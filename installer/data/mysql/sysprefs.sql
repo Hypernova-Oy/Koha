@@ -210,6 +210,7 @@ INSERT INTO systempreferences ( `variable`, `value`, `options`, `explanation`, `
 ('HTML5MediaEnabled','not','not|opac|staff|both','Show a tab with a HTML5 media player for files catalogued in field 856','Choice'),
 ('HTML5MediaExtensions','webm|ogg|ogv|oga|vtt','','Media file extensions','free'),
 ('HTML5MediaYouTube',0,'Embed|Don\'t embed','YouTube links as videos','YesNo'),
+('HypernovaKohaHostingPriceFormula','','','','Free'),
 ('IDreamBooksReadometer','0','','Display Readometer from IDreamBooks.com','YesNo'),
 ('IDreamBooksResults','0','','Display IDreamBooks.com rating in search results','YesNo'),
 ('IDreamBooksReviews','0','','Display book review snippets from IDreamBooks.com','YesNo'),

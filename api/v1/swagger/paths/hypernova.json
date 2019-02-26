@@ -1,0 +1,100 @@
+{
+  "/hypernova/hosting/price": {
+    "get": {
+      "x-mojo-to": "Hypernova#get_hosting_price",
+      "operationId": "get_hosting_priceHypernova",
+      "tags": ["hypernova"],
+      "parameters": [
+        {
+          "name": "kohaBasicActiveStaff",
+          "in": "query",
+          "description": "Number of active staff members",
+          "type": "integer"
+        },
+        {
+          "name": "kohaBasicAnnualCirc",
+          "in": "query",
+          "description": "Number of annually circulating items",
+          "type": "integer"
+        },
+        {
+          "name": "kohaBasicBibRecords",
+          "in": "query",
+          "description": "Number of bibliographic records",
+          "type": "integer"
+        },
+        {
+          "name": "kohaIntgFinna",
+          "in": "query",
+          "description": "Finna integration",
+          "type": "boolean"
+        },
+        {
+          "name": "kohaIntgMelinda",
+          "in": "query",
+          "description": "Melinda integration",
+          "type": "boolean"
+        },
+        {
+          "name": "kohaIntgSip2Clients",
+          "in": "query",
+          "description": "SIP2 clients",
+          "type": "boolean"
+        },
+        {
+          "name": "kohaIntgSmtp",
+          "in": "query",
+          "description": "SMTP integration",
+          "type": "boolean"
+        },
+        {
+          "name": "kohaIntgSms",
+          "in": "query",
+          "description": "SMTP integration",
+          "type": "boolean"
+        }
+      ],
+      "produces": ["application/json"],
+      "responses": {
+        "200": {
+          "description": "Price",
+          "schema": {
+              "type": "object",
+              "properties": {
+                  "price": {
+                      "type": "number"
+                  },
+                  "price_formatted": {
+                      "type": "string"
+                  }
+              }
+          }
+        },
+        "400": {
+          "description": "Bad parameter(s)",
+          "schema": {
+            "$ref": "../definitions.json#/error"
+          }
+        },
+        "403": {
+          "description": "No permissions or service deactivated",
+          "schema": {
+            "$ref": "../definitions.json#/error"
+          }
+        },
+        "500": {
+          "description": "Internal server error",
+          "schema": {
+            "$ref": "../definitions.json#/error"
+          }
+        },
+        "503": {
+          "description": "Under maintenance",
+          "schema": {
+            "$ref": "../definitions.json#/error"
+          }
+        }
+      }
+    }
+  }
+}
