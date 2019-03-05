@@ -39,7 +39,7 @@
           "name": "kohaIntgSip2Clients",
           "in": "query",
           "description": "SIP2 clients",
-          "type": "boolean"
+          "type": "integer"
         },
         {
           "name": "kohaIntgSmtp",
@@ -50,8 +50,14 @@
         {
           "name": "kohaIntgSms",
           "in": "query",
-          "description": "SMTP integration",
+          "description": "SMS integration",
           "type": "boolean"
+        },
+        {
+          "name": "kohaIntgOther",
+          "in": "query",
+          "description": "Custom integrations",
+          "type": "string"
         }
       ],
       "produces": ["application/json"],
