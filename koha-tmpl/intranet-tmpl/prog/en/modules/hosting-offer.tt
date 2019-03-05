@@ -1,0 +1,113 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Koha &rsaquo; Request a quotation</title>
+[% Asset.css("css/mainpage.css") | $raw %]
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="hosting_main" class="hosting-offer">
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'home-search.inc' %]
+
+<div id="breadcrumbs"><a href="/cgi-bin/koha/mainpage.pl">Home</a> &rsaquo; Request a quotation</div>
+
+<div id="container-main" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+
+            <h1>Request a quotation</h1>
+            <fieldset class="brief">
+            <form id="hosting-offer-form">
+                <table>
+                    <thead>
+                        <tr>
+                            <th><h3>Basic parameters</h3></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><label for="kohaBasicAnnualCirc">Annual Circulation</label></td>
+                        <td><input type="number" name="kohaBasicAnnualCirc" id="kohaBasicAnnualCirc" placeholder="e.g. 25 000"/></td>
+                    </tr>
+                    <tr>
+                        <td><label for="kohaBasicBibRecords">Bibliographic records</label></td>
+                        <td><input type="number" name="kohaBasicBibRecords" id="kohaBasicBibRecords" placeholder="e.g. 8000" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="kohaBasicActiveStaff">Librarians</label><p class="tip">Staff members using Koha</p></td>
+                        <td><input type="number" name="kohaBasicActiveStaff" id="kohaBasicActiveStaff" placeholder="e.g. 5" /></td>
+                    </tr>
+                    <tr>
+                        <th><h3>Integrations</h3></th>
+                        <th></th>
+                    </tr>
+                    [% IF ( integrations.kohaIntgFinna ) %]
+                    <tr>
+                        <td><label for="kohaIntgFinna">Finna integration</label></td>
+                        <td><input type="checkbox" name="kohaIntgFinna" id="kohaIntgFinna" value="true" /></td>
+                    </tr>
+                    [% END %]
+                    [% IF ( integrations.kohaIntgMelinda ) %]
+                    <tr>
+                        <td><label for="kohaIntgMelinda">Melinda integration</label></td>
+                        <td><input type="checkbox" name="kohaIntgMelinda" id="kohaIntgMelinda" value="true" /></td>
+                    </tr>
+                    [% END %]
+                    [% IF ( integrations.kohaIntgSip2Clients ) %]
+                    <tr>
+                        <td><label for="kohaIntgSip2Clients">Number of SIP2 devices</label></td>
+                        <td><input type="number" name="kohaIntgSip2Clients" id="kohaIntgSip2Clients" size="1" placeholder="e.g. 10" /></td>
+                    </tr>
+                    [% END %]
+                    [% IF ( integrations.kohaIntgSmtp ) %]
+                    <tr>
+                        <td><label for="kohaIntgSmtp">Email notifications</label></td>
+                        <td><input type="checkbox" checked disabled="true" name="kohaIntgSmtp" id="kohaIntgSmtp" value="true" /></td>
+                    </tr>
+                    [% END %]
+                    [% IF ( integrations.kohaIntgSms ) %]
+                    <tr>
+                        <td><label for="kohaIntgSms">SMS notifications</label></td>
+                        <td><input type="checkbox" name="kohaIntgSms" id="kohaIntgSms" value="true" /></td>
+                    </tr>
+                    [% END %]
+                    <tr>
+                        <td><label for="kohaIntgOther">Custom integrations</label></td>
+                        <td><textarea name="kohaIntgOther" id="kohaIntgOther" rows="10" cols="50"></textarea></td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td><label for="kohaSubmitForm">Generate price</label></td>
+                        <td><button type="submit" id="kohaGenerateButton">Generate</button><p class="tip">Note! Total cost shown via this form is only an estimation.<br /> Please fill your contact information below to request an actual quotation.</p></td>
+                    </tr>
+                    <tr>
+                        <td><h3>Annual cost</h3></td>
+                        <td><p id="loading-price"><img src="[% interface | html %]/[% theme | html %]/img/spinner-small.gif" alt="" /> Generating...</p><p id="kohaAnnualCost"></p></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </form>
+            </fieldset>
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+</div>
+
+
+[% MACRO jsinclude BLOCK %]
+    [% Asset.js("/js/hypernova/hosting-offer.js") | $raw %]
+    <script type="text/javascript">
+        //<![CDATA[
+        var MSG_ERROR_GETTING_PRICE = _('An error occured. Please <a href="mailto:info@hypernova.fi">contact us by email</a> and share the following with us:');
+        //]]>
+    </script>
+[% END %]
+
+<!-- the main div is closed in intranet-bottom.inc -->
+[% INCLUDE 'intranet-bottom.inc' %]
+

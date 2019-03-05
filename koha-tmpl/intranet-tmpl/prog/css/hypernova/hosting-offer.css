@@ -1,0 +1,27 @@
+.navbar .nav > li > a.hosting-header-link,
+.navbar .nav > li > a.hosting-header-link:visited {
+    color:#eeeeee;
+    background:rgba(204,0,0,1);
+    padding-left:2em;
+    padding-right:2em;
+    border:solid 1px rgba(204,0,0,1);
+}
+
+.navbar .nav > li > a.hosting-header-link:hover,
+.navbar .nav > li > a.hosting-header-link:active {
+    color:#000;
+    background:rgba(204,0,0,0.9);
+    border:solid 1px rgba(0,0,0,1);
+}
+
+td > p#loading-price {
+    display:none;
+}
+
+p#kohaAnnualCost > pre {
+    background-color:#ffffdd;
+    border:1px solid #e4e4e4;
+    font-size:10px;
+    font-family:Verdana, sans-serif;
+    padding:5px;
+}

@@ -54,6 +54,9 @@
                     <li><a href="/cgi-bin/koha/about.pl">About Koha</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="/cgi-bin/koha/hosting-offer.pl" class="hosting-header-link"><i class="fa fa-server"></i> Request a quotation</a>
+            </li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             [% IF ( loggedinusername ) %]
