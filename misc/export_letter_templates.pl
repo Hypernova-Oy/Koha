@@ -25,13 +25,15 @@ use Pod::Usage;
 
 use Koha::LetterTemplates;
 
-my ( $output_format, $letter_lang, $letter_code, $help );
+my ( $output_format, $letter_lang, $letter_code, $branchcode, $help );
 $output_format = 'plain';
 $letter_lang   = 'default';
+$branchcode    = '';
 GetOptions(
     'f|format=s'                => \$output_format,
     'l|lang=s'                  => \$letter_lang,
     'c|code=s'                  => \$letter_code,
+    'b|branchcode=s'            => \$branchcode,
     'h|help|?'                  => \$help
 ) || pod2usage(1);
 
@@ -44,6 +46,7 @@ my $search_params;
 
 $search_params->{'lang'} = $letter_lang;
 $search_params->{'code'} = $letter_code if defined $letter_code;
+$search_params->{'branchcode'} = $branchcode;
 
 $letters = Koha::LetterTemplates->search( $search_params )->as_list;
 if ($output_format eq 'plain') {
@@ -76,7 +79,7 @@ export letter templates - This script exports letter templates (letter database 
 
 =head1 SYNOPSIS
 
-export_letter_templates.pl [-h|--help] [-f|--format=FORMAT] [-l|--language=LANGUAGE] [-c|--code=CODE] > letter_templates.txt
+export_letter_templates.pl [-h|--help] [-f|--format=FORMAT] [-l|--language=LANGUAGE] [-c|--code=CODE] [-b|--branchcode=BRANCHCODE] > letter_templates.txt
 
 =head1 OPTIONS
 
@@ -99,6 +102,11 @@ Print a brief help message.
 
  --code=CODE            CODE is letter code, e.g. PREDUEDGST. Leave empty to
                         export all letters.
+
+=item B<--branchcode>
+
+ --branchcode=CODE      BRANCHCODE is Koha branchcode, e.g. CPL. Default is ''
+                        (all libraries).
 
 =back
 
