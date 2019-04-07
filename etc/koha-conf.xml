@@ -396,6 +396,28 @@ __PAZPAR2_TOGGLE_XML_POST__
         </branchcode>
         <sourceName></sourceName> <!-- Displays as sender name in phones. Maxlength 11 chars -->
     </sonera>
+    <BudgetSMS>
+        <!-- Login details for SMS Gateway service
+        There are 3 options to configure this,
+        first one is single branch login. This uses branchcode for defining client
+        <branchcode>
+            <username></username>
+            <userid></userid>
+            <handle></handle>
+        </branchcode>-->
+        <!-- Second one is library group login. This uses 3 first chars of branchcode for defining client
+        <branchprefix>
+            <username></username>
+            <userid></userid>
+            <handle></handle>
+        </branchprefix>-->
+        <!-- And the third one is shared login for all messages.-->
+        <username></username>
+        <userid></userid>
+        <handle></handle>
+        <reportUrlAllowedIPs>81.19.118.90 83.145.230.90</reportUrlAllowedIPs>
+        <sourceName>Koha.fi</sourceName> <!-- Displays as sender name in phones. Maxlength 11 chars -->
+    </BudgetSMS>
  </smsProviders>
 </config>
 </yazgfs>
