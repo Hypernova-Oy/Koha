@@ -77,6 +77,28 @@ sub library_groups {
     return Koha::Library::Groups->_new_from_dbic( $rs );
 }
 
+=head3 selected
+
+Is the library selected in the context of the selection?
+For example:
+  Can be used to show that,
+  this specific library
+  is the one currently selected,
+  on the user interface
+  from a list of other libraries.
+
+ @param1 Any, Context specific variable
+ @returns Any, explaining the type of selection in the context of the selection.
+          or undef, when this Library is not selected.
+
+=cut
+
+sub selected {
+    my ( $self, $selected ) = @_;
+    $self->{_koha_selected} = $selected if $selected;
+    return $self->{_koha_selected};
+}
+
 =head2 Internal methods
 
 =head3 _type
