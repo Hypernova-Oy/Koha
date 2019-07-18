@@ -37,63 +37,48 @@ my ($template, $loggedinuser, $cookie)
 			     debug => 1,
 			     });
 
-my $dbh = C4::Context->dbh;
-my $branchcode;
-if((!defined($input->param('branchcode'))) & C4::Context::mybranch() ne '')
+my $fromBranch;
+if((!defined($input->param('fromBranch'))) && C4::Context::mybranch() ne '')
 {
-    $branchcode = C4::Context::mybranch();
+    $fromBranch = Koha::Libraries->find(C4::Context::mybranch());
 }
 else
 {
-	$branchcode = $input->param('branchcode');
+    $fromBranch = Koha::Libraries->find($input->param('fromBranch'));
 }
 
 # Set the template language for the correct limit type using $limitType
 my $limitType = C4::Context->preference("BranchTransferLimitsType") || "ccode";
 
+my @branches = Koha::Libraries->search({});
 my @codes;
-my @branchcodes;
 
-my $sth;
 if ( $limitType eq 'ccode' ) {
-	$sth = $dbh->prepare('SELECT authorised_value AS ccode FROM authorised_values WHERE category = "CCODE"');
-} elsif ( $limitType eq 'itemtype' ) {
-	$sth = $dbh->prepare('SELECT itemtype FROM itemtypes');
+    @codes = map {$_->authorised_value} Koha::AuthorisedValues->search({category => 'CCODE'}, {columns => ['authorised_value']});
 }
-$sth->execute();
-while ( my $row = $sth->fetchrow_hashref ) {
-	push( @codes, $row->{ $limitType } );
-}
-
-$sth = $dbh->prepare("SELECT branchcode FROM branches");
-$sth->execute();
-while ( my $row = $sth->fetchrow_hashref ) {
-	push( @branchcodes, $row->{'branchcode'} );
+elsif ( $limitType eq 'itemtype' ) {
+    @codes = map {$_->itemtype} Koha::ItemTypes->search({}, {columns => ['itemtype']});
 }
 
 ## If Form Data Passed, Update the Database
 if ( $input->param('updateLimits') ) {
-    DeleteBranchTransferLimits($branchcode);
-
+    DeleteBranchTransferLimits($fromBranch->branchcode);
 
 	foreach my $code ( @codes ) {
-		foreach my $toBranch ( @branchcodes ) {
-			my $isSet = not $input->param( $code . "_" . $toBranch);
+		foreach my $toBranch ( @branches ) {
+			my $isSet = not $input->param( $code . "_" . $toBranch->branchcode);
 			if ( $isSet ) {
-			    CreateBranchTransferLimit( $toBranch, $branchcode, $code );
+			    CreateBranchTransferLimit( $toBranch->branchcode, $fromBranch->branchcode, $code );
 			}
 		}
 	}
 }
 
-## Build branchcode loop
-my @branchcode_loop;
-foreach my $branchcode ( @branchcodes ) {
-	my %row_data;
-	$row_data{ branchcode } = $branchcode;
-	push ( @branchcode_loop, \%row_data );
+## Caclulate the selected branch here, this is to avoid calling Branches.all(selected...) in the Template Toolkit since we already need all the branches here.
+foreach my $branch ( @branches ) {
+    $branch->selected(1) if $branch->branchcode eq $fromBranch->branchcode;
 }
-my $branchcount = scalar(@branchcode_loop);
+my $branchcount = scalar(@branches);
 
 ## Build the default data
 my @codes_loop;
@@ -102,9 +87,9 @@ foreach my $code ( @codes ) {
 	my %row_data;
 	$row_data{ code } = $code;
 	$row_data{ to_branch_loop } = \@to_branch_loop;
-	foreach my $toBranch ( @branchcodes ) {
+	foreach my $toBranch ( @branches ) {
 		my %row_data;
-                my $isChecked = IsBranchTransferAllowed( $toBranch, $branchcode, $code );
+                my $isChecked = IsBranchTransferAllowed( $toBranch->branchcode, $fromBranch->branchcode, $code );
 		$row_data{ code }         = $code;
 		$row_data{ toBranch }     = $toBranch;
 		$row_data{ isChecked }    = $isChecked;	
@@ -118,8 +103,8 @@ foreach my $code ( @codes ) {
 $template->param(
 		branchcount => $branchcount,
 		codes_loop => \@codes_loop,
-		branchcode_loop => \@branchcode_loop,
-		branchcode => $branchcode,
+		branches => \@branches,
+		fromBranch => $fromBranch,
         limitType => $limitType,
 		);
 
