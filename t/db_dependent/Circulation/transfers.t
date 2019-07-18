@@ -27,7 +27,7 @@ use Koha::Item::Transfers;
 
 use t::lib::TestBuilder;
 
-use Test::More tests => 24;
+use Test::More tests => 25;
 use Test::Deep;
 
 BEGIN {
@@ -208,6 +208,31 @@ ModItemTransfer(
 $transfer->{_result}->discard_changes;
 ok( $transfer->datearrived, 'Date arrived is set when new transfer is initiated' );
 is( $transfer->comments, "Canceled, new transfer from $branchcode_1 to $branchcode_2 created", 'Transfer comment is set as expected when new transfer is initiated' );
+
+
+subtest "Feature: Limit branch transfer by branch only", sub {
+    plan tests => 2;
+
+    subtest "Scenario: Transfer succeeds because of no limits", sub {
+        plan tests => 2;
+
+        is(C4::Circulation::DeleteBranchTransferLimits('CPL'), '0E0',
+          "Given there are no branch transfer limits between branches");
+
+        is(C4::Circulation::IsBranchTransferAllowed($branchcode_1, $branchcode_2, $itemtype), 1,
+          "Then a transfer between branches succeeds");
+    };
+
+    subtest "Scenario: Transfer fails because of a matching limit", sub {
+        plan tests => 2;
+
+        is(CreateBranchTransferLimit($branchcode_1, $branchcode_2, $itemtype), 1,
+          "Given a branch transfer limit between branches");
+
+        is(C4::Circulation::IsBranchTransferAllowed($branchcode_1, $branchcode_2, $itemtype), 0,
+          "Then a transfer between branches fails");
+    };
+};
 
 $schema->storage->txn_rollback;
 
