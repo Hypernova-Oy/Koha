@@ -28,6 +28,7 @@ use C4::Koha;
 use C4::Circulation qw{ IsBranchTransferAllowed DeleteBranchTransferLimits CreateBranchTransferLimit };
 
 my $input = new CGI;
+my %errors; # Collect possible errors here.
 
 my ($template, $loggedinuser, $cookie)
     = get_template_and_user({template_name => "admin/branch_transfer_limits.tt",
@@ -46,6 +47,8 @@ else
 {
     $fromBranch = Koha::Libraries->find($input->param('fromBranch'));
 }
+
+$errors{syspref_UseBranchTransferLimits_isMissing} = 1 if not(C4::Context->preference('UseBranchTransferLimits'));
 
 # Set the template language for the correct limit type using $limitType
 my $limitType = C4::Context->preference("BranchTransferLimitsType") || "ccode";
@@ -101,6 +104,7 @@ foreach my $code ( @codes ) {
 
 
 $template->param(
+		errors => \%errors,
 		branchcount => $branchcount,
 		codes_loop => \@codes_loop,
 		branches => \@branches,

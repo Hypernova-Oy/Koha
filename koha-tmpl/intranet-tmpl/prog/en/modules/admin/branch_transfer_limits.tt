@@ -19,6 +19,10 @@
         <div class="col-sm-10 col-sm-push-2">
             <main>
 
+[% IF errors.syspref_UseBranchTransferLimits_isMissing %]
+    <div class="dialog alert"><strong>Warning:</strong> This feature is disabled while system preference 'UseBranchTransferLimits' is not set. This feature is enabled and configured from the system preferences.</div>
+[% END %]
+
 <h1>Library [% fromBranch.branchcode | html %] - [% fromBranch.branchname | html %] Checkin and transfer policy</h1>
     <form method="get" action="/cgi-bin/koha/admin/branch_transfer_limits.pl" id="selectlibrary">
         <label for="branchselect">Select a library :</label>
