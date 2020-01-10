@@ -1,4 +1,36 @@
 {
+  "item_barcode_qp": {
+    "name": "barcode",
+    "in": "query",
+    "description": "Item's barcode",
+    "type": "string"
+  },
+  "item_barcodes_qp": {
+    "name": "barcode",
+    "in": "query",
+    "description": "Item barcodes",
+    "type": "array",
+    "items": {
+      "type": "string"
+    },
+    "collectionFormat": "multi"
+  },
+  "item_id_qp": {
+    "name": "item_id",
+    "in": "query",
+    "description": "Internal item identifier",
+    "type": "integer"
+  },
+  "item_ids_qp": {
+    "name": "item_id",
+    "in": "query",
+    "description": "Internal items identifier",
+    "type": "array",
+    "items": {
+      "type": "integer"
+    },
+    "collectionFormat": "multi"
+  },
   "item_id_pp": {
     "name": "item_id",
     "in": "path",

@@ -142,6 +142,64 @@ sub get {
     );
 }
 
+=head3 add
+
+Check out an item
+
+=cut
+
+sub add {
+    my $c = shift->openapi->valid_input or return;
+
+    my $args = $c->req->params->to_hash // {};
+
+    # Unless borrowernumber is specified, use logged in user as target patron
+    unless ($args->{patron_id}) {
+        $args->{patron_id} = $c->stash('koha.user')->borrowernumber;
+    }
+
+    my $borrowernumber = $args->{patron_id};
+
+    try {
+        my $barcodes;
+        my $patron = Koha::Patrons->find( $borrowernumber );
+
+        unless ($patron) {
+            return $c->render(
+                status => 404,
+                openapi => { error => "Patron does not exist" }
+            );
+        }
+
+        $barcodes->{$_}++ for ( @{$args->{barcode}} );
+        foreach my $itemnumber ( @{$args->{item_id}} ) {
+            my $barcode = Koha::Items->find( $itemnumber );
+            $barcodes->{$barcode}++ if $barcode;
+        }
+
+        foreach my $barcode (keys %$barcodes) {
+            my ( $issuingimpossible, $needsconfirmation, $alerts ) =
+                CanBookBeIssued( $patron->unblessed, $barcode );
+
+            unless ( $issuingimpossible ) {
+                my $issue = AddIssue( $patron->unblessed, $barcode );
+            }
+        }
+    } catch {
+        if ( $_->isa('DBIx::Class::Exception') ) {
+            return $c->render(
+                status => 500,
+                openapi => { error => $_->{msg} }
+            );
+        } else {
+            return $c->render(
+                status => 500,
+                openapi => { error => "Something went wrong, check the logs." }
+            );
+        }
+    };
+}
+
 =head3 renew
 
 Renew a checkout

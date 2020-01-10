@@ -17,7 +17,7 @@
 
 use Modern::Perl;
 
-use Test::More tests => 93;
+use Test::More tests => 94;
 use Test::MockModule;
 use Test::Mojo;
 use t::lib::Mocks;
@@ -216,3 +216,56 @@ $t->get_ok( "//$userid:$password@/api/v1/checkouts/" . $issue2->issue_id . "/all
         current_renewals => 1,
         error            => 'too_many'
     });
+
+$schema->storage->txn_rollback;
+
+subtest 'add_checkout' => sub {
+    $schema->storage->txn_begin;
+
+    my $librarian = $builder->build_object({
+        class => 'Koha::Patrons',
+        value => { flags => 2 }
+    });
+    my $password = 'thePassword123';
+    $librarian->set_password({ password => $password, skip_validation => 1 });
+    my $userid = $librarian->userid;
+
+    my $patron = $builder->build_object({
+        class => 'Koha::Patrons',
+        value => { flags => 0 }
+    });
+    my $unauth_password = 'thePassword000';
+    $patron->set_password({ password => $unauth_password, skip_validattion => 1 });
+    my $unauth_userid = $patron->userid;
+
+    $t->post_ok( "/api/v1/checkouts/" )
+      ->status_is(401);
+
+    $t->post_ok( "//$unauth_userid:$unauth_password@/api/v1/checkouts/" )
+      ->status_is(403)
+      ->json_is({ error => "Authorization failure. Missing required permission(s).",
+            required_permissions => { circulate => "circulate_remaining_permissions" }
+        });
+
+    my $branchcode = $builder->build({ source => 'Branch' })->{ branchcode };
+    my $module = new Test::MockModule('C4::Context');
+    $module->mock('userenv', sub { { branch => $branchcode } });
+
+    my $item1 = $builder->build_sample_item;
+    my $item2 = $builder->build_sample_item;
+    my $item3 = $builder->build_sample_item;
+    my $item4 = $builder->build_sample_item;
+
+    my $checkout_params = {
+        patron_id => -12345679,
+        item_id => [$item1, $item2, $item3]
+    };
+
+    $t->post_ok( "//$userid:$password@/api/v1/checkouts/" => json => $checkout_params )
+      ->status_is(404)
+      ->json_is({ error => "Authorization failure. Missing required permission(s).",
+            required_permissions => { circulate => "circulate_remaining_permissions" }
+        });
+
+    $schema->storage->txn_rollback;
+};
