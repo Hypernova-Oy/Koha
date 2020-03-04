@@ -28,6 +28,7 @@ use C4::Context;
 use C4::Biblio;
 use C4::Holdings;
 
+use Koha::Biblios;
 use Koha::BiblioFrameworks;
 use Koha::Database;
 use Koha::Holdings;
@@ -45,9 +46,56 @@ my $t = Test::Mojo->new('Koha::REST::V1');
 my $tx;
 
 subtest "list() tests" => sub {
-    plan skip_all => 'not implemented';
+    plan tests => 15;
 
     $schema->storage->txn_begin;
+
+    my ($patron, $session_patron) = create_user_and_session( { authorized => 0 } );
+
+    Koha::Holdings->search->delete;
+
+    $tx = $t->ua->build_tx( GET => '/api/v1/holdings' );
+    $tx->req->cookies( { name => 'CGISESSID', value => $session_patron } );
+    $t->request_ok( $tx )->status_is( 200 )
+        ->json_is( [] );
+
+    my $biblionumber = create_biblio( 'test' );
+
+    # test with 1 holding
+    my $holding = create_holding( $biblionumber );
+    my $holdings_full = Koha::Biblios->find( $biblionumber )->holdings_full();
+    $tx = $t->ua->build_tx( GET => '/api/v1/holdings' );
+    $tx->req->cookies( { name => 'CGISESSID', value => $session_patron } );
+    $t->request_ok( $tx )->status_is( 200 )
+        ->json_is( $holdings_full );
+
+    # test with 2 holdings
+    my $holding2 = create_holding( $biblionumber );
+    $holdings_full = Koha::Biblios->find( $biblionumber )->holdings_full();
+    $tx = $t->ua->build_tx( GET => '/api/v1/holdings' );
+    $tx->req->cookies( { name => 'CGISESSID', value => $session_patron } );
+    $t->request_ok( $tx )->status_is( 200 )
+        ->json_is( $holdings_full );
+
+    # test search parameters
+    my $branchcode = $builder->build( { source => 'Branch' } )->{branchcode};
+    my $holding3 = create_holding( $biblionumber, $branchcode, $branchcode );
+    $holdings_full = Koha::Biblios->find( $biblionumber )->holdings_full({
+        holdingbranch => $branchcode
+    });
+    $tx = $t->ua->build_tx( GET => '/api/v1/holdings?holdingbranch=' . $branchcode );
+    $tx->req->cookies( { name => 'CGISESSID', value => $session_patron } );
+    $t->request_ok( $tx )->status_is( 200 )
+        ->json_is( $holdings_full );
+
+    # test datecreated starts-with search
+    my ($datecreated_starts_with) = $holding3->datecreated =~ /^(\d{4})/;
+    $tx = $t->ua->build_tx( GET => '/api/v1/holdings?holdingbranch=' .
+        $branchcode . '&datecreated=' . $datecreated_starts_with );
+    $tx->req->cookies( { name => 'CGISESSID', value => $session_patron } );
+    $t->request_ok( $tx )->status_is( 200 )
+        ->json_is( $holdings_full );
+
     $schema->storage->txn_rollback;
 };
 
