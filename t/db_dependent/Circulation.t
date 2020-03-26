@@ -18,7 +18,7 @@
 use Modern::Perl;
 use utf8;
 
-use Test::More tests => 47;
+use Test::More tests => 45;
 use Test::MockModule;
 use Test::Deep qw( cmp_deeply );
 
@@ -1535,36 +1535,6 @@ subtest "AllowRenewalIfOtherItemsAvailable tests" => sub {
     ( $renewokay, $error ) = CanBookBeRenewed( $borrowernumber1, $item_1->itemnumber );
     is( $renewokay, 0, 'Bug 14337 - Verify the borrower can not renew with a hold on the record if AllowRenewalIfOtherItemsAvailable is enabled but the only available item is notforloan' );
 };
-
-{
-    # Don't allow renewing onsite checkout
-    my $branch   = $library->{branchcode};
-
-    #Create another record
-    my $biblio = $builder->build_sample_biblio();
-
-    my $item = $builder->build_sample_item(
-        {
-            biblionumber     => $biblio->biblionumber,
-            library          => $branch,
-            itype            => $itemtype,
-        }
-    );
-
-    my $borrowernumber = Koha::Patron->new({
-        firstname =>  'fn',
-        surname => 'dn',
-        categorycode => $patron_category->{categorycode},
-        branchcode => $branch,
-    })->store->borrowernumber;
-
-    my $borrower = Koha::Patrons->find( $borrowernumber )->unblessed;
-
-    my $issue = AddIssue( $borrower, $item->barcode, undef, undef, undef, undef, { onsite_checkout => 1 } );
-    my ( $renewed, $error ) = CanBookBeRenewed( $borrowernumber, $item->itemnumber );
-    is( $renewed, 0, 'CanBookBeRenewed should not allow to renew on-site checkout' );
-    is( $error, 'onsite_checkout', 'A correct error code should be returned by CanBookBeRenewed for on-site checkout' );
-}
 
 {
     my $library = $builder->build({ source => 'Branch' });

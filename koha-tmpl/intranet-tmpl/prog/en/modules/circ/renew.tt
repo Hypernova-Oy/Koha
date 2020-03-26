@@ -2,6 +2,7 @@
 [% USE Asset %]
 [% USE Koha %]
 [% USE KohaDates %]
+[% USE Checkouts %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
 
@@ -30,7 +31,7 @@
 
                 [% IF error %]
                     <div class="dialog alert">
-                        <h3>Cannot renew:</h3>
+                        <h3>Cannot renew[% IF issue.checkout_type == Checkouts.type.onsite_checkout %] on-site checkout[% END %]:</h3>
 
                             [% IF error == "no_item" %]
 
@@ -133,9 +134,6 @@
                             [% ELSIF error == "item_denied_renewal" %]
 
                                 <p>Item is not allowed renewal.</p>
-
-                            [% ELSIF error == "onsite_checkout" %]
-                                <p>Item cannot be renewed because it's an onsite checkout</p>
 
                             [% ELSE %]
 
