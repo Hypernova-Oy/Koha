@@ -87,13 +87,24 @@ Koha::CirculationRules->set_rules(
         branchcode   => $branch->{branchcode},
         categorycode => undef,
         itemtype     => undef,
+        checkout_type => undef,
         rules        => {
             maxissueqty       => 2,
-            maxonsiteissueqty => 1,
             lengthunit        => 'days',
             issuelength       => 5,
             hardduedate        => undef,
             hardduedatecompare => 0,
+        }
+    }
+);
+Koha::CirculationRules->set_rules(
+    {
+        branchcode   => $branch->{branchcode},
+        categorycode => undef,
+        itemtype     => undef,
+        checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+        rules        => {
+            maxissueqty       => 1,
         }
     }
 );
@@ -159,9 +170,20 @@ Koha::CirculationRules->set_rules(
         branchcode   => $branch->{branchcode},
         categorycode => undef,
         itemtype     => undef,
+        checkout_type => undef,
         rules        => {
             maxissueqty       => 2,
-            maxonsiteissueqty => 1,
+        }
+    }
+);
+Koha::CirculationRules->set_rules(
+    {
+        branchcode   => $branch->{branchcode},
+        categorycode => undef,
+        itemtype     => undef,
+        checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+        rules        => {
+            maxissueqty       => 2,
         }
     }
 );

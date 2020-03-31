@@ -385,6 +385,11 @@ sub TooMany {
 	# Get which branchcode we need
     $branch = _GetCircControlBranch($item_object->unblessed,$borrower);
     my $type = $item_object->effective_itemtype;
+    my $checkout_type = $onsite_checkout
+        ? $switch_onsite_checkout
+            ? $Koha::Checkouts::type->{checkout}
+            : $Koha::Checkouts::type->{onsite_checkout}
+        : $Koha::Checkouts::type->{checkout};
 
     # given branch, patron category, and item type, determine
     # applicable issuing rule
@@ -394,14 +399,6 @@ sub TooMany {
             itemtype     => $type,
             branchcode   => $branch,
             rule_name    => 'maxissueqty',
-        }
-    );
-    my $maxonsiteissueqty_rule = Koha::CirculationRules->get_effective_rule(
-        {
-            categorycode => $cat_borrower,
-            itemtype     => $type,
-            branchcode   => $branch,
-            rule_name    => 'maxonsiteissueqty',
         }
     );
 
@@ -473,14 +470,13 @@ sub TooMany {
         my ( $checkout_count, $onsite_checkout_count ) = $dbh->selectrow_array( $count_query, {}, @bind_params );
 
         my $max_checkouts_allowed = $maxissueqty_rule ? $maxissueqty_rule->rule_value : undef;
-        my $max_onsite_checkouts_allowed = $maxonsiteissueqty_rule ? $maxonsiteissueqty_rule->rule_value : undef;
 
-        if ( $onsite_checkout and $max_onsite_checkouts_allowed ne '' ) {
-            if ( $onsite_checkout_count >= $max_onsite_checkouts_allowed )  {
+        if ( $onsite_checkout and $max_checkouts_allowed ne '' ) {
+            if ( $onsite_checkout_count >= $max_checkouts_allowed )  {
                 return {
                     reason => 'TOO_MANY_ONSITE_CHECKOUTS',
                     count => $onsite_checkout_count,
-                    max_allowed => $max_onsite_checkouts_allowed,
+                    max_allowed => $max_checkouts_allowed,
                 }
             }
         }
@@ -505,7 +501,7 @@ sub TooMany {
     }
 
     # Now count total loans against the limit for the branch
-    my $branch_borrower_circ_rule = GetBranchBorrowerCircRule($branch, $cat_borrower);
+    my $branch_borrower_circ_rule = GetBranchBorrowerCircRule($branch, $cat_borrower, $checkout_type );
     if (defined($branch_borrower_circ_rule->{patron_maxissueqty}) and $branch_borrower_circ_rule->{patron_maxissueqty} ne '') {
         my @bind_params = ();
         my $branch_count_query = qq|
@@ -527,14 +523,13 @@ sub TooMany {
         }
         my ( $checkout_count, $onsite_checkout_count ) = $dbh->selectrow_array( $branch_count_query, {}, @bind_params );
         my $max_checkouts_allowed = $branch_borrower_circ_rule->{patron_maxissueqty};
-        my $max_onsite_checkouts_allowed = $branch_borrower_circ_rule->{patron_maxonsiteissueqty};
 
-        if ( $onsite_checkout and $max_onsite_checkouts_allowed ne '' ) {
-            if ( $onsite_checkout_count >= $max_onsite_checkouts_allowed )  {
+        if ( $onsite_checkout and $max_checkouts_allowed ne '' ) {
+            if ( $onsite_checkout_count >= $max_checkouts_allowed )  {
                 return {
                     reason => 'TOO_MANY_ONSITE_CHECKOUTS',
                     count => $onsite_checkout_count,
-                    max_allowed => $max_onsite_checkouts_allowed,
+                    max_allowed => $max_checkouts_allowed,
                 }
             }
         }
@@ -1623,7 +1618,7 @@ sub GetHardDueDate {
 
 =head2 GetBranchBorrowerCircRule
 
-  my $branch_cat_rule = GetBranchBorrowerCircRule($branchcode, $categorycode);
+  my $branch_cat_rule = GetBranchBorrowerCircRule($branchcode, $categorycode, $checkout_type);
 
 Retrieves circulation rule attributes that apply to the given
 branch and patron category, regardless of item type.  
@@ -1633,21 +1628,13 @@ patron_maxissueqty - maximum number of loans that a
 patron of the given category can have at the given
 branch.  If the value is undef, no limit.
 
-patron_maxonsiteissueqty - maximum of on-site checkouts that a
-patron of the given category can have at the given
-branch.  If the value is undef, no limit.
-
-This will check for different branch/category combinations in the following order:
-branch and category
-branch only
-category only
-default branch and category
+The order in which rules are searched is defined in circulation
+rules user interface.
 
 If no rule has been found in the database, it will default to
 the buillt in rule:
 
 patron_maxissueqty - undef
-patron_maxonsiteissueqty - undef
 
 C<$branchcode> and C<$categorycode> should contain the
 literal branch code and patron category code, respectively - no
@@ -1656,21 +1643,21 @@ wildcards.
 =cut
 
 sub GetBranchBorrowerCircRule {
-    my ( $branchcode, $categorycode ) = @_;
+    my ( $branchcode, $categorycode, $checkout_type ) = @_;
 
     # Initialize default values
     my $rules = {
         patron_maxissueqty       => undef,
-        patron_maxonsiteissueqty => undef,
     };
 
     # Search for rules!
-    foreach my $rule_name (qw( patron_maxissueqty patron_maxonsiteissueqty )) {
+    foreach my $rule_name (qw( patron_maxissueqty )) {
         my $rule = Koha::CirculationRules->get_effective_rule(
             {
                 categorycode => $categorycode,
                 itemtype     => undef,
                 branchcode   => $branchcode,
+                checkout_type => $checkout_type,
                 rule_name    => $rule_name,
             }
         );

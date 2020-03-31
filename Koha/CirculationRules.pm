@@ -53,9 +53,6 @@ our $RULE_KINDS = {
     patron_maxissueqty => {
         scope => [ 'branchcode', 'categorycode', 'checkout_type' ],
     },
-    patron_maxonsiteissueqty => {
-        scope => [ 'branchcode', 'categorycode' ],
-    },
     max_holds => {
         scope => [ 'branchcode', 'categorycode' ],
     },
@@ -117,9 +114,6 @@ our $RULE_KINDS = {
     },
     maxissueqty => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
-    },
-    maxonsiteissueqty => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
     maxsuspensiondays => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],

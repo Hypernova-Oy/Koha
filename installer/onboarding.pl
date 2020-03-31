@@ -273,7 +273,6 @@ if ( $step == 5 ) {
                 holds_per_day                    => $holds_per_day,
                 holds_per_record                 => $holds_per_record,
                 maxissueqty                      => $maxissueqty,
-                maxonsiteissueqty                => "",
                 maxsuspensiondays                => "",
                 no_auto_renewal_after            => "",
                 no_auto_renewal_after_hard_limit => "",
