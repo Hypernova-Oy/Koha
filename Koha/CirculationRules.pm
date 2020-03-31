@@ -50,9 +50,6 @@ our $RULE_KINDS = {
         scope => [ 'branchcode' ],
     },
 
-    patron_maxissueqty => {
-        scope => [ 'branchcode', 'categorycode', 'checkout_type' ],
-    },
     max_holds => {
         scope => [ 'branchcode', 'categorycode' ],
     },
@@ -67,9 +64,29 @@ our $RULE_KINDS = {
         scope => [ 'branchcode', 'itemtype' ],
     },
 
+    patron_maxissueqty => {
+        scope => [ 'branchcode', 'categorycode', 'checkout_type' ],
+    },
+
     article_requests => {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
+    holds_per_day => {
+        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+    },
+    holds_per_record => {
+        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+    },
+    onshelfholds => {
+        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+    },
+    opacitemholds => {
+        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+    },
+    reservesallowed => {
+        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+    },
+
     auto_renew => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
@@ -97,12 +114,6 @@ our $RULE_KINDS = {
     hardduedatecompare => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
-    holds_per_day => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
-    },
-    holds_per_record => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
-    },
     issuelength => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
@@ -127,12 +138,6 @@ our $RULE_KINDS = {
     norenewalbefore => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
-    onshelfholds => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
-    },
-    opacitemholds => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
-    },
     overduefinescap => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
@@ -144,9 +149,6 @@ our $RULE_KINDS = {
     },
     rentaldiscount => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
-    },
-    reservesallowed => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
     suspension_chargeperiod => {
         scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
