@@ -108,9 +108,9 @@ subtest '1 Issuingrule exist 0 0: no issue allowed' => sub {
             branchcode   => $branch->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => undef,
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 0,
-                maxonsiteissueqty => 0,
             }
         },
     );
@@ -165,9 +165,20 @@ subtest '1 Issuingrule exist with onsiteissueqty=unlimited' => sub {
             branchcode   => $branch->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => undef,
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => undef,
+            }
+        },
+    );
+    Koha::CirculationRules->set_rules(
+        {
+            branchcode   => $branch->{branchcode},
+            categorycode => $category->{categorycode},
+            itemtype     => undef,
+            checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+            rules        => {
+                maxissueqty       => undef,
             }
         },
     );
@@ -220,9 +231,9 @@ subtest '1 Issuingrule exist 1 1: issue is allowed' => sub {
             branchcode   => $branch->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => undef,
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => 1,
             }
         }
     );
@@ -260,9 +271,9 @@ subtest '1 Issuingrule exist: 1 CO allowed, 1 OSCO allowed. Do a CO' => sub {
             branchcode   => $branch->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => undef,
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => 1,
             }
         }
     );
@@ -316,9 +327,9 @@ subtest '1 Issuingrule exist: 1 CO allowed, 1 OSCO allowed, Do a OSCO' => sub {
             branchcode   => $branch->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => undef,
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => 1,
             }
         }
     );
@@ -375,9 +386,9 @@ subtest '1 BranchBorrowerCircRule exist: 1 CO allowed, 1 OSCO allowed' => sub {
             branchcode   => $branch->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => undef,
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => 1,
             }
         }
     );
@@ -427,9 +438,9 @@ subtest '1 BranchBorrowerCircRule exist: 1 CO allowed, 1 OSCO allowed' => sub {
             branchcode   => $branch->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => undef,
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => 1,
             }
         }
     );
@@ -505,6 +516,7 @@ subtest 'General vs specific rules limit quantity correctly' => sub {
             categorycode => '*',
             itemtype     => $itemtype->{itemtype},
             branchcode   => '*',
+            checkout_type => '*',
             rules        => {
                 issuelength => 1,
                 firstremind => 1,        # 1 day of grace
@@ -519,10 +531,10 @@ subtest 'General vs specific rules limit quantity correctly' => sub {
         {
             branchcode   => '*',
             categorycode => '*',
+            checkout_type => '*',
             itemtype     => $itemtype->{itemtype},
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => 1,
             }
         }
     );
@@ -573,9 +585,9 @@ subtest 'General vs specific rules limit quantity correctly' => sub {
             branchcode   => $branch->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => $itemtype->{itemtype},
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => 1,
             }
         }
     );
@@ -669,9 +681,9 @@ subtest 'General vs specific rules limit quantity correctly' => sub {
             branchcode   => $branch2->{branchcode},
             categorycode => $category->{categorycode},
             itemtype     => $itemtype->{itemtype},
+            checkout_type => undef,
             rules        => {
                 maxissueqty       => 1,
-                maxonsiteissueqty => 1,
             }
         }
     );
@@ -691,9 +703,9 @@ subtest 'empty string means unlimited' => sub {
             branchcode   => '*',
             categorycode => '*',
             itemtype     => '*',
+            checkout_type => '*',
             rules        => {
                 maxissueqty       => '',
-                maxonsiteissueqty => '',
             }
         },
     );
@@ -706,7 +718,7 @@ subtest 'empty string means unlimited' => sub {
     is(
         C4::Circulation::TooMany( $patron, $item_object, { onsite_checkout => 1 } ),
         undef,
-        'maxonsiteissueqty="" should mean unlimited'
+        'maxissueqty="" should mean unlimited'
     );
 
     teardown();

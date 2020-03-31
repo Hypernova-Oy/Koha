@@ -91,7 +91,6 @@
                 <th>Actions</th>
                 <th>Note</th>
                 <th>Current checkouts allowed</th>
-                <th>Current on-site checkouts allowed</th>
                 <th>Loan period</th>
                 <th>Unit</th>
                 <th>Hard due date</th>
@@ -128,7 +127,6 @@
                         [% SET i = '' UNLESS i.defined %]
                         [% SET note = all_rules.$c.$i.note %]
                         [% SET maxissueqty = all_rules.$c.$i.maxissueqty %]
-                        [% SET maxonsiteissueqty = all_rules.$c.$i.maxonsiteissueqty %]
                         [% SET issuelength = all_rules.$c.$i.issuelength %]
                         [% SET lengthunit = all_rules.$c.$i.lengthunit %]
                         [% SET hardduedate = all_rules.$c.$i.hardduedate %]
@@ -156,7 +154,7 @@
                         [% SET article_requests = all_rules.$c.$i.article_requests %]
                         [% SET rentaldiscount = all_rules.$c.$i.rentaldiscount %]
 
-                        [% SET show_rule = maxissueqty || maxonsiteissueqty || issuelength || lengthunit || hardduedate || hardduedatebefore || hardduedateexact || fine || chargeperiod || chargeperiod_charge_at || firstremind || overduefinescap || cap_fine_to_replacement_price || finedays || maxsuspensiondays || suspension_chargeperiod || renewalsallowed || renewalsallowed || norenewalbefore || auto_renew || no_auto_renewal_after || no_auto_renewal_after_hard_limit || reservesallowed || holds_per_day || holds_per_record || onshelfholds || opacitemholds || article_requests || article_requests %]
+                        [% SET show_rule = maxissueqty || issuelength || lengthunit || hardduedate || hardduedatebefore || hardduedateexact || fine || chargeperiod || chargeperiod_charge_at || firstremind || overduefinescap || cap_fine_to_replacement_price || finedays || maxsuspensiondays || suspension_chargeperiod || renewalsallowed || renewalsallowed || norenewalbefore || auto_renew || no_auto_renewal_after || no_auto_renewal_after_hard_limit || reservesallowed || holds_per_day || holds_per_record || onshelfholds || opacitemholds || article_requests || article_requests %]
                         [% IF show_rule %]
                             [% SET row_count = row_count + 1 %]
                             <tr row_countd="row_[% row_count | html %]">
@@ -186,13 +184,6 @@
                                     <td>
                                         [% IF maxissueqty.defined && maxissueqty != '' %]
                                             [% maxissueqty | html %]
-                                        [% ELSE %]
-                                            <span>Unlimited</span>
-                                        [% END %]
-                                    </td>
-                                    <td>
-                                        [% IF maxonsiteissueqty.defined && maxonsiteissueqty != ''  %]
-                                            [% maxonsiteissueqty | html %]
                                         [% ELSE %]
                                             <span>Unlimited</span>
                                         [% END %]
@@ -333,7 +324,6 @@
                     </td>
                     <td><input type="text" name="note" id="note" size="15" value="" maxlength="100"></td>
                     <td><input type="text" name="maxissueqty" id="maxissueqty" size="3" /></td>
-                    <td><input type="text" name="maxonsiteissueqty" id="maxonsiteissueqty" size="3" /></td>
                     <td><input type="text" name="issuelength" id="issuelength" size="3" /> </td>
                     <td>
                       <select name="lengthunit" id="lengthunit">
@@ -417,7 +407,6 @@
                       <th>&nbsp;</th>
                       <th>Note</th>
                       <th>Current checkouts allowed</th>
-                      <th>Current on-site checkouts allowed</th>
                       <th>Loan period</th>
                       <th>Unit</th>
                       <th>Hard due date</th>
@@ -460,7 +449,6 @@
                 <tr>
                     <th>&nbsp;</th>
                     <th>Total current checkouts allowed</th>
-                    <th>Total current on-site checkouts allowed</th>
                     <th>Maximum total holds allowed (count)</th>
                     <th>Hold policy</th>
                     <th>Hold pickup library match</th>
@@ -472,10 +460,6 @@
                     <td>
                         [% SET patron_maxissueqty = CirculationRules.Search( current_branch, undef, undef, 'patron_maxissueqty' ) %]
                         <input type="text" name="patron_maxissueqty" size="3" value="[% patron_maxissueqty | html %]"/>
-                    </td>
-                    <td>
-                        [% SET patron_maxonsiteissueqty = CirculationRules.Search( current_branch, undef, undef, 'patron_maxonsiteissueqty' ) %]
-                        <input type="text" name="patron_maxonsiteissueqty" size="3" value="[% patron_maxonsiteissueqty | html %]"/>
                     </td>
                     <td>
                         [% SET rule_value = CirculationRules.Search( current_branch, undef , undef, 'max_holds' ) %]
@@ -635,17 +619,15 @@
                 <tr>
                     <th>Patron category</th>
                     <th>Total current checkouts allowed</th>
-                    <th>Total current on-site checkouts allowed</th>
                     <th>Total holds allowed</th>
                     <th>&nbsp;</th>
                 </tr>
                 [% FOREACH c IN categorycodes %]
                     [% NEXT UNLESS c %]
                     [% SET patron_maxissueqty = CirculationRules.Search( branchcode, c, undef, 'patron_maxissueqty' ) %]
-                    [% SET patron_maxonsiteissueqty = CirculationRules.Search( branchcode, c, undef, 'patron_maxonsiteissueqty' ) %]
                     [% SET max_holds = CirculationRules.Search( branchcode, c, undef, 'max_holds' ) %]
 
-                    [% IF  ( patron_maxissueqty.defined && patron_maxissueqty != '' ) || ( patron_maxonsiteissueqty.defined && patron_maxonsiteissueqty != '' ) || ( max_holds.defined && max_holds != '' ) %]
+                    [% IF  ( patron_maxissueqty.defined && patron_maxissueqty != '' ) || ( max_holds.defined && max_holds != '' ) %]
                     <tr>
                         <td>
                             [% IF c == undef %]
@@ -657,13 +639,6 @@
                         <td>
                             [% IF patron_maxissueqty.defined && patron_maxissueqty != '' %]
                                 [% patron_maxissueqty | html %]
-                            [% ELSE %]
-                                <span>Unlimited</span>
-                            [% END %]
-                        </td>
-                        <td>
-                            [% IF patron_maxonsiteissueqty.defined && patron_maxonsiteissueqty != '' %]
-                                [% patron_maxonsiteissueqty | html %]
                             [% ELSE %]
                                 <span>Unlimited</span>
                             [% END %]
@@ -691,7 +666,6 @@
                         </select>
                     </td>
                     <td><input name="patron_maxissueqty" size="3" type="text" /></td>
-                    <td><input name="patron_maxonsiteissueqty" size="3" type="text" /></td>
                     <td><input name="max_holds" size="3" type="text" /></td>
                     <td class="actions"><button type="submit" class="btn btn-default btn-xs"><i class="fa fa-plus"></i> Add</td>
                 </tr>
@@ -988,7 +962,7 @@
                         // specific processing for the Note column
                         var note = $(this).find("a[name='viewnote']").data("content");
                         $(current_column).find("input[type='text']").val(note);
-                    } else if ( i == 8 ) {
+                    } else if ( i == 7 ) {
                         // specific processing for the Hard due date column
                         var select_value = $(this).find("input[type='hidden'][name='hardduedatecomparebackup']").val();
                         var input_value = '';
@@ -999,7 +973,7 @@
                         }
                         $(current_column).find("input[type='text']").val(input_value);
                         $(current_column).find("select").val(select_value);
-                    } else if ( i == 14 ) {
+                    } else if ( i == 13 ) {
                         // specific processing for cap_fine_to_replacement_price
                         var cap_fine_to_replacement_price = $(this).find("input[type='checkbox']");
                         $('#cap_fine_to_replacement_price').prop('checked', cap_fine_to_replacement_price.is(':checked') );
@@ -1024,10 +998,9 @@
                             // Remove potential previous input added
                             $(current_column).find("input").remove();
                             $(current_column).append("<input type='hidden' name='"+name+"' value='"+val+"' />");
-                        } else if ( i == 4 || i == 5 || i == 24 || i == 25 || i == 26 ) {
+                        } else if ( i == 4 || i == 23 || i == 24 || i == 25 ) {
                             // If the value is not an integer for
                             //     - "Current checkouts allowed"
-                            //     - "Current on-site checkouts allowed"
                             //     - "Holds allowed (total)"
                             //     - "Holds allowed (daily)"
                             //     - "Holds per record (count)"

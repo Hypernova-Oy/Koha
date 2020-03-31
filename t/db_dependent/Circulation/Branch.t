@@ -25,7 +25,7 @@ use Koha::CirculationRules;
 
 use Koha::Patrons;
 
-use Test::More tests => 14;
+use Test::More tests => 15;
 use t::lib::Mocks;
 use t::lib::TestBuilder;
 
@@ -143,29 +143,39 @@ my $borrower_id1 = Koha::Patron->new({
 
 is_deeply(
     GetBranchBorrowerCircRule(),
-    { patron_maxissueqty => undef, patron_maxonsiteissueqty => undef },
-"Without parameter, GetBranchBorrower returns undef (unilimited) for patron_maxissueqty and patron_maxonsiteissueqty if no rules defined"
+    { patron_maxissueqty => undef },
+"Without parameter, GetBranchBorrower returns undef (unilimited) for patron_maxissueqty if no rules defined"
 );
 
 Koha::CirculationRules->set_rules(
     {
         branchcode   => $samplebranch1->{branchcode},
         categorycode => $samplecat->{categorycode},
+        checkout_type => undef,
         rules        => {
             patron_maxissueqty       => 5,
-            patron_maxonsiteissueqty => 6,
         }
     }
 );
 
+Koha::CirculationRules->set_rules(
+    {
+        branchcode   => $samplebranch1->{branchcode},
+        categorycode => $samplecat->{categorycode},
+        checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+        rules        => {
+            patron_maxissueqty       => 9001,
+        }
+    }
+);
 
 Koha::CirculationRules->set_rules(
     {
         branchcode   => $samplebranch2->{branchcode},
         categorycode => undef,
+        checkout_type => undef,
         rules        => {
             patron_maxissueqty       => 3,
-            patron_maxonsiteissueqty => 2,
         }
     }
 );
@@ -184,9 +194,9 @@ Koha::CirculationRules->set_rules(
     {
         branchcode   => undef,
         categorycode => undef,
+        checkout_type => undef,
         rules        => {
             patron_maxissueqty       => 4,
-            patron_maxonsiteissueqty => 5,
         }
     }
 );
@@ -235,26 +245,35 @@ Koha::CirculationRules->set_rules(
 #Test GetBranchBorrowerCircRule
 is_deeply(
     GetBranchBorrowerCircRule(),
-    { patron_maxissueqty => 4, patron_maxonsiteissueqty => 5 },
-"Without parameter, GetBranchBorrower returns the patron_maxissueqty and patron_maxonsiteissueqty of default_circ_rules"
+    { patron_maxissueqty => 4 },
+"Without parameter, GetBranchBorrower returns the patron_maxissueqty of default_circ_rules"
 );
 is_deeply(
     GetBranchBorrowerCircRule( $samplebranch2->{branchcode} ),
-    { patron_maxissueqty => 3, patron_maxonsiteissueqty => 2 },
-"Without only the branchcode specified, GetBranchBorrower returns the patron_maxissueqty and patron_maxonsiteissueqty corresponding"
+    { patron_maxissueqty => 3 },
+"Without only the branchcode specified, GetBranchBorrower returns the patron_maxissueqty corresponding"
 );
 is_deeply(
     GetBranchBorrowerCircRule(
         $samplebranch1->{branchcode},
         $samplecat->{categorycode}
     ),
-    { patron_maxissueqty => 5, patron_maxonsiteissueqty => 6 },
-    "GetBranchBorrower returns the patron_maxissueqty and patron_maxonsiteissueqty of the branch1 and the category1"
+    { patron_maxissueqty => 5 },
+    "GetBranchBorrower returns the patron_maxissueqty of the branch1 and the category1"
+);
+is_deeply(
+    GetBranchBorrowerCircRule(
+        $samplebranch1->{branchcode},
+        $samplecat->{categorycode},
+        $Koha::Checkouts::type->{onsite_checkout}
+    ),
+    { patron_maxissueqty => 9001 },
+     "GetBranchBorrower returns the patron_maxissueqty of the branch1 and the category1 and checkout_type on-site"
 );
 is_deeply(
     GetBranchBorrowerCircRule( -1, -1 ),
-    { patron_maxissueqty => 4, patron_maxonsiteissueqty => 5 },
-"GetBranchBorrower with wrong parameters returns the patron_maxissueqty and patron_maxonsiteissueqty of default_circ_rules"
+    { patron_maxissueqty => 4 },
+"GetBranchBorrower with wrong parameters returns the patron_maxissueqty of default_circ_rules"
 );
 
 #Test GetBranchItemRule

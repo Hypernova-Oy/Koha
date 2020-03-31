@@ -84,7 +84,6 @@ if ($op eq 'delete') {
             itemtype     => $itemtype eq '*' ? undef : $itemtype,
             rules        => {
                 maxissueqty                      => undef,
-                maxonsiteissueqty                => undef,
                 rentaldiscount                   => undef,
                 fine                             => undef,
                 finedays                         => undef,
@@ -127,7 +126,6 @@ elsif ($op eq 'delete-branch-cat') {
                     rules        => {
                         max_holds                      => undef,
                         patron_maxissueqty             => undef,
-                        patron_maxonsiteissueqty       => undef,
                     }
                 }
             );
@@ -150,7 +148,6 @@ elsif ($op eq 'delete-branch-cat') {
                     rules        => {
                         max_holds                => undef,
                         patron_maxissueqty       => undef,
-                        patron_maxonsiteissueqty => undef,
                     }
                 }
             );
@@ -162,7 +159,6 @@ elsif ($op eq 'delete-branch-cat') {
                 categorycode => undef,
                 rules        => {
                     patron_maxissueqty       => undef,
-                    patron_maxonsiteissueqty => undef,
                 }
             }
         );
@@ -185,7 +181,6 @@ elsif ($op eq 'delete-branch-cat') {
                 rules        => {
                     max_holds         => undef,
                     patron_maxissueqty       => undef,
-                    patron_maxonsiteissueqty => undef,
                 }
             }
         );
@@ -260,7 +255,6 @@ elsif ($op eq 'add') {
     my $chargeperiod = $input->param('chargeperiod');
     my $chargeperiod_charge_at = $input->param('chargeperiod_charge_at');
     my $maxissueqty  = strip_non_numeric($input->param('maxissueqty'));
-    my $maxonsiteissueqty  = strip_non_numeric($input->param('maxonsiteissueqty'));
     my $renewalsallowed  = $input->param('renewalsallowed');
     my $renewalperiod    = $input->param('renewalperiod');
     my $norenewalbefore  = $input->param('norenewalbefore');
@@ -288,11 +282,10 @@ elsif ($op eq 'add') {
     my $overduefinescap = $input->param('overduefinescap') || '';
     my $cap_fine_to_replacement_price = $input->param('cap_fine_to_replacement_price') eq 'on';
     my $note = $input->param('note');
-    $debug and warn "Adding $br, $bor, $itemtype, $fine, $maxissueqty, $maxonsiteissueqty, $cap_fine_to_replacement_price";
+    $debug and warn "Adding $br, $bor, $itemtype, $fine, $maxissueqty, $cap_fine_to_replacement_price";
 
     my $rules = {
         maxissueqty                   => $maxissueqty,
-        maxonsiteissueqty             => $maxonsiteissueqty,
         rentaldiscount                => $rentaldiscount,
         fine                          => $fine,
         finedays                      => $finedays,
@@ -335,8 +328,6 @@ elsif ($op eq 'add') {
 elsif ($op eq "set-branch-defaults") {
     my $categorycode  = $input->param('categorycode');
     my $patron_maxissueqty   = strip_non_numeric($input->param('patron_maxissueqty'));
-    my $patron_maxonsiteissueqty = $input->param('patron_maxonsiteissueqty');
-    $patron_maxonsiteissueqty = strip_non_numeric($patron_maxonsiteissueqty);
     my $holdallowed   = $input->param('holdallowed');
     my $hold_fulfillment_policy = $input->param('hold_fulfillment_policy');
     my $returnbranch  = $input->param('returnbranch');
@@ -362,7 +353,6 @@ elsif ($op eq "set-branch-defaults") {
                 branchcode   => undef,
                 rules        => {
                     patron_maxissueqty             => $patron_maxissueqty,
-                    patron_maxonsiteissueqty       => $patron_maxonsiteissueqty,
                 }
             }
         );
@@ -384,7 +374,6 @@ elsif ($op eq "set-branch-defaults") {
                 branchcode   => $branch,
                 rules        => {
                     patron_maxissueqty             => $patron_maxissueqty,
-                    patron_maxonsiteissueqty       => $patron_maxonsiteissueqty,
                 }
             }
         );
@@ -401,8 +390,6 @@ elsif ($op eq "set-branch-defaults") {
 elsif ($op eq "add-branch-cat") {
     my $categorycode  = $input->param('categorycode');
     my $patron_maxissueqty = strip_non_numeric($input->param('patron_maxissueqty'));
-    my $patron_maxonsiteissueqty = $input->param('patron_maxonsiteissueqty');
-    $patron_maxonsiteissueqty = strip_non_numeric($patron_maxonsiteissueqty);
     my $max_holds = $input->param('max_holds');
     $max_holds =~ s/\s//g;
     $max_holds = undef if $max_holds !~ /^\d+/;
@@ -416,7 +403,6 @@ elsif ($op eq "add-branch-cat") {
                     rules        => {
                         max_holds         => $max_holds,
                         patron_maxissueqty       => $patron_maxissueqty,
-                        patron_maxonsiteissueqty => $patron_maxonsiteissueqty,
                     }
                 }
             );
@@ -428,7 +414,6 @@ elsif ($op eq "add-branch-cat") {
                     rules        => {
                         max_holds         => $max_holds,
                         patron_maxissueqty       => $patron_maxissueqty,
-                        patron_maxonsiteissueqty => $patron_maxonsiteissueqty,
                     }
                 }
             );
@@ -441,7 +426,6 @@ elsif ($op eq "add-branch-cat") {
                 rules        => {
                     max_holds         => $max_holds,
                     patron_maxissueqty       => $patron_maxissueqty,
-                    patron_maxonsiteissueqty => $patron_maxonsiteissueqty,
                 }
             }
         );
@@ -453,7 +437,6 @@ elsif ($op eq "add-branch-cat") {
                 rules        => {
                     max_holds         => $max_holds,
                     patron_maxissueqty       => $patron_maxissueqty,
-                    patron_maxonsiteissueqty => $patron_maxonsiteissueqty,
                 }
             }
         );
