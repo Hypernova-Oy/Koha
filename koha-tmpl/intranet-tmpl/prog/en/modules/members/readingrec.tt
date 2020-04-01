@@ -4,6 +4,7 @@
 [% USE Koha %]
 [% USE AuthorisedValues %]
 [% USE Branches %]
+[% USE Checkouts %]
 [% USE ColumnsSettings %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
@@ -66,7 +67,7 @@
       [% FOREACH issue IN loop_reading %]
         [% IF  issue.returndate  %]<tr>[% ELSE %]<tr class="onissue">[% END %]
           <td style="display:none;">
-            [% IF issue.onsite_checkout %][% issuetype = 'onsite_checkout' | html %]
+            [% IF ( issue.checkout_type && issue.checkout_type == Checkouts.type.onsite_checkout ) %][% issuetype = 'onsite_checkout' | html %]
             [% ELSE %][% issuetype = 'standard_checkout' | html %]
             [% END %]
             [% issuetype | html %]

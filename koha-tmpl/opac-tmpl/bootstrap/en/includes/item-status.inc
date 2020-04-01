@@ -1,4 +1,5 @@
 [% USE AuthorisedValues %]
+[% USE Checkouts %]
 [% SET itemavailable = 1 %]
 
 [%#- This include takes two parameters: an item structure -%]
@@ -18,10 +19,10 @@
 
 [% IF item.isa('Koha::Item') %]
     [% SET datedue = issue.date_due %]
-    [% SET onsite_checkout = issue.onsite_checkout %]
+    [% SET onsite_checkout = ( issue.checkout_type && issue.checkout_type == Checkouts.type.onsite_checkout ) ? 1 : 0 %]
 [% ELSE %]
     [% SET datedue = item.datedue || issue.date_due %]
-    [% SET onsite_checkout = item.onsite_checkout %]
+    [% SET onsite_checkout = ( item.checkout_type && item.checkout_type == Checkouts.type.onsite_checkout ) ? 1 : 0 %]
 [% END %]
 [% IF datedue %]
     [% SET itemavailable = 0 %]

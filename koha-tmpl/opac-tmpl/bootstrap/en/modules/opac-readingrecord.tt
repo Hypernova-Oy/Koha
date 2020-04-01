@@ -1,6 +1,7 @@
 [% USE raw %]
 [% USE Koha %]
 [% USE KohaDates %]
+[% USE Checkouts %]
 [% INCLUDE 'doc-head-open.inc' %]
 <title>[% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog &rsaquo; Your checkout history</title>
 [% INCLUDE 'doc-head-close.inc' %]
@@ -90,7 +91,7 @@
                                             [% FOREACH issue IN READING_RECORD %]
                                                 <tr>
                                                     <td style="display:none;">
-                                                      [% IF issue.onsite_checkout %][% issuetype = 'onsite_checkout' %]
+                                                      [% IF ( issue.checkout_type && issue.checkout_type == Checkouts.type.onsite_checkout ) %][% issuetype = 'onsite_checkout' %]
                                                       [% ELSE %][% issuetype = 'standard_checkout' %]
                                                       [% END %]
                                                       [% issuetype | html %]
