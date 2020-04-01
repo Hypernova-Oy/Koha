@@ -62,6 +62,17 @@ sub calculate_dropbox_date {
     return $dropbox_date;
 }
 
+=head3 $type
+
+Name to code mappings
+
+=cut
+
+our $type = {
+    'checkout'        => 'CHECKOUT',
+    'onsite_checkout' => 'ONSITE',
+};
+
 =head3 type
 
 =cut
