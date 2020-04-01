@@ -724,3 +724,7 @@ INSERT INTO authorised_values (category, authorised_value, lib) VALUES ('HSBND_F
 -- return claims
 INSERT INTO authorised_values (category, authorised_value, lib) VALUES ('RETURN_CLAIM_RESOLUTION', 'RET_BY_PATRON', 'Returned by patron');
 INSERT INTO authorised_values (category, authorised_value, lib) VALUES ('RETURN_CLAIM_RESOLUTION', 'FOUND_IN_LIB',  'Found in library');
+
+-- Checkout types
+INSERT INTO authorised_values (category,authorised_value,lib,lib_opac) VALUES ('CHECKOUT_TYPE', 'CHECKOUT', 'Normal checkout', 'Normal checkout');
+INSERT INTO authorised_values (category,authorised_value,lib,lib_opac) VALUES ('CHECKOUT_TYPE', 'ONSITE', 'On-site checkout', 'On-site checkout');

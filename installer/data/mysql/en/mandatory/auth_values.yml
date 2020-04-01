@@ -50,6 +50,16 @@ tables:
           lib: "Creditcard via SIP2"
           lib_opac: "Creditcard"
 
+        - category: "CHECKOUT_TYPE"
+          authorised_value: "CHECKOUT"
+          lib: "Normal checkout"
+          lib_opac: "Normal checkout"
+
+        - category: "CHECKOUT_TYPE"
+          authorised_value: "ONSITE"
+          lib: "On-site checkout"
+          lib_opac: "On-site checkout"
+
   - authorised_values:
       translatable: [ lib ]
       multiline: []
