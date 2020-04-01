@@ -65,3 +65,7 @@ INSERT IGNORE INTO authorised_value_categories( category_name ) VALUES
 -- For Claims returned
 INSERT IGNORE INTO authorised_value_categories( category_name ) VALUES
     ('RETURN_CLAIM_RESOLUTION');
+
+-- For Circulation types
+INSERT IGNORE INTO authorised_value_categories( category_name ) VALUES
+    ('CHECKOUT_TYPE');
