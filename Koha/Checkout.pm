@@ -41,6 +41,19 @@ Koha::Checkout - Koha Checkout object class
 
 =cut
 
+=head3 is_onsite_checkout
+
+my is_onsite_checkout = $checkout->is_onsite_checkout();
+
+Return 1 if the checkout is an on-site checkout.
+
+=cut
+
+sub is_onsite_checkout {
+    my ( $self ) = @_;
+    return $self->checkout_type eq $Koha::Checkouts::type->{onsite_checkout};
+}
+
 =head3 is_overdue
 
 my  $is_overdue = $checkout->is_overdue( [ $reference_dt ] );
