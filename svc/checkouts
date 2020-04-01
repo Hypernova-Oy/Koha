@@ -28,6 +28,7 @@ use C4::Overdues qw(GetFine);
 use C4::Context;
 
 use Koha::AuthorisedValues;
+use Koha::Checkouts;
 use Koha::DateUtils;
 use Koha::ItemTypes;
 
@@ -69,7 +70,7 @@ my $sql = '
         issues.date_due < now() as date_due_overdue,
         issues.timestamp,
 
-        issues.onsite_checkout,
+        issues.checkout_type,
 
         biblio.biblionumber,
         biblio.title,
@@ -220,7 +221,7 @@ while ( my $c = $sth->fetchrow_hashref() ) {
         date_due            => $c->{date_due},
         date_due_overdue    => $c->{date_due_overdue} ? JSON::true : JSON::false,
         timestamp           => $c->{timestamp},
-        onsite_checkout     => $c->{onsite_checkout},
+        onsite_checkout     => $c->{checkout_type} ? ( $c->{checkout_type} eq $Koha::Checkouts::type->{onsite_checkout} ? 1 : 0 ) : 0,
         enumchron           => $c->{enumchron},
         renewals_count      => $renewals_count,
         renewals_allowed    => $renewals_allowed,

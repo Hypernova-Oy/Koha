@@ -66,6 +66,7 @@ use Koha::AuthorisedValues;
 use Koha::DateUtils qw(dt_from_string);
 use Koha::Database;
 
+use Koha::Checkouts;
 use Koha::Biblioitems;
 use Koha::Items;
 use Koha::ItemTypes;
@@ -660,7 +661,7 @@ sub GetItemsInfo {
            items.notforloan as itemnotforloan,
            issues.borrowernumber,
            issues.date_due as datedue,
-           issues.onsite_checkout,
+           issues.checkout_type,
            borrowers.cardnumber,
            borrowers.surname,
            borrowers.firstname,
@@ -715,6 +716,9 @@ sub GetItemsInfo {
         $descriptions = Koha::AuthorisedValues->get_description_by_koha_field({frameworkcode => $data->{frameworkcode}, kohafield => 'items.notforloan', authorised_value => $data->{itemnotforloan} });
         $data->{notforloanvalue}     = $descriptions->{lib} // '';
         $data->{notforloanvalueopac} = $descriptions->{opac_description} // '';
+
+        # is onsite checkout
+        $data->{onsite_checkout}     = defined $data->{checkout_type} && $data->{checkout_type} eq $Koha::Checkouts::type->{onsite_checkout} ? 1 : 0;
 
         # get restricted status and description if applicable
         $descriptions = Koha::AuthorisedValues->get_description_by_koha_field({frameworkcode => $data->{frameworkcode}, kohafield => 'items.restricted', authorised_value => $data->{restricted} });

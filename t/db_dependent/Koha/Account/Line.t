@@ -360,7 +360,6 @@ subtest 'Renewal related tests' => sub {
             class => 'Koha::Checkouts',
             value => {
                 itemnumber      => $item->itemnumber,
-                onsite_checkout => 0,
                 renewals        => 99,
                 auto_renew      => 0
             }
@@ -406,7 +405,6 @@ subtest 'Renewal related tests' => sub {
             class => 'Koha::Checkouts',
             value => {
                 itemnumber      => $item->itemnumber,
-                onsite_checkout => 0,
                 renewals        => 0,
                 auto_renew      => 0
             }
