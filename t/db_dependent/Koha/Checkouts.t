@@ -19,7 +19,8 @@
 
 use Modern::Perl;
 
-use Test::More tests => 7;
+use Test::More tests => 9;
+use Test::Exception;
 
 use C4::Circulation;
 use Koha::Checkouts;
@@ -55,6 +56,24 @@ is( Koha::Checkouts->search->count, $nb_of_checkouts + 2, 'The 2 checkouts shoul
 
 my $retrieved_checkout_1 = Koha::Checkouts->find( $new_checkout_1->issue_id );
 is( $retrieved_checkout_1->itemnumber, $new_checkout_1->itemnumber, 'Find a checkout by id should return the correct checkout' );
+
+subtest 'Koha::Checkouts checkout_codes' => sub {
+    plan tests => 2;
+    is( $Koha::Checkouts::type->{checkout}, 'CHECKOUT' );
+    is( $Koha::Checkouts::type->{onsite_checkout}, 'ONSITE' );
+};
+
+subtest 'is_onsite_checkout' => sub {
+    plan tests => 2;
+
+    my $old_checkout_type = $retrieved_checkout_1->checkout_type;
+    $new_checkout_1->checkout_type($Koha::Checkouts::type->{checkout})->store;
+    ok( !$new_checkout_1->is_onsite_checkout, 'It is not on-site checkout' );
+    $new_checkout_1->checkout_type($Koha::Checkouts::type->{onsite_checkout})->store;
+    is( $new_checkout_1->is_onsite_checkout,
+        1, 'It is an on-site checkout' );
+    $new_checkout_1->checkout_type($old_checkout_type)->store;
+};
 
 subtest 'is_overdue' => sub {
     plan tests => 6;
