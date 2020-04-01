@@ -1622,7 +1622,7 @@ CREATE TABLE `issues` ( -- information related to check outs or issues
   `auto_renew_error` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL, -- automatic renewal error
   `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP, -- the date and time this record was last touched
   `issuedate` datetime default NULL, -- date the item was checked out or issued
-  `onsite_checkout` int(1) NOT NULL default 0, -- in house use flag
+  `checkout_type` ENUM('CHECKOUT', 'ONSITE') NOT NULL default 'CHECKOUT', -- checkout type
   `note` LONGTEXT default NULL, -- issue note text
   `notedate` datetime default NULL, -- datetime of issue note (yyyy-mm-dd hh:mm::ss)
   `noteseen` int(1) default NULL, -- describes whether checkout note has been seen 1, not been seen 0 or doesn't exist null
@@ -1654,7 +1654,7 @@ CREATE TABLE `old_issues` ( -- lists items that were checked out and have been r
   `auto_renew_error` varchar(32) COLLATE utf8mb4_unicode_ci DEFAULT NULL, -- automatic renewal error
   `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP, -- the date and time this record was last touched
   `issuedate` datetime default NULL, -- date the item was checked out or issued
-  `onsite_checkout` int(1) NOT NULL default 0, -- in house use flag
+  `checkout_type` ENUM('CHECKOUT', 'ONSITE') NOT NULL default 'CHECKOUT', -- checkout type
   `note` LONGTEXT default NULL, -- issue note text
   `notedate` datetime default NULL, -- datetime of issue note (yyyy-mm-dd hh:mm::ss)
   `noteseen` int(1) default NULL, -- describes whether checkout note has been seen 1, not been seen 0 or doesn't exist null
