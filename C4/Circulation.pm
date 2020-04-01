@@ -411,8 +411,8 @@ sub TooMany {
     # rule
     if (defined($maxissueqty_rule) and $maxissueqty_rule->rule_value ne '') {
         my @bind_params;
-        my $count_query = q|
-            SELECT COUNT(*) AS total, COALESCE(SUM(onsite_checkout), 0) AS onsite_checkouts
+        my $count_query = qq|
+            SELECT COUNT(*) AS total, COALESCE(SUM(CASE WHEN checkout_type = '$Koha::Checkouts::type->{onsite_checkout}' THEN 1 ELSE 0 END), 0) AS onsite_checkouts
             FROM issues
             JOIN items USING (itemnumber)
         |;
@@ -508,8 +508,8 @@ sub TooMany {
     my $branch_borrower_circ_rule = GetBranchBorrowerCircRule($branch, $cat_borrower);
     if (defined($branch_borrower_circ_rule->{patron_maxissueqty}) and $branch_borrower_circ_rule->{patron_maxissueqty} ne '') {
         my @bind_params = ();
-        my $branch_count_query = q|
-            SELECT COUNT(*) AS total, COALESCE(SUM(onsite_checkout), 0) AS onsite_checkouts
+        my $branch_count_query = qq|
+            SELECT COUNT(*) AS total, COALESCE(SUM(CASE WHEN checkout_type = '$Koha::Checkouts::type->{onsite_checkout}' THEN 1 ELSE 0 END), 0) AS onsite_checkouts
             FROM issues
             JOIN items USING (itemnumber)
             WHERE borrowernumber = ?
@@ -852,7 +852,7 @@ sub CanBookBeIssued {
         # If it is an on-site checkout if it can be switched to a normal checkout
         # or ask whether the loan should be renewed
 
-        if ( $issue->onsite_checkout
+        if ( $issue->is_onsite_checkout
                 and C4::Context->preference('SwitchOnSiteCheckouts') ) {
             $messages{ONSITE_CHECKOUT_WILL_BE_SWITCHED} = 1;
         } else {
@@ -902,7 +902,7 @@ sub CanBookBeIssued {
     my $switch_onsite_checkout = (
           C4::Context->preference('SwitchOnSiteCheckouts')
       and $issue
-      and $issue->onsite_checkout
+      and $issue->is_onsite_checkout
       and $issue->borrowernumber == $patron->borrowernumber ? 1 : 0 );
     my $toomany = TooMany( $patron_unblessed, $item_object, { onsite_checkout => $onsite_checkout, switch_onsite_checkout => $switch_onsite_checkout, } );
     # if TooMany max_allowed returns 0 the user doesn't have permission to check out this book
@@ -1428,7 +1428,9 @@ sub AddIssue {
                 issuedate       => $issuedate->strftime('%Y-%m-%d %H:%M:%S'),
                 date_due        => $datedue->strftime('%Y-%m-%d %H:%M:%S'),
                 branchcode      => C4::Context->userenv->{'branch'},
-                onsite_checkout => $onsite_checkout,
+                checkout_type   => $onsite_checkout ?
+                        $Koha::Checkouts::type->{onsite_checkout}
+                      : $Koha::Checkouts::type->{checkout},
                 auto_renew      => $auto_renew ? 1 : 0,
             };
 
@@ -2760,7 +2762,7 @@ sub CanBookBeRenewed {
 
     my $item      = Koha::Items->find($itemnumber)      or return ( 0, 'no_item' );
     my $issue = $item->checkout or return ( 0, 'no_checkout' );
-    return ( 0, 'onsite_checkout' ) if $issue->onsite_checkout;
+    return ( 0, 'onsite_checkout' ) if $issue->is_onsite_checkout;
     return ( 0, 'item_denied_renewal') if _item_denied_renewal({ item => $item });
 
     my $patron = $issue->patron or return;
@@ -4153,7 +4155,7 @@ sub GetAgeRestriction {
 
 sub GetPendingOnSiteCheckouts {
     my $dbh = C4::Context->dbh;
-    return $dbh->selectall_arrayref(q|
+    return $dbh->selectall_arrayref(qq|
         SELECT
           items.barcode,
           items.biblionumber,
@@ -4174,7 +4176,7 @@ sub GetPendingOnSiteCheckouts {
         LEFT JOIN issues ON items.itemnumber = issues.itemnumber
         LEFT JOIN biblio ON items.biblionumber = biblio.biblionumber
         LEFT JOIN borrowers ON issues.borrowernumber = borrowers.borrowernumber
-        WHERE issues.onsite_checkout = 1
+        WHERE issues.checkout_type = '$Koha::Checkouts::type->{onsite_checkout}'
     |, { Slice => {} } );
 }
 

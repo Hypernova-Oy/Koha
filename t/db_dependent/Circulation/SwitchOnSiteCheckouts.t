@@ -116,7 +116,7 @@ is( $messages->{ONSITE_CHECKOUT_WILL_BE_SWITCHED}, 1, 'If SwitchOnSiteCheckouts,
 is( exists $impossible->{TOO_MANY}, '', 'If SwitchOnSiteCheckouts, switch the on-site checkout' );
 C4::Circulation::AddIssue( $patron_unblessed, $item->{barcode}, undef, undef, undef, undef, { switch_onsite_checkout => 1 } );
 my $issue = Koha::Checkouts->find( { itemnumber => $item->{itemnumber} } );
-is( $issue->onsite_checkout, 0, 'The issue should have been switched to a regular checkout' );
+is( $issue->checkout_type, $Koha::Checkouts::type->{checkout}, 'The issue should have been switched to a regular checkout' );
 my $five_days_after = dt_from_string->add( days => 5 )->set( hour => 23, minute => 59, second => 0 );
 is( dt_from_string($issue->date_due, 'sql'), $five_days_after, 'The date_due should have been set depending on the circ rules when the on-site checkout has been switched' );
 

@@ -327,7 +327,7 @@ $(document).ready(function() {
                         }
 
                         var onsite_checkout = '';
-                        if ( oObj.onsite_checkout == 1 ) {
+                        if ( oObj.onsite_checkout ) {
                             onsite_checkout += " <span class='onsite_checkout'>(" + INHOUSE_USE + ")</span>";
                         }
 
@@ -507,7 +507,7 @@ $(document).ready(function() {
                             span_class = "renewals-allowed";
                         }
 
-                        var can_force_renew = ( oObj.onsite_checkout == 0 ) &&
+                        var can_force_renew = ( oObj.onsite_checkout ) &&
                             ( oObj.can_renew_error != "on_reserve" || (oObj.can_renew_error == "on_reserve" && AllowRenewalOnHoldOverride))
                             ? true : false;
                         var can_renew = ( oObj.renewals_remaining > 0  && !oObj.can_renew_error );
@@ -701,7 +701,7 @@ $(document).ready(function() {
                             }
 
                             var onsite_checkout = '';
-                            if ( oObj.onsite_checkout == 1 ) {
+                            if ( oObj.onsite_checkout ) {
                                 onsite_checkout += " <span class='onsite_checkout'>(" + INHOUSE_USE + ")</span>";
                             }
 

@@ -3387,7 +3387,6 @@ subtest 'ItemsDeniedRenewal preference' => sub {
         auto_renew => 0,
         borrowernumber => $idr_borrower->borrowernumber,
         itemnumber => $deny_book->itemnumber,
-        onsite_checkout => 0,
         date_due => $future,
         }
     });
@@ -3397,7 +3396,6 @@ subtest 'ItemsDeniedRenewal preference' => sub {
         auto_renew => 0,
         borrowernumber => $idr_borrower->borrowernumber,
         itemnumber => $allow_book->itemnumber,
-        onsite_checkout => 0,
         date_due => $future,
         }
     });

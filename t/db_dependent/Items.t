@@ -315,7 +315,7 @@ subtest 'GetHiddenItemnumbers tests' => sub {
 
 subtest 'GetItemsInfo tests' => sub {
 
-    plan tests => 9;
+    plan tests => 10;
 
     $schema->storage->txn_begin;
 
@@ -370,6 +370,8 @@ subtest 'GetItemsInfo tests' => sub {
         'GetItemsInfo returns the correct holding branch OPAC info notice' );
     is( exists( $results[0]->{ onsite_checkout } ), 1,
         'GetItemsInfo returns a onsite_checkout key' );
+    is( exists( $results[0]->{ checkout_type } ), 1,
+        'GetItemsInfo returns a checkout_type key' );
     is( $results[0]->{ restricted }, 1,
         'GetItemsInfo returns a restricted value code' );
     is( $results[0]->{ restrictedvalue }, "Restricted Access",

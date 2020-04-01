@@ -5,6 +5,8 @@
 [% USE AuthorisedValues %]
 [% USE Branches %]
 [% USE TablesSettings %]
+[% USE Checkouts %]
+[% USE ColumnsSettings %]
 [% SET footerjs = 1 %]
 [% INCLUDE 'doc-head-open.inc' %]
 <title>Circulation History for [% INCLUDE 'patron-title.inc' no_html = 1 %]</title>
@@ -66,7 +68,7 @@
       [% FOREACH issue IN loop_reading %]
         [% IF  issue.returndate  %]<tr>[% ELSE %]<tr class="onissue">[% END %]
           <td style="display:none;">
-            [% IF issue.onsite_checkout %][% issuetype = 'onsite_checkout' | html %]
+            [% IF ( issue.checkout_type && issue.checkout_type == Checkouts.checkout_type.onsite_checkout ) %][% issuetype = 'onsite_checkout' | html %]
             [% ELSE %][% issuetype = 'standard_checkout' | html %]
             [% END %]
             [% issuetype | html %]
