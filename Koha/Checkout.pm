@@ -29,6 +29,8 @@ use Koha::Database;
 use Koha::DateUtils;
 use Koha::Items;
 
+use Koha::Exceptions::Object;
+
 use base qw(Koha::Object);
 
 =head1 NAME
@@ -102,6 +104,30 @@ sub patron {
     my ( $self ) = @_;
     my $patron_rs = $self->_result->borrower;
     return Koha::Patron->_new_from_dbic( $patron_rs );
+}
+
+=head3 store
+
+my $checkout = $checkout->store
+
+Overrides the default store subroutine.
+
+=cut
+
+sub store {
+    my ( $self ) = @_;
+
+    my $checkout_type = $self->checkout_type;
+    if ( $checkout_type ) {
+        unless ( Koha::Checkouts::is_valid_checkout_type( $checkout_type ) ) {
+            Koha::Exceptions::Object::FKConstraint->throw(
+                broken_fk => 'checkout_type',
+                value     => $self->checkout_type,
+            );
+        }
+    }
+
+    return $self->SUPER::store();
 }
 
 =head3 to_api_mapping

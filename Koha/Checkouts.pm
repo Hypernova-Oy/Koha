@@ -22,6 +22,7 @@ use Modern::Perl;
 use Carp;
 
 use C4::Context;
+use Koha::AuthorisedValues;
 use Koha::Checkout;
 use Koha::Database;
 use Koha::DateUtils;
@@ -55,7 +56,26 @@ sub calculate_dropbox_date {
     return $dropbox_date;
 }
 
+=head3 is_valid_checkout_type
+
+my $valid_checkout_type = Koha::Checkouts::is_valid_checkout_type( $type );
+
+Checks authorised values for valid checkout types.
+
 =cut
+
+sub is_valid_checkout_type {
+    my ( $type ) = @_;
+
+    return 1 if not defined $type; # undefined refers to normal checkout
+
+    my $av = Koha::AuthorisedValues->search({
+        category         => 'CHECKOUT_TYPE',
+        authorised_value => $type,
+    });
+
+    return $av->count ? 1 : 0;
+}
 
 =head2 Name to code mappings
 

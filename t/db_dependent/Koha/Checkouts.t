@@ -19,10 +19,12 @@
 
 use Modern::Perl;
 
-use Test::More tests => 9;
+use Test::More tests => 10;
 use Test::Exception;
 
 use C4::Circulation;
+use Koha::AuthorisedValues;
+use Koha::AuthorisedValueCategories;
 use Koha::Checkouts;
 use Koha::Database;
 use Koha::DateUtils qw( dt_from_string );
@@ -139,6 +141,55 @@ subtest 'patron' => sub {
     is( $old_issue->patron, undef,
         'Koha::Checkout->patron should return undef if the patron record has been deleted'
     );
+};
+
+subtest 'store' => sub {
+    plan tests => 1;
+
+    subtest 'validate checkout_type' => sub {
+        plan tests => 3;
+
+        # This should exist on clean installations, but just make sure...
+        unless ( Koha::AuthorisedValueCategories->search( {
+            category_name => 'CHECKOUT_TYPE'
+        } )->count ) {
+            $builder->build_object( {
+                class=> 'Koha::AuthorisedValueCategories',
+                value => { category_name => 'CHECKOUT_TYPE' }
+            } );
+        }
+
+        my $av = $builder->build_object( {
+            class=> 'Koha::AuthorisedValues',
+            value => { category => 'CHECKOUT_TYPE' }
+        } );
+
+        my $patron = $builder->build_object( {
+            class=> 'Koha::Patrons',
+            value => { branchcode => $library->{branchcode} }
+        } );
+        my $item   = $builder->build_object( { class=> 'Koha::Items' } );
+        my $checkout = Koha::Checkout->new(
+            {   borrowernumber => $patron->borrowernumber,
+                itemnumber     => $item->itemnumber,
+                branchcode     => $library->{branchcode},
+            }
+        )->store;
+
+        ok( $checkout->issue_id > 0,
+            'store() was successful with undef checkout_type' );
+
+        $checkout->set({ checkout_type => $av->authorised_value })->store;
+        is( $checkout->checkout_type, $av->authorised_value,
+            'store() was successful with a valid checkout_type' );
+
+        throws_ok {
+            $checkout->set({ checkout_type => 'NON_EXISTENT' })->store
+        } 'Koha::Exceptions::Object::FKConstraint',
+          'store() throws an exception with an invalid checkout_type';
+
+        $checkout->delete;
+    };
 };
 
 $retrieved_checkout_1->delete;
