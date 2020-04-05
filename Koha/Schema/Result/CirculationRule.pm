@@ -50,6 +50,12 @@ __PACKAGE__->table("circulation_rules");
   is_nullable: 1
   size: 10
 
+=head2 checkout_type
+
+  data_type: 'enum'
+  extra: {list => ["CHECKOUT","ONSITE"]}
+  is_nullable: 1
+
 =head2 rule_name
 
   data_type: 'varchar'
@@ -73,6 +79,12 @@ __PACKAGE__->add_columns(
   { data_type => "varchar", is_foreign_key => 1, is_nullable => 1, size => 10 },
   "itemtype",
   { data_type => "varchar", is_foreign_key => 1, is_nullable => 1, size => 10 },
+  "checkout_type",
+  {
+    data_type => "enum",
+    extra => { list => ["CHECKOUT", "ONSITE"] },
+    is_nullable => 1,
+  },
   "rule_name",
   { data_type => "varchar", is_nullable => 0, size => 32 },
   "rule_value",
@@ -103,6 +115,8 @@ __PACKAGE__->set_primary_key("id");
 
 =item * L</itemtype>
 
+=item * L</checkout_type>
+
 =item * L</rule_name>
 
 =back
@@ -111,7 +125,13 @@ __PACKAGE__->set_primary_key("id");
 
 __PACKAGE__->add_unique_constraint(
   "branchcode",
-  ["branchcode", "categorycode", "itemtype", "rule_name"],
+  [
+    "branchcode",
+    "categorycode",
+    "itemtype",
+    "checkout_type",
+    "rule_name",
+  ],
 );
 
 =head1 RELATIONS
@@ -177,8 +197,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07042 @ 2018-10-05 14:29:17
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:QHMqvrtX0ohJe70PHUYZ0Q
+# Created by DBIx::Class::Schema::Loader v0.07048 @ 2020-04-09 21:29:30
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:k6fFSiRyYlY8mwHNNQ1u5A
 
 sub koha_objects_class {
     'Koha::CirculationRules';
