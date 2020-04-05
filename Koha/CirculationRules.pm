@@ -51,7 +51,7 @@ our $RULE_KINDS = {
     },
 
     patron_maxissueqty => {
-        scope => [ 'branchcode', 'categorycode' ],
+        scope => [ 'branchcode', 'categorycode', 'checkout_type' ],
     },
     patron_maxonsiteissueqty => {
         scope => [ 'branchcode', 'categorycode' ],
@@ -74,31 +74,31 @@ our $RULE_KINDS = {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
     auto_renew => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     cap_fine_to_replacement_price => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     chargeperiod => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     chargeperiod_charge_at => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     fine => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     finedays => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     firstremind => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     hardduedate => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     hardduedatecompare => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     holds_per_day => {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
@@ -107,31 +107,31 @@ our $RULE_KINDS = {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
     issuelength => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     daysmode => {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
     lengthunit => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     maxissueqty => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     maxonsiteissueqty => {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
     maxsuspensiondays => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     no_auto_renewal_after => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     no_auto_renewal_after_hard_limit => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     norenewalbefore => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     onshelfholds => {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
@@ -140,25 +140,25 @@ our $RULE_KINDS = {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
     overduefinescap => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     renewalperiod => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     renewalsallowed => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     rentaldiscount => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     reservesallowed => {
         scope => [ 'branchcode', 'categorycode', 'itemtype' ],
     },
     suspension_chargeperiod => {
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     note => { # This is not really a rule. Maybe we will want to separate this later.
-        scope => [ 'branchcode', 'categorycode', 'itemtype' ],
+        scope => [ 'branchcode', 'categorycode', 'itemtype', 'checkout_type' ],
     },
     # Not included (deprecated?):
     #   * accountsent
@@ -180,22 +180,24 @@ sub get_effective_rule {
     $params->{categorycode} //= undef;
     $params->{branchcode}   //= undef;
     $params->{itemtype}     //= undef;
+    $params->{checkout_type} //= undef;
 
     my $rule_name    = $params->{rule_name};
     my $categorycode = $params->{categorycode};
     my $itemtype     = $params->{itemtype};
     my $branchcode   = $params->{branchcode};
+    my $checkout_type = $params->{checkout_type};
 
     Koha::Exceptions::MissingParameter->throw(
         "Required parameter 'rule_name' missing")
       unless $rule_name;
 
-    for my $v ( $branchcode, $categorycode, $itemtype ) {
+    for my $v ( $branchcode, $categorycode, $itemtype, $checkout_type ) {
         $v = undef if $v and $v eq '*';
     }
 
     my $order_by = $params->{order_by}
-      // { -desc => [ 'branchcode', 'categorycode', 'itemtype' ] };
+      // { -desc => [ 'branchcode', 'checkout_type', 'categorycode', 'itemtype', ] };
 
     my $search_params;
     $search_params->{rule_name} = $rule_name;
@@ -203,6 +205,7 @@ sub get_effective_rule {
     $search_params->{categorycode} = defined $categorycode ? [ $categorycode, undef ] : undef;
     $search_params->{itemtype}     = defined $itemtype     ? [ $itemtype, undef ] : undef;
     $search_params->{branchcode}   = defined $branchcode   ? [ $branchcode,   undef ] : undef;
+    $search_params->{checkout_type} = defined $checkout_type ? [ $checkout_type, undef ] : undef;
 
     my $rule = $self->search(
         $search_params,
@@ -225,6 +228,7 @@ sub get_effective_rules {
     my $rules        = $params->{rules};
     my $categorycode = $params->{categorycode};
     my $itemtype     = $params->{itemtype};
+    my $checkout_type = $params->{checkout_type};
     my $branchcode   = $params->{branchcode};
 
     my $r;
@@ -234,6 +238,7 @@ sub get_effective_rules {
                 rule_name    => $rule,
                 categorycode => $categorycode,
                 itemtype     => $itemtype,
+                checkout_type => $checkout_type,
                 branchcode   => $branchcode,
             }
         );
@@ -263,7 +268,7 @@ sub set_rule {
         unless defined $kind_info;
 
     # Enforce scope; a rule should be set for its defined scope, no more, no less.
-    foreach my $scope_level ( qw( branchcode categorycode itemtype ) ) {
+    foreach my $scope_level ( qw( branchcode categorycode itemtype checkout_type ) ) {
         if ( grep /$scope_level/, @{ $kind_info->{scope} } ) {
             croak "set_rule needs '$scope_level' to set '$params->{rule_name}'!"
                 unless exists $params->{$scope_level};
@@ -276,10 +281,11 @@ sub set_rule {
     my $branchcode   = $params->{branchcode};
     my $categorycode = $params->{categorycode};
     my $itemtype     = $params->{itemtype};
+    my $checkout_type = $params->{checkout_type};
     my $rule_name    = $params->{rule_name};
     my $rule_value   = $params->{rule_value};
 
-    for my $v ( $branchcode, $categorycode, $itemtype ) {
+    for my $v ( $branchcode, $categorycode, $itemtype, $checkout_type ) {
         $v = undef if $v and $v eq '*';
     }
     my $rule = $self->search(
@@ -288,6 +294,7 @@ sub set_rule {
             branchcode   => $branchcode,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
         }
     )->next();
 
@@ -307,6 +314,7 @@ sub set_rule {
                     branchcode   => $branchcode,
                     categorycode => $categorycode,
                     itemtype     => $itemtype,
+                    checkout_type => $checkout_type,
                     rule_name    => $rule_name,
                     rule_value   => $rule_value,
                 }

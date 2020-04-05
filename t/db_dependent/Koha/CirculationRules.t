@@ -22,6 +22,7 @@ use Modern::Perl;
 use Test::More tests => 3;
 use Test::Exception;
 
+use Koha::Checkouts;
 use Koha::CirculationRules;
 use Koha::Database;
 
@@ -36,6 +37,7 @@ subtest 'set_rule + get_effective_rule' => sub {
 
     $schema->storage->txn_begin;
 
+    my $checkout_type = $Koha::Checkouts::type->{checkout};
     my $categorycode = $builder->build_object( { class => 'Koha::Patron::Categories' } )->categorycode;
     my $itemtype     = $builder->build_object( { class => 'Koha::ItemTypes' } )->itemtype;
     my $branchcode   = $builder->build_object( { class => 'Koha::Libraries' } )->branchcode;
@@ -55,6 +57,7 @@ subtest 'set_rule + get_effective_rule' => sub {
             branchcode   => $branchcode,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => $rule_name,
         }
     );
@@ -65,6 +68,7 @@ subtest 'set_rule + get_effective_rule' => sub {
             branchcode   => '*',
             categorycode => '*',
             itemtype     => '*',
+            checkout_type => '*',
             rule_name    => $rule_name,
             rule_value   => $default_rule_value,
         }
@@ -75,6 +79,7 @@ subtest 'set_rule + get_effective_rule' => sub {
             branchcode   => undef,
             categorycode => undef,
             itemtype     => undef,
+            checkout_type => undef,
             rule_name    => $rule_name,
         }
     );
@@ -84,6 +89,7 @@ subtest 'set_rule + get_effective_rule' => sub {
             branchcode   => '*',
             categorycode => '*',
             itemtype     => '*',
+            checkout_type => '*',
             rule_name    => $rule_name,
         }
     );
@@ -95,6 +101,7 @@ subtest 'set_rule + get_effective_rule' => sub {
             branchcode   => $branchcode_2,
             categorycode => '*',
             itemtype     => '*',
+            checkout_type => '*',
             rule_name    => $rule_name,
         }
     );
@@ -107,6 +114,7 @@ subtest 'set_rule + get_effective_rule' => sub {
             branchcode => $branchcode,
             categorycode => $categorycode,
             itemtype => $itemtype,
+            checkout_type => $checkout_type,
         }, 'maxissueqty' );
 
         plan tests => 2**scalar @$order;
@@ -122,6 +130,7 @@ subtest 'set_rule + get_effective_rule' => sub {
                 branchcode => $branchcode,
                 categorycode => $categorycode,
                 itemtype => $itemtype,
+                checkout_type => $checkout_type,
                 rule_name => $rule_name,
             } );
 
@@ -137,9 +146,9 @@ subtest 'set_rule + get_effective_rule' => sub {
     };
 
     my $our_branch_rules = Koha::CirculationRules->search({branchcode => $branchcode});
-    is( $our_branch_rules->count, 4, "We added 8 rules");
+    is( $our_branch_rules->count, 8, "We added 16 rules");
     $our_branch_rules->delete;
-    is( $our_branch_rules->count, 0, "We deleted 8 rules");
+    is( $our_branch_rules->count, 0, "We deleted 16 rules");
 
     $schema->storage->txn_rollback;
 };
@@ -271,7 +280,7 @@ subtest 'set_rules() tests' => sub {
     plan tests => 1;
 
     subtest 'scope validation' => sub {
-        plan tests => 6;
+        plan tests => 7;
 
         $schema->storage->txn_begin;
 
@@ -281,6 +290,7 @@ subtest 'set_rules() tests' => sub {
             class => 'Koha::ItemTypes' } )->itemtype;
         my $branchcode   = $builder->build_object( {
             class => 'Koha::Libraries' } )->branchcode;
+        my $checkout_type = $Koha::Checkouts::type->{checkout};
 
         my $rule;
         Koha::CirculationRules->delete;
@@ -289,14 +299,16 @@ subtest 'set_rules() tests' => sub {
             branchcode   => $branchcode,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rules        => {
                 refund              => 1,
+                max_holds           => 9001,
                 patron_maxissueqty  => 2,
                 holdallowed         => 3,
                 article_requests    => 4,
                 maxissueqty         => 5,
             }
-        } )}, 5, 'All rules added' );
+        } )}, 6, 'All rules added' );
 
         is( Koha::CirculationRules->get_effective_rule( {
             branchcode      => $branchcode,
@@ -306,6 +318,14 @@ subtest 'set_rules() tests' => sub {
         is( Koha::CirculationRules->get_effective_rule( {
             branchcode      => $branchcode,
             categorycode    => $categorycode,
+            checkout_type   => $checkout_type,
+            rule_name       => 'max_holds'
+        } )->rule_value, 9001, 'Found rule patron_maxissueqty' );
+
+        is( Koha::CirculationRules->get_effective_rule( {
+            branchcode      => $branchcode,
+            categorycode    => $categorycode,
+            checkout_type   => $checkout_type,
             rule_name       => 'patron_maxissueqty'
         } )->rule_value, 2, 'Found rule patron_maxissueqty' );
 
@@ -326,6 +346,7 @@ subtest 'set_rules() tests' => sub {
             branchcode      => $branchcode,
             categorycode    => $categorycode,
             itemtype        => $itemtype,
+            checkout_type   => $checkout_type,
             rule_name       => 'maxissueqty'
         } )->rule_value, 5, 'Found rule maxissueqty' );
 
@@ -361,7 +382,7 @@ sub prepare_tests_for_rule_scope_combinations {
     # We must maintain the order in order to keep the test valid. This should be
     # equal to Koha/CirculationRules.pm "order_by" of C<get_effective_rule> sub.
     # Let's explicitly define the order and fail test if we are missing a scope:
-    my $order = [ 'branchcode', 'categorycode', 'itemtype' ];
+    my $order = [ 'branchcode', 'checkout_type', 'categorycode', 'itemtype' ];
     is( join(", ", sort keys %$scope),
        join(", ", sort @$order), 'Missing a scope!' ) if keys %$scope ne scalar @$order;
 
