@@ -24,17 +24,19 @@ use base qw( Template::Plugin );
 use Koha::CirculationRules;
 
 sub Get {
-    my ( $self, $branchcode, $categorycode, $itemtype, $rule_name ) = @_;
+    my ( $self, $branchcode, $categorycode, $itemtype, $checkout_type, $rule_name ) = @_;
 
     $branchcode   = undef if $branchcode eq q{}   or $branchcode eq q{*};
     $categorycode = undef if $categorycode eq q{} or $categorycode eq q{*};
     $itemtype     = undef if $itemtype eq q{}     or $itemtype  eq q{*};
+    $checkout_type = undef if $checkout_type eq {} or $checkout_type eq q{*};
 
     my $rule = Koha::CirculationRules->get_effective_rule(
         {
             branchcode   => $branchcode,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => $rule_name,
         }
     );
@@ -43,17 +45,19 @@ sub Get {
 }
 
 sub Search {
-    my ( $self, $branchcode, $categorycode, $itemtype, $rule_name ) = @_;
+    my ( $self, $branchcode, $categorycode, $itemtype, $checkout_type, $rule_name ) = @_;
 
     $branchcode   = undef if $branchcode eq q{}   or $branchcode eq q{*};
     $categorycode = undef if $categorycode eq q{} or $categorycode eq q{*};
     $itemtype     = undef if $itemtype eq q{}     or $itemtype eq q{*};
+    $checkout_type = undef if $checkout_type eq q{} or $checkout_type eq q{*};
 
     my $rule = Koha::CirculationRules->search(
         {
             branchcode   => $branchcode,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => $rule_name,
         }
     )->next;

@@ -213,6 +213,7 @@ sub allows_renewal {
             categorycode => $checkout->patron->categorycode,
             itemtype     => $checkout->item->effective_itemtype,
             branchcode   => $checkout->branchcode,
+            checkout_type => $checkout->checkout_type,
             rule_name    => 'renewalsallowed',
         }
     );

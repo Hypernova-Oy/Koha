@@ -391,13 +391,14 @@ sub TooMany {
             : $Koha::Checkouts::type->{onsite_checkout}
         : $Koha::Checkouts::type->{checkout};
 
-    # given branch, patron category, and item type, determine
+    # given branch, patron category, item type, and checkout type, determine
     # applicable issuing rule
     my $maxissueqty_rule = Koha::CirculationRules->get_effective_rule(
         {
             categorycode => $cat_borrower,
             itemtype     => $type,
             branchcode   => $branch,
+            checkout_type => $checkout_type,
             rule_name    => 'maxissueqty',
         }
     );
@@ -676,6 +677,9 @@ sub CanBookBeIssued {
     my $onsite_checkout     = $params->{onsite_checkout}     || 0;
     my $override_high_holds = $params->{override_high_holds} || 0;
 
+    my $checkout_type = $onsite_checkout
+        ? $Koha::Checkouts::type->{onsite_checkout}
+        : $Koha::Checkouts::type->{checkout};
     my $item_object = Koha::Items->find({barcode => $barcode });
 
     # MANDATORY CHECKS - unless item exists, nothing else matters
@@ -1301,6 +1305,11 @@ sub AddIssue {
     my $auto_renew = $params && $params->{auto_renew};
     my $dbh          = C4::Context->dbh;
     my $barcodecheck = CheckValidBarcode($barcode);
+    my $checkout_type = $onsite_checkout
+        ? $switch_onsite_checkout
+            ? $Koha::Checkouts::type->{checkout}
+            : $Koha::Checkouts::type->{onsite_checkout}
+        : $Koha::Checkouts::type->{checkout};
 
     my $issue;
 
@@ -1357,6 +1366,7 @@ sub AddIssue {
                     patron    => $patron,
                     library   => $library,
                     item      => $item_object,
+                    checkout_type => $checkout_type,
                     to_date   => $datedue,
                 }
             );
@@ -1394,6 +1404,7 @@ sub AddIssue {
                         categorycode => $borrower->{categorycode},
                         itemtype     => $item_object->effective_itemtype,
                         branchcode   => $branchcode,
+                        checkout_type => $checkout_type,
                         rule_name    => 'auto_renew'
                     }
                 );
@@ -1414,9 +1425,7 @@ sub AddIssue {
                 issuedate       => $issuedate->strftime('%Y-%m-%d %H:%M:%S'),
                 date_due        => $datedue->strftime('%Y-%m-%d %H:%M:%S'),
                 branchcode      => C4::Context->userenv->{'branch'},
-                checkout_type   => $onsite_checkout ?
-                        $Koha::Checkouts::type->{onsite_checkout}
-                      : $Koha::Checkouts::type->{checkout},
+                checkout_type   => $checkout_type,
                 auto_renew      => $auto_renew ? 1 : 0,
             };
 
@@ -1991,7 +2000,7 @@ sub AddReturn {
 
         if ( $issue and $issue->is_overdue ) {
         # fix fine days
-            my ($debardate,$reminder) = _debar_user_on_return( $patron_unblessed, $item->unblessed, dt_from_string($issue->date_due), $return_date );
+            my ($debardate,$reminder) = _debar_user_on_return( $patron_unblessed, $item->unblessed, $issue->checkout_type, dt_from_string($issue->date_due), $return_date );
             if ($reminder){
                 $messages->{'PrevDebarred'} = $debardate;
             } else {
@@ -2191,11 +2200,13 @@ sub MarkIssueReturned {
 
 =head2 _debar_user_on_return
 
-    _debar_user_on_return($borrower, $item, $datedue, $returndate);
+    _debar_user_on_return($borrower, $item, $checkout_type, $datedue, $returndate);
 
 C<$borrower> borrower hashref
 
 C<$item> item hashref
+
+C<$checkout_type> One of $Koha::Checkouts::type values
 
 C<$datedue> date due DateTime object
 
@@ -2212,7 +2223,7 @@ to ease testing.
 =cut
 
 sub _calculate_new_debar_dt {
-    my ( $borrower, $item, $dt_due, $return_date ) = @_;
+    my ( $borrower, $item, $checkout_type, $dt_due, $return_date ) = @_;
 
     my $branchcode = _GetCircControlBranch( $item, $borrower );
     my $circcontrol = C4::Context->preference('CircControl');
@@ -2220,6 +2231,7 @@ sub _calculate_new_debar_dt {
         {   categorycode => $borrower->{categorycode},
             itemtype     => $item->{itype},
             branchcode   => $branchcode,
+            checkout_type => $checkout_type,
             rules => [
                 'finedays',
                 'lengthunit',
@@ -2293,11 +2305,11 @@ sub _calculate_new_debar_dt {
 }
 
 sub _debar_user_on_return {
-    my ( $borrower, $item, $dt_due, $return_date ) = @_;
+    my ( $borrower, $item, $checkout_type, $dt_due, $return_date ) = @_;
 
     $return_date //= dt_from_string();
 
-    my $new_debar_dt = _calculate_new_debar_dt ($borrower, $item, $dt_due, $return_date);
+    my $new_debar_dt = _calculate_new_debar_dt ($borrower, $item, $checkout_type, $dt_due, $return_date);
 
     return unless $new_debar_dt;
 
@@ -2925,6 +2937,7 @@ sub AddRenewal {
                 patron    => $patron,
                 library   => $circ_library,
                 item      => $item_object,
+                checkout_type => $issue->checkout_type,
                 from_date => dt_from_string( $issue->date_due, 'sql' ),
                 to_date   => dt_from_string($datedue),
             }
@@ -3040,12 +3053,14 @@ sub GetRenewCount {
     $renewcount = $data->{'renewals'} if $data->{'renewals'};
     # $item and $borrower should be calculated
     my $branchcode = _GetCircControlBranch($item->unblessed, $patron->unblessed);
+    my $checkout_type = $data->{'checkout_type'};
 
     my $rule = Koha::CirculationRules->get_effective_rule(
         {
             categorycode => $patron->categorycode,
             itemtype     => $item->effective_itemtype,
             branchcode   => $branchcode,
+            checkout_type => $checkout_type,
             rule_name    => 'renewalsallowed',
         }
     );
