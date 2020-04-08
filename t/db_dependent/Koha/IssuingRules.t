@@ -25,6 +25,7 @@ use Test::Exception;
 
 use Benchmark;
 
+use Koha::Checkouts;
 use Koha::CirculationRules;
 
 use t::lib::TestBuilder;
@@ -41,6 +42,7 @@ subtest 'get_effective_issuing_rule' => sub {
     my $categorycode = $builder->build({ source => 'Category' })->{'categorycode'};
     my $itemtype     = $builder->build({ source => 'Itemtype' })->{'itemtype'};
     my $branchcode   = $builder->build({ source => 'Branch' })->{'branchcode'};
+    my $checkout_type = $Koha::Checkouts::type->{checkout};
 
     subtest 'Call with undefined values' => sub {
         plan tests => 5;
@@ -54,6 +56,7 @@ subtest 'get_effective_issuing_rule' => sub {
             branchcode   => undef,
             categorycode => undef,
             itemtype     => undef,
+            checkout_type => undef,
             rule_name    => 'fine',
             rule_value   => 1,
         });
@@ -67,6 +70,7 @@ subtest 'get_effective_issuing_rule' => sub {
                     branchcode   => undef,
                     categorycode => undef,
                     itemtype     => undef,
+                    checkout_type => undef,
                     rule_name    => 'fine',
                     rule_value   => 2,
                 }
@@ -77,6 +81,7 @@ subtest 'get_effective_issuing_rule' => sub {
             branchcode   => undef,
             categorycode => undef,
             itemtype     => undef,
+            checkout_type => undef,
             rule_name    => 'fine',
         });
         _is_row_match(
@@ -85,6 +90,7 @@ subtest 'get_effective_issuing_rule' => sub {
                 branchcode   => undef,
                 categorycode => undef,
                 itemtype     => undef,
+                checkout_type => undef,
                 rule_name    => 'fine',
                 rule_value   => 2,
             },
@@ -95,31 +101,44 @@ subtest 'get_effective_issuing_rule' => sub {
     };
 
     subtest 'Performance' => sub {
-        plan tests => 4;
+        plan tests => 5;
 
         my $worst_case = timethis(500,
                     sub { Koha::CirculationRules->get_effective_rule({
                             branchcode   => 'nonexistent',
                             categorycode => 'nonexistent',
                             itemtype     => 'nonexistent',
+                            checkout_type => 'nonexistent',
                             rule_name    => 'nonexistent',
                         });
                     }
                 );
-        my $mid_case = timethis(500,
+        my $mid_case1 = timethis(500,
                     sub { Koha::CirculationRules->get_effective_rule({
                             branchcode   => $branchcode,
                             categorycode => 'nonexistent',
                             itemtype     => 'nonexistent',
+                            checkout_type => 'nonexistent',
                             rule_name    => 'nonexistent',
                         });
                     }
                 );
-        my $sec_best_case = timethis(500,
+        my $mid_case2 = timethis(500,
                     sub { Koha::CirculationRules->get_effective_rule({
                             branchcode   => $branchcode,
                             categorycode => $categorycode,
                             itemtype     => 'nonexistent',
+                            checkout_type => 'nonexistent',
+                            rule_name    => 'nonexistent',
+                        });
+                    }
+                );
+        my $mid_case3 = timethis(500,
+                    sub { Koha::CirculationRules->get_effective_rule({
+                            branchcode   => $branchcode,
+                            categorycode => $categorycode,
+                            itemtype     => $itemtype,
+                            checkout_type => 'nonexistent',
                             rule_name    => 'nonexistent',
                         });
                     }
@@ -129,6 +148,7 @@ subtest 'get_effective_issuing_rule' => sub {
                             branchcode   => $branchcode,
                             categorycode => $categorycode,
                             itemtype     => $itemtype,
+                            checkout_type => $checkout_type,
                             rule_name    => 'nonexistent',
                         });
                     }
@@ -136,11 +156,14 @@ subtest 'get_effective_issuing_rule' => sub {
         ok($worst_case, 'In worst case, get_effective_issuing_rule finds matching'
            .' rule '.sprintf('%.2f', $worst_case->iters/$worst_case->cpu_a)
            .' times per second.');
-        ok($mid_case, 'In mid case, get_effective_issuing_rule finds matching'
-           .' rule '.sprintf('%.2f', $mid_case->iters/$mid_case->cpu_a)
+        ok($mid_case1, 'In mid case 1, get_effective_issuing_rule finds matching'
+           .' rule '.sprintf('%.2f', $mid_case1->iters/$mid_case1->cpu_a)
            .' times per second.');
-        ok($sec_best_case, 'In second best case, get_effective_issuing_rule finds matching'
-           .' rule '.sprintf('%.2f', $sec_best_case->iters/$sec_best_case->cpu_a)
+        ok($mid_case2, 'In mid case 2, get_effective_issuing_rule finds matching'
+           .' rule '.sprintf('%.2f', $mid_case2->iters/$mid_case2->cpu_a)
+           .' times per second.');
+        ok($mid_case3, 'In mid case 3, get_effective_issuing_rule finds matching'
+           .' rule '.sprintf('%.2f', $mid_case3->iters/$mid_case3->cpu_a)
            .' times per second.');
         ok($best_case, 'In best case, get_effective_issuing_rule finds matching'
            .' rule '.sprintf('%.2f', $best_case->iters/$best_case->cpu_a)
@@ -292,6 +315,7 @@ subtest 'clone' => sub {
     my $branchcode   = $builder->build({ source => 'Branch' })->{'branchcode'};
     my $categorycode = $builder->build({ source => 'Category' })->{'categorycode'};
     my $itemtype     = $builder->build({ source => 'Itemtype' })->{'itemtype'};
+    my $checkout_type = $Koha::Checkouts::type->{checkout};
 
     subtest 'Clone multiple rules' => sub {
         plan tests => 4;
@@ -302,6 +326,7 @@ subtest 'clone' => sub {
             branchcode   => undef,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => 'fine',
             rule_value   => 5,
         })->store;
@@ -310,6 +335,7 @@ subtest 'clone' => sub {
             branchcode   => undef,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => 'lengthunit',
             rule_value   => 'days',
         })->store;
@@ -320,12 +346,14 @@ subtest 'clone' => sub {
             branchcode   => $branchcode,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => 'fine',
         });
         my $rule_lengthunit = Koha::CirculationRules->get_effective_rule({
             branchcode   => $branchcode,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => 'lengthunit',
         });
 
@@ -335,6 +363,7 @@ subtest 'clone' => sub {
                 branchcode   => $branchcode,
                 categorycode => $categorycode,
                 itemtype     => $itemtype,
+                checkout_type => $checkout_type,
                 rule_name    => 'fine',
                 rule_value   => 5,
             },
@@ -347,6 +376,7 @@ subtest 'clone' => sub {
                 branchcode   => $branchcode,
                 categorycode => $categorycode,
                 itemtype     => $itemtype,
+                checkout_type => $checkout_type,
                 rule_name    => 'lengthunit',
                 rule_value   => 'days',
             },
@@ -365,6 +395,7 @@ subtest 'clone' => sub {
             branchcode   => undef,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => 'fine',
             rule_value   => 5,
         })->store;
@@ -376,6 +407,7 @@ subtest 'clone' => sub {
             branchcode   => $branchcode,
             categorycode => $categorycode,
             itemtype     => $itemtype,
+            checkout_type => $checkout_type,
             rule_name    => 'fine',
         });
 
@@ -385,6 +417,7 @@ subtest 'clone' => sub {
                 branchcode   => $branchcode,
                 categorycode => $categorycode,
                 itemtype     => $itemtype,
+                checkout_type => $checkout_type,
                 rule_name    => 'fine',
                 rule_value   => '5',
             },

@@ -33,6 +33,7 @@ Koha::CirculationRules->set_rules(
         categorycode => undef,
         itemtype     => undef,
         branchcode   => undef,
+        checkout_type => undef,
         rules        => {
             firstremind => 0,
             finedays    => 2,
@@ -90,6 +91,7 @@ Koha::CirculationRules->set_rules(
         categorycode => undef,
         itemtype     => undef,
         branchcode   => undef,
+        checkout_type => undef,
         rules        => {
             maxsuspensiondays => 10,
         }
@@ -128,7 +130,7 @@ subtest "suspension_chargeperiod" => sub {
 
     my $last_year = dt_from_string->clone->subtract( years => 1 );
     my $today = dt_from_string;
-    my $new_debar_dt = C4::Circulation::_calculate_new_debar_dt( $patron->unblessed, $item->unblessed, $last_year, $today );
+    my $new_debar_dt = C4::Circulation::_calculate_new_debar_dt( $patron->unblessed, $item->unblessed, undef, $last_year, $today );
     is( $new_debar_dt->truncate( to => 'day' ),
         $today->clone->add( days => 365 / 15 * 7 )->truncate( to => 'day' ) );
 
@@ -155,7 +157,7 @@ subtest "maxsuspensiondays" => sub {
 
     my $last_year = dt_from_string->clone->subtract( years => 1 );
     my $today = dt_from_string;
-    my $new_debar_dt = C4::Circulation::_calculate_new_debar_dt( $patron->unblessed, $item->unblessed, $last_year, $today );
+    my $new_debar_dt = C4::Circulation::_calculate_new_debar_dt( $patron->unblessed, $item->unblessed, undef, $last_year, $today );
     is( $new_debar_dt->truncate( to => 'day' ),
         $today->clone->add( days => 333 )->truncate( to => 'day' ) );
 };

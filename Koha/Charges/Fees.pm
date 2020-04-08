@@ -22,6 +22,7 @@ use Modern::Perl;
 use Carp qw( carp confess );
 
 use Koha::Calendar;
+use Koha::Checkouts;
 use Koha::DateUtils qw( dt_from_string );
 use Koha::Exceptions;
 
@@ -38,6 +39,7 @@ Koha::Charges::Fees->new(
         patron    => $patron,
         library   => $library,
         item      => $item,
+        [ checkout_type => $checkout_type, ]
         to_date   => $to_dt,
         [ from_date => $from_dt, ]
     }
@@ -57,12 +59,19 @@ sub new {
     Koha::Exceptions::MissingParameter->throw("Missing mandatory parameter: to_date")
         unless $params->{to_date};
 
+    $params->{checkout_type} = exists $params->{checkout_type}
+            ? $params->{checkout_type}
+            : $Koha::Checkouts::type->{checkout};
+
     Carp::confess("Key 'patron' is not a Koha::Patron object!")
       unless $params->{patron}->isa('Koha::Patron');
     Carp::confess("Key 'library' is not a Koha::Library object!")
       unless $params->{library}->isa('Koha::Library');
     Carp::confess("Key 'item' is not a Koha::Item object!")
       unless $params->{item}->isa('Koha::Item');
+    my @valid_types = values %$Koha::Checkouts::type;
+    Carp::confess("Key 'checkout_type' is not valid! Valid are: " . join(', ', @valid_types))
+      unless grep { $_ eq $params->{checkout_type} } @valid_types;
     Carp::confess("Key 'to_date' is not a DateTime object!")
       unless $params->{to_date}->isa('DateTime');
 
@@ -95,6 +104,7 @@ sub accumulate_rentalcharge {
             categorycode => $self->patron->categorycode,
             itemtype     => $itemtype->id,
             branchcode   => $self->library->id,
+            checkout_type => $self->checkout_type,
             rule_name    => 'lengthunit',
         }
     );
@@ -186,6 +196,26 @@ sub item {
     $self->{item} = $item if $item;
 
     return $self->{item};
+}
+
+=head3 checkout_type
+
+my $item = $fees->checkout_type( $checkout_type );
+
+=cut
+
+sub checkout_type {
+    my ( $self, $checkout_type ) = @_;
+
+    if ( $checkout_type ) {
+        my @valid_types = values %$Koha::Checkouts::type;
+        Carp::carp("Given 'checkout_type' is not valid! Valid are: " . join(', ', @valid_types))
+          unless grep { $_ eq $checkout_type } @valid_types;
+
+        $self->{checkout_type} = $checkout_type if $checkout_type;
+    }
+
+    return $self->{checkout_type};
 }
 
 =head3 to_date

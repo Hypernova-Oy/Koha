@@ -29,6 +29,7 @@ use t::lib::Dates;
 
 use Time::Fake;
 use C4::Calendar;
+use Koha::Checkouts;
 use Koha::DateUtils qw(dt_from_string);
 
 BEGIN {
@@ -100,7 +101,7 @@ my $dt_from = $now->clone->subtract( days => 2 );
 my $dt_to = $now->clone->add( days => 4 );
 
 subtest 'new' => sub {
-    plan tests => 9;
+    plan tests => 10;
 
     # Mandatory parameters missing
     throws_ok {
@@ -178,6 +179,18 @@ subtest 'new' => sub {
           )
     }
     'dies for bad item';
+    dies_ok {
+        Koha::Charges::Fees->new(
+            {
+                patron  => $patron,
+                library => $library,
+                item    => $item,
+                checkout_type => 'NON-EXISTENT-CHECKOUT-TYPE:)',
+                to_date => $dt_to,
+            }
+          )
+    }
+    'dies for bad checkout_type';
     dies_ok {
         Koha::Charges::Fees->new(
             {
@@ -327,6 +340,7 @@ subtest 'accumulate_rentalcharge tests' => sub {
             categorycode => $patron->categorycode,
             itemtype     => $itemtype->id,
             branchcode   => $library->id,
+            checkout_type => undef,
             rules => {
                 lengthunit => 'days',
             }
@@ -388,6 +402,7 @@ subtest 'accumulate_rentalcharge tests' => sub {
             categorycode => $patron->categorycode,
             itemtype     => $itemtype->id,
             branchcode   => $library->id,
+            checkout_type => undef,
             rules => {
                 lengthunit => 'hours',
             }
@@ -404,6 +419,7 @@ subtest 'accumulate_rentalcharge tests' => sub {
             patron    => $patron,
             library   => $library,
             item      => $item,
+            checkout_type => $Koha::Checkouts::type->{checkout},
             to_date   => $dt_to,
             from_date => $dt_from,
         }
