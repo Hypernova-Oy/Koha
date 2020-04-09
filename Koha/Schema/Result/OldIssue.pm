@@ -95,10 +95,11 @@ __PACKAGE__->table("old_issues");
   datetime_undef_if_invalid: 1
   is_nullable: 1
 
-=head2 onsite_checkout
+=head2 checkout_type
 
-  data_type: 'integer'
-  default_value: 0
+  data_type: 'enum'
+  default_value: 'CHECKOUT'
+  extra: {list => ["CHECKOUT","ONSITE"]}
   is_nullable: 0
 
 =head2 note
@@ -165,8 +166,13 @@ __PACKAGE__->add_columns(
     datetime_undef_if_invalid => 1,
     is_nullable => 1,
   },
-  "onsite_checkout",
-  { data_type => "integer", default_value => 0, is_nullable => 0 },
+  "checkout_type",
+  {
+    data_type => "enum",
+    default_value => "CHECKOUT",
+    extra => { list => ["CHECKOUT", "ONSITE"] },
+    is_nullable => 0,
+  },
   "note",
   { data_type => "longtext", is_nullable => 1 },
   "notedate",
@@ -234,12 +240,11 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07046 @ 2019-04-10 19:55:44
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:E2N2paWcCHg916100ry+2A
+# Created by DBIx::Class::Schema::Loader v0.07048 @ 2020-04-09 19:47:02
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:J7jzh/kOsynQr52uSGxQ/A
 
 __PACKAGE__->add_columns(
-    '+auto_renew'      => { is_boolean => 1 },
-    '+onsite_checkout' => { is_boolean => 1 }
+    '+auto_renew'      => { is_boolean => 1 }
 );
 
 __PACKAGE__->belongs_to(
