@@ -97,10 +97,11 @@ __PACKAGE__->table("old_issues");
 
 =head2 checkout_type
 
-  data_type: 'enum'
+  data_type: 'varchar'
   default_value: 'CHECKOUT'
-  extra: {list => ["CHECKOUT","ONSITE"]}
+  is_foreign_key: 1
   is_nullable: 0
+  size: 80
 
 =head2 note
 
@@ -168,10 +169,11 @@ __PACKAGE__->add_columns(
   },
   "checkout_type",
   {
-    data_type => "enum",
+    data_type => "varchar",
     default_value => "CHECKOUT",
-    extra => { list => ["CHECKOUT", "ONSITE"] },
+    is_foreign_key => 1,
     is_nullable => 0,
+    size => 80,
   },
   "note",
   { data_type => "longtext", is_nullable => 1 },
@@ -219,6 +221,21 @@ __PACKAGE__->belongs_to(
   },
 );
 
+=head2 checkout_type
+
+Type: belongs_to
+
+Related object: L<Koha::Schema::Result::AuthorisedValue>
+
+=cut
+
+__PACKAGE__->belongs_to(
+  "checkout_type",
+  "Koha::Schema::Result::AuthorisedValue",
+  { authorised_value => "checkout_type" },
+  { is_deferrable => 1, on_delete => "RESTRICT", on_update => "CASCADE" },
+);
+
 =head2 itemnumber
 
 Type: belongs_to
@@ -240,8 +257,8 @@ __PACKAGE__->belongs_to(
 );
 
 
-# Created by DBIx::Class::Schema::Loader v0.07048 @ 2020-04-09 19:47:02
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:J7jzh/kOsynQr52uSGxQ/A
+# Created by DBIx::Class::Schema::Loader v0.07048 @ 2020-04-09 20:37:11
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:gyjaefP3JtK14XMHw2QyTg
 
 __PACKAGE__->add_columns(
     '+auto_renew'      => { is_boolean => 1 }

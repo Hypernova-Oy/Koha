@@ -144,9 +144,39 @@ __PACKAGE__->has_many(
   { cascade_copy => 0, cascade_delete => 0 },
 );
 
+=head2 issues
 
-# Created by DBIx::Class::Schema::Loader v0.07046 @ 2019-02-22 14:32:48
-# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:hDlebhEn+f+thqwBo/LOqQ
+Type: has_many
+
+Related object: L<Koha::Schema::Result::Issue>
+
+=cut
+
+__PACKAGE__->has_many(
+  "issues",
+  "Koha::Schema::Result::Issue",
+  { "foreign.checkout_type" => "self.authorised_value" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+=head2 old_issues
+
+Type: has_many
+
+Related object: L<Koha::Schema::Result::OldIssue>
+
+=cut
+
+__PACKAGE__->has_many(
+  "old_issues",
+  "Koha::Schema::Result::OldIssue",
+  { "foreign.checkout_type" => "self.authorised_value" },
+  { cascade_copy => 0, cascade_delete => 0 },
+);
+
+
+# Created by DBIx::Class::Schema::Loader v0.07048 @ 2020-04-09 20:37:10
+# DO NOT MODIFY THIS OR ANYTHING ABOVE! md5sum:2Wzevhr//Lr9VgPd9uHe0g
 
 
 # You can replace this text with custom code or comments, and it will be preserved on regeneration
