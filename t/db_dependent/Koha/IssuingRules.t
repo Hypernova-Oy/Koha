@@ -154,9 +154,10 @@ subtest 'set_rule' => sub {
     my $branchcode   = $builder->build({ source => 'Branch' })->{'branchcode'};
     my $categorycode = $builder->build({ source => 'Category' })->{'categorycode'};
     my $itemtype     = $builder->build({ source => 'Itemtype' })->{'itemtype'};
+    my $checkout_type = $Koha::Checkouts::type->{checkout};
 
     subtest 'Correct call' => sub {
-        plan tests => 4;
+        plan tests => 5;
 
         Koha::CirculationRules->delete;
 
@@ -172,6 +173,7 @@ subtest 'set_rule' => sub {
             Koha::CirculationRules->set_rule( {
                 branchcode => $branchcode,
                 categorycode => $categorycode,
+                checkout_type => $checkout_type,
                 rule_name => 'patron_maxissueqty',
                 rule_value => '',
             } );
@@ -191,10 +193,22 @@ subtest 'set_rule' => sub {
                 branchcode => $branchcode,
                 categorycode => $categorycode,
                 itemtype => $itemtype,
+                checkout_type => $checkout_type,
                 rule_name => 'fine',
                 rule_value => '',
             } );
-        }, 'setting fine with branch/category/itemtype succeeds' );
+        }, 'setting fine with branch/category/itemtype/checkout_type succeeds' );
+
+        lives_ok( sub {
+            Koha::CirculationRules->set_rule( {
+                branchcode => $branchcode,
+                categorycode => $categorycode,
+                itemtype => $itemtype,
+                checkout_type => $checkout_type,
+                rule_name => 'maxissueqty',
+                rule_value => 5,
+            } );
+        }, 'setting maxissueqty with branch/category/itemtype/checkout_type succeeds' );
     };
 
     subtest 'Call with missing params' => sub {
@@ -212,6 +226,7 @@ subtest 'set_rule' => sub {
         throws_ok( sub {
             Koha::CirculationRules->set_rule( {
                 branchcode => $branchcode,
+                checkout_type => $checkout_type,
                 rule_name => 'patron_maxissueqty',
                 rule_value => '',
             } );
