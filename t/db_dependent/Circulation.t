@@ -667,6 +667,7 @@ subtest "CanBookBeRenewed tests" => sub {
             categorycode => undef,
             branchcode   => undef,
             itemtype     => undef,
+            checkout_type => undef,
             rule_name    => 'norenewalbefore',
             rule_value   => '7',
         }
@@ -2156,6 +2157,7 @@ subtest 'AddReturn + suspension_chargeperiod' => sub {
             categorycode => undef,
             branchcode   => undef,
             itemtype     => undef,
+            checkout_type => undef,
             rule_name    => 'suspension_chargeperiod',
             rule_value   => '2',
         }
@@ -3488,6 +3490,8 @@ subtest 'Incremented fee tests' => sub {
     my $library =
       $builder->build_object( { class => 'Koha::Libraries' } )->store;
 
+    my $checkout_type = $Koha::Checkouts::type->{checkout};
+
     my $module = new Test::MockModule('C4::Context');
     $module->mock( 'userenv', sub { { branch => $library->id } } );
 
@@ -3613,6 +3617,7 @@ subtest 'Incremented fee tests' => sub {
             categorycode => $patron->categorycode,
             itemtype     => $itemtype->id,
             branchcode   => $library->id,
+            checkout_type => $checkout_type,
             rule_name    => 'lengthunit',
             rule_value   => 'hours',
         }
