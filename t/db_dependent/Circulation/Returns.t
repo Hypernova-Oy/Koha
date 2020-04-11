@@ -254,6 +254,7 @@ subtest 'Handle ids duplication' => sub {
             categorycode => undef,
             itemtype     => undef,
             branchcode   => undef,
+            checkout_type => undef,
             rules        => {
                 chargeperiod => 1,
                 fine         => 1,

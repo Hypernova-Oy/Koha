@@ -92,6 +92,7 @@ subtest cancel_hold => sub {
             categorycode => $patron->categorycode,
             branchcode   => $library->branchcode,
             itemtype     => $item->effective_itemtype,
+            checkout_type => undef,
             rules        => {
                 onshelfholds     => 1,
                 reservesallowed  => 3,

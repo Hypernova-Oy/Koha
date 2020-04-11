@@ -5,6 +5,7 @@ use C4::Context;
 use DateTime;
 use Koha::Database;
 use Koha::DateUtils;
+use Koha::Checkouts;
 use Koha::CirculationRules;
 use Koha::Library;
 
@@ -120,6 +121,7 @@ my $sampleissuingrule1 = {
     branchcode   => $samplebranch1->{branchcode},
     categorycode => $samplecat->{categorycode},
     itemtype     => $sampleitemtype1,
+    checkout_type => $Koha::Checkouts::type->{checkout},
     rules        => {
         finedays                         => 0,
         lengthunit                       => 'days',
@@ -153,6 +155,7 @@ my $sampleissuingrule2 = {
     branchcode   => $samplebranch2->{branchcode},
     categorycode => $samplecat->{categorycode},
     itemtype     => $sampleitemtype1,
+    checkout_type => $Koha::Checkouts::type->{checkout},
     rules        => {
         renewalsallowed               => 0,
         renewalperiod                 => 2,
@@ -182,6 +185,7 @@ my $sampleissuingrule3 = {
     branchcode   => $samplebranch1->{branchcode},
     categorycode => $samplecat->{categorycode},
     itemtype     => $sampleitemtype2,
+    checkout_type => $Koha::Checkouts::type->{checkout},
     rules        => {
         renewalsallowed               => 0,
         renewalperiod                 => 3,

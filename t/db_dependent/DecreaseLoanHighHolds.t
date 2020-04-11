@@ -101,6 +101,7 @@ Koha::CirculationRules->set_rules(
         branchcode   => undef,
         categorycode => undef,
         itemtype     => $item->itype,
+        checkout_type => undef,
         rules        => {
             issuelength     => '14',
             lengthunit      => 'days',

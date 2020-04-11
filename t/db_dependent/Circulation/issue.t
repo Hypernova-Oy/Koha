@@ -93,6 +93,7 @@ Koha::CirculationRules->set_rules(
         itemtype     => '*',
         categorycode => '*',
         branchcode   => '*',
+        checkout_type => '*',
         rules        => {
             lengthunit      => 'days',
             issuelength     => 0,
@@ -355,6 +356,7 @@ Koha::CirculationRules->set_rules(
         categorycode => undef,
         itemtype     => undef,
         branchcode   => undef,
+        checkout_type => undef,
         rules        => {
             renewalsallowed => 3,
         }
