@@ -87,6 +87,7 @@ Koha::CirculationRules->set_rules(
         categorycode => undef,
         itemtype     => $itemtype,
         branchcode   => undef,
+        checkout_type => undef,
         rules        => {
             issuelength     => 7,
             lengthunit      => 8,
@@ -272,6 +273,7 @@ Koha::CirculationRules->set_rules(
         categorycode => undef,
         itemtype     => $itemtype2,
         branchcode   => undef,
+        checkout_type => undef,
         rules        => {
             maxissueqty     => 99,
             onshelfholds    => 0,

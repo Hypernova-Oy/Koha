@@ -10,6 +10,7 @@ use t::lib::Mocks;
 use t::lib::TestBuilder;
 use C4::Calendar;
 
+use Koha::Checkouts;
 use Koha::CirculationRules;
 
 use_ok('C4::Circulation');
@@ -21,6 +22,7 @@ my $builder = t::lib::TestBuilder->new;
 my $categorycode = 'B';
 my $itemtype = 'MX';
 my $branchcode = 'FPL';
+my $checkout_type = $Koha::Checkouts::type->{checkout};
 my $issuelength = 10;
 my $renewalperiod = 5;
 my $lengthunit = 'days';
@@ -31,6 +33,7 @@ Koha::CirculationRules->set_rules(
         categorycode => $categorycode,
         itemtype     => $itemtype,
         branchcode   => $branchcode,
+        checkout_type => $checkout_type,
         rules        => {
             issuelength   => $issuelength,
             renewalperiod => $renewalperiod,
@@ -170,6 +173,7 @@ Koha::CirculationRules->set_rules(
         categorycode => $dayweek_categorycode,
         itemtype     => $dayweek_itemtype,
         branchcode   => $dayweek_branchcode,
+        checkout_type => $checkout_type,
         rules        => {
             issuelength   => $dayweek_issuelength,
             renewalperiod => $dayweek_renewalperiod,

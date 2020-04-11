@@ -76,6 +76,7 @@ Koha::CirculationRules->set_rules(
         categorycode => undef,
         itemtype     => undef,
         branchcode   => undef,
+        checkout_type => undef,
         rules        => {
             renewalperiod => 7,
             renewalsallowed => 1,

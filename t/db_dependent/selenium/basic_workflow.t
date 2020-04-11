@@ -70,6 +70,11 @@ our $sample_data = {
         rentalcharge => 0,
         notforloan   => 0,
     },
+    checkout_type => {
+        itemtype     => 'CHECKOUT',
+        description  => 'Just a checkout_type for tests',
+        maxissueqty  => 80100,
+    },
     issuingrule => {
         categorycode  => 'test_cat',
         itemtype      => 'IT4test',
@@ -159,6 +164,7 @@ SKIP: {
             categorycode => $issuing_rules->{categorycode},
             itemtype     => $issuing_rules->{itemtype},
             branchcode   => $issuing_rules->{branchcode},
+            checkout_type => $issuing_rules->{checkout_type},
             rules => {
                 maxissueqty     => $issuing_rules->{maxissueqty},
                 issuelength     => $issuing_rules->{issuelength},

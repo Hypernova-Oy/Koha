@@ -174,6 +174,7 @@ subtest 'pickup_locations' => sub {
             categorycode => undef,
             itemtype     => undef,
             branchcode   => undef,
+            checkout_type => undef,
             rules        => {
                 reservesallowed => 25,
             }

@@ -237,6 +237,7 @@ if ( $step == 5 ) {
         my $branchcode      = $input->param('branch');
         my $categorycode    = $input->param('categorycode');
         my $itemtype        = $input->param('itemtype');
+        my $checkout_type   = $input->param('checkout_type');
         my $maxissueqty     = $input->param('maxissueqty');
         my $issuelength     = $input->param('issuelength');
         my $lengthunit      = $input->param('lengthunit');
@@ -254,6 +255,7 @@ if ( $step == 5 ) {
             branchcode      => $branchcode,
             categorycode    => $categorycode,
             itemtype        => $itemtype,
+            checkout_type   => $checkout_type,
             rules => {
                 renewalsallowed                  => $renewalsallowed,
                 renewalperiod                    => $renewalperiod,
