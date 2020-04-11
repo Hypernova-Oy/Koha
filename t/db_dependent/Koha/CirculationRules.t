@@ -19,7 +19,7 @@
 
 use Modern::Perl;
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 use Test::Exception;
 
 use Koha::CirculationRules;
@@ -281,4 +281,70 @@ subtest 'get_onshelfholds_policy() tests' => sub {
     is( $circ_rules->get_onshelfholds_policy({ item => $item }), 0, 'If no matching rule, fallback to 0' );
 
     $schema->storage->txn_rollback;
+};
+
+subtest 'set_rules() tests' => sub {
+    plan tests => 1;
+
+    subtest 'scope validation' => sub {
+        plan tests => 6;
+
+        $schema->storage->txn_begin;
+
+        my $categorycode = $builder->build_object( {
+            class => 'Koha::Patron::Categories' } )->categorycode;
+        my $itemtype     = $builder->build_object( {
+            class => 'Koha::ItemTypes' } )->itemtype;
+        my $branchcode   = $builder->build_object( {
+            class => 'Koha::Libraries' } )->branchcode;
+
+        my $rule;
+        Koha::CirculationRules->delete;
+
+        is( scalar @{Koha::CirculationRules->set_rules( {
+            branchcode   => $branchcode,
+            categorycode => $categorycode,
+            itemtype     => $itemtype,
+            rules        => {
+                refund              => 1,
+                patron_maxissueqty  => 2,
+                holdallowed         => 3,
+                article_requests    => 4,
+                maxissueqty         => 5,
+            }
+        } )}, 5, 'All rules added' );
+
+        is( Koha::CirculationRules->get_effective_rule( {
+            branchcode      => $branchcode,
+            rule_name       => 'refund'
+        } )->rule_value, 1, 'Found rule refund' );
+
+        is( Koha::CirculationRules->get_effective_rule( {
+            branchcode      => $branchcode,
+            categorycode    => $categorycode,
+            rule_name       => 'patron_maxissueqty'
+        } )->rule_value, 2, 'Found rule patron_maxissueqty' );
+
+        is( Koha::CirculationRules->get_effective_rule( {
+            branchcode      => $branchcode,
+            itemtype        => $itemtype,
+            rule_name       => 'holdallowed'
+        } )->rule_value, 3, 'Found rule holdallowed' );
+
+        is( Koha::CirculationRules->get_effective_rule( {
+            branchcode      => $branchcode,
+            categorycode    => $categorycode,
+            itemtype        => $itemtype,
+            rule_name       => 'article_requests'
+        } )->rule_value, 4, 'Found rule article_requests' );
+
+        is( Koha::CirculationRules->get_effective_rule( {
+            branchcode      => $branchcode,
+            categorycode    => $categorycode,
+            itemtype        => $itemtype,
+            rule_name       => 'maxissueqty'
+        } )->rule_value, 5, 'Found rule maxissueqty' );
+
+        $schema->storage->txn_rollback;
+    };
 };
