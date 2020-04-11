@@ -322,14 +322,16 @@ sub set_rule {
 sub set_rules {
     my ( $self, $params ) = @_;
 
-    my %set_params;
-    $set_params{branchcode} = $params->{branchcode} if exists $params->{branchcode};
-    $set_params{categorycode} = $params->{categorycode} if exists $params->{categorycode};
-    $set_params{itemtype} = $params->{itemtype} if exists $params->{itemtype};
     my $rules        = $params->{rules};
 
     my $rule_objects = [];
     while ( my ( $rule_name, $rule_value ) = each %$rules ) {
+        my %set_params;
+        foreach my $set_param ( values @{$RULE_KINDS->{$rule_name}->{scope}} ) {
+            if ( exists $params->{$set_param} ) {
+                $set_params{$set_param} = $params->{$set_param};
+            }
+        }
         my $rule_object = Koha::CirculationRules->set_rule(
             {
                 %set_params,
