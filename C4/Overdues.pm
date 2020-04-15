@@ -222,7 +222,7 @@ or "Final Notice".  But CalcFine never defined any value.
 =cut
 
 sub CalcFine {
-    my ( $item, $bortype, $branchcode, $due_dt, $end_date  ) = @_;
+    my ( $item, $bortype, $branchcode, $checkout_type, $due_dt, $end_date  ) = @_;
 
     # Skip calculations if item is not overdue
     return ( 0, 0, 0 ) unless (DateTime->compare( $due_dt, $end_date ) == -1);
@@ -235,6 +235,7 @@ sub CalcFine {
             categorycode => $bortype,
             itemtype     => $itemtype,
             branchcode   => $branchcode,
+            checkout_type => $checkout_type,
             rules => [
                 'lengthunit',
                 'firstremind',

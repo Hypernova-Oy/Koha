@@ -54,9 +54,9 @@ my $dateexpiry = '2013-01-01';
 
 my $borrower = {categorycode => 'B', dateexpiry => $dateexpiry};
 my $start_date = DateTime->new({year => 2013, month => 2, day => 9});
-my $date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower );
+my $date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type );
 is($date, $dateexpiry . 'T23:59:00', 'date expiry');
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, 1 );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type, 1 );
 
 
 #Set syspref ReturnBeforeExpiry = 1 and useDaysMode != 'Days'
@@ -65,7 +65,7 @@ t::lib::Mocks::mock_preference('useDaysMode', 'noDays');
 
 $borrower = {categorycode => 'B', dateexpiry => $dateexpiry};
 $start_date = DateTime->new({year => 2013, month => 2, day => 9});
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type );
 is($date, $dateexpiry . 'T23:59:00', 'date expiry with useDaysMode to noDays');
 
 # Let's add a special holiday on 2013-01-01. With ReturnBeforeExpiry and
@@ -78,7 +78,7 @@ $calendar->insert_single_holiday(
     title           =>'holidayTest',
     description     => 'holidayDesc'
 );
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type );
 is($date, '2012-12-31T23:59:00', 'date expiry should be 2013-01-01 -1 day');
 $calendar->insert_single_holiday(
     day             => 31,
@@ -87,11 +87,11 @@ $calendar->insert_single_holiday(
     title           =>'holidayTest',
     description     => 'holidayDesc'
 );
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type );
 is($date, '2012-12-30T23:59:00', 'date expiry should be 2013-01-01 -2 day');
 
 
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, 1 );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type, 1 );
 
 
 #Set syspref ReturnBeforeExpiry = 0 and useDaysMode = 'Days'
@@ -100,10 +100,10 @@ t::lib::Mocks::mock_preference('useDaysMode', 'Days');
 
 $borrower = {categorycode => 'B', dateexpiry => $dateexpiry};
 $start_date = DateTime->new({year => 2013, month => 2, day => 9});
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type );
 is($date, '2013-02-' . (9 + $issuelength) . 'T23:59:00', "date expiry ( 9 + $issuelength )");
 
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, 1 );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type, 1 );
 is($date, '2013-02-' . (9 + $renewalperiod) . 'T23:59:00', "date expiry ( 9 + $renewalperiod )");
 
 
@@ -117,10 +117,10 @@ t::lib::Mocks::mock_preference('ReturnBeforeExpiry', 0);
 t::lib::Mocks::mock_preference('useDaysMode', 'Dayweek');
 
 # No closed day interfering, so we should get the regular due date
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type );
 is($date, '2013-02-' . (9 + $issuelength) . 'T23:59:00', "useDaysMode = Dayweek, no closed days, issue date expiry ( start + $issuelength )");
 
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, 1 );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type, 1 );
 is($date, '2013-02-' . (9 + $renewalperiod) . 'T23:59:00', "useDaysMode = Dayweek, no closed days, renewal date expiry ( start + $renewalperiod )");
 
 # Now let's add a closed day on the expected renewal date, it should
@@ -133,7 +133,7 @@ $calendar->insert_single_holiday(
     title           =>'DayweekTest1',
     description     => 'DayweekTest1'
 );
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type );
 is($date, '2013-02-' . (9 + $issuelength + 1) . 'T23:59:00', "useDaysMode = Dayweek, closed on due date, 10 day loan (should not trigger 7 day roll forward), issue date expiry ( start + $issuelength  + 1 )");
 # Remove the holiday we just created
 $calendar->delete_holiday(
@@ -150,7 +150,7 @@ $calendar->insert_single_holiday(
     title           =>'DayweekTest2',
     description     => 'DayweekTest2'
 );
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, 1 );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $borrower, $checkout_type, 1 );
 is($date, '2013-02-' . (9 + $renewalperiod + 1) . 'T23:59:00', "useDaysMode = Dayweek, closed on due date, 5 day renewal (should not trigger 7 day roll forward), renewal date expiry ( start + $renewalperiod  + 1 )");
 # Remove the holiday we just created
 $calendar->delete_holiday(
@@ -193,7 +193,7 @@ $calendar->insert_single_holiday(
     title           =>'DayweekTest3',
     description     => 'DayweekTest3'
 );
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, $checkout_type );
 my $issue_should_add = $dayweek_issuelength + 7;
 my $dayweek_issue_expected = $start_date->add( days => $issue_should_add );
 is($date, $dayweek_issue_expected->strftime('%F') . 'T23:59:00', "useDaysMode = Dayweek, closed on due date, 14 day loan (should trigger 7 day roll forward), issue date expiry ( start + $issue_should_add )");
@@ -213,7 +213,7 @@ $calendar->insert_single_holiday(
     title           => 'DayweekTest4',
     description     => 'DayweekTest4'
 );
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, 1 );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, $checkout_type, 1 );
 my $renewal_should_add = $dayweek_renewalperiod + 7;
 my $dayweek_renewal_expected = $start_date->add( days => $renewal_should_add );
 is($date, $dayweek_renewal_expected->strftime('%F') . 'T23:59:00', "useDaysMode = Dayweek, closed on due date, 7 day renewal (should trigger 7 day roll forward), renewal date expiry ( start + $renewal_should_add )");
@@ -254,12 +254,12 @@ $calendar->insert_single_holiday(
     description     => 'DayweekTest7'
 );
 # For issues...
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, $checkout_type );
 $dayweek_issue_expected = $start_date->add( days => $issue_should_add );
 is($date, $expected_rolled_date->strftime('%F') . 'T23:59:00', "useDaysMode = Dayweek, closed on due date and two subequent due dates, 14 day loan (should trigger 2 x 7 day roll forward), issue date expiry ( start + 28 )");
 # ...and for renewals...
 $start_date = DateTime->new({year => 2013, month => 2, day => 9});
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, 1 );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, $checkout_type, 1 );
 $dayweek_issue_expected = $start_date->add( days => $renewal_should_add );
 is($date, $expected_rolled_date->strftime('%F') . 'T23:59:00', "useDaysMode = Dayweek, closed on due date and three subsequent due dates, 7 day renewal (should trigger 3 x 7 day roll forward), issue date expiry ( start + 28 )");
 # Remove the holidays we just created
@@ -294,12 +294,12 @@ $calendar->insert_week_day_holiday(
     description => "Closed on Saturdays"
 );
 # For issues...
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, $checkout_type );
 $dayweek_issue_expected = $start_date->add( days => $dayweek_issuelength + 1 );
 is($date, $dayweek_issue_expected->strftime('%F') . 'T23:59:00', "useDaysMode = Dayweek, due on Saturday, closed on Saturdays, 14 day loan (should trigger 1 day roll forward), issue date expiry ( start + 15 )");
 # ...and for renewals...
 $start_date = DateTime->new({year => 2013, month => 2, day => 9});
-$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, 1 );
+$date = C4::Circulation::CalcDateDue( $start_date, $itemtype, $branchcode, $dayweek_borrower, $checkout_type, 1 );
 $dayweek_renewal_expected = $start_date->add( days => $dayweek_renewalperiod + 1 );
 is($date, $dayweek_renewal_expected->strftime('%F') . 'T23:59:00', "useDaysMode = Dayweek, due on Saturday, closed on Saturdays, 7 day renewal (should trigger 1 day roll forward), issue date expiry ( start + 8 )");
 # Remove the holiday we just created
