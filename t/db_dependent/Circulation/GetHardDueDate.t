@@ -11,7 +11,7 @@ use Koha::Library;
 
 use t::lib::TestBuilder;
 
-use Test::More tests => 9;
+use Test::More tests => 10;
 
 BEGIN {
     use_ok('C4::Circulation');
@@ -220,7 +220,7 @@ Koha::CirculationRules->set_rules( $sampleissuingrule3 );
 is_deeply(
     C4::Circulation::GetLoanLength(
         $samplecat->{categorycode},
-        $sampleitemtype1, $samplebranch1->{branchcode}
+        $sampleitemtype1, $samplebranch1->{branchcode}, $Koha::Checkouts::type->{checkout}
     ),
     { issuelength => 5, lengthunit => 'days', renewalperiod => 5 },
     "GetLoanLength"
@@ -248,6 +248,11 @@ is_deeply(
 );    #NOTE : is that really what is expected?
 is_deeply(
     C4::Circulation::GetLoanLength( $samplecat->{categorycode}, $sampleitemtype1, $samplebranch1->{branchcode} ),
+    $default,
+    "With only three parameters, GetLoanLength returns hardcoded values"
+);    #NOTE : is that really what is expected?
+is_deeply(
+    C4::Circulation::GetLoanLength( $samplecat->{categorycode}, $sampleitemtype1, $samplebranch1->{branchcode}, $Koha::Checkouts::type->{checkout} ),
     {
         issuelength   => 5,
         renewalperiod => 5,
@@ -258,7 +263,7 @@ is_deeply(
 
 #Test GetHardDueDate
 my @hardduedate = C4::Circulation::GetHardDueDate( $samplecat->{categorycode},
-    $sampleitemtype1, $samplebranch1->{branchcode} );
+    $sampleitemtype1, $samplebranch1->{branchcode}, $Koha::Checkouts::type->{checkout} );
 is_deeply(
     \@hardduedate,
     [

@@ -541,7 +541,7 @@ subtest "CanBookBeRenewed tests" => sub {
     my $passeddatedue1 = AddIssue($renewing_borrower, $item_7->barcode, $five_weeks_ago);
     is (defined $passeddatedue1, 1, "Item with passed date due checked out, due date: " . $passeddatedue1->date_due);
 
-    my ( $fine ) = CalcFine( $item_7->unblessed, $renewing_borrower->{categorycode}, $branch, $five_weeks_ago, $now );
+    my ( $fine ) = CalcFine( $item_7->unblessed, $renewing_borrower->{categorycode}, $branch, undef, $five_weeks_ago, $now );
     C4::Overdues::UpdateFine(
         {
             issue_id       => $passeddatedue1->id(),
@@ -2435,7 +2435,7 @@ subtest 'AddReturn | is_overdue' => sub {
 
         # Fake fines cronjob on this checkout
         my ($fine) =
-          CalcFine( $item, $patron->categorycode, $library->{branchcode},
+          CalcFine( $item, $patron->categorycode, $library->{branchcode}, undef,
             $ten_days_ago, $now );
         UpdateFine(
             {

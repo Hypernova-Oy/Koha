@@ -708,7 +708,7 @@ sub CanBookBeIssued {
     unless ( $duedate ) {
         my $issuedate = $now->clone();
 
-        $duedate = CalcDateDue( $issuedate, $effective_itemtype, $circ_library->branchcode, $patron_unblessed );
+        $duedate = CalcDateDue( $issuedate, $effective_itemtype, $circ_library->branchcode, $patron_unblessed, $checkout_type );
 
         # Offline circ calls AddIssue directly, doesn't run through here
         #  So issuingimpossible should be ok.
@@ -1240,7 +1240,7 @@ sub checkHighHolds {
         my $calendar = Koha::Calendar->new( branchcode => $branchcode );
 
         my $itype = $item_object->effective_itemtype;
-        my $orig_due = C4::Circulation::CalcDateDue( $issuedate, $itype, $branchcode, $borrower );
+        my $orig_due = C4::Circulation::CalcDateDue( $issuedate, $itype, $branchcode, $borrower, $Koha::Checkouts::type->{checkout}, undef );
 
         my $decreaseLoanHighHoldsDuration = C4::Context->preference('decreaseLoanHighHoldsDuration');
 
@@ -1354,7 +1354,7 @@ sub AddIssue {
         else {
             unless ($datedue) {
                 my $itype = $item_object->effective_itemtype;
-                $datedue = CalcDateDue( $issuedate, $itype, $branchcode, $borrower );
+                $datedue = CalcDateDue( $issuedate, $itype, $branchcode, $borrower, $checkout_type );
 
             }
             $datedue->truncate( to => 'minute' );
@@ -1415,7 +1415,7 @@ sub AddIssue {
             # Record in the database the fact that the book was issued.
             unless ($datedue) {
                 my $itype = $item_object->effective_itemtype;
-                $datedue = CalcDateDue( $issuedate, $itype, $branchcode, $borrower );
+                $datedue = CalcDateDue( $issuedate, $itype, $branchcode, $borrower, $checkout_type );
 
             }
             $datedue->truncate( to => 'minute' );
@@ -1537,14 +1537,14 @@ sub AddIssue {
 
 =head2 GetLoanLength
 
-  my $loanlength = &GetLoanLength($borrowertype,$itemtype,branchcode)
+  my $loanlength = &GetLoanLength($borrowertype,$itemtype,branchcode,$checkout_type)
 
 Get loan length for an itemtype, a borrower type and a branch
 
 =cut
 
 sub GetLoanLength {
-    my ( $categorycode, $itemtype, $branchcode ) = @_;
+    my ( $categorycode, $itemtype, $branchcode, $checkout_type ) = @_;
 
     # Initialize default values
     my $rules = {
@@ -1557,6 +1557,7 @@ sub GetLoanLength {
         branchcode => $branchcode,
         categorycode => $categorycode,
         itemtype => $itemtype,
+        checkout_type => $checkout_type,
         rules => [
             'issuelength',
             'renewalperiod',
@@ -1575,20 +1576,21 @@ sub GetLoanLength {
 
 =head2 GetHardDueDate
 
-  my ($hardduedate,$hardduedatecompare) = &GetHardDueDate($borrowertype,$itemtype,branchcode)
+  my ($hardduedate,$hardduedatecompare) = &GetHardDueDate($borrowertype,$itemtype,branchcode,$checkout_type)
 
 Get the Hard Due Date and it's comparison for an itemtype, a borrower type and a branch
 
 =cut
 
 sub GetHardDueDate {
-    my ( $borrowertype, $itemtype, $branchcode ) = @_;
+    my ( $borrowertype, $itemtype, $branchcode, $checkout_type ) = @_;
 
     my $rules = Koha::CirculationRules->get_effective_rules(
         {
             categorycode => $borrowertype,
             itemtype     => $itemtype,
             branchcode   => $branchcode,
+            checkout_type => $checkout_type,
             rules        => [ 'hardduedate', 'hardduedatecompare' ],
         }
     );
@@ -2682,6 +2684,7 @@ sub CanBookBeRenewed {
                 categorycode => $patron->categorycode,
                 itemtype     => $item->effective_itemtype,
                 branchcode   => $branchcode,
+                checkout_type => $issue->checkout_type,
                 rules => [
                     'renewalsallowed',
                     'no_auto_renewal_after',
@@ -2929,7 +2932,7 @@ sub AddRenewal {
             $datedue = (C4::Context->preference('RenewalPeriodBase') eq 'date_due') ?
                                             dt_from_string( $issue->date_due, 'sql' ) :
                                             dt_from_string();
-            $datedue =  CalcDateDue($datedue, $itemtype, $circ_library->branchcode, $patron_unblessed, 'is a renewal');
+            $datedue =  CalcDateDue($datedue, $itemtype, $circ_library->branchcode, $patron_unblessed, $issue->checkout_type, 'is a renewal');
         }
 
         my $fees = Koha::Charges::Fees->new(
@@ -3107,6 +3110,7 @@ sub GetSoonestRenewDate {
         {   categorycode => $patron->categorycode,
             itemtype     => $item->effective_itemtype,
             branchcode   => $branchcode,
+            checkout_type => $itemissue->checkout_type,
             rules => [
                 'norenewalbefore',
                 'lengthunit',
@@ -3171,6 +3175,7 @@ sub GetLatestAutoRenewDate {
             categorycode => $patron->categorycode,
             itemtype     => $item->effective_itemtype,
             branchcode   => $branchcode,
+            checkout_type => $itemissue->checkout_type,
             rules => [
                 'no_auto_renewal_after',
                 'no_auto_renewal_after_hard_limit',
@@ -3521,7 +3526,7 @@ sub updateWrongTransfer {
 
 =head2 CalcDateDue
 
-$newdatedue = CalcDateDue($startdate,$itemtype,$branchcode,$borrower);
+$newdatedue = CalcDateDue($startdate,$itemtype,$branchcode,$borrower,$checkout_type);
 
 this function calculates the due date given the start date and configured circulation rules,
 checking against the holidays calendar as per the 'useDaysMode' syspref.
@@ -3534,13 +3539,13 @@ C<$isrenewal> = Boolean: is true if we want to calculate the date due for a rene
 =cut
 
 sub CalcDateDue {
-    my ( $startdate, $itemtype, $branch, $borrower, $isrenewal ) = @_;
+    my ( $startdate, $itemtype, $branch, $borrower, $checkout_type, $isrenewal ) = @_;
 
     $isrenewal ||= 0;
 
     # loanlength now a href
     my $loanlength =
-            GetLoanLength( $borrower->{'categorycode'}, $itemtype, $branch );
+            GetLoanLength( $borrower->{'categorycode'}, $itemtype, $branch, $checkout_type );
 
     my $length_key = ( $isrenewal and defined $loanlength->{renewalperiod} )
             ? qq{renewalperiod}
@@ -3586,7 +3591,7 @@ sub CalcDateDue {
 
     # if Hard Due Dates are used, retrieve them and apply as necessary
     my ( $hardduedate, $hardduedatecompare ) =
-      GetHardDueDate( $borrower->{'categorycode'}, $itemtype, $branch );
+      GetHardDueDate( $borrower->{'categorycode'}, $itemtype, $branch, $checkout_type );
     if ($hardduedate) {    # hardduedates are currently dates
         $hardduedate->truncate( to => 'minute' );
         $hardduedate->set_hour(23);
@@ -4168,7 +4173,7 @@ sub _CalculateAndUpdateFine {
     my $date_returned = $return_date ? $return_date : dt_from_string();
 
     my ( $amount, $unitcounttotal, $unitcount  ) =
-      C4::Overdues::CalcFine( $item, $borrower->{categorycode}, $control_branchcode, $datedue, $date_returned );
+      C4::Overdues::CalcFine( $item, $borrower->{categorycode}, $control_branchcode, $issue->{checkout_type}, $datedue, $date_returned );
 
     if ( C4::Context->preference('finesMode') eq 'production' ) {
         if ( $amount > 0 ) {
