@@ -5,6 +5,7 @@
 [% USE Branches %]
 [% USE Categories %]
 [% USE ItemTypes %]
+[% USE Checkouts %]
 [% USE CirculationRules %]
 [% SET footerjs = 1 %]
 
@@ -21,6 +22,12 @@
     [% itemtypes.push( i.itemtype ) %]
 [% END %]
 [% itemtypes.push(undef) %]
+
+[% SET checkout_types = [] %]
+[% FOREACH ct IN Checkouts.checkout_type %]
+    [% checkout_types.push( ct.value ) %]
+[% END %]
+[% checkout_types.push(undef) %]
 
 [% INCLUDE 'doc-head-open.inc' %]
 <title>Koha &rsaquo; Administration &rsaquo; Circulation and fine rules</title>
@@ -86,6 +93,7 @@
             <table id="default-circulation-rules">
             <thead>
             <tr>
+                <th>Checkout type</th>
                 <th>Patron category</th>
                 <th>Item type</th>
                 <th>Actions</th>
@@ -122,10 +130,12 @@
             </thead>
             <tbody>
                 [% SET row_count = 0 %]
-                [% FOREACH c IN categorycodes %]
-                    [% SET c = '' UNLESS c.defined %]
-                    [% FOREACH i IN itemtypes %]
+                [% FOREACH ct IN checkout_types %]
+                    [% FOREACH c IN categorycodes %]
+                        [% SET c = '' UNLESS c.defined %]
+                        [% FOREACH i IN itemtypes %]
                         [% SET i = '' UNLESS i.defined %]
+                        [% SET ct = '' UNLESS ct.defined %]
                         [% SET note = all_rules.$c.$i.note %]
                         [% SET maxissueqty = all_rules.$c.$i.maxissueqty %]
                         [% SET issuelength = all_rules.$c.$i.issuelength %]
@@ -161,6 +171,17 @@
                             [% SET row_count = row_count + 1 %]
                             <tr row_countd="row_[% row_count | html %]">
                                     <td>
+                                        [% IF ct == undef %]
+                                            <em>All</em>
+                                        [% ELSE %]
+                                            [% IF ct == 'CHECKOUT' %]
+                                                <em>Normal checkout</em>
+                                            [% ELSIF ct == 'ONSITE' %]
+                                                <em>On-site checkout</em>
+                                            [% END %]
+                                        [% END %]
+                                    </td>
+                                    <td>
                                         [% IF c == undef %]
                                             <em>All</em>
                                         [% ELSE %]
@@ -176,7 +197,7 @@
                                     </td>
                                     <td class="actions">
                                       <a href="#" class="editrule btn btn-default btn-xs"><i class="fa fa-pencil"></i> Edit</a>
-                                      <a class="btn btn-default btn-xs delete" href="/cgi-bin/koha/admin/smart-rules.pl?op=delete&amp;itemtype=[% i || '*' | html %]&amp;categorycode=[% c || '*' | html %]&amp;branch=[% current_branch | html %]"><i class="fa fa-trash"></i> Delete</a>
+                                      <a class="btn btn-default btn-xs delete" href="/cgi-bin/koha/admin/smart-rules.pl?op=delete&amp;checkout_type=[% ct || '*' | html %]&amp;itemtype=[% i || '*' | html %]&amp;categorycode=[% c || '*' | html %]&amp;branch=[% current_branch | html %]"><i class="fa fa-trash"></i> Delete</a>
                                     </td>
                                     <td>
                                         [% IF note.defined && note != '' %]
@@ -309,9 +330,17 @@
                                     </td>
                             </tr>
                         [% END %]
+                        [% END %]
                     [% END %]
                 [% END %]
                 <tr id="edit_row">
+                    <td>
+                        <select name="checkout_type" id="matrixcheckout_type" style="width:13em;">
+                            <option value="*">All</option>
+                            <option value="CHECKOUT">Normal checkout</option>
+                            <option value="ONSITE">On-site checkout</option>
+                        </select>
+                    </td>
                     <td>
                         <select name="categorycode" id="categorycode">
                             <option value="*">All</option>
@@ -422,6 +451,7 @@
                 </tr>
                 <tfoot>
                     <tr>
+                      <th>Checkout type</th>
                       <th>Patron category</th>
                       <th>Item type</th>
                       <th>&nbsp;</th>
@@ -470,6 +500,7 @@
                 <tr>
                     <th>&nbsp;</th>
                     <th>Total current checkouts allowed</th>
+                    <th>Total current on-site checkouts allowed</th>
                     <th>Maximum total holds allowed (count)</th>
                     <th>Hold policy</th>
                     <th>Hold pickup library match</th>
@@ -479,16 +510,20 @@
                 <tr>
                     <td><em>Defaults</em></td>
                     <td>
-                        [% SET patron_maxissueqty = CirculationRules.Search( current_branch, undef, undef, 'patron_maxissueqty' ) %]
+                        [% SET patron_maxissueqty = CirculationRules.Search( current_branch, undef, undef, Checkouts.checkout_type.checkout, 'patron_maxissueqty' ) %]
                         <input type="text" name="patron_maxissueqty" size="3" value="[% patron_maxissueqty | html %]"/>
                     </td>
                     <td>
-                        [% SET rule_value = CirculationRules.Search( current_branch, undef , undef, 'max_holds' ) %]
+                        [% SET patron_maxissueqty = CirculationRules.Search( current_branch, undef, undef, Checkouts.checkout_type.onsite_checkout, 'patron_maxissueqty' ) %]
+                        <input type="text" name="patron_maxonsiteissueqty" size="3" value="[% patron_maxissueqty | html %]"/>
+                    </td>
+                    <td>
+                        [% SET rule_value = CirculationRules.Search( current_branch, undef , undef, undef, 'max_holds' ) %]
                         <input name="max_holds" size="3" value="[% rule_value | html %]" />
                     </td>
                     <td>
                         <select name="holdallowed">
-                            [% SET holdallowed = CirculationRules.Search( current_branch, undef, undef, 'holdallowed' ) %]
+                            [% SET holdallowed = CirculationRules.Search( current_branch, undef, undef, undef, 'holdallowed' ) %]
                             <option value="">
                                 Not set
                             </option>
@@ -528,7 +563,7 @@
                     </td>
                     <td>
                         <select name="hold_fulfillment_policy">
-                            [% SET hold_fulfillment_policy = CirculationRules.Search( current_branch, undef, undef, 'hold_fulfillment_policy' ) %]
+                            [% SET hold_fulfillment_policy = CirculationRules.Search( current_branch, undef, undef, undef, 'hold_fulfillment_policy' ) %]
 
                             <option value="">
                                 Not set
@@ -587,7 +622,7 @@
                     </td>
                     <td>
                         <select name="returnbranch">
-                            [% SET returnbranch = CirculationRules.Search( current_branch, undef, undef, 'returnbranch' ) %]
+                            [% SET returnbranch = CirculationRules.Search( current_branch, undef, undef, undef, 'returnbranch' ) %]
 
                             <option value="">
                                 Not set
@@ -640,13 +675,15 @@
                 <tr>
                     <th>Patron category</th>
                     <th>Total current checkouts allowed</th>
+                    <th>Total current on-site checkouts allowed</th>
                     <th>Total holds allowed</th>
                     <th>&nbsp;</th>
                 </tr>
                 [% FOREACH c IN categorycodes %]
                     [% NEXT UNLESS c %]
-                    [% SET patron_maxissueqty = CirculationRules.Search( branchcode, c, undef, 'patron_maxissueqty' ) %]
-                    [% SET max_holds = CirculationRules.Search( branchcode, c, undef, 'max_holds' ) %]
+                    [% SET patron_maxissueqty = CirculationRules.Search( branchcode, c, undef, Checkouts.checkout_type.checkout, 'patron_maxissueqty' ) %]
+                    [% SET patron_maxonsiteissueqty = CirculationRules.Search( branchcode, c, undef, Checkouts.checkout_type.onsite_checkout, 'patron_maxissueqty' ) %]
+                    [% SET max_holds = CirculationRules.Search( branchcode, c, undef, undef, 'max_holds' ) %]
 
                     [% IF  ( patron_maxissueqty.defined && patron_maxissueqty != '' ) || ( max_holds.defined && max_holds != '' ) %]
                     <tr>
@@ -660,6 +697,13 @@
                         <td>
                             [% IF patron_maxissueqty.defined && patron_maxissueqty != '' %]
                                 [% patron_maxissueqty | html %]
+                            [% ELSE %]
+                                <span>Unlimited</span>
+                            [% END %]
+                        </td>
+                        <td>
+                            [% IF patron_maxonsiteissueqty.defined && patron_maxonsiteissueqty != '' %]
+                                [% patron_maxonsiteissueqty | html %]
                             [% ELSE %]
                                 <span>Unlimited</span>
                             [% END %]
@@ -687,6 +731,7 @@
                         </select>
                     </td>
                     <td><input name="patron_maxissueqty" size="3" type="text" /></td>
+                    <td><input name="patron_maxonsiteissueqty" size="3" type="text" /></td>
                     <td><input name="max_holds" size="3" type="text" /></td>
                     <td class="actions"><button type="submit" class="btn btn-default btn-xs"><i class="fa fa-plus"></i> Add</td>
                 </tr>
@@ -806,9 +851,9 @@
                     <th>&nbsp;</th>
                 </tr>
                 [% FOREACH i IN itemtypeloop %]
-                    [% SET holdallowed = CirculationRules.Search( branchcode, undef, i.itemtype, 'holdallowed' ) %]
-                    [% SET hold_fulfillment_policy = CirculationRules.Search( branchcode, undef, i.itemtype, 'hold_fulfillment_policy' ) %]
-                    [% SET returnbranch = CirculationRules.Search( branchcode, undef, i.itemtype, 'returnbranch' ) %]
+                    [% SET holdallowed = CirculationRules.Search( branchcode, undef, i.itemtype, undef, 'holdallowed' ) %]
+                    [% SET hold_fulfillment_policy = CirculationRules.Search( branchcode, undef, i.itemtype, undef, 'hold_fulfillment_policy' ) %]
+                    [% SET returnbranch = CirculationRules.Search( branchcode, undef, i.itemtype, undef, 'returnbranch' ) %]
 
                     [% IF holdallowed || hold_fulfillment_policy || returnbranch %]
                         <tr>
@@ -979,11 +1024,11 @@
                     itm = $(this).text();
                     itm = itm.replace(/^\s*|\s*$/g,'');
                     var current_column = $("#edit_row td:eq("+i+")");
-                    if ( i == 3 ) {
+                    if ( i == 4 ) {
                         // specific processing for the Note column
                         var note = $(this).find("a[name='viewnote']").data("content");
                         $(current_column).find("input[type='text']").val(note);
-                    } else if ( i == 8 ) {
+                    } else if ( i == 9 ) {
                         // specific processing for the Hard due date column
                         var select_value = $(this).find("input[type='hidden'][name='hardduedatecomparebackup']").val();
                         var input_value = '';
@@ -994,7 +1039,7 @@
                         }
                         $(current_column).find("input[type='text']").val(input_value);
                         $(current_column).find("select").val(select_value);
-                    } else if ( i == 14 ) {
+                    } else if ( i == 15 ) {
                         // specific processing for cap_fine_to_replacement_price
                         var cap_fine_to_replacement_price = $(this).find("input[type='checkbox']");
                         $('#cap_fine_to_replacement_price').prop('checked', cap_fine_to_replacement_price.is(':checked') );
@@ -1009,17 +1054,20 @@
                                 $(this).attr('selected', 'selected');
                             }
                         });
-                        if ( i == 0 || i == 1 ) {
+                        if ( i == 0 || i == 1 || i == 2 ) {
                             // Disable the 2 first columns, we cannot update them.
                             var val = $(current_column).find("select option:selected").val();
                             var name = "categorycode";
                             if ( i == 1 ) {
                                 name="itemtype";
                             }
+                            if ( i == 2 ) {
+                                name="checkout_type";
+                            }
                             // Remove potential previous input added
                             $(current_column).find("input").remove();
                             $(current_column).append("<input type='hidden' name='"+name+"' value='"+val+"' />");
-                        } else if ( i == 5 || i == 25 || i == 26 || i == 27 ) {
+                        } else if ( i == 6 || i == 25 || i == 26 || i == 27 ) {
                             // If the value is not an integer for
                             //     - "Current checkouts allowed"
                             //     - "Holds allowed (total)"
@@ -1035,6 +1083,7 @@
                 });
                 $("#default-circulation-rules tr:last td:eq(0) select").prop('disabled', true);
                 $("#default-circulation-rules tr:last td:eq(1) select").prop('disabled', true);
+                $("#default-circulation-rules tr:last td:eq(2) select").prop('disabled', true);
                 return false;
             });
             $(".clear_edit").on("click",function(e){
