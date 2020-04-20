@@ -75,6 +75,8 @@ $cache->clear_from_cache( Koha::CirculationRules::GUESSED_ITEMTYPES_KEY );
 if ($op eq 'delete') {
     my $itemtype     = $input->param('itemtype');
     my $categorycode = $input->param('categorycode');
+    my $checkout_type = $input->param('checkout_type');
+
     $debug and warn "deleting $1 $2 $branch";
 
     Koha::CirculationRules->set_rules(
@@ -82,6 +84,7 @@ if ($op eq 'delete') {
             categorycode => $categorycode eq '*' ? undef : $categorycode,
             branchcode   => $branch eq '*' ? undef : $branch,
             itemtype     => $itemtype eq '*' ? undef : $itemtype,
+            checkout_type => $checkout_type eq '*' ? undef : $checkout_type,
             rules        => {
                 maxissueqty                      => undef,
                 rentaldiscount                   => undef,
@@ -125,7 +128,26 @@ elsif ($op eq 'delete-branch-cat') {
                     categorycode => undef,
                     rules        => {
                         max_holds                      => undef,
-                        patron_maxissueqty             => undef,
+                    }
+                }
+            );
+            Koha::CirculationRules->set_rules(
+                {
+                    branchcode   => undef,
+                    categorycode => undef,
+                    checkout_type => $Koha::Checkouts::type->{checkout},
+                    rules        => {
+                        patron_maxissueqty                      => undef,
+                    }
+                }
+            );
+            Koha::CirculationRules->set_rules(
+                {
+                    branchcode   => undef,
+                    categorycode => undef,
+                    checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                    rules        => {
+                        patron_maxissueqty       => undef,
                     }
                 }
             );
@@ -147,6 +169,25 @@ elsif ($op eq 'delete-branch-cat') {
                     branchcode   => undef,
                     rules        => {
                         max_holds                => undef,
+                    }
+                }
+            );
+            Koha::CirculationRules->set_rules(
+                {
+                    categorycode => $categorycode,
+                    branchcode   => undef,
+                    checkout_type => $Koha::Checkouts::type->{checkout},
+                    rules        => {
+                        patron_maxissueqty       => undef,
+                    }
+                }
+            );
+            Koha::CirculationRules->set_rules(
+                {
+                    categorycode => $categorycode,
+                    branchcode   => undef,
+                    checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                    rules        => {
                         patron_maxissueqty       => undef,
                     }
                 }
@@ -157,6 +198,17 @@ elsif ($op eq 'delete-branch-cat') {
             {
                 branchcode   => $branch,
                 categorycode => undef,
+                checkout_type => $Koha::Checkouts::type->{checkout},
+                rules        => {
+                    patron_maxissueqty       => undef,
+                }
+            }
+        );
+        Koha::CirculationRules->set_rules(
+            {
+                branchcode   => $branch,
+                categorycode => undef,
+                checkout_type => $Koha::Checkouts::type->{onsite_checkout},
                 rules        => {
                     patron_maxissueqty       => undef,
                 }
@@ -180,7 +232,26 @@ elsif ($op eq 'delete-branch-cat') {
                 branchcode   => $branch,
                 rules        => {
                     max_holds         => undef,
-                    patron_maxissueqty       => undef,
+                }
+            }
+        );
+        Koha::CirculationRules->set_rules(
+            {
+                categorycode => $categorycode,
+                branchcode   => $branch,
+                checkout_type => $Koha::Checkouts::type->{checkout},
+                rules        => {
+                    patron_maxissueqty => undef,
+                }
+            }
+        );
+        Koha::CirculationRules->set_rules(
+            {
+                categorycode => $categorycode,
+                branchcode   => $branch,
+                checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                rules        => {
+                    patron_maxissueqty => undef,
                 }
             }
         );
@@ -245,6 +316,7 @@ elsif ($op eq 'add') {
     my $br = $branch; # branch
     my $bor  = $input->param('categorycode'); # borrower category
     my $itemtype  = $input->param('itemtype');     # item type
+    my $checkout_type = $input->param('checkout_type');
     my $fine = $input->param('fine');
     my $finedays     = $input->param('finedays');
     my $maxsuspensiondays = $input->param('maxsuspensiondays');
@@ -320,6 +392,7 @@ elsif ($op eq 'add') {
             categorycode => $bor eq '*' ? undef : $bor,
             itemtype     => $itemtype eq '*' ? undef : $itemtype,
             branchcode   => $br eq '*' ? undef : $br,
+            checkout_type => $checkout_type eq '*' ? undef : $checkout_type,
             rules        => $rules,
         }
     );
@@ -328,6 +401,7 @@ elsif ($op eq 'add') {
 elsif ($op eq "set-branch-defaults") {
     my $categorycode  = $input->param('categorycode');
     my $patron_maxissueqty   = strip_non_numeric($input->param('patron_maxissueqty'));
+    my $patron_maxonsiteissueqty   = strip_non_numeric($input->param('patron_maxonsiteissueqty'));
     my $holdallowed   = $input->param('holdallowed');
     my $hold_fulfillment_policy = $input->param('hold_fulfillment_policy');
     my $returnbranch  = $input->param('returnbranch');
@@ -351,8 +425,19 @@ elsif ($op eq "set-branch-defaults") {
             {
                 categorycode => undef,
                 branchcode   => undef,
+                checkout_type => $Koha::Checkouts::type->{checkout},
                 rules        => {
                     patron_maxissueqty             => $patron_maxissueqty,
+                }
+            }
+        );
+        Koha::CirculationRules->set_rules(
+            {
+                categorycode => undef,
+                branchcode   => undef,
+                checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                rules        => {
+                    patron_maxissueqty             => $patron_maxonsiteissueqty,
                 }
             }
         );
@@ -372,8 +457,19 @@ elsif ($op eq "set-branch-defaults") {
             {
                 categorycode => undef,
                 branchcode   => $branch,
+                checkout_type => $Koha::Checkouts::type->{checkout},
                 rules        => {
                     patron_maxissueqty             => $patron_maxissueqty,
+                }
+            }
+        );
+        Koha::CirculationRules->set_rules(
+            {
+                categorycode => undef,
+                branchcode   => $branch,
+                checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                rules        => {
+                    patron_maxissueqty             => $patron_maxonsiteissueqty,
                 }
             }
         );
@@ -390,6 +486,7 @@ elsif ($op eq "set-branch-defaults") {
 elsif ($op eq "add-branch-cat") {
     my $categorycode  = $input->param('categorycode');
     my $patron_maxissueqty = strip_non_numeric($input->param('patron_maxissueqty'));
+    my $patron_maxonsiteissueqty = strip_non_numeric($input->param('patron_maxonsiteissueqty'));
     my $max_holds = $input->param('max_holds');
     $max_holds =~ s/\s//g;
     $max_holds = undef if $max_holds !~ /^\d+/;
@@ -400,9 +497,21 @@ elsif ($op eq "add-branch-cat") {
                 {
                     categorycode => undef,
                     branchcode   => undef,
+                    checkout_type => $Koha::Checkouts::type->{checkout},
                     rules        => {
                         max_holds         => $max_holds,
                         patron_maxissueqty       => $patron_maxissueqty,
+                    }
+                }
+            );
+            Koha::CirculationRules->set_rules(
+                {
+                    categorycode => undef,
+                    branchcode   => undef,
+                    checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                    rules        => {
+                        max_holds         => $max_holds,
+                        patron_maxissueqty       => $patron_maxonsiteissueqty,
                     }
                 }
             );
@@ -411,9 +520,21 @@ elsif ($op eq "add-branch-cat") {
                 {
                     categorycode => $categorycode,
                     branchcode   => undef,
+                    checkout_type => $Koha::Checkouts::type->{checkout},
                     rules        => {
                         max_holds         => $max_holds,
                         patron_maxissueqty       => $patron_maxissueqty,
+                    }
+                }
+            );
+            Koha::CirculationRules->set_rules(
+                {
+                    categorycode => $categorycode,
+                    branchcode   => undef,
+                    checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                    rules        => {
+                        max_holds         => $max_holds,
+                        patron_maxissueqty       => $patron_maxonsiteissueqty,
                     }
                 }
             );
@@ -423,9 +544,21 @@ elsif ($op eq "add-branch-cat") {
             {
                 categorycode => undef,
                 branchcode   => $branch,
+                checkout_type => $Koha::Checkouts::type->{checkout},
                 rules        => {
                     max_holds         => $max_holds,
                     patron_maxissueqty       => $patron_maxissueqty,
+                }
+            }
+        );
+        Koha::CirculationRules->set_rules(
+            {
+                categorycode => undef,
+                branchcode   => $branch,
+                checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                rules        => {
+                    max_holds         => $max_holds,
+                    patron_maxissueqty       => $patron_maxonsiteissueqty,
                 }
             }
         );
@@ -434,9 +567,21 @@ elsif ($op eq "add-branch-cat") {
             {
                 categorycode => $categorycode,
                 branchcode   => $branch,
+                checkout_type => $Koha::Checkouts::type->{checkout},
                 rules        => {
                     max_holds         => $max_holds,
                     patron_maxissueqty       => $patron_maxissueqty,
+                }
+            }
+        );
+        Koha::CirculationRules->set_rules(
+            {
+                categorycode => $categorycode,
+                branchcode   => $branch,
+                checkout_type => $Koha::Checkouts::type->{onsite_checkout},
+                rules        => {
+                    max_holds         => $max_holds,
+                    patron_maxissueqty       => $patron_maxonsiteissueqty,
                 }
             }
         );
@@ -549,7 +694,7 @@ my $definedbranch = $all_rules->count ? 1 : 0;
 my $rules = {};
 while ( my $r = $all_rules->next ) {
     $r = $r->unblessed;
-    $rules->{ $r->{categorycode} }->{ $r->{itemtype} }->{ $r->{rule_name} } = $r->{rule_value};
+    $rules->{ $r->{categorycode} }->{ $r->{itemtype} }->{ $r->{checkout_type} }->{ $r->{rule_name} } = $r->{rule_value};
 }
 
 $template->param(show_branch_cat_rule_form => 1);
