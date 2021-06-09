@@ -512,6 +512,7 @@ INSERT INTO systempreferences ( `variable`, `value`, `options`, `explanation`, `
 ('OpacHiddenItems','','','This syspref allows to define custom rules for hiding specific items at the OPAC. See https://wiki.koha-community.org/wiki/OpacHiddenItems for more information.','Textarea'),
 ('OpacHiddenItemsExceptions','',NULL,'List of borrower categories, separated by comma, that can see items otherwise hidden by OpacHiddenItems','Textarea'),
 ('OpacHiddenItemsHidesRecord','1','','Hide biblio record when all its items are hidden because of OpacHiddenItems','YesNo'),
+('OpacHiddenRecordRedirect','0','Redirect the opac detail page for records hidden by OpacHiddenItems to an explanatory page (otherwise redirect to 404 error page)','','YesNo'),
 ('OpacHighlightedWords','1','','If Set, then queried words are higlighted in OPAC','YesNo'),
 ('OpacHoldNotes','0','','Show hold notes on OPAC','YesNo'),
 ('OPACHoldRequests','1',NULL,'If ON, globally enables patron holds on OPAC','YesNo'),
