@@ -674,6 +674,12 @@ OPAC:
                   0: "Don't hide"
                   1: Hide
             - "the bibliographic record when all its items are hidden by <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacHiddenItems'>OpacHiddenItems</a>."
+            - <br />Redirect the opac detail page for hidden records to
+            - pref: OpacHiddenRecordRedirect
+              choices:
+                  1: "an explanatory page ('This record is blocked')."
+                  0: "the 404 error page ('Not found')."
+            - "<br />Display a message on the redirect page for suppressed bibliographic records with HTML customization <strong>OpacHiddenRecordMessage</strong>."
         -
             - pref: OpacAllowPublicListCreation
               default: 1
