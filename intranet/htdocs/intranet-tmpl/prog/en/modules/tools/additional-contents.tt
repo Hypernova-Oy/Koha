@@ -528,7 +528,7 @@
             [% END %]
         [% END %]
     [% ELSE %]
-        [% SET opac_available_options = [ 'OpacNavRight', 'opacheader', 'OpacCustomSearch', 'OpacMainUserBlock', 'opaccredits', 'OpacLoginInstructions', 'OpacNav', 'OpacNavBottom', 'OpacSuggestionInstructions', 'ArticleRequestsDisclaimerText', 'OpacMoreSearches', 'OpacMySummaryNote', 'OpacLibraryInfo', 'OpacMaintenanceNotice', 'OPACResultsSidebar', 'OpacSuppressionMessage', 'SCOMainUserBlock', 'SelfCheckInMainUserBlock', 'SelfCheckHelpMessage', 'CatalogConcernHelp', 'CatalogConcernTemplate', 'CookieConsentBar', 'CookieConsentPopup', 'PatronSelfRegistrationAdditionalInstructions', 'ILLModuleCopyrightClearance' ] %]
+        [% SET opac_available_options = [ 'OpacNavRight', 'opacheader', 'OpacCustomSearch', 'OpacMainUserBlock', 'opaccredits', 'OpacLoginInstructions', 'OpacNav', 'OpacNavBottom', 'OpacSuggestionInstructions', 'ArticleRequestsDisclaimerText', 'OpacMoreSearches', 'OpacMySummaryNote', 'OpacLibraryInfo', 'OpacMaintenanceNotice', 'OPACResultsSidebar', 'OpacSuppressionMessage', 'SCOMainUserBlock', 'SelfCheckInMainUserBlock', 'SelfCheckHelpMessage', 'CatalogConcernHelp', 'CatalogConcernTemplate', 'CookieConsentBar', 'CookieConsentPopup', 'PatronSelfRegistrationAdditionalInstructions', 'ILLModuleCopyrightClearance', 'OpacHiddenRecordMessage' ] %]
         <optgroup label="OPAC">
             [% FOREACH l IN opac_available_options.sort %]
                 [% IF l == location %]
