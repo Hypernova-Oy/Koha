@@ -33,4 +33,8 @@ my ( $template, $borrowernumber, $cookie ) = get_template_and_user(
     }
 );
 
+if ( $query->param('hidden') ) {
+    $template->param( hidden => 1 );
+}
+
 output_with_http_headers $query, $cookie, $template->output, 'html';

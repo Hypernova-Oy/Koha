@@ -1,6 +1,7 @@
 [% USE raw %]
 [% USE AdditionalContents %]
 [% SET OpacSuppressionMessage = AdditionalContents.get( location => "OpacSuppressionMessage", lang => lang, library => branchcode || default_branch ) %]
+[% SET OpacHiddenRecordMessage = AdditionalContents.get( location => "OpacHiddenRecordMessage", lang => lang, library => branchcode || default_branch ) %]
 [% PROCESS 'i18n.inc' %]
 [% PROCESS 'html_helpers.inc' %]
 [% INCLUDE 'doc-head-open.inc' %]
@@ -29,8 +30,14 @@
                 <div id="opac-blocked-message" class="maincontent">
                     <h1>Record blocked</h1>
                     <p>You are not authorized to view this record.</p>
-                    [% IF ( OpacSuppressionMessage ) %]
-                        <div id="opacsuppressionmessage"> [% PROCESS koha_news_block news => OpacSuppressionMessage %] </div>
+                    [% IF ( OpacSuppressionMessage ) || ( hidden ) %]
+                        <div id="opacsuppressionmessage">
+                            [% IF hidden %]
+                                [% PROCESS koha_news_block news => OpacHiddenRecordMessage %]
+                            [% ELSE %]
+                                [% PROCESS koha_news_block news => OpacSuppressionMessage %]
+                            [% END %]
+                        </div>
                     [% END %]
                 </div>
             </div>
