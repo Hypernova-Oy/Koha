@@ -22,6 +22,7 @@ use Modern::Perl;
 
 use Koha::Script -cron;
 use C4::Reports::Guided qw( store_results execute_query );
+use C4::Scheduler qw( add_at_job );
 use Koha::Reports;
 use C4::Context;
 use C4::Log qw( cronlogaction );
@@ -68,6 +69,7 @@ runreport.pl [ -h | -m ] [ -v ] reportID [ reportID ... ]
    --separator     separator character for csv
    --quote         quote character for csv
    --csv-header    add column names as first line of csv output
+   --recurring     optional, duration at which this script is repeated, in format "integer-unit", e.g. 15-minutes.
 
 
  Arguments:
@@ -142,6 +144,17 @@ Store the result of the report into the saved_reports DB table.
 
 To access the results, go on Reports > Guided reports > Saved report.
 
+=item B<--recurring>
+
+Duration at which this script is repeated.
+
+Format for this parameter is "integer-unit" (without quotes)
+Example: 15-minutes.
+
+Regex: [1-9][0-9]*-(years|months|weeks|days|hours|minutes)
+
+Optional.
+
 =back
 
 =head1 DESCRIPTION
@@ -199,6 +212,7 @@ my $store_results = 0;
 my $csv_header    = 0;
 my $csv_separator = "";
 my $csv_quote     = "";
+my $recurring;
 
 my $username = undef;
 my $password = undef;
@@ -226,6 +240,7 @@ GetOptions(
     'method:s'      => \$method,
     'store-results' => \$store_results,
     'csv-header'    => \$csv_header,
+    'recurring:s'   => \$recurring,
 
 ) or pod2usage(2);
 pod2usage( -verbose => 2 ) if ($man);
@@ -262,6 +277,11 @@ if ( $to or $from or $send_email ) {
     $send_email = 1;
     $from or $from = C4::Context->preference('KohaAdminEmailAddress');
     $to   or $to   = C4::Context->preference('KohaAdminEmailAddress');
+}
+
+if ( $recurring and $recurring !~ /^[1-9][0-9]*-(years|months|weeks|days|hours|minutes)$/ ) {
+    print STDERR "ERROR: Invalid --recurring format, format is: [1-9][0-9]*-(years|months|weeks|days|hours|minutes)\n";
+    pod2usage(1);
 }
 
 unless ( scalar(@ARGV) ) {
@@ -398,3 +418,27 @@ foreach my $report_id (@ARGV) {
 }
 
 cronlogaction( { action => 'End', info => "COMPLETED" } );
+
+if ( $recurring ) {
+    my ( $frequency, $frequency_unit ) = split( '-', $recurring );
+    my $base;
+    if ( C4::Context->config('supportdir') ) {
+        $base = C4::Context->config('supportdir');
+    }
+    else {
+        $base = "/usr/share/koha/bin";
+    }
+    my $CONFIG_NAME = $ENV{'KOHA_CONF'};
+    my $command =
+    "export KOHA_CONF=\"$CONFIG_NAME\"; " .
+    "$base/cronjobs/runreport.pl " . join(' ', @ARGV) . " --format=$format --to=$to --recurring=$recurring";
+
+    my $start = dt_from_string->add( $frequency_unit => $frequency )->truncate( to => 'minute' );
+    $start = $start->ymd('') . substr($start->hms(''), 0, 4);
+
+    unless ( add_at_job( $start, $command ) ) {
+        print STDERR "ERROR: Adding recurring job failed\n";
+    } else {
+        print STDOUT "Recurring job added\n";
+    }
+}
