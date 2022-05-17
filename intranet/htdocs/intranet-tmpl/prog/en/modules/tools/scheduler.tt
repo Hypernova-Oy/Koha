@@ -50,6 +50,19 @@
                     <input type="text" size="10" id="startdate" name="startdate" class="flatpickr" data-flatpickr-futuredate="true" value="" />
                     <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
                 </li>
+<li>
+    <label for="frequency">Recurring every:</label>
+    <input type="text" name="frequency" id="frequency" value="" maxlength="10" size="10" />
+    <select name="frequency_unit" id="frequency_unit">
+        <option value="minutes">minutes</option>
+        <option value="hours">hours</option>
+        <option value="days">days</option>
+        <option value="weeks">weeks</option>
+        <option value="months">months</option>
+        <option value="years">years</option>
+    </select>
+    <div class="hint">(optional)</div>
+</li>
                 <li
                     ><label for="report">Report:</label>
                     <select name="report" id="report">
