@@ -92,6 +92,18 @@ if ( $op eq 'cud-add' ) {
               "export KOHA_CONF=\"$CONFIG_NAME\"; "
             . "$base/cronjobs/runreport.pl $report --format=$format --to='$email'";
 
+        my $recurring = $input->param('frequency');
+        if ( $recurring ) {
+            my $frequency = $recurring;
+            $frequency =~ s/^\s+|\s+$//g;
+            my $frequency_unit = $input->param('frequency_unit');
+
+            my @allowed_units = qw( years months weeks days hours minutes );
+            if ( $frequency =~ /^[1-9][0-9]*$/ and grep( /^$frequency_unit$/, @allowed_units ) ) {
+                $command = $command . ' --recurring=' . $frequency . '-' . $frequency_unit;
+            }
+        }
+
         unless ( add_at_job( $start, $command ) ) {
             $template->param( job_add_failed => 1 );
         }
