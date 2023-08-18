@@ -194,6 +194,12 @@ sub get_template_and_user {
         }
     }
 
+    my $csp_nonce;
+    if ( $in->{'type'} eq 'opac' ) {
+        $csp_nonce = $ENV{'plack.middleware.Koha.CSP.csp_nonce'};
+        $template->param( csp_nonce => $csp_nonce ) if $csp_nonce;
+    }
+
     if ( $in->{'template_name'} !~ m/maintenance/ ) {
         ( $user, $cookie, $sessionID, $flags ) = checkauth(
             $in->{'query'},
@@ -267,6 +273,7 @@ sub get_template_and_user {
         if ($kick_out) {
             $template = C4::Templates::gettemplate( 'opac-auth.tt', 'opac',
                 $in->{query} );
+            $template->param( csp_nonce => $csp_nonce ) if $csp_nonce;
             $cookie = $cookie_mgr->replace_in_list( $cookie, $in->{query}->cookie(
                 -name     => 'CGISESSID',
                 -value    => '',
@@ -1489,6 +1496,9 @@ sub checkauth {
         $template->param(
             some_public_shelves  => $some_public_shelves,
         );
+
+        my $csp_nonce = $ENV{'plack.middleware.Koha.CSP.csp_nonce'};
+        $template->param( csp_nonce => $csp_nonce ) if $csp_nonce;
     }
 
     if ($cas) {

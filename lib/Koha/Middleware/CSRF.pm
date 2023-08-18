@@ -40,6 +40,13 @@ sub call {
         PATCH  => 1,
     );
 
+    #HN hack, remove when CSP gets pushed
+    unless ( $env->{csp_nonce} ) {
+        my $csp_nonce = Koha::Token->new()->generate( { pattern => '\w{10}' } );
+        $env->{'plack.middleware.Koha.CSP.csp_nonce'} = $csp_nonce;
+        $ENV{'plack.middleware.Koha.CSP.csp_nonce'} = $csp_nonce;
+    }
+    
     my $original_op    = $req->param('op');
     my $request_method = $req->method  // q{};
     my $uri            = $req->uri     // q{};
