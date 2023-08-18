@@ -34,6 +34,7 @@ use URI::Escape;
 use C4::Auth qw( get_template_and_user );
 use C4::Context;
 use C4::Templates;
+use Koha::Cache::Memory::Lite;
 
 our (@ISA, @EXPORT_OK);
 
@@ -260,6 +261,21 @@ sub output_with_http_headers {
     die "Unknown content type '$content_type'" if ( !defined( $content_type_map{$content_type} ) );
     my $cache_policy = 'no-cache';
     $cache_policy .= ', no-store, max-age=0' if $extra_options->{force_no_caching};
+    my $csp_nonce = '';
+    my $cache = Koha::Cache::Memory::Lite->get_instance();
+    if ( my $csp_nonce_value = $cache->get_from_cache('csp_nonce') ){
+        $csp_nonce = "'nonce-$csp_nonce_value'";
+    }
+    #NOTE: unsafe-eval is needed in script-src for DataTables
+    my @csp_options = (
+        q#default-src 'self'#,
+        "script-src 'self' 'unsafe-eval' $csp_nonce",
+        q#style-src 'self' 'unsafe-inline'#,
+        q#img-src 'self' data:#,
+        q#font-src 'self'#,
+        q#object-src 'none'#,
+    );
+    my $csp_header = join('; ',@csp_options);
     my $options = {
         type              => $content_type_map{$content_type},
         status            => $status,
@@ -267,6 +283,7 @@ sub output_with_http_headers {
         Pragma            => 'no-cache',
         'Cache-Control'   => $cache_policy,
         'X-Frame-Options' => 'SAMEORIGIN',
+        'Content-Security-Policy' => $csp_header,
     };
     $options->{expires} = 'now' if $extra_options->{force_no_caching};
     $options->{'Access-Control-Allow-Origin'} = C4::Context->preference('AccessControlAllowOrigin')
