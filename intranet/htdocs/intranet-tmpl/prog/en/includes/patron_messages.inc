@@ -313,7 +313,7 @@
         <h4>Notes</h4>
         <ul>
             <li>
-                <span class="circ-hlt"> [% patron.borrowernotes | $raw | html_line_break %] </span>
+                <span class="circ-hlt"> [% patron.borrowernotes | html | html_line_break %] </span>
             </li>
         </ul>
     </div>
