@@ -98,7 +98,7 @@
                                         <a id="newsitem[% koha_new.additional_content.id | html %]" href="/cgi-bin/koha/opac-main.pl?news_id=[% koha_new.additional_content.id | uri %]">[% koha_new.title | html %]</a>
                                     [% END %]
                                 </h2>
-                                <div class="newsbody">[% koha_new.content | $raw %]</div>
+                                <div class="newsbody">[% koha_new.content | html %]</div>
                                 <div class="newsfooter">
                                     Published on [% koha_new.published_on | $KohaDates %]
                                     [% IF ( show_author && koha_new.author ) %]
