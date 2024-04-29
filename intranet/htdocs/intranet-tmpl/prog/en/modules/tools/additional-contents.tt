@@ -489,9 +489,9 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     [% IF ( category == 'record_display' ) %]
-                                                        <template shadowrootmode="open"> [% default_localization.content | scrub_html type => 'record_display' | $raw %] </template>
+                                                        <template shadowrootmode="open"> [% default_localization.content | scrub_html type => 'record_display' | html %] </template>
                                                     [% ELSE %]
-                                                        <template shadowrootmode="open"> [% default_localization.content | $raw %] </template>
+                                                        <template shadowrootmode="open"> [% default_localization.content | html %] </template>
                                                     [% END %]
                                                 </div>
                                                 <div class="modal-footer">
