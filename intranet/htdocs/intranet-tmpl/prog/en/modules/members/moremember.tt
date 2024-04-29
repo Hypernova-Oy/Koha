@@ -537,7 +537,7 @@
                         [% IF ( patron.borrowernotes ) %]
                             <li id="patron-borrowernotes">
                                 <span class="label">Circulation note: </span><br />
-                                [% patron.borrowernotes | $raw | html_line_break %]
+                                [% patron.borrowernotes | html | html_line_break %]
                             </li>
                         [% END %]
 

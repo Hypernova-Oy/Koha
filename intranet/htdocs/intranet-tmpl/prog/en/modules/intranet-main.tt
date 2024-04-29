@@ -41,7 +41,7 @@
                     [% FOREACH koha_new IN koha_news %]
                         <div class="newsitem" id="news[% koha_new.additional_content_id | html %]"
                             ><h4>[% koha_new.title | html %]</h4>
-                            <div class="newsbody">[% koha_new.content | $raw %]</div>
+                            <div class="newsbody">[% koha_new.content | html %]</div>
                             <p class="newsfooter">
                                 Posted on [% koha_new.published_on | $KohaDates %][% IF( show_author && koha_new.author ) %]by <span class="newsauthor">[% INCLUDE 'patron-title.inc' patron=koha_new.author %]<br /></span>[% END %]
                                 [% IF ( CAN_user_tools_edit_additional_contents ) %]
