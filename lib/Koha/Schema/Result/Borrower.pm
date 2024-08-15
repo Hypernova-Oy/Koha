@@ -35,7 +35,7 @@ primary key, Koha assigned ID number for patrons/borrowers
 
   data_type: 'varchar'
   is_nullable: 1
-  size: 32
+  size: 75
 
 unique key, library assigned ID number for patrons/borrowers
 
@@ -668,7 +668,7 @@ __PACKAGE__->add_columns(
   "borrowernumber",
   { data_type => "integer", is_auto_increment => 1, is_nullable => 0 },
   "cardnumber",
-  { data_type => "varchar", is_nullable => 1, size => 32 },
+  { data_type => "varchar", is_nullable => 1, size => 75 },
   "surname",
   { data_type => "longtext", is_nullable => 1 },
   "firstname",
