@@ -677,6 +677,7 @@ for ( my $i = 0 ; $i < @servers ; $i++ ) {
                 { $patron ? ( categorycode => $patron->categorycode ) : () } );
         }
 
+        my $results_count = scalar @newresults;
         foreach my $res (@newresults) {
 
             # must define a value for size if not present in DB
@@ -744,7 +745,11 @@ for ( my $i = 0 ; $i < @servers ; $i++ ) {
         }
 
         if ( $results_hashref->{$server}->{"hits"} ) {
-            $total = $total + $hits;
+            if ( $hits > $results_per_page ) {
+                $total = $total + $hits;
+            } else {
+                $total = $results_count;
+            }
         }
 
         # Opac search history
