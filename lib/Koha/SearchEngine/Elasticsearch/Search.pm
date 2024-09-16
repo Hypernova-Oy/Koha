@@ -260,6 +260,7 @@ sub search_auth_compat {
             # Turn the resultset into a hash
             $result{authtype}     = $authtype ? $authtype->authtypetext : $authtypecode;
             $result{reported_tag} = $reported_tag;
+            $result{origincode}   = C4::AuthoritiesMarc::CalculateOriginCode( $marc, $authtypecode );
 
             if ( C4::Context->preference('ShowHeadingUse') ) {
 
