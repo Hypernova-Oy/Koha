@@ -85,6 +85,7 @@
             <table>
                 <tr>
                     <th>Summary</th>
+                    <th>Source</th>
                     <th>Heading type</th>
                     <th>Used</th>
                     [% IF Koha.Preference('ShowHeadingUse') %]
@@ -102,6 +103,7 @@
                                 [% PROCESS authresult summary=line.summary authid=line.authid auth_preview=1 %]
                             [% END %]
                         </td>
+                        <td>[% line.origincode | html %]</td>
                         <td>[% line.summary.label | html %]</td>
                         <td>
                             [% IF line.used > 0 %]

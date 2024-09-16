@@ -62,6 +62,7 @@
                 <table>
                     <tr>
                         <th>Summary</th>
+                        <th>Source</th>
                         <th>Heading type</th>
                         [% UNLESS ( isEDITORS ) %]
                             <th>Used in</th>
@@ -82,6 +83,7 @@
                                     [% PROCESS authresult summary=line.summary authid=line.authid %]
                                 [% END %]
                             </td>
+                            <td>[% line.origincode | html %]</td>
                             <td>[% line.authtype | html %]</td>
                             [% UNLESS ( line.isEDITORS ) %]
                                 <td>
