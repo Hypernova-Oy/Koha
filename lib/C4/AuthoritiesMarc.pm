@@ -704,12 +704,15 @@ sub AddAuthority {
 
     my $heading = $authority->heading_object( { record => $record } );
 
+    my $origincode = CalculateOriginCode( $record, $authtypecode );
+
     # Update
     $authority->update(
         {
             authtypecode => $authtypecode,
             marcxml      => $record->as_xml_record($format),
             heading      => $heading ? $heading->display_form : '',
+            origincode   => $origincode,
         }
     );
 
@@ -1271,6 +1274,34 @@ sub GetAuthorizedHeading {
         }
     }
     return;
+}
+
+=head2 CalculateOriginCode
+
+    Finds the auth_header.origincode from the given MARC Authorities Record for the given MARC Authorities Framework
+
+=cut
+
+sub CalculateOriginCode {
+    my ( $record, $authtypecode ) = @_;
+
+    my ( $tagfield, $tagsubfield ) = GetAuthMARCFromKohaField( 'auth_header.origincode', $authtypecode );
+    if ( not( defined($tagfield) && defined($tagsubfield) ) || not( $record->subfield( $tagfield, $tagsubfield ) ) ) {
+        if ( C4::Context->preference('marcflavour') eq 'MARC21' ) {
+            return
+                   $record->subfield( '040', 'c' )
+                || $record->subfield( '040', 'a' )
+                || $record->subfield( '024', '2' )
+                || $record->field('003')
+                || '';
+        } else {
+            warn "KohaToMARCMapping for 'auth_header.origincode' not set for '"
+                . C4::Context->preference('marcflavour')
+                . "' and don't know what fallbacks to use.";
+            return '';
+        }
+    }
+    return $record->subfield( $tagfield, $tagsubfield );
 }
 
 =head2 CompareFieldWithAuthority
