@@ -28,8 +28,8 @@ dedup_authorities.pl [ -h ] [ -where="authid < 5000" ] -c [ -v ] [ -m d ] [ -a P
  Options:
      -h --help          display usage statement
      -v --verbose       increase verbosity, can be repeated for greater verbosity
-     -m --method        method for choosing the reference authority, can be: date, used, or ppn (UNIMARC)
-                        can be repeated
+     -m --method        method for choosing the reference authority, can be: date, used, get-subfield,
+                        match-subfield or ppn (UNIMARC). Can be repeated
      -w --where         a SQL WHERE statement to limit the authority records checked
      -c --confirm       without this parameter no changes will be made, script will run in test mode
      -a --authtypecode  check only specified auth type, repeatable
@@ -47,11 +47,13 @@ and in which order.
 Letters can be:
     date:  keep the most recent authority (based on 005 field)
     used:  keep the most used authority
+    get-subfield: keep the authority that has a bigger sort value from the given subfield
+    match-subfield: keep the authority that exactly matches the subfield's content
     ppn:   PPN (UNIMARC only), keep the authority with a ppn (when some
         authorities don't have one, based on 009 field)
 
 Example:
--m ppn -m date -m used
+-m ppn -m date -m used -m "match-subfield=040.a=FI-NL" -m "get-subfield=001"
 Among the authorities that have a PPN, keep the most recent,
 and if two (or more) have the same date in 005, keep the
 most used.
@@ -113,6 +115,19 @@ foreach my $method (@methods) {
         push @choose_subs, \&_has_ppn;
     } elsif ( $method eq 'used' ) {
         push @choose_subs, \&_get_usage;
+    } elsif ( $method =~ /^get-subfield\W
+                           (?<field>\d\d\d)\W?
+                           (?<subfield>\w)?$
+                         /x ) {
+        my ($field, $subfield) = ($+{field}, $+{subfield});
+        push @choose_subs, sub { _get_subfield($field, $subfield, @_); };
+    } elsif ( $method =~ /^match-subfield\W
+                           (?<field>\d\d\d)\W
+                           (?<subfield>\w)\W
+                           (?<content>.*)$
+                         /x ) {
+        my ($field, $subfield, $content) = ($+{field}, $+{subfield}, $+{content});
+        push @choose_subs, sub { _match_subfield($field, $subfield, $content, @_); };
     } else {
         warn "Choose method '$method' is not supported";
     }
@@ -301,6 +316,28 @@ sub _get_usage {
 
     if ( $record and ( my $field = $record->field('001') ) ) {
         return Koha::Authorities->get_usage_count( { authid => $field->data() } );
+    }
+    return 0;
+}
+
+sub _get_subfield {
+    my ($field, $subfield, $record) = @_;
+    if ( $record ) {
+        if ( not(defined $subfield) or $subfield eq '' ) {
+            my $f = $record->field($field);
+            return $f->data if $f;
+        }
+        else {
+            $record->subfield($field, $subfield);
+        }
+    }
+    return 0;
+}
+
+sub _match_subfield {
+    my ($field, $subfield, $content, $record) = @_;
+    if ( $record and $record->subfield($field, $subfield) eq $content ) {
+        return 1;
     }
     return 0;
 }
