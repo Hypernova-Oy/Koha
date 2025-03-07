@@ -456,6 +456,7 @@ sub edititem {
         my $request = $params->{request};
         $request->updated( dt_from_string() );
         $request->store;
+        $request->send_staff_notice('ILL_REQUEST_MODIFIED');
 
         # ...Populate Illrequestattributes
         # generate $request_details
@@ -556,6 +557,7 @@ sub confirm {
         $request->orderid( $request->illrequest_id );
         $request->status("REQ");
         $request->store;
+        $request->send_staff_notice('ILL_REQUEST_MODIFIED');
 
         # ...then return our result:
         return {
@@ -595,6 +597,7 @@ sub cancel {
     my $stage = $params->{other}->{stage};
     if ( !$stage || $stage eq 'init' ) {
 
+        $params->{request}->send_staff_notice('ILL_REQUEST_CANCEL');
         # We simply need our template .INC to produce a text block.
         return {
             method => 'cancel',
@@ -605,6 +608,8 @@ sub cancel {
         $params->{request}->status("REQREV");
         $params->{request}->orderid(undef);
         $params->{request}->store;
+        $params->{request}->send_staff_notice('ILL_REQUEST_CANCEL');
+        $params->{request}->send_patron_notice('ILL_REQUEST_CANCEL');
         return {
             method => 'cancel',
             stage  => 'commit',
@@ -990,6 +995,7 @@ sub add_request {
         $params->{other}->{ill_batch_id} ? $params->{other}->{ill_batch_id} : $params->{other}->{batch_id} )
         if column_exists( 'illrequests', 'batch_id' );
     $request->store;
+    $request->send_staff_notice('ILL_REQ_CREATED');
 
     my @request_details_array = map {
         {
