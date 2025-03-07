@@ -886,6 +886,7 @@ sub mark_completed {
     my ( $self ) = @_;
     $self->status('COMP')->store;
     $self->completed(dt_from_string())->store;
+    $self->_backend->mark_completed({request=>$self});
     return {
         error   => 0,
         status  => '',
