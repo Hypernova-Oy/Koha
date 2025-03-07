@@ -926,6 +926,7 @@ sub mark_completed {
         $self->status_alias( $params->{status_alias} ) if $params->{status_alias};
         $self->completed( dt_from_string() );
         $self->store;
+        $self->_backend->mark_completed({request=>$self});
         return {
             stage => 'commit',
             next  => 'illview',
@@ -1033,6 +1034,26 @@ sub backend_cancel {
     my ( $self, $params ) = @_;
 
     my $result = $self->_backend->cancel(
+        {
+            request => $self,
+            other   => $params
+        }
+    );
+
+    return $self->expand_template($result);
+}
+
+sub delete {
+    my ( $self, $params ) = @_;
+
+    $self->backend_delete($params);
+    return $self->SUPER::delete($params);
+}
+
+sub backend_delete {
+    my ( $self, $params ) = @_;
+
+    my $result = $self->_backend->delete(
         {
             request => $self,
             other   => $params
