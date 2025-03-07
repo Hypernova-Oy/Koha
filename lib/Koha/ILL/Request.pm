@@ -926,6 +926,7 @@ sub mark_completed {
         $self->status_alias( $params->{status_alias} ) if $params->{status_alias};
         $self->completed( dt_from_string() );
         $self->store;
+        $self->_backend->mark_completed({request=>$self});
         return {
             stage => 'commit',
             next  => 'illview',

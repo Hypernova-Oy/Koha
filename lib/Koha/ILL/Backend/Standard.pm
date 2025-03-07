@@ -648,6 +648,30 @@ sub cancel {
     }
 }
 
+sub mark_completed {
+    my ( $self, $params ) = @_;
+
+    my $ill = $params->{request};
+
+    return unless $ill->biblio_id;
+
+    my $holds = Koha::Holds->search( { biblionumber => $ill->biblio_id } );
+    while ( my $hold = $holds->next ) {
+        $hold->delete;
+    }
+
+    my $items = Koha::Items->search( { biblionumber => $ill->biblio_id } );
+    while ( my $item = $items->next ) {
+        if ( Koha::Checkouts->find( { itemnumber => $item->itemnumber } ) ) {
+            $item->barcode( "ILL-".$ill->illrequest_id."-".$ill->placed )->store unless $item->barcode;
+            C4::Circulation::AddReturn( $item->barcode, C4::Context->userenv->{'branch'} );
+        }
+        $item->delete;
+    }
+
+    return C4::Biblio::DelBiblio( $ill->biblio_id );
+}
+
 =head3 migrate
 
 Migrate a request into or out of this backend.
