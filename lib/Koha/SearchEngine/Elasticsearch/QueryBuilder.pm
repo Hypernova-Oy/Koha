@@ -217,6 +217,8 @@ sub build_query {
 
     $res->{query}->{bool}->{should} = $options{field_match_boost_query} if $options{field_match_boost_query};
 
+    my $sortby_pubdate = 1;
+
     if ( $options{sort} ) {
         foreach my $sort ( @{ $options{sort} } ) {
             my ( $f, $d ) = @$sort{qw/ field direction /};
@@ -226,12 +228,18 @@ sub build_query {
 
             $f = $self->_sort_field($f);
             push @{ $res->{sort} }, { $f => { order => $d } };
+            $sortby_pubdate = 0 if $f eq 'date-of-publication';
         }
     }
 
     # If not sorting by anything explicitly search by score
     if ( !defined $res->{sort} ) {
         push @{ $res->{sort} }, { _score => { order => 'desc' } };
+    }
+
+    # If not explicitly sorting by date-of-publication, add it as a secondary sorting method
+    if ( $sortby_pubdate ) {
+        push @{ $res->{sort} }, { $self->_sort_field('date-of-publication') => { order => 'desc' } };
     }
 
     # Add a tie breaker in case of equally relevant records
