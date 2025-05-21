@@ -1,0 +1,644 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE AuthorisedValues %]
+[% USE KohaDates %]
+[% USE AdditionalContents %]
+[% SET opacsuggestion = AdditionalContents.get( location => "OpacSuggestioninstructions", lang => lang, library => logged_in_user.branchcode || default_branch ) %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET AllPublicBranches = Branches.all(  search_params => { public => 1 }, selected => logged_in_user.branchcode ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% IF ( op_add_form ) %]Skicka ett nytt inköpsförslag[% END %] [% IF ( op_else ) %]Inköpsförslag[% END %] &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] katalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% IF ( loggedinusername ) %][% INCLUDE 'bodytag.inc' bodyid='opac-usersuggestions' bodyclass='scrollto' %][% ELSE %][% INCLUDE 'bodytag.inc' bodyid='opac-suggestions' bodyclass='scrollto' %][% END %]
+[% INCLUDE 'masthead.inc' %]
+
+ <div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% IF ( logged_in_user ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
+ [% END %]
+ [% END %]
+ [% IF ( op_add_form ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-suggestions.pl">Inköpsförslag</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Nytt inköpsförslag</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Inköpsförslag</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col col-lg-2 order-2 order-lg-1">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ <div class="col-md-12 col-lg-10 order-1">
+
+ <div id="usersuggestions" class="maincontent">
+ [% IF ( op_add_form ) %]
+ <h1>Dina inköpsförslag</h1>
+ [% IF ( Koha.Preference('MaxTotalSuggestions') != '' && patrons_total_suggestions_count >= Koha.Preference('MaxTotalSuggestions') ) %]
+ <h2 class="TooManySuggestions">Du kan inte skicka fler förslag</h2>
+ <p class="TooManySuggestionsText">Du kan bara göra [% Koha.Preference('MaxTotalSuggestions') | html %] förslag på [% Koha.Preference('NumberOfSuggestionDays') | html %] dagar.</p>
+ [% ELSIF ( Koha.Preference('MaxOpenSuggestions') != '' && patrons_pending_suggestions_count >= Koha.Preference('MaxOpenSuggestions') ) %]
+ <h2 class="TooManySuggestions">Du kan inte skicka fler förslag</h2>
+ <p class="TooManySuggestionsText">Du har nått gränsen för hur många förslag du kan göra just nu ([% Koha.Preference('MaxOpenSuggestions') | html %]). När biblioteket har hanterat dessa förslag kommer du kunna göra fler.</p>
+ [% ELSE %]
+
+ [% IF ( opacsuggestion ) %]
+ [% PROCESS koha_news_block news => opacsuggestion %]
+ [% ELSE %]
+ <h2>Ange ett nytt inköpsförslag</h2>
+
+ <p>Fyll i formuläret för att lämna ett inköpsförslag. Biblioteket kommer att underrätta dig via e-post när ditt förslag behandlas.</p>
+ <p>Bara titeln (rödmarkerad) är obligatorisk, men ju mer information du anger desto lättare blir det för bibliotekspersonalen att hitta det du vill ha. I fältet "Kommentarer" kan du ange ytterligare information.</p>
+ [% END %]
+ [% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'biblio_exists' %]
+ <span>Ett liknande dokument finns redan: <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% m.id | uri %]">[% m.title | html %]</a>. Klicka på "Bekräfta ditt förslag" för att ignorera det här meddelandet.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+ [% END %]
+
+ <form action="/cgi-bin/koha/opac-suggestions.pl" method="post" id="add_suggestion_form">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <ol>
+ [% IF Koha.Preference( 'OPACSuggestionAutoFill' ) %]
+ <li>
+ <label for="isbn">Standardnummer (ISBN, ISSN eller annat):</label>
+ <input type="text" id="isbn" name="isbn" maxlength="80" style="margin-right:10px;margin-top:10px;" size="15"/>
+ </li>
+ [% END %]
+ <li>
+ [% IF biblionumber %]
+ <label>Titel:</label>
+ <a id="title" href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% biblionumber | uri %]">[% title | html %]</a>
+ [% ELSIF ( title_required ) %]
+ <label for="title" class="required">Titel:</label>
+ <input type="text" id="title" name="title" class="span6" maxlength="255" value="[% title | html %]" required="required" />
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="title">Titel:</label>
+ <input type="text" id="title" name="title" class="span6" maxlength="255" value="[% title | html %]" />
+ [% END %]
+ </li>
+ [% UNLESS ( author_hidden ) %]
+ <li>
+ [% IF biblionumber %]
+ <label>Författare:</label>
+ <span id="author">[% author | html %]</span>
+ [% ELSIF ( author_required ) %]
+ <label for="author" class="required">Författare:</label>
+ <input type="text" id="author" name="author" class="span6" maxlength="80" value="[% author | html %]" required="required" />
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="author">Författare:</label>
+ <input type="text" id="author" name="author" class="span6" maxlength="80" value="[% author | html %]" />
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( copyrightdate_hidden )%]
+ <li>
+ <div title="Copyright eller publikationsår, exempelvis: 2016">
+ [% IF biblionumber %]
+ <label>Utgivningsår:</label>
+ <span id="copyrightdate">[% copyrightdate | html %]</span>
+ [% ELSIF ( copyrightdate_required ) %]
+ <label for="copyrightdate" class="required">Utgivningsår:</label>
+ <input type="text" id="copyrightdate" name="copyrightdate" pattern="[12]\d{3}" size="10" maxlength="4" value="[% copyrightdate | html %]" required="required" />
+ <div class="required_label required">Obligatoriskt</div>
+ <span class="hint">Copyright eller publikationsår, exempelvis: 2016</span>
+ [% ELSE %]
+ <label for="copyrightdate">Utgivningsår:</label>
+ <input type="text" id="copyrightdate" name="copyrightdate" pattern="[12]\d{3}" size="10" maxlength="4" value="[% copyrightdate | html %]" />
+ <span class="hint">Copyright eller publikationsår, exempelvis: 2016</span>
+ [% END %]
+ </div>
+ </li>
+ [% END %]
+ [% UNLESS ( isbn_hidden or Koha.Preference('OPACSuggestionAutoFill') ) %]
+ <li>
+ [% IF biblionumber %]
+ <label>Standardnummer (ISBN, ISSN eller annat):</label>
+ <span id="isbn">[% isbn | html %]</span>
+ [% ELSIF ( isbn_required ) %]
+ <label for="isbn" class="required">Standardnummer (ISBN, ISSN eller annat):</label>
+ <input type="text" id="isbn" name="isbn"  maxlength="80" value="[% isbn | html %]" required="required" />
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="isbn">Standardnummer (ISBN, ISSN eller annat):</label>
+ <input type="text" id="isbn" name="isbn"  maxlength="80" value="[% isbn | html %]" />
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( publishercode_hidden ) %]
+ <li>
+ [% IF biblionumber %]
+ <label>Förlag:</label>
+ <span id="publishercode">[% publishercode | html %]</span>
+ [% ELSIF ( publishercode_required ) %]
+ <label for="publishercode" class="required">Förlag:</label>
+ <input type="text" id="publishercode" name="publishercode" class="span6" maxlength="80" value="[% publishercode | html %]" required="required" />
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="publishercode">Förlag:</label>
+ <input type="text" id="publishercode" name="publishercode" class="span6" maxlength="80" value="[% publishercode | html %]" />
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( collectiontitle_hidden ) %]
+ <li>
+ [% IF biblionumber %]
+ <label for="collectiontitle" class="required">Samlingstitel:</label>
+ <span id="collectiontitle">[% collectiontitle | html %]</span>
+ [% ELSIF ( collectiontitle_required ) %]
+ <label for="collectiontitle" class="required">Samlingstitel:</label>
+ <input type="text" id="collectiontitle" name="collectiontitle" class="span6" maxlength="80" value="[% collectiontitle | html %]" required="required" />
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="collectiontitle">Samlingstitel:</label>
+ <input type="text" id="collectiontitle" name="collectiontitle" class="span6" maxlength="80" value="[% collectiontitle | html %]" />
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( place_hidden ) %]
+ <li>
+ [% IF biblionumber %]
+ <label for="place" class="required">Utgivningsort:</label>
+ <span id="place">[% place | html %]</span>
+ [% ELSIF ( place_required ) %]
+ <label for="place" class="required">Utgivningsort:</label>
+ <input type="text" id="place" name="place" required="required" maxlength="80" value="[% place | html %]" />
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="place">Utgivningsort:</label>
+ <input type="text" id="place" name="place"  maxlength="80" value="[% place | html %]" />
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( quantity_hidden ) %]
+ <li id="opac-suggestion-quantity">
+ [% IF ( quantity_required ) %]
+ <label for="quantity" class="required">Antal:</label>
+ <input type="text" id="quantity" name="quantity" required="required" maxlength="4" size="4" value="[% quantity | html %]" />
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="quantity">Antal:</label>
+ <input type="text" id="quantity" name="quantity"  maxlength="4" size="4" value="[% quantity | html %]" />
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( itemtype_hidden )%]
+ <li>
+ [% IF ( itemtype_required ) %]
+ <label for="itemtype" class="required">Exemplartyp:</label>
+ [% PROCESS 'av-build-dropbox.inc' name="itemtype", category="SUGGEST_FORMAT", size = 20, required = 1, blank = 1, default=itemtype %]
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="itemtype">Exemplartyp:</label>
+ [% PROCESS 'av-build-dropbox.inc' name="itemtype", category="SUGGEST_FORMAT", size = 20, blank = 1, default=itemtype %]
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( branchcode_hidden || AllPublicBranches.size < 2 )%]
+ <li>
+ [% IF ( branchcode_required ) %]
+ <label for="branch" class="required">Bibliotek:</label>
+ <select name="branchcode" id="branch" required="required">
+ <option value=""></option>
+ [% PROCESS options_for_libraries libraries => AllPublicBranches %]
+ </select>
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="branch">Bibliotek:</label>
+ <select name="branchcode" id="branch">
+ [% PROCESS options_for_libraries libraries => AllPublicBranches %]
+ </select>
+ [% END %]
+ </li>
+ [% END %]
+ [% IF ( patron_reason_loop ) %]
+ [% UNLESS ( patronreason_hidden )%]
+ <li>
+ [% IF ( patronreason_required ) %]
+ <label for="patronreason" class="required">Skäl till förslag: </label>
+ <select name="patronreason" id="patronreason" required="required">
+ <option value="">-- Välj --</option>
+ [% FOREACH patron_reason_loo IN patron_reason_loop %]
+ [% IF patron_reason_loo.authorised_value == patronreason %]
+ <option value="[% patron_reason_loo.authorised_value | html %]" selected="selected">[% patron_reason_loo.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% patron_reason_loo.authorised_value | html %]">[% patron_reason_loo.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="patronreason">Skäl till förslag: </label>
+ <select name="patronreason" id="patronreason">
+ <option value="">-- Välj --</option>
+ [% FOREACH patron_reason_loo IN patron_reason_loop %]
+ [% IF patron_reason_loo.authorised_value == patronreason %]
+ <option value="[% patron_reason_loo.authorised_value | html %]" selected="selected">[% patron_reason_loo.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% patron_reason_loo.authorised_value | html %]">[% patron_reason_loo.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ [% END %]
+ </li>
+ [% END %]
+ [% END %]
+ [% UNLESS ( note_hidden ) %]
+ <li>
+ [% IF ( note_required ) %]
+ <label for="note" class="required">Kommentarer:</label>
+ <textarea name="note" id="note" rows="5" cols="40" required="required">[% note | html %]</textarea>
+ <div class="required_label required">Obligatoriskt</div>
+ [% ELSE %]
+ <label for="note">Kommentarer:</label>
+ <textarea name="note" id="note" rows="5" cols="40">[% note | html %]</textarea>
+ [% END %]
+ </li>
+ [% END %]
+
+ <!-- Add a hidden 'negcap' field -->
+ <li id="negcap" style="position: absolute; left: -2000px;">
+ negcap <input type="text" name="negcap"/>
+ </li>
+
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="suggested_by_anyone" value="[% suggested_by_anyone | html %]" />
+ [% IF need_confirm # Confirm that we want a duplicate %]
+ <input type="hidden" name="op" value="cud-add_confirm" />
+ <input class="btn btn-primary" type="submit" value="Bekräfta ditt förslag" />
+ [% ELSIF biblionumber # Create from an existing title %]
+ <input type="hidden" name="op" value="cud-add_confirm" />
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ <input class="btn btn-primary" type="submit" value="Skicka ditt förslag" />
+ [% ELSE # Not created from an existing title, search for possible duplicate %]
+ <input type="hidden" name="op" value="cud-add_validate" />
+ <input class="btn btn-primary" type="submit" value="Skicka ditt förslag" />
+ [% END %]
+ <a class="action" href="/cgi-bin/koha/opac-suggestions.pl">Avbryt</a>
+ </fieldset>
+ </form>
+ [% END %]
+ [% END #  IF op_add_form %]
+
+ [% IF ( op_else ) %]
+ <h1>
+ [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) == 1 %]
+ <span>Inköpsförslag</span>
+ [% ELSE %]
+ [% IF ( loggedinusername ) %]
+ <span>Dina inköpsförslag</span>
+ [% ELSE %]
+ <span>Inköpsförslag</span>
+ [% END %]
+ [% END %]
+ </h1>
+ [% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'total_suggestions' %]
+ <span>Förslaget har inte lagts till. Du har nått gränsen för hur många förslag du kan göra just nu ([% Koha.Preference('MaxTotalSuggestions') | html %] på [% Koha.Preference('NumberOfSuggestionDays') | html %] dagar).</span>
+ [% CASE 'too_many' %]
+ <span>Ditt förslag kan inte tas emot. Du har nått gränsen för hur många förslag som kan lämnas åt gången ([% Koha.Preference('MaxOpenSuggestions') | html %]). När biblioteket har hanterat dessa förslag kommer du kunna göra fler.</span>
+ [% CASE 'already_exists' %]
+ <span>Förslaget har inte lagts till. Ett förslag med denna titel finns redan.</span>
+ [% CASE 'success_on_inserted' %]
+ <span>Ditt förslag har skickats in.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF ( deleted ) %]<div class="alert alert-info">De markerade förslagen har tagits bort.</div>[% END %]
+
+ [% IF (Koha.Preference( 'OPACViewOthersSuggestions' ) || loggedinusername) && (suggestions.size > 0 OR title_filter) %]
+ [% SET can_delete_suggestion = 0 %]
+ <form action="/cgi-bin/koha/opac-suggestions.pl" class="row" id="search_suggestions_form" method="get">
+ <div class="col-auto gx-2 ms-2 my-1">
+ <label for="title_filter">Sök efter:</label>
+ </div>
+ <div class="col-auto gx-2 my-1">
+ <input type="text" name="title_filter" id="title_filter" value="[% title_filter | html %]" size="30" class="form-control form-control-sm" />
+ </div>
+ [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) %]
+ [% IF loggedinusername %]
+ <div class="col-auto gx-2 my-1">
+ <label class="sr-only" for="suggested_by_anyone">Föreslaget av:</label>
+ <select class="form-select form-select-sm" name="suggested_by_anyone" id="suggested_by_anyone">
+ [% IF suggested_by_anyone %]
+ <option value="0">Föreslaget av mig</option>
+ <option value="1" selected="selected">Föreslaget av vem som helst</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Föreslaget av mig</option>
+ <option value="1">Föreslaget av vem som helst</option>
+ [% END %]
+ </select>
+ </div>
+ [% END %]
+ [% END %]
+ <div class="col-auto gx-2 my-1">
+ <button type="submit" class="btn btn-sm btn-primary">Gå</button>
+ </div>
+ </form>
+ [% END %]
+ [% IF suggestions.size > 0 %]
+ [% SET can_delete_suggestion = 0 %]
+ <form action="/cgi-bin/koha/opac-suggestions.pl" method="post" id="delete_suggestions">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete" />
+ [% IF ( loggedinusername || ( Koha.Preference( 'AnonSuggestions' ) == 1 ) ) %]
+ <div id="toolbar" class="toolbar clearfix">
+ [% IF ( Koha.Preference('MaxTotalSuggestions') != '' && patrons_total_suggestions_count >= Koha.Preference('MaxTotalSuggestions') ) %]
+ <p class="TooManySuggestionsText">Du kan bara göra [% Koha.Preference('MaxTotalSuggestions') | html %] förslag på [% Koha.Preference('NumberOfSuggestionDays') | html %] dagar.</p>
+ [% ELSIF ( Koha.Preference('MaxOpenSuggestions') != '' && patrons_pending_suggestions_count >= Koha.Preference('MaxOpenSuggestions') ) %]
+ <p class="TooManySuggestionsText">Du har nått gränsen för hur många förslag du kan göra just nu ([% Koha.Preference('MaxOpenSuggestions') | html %]).</br>När biblioteket har granskat de förslagen kommer du kunna göra flera.</p>
+ [% ELSE %]
+ <a class="btn btn-link new" href="/cgi-bin/koha/opac-suggestions.pl?op=add_form"><i class="fa fa-plus"  aria-hidden="true"></i> Nytt inköpsförslag</a>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF ( loggedinusername ) %]
+ <div class="selections-toolbar toolbar">
+ <div class="check_control">
+ <span class="checkall"></span> <span class="clearall"></span>
+ </div>
+ <div class="links">
+ <span class="selections">Välj förslag: </span>
+ <span id="removeitems">
+ <a href="#" class="btn btn-link removeitems tag_hides disabled"><i class="fa fa-trash-can" aria-hidden="true"></i> Ta bort</a>
+ </span>
+ </div>
+ </div>
+ [% END %]
+
+ [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) == 1 || loggedinusername %]
+ <table id="suggestt" class="table table-bordered tabled">
+ <caption class="sr-only">Dina inköpsförslag<caption>
+ <thead>
+ <tr>
+ [% IF ( loggedinusername ) %]<th>&nbsp;</th>[% END %]
+ <th class="all">Sammanfattning</th>
+ <th>Föreslaget den</th>
+ <th>Kommentar</th>
+ [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) == 1 %]<th>Föreslaget till</th>[% END %]
+ [% IF Koha.Preference( 'OpacSuggestionManagedBy' ) %]<th>Hanterad av</th>[% END %]
+ <th>Status</th>
+ <th></th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH suggestion IN suggestions %]
+ <tr>
+ [% IF logged_in_user %]
+ <td class="selectcol">
+ [% IF logged_in_user.borrowernumber == suggestion.suggester.borrowernumber %]
+ [% SET can_delete_suggestion = 1 %]
+ <input type="checkbox" class="cb" id="id[% suggestion.suggestionid | html %]" name="delete_field" data-title="[% suggestion.title | html %]" value="[% suggestion.suggestionid | html %]" />
+ [% END %]
+ </td>
+ [% END %]
+ <td>
+ <p>
+ <label for="id[% suggestions_loo.suggestionid | html %]">
+ [% IF suggestion.biblionumber %]
+ <strong><a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% suggestion.biblionumber | uri %]">[% suggestion.title | html %]</a></strong>
+ [% ELSE %]
+ <strong>[% suggestion.title | html %]</strong>
+ [% END %]
+ </label>
+ </p>
+ <p>[% IF ( suggestion.author ) %][% suggestion.author | html %],[% END %]
+ [% IF ( suggestion.copyrightdate ) %] - [% suggestion.copyrightdate | html %],[% END %]
+ [% IF ( suggestion.publishercode ) %] - [% suggestion.publishercode | html %][% END %]
+ [% IF ( suggestion.place ) %]([% suggestion.place | html %])[% END %]
+ [% IF ( suggestion.collectiontitle ) %] , [% suggestion.collectiontitle | html %][% END %]
+ [% IF ( suggestion.itemtype ) %] - [% AuthorisedValues.GetByCode( 'SUGGEST_FORMAT', suggestion.itemtype, 1 ) | html %][% END %]
+ </p>
+ </td>
+ <td data-order="[% suggestion.suggesteddate | html %]">
+ [% IF ( suggestion.suggesteddate ) %][% suggestion.suggesteddate |$KohaDates %][% END %]
+ </td>
+ <td>
+ [% IF ( suggestion.note ) %]
+ [% suggestion.note | html %]
+ [% END %]
+ </td>
+ [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) == 1 %]
+ <td>
+ [% IF suggestion.suggestedby %]
+ [% Branches.GetName(suggestion.branchcode) | html %]
+ [% END %]
+ </td>
+ [% END %]
+ [% IF Koha.Preference( 'OpacSuggestionManagedBy' ) %]
+ <td>
+ [% IF suggestion.managedby %]
+ [% INCLUDE 'patron-title.inc' patron = suggestion.manager %]
+ [% IF ( suggestion.manageddate ) %] - [% suggestion.manageddate | $KohaDates %][% END %]
+ [% END %]
+ </td>
+ [% END %]
+ <td>
+ [% IF ( suggestion.STATUS == 'ASKED' ) %]<span>Begärd</span>
+ [% ELSIF ( suggestion.STATUS == 'CHECKED' ) %]<span>Utlånad av biblioteket</span>
+ [% ELSIF ( suggestion.STATUS == 'ACCEPTED' ) %]<span>Godkänd av biblioteket</span>
+ [% ELSIF ( suggestion.STATUS == 'ORDERED' ) %]<span>Beställt av biblioteket</span>
+ [% ELSIF ( suggestion.STATUS == 'REJECTED' ) %]<span>Förslag nekat</span>
+ [% ELSIF ( suggestion.STATUS == 'AVAILABLE' ) %]<span>Tillgänglig på biblioteket</span>
+ [% ELSE %] [% AuthorisedValues.GetByCode( 'SUGGEST_STATUS', suggestion.STATUS, 1 ) | html %] [% END %]
+ [% IF ( suggestion.reason ) %]([% suggestion.reason | html %])[% END %]
+ </td>
+ <td></td>
+ </tr>
+ [% END # / FOREACH suggestions %]
+ </tbody>
+ </table>
+ [% END %]
+
+ [% IF ( loggedinusername && can_delete_suggestion ) %]
+ <fieldset class="action">
+ <input class="btn btn-danger removeitems" type="submit" value="Ta bort valda" />
+ </fieldset>
+ [% END %]
+ </form>
+ [% ELSE %]
+ [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) %]
+ [% IF title_filter %]
+ <div class="alert alert-info" role="alert">Det finns inga väntande inköpsförslag som matchar din sökning.</div>
+ [% ELSIF loggedinusername AND NOT suggested_by_anyone %]
+ <div class="alert alert-info" role="alert">Det finns inga väntande inköpsförslag. <a href="/cgi-bin/koha/opac-suggestions.pl?suggested_by_anyone=1">Se alla förslag</a></div>
+ [% ELSE %]
+ <div class="alert alert-info" role="alert">Det finns inga väntande inköpsförslag.</div>
+ [% END %]
+ [% ELSE %]
+ [% IF ( loggedinusername ) %]
+ [% IF title_filter %]
+ <div class="alert alert-info" role="alert">Det finns inga väntande inköpsförslag som matchar din sökning.</div>
+ [% ELSE %]
+ <div class="alert alert-info" role="alert">Det finns inga väntande inköpsförslag.</div>
+ [% END %]
+ [% ELSE %]
+ <div class="alert alert-warning" role="alert">Du har inte behörighet att se väntande inköpsförslag.</div>
+ [% END %]
+ [% END %]
+ [% IF ( loggedinusername || ( Koha.Preference( 'AnonSuggestions' ) == 1 ) ) %]
+ [% IF ( Koha.Preference('MaxTotalSuggestions') != ''  && patrons_total_suggestions_count >= Koha.Preference('MaxTotalSuggestions') ) %]
+ <p class="TooManySuggestionsText">Du kan bara göra [% Koha.Preference('MaxTotalSuggestions') | html %] förslag på [% Koha.Preference('NumberOfSuggestionDays') | html %] dagar.</p>
+ [% ELSIF ( Koha.Preference('MaxOpenSuggestions') != ''  && patrons_pending_suggestions_count >= Koha.Preference('MaxOpenSuggestions') ) %]
+ <p class="TooManySuggestionsText">Du har nått gränsen för hur många förslag du kan göra just nu.</br>När biblioteket har granskat de förslagen kommer du kunna göra flera.</p>
+ [% ELSE %]
+ <p><a class="btn btn-link new" href="/cgi-bin/koha/opac-suggestions.pl?op=add_form"><i class="fa fa-plus" aria-hidden="true"></i> Nytt inköpsförslag</a></p>
+ [% END %]
+ [% END %]
+ [% END # / IF suggestions.size %]
+
+ [% END # IF op_else %]
+ </div> <!-- / #usersuggestions -->
+ </div> <!-- / .col-lg-10 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+[% IF Koha.Preference("OPACSuggestionAutoFill") %]
+ [% Asset.js("js/autofill.js") | $raw %]
+[% END %]
+[% INCLUDE 'datatables.inc' %]
+<script>
+    [% IF ( loggedinusername ) %]
+        function enableCheckboxActions(){
+            // Enable/disable controls if checkboxes are checked
+            var checkedBoxes = $(".cb:checked");
+            if ($(checkedBoxes).size()) {
+              $(".selections").html(_("Med valda förslag: "));
+              $(".selections-toolbar .links a").removeClass("disabled");
+            } else {
+              $(".selections").html(_("Välj förslag: "));
+              $(".selections-toolbar .links a").addClass("disabled");
+            }
+        }
+    [% END %]
+
+    [% IF Koha.Preference( 'OPACSuggestionAutoFill' ) %]
+    $(function() {
+        $('#isbn').autofill({
+            'volumeInfo.title': {target: 'title', effect: 'flash'},
+            'volumeInfo.authors': {target: 'author', effect: 'flash'},
+            'volumeInfo.publisher': {target: 'publishercode', effect: 'flash'},
+            'volumeInfo.publishedDate': {target: 'copyrightdate', effect: 'flash'},
+            /* google books api seem to only have books, so if we got a result
+             * item, type will be a book, so set to BK (book). */
+            'kind': {target: 'itemtype', handle: function(t,v) { t.val('BK'); },},
+        });
+    });
+    [% END %]
+
+    $(function() {
+        $("#suggestt").dataTable($.extend(true, {}, dataTablesDefaults, {
+            "order": [[ 1, "asc" ]],
+            "columnDefs": [
+              [% IF ( loggedinusername ) %]{ "targets": [ 0 ], "sortable": false, "searchable": false }[% END %],
+                { "className": 'dtr-control', "orderable": false, "targets": -1 },
+                { responsivePriority: 1, targets: 1 }
+            ],
+            "columns": [
+                [% IF ( loggedinusername ) %]null,[% END %]
+                { "type": "anti-the" },
+                null,
+                null,
+                [% IF Koha.Preference( 'OPACViewOthersSuggestions' ) == 1 %]null,[% END %]
+                [% IF Koha.Preference( 'OpacSuggestionManagedBy' ) %]null,[% END %]
+                null,
+                null
+            ],
+            "responsive": {
+                details: {
+                    type: 'column',
+                    target: -1
+                }
+            },
+        }));
+        [% IF ( loggedinusername ) %]$("span.clearall").html("<a id=\"CheckNone\" class=\"btn btn-link btn-sm\" href=\"#\">"+_("Rensa alla")+"<\/a>");
+        $("span.checkall").html("<a id=\"CheckAll\" class=\"btn btn-link btn-sm\" href=\"#\">"+_("Välj alla")+"<\/a>");
+        $("#CheckAll").on("click",function(e){
+            e.preventDefault();
+            $(".cb").prop("checked", true);
+            enableCheckboxActions();
+        });
+        $("#CheckNone").on("click",function(e){
+            e.preventDefault();
+            $(".cb").prop("checked", false);
+            enableCheckboxActions();
+        });
+        $(".cb").click(function(){
+          enableCheckboxActions();
+        });
+
+        enableCheckboxActions();
+
+        $(".removeitems").on("click", function(e) {
+            e.preventDefault();
+            var selected_titles = $("input:checked");
+            var title;
+            var yes_label;
+            var no_label;
+            var message = "";
+            if ( selected_titles.size() < 1 ) {
+                alert( _("Inget förslag har valts") );
+                return false;
+            } else {
+                if( selected_titles.size() > 1 ){
+                    message = $("<ul></ul>");
+                    title = _("Är du säker på att du vill ta bort dessa förslag?");
+                    yes_label = _("Ja, ta bort förslagen");
+                    no_label = _("Nej, ta inte bort förslagen");
+                    selected_titles.each(function(){
+                        message.append( "<li>" +  $(this).data("title") + "</li>" );
+                    });
+                } else {
+                    title = _("Är du säker på att du vill ta bort detta förslag?");
+                    yes_label = _("Ja, ta bort förslag");
+                    no_label = _("Nej, ta inte bort det här förslaget");
+                    selected_titles.each(function(){
+                        message += $(this).data("title");
+                    });
+                }
+                confirmModal( message, title, yes_label, no_label, function( result ){
+                    if( result ){
+                        $("#delete_suggestions").submit();
+                    }
+                });
+            }
+        });
+        [% END %]
+    });
+</script>
+[% END %]

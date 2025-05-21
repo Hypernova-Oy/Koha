@@ -1,0 +1,62 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+
+<title>[% FILTER collapse %]
+ [% t("Create a library") | html %] &rsaquo;
+ [% t("Web installer") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="onboarding-step1" class="installer-main col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+ <div id="logo"><a href="#">Koha</a></div>
+ <h1>Webbinstallerare &rsaquo; Skapa bibliotek</h1>
+
+ [% INCLUDE 'onboarding_messages.inc' %]
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Installera</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Onboarding <ol>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Skapa ett bibliotek</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Skapa en ny låntagarkategori</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Skapa Koha-administratör</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Skapa en ny exemplartyp</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Skapa ny låneregel</li>
+ </ol>
+ </li>
+ </ol>
+ </div>
+
+ <form name="LibraryCreation" method="post" action="onboarding.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows" >
+ <input type="hidden" name="step" value="1"/>
+ <input type="hidden" name="op" value="cud-add_validate_library"/>
+ <ol>
+ <li>
+ <label for="branchcode" class="required">Bibliotekskod: </label>
+ <input type="text"  pattern="[0-9A-Za-z]{1,10}" name="branchcode" id="branchcode" size="10" maxlength="10" value="" class="required" required="required" />
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="branchname" class="required">Namn: </label>
+ <input type="text" name="branchname" id="branchname" size="42" class="required" required="required">
+ <span class="required">Obligatoriskt</span>
+ </li>
+ </ol>
+ <p>För att lägga till ett nytt bibliotek och för fler inställningar, gå till: <span class="breadcrumbs"> Administration <strong>&rsaquo;</strong> Bibliotek och grupper </span>
+ </p>
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ </fieldset>
+ </form>
+ </div> <!-- / #onboarding-step1 -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

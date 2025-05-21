@@ -1,0 +1,332 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE TablesSettings %]
+[% USE AuthorisedValues %]
+[%- USE Branches -%]
+[%- USE ItemTypes -%]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Holds to pull") | html %] &rsaquo;
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="circ_pendingreserves" class="circ">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Cirkulation</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Plocklista reservationer</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'letter_enqueued' %]
+ <span>Meddelandet har köats korrekt.</span>
+ [% CASE 'no_email_address' %]
+ <span>Låntagaren har ingen e-postadress.</span>
+ [% CASE 'no_template_notice' %]
+ <span>Det finns ingen meddelandemall med koden 'CANCEL_HOLD_ON_LOST' definerad i systemet.</span>
+ [% CASE 'hold_cancelled' %]
+ <span>Reservationen har avbrutits korrekt.</span>
+ [% CASE 'hold_placed_at_biblio_level' %]
+ <span>Reservationen har lagts på biblio-nivå. Det är inte möjligt att fastställa vilket exemplar som ska markeras som förlorad.</span>
+ [% CASE %]
+ [% m.code | html %]
+ [% END %]
+ </div>
+ [% END %]
+
+<h1>Plocklista för reservationer lagda mellan [% from | $KohaDates %] och [% to | $KohaDates %]</h1>
+<h3>Rapporterad den [% todaysdate | $KohaDates %]</h3>
+<p>Följande reservationer har inte behandlats. Hämta dem och återlämna dem.</p>
+<div id="searchresults">
+ [% IF holds_info %]
+ <table id="holdst">
+ <thead>
+ <tr>
+ <th>Plocka detta antal exemplar</th>
+ <th>Tillgängliga exemplar</th>
+ <th>Låntagare med reservationer</th>
+ <th>Första låntagaren</th>
+ <th class="anti-the">Titel</th>
+ <th class="string-sort">Bibliotek</th>
+ <th>Tillgängliga streckkoder</th>
+ <th>Tillgängliga hyllsignaturer</th>
+ <th>Tillgängliga exemplarnummer</th>
+ <th>Tillgänglig numrering</th>
+ <th class="string-sort">Tillgängliga exemplartyper</th>
+ <th class="string-sort">Tillgängliga platser</th>
+ <th class="string-sort">Tillgängliga avdelningar</th>
+ <th>Tidigaste reservationsdatum</th>
+ <th>Reservationskommentar</th>
+ <th class="string-sort">Avhämtningsbibliotek</th>
+ <th class="NoSort">Åtgärd</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH hold_info IN holds_info %]
+ <tr>
+ [% SET patron = hold_info.patron %]
+ [% SET item = hold_info.item %]
+ [% SET hold = hold_info.hold %]
+ [% IF patron %]
+ [% SET biblio = hold_info.biblio %]
+ <td><p><strong>[% hold_info.pull_count | html %]</strong></p></td>
+ <td>[% hold_info.items_count | html %]</td>
+ <td>[% hold_info.patrons_count | html %]</td>
+ <td><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">[% patron.firstname | html %] [% patron.surname | html %]</a></td>
+ <td>
+ <p>
+ [% INCLUDE 'biblio-title.inc' biblio=biblio link = 1 %]
+ </p>
+ [% IF ( biblio.author ) %]<p> av [% biblio.author | html %]</p>[% END %]
+ [% IF ( biblio.biblioitem.editionstatement ) %]<p>[% biblio.biblioitem.editionstatement | html %]</p>[% END %]
+ [% IF ( Koha.Preference('marcflavour') == 'MARC21' ) %]
+ [% IF ( biblio.copyrightdate ) %]<p>[% biblio.copyrightdate | html %]</p>[% END %]
+ [% ELSE %]
+ [% IF ( biblio.biblioitem.publicationyear ) %]<p>[% biblio.biblioitem.publicationyear | html %]</p>[% END %]
+ [% END %]
+ </td>
+ [% ELSE %]
+ <td>"</td>
+ <td>"</td>
+ <td>"</td>
+ <td>"</td>
+ <td>"</td>
+ [% END %]
+ <td>
+ [% IF ( hold_info.holdingbranches.size ) %]
+ <ul>
+ [% FOREACH holdingbranch IN hold_info.holdingbranches %]
+ <li>[% Branches.GetName ( holdingbranch ) | html %]</li>
+ [% END %]
+ </ul>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( hold_info.barcodes.size ) %]
+ [% SET barcode = hold_info.barcodes.first %]
+ [% IF ( hold_info.item ) %]
+ <span>Endast [% barcode | html %]</span>
+ [% ELSE %]
+ <span>[% barcode | html %] eller [% IF hold_info.item_group %] alla tillgängliga från exemplargruppen <em>[% hold_info.item_group.description | html %]</em>. [% ELSE %] alla tillgängliga. [% END %] </span>
+ [% END %] [% ELSIF hold_info.item_group %] Alla tillgängliga från exemplargruppen <em>[% hold_info.item_group.description | html %]</em>.
+ [% END %]
+ </td>
+ <td>
+ [% IF ( hold_info.callnumbers.size ) %]
+ <ul>
+ [% FOREACH callnumber IN hold_info.callnumbers %]
+ <li>
+ [% callnumber | html %]
+ </li>
+ [% END %]
+ </ul>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( hold_info.copynumbers.size ) %]
+ <ul>
+ [% FOREACH copyno IN hold_info.copynumbers %]
+ <li>
+ [% copyno | html %]
+ </li>
+ [% END %]
+ </ul>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( hold_info.enumchrons.size ) %]
+ <ul>
+ [% FOREACH enumchron IN hold_info.enumchrons %]
+ <li>
+ [% enumchron | html %]
+ </li>
+ [% END %]
+ </ul>
+ [% END %]
+ </td>
+ <td>
+ <ul>
+ [% FOREACH type IN hold_info.itemtypes %]
+ <li>[% ItemTypes.GetDescription( type ) | html %]</li>
+ [% END %]
+ </ul>
+ </td>
+ <td>
+ <ul>
+ [% FOREACH loc IN hold_info.locations %]
+ <li>[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => loc ) | html %]</li>
+ [% END %]
+ </ul>
+ </td>
+ <td>
+ <ul>
+ [% FOREACH ccode IN hold_info.collections %]
+ <li>[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.ccode', authorised_value => ccode ) | html %]</li>
+ [% END %]
+ </ul>
+ </td>
+ <td data-order="[% hold.reservedate | html %]">
+ [% hold.reservedate | $KohaDates %] i [% Branches.GetName ( hold.branchcode ) | html %] </td>
+ <td>[% hold.reservenotes | html %]</td>
+ <td>
+ [% Branches.GetName ( hold.branchcode ) | html %]
+ </td>
+ <td>
+ <form name="cancelReserve" action="/cgi-bin/koha/circ/pendingreserves.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-cancel_reserve" />
+ <input type="hidden" name="reserve_id" value="[% hold.reserve_id | html %]" />
+
+ [% SET hold_cancellation = AuthorisedValues.GetAuthValueDropbox('HOLD_CANCELLATION') %]
+ [% IF hold_cancellation.count %]
+ <div class="form-group">
+ <label for="cancellation-reason">Orsak till annullering:</label>
+ <select class="cancellation-reason" name="cancellation-reason" id="cancellation-reason">
+ <option value="">Ingen anledning vald</option>
+ [% FOREACH reason IN hold_cancellation %]
+ <option value="[% reason.authorised_value | html %]">[% reason.lib | html %]</option>
+ [% END %]
+ </select>
+ </div>
+ [% END %]
+
+ [% IF item.holdingbranch != item.homebranch %]
+ <input class="btn btn-default" type="submit" value="Avbryt reservation och skicka till: [% Branches.GetName( item.homebranch ) | html %]" />
+ [% ELSE %]
+ <input class="btn btn-default" type="submit" value="Annullera reservation" />
+ [% END %]
+ </form>
+
+ [% IF Koha.Preference('CanMarkHoldsToPullAsLost') != 'do_not_allow' %]
+ [% IF hold.itemnumber %]
+ <form name="cancelReserve" action="/cgi-bin/koha/circ/pendingreserves.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="reserve_id" value="[% hold.reserve_id | html %]" />
+ [% IF Koha.Preference('CanMarkHoldsToPullAsLost') == 'allow' %]
+ <input type="hidden" name="op" value="cud-mark_as_lost" />
+ <input class="btn btn-primary" type="submit" value="Markera objektet som förlorat" />
+ [% ELSIF Koha.Preference('CanMarkHoldsToPullAsLost') == 'allow_and_notify' %]
+ <input type="hidden" name="op" value="cud-mark_as_lost_and_notify" />
+ <input class="btn btn-primary" type="submit" value="Markera som förlorat och meddela låntagare" />
+ [% END %]
+ </form>
+ [% ELSE %]
+ <span>Reservation på postnivå.</span>
+ [% END %]
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% ELSE %]
+ <strong>Inga exemplar hittade.</strong>
+ [% END %]
+</div>
+
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+
+<div id="filters">
+
+<form action="/cgi-bin/koha/circ/pendingreserves.pl" method="get" >
+<fieldset class="brief">
+<h4>Förfina resultat</h4>
+<ol>
+<li>
+<label for="from">
+ Startdatum: </label>
+<input type="text" size="10" id="from" name="from" value="[% from | html %]" class="flatpickr" data-date_to="to" />
+</li>
+<li><label for="to">
+ Slutdatum: </label>
+<input type="text" size="10" id="to" name="to" value="[% to | html %]" class="flatpickr" />
+</li>
+</ol>
+
+[% IF ( HoldsToPullEndDate ) %]
+ <p><em>(Inklusive, standard är [% HoldsToPullStartDate | html %] dagar sedan till [% HoldsToPullEndDate | html %] dagar framåt. Ställ in andra datumintervall efter behov.)</em></p>
+[% ELSE %]
+ <p><em>(Inklusive, standard är [% HoldsToPullStartDate | html %] dagar sedan till idag. Ställa in andra datumintervall efter behov.)</em></p>
+[% END %]
+</fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" name="run_report" type="submit" value="Skicka" />
+ </fieldset>
+</form>
+
+</div>
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        function get_options(column){
+            let regex = /(<([^>]+)>)/ig; // Remove html tags
+            let options = [... new Set(column
+                .data()
+                .toArray()
+                .map(d => d.replace(regex, '').trim().split(/\n/gi).flat())
+                .flat()
+                .sort())];
+
+            return options
+                .map(e => {
+                    return {_id: e, _str: e}
+                });
+        }
+
+        $(document).ready(function() {
+            let filters_options = {
+                [5] : (table_dt) => get_options(table_dt.column(5)),
+                [10] : (table_dt) => get_options(table_dt.column(10)),
+                [11] : (table_dt) => get_options(table_dt.column(11)),
+                [15] : (table_dt) => get_options(table_dt.column(15)),
+            };
+
+
+            var table_settings = [% TablesSettings.GetTableSettings('circ', 'holds', 'holds-to-pull', 'json') | $raw %];
+            var holdst = KohaTable("holdst", {
+                "pagingType": "full_numbers",
+                "columnDefs": [
+                    { "orderable": false, "searchable":  false, "targets": [ 'NoSort' ] },
+                ],
+            }, table_settings, true, null, filters_options);
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

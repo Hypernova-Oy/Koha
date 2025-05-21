@@ -1,0 +1,53 @@
+---
+description:
+- Kredittyper som används i Koha
+tables:
+- account_credit_types:
+    multiline: []
+    rows:
+    - can_be_added_manually: '0'
+      code: OVERPAYMENT
+      description: Återbetalning av överbetalning
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PAYMENT
+      description: Betalning
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: WRITEOFF
+      description: Avskrivning
+      is_system: '1'
+    - can_be_added_manually: '1'
+      code: FORGIVEN
+      description: Efterskänkt
+      is_system: '1'
+    - can_be_added_manually: '1'
+      code: CREDIT
+      description: Kredit
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: DISCOUNT
+      description: Rabatt tillämpad på låntagares avgifter
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: REFUND
+      description: Återbetalning
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: LOST_FOUND
+      description: Återbetalning för förlorat exemplar
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PURCHASE
+      description: Inköp
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: CANCELLATION
+      description: Annullering
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PROCESSING_FOUND
+      description: Återbetalning av hanteringsavgift för förlorat exemplar
+      is_system: '1'
+    translatable:
+    - description

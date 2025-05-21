@@ -1,0 +1,240 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("008 builder") | html %] &rsaquo;
+ [% t("Classifications") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_marc21_field_008_classifications" class="cat value_builder">
+<h1> 008 Kiinteämittaiset kentät</h1>
+
+<div class="page-section">
+ <form method="get" name="f_pop" onsubmit="report()" action="">
+ <input type="hidden" name="plugin_name" value="marc21_field_008_classifications.pl" />
+ <input name="f1" value="[% f1 | html %]" type="hidden" />
+ <table>
+ <tr>
+ <td>00-05- Luontipäivä</td>
+ <td>[% f1 | html %]</td>
+ </tr>
+ <tr>
+ <td><label for="f6">06- Tietueen laji</label></td>
+ <td>
+ <select name="f6" id="f6">
+ [% IF ( f6a ) %]
+ <option value="a" selected="selected">a- Aikataulutietue</option>
+ [% ELSE %]
+ <option value="a">a- Aikataulutietue</option>
+ [% END %]
+ [% IF ( f6b ) %]
+ <option value="b" selected="selected">b- Taulukkotietue</option>
+ [% ELSE %]
+ <option value="b">b- Taulukkotietue</option>
+ [% END %]
+ [% IF ( f6c ) %]
+ <option value="c" selected="selected">c- Hakutermitietue</option>
+ [% ELSE %]
+ <option value="c">c- Hakutermitietue</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f7">07- Numeron tyyppi</label></td>
+ <td>
+ <select name="f7" id="f7">
+ [% IF ( f7a ) %]
+ <option value="a" selected="selected">a- Yksi numero</option>
+ [% ELSE %]
+ <option value="a">a- Yksi numero</option>
+ [% END %]
+ [% IF ( f7b ) %]
+ <option value="b" selected="selected">b- Määritetty numeroväli</option>
+ [% ELSE %]
+ <option value="b">b- Määritetty numeroväli</option>
+ [% END %]
+ [% IF ( f7c ) %]
+ <option value="c" selected="selected">c- Yhteenvedon numeroväli</option>
+ [% ELSE %]
+ <option value="c">c- Yhteenvedon numeroväli</option>
+ [% END %]
+ [% IF ( f7n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n - Soveltumaton</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f8">08- Luokituksen kelpoisuus</label></td>
+ <td>
+ <select name="f8" id="f8">
+ [% IF ( f8a ) %]
+ <option value="a" selected="selected">a- Kelvollinen</option>
+ [% ELSE %]
+ <option value="a">a- Kelvollinen</option>
+ [% END %]
+ [% IF ( f8b ) %]
+ <option value="b" selected="selected">b- Numerovälin ensimmäinen numero virheellinen</option>
+ [% ELSE %]
+ <option value="b">b- Numerovälin ensimmäinen numero virheellinen</option>
+ [% END %]
+ [% IF ( f8c ) %]
+ <option value="c" selected="selected">c- Numerovälin viimeinen numero virheellinen</option>
+ [% ELSE %]
+ <option value="c">c- Numerovälin viimeinen numero virheellinen</option>
+ [% END %]
+ [% IF ( f8d ) %]
+ <option value="d" selected="selected">d- Täysin virheellinen</option>
+ [% ELSE %]
+ <option value="d">d- Täysin virheellinen</option>
+ [% END %]
+ [% IF ( f8e ) %]
+ <option value="e" selected="selected">e- Vanhentunut</option>
+ [% ELSE %]
+ <option value="e">e- Vanhentunut</option>
+ [% END %]
+ [% IF ( f8n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n - Soveltumaton</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f9">09- Standardi vai valinnainen määrite</label></td>
+ <td>
+ <select name="f9" id="f9">
+ [% IF ( f9a ) %]
+ <option value="a" selected="selected">a- Standardi</option>
+ [% ELSE %]
+ <option value="a">a- Standardi</option>
+ [% END %]
+ [% IF ( f9b ) %]
+ <option value="b" selected="selected">b- Valinnainen</option>
+ [% ELSE %]
+ <option value="b">b- Valinnainen</option>
+ [% END %]
+ [% IF ( f9n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n - Soveltumaton</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f10">10- Tietueen päivitys meneillään</label></td>
+ <td>
+ <select name="f10" id="f10">
+ [% IF ( f10a ) %]
+ <option value="a" selected="selected">a - Tietueen tietoja voidaan käyttää</option>
+ [% ELSE %]
+ <option value="a">a - Tietueen tietoja voidaan käyttää</option>
+ [% END %]
+ [% IF ( f10b ) %]
+ <option value="b" selected="selected">b- Tietuetta päivitetään parhaillaan</option>
+ [% ELSE %]
+ <option value="b">b- Tietuetta päivitetään parhaillaan</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f11">11- Vahvistamisen taso</label></td>
+ <td>
+ <select name="f11" id="f11">
+ [% IF ( f11a ) %]
+ <option value="a" selected="selected">a - Täysin vahvistettu</option>
+ [% ELSE %]
+ <option value="a">a - Täysin vahvistettu</option>
+ [% END %]
+ [% IF ( f11c ) %]
+ <option value="c" selected="selected">c- Vahvistamaton</option>
+ [% ELSE %]
+ <option value="c">c- Vahvistamaton</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f12">12- Syntetisoitu numeron indikaatio</label></td>
+ <td>
+ <select name="f12" id="f12">
+ [% IF ( f12a ) %]
+ <option value="a" selected="selected">a- Ei syntetisoitu</option>
+ [% ELSE %]
+ <option value="a">a- Ei syntetisoitu</option>
+ [% END %]
+ [% IF ( f12b ) %]
+ <option value="b" selected="selected">b- Synteettinen</option>
+ [% ELSE %]
+ <option value="b">b- Synteettinen</option>
+ [% END %]
+ [% IF ( f12n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n - Soveltumaton</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f13">13- Näytön ohjain</label></td>
+ <td>
+ <select name="f13" id="f13">
+ [% IF ( f13a ) %]
+ <option value="a" selected="selected">a- Näytetään stadardeissa aikatauluissa tai taulukoissa</option>
+ [% ELSE %]
+ <option value="a">a- Näytetään stadardeissa aikatauluissa tai taulukoissa</option>
+ [% END %]
+ [% IF ( f13b ) %]
+ <option value="b" selected="selected">b- Laajennettu näyttö</option>
+ [% ELSE %]
+ <option value="b">b- Laajennettu näyttö</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ </table>
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tallenna" />
+ <button class="btn btn-default close_window">Peruuta</button>
+ </fieldset>
+ </div>
+ </nav>
+ </form>
+</div> <!-- /.page-section -->
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        function report() {
+            var doc   = opener.document;
+            var field = doc.getElementById("[% index | html %]");
+            field.value =
+                document.f_pop.f1.value +
+                document.f_pop.f6.value +
+                document.f_pop.f7.value +
+                document.f_pop.f8.value +
+                document.f_pop.f9.value +
+                document.f_pop.f10.value +
+                document.f_pop.f11.value +
+                document.f_pop.f12.value +
+                document.f_pop.f13.value;
+            self.close();
+            return false;
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

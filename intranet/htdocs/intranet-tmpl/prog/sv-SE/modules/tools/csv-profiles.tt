@@ -1,0 +1,375 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op == 'add_form' %]
+ [% IF csv_profile %]
+ [% tx("Modify CSV profile '{csv_profile_name}'", {csv_profile_name = csv_profile.profile }) | html %] &rsaquo;
+ [% ELSE %]
+ [% t("New CSV profile") | html %] &rsaquo;
+ [% END %]
+ [% ELSIF ( op == 'delete_confirm' ) %]
+ [% tx("Confirm deletion of CSV profile '{csv_profile_name}'", {csv_profile_name = csv_profile.profile }) | html %] &rsaquo;
+ [% END %]
+ [% t("CSV profiles") | html %] &rsaquo;
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="tools_csv-profiles" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Verktyg</a>
+ [% END %]
+ [% IF op == 'add_form' || op == 'delete_confirm' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/csv-profiles.pl">CSV-profiler</a>
+ [% END %]
+ [% END %]
+ [% IF op == 'add_form' %]
+ [% IF csv_profile %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("Modify CSV profile '{csv_profile_name}'", {csv_profile_name = csv_profile.profile }) | html %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Ny CSV-profil</span>
+ [% END %]
+ [% END %]
+ [% ELSIF ( op == 'delete_confirm') %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("Confirm deletion of CSV profile '{csv_profile_name}'", {csv_profile_name = csv_profile.profile }) | html %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>CSV-profiler</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Ett fel inträffade när CSV-profilen uppdaterades. Kanske finns den redan.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Ett fel uppstod när CSV-profilen skulle läggas till.</span>
+ [% CASE 'error_on_delete' %]
+ <span>Ett fel uppstod när CSV-profilen skulle tas bort. Titta i loggarna.</span>
+ [% CASE 'success_on_update' %]
+ <span>CSV-profil har uppdaterats.</span>
+ [% CASE 'success_on_insert' %]
+ <span>CSV-profil har lagts till.</span>
+ [% CASE 'success_on_delete' %]
+ <span>CSV-profil har tagits bort.</span>
+ [% CASE 'already_exists' %]
+ <span>Den här CSV-filen finns redan.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+[% BLOCK list_separator_options %]
+ [% IF selected_separator == ',' %]
+ <option value="," selected="selected">Komma (,)</option>
+ [% ELSE %]
+ <option value=",">Komma (,)</option>
+ [% END %]
+ [% IF selected_separator == '|' %]
+ <option value="|" selected="selected">Lodstreck (|)</option>
+ [% ELSE %]
+ <option value="|">Lodstreck (|)</option>
+ [% END %]
+ [% IF selected_separator == ';' %]
+ <option value=";" selected="selected">Semikolon (;)</option>
+ [% ELSE %]
+ <option value=";">Semikolon (;)</option>
+ [% END %]
+ [% IF selected_separator == '#' %]
+ <option value="#" selected="selected">Nummertecken (#)</option>
+ [% ELSE %]
+ <option value="#">Nummertecken (#)</option>
+ [% END %]
+ [% IF selected_separator == ' ' %]
+ <option value=" " selected="selected">Mellanslag ( )</option>
+ [% ELSE %]
+ <option value=" ">Mellanslag ( )</option>
+ [% END %]
+ [% tab_char = '\t' %]
+ [% IF selected_separator == '\t' %]
+ <option value="\t" selected="selected">Tabulering ([% tab_char | html %])</option>
+ [% ELSE %]
+ <option value="\t">Tabulering ([% tab_char | html %])</option>
+ [% END %]
+ [% new_line_char = '\n' %]
+ [% IF selected_separator == '\n' %]
+ <option value="\n" selected="selected">Ny rad ([% new_line_char | html %])</option>
+ [% ELSE %]
+ <option value="\n">Ny rad ([% new_line_char | html %])</option>
+ [% END %]
+[% END %]
+
+[% BLOCK type_description %]
+ [% IF type_code == 'marc' %] <span>MARC</span>
+ [% ELSIF type_code == 'sql' %] <span>SQL</span>
+ [% ELSE %] <span>Okänd typ</span>
+ [% END %]
+[% END %]
+
+[% BLOCK used_for_description %]
+ [% IF used_for_code == 'export_records' %] <span>Exportera poster</span>
+ [% ELSIF used_for_code == 'late_issues' %] <span>Reklamation av sena nummer</span>
+ [% ELSIF used_for_code == 'late_orders' %] <span>Exportera sena beställningar</span>
+ [% ELSIF used_for_code == 'export_basket' %] <span>Korgexport i inköp</span>
+ [% ELSIF used_for_code == 'export_lost_items' %] <span>Exportera förkomna exemplar i rapport</span>
+ [% ELSE %] <span>Okänt användande</span>
+ [% END %]
+[% END %]
+
+[% IF op == 'add_form' %]
+ [% IF csv_profile %]
+ <h1>[% tx("Modify CSV profile '{csv_profile_name}'", {csv_profile_name = csv_profile.profile }) | html %]</h1>
+ [% ELSE %]
+ <h1>Ny CSV-profil</h1>
+ [% END %]
+
+ <form action="/cgi-bin/koha/tools/csv-profiles.pl" class="validated" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add_validate" />
+ <input type="hidden" name="export_format_id" value="[% csv_profile.export_format_id | html %]" />
+ <fieldset class="rows">
+ <ol>
+ [% IF csv_profile %]
+ <li><span class="label">Profil-ID: </span>[% csv_profile.export_format_id | html %]</li>
+ [% END %]
+ <li>
+ <label for="profile" class="required">Profilnamn: </label>
+ <input type="text" name="profile" id="profile" value="[% csv_profile.profile | html %]" class="required">
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="type" class="required">Profiltyp: </label>
+ <select id="type" name="type">
+ [% FOREACH type IN [ 'marc' 'sql'] %]
+ [% IF csv_profile.type == type %]
+ <option value="[% type | html %]" selected="selected">[% PROCESS type_description type_code = type %]</option>
+ [% ELSE %]
+ <option value="[% type | html %]">[% PROCESS type_description type_code = type %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li class="sql_specific">
+ <label for="used_for_sql">Användning: </label>
+ <select id="used_for_sql" name="used_for_sql">
+ [% FOREACH used_for IN [ 'late_issues' 'late_orders', 'export_basket' 'export_lost_items' ] %]
+ [% IF csv_profile.used_for == used_for %]
+ <option value="[% used_for | html %]" selected="selected">[% PROCESS used_for_description used_for_code = used_for %]</option>
+ [% ELSE %]
+ <option value="[% used_for | html %]">[% PROCESS used_for_description used_for_code = used_for %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ <li class="marc_specific">
+ <label for="used_for_marc">Användning: </label>
+ <select id="used_for_marc" name="used_for_marc">
+ [% FOREACH used_for IN [ 'export_records' ] %]
+ [% IF csv_profile.used_for == used_for %]
+ <option value="[% used_for | html %]" selected="selected">[% PROCESS used_for_description used_for_code = used_for %]</option>
+ [% ELSE %]
+ <option value="[% used_for | html %]">[% PROCESS used_for_description used_for_code = used_for %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="description">Profilbeskrivning: </label>
+ <textarea cols="50" rows="2" name="description" id="description">[% csv_profile.description | html %]</textarea>
+ </li>
+ <li>
+ <label for="csv_separator">CSV-separator: </label>
+ <select name="csv_separator" id="csv_separator">
+ [% PROCESS list_separator_options selected_separator=csv_profile.csv_separator || ',' %]
+ </select>
+ </li>
+
+ <li class="marc_specific">
+ <label for="field_separator">Fältseparator: </label>
+ <select name="field_separator" id="field_separator">
+ [% PROCESS list_separator_options selected_separator=csv_profile.field_separator || '#' %]
+ </select>
+ </li>
+
+ <li class="marc_specific"><label for="subfield_separator">Separatortecken för delfält: </label>
+ <select name="subfield_separator" id="subfield_separator">
+ [% PROCESS list_separator_options selected_separator=csv_profile.subfield_separator || '|'%]
+ </select>
+ </li>
+
+ <li class="marc_specific"><label for="encoding">Kodning: </label>
+ <select name="encoding" id="encoding">
+ [% FOREACH encoding IN encodings %]
+ [% IF csv_profile.encoding == encoding OR NOT csv_profile AND encoding == 'utf8' %]
+ <option selected="selected">[% encoding | html %]</option>
+ [% ELSE %]
+ <option>[% encoding | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li class="marc_specific">
+ <label for="staff_only">Bara tillgänglig i personalklienten: </label>
+ [% IF csv_profile.staff_only %]
+ <input type="checkbox" name="staff_only" id="staff_only" value="1" checked="checked">
+ [% ELSE %]
+ <input type="checkbox" name="staff_only" id="staff_only" value="1">
+ [% END %]
+ </li>
+
+ <li class="marc_specific">
+ <label for="marc_content" class="required">Profil för MARC-fält: </label>
+ <textarea cols="50" rows="2" name="marc_content" id="marc_content">[% csv_profile.content | html %]</textarea>
+ <span class="required">Obligatoriskt</span>
+ <p>Du måste definiera vilka fält eller delfält du vill exportera. Separera dem med lodstreck.</p>
+ <p>Du kan också använda dina egna rubriker (i stället för Kohas) genom att ange en rubrik innan fältnumret, följt av ett likhetstecken.</p>
+ <p>Exempel: Personnamn=200|Postelement=210$a|300|009</p>
+ <p>Du kan även använda mallverktygets taggar. Se hjälpsidan för mer information.</p>
+ </li>
+
+ <li class="sql_specific">
+ <label for="sql_content" class="required">Profil för SQL-fält: </label>
+ <textarea cols="50" rows="2" name="sql_content" id="sql_content">[% csv_profile.content | html %]</textarea>
+ <p>Du måste definiera vilka fält du vill exportera, separerade med lodstreck.</p>
+ <p>Du kan också använda dina egna rubriker (i stället för Kohas) genom att ange en rubrik innan fältnumret, följt av ett likhetstecken.</p>
+ <p>Exempel: Namn=subscription.name|Titel=subscription.title|Exemplarnummer=serial.serialseq</p>
+ <p>För reklamering av sena nummer kan du använda data från följande tabeller: serial, subscription, biblio, biblioitems och aqbookseller.</p>
+ <p>För kundvagnsexport kan du använda data från följande tabeller: biblio, biblioitems, aqorders, aqbudgets och aqbasket.</p>
+ <p>För att exportera sena beställningar måste du tillhandahålla en profil i Template Toolkit-syntax för att generera en CSV-fil.</p>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ <a class="cancel" href="/cgi-bin/koha/tools/csv-profiles.pl">Avbryt</a>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'delete_confirm' %]
+ <div class="alert alert-warning">
+ [% IF csv_profile %]
+ <h1>[% tx("Delete CSV profile '{csv_profile_name}'?", {csv_profile_name = csv_profile.profile }) | html %]</h1>
+ <form action="/cgi-bin/koha/tools/csv-profiles.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_confirmed" />
+ <input type="hidden" name="export_format_id" value="[% csv_profile.export_format_id | html %]" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-check" aria-hidden="true"></i> Ja, ta bort</button>
+ </form>
+ <form action="/cgi-bin/koha/tools/csv-profiles.pl" method="get">
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-remove" aria-hidden="true"></i> Nej, ta inte bort</button>
+ </form>
+ [% ELSE %] Denna CSV-profil existerar inte. [% END %] </div>
+[% END %]
+
+[% IF op == 'list' %]
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="newcsvprofile" href="/cgi-bin/koha/tools/csv-profiles.pl?op=add_form"><i class="fa fa-plus"></i> Ny CSV-profil</a>
+ </div>
+
+ <h1>CSV-profiler</h1>
+
+ [% IF csv_profiles %]
+ <div class="page-section">
+ <table id="table_csv_profiles">
+ <thead>
+ <th>ID för CSV-profil</th>
+ <th>Namn</th>
+ <th>Beskrivning</th>
+ <th>Innehåll</th>
+ <th>CSV-separator</th>
+ <th>CSV-typ</th>
+ <th>Användning</th>
+ <th class="noExport">Åtgärder</th>
+ </thead>
+ <tbody>
+ [% FOREACH csv_profile IN csv_profiles %]
+ <tr>
+ <td>[% csv_profile.export_format_id | html %]</td>
+ <td>[% csv_profile.profile | html %]</td>
+ <td>[% csv_profile.description | html %]</td>
+ <td>[% csv_profile.content | html | html_line_break %]</td>
+ <td>[% csv_profile.csv_separator | html %]</td>
+ <td>[% PROCESS type_description type_code = csv_profile.type %]</td>
+ <td>[% PROCESS used_for_description used_for_code = csv_profile.used_for %]</td>
+ <td class="actions">
+ <a href="/cgi-bin/koha/tools/csv-profiles.pl?op=add_form&amp;export_format_id=[% csv_profile.export_format_id | uri %]" class="btn btn-default btn-xs"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ <a href="/cgi-bin/koha/tools/csv-profiles.pl?op=delete_confirm&amp;export_format_id=[% csv_profile.export_format_id | uri %]" class="btn btn-default btn-xs"><i class="fa fa-trash-can"></i> Ta bort</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+ [% ELSE %] Ingen CSV-profil definierad. <a href="/cgi-bin/koha/tools/csv-profiles.pl?op=add_form">Skapa en ny CSV-profil</a>.
+ [% END %]
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ <script>
+        function reloadPage(p) {
+            var id = p.value;
+            if (id != 0) { document.location = "/cgi-bin/koha/tools/csv-profiles.pl?op=add_form&amp;export_format_id=" + id; }
+        }
+        $(document).ready(function() {
+            $("#type").change(function(){
+                if ( $(this).find("option:selected").val() == "marc" ) {
+                    $("li.marc_specific").show();
+                    $("#marc_content").attr("required", "required");
+                    $("li.sql_specific").hide();
+                    $("#sql_content").removeAttr("required");
+                } else {
+                    $("li.marc_specific").hide();
+                    $("#marc_content").removeAttr("required");
+                    $("li.sql_specific").show();
+                    $("#sql_content").attr("required", "required");
+                }
+            });
+            $("#type").change();
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,1968 @@
+[% USE raw %]
+[% USE To %]
+[% USE Asset %]
+[% USE JSON.Escape %]
+[% USE Koha %]
+[% USE Biblio %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE Categories %]
+[% USE ItemTypes %]
+[% USE AuthorisedValues %]
+[% USE Price %]
+[% USE TablesSettings %]
+[% SET reserve_input_type = 'radio' %]
+[% IF ( Koha.Preference('DisplayMultiItemHolds') ) %]
+ [% SET reserve_input_type = 'checkbox' %]
+[% END %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% SET libraries = Branches.all %]
+[% SET categories = Categories.all.unblessed %]
+[% SET columns = ['name', 'cardnumber', 'dateofbirth', 'category', 'branch', 'address', 'phone'] %]
+[% PROCESS "patron-search.inc" %]
+<title>[% FILTER collapse %]
+ [% UNLESS ( multi_hold ) %]
+ [% title_in_title = INCLUDE 'biblio-title-head.inc' %]
+ [% tx("Place a hold on {title}", { title = title_in_title }) | html %] &rsaquo;
+ [% ELSE %]
+ [% t("Confirm holds") | html %] &rsaquo;
+ [% END %]
+ [% t("Holds") | html %] &rsaquo;
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% FILTER collapse %]
+ <style>
+        a.hold-arrow {
+            display:inline-block;
+            padding:3px;
+        }
+        a.hold-arrow:link,
+        a.hold-arrow:visited {
+            color: #538200;
+        }
+
+        a.hold-arrow:hover,
+        a.hold-arrow:active{
+            color: #75b700;
+        }
+
+        .hold-arrow:hover i,
+        .hold-arrow:active i {
+            border-color: #75b700;
+        }
+
+        a.cancel-hold {
+            display:inline-block;
+            padding:3px;
+        }
+
+        a.cancel-hold:link,
+        a.cancel-hold:visited{
+            color:#c00;
+            font-size:130%
+        }
+
+        .icon-move-hold-up::before {
+            content: "\f062";
+        }
+
+        .icon-move-hold-top {
+            border-top: 2px solid #538200;
+            display: inline;
+        }
+
+        .icon-move-hold-top::before {
+            content: "\f062";
+        }
+
+        .icon-move-hold-bottom {
+            border-bottom: 2px solid #538200;
+            display: inline;
+        }
+
+        .icon-move-hold-bottom::before {
+            content: "\f063";
+        }
+
+        .icon-move-hold-down::before {
+            content: "\f063";
+        }
+
+        .icon-unset-lowest::before {
+            content: "\f050";
+        }
+
+        .icon-set-lowest::before {
+            content: "\f04e";
+        }
+        :disabled{
+            opacity:0.5
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="circ_request" class="catalog">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/catalogue/search.pl">Luettelo</a>
+ [% END %]
+ [% UNLESS ( multi_hold ) %]
+ [% WRAPPER breadcrumb_item %]
+ [% INCLUDE 'biblio-title.inc' link =1 %]
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Varaa</span>
+ [% END %]
+ [% ELSE %]
+ [% IF ( patron ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Varaa</span>
+ [% END %]
+ [% ELSE %]
+ [% IF clubcount %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Hae asiakkaita tai kerhoja</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Hae asiakkaita</span>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% END # UNLESS multi_hold %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ [% IF ( multi_hold || nobiblio ) # No sidebar menu when placing multiple holds or biblio not found %]
+ <div class="col-md-10 offset-md-1">
+ [% ELSE %]
+ <div class="col-md-10 order-md-2 order-sm-1">
+ [% END %]
+
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ <h1>Varaukset</h1>
+
+ [% IF ( nobiblio ) %]
+ <div class="alert alert-warning">
+ [%IF (multi_hold) %]
+ <strong>Ei varattavissa:</strong> tietuetta/tietueita ei ole olemassa. [% ELSE %] <strong>Ei varattavissa:</strong> tietuetta ei ole olemassa. [% END %] </div>
+ [% END %]
+ [% IF ( noitems ) %]
+ <div class="alert alert-warning">
+ [%IF (multi_hold) %]
+ <strong>Ei varattavissa:</strong> yhdellä tai useammalla tietueella ei ole niteitä. [% ELSE %] <strong>Ei varattavissa:</strong> tällä tietueella ei ole niteitä. [% END %] </div>
+ [% END %]
+
+ [% IF ( failed_holds ) %]
+ <div class="alert alert-warning">
+ <strong>Yhtä tai useampaa varausta ei tehty seuraavien virheiden vuoksi:</strong>
+ <ul>
+ [% FOREACH fail IN failed_holds %]
+ <li>
+ [% SWITCH fail %]
+ [% CASE 'damaged' %]
+ <span>Nide vaurioitunut</span>
+ [% CASE 'ageRestricted' %]
+ <span>Tietueella ja sen niteillä on ikärajoituksia</span>
+ [% CASE 'tooManyHoldsForThisRecord' %]
+ <span>Asiakkaan yhtäaikaisten varausten määrä tälle tietueelle on täynnä</span>
+ [% CASE 'tooManyReservesToday' %]
+ <span>Asiakkaan päivittäinen raja varauksille on täyttynyt</span>
+ [% CASE 'tooManyReserves' %]
+ <span>Liian monta varausta</span>
+ [% CASE 'notReservable' %]
+ <span>Ei varattavissa</span>
+ [% CASE 'cannotReserveFromOtherBranches' %]
+ <span>Tämä asiakas on toisesta kirjastosta</span>
+ [% CASE 'branchNotInHoldGroup' %]
+ <span>Asiakkaan kirjastosta ei voi tehdä varauksia</span>
+ [% CASE 'itemAlreadyOnHold' %]
+ <span>Asiakkaalla on jo varaus tähän niteeseen</span>
+ [% CASE 'cannotBeTransferred' %]
+ <span>Ei voi kuljettaa noutokirjastoon</span>
+ [% CASE 'pickupNotInHoldGroup' %]
+ <span>Valittu noutopaikka ei ole sallittu</span>
+ [% CASE 'noReservesAllowed' %]
+ <span>Nide ei ole varattavissa</span>
+ [% CASE 'libraryNotPickupLocation' %]
+ <span>Tämä kirjasto ei ole sallittu noutopaikka</span>
+ [% CASE 'no_valid_pickup_location' %]
+ <span>Ei sallittua noutopaikkaa</span>
+ [% CASE 'notforloan' %]
+ <span>Ei lainattavissa</span>
+ [% CASE 'items_available' %]
+ <span>Niteitä on saatavissa kirjastossa</span>
+ [% CASE 'not_placed' %]
+ <span>Virhe varausta tehdessä</span>
+ [% CASE %]
+ <span>Virhe: [% fail | html %]</span>
+ [% END %]
+ </li>
+ [% END %]
+ </ul>
+ </div>
+ [% END %]
+
+ [% UNLESS ( multi_hold ) %]
+ <h2>Varaa [% INCLUDE 'biblio-title.inc' link = 1 %] [% IF biblio.author %] / [% biblio.author | html %][% END %]</h2>
+ [% ELSE %]
+ <h2>
+ [% IF ( patron ) %]
+ <span>Varaa</span>
+ [% ELSE %]
+ [% IF clubcount %]
+ <span>Hae asiakkaita tai kerhoja</span>
+ [% ELSE %]
+ <span>Hae asiakkaita</span>
+ [% END %]
+ [% END %]
+ </h2>
+ [% END %]
+
+ [% UNLESS club OR patron OR patron.borrowernumber OR noitems OR nobiblio %]
+ [% IF ( messageborrower ) %]
+ <div class="alert alert-warning">
+ <h3>Asiakasta ei löytynyt</h3>
+ <p>Ei asiakasta tällä nimellä. Yritä uudelleen.</p>
+ </div>
+ [% END %]
+
+ [% IF ( messageclub ) %]
+ <div class="alert alert-warning">
+ <h3>Kerhoa ei löydy</h3>
+ <p>Ei kerhoa tällä nimellä. Yritä uudelleen.</p>
+ </div>
+ [% END %]
+ <fieldset>
+ [% UNLESS multi_hold %]
+ [% IF clubcount %]
+ <h2>Hae asiakkaita tai kerhoja</h2>
+ [% ELSE %]
+ <h2>Hae asiakkaita</h2>
+ [% END %]
+ [% END %]
+
+ [% WRAPPER tabs id= "circ_holds_select" %]
+ [% WRAPPER tabs_nav %]
+ [% WRAPPER tab_item tabname= "holds_patronsearch_pane" bt_active= 1 %] <span>Asiakkaat</span> [% END %]
+ [% IF clubcount %]
+ [% WRAPPER tab_item tabname= "holds_clubsearch_pane" %] <span>Kerhot</span> [% END %]
+ [% END %]
+ [% END # /WRAPPER tabs_nav %]
+
+ [% WRAPPER tab_panels %]
+ [% WRAPPER tab_panel tabname="holds_patronsearch_pane" bt_active= 1 %]
+ [% PROCESS patron_search_filters_simple %]
+
+ [% PROCESS patron_search_table table_id => 'table_borrowers', open_on_row_click => 1 %]
+ [% END # /tab_panel# %]
+ [% IF clubcount %]
+ [% WRAPPER tab_panel tabname="holds_clubsearch_pane" %]
+ <form id="holds_clubsearch" action="request.pl" method="get">
+ <div class="hint">Syötä kerhon ID tai osa nimestä:</div>
+ <input type="text" size="40" id="club" class="focus" name="findclub" autocomplete="off" />
+ <input type="hidden" name="form_submitted" value="1" />
+ <input class="btn btn-primary" type="submit" value="Haku" />
+ [% FOREACH biblionumber IN biblionumbers %]
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]"/>
+ [% END %]
+
+ </form> <!-- /#holds_patronsearch -->
+ [% IF clubs %]
+ [% INCLUDE 'clubs-table.inc' destination = "holds" %]
+ [% END %]
+ [% END # /tab_panel# %]
+ [% END # /IF clubcount %]
+ [% END # /WRAPPER tab_panels %]
+ [% END # /WRAPPER tabs %]
+ </fieldset>
+ [% ELSIF club %]
+ <div class="alert alert-warning visually-hidden clubalert">
+ </div>
+ <fieldset class="rows">
+ <legend>Varauksen tiedot</legend>
+ <form action="/api/v1/clubs/[% club.id | html %]/holds" method="post" name="form" id="club-request-form">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-noop" />
+
+ [% IF ( multi_hold ) %]
+ <input type="hidden" name="request" value="any"/>
+ [% FOREACH biblioloo IN biblioloop %]
+ [% UNLESS biblioloo.none_avail %]
+ <input type="hidden" name="holdable_bibs" id="holdable_bibs" value="[% biblioloo.biblionumber | html %]"/>
+ <input type="hidden" name="title_[% biblioloo.biblionumber | html %]" value="[% biblioloo.title | html %]"/>
+ <input type="hidden" name="rank_[% biblioloo.biblionumber | html %]" value="[% biblioloo.rank | html %]"/>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ <input type="hidden" name="holdable_bibs" id="holdable_bibs" value="[% biblio.biblionumber | html %]"/>
+ <input type="hidden" name="title" value="[% biblio.title | html %]" />
+ <input type="hidden" name="rank-request" value="[% fixedRank | html %]" />
+ [% END # /IF multi_hold %]
+ <ol>
+ <li>
+ <span class="label">Kerho: </span> [% club.name | html %]
+ </li>
+ <li>
+ <span class="label">Kuvaus: </span> [% club.description | html %]
+ </li>
+ <li>
+ <label for="pickup">Noutopaikka:</label>
+ <select name="pickup" id="pickup_club">
+ [% PROCESS options_for_libraries libraries => Branches.all({ selected => club.branchcode, search_params => { pickup_location => 1 } }) %]
+ </select>
+ </li>
+ <li>
+ <label for="default_patron_home">Nouto asiakkaan kotikirjastosta, kun mahdollista:</label>
+ <input type="checkbox" id="default_patron_home" name="default_patron_home"/>
+ </li>
+ </ol>
+ <h2 style="padding: 0 1em;">Jäsenet</h2>
+ <ol>
+ [% FOREACH member IN members %]
+ [% SET patron = member.patron %]
+ <li style="padding: 0.5em 1em;">
+ <div>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %]</div>
+ [% IF member.exceeded_maxreserves %]
+ <div>
+ <i class="fa fa-error"></i>
+ <strong>Liian monta varausta: </strong> Asiakas voi tehdä korkeintaan [% maxreserves | html %] varausta. </div>
+ [% END %]
+ [% IF ( patron.is_expired ) %]
+ <div>
+ <i class="fa-solid fa-triangle-exclamation"></i>
+ <strong>Kirjastokortti on vanhentunut</strong>
+ </div>
+ [% END %]
+ [% IF patron.is_debarred %]
+ <div>
+ <i class="fa-solid fa-triangle-exclamation"></i>
+ <strong>Asiakkaalla on rajoituksia</strong>
+ </div>
+ [% END %]
+ [% IF member.amount_outstanding && Koha.Preference('maxoutstanding') && member.amount_outstanding > Koha.Preference('maxoutstanding') %]
+ <div>
+ <i class="fa-solid fa-triangle-exclamation"></i>
+ <strong>Asiakkaalla on maksuja: [% member.amount_outstanding | $Price %]</strong>
+ </div>
+ [% END %]
+
+ [% IF ( member.diffbranch ) %]
+ <div>
+ <i class="fa-solid fa-triangle-exclamation"></i>
+ <strong>Noutokirjasto on jokin toinen.</strong> Asiakkaan kotikirjasto: ([% Branches.GetName(patron.branchcode) | html %] / [% patron.branchcode | html %] ) </div>
+ [% END %]
+ </li>
+ [% END %]
+ [% UNLESS ( multi_hold ) %]
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Varaa" />
+ </fieldset>
+ [% ELSE %]
+ <table id="requesttitles">
+ <tr>
+ <th>&nbsp;</th>
+ <th>Nimeke</th>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <th>Nidetyyppi</th>
+ [% END %]
+ <th>Sija jonossa</th>
+ <th>Tiedot</th>
+ </tr>
+ [% FOREACH biblioloo IN biblioloop %]
+ [% IF ( biblioloo.warn ) %]
+ <tr class="onissue">
+ [% ELSE %]
+ <tr>
+ [% END %]
+ <td>
+ [% UNLESS ( biblioloo.warn ) %]
+ <input class="multi_hold_item_checkbox" type="checkbox" checked="checked" title="[% biblioloo.biblionumber | html %]"/>
+ </td>
+ [% END %]
+ <td>
+ <ul>
+ <li>
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblioloo.biblionumber | uri %]">[% biblioloo.title | html %]</a>
+ [% IF biblioloo.author %] / [% biblioloo.author | html %][% END %] </li>
+ [% IF ( biblioloo.publicationyear ) %]
+ <li>
+ <span class="label">Julkaisuvuosi:</span> [% biblioloo.publicationyear | html %]
+ </li>
+ [% END %]
+ </ul>
+ [% IF ( biblioloo.warn ) %]
+ <span class="not_holdable" title="[% biblioloo.biblionumber | html %]"></span>
+ [% END %]
+ </td>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <td>
+ <img class="itemtype-image" src="[% biblioloo.itemtype.image_location| html %]" alt="[% biblioloo.itemtype.translated_description | html %]" title="[% biblioloo.itemtype.translated_description | html %]" />
+ </td>
+ [% END %]
+ <td>[% biblioloo.rank | html %]</td>
+ <td>
+ [% IF ( biblioloo.checked_previously ) %]
+ <span>Asiakas on lainannut tämän teoksen aiemmin</span><br/>
+ [% END %]
+ [% IF ( biblioloo.alreadyres ) %]
+ <ul>
+ [% ELSE %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <ul>
+ [% END %]
+ [% END %]
+
+ [% IF ( biblioloo.alreadyres ) %]
+ <li>
+ [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] <strong>on jo varannut</strong> tälle niteelle </li>
+ [% END %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <li> <strong>Ei niteitä saatavilla</strong> varattavaksi</li>
+ [% END %]
+
+ [% IF ( biblioloo.alreadyres ) %]
+ </ul>
+ [% ELSE %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ </ul>
+ [% END %]
+ [% END %]
+ </td>
+ </tr>
+ [% END # /FOREACH biblioloo %]
+ </table> <!-- /#requesttitles -->
+ [% END %]
+ </form>
+ </fieldset>
+ [% ELSIF NOT ( noitems || nobiblio ) # /UNLESS patron %]
+
+ [% IF ( checked_previously && !multi_hold ) %]
+ <div class="alert alert-warning">
+ <ul>
+ <li>Asiakas on lainannut tämän teoksen aiemmin</li>
+ </ul>
+ </div>
+ [% END %]
+
+ [% IF ( no_reserves_allowed || exceeded_maxreserves || exceeded_holds_per_record || alreadyreserved || none_available || alreadypossession || ageRestricted || recall ) %]
+ <div class="alert alert-warning">
+
+ [% UNLESS ( multi_hold ) %]
+ <h3>Ei varattavissa</h3>
+ <ul>
+ [% IF ( no_reserves_allowed ) %]
+ <li><strong>Ei varattavissa:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] ei voi varata mitään näistä niteistä.</li>
+ [% ELSIF ( exceeded_maxreserves ) %]
+ <li><strong>Liian monta varausta:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] voi tehdä korkeintaan [% maxreserves | html %] varausta.</li>
+ [% ELSIF ( exceeded_holds_per_record ) %]
+ <li><strong>Liian monta varausta tähän tietueeseen:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] voi tehdä korkeintaan [% max_holds_for_record | html %] varausta tähän tietueeseen.</li>
+ [% ELSIF ( alreadypossession ) %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 hide_patron_infos_if_needed => 1 %] <strong>on jo hallussaan</strong> yksi nide.</li>
+ [% ELSIF ( alreadyreserved ) %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] <strong>on jo varannut</strong> tälle niteelle.</li>
+ [% ELSIF ( ageRestricted ) %]
+ <li><strong>Ikärajoitus</strong></li>
+ [% ELSIF ( none_available ) %]
+ <li> <strong>Ei niteitä saatavilla</strong> varattavaksi.</li>
+ [% ELSIF ( maxreserves ) %]
+ <li><strong>Liian monta varausta:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] on liikaa varauksia.</li>
+ [% ELSIF ( recall ) %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] on <strong>jo tehnyt palautuspyynnön</strong> tälle niteelle.</li>
+ [% END # /IF exceeded_maxreserves %]
+ </ul>
+ [% ELSE # UNLESS multi_hold %]
+ <h3>Joidenkin niteiden varaus ei ole mahdollista</h3>
+ [% IF (no_reserves_allowed ) %]
+ <li><strong>Ei varattavissa:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] ei voi varata joitakin näiden nimekkeiden niteitä.</li>
+ [% ELSIF ( exceeded_maxreserves ) %]
+ <li><strong>Liian monta varausta:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] voi tehdä [% new_reserves_allowed | html %] varausta pyydetyistä [% new_reserves_count | html %] varauksesta [% maxreserves | html %] varausten maksimimäärästä.</li>
+ [% ELSIF ( exceeded_holds_per_record ) %]
+ [% FOREACH biblioloo IN biblioloop %]
+ [% IF (biblioloo.tooManyHoldsForThisRecord) %]
+ <li><strong>Liian monta varausta <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblioloo.biblionumber | uri %]"> [% biblioloo.title | html %]</a>:</strong> [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] voi tehdä korkeintaan [% max_holds_for_record | html %] varausta tähän tietueeseen.</li>
+ [% END %]
+ [% END %]
+ [% ELSIF ( none_available ) %]
+ <li><strong>Ei niteitä saatavilla: </strong>Yhdellä tai useammalla tietueella ei ole niteitä, joita voidaan varata</li>
+ [% END # /IF exceeded_maxreserves %]
+ [% END # /UNLESS multi_hold %]
+ </div>
+ [% END # /IF ( exceeded_maxreserves || ... %]
+
+ [% IF ( patron.is_expired || diffbranch || patron.is_debarred || ( amount_outstanding && Koha.Preference('maxoutstanding') && amount_outstanding > Koha.Preference('maxoutstanding') ) ) %]
+ <div class="alert alert-info">
+ <ul>
+ [% IF ( patron.is_expired ) %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %]: <strong>Kirjastokortti on vanhentunut</strong></li>
+ [% END %]
+
+ [% IF patron.is_debarred %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %]: <strong>Asiakkaalla on rajoituksia</strong></li>
+ [% END %]
+
+ [% IF amount_outstanding && Koha.Preference('maxoutstanding') && amount_outstanding > Koha.Preference('maxoutstanding') %]
+ <li>[% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 link_to => 'members_pay' %]: <strong>Asiakkaalla on maksuja: [% amount_outstanding | $Price %]</strong></li>
+ [% END %]
+
+ [% IF ( diffbranch ) %]
+ <li><strong>Noutokirjasto on jokin toinen. </strong>Asiakas: [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] Asiakkaan kotikirjasto: ([% Branches.GetName(patron.branchcode) | html %] / [% patron.branchcode | html %] )</li>
+ [% END %]
+ </ul> <!-- /.dialog.message -->
+ </div>
+ [% END # /IF patron.is_expired || diffbranch ... %]
+
+ [% IF ( messageborrower ) %]
+ <div class="alert alert-warning">
+ <h3>Asiakasta ei löytynyt:</h3>
+ <p>Nimeä tai viivakoodia ei löytynyt. Yritä uudelleen. </p>
+ </div>
+ [% END %]
+
+ <div class="alert alert-warning visually-hidden holdalert">
+ </div>
+
+ [% UNLESS ( multi_hold ) %]
+ <form action="placerequest.pl" method="post" name="form" id="hold-request-form">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-placerequest" />
+ <fieldset class="rows">
+ <legend>Varauksen tiedot</legend>
+
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ [% FOREACH biblionumber IN biblionumbers %]
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]"/>
+ [% END %]
+ <input type="hidden" name="holdable_bibs" id="holdable_bibs" value="[% biblio.biblionumber | html %]"/>
+ <input type="hidden" name="title" value="[% biblio.title | html %]" />
+ <input type="hidden" name="rank-request" value="[% fixedRank | html %]" />
+
+ <ol>
+ <li>
+ <span class="label">Asiakas:</span>
+ [% IF ( patron.borrowernumber ) %] [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 hide_patron_infos_if_needed => 1 %] [% ELSE %] Ei määritelty vielä [% END %] </li>
+
+ <li>
+ <span class="label">Arvioitu järjestys:</span>
+ <strong>[% fixedRank | html %]</strong>
+ </li>
+
+ <li>
+ <label for="holdnotes">Huomautukset:</label>
+ <textarea id="holdnotes" name="notes" cols="30" rows="1"></textarea>
+ </li>
+
+ [% IF Koha.Preference('AllowHoldItemTypeSelection') %]
+ <li>
+ <label for="itemtype">Pyydä tiettyä nidetyyppiä:</label>
+ <select name="itemtype" id="itemtype">
+ <option value="">Mikä tahansa nidetyyppi</option>
+ [%- FOREACH itemtype IN available_itemtypes %]
+ <option value="[% itemtype | html %]">[% ItemTypes.GetDescription( itemtype ) | html %]</option>
+ [%- END %]
+ </select>
+ </li>
+ [% END %]
+
+ [% IF ( Koha.Preference('AllowHoldDateInFuture') ) %]
+ <li>
+ <label for="from">Varauksen alkamispvm:</label>
+ <input id="reserve_date" name="reserve_date" id="from" size="10" type="text" data-date_to="expiration_date" class="flatpickr" data-flatpickr-futureinclusive="true" />
+ </li>
+ [% END %]
+
+ <li>
+ <label for="to">Varaus vanhenee:</label>
+ <input id="expiration_date" name="expiration_date" id="to" size="10" type="text" class="flatpickr" data-flatpickr-futuredate="true" />
+ </li>
+
+ <li id="non_priority_list_item">
+ <label for="non_priority">Kiireetön varaus:</label>
+ <input name="non_priority" id="non_priority" type="checkbox" />
+ <span class="hint">Kiireetön varaus ei estä nykyisen lainan uusimista</span>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="rows any_specific">
+ <legend>
+ [% IF force_hold_level == 'item' || force_hold_level == 'item_group' %]
+ <input type="radio" id="requestany" name="request" disabled="true" />
+ [% ELSIF force_hold_level == 'record' %]
+ <input type="radio" id="requestany" checked="checked" value="Any" disabled="true"/>
+ <input type="hidden" name="request" value="Any"/>
+ <span class="error"><i>(Pakollinen)</i></span>
+ [% ELSE %]
+ <input type="radio" id="requestany" name="request" checked="checked" value="Any" />
+ [% END %]
+ <label for="requestany" class="inline">
+ Varaa seuraava vapaa nide </label>
+ </legend>
+ <input type="hidden" name="alreadyreserved" value="[% alreadyreserved | html %]" />
+ <fieldset class="enable_request_any disable_request_group disable_request_specific">
+ [% IF force_hold_level == 'item' # Patron has placed a item level hold previously for this record %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Ei voi varata"></i>
+ Varaus pitää tehdä nidevarauksena </span>
+ [% ELSIF force_hold_level == 'item_group' # Patron has placed an item group level hold previously for this record %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Ei voi varata"></i>
+ Varaus pitää tehdä nideryhmään </span>
+ [% ELSE %]
+ <ol>
+
+ <li>
+ <label for="pickup">Noutopaikka:</label>
+ <select name="pickup" id="pickup-next-avail"
+                                                    data-biblio-id="[% biblio.biblionumber | html %]"
+                                                    data-patron-id="[% patron.borrowernumber | html %]"
+                                                    data-pickup-location-source="biblio">
+ [% PROCESS options_for_libraries libraries => Branches.pickup_locations({ search_params => { biblio => biblionumber, patron => patron }, selected => pickup }) %]
+ </select>
+ </li>
+
+ [% IF Koha.Preference('AllowHoldItemTypeSelection') %]
+ <li>
+ <label for="itemtype">Pyydä tiettyä nidetyyppiä:</label>
+ <select name="itemtype" id="itemtype">
+ <option value="">Mikä tahansa nidetyyppi</option>
+ [%- FOREACH itemtype IN available_itemtypes %]
+ <option value="[% itemtype | html %]">[% ItemTypes.GetDescription( itemtype ) | html %]</option>
+ [%- END %]
+ </select>
+ </li>
+ [% END %]
+ [% UNLESS remaining_holds_for_record == 1 %]
+ <li>
+ <label for="holds_to_place_count">Tee varauksia (määrä)</label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" id="holds_to_place_count" name="holds_to_place_count" value="1" />
+ </li>
+ [% ELSE %]
+ <input type="hidden" name="holds_to_place_count" value="1" />
+ [% END %]
+ </ol>
+ [% END %]
+
+
+ <fieldset class="action">
+ [% IF ( patron.borrowernumber ) %]
+ [% IF ( override_required ) %]
+ <button type="submit" id="hold_grp_btn" class="btn btn-primary warning"><i class="fa fa-exclamation-triangle "></i> Varaa</button>
+ [% ELSIF ( none_available ) %]
+ <button type="submit" id="hold_grp_btn" disabled="disabled" class="btn btn-primary btn-disabled">Varaa</button>
+ [% ELSE %]
+ <button type="submit" id="hold_grp_btn" class="btn btn-primary">Varaa</button>
+ [% END %]
+ [% END %]
+ </fieldset>
+ </fieldset>
+ </fieldset>
+
+ <hr/>
+
+ [% biblio_info = biblioloop.0 %]
+ <!-- ItemGroup level holds -->
+ [% IF Koha.Preference('EnableItemGroupHolds') && biblio_info.object.item_groups.count %]
+ <fieldset class="rows any_specific">
+ <legend>
+ [% IF force_hold_level == 'item_group' %]
+ <input type="radio" class="requestgrp" id="requestgrp" name="request" checked="checked" disabled="true" />
+ <span class="error"><i>(Pakollinen)</i></span>
+ [% ELSIF force_hold_level == 'item' || force_hold_level == 'record' %]
+ <input type="radio" class="requestgrp" id="requestgrp" name="request" disabled="true" />
+ [% ELSE %]
+ <input type="radio" class="requestgrp" id="requestgrp" name="request" />
+ [% END %]
+ <label for="requestgrp" class="inline">
+ Varaa seuraava vapaa nide nideryhmästä </label>
+ </legend>
+
+ <fieldset class="enable_request_group disable_request_any disable_request_specific">
+ [% IF force_hold_level == 'record' # Patron has placed a record level hold previously for this record %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Ei voi varata"></i>
+ Varaus pitää tehdä tietueeseen </span>
+ [% ELSIF force_hold_level == 'item' # Patron has placed an item level hold previously for this record %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Ei voi varata"></i>
+ Varaus pitää tehdä nidevarauksena </span>
+ [% ELSE %]
+ <ul>
+ <li>
+ <label for="pickup">Noutopaikka:</label>
+ <select name="pickup" id="pickup-item-group"
+                                                data-biblio-id="[% biblio.biblionumber | html %]"
+                                                data-patron-id="[% patron.borrowernumber | html %]"
+                                                data-pickup-location-source="biblio">
+ [% PROCESS options_for_libraries libraries => Branches.pickup_locations({ search_params => { biblio => biblionumber, patron => patron }, selected => pickup }) %]
+ </select>
+ </li>
+ <li>
+ <table id="requestgroup">
+ <thead>
+ <tr>
+ <th>Varaus</th>
+ <th>Nideryhmä</th>
+ <th>Varattavissa olevat niteet</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH g IN biblio_info.object.item_groups.search({}, { order_by => ['display_order'] }) %]
+ [% IF g.items.count %]
+ <tr>
+ <td>
+ <input id="item_group_id_[% g.id | html %]" class="requestgrp" type="radio" name="item_group_id" value="[% g.id | html %]" />
+ </td>
+ <td>
+ <label for="item_group_id_[% g.id | html %]">[% g.description | html %]</label>
+ </td>
+ <td>
+ [% FOREACH i IN g.items %]
+ <div><a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% i.biblionumber | uri %]#item[% i.itemnumber | uri %]">[% i.barcode | html %]</a></div>
+ [% END %]
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>
+ <input id="item_group_id_[% g.id | html %]" class="requestgrp" type="radio" name="item_group_id" value="[% g.id | html %]" disabled="disabled" />
+ </td>
+ <td>
+ <label for="item_group_id_[% g.id | html %]">[% g.description | html %]</label>
+ </td>
+ <td>
+ <div class="error">Ei varattavissa olevia niteitä tässä nideryhmässä.</div>
+ </td>
+ </tr>
+ [% END %]
+ [% END %]
+ </tbody>
+ </table>
+ </li>
+ </ul>
+ [% END %]
+ <fieldset class="action">
+ [% IF ( patron.borrowernumber ) %]
+ [% IF ( override_required ) %]
+ <button type="submit" id="hold_any_btn" class="btn btn-primary warning"><i class="fa fa-exclamation-triangle "></i> Varaa</button>
+ [% ELSIF ( none_available ) %]
+ <button type="submit" id="hold_any_btn" disabled="disabled" class="btn btn-primary btn-disabled">Varaa</button>
+ [% ELSE %]
+ <button type="submit" id="hold_any_btn" class="btn btn-primary">Varaa</button>
+ [% END %]
+ [% END %]
+ </fieldset>
+ </fieldset>
+ </fieldset>
+ [% END %]
+ <!-- /ItemGroup level holds -->
+
+ <fieldset class="rows any_specific">
+ <legend>
+ [% IF force_hold_level == 'item' %]
+ <input type="radio" id="requestspecificitem" name="request" class="requestspecific" checked="checked" disabled='disabled'/>
+ <span class="error"><em>(Pakollinen)</em></span>
+ [% ELSIF force_hold_level == 'record' || force_hold_level == 'item_group' %]
+ <input type="radio" id="requestspecificitem" name="request" class="requestspecific" disabled='disabled'/>
+ [% ELSE %]
+ <input type="radio" id="requestspecificitem" name="request" class="requestspecific"/>
+ [% END %]
+ <label for="requestspecificitem" class="inline">
+ Varaa tietty nide </label>
+ </legend>
+
+ <fieldset class="enable_request_specific disable_request_any disable_request_group">
+ <ol>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <li>
+ <span class="label">Nidetyyppi:</span>
+ [% biblio_info.itemtype.translated_description | html %]
+ </li>
+ [% END %]
+
+ [% IF ( biblio_info.biblioitem.publicationyear ) %]
+ <li>
+ <span class="label">Julkaisuvuosi:</span>
+ [% biblio_info.biblioitem.publicationyear | html %]
+ </li>
+ [% END %]
+ </ol>
+
+ <table id="requestspecific">
+ <thead>
+ <tr>
+ <th>Varaus</th>
+ <th>Sallitut noutopaikat</th>
+ [% IF Koha.Preference('item-level_itypes') %]
+ <th>Nidetyyppi</th>
+ [% END %]
+ <th>Viivakoodi</th>
+ [% IF Koha.Preference('EnableItemGroupHolds') && biblio_info.object.item_groups.count %]
+ <th>Nideryhmä</th>
+ [% END %]
+ <th>Kotikirjasto</th>
+ <th>Viimeisin havainto</th>
+ [% IF itemdata_ccode %]
+ <th>Kokoelma</th>
+ [% END %]
+ <th>Luokka</th>
+ <th>Nidenumero</th>
+ [% IF itemdata_enumchron %]
+ <th>Nro.</th>
+ [% END %]
+ <th>Tiedot</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% SET selected = 0 %]
+ [% FOREACH itemloo IN biblio_info.itemloop %]
+ [% UNLESS ( itemloo.hide ) %]
+ <tr class="[% itemloo.backgroundcolor | html %]">
+ <td>
+ [% IF force_hold_level == 'record' # Patron has placed a record level hold previously for this record %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Ei voi varata"></i>
+ Varaus pitää tehdä tietueeseen </span>
+ [% ELSIF force_hold_level == 'item_group' %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Ei voi varata"></i>
+ Varaus pitää tehdä nideryhmään </span>
+ [% ELSIF ( itemloo.available ) %]
+ <input type="[% reserve_input_type | html %]" name="checkitem" class="requestspecific" value="[% itemloo.itemnumber | html %]" />
+ [% ELSIF ( itemloo.override ) %]
+ <input type="[% reserve_input_type | html %]" name="checkitem" class="needsoverride requestspecific" value="[% itemloo.itemnumber | html %]" />
+ <i class="fa fa-exclamation-triangle fa-lg" style="color:gold" title="Vaatii varaussäännön ohittamista" /></i>
+ [% ELSE %]
+ <span class="error">
+ <i class="fa fa-times fa-lg" title="Ei voi varata"></i>
+ [% IF itemloo.not_holdable %]
+ [% IF itemloo.not_holdable == 'damaged' %]
+ <span>Nide vaurioitunut</span>
+ [% ELSIF itemloo.not_holdable == 'ageRestricted' %]
+ <span>Ikärajoitus</span>
+ [% ELSIF itemloo.not_holdable == 'tooManyHoldsForThisRecord' %]
+ <span>Varausten maksimimäärä tietuetta kohden ylittynyt</span>
+ [% ELSIF itemloo.not_holdable == 'tooManyReservesToday' %]
+ <span>Asiakkaan päivittäinen varausraja on täyttynyt</span>
+ [% ELSIF itemloo.not_holdable == 'tooManyReserves' %]
+ <span>Liian monta varausta</span>
+ [% ELSIF itemloo.not_holdable == 'notReservable' %]
+ <span>Ei varattavissa</span>
+ [% ELSIF itemloo.not_holdable == 'cannotReserveFromOtherBranches' %]
+ <span>Tämä asiakas on toisesta kirjastosta</span>
+ [% ELSIF itemloo.not_holdable == 'branchNotInHoldGroup' %]
+ <span>Asiakkaan kirjasto ei voi tehdä varauksia</span>
+ [% ELSIF itemloo.not_holdable == 'itemAlreadyOnHold' %]
+ <span>Asiakkaalla on jo varaus tähän niteeseen</span>
+ [% ELSIF itemloo.not_holdable == 'cannotBeTransferred' %]
+ <span>Ei voi kuljettaa noutokirjastoon</span>
+ [% ELSIF itemloo.not_holdable == 'pickupNotInHoldGroup' %]
+ <span>Vain saman varausryhmän noutopaikka on sallittu</span>
+ [% ELSIF itemloo.not_holdable == 'noReservesAllowed' %]
+ <span>Ei varattavissa</span>
+ [% ELSIF itemloo.not_holdable == 'libraryNotPickupLocation' %]
+ <span>Tämä kirjasto ei ole sallittu noutopaikka</span>
+ [% ELSIF itemloo.not_holdable == 'no_valid_pickup_location' %]
+ <span>Ei sallittua noutopaikkaa</span>
+ [% ELSIF itemloo.not_holdable == 'notforloan' %]
+ <span>Ei lainattavissa</span>
+ [% ELSE %]
+ <span>[% itemloo.not_holdable | html %]</span>
+ [% END %]
+ [% END %]
+ </span>
+ [% END # /IF force_hold_level %]
+ </td>
+ <td>
+ [% IF (itemloo.pickup_locations_count > 0) || Koha.Preference('AllowHoldPolicyOverride') %]
+ <select name="item_pickup_[% itemloo.itemnumber | html %]" class="pickup_locations requestspecific" style="width:100%;"
+                                                                data-item-id="[% itemloo.itemnumber | html %]"
+                                                                data-patron-id="[% patron.borrowernumber | html %]"
+                                                                data-pickup-location-source="item">
+ [% IF (itemloo.default_pickup_location) %]
+ <option value="[% itemloo.default_pickup_location.branchcode | html %]" selected="selected">[% itemloo.default_pickup_location.branchname | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </td>
+ [% IF Koha.Preference('item-level_itypes') %]
+ <td>
+ [% UNLESS ( noItemTypeImages ) %]
+ [% IF ( itemloo.itemtype.image_location) %]<img class="itemtype-image" src="[% itemloo.itemtype.image_location | html %]" alt="" /> <br /> [% END %]
+ [% END %]
+ <span class="itypetext">[% itemloo.itemtype.translated_description | html %]</span>
+ </td>
+ [% END %]
+ <td>
+ [% itemloo.barcode | html %]
+ </td>
+ [% IF Koha.Preference('EnableItemGroupHolds') && biblio_info.object.item_groups.count %]
+ <td>
+ [% itemloo.object.item_group.description | html %]
+ </td>
+ [% END %]
+ <td>
+ [% Branches.GetName( itemloo.homebranch ) | html %]
+ </td>
+ <td>
+ [% Branches.GetName( itemloo.holdingbranch ) | html %]
+ </td>
+ [% IF itemdata_ccode %]
+ <td>
+ [% IF ( itemloo.ccode ) %][% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.ccode', authorised_value => itemloo.ccode ) | html %][% END %]
+ </td>
+ [% END %]
+ <td>
+ [% itemloo.itemcallnumber | html %]
+ </td>
+ <td>
+ [% IF ( itemloo.copynumber ) %][% itemloo.copynumber | html %][% ELSE %]&nbsp;[% END %]
+ </td>
+ [% IF itemdata_enumchron %]
+ <td>
+ [% itemloo.enumchron | html %]
+ </td>
+ [% END %]
+ [% IF ( itemloo.onloan ) %]
+ <td data-order="[% itemloo.date_due | html %]">
+ <span class="checkedout">Eräpäivä [% itemloo.date_due | $KohaDates as_due_date => 1 %]</span>
+ [% ELSE %]
+ <td>
+ [% IF ( itemloo.transfertwhen ) %]
+ <span>Kuljetettavana kirjastosta [% Branches.GetName( itemloo.transfertfrom ) | html %] kirjastoon [% Branches.GetName( itemloo.transfertto ) | html %] lähtien [% itemloo.transfertwhen | $KohaDates %].</span>
+ [% END %]
+ [% END %]
+
+ [% IF ( itemloo.reservedate ) %]
+ [% IF ( itemloo.nocancel ) %]
+ <span>Varausta ei voi peruuttaa kuljetuksen aikana</span>
+ [% ELSE %]
+ [% IF ( itemloo.waitingdate ) %]
+ [% IF ( itemloo.canreservefromotherbranches ) %]
+ <span>Odottaa asiakasta [% INCLUDE 'patron-title.inc' patron=itemloo.ReservedFor %] kirjastossa [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %] lähtien [% itemloo.waitingdate | $KohaDates %]</span>
+ [% ELSE %]
+ <span>Odottaa kirjastossa [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %] lähtien [% itemloo.waitingdate | $KohaDates %]</span>
+ [% END %]
+ [% ELSE %]
+ [% IF ( itemloo.canreservefromotherbranches ) %]
+ [% IF itemloo.reservedate %]
+ <span>Varattuna asiakkaalle [% INCLUDE 'patron-title.inc' patron=itemloo.ReservedFor %] kirjastossa [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %] lähtien</span>
+ [% ELSE %]
+ <span>Varausta odotetaan kirjastossa [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %]</span>
+ [% END %]
+ [% ELSIF itemloo.reservedate %]
+ <span>Varausta odotetaan kirjastossa [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %] lähtien [% itemloo.reservedate | $KohaDates %]</span>
+ [% ELSE %]
+ <span>Varausta odotetaan kirjastossa [% Branches.GetName( itemloo.ExpectedAtLibrary ) | html %]</span>
+ [% END %] [% END %] [% END # /IF itemloo.nocancel %] [% ELSE %] Niteeseen ei kohdistu varauksia [% END # /IF itemloo.reservedate %] [% IF itemloo.item_level_holds == "N" %] <br/>Nidevaraukset eivät ole sallittuja verkkokirjastossa [% ELSIF itemloo.item_level_holds == "F" %] <br/>Verkkokirjastossa voi tehdä vain nidevarauksia [% END %] [% IF ( itemloo.itemlost ) %] <span class="lost">[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.itemlost', authorised_value => itemloo.itemlost ) | html %]</span>
+ [% END %]
+
+ [% IF ( itemloo.damaged ) %]
+ <span class="dmg">[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.damaged', authorised_value => itemloo.damaged ) | html %]</span>
+ [% END %]
+
+ [% IF ( itemloo.withdrawn ) %]
+ <span class="wdn">[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.withdrawn', authorised_value => itemloo.withdrawn ) | html %]</span>
+ [% END %]
+
+ [% IF ( itemloo.notforloan ) %]
+ <span class="nfl">Ei lainata ([% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => itemloo.notforloan ) | html %])</span>
+ [% ELSIF ( itemloo.notforloanitype ) %]
+ <span class="nfl">Ei lainattavissa (Nidetyyppi ei ole lainattavissa)</span>
+ [% END %]
+ </td>
+ </tr>
+ [% END # / UNLESS itemloo.hide %]
+ [% END # /FOREACH itemloo %]
+ </tbody>
+ </table> <!-- /#requestspecific -->
+
+ [% IF hiddencount %]
+ <p class="hiddencount">
+ <a href="request.pl?biblionumber=[% biblio_info.biblionumber | uri %]&amp;borrowernumber=[% borrowernumber | uri %]&amp;showallitems=1">Näytä kaikki ([% hiddencount | html %] piilotettu)</a>
+ </p>
+ [% END # /IF hiddencount %]
+ <fieldset class="action">
+ [% IF ( patron.borrowernumber ) %]
+ [% IF ( override_required ) %]
+ <button type="submit" id="hold_item_btn" class="btn btn-primary warning"><i class="fa fa-exclamation-triangle "></i> Varaa</button>
+ [% ELSIF ( none_available ) %]
+ <button type="submit" id="hold_item_btn" disabled="disabled" class="btn btn-primary btn-disabled">Varaa</button>
+ [% ELSE %]
+ <button type="submit" id="hold_item_btn" class="btn btn-primary">Varaa</button>
+ [% END %]
+ [% END %]
+ </fieldset>
+
+ [% ELSE # /UNLESS multi_hold %]
+ <fieldset class="rows">
+ <legend>Varauksen tiedot</legend>
+ <form action="placerequest.pl" method="post" name="form" id="hold-request-form">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-placerequest" />
+ <input type="hidden" name="multi_holds" id="multi_holds" value="1" />
+ <input type="hidden" name="request" value="any"/>
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ [% FOREACH biblioloo IN biblioloop %]
+ <input type="hidden" name="biblionumber" id="biblionumber" value="[% biblioloo.biblionumber | html %]"/>
+ [% UNLESS biblioloo.none_avail %]
+ <input type="hidden" name="title_[% biblioloo.biblionumber | html %]" value="[% biblioloo.title | html %]"/>
+ <input type="hidden" name="rank_[% biblioloo.biblionumber | html %]" value="[% biblioloo.rank | html %]"/>
+ [% END %]
+ [% END %]
+
+ <ol>
+
+ <li>
+ <span class="label">Asiakas:</span>
+ [% IF ( patron.borrowernumber ) %] [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 hide_patron_infos_if_needed => 1 %] [% ELSE %] Ei määritelty vielä [% END %] </li>
+
+
+ <li>
+ <label for="holdnotes">Huomautukset:</label>
+ <textarea id="holdnotes" name="notes" cols="30" rows="1"></textarea>
+ </li>
+ <li>
+ <label for="pickup">Noutopaikka:</label>
+ <select name="pickup" id="pickup_multi" data-patron-id="[% patron.borrowernumber | html %]">
+ <option value="" selected="selected"></option>
+ [% FOREACH pickup_location IN multi_pickup_locations %]
+ <option value="[% pickup_location.branchcode | html %]">[% pickup_location.branchname | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ [% IF ( Koha.Preference('AllowHoldDateInFuture') ) %]
+ <li>
+ <label for="from">Varauksen alkamispvm:</label>
+ <input id="reserve_date" name="reserve_date" id="from" size="10" type="text" data-date_to="expiration_date" class="flatpickr" data-flatpickr-futureinclusive="true" />
+ </li>
+ [% END %]
+
+ <li>
+ <label for="to">Varaus vanhenee:</label>
+ <input id="expiration_date" name="expiration_date" id="to" size="10" type="text" class="flatpickr" data-flatpickr-futuredate="true" />
+ </li>
+
+ </ol>
+ <table id="requesttitles">
+ <tr>
+ <th>&nbsp;</th>
+ <th>Noutopiste</th>
+ <th>Nimeke</th>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <th>Nidetyyppi</th>
+ [% END %]
+ <th>Sija jonossa</th>
+ <th>Tiedot</th>
+ </tr>
+ [% FOREACH biblioloo IN biblioloop %]
+ [% IF ( biblioloo.warn ) %]
+ <tr class="onissue">
+ [% ELSE %]
+ <tr>
+ [% END %]
+ <td>
+ [% UNLESS ( biblioloo.warn ) %]
+ <input id="holdable_bibs" name="holdable_bibs" class="multi_hold_item_checkbox" type="checkbox" checked="checked" title="[% biblioloo.biblionumber | html %]" value="[% biblioloo.biblionumber | html %]"/>
+ [% END %]
+ </td>
+ <td>
+ [% UNLESS ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <select name="pickup_[% biblioloo.biblionumber | html %]"
+                                                                class="multi_pickup_select"
+                                                                data-biblio-id="[% biblioloo.biblionumber | html %]"
+                                                                data-patron-id="[% patron.borrowernumber | html %]"
+                                                                data-pickup-locations='[% biblioloo.pickup_locations_codes.json | $raw %]'>
+ <option value=""></option>
+ [% FOREACH pickup_location IN biblioloo.pickup_locations %]
+ <option value="[% pickup_location.branchcode | html %]">[% pickup_location.branchname | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </td>
+ <td>
+ <ul>
+ <li>
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblioloo.biblionumber | uri %]">[% biblioloo.title | html %]</a>
+ [% IF biblioloo.author %] / [% biblioloo.author | html %][% END %] </li>
+ [% IF ( biblioloo.publicationyear ) %]
+ <li>
+ <span class="label">Julkaisuvuosi:</span> [% biblioloo.publicationyear | html %]
+ </li>
+ [% END %]
+ </ul>
+ [% IF ( biblioloo.warn ) %]
+ <span class="not_holdable" title="[% biblioloo.biblionumber | html %]"></span>
+ [% END %]
+ </td>
+ [% UNLESS Koha.Preference('item-level_itypes') %]
+ <td>
+ <img src="[% biblioloo.itemtype.image_location | html %]" alt="[% biblioloo.itemtype.translated_description | html %]" title="[% biblioloo.itemtype.translated_description | html %]" />
+ </td>
+ [% END %]
+ <td>[% biblioloo.rank | html %]</td>
+ <td>
+ [% IF ( biblioloo.checked_previously ) %]
+ <span>Asiakas on lainannut tämän teoksen aiemmin</span><br/>
+ [% END %]
+ [% IF ( biblioloo.alreadyres ) %]
+ <ul>
+ [% ELSE %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <ul>
+ [% END %]
+ [% END %]
+
+ [% IF ( biblioloo.alreadyres ) %]
+ <li>
+ [% INCLUDE 'patron-title.inc' patron => patron no_title => 1 no_cardnumber => 1 hide_patron_infos_if_needed => 1 %] <strong>on jo varannut</strong> tälle niteelle </li>
+ [% END %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ <li> <strong>Ei niteitä saatavilla</strong> varattavaksi</li>
+ [% END %]
+
+ [% IF ( biblioloo.alreadyres ) %]
+ </ul>
+ [% ELSE %]
+ [% IF ( biblioloo.none_avail || biblioloo.noitems ) %]
+ </ul>
+ [% END %]
+ [% END %]
+ </td>
+ </tr>
+ [% END # /FOREACH biblioloo %]
+ </table> <!-- /#requesttitles -->
+ </fieldset>
+ <fieldset class="action">
+ [% IF ( patron AND patron.borrowernumber ) %]
+ [% IF ( override_required ) %]
+ <button type="submit" id="hold_multi_btn" class="btn btn-primary warning"><i class="fa fa-exclamation-triangle "></i> Varaa</button>
+ [% ELSIF ( no_bibs_available ) %]
+ <button type="submit" id="hold_multi_btn" class="btn btn-primary btn-disabled" disabled="disabled">Varaa</button>
+ [% ELSIF ( none_available ) %]
+ <button type="submit" id="hold_multi_btn" class="btn btn-primary">Varaa</button>
+ [% ELSE %]
+ <button type="submit" id="hold_multi_btn" class="btn btn-primary" id="multi_hold_submit">Varaa</button>
+ [% END %]
+ [% END # /IF patron %]
+ </fieldset> <!-- /.action -->
+
+ [% END # /UNLESS multi_hold %]
+
+ </fieldset>
+ </fieldset> <!-- /.rows -->
+ </form> <!-- /#hold-request-form -->
+ [% END %]
+
+ [% UNLESS ( patron ) %]
+ [% UNLESS borrowers %]
+ [% SET hold_count = biblio.holds.count | html %]
+ [% IF hold_count %]
+ <label for ="always_show_holds">Näytä aina varaukset</label>
+ [% IF always_show_holds == 'DONT' %]
+ <input type="checkbox" name="always_show_holds" id="always_show_holds" value="DO">
+ [% UNLESS reserveloop %]
+ <a class="btn btn-default" value="Show holds" id="show_holds_now" href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% biblio.biblionumber | uri %]&show_holds_now=1">Näytä varaukset ([% hold_count | html %])</a>
+ [% END %]
+ [% ELSE %]
+ <input type="checkbox" name="always_show_holds" value="DO" id="always_show_holds" checked="checked">
+ [% END %]
+ [% END %]
+ [% END %]
+ [% IF ( reserveloop ) %]
+ <form id="existing_holds" name="T[% time | html %]" action="modrequest.pl" method="post" style="display:block">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% IF ( multi_hold ) %]
+ [% FOREACH biblionumber IN biblionumbers %]
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]"/>
+ [% END %]
+ [% END %]
+
+ [% IF enqueued %]
+ <div class="alert alert-info">
+ <p>Työ on jonossa! Se käsitellään niin pian kuin mahdollista.</p>
+ <p><a href="/cgi-bin/koha/admin/background_jobs.pl?op=view&id=[% job_id | uri %]" title="Tarkastele jonossa olevan työn tietoja">Tarkastele jonossa olevan työn tietoja</a></p>
+ </div>
+ [% END %]
+
+ <h2>Olemassa olevat varaukset</h2>
+ <div id="toolbar" class="btn-toolbar sticky">
+ <div class="btn-group">
+ <input type="hidden" name="op" value="cud-modifyall">
+ <input class="btn btn-primary" name="submit" type="submit" value="Päivitä varaukset" />
+ </div>
+ <div class="btn-group">
+ <button class="btn cancel_selected_holds" data-bulk="true"></button>
+ </div>
+ <fieldset id="cancellation-reason-fieldset" class="action" style="display:none">
+ [% SET hold_cancellation = AuthorisedValues.GetAuthValueDropbox('HOLD_CANCELLATION') %]
+ [% IF hold_cancellation.count %]
+ <label for="cancellation-reason">Peruutuksen syy: </label>
+ <select class="cancellation-reason" name="cancellation-reason" id="cancellation-reason">
+ <option value="">Syytä ei annettu</option>
+ [% FOREACH reason IN hold_cancellation %]
+ <option value="[% reason.authorised_value | html %]">[% reason.lib | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </fieldset>
+ </div>
+ <div class="page-section">
+
+ [% FOREACH biblioloo IN biblioloop %]
+ [% IF ( biblioloo.reserveloop ) %]
+ <div class="hold_title" id="hold_title_[% biblioloo.biblionumber | html %]">
+ [% IF ( multi_hold ) %]
+ <h3>
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblioloo.biblionumber | uri %]">
+ [% biblioloo.title | html %]
+ </a> <span class="badge text-bg-info"><span>[% biblioloo.reserveloop.size | html %] [% tn('Hold', 'Holds', biblioloo.reserveloop.size) | $raw %]</span></span>
+ </h3>
+ [% END %]
+
+ [% IF Koha.Preference('HoldsSplitQueue') == 'branch' %]
+
+ [% SET branchcodes = [] %]
+
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% branchcodes.push( h.branchcode ) %]
+ [% END %]
+ [% branchcodes = branchcodes.unique %]
+ [% IF ( branchcodes.empty ) %]
+ <div class="alert alert-info">
+ Tällä nimekkeellä ei ole varauksia. </div>
+ [% ELSE %]
+
+ [% FOREACH b IN branchcodes.sort %]
+ [% SET holds_by_branch = [] %]
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% IF h.branchcode == b %]
+ [% holds_by_branch.push( h ) %]
+ [% END %]
+ [% END %]
+ <div class="holds_by_library">
+ <h4>[% Branches.GetName( b ) | html %]</h4>
+
+ [% INCLUDE holds_table.inc holds=holds_by_branch %]
+ </div>
+ [% END # /FOREACh b %]
+ [% END # /IF ( branchcodes.empty ) %]
+
+ [% ELSIF Koha.Preference('HoldsSplitQueue') == 'itemtype' %]
+
+ [% SET itemtypes = [] %]
+
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% SET hold_itemtype = h.object.item.effective_itemtype || h.itemtype %]
+ [% itemtypes.push( hold_itemtype ) %]
+ [% END %]
+ [% itemtypes = itemtypes.unique %]
+ [% IF ( itemtypes.empty ) %]
+ <div class="alert alert-info">
+ Tällä nimekkeellä ei ole varauksia. </div>
+ [% ELSE %]
+
+ [% FOREACH i IN itemtypes.sort %]
+ [% SET holds_by_itemtype = [] %]
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% SET hold_itemtype = h.object.item.effective_itemtype || h.itemtype %]
+ [% IF hold_itemtype == i %]
+ [% holds_by_itemtype.push( h ) %]
+ [% END %]
+ [% END %]
+
+ <div class="holds_by_itemtype">
+ [% IF i %]
+ <h4>[% ItemTypes.GetDescription( i ) | html %]</h4>
+ [% ELSE %]
+ <h4>Mikä tahansa nidetyyppi</h4>
+ [% END %]
+ [% INCLUDE holds_table.inc holds=holds_by_itemtype %]
+ </div>
+ [% END # /FOREACH i %]
+ [% END # /IF ( itemtypes.empty ) %]
+
+ [% ELSIF Koha.Preference('HoldsSplitQueue') == 'branch_itemtype' %]
+ [% SET branchcodes = [] %]
+
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% branchcodes.push( h.branchcode ) %]
+ [% END %]
+ [% branchcodes = branchcodes.unique %]
+ [% IF ( branchcodes.empty ) %]
+ <div class="alert alert-info">
+ Tällä nimekkeellä ei ole varauksia. </div>
+ [% ELSE %]
+
+ [% FOREACH b IN branchcodes.sort %]
+ <div class="holds_by_library">
+ <h4 class="library_holds">[% Branches.GetName( b ) | html %]</h4>
+ [% SET holds_by_branch = [] %]
+ [% FOREACH h IN biblioloo.reserveloop %]
+ [% IF h.branchcode == b %]
+ [% holds_by_branch.push( h ) %]
+ [% END %]
+ [% END %]
+
+ [% SET itemtypes = [] %]
+ [% FOREACH h IN holds_by_branch %]
+ [% SET hold_itemtype = h.object.item.effective_itemtype || h.itemtype %]
+ [% itemtypes.push( hold_itemtype ) %]
+ [% END %]
+ [% itemtypes = itemtypes.unique %]
+
+ [% FOREACH i IN itemtypes.sort %]
+ <div class="holds_by_itemtype">
+ <h5 class="itemtype_holds">
+ [% IF i %]
+ [% ItemTypes.GetDescription( i ) | html %]
+ [% ELSE %]
+ <span>Mikä tahansa nidetyyppi</span>
+ [% END %]
+ </h5>
+
+ [% SET holds_by_itemtype = [] %]
+ [% FOREACH h IN holds_by_branch %]
+ [% SET hold_itemtype = h.object.item.effective_itemtype || h.itemtype %]
+ [% IF hold_itemtype == i %]
+ [% holds_by_itemtype.push( h ) %]
+ [% END %]
+ [% END %]
+ [% INCLUDE holds_table.inc holds=holds_by_itemtype %]
+ </div> <!-- /.holds_by_itemtype -->
+ [% END %]
+ </div> <!-- /.holds_by_library -->
+ [% END # /FOREACH b %]
+ [% END # /IF ( branchcodes.empty ) %]
+
+ [% ELSE %]
+
+ [% IF ( biblioloo.reserveloop.size ) %]
+ [% INCLUDE holds_table.inc holds=biblioloo.reserveloop %]
+ [% ELSE %]
+ <div class="alert alert-info">
+ Tällä nimekkeellä ei ole varauksia. </div>
+ [% END %]
+
+ [% END # /IF HoldsSplitQueue %]
+ </div> <!-- /hold_title -->
+ [% END # /IF biblioloo.reserveloop %]
+ [% END # FOREACH biblioloo %]
+ </div>
+ </form> <!-- /#existing_holds -->
+ [% END # IF reserveloop %]
+ [% END # UNLESS patron %]
+
+ </main>
+
+ [% IF ( multi_hold || nobiblio ) # No sidebar menu when placing multiple holds or biblio not found %]
+ </div> <!-- /.col-md-10.offset-md-1 -->
+ [% ELSE %]
+ </div> <!-- /.col-md-10.order-md-2 -->
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'biblio-view-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ [% END %]
+ </div> <!-- /.row -->
+
+ <div id="cancelModal" class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title">Vahvista poisto</h1>
+ <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+
+ <form id="cancel_modal_form" method="post" action="request.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <div id="inputs">
+ <input type="hidden" name="op" value="cud-cancel">
+ </div>
+
+ <div class="modal-body">
+ <p>Haluatko varmasti peruuttaa tämän varauksen?</p>
+ <div id="cancel_hold_alert" class="alert alert-danger" style="display:none;"></div>
+ <fieldset class="action">
+ [% SET hold_cancellation = AuthorisedValues.GetAuthValueDropbox('HOLD_CANCELLATION') %]
+ [% IF hold_cancellation.count %]
+ <label for="modal-cancellation-reason">Peruutuksen syy: </label>
+ <select class="cancellation-reason" name="cancellation-reason" id="modal-cancellation-reason">
+ <option value="">Syytä ei annettu</option>
+ [% FOREACH reason IN hold_cancellation %]
+ <option value="[% reason.authorised_value | html %]">[% reason.lib | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </fieldset>
+ </div>
+
+ <div class="modal-footer">
+ <button id="cancelModalConfirmBtn" type="submit" class="btn btn-danger">Vahvista poisto</button>
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Peruuta</button>
+ </div>
+
+ </form>
+
+ </div>
+ </div>
+ </div>
+ <div id="hold-actions">
+ <form id="hold-actions-form">
+ [% INCLUDE 'csrf-token.inc' %]
+ </form>
+ </div>
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'select2.inc' %]
+ [% Asset.js("js/holds.js") | $raw%]
+ [% Asset.js("js/form-submit.js") | $raw%]
+
+ [% SET url_biblio_params = "biblionumber=" _ biblionumbers.join("&amp;biblionumber=") %]
+ [% IF multi_hold %]
+ [% SET url_biblio_params = url_biblio_params _ "&amp;multi_hold=1" %]
+ [% END %]
+
+ <script>
+        $(document).ready(function () {
+            hold_table_settings = [% TablesSettings.GetTableSettings( 'circ', 'holds', 'patron_holds_table', 'json' ) | $raw %];
+            KohaTable("patron_holds_table", {
+                "bPaginate":false,
+                "bKohaColumnsUseNames": true,
+           }, hold_table_settings);
+        });
+        var biblionumbers = [[% biblionumbers.join(', ') | $raw %]];
+        var borrowernumber = "[% patron.borrowernumber | $raw %]";
+        var patron_homebranch = "[% To.json( Branches.GetName( patron.branchcode ) ) | $raw %]";
+        var override_items = {[% FOREACH biblio_info IN biblioloop %][% FOREACH itemloo IN biblio_info.itemloop %][% IF ( itemloo.override ) %]
+        [% itemloo.itemnumber | html %]: {
+            homebranch: "[% To.json( Branches.GetName( itemloo.homebranch ) ) | $raw %]",
+            holdallowed: "[% itemloo.holdallowed | html %]"
+            },
+            [% END %][% END %][% END %]
+        };
+        var ERROR_MAP = {
+            damaged: _("Nide vaurioitunut"),
+            ageRestricted: _("Ikärajoitus"),
+            tooManyHoldsForThisRecord: _("Varausten maksimimäärä tietuetta kohden ylittynyt"),
+            tooManyReservesToday: _("Asiakkaan päivittäinen varausraja on täyttynyt"),
+            tooManyReserves: _("Liian monta varausta"),
+            notReservable: _("Ei varattavissa"),
+            noReservesAllowed: _("Ei varattavissa"),
+            cannotReserveFromOtherBranches: _("Tämä asiakas on toisesta kirjastosta"),
+            itemAlreadyOnHold: _("Asiakkaalla on jo varaus tähän niteeseen"),
+            cannotBeTransferred: _("Ei voi kuljettaa noutokirjastoon"),
+            pickupNotInHoldGroup: _("Vain saman varausryhmän noutopaikka on sallittu")
+        }
+
+        var MSG_CANCEL_SELECTED = _("Peruuta valitut (%s)");
+        var MSG_CANCEL_ALERT    = _("Tämä poistaa <span class='badge'>%s</span> varauksen/varausta.");
+        $.fn.select2.defaults.set("width", "100%" );
+        $.fn.select2.defaults.set("dropdownAutoWidth", true );
+
+        $(document).ready(function() {
+            $('#cancellation-reason-fieldset').hide();
+            $('.rank-request').on('change', function() {
+                if ( $(".rank-request option:selected[value='del']").length ) {
+                    $('#cancellation-reason-fieldset').show();
+                } else {
+                    $('#cancellation-reason-fieldset').hide();
+                }
+            });
+
+            if( $("#circ_holds_select").length > 0 ){
+                [% SET active = clubs ? 1 : 0 %]
+                /* Set active tab based on whether a club search was submitted */
+                var tabs = $("#circ_holds_select li:eq(" + [% active | $raw %] + ") a").tab("show");
+                $( tabs[0].hash ).find("input.focus").focus();
+
+                /* Change active focus when tabs change */
+                $("#circ_holds_select a[data-bs-toggle='tab']").on("shown.bs.tab", function (e) {
+                    active_tab = e.target.hash;
+                    $( active_tab ).find("input.focus").focus();
+                });
+            }
+
+
+            ToggleHoldsToPlace();
+            $("#requestany,.requestspecific[name='request'],.requestgrp").on('change', function(){
+                ToggleHoldsToPlace();
+            });
+
+            [% IF Koha.Preference('UseBranchTransferLimits') %]
+                $("#pickup,#pickup-next-avail,#pickup-item-group").on('change', function(){
+                    var pickup = $(this).val();
+                    var url = "?pickup=" + pickup;
+                    url += "&borrowernumber=" + borrowernumber;
+                    url += "&biblionumber=" + biblionumbers[0];
+                    window.location.replace(url);
+                });
+            [% END %]
+
+            var my_table = $("#requestspecific").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "paginate": false,
+                "dom": '<"top pager"ilf>t',
+            }));
+
+
+            $("#club-request-form").on("submit", function() {
+                let $t = $(this);
+                $('.clubalert, .holdalert').addClass('hide');
+                const data = {
+                    pickup_library_id: $('select[name="pickup"]').val()
+                };
+                if($('input[name="checkitem"]:checked').length)
+                    data.item_id = $('input[name="checkitem"]:checked').val();
+                if($('input[name="item_group_id"]:checked').length)
+                    data.item_group_id = $('input[name="item_group_id"]:checked').val();
+                if($('input[name="borrowernumber"]').length)
+                    data.patron_id = $('input[name="borrowernumber"]').val();
+                if($('textarea[name="notes"]').length)
+                    data.notes = $('textarea[name="notes"]').val()||null;
+                if($('input[name="itemtype"]').length) {
+                    data.item_type = $('input[name="itemtype"]').val()||null;
+                }
+                if($('input[name="default_patron_home"]:checked').length) {
+                    data.default_patron_home = 1;
+                }
+
+                const count = $('input[name="holds_to_place_count"]').length?$('input[name="holds_to_place_count"]').val():1;
+                var newloc = 'request.pl?';
+                biblionumbers.forEach(function (biblionumber) {
+                    newloc += '&biblionumber=' + biblionumber;
+                });
+
+                biblionumbers.forEach(function(biblionumber) {
+                    data.biblio_id = biblionumber;
+                    let options = {
+                        url: $t.attr('action'),
+                        method: $t.attr('method').toUpperCase(),
+                        contentType: 'application/json',
+                        data: JSON.stringify(data)
+                    };
+                    for(let i = 0; i < count; i++) {
+                        $.ajax(options)
+                        .then(function(result) {
+                            document.location = newloc;
+                        })
+                        .fail(function(err) {
+                            var message = err.responseJSON.error;
+                            var match = err.responseJSON.error.match(/Reason: (\w+)\s*$/);
+                            if(match && ERROR_MAP[match[1]]) {
+                                message = '<div><strong>'+_("Ei varattavissa")+'</strong></div><div>'+ERROR_MAP[match[1]]+'</div>'
+                            }
+                            $('.clubalert, .holdalert').removeClass('hide').html(message);
+                        });
+                    }
+                });
+
+                return false;
+            });
+
+            [% UNLESS ( multi_hold ) %]
+                $("#hold-request-form").on("submit", function(e){
+                    return check(e, $(this));
+                });
+            [% ELSE %]
+                $("#hold-request-form").on("submit", function(){
+                    return checkMultiHold();
+                });
+            [% END %]
+
+            $(".pickup_location_dropdown").each( function () {
+                $(this).pickup_locations_dropdown();
+            });
+
+            $("#pickup_multi").select2({
+                width: '30%',
+                allowClear: true
+            });
+
+            $('.multi_pickup_select').select2({
+                width: '100%',
+                allowClear: true
+            });
+
+            $("#pickup_multi").on("change", function() {
+                var selection = $(this).val();
+                if ( selection != '' ) {
+                    $(".multi_pickup_select").each(function() {
+                        var valid_pickup_locations = $(this).data('pickup-locations');
+                        if ( valid_pickup_locations.includes(selection) ) {
+                            $(this).val(selection);
+                            $(this).trigger("change");
+                        }
+                    });
+                }
+            });
+
+            $("#pickup,#pickup-item-group,#pickup-next-avail").each( function () {
+                $(this).pickup_locations_dropdown();
+            });
+
+            $(".pickup_locations").each(function () {
+                $(this).pickup_locations_dropdown();
+            });
+        });
+
+        function ToggleHoldsToPlace() {
+            if ( $("#requestany").prop('checked') ) {
+                $(".disable_request_any").prop('disabled',true).addClass('disabled').removeClass('enabled');
+                $(".enable_request_any").prop('disabled',false).removeClass('disabled').addClass('enabled');
+                $(".requestspecific,.requestgrp").prop('checked', false);
+            } else if( $(".requestspecific").prop('checked') ) {
+                $(".disable_request_specific").prop('disabled',true).addClass('disabled').removeClass('enabled');
+                $(".enable_request_specific").prop('disabled',false).removeClass('disabled').addClass('enabled');
+                $("#requestany,.requestgrp").prop('checked', false);
+            } else {
+                $(".disable_request_group").prop('disabled',true).addClass('disabled').removeClass('enabled');
+                $(".enable_request_group").prop('disabled',false).removeClass('disabled').addClass('enabled');
+                $("#requestany,.requestspecific").prop('checked', false);
+            }
+        }
+
+        $('.any_specific').click(function() {
+            const fieldset = $(this).find('fieldset:first');
+
+            if ( fieldset.hasClass('disabled') ) {
+                $('.enable_request_specific, .enable_request_any, .enable_request_group').removeClass('enabled');
+                const specific_cb = $(this).find('#requestspecificitem');
+                const any_cb = $(this).find('#requestany');
+                const itemgroup_cb = $(this).find('#requestgrp');
+
+                if ( specific_cb.length ) {
+                    specific_cb.prop('checked', true);
+                } else if ( any_cb.length ) {
+                    any_cb.prop('checked', true);
+                } else {
+                    itemgroup_cb.prop('checked', true);
+                }
+
+                fieldset.removeClass('disabled').addClass('enabled');
+                ToggleHoldsToPlace();
+            }
+        });
+
+        function check( e, table ) {
+
+            var msg = "";
+
+            if ( $(".requestspecific").is(":checked") ) {
+                // requestany not selected, go through the item-specific cases
+                var selected_items = $('#requestspecific input[name="checkitem"]:checked');
+                if ( selected_items.length > 0 ) {
+                    // got item-specific hold requests in the form!
+                    // verify they have a pickup location selected
+
+                    if ( selected_items.closest('tr').find(".pickup_locations").val() == '' ) {
+
+                        msg = _("- Valitse noutopaikka") + "\n"
+                    }
+                }
+                else {
+                    msg = _("- Valitse varattava nide") + "\n";
+                }
+            } else if ( $("#requestgrp").is(":checked") ) {
+                var selected_group = $('#requestgroup input[type="radio"]:checked');
+                if( selected_group.length > 0 ){
+                    if( $("#pickup-item-group").length < 1 || $("#pickup-item-grp").val() == "" ){
+                        msg = _("- Please select a pickup location for this hold" + "\n");
+                    }
+                } else {
+                    msg = (_("- Valitse nideryhmä tehdäksesi varauksen") + "\n");
+                }
+            } else {
+                // Requesting next available
+                if( $("#pickup-next-avail").length < 1 || $("#pickup-next-avail").val() == "" || $('#pickup-next-avail').val() === null ){
+                    msg = _("- Valitse varaukselle noutokirjasto") + "\n";
+                }
+            }
+
+
+            if (msg == "") {
+                $('#hold-request-form').preventDoubleFormSubmit();
+                return(true);
+            } else {
+                e.preventDefault();
+                alert(msg);
+                return(false);
+            }
+        }
+
+        function checkMultiHold() {
+
+            var selected_bibs = $(".multi_hold_item_checkbox:checked");
+            if ( selected_bibs.length > 0 ) {
+                // there are biblios selected in the form!
+                // verify they have a pickup location selected
+
+                var pickup_not_set = 0;
+                selected_bibs.each(function() {
+                    if ( $(this).closest('tr').find(".multi_pickup_select").val() === "" ) {
+                        pickup_not_set++;
+                    }
+                    else {
+                        var bibnum = $(this).attr("title");
+                    }
+                });
+                if ( pickup_not_set > 0 ) {
+                    alert( _("Varmista, että kaikilla valituilla nimekkeillä on noutopaikka") + "\n" );
+                    return false;
+                }
+            }
+            else {
+                alert( _("Valitse ainakin yksi nimeke") + "\n" );
+                return false;
+            }
+
+            $('#hold-request-form').preventDoubleFormSubmit();
+
+            return true;
+        }
+
+         $(document).ready(function() {
+
+            $("#always_show_holds").change(function(){
+                if( $(this).prop('checked') ){
+                    document.cookie = 'always_show_holds=DO';
+                } else {
+                    document.cookie = 'always_show_holds=DONT';
+                }
+            });
+            $("input.needsoverride").click(function() { // This must be before the radio button/checkbox switch logic
+                var itemnumber = this.value;
+                var msg = '';
+
+                switch (override_items[itemnumber].holdallowed) {
+                    case "not_allowed": msg = _("Tätä nidettä ei voi varata."); break;
+                    case "from_home_library": msg = _("Tämän niteen voivat varata vain asiakkaat, joiden kotikirjasto on %s.").format(override_items[itemnumber].homebranch); break;
+                }
+
+                msg += "\n\n" + _("Varaa tämä nide?");
+
+                return confirm(msg);
+            });
+            $("button.warning").click(function() {
+                return confirm( _("Asiakas ei voi varata nimekettä.") + "\n\n" + _("Varaa tämä?") );
+            });
+            var prev_rank_request;
+            $("select[name=rank-request]").on("focus", function() {
+                prev_rank_request = $(this).val();
+                var row = $(this).parents("tr:first");
+            }).change(function() {
+                var row = $(this).parents("tr:first");
+                var value = parseInt($(this).val());
+                var found_holds = $("select[name='rank-request'][disabled='disabled']").length ; //Count how many are found
+                if( !isNaN(value) ) {  //If moved to 'del'
+                    var after = row.parent().find(`tr:nth-child(${value+found_holds})`); //Go to the row 1 after the new value (and skip found holds)
+                    if (prev_rank_request > value) {
+                        row.insertBefore(after);
+                    } else {
+                        row.insertAfter(after);
+                    }
+                }
+
+                var next_priority = 1;
+                $("select[name=rank-request]").each(function () {
+                    if( isNaN( $(this).val() ) ){ return true; } //Don't reset found or del holds
+                    $(this).val(next_priority);
+                    next_priority++;
+                });
+            });
+
+            $(".clear-date").on("click",function(e){
+                e.preventDefault();
+                var fieldID = this.id.replace("clear-date-","");
+                $("#" + fieldID).val("");
+            });
+
+            // Confirm cancellation of hold
+            let cancel_link;
+            $(".cancel-hold").on("click",function(e) {
+                e.preventDefault;
+                cancel_link = $(this);
+                $("#cancel_modal_form #inputs").empty();
+                    let reserve_id = cancel_link.data('id');
+                    let biblionumber = cancel_link.data('biblionumber');
+                    $("#cancel_modal_form #inputs").append('<input type="hidden" name="reserve_id" value="' + reserve_id + '">');
+                    $("#cancel_modal_form #inputs").append('<input type="hidden" name="biblionumber" value="' + biblionumber + '">');
+                    $("#cancel_modal_form #inputs").append('<input type="hidden" name="op" value="cud-cancel">');
+                $('#cancelModal').modal('show');
+                return false;
+            });
+
+            [% UNLESS ( patron || patron.borrowernumber || borrowers || noitems || nobiblio ) %]
+                [% IF ( PatronAutoComplete ) %]
+                    patron_autocomplete($(".search_patron_filter"), { 'link-to': 'reserve', 'url-params': '[% url_biblio_params | url %]' });
+                [% END %]
+            [% END %]
+
+            [% IF Koha.Preference('EnableItemGroupHolds') %]
+                $(':radio[name="item_group_id"]').change(function(){
+                    $('input[name="checkitem"]').prop('checked', false);
+                });
+
+                $('input[name="checkitem"]').change(function(){
+                    $(':radio[name="item_group_id"]').prop('checked', false);
+                });
+            [% END %]
+
+            if(!localStorage.selectedHolds  || document.referrer.replace(/\?.*/, '') !== document.location.origin+document.location.pathname) {
+                localStorage.selectedHolds = [];
+            }
+
+            $('.holds_table .select_hold').each(function() {
+                if(localStorage.selectedHolds.includes($(this).data('id'))) {
+                    $(this).prop('checked', true);
+                }
+            });
+
+            $('.holds_table .select_hold_all').each(function() {
+                var table = $(this).parents('.holds_table');
+                var count = $('.select_hold:not(:checked)', table).length;
+                $('.select_hold_all', table).prop('checked', !count);
+            });
+
+            $('.cancel_selected_holds').html(MSG_CANCEL_SELECTED.format($('.holds_table .select_hold:checked').length));
+
+            $('.holds_table .select_hold_all').click(function() {
+                var table = $(this).parents('.holds_table');
+                var count = $('.select_hold:checked', table).length;
+                $('.select_hold', table).prop('checked', !count);
+                $(this).prop('checked', !count);
+                $('.cancel_selected_holds').html(MSG_CANCEL_SELECTED.format($('.holds_table .select_hold:checked').length));
+                $('#cancel_hold_alert').html( MSG_CANCEL_ALERT.format($('.holds_table .select_hold:checked').length));
+                $('#cancel_hold_alert').show();
+                localStorage.selectedHolds = $('.holds_table .select_hold:checked').toArray().map(el => $(el).data('id'));
+            });
+
+            $('.holds_table .select_hold').click(function() {
+                var table = $(this).parents('.holds_table');
+                var count = $('.select_hold:not(:checked)', table).length;
+                $('.select_hold_all', table).prop('checked', !count);
+                $('.cancel_selected_holds').html(MSG_CANCEL_SELECTED.format($('.holds_table .select_hold:checked').length));
+                $('#cancel_hold_alert').html( MSG_CANCEL_ALERT.format($('.holds_table .select_hold:checked').length));
+                $('#cancel_hold_alert').show();
+                localStorage.selectedHolds = $('.holds_table .select_hold:checked').toArray().map(el => $(el).data('id'));
+            });
+
+            $('.cancel_selected_holds').click(function(e) {
+                e.preventDefault();
+                if($('.holds_table .select_hold:checked').length) {
+                    cancel_link = $(this);
+                    $("#cancel_modal_form #inputs").empty();
+                    biblionumbers.forEach( function(biblionumber){
+                        $("#cancel_modal_form #inputs").append('<input type="hidden" name="biblionumber" value="'+biblionumber+'">');
+                    });
+                    $("#cancel_modal_form #inputs").append('<input type="hidden" name="op" value="cud-cancel_bulk">');
+                    let hold_ids= $('.holds_table .select_hold:checked').toArray().map(el => $(el).data('id')).join(',');
+                    $("#cancel_modal_form #inputs").append('<input type="hidden" name="ids" value="' + hold_ids + '">');
+                    delete localStorage.selectedHolds;
+                    $('#cancelModal').modal('show');
+                }
+                return false;
+            });
+
+            $(".hold-arrow").click(function(e) {
+                e.preventDefault();
+                let arrowForm = $("#hold-actions-form").attr({
+                    action: 'request.pl',
+                    method: 'post'
+                });
+                let arrow_op = $("<input />").attr({
+                    name: 'op',
+                    type: 'hidden',
+                    value: $(this).data('op')
+                });
+                let arrow_where = $("<input />").attr({
+                    name: 'where',
+                    type: 'hidden',
+                    value: $(this).data('where')
+                });
+                let arrow_fp = $("<input />").attr({
+                    name: 'first_priority',
+                    type: 'hidden',
+                    value: $(this).data('first_priority')
+                });
+                let arrow_lp = $("<input />").attr({
+                    name: 'last_priority',
+                    type: 'hidden',
+                    value: $(this).data('last_priority')
+                });
+                let arrow_pp = $("<input />").attr({
+                    name: 'prev_priority',
+                    type: 'hidden',
+                    value: $(this).data('prev_priority')
+                });
+                let arrow_np = $("<input />").attr({
+                    name: 'next_priority',
+                    type: 'hidden',
+                    value: $(this).data('next_priority')
+                });
+                let arrow_bn = $("<input />").attr({
+                    name: 'borrowernumber',
+                    type: 'hidden',
+                    value: $(this).data('borrowernumber')
+                });
+                let arrow_bb = $("<input />").attr({
+                    name: 'biblionumber',
+                    type: 'hidden',
+                    value: $(this).data('biblionumber')
+                });
+                let arrow_ri = $("<input />").attr({
+                    name: 'reserve_id',
+                    type: 'hidden',
+                    value: $(this).data('reserve_id')
+                });
+                let arrow_date = $("<input />").attr({
+                    name: 'date',
+                    type: 'hidden',
+                    value: $(this).data('date')
+                });
+                arrowForm.append(arrow_op,arrow_where,arrow_fp,arrow_lp,arrow_pp,arrow_np,arrow_bn,arrow_bb,arrow_ri,arrow_date);
+                $("#hold-actions-form").submit();
+                return true;
+            })
+        });
+</script>
+
+ <script>
+        table_settings = [% TablesSettings.GetTableSettings( 'circ', 'circulation', 'table_borrowers', 'json' ) | $raw %];
+    </script>
+
+ [% UNLESS patron %]
+ [% SET search_results_block_id = 'holds_patronsearch_pane_panel' %] [%# adjusting variable for patron-search.inc %]
+ [% PROCESS patron_search_js table_id => 'table_borrowers', categories => categories, libraries => libraries, columns => columns, open_on_row_click => 1, on_click_url => '/cgi-bin/koha/reserve/request.pl?' _ url_biblio_params, redirect_if_one_result => 1, redirect_url => '/cgi-bin/koha/reserve/request.pl?' _ url_biblio_params, redirect_if_attribute_equal => 'cardnumber' %]
+ <script>
+            $(document).ready(function() {
+                $("#holds_patronsearch").on("submit", filter);
+            });
+        </script>
+ [% END %]
+ <script>
+        $('.printholdslip').click(function(){
+            var reserve_id = $(this).attr('data-reserve_id');
+            window.open("/cgi-bin/koha/circ/hold-transfer-slip.pl?reserve_id=" + reserve_id);
+            return false;
+        })
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

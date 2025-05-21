@@ -1,0 +1,145 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% SET footerjs = 1 %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Files") | html %] &rsaquo;
+ [% t("Invoice") | html %] &rsaquo;
+ [% t("Acquisitions") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="acq_invoice_files" class="acq">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'acquisitions-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/acqui-home.pl">Inköp</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/invoices.pl">Fakturor</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/invoice.pl?invoiceid=[% invoiceid | uri %]">[% invoicenumber | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Filer</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-2">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Filer för faktura: [% invoicenumber | html %]</h1>
+ <p><strong>Leverantör: </strong><a href="/cgi-bin/koha/acqui/supplier.pl?booksellerid=[% booksellerid | uri %]">[% suppliername | html %]</a></p>
+ <br />
+ [% IF errors %]
+ <div class="alert alert-warning">
+ [% IF errors.empty_upload %]Filen du försöker ladda upp har inget innehåll.[% END %] [% IF errors.no_file %]Du valde inte en fil för uppladdning.[% END %] [% IF errors.invalid_parameter %]Ogiltig eller saknad skriptparameter.[% END %] </div>
+ [% END %]
+ [% IF files %]
+ <div class="page-section">
+ <table id="invoice_files_details_table">
+ <thead>
+ <tr>
+ <th>Namn</th>
+ <th>Typ</th>
+ <th>Beskrivning</th>
+ <th>Uppladdad</th>
+ <th>Byte</th>
+ <th>&nbsp;</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH f IN files %]
+ <tr>
+ <td><a href="?invoiceid=[% invoiceid | uri %]&amp;op=download&amp;view=1&amp;file_id=[% f.file_id | uri %]">[% f.file_name | html %]</a></td>
+ <td>[% f.file_type | html %]</td>
+ <td>[% f.file_description | html %]</td>
+ <td data-order="[% f.date_uploaded | html %]">
+ [% f.date_uploaded | $KohaDates %]
+ </td>
+ <td>[% f.file_size | html %]</td>
+ <td>
+ <form action="invoice-files.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="invoiceid" value="[% invoiceid | html %]" />
+ <input type="hidden" name="file_id" value="[% f.file_id | html %]" />
+ <input type="hidden" name="op" value="cud-delete" />
+ <button type="submit" class="btn btn-default btn-xs delete_file">
+ <i class="fa fa-trash"></i> Ta bort </button>
+ </form>
+ </td>
+ <td><a class="btn btn-default btn-xs" href="?invoiceid=[% invoiceid | uri %]&amp;op=download&amp;file_id=[% f.file_id | uri %]"><i class="fa fa-download"></i> Ladda ned</a></td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p>Inga filer är kopplade till denna faktura.</p>
+ </div>
+ [% END %]
+ [% IF invoiceid %]
+ <br />
+ <form method="post" action="/cgi-bin/koha/acqui/invoice-files.pl" enctype="multipart/form-data">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <legend>Ladda upp en ny fil</legend>
+ <ol>
+ <li><input type="hidden" name="op" value="cud-upload" />
+ <input type="hidden" name="invoiceid" value="[% invoiceid | html %]" />
+ <label for="description">Beskrivning:</label>
+ <input name="description" id="description" type="text" /></li>
+ <li><label for="uploadfile">Fil:</label><input name="uploadfile" type="file" id="uploadfile" /></li>
+ </ol>
+ </fieldset>
+ <fieldset class="action"><input class="btn btn-primary" id="upload" name="upload" type="submit" value="Ladda upp fil" /></fieldset>
+ </form>
+ [% END %]
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+<div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'acquisitions-menu.inc' %]
+ </aside>
+</div> <!-- /.col-md-2.order-md-1 -->
+</div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/acquisitions-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            $("#invoice_files_details_table").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "columnDefs": [
+                    { "targets": [ -1, -2 ], "orderable": false, "searchable":  false }
+                ],
+                "info": false,
+                "paging": false,
+                "searching": false,
+                "dom": "t"
+            }));
+            $(".delete_file").click(function(){
+                return ( confirm( _("Är du säker på att du vill ta bort denna fil?") ) );
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

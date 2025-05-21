@@ -1,0 +1,577 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op == 'add_form' %]
+ [% IF ( action_modify || action_add_value ) %]
+ [% IF ( action_modify ) %]
+ [% t("Modify authorized value") | html %] &rsaquo;
+ [% END %]
+ [% IF ( action_add_value ) %]
+ [% t("New authorized value") | html %] &rsaquo;
+ [% END %]
+ [% tx("Authorized values for category {category_name}", { category_name = category_name }) | html %] &rsaquo;
+ [% END %]
+ [% IF ( action_add_category ) %]
+ [% t("New category") | html %] &rsaquo;
+ [% END %]
+
+ [% ELSIF ( loop || searchfield ) %]
+ [% tx("Authorized values for category {category_name}", { category_name = category.category_name }) | html %] &rsaquo;
+ [% END # /IF op == 'add_form' %]
+
+ [% t("Authorized values") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+
+[% FILTER collapse %]
+ <style>
+        fieldset.rows div.toptabs li {
+            clear: none;
+            margin-right:.4em;
+            padding-bottom: 0;
+            width: auto;
+        }
+        #lib,
+        #lib_opac {
+            width: 75%;
+        }
+        .authval-icons {
+            display: flex;
+            flex-wrap: wrap;
+            clear: both;
+        }
+        .authval-icons label {
+            float: none;
+            width: auto;
+        }
+        #authorised_value:invalid {
+            color:red;
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="admin_authorised_values" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Ylläpito</a>
+ [% END %]
+
+ [% IF ( op == 'add_form' || loop || searchfield ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/authorised_values.pl">Auktorisoidut arvot</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Auktorisoidut arvot</span>
+ [% END %]
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% IF ( action_modify || action_add_value ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=[% category_name | uri %]">Auktorisoidut arvot luokalle [% category_name | html %]</a>
+ [% END %]
+ [% IF ( action_modify ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Muokkaa auktorisoitua arvoa</span>
+ [% END %]
+ [% END %]
+ [% IF ( action_add_value ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uusi auktorisoitu arvo</span>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% IF ( action_add_category ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uusi luokka</span>
+ [% END %]
+ [% END %]
+
+ [% ELSIF ( loop || searchfield ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Auktorisoidut arvot luokalle [% category.category_name | html %]</span>
+ [% END %]
+ [% END # /IF op == 'add_form' %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% IF op == 'add_form' OR op == 'edit_form' %]
+ <h1>
+ [% IF ( action_modify ) %]<span>Muokkaa auktorisoitua arvoa</span>[% END %]
+ [% IF ( action_add_value ) %]<span>Uusi auktorisoitu arvo</span>[% END %]
+ [% IF ( action_add_category ) %]<span>Uusi luokka</span>[% END %]
+ [% IF ( op == 'edit_form' ) %]<span>Muokkaa luokkaa</span>[% END %]
+ </h1>
+
+ [% IF ( action_modify ) %]
+ <div class="alert alert-info">
+ <i class="fa fa-exclamation"></i> <strong>HUOM:</strong> Jos muutat auktorisoitua arvoa, sitä käyttäviä jo olemassa olevia tietueita ei päivitetä. Muutokset auktorisoidun arvon kuvaukseen näkyvät välittömästi. </div>
+ [% END %]
+
+ <form action="/cgi-bin/koha/admin/authorised_values.pl" name="Aform" id="Aform" method="post" class="validated">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ [% IF action_add_category %]
+ <ol>
+ <li>
+ <label for="category" class="required">Tyyppi: </label>
+ <input type="text" name="category"  id="category" size="32" maxlength="32" class="focus required" />
+ <span class="required">Pakollinen tieto</span>
+ <input type="hidden" name="op" value="cud-add_category" />
+ </li>
+ <li>
+ <input type="checkbox" name="is_integer_only" id="is_integer_only"/><label for="is_integer_only">Rajoita arvot numeroiksi</label></input>
+ </li>
+ </ol>
+ [% ELSIF op == 'edit_form' %]
+ <ol>
+ <li>
+ <label for="category" class="required">Tyyppi: </label>
+ <input type="text" disabled value="[% category_name | html %]"/>
+ </li>
+ <li>
+ [% IF category.is_integer_only %]
+ <input type="checkbox" checked name="is_integer_only" id="is_integer_only"/><label for="is_integer_only">Rajoita arvot numeroiksi</label></input>
+ [% ELSE %]
+ <input type="checkbox" name="is_integer_only" id="is_integer_only"/><label for="is_integer_only">Rajoita arvot numeroiksi</label></input>
+ [% END %]
+ </li>
+ </ol>
+ <input type="hidden" name="op" value="cud-edit_category" />
+ <input type="hidden" name="category" value="[% category_name | html %]" />
+ <input type="hidden" name="searchfield" value="[% category_name | html %]" />
+ [% ELSE %]
+ <ol>
+ <li>
+ <span class="label">Tyyppi</span>
+ <input type="hidden" name="op" value="cud-add" />
+ <input type="hidden" name="category" value="[% category_name | html %]" /> [% category_name | html %]
+ </li>
+ <li>
+ <label for="authorised_value">Auktorisoitu arvo: </label>
+ [% IF ( action_modify ) %]
+ <input type="hidden" id="id" name="id" value="[% av.id | html %]" />
+ [% END %]
+ [% IF ( av && av.is_integer_only ) || category.is_integer_only %]
+ <input class="focus" id="authorised_value" inputmode="numeric" max="127" min="-128" name="authorised_value" pattern="[% num_pattern | $raw %]" required/="required/" title="Pitää olla numeerinen (-128..127)" type="text" value="[% av.authorised_value | html %]">
+ [% ELSE %]
+ <input type="text" id="authorised_value" name="authorised_value" value="[% av.authorised_value | html %]" maxlength="80" class="focus"/>
+ [% END %]
+ </li>
+ <li>
+ <label for="lib">Kuvaus: </label>
+ <input type="text" name="lib" id="lib" value="[% av.lib | html %]" maxlength="200" />
+ </li>
+ <li>
+ <label for="lib_opac">Kuvaus (verkkokirjastossa): </label>
+ <input type="text" name="lib_opac" id="lib_opac" value="[% av.lib_opac | html %]" maxlength="200" />
+ </li>
+ <li><label for="branches">Kirjastorajoitukset: </label>
+ <select id="branches" name="branches" multiple size="10">
+ <option value="">Kaikki kirjastot</option>
+ [% FOREACH branch IN branches_loop %]
+ [% IF ( branch.selected ) %]
+ <option selected="selected" value="[% branch.branchcode | html %]">[% branch.branchname | html %]</option>
+ [% ELSE %]
+ <option value="[% branch.branchcode | html %]">[% branch.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <div class="hint">Valitse 'Kaikki kirjastot', jos tämä auktorisoitu arvo näytetään aina. Muussa tapauksessa valitse kirjastot, joita arvo koskee.</div>
+ </li>
+ </ol>
+
+ [% INCLUDE 'admin-icon-selection.inc' context = "authval" %]
+
+ [% END # /IF action_add_category %]
+ </fieldset>
+
+ <fieldset class="action">
+ <input type="hidden" name="id" value="[% av.id | html %]" />
+ <input class="btn btn-primary" type="submit" value="Tallenna" />
+ <a class="cancel" href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=[% category_name | url %]">Peruuta</a>
+ </fieldset>
+ </form>
+ [% END # /IF op == 'add_form' %]
+
+ [% IF op == 'list' %]
+ <div id="toolbar" class="btn-toolbar">
+ <a id="addcat" class="btn btn-default" href= "/cgi-bin/koha/admin/authorised_values.pl?op=add_form"><i class="fa fa-plus"> </i> Uusi luokka</a>
+ [% IF ( searchfield ) %]
+ <a id="editcat" class="btn btn-default" href= "/cgi-bin/koha/admin/authorised_values.pl?op=edit_form&amp;category=[% category.category_name | url %]"><i class="fa fa-plus"> </i> Muokkaa luokkaa</a>
+ <a id="addauth" class="btn btn-default" href= "/cgi-bin/koha/admin/authorised_values.pl?op=add_form&amp;category=[% category.category_name | url %]"><i class="fa fa-plus"> </i> Uusi auktorisoitu arvo kohteelle [% category.category_name | html %]</a>
+ [% END %]
+ </div>
+
+ [% IF ( searchfield ) %]
+ <h1>Auktorisoidut arvot luokalle [% category.category_name | html %]</h1>
+ [% PROCESS category_descriptions code_category = category.category_name %]
+ [% ELSE %]
+ <h1>Auktorisoidut arvot</h1>
+ [% END %]
+
+ [% IF ( searchfield ) %]
+ <div class="alert alert-info">
+ <i class="fa fa-exclamation"></i> <strong>HUOM:</strong> Jos muutat auktorisoitua arvoa, sitä käyttäviä jo olemassa olevia tietueita ei päivitetä. Muutokset auktorisoidun arvon kuvaukseen näkyvät välittömästi. </div>
+ [% END %]
+
+ [% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Auktoriteetin arvon päivityksessä tapahtui virhe. Ehkä arvo on jo olemassa.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Auktorisoidun arvon lisäyksessä tapahtui virhe. Ehkä arvo tai kategoria on jo olemassa?</span>
+ [% CASE 'error_on_edit_cat' %]
+ <span>Auktorisoidun arvon luokan päivityksessä tapahtui virhe.</span>
+ [% CASE 'error_on_insert_cat' %]
+ <span>Auktorisoidun arvon kategorian lisäyksessä tapahtui virhe. Ehkä kategorian nimi on jo olemassa?</span>
+ [% CASE 'error_on_delete' %]
+ <span>Auktorisoidun arvon poistossa tapahtui virhe. Tarkista lokit.</span>
+ [% CASE 'error_on_delete_category' %]
+ <span>Auktorisoidun arvon luokan poistossa tapahtui virhe. Tarkista lokit.</span>
+ [% CASE 'success_on_update' %]
+ <span>Auktorisoitu arvo on päivitetty.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Auktorisoitu arvo on lisätty.</span>
+ [% CASE 'success_on_insert_cat' %]
+ <span>Auktorisoidun arvon luokka on lisätty.</span>
+ [% CASE 'success_on_delete' %]
+ <span>Auktorisoitu arvo on poistettu.</span>
+ [% CASE 'success_on_delete_category' %]
+ <span>Auktorisoidun arvon luokka on poistettu.</span>
+ [% CASE 'cat_already_exists' %]
+ <span>Auktorisoidun arvon luokka on jo olemassa.</span>
+ [% CASE 'invalid_category_name' %]
+ <span>Koha käyttää sisäisesti auktorisoituja arvoluokkia 'branches', 'itemtypes' ja 'cn_source', eivätkä ne ole kelvollisia.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+ [% END # /FOR m IN messages %]
+
+ <div class="page-section">
+ [% IF ( searchfield ) %]
+
+ <form action="/cgi-bin/koha/admin/authorised_values.pl" method="get" id="category">
+ <p>
+ <label for="category_search">Näytä luokka: </label>
+ <select name="searchfield" id="category_search">
+ [% FOR c IN category_names %]
+ [% IF c == searchfield %]
+ <option value="[% c | html %]" selected="selected">[% c | html %]</option>
+ [% ELSE %]
+ <option value="[% c | html %]">[% c | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </p>
+ </form> <!-- /#category -->
+
+ [% IF loop %]
+ <table id="categoriest" class="authorized_values_table">
+ <thead>
+ <tr>
+ <th>Auktorisoitu arvo</th>
+ <th>Kuvaus</th>
+ <th>Kuvaus (verkkokirjastossa)</th>
+ <th>Kuva</th>
+ <th>Kirjastorajoitukset</th>
+ <th class="noExport NoSort">Toiminnot</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH loo IN loop %]
+ <tr>
+ <td>[% loo.authorised_value | html %]</td>
+ <td>[% loo.lib | html %]</td>
+ <td>[% loo.lib_opac | html %]</td>
+ <td>
+ [% IF ( loo.image ) %]<img class="itemtype-image" src="[% loo.image | url %]" alt=""/>[% ELSE %]&nbsp;[% END %]</td>
+ <td>
+ [% IF loo.branches.size > 0 %]
+ [% branches_str = "" %]
+ [% FOREACH branch IN loo.branches %]
+ [%- IF loop.first -%]
+ [% branches_str = branch.branchname _ " (" _ branch.branchcode _ ")" %]
+ [% ELSE %]
+ [% branches_str = branches_str _ "\n" _ branch.branchname _ " (" _ branch.branchcode _ ")" %]
+ [% END %]
+ [% END %]
+ <span class="library_limitation" data-bs-toggle="tooltip" title="[% branches_str | html %]">
+ [% IF loo.branches.size > 1 %]
+ <span>[% loo.branches.size | html %] kirjastorajoitus(ta)</span>
+ [% ELSE %]
+ <span>[% loo.branches.size | html %] kirjastorajoitus(ta)</span>
+ [% END %]
+ [% ELSE %]
+ <span>Ei rajoitusta</span>
+ [% END # /IF loo.branches.size > 0 %]
+ </td>
+ <td class="actions">
+ <a href="/cgi-bin/koha/admin/authorised_values.pl?op=add_form&amp;id=[% loo.id | uri %]" class="btn btn-default btn-xs"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa</a>
+ <form action="/cgi-bin/koha/admin/authorised_values.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete" />
+ <input type="hidden" name="searchfield" value="[% searchfield | html %]" />
+ <input type="hidden" name="id" value="[% loo.id | html %]" />
+ <button type="submit" class="delete btn btn-default btn-xs"><i class="fa fa-trash-can"></i> Poista</button>
+ </form>
+ </td>
+ </tr>
+ [% END # /FOREACH loop %]
+ </tbody>
+ </table> <!-- /#categoriest -->
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p>Ei auktorisoituja arvoja luokalle [% category.category_name | html %]</p>
+ <form action="/cgi-bin/koha/admin/authorised_values.pl" method="get">
+ <input type="hidden" name="op" value="add_form" />
+ <input type="hidden" name="category" value="[% category.category_name | html %]" />
+ <button type="submit"><i class="fa fa-plus"></i> Lisää uusi auktorisoitu arvo</button>
+ </form>
+ [% UNLESS category.is_system %]
+ <form id="delete_category" action="/cgi-bin/koha/admin/authorised_values.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_category" />
+ <input type="hidden" name="category_name" value="[% category.category_name | html %]" />
+ <button type="submit"><i class="fa fa-plus"></i> Poista luokka '[% category.category_name | html %]' </button>
+ </form>
+ [% END %]
+ </div>
+ [% END # /IF loop %]
+
+ [% ELSE # category was selected %]
+ <table id="categoriest" class="authorized_values_table">
+ <thead>
+ <tr>
+ <th>Tyyppi</th>
+ <th>Kuvaus</th>
+ <th class="noExport">&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOR c IN category_names %]
+ <tr>
+ <td><a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=[% c | uri %]">[% c | html %]</a></td>
+ <td>
+ [% PROCESS category_descriptions code_category = c %]
+ </td>
+ <td>
+ <a id="addauth" class="btn btn-default btn-xs" href= "/cgi-bin/koha/admin/authorised_values.pl?op=add_form&amp;category=[% c | uri %]"><i class="fa fa-plus"> </i> Lisää</a>
+ </td>
+ </tr>
+ [% END # /FOR c %]
+ </tbody>
+ </table> <!-- /#categoriest -->
+ [% END # /IF ( searchfield  )%]
+ </div>
+
+ [% END # /IF op == 'list' %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        $(document).ready(function() {
+
+            KohaTable("categoriest", {
+                "order": [[ 0, "asc" ]],
+                "pagingType": "full"
+            });
+
+            if ( $("#branches option:selected").length < 1 ) {
+                $("#branches option:first").attr("selected", "selected");
+            }
+
+            $(".delete").click(function(){
+                return confirm(_("Haluatko varmasti poistaa tämän auktorisoidun arvon?"));
+            });
+            $('#category_search').change(function() {
+                $('#category').submit();
+            });
+
+            $("#delete_category").on('submit', function(){
+                return confirm(_("Haluatko varmasti poistaa tämän auktorisoidun arvon luokan?"));
+            });
+
+            if( $("#icons .tab-pane.active").length < 1 ){
+                $("#icons a:first").tab("show");
+            }
+
+            $("#Aform").submit(function() {
+                if ( $('#authorised_value').length ) {
+                    if ( ! $('#authorised_value').get(0).checkValidity() ) {
+                        alert( _("Auktorisoitu arvo pitäisi olla numeerinen.") );
+                        $('#authorised_value').focus();
+                        return false;
+                    }
+                }
+                return true;
+            });
+        });
+    </script>
+[% END %]
+
+[% BLOCK category_descriptions %]
+ [% SWITCH code_category %]
+ [% CASE 'Asort1' %]
+ <p>Käytetään hankinnan tilastoinnissa</p>
+ [% CASE 'Asort2' %]
+ <p>Käytetään hankinnan tilastoinnissa</p>
+ [% CASE 'BOR_NOTES' %]
+ <p>Arvot asiakasviesteille, jotka näkyvät lainausnäytöllä sekä verkkokirjastossa. Arvon kuvaus on viestin teksti ja se voi olla korkeintaan 200 merkkiä.</p>
+ [% CASE 'branches' %]
+ <p></p>
+ [% CASE 'Bsort1' %]
+ <p>Asiakkaisiin liitetty auktorisoitu arvo, jota käytetään lajittelu 1 -kentässä ja jota voidaan käyttää tilastotarkoituksiin</p>
+ [% CASE 'Bsort2' %]
+ <p>Asiakkaisiin liitetty auktorisoitu arvo, jota käytetään lajittelu 2 -kentässä ja jota voidaan käyttää tilastotarkoituksiin</p>
+ [% CASE 'CAND' %]
+ <p></p>
+ [% CASE 'CCODE' %]
+ <p>Kokoelmat (käytetään luetteloinnissa ja nidetoimintojen yhteydessä)</p>
+ [% CASE 'cn_source' %]
+ <p></p>
+ [% CASE 'CONTROL_NUM_SEQUENCE' %]
+ <p></p>
+ [% CASE 'COUNTRY' %]
+ <p>Käytetään UNIMARC-kentässä 102$a</p>
+ [% CASE 'DAMAGED' %]
+ <p>Vahingoittuneeksi merkattujen niteiden kuvaukset (näkyy, kun luetteloidaan tai käsitellään niteitä)</p>
+ [% CASE 'DEPARTMENT' %]
+ <p>Osastot vaaditaan, kun käytetään Kurssivarantojen modulia</p>
+ [% CASE 'ETAT' %]
+ <p>Käytetään ranskalaisissa UNIMARC-asennuksissa kentässä 995$o määrittelemään niteen tila. Vastaa NOT_LOAN-arvoa</p>
+ [% CASE 'ERM_AGREEMENT_CLOSURE_REASON' %]
+ <p>Sopimusten päättymissyyt (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_AGREEMENT_LICENSE_LOCATION' %]
+ <p>Lisenssisopimusten sijainnit (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_AGREEMENT_LICENSE_STATUS' %]
+ <p>Lisenssisopimusten statukset (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_AGREEMENT_RENEWAL_PRIORITY' %]
+ <p>Sopimusten uusintaprioriteetit (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_AGREEMENT_STATUS' %]
+ <p>Sopimusstatukset (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_USER_ROLES' %]
+ <p>Käyttäjien roolit (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_LICENSE_STATUS' %]
+ <p>Lisenssistatukset (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_LICENSE_TYPE' %]
+ <p>Lisenssien tyypit (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_PACKAGE_CONTENT_TYPE' %]
+ <p>Pakettien sisältötyypit (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_PACKAGE_TYPE' %]
+ <p>Pakettityypit (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'ERM_TITLE_PUBLICATION_TYPE' %]
+ <p>Nimekkeiden julkaisutyypit (elektronisten aineistojen hallintamoduuli)</p>
+ [% CASE 'HINGS_AS' %]
+ <p>Yleiset kokoelmat: hankinnan tilatunnus :: Tämä tietoelementti määrittää hankinnan tilan teokselle kokoelmaraportin ajohetkellä.</p>
+ [% CASE 'HINGS_C' %]
+ <p>Yleiset kokoelmat: täydellisyysasteen tunnus</p>
+ [% CASE 'HINGS_PF' %]
+ <p>Ulkoasua koskevat informaatiokoodit</p>
+ [% CASE 'HINGS_RD' %]
+ <p>Yleiset kokoelmat: säilytysajan tunnus :: Tämä tietoelementti määrittää yksikön säilytysaikasäännön kokoelmaraportin ajon aikaan.</p>
+ [% CASE 'HINGS_UT' %]
+ <p>Yleiset kokoelmat: yksikön tunnistetyyppi</p>
+ [% CASE 'HOLD_CANCELLATION' %]
+ <p>Varauksen perumissyyt</p>
+ [% CASE 'ILL_STATUS_ALIAS' %]
+ <p>Kaukolainapyyntöjen tilojen aliakset, joita käytetään kaukolainamoduulissa.</p>
+ [% CASE 'AR_CANCELLATION' %]
+ <p>Artikkelitilausten perumissyyt</p>
+ [% CASE 'HSBND_FREQ' %]
+ <p>Kotipalvelumodulissa käytetyt aikataulut. Ne näytetään asiakkaan tiedoissa virkailijaliittymässä kotipalvelu-välilehdellä.</p>
+ [% CASE 'ITEMTYPECAT' %]
+ <p>Sallii usean nidetyypin haun luokan mukaan. Luokat voidaan lisätä auktorisoituun arvoon ITEMTYPECAT. Jotta nidetyyppejä voidaan yhdistää tähän luokkaan, lisää hakutyyppi mihin tahansa nidetyyppiin</p>
+ [% CASE 'itemtypes' %]
+ <p></p>
+ [% CASE 'LANG' %]
+ <p>ISO 639-2 standardin mukaiset kielikoodit</p>
+ [% CASE 'LOC' %]
+ <p>Hyllypaikka (näkyy yleensä, kun lisätään tai muokataan nidettä). LOC määrittelee items.location:a Kohassa.</p>
+ [% CASE 'LOST' %]
+ <p>Kuvaukset kadonneiksi merkatuille niteille (näkyy nidettä lisätessä ja muokatessa)</p>
+ [% CASE 'NOT_LOAN' %]
+ <p>Syyt, miksi nimeke ei ole lainattavissa</p>
+ [% CASE 'OPAC_SUG' %]
+ <p>Verkkokirjastossa näytettävien hankintaehdotusten syiden lista.</p>
+ [% CASE 'ORDER_CANCELLATION_REASON' %]
+ <p>Tilausten perumissyyt</p>
+ [% CASE 'PAYMENT_TYPE' %]
+ <p>Näyttää pudotusvalikossa maksusuoritustyppien listauksen maksujen maksamisen yhteydessä</p>
+ [% CASE 'qualif' %]
+ <p>Tekijäkoodit (tekijä, toimittaja, yhteistyökumppani, jne) joita käytetään UNIMARCissa 7XX $4 (Ranska)</p>
+ [% CASE 'RELTERMS' %]
+ <p>Lista suhdekoodeista ja -termeistä <a target="_blank" href="https://www.loc.gov/marc/relators/">MARC-koodilista suhteista</a></p>
+ [% CASE 'REPORT_GROUP' %]
+ <p>Tapa mahdollistaa raporttien lajittelun ja suodattamisen. Oletusarvona on Kohan moduulit (Maksut, Hankinta, Kuvailu, Lainaus ja palautus, Asiakkaat)</p>
+ [% CASE 'REPORT_SUBGROUP' %]
+ <p>Mahdollistaa raporttien tarkemman lajittelun ja suodattamisen. Tämä luokka on oletusarvoltaan tyhjä. Arvon pitää sisältää REPORT_GROUP auktorisoitu arvo 'Kuvaus (verkkokirjastossa)'-kentässä, jotta alaryhmän linkittäminen oikeaan ryhmään onnistuu.</p>
+ [% CASE 'RESTRICTED' %]
+ <p>Niteen rajoitusten arvot</p>
+ [% CASE 'ROADTYPE' %]
+ <p>Asiakkaiden osoitteissa käytettävät tietyypit</p>
+ [% CASE 'SIP_MEDIA_TYPE' %]
+ <p>Käytetään määrittämään nidetyypin SIP-mediatyyppi laitteille, kuten noutolokerot tai lajittelijat.</p>
+ [% CASE 'STACK' %]
+ <p>Hyllytyksen kontrollinumero</p>
+ [% CASE 'SUGGEST' %]
+ <p>Asiakkaan hankintaehdotuksen hyväksymisen tai hylkäämisen syyt (näkyy, kun käsitellään ehdotuksia)</p>
+ [% CASE 'SUGGEST_FORMAT' %]
+ <p>Lista nidetyypeistä, jotka näytetään hankintaehdotuslomakkeen pudotusvalikossa verkkokirjastossa. Kun luodaan auktorisoituja arvoja tyypille SUGGEST_FORMAT, syötä kuvaus tähän lomakkeeseen, jotta se näkyy asiakkaille verkkokirjastossa.</p>
+ [% CASE 'SUGGEST_STATUS' %]
+ <p>Lista hankintaehdotusten tila-arvoista, joita voi käyttää oletusarvojen lisäksi.</p>
+ [% CASE 'TERM' %]
+ <p>Termejä joita käytetään Kurssivarantojen modulissa. Syötä pudotusvalikossa näkyvät termit, kun kurssivarannon asetuksia tehdään (esim. kevät, kesä, talvi, syksy).</p>
+ [% CASE 'TICKET_STATUS' %]
+ <p>Lista kuvailutietueiden virheilmoitusten tila-arvoista, joita voi käyttää oletusarvojen "Uusi" ja "Ratkaistu" lisäksi.</p>
+ [% CASE 'TICKET_RESOLUTION' %]
+ <p>Lista kuvailutietojen virheilmoitusten ratkaisujen arvoista, joita voi käyttää oletusarvon "Ratkaistu" lisäksi.</p>
+ [% CASE 'UPLOAD' %]
+ <p>Tiedostojen latauksille määrättävät kategoriat. Lataus katsotaan väliaikaiseksi ilman kategoriaa ja se voidaan poistaa automaattisen puhdistuksen aikana.</p>
+ [% CASE 'VENDOR_TYPE' %]
+ <p>Hankinnassa käytettävät 'Toimittajan tyyppi' kentän arvot, joita voidaan käyttää tilastotarkoituksiin</p>
+ [% CASE 'VENDOR_INTERFACE_TYPE' %]
+ <p>Arvot, joita voidaan käyttää kentässä 'Toimittajan tyyppi' hankintamoduulissa</p>
+ [% CASE 'VENDOR_ISSUE_TYPE' %]
+ <p>Arvot, joita voidaan käyttää 'Toimittajan ongelmatyypit' -kentässä hankintaosiossa</p>
+ [% CASE 'WITHDRAWN' %]
+ <p>Lainauskierrosta sivuun vedetyn niteen tilatiedon kuvaus (näkyy niteiden lisäämisen tai muokkaamisen yhteydessä)</p>
+ [% CASE 'YES_NO' %]
+ <p>Yleinen auktorisoitu arvokenttä, jota voidaan käyttää missä tahansa yksinkertaisessa kyllä/ei pudotusvalikossa.</p>
+ [% END %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

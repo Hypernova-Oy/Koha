@@ -1,0 +1,17 @@
+---
+erm.pref:
+  Gränssnitt:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: ERMModule
+    - modulen för e-resurshantering
+  - - Leverantörer för e-resurshanteringsmodulen
+    - multiple:
+        ebsco: EBSCO
+        local: Lokal
+      pref: ERMProviders
+  - - Kund-ID för EBSCO HoldingsIQ
+    - pref: ERMProviderEbscoCustomerID
+  - - API-nyckel för EBSCO HoldingsIQ
+    - pref: ERMProviderEbscoApiKey

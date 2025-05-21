@@ -1,0 +1,1010 @@
+---
+opac.pref:
+  Autentisering:
+  - - choices:
+        '0': Tillåt
+        '1': Tillåt inte
+      pref: OPACShibOnly
+    - låntagare att logga in med ett annat alternativ än Shibboleth.
+  Avancerade sökalternativ:
+  - - 'Visa sökalternativ:'
+    - multiple:
+        itemtype: Exemplartyper
+        language: Språk
+        location: Placering och tillgänglighet
+        pubdate: Utgivningsår
+        sorting: Sortering
+        subtype: Underkategorier
+      pref: OpacAdvSearchOptions
+  - - 'Visa sökalternativ för den utökade vyn:'
+    - multiple:
+        itemtype: Exemplartyper
+        language: Språk
+        location: Placering och tillgänglighet
+        pubdate: Utgivningsår
+        sorting: Sortering
+        subtype: Underkategorier
+      pref: OpacAdvSearchMoreOptions
+  - - Visa flikar för att avgränsa sökresultatet i OPAC:ens avancerade sökning utifrån
+    - class: long
+      pref: OpacAdvancedSearchTypes
+    - -fält (separera värden med |). Flikar visas i den ordning de listas.<br/>
+    - 'opac.pref#OpacAdvancedSearchTypes# <em>För närvarande stödda värden</em>: Exemplartyper
+      (<strong>itemtypes</strong>), Avdelningar (<strong>ccode</strong>) och Placering
+      (<strong>loc</strong>).'
+  Begränsad sida:
+  - - Åtkomst från IP-adresser som börjar med
+    - pref: RestrictedPageLocalIPs
+    - behöver inte autentiseras (kommaseparerad - t.ex. '127.0.0,127.0.1').
+  - - HTML-innehåll för den begränsade sidan (tillgänglig på /cgi-bin/koha/opac-restrictedpage.pl)
+    - class: HTML
+      pref: RestrictedPageContent
+      syntax: text/html
+      type: textarea
+  - - Använd
+    - class: long
+      pref: RestrictedPageTitle
+    - som titel på din begränsade sida (visas i breadcrumbs och längst upp på den
+      begränsade sidan).
+  Funktioner:
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: OpacCatalogConcerns
+    - OPAC-användare att rapportera ärenden kring katalogposter.
+    - <p><strong>OBS:</strong> Aktivera `<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CatalogConcerns">CatalogConcerns</a>`
+      för att tillåta rapportering av ärenden via personalgränssnittet.</p>
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OPACReportProblem
+    - låntagare att rapportera problem på OPAC-sidor till biblioteket eller Kohaadministratör.
+    - <br/>
+    - <strong>Obs:</strong> Du måste ha <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>
+      aktiverad.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: opacuserlogin
+    - låntagare att logga in på sina konton i OPAC.
+  - - Show
+    - choices:
+        callnum: bibliotek och hyllsignum
+        ccode: bibliotek, avdelning och hyllsignum
+        library: enbart bibliotek
+        location: library, location, and call number
+      pref: OPACItemLocation
+    - för exemplar i OPAC:s sökresultat.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OpacPasswordChange
+    - låntagare att ändra sina egna lösenord i OPAC. Detta måste vara inaktiverat
+      för att kunna använda LDAP-autentisering.
+  - - 'Låntagarna '
+    - choices:
+        '0': får inte
+        '1': får
+      default: 1
+      pref: OpacResetPassword
+    - återställa sina lösenord via e-post i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OPACpatronimages
+    - låntagarbilder på informationssidan för låntagare i OPAC.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: OPACDetailQRCode
+    - alternativet att visa en QR-kod på OPAC-sidorna med detaljinformation.
+  - - choices:
+        '0': Ge inte
+        '1': Ge
+      pref: OPACFinesTab
+    - låntagare åtkomst till fliken Avgifter på sidan Mitt konto i OPAC.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OpacBrowser
+    - låntagare att bläddra bland ämnesauktoriteter i OPAC:en.
+    - <br><strong>NOTERA:</strong> Den här systeminställningen kräver cronjobbet <code>misc/cronjobs/build_browser_and_cloud.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OpacCloud
+    - ett ämnesmoln i OPAC:en.
+    - <br><strong>NOTERA:</strong> Den här systeminställningen kräver cronjobbet <code>misc/cronjobs/build_browser_and_cloud.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OpacAuthorities
+    - låntagare att söka i dina auktoritetsposter.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: opacbookbag
+    - låntagare att förvara exemplar i en temporär "minneslista" i OPAC.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OpacTopissue
+    - låntagare komma åt en lista med de mest utlånade exemplaren i OPAC. Detta är
+      till viss del en experimentell funktion och ska undvikas om din samling har
+      ett stort antal exemplar.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OPACComments
+    - låntagare att kommentera exemplar i OPAC.
+  - - Visa
+    - choices:
+        first: förnamn
+        firstandinitial: initialer från för- och efternamn
+        full: fullständigt namn
+        none: inget namn
+        surname: efternamn
+        username: användarnamn
+      pref: ShowReviewer
+    - för kommentator med kommentarer i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: ShowReviewerPhoto
+    - recensentens avatar intill kommentarer i OPAC. Avataren söks fram på <a href="https://www.libravatar.org"
+      target="_blank">Libravatar</a> med låntagarens e-postadress.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OPACHoldRequests
+    - låntagare att reservera exemplar från OPAC.
+  - - Visa
+    - class: long
+      pref: numSearchRSSResults
+    - sökresultat i RSS-data.
+  - - Visa
+    - multiple:
+        email: E-post
+        facebook: Facebook
+        linkedin: LinkedIn
+      pref: SocialNetworks
+    - länkar till sociala nätverk på detaljsidorna i OPAC.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      default: 1
+      pref: OpacBrowseResults
+    - bläddra i och byta sida i sökresultat från OPAC:s detaljsida.
+  - - Visa dagens citat
+    - multiple:
+        intranet: i personalklienten
+        opac: OPAC
+      pref: QuoteOfTheDay
+    - på startsidan.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: OPACPopupAuthorsSearch
+    - listan med författare/ämnen i en popup för en kombinerad sökning i detaljsidan
+      för OPAC.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: OpacHoldNotes
+    - låntagare att lägga till en kommentar när reservationen görs.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: OPACAcquisitionDetails
+    - inköpsinformation på OPAC-sidorna med detaljinformation.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: OpacNewsLibrarySelect
+    - en lista med val av bibliotek för nyheter i OPAC:en.
+  - - 'Använd följande som ISBD-mall i OPAC:'
+    - class: code
+      pref: OPACISBD
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': Inaktivera
+        '1': Aktivera
+      default: 0
+      pref: OpacBrowseSearch
+    - gränssnittet för att bläddra bland alla bestånd (enbart Elasticsearch).
+  - - 'Visa denna information om författare och bidragsgivare på sidan med detaljinformation
+      för exemplar i OPAC:'
+    - multiple_sortable:
+        activity: Activity (372$a$s$t)
+        address: Address (371$a$b$d$e)
+        associated_group: Associated group (373$a$s$t$u$v$0)
+        email_address: Electronic mail address (371$m)
+        identifiers: Identifiers (024$2$a)
+        occupation: Occupation (374$a$s$t$u$v$0)
+        place_of_birth: Place of birth (370$a)
+        place_of_death: Place of death (370$b)
+        uri: URI (371$u)
+      pref: OPACAuthorIdentifiersAndInformation
+    - '<strong>NOTE:</strong> Identifiers for authors and contributors - valid codes
+      to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID),
+      loop (Loop ID), rid (Publons ID), and viaf (VIAF ID).'
+  - - 'Beräkna hur mycket en låntagare har "sparat" genom att använda biblioteket,
+      baserat på ersättningskostnad, och visa:'
+    - multiple:
+        checkouthistory: under låntagarens utlåningshistorik (systeminställningen
+          'opacreadinghistory' måste vara aktiverad)
+        summary: i sammanfattningsrutan i OPAC (systeminställningen 'OPACUserSummary'
+          måste vara aktiverad)
+        user: på låntagarens sida 'din sammanfattning'
+      pref: OPACShowSavings
+    - . Observera att visad summa kan vara felaktig om utlåningshistorik är anonymiserad.
+  Förslag:
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OpacSuggestionManagedBy
+    - namnet på personalen som hanterade ett förslag i OPAC.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AnonSuggestions
+    - låntagare som inte är inloggade att lämna inköpsförslag. Förslag är kopplade
+      till systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AnonymousPatron">AnonymousPatron</a>.
+  - - Begränsa låntagare till
+    - class: integer
+      pref: MaxOpenSuggestions
+    - 'öppna förslag. Lämna tomt för ingen begränsning. **OBS: Denna inställning påverkar
+      inte anonyma förslag.'
+  - - Totalt antal tillåtna förslag
+    - class: integer
+      pref: MaxTotalSuggestions
+    - under
+    - class: integer
+      pref: NumberOfSuggestionDays
+    - dagar.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OPACViewOthersSuggestions
+    - inköpsförslag från andra låntagare i OPAC.
+  - - choices:
+        '0': Don't allow
+        '1': Tillåt
+      pref: OPACVirtualCard
+    - patrons to access the 'My virtual card' tab on their account page on the OPAC.
+    - 'If set to allow, show a '
+    - choices:
+        code128: CODE128
+        code39: CODE39
+        coop2of5: COOP 2 of 5
+        ean13: EAN-13
+        ean8: EAN-8
+        iata2of5: IATA 2 of 5
+        industrial2of5: Industrial 2 of 5
+        itf14: ITF-14
+        matrix2of5: Matrix 2 of 5
+        qrcode: QR Code
+        upca: UPC-A
+        upce: UPC-E
+      default: code39
+      pref: OPACVirtualCardBarcode
+    - ' barcode in the patron''s virtual card.'
+  - - 'Fält som ska vara obligatoriska för inköpsförslag från låntagare:'
+    - pref: OPACSuggestionMandatoryFields
+      required: title
+      source: suggestions
+      type: modalselect
+    - '<br />OBS: Om inget av ovanstående val markeras kommer ''Title'' fältet ändå
+      att vara obligatoriskt som standard.'
+  - - 'Fält som ska döljas när låntagare lämnar inköpsförslag:'
+    - exclusions: title
+      pref: OPACSuggestionUnwantedFields
+      source: suggestions
+      type: modalselect
+    - '<br />Obs: Gör inte <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACSuggestionMandatoryFields">OPACSuggestionMandatoryFields</a>
+      oönskade/gömda fält '
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: suggestion
+    - inköpsförslag i OPAC.<br>
+    - 'När inställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=suggestion">suggestion</a>
+      är aktiverad och <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AnonSuggestions">AnonSuggestions</a>
+      är inaktiverad, får inte följande låntagarkategorier lämna inköpsförslag:'
+    - choices: patron-categories
+      class: multiple
+      pref: suggestionPatronCategoryExceptions
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      default: 0
+      pref: OPACSuggestionAutoFill
+    - att formuläret för inköpsförslag i OPAC automatiskt fylls med data från Google
+      Books API.
+  Hyllnavigeringsverktyg:
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OPACShelfBrowser
+    - ett hyllnavigeringsverktyg på sidor med exemplarinformation, som gör att låntagare
+      kan se vad som finns nära det exemplaret på hyllan. Detta använder betydande
+      resurser på servern och ska inte användas om samlingen innehåller ett stort
+      antal exemplar.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      default: 1
+      pref: ShelfBrowserUsesLocation
+    - exemplarets placering när exemplar hittas för hyllnavigeringsverktyget.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      default: 1
+      pref: ShelfBrowserUsesHomeBranch
+    - exemplarets hembibliotek när exemplar hittas för hyllnavigeringsverktyget.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      default: 0
+      pref: ShelfBrowserUsesCcode
+    - exemplarets avdelning när exemplar hittas för hyllnavigeringsverktyget.
+  Integritet:
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: opacreadinghistory
+    - patrons to see what items they have checked out in the past.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OPACHoldsHistory
+    - låntagare att se en lista över sina tidigare reservationer.
+  - - choices:
+        '0': Spara inte
+        '1': Spara
+      default: 0
+      pref: EnableOpacSearchHistory
+    - sökhistorik för låntagare i OPAC.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: OPACPrivacy
+    - låntagare att själva ange sina sekretessinställningar för utlåningshistorik.
+      Detta kräver systeminställningarna <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=opacreadinghistory">opacreadinghistory</a>
+      och <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AnonymousPatron">AnonymousPatron</a>.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: AllowPatronToSetCheckoutsVisibilityForGuarantor
+    - låntagare att välja egna inställningar för hur deras utlån skyddas för visning
+      för deras vårdnadshavare.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: AllowPatronToSetFinesVisibilityForGuarantor
+    - låntagare att välja egna inställningar för hur deras avgifter skyddas för visning
+      för deras vårdnadshavare.
+  - - Använd låntagarnummer
+    - class: integer
+      pref: AnonymousPatron
+    - som anonym låntagare (för anonyma förslag och utlåningshistorik).
+  - - choices:
+        '0': Spåra inte
+        anonymous: Spåra anonymt
+        track: Spåra
+      default: 0
+      pref: TrackClicks
+    - länkar som låntagare klickar på.
+  OpenURL:
+  - - 'Fyll i URL till OpenURL-uppslagstjänst (börjar med <code>http://</code> eller
+      <code>https://</code>):'
+    - class: url
+      pref: OpenURLResolverURL
+  - - 'Text till OpenURL-länkar (eller bildtitel om <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLImageLocation">OpenURLImageLocation</a>
+      är definierad):'
+    - pref: OpenURLText
+  - - 'Bildadress för OpenURL-länkar:'
+    - class: url
+      pref: OpenURLImageLocation
+    - <br />(Kan vara en absolut URL som börjar med <code>http://</code> eller
+    - <code>https://</code> eller relativ sökväg
+    - '<br />Exempel:'
+    - <br />- <code>http://www.example.com/img/openurl.png</code>
+    - <br />- <code>/opac-tmpl/bootstrap/images/OpenURL.png</code>
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: OPACShowOpenURL
+    - visning av OpenURL-länk i träfflistan och på detaljsidan i OPAC.
+  - - 'Lista med koder för exemplartyper (separerade med blanksteg) när OpenURL-länken
+      ska visas:'
+    - pref: OPACOpenURLItemTypes
+    - <br />
+  Policy:
+  - - choices:
+        '0': Begränsa inte
+        '1': Begränsa
+      pref: SearchMyLibraryFirst
+    - låntagarens sökningar till biblioteket de är registrerade hos.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OpacRenewalAllowed
+    - låntagare att låna om sina egna böcker i OPAC.
+  - - Använd
+    - choices:
+        checkoutbranch: biblioteket exemplaret lånades ut från
+        itemhomebranch: exemplarets hembibliotek
+        none: NULL
+        opacrenew: '''OPACRenew'''
+        patronhomebranch: låntagarens hembibliotek
+      pref: OpacRenewalBranch
+    - som filialkod att lagra i statistiktabellen.
+  - - Låt endast låntagare låna om sina egna böcker i OPAC om de har mindre än
+    - class: currency
+      pref: OPACFineNoRenewals
+    - '[% local_currency %] i avgifter (lämna tomt för att avaktivera).'
+  - - choices:
+        '0': Inkludera inte
+        '1': Inkludera
+      pref: OPACFineNoRenewalsIncludeCredits
+    - utstående avgifter när regeln <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFineNoRenewals">OPACFineNoRenewals</a>
+      appliceras för låntagare.
+  - - class: code
+      pref: OpacHiddenItems
+      syntax: text/x-yaml
+      type: textarea
+    - Ange anpassade regler för att dölja specifika exemplar från sökning och visning
+      i OPAC. Hur dessa regler skapas finns dokumenterat i <a href="http://wiki.koha-community.org/wiki/OpacHiddenItems"
+      target="_blank">Koha:s wiki</a>.
+  - - 'Lista med låntagarkategorier som kan se exemplar som annars göms av <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacHiddenItems">OpacHiddenItems</a>:'
+    - choices: patron-categories
+      class: multiple
+      pref: OpacHiddenItemsExceptions
+  - - choices:
+        '0': Dölj inte
+        '1': Dölj
+      default: 1
+      pref: OpacHiddenItemsHidesRecord
+    - den bibliografiska posten när alla exemplar är gömda av <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacHiddenItems'>OpacHiddenItems</a>.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 1
+      pref: OpacAllowPublicListCreation
+    - OPAC-användare att skapa offentliga listor.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: OpacAllowSharingPrivateLists
+    - OPAC-användare att dela privata listor med andra låntagare.
+  - - 'Expired patrons are blocked from performing the following actions in the OPAC:'
+    - multiple:
+        hold: Placing a hold on an item
+        ill_request: Placing an ILL request
+        renew: Renewing an item
+      pref: BlockExpiredPatronOpacActions
+    - <p><strong>NOTE:</strong> OPAC actions blocked using the patron category setting
+      take priority over this system preference.</p>
+  - - Cronjobbet cleanup_database.pl tar automatiskt bort inbjudningar till oaccepterade
+      privata listdelninger efter
+    - class: integer
+      pref: PurgeListShareInvitesOlderThan
+    - dagar.
+    - '<p>Exempel: [14] Tar bort en inbjudan till oaccepterad privat listdelning äldre
+      än 14 dagar.</p>'
+    - '<p><strong>VARNING</strong>: Oaccepterade privata listdelningar tas bort enligt
+      dessa prioriteringar:'
+    - <ul>
+    - '<li>Första prioritet: Använd inställningen --list-invites när cronjobbet cleanup_database.pl
+      cronjob körs och inställningen --list-invites definierar ett antal dagar.</li>'
+    - '<li>Andra prioritet: Använd systeminställningen PurgeListShareInvitesOlderThan
+      när den innehåller ett värde.</li>'
+    - '<li>Tredje prioritet: Använd som standard 14 dagar när cronjobbet cleanup_database.pl
+      körs med inställningen --list-invites, men utan värde OCH systeminställningen
+      PurgeListShareInvitesOlderThan är tom.</li>'
+    - </ul>
+    - '<strong>OBS!</strong> Denna systeminställning kräver att följande cronjobb
+      körs: <code>misc/cronjobs/cleanup_database.pl</code>Be din systemadministratör
+      att schemalägga det.'
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: OpacTrustedCheckout
+    - OPAC-användare att låna ut exemplar till sig själva.
+  Självregistrering och ändring:
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: PatronSelfRegistration
+    - bibliotekslåntagare att registrera sig för ett konto via OPAC.
+    - <br><strong>NOTERA:</strong> Den här systeminställningen kräver att <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfRegistrationDefaultCategory'>PatronSelfRegistrationDefaultCategory</a>
+      är en giltig låntagarkategorikod.
+  - - choices:
+        '0': Kräv inte
+        '1': Kräv
+      pref: PatronSelfRegistrationVerifyByEmail
+    - att låntagare som registrerat sig via OPAC verifierar sig via e-post.
+    - '<br><strong>OBS!</strong> Denna systeminställning kräver att följande cronjobb
+      körs: <code>misc/cronjobs/cleanup_database.pl</code>Be din systemadministratör
+      att schemalägga det.'
+  - - Använd
+    - choices: patron-categories
+      pref: PatronSelfRegistrationDefaultCategory
+    - som standardkategori för låntagare som registreras via OPAC.
+    - '<br><strong>OBS: Använd inte en vanlig låntagarkategori vid självregistrering.</strong>'
+    - <br>Om cronjobbet <code>misc/cronjobs/cleanup_database.pl</code> är inställt
+      på att ta bort overifierade och ofärdiga självregistreringar från OPAC, så kommer
+      alla låntagare som har registrerat sig för mer än <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfRegistrationExpireTemporaryAccountsDelay'>PatronSelfRegistrationExpireTemporaryAccountsDelay</a>
+      dagar sen att tas bort permanent (så länge fördröjningen inte är tom eller noll).
+  - - Ta bort låntagare som fortfarande är kvar i kategorin som har angetts på <a
+      href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfRegistrationDefaultCategory">PatronSelfRegistrationDefaultCategory</a>
+    - class: integer
+      pref: PatronSelfRegistrationExpireTemporaryAccountsDelay
+    - dagar efter att kontot har skapats.
+    - <br><strong>Obs:</strong> Den här systeminställningen kräver cronjobbet <code>misc/cronjobs/cleanup_database.pl</code>.
+      Be din systemadministratör att schemalägga det.<br>Inga låntagare kommer att
+      tas bort om inställningen är satt till noll eller är tom.
+  - - 'Följande <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>databaskolumner</a> ska vara obligatoriska i formuläret för
+      självregistrering:'
+    - exclusions: password|cardnumber|dateexpiry|categorycode|sort1|sort2|opacnote|borrowernotes|gonenoaddress|lost|flags
+      pref: PatronSelfModificationMandatoryField
+      source: borrowers
+      type: modalselect
+  - - 'Följande <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>databaskolumner</a> ska vara obligatoriska i formuläret för
+      självregistrering:'
+    - exclusions: sort1|sort2|opacnote|borrowernotes|gonenoaddress|lost|flags
+      pref: PatronSelfRegistrationBorrowerMandatoryField
+      source: borrowers
+      type: modalselect
+  - - 'Följande <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>databaskolumner</a> ska inte visas i formuläret för självregistrering:'
+    - exclusions: branchcode|sort1|sort2|gonenoaddress|lost|flags
+      inclusions: categorycode|dateexpiry
+      pref: PatronSelfRegistrationBorrowerUnwantedField
+      source: borrowers
+      type: modalselect
+    - '<br /> NOTE: preferred_name will be set to firstname if not included in the
+      form.'
+  - - 'Följande <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
+      target=''blank''>databaskolumner</a> kommer inte visas i formuläret där låntagaren
+      kan ändra uppgifter:'
+    - exclusions: sort1|sort2|gonenoaddress|lost|flags
+      pref: PatronSelfModificationBorrowerUnwantedField
+      source: borrowers
+      type: modalselect
+    - '<br /> NOTE: preferred_name will be set to firstname if not included in the
+      form. It should also be selected in <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerUnwantedField">BorrowerUnwantedField</a>
+      if selected here.'
+  - - choices:
+        '0': Betrakta inte
+        '1': Betrakta
+      pref: PatronSelfRegistrationEmailMustBeUnique
+    - låntagares e-postadress (borrowers.email) som unik vid självregistrering. En
+      e-postadress kommer inte att accepteras om den redan existerar i databasen.
+  - - 'Aktivera självregistrering för följande bibliotek/filialer:'
+    - pref: PatronSelfRegistrationLibraryList
+    - (separera bibliotek/filialer med |).
+    - Om fältet lämnas tomt kommer samtliga bibliotek/filialer att listas.
+  - - choices:
+        '0': Visa inte eller fyll i i förväg
+        '1': Visa och fyll i i förväg
+      pref: PatronSelfRegistrationPrefillForm
+    - lösenord och loginformulär efter att en låntagare har självregistrerat.
+  - - choices:
+        '0': Kräv inte
+        '1': Kräv
+      pref: PatronSelfRegistrationConfirmEmail
+    - att låntagare bekräftar sin e-postadress genom att ange den två gånger.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OPACPatronDetails
+    - låntagare att informera biblioteket om ändringar i sin kontaktinformation från
+      OPAC.
+  - - 'Välj vilken e-postadress nya självregistreringar ska skickas till: '
+    - choices:
+        '0': ingen
+        BranchEmailAddress: bibliotekets e-postadress
+        EmailAddressForPatronRegistrations: EmailAddressForPatronRegistrations
+        KohaAdminEmailAddress: KohaAdminEmailAddress
+      default: 0
+      pref: EmailPatronRegistrations
+    - '<br>If you choose <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForPatronRegistrations">EmailAddressForPatronRegistrations</a>
+      you have to enter a valid email address: '
+    - class: email
+      pref: EmailAddressForPatronRegistrations
+  Utseende:
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OPACUserSummary
+    - en sammanfattning av en inloggad låntagares lån, försenade lån, reservationer
+      och avgifter på OPAC:ens startsida.
+  - - För sökresultat i OPAC, visa exemplarets
+    - choices:
+        holdingbranch: aktuella bibliotek
+        homebranch: hembibliotek
+      pref: OPACResultsLibrary
+    - .
+  - - Använd
+    - choices: opac-templates
+      pref: opacthemes
+    - temat för OPAC.
+  - - Använd
+    - choices:
+        bootstrap: bootstrap
+        prog: prog
+      pref: OPACFallback
+    - -temat som reservtema för OPAC.
+  - - 'OPAC finns på '
+    - class: url
+      pref: OPACBaseURL
+    - . Detta bör vara en fullständig URL, som inleds med <code>http://</code> eller
+      <code>https://</code>. Inkludera inte ett avslutande snedstreck i URL. (Detta
+      måste fyllas i korrekt för att RSS, unAPI och plugins för sökning ska fungera.)
+  - - Visa
+    - class: long
+      pref: LibraryName
+    - som bibliotekets namn i OPAC.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: OpacPublic
+    - 'Koha OPAC som öppen för allmänheten. Privat OPAC kräver autentisering innan
+      man kommer in i OPAC. '
+    - 'Notera: Det här berör inte den offentliga API:n, se <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RESTPublicAnonymousRequests">RESTPublicAnonymousRequests</a>
+      för att styra API:n.'
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OPACShowLibraries
+    - en länk till en sida i OPAC som visar information om varje bibliotek.
+  - - Visa stjärnbetyg på
+    - choices:
+        all: resultat-, detalj- och låntagar-
+        details: endast detaljinformations-
+        disable: inga
+      pref: OpacStarRatings
+    - sidor.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OpacMaintenance
+    - en varning om att underhåll av OPAC pågår, istället för av OPAC. Obs! detta
+      visar samma varning som när databasen måste uppgraderas, men utan möjlighet
+      att förbigå varningen. Ett meddelande kan visas i OPAC genom att skapa en <a
+      href='/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations'>HTML-anpassning</a>
+      i sektionen OpacMaintenanceNotice.
+  - - Den här beskrivningen kommer att synas i sökmotorernas söklistor (160 tecken).
+    - pref: OpacMetaDescription
+      type: textarea
+  - - Control how search engines index the OPAC by adding a robots meta tag with
+    - multiple:
+        nofollow: nofollow
+        noindex: noindex
+      pref: OpacMetaRobots
+    - options.<br>
+    - <br><strong>nofollow:</strong> This option tells search engines not to follow
+      any links on the OPAC. If you don't specify this rule, search engines may use
+      links on the page to discover those linked pages.
+    - <br/><strong>noindex:</strong> This option instructs search engines not to index
+      the OPAC at all. This means the OPAC won't appear in search results. This might
+      be useful for internal library catalogs that are not intended for public search.
+    - <br><strong>both:</strong> Search engines won't follow any links on the OPAC
+      and won't index the OPAC itself.
+  - - Visa som standard katalogposter
+    - choices:
+        isbd: som angivet i ISBD-mallen.
+        marc: i sitt MARC-format.
+        normal: i förenklat format.
+      pref: BiblioDefaultView
+  - - När låntagare klickar på en länk till en annan webbplats från din OPAC (t.ex.
+      Amazon eller OCLC),
+    - choices:
+        '0': öppna inte
+        '1': öppna
+      pref: OPACURLOpenInNewWindow
+    - webbplatsen i ett nytt fönster.
+  - - choices:
+        '0': Visa
+        '1': Visa inte
+      pref: hidelostitems
+    - förlorade exemplar på sök- och detaljsidor.
+  - - 'Visa listor i OPAC genom att använda XSLT-stilmall på: '
+    - class: file
+      pref: OPACXSLTListsDisplay
+    - <br />Alternativ:<ul><li>Ange "<a href="#" class="set_syspref" data-syspref="OPACXSLTListsDisplay"
+      data-value="default">default</a>" för standardstilmallen</li><li>Ange en sökväg
+      för att definiera en XSLT-fil</li><li>Ange en URL för en extern specifik stilmall.</li></ul>Om
+      du har flera stilmallar för olika språk så kommer biten {langcode} att ersättas
+      med nuvarande gränssnitts språk.
+  - - 'Visa OPAC-resultat med XSLT-stilmallen: '
+    - class: file
+      pref: OPACXSLTResultsDisplay
+    - '<br />Alternativ:<ul><li>Ange "<a href="#" class="set_syspref" data-syspref="XSLTResultsDisplay"
+      data-value="default">default</a>" för standardstilmallen</li><li>Ange en sökväg
+      för att definiera en XSLT-fil</li><li>Ange en URL för en extern specifik stilmall.</li><li>NOTERA:
+      Systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PassItemMarcToXSLT">PassItemMarcToXSLT</a>
+      måste vara aktiverad om din egen stilmall använder data i exemplarfälten</li></ul>Om
+      du har flera stilmallar för olika språk så kommer biten {langcode} att ersättas
+      med nuvarande gränssnitts språk.'
+  - - 'Visa OPAC-information med XSLT-stilmallen: '
+    - class: file
+      pref: OPACXSLTDetailsDisplay
+    - <br />Alternativ:<ul><li>Ange "<a href="#" class="set_syspref" data-syspref="XSLTListsDisplay"
+      data-value="default">default</a>" för standardstilmallen</li><li>Ange en sökväg
+      för att definiera en XSLT-fil</li><li>Ange en URL för en extern specifik stilmall.</li></ul>Om
+      du har flera stilmallar för olika språk så kommer biten {langcode} att ersättas
+      med nuvarande gränssnitts språk.
+  - - 'Visa auktoritetsdetaljer i OPAC med XSLT-stilmallen: '
+    - class: file
+      pref: AuthorityXSLTOpacResultsDisplay
+    - 'opac.pref#AuthorityXSLTOpacResultsDisplay# <br />Alternativ:<ul><li>Tom. Ingen
+      XSLT kommer användas (<strong>default</strong>)</li><li>Ange en sökväg till
+      en anpassad XSLT-fil.</li><li>Ange en URL för en extern stilmall.</li></ul>Om
+      du har flera stilmallar för: <ul><li>olika språk: använd platshållaren {langcode}
+      - denna kommer att ersättas med det nuvarande gränssnittsspråket</li><li>auktoritetstyper:
+      använd platshållaren {authtypecode} - detta kommer att ersättas med auktoritetstypskoden'
+  - - 'Visa resultat i OPAC med XSLT-stilmallen: '
+    - class: file
+      pref: AuthorityXSLTOpacDetailsDisplay
+    - '<br />Alternativ:<ul><li>Tom. Ingen XSLT kommer användas (<strong>default</strong>)</li><li>Ange
+      en sökväg till en anpassad XSLT-fil.</li><li>Ange en URL för en extern stilmall.</li></ul>Om
+      du har flera stilmallar för: <ul><li>olika språk: använd platshållaren {langcode}
+      - denna kommer att ersättas med det nuvarande gränssnittsspråket</li><li>auktoritetstyper:
+      använd platshållaren {authtypecode} - detta kommer att ersättas med auktoritetstypskoden'
+  - - choices:
+        '0': Visa
+        '1': Visa inte
+      default: 0
+      pref: OpacNoItemTypeImages
+    - ikoner för exemplartyper i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: DisplayOPACiconsXSLT
+    - ikonerna för format, målgrupp och materialtyp i XSLT MARC21-resultaten och på
+      detaljsidorna i OPAC.
+  - - choices:
+        '0': Inkludera inte
+        '1': Inkludera
+      pref: COinSinOPACResults
+    - 'COinS / OpenURL / Z39.88 i OPAC-sökresultat.  <br/>Varning: Om denna funktion
+      aktiveras, påverkas svarstiderna för OPAC-sökningar negativt.'
+    - '<br/>Om ni vill visa en länk till en OpenURL-uppslagningstjänst, titta på följande
+      systeminställningar:'
+    - <br/><a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLResolverURL">OpenURLResolverURL</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACShowOpenURL">OPACShowOpenURL</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACOpenURLItemTypes">OPACOpenURLItemTypes</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLText">OpenURLText</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLImageLocation">OpenURLImageLocation</a>
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OPACShowUnusedAuthorities
+    - oanvända auktoriteter i auktoritetsverktyget för OPAC.
+  - - choices:
+        holds: Visa reservationer
+        holds_priority: Visa reservationer och deras prioriteringsnivå
+        none: Visa inga reservationsdetaljer
+        priority: Visa prioriteringsnivå
+      pref: OPACShowHoldQueueDetails
+    - för låntagare i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: OPACShowCheckoutName
+    - namnet på den låntagare som har ett lånat exemplar på sidan med detaljinformation
+      för exemplar i OPAC.
+  - - Visa
+    - choices:
+        both: hembibliotek och nuvarande plats
+        holding: nuvarande plats
+        home: hembibliotek
+      pref: OpacLocationBranchToDisplay
+    - för exemplar på sidan med postdetaljer i OPAC.
+  - - 'Visa placering '
+    - choices:
+        both: under både hembibliotek och nuvarande plats
+        column: i separat kolumn
+        holding: under nuvarande plats
+        home: under hembibliotek
+      pref: OpacLocationOnDetail
+    - för exemplar på sidan med postdetaljer i OPAC.
+    - '<br />Obs: Om ''separat kolumn'' är markerad, behöver du fortfarande aktivera
+      visning av item_shelving_location på sidan <a href=''/cgi-bin/koha/admin/columns_settings.pl''>konfigurera
+      kolumner</a>.'
+  - - Use
+    - choices:
+        cardnumber: card number
+        cardnumberorusername: card number or username
+        username: användarnamn
+      default: card number
+      pref: OPACLoginLabelTextContent
+    - as the label of the userid input field on the OPAC login form.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: OPACShowMusicalInscripts
+    - noter på detaljsidan i OPAC.
+  - - choices:
+        '0': Spela inte upp
+        '1': Spela upp
+      default: 0,'','If displayed musical inscripts, play midi conversion for items
+        on the OPAC record details page.'
+      pref: OPACPlayMusicalInscripts
+    - MIDI på sidan för postdetaljer i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: OpacKohaUrl
+    - Texten 'Drivs av Koha' i OPAC:s sidfot.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: OpacShowRecentComments
+    - en länk till aktuella kommentarer i OPAC:s övre del.
+  - - choices:
+        '0': Markera inte
+        '1': Markera
+      pref: OpacHighlightedWords
+    - 'ord som låntagaren sökte efter i sökresultaten och detaljsidorna; För att göra
+      så att vissa ord aldrig visas, ange en lista med stoppord här:'
+    - class: multi
+      pref: NotHighlightedWords
+    - (separera kolumner med |).
+  - - Använd bilden på
+    - class: url
+      pref: OpacFavicon
+    - för OPAC:s favicon. (Detta bör vara en komplett URL, som börjar med <code>http://</code>.)
+  - - 'Inkludera följande JavaScript på alla sidor i OPAC:'
+    - class: code
+      pref: OPACUserJS
+      syntax: javascript
+      type: textarea
+    - <br><strong>OBS:</strong> Biblioteksspecifik javascriptkod kan definieras <a
+      href='/cgi-bin/koha/admin/branches.pl'>här</a>.
+  - - Inkludera den extra CSS-stilmallen
+    - class: file
+      pref: OpacAdditionalStylesheet
+    - för att åsidosätta specificerade inställningar från standardstilmallen (lämna
+      tomt för att avaktivera). Ange ett filnamn, en komplett lokal sökväg eller en
+      fullständig URL som börjar med <code>http://</code> (om filen finns på en extern
+      server). Om du bara anger ett filnamn, måste filen finnas i css-underkatalogen
+      för varje aktivt tema och språk i Kohas mallkatalog. En komplett lokal sökväg
+      förutsätts starta från HTTP-dokumentets rotkatalog.
+  - - Använd CSS-stilmallen
+    - class: file
+      pref: opaclayoutstylesheet
+    - på alla sidor i OPAC, istället för standard-css (används när detta fält lämnas
+      tomt). Ange ett filnamn, en komplett lokal sökväg eller en fullständig URL som
+      börjar med <code>http://</code> (om filen finns på en extern server). Om du
+      bara anger ett filnamn, måste filen finnas i css-underkatalogen för varje aktivt
+      tema och språk i Kohas mallkatalog. En komplett lokal sökväg förutsätts starta
+      från HTTP-dokumentets rot.
+  - - 'Inkludera följande CSS på alla sidor i OPAC:'
+    - class: code
+      pref: OPACUserCSS
+      syntax: css
+      type: textarea
+    - <br><strong>OBS:</strong> Biblioteksspecifik CSS kan ställas in <a href='/cgi-bin/koha/admin/branches.pl'>här</a>.
+  - - 'Inkludera rutan "Fler sökningar" på detaljsidan för exemplar i OPAC, med följande
+      HTML (lämna tomt för att avaktivera):'
+    - <br />Obs! Platsmarkörerna {BIBLIONUMBER}, {CONTROLNUMBER}, {TITLE}, {ISBN},
+      {ISSN} och {AUTHOR} byts ut mot information från den visade posten.
+    - class: code
+      pref: OPACSearchForTitleIn
+      syntax: text/html
+      type: textarea
+  - - 'Inkludera en "Länkar"-kolumn under flikarna "min sammanfattning" och "min läsehistorik"
+      när en användare är inloggad i OPAC, med följande HTML (lämna tomt för att avaktivera):'
+    - <br />Obs! Platsmarkörerna {BIBLIONUMBER}, {TITLE}, {ISBN} och {AUTHOR} byts
+      ut mot information från den visade posten.
+    - class: code
+      pref: OPACMySummaryHTML
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': Lägg inte till
+        '1': Lägg till
+      pref: OpacAddMastheadLibraryPulldown
+    - en rullgardinsmeny för att välja bibliotek i OPAC:s övre del.
+  - - 'Vissa denna HTML när inga resultat hittas för en sökning i OPAC:'
+    - <br />Obs! Du kan ange platsmarkörer {QUERY_KW} som byts ut mot frågans nyckelord.
+    - class: code
+      pref: OPACNoResultsFound
+      syntax: text/html
+      type: textarea
+  - - 'Visa URI i fältet 856u som en bild på: '
+    - choices:
+        Both: både detalj- och resultatsidor
+        Details: endast detaljsida
+        OFF: varken detalj- eller resultatsidor
+        Results: endast resultatsida
+      pref: OPACDisplay856uAsImage
+    - . Obs! Motsvarande alternativ för <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACXSLT">OPACXSLT</a>
+      måste vara aktiverat.
+  - - 'Välj exportalternativ som ska vara tillgängliga från detaljsidan i OPAC:'
+    - multiple:
+        bibtex: BibTeX
+        dc: Dublin Core
+        isbd: ISBD
+        marc8: MARC-8-kodad MARC
+        marcstd: Unicode/UTF-8-kodad MARC utan lokal användning -9xx, x9x, xx9-fält
+          och delfält
+        marcxml: MARCXML
+        mods: MODS
+        ris: RIS
+        utf8: Unicode/UTF-8-kodad MARC
+      pref: OpacExportOptions
+  - - choices:
+        '0': Separera inte
+        '1': Separera
+      pref: OpacSeparateHoldings
+    - exemplar visas i två flikar, där den första fliken innehåller exemplar vars
+    - choices:
+        holdingbranch: nuvarande plats
+        homebranch: hembibliotek
+      pref: OpacSeparateHoldingsBranch
+    - är den inloggade användarens bibliotek. Den andra fliken innehåller alla andra
+      exemplar.
+  - - choices:
+        first_column: Första kolumnen i tabellen
+        holdingbranch: Nuvarande plats
+        homebranch: Hembibliotek
+      pref: OPACHoldingsDefaultSortField
+    - är standardsorteringsfältet för tabellen holdings.
+  - - Visa upp till
+    - class: integer
+      pref: OpacMaxItemsToDisplay
+    - exemplar på detaljsidan med bibliografisk information (om posten har fler exemplar
+      än detta, visas i stället en länk som låter användaren välja att visa alla exemplar).
+  - - 'Visa språkval på '
+    - choices:
+        both: både sidhuvud och sidfot
+        footer: endast sidfot
+        top: sidhuvud
+      pref: OpacLangSelectorMode
+    - .
+  - - 'Lista följande <a href=''/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN''>"Ej
+      för utlån"</a>-statusar som referensexemplar bland sökresultaten i OPAC:'
+    - pref: Reference_NFL_Statuses
+    - (Använd | som avgränsare.)
+  - - Visa inte fler än
+    - pref: OPACResultsMaxItems
+    - enskilda (tillgängliga) exemplar i OPAC XSLT-sökresultaten.<br>
+    - Om <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACResultsUnavailableGroupingBy">OPACResultsUnavailableGroupingBy</a>
+      är inställd på "bibliotek och understatus", visa inte fler än
+    - pref: OPACResultsMaxItemsUnavailable
+    - enskilda (otillgängliga) bibliotek enligt bibliotek och kategori (som Utlånad,
+      Skadad, Reserverad etc)<br>
+    - Gruppera otillgängliga exemplar enligt
+    - choices:
+        branch: bibliotek och understatus
+        branchonly: endast bibliotek
+        substatus: endast understatus
+      pref: OPACResultsUnavailableGroupingBy
+    - '. (OBS: För stora samlingar rekommenderar vi att gruppera otillgängliga objekt
+      efter ''endast understatus'', och lista antal exemplar enligt denna. På samma
+      sätt resulterar alternativet ''endast bibliotek'' i antalet otillgängliga exemplar
+      per bibliotek.)'

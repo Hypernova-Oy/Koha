@@ -1,0 +1,101 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE AdditionalContents %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET consentview = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Suostumukset &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Kohan verkkokirjasto[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-patron-consent' %]
+[% INCLUDE 'masthead.inc' %]
+
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-user.pl">[% patron.firstname | html %] [% patron.surname | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Suostumukset</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ <div class="col-lg-10 order-first order-md-first order-lg-2">
+ <div id="patronconsents" class="maincontent">
+ <form action="/cgi-bin/koha/opac-patron-consent.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-save"/>
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]"/>
+ <h1>Suostumukset</h1>
+ [% FOREACH consent IN consents %]
+ [% SET consent_type = consent.type %]
+ [% IF consent_type == 'GDPR_PROCESSING' %]
+ <legend><h2>Tietosuojasuostumus</h2></legend>
+ <div class="alert alert-warning">
+ <p>Voidaksemme pitää sinut sisäänkirjautuneena, tarvitsemme alla määritellyn tietosuoja-asetuksen mukaisen hyväksyntäsi henkilötietojesi käsittelyyn.</p>
+ <p>Jos haluat peruuttaa suostumuksesi, <strong>poistamme käyttäjätilisi</strong> kohtuullisen ajan sisällä ja voit nyt kirjautua ulos.</p>
+ </div>
+ <p>Olen lukenut ja hyväksyn <a target="_blank" href="[% Koha.Preference('PrivacyPolicyURL') | url %]">tietosuojaselosteessa</a> mainitut henkilötietojen käsittelytavat.</p>
+ [% ELSIF consent_types.$consent_type %]
+ [% SET consent_title = ( consent_types.$consent_type.title.$lang || consent_types.$consent_type.title.en ) %]
+ [% SET consent_desc  = ( consent_types.$consent_type.description.$lang || consent_types.$consent_type.description.en )  %]
+ <legend><h2>[% consent_title | html %]</h2></legend>
+ <p>[% consent_desc | html %]</p>
+ <p>Hyväksytkö?</p>
+ [% ELSE %]
+ <legend><h2>Suostumus kohteelle [% consent_type | html %]</h2></legend>
+ <p>Hyväksytkö?</p>
+ [% END %]
+ <fieldset>
+ [% IF consent.given_on %]
+ <input type="radio" name="check_[% consent_type | html %]" value="1" checked="checked"> Kyllä<br>
+ <input type="radio" name="check_[% consent_type | html %]" value="0"> Ei [% ELSIF consent.refused_on %] <input type="radio" name="check_[% consent_type | html %]" value="1"> Kyllä<br>
+ <input type="radio" name="check_[% consent_type | html %]" value="0" checked="checked"> Ei [% ELSE %] <input type="radio" name="check_[% consent_type | html %]" value="1"> Kyllä<br>
+ <input type="radio" name="check_[% consent_type | html %]" value="0"> Ei [% END %] [% IF consent.given_on %] <p class="consent_info"><strong>Suostumuksesi on rekisteröity [% consent.given_on | html %].</strong></p>
+ [% ELSIF consent.refused_on %]
+ <p class="dissent_info"><strong>Et antanut suostumustasi kohteelle [% consent.refused_on | html %].</strong></p>
+ [% END %]
+ </fieldset>
+ [% END %]
+ <fieldset class="action">
+ <input class="btn btn-primary" id="saveconsent" type="submit" value="Tallenna" />
+ </fieldset>
+ </form>
+ </div> <!-- / #patronconsents -->
+ </div> <!-- / .col-lg-10 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+</div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+ <script>
+        $(document).ready(function() {
+            // Initially no choice is made or no change, so disable button
+            $("#saveconsent").prop('disabled', true);
+
+            $("input[type='radio']").click(function() {
+                $("#saveconsent").prop('disabled', false);
+                var v = $(this).val();
+                // If former registration info present, toggle
+                if( v == 1 ) {
+                    $(this).siblings('.consent_info').show();
+                    $(this).siblings('.dissent_info').hide();
+                } else {
+                    $(this).siblings('.consent_info').hide();
+                    $(this).siblings('.dissent_info').show();
+                }
+            });
+        });
+    </script>
+[% END %]

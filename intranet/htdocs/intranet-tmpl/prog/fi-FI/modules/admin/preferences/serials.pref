@@ -1,0 +1,80 @@
+---
+Kausijulkaisut:
+  Ilmoitukset:
+  - - Käytä lähettäjäosoitteena
+    - class: email
+      pref: SerialsDefaultEmailAddress
+    - kun lähetetään reklamaatioita kausijulkaisuista.
+    - '<br>Jos tämä jätetään tyhjäksi, käytetään ensimmäistä määriteltyä osoitetta
+      tästä listasta: kirjaston sähköpostiosoite, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  - - Käytä vastaussähköpostina
+    - class: email
+      pref: SerialsDefaultReplyTo
+    - kun lähetetään reklamaatioita kausijulkaisuista.
+    - '<br>Jos tämä jätetään tyhjäksi, käytetään ensimmäistä määriteltyä osoitetta
+      tästä listasta: kirjaston vastausosoite, kirjaston sähköpostiosoite, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>
+      ja <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  Ominaisuudet:
+  - - Näytä
+    - choices:
+        holdings: kokoelmatiedot
+        serialcollection: kausijulkaisun kokoelmatiedot
+        subscriptions: kausijulkaisutilaustiedot
+        titlenotes: nimekkeen huomautukset -välilehteä
+      pref: opacSerialDefaultTab
+    - 'oletusvälilehtenä verkkokirjastossa. Huomaa: Kausijulkaisujen kokoelmavälilehti
+      on käytettävissä vain UNIMARC-formaattia käytettäessä.'
+  - - choices:
+        '0': Älä ehdota
+        '1': Ehdota
+      pref: RenewSerialAddsSuggestion
+    - tietuetta, kun siihen liitetyn kausijulkaisun tilaus uudistetaan.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: RoutingSerials
+    - kiertolistaominaisuutta kausijulkaisuissa.
+  - - choices:
+        '0': Älä merkitse varatuksi
+        '1': Merkitse varatuksi
+      pref: RoutingListAddReserves
+    - saapuneet kausijulkaisun numero(a), jos sille on olemassa kiertolista.
+  - - 'Liitä seuraava huomautus kaikkiin kiertolistoihin:'
+    - class: code
+      pref: RoutingListNote
+      type: textarea
+  - - Näytä
+    - class: integer
+      pref: StaffSerialIssueDisplayCount
+    - kausijulkaisun edelliset numerot virkailijaliittymässä.
+  - - Näytä
+    - class: integer
+      pref: OPACSerialIssueDisplayCount
+    - kausijulkaisun edelliset numerot verkkokirjastossa.
+  - - Näytä kausijulkaisun saapumishistoriassa
+    - choices:
+        full: täydet tiedot
+        simplified: lyhyet tiedot
+      pref: SubscriptionHistory
+    - kausijulkaisun numeroista.
+  - - Kentät, joiden tietoja ei muokata, kun tilaus kopioidaan uuden tilauksen pohjaksi
+      (Käytä erottimena |-merkkiä)
+    - pref: SubscriptionDuplicateDroppedInput
+  - - choices:
+        '0': Älä muuta
+        '1': Muuta
+      pref: makePreviousSerialAvailable
+    - kausijulkaisun edellinen numero automaattisesti saatavaksi, kun seuraava numero
+      otetaan vastaan. Edelliselle numerolle voidaan muuttaa myös toinen nidetyyppi,
+      kun seuraava numero otetaan vastaan. Huomioi, että <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=item-level_itypes">item-level_itypes</a>
+      järjestelmäasetukseen pitää tällöin olla asetettuna 'niteestä'.
+  - - choices:
+        '0': Älä kopioi
+        '1': Kopioi
+      pref: PreserveSerialNotes
+    - huomautus(ta) edellisestä vastaanotetusta numerosta kun generoidaan uusi 'Odotetaan'
+      numero.
+  - - Näytä vain
+    - class: integer
+      pref: SerialsSearchResultsLimit
+    - ensimmäistä kausijulkaisua, kun haetaan kausijulkaisuhaulla.

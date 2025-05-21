@@ -1,0 +1,178 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Serials subscriptions stats") | html %] &rsaquo;
+ [% t("Reports") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>
+	.sql {display: none;}
+</style>
+</head>
+
+<body id="rep_serials_stats" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/reports-home.pl">Raportit</a>
+ [% END %]
+ [% IF ( do_it ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/serials_stats.pl">Kausijulkaisutilausten tilastot</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tulokset</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kausijulkaisutilausten tilastot</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Kausijulkaisutilaukset</h1>
+[% IF ( do_it ) %]
+ <table id="resulttable">
+ <thead>
+ <tr>
+ <th>Toimittaja</th>
+ <th class="anti-the">Nimeke</th>
+ <th>Kausijulkaisutilauksen tunnus</th>
+ <th>Kirjasto</th>
+ <th>Luokka</th>
+ <th>Kausijulkaisutilaus alkanut</th>
+ <th>Kausijulkaisutilauksen päättymispäivä</th>
+ <th>Vanhentunut? / Suljettu?</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH data IN datas %]
+ <tr>
+ <td><a href="/cgi-bin/koha/acqui/supplier.pl?booksellerid=[% data.aqbooksellerid | uri %]">[% data.name | html %]</a></td>
+ <td><a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% data.subscriptionid | uri %]">[% data.title | html %]</a></td>
+ <td>[% data.subscriptionid | html %]</td>
+ <td>[% Branches.GetName( data.branchcode ) | html %]</td>
+ <td>[% data.callnumber | html %]</td>
+ <td data-order="[% data.startdate | html %]">[% data.startdate | $KohaDates %]</td>
+ <td data-order="[% data.enddate | html %]">[% data.enddate | $KohaDates %]</td>
+ <td>
+ [% IF data.closed %]
+ <span>Suljettu</span>
+ [% ELSIF data.expired %]
+ <span>Vanhentunut</span>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tr>
+ </tbody>
+ </table>
+
+[% ELSE %]
+ <form method="get" action="/cgi-bin/koha/reports/serials_stats.pl">
+
+ <fieldset class="rows">
+ <ol>
+ <li>
+
+ <label for="bookseller">
+ Toimittaja: </label>
+ <select name="bookseller" id="bookseller">
+ <option value="">Mikä tahansa toimittaja</option>
+ [% FOREACH bookseller IN booksellers %]
+ <option value="[% bookseller.aqbooksellerid | html %]">[% bookseller.name | html %]</option>
+ [% END %]
+ </select>
+ </li><li>
+ <label for="branchcode">
+ Kirjasto: </label>
+ <select name="branchcode"  id="branchcode">
+ <option value="">Kaikki kirjastot</option>
+ [% PROCESS options_for_libraries libraries => Branches.all() %]
+ </select>
+
+ </li>
+ <li>
+ <label for="expired">Sisällytä loppuneet kausijulkaisutilaukset: </label>
+ <input type="checkbox" name="expired" id="expired" />
+ </li>
+ </ol>
+ </fieldset>
+
+
+ <fieldset class="rows">
+ <legend>Tulostus</legend>
+ <ol>
+ <li>
+ <label for="outputscreen">Selaimen näytölle: </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" />
+ </li>
+ <li>
+ <label for="outputfile">Tiedostoon:</label> <input type="radio" name="output" value="file" id="outputfile" />
+ <label class="inline" for="basename">Nimi: </label><input id="basename" name="basename" type="text" value="Vie" />
+ <label class="inline" for="MIME">Ohjelmaan:</label>
+ <select name="MIME" id="MIME">
+ [% FOREACH value IN CGIextChoice %]
+ <option value="[% value | html %]">[% value | html %]</option>
+ [% END %]
+ </select>
+ <select name="sep" id="sep">
+ [% FOREACH value IN CGIsepChoice.values.sort() %]
+ [% IF ( value == CGIsepChoice.default ) %]
+ <option value="[% value | html %]" selected="selected">[% value | html %]</option>
+ [% ELSE %]
+ <option value="[% value | html %]">[% value | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="OK" />
+ <input type="hidden" name="report_name" value="[% report_name | html %]" />
+ <input type="hidden" name="do_it" value="1" />
+ </fieldset>
+ </form>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'reports-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+[% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            $("#resulttable").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "paginate": false,
+            }));
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

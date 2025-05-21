@@ -1,0 +1,44 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE "doc-head-open.inc" %]
+<title>[% FILTER collapse %]
+ [% t("Add order") | html %] &rsaquo;
+ [% t("Acquisition") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE "doc-head-close.inc" %]
+</head>
+
+<body id="acq_addorder" class="acq">
+[% INCLUDE "header.inc" %]
+
+ <div class="container-fluid">
+ [% IF (not_enough_budget) %]
+ <form action="/cgi-bin/koha/acqui/addorder.pl" method="post">
+ <input type="hidden" name="op" value="cud-order"/>
+ [% INCLUDE 'csrf-token.inc' %]
+ [% FOREACH var IN vars_loop %]
+ [% FOREACH val IN var.values %]
+ <input type="hidden" name="[% var.name | html %]" value="[% val | html %]" />
+ [% END %]
+ [% END %]
+ <input type="hidden" name="op" value="cud-addorder">
+ <input type="hidden" name="confirm_budget_exceeding" value="1" />
+ <div class="alert alert-warning">
+ [% IF (budget_exceeded) %]
+ <p>Varoitus: Tilauksen yhteissumma ylittää budjetin.</p>
+ [% END %]
+ [% IF (encumbrance_exceeded) %]
+ <p>Varoitus: Ylität [% encumbrance | html %]% tilistäsi.</p>
+ [% END %]
+ [% IF (expenditure_exceeded) %]
+ <p>Varoitus: Ylität asetetun rajan ([% expenditure | html %][% IF (currency) %] [% currency | html %][% END %]) tilistäsi.</p>
+ [% END %]
+ <p>Haluatko varmasti vahvistaa tämän tilauksen?</p>
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-fw fa-check"></i> Kyllä, vahvistan</button>
+ <button type="button" class="btn btn-default deny" onclick="window.location.href = '[% referer | html %]'"><i class="fa fa-fw fa-times"></i> Ei, en vahvista</button>
+ </div>
+ </form>
+ [% END %]
+
+[% INCLUDE "intranet-bottom.inc" %]

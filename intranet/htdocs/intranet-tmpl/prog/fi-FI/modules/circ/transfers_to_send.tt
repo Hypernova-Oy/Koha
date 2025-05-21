@@ -1,0 +1,134 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% PROCESS 'transfer_reasons.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Transfers to send") | html %] &rsaquo;
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="circ_transferstosend" class="circ">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Lainaus ja palautus</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lähetettävät kuljetukset</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-12">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ <div class="row">
+
+ [% IF Koha.Preference('CircSidebar') %]
+ <div class="col-md-10 order-md-2 order-sm-1">
+ [% ELSE %]
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% END %]
+
+ <h1>Kirjastostasi pyydetyt kuljetukset [% show_date | $KohaDates %] alkaen</h1>
+
+ [% IF libraries.count %]
+ <p>Kirjastosi on seuraavien kuljetusten lähtöpiste</p>
+ <div id="resultlist">
+ [% FOREACH library IN libraries %]
+ [% IF ( library.branchcode ) %]
+ <div class="page-section">
+ <table style="width: 100%" id="transferst[% library.branchcode | html %]">
+ <caption>Lähetetään kohteeseen: [% library.branchname | html %]</caption>
+ <thead>
+ <tr>
+ <th>Pyynnön pvm</th>
+ <th class="anti-the">Nimeke</th>
+ <th>Syy</th>
+ <th>Lainassa</th>
+ <th>Kotikirjasto</th>
+ <th>Luokka</th>
+ <th>Toiminnot</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH transfer IN library.inbound_transfers %]
+ [% UNLESS transfer.datesent %]
+ <tr>
+ <td data-order="[% transfer.daterequested | html %]">
+ [% transfer.daterequested | $KohaDates %]
+ </td>
+ <td>
+ [% INCLUDE 'biblio-title.inc' biblio = transfer.item.biblio link = 1 %][% IF ( transfer.item.biblio.author ) %] / [% transfer.item.biblio.author | html %][% END %] [% IF ( transfer.item.effective_itemtype ) %] (<b>[% ItemTypes.GetDescription( transfer.item.effective_itemtype ) | html %]</b>)[% END %]
+ <br />Viivakoodi: [% transfer.item.barcode | html %] </td>
+ <td><p>[% PROCESS transfer_reason transfer=transfer %]</p></td>
+ <td>[% IF transfer.item.onloan %]Eräpäivä [% transfer.item.onloan | $KohaDates %][% ELSE %]Hyllyssä[% END %]</td>
+ <td>[% Branches.GetName( transfer.item.homebranch ) | html %]</td>
+ <td>[% transfer.item.itemcallnumber | html %]</td>
+ <td class="actions">
+ [% IF transfer.reason == 'StockrotationAdvance' %]
+ <a href="/cgi-bin/koha/catalogue/stockrotation.pl?op=toggle_in_demand&stage_id=4&item_id=[% transfer.itemnumber | uri %]&biblionumber=[% transfer.item.biblionumber | uri %]" class="btn btn-default btn-xs"><i class="fa fa-fire"></i> Merkitse "pyydetyksi"</a>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.page-section -->
+ [% END %]
+ [% END %]
+ </div>
+ [% ELSE %]
+ <p>Ei lähetettäviä kuljetuksia</p>
+ [% END %]
+
+ </div> <!-- /.col-sm-10.col-sm-push-2 OR /.col-md-10 offset-md-1 col-lg-8 offset-lg-2-->
+
+ [% IF Koha.Preference('CircSidebar') %]
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-nav.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ [% END %]
+
+ </div> <!-- /.row -->
+ </main>
+ </div> <!-- /.col-sm-12 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            [% FOREACH library IN libraries %]
+            $("#transferst[% library.branchcode | html %]").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "columnDefs": [
+                    { "targets": [ -1 ], "orderable": false, "searchable":  false },
+                    { "type": "anti-the", "targets":  [ "anti-the" ] }
+                ],
+                "dom": 't',
+                "paginate": false
+            }));
+            [% END %]
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

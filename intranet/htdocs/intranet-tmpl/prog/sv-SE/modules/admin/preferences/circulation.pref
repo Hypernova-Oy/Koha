@@ -1,0 +1,1479 @@
+---
+circulation.pref:
+  Artikelbeställningar:
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: ArticleRequests
+    - låntagare att skapa artikelförfrågningar.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: ArticleRequestsOpacHostRedirection
+    - omdirigering från child till host baserat på MARC21 773$w när child inte har
+      några exemplar vid artikelbeställningar i Opac.
+  - - choices:
+        always: Visa alltid
+        calc: Använd algoritm för att visa eller dölja
+      pref: ArticleRequestsLinkControl
+    - länkar till artikelbeställning vid träfflista.
+  - - 'För poster som kan reserveras på post- eller exemplarnivå, gör följande fält
+      obligatoriska:'
+    - multiple:
+        author: Författare
+        chapters: Kapitel
+        date: Datum
+        issue: Nummer
+        pages: Sidor
+        title: Titel
+        volume: Volym
+      pref: ArticleRequestsMandatoryFields
+    - ''
+  - - 'För poster som endast kan reserveras på bibliografisk nivå, gör följande fält
+      obligatoriska:'
+    - multiple:
+        author: Författare
+        chapters: Kapitel
+        date: Datum
+        issue: Nummer
+        pages: Sidor
+        title: Titel
+        volume: Volym
+      pref: ArticleRequestsMandatoryFieldsRecordOnly
+    - ''
+  - - 'För poster som endast kan reserveras på exemplarnivå, gör följande fält obligatoriska:'
+    - multiple:
+        author: Författare
+        chapters: Kapitel
+        date: Datum
+        issue: Nummer
+        pages: Sidor
+        title: Titel
+        volume: Volym
+      pref: ArticleRequestsMandatoryFieldsItemOnly
+    - ''
+  - - 'Följande format för artikelbeställningar stöds:'
+    - multiple_sortable:
+        PHOTOCOPY: Photocopy
+        SCAN: Scan
+      pref: ArticleRequestsSupportedFormats
+    - The first listed format is selected by default when you request via the OPAC.
+  Avgiftspolicy:
+  - - choices:
+        ignoreCalendar: Ta inte hänsyn till kalendern
+        noFinesWhenClosed: Ta hänsyn till kalendern
+      pref: finesCalendar
+      type: choice
+    - när avgifter beräknas.
+  - - choices:
+        ignoreCalendar: Ta inte hänsyn till kalendern
+        noSuspensionsWhenClosed: Ta hänsyn till kalendern
+      pref: SuspensionsCalendar
+      type: choice
+    - när perioden för pausade reservationer beräknas.
+  - - choices:
+        off: Beräkna inte
+        production: Beräkna och debitera
+      pref: finesMode
+      type: choice
+    - avgifter (när <code>misc/cronjobs/fines.pl</code> körs).
+    - <br><strong>OBS:</strong> Om cronjobbet cronjobs/fines.pl körs, beräknas avgifter
+      när cronjobbet körs, och dessa sammanräknas när exemplaret återlämnas. Om systeminställningen
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CalculateFinesOnReturn">CalculateFinesOnReturn</a>
+      är aktiverad, sammanräknas slutgiltigt belopp när exemplaret återlämnas.<br/>
+    - choices:
+        '0': Debitera inte
+        '1': Debitera
+      pref: ChargeFinesOnClosedDays
+      type: choice
+    - på stängda dagar. Om det här är inställt så kommer cronjobbet fines.pl inte
+      att generera avgifter när det körs på dagar som är markerade som stängda i kalendern.
+  - - Om ett förkommet exemplar återlämnas, tillämpa återbetalningsreglerna som är
+      definierade för
+    - choices:
+        CheckinLibrary: biblioteket där exemplaret återlämnats.
+        ItemHoldingBranch: exemplarets nuvarande plats.
+        ItemHomeBranch: exemplarets hembibliotek.
+      pref: RefundLostOnReturnControl
+  - - choices:
+        '0': Inkludera inte
+        '1': Inkludera
+      pref: FinesIncludeGracePeriod
+    - respittiden vid beräkning av avgifterna för ett försenat exemplar.
+  - - choices:
+        '0': Efterskänk inte
+        '1': Efterskänk
+      pref: WhenLostForgiveFine
+    - avgifterna för ett exemplar när det är förlorat.
+  - - Återbetala inte förkommet material-avgifter om ett förkommet material återlämnas
+      mer än
+    - class: integer
+      pref: NoRefundOnLostReturnedItemsAge
+    - dagar efter att det markerades som förkommet.
+  - - Återbetala inte avgift för förlorat exemplar om avgiften betalades i sin helhet
+      eller om återstoden av avgiften betalades mer än
+    - class: integer
+      pref: NoRefundOnLostFinesPaidAge
+    - dagar efter att det markerades som förkommet.
+  - - choices:
+        '0': Debitera inte
+        '1': Debitera
+      pref: WhenLostChargeReplacementFee
+    - ersättningspriset när en låntagare tappar bort ett exemplar.
+  - - Ta ut en reservationsavgift
+    - choices:
+        any_time_is_collected: när en reservation fångas in.
+        any_time_is_placed: när en reservation görs.
+        not_always: endast om samtliga exemplar är utlånade och posten redan har minst
+          en reservation.
+      pref: HoldFeeMode
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: useDefaultReplacementCost
+    - schablonpriset för vald exemplartyp.
+  - - 'Texten som ska registreras i kolumnen "anteckning", tabell "kontolinjer" när
+      behandlingsavgiften (definierad för exemplartypen) tillämpas:'
+    - class: code
+      pref: ProcessingFeeNote
+      type: textarea
+  Boken kommer-modulen:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: HouseboundModule
+    - boken kommer-modulen.
+  Gränssnitt:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: CircSidebar
+    - sidofältet för navigering på alla cirkulationssidor.
+  - - choices:
+        '0': Begär inte
+        '1': Begär
+      pref: CircConfirmItemParts
+    - personalen bekräfta att alla delar är med vid utlån och återlämning.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: AutoSwitchPatron
+    - automatisk omdirigering till annan låntagare när ett kortnummer skannas istället
+      för en streckkod.
+    - Detta bör inte aktiveras om nummerserierna för lånekort och streckkoder på medier
+      överlappar varandra.
+  - - choices:
+        '0': Försök inte
+        '1': Försök
+      pref: PatronAutoComplete
+    - gissa vilken låntagare det gäller när det söks i Låna ut eller Sök låntagare.
+    - Visar endast de första 10 resultaten i taget.
+  - - choices:
+        EAN13: EAN-13 eller nollutfylld UPC-A från
+        OFF: Filtrera inte
+        T-prefix: Avlägsna första numret från T-prefix-formatet
+        cuecat: Konvertera från CueCat-format
+        libsuite8: Konvertera från Libsuite8-format
+        whitespace: Avlägsna mellanslag från
+      pref: itemBarcodeInputFilter
+    - skannade streckkoder för exemplar. Kom ihåg att inledande eller efterföljande
+      blanksteg tas bort före detta filter.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: itemBarcodeFallbackSearch
+    - automatisk användning av en katalogsökning med nyckelord om frasen som angivits
+      som en streckkod på utlåningssidan inte ger några resultat vid en sökning efter
+      en streckkod för ett exemplar.
+  - - Sortera tidigare utlån på cirkulationssidan från
+    - choices:
+        asc: tidigaste till senaste
+        desc: senaste till tidigaste
+      pref: previousIssuesDefaultSortOrder
+    - återlämningsdatum.
+  - - Sortera dagens utlån på cirkulationssidan från
+    - choices:
+        asc: tidigaste till senaste
+        desc: senaste till tidigaste
+      pref: todaysIssuesDefaultSortOrder
+      type: choice
+    - tid för utlåning.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: SpecifyDueDate
+    - personal att ange ett förfallodatum för en utlåning.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: SpecifyReturnDate
+    - personal att specificera ett återlämningsdatum för en återlämning.
+  - - Ange följande startdatum som standard för plocklista
+    - class: integer
+      pref: HoldsToPullStartDate
+    - dagar sedan. Notera att det automatiska slutdatumet styrs av systeminställningen
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ConfirmFutureHolds">ConfirmFutureHolds</a>.
+  - - When building the holds queue, calculate hold matches using
+    - class: integer
+      pref: HoldsQueueParallelLoopsCount
+    - parallel loop(s). The more loops used, the faster it will calculate and the
+      more computing resources it will use.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowAllMessageDeletion
+    - personal att ta bort meddelanden som har lagts till från andra bibliotek.
+  - - Visa de
+    - class: integer
+      pref: numReturnedItemsToShow
+    - senaste återlämnade exemplaren på återlämningsskärmen.
+  - - choices:
+        '0': Meddela inte
+        '1': Meddela
+      pref: FineNotifyAtCheckin
+    - bibliotekarier om förseningsavgifter för de exemplar de återlämnar.
+  - - choices:
+        '0': Meddela inte
+        '1': Meddela
+      pref: WaitingNotifyAtCheckin
+    - bibliotekarier om väntande reservationer för den låntagare vars exemplar de
+      återlämnar.
+  - - choices:
+        '0': Meddela inte
+        '1': Meddela
+      pref: WaitingNotifyAtCheckout
+    - bibliotekarier om väntande reservationer för den låntagare vars exemplar de
+      lånar ut.
+  - - choices:
+        '0': Kräv inte
+        '1': Kräv
+      pref: FilterBeforeOverdueReport
+    - att personalen väljer vilka lån som ska visas innan rapporten för förseningar
+      körs.
+  - - choices:
+        issueqslip: Visa snabbknappar för utskrift och rensa skärm
+        issueslip: Visa snabbknappar för utskrift och rensa skärm
+        no: Visa inte rensa-knappen
+      pref: DisplayClearScreenButton
+    - för att rensa den aktuella låntagaren från skärmen.
+  - - choices:
+        '0': Registrera inte
+        '1': Registrera
+      pref: RecordLocalUseOnReturn
+    - lokal användning när ett outlånat exemplar återlämnas.
+  - - När ett tomt streckkodsfält matas in i låneskärmen
+    - choices:
+        clear: rensa skärmen
+        ignore: gör ingenting
+        qslip: öppna ett fönster för att skriva ut snabbkvitto
+        slip: öppna ett fönster för utskrift av kvittering
+      pref: CircAutoPrintQuickSlip
+    - .
+  - - Inkludera stilmallen från
+    - class: url
+      pref: NoticeCSS
+    - i meddelanden. (Detta bör vara en komplett URL, som börjar med <code>http://</code>)
+  - - choices:
+        '0': Uppdatera inte
+        '1': Uppdatera
+      pref: UpdateTotalIssuesOnCirc
+    - antal utlån för en bibliografisk post när ett exemplar lånas ut. (VARNING! Detta
+      ökar serverbelastningen betydligt; om prestanda är ett problem använder du istället
+      cronjobbet update_totalissues.pl för att uppdatera det totala antalet utlån).
+  - - choices:
+        '0': Visa inte
+        '1': Visa inte
+      pref: ExportCircHistory
+    - alternativet att exportera låntagares utlåningshistorik.
+  - - 'Följande fält ska undantas från exporten av låntagarens lånehistorik som CSV
+      eller MARC (ISO2709):'
+    - pref: ExportRemoveFields
+    - (separera fält med mellanslag, t.ex. 100a 200b 300c).
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: ShowAllCheckins
+    - alla exemplar i listan över återlämnade exemplar, även sådana som inte lånats
+      ut.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowCheckoutNotes
+    - låntagare att lämna kommentarer för lånade exemplar.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: UseCirculationDesks
+    - cirkulationsställen.
+  Kurslistor:
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: UseCourseReserves
+    - kurslistor.
+  Lånepolicy:
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: AlwaysLoadCheckoutsTable
+    - tabellen med utlån när låntagarsidan öppnas i personalklienten.
+  - - Läs in utlåningstabellen på utlåningssidan med en fördröjning på
+    - class: integer
+      pref: LoadCheckoutsTableDelay
+    - sekunder när "Visa alltid lån automatiskt" eller <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AlwaysLoadCheckoutsTable">AlwaysLoadCheckoutsTable</a>
+      är aktiverade.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: OnSiteCheckoutAutoCheck
+    - lån på plats automatiskt om det senaste lånet var ett på lån på plats.
+  - - choices:
+        '0': Kräv
+        '1': Kräv inte
+      pref: AutoReturnCheckedOutItems
+    - att personal bekräftar utlån när exemplaret redan är utlånat till annan låntagare.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowSetAutomaticRenewal
+    - personal att från utlåningsvyn markera de exemplar som ska få automatiskt omlån.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowTooManyOverride
+    - personal att åsidosätta och låna ut exemplar när låntagaren har nått det maximala
+      antalet tillåtna lån.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowNotForLoanOverride
+    - personal att åsidosätta och låna ut exemplar som är markerade som "Ej för utlån".
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowRenewalLimitOverride
+    - personal att manuellt åsidosätta omlåningsspärrar och göra ett nytt omlån när
+      detta skulle överskrida gränsen för omlån eller ske tidigare än inställningen
+      "Kan ej omlånas före" i utlåningspolicyn eller om exemplaret har schemalagts
+      för automatiskt omlån.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowRenewalOnHoldOverride
+    - personal att låna om reserverade exemplar genom att manuellt ange återlämningsdatum.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowItemsOnHoldCheckoutSIP
+    - utlån av exemplar som är reserverade av någon annan via SIP utlåningsmeddelanden.
+    - Om tillåtet, generera ingen RESERVED-varning.
+    - Detta tillåter självutlåning för dessa exemplar. Om du använder reservationskön
+      kommer exemplar med väntande reservation att markeras som "inte tillgänglig"
+      om detta är inställt på "Tillåt inte".
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowItemsOnLoanCheckoutSIP
+    - utlån av exemplar som är reserverade av någon annan via SIP utlåningsmeddelanden.
+    - If allowed do not generate ISSUED_TO_ANOTHER warning.
+    - This allows self checkouts for those items.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowItemsOnHoldCheckoutSCO
+    - utlån av exemplar reserverade till någon annan i SCO-modulen. Om utlån tillåts,
+      genera inte varningsmeddelandena RESERVE_WAITING och RESERVED. Det tillåter
+      utlån av dessa exemplar.
+  - - choices:
+        '0': Kräv inte
+        '1': Kräv
+      pref: AllFinesNeedOverride
+    - att personal manuellt åsidosätter alla avgifter, även avgifter som är mindre
+      än vad som anges i systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge">noissuescharge</a>.
+      Aktivering av denna systeminställning kommer att blockera alla lån för låntagare
+      med avgifter både via den webbaserade självbetjäningen och via SIP.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowFineOverride
+    - personal att manuellt åsidosätta och låna ut exemplar till låntagare som har
+      högre avgifter än enligt systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge">noissuescharge</a>.
+  - - choices:
+        '0': Välj inte
+        '1': Välj
+      pref: AutomaticItemReturn
+    - att automatiskt överföra exemplar till sitt hembibliotek när de återlämnas.
+  - - choices:
+        '0': Tvinga inte
+        '1': Tvinga
+      pref: UseBranchTransferLimits
+    - överföringsbegränsningar för bibliotek baserat på
+    - choices:
+        ccode: avdelning
+        itemtype: exemplartyp
+      pref: BranchTransferLimitsType
+    - .
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: UseTransportCostMatrix
+    - fraktkostnadstabellen för att beräkna optimal infångning av reservationer mellan
+      filialer.
+  - - Använd kalender- och cirkulationsreglerna för
+    - choices:
+        ItemHomeLibrary: biblioteket exemplaret kommer från.
+        PatronLibrary: biblioteket låntagaren kommer från.
+        PickupLibrary: biblioteket du är inloggad på.
+      pref: CircControl
+      type: choice
+  - - För att avgöra om ett exemplar överförs eller finns kvar i biblioteket efter
+      återlämning, använd cirkulationsreglerna för
+    - choices:
+        CheckInLibrary: biblioteket som exemplaret återlämnades på.
+        ItemHoldingLibrary: biblioteket där det finns en reservation på exemplaret.
+        ItemHomeLibrary: biblioteket som äger exemplaret.
+      pref: CircControlReturnsBranch
+      type: choice
+  - - Använd utlånings- och avgiftsreglerna för
+    - choices:
+        holdingbranch: exemplarets nuvarande plats.
+        homebranch: exemplarets hembibliotek.
+      pref: HomeOrHoldingBranch
+      type: choice
+  - - Tillåt att material återlämnas
+    - choices:
+        anywhere: på vilket bibliotek som helst.
+        holdingbranch: endast på det bibliotek exemplaret lånades ut från.
+        homebranch: endast på biblioteket exemplaret kommer från.
+        homeorholdingbranch: antingen på det bibliotek exemplaret är från eller det
+          bibliotek det lånades ut från.
+      pref: AllowReturnToBranch
+      type: choice
+  - - För sökresultat i personalklienten, visa
+    - choices:
+        holdingbranch: exemplarets nuvarande bibliotek.
+        homebranch: exemplarets hembibliotek.
+      pref: StaffSearchResultsDisplayBranch
+      type: choice
+  - - choices:
+        Calendar: Använd kalendern för att hoppa över de dagar då biblioteket är stängt
+        Datedue: Använd kalendern för att flytta återlämningsdatumet till nästa öppetdag
+        Days: Ta inte hänsyn till kalendern
+        Dayweek: Använd kalendern för att flytta fram återlämningsdatum så att det
+          infaller på samma veckodag för återlämning som vid utlån, i de fall veckolånetid
+          tillämpas. I annat fall blir återlämningsdatum närmaste därefter öppna veckodag
+      pref: useDaysMode
+    - när återlämningsdatum beräknas.
+  - - Beräkna "Kan inte lånas om före" baserat på
+    - choices:
+        date: datum.
+        exact_time: exakt tidpunkt.
+      pref: NoRenewalBeforePrecision
+    - Endast relevant för lån räknade i dagar, timslån är inte påverkade av denna
+      inställning.
+  - - Vid omlån, basera det nya återlämningsdatumet på
+    - choices:
+        date_due: lånets gamla återlämningsdatum.
+        now: aktuellt datum.
+      pref: RenewalPeriodBase
+  - - choices:
+        '0': Skicka inte
+        '1': Skicka
+      pref: RenewalSendNotice
+    - ett omlånemeddelande beroende på låntagarens meddelandeinställning för utlåning.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: UnseenRenewals
+    - omlån att registreras som "osedda" av biblioteket och räknas av mot det tillåtna
+      antalet osedda omlån.
+  - - Förhindra låntagare att reservera i OPAC om de är skyldiga mer än
+    - class: currency
+      pref: maxoutstanding
+    - '[% local_currency %] i avgift.'
+  - - Visa en varning på sidan "Överföringar att ta emot" om överföringen inte tagits
+      emot
+    - class: integer
+      pref: TransfersMaxDaysWarning
+    - dagar efter att den skickades.
+  - - choices:
+        '0': Förhindra
+        '1': Förhindra inte
+      pref: IssuingInProcess
+    - låntagare från att låna ett exemplar vars hyresavgift får dem att överskrida
+      gränsen.
+  - - 'Hindra låntagare med följande målgruppsvärden från att låna olämpliga material:'
+    - pref: AgeRestrictionMarker
+    - Ange nyckelord för målgrupp separerade av | (lodstreck) FSK|PEGI|Ålder| (inget
+      mellanslag intill |). Se till att agerestriction i Koha mappas till MARC (t.ex.
+      521$a). Ett MARC-fältvärde på FSK 12 eller PEGI 12 skulle innebära att låntagaren
+      måste vara 12 år gammal. Lämna tomt om ingen åldersbegränsning ska göras.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AgeRestrictionOverride
+    - personal att låna ut ett exemplar med en åldersbegränsning.
+  - - Förhindra låntagare att låna böcker om de har mer än
+    - class: integer
+      pref: noissuescharge
+    - '[% local_currency %] i avgifter.'
+  - - Förhindra en låntagare från att låna ifall de som låntagaren är vårdnadshavare
+      för har avgifter som överstiger
+    - class: integer
+      pref: NoIssuesChargeGuarantees
+    - '[% local_currency %] i obetalda avgifter.'
+  - - Förhindra en låntagare från att låna ifall de som låntagaren är vårdnadshavare
+      för har avgifter som överstiger
+    - class: integer
+      pref: NoIssuesChargeGuarantorsWithGuarantees
+    - '[% local_currency %] i avgifter.'
+  - - choices:
+        '0': Kräv inte
+        '1': Kräv
+      pref: ReturnBeforeExpiry
+    - att låntagare återlämnar böcker innan deras konton löper ut (genom att begränsa
+      återlämningsdatum till innan låntagarens utgångsdatum).
+  - - 'Skicka alla meddelanden som hemlig kopia till denna e-postadress:'
+    - class: email
+      pref: NoticeBcc
+  - - choices:
+        '0': Ignorera kalender
+        '1': Använd kalender
+      pref: OverdueNoticeCalendar
+    - när perioden för förseningsmeddelanden tas fram.
+  - - Organisera och skicka förseningsmeddelanden med hjälp av
+    - choices:
+        cron: kommandoradsalternativ
+        item-homebranch: exemplarets hembibliotek
+        item-issuebranch: utlånande bibliotek
+        patron-homebranch: låntagarens hembibliotek
+      pref: OverdueNoticeFrom
+    - .
+  - - Inkludera upp till
+    - class: integer
+      pref: PrintNoticesMaxLines
+    - exemplarsrader i ett utskrivet förseningsmeddelande. Om antalet exemplar är
+      högre än detta nummer, avslutas meddelandet med en varning till låntagaren om
+      att hen bör kontrollera sitt konto online för att se en komplett lista med försenade
+      exemplar. Ange 0 för att ta med alla försenade exemplar i meddelandet, oavsett
+      antal.
+  - - choices:
+        block: Blockera
+        confirmation: Be om bekräftelse
+        noblock: Blockera inte
+      pref: OverduesBlockCirc
+    - vid utlån till en låntagare som har utestående förseningar.
+  - - 'Vid utlåning av ett exemplar med hyresavgift, '
+    - choices:
+        '0': be inte om
+        '1': be om
+      pref: RentalFeesCheckoutConfirmation
+    - bekräftelse.
+  - - 'Vid utlåning av ett exemplar med, '
+    - choices:
+        '0': använd inte
+        '1': använd
+      pref: RecordStaffUserOnCheckout
+    - funktionen för lån på plats.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowMultipleIssuesOnABiblio
+    - låntagare att låna flera exemplar kopplade till samma katalogpost. (<strong>OBS:</strong>
+      Detta påverkar endast poster utan tillhörande prenumeration.)
+  - - choices:
+        '0': Inaktivera
+        '1': Aktivera
+      pref: OnSiteCheckouts
+    - funktionen för lån på plats.
+  - - choices:
+        '0': Inaktivera
+        '1': Aktivera
+      pref: OnSiteCheckoutsForce
+    - lån på plats i alla situationer (även om en användare är spärrad, osv.).
+  - - choices:
+        '0': Betrakta inte
+        '1': Betrakta
+      pref: ConsiderOnSiteCheckoutsAsNormalCheckouts
+    - lån på plats som normala lån.
+    - Om inställningen är aktiverad kommer lån på plats att räknas in i maxantalet
+      för vanliga lån. Gränsen för lån på plats gäller fortfarande för lån på plats.
+    - Om detta är inaktiverat kommer båda värdena att kontrolleras separat.
+  - - choices:
+        '0': Växla inte
+        '1': Växla
+      pref: SwitchOnSiteCheckouts
+    - från "Lån på plats" till normala lån vid utlån.
+  - - När en låntagares exemplar är försenat,
+    - choices:
+        allow: tillåt omlån.
+        block: spärra omlån för alla låntagarens exemplar.
+        blockitem: spärra omlån bara för detta exemplar.
+      pref: OverduesBlockRenewing
+      type: choice
+  - - Om en låntagares avgifter överstiger värdet för <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFineNoRenewals">OPACFineNoRenewals</a>,
+    - choices:
+        '0': tillåt
+        '1': blockera
+      pref: OPACFineNoRenewalsBlockAutoRenew
+    - automatiska omlån.
+  - - Om en låntagare betalar av alla avgifter på ett försenat exemplar som löpande
+      samlar på sig mer avgifter,
+    - choices:
+        '0': låna inte om
+        '1': låna om
+      pref: RenewAccruingItemWhenPaid
+    - exemplaret automatiskt. Om systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RenewalPeriodBase">RenewalPeriodBase</a>
+      är inställd på "due date" kan förnyade exemplar ändå vara försenade.
+  - - Om en låntagare betalar av alla avgifter i OPAC via en betalningsplugin på ett
+      försenat exemplar som löpande samlar på sig mer avgifter,
+    - choices:
+        '0': låna inte om
+        '1': låna om
+      pref: RenewAccruingItemInOpac
+    - exemplaret automatiskt. Om systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RenewalPeriodBase">RenewalPeriodBase</a>
+      är inställd på "due date" kan förnyade exemplar ändå vara försenade.
+  - - class: code
+      pref: ItemsDeniedRenewal
+      syntax: text/x-yaml
+      type: textarea
+    - Definiera egna regler för att neka specifika exemplar från att lånas om.
+    - <br /> Kan skriva vilket fält som helst i exemplartabellen följt av ett kolon
+      och sedan ett mellanslag och sedan
+    - en lista med värden inom parentes separerade med kommatecken.
+    - 'Till exempel:'
+    - '<br />ccode: [NEWFIC,NULL,DVD]'
+    - '<br />itype: [NEWBK,""]'
+    - <br /> <strong>OBS:</strong> Ordet 'NULL' kan användas för att blockera förnyelse
+      av odefinierade fält, medan en tom sträng "" kommer att blockera ett tomt (men
+      definierat) fält.
+    - <br /><strong>Konfiguration:</strong> <a href='/cgi-bin/koha/admin/authorised_values.pl?searchfield=CCODE'>Avdelningar
+      (CCODE)</a> | <a href='/cgi-bin/koha/admin/itemtypes.pl'>Exemplartyper</a>
+  - - class: code
+      pref: UpdateItemLocationOnCheckout
+      syntax: text/x-yaml
+      type: textarea
+    - 'Det här är en lista med värdepar. Ett korrekt par ser ut så här: ''värde 1:
+      värde 2'' (värde 1 kolon mellanslag värde 2).<br/><br/>'
+    - Exempel:<br/>
+    - 'PROC: FIC - gör att ett exemplar med placeringen Processing Center ändras till
+      placeringen Fiction vid återlämning.<br/>'
+    - 'FIC: GEN - gör att ett exemplar med placering Fiction flyttas till placeringen
+      General stacks vid återlämning.<br/>'
+    - '_BLANK_: FIC - gör att ett exemplar som saknas placering flyttas till placeringen
+      Fiction vid utlån.<br/>'
+    - 'FIC: _BLANK_ - gör att ett exemplar med placering FIC blir flyttat till en
+      tom placering vid återlämning.<br/>'
+    - '_ALL_: FIC - gör att alla exemplar flyttas till placeringen Fiction vid utlån.<br/>'
+    - 'PROC: _PERM_ - gör att ett exemplar som är i Processing Center kommer att flyttas
+      till dess permanenta placering.<br/><br/>'
+    - 'Allmän regel: om placeringen till vänster om kolonet (:) matchar exemplarets
+      nuvarande placering, så kommer det flyttas till placeringen som står till höger
+      om kolonet (:).<br/>'
+    - 'Observera: PROC och CART är speciella värden, för dessa placeringar så kan
+      placering och permanent placering skilja sig åt, i alla andra fall så kommer
+      flytten att beröra båda. Exemplar med placeringen CART kommer att återlämnas
+      till deras permanenta placering vid utlån.<br/>'
+    - Specialtermen _BLANK_ kan användas på båda sidorna för att flytta till eller
+      ta bort en placering från exemplar som saknar en placering.<br/>
+    - Specialtermen _ALL_ används på vänster sida om kolonet (:) för att påverka alla
+      exemplar, <strong>och det åsidosätter alla andra regler.</strong>
+  - - class: code
+      pref: UpdateNotForLoanStatusOnCheckout
+      syntax: text/x-yaml
+      type: textarea
+    - Detta är en lista med värdepar. När ett exemplar återlämnas, om "Ej för utlån"-värdet
+      till vänster matchar exemplarens "Ej för utlån"-värde
+    - 'kommer det att uppdateras till värdet på höger sida. Exempelvis kommer "-1:
+      0" att göra så att ett exemplar som var inställt på "Beställd" nu kommer att
+      vara tillgängligt för lån.'
+    - Varje värdepar ska vara på en separat rad.
+  - - Vid utlåning av ett avgiftsbelagt exemplar som kommer att bli försenat efter
+      att biblioteket stänger,
+    - choices:
+        close: förkorta lånetiden och ange förfallotid när biblioteket stänger.
+        ignore: ta inte hänsyn till bibliotekets öppettider.
+        open: utöka lånetiden och ange förfallotid när biblioteket öppnar.
+      pref: ConsiderLibraryHoursInCirculation
+  Låntagarbegränsningar:
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: PatronRestrictionTypes
+    - att specificera typ av låntagarbegränsning vid manuell inställning.
+  - - choices:
+        '0': Ackumulera inte
+        '1': Ackumulera
+      pref: CumulativeRestrictionPeriods
+    - begränsningsperioderna.
+  - - När exemplar returneras
+    - choices:
+        no: ta inte bort
+        when_no_overdue: om låntagaren inte har kvarvarande försenade exemplar
+        when_no_overdue_causing_debarment: om låntagaren inte har kvarvarande exemplar
+          som leder till avstängning
+      pref: AutoRemoveOverduesRestrictions
+      type: choice
+    - ta bort OVERDUES-begränsningen som utlöses av skickade meddelanden. Skillnaden
+      mellan att ta bort begränsningen när inga kvarvarande sena exemplar finns, och
+      att göra det när något exemplar leder till avstängning är att det senare alternativet
+      tar hänsyns till respittider hos övertidsregler även för återlämningar och inte
+      bara när övertidsmeddelanden genereras.
+  - - Om en låntagare är begränsad,
+    - choices:
+        '0': tillåt
+        '1': blockera
+      pref: RestrictionBlockRenewing
+    - omlån av exemplar från personalklienten och via cronjobbet <code>misc/cronjobs/automatic_renewals.pl</code>.
+  Modul för beståndsrotation:
+  - - choices:
+        '0': Inaktivera
+        '1': Aktivera
+      pref: StockRotation
+    - modulen för beståndsrotation.
+  Paket:
+  - - Använd det auktoriserade <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>-värdet
+    - choices: authval
+      pref: BundleLostValue
+      source: LOST
+    - för att representera "saknas från paketet" vid återlämning.
+  - - Använd det auktoriserade <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">NOT_LOAN</a>-värdet
+    - choices: authval
+      pref: BundleNotLoanValue
+      source: NOT_LOAN
+    - för att representera "läggs till i paketet" när ett exemplar är kopplat till
+      paketet.
+  Policy för förlorat exemplar:
+  - - Använd som standard det auktoriserade <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>-värdet
+    - choices: authval
+      pref: DefaultLongOverdueLostValue
+      source: LOST
+    - när exemplaret är försenat mer än
+    - class: integer
+      pref: DefaultLongOverdueDays
+    - dagar.
+    - <br>VARNING — Dessa alternativ aktiverar den automatiska processen för förlorat
+      exemplar. Lämna dessa fält tomma om du inte vill aktivera denna funktion.
+    - '<br>Exempel: [1] [30] Ger ett exemplar <a href=''/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST''>LOST</a>-värde
+      1 när det är mer än 30 dagar försenat.'
+    - <br>(Används när skriptet longoverdue.pl anropas utan parametern --lost)
+    - <br><strong>NOTERA:</strong> Den här systeminställningen kräver cronjobbet <code>misc/cronjobs/longoverdue.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - 'Lägg på en avgift för förkommet material på låntagarens konto om <a href=''/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST''>LOST</a>-värdet
+      på ett exemplar ändras till:'
+    - choices: authval
+      pref: DefaultLongOverdueChargeValue
+      source: LOST
+    - <br>Lämna det här fältet tomt om du inte vill ta ut en avgift för förkommet
+      material.
+    - <br>(Används när skriptet longoverdue.pl anropas utan parametern --charge)
+    - <br><strong>OBS:</strong> Denna systeminställning kräver cronjobbet <code>misc/cronjobs/longoverdue.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - Processen påverkar låntagare i
+    - choices: patron-categories
+      class: multiple
+      pref: DefaultLongOverduePatronCategories
+    - kategorier.
+    - <br>Lämna det här fältet tomt om du vill hantera förseningar för samtliga låntagarkategorier.
+    - <br>(Används när skriptet longoverdue.pl anropas utan parametern --category)
+    - <br><strong>VARNING:</strong> Denna inställning kommer endast att vara aktiv
+      om DefaultLongOverdueSkipPatronCategories är tom.
+    - <br>
+    - The long overdue process <i>does not</i> affect patrons in the
+    - choices: patron-categories
+      class: multiple
+      pref: DefaultLongOverdueSkipPatronCategories
+    - kategorier.
+    - <br>Lämna det här fältet tomt om du vill hantera förseningar för samtliga låntagarkategorier.
+    - <br>(Används när skriptet longoverdue.pl anropas utan parametern --skip category)
+    - <br><strong>VARNING:</strong> Denna inställning åsidosätter inställningen DefaultLongOverduePatronCategories,
+      så filtret DefaultLongOverduePatronCategories kommer inte att träda i kraft.
+    - <br><strong>OBS:</strong> Denna systeminställning kräver cronjobbet <code>misc/cronjobs/longoverdue.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - När du använder den automatiska processen för förlorade exemplar, hoppa över
+      exemplar med <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>-värden
+      som matchar något av
+    - pref: DefaultLongOverdueSkipLostStatuses
+    - .
+    - <br>Lämna det här fältet tomt om du inte vill hoppa över några <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">Förlorad</a>-statusar.
+    - <br>Ange som lista med kommaavgränsade värden, t.ex. <em>5,6,7</em>.
+  - - 'Vid lån av ett exemplar som markerats som förlorat, '
+    - choices:
+        alert: visa ett meddelande
+        confirm: kräv bekräftelse
+        nothing: gör inget
+      pref: IssueLostItem
+    - .
+  - - 'Markera ett exemplar som återlämnat när det har flaggats som förkommet '
+    - multiple:
+        additem: när ett exemplar katalogiseras
+        batchmod: från verktyget Satsredigering av exemplar
+        claim_returned: när du sätter exemplaret som 'påstås återlämnad'
+        cronjob: från cronjobbet "longoverdue"
+        moredetail: från fliken Exemplar i katalogmodulen
+        onpayment: när det mottas ersättning för ett exemplar
+        pendingreserves: från listan "Plocklista reservationer"
+      pref: MarkLostItemsAsReturned
+    - .
+  - - Uppdatera exemplarstatus till
+    - choices: authval
+      pref: UpdateItemLostStatusWhenPaid
+      source: LOST
+    - när det utestående beloppet betalas.
+  - - Uppdatera exemplarets status till
+    - choices: authval
+      pref: UpdateItemLostStatusWhenWriteoff
+      source: LOST
+    - när utstående balans avskrivs.
+  Påstås återlämnad:
+  - - När ett lån markeras som "påstås återlämnad",
+    - choices:
+        ask: fråga om en avgift för förkommet material ska tas ut
+        charge: ta ut en avgift för förkommet material
+        no_charge: ta inte ut en avgift för förkommet material
+      default: ask
+      pref: ClaimReturnedChargeFee
+    - .
+  - - Automatically resolve the claim and change the resolution to the <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION">RETURN_CLAIM_RESOLUTION</a>
+      authorized value
+    - choices: authval
+      pref: AutoClaimReturnStatusOnCheckin
+      source: RETURN_CLAIM_RESOLUTION
+    - vid återlämning.
+  - - Automatically resolve the claim and change the resolution to the <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION">RETURN_CLAIM_RESOLUTION</a>
+      authorized value
+    - choices: authval
+      pref: AutoClaimReturnStatusOnCheckout
+      source: RETURN_CLAIM_RESOLUTION
+    - vid utlåning.
+  - - Använd ett värde från den auktoriserade värdekategorin <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>
+    - choices: authval
+      pref: ClaimReturnedLostValue
+      source: LOST
+    - för att markera "påstås återlämnad".
+    - Detta uppdaterar inte objektets förlorad-status om det redan finns en befintlig
+      förlorad-status angiven.</span>
+  - - Varna bibliotekarier att en låntagare har överdrivet många "påstås återlämnad"
+      om kunden har hävdat återlämnande av mer än
+    - class: integer
+      pref: ClaimReturnedWarningThreshold
+    - exemplar.
+  - - Ta bort lösta "påstås återlämnad" äldre än
+    - class: integer
+      pref: CleanUpDatabaseReturnClaims
+    - dagar.
+    - <span class="hint">Den här systeminställningen används av cronjobbet the cleanup_database.pl.</span>
+  Reservationspolicy:
+  - - Ange följande antal som standard för reservationsförhållanden
+    - class: integer
+      pref: HoldRatioDefault
+    - .
+  - - I personalgränssnittet, dela upp reservationskön i separata tabeller med
+    - choices:
+        branch: avhämtningsbibliotek
+        branch_itemtype: avhämtningsbibliotek och exemplartyp
+        itemtype: reservationens exemplartyp
+        nothing: inget
+      pref: HoldsSplitQueue
+    - .
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: EnableItemGroupHolds
+    - möjligheten att reservera exemplargrupper. <br><strong>OBS:</strong></br> Denna
+      systeminställning kräver att <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EnableItemGroups'>EnableItemGroups</a>
+      är inställt på 'Aktivera'.
+  - - Om reservationskön är delad, visa personalen
+    - choices:
+        actual: den faktiska prioriteringen, som kan vara i oordning
+        virtual: '"virtuella" prioriteringar, där varje grupp numreras separat'
+      pref: HoldsSplitQueueNumbering
+    - .
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: RealTimeHoldsQueue
+    - realtidsuppdateringar för reservationskön.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowHoldItemTypeSelection
+    - att exemplarval vid reservationer begränsas till exemplartyp.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowRenewalIfOtherItemsAvailable
+    - en låntagare att låna om ett exemplar med väntande reservationer om andra tillgängliga
+      exemplar kan uppfylla reservationen.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowHoldPolicyOverride
+    - personal att åsidosätta reservationspolicy vid reservationer.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowHoldsOnDamagedItems
+    - att reservationer skapas för eller fylls av skadade exemplar.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowHoldDateInFuture
+    - reservationer som inte kommer med på väntelistan förrän vid ett framtida datum.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OPACAllowHoldDateInFuture
+    - låntagare att göra reservationer som inte kommer med på väntelistan förrän vid
+      ett framtida datum. (<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AllowHoldDateInFuture">AllowHoldDateInFuture</a>
+      måste också vara aktiverat).
+  - - När en reservation görs i OPAC, gör
+    - choices:
+        '': inga datum
+        both: både start- och utgångsdatum
+        end: reservationens utgångsdatum
+        start: reservationens startdatum
+      pref: OPACMandatoryHoldDates
+    - obligatoriskt.
+    - <br><strong>NOTE:</strong> Alternativ för reservationens startdatum är endast
+      valbart om <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AllowHoldDateInFuture">AllowHoldDateInFuture</a>
+      och <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACAllowHoldDateInFuture">OPACAllowHoldDateInFuture</a>
+      är påslagna.
+  - - Bekräfta framtida reservationer (med start senast
+    - class: integer
+      pref: ConfirmFutureHolds
+    - dagar från nu) vid återlämning. Detta antal dagar kommer även att användas för
+      att beräkna normalt slutdatum för rapporten Plocklista. Men det påverkar inte
+      utlån, omlån eller överföring av böcker.
+  - - Kontrollera regeln från
+    - choices:
+        ItemHomeLibrary: exemplarets hembibliotek
+        PatronLibrary: låntagarens hembibliotek
+      pref: ReservesControlBranch
+    - för att se om låntagaren kan reservera exemplaret.
+  - - Markera en reservation som problematisk om den har väntat längre än
+    - class: integer
+      pref: ReservesMaxPickUpDelay
+    - dagar.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: ExpireReservesMaxPickUpDelay
+    - reservationer att automatiskt gå ut om de inte har hämtats inom tidsperioden
+      specificerad i systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReservesMaxPickUpDelay">ReservesMaxPickUpDelay</a></br>
+    - choices:
+        '0': Välj inte att
+        '1': Välj att
+      pref: ExpireReservesAutoFill
+    - automatiskt uppfylla nästa reservation med hjälp av exemplaret.
+    - Skicka e-post om den nya infångade reservationen med ett "canceled item" till
+    - class: email
+      pref: ExpireReservesAutoFillEmail
+    - Om ingen adress är angiven här skickas meddelandet till bibliotekets e-postadress.
+    - <br><strong>OBS:</strong> Denna systeminställning kräver cronjobbet <code>misc/cronjobs/holds/cancel_expired_holds.pl</code>.
+      Be din systemadministratör att schemalägga det.<br>
+  - - Om <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ExpireReservesMaxPickUpDelay">ExpireReservesMaxPickUpDelay</a>
+      används, lägg på följande avgift för ej uthämtade reservationer
+    - class: currency
+      pref: ExpireReservesMaxPickUpDelayCharge
+    - .
+  - - Reservationskön bör prioritera att fånga in en reservation genom att matcha
+      låntagarens hembibliotek med ett exemplar som har en matchande
+    - choices:
+        holdingbranch: nuvarande plats.
+        homebranch: hembibliotek.
+      pref: HoldsQueuePrioritizeBranch
+      type: choice
+  - - Uppfyll reservationer med exemplar från biblioteken
+    - class: multi
+      pref: StaticHoldsQueueWeight
+    - (som filialkoder, åtskilda av kommatecken; om fältet är tomt används alla bibliotek)
+    - när de är
+    - choices:
+        '0': öppna eller stängda
+        '1': öppna
+      pref: HoldsQueueSkipClosed
+    - choices:
+        '0': i den ordningen.
+        '1': i slumpmässig ordning.
+      pref: RandomizeHoldsQueueWeight
+    - <br><strong>NOTERA:</strong> Den här systeminställningen kräver cronjobbet <code>misc/cronjobs/holds/build_holds_queue.pl</code>.
+      Be din systemadministratör att schemalägga det.
+    - ''
+  - - choices:
+        '0': Tillåt inte (med oberoende filialer)
+        '1': Tillåt
+      pref: canreservefromotherbranches
+    - en användare från ett bibliotek att reservera ett exemplar från ett annat bibliotek
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OPACAllowUserToChooseBranch
+    - en användare att välja från vilket bibliotek en reservation ska hämtas.
+  - - 'Tillåt en låntagare att ändra hämtbibliotek vid dessa statusar:'
+    - multiple:
+        intransit: På väg
+        pending: Väntande
+        suspended: Pausad
+      pref: OPACAllowUserToChangeBranch
+  - - choices:
+        '0': Markera automatiskt
+        '1': Markera inte automatiskt
+      pref: ReservesNeedReturns
+    - en reservation som hittad och väntande när en reservation skapas för ett särskilt
+      exemplar och det exemplaret redan är återlämnat.
+  - - Låntagare kan ha högst
+    - class: integer
+      pref: maxreserves
+    - reservationer samtidigt (lämna tomt eller skriv 0 för att avaktivera). Ytterligare
+      begränsningar kan gälla utifrån cirkulationsregler.
+  - - choices:
+        '0': Skicka inte
+        '1': Skicka
+      pref: emailLibrarianWhenHoldIsPlaced
+    - för att skicka ett e-postmeddelande till biblioteket varje gång en reservation
+      läggs.
+    - 'Den första e-postadressen i följande lista kommer att användas: Library Reply-To,
+      Library Email, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>
+      och <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  - - choices:
+        '0': Skicka inte e-post
+        '1': Skicka e-post
+      pref: EmailPatronWhenHoldIsPlaced
+    - när en låntagare har lagt en reservation.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: DisplayMultiPlaceHold
+    - möjligheten att i träfflistan välja flera poster för reservation
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: DisplayMultiItemHolds
+    - möjligheten att reservera flera exemplar samtidigt i personalklienten och OPAC.
+  - - choices:
+        '0': Överför inte
+        '1': Överför
+      pref: TransferWhenCancelAllWaitingHolds
+    - exemplar när alla väntande reservationer annulleras.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AutoResumeSuspendedHolds
+    - att pausade reservationer automatiskt återupptas ett visst datum.
+    - <br><strong>OBS:</strong> Denna systeminställning kräver cronjobbet <code>misc/cronjobs/holds/auto_unsuspend_holds.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - choices:
+        '0': Tillåt inte att
+        '1': Tillåt att
+      pref: SuspendHoldsIntranet
+    - reservationer kan pausas från personalklienten.
+  - - choices:
+        '0': Tillåt inte att
+        '1': Tillåt att
+      pref: SuspendHoldsOpac
+    - reservationer kan pausas från OPAC.
+  - - Om <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ExpireReservesMaxPickUpDelay">ExpireReservesMaxPickUpDelay</a>
+      används,
+    - choices:
+        '0': tillåt inte
+        '1': tillåt
+      pref: ExpireReservesOnHolidays
+    - förfallna reservationer att annulleras dagar då biblioteket är stängt.
+  - - choices:
+        '0': Ta inte hänsyn till kalendern
+        '1': Ta hänsyn till kalendern
+      pref: ExcludeHolidaysFromMaxPickUpDelay
+    - när sista hämtdatum för infångad reservation beräknas.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: decreaseLoanHighHolds
+    - minskningen av låneperioden till
+    - class: integer
+      pref: decreaseLoanHighHoldsDuration
+    - dagar för exemplar med hög efterfrågan med fler än
+    - class: integer
+      pref: decreaseLoanHighHoldsValue
+    - reservationer
+    - choices:
+        dynamic: över antalet reserverbara böcker på posten
+        static: på katalogposten
+      pref: decreaseLoanHighHoldsControl
+    - '. Ignorera exemplar med följande status:'
+    - multiple:
+        damaged: Skadad
+        itemlost: Förkommen
+        notforloan: Ej för utlån
+        withdrawn: Återkallat
+      pref: decreaseLoanHighHoldsIgnoreStatuses
+    - 'Obs: Den förkortade lånetiden kan också ställas in under cirkulationsregler
+      och kommer då att skriva över inställningen här.'
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowHoldsOnPatronsPossessions
+    - en låntagare att reservera ett exemplar på en post om låntagaren redan har ett
+      eller flera exemplar från samma post bland sina lån.
+  - - choices:
+        '0': Prioritera inte
+        '1': Prioritera
+      pref: LocalHoldsPriority
+    - att fylla reservationer för låntagare vars
+    - choices:
+        HomeLibrary: hembibliotek
+        PickupLibrary: avhämtningsbibliotek
+      pref: LocalHoldsPriorityPatronControl
+    - matchar exemplarets
+    - choices:
+        holdingbranch: nuvarande plats
+        homebranch: hembibliotek
+      pref: LocalHoldsPriorityItemControl
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: OPACHoldsIfAvailableAtPickup
+    - låntagare att reservera titlar som finns inne på hämtstället.
+  - - 'Låntagarkategorier som inte berörs av <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACHoldsIfAvailableAtPickup">OPACHoldsIfAvailableAtPickup</a>:'
+    - choices: patron-categories
+      class: multiple
+      pref: OPACHoldsIfAvailableAtPickupExceptions
+  - - choices:
+        allow: Tillåt att exemplar markeras som försvunna
+        allow_and_notify: Tillåt att exemplar markeras som försvunna och meddela låntagaren
+        do_not_allow: Tillåt inte att exemplar markeras som försvunna
+      pref: CanMarkHoldsToPullAsLost
+    - från sidan "Plocklista reservationer". Värden som ska användas måste definieras
+      i <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UpdateItemWhenLostFromHoldList">UpdateItemWhenLostFromHoldList</a>.
+  - - En lista med värden för att uppdatera ett exemplar när det markeras som <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">förlorat</a>
+      på sidan 'Plocklista reservationer'.
+    - 'Exempel: "itemlost: 1" sätter items.itemlost till 1 när ett exemplar är markerat
+      som förkommet. (Kräver <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CanMarkHoldsToPullAsLost">CanMarkHoldsToPullAsLost</a>)'
+    - pref: UpdateItemWhenLostFromHoldList
+      syntax: text/x-yaml
+      type: textarea
+  - - choices:
+        '0': Ställ inte in
+        '1': Ställ in
+      default: 0
+      pref: DefaultHoldExpirationdate
+    - ett standardutgångsdatum för reservationer automatiskt.
+    - Om aktiverad, ställ in ett utgångsdatum
+    - class: integer
+      default: 0
+      pref: DefaultHoldExpirationdatePeriod
+    - choices:
+        days: dagar
+        months: månader
+        years: år
+      default: days
+      pref: DefaultHoldExpirationdateUnitOfTime
+    - från reservationsdatum.
+  - - När reservationer görs via personalgränssnittet är avhämtningsbiblioteket
+    - choices:
+        holdingbranch: exemplarets aktuella bibliotek
+        homebranch: exemplarets hembibliotek
+        loggedinlibrary: det bibliotek du är inloggad på
+      default: loggedinlibrary
+      pref: DefaultHoldPickupLocation
+    - .
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AutomaticCheckinAutoFill
+    - att reservationer automatiskt fångas in efter automatisk återlämning.
+    - <br><strong>OBS:</strong> Denna systeminställning kräver cronjobbet <code>misc/cronjobs/automatic_checkin.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - choices:
+        '0': Lägg inte
+        '1': Lägg
+      pref: PlaceHoldsOnOrdersFromSuggestions
+    - en reservation vid beställning baserad på inköpsförslag.
+  SIP2:
+  - - Använd följande mappningar för att bestämma sort_bin för en återlämnat exemplar.<br/>
+    - Mappningen bör ha formen 'branchcode:item field:comparator:item field value:sort
+      bin number', med en mappning per rad.<br/>
+    - '''filialkod'' är platsen där återlämningen utförs (d.v.s. filial tilldelad
+      SIP-användare)<br/>'
+    - '- ''exemplarfält'' är en databaskolumn i exemplartabellen<br/>'
+    - '''comparator'' är typen av jämförelse, möjliga värden är: eq,<,<=,>,>=,ne<br/>'
+    - '''exemplarfältsvärde'' är värdet som ska jämföras med värdet i det angivna
+      ''exemplarfältet''<br/>'
+    - '- ''sort bin number'' är det förväntade returvärdet i CL-fältet i SIP-svaret
+      för en artikel som matchar en regel<br/><br/>'
+    - Gruppen 'item field:comparator:item field value:' är upprepningsbar inom en
+      enkel rad för att möjliggöra mer komplexa fall
+    - 'OBS: Om du anger ''item_field_value'' med ett inledande ''\$'' och ett exemplarfältnamn
+      används värdet för det fältet i exemplaret för jämförelse:<br/>'
+    - dvs \$holdingbranch<br/></br>
+    - Exempel:<br/>
+    - CPL:itype:eq:BOOK:1 - Kommer att returnera 'sort bin 1' för ett exemplar med
+      exemplartypen 'BOOK' som har återlämnats till CPL.<br/>
+    - CPL:itemcallnumber:<:339.6:3 - Returnerar sorteringsfack 3 för ett exemplar
+      med en hyllsignatur lägre än 339.6 som returneras till CPL .<br/>
+    - CPL:homebranch:ne:\$holdingbranch:X - Returnerar sorteringsfack 'X' för ett
+      exemplar som returneras till CPL där nuvarande plats inte är lika med hembibliotek
+      (dvs. alla föremål som tillhör en annan filial än CPL).<br/>
+    - CPL:itype:eq:BOOK:ccode:eq:TEEN:5 - Returnerar sorteringsfack 5 för ett exemplar
+      med exemplartypen 'BOOK' och avdelningskoden 'TEEN' som returneras till CPL.<br/><br/>
+    - class: long
+      pref: SIP2SortBinMapping
+      type: textarea
+  - - Använd
+    - choices:
+        '0': hembibliotek
+        '1': permanent_location
+      pref: UseLocationAsAQInSIP
+    - för AQ-fält i SIP-protokoll.
+  - - choices:
+        '0': Skicka inte
+        '1': Skicka
+      pref: SIP2AddOpacMessagesToScreenMessage
+    - OPAC-meddelanden i meddelandefältet för SIP2.
+  Självbetjäningsmodulen:
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: SelfCheckInModule
+    - 'det webbaserade självlånesystemet. (finns i: /cgi-bin/koha/sco/sco-main.pl).'
+  - - Återställ aktuell självbetjäningsskärm efter
+    - class: integer
+      pref: SelfCheckInTimeout
+    - sekunder.
+  - - 'Inkludera följande CSS på alla sidor i den webbaserade självåterlämningen:'
+    - class: code
+      pref: SelfCheckInUserCSS
+      syntax: css
+      type: textarea
+  - - 'Inkludera följande JavaScript på alla sidor i den webbaserade självåterlämningen:'
+    - class: code
+      pref: SelfCheckInUserJS
+      syntax: javascript
+      type: textarea
+  Självutcheckningsmodul:
+  - - 'Inkludera följande JavaScript på alla sidor i den webbaserade självutlåningen:'
+    - class: code
+      pref: SCOUserJS
+      syntax: javascript
+      type: textarea
+  - - 'Inkludera följande CSS på alla sidor i den webbaserade självutlåningen:'
+    - class: code
+      pref: SCOUserCSS
+      syntax: css
+      type: textarea
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SCOLoadCheckoutsByDefault
+    - låntagarens bild (om en sådan lagts till) när de använder den webbaserade självutlåningen.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: ShowPatronImageInWebBasedSelfCheck
+    - låntagarens bild (om en sådan lagts till) när de använder den webbaserade självutlåningen.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: WebBasedSelfCheck
+    - 'det webbaserade självutlåningssystemet (finns här: /cgi-bin/koha/sco/sco-main.pl).'
+  - - Låt låntagare logga in i det webbaserade självlånesystemet med sina
+    - choices:
+        '0': Låt låntagare logga in i det webbaserade självlånesystemet med sina
+        '1': användarnamn och lösenord
+      pref: SelfCheckoutByLogin
+    - '.</br>OBS: Om du använder ''cardnumber'' och AutoSelfCheckAllowed bör du ställa
+      in SelfCheckAllowByIPRanges för att förhindra att brute force-attacker kommer
+      åt låntagarinformation utanför biblioteket.'
+  - - Ställ in timeouten för den aktuella låntagarens inloggning i det webbaserade
+      självlånesystemet till
+    - class: integer
+      pref: SelfCheckTimeout
+    - sekunder.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: SCOAllowCheckin
+    - låntagare att återlämna exemplar via det webbaserade självutlåningssystemet.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AutoSelfCheckAllowed
+    - det webbaserade självbetjäningssystemet att automatiskt logga in med denna personalinloggning
+    - pref: AutoSelfCheckID
+    - och detta lösenord
+    - class: password
+      pref: AutoSelfCheckPass
+    - .
+    - 'Notera: Låntagare som anges här kommer inte kunna logga in i OPAC.'
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SelfCheckReceiptPrompt
+    - popup-rutan för kvittoutskrift när självutlåning slutförts.
+  - - 'Tillåt självutlåning från följande IP-adresser:'
+    - class: short
+      pref: SelfCheckAllowByIPRanges
+    - (Lämna tomt om det inte används. Använd intervall eller enkla IP-adresser separerade
+      av mellanslag, tex <code>192.168.1.1 192.168.0.0/24</code>.)
+  - - 'Låntagarkategorier som får låna satsvis när de är inloggade i självbetjäningssystemet:'
+    - choices: patron-categories
+      class: multiple
+      pref: SCOBatchCheckoutsValidCategories
+  Upphämtningsmodulen:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: CurbsidePickup
+    - upphämtningsmodulen.
+  Utlåning satsvis:
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: BatchCheckouts
+    - utlåning satsvis.
+  - - 'Låntagarkategorier som får låna satsvis:'
+    - choices: patron-categories
+      class: multiple
+      pref: BatchCheckoutsValidCategories
+  Återkrav:
+  - - Markera en reservation som problematisk om den har väntat längre än
+    - pref: RecallsMaxPickUpDelay
+    - class: integer
+    - dagar.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: UseRecalls
+    - återkrav. Ställ in <a href="/cgi-bin/koha/admin/smart-rules.pl">regler för utlåning
+      och avgifter</a> för återkrav när funktionen har aktiverats.
+  Återlämningspolicy:
+  - - choices:
+        '0': Fånga inte in
+        '1': Fånga in
+      pref: TrapHoldsOnOrder
+    - exemplar som är 'ej för utlån' men som går att reservera ( notforloan < 0) för
+      att fylla reservationer.
+  - - Fånga inte in exemplar med följande <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">'ej
+      för utlån'</a>-värden
+    - class: integer
+      pref: SkipHoldTrapOnNotForLoanValue
+    - för att fånga in reservationer.
+    - lista med auktoriserade <a href='/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN'>not
+      for loan</a>-värden separeras med lodstreck '|')
+  - - choices:
+        '0': Fånga inte in
+        '1': Fånga in
+      pref: HoldsAutoFill
+    - reservationer automatiskt utan att dessa behöver bekräftas av personal.
+  - - choices:
+        '0': Genomför
+        '1': Genomför inte
+      pref: HoldsNeedProcessingSIP
+    - reservationer automatiskt om matchande exemplar returneras via SIP-protokoll.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: HoldsAutoFillPrintSlip
+    - rutan för kvittoutskrift för automatiskt infångade reservationer.
+  - - choices:
+        '0': Blockera inte
+        '1': Blockera
+      pref: BlockReturnOfWithdrawnItems
+    - återlämning av exemplar som har dragits in.
+  - - choices:
+        '0': Blockera inte
+        '1': Blockera
+      pref: BlockReturnOfLostItems
+    - återlämning av exemplar som har varit försvunna.
+  - - choices:
+        '0': Beräkna och uppdatera inte
+        '1': Beräkna och uppdatera
+      pref: CalculateFinesOnReturn
+    - förseningsavgifter när ett exemplar återlämnas.
+    - <br /><strong>NOTERA:</strong> Om du använder timslån så bör den här vara aktiverad.
+    - <br /><strong>NOTERA:</strong> Den här systeminställningen kräver att <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=FinesMode">FinesMode</a>
+      är inställd på "Beräkna och debitera."
+  - - choices:
+        '0': Beräkna och uppdatera inte
+        '1': Beräkna och uppdatera
+      pref: CalculateFinesOnBackdate
+    - förseningsavgifter när ett exemplar återlämnas med ett bakdaterat datum.
+  - - class: code
+      pref: UpdateItemLocationOnCheckin
+      syntax: text/x-yaml
+      type: textarea
+    - 'Det här är en lista med värdepar. Ett korrekt par ser ut så här: ''värde 1:
+      värde 2'' (värde 1 kolon mellanslag värde 2).'
+    - Giltiga värden är auktoriserade <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOC">LOC</a>-värden,
+      _BLANK_, _PERM_, och _ALL_.<br><br>
+    - Exempel:<br/>
+    - 'PROC: FIC - gör att ett exemplar med placeringen Processing Center ändras till
+      placeringen Fiction vid återlämning.<br/>'
+    - 'FIC: GEN - gör att ett exemplar med placering Fiction flyttas till placeringen
+      General stacks vid återlämning.<br/>'
+    - '_BLANK_: FIC - gör att ett exemplar som saknas placering flyttas till placeringen
+      Fiction vid återlämning.<br/>'
+    - 'FIC: _BLANK_ - gör att ett exemplar med placering FIC blir flyttat till en
+      tom placering vid återlämning.<br/>'
+    - '_ALL_: FIC - gör att alla exemplar flyttas till placeringen Fiction vid återlämning.<br/>'
+    - 'PROC: _PERM_ - gör att ett exemplar som är i Processing Center kommer att flyttas
+      till dess permanenta placering.<br/><br/>'
+    - 'Allmän regel: om placeringen till vänster om kolonet (:) matchar exemplarets
+      nuvarande placering, så kommer det flyttas till placeringen som står till höger
+      om kolonet (:).<br/>'
+    - 'Notera: PROC och CART är speciella värden, för det här placeringarna så kan
+      location och permanent_location skilja sig åt, i alla andra fall så kommer flytten
+      att beröra båda. Exemplar med placeringen CART kommer att återlämnas till deras
+      permanenta placering vid utlån.<br/>'
+    - Specialtermen _BLANK_ kan användas på båda sidorna för att flytta till eller
+      ta bort en placering från exemplar som saknar en placering.<br/>
+    - Specialtermen _ALL_ används på vänster sida om kolonet (:) för att påverka alla
+      exemplar, <strong>och det åtsidosätter alla andra regler.</strong>
+  - - class: code
+      pref: UpdateNotForLoanStatusOnCheckin
+      syntax: text/x-yaml
+      type: textarea
+    - Detta är en lista med exemplartyper och värdepar.<br/><br/>
+    - <strong>Examples:</strong><br/>
+    - _ALL_:<br/>
+    - '&nbsp-1: 0<br/><br/>'
+    - CR:<br/>
+    - '&nbsp1: 0<br/><br/>'
+    - BK:<br/>
+    - '&nbsp-1: ONLYMESSAGE<br/><br/>'
+    - Vid återlämning av exemplar - om dess exemplartyp matchar CR, och värdet till
+      vänster (1) stämmer överens med objektets 'ej för utlån'-värde, kommer statusen
+      att uppdateras till värdet till höger .<br/><br/> Specialtermen _ALL_ används
+      på vänster sida av kolon (:) för att påverka alla exemplartyper, <strong>detta
+      åsidosätter inte alla andra regler</strong><br/><br/>
+    - Varje exemplartyp måste anges på en separat rad till vänster om kolonet (:).<br/>Varje
+      par av "ej för utlån"-värden, för den exemplartypen, måste listas på separata
+      rader under exemplartypen, med ett inledande mellanslag.<br/><br/>
+    - Giltiga värden är auktoriserade <a href='/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN'>NOT_LOAN</a>-värden
+      och ONLYMESSAGE.<br/><br/>
+    - 'ONLYMESSAGE kan användas för att endast visa ''ej för utlån''-beskrivningen.
+      T.ex.. ''-1: ONLYMESSAGE''<br/><br/>'
+  - - choices:
+        '0': Dölj inte
+        '1': Dölj
+      pref: HidePersonalPatronDetailOnCirculation
+    - en låntagares telefonnummer, e-postadress, gatuadress och stad på cirkulationssidan.
+  - - choices:
+        '0': Hindra inte
+        '1': Hindra
+      pref: TransfersBlockCirc
+    - personal från att fortsätta skanna in exemplar utan att bekräfta överföring
+      när en sådan aktiverats.
+  - - choices:
+        '0': Godkänn inte
+        '1': Godkänn
+      pref: AutomaticConfirmTransfer
+    - automatiskt överföring när dialogfönstret stängs utan att klicka 'Ja'.
+  - - choices:
+        '0': Spara inte
+        '1': Spara
+      default: 0
+      pref: StoreLastBorrower
+    - senaste låntagaren som återlämnade exemplaret. Den här inställningen är fristående
+      från systeminställningarna <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=opacreadinghistory">opacreadinghistory</a>
+      och <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AnonymousPatron">AnonymousPatron</a>.

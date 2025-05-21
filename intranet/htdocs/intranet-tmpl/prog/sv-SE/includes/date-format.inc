@@ -1,0 +1,1 @@
+[% IF ( dateformat == "us" ) %](MM/DD/ÅÅÅÅ)[% ELSIF ( dateformat == "metric" ) %](DD/MM/ÅÅÅÅ)[% ELSIF ( dateformat == "dmydot" ) %](DD.MM.ÅÅÅÅ)[% ELSE %](ÅÅÅÅ-MM-DD)[% END %] 

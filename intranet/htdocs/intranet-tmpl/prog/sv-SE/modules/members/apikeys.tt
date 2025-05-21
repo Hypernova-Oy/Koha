@@ -1,0 +1,161 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("API Keys") | html %] &rsaquo;
+ [% t("Patrons") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="pat_apikeys" class="pat">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Låntagare</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>API-nycklar</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% INCLUDE 'members-toolbar.inc' %]
+
+ <h1>API nycklar för [% INCLUDE 'patron-title.inc' %]</h1>
+
+ [% IF fresh_api_key %]
+ [%# A fresh api key was generated, display the secret, only once %]
+ <div class="alert alert-info">Se till att kopiera din API-nyckel nu. Du kommer inte kunna se den igen!</div>
+ <div class="page-section rows">
+ <ol>
+ <li>
+ <span class="label">Beskrivning: </span>
+ [% fresh_api_key.description | html %]
+ </li>
+ <li>
+ <span class="label">Klient-ID: </span>
+ [% fresh_api_key.client_id | html %]
+ </li>
+ <li>
+ <span class="label">Hemlig: </span>
+ [% fresh_api_key.plain_text_secret | html %]
+ </li>
+ </ol>
+ </div>
+ [% END %]
+
+ <form id="add-api-key" action="/cgi-bin/koha/members/apikeys.pl" method="post" style="display:none">
+ <input type="hidden" name="patron_id" value="[% patron.id | html %]" />
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-generate" />
+ <fieldset class="brief">
+ <legend>Generera ett nytt klient-id/hemligt par</legend>
+ <ol>
+ <li>
+ <label for="description">Beskrivning: </label>
+ <input type="text" name="description" />
+ <input class="btn btn-primary" type="submit" value="Spara" />
+ <a href="#" class="cancel toggle_element" data-element="#add-api-key">Avbryt</a>
+ </li>
+ </ol>
+ </fieldset>
+ </form>
+
+ [% IF api_keys.count %]
+ <div class="page-section" id="keys">
+ <p>
+ <button class="btn btn-default toggle_element" type="submit" id="show-api-form" data-element="#add-api-key"><i class="fa fa-plus"></i> Generera ett nytt klient-id/nyckelpar</button>
+ </p>
+ <table>
+ <thead>
+ <tr>
+ <th>Beskrivning</th>
+ <th>Klient-ID</th>
+ <th>Aktiv</th>
+ <th class="noExport">Åtgärder</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH key IN api_keys %]
+ <tr>
+ <td>[% key.description | html %]</td>
+ <td>[% key.client_id | html %]</td>
+ <td>[% IF key.active %]Ja[% ELSE %]Nej[% END %]</td>
+ <td>
+ <form action="/cgi-bin/koha/members/apikeys.pl" method="post">
+ <input type="hidden" name="patron_id" value="[% patron.id | html %]" />
+ <input type="hidden" name="key" value="[% key.id | html %]" />
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete" />
+ <button class="btn btn-default btn-xs delete" type="submit"><i class="fa fa-trash-can"></i> Ta bort</button>
+ </form>
+ <form action="/cgi-bin/koha/members/apikeys.pl" method="post">
+ <input type="hidden" name="patron_id" value="[% patron.id | html %]" />
+ <input type="hidden" name="key" value="[% key.id | html %]" />
+ [% INCLUDE 'csrf-token.inc' %]
+ [% IF key.active %]
+ <input type="hidden" name="op" value="cud-revoke" />
+ <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-times"></i> Återkalla</button>
+ [% ELSE %]
+ <input type="hidden" name="op" value="cud-activate" />
+ <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play"></i> Aktivera</button>
+ [% END %]
+ </form>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /#keys.page-section -->
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p>Inga nycklar har definierats för aktuell låntagare.</p>
+ <p>
+ <a href="#" class="btn btn-default toggle_element" data-element="#add-api-key" id="show-api-form">
+ <i class="fa fa-plus"></i>
+ <span>Generera ett nytt klient-id/hemligt par</span>
+ </a>
+ <p>
+ </div>
+ [% END # /IF api_keys.count %]
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ <script>
+        $(document).ready(function(){
+            $(".delete").on("click", function(e){
+                return confirmDelete(_("Är du säker på att du vill ta bort denna nyckel?"));
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

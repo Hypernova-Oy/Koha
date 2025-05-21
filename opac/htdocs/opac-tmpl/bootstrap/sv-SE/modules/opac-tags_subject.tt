@@ -1,0 +1,65 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE AdditionalContents %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Ämnesmoln &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %]-katalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-tags-subject' %]
+[% INCLUDE 'masthead.inc' %]
+
+ <div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Ämnesmoln</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( OpacNav || OpacNavBottom ) %]
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' %]
+ </div>
+ </div>
+ <div class="col-10 order-first order-md-first order-lg-2">
+ [% ELSE %]
+ <div class="col order-first order-md-first order-lg-2">
+ [% END %]
+
+ <div id="subjectcloud" class="maincontent">
+ <h1>Ämnesmoln</h1>
+ [% IF Koha.Preference( 'OpacCloud' ) == 1 %]
+ [% IF ( LOOP ) %]
+ <p>Det här &quot;molnet&quot; innehåller rubriker som används oftast i vår katalog. Klicka på ett ämne nedan för att visa böckerna/medierna i vår samling.</p>
+ <fieldset>
+ <legend>Visa</legend>
+ <form class="form-inline" action="/cgi-bin/koha/opac-tags_subject.pl" method="get">
+ <p>upp till <input type="text" name="number" value="[% number | html %]" size="4" maxlength="4" /> ämnen <input type="submit" class="btn btn-primary" value="OK" /></p>
+ </form>
+ </fieldset>
+
+ [% FOREACH LOO IN LOOP %]
+ <a href="/cgi-bin/koha/opac-search.pl?idx=su&amp;q=&quot;[% LOO.entry | uri %]&quot;" style="font-size:[% LOO.weight | html %]px;">[% LOO.entry | html %]</a>
+ [% END %]
+ [% ELSE %]
+ <p>Obs! Den här funktionen är bara tillgänglig för franska kataloger där ISBD-ämnen har fyllts i och ett index har skapats med ett separat skript.</p>
+ [% END # / IF LOOP %]
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p>ISBD-molnet är inte aktiverat.</p>
+ </div>
+ [% END # / IF OpacCloud %]
+ </div> <!-- / #subjectcloud -->
+
+ </div> <!-- / .col-10/12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %][% END %]

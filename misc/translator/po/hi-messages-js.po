@@ -1,0 +1,4762 @@
+# Compendium of hi.
+msgid ""
+msgstr ""
+"Project-Id-Version: Koha 24.11.03.000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-23 04:07+0000\n"
+"PO-Revision-Date: 2025-03-07 03:45+0000\n"
+"Last-Translator: Nikunj Tyagi <nikunj1@gmail.com>\n"
+"Language-Team: Koha Translation Team\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 5.6.2\n"
+"X-Pootle-Revision: 1\n"
+"X-Pootle-Path: /hi/22.11/hi-messages-js.po\n"
+"X-POOTLE-MTIME: 1697630809.332628\n"
+
+#: koha-tmpl/intranet-tmpl/prog/js/acq.js:10
+msgid "ERROR: Price is not a valid number, please check the price and try again!"
+msgstr "त्रुटि: मूल्य एक मान्य संख्या नहीं है, कृपया मूल्य की जांच करें और फिर से प्रयास करें!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/acq.js:314
+msgid "Fund amount exceeds parent allocation"
+msgstr "फंड की राशि मूल आवंटन से अधिक है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/acq.js:316
+msgid "Fund amount exceeds period allocation"
+msgstr "फंड की राशि अवधि आवंटन से अधिक है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/acq.js:348
+msgid "New budget-parent is beneath budget"
+msgstr "नए बजट-पेरेंट बजट के नीचे है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:10
+msgid "Form not submitted because of the following problem(s)"
+msgstr "निम्नलिखित समस्या(ओं) के कारण फॉर्म सबमिट नहीं किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:14
+#, javascript-format
+msgid "%s item mandatory fields empty"
+msgstr "%s आइटम अनिवार्य फ़ील्ड रिक्त"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:31
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:64
+msgid "Update item"
+msgstr "अद्यतन आइटम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:36
+msgid "You can't receive any more items"
+msgstr "आप कोई और आइटम प्राप्त नहीं कर सकते"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:187
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:653
+msgid "Edit"
+msgstr "संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:108
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1125
+#: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:9
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:592
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:67
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:18
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:18
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:16
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:16
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:193
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:102
+msgid "Delete"
+msgstr "मिटाना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:195
+msgid "Add item"
+msgstr "आइटम जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:196
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:106
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:338
+msgid "Clear"
+msgstr "स्पष्ट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:197
+msgid "Add multiple items"
+msgstr "एकाधिक आइटम जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:199
+msgid "Number of items to add"
+msgstr "आइटम्स की संख्या जोड़ने के लिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:200
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:84
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:78
+msgid "Add"
+msgstr "जोड़ना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:201
+msgid "NOTE: Fields listed in the 'UniqueItemFields' system preference will not be copied"
+msgstr "नोट: 'UniverItemfields' सिस्टम वरीयता में सूचीबद्ध फ़ील्ड को कॉपी नहीं किया जाएगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:288
+msgid "is duplicated"
+msgstr "डुप्लिकेट हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:313
+msgid "already exists in database"
+msgstr "पहले से ही डेटाबेस में मौजूद"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:52
+msgid "There is no record selected"
+msgstr "कोई रिकॉर्ड का चयन किया नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:63
+msgid "quantity values are not filled in or are not numbers"
+msgstr "मात्रा मान न भरे गए हैं और न संख्याएँ हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:70
+msgid "Some funds are not defined in item records"
+msgstr "कुछ फंड आइटम रिकॉर्ड में परिभाषित नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:78
+msgid "Some required item subfields are not set"
+msgstr "कुछ आवश्यक आइटम सबफ़ील्ड सेट नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:99
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:5
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:73
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:134
+#: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:110
+msgid "Loading"
+msgstr "लोड कर रहा है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/ajax.js:18
+msgid "Internal Server Error, please reload the page"
+msgstr "आंतरिक सर्वर त्रुटि, पृष्ठ पुनः लोड करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/ajax.js:25
+msgid "You need to log in again, your session has timed out"
+msgstr "आप फिर से लॉग इन करने की जरूरत है, अपने सत्र का समय समाप्त हो गया है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/ajax.js:31
+msgid "Error; your data might not have been saved"
+msgstr "त्रुटि; आपका डेटा शायद सहेजा नहीं गया है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/ajax.js:35
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:20
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:4
+#: koha-tmpl/intranet-tmpl/prog/js/pages/circulation.js:98
+#: koha-tmpl/intranet-tmpl/prog/js/pages/circulation.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Dialog.vue:114
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:21
+msgid "Loading..."
+msgstr "लोड कर रहा है..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/audio_alerts.js:53
+msgid "Please select or enter a sound."
+msgstr "कृपया चयन करें या एक ध्वनि दर्ज करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/audio_alerts.js:76
+msgid "Are you sure you want to delete the selected audio alerts?"
+msgstr "क्या आप वाकई चयनित ऑडियो अलर्ट को मिटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/audio_alerts.js:78
+msgid "Check the box next to the alert you want to delete."
+msgstr "आप जिस अलर्ट को हटाना चाहते हैं, उसके बगल में स्थित बॉक्स को चेक करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/authorities-detail-modal.js:13
+msgid "Authority"
+msgstr "प्राधिकरण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:37
+#, javascript-format
+msgid "Error importing the authority type %s"
+msgstr "प्राधिकरण प्रकार आयात करने में त्रुटि %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:44
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:76
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:73
+msgid "Please select a CSV (.csv) or ODS (.ods) spreadsheet file."
+msgstr "कृपया एक CSV (.csv) या ODS (.ods) स्प्रेडशीट फ़ाइल चुनें."
+
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:59
+msgid "Do you really want to import the authority type fields and subfields? This will overwrite the current configuration. For safety reasons please use the export option to make a backup"
+msgstr "क्या आप वास्तव में प्राधिकरण प्रकार के फ़ील्ड और सबफील्ड आयात करना चाहते हैं? यह वर्तमान कॉन्फ़िगरेशन को अधिलेखित कर देगा। सुरक्षा कारणों से कृपया बैकअप बनाने के लिए निर्यात विकल्प का उपयोग करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:61
+#, javascript-format
+msgid "Importing to authority type: %s. Importing from file: %s"
+msgstr "प्राधिकरण प्रकार के लिए आयात करना: %s. फाइल से आयातित: %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:91
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:82
+msgid "Your cart is currently empty"
+msgstr "अपनी कार्ट वर्तमान में खाली है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:119
+msgid "This record is already in your cart"
+msgstr "यह रिकार्ड पहले से ही आपकी कार्ट में हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:136
+msgid "This record has been added to your cart"
+msgstr "यह रिकार्ड आपके कार्ट में जोड़ा गया है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:208
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:213
+#, javascript-format
+msgid "%s record(s) added to your cart"
+msgstr "%s आपकी कार्ट मे रिकार्ड(ओ) जोड़ी है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:210
+#, javascript-format
+msgid "%s already in your cart"
+msgstr "%s पहले से ही आपकी कार्ट में"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:218
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:311
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:429
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:444
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:454
+msgid "No record was selected"
+msgstr "कोई रिकार्ड नही चुना गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:221
+msgid "No record was added to your cart (already in your cart)!"
+msgstr "आपकी कार्ट में कोई रिकार्ड नहीं जोड़ा गया (पहले से ही आपकी कार्ट में)!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:260
+msgid "The record has been removed from your cart"
+msgstr "यह रिकार्ड आपकी कार्ट से हटा दिया गया है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:339
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:245
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:300
+msgid "Are you sure you want to empty your cart?"
+msgstr "क्या आप वाकई अपनी कार्ट खाली करना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:358
+msgid "Are you sure you want to remove the selected records?"
+msgstr "क्या आप वाकई चयनित रिकार्ड को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:412
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:415
+#, javascript-format
+msgid "Records in your cart: %s"
+msgstr "आपके कार्ट मे रिकार्ड: %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:487
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:495
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:498
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:509
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:111
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:421
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:429
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:437
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:440
+msgid "Add to cart"
+msgstr "कार्ट मे जोड़े"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:490
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:512
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:418
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:426
+msgid "In your cart"
+msgstr "आपकी कार्ट में"
+
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:36
+msgid "Error importing the framework"
+msgstr "फ्रेमवर्क के आयात में त्रुटि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:57
+#, javascript-format
+msgid "Are you sure you want to replace the fields and subfields for the %s framework structure? The existing structure will be overwritten! For safety reasons, it is recommended to use the export option to make a backup first."
+msgstr "क्या आप सुनिश्चित हैं कि आप %s फ्रेमवर्क संरचना के लिए क्षेत्रों और उपक्षेत्रों को बदलना चाहते हैं?मौजूदा संरचना को अधिलेखित कर दिया जाएगा! सुरक्षा कारणों से, पहले बैकअप बनाने के लिए निर्यात विकल्प का उपयोग करने की सिफारिश की जाती है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:59
+#, javascript-format
+msgid "Importing to framework: %s. Importing from file: %s."
+msgstr "फ्रेमवर्क में आयातित: %s. फाइल से आयातित: %s."
+
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:88
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:90
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:13
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:14
+msgid "Previous"
+msgstr "पिछला"
+
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:93
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:95
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:12
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:13
+msgid "Next"
+msgstr "अगला"
+
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:97
+msgid "Results"
+msgstr "परिणाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:122
+msgid "Go back to the results"
+msgstr "परिणामों पर वापस जाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:3
+#, javascript-format
+msgid "Please enter a valid date (should match %s)."
+msgstr "कोई मान्य दिनांक दर्ज करें (मिलान चाहिए %s)."
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Fri"
+msgstr "शुक्र "
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Mon"
+msgstr "सोम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Sat"
+msgstr "शनि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Sun"
+msgstr "रवि "
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Thu"
+msgstr "गुरु "
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Tue"
+msgstr "मंगल "
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Wed"
+msgstr "बुध"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Friday"
+msgstr "शुक्रवार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Monday"
+msgstr "सोमवार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Saturday"
+msgstr "शनिवार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Sunday"
+msgstr "रविवार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Thursday"
+msgstr "गुरुवार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Tuesday"
+msgstr "मंगलवार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Wednesday"
+msgstr "बुधवार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Apr"
+msgstr "अप्रैल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Aug"
+msgstr "अगस्त"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Dec"
+msgstr "दिसम्बर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Feb"
+msgstr "फ़रवरी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Jan"
+msgstr "जन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Jul"
+msgstr "जुलाई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Jun"
+msgstr "जून"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Mar"
+msgstr "मार्च"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "May"
+msgstr "मई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Nov"
+msgstr "नवं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Oct"
+msgstr "अक्टू"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Sep"
+msgstr "सितं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "April"
+msgstr "अप्रैल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "August"
+msgstr "अगस्त"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "December"
+msgstr "दिसंबर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "February"
+msgstr "फ़रवरी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "January"
+msgstr "जनवरी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "July"
+msgstr "जुलाई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "June"
+msgstr "जून"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "March"
+msgstr "मार्च"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "November"
+msgstr "नवम्बर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "October"
+msgstr "अक्टूबर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "September"
+msgstr "सितम्बर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cancel_booking_modal.js:47
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1188
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1256
+msgid "Failure"
+msgstr "विफल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cart.js:6
+#: koha-tmpl/intranet-tmpl/prog/js/cart.js:28
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:17
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:77
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:96
+msgid "No item was selected"
+msgstr "कोई आइटम नही चुना गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cart.js:83
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:351
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:350
+msgid "Place hold"
+msgstr "जगह होल्ड"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cashup_modal.js:23
+msgid "{credit_type_description} against {debit_type_description}"
+msgstr "{credit_type_description} विरुद्ध{debit_type_description}"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:12
+msgid "Please note that this external search could replace the current record."
+msgstr "कृपया ध्यान दें कि यह बाहरी खोज वर्तमान रिकॉर्ड को बदल सकती है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:33
+#, javascript-format
+msgid "%s item(s) are attached to this record. You must delete all items before deleting this record."
+msgstr "%s मद (s) इस रिकॉर्ड से जुड़े होते हैं। आप इस रिकॉर्ड को हटाने से पहले सभी वस्तुओं को हटाना होगा।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:36
+#, javascript-format
+msgid "Warning: This record is used in %s order(s). These orders will be cancelled. Are you sure you want to delete this record?"
+msgstr "चेतावनी: यह रिकॉर्ड %s क्रम (ओं) में उपयोग किया जाता है। ये आदेश रद्द कर दिए जाएंगे। क्या आप सुनिश्चित हैं कि आप इस रिकॉर्ड को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:38
+#, javascript-format
+msgid "%s order(s) are using this record. You need order managing permissions to delete this record."
+msgstr "%s आदेश (s) इस रिकॉर्ड का उपयोग कर रहे हैं। आप प्रबंध अनुमतियों के क्रम में इस रिकॉर्ड को नष्ट करने की जरूरत है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:42
+#, javascript-format
+msgid "%s deleted order(s) are using this record. Are you sure you want to delete this record?"
+msgstr "%s नष्ट कर दिया आदेश(ओ) इस रिकॉर्ड का उपयोग कर रहे हैं। आप इस रिकॉर्ड को नष्ट करना चाहते हैं आप सुनिश्चित हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:44
+#, javascript-format
+msgid "%s deleted order(s) are using this record. You need order managing permissions to delete this record."
+msgstr "%s नष्ट कर दिया आदेश(s) इस रिकॉर्ड का उपयोग कर रहे हैं। आप प्रबंध अनुमतियों के क्रम में इस रिकॉर्ड को नष्ट करने की जरूरत है."
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:47
+#, javascript-format
+msgid "%s holds(s) for this record. Are you sure you want to delete this record?"
+msgstr "%s होल्ड(ओं) इस रिकार्ड के लिए। आप इस रिकॉर्ड को नष्ट करना चाहते हैं आप सुनिश्चित हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:49
+#, javascript-format
+msgid "%s subscription(s) are attached to this record. You must delete all subscription before deleting this record."
+msgstr "%s सदस्यता(ओं) को इस रिकॉर्ड से जोड़ा गया है। इस रिकॉर्ड को हटाने से पहले आपको सभी सदस्यता को हटाना होगा।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:51
+msgid "Are you sure you want to delete this record?"
+msgstr "क्या आप इस अभिलेख को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:67
+#, javascript-format
+msgid "%s hold(s) on this record. You must delete all holds before deleting all items."
+msgstr "%s इस रिकॉर्ड पर होल्ड है। सभी आइटम हटाने से पहले आपको सभी होल्ड को हटाना होगा."
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:69
+#, javascript-format
+msgid "Are you sure you want to delete the %s attached items?"
+msgstr "क्या आप वाकई %s संलग्न आइटम हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cataloging.js:124
+msgid "(select to create)"
+msgstr "(बनाने के लिए चयन करें)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cataloging.js:649
+msgid "Something went wrong. Maybe the value already exists?"
+msgstr "कुछ गलत हो गया। शायद मूल्य पहले से मौजूद है?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cataloging_additem.js:158
+msgid "Template name is required."
+msgstr "टेम्प्लेट नाम आवश्यक है."
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:14
+msgid "Category code can only contain the following characters: letters, numbers, - and _."
+msgstr ", अक्षर, संख्या - और _: श्रेणी कोड केवल निम्न वर्ण हो सकते हैं।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:32
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:111
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:116
+msgid "Please choose an enrollment period in months OR by date."
+msgstr "कृपया महीनों में या दिनांक तक नामांकन अवधि चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:124
+msgid "Please select ..."
+msgstr "कृपया चयन करें ..।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:127
+msgid "All selected"
+msgstr "सभी चयनित है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:128
+#, javascript-format
+msgid "# of % selected"
+msgstr "की % चुने गए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:129
+msgid "No matches found"
+msgstr "कोई मेल नहीं मिला"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:13
+#, javascript-format
+msgid "Note: %s out of %s renewals have been logged"
+msgstr "नोट: %s में से %s नवीनीकरण लॉग हो चुके हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:24
+msgid "Renewed by"
+msgstr "द्वारा नवीनीकृत "
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:24
+msgid "manually"
+msgstr "मैन्युअल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:26
+msgid "Automatic"
+msgstr "स्वचालित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:26
+msgid "Renewal type:"
+msgstr "नवीकरण प्रकार:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:34
+msgid "Loading... you may continue scanning."
+msgstr "लोड हो रहा है ... आप स्कैनिंग जारी रख सकते हैं."
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:69
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:443
+msgid "Today's checkouts"
+msgstr "आज की चैक आउट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:71
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:445
+msgid "Previous checkouts"
+msgstr "पिछला चैक आउट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:128
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:858
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:156
+msgid "by _AUTHOR_"
+msgstr "by _AUTHOR_"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:149
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:879
+msgid "On-site checkout"
+msgstr "ऑन-साइट चैकआउट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:153
+msgid "This item has been recalled and the due date updated"
+msgstr "इस आइटम को वापस बुला लिया गया है और देय तिथि अपडेट की गई है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:255
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:385
+msgid "Recalled"
+msgstr "रिकॉल किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:262
+msgid "Booked"
+msgstr "बुक किया हुआ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:268
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:387
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:314
+msgid "On hold"
+msgstr "होल्ड पर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:275
+msgid "Not renewable"
+msgstr "नवीनीकरणयोग्य नही"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:282
+msgid "Must be renewed at the library"
+msgstr "पुस्तकालय में नवीनीकृत किया जाना चाहिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:740
+msgid "Not allowed: patron restricted"
+msgstr "अनुमति नहीं: संरक्षक प्रतिबंधित है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:294
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:742
+msgid "Not allowed: overdue"
+msgstr "अनुमति नहीं: अतिदेय"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:301
+#, javascript-format
+msgid "No renewal before %s"
+msgstr "कोई नवीकरण नही से पहले %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:308
+msgid "Can no longer be auto-renewed - number of checkout days exceeded"
+msgstr "अब कोई ऑटो नवीकरण किया जा सकता - चेकआउट दिनों की संख्या पार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:315
+msgid "Automatic renewal failed, patron has unpaid fines"
+msgstr "स्वचालित नवीनीकरण में असफल रहा, संरक्षक ने भुगतान न किए गए जुर्माना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:322
+msgid "Automatic renewal failed, account expired"
+msgstr "स्वचालित नवीनीकरण विफल, खाता समाप्त हो गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:331
+msgid "Renewal denied by syspref"
+msgstr "नवीनीकरण से इनकार किया syspref द्वारा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:366
+#, fuzzy
+msgid "{renewals_left} of {renewals_allowed} renewals remaining"
+msgstr "%s के %s नवीकरण शेष"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:368
+#, fuzzy
+msgid " and {renewals_left} of {renewals_allowed} unseen renewals remaining"
+msgstr " और %s के %s अनदेखे नवीनीकरण शेष"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:374
+msgid "Scheduled for automatic renewal"
+msgstr "स्वत: नवीकरण के लिए अनुसूचित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:389
+#, javascript-format
+msgid "Confirm (%s)"
+msgstr "पुष्टि (%s)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:403
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:405
+msgid "Claim returned"
+msgstr "दावा वापसी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:460
+msgid "No itemtype"
+msgstr "नही itemtype"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:466
+msgid "Number of checkouts by item type"
+msgstr "आइटम प्रकार द्वारा चेकआउट की संख्या"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:637
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:639
+msgid "Checked in"
+msgstr "चेकड इन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:641
+msgid "Patron note"
+msgstr "संरक्षक टिप्पणी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:644
+msgid "Unable to check in"
+msgstr "चेक इन करने में असमर्थ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:727
+msgid "Renewed, due:"
+msgstr "नवीनीकृत, देयः"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:730
+msgid "Renew failed:"
+msgstr "नवीनीकरण असफलः"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:732
+msgid "not checked out"
+msgstr "चैक आउट नहीं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:734
+msgid "too many renewals"
+msgstr "बहुत सारे नवीनीकरण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:736
+msgid "too many consecutive renewals without being seen by the library"
+msgstr "पुस्तकालय द्वारा देखे बिना बहुत से लगातार नवीनीकरण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:738
+msgid "on hold"
+msgstr "होल्ड पर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:744
+msgid "Unable to find an open day"
+msgstr "एक खुला दिन खोजने में असमर्थ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:748
+msgid "reason unknown"
+msgstr "अज्ञात कारण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:796
+msgid "There are no items to be renewed."
+msgstr "नवीनीकृत करने के लिए कोई आइटम नहीं हैं।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1080
+msgid "Double click to edit"
+msgstr "संपादित करने के लिए डबल क्लिक करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1128
+msgid "Resolve"
+msgstr "हल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1133
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:100
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:107
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:161
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:398
+msgid "Actions"
+msgstr "क्रिया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1136
+msgid "Edit notes"
+msgstr "नॊट का संपादन करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1195
+msgid "Show 1 claim"
+msgid_plural "Show all {count} claims"
+msgstr[0] "Show 1 दावा"
+msgstr[1] "Show all {count} दावे"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1200
+msgid "Show 1 unresolved claim"
+msgid_plural "Show {count} unresolved claims"
+msgstr[0] "Show 1 अनसुलझे दावे"
+msgstr[1] "Show {count} अनसुलझे दावे"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1224
+msgid "Update"
+msgstr "अद्यतन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1225
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:415
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:111
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:48
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:167
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:84
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:406
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:133
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:371
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:378
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:78
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:192
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:89
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:106
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:142
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:100
+msgid "Cancel"
+msgstr "रद्द करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1266
+msgid "Are you sure you want to delete this return claim?"
+msgstr "क्या आप वाकई इस दावे को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:10
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:11
+msgid "First"
+msgstr "प्रथम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:11
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:12
+msgid "Last"
+msgstr "अंतिम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:15
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1072
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:16
+msgid "No data available in table"
+msgstr "सारणी मे डेटा उपलब्ध नही"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:16
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:17
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "Showing _START_ to _END_ of _TOTAL_ entries"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:17
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:18
+msgid "No entries to show"
+msgstr "दिखाने के लिए कोई प्रविष्टि नही"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:18
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:19
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(कुल प्रविष्टियों_MAX_ से फ़िल्टर)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:19
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:20
+msgid "Show _MENU_ entries"
+msgstr "_MENU_ प्रविष्टियों दिखाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:21
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:22
+msgid "Processing..."
+msgstr "प्रोसेसिंग..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:22
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:23
+msgid "Search:"
+msgstr "खोज:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:23
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:24
+msgid "No matching records found"
+msgstr "मेल रिकॉर्ड नही मिला"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:25
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:26
+msgid "Copy to clipboard"
+msgstr "क्लिपबोर्ड पर कॉपी करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:26
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:27
+msgid "Press <i>ctrl</i> or <i>⌘</i> + <i>C</i> to copy the table data<br>to your system clipboard.<br><br>To cancel, click this message or press escape."
+msgstr "दबाए <i>ctrl</i> or <i>⌘</i> + <i>C</i> तालिका डेटा कॉपी करने के लिए<br>आपके सिस्टम क्लिपबोर्ड पर.<br><br>रद्द करने के लिए, इस संदेश को क्लिक करें या इस्केप को दबाएँ."
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:28
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:29
+#, javascript-format
+msgid "Copied %d rows to clipboard"
+msgstr "पंक्तियों को क्लिपबोर्ड पर %d कॉपी किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:29
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:30
+msgid "Copied one row to clipboard"
+msgstr "एक पंक्ति को क्लिपबोर्ड पर कॉपी किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:31
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:32
+msgid "Print"
+msgstr "प्रिंट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:32
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:695
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:33
+msgid "Copy"
+msgstr "प्रतिलिपि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:33
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:34
+msgid "CSV"
+msgstr "सीएसवी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:34
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:35
+msgid "Excel"
+msgstr "एक्सेल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:41
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:688
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:690
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:62
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:64
+msgid "Clear filter"
+msgstr "फ़िल्टर साफ करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:55
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:124
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:27
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:43
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:27
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:16
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:27
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:18
+msgid "All"
+msgstr "सब"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:242
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:92
+msgid "a an the"
+msgstr "a an the"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:400
+#, javascript-format
+msgid ""
+"Something went wrong when loading the table.\n"
+"%s: %s. \n"
+"%s"
+msgstr ""
+"टेबल लोड करते समय कोई गड़बड़ी हुई..\n"
+"%s: %s. \n"
+"%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:406
+msgid "Something went wrong when loading the table."
+msgstr "टेबल लोड करते समय कोई गड़बड़ी हुई."
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:723
+msgid "Columns settings"
+msgstr "स्तंभ सेटिंग्स"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:724
+msgid "Columns"
+msgstr "कॉलम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:738
+msgid "Export or print"
+msgstr "निर्यात या प्रिंट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:739
+msgid "Export"
+msgstr "निर्यात"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:747
+msgid "Copied!"
+msgstr "कॉपी!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:754
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:755
+msgid "Copy shareable link"
+msgstr "कॉपी शार्पेबल लिंक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:775
+msgid "Configure table"
+msgstr "तालिका कॉन्फ़िगर करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:776
+msgid "Configure"
+msgstr "विन्यास "
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:866
+#, javascript-format
+msgid "%s search"
+msgstr "%s खोज"
+
+#: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:71
+msgid "This field is mandatory and must have at least one mapping"
+msgstr "यह फ़ील्ड अनिवार्य है और इसमें कम से कम एक मैपिंग होनी चाहिए "
+
+#: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:152
+#, javascript-format
+msgid "Search field '%s' already exists"
+msgstr "खोज क्षेत्र '%s' पहले से मौज़ूद है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:174
+#, javascript-format
+msgid "Facet '%s' already exists"
+msgstr "पहलू '%s' पहले से मौज़ूद है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:6
+msgid "This pickup location is not allowed according to circulation rules"
+msgstr "संचलन नियमों के अनुसार इस पिकअप स्थान की अनुमति नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:211
+msgid " (current) "
+msgstr " (वर्तमान)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:245
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:101
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:135
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:370
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:73
+msgid "No"
+msgstr "नहीं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:246
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:91
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:136
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:370
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:71
+msgid "Yes"
+msgstr "हाँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:263
+msgid "Resume"
+msgstr "पुनरारंभ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:266
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:414
+msgid "Suspend"
+msgstr "निलंबित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:275
+msgid "Hold is <strong>suspended</strong>"
+msgstr "होल्ड है <strong>निलंबित</strong>"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:277
+#, javascript-format
+msgid "until %s"
+msgstr "जब तक %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:283
+#, javascript-format
+msgid "Next available %s item"
+msgstr "उपलब्ध अगला %s आइटम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:287
+#, javascript-format
+msgid "Next available item group <strong>%s</strong> item"
+msgstr "अगला उपलब्ध आइटम समूह <strong>%s</strong> item"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:295
+msgid "Item is <strong>waiting here</strong>"
+msgstr "आइटम हैं <strong>यहा इंतजार</strong>"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:297
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:301
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
+#, javascript-format
+msgid "at %s"
+msgstr "पर %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:300
+msgid "Item is <strong>waiting</strong>"
+msgstr "आइटम है <strong>इंतजार कर</strong>"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:309
+#, javascript-format
+msgid "Item is <strong>in transit</strong> from %s since %s"
+msgstr "आइटम हैं <strong>परिवहन में</strong>से %s since %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
+#, javascript-format
+msgid "Item hasn't been transferred yet from %s"
+msgstr "आइटम से अभी तक हस्तांतरित नहीं किया गया है %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:350
+msgid "Unable to resume, hold not found"
+msgstr "फिर से शुरू करने में असमर्थ है, होल्ड नहीं मिला "
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:353
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:439
+msgid "Your request could not be processed. Check the logs for details."
+msgstr "आपका अनुरोध संसाधित नहीं किया जा सका. विवरण के लिए लॉग की जाँच करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:399
+msgid "Suspend hold on"
+msgstr "निलंबित होल्ड पर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:406
+msgid "Suspend until:"
+msgstr "जब तक निलंबित:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:409
+msgid "Clear date to suspend indefinitely"
+msgstr "स्पष्ट तारीख अनिश्चित काल के लिए स्थगित करने के लिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:436
+msgid "Unable to suspend, hold not found."
+msgstr "निलंबित करने में असमर्थ, होल्ड नहीं मिला।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/item_search_fields.js:5
+msgid "Please enter letters or numbers"
+msgstr "कृपया पत्र या संख्याएं दर्ज करें."
+
+#: koha-tmpl/intranet-tmpl/prog/js/item_search_fields.js:10
+msgid "Are you sure you want to delete this field?"
+msgstr "क्या आप वाकई इस क्षेत्र को मिटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:21
+#, javascript-format
+msgid "A default letter with the code '%s' already exists."
+msgstr "कोड के साथ एक डिफ़ॉल्ट पत्र'%s' पहले से ही मौजूद है!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:23
+#, javascript-format
+msgid "A letter with the code '%s' already exists for '%s'."
+msgstr "कोड के साथ एक पत्र'%s' पहले से ही मौजूद के लिए  '%s'."
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:47
+#, javascript-format
+msgid "A letter with the code '%s' already exists for '%s'. Overwrite this letter?"
+msgstr "कोड के साथ एक पत्र '%s' पहले से ही '%s' के लिए मौजूद है। इस पत्र को अधिलेखित करें?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:52
+msgid "Existing format settings for all notices of the same language will be overwritten by these format settings."
+msgstr "एक ही भाषा के सभी नोटिसों के लिए मौजूदा प्रारूप सेटिंग्स को इन प्रारूप सेटिंग्स द्वारा अधिलेखित किया जाएगा।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:110
+#, javascript-format
+msgid "Please specify title and content for %s"
+msgstr "कृपया शीर्षक और सामग्री निर्दिष्ट करें %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:119
+msgid "Please fill at least one template."
+msgstr "कृपया कम से कम एक टेम्पलेट भरें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:156
+msgid " characters"
+msgstr " अक्षर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:19
+msgid "Both subfield values should be filled or empty."
+msgstr "दोनों उपक्षेत्र मान भरे या खाली होने चाहिए."
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:24
+msgid "The destination should be filled."
+msgstr "गंतव्य भरा जाना चाहिए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:29
+msgid "If the field is a control field, the subfield should be empty"
+msgstr "यदि फ़ील्ड एक नियंत्रण क्षेत्र है, तो उपक्षेत्र खाली होना चाहिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:35
+msgid "The source subfield should be filled for update."
+msgstr "अद्यतन के लिए स्रोत उपक्षेत्र भरा जाना चाहिए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:40
+msgid "The source field should be filled."
+msgstr "स्रोत क्षेत्र भरा जाना चाहिए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:45
+msgid "The conditional field should be filled."
+msgstr "सशर्त क्षेत्र को भरना चाहिए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:49
+msgid "The conditional comparison operator should be filled."
+msgstr "सशर्त तुलना ऑपरेटर को भरा जाना चाहिए."
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:55
+msgid "The conditional regular expression should be filled."
+msgstr "सशर्त नियमित अभिव्यक्ति को भरना चाहिए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:58
+msgid "The conditional value should be filled."
+msgstr "सशर्त मान भरा जाना चाहिए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:111
+msgid "Are you sure you wish to delete this template action?"
+msgstr "क्या आप वाकई इस टेम्पलेट कार्रवाई को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:115
+msgid "Are you sure you wish to delete this template?"
+msgstr "क्या आप वाकई इस टेम्पलेट को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:122
+msgid "Every"
+msgstr "प्रत्येक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:308
+#, javascript-format
+msgid "Edit action %s"
+msgstr "कार्रवाई संपादित करें %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:311
+msgid "Update action"
+msgstr "अद्यतन कार्रवाई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:39
+msgid "Are you sure you want to delete this message? This cannot be undone."
+msgstr "क्या आप इस संदेश को हटाना चाहते हैं? यह पूर्ववत नहीं कर सकते हैं."
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:139
+msgid "Dates of birth should be entered in the format 'MM/DD/YYYY'"
+msgstr "जन्म तिथि प्रारूप में दर्ज किया जाना चाहिए 'MM/DD/YYYY'"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:141
+msgid "Dates of birth should be entered in the format 'YYYY-MM-DD'"
+msgstr "जन्म की तारीखें 'YYYY-MM-DD' प्रारूप में दर्ज की जानी चाहिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:143
+msgid "Dates of birth should be entered in the format 'DD/MM/YYYY'"
+msgstr "जन्म तिथि प्रारूप में दर्ज किया जाना चाहिए 'DD/MM/YYYY'"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:145
+msgid "Dates of birth should be entered in the format 'DD.MM.YYYY'"
+msgstr "जन्म तिथि प्रारूप में दर्ज किया जाना चाहिए 'DD.MM.YYYY'"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:154
+msgid "Are you sure you want to update this child to an Adult category? This cannot be undone."
+msgstr "क्या आप वाकई इस बच्चे को वयस्क श्रेणी में अपडेट करना चाहते हैं? इसे असंपादित नहीं किया जा सकता है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:169
+msgid "Are you sure you want to renew this patron's registration?"
+msgstr "क्या आप वाकई इस संरक्षक पंजीकरण को नवीनीकृत करना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-patron-selections.js:21
+#, javascript-format
+msgid "Patrons selected: %s"
+msgstr "चुने गए संरक्षक: %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:20
+msgid "Please confirm whether this is a duplicate patron"
+msgstr "कृपया यह एक नकली संरक्षक है कि क्या"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:82
+#, javascript-format
+msgid "Minimum password length: %s"
+msgstr "न्यूनतम पासवर्ड लंबाई: %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:178
+msgid "Age"
+msgstr "उम्र"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:182
+#, javascript-format
+msgid "%s year"
+msgstr "%s वर्ष"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:182
+#, javascript-format
+msgid "%s years"
+msgstr "%s वर्षों"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:187
+#, javascript-format
+msgid "%s month"
+msgstr "%s महीने"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:187
+#, javascript-format
+msgid "%s months"
+msgstr "%s महीने"
+
+#: koha-tmpl/intranet-tmpl/prog/js/merge-record.js:72
+msgctxt "Bibliographic record"
+msgid "The field is non-repeatable and already exists in the destination record. Therefore, you cannot add it."
+msgstr "क्षेत्र गैर-दोहराने योग्य है और पहले से ही गंतव्य रिकॉर्ड में मौजूद है। इसलिए, आप इसे नहीं जोड़ सकते।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/merge-record.js:107
+msgctxt "Bibliographic record"
+msgid "The subfield is non-repeatable and already exists in the destination record. Therefore, you cannot add it."
+msgstr "उपक्षेत्र गैर-दोहराने योग्य है और गंतव्य रिकॉर्ड में पहले से मौजूद है। इसलिए, आप इसे नहीं जोड़ सकते।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/messaging-preference-form.js:18
+msgid "Change messaging preferences to default for this category?"
+msgstr "इस श्रेणी के लिए डिफ़ॉल्ट करने के लिए प्राथमिकताएँ संदेश बदलें?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/add_catalog_concern.js:41
+#: koha-tmpl/opac-tmpl/bootstrap/js/modals/catalog_concern.js:56
+msgid "Your concern was successfully submitted."
+msgstr "आपका मामला सफलतापूर्वक प्रस्तुत की गया।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/add_catalog_concern.js:54
+#: koha-tmpl/opac-tmpl/bootstrap/js/modals/catalog_concern.js:61
+msgid "There was an error when submitting your concern, please contact a librarian."
+msgstr "अपना मामला प्रस्तुत करते समय एक त्रुटि थी, कृपया एक लाइब्रेरियन से संपर्क करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:49
+msgid "Assignee"
+msgstr "अभिहस्तांकिती"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:59
+msgid "Loading updates . . ."
+msgstr "अपडेट लोड हो रहा है . . ."
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:93
+msgid "Public"
+msgstr "जनता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:96
+msgid "Private"
+msgstr "निजी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:194
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:110
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:718
+msgid "years"
+msgstr "साल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:217
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:129
+msgid "Search for a patron"
+msgstr "एक संरक्षक की खोज करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:250
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:296
+#, javascript-format
+msgid "Concern #%s updated successfully."
+msgstr "संबंधित #%s को सफलतापूर्वक अपडेट किया गया।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:261
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:307
+#, javascript-format
+msgid "Error resolving concern #%s. Check the logs for details."
+msgstr "संंबंधित का समाधान करने में त्रुटि #%s. विवरण के लिए लॉग की जाँच करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:43
+msgid "Edit booking"
+msgstr "बुकिंग संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:46
+msgid "Place booking"
+msgstr "बुकिंग रखें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:198
+msgid "Pickup location"
+msgstr "पिकअप स्थान"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:249
+msgid "Item type"
+msgstr "आइटम प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1177
+msgid "Booking successfully placed"
+msgstr "बुकिंग सफलतापूर्वक रखी गई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1245
+msgid "Booking successfully updated"
+msgstr "बुकिंग सफलतापूर्वक अपडेट की गई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/circulation.js:72
+msgid "Remove restriction?"
+msgstr "प्रतिबंध हटाएं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/circulation.js:113
+msgid "You must select checkout(s) to export"
+msgstr "आपको निर्यात करने के लिए चेकआउट का चयन करना होगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:10
+msgid "Error: presence of invalid data prevent saving. Please make the corrections and try again."
+msgstr "त्रुटि: अमान्य डेटा की उपस्थिति बचत को रोकती है। कृपया सुधार करें और पुनः प्रयास करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:48
+msgid "Nothing to save"
+msgstr "कुछ भी सहेजा नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:51
+msgid "Saving..."
+msgstr "सहेज रहे..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:76
+#, javascript-format
+msgid "Saved preference %s"
+msgstr "प्राथमिकताएँ सहेजें %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:97
+msgid "modified"
+msgstr "परिवर्धित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:104
+msgid "You have made changes to system preferences."
+msgstr "आपने सिस्टम वरीयताओं में परिवर्तन किए हैं।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:202
+msgid "Are you sure you want to delete this consent item?"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस सहमति आइटम को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:268
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:284
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:299
+msgid "Collapse this section"
+msgstr "इस खंड को ढहना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:278
+msgid "Expand this section"
+msgstr "इस खंड का विस्तार करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:329
+msgid "Note: _ALL_ value will override all other values"
+msgstr "नोट: _ALL_ मान अन्य सभी मानों को ओवरराइड करेगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:343
+msgid "The following values are not formatted correctly:"
+msgstr "निम्नलिखित मानों को सही ढंग से प्रारूपित नहीं किया गया है:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:483
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:17
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:46
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:303
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:126
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:154
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:155
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:195
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:106
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageTitlesList.vue:58
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:217
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlePackagesList.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:92
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:194
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:77
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:304
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:73
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:229
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:130
+msgid "Name"
+msgstr "नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:490
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:504
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:534
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:548
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:562
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:31
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:53
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:29
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:40
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:64
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:67
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:31
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:40
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:56
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:45
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:67
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:89
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:60
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:176
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:203
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:226
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:249
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:274
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:297
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:55
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:100
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:146
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:178
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:40
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:32
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:54
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:83
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:111
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:146
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:171
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:36
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:125
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:111
+msgid "Required"
+msgstr "आवश्यक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:497
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:333
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:45
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:225
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:43
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:12
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:87
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:321
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:136
+msgid "Description"
+msgstr "विवरण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:511
+msgid "Requires consent in OPAC"
+msgstr "ओपेक में सहमति की आवश्यकता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:519
+msgid "Requires consent in staff interface"
+msgstr "स्टाफ इंटरफेंस में सहमति की आवश्यकता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:527
+msgid "String used to identify cookie name"
+msgstr "स्ट्रिंग कुकी नाम की पहचान करने के लिए उपयोग की जाती है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:541
+msgid "Cookie domain"
+msgstr "कुकी डोमेन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:555
+msgid "Cookie path"
+msgstr "कुकी पाथ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:578
+msgid "Expand"
+msgstr "विस्तार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:585
+msgid "Collapse"
+msgstr "ढहना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:609
+msgid "You must complete all fields"
+msgstr "आपको सभी फ़ील्ड पूरा करना होगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:657
+msgid "Unable to Base64 decode value stored in CookieConsentedJS syspref: "
+msgstr "Base64 डिकोड मान को कुCookieConsentedJS syspref में संग्रहीत करने में असमर्थ: "
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:665
+msgid "Unable to JSON parse decoded value stored in CookieConsentedJS syspref: "
+msgstr "JSON PARSE में असमर्थ डिकोडेड वैल्यू को CookieConsentedJS syspref में संग्रहीत किया गया है: "
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:681
+msgid "Add new code"
+msgstr "नए कोड जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:57
+msgid "Coce image from Amazon.com"
+msgstr "Amazon.com से कोस की छवि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:59
+msgid "Coce image from Google Books"
+msgstr "गुगल बुक्स से कोस की छवि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:61
+msgid "Coce image from Open Library"
+msgstr "ओपेन लाइब्रेरी से कोस की छवि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:98
+#: koha-tmpl/opac-tmpl/bootstrap/js/amazonimages.js:10
+#: koha-tmpl/opac-tmpl/bootstrap/js/amazonimages.js:12
+#: koha-tmpl/opac-tmpl/bootstrap/js/bakertaylorimages.js:9
+#: koha-tmpl/opac-tmpl/bootstrap/js/google-jackets.js:78
+#: koha-tmpl/opac-tmpl/bootstrap/js/localcovers.js:26
+#: koha-tmpl/opac-tmpl/bootstrap/js/localcovers.js:56
+#: koha-tmpl/opac-tmpl/bootstrap/js/openlibrary.js:66
+msgid "No cover image available"
+msgstr "नहीं कवर छवि उपलब्ध"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:331
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:361
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:369
+msgid "Nothing is selected"
+msgstr "कुछ भी चयनित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:422
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:434
+msgid "You must select at least one record"
+msgstr "आपको कम से कम एक रिकॉर्ड का चयन करना होगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:447
+msgid "At least two records must be selected for merging"
+msgstr "कम से कम दो रिकॉर्ड विलय के लिए चयनित किया जाना चाहिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:37
+#, javascript-format
+msgid "AJAX failed to approve tag: %s"
+msgstr "टैग को अनुमोदन करने में AJAX असफल: %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:43
+#, javascript-format
+msgid "AJAX failed to reject tag: %s"
+msgstr "टैग को अस्वीकृत करने में AJAX असफल: %s "
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:46
+#, javascript-format
+msgid "%s is permitted!"
+msgstr "%s की अनुमति!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:49
+#, javascript-format
+msgid "%s is prohibited!"
+msgstr "%s निषिद्ध है!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:52
+#, javascript-format
+msgid "%s is neither permitted nor prohibited!"
+msgstr "%s की अनुमति दी है और न ही निषिद्ध न किया जाता है!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:57
+msgid " Test"
+msgstr " परीक्षण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:70
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:187
+msgid "Clear all"
+msgstr "सभी साफ करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:70
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:154
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:184
+msgid "Select all"
+msgstr "सबको चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:70
+msgid "Select all pending"
+msgstr "सभी लंबित चयन करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:113
+msgid "Reject"
+msgstr "अस्वीकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:115
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:118
+msgid "Approved"
+msgstr "अनुमोदित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:136
+msgid "Approve"
+msgstr "स्वीकृत"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:138
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:141
+msgid "Rejected"
+msgstr "अस्वीकृत"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:151
+msgid "Testing..."
+msgstr "परिक्षण..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:163
+#, javascript-format
+msgid "AJAX error (%s alert)"
+msgstr "AJAX त्रुटि (%sचेतावनी)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:112
+msgid "No camera detected."
+msgstr "कोई कैमरा नहीं मिला।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:116
+msgid "Could not access camera."
+msgstr "कैमरा ऐक्सेस नहीं किया जा सका."
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:120
+msgid "Access to camera denied."
+msgstr "कैमरे तक पहुंच अस्वीकृत."
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:123
+msgid "This feature is available only in secure contexts (HTTPS)."
+msgstr "यह सुविधा केवल सुरक्षित संदर्भों (HTTPS) में उपलब्ध है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:126
+msgid "An unknown error occurred: "
+msgstr "एक अज्ञात त्रुटि हुई: "
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:6
+msgid "Are you sure you want to remove this recall?"
+msgstr "क्या आप वाकई इस रिकॉल को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:12
+msgid "The recall may have already been cancelled. Please refresh the page."
+msgstr "हो सकता है कि रिकॉल पहले ही रद्द कर दिया गया हो। कृपया पेज को रिफ्रेश करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:14
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:94
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:153
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:165
+msgid "Cancelled"
+msgstr "रद्द किया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:26
+msgid "Are you sure you want to expire this recall?"
+msgstr "क्या आप वाकई इस रिकॉल की समय सीमा समाप्त करना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:32
+msgid "The recall may have already been expired. Please refresh the page."
+msgstr "हो सकता है कि रिकॉल की समय सीमा पहले ही समाप्त हो चुकी हो। कृपया पेज को रिफ्रेश करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:34
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:734
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:139
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:164
+msgid "Expired"
+msgstr "एक्स्पायर्ड"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:46
+msgid "Are you sure you want to revert the waiting status of this recall?"
+msgstr "क्या आप वाकई इस रिकॉल की प्रतीक्षा स्थिति को वापस लाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:52
+msgid "The recall may have already been reverted. Please refresh the page."
+msgstr "रिकॉल हो सकता है कि पहले ही वापस आ गया है। कृपया पृष्ठ को ताज़ा करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:54
+msgid "Waiting status reverted"
+msgstr "प्रतीक्षा की स्थिति वापस आ गई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:66
+msgid "Are you sure you want to mark this recall as overdue?"
+msgstr "क्या आप वाकई इस रिकॉल को अतिदेय के रूप में चिह्नित करना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:72
+msgid "The recall may have already been marked as overdue. Please refresh the page."
+msgstr "हो सकता है कि रिकॉल को पहले से ही अतिदेय के रूप में चिह्नित किया गया हो। कृपया पेज को रिफ्रेश करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:74
+msgid "Marked overdue"
+msgstr "चिह्नित अतिदेय"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:86
+msgid "Are you sure you want to remove this recall and return the item to it's home library?"
+msgstr "क्या आप वाकई इस रिकॉल को हटाना चाहते हैं और आइटम को उसकी होम लाइब्रेरी में वापस करना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:92
+msgid "The recall may have already been removed. Please refresh the page."
+msgstr "हो सकता है कि रिकॉल को पहले ही हटा दिया गया हो। कृपया पेज को रिफ्रेश करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:116
+msgid "Are you sure you want to remove the selected recall(s)?"
+msgstr "क्या आप वाकई चयनित रिकॉल को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:118
+msgid "Please make a selection."
+msgstr "कृपया चयन करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/resolve_claim_modal.js:9
+#, javascript-format
+msgid "%s (current status)"
+msgstr "%s (वर्तमान स्थिति)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/rotating-collections.js:7
+msgid "Are you sure you want to delete this rotating collection?"
+msgstr "आप इस घूर्णन संग्रह को नष्ट करना चाहते हैं तो आप यकीन कर रहे हैं ?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/rotating-collections.js:12
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:491
+msgid "Are you sure you want to remove this item?"
+msgstr "क्या आप वाकई इस आइटम को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:8
+msgid "The results could not be loaded"
+msgstr "परिणाम लोड नहीं हो सका"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:11
+#, javascript-format
+msgid "Please delete %s character(s)"
+msgstr "कृपया %s वर्ण मिटाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:15
+#, javascript-format
+msgid "Please enter %s or more characters"
+msgstr "कृपया %s या अधिक वर्ण दर्ज करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:20
+msgid "Loading more results…"
+msgstr "अधिक परिणाम लोड हो रहा है…"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:22
+#, javascript-format
+msgid "You can only select %s item(s)"
+msgstr "आप केवल चयन कर सकते हैं %s आइटम(s)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:49
+msgid "No results found"
+msgstr "कोई परिणाम नहीं मिला"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:25
+msgid "Searching…"
+msgstr "खोज रहा है..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:26
+msgid "Remove all items"
+msgstr "सभी आइटम हटाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:27
+msgid "Remove item"
+msgstr "आइटम हटाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/serials-toolbar.js:9
+msgid "Are you sure you want to delete this subscription?"
+msgstr "क्या आप वाकई इस सदस्यता को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/serials-toolbar.js:12
+msgid "Are you sure you want to reopen this subscription?"
+msgstr "आप इस सदस्यता को फिर से खोलने के लिए चाहते हैं आप सुनिश्चित हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/serials-toolbar.js:15
+msgid "Are you sure you want to close this subscription?"
+msgstr "क्या आप वाकई इस सदस्यता को बन्द करना चाहते हैं? "
+
+#: koha-tmpl/intranet-tmpl/prog/js/sms_providers.js:36
+msgid "Add an SMS cellular provider"
+msgstr "एक एसएमएस सेलुलर प्रदाता जोड़े"
+
+#: koha-tmpl/intranet-tmpl/prog/js/sms_providers.js:44
+#, javascript-format
+msgid "Edit provider %s"
+msgstr "प्रदाता संपादित करें %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/sms_providers.js:67
+#, javascript-format
+msgid "Are you sure you want to delete %s? %s patron(s) are using it!"
+msgstr "क्या आप वाकई हटाने के इच्छुक हैं  %s? %s संरक्षक(s) यह प्रयोग कर रहे हैं!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/sms_providers.js:69
+#, javascript-format
+msgid "Are you sure you want to delete %s?"
+msgstr "क्या आप पक्का इसे हटाना चाहते हैं %s?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:154
+msgid "Please enter a decimal number in the format: 0.0"
+msgstr "कृपया प्रारूप में एक दशमलव संख्या दर्ज करें: 0.0"
+
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:305
+#: koha-tmpl/opac-tmpl/bootstrap/js/global.js:337
+msgid "Back to top"
+msgstr "वापस शीर्ष पर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:652
+msgid "An error occurred. Check the logs for details."
+msgstr "एक गलती हुई। विवरण के लिए लॉग की जाँच करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:739
+msgid "Restricted"
+msgstr "प्रतिबंधित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:19
+msgid "Frequency and subscription length provided doesn't combine well. Please consider entering an issue count rather than a time period."
+msgstr "प्रदान की गई आवृत्ति और सदस्यता की लंबाई अच्छी तरह से मेल नहीं खाती है। कृपया एक समयावधि के बजाय एक अंक गणना दर्ज करने पर विचार करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:51
+msgid "If you wish to claim late or missing issues you must link this subscription to a vendor. Click OK to ignore or Cancel to return and enter a vendor"
+msgstr "अगर तुम चाहो तो तुम एक विक्रेता को इस सदस्यता कड़ी होगी देर या लापता मुद्दों का दावा करना चाहते हैं. पर क्लिक करें की उपेक्षा करने या रद्द कर वापस करने के लिए और एक विक्रेता दर्ज ठीक है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:58
+msgid "The vendor does not exist"
+msgstr "वेंडर मौजूद नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:65
+msgid "You must choose or create a bibliographic record"
+msgstr "आपको एक ग्रंथ सूची का चयन करना होगा या बनाना चाहिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:72
+msgid "Bibliographic record does not exist!"
+msgstr "यह ग्रंथसूची रिकॉर्ड मौजूद नहीं है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:77
+msgid "Number of issues to display to staff must be a number"
+msgstr "कर्मचारियों को प्रदर्शित करने के लिए इश्यू की संख्या एक संख्या होनी चाहिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:81
+msgid "Number of issues to display to the public must be a number"
+msgstr "जनता को प्रदर्शित करने के लिए इश्यू की संख्या एक संख्या होनी चाहिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:91
+msgid "You must choose a first publication date"
+msgstr "आप एक पहले प्रकाशन तिथि का चयन करना होगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:96
+msgid "You must choose a subscription length or an end date."
+msgstr "आप एक सदस्यता लंबाई या एक अंतिम तिथि का चयन करना होगा।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:100
+msgid "You have modified the advanced prediction pattern. Please save your work or cancel modifications."
+msgstr "आप उन्नत भविष्यवाणी पैटर्न संशोधित किया है। अपने काम को बचाने या संशोधन को रद्द करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:105
+msgid "Warning! Present pattern has planned irregularities. Click on 'Test prediction pattern' to check if it's still valid"
+msgstr "चेतावनी! वर्तमान पैटर्न अनियमितताओं की योजना बनाई है। जांच करने के लिए 'टेस्ट भविष्यवाणी पैटर्न' पर क्लिक करता है, तो यह अभी भी मान्य है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:107
+msgid "Please click on 'Test prediction pattern' before saving subscription."
+msgstr "सदस्यता सहेजने से पहले 'टेस्ट भविष्यवाणी पैटर्न' पर क्लिक करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:288
+msgid "Frequency is not defined"
+msgstr "फ़्रिक्वेंसी परिभाषित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:293
+msgid "First publication date is not defined"
+msgstr "पहली प्रकाशन तिथि परिभाषित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:299
+msgid "Next issue publication date is not defined"
+msgstr "अगला इश्यू प्रकाशन तिथि परिभाषित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:305
+#, javascript-format
+msgid "Cannot test prediction pattern for the following reason(s): %s"
+msgstr "निम्नलिखित कारण (ओं) के लिए भविष्यवाणी पैटर्न परीक्षण नहीं कर सकता: %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:354
+msgid "Please enter a name for this pattern"
+msgstr "इस पेट्रन के लिए एक नाम दर्ज करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:369
+msgid "This pattern name already exists. Do you want to modify it?"
+msgstr "यह पैटर्न नाम पहले से ही मौजूद है। आप इसे संशोधित करना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:370
+msgid "Warning: This will modify the pattern for all subscriptions that are using it."
+msgstr "चेतावनी: यह सभी सदस्यता के लिए पैटर्न को संशोधित करेगा जो इसका उपयोग कर रहे हैं।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:400
+msgid "Something went wrong. Unable to create a new numbering pattern."
+msgstr "कुछ गलत हो गया। एक नए नंबरिंग पैटर्न बनाने में असमर्थ।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:421
+msgid "Searching for subscription in Mana Knowledge Base"
+msgstr "माना ज्ञान बेस में सदस्यता के लिए खोज"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:432
+msgid "Results from Mana Knowledge Base"
+msgstr "माना ज्ञान आधार से परिणाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:446
+msgid "Show Mana results"
+msgstr "माना परिणाम दिखाओ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:446
+msgid "Subscription found on Mana Knowledge Base:"
+msgstr "माना नॉलेज बेस पर मिली सदस्यता:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:449
+msgid "No subscription found on Mana Knowledge Base"
+msgstr "माना ज्ञान आधार पर कोई सदस्यता नहीं मिली"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:449
+msgid "Please feel free to share your pattern with all others librarians once you are done"
+msgstr "कृपया एक बार अपने सभी लाइब्रेरियन के साथ अपने पैटर्न को साझा करने के लिए स्वतंत्र महसूस करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:735
+msgid "This bibliographic record does not exist"
+msgstr "यह ग्रंथसूची रिकॉर्ड मौजूद नहीं है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:40
+msgid "Booking ID"
+msgstr "बुकिंग आईडी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:47
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:339
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:155
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:71
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:242
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:55
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:18
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:327
+msgid "Status"
+msgstr "स्थिति"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:52
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:216
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:173
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:346
+msgid "Title"
+msgstr "शीर्षक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:63
+msgid "Item"
+msgstr "आइटम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:66
+msgid "Any item"
+msgstr "कोई आइटम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:82
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:20
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:54
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:93
+msgid "Start date"
+msgstr "प्रारंभ तिथि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:91
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:33
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:65
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:103
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:227
+msgid "End date"
+msgstr "अन्तिम तिथि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:143
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:167
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:424
+msgid "Active"
+msgstr "सक्रिय"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:147
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:166
+msgid "Pending"
+msgstr "लम्बित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:150
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:169
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:117
+msgid "New"
+msgstr "समाचार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:156
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:168
+msgid "Completed"
+msgstr "पूर्ण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:161
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:65
+msgid "Unknown"
+msgstr "अज्ञात"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:179
+msgid "Show expired"
+msgstr "समाप्त हो गया दिखाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:180
+msgid "Hide expired"
+msgstr "समाप्त हो गया छिपाना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:71
+msgid "Are you sure you want to delete this cover image?"
+msgstr "क्या आप वाकई इस कवर छवि को मिटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "Directory is not writeable"
+msgstr "निर्देशिका लिखने योग्य नहीं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "Error code 0 not used"
+msgstr "त्रुटि कोड 0 का उपयोग नहीं किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "File already exists"
+msgstr "फ़ाइल पहले से मौज़ूद है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "Root directory for uploads not defined"
+msgstr "अपलोड के लिए रूट निर्देशिका परिभाषित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "Temporary directory for uploads not defined"
+msgstr "अपलोड के लिए अस्थायी निर्देशिका परिभाषित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:113
+msgid "Upload status: "
+msgstr "स्थिति अपलोड करें "
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:114
+msgid "Failed"
+msgstr "विफल "
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:115
+msgid "Denied"
+msgstr "वंचित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:143
+msgid "An error occurred while uploading."
+msgstr "अपलोड करते समय एक त्रुटि हुई।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:173
+msgid "Error:"
+msgstr "त्रुटि:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:173
+msgid "This tool only accepts ZIP files or GIF, JPEG, PNG, or XPM images."
+msgstr "यह उपकरण केवल ज़िप फ़ाइलें या GIF, JPEG, PNG, या XPM चित्र स्वीकार करता है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:180
+msgid "File name:"
+msgstr "फ़ाइल नाम:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:181
+msgid "File type:"
+msgstr "फ़ाइल प्रकार:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:182
+msgid "File size:"
+msgstr "फ़ाइल आकार:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:214
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:219
+msgid "An error occurred on deleting this image"
+msgstr "इस छवि को हटाने पर कोई त्रुटि उत्पन्न"
+
+#: koha-tmpl/intranet-tmpl/prog/js/viewlog.js:16
+msgid "View comparison"
+msgstr "तुलना देखें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/viewlog.js:33
+#, javascript-format
+msgid "Showing results for %s"
+msgstr "के लिए परिणाम दिखा रहा है %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/viewlog.js:40
+msgid "You can select maximum of two checkboxes"
+msgstr "आप अधिकतम दो चेकबॉक्स का चयन कर सकते हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/viewlog.js:118
+msgid "You must select two entries to compare"
+msgstr "तुलना करने के लिए आपको दो प्रविष्टियों का चयन करना होगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsDisplay.vue:7
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:7
+msgid "Additional fields"
+msgstr "अतिरिक्त क्षेत्र"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:6
+#, javascript-format
+msgid "Edit record source #%s"
+msgstr "रिकॉर्ड स्रोत संपादित करें#%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:11
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:27
+msgid "Add record source"
+msgstr "रिकॉर्ड स्रोत जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:28
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:51
+msgid "Can be edited"
+msgstr "संपादित किया जा सकता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:110
+msgid "Record source updated!"
+msgstr "रिकार्ड स्रोत अद्यतन!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:120
+msgid "Record source created!"
+msgstr "रिकार्ड स्रोत बनाया गया!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:21
+msgid "There are no record sources defined"
+msgstr "कोई रिकॉर्ड स्रोत परिभाषित नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:36
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:14
+msgid "Record sources"
+msgstr "रिकॉर्ड स्रोत"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:381
+msgid "ID"
+msgstr "आईडी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:118
+msgid "Are you sure you want to delete this record source?"
+msgstr "क्या आप वाकई इस रिकॉर्ड स्रोत को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:121
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:246
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:416
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:192
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:190
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:147
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:344
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:169
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:224
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:98
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:137
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:212
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:80
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:149
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:159
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:427
+msgid "Yes, delete"
+msgstr "हाँ, हटाओ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:122
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:247
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:417
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:193
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:191
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:148
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:345
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:170
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:225
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:99
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:138
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:213
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:81
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:150
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:160
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:428
+msgid "No, do not delete"
+msgstr "नहीं, नष्ट नहीं करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:132
+#, javascript-format
+msgid "Record source '%s' deleted"
+msgstr "रिकॉर्ड स्रोत '%s'  हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ButtonSubmit.vue:11
+msgid "Submit"
+msgstr "जमा करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Dialog.vue:19
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:336
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageAgreements.vue:34
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:108
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:238
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:115
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:258
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:150
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:113
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:82
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:108
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:276
+msgid "Close"
+msgstr "बन्द करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Dialog.vue:110
+msgid "Submitting..."
+msgstr "जमा कर रहे है ..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:151
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:79
+msgid "Licenses"
+msgstr "लाइसेंस"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:11
+#, javascript-format
+msgid "Agreement license %s"
+msgstr "अनुबंध लाइसेंस %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:14
+msgid "Remove this license"
+msgstr "यह लाइसेंस हटाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:20
+msgid "License"
+msgstr "लाइसेंस"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:156
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:310
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:70
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:124
+msgid "Physical location"
+msgstr "भौतिक स्थान"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:69
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:52
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:68
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:157
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:317
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:90
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:127
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:284
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:62
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:209
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:145
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:131
+msgid "Notes"
+msgstr "नोट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:79
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:158
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:314
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:82
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:128
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:138
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:111
+msgid "URI"
+msgstr "यूआरआई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:90
+msgid "Add new license"
+msgstr "नया लाइसेंस जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:92
+msgid "There are no licenses created yet"
+msgstr "अभी तक कोई लाइसेंस नहीं बनाए गए हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:90
+msgid "Periods"
+msgstr "अवधियाँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:11
+#, javascript-format
+msgid "Agreement period %s"
+msgstr "अनुबंध अवधि %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:14
+msgid "Remove this period"
+msgstr "इस अवधि को हटा दें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:43
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:95
+msgid "Cancellation deadline"
+msgstr "रद्द करने की समय सीमा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:64
+msgid "Add new period"
+msgstr "नई अवधि जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:204
+msgid "Related agreements"
+msgstr "संबंधित समझौते"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:11
+#, javascript-format
+msgid "Related agreement %s"
+msgstr "संबंधित समझौते %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:14
+msgid "Remove this relationship"
+msgstr "इस संबंध को हटा दें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:22
+msgid "Related agreement"
+msgstr "संबंधित समझौता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:46
+msgid "Relationship"
+msgstr "सम्बन्ध"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:83
+msgid "Add new related agreement"
+msgstr "नया संबंधित अनुबंध जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:86
+msgid "There are no other agreements created yet"
+msgstr "अभी तक कोई अन्य अनुबंध नहीं बनाया गया है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:5
+#, javascript-format
+msgid "Edit agreement #%s"
+msgstr "समझौता संपादित करें #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:7
+msgid "New agreement"
+msgstr "नया अनुबंध"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:29
+msgid "Agreement name"
+msgstr "अनुबंध नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:318
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:217
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:36
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:93
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:232
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:74
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:209
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:33
+msgid "Vendor"
+msgstr "विक्रेता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:71
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:350
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:60
+msgid "Closure reason"
+msgstr "बंद करने का कारण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:86
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:364
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:69
+msgid "Is perpetual"
+msgstr "लगातार हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:113
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:375
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:76
+msgid "Renewal priority"
+msgstr "नवीनीकरण प्राथमिकता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:125
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:85
+msgid "License info"
+msgstr "लाइसेंस की जानकारी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:267
+msgid "A license is used several times"
+msgstr "एक लाइसेंस का उपयोग कई बार किया जाता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:281
+msgid "An agreement is used as relationship several times"
+msgstr "एक अनुबंध का उपयोग कई बार रिश्ते के रूप में किया जाता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:290
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:297
+msgid "Only one controlling license is allowed"
+msgstr "केवल एक नियंत्रण लाइसेंस की अनुमति है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:309
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:213
+#, javascript-format
+msgid "File size exceeds maximum allowed: %s MB"
+msgstr "फ़ाइल आकार अधिकतम अनुमत से अधिक है: %s एमबी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:317
+#, javascript-format
+msgid "Agreement user %s is missing a user"
+msgstr "समझौता उपयोगकर्ता %s एक उपयोगकर्ता को याद कर रहा है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:379
+msgid "Agreement updated"
+msgstr "अनुबंध अपडेट किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:387
+msgid "Agreement created"
+msgstr "अनुबंध बनाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:12
+msgid "Filter by expired"
+msgstr "समाप्त द्वारा फ़िल्टर करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:19
+msgid "on"
+msgstr "पर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:27
+msgid "Show mine only"
+msgstr "केवल मेरा दिखाओ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:55
+msgid "There are no agreements defined"
+msgstr "कोई अनुबंध परिभाषित नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:149
+msgid "Select"
+msgstr "चुनना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:243
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:413
+msgid "Are you sure you want to remove this agreement?"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस अनुबंध को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:254
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:424
+#, javascript-format
+msgid "Agreement %s deleted"
+msgstr "अनुबंध %s हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:23
+#, javascript-format
+msgid "Agreement #%s"
+msgstr "अनुबंध #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:93
+msgid "Period start"
+msgstr "अवधि आरंभ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:94
+msgid "Period end"
+msgstr "अवधि समाप्ति"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:96
+msgid "Period note"
+msgstr "अवधि नोट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:123
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:74
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:3
+msgid "Users"
+msgstr "उपयोगकर्ताओं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:127
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:78
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:36
+msgid "Role"
+msgstr "भूमिका"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:238
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:122
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:232
+msgid "Packages"
+msgstr "पैकेज"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:264
+#, fuzzy
+msgid "(EBSCO)"
+msgstr "इब्सकों"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:280
+#, fuzzy
+msgid "local"
+msgstr "स्थानीय"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:287
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:101
+msgid "Documents"
+msgstr "दस्तावेज़"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:306
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:60
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:120
+msgid "Uploaded on"
+msgstr "पर अपलोड किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:11
+#, javascript-format
+msgid "Document %s"
+msgstr "दस्तावेज़ %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:14
+msgid "Remove this document"
+msgstr "इस दस्तावेज़ को हटा दें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:19
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:5
+msgid "File"
+msgstr "फाइल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:8
+msgid "Select a file"
+msgstr "एक फाइल चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:31
+msgid "Update file"
+msgstr "अद्यतन फ़ाइल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:18
+msgid "File name"
+msgstr "फ़ाइल नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:45
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:22
+msgid "File type"
+msgstr "फ़ाइल प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:49
+msgid "File description"
+msgstr "फाइल विवरण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:103
+msgid "Add new document"
+msgstr "नया दस्तावेज़ जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageAgreements.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:67
+msgid "Add agreement"
+msgstr "समझौता जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageAgreements.vue:65
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:49
+msgid "Add new agreement"
+msgstr "नया अनुबंध जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageAgreements.vue:137
+msgid "This agreement is already linked with this package"
+msgstr "यह अनुबंध पहले से ही इस पैकेज से जुड़ा हुआ है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:7
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:7
+msgid "Hide filters"
+msgstr "फ़िल्टर्स छिपाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:7
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:7
+msgid "Show filters"
+msgstr "फ़िल्टर दिखाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:177
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:11
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:249
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:139
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageTitlesList.vue:73
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:38
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:230
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:205
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:157
+msgid "Publication type"
+msgstr "प्रकाशन प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:38
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:25
+msgid "Selection status"
+msgstr "चयन की स्थिति"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:25
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:28
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:28
+msgid "Selected"
+msgstr "चयनित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:45
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:29
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:29
+msgid "Not selected"
+msgstr "चयनित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:170
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:210
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:154
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:233
+msgid "Is selected"
+msgstr "चयनित है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:4
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:30
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:29
+msgid "Package name"
+msgstr "पैकेज नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:11
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:240
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:68
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:261
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:53
+msgid "Content type"
+msgstr "सामग्री-प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:49
+#, javascript-format
+msgid "%s packages found locally"
+msgstr "%s स्थानीय रूप से मिले पैकेज"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:226
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:34
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:247
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:49
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:231
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:49
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:90
+msgid "Type"
+msgstr "प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:5
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:23
+#, javascript-format
+msgid "Package #%s"
+msgstr "पैकेज #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:13
+msgid "Add package to holdings"
+msgstr "होल्डिंग्स में पैकेज जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:22
+msgid "Remove package from holdings"
+msgstr "पैकेज को होल्डिंग्स से हटाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:40
+msgid "External ID"
+msgstr "बाहरी आईडी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:59
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:44
+msgid "Package type"
+msgstr "पैकेज प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:77
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:275
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:66
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:238
+msgid "Created on"
+msgstr "को निर्मित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:91
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:92
+#, javascript-format
+msgid "Titles (%s)"
+msgstr "शीर्षक (%s)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:5
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:5
+#, javascript-format
+msgid "Resource #%s"
+msgstr "संसाधन #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:13
+msgid "Add title to holdings"
+msgstr "होल्डिंग्स में शीर्षक जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:22
+msgid "Remove title from holdings"
+msgstr "होल्डिंग्स से टाइटल हटाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:28
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:9
+msgid "Resource information"
+msgstr "सूचना का स्रोत"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:31
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:12
+msgid "Resource identifier"
+msgstr "संसाधन पहचानकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:37
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:4
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:17
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:18
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:23
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:33
+msgid "Publication title"
+msgstr "प्रकाशन तिथि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:240
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:133
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:32
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:219
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:151
+msgid "Publisher name"
+msgstr "प्रकाशक नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:63
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:29
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:36
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:45
+msgid "Print-format identifier"
+msgstr "प्रिंट प्रारूप पहचानकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:69
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:50
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:47
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:51
+msgid "Online-format identifier"
+msgstr "ऑनलाइन प्रारूप पहचानकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:80
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:61
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:21
+msgid "Package"
+msgstr "पैकेज"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:99
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:80
+msgid "Package content type"
+msgstr "पैकेज सामग्री प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:109
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:90
+msgid "Coverage dates"
+msgstr "कवरेज की तारीखें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:38
+msgid "Please enter a search term"
+msgstr "कृपया खोज शब्द एंटर करें."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:55
+#, javascript-format
+msgid "%s titles found locally"
+msgstr "%s स्थानीय रूप से मिले शीर्षक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:263
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:219
+msgid "Identifier"
+msgstr "पहचानकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:273
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:229
+#, javascript-format
+msgid "ISBN (Print): %s"
+msgstr "आईएसबीएन (प्रिंट):%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:280
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:236
+#, javascript-format
+msgid "ISBN (Online): %s"
+msgstr "आईएसबीएन (ऑनलाइन): %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:5
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:21
+#, javascript-format
+msgid "Title #%s"
+msgstr "शीर्षक #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:11
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:27
+msgid "Title identifier"
+msgstr "शीर्षक पहचानकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:40
+msgid "Local bibliographic record"
+msgstr "स्थानीय ग्रंथ सूची रिकॉर्ड"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:60
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:69
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:60
+msgid "Date of first serial issue available online"
+msgstr "ऑनलाइन उपलब्ध प्रथम धारावाहिक अंक की तिथि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:55
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:79
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:88
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:71
+msgid "Number of first volume available online"
+msgstr "ऑनलाइन उपलब्ध पहले वॉल्यूम की संख्या"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:65
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:98
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:107
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:81
+msgid "Number of first issue available online"
+msgstr "ऑनलाइन उपलब्ध पहले अंक की संख्या"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:75
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:116
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:123
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:91
+msgid "Date of last issue available online"
+msgstr "ऑनलाइन उपलब्ध अंतिम अंक की तिथि"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:85
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:132
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:141
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:101
+msgid "Number of last volume available online"
+msgstr "ऑनलाइन उपलब्ध अंतिम मात्रा की संख्या"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:95
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:151
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:159
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:111
+msgid "Number of last issue available online"
+msgstr "ऑनलाइन उपलब्ध अंतिम अंक की संख्या"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:103
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:166
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:119
+msgid "Title-level URL"
+msgstr "शीर्षक-स्तरीय URL"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:109
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:177
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:127
+msgid "First author"
+msgstr "प्रथम लेखक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:115
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:188
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:133
+msgid "Embargo information"
+msgstr "प्रतिबंध की जानकारी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:121
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:199
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:139
+msgid "Coverage depth"
+msgstr "कवरेज की गहराई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:153
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:245
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:254
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:171
+msgid "Date the monograph is first published in print"
+msgstr "दिनांक मोनोग्राफ पहली बार प्रिंट में प्रकाशित हुआ है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:165
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:264
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:273
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:183
+msgid "Date the monograph is first published online"
+msgstr "तिथि मोनोग्राफ पहली बार ऑनलाइन प्रकाशित किया गया था"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:175
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:282
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:289
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:193
+msgid "Number of volume for monograph"
+msgstr "मोनोग्राफ के लिए वॉल्यूम की संख्या"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:182
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:296
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:200
+msgid "Edition of the monograph"
+msgstr "मोनोग्राफ का संस्करण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:188
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:307
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:206
+msgid "First editor"
+msgstr "प्रथम सम्पादक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:197
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:320
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:329
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:215
+msgid "Title identifier of the parent publication"
+msgstr "मूल प्रकाशन का शीर्षक पहचानकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:209
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:339
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:348
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:227
+msgid "Title identifier of any preceding publication title"
+msgstr "किसी भी पूर्ववर्ती प्रकाशन शीर्षक का शीर्षक पहचानकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:218
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:358
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:236
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:151
+msgid "Access type"
+msgstr "पहुंच प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:70
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:48
+msgid "Agreements"
+msgstr "अनुबंध"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:14
+#, javascript-format
+msgid "Agreement %s"
+msgstr "अनुबंध %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:17
+msgid "Remove this agreement"
+msgstr "इस दस्तावेज़ को हटा दें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:23
+msgid "Agreement"
+msgstr "अनुबंध"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:52
+msgid "There are no agreements created yet"
+msgstr "अभी तक कोई अनुबंध नहीं बनाया गया है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:5
+#, javascript-format
+msgid "Edit package #%s"
+msgstr "पैकेज संपादित करें #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:7
+msgid "New package"
+msgstr "नया पैकेज"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:45
+msgid "Content type: "
+msgstr "सामग्री-प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:159
+msgid "An agreement is used several times"
+msgstr "एक अनुबंध का कई बार उपयोग किया जाता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:192
+msgid "Package updated"
+msgstr "पैकेज अपडेट किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:202
+msgid "Package created"
+msgstr "पैकेज बनाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:28
+msgid "There are no packages defined"
+msgstr "कोई पैकेज परिभाषित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:189
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:187
+msgid "Are you sure you want to remove this package?"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस पैकेज को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:200
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:198
+#, javascript-format
+msgid "Local package %s deleted"
+msgstr "स्थानीय पैकेज %s हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:5
+#, javascript-format
+msgid "Edit title #%s"
+msgstr "शीर्षक संपादित करें #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:7
+msgid "New title"
+msgstr "नया शीर्षक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:378
+msgid "Update linked bibliographic record"
+msgstr "लिंक किए गए ग्रंथसूची रिकॉर्ड को अपडेट करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:379
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:61
+msgid "Create linked bibliographic record"
+msgstr "लिंक्ड ग्रंथ सूची बनाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:385
+#, fuzzy
+msgid "Update bibliographic record"
+msgstr "लिंक किए गए ग्रंथसूची रिकॉर्ड को अपडेट करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:386
+#, fuzzy
+msgid "Create bibliographic record"
+msgstr "लिंक्ड ग्रंथ सूची बनाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:497
+msgid "A package is used several times"
+msgstr "एक पैकेज का उपयोग कई बार किया जाता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:528
+msgid "Title updated"
+msgstr "शीर्षक अपडेट किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:538
+msgid "Title created"
+msgstr "शीर्षक बनाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:10
+#, javascript-format
+msgid "Package %s"
+msgstr "पैकेज %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:13
+msgid "Remove from this package"
+msgstr "इस पैकेज से हटा दें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:74
+msgid "Proxy"
+msgstr "प्रोक्सी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:85
+msgid "Add to another package"
+msgstr "दूसरे पैकेज में जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:87
+msgid "There are no packages created yet"
+msgstr "अभी तक कोई पैकेज नहीं बनाया गया है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:202
+msgid "Import from a list"
+msgstr "सूची से आयात करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:4
+msgid "Import in progress,"
+msgstr "आयात प्रगति पर है,"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:9
+#, javascript-format
+msgid "see job #%s"
+msgstr "जॉब देखें #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:36
+msgid "To the following local package"
+msgstr "निम्नलिखित स्थानीय पैकेज के लिए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:67
+msgid "Cannot import, no package selected"
+msgstr "आयात नहीं किया जा सकता, कोई पैकेज नहीं चुना गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:138
+msgid "Import"
+msgstr "आयात"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:210
+#, fuzzy
+msgid "Import from a KBART file"
+msgstr "सूची से आयात करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:5
+#, fuzzy
+msgid "Requirements:"
+msgstr "आवश्यक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:7
+msgid "The file must be in TSV or CSV format"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:11
+msgid "The file should not contain any additional information / header rows, e.g. a file with a single title would be structured as follows:"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:15
+#, fuzzy
+msgid "Column headings row"
+msgstr "स्तंभ सेटिंग्स"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:16
+#, fuzzy
+msgid "Title data row"
+msgstr "शीर्षक अपडेट किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:21
+#, fuzzy
+msgid "Select file for upload"
+msgstr "एक फाइल चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:75
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:30
+#: koha-tmpl/opac-tmpl/bootstrap/js/autofill.js:30
+msgid "Clear form"
+msgstr "फार्म साफ करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:146
+#, javascript-format
+msgid "Your file was too large to process in one job, the file has been split into %s jobs to meet the maximum size limits."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:151
+#, fuzzy, javascript-format
+msgid "Job %s for uploaded file has been queued"
+msgstr "अपलोड की गई फ़ाइल के लिए जॉब कतारबद्ध की गई है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:155
+#, fuzzy
+msgid "see progress"
+msgstr "नौकरी प्रगति की जाँच करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:162
+#, fuzzy
+msgid "Information:"
+msgstr "प्रतिबंध की जानकारी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:165
+msgid "Additional columns were detected in your report, please see the list below:"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:171
+msgid "The data in these columns will not be imported."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:177
+msgid "The file must be in .tsv or .csv format, please convert your file and try again."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:36
+msgid "There are no titles defined"
+msgstr "कोई शीर्षक परिभाषित नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:144
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:341
+msgid "Are you sure you want to remove this title?"
+msgstr "क्या आप वाकई इस शीर्षक को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:155
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:352
+#, javascript-format
+msgid "Local title %s deleted"
+msgstr "स्थानीय शीर्षक %s हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:190
+msgid "Contributors"
+msgstr "योगदानकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:243
+#, fuzzy, javascript-format
+msgid "Packages (%s)"
+msgstr "पैकेज %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:5
+#, javascript-format
+msgid "Edit license %s"
+msgstr "लाइसेंस संपादित करें %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:7
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:66
+msgid "New license"
+msgstr "नया अनुबंध"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:27
+msgid "License name"
+msgstr "लाइसेंस नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:221
+#, javascript-format
+msgid "License user %s is missing a user"
+msgstr "लाइसेंस उपयोगकर्ता %s एक उपयोगकर्ता को याद कर रहा है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:260
+msgid "License updated"
+msgstr "लाइसेंस अपडेट किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:268
+msgid "License created"
+msgstr "लाइसेंस बनाया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:23
+msgid "There are no licenses defined"
+msgstr "कोई लाइसेंस परिभाषित नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:166
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:221
+msgid "Are you sure you want to remove this license?"
+msgstr "क्या आप वाकई इस लाइसेसं को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:177
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:232
+#, javascript-format
+msgid "License %s deleted"
+msgstr "लाइसेंस %s हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:253
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:65
+msgid "Started on"
+msgstr "पर आरंभ किया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:262
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:70
+msgid "Ended on"
+msgstr "पर समाप्त हुआ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:21
+#, javascript-format
+msgid "License #%s"
+msgstr "लाइसेंस #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Main.vue:138
+#, fuzzy
+msgid "The e-resource management module is disabled, turn on <a href='/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule'>ERMModule</a> to use it"
+msgstr "ई-संसाधन प्रबंधन मॉड्यूल अक्षम है, इसका उपयोग करने के लिए '<a href=\"/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule\">ERMModule</a>चालू करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:169
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:27
+msgid "Data provider"
+msgstr "डाटा प्रदाता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:6
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:21
+msgid "Data provider name"
+msgstr "डाटा प्रदाता नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:23
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:425
+#, fuzzy
+msgid "Inactive"
+msgstr "सक्रिय"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:28
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:113
+msgid "Service type"
+msgstr "सेवा प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:34
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:134
+msgid "Report types"
+msgstr "रिपोर्ट प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:40
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:123
+#, fuzzy
+msgid "Service platform"
+msgstr "सेवा प्रकार"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:47
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:180
+msgid "SUSHI credentials"
+msgstr "सुशी क्रेडेंशियल्स"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:191
+msgid "Service URL"
+msgstr "सेवा यूआरएल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:214
+msgid "Report release"
+msgstr "रिपोर्ट जारी करना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:63
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:237
+msgid "Customer ID"
+msgstr "ग्राहक आईडी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:69
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:260
+msgid "Requestor ID"
+msgstr "अनुरोधकर्ता आईडी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:75
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:285
+msgid "API key"
+msgstr "एपीआई कुंजी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:81
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:302
+msgid "Requestor name"
+msgstr "अनुरोधक नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:87
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:313
+msgid "Requestor email"
+msgstr "अनुरोधक ईमेल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:13
+msgid "There are no import logs defined"
+msgstr "कोई आयात लॉग परिभाषित नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:55
+msgid "Download"
+msgstr "डाउनलोड"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:95
+msgid "Are you sure you want to remove this file?"
+msgstr "क्या आप वाकई इस फाइल को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:108
+#, javascript-format
+msgid "File %s deleted"
+msgstr "फाइल %s हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:123
+msgid "Filename"
+msgstr "फ़ाइलनाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:130
+msgid "Import date"
+msgstr "आयात दिनाँक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:140
+msgid "Imported by"
+msgstr "द्वारा आयातित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:149
+msgid "Cronjob"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:4
+msgid "Manual upload:"
+msgstr "मैनुअल अपलोड:"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:95
+msgid "Job for uploaded file has been queued"
+msgstr "अपलोड की गई फ़ाइल के लिए जॉब कतारबद्ध की गई है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:100
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:256
+msgid "Check job progress"
+msgstr "नौकरी प्रगति की जाँच करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:6
+#, javascript-format
+msgid "Edit usage data provider #%s"
+msgstr "उपयोग डेटा प्रदाता संपादित करें #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:11
+msgid "New usage data provider"
+msgstr "नया उपयोग डेटा प्रदाता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:210
+msgid "Type at least two characters to search"
+msgstr "खोज करने के लिए कम से कम दो वर्ण टाइप करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:46
+msgid "Searching..."
+msgstr "खोज रहे हैं..।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:71
+msgid "Create manually"
+msgstr "मैन्युअल रूप से बनाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:82
+msgid "Create from registry"
+msgstr "रजिस्ट्री से बनाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:100
+msgid "Harvester status"
+msgstr "हार्वेस्टर की स्थिति"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:161
+msgid "Unselect all"
+msgstr "सभी को अचयनित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:324
+msgid "Credentials information"
+msgstr "साख सूचना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:327
+msgid "Customer ID info"
+msgstr "ग्राहक आईडी जानकारी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:332
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:342
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:352
+#, fuzzy
+msgid "No information provided"
+msgstr "प्रतिबंध की जानकारी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:337
+msgid "Requestor ID info"
+msgstr "अनुरोधकर्ता आईडी जानकारी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:347
+msgid "API key info"
+msgstr "एपीआई कुंजी जानकारी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:356
+msgid "Please refer to the "
+msgstr "कृपया संदर्भित करें "
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:358
+msgid "COUNTER registry"
+msgstr "काउंटर रजिस्ट्री"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:360
+msgid "for more information."
+msgstr "अधिक जानकारी के लिए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:519
+msgid "This provider does not currently support any COUNTER 5 reports via SUSHI."
+msgstr "यह प्रदाता वर्तमान में सुशी के माध्यम से किसी भी काउंटर 5 रिपोर्ट का समर्थन नहीं करता है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:591
+msgid "Data provider updated"
+msgstr "डेटा प्रदाता अद्यतन किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:607
+msgid "Data provider created"
+msgstr "डेटा प्रदाता अद्यतन बनाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:16
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:338
+msgid "Data providers summary"
+msgstr "डेटा प्रदाता सांराश"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:32
+msgid "There are no usage data providers defined"
+msgstr "कोई उपयोग डेटा प्रदाता परिभाषित नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:78
+msgid "Run now"
+msgstr "अब चलाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:84
+msgid "Test"
+msgstr "परीक्षण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:134
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:209
+msgid "Are you sure you want to remove this data provider?"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस डेटा प्रदाता को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:147
+#, javascript-format
+msgid "Data provider %s deleted"
+msgstr "डेटा प्रदाता %s हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:166
+msgid "This data provider is set to 'Inactive', do you wish to update the status to 'Active'?"
+msgstr "यह डेटा प्रदाता 'निष्क्रिय' पर सेट है, क्या आप 'सक्रिय' के लिए स्थिति को अपडेट करना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:169
+msgid "Yes, update status"
+msgstr "हां, अद्यतन स्थिति"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:170
+msgid "No, do not update status"
+msgstr "नहीं, स्थिति को अपडेट न करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:192
+#, javascript-format
+msgid "Updated status for usage data provider %s"
+msgstr "उपयोग डेटा प्रदाता के लिए अद्यतन स्थिति %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:209
+msgid "Are you sure you want to run the harvester for this data provider?"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस डेटा प्रदाता के लिए हार्वेस्टर चलाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:212
+msgid "Yes, run"
+msgstr "हाँ, चलाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:213
+msgid "No, do not run"
+msgstr "नहीं, नही चलाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:220
+msgid "Begin date"
+msgstr "प्रारम्भ दिनाँक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:251
+#, javascript-format
+msgid "Job for report type <strong>%s</strong> has been queued"
+msgstr "रिपोर्ट प्रकार के लिए नौकरी <strong>%s </strong> को कतारबद्ध किया गया है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:277
+#, javascript-format
+msgid "Harvester connection was successful for usage data provider %s"
+msgstr "हार्वेस्टर कनेक्शन उपयोग डेटा प्रदाता के लिए सफल रहा %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:284
+#, javascript-format
+msgid "No connection for usage data provider %s, please check your credentials and try again."
+msgstr "उपयोग डेटा प्रदाता के लिए कोई कनेक्शन नहीं %s, कृपया अपने क्रेडेंशियल्स की जाँच करें और फिर से प्रयास करें।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:295
+msgid "This data provider is inactive - connection testing is not possible"
+msgstr "यह डेटा प्रदाता निष्क्रिय है - कनेक्शन परीक्षण संभव नहीं है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:336
+msgid "Last run"
+msgstr "अंतिम चलाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:30
+#, javascript-format
+msgid "Data provider #%s"
+msgstr "डाटा प्रदाता #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:44
+msgid "Detail"
+msgstr "विवरण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:70
+msgid "Manual upload"
+msgstr "मैनुअल अपलोड"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:80
+msgid "Import logs"
+msgstr "लॉग आयात"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:167
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:161
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:255
+msgid "Titles"
+msgstr "शीर्षक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:172
+#, fuzzy
+msgid "Platforms"
+msgstr "प्लेटफार्म"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:174
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:178
+msgid "Items"
+msgstr "आइटमें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:178
+#, fuzzy
+msgid "Databases"
+msgstr "डेटाबेस स्तंभ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:223
+#, javascript-format
+msgid "Usage data provider %s deleted"
+msgstr "उपयोग डेटा प्रदाता %s हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:13
+msgid "Data providers list"
+msgstr "आंकड़ा प्रदाता सूची"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:82
+msgid "Provider"
+msgstr "प्रदाता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:96
+msgid "Start"
+msgstr "प्रारंभ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:103
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:115
+msgid "N/A"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:108
+msgid "End"
+msgstr "समाप्त"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:135
+#, fuzzy
+msgid "Title reports"
+msgstr "रिपोर्ट देखें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:137
+#, fuzzy
+msgid "Platform reports"
+msgstr "प्लेटफार्म"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:139
+#, fuzzy
+msgid "Database reports"
+msgstr "सहेजें गए रिपोर्ट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:141
+#, fuzzy
+msgid "Item reports"
+msgstr "सहेजें गए रिपोर्ट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersToolbar.vue:7
+msgid "New data provider"
+msgstr "नया आंकड़ा प्रदाता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:9
+#, fuzzy, javascript-format
+msgid "No %s data has been harvested for this provider"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस डेटा प्रदाता के लिए हार्वेस्टर चलाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:84
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:51
+msgid "Platform"
+msgstr "प्लेटफार्म"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:93
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:39
+msgid "Publisher"
+msgstr "प्रकाशक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:102
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:63
+msgid "Publisher ID"
+msgstr "प्रकाशक आईडी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:111
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:99
+msgid "DOI"
+msgstr "डीओआई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:120
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:87
+msgid "Print ISSN"
+msgstr "प्रिंट आईएसएसएन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:129
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:75
+msgid "Online ISSN"
+msgstr "ऑनलाइन आईएसएसएन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:3
+msgid "Build a custom report"
+msgstr "एक कस्टम रिपोर्ट बनाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:7
+msgid "Select report data"
+msgstr "रिपोर्ट डेटा का चयन करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:11
+msgid "Data display"
+msgstr "आंकड़ा प्रदर्शन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:21
+#, fuzzy
+msgid "By month"
+msgstr "%s महीने"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:26
+msgid "By month with period total"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:31
+#, fuzzy
+msgid "By year"
+msgstr "%s वर्ष"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:35
+#, fuzzy
+msgid "By metric type"
+msgstr "मीट्रिक प्रकार चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:40
+#, fuzzy
+msgid "By data provider totals"
+msgstr "आंकड़ा प्रदाता सूची"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:59
+msgid "Choose data provider"
+msgstr "डेटा प्रदाता चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:78
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:21
+msgid "Choose report"
+msgstr "रिपोर्ट चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:104
+msgid "Choose metric type"
+msgstr "मीट्रिक प्रकार चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:120
+msgid "Choose access type"
+msgstr "एक्सेस टाइप चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:135
+msgid "Start year"
+msgstr "प्रारंभ वर्ष"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:142
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:174
+msgid "Please enter year in format YYYY"
+msgstr "कृपया प्रारूप में वर्ष दर्ज करें YYYY"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:150
+msgid "Start month"
+msgstr "माह की शुरुआत"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:168
+msgid "End year"
+msgstr "अंतिम वर्ष"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:182
+msgid "End month"
+msgstr "अंतिम माह"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:200
+msgid "Keyword"
+msgstr "कीवर्ड"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:218
+msgid "Select report columns"
+msgstr "रिपोर्ट कॉलम का चयन करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:251
+msgid "Select date display method"
+msgstr "दिनांक प्रदर्शन विधि का चयन करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:256
+msgid "Display data filtered by year"
+msgstr "वर्ष द्वारा फ़िल्टर किए गए डेटा को प्रदर्शित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:271
+msgid "Yes - Table will be limited to 12 columns (Jan-Dec) with the option to switch between years"
+msgstr "हां - तालिका वर्षों के बीच स्विच करने के विकल्प के साथ 12 कॉलम (जन -दिसंबर) तक सीमित होगी"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:290
+msgid "No - Table will include one column for every month of data selected"
+msgstr "नहीं - तालिका में चयनित डेटा के हर महीने के लिए एक कॉलम शामिल होगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:297
+msgid "Select which months to display"
+msgstr "प्रदर्शित करने के लिए किन महीनों का चयन करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:352
+msgid "Save report"
+msgstr "रिपोर्ट सहेजें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:4
+msgid "Usage statistics reports"
+msgstr "उपयोग सांख्यिकी रिपोर्ट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:16
+msgid "Saved reports"
+msgstr "सहेजें गए रिपोर्ट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:28
+msgid "Create report"
+msgstr "रिपोर्ट बनाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:86
+msgid "No data providers have been created -  no report data will be available"
+msgstr "कोई डेटा प्रदाता नहीं बनाए गए हैं -  कोई रिपोर्ट डेटा उपलब्ध नहीं होगा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:5
+msgid "Display by year"
+msgstr "वर्ष द्वारा प्रदर्शन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:142
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:269
+msgid "YOP"
+msgstr "YOP"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:158
+msgid "Metric"
+msgstr "मीट्रिक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:175
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:332
+msgid "Period total"
+msgstr "अवधि कुल"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:7
+msgid "You have not saved any reports yet, please create a report."
+msgstr "आपने अभी तक कोई रिपोर्ट नहीं दी है, कृपया एक रिपोर्ट बनाएं।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:16
+msgid "Select saved report"
+msgstr "सहेजे गए रिपोर्ट का चयन करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:51
+msgid "Delete report"
+msgstr "रिपोर्ट मिटाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:100
+msgid "Report deleted successfully"
+msgstr "रिपोर्ट सफलतापूर्वक हटा दी गई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:112
+msgid "No report was selected - could not delete"
+msgstr "कोई रिपोर्ट नहीं चुनी गई - हटा नहीं सकती"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:13
+msgid "Remove this user"
+msgstr "इस उपयोगकर्ता को हटा दें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:19
+msgid "User"
+msgstr "उपयोगकर्ता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:30
+msgid "Select user"
+msgstr "उपयोगकर्ता का चयन करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:64
+msgid "Add new user"
+msgstr "नई उपयोगकर्ता को जोड़ना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Help.vue:9
+msgid "Help"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/InfiniteScrollSelect.vue:27
+msgid "Loading more options..."
+msgstr "अधिक विकल्प लोड हो रहे हैं ..।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:199
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:91
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:85
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:672
+msgid "Remove"
+msgstr "हटाना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Main.vue:87
+msgid "The preservation module is disabled, turn on <a href=\"/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=PreservationModule\">PreservationModule</a> to use it"
+msgstr "ई-संसाधन प्रबंधन मॉड्यूल अक्षम है, इसका उपयोग करने के लिए <a href=\"/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=PreservationModule\">PreservationModule</a> चालू करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:5
+msgid "Edit preservation settings"
+msgstr "संरक्षण सेटिंग्स संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:83
+msgid "General settings"
+msgstr "सामान्य सेटिंग"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:21
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:88
+msgid "Status for item added to waiting list"
+msgstr "प्रतीक्षा सूची में जोड़े गए आइटम के लिए स्थिति"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:101
+msgid "Default status for item added to train"
+msgstr "ट्रेन में जोड़ा गया आइटम के लिए डिफ़ॉल्ट स्थिति"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:173
+msgid "Settings updated"
+msgstr "सेंटिग्स अपडेट किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:3
+msgid "Processings"
+msgstr "प्रोसेसिंग"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:23
+msgid "Remove this processing"
+msgstr "इस प्रोसेसिंग को हटा दें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:32
+msgid "Edit this processing"
+msgstr "इस प्रोसेसिंग को संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:42
+msgid "Add new processing"
+msgstr "नया प्रसंस्करण जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:77
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:146
+msgid "Are you sure you want to remove this processing?"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस प्रसंस्करण को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:88
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:159
+#, javascript-format
+msgid "Processing %s deleted"
+msgstr "प्रोसेसिंग %s हटाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:105
+msgid "This processing cannot be deleted, it is already in used."
+msgstr "इस प्रसंस्करण को हटाया नहीं जा सकता है, यह पहले से ही उपयोग में है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:5
+#, javascript-format
+msgid "Edit processing #%s"
+msgstr "प्रोसेसिंग संपादित करें #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:7
+msgid "New processing"
+msgstr "नई प्रोसेसिंग"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:25
+msgid "Processing name"
+msgstr "प्रोसेसिंग नाम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:27
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:33
+msgid "Letter template for printing slip"
+msgstr "मुद्रण पर्ची के लिए पत्र टेम्पलेट"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:48
+msgid "Attributes"
+msgstr "श्रेय देना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:49
+msgid "Be careful when removing attributes from this processing: the items using it will be impacted as well!"
+msgstr "इस प्रसंस्करण से विशेषताओं को हटाते समय सावधान रहें: इसका उपयोग करने वाले आइटम भी प्रभावित होंगे!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:60
+#, javascript-format
+msgid "Attribute %s"
+msgstr "श्रेय देना %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:65
+msgid "Remove this attribute"
+msgstr "इस श्रेयदानकर्ता को हटा दें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:118
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:153
+msgid "Options"
+msgstr "विकल्प"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:132
+msgid "DOES NOT EXIST!"
+msgstr "मौजूद नहीं होना!"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:178
+msgid "Add new attribute"
+msgstr "नई विशेषता जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:232
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:56
+msgid "Authorized value"
+msgstr "अधिकृत मूल्य"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:236
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:59
+msgid "Free text"
+msgstr "मुक्त पाठ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:240
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:62
+msgid "Database column"
+msgstr "डेटाबेस स्तंभ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:297
+msgid "Processing updated"
+msgstr "प्रोसेसिंग अद्यतन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:305
+msgid "Processing created"
+msgstr "प्रसंस्करण बनाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:19
+#, javascript-format
+msgid "Processing #%s"
+msgstr "प्रोसेसिंग #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:41
+msgid "Edit this template"
+msgstr "इस टेम्पलेट को संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:72
+msgid "There are no attributes defined for this processing."
+msgstr "इस प्रसंस्करण के लिए कोई विशेषताएँ परिभाषित नहीं हैं।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:5
+#, javascript-format
+msgid "Edit train #%s"
+msgstr "संपादित ट्रेन #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:7
+msgid "New train"
+msgstr "नई ट्रेन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:162
+msgid "Status for item added to this train"
+msgstr "इस ट्रेन में जोड़े गए आइटम के लिए स्थिति"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:170
+msgid "Default processing"
+msgstr "डिफ़ॉल्ट संसाधन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:183
+msgid "Train updated"
+msgstr "ट्रेन अपडेट किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:191
+msgid "Train created"
+msgstr "ट्रेन बनाया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:5
+#, javascript-format
+msgid "Edit item #%s"
+msgstr "आइटम संपादित करें #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:7
+#, javascript-format
+msgid "Add new item to %s"
+msgstr "नई आइटम जोड़ें %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:14
+msgid "Itemnumber"
+msgstr "आइटमनबंर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:20
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:16
+msgid "Processing"
+msgstr "प्रोसेसिंग"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:117
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:367
+msgid "Barcode"
+msgstr "बारकोड"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:241
+msgid "Cannot find item with this barcode. It must be in the waiting list."
+msgstr "इस बारकोड के साथ आइटम नहीं मिल सकता है। यह प्रतीक्षा सूची में होना चाहिए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:364
+msgid "Item updated"
+msgstr "आइटम अपडेट किया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:375
+msgid "Item added to train"
+msgstr "ट्रेन में जोड़ा गया आइटम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:4
+#, javascript-format
+msgid "Add new items to %s"
+msgstr "में नए आइटम जोड़ें %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:10
+msgid "Itemnumbers"
+msgstr "आइटमनंबर्स"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:61
+#, javascript-format
+msgid "Cannot be edited now, the value will be retrieved from %s"
+msgstr "अब संपादित नहीं किया जा सकता है, मूल्य से पुनर्प्राप्त किया जाएगा %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:266
+#, javascript-format
+msgid "%s items have been added to train %s."
+msgstr "%sट्रेन में आइटम जोड़े गए हैं %s।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:275
+msgid "No items have been added to the train."
+msgstr "ट्रेन में कोई आइटम नहीं जोड़ा गया है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:12
+msgid "Filter by"
+msgstr "द्वारा फ़िल्टर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:24
+msgid "Closed"
+msgstr "बंद किया हुआ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:30
+msgid "Sent"
+msgstr "भेजा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:36
+msgid "Received"
+msgstr "प्राप्त किया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:56
+msgid "There are no trains defined"
+msgstr "कोई ट्रेनें परिभाषित नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:113
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:91
+msgid "Add items"
+msgstr "आइटमें जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:156
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:424
+msgid "Are you sure you want to remove this train?"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस ट्रेन को हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:167
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:435
+#, javascript-format
+msgid "Train %s deleted"
+msgstr "ट्रेन %s हटा दिया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:179
+msgid "Cannot add items to a closed train"
+msgstr "एक बंद ट्रेन में आइटम नहीं जोड़ सकते"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:247
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:142
+msgid "Closed on"
+msgstr "पर बंद करना"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:256
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:148
+msgid "Sent on"
+msgstr "पर भेजा गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:265
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:154
+msgid "Received on"
+msgstr "पर प्राप्त किया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:14
+msgid "Copy item to the following train"
+msgstr "निम्नलिखित ट्रेन में आइटम कॉपी करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:30
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:88
+msgid "Select a train"
+msgstr "एक ट्रेन चुनें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:114
+msgid "Send"
+msgstr "भेजे"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:120
+msgid "Receive"
+msgstr "प्राप्त"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:124
+#, javascript-format
+msgid "Train #%s"
+msgstr "ट्रेन #%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:189
+msgid "Actions: "
+msgstr "क्रियाएं: "
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:194
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:197
+msgid "Print slips"
+msgstr "प्रिंट स्लिप्स"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:217
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:617
+msgid "Cannot print slip, this item does not have a processing with a letter template defined."
+msgstr "स्लिप को प्रिंट नहीं कर सकता, इस आइटम में एक लेटर टेम्पलेट के साथ प्रसंस्करण नहीं है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:493
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:323
+msgid "Yes, remove"
+msgstr "हाँ, हटाओ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:494
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:324
+msgid "No, do not remove"
+msgstr "नहीं, मत हटाओ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:502
+msgid "Item removed"
+msgstr "आइटम हटा दिया गया"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:537
+msgid "Item copied successfully."
+msgstr "आइटम को सफलतापूर्वक कॉपी किया गया।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:543
+msgid "Item cannot be copied to a train, it is already in a non-received train."
+msgstr "आइटम को एक ट्रेन में कॉपी नहीं किया जा सकता है, यह पहले से ही एक गैर-प्राप्त ट्रेन में है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:716
+msgid "Print slip"
+msgstr "प्रिंट स्लिप"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:14
+msgid "Add items to waiting list"
+msgstr "प्रतीक्षा सूची में आइटम जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:30
+msgid "Barcode list"
+msgstr "बारकोड सूची"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:72
+msgid "Add items to a train"
+msgstr "एक ट्रेन में आइटम जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:139
+msgid "You need to configure this module first."
+msgstr "आपको पहले इस मॉड्यूल को कॉन्फ़िगर करने की आवश्यकता है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:149
+msgid "Add to waiting list"
+msgstr "प्रतीक्षा सूची में जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:159
+#, javascript-format
+msgid "Add last %s items to a train"
+msgstr "अंतिम जोड़े %s एक ट्रेन के लिए आइटम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:173
+msgid "There are no items in the waiting list"
+msgstr "प्रतीक्षा सूची में कोई आइटम नहीं हैं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:279
+#, javascript-format
+msgid "%s new items added. %s items not found."
+msgstr "%s नए आइटम जोड़े गए। %s आइटम नहीं मिला।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:288
+#, javascript-format
+msgid "%s new items added."
+msgstr "%s नए आइटम जोड़े गए।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:303
+msgid "No items added"
+msgstr "कोई आइटम नही जोड़ी गई"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:320
+msgid "Are you sure you want to remove this item from the waiting list?"
+msgstr "क्या आप सुनिश्चित हैं कि आप इस आइटम को प्रतीक्षा सूची से हटाना चाहते हैं?"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:331
+msgid "Item removed from the waiting list"
+msgstr "प्रतीक्षा सूची से हटा दिया गया आइटम"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:355
+msgid "Author"
+msgstr "लेखक"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:361
+msgid "Call number"
+msgstr "कॉल नंबर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:7
+msgid "Administration"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:33
+msgid "Edit record source"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:38
+msgid "E-resource management"
+msgstr "ई-संसाधन प्रबंधन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:61
+msgid "Show agreement"
+msgstr "अनुबंध दिखाए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:73
+msgid "Edit agreement"
+msgstr "समझौता संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:92
+msgid "Show license"
+msgstr "लाइसेंस दिखाए"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:98
+msgid "Add license"
+msgstr "लाइसेंस जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:104
+msgid "Edit license"
+msgstr "लाइसेंस संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:110
+msgid "eHoldings"
+msgstr "ईहोल्डिंग्स"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:116
+msgid "Local"
+msgstr "स्थानीय"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:139
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:249
+msgid "Show package"
+msgstr "पैकेज दिखाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:147
+msgid "Add package"
+msgstr "पैकेज जोड़े"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:155
+msgid "Edit package"
+msgstr "पैकेज संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:178
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:272
+msgid "Show title"
+msgstr "शीर्षक दिखाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:186
+msgid "Add title"
+msgstr "शीर्षक जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:194
+msgid "Edit title"
+msgstr "शीर्षक संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:218
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:280
+msgid "Resource"
+msgstr "संसाधन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:226
+msgid "EBSCO"
+msgstr "इब्सकों"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:291
+msgid "eUsage"
+msgstr "eUsage"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:297
+msgid "Data providers"
+msgstr "डेटा प्रदाता"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:314
+msgid "Show provider"
+msgstr "प्रदाता दिखाएं"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:322
+msgid "Add data provider"
+msgstr "डेटा प्रदाता जोड़े"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:330
+msgid "Edit data provider"
+msgstr "डेटा प्रदाता संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:359
+msgid "View report"
+msgstr "रिपोर्ट देखें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:28
+msgid "Preservation"
+msgstr "संरक्षण"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:34
+msgid "Home"
+msgstr "घर"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:39
+msgid "Trains"
+msgstr "ट्रेन"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:50
+msgid "Show train"
+msgstr "ट्रेन दिखाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:66
+msgid "Add item to train"
+msgstr "ट्रेन में आइटम जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:72
+msgid "Add items to train"
+msgstr "ट्रेन में आइटमें जोड़ें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:78
+msgid "Edit item in train"
+msgstr "ट्रेन में आइटम संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:88
+msgid "Add train"
+msgstr "ट्रेन जोड़े"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:94
+msgid "Edit train"
+msgstr "ट्रेन संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:100
+msgid "Waiting list"
+msgstr "प्रतिक्षा सूची"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:113
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:129
+msgid "Show processing"
+msgstr "प्रोसेसिंग दिखाएँ"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:135
+msgid "Add processing"
+msgstr "प्रोसेसिंग जोड़े"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:141
+msgid "Edit processing"
+msgstr "प्रोसेसिंग संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:14
+msgid "supersedes"
+msgstr "सुपरसीडेड"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:15
+msgid "is superseded by"
+msgstr "सुपर सीडेड है द्वारा"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:18
+msgid "provides post-cancellation access for"
+msgstr "रद्द करने के बाद के लिए पहुँच प्रदान करता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:22
+msgid "has post-cancellation access in"
+msgstr "में पोस्ट-कैंसिलेशन एक्सेस है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:26
+msgid "tracks demand-driven acquisitions for"
+msgstr "के लिए मांग-संचालित अधिग्रहणों को ट्रैक करता है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:30
+msgid "has demand-driven acquisitions in"
+msgstr "में मांग-संचालित अधिग्रहण है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:32
+msgid "has backfile in"
+msgstr "में बैकफाइल है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:33
+msgid "has frontfile in"
+msgstr "सामने फ़ाइल है"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:34
+msgid "related to"
+msgstr "से संबंधित"
+
+#: koha-tmpl/intranet-tmpl/prog/js/xmlControlfield.js:215
+#, javascript-format
+msgid "AJAX error: receiving data from %s"
+msgstr "अजाक्स त्रुटि: से डेटा प्राप्त करना %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:9
+msgid "The page entered is not a number."
+msgstr "दर्ज किया गया पृष्ठ संख्या नहीं है।"
+
+#: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:12
+#, javascript-format
+msgid "The page should be a number between 1 and %s."
+msgstr "पेज एक नंबर होना चाहिए के बीच 1और %s."
+
+#: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:56
+msgid "Please choose at least one external target"
+msgstr "कृपया कम से कम एक बाहरी लक्ष्य चुनें"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/autofill.js:31
+msgid "Search Google Books"
+msgstr "गुगल पुस्तकें खोजें"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/autofill.js:84
+msgid "Sorry, nothing found."
+msgstr "क्षमा करें, कुछ नहीं मिला।"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/barcode-generator.js:24
+#, fuzzy
+msgid "Error: "
+msgstr "त्रुटियाँ: "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/barcode-generator.js:26
+msgid "Unable to generate barcode"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:111
+msgctxt "Bibliographic record"
+msgid "The item is already in your cart"
+msgstr "यह आइटम पहले से ही आपकी कार्ट में हैं"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:128
+msgctxt "Bibliographic record"
+msgid "The item has been added to your cart"
+msgstr "आइटम आपकी कार्ट में जोड़ा जा चुका है"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:166
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:169
+msgctxt "Bibliographic record"
+msgid " item(s) added to your cart"
+msgstr " आपकी कार्ट मे आइटम(ओ) जोड़ी है"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:166
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:177
+msgid "already in your cart"
+msgstr "आपकी कार्ट में पहले से ही है"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:174
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:269
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:351
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:382
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:397
+msgctxt "Bibliographic record"
+msgid "No item was selected"
+msgstr "कोई आइटम नही चुना गया"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:177
+msgctxt "Bibliographic record"
+msgid "No item was added to your cart"
+msgstr "आपकी कार्ट में कोई आइटम नहीं जोड़ा गया"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:218
+msgctxt "Bibliographic record"
+msgid "The item has been removed from your cart"
+msgstr "आइटम आपकी कार्ट से हटा दिया गया है"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/global.js:339
+msgid "Scroll to the top of the page"
+msgstr "पृष्ठ के शीर्ष पर स्क्रॉल करें"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:79
+msgid "Log in to your OverDrive account"
+msgstr "अपने ओवरड्राइव अकाउंट में लॉग इन करें"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:127
+msgid "OverDrive account page"
+msgstr "ओवरड्राइव खाता पृष्ठ"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:138
+msgid "Log out of your OverDrive account"
+msgstr "अपने ओवरड्राइव अकाउंट से लॉग आउट करें"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:145
+msgid "Checkouts"
+msgstr "चेकआउटस"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:155
+msgid "Holds"
+msgstr "होल्डस"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:291
+msgid "Checked out until: "
+msgstr "जब तक चैक आउट: "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:296
+msgid "Get item"
+msgstr "आइटम प्राप्त करें"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:302
+msgid "Check in"
+msgstr "चैक इन"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:303
+msgid "Are you sure you want to return this item?"
+msgstr "क्या आप वाकई इस आइटम को वापस करना चाहते हैं?"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:320
+msgid "Check out"
+msgstr "चेकआउट"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:321
+msgid "Are you sure you want to check out this item?"
+msgstr "क्या आप वाकई इस आइटम को चेकआउट करना चाहते हैं?"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:356
+msgid "Cancel hold"
+msgstr "रद्द होल्ड"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:357
+msgid "Are you sure you want to cancel this hold?"
+msgstr "क्या आप वाकई इस होल्ड को रद्द करना चाहते हैं?"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:386
+msgid "Item cannot be checked out. There are no available formats"
+msgstr "आइटम की चैक आउट नही की जा सकती। कोई उपलब्ध प्रारूप नहीं हैं"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/privacy.js:4
+msgid "Warning: Cannot be undone. Please confirm once again"
+msgstr "चेतावनी: पूर्ववत नहीं किया जा सकता है। कृपया एक बार फिर से पुष्टि करें"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/ratings.js:35
+#, javascript-format
+msgid "Your rating: %s."
+msgstr "आपकी रेटिंग : %s "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/ratings.js:42
+#, javascript-format
+msgid "Average rating: %s (%s votes)"
+msgstr "औसत रेटिंगः: %s (%s वोटस)"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:32
+#, fuzzy
+msgid "With selected titles: "
+msgstr "शीर्षक हटाएं"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:35
+#, fuzzy
+msgid "Select titles to: "
+msgstr "आइटम चुनें"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:55
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:64
+#, fuzzy
+msgid "You must be logged in to create or add to lists"
+msgstr "आपको टैग्स जोड़ने के लिए लॉग इन करना ही होगा।"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:102
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:210
+#, fuzzy
+msgid "No tag was specified."
+msgstr "कोई आइटम नही चुना गया"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:44
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:100
+msgid "Tags added: "
+msgstr "टैग जोड़े गए: "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:45
+msgid "Tags deleted: "
+msgstr "टैग हटाए गए: "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:46
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:110
+msgid "Errors: "
+msgstr "त्रुटियाँ: "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:62
+msgid "Sorry, tags are not enabled on this system."
+msgstr "क्षमा करें, इस प्रणाली पर टैग सक्षम नहीं हैं।"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:63
+msgid "Error! Your tag was entirely markup code.  It was NOT added.  Please try again with plain text."
+msgstr "गलती! आपका टैग पूरी तरह से मार्कअप कोड था।  यह नहीं जोड़ा गया था।  कृपया सादे पाठ के साथ फिर से प्रयास करें।"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:64
+msgid "Error! Illegal parameter"
+msgstr "गलती! अवैध पैरामीटर"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:65
+msgid "Note: your tag contained markup code that was removed. The tag was added as "
+msgstr "नोट: आपके टैग में मार्कअप कोड था जिसे हटा दिया गया था। टैग के रूप में जोड़ा गया था "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:66
+msgid "Error! Adding tags failed at"
+msgstr "गलती! टैग जोड़ना विफल रहा"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:66
+msgid "Note: you can only tag an item with a given term once.  Check 'Tags' to see your current tags."
+msgstr "नोट: आप केवल एक बार दिए गए शब्द के साथ एक आइटम को टैग कर सकते हैं।  अपने वर्तमान टैग देखने के लिए 'टैग' की जाँच करें।"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:67
+msgid "Error! You cannot delete the tag"
+msgstr "गलती! आप टैग को हटा नहीं सकते"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:67
+msgid "Note: you can only delete your own tags."
+msgstr "नोट: आप केवल अपने स्वयं के टैग को हटा सकते हैं।"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:68
+msgid "You must be logged in to add tags."
+msgstr "आपको टैग्स जोड़ने के लिए लॉग इन करना ही होगा।"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:130
+msgid "Unable to add one or more tags."
+msgstr "एक या एक से अधिक टैग जोड़ने में असमर्थ।"
+
+#, fuzzy, javascript-format
+#~ msgid "%s linked biblio record"
+#~ msgstr "स्थानीय ग्रंथ सूची रिकॉर्ड"
+
+#, javascript-format
+#~ msgid "<li>Job for report type <strong>%s</strong> has been queued, <a href=\"/cgi-bin/koha/admin/background_jobs.pl?op=view&id=%s\" target=\"_blank\">click here</a> to check its progress.</li>"
+#~ msgstr "<li>रिपोर्ट प्रकार के लिए नौकरी <strong>%s </strong> को कतारबद्ध किया गया है,<a href=\"/cgi-bin/koha/admin/background_jobs.pl?op=view&id=%s\" target=\"_blank\">click here</a>इसकी प्रगति की जाँच करने के लिए.</li>"
+
+#, javascript-format
+#~ msgid "<li>Job for uploaded file has been queued, <a href=\"/cgi-bin/koha/admin/background_jobs.pl?op=view&id=%s\" target=\"_blank\">click here</a> to check its progress.</li>"
+#~ msgstr "<li>अपलोड की गई फ़ाइल के लिए नौकरी कतारबद्ध की गई है, <a href=\"/cgi-bin/koha/admin/background_jobs.pl?op=view&id=%s\" target=\"_blank\">यहाँ क्लिक करें </a>इसकी प्रगति की जाँच करने के लिए.</li>"
+
+#~ msgid "A control field cannot be used with a regular field."
+#~ msgstr "एक नियंत्रण क्षेत्र का उपयोग नियमित क्षेत्र के साथ नहीं किया जा सकता है."
+
+#~ msgid "Activate filters"
+#~ msgstr "सक्रिय फ़िल्टर्स"
+
+#~ msgid "Agreement user"
+#~ msgstr "अनुबंध उपयोगकर्ता"
+
+#~ msgid "Are you sure you want to delete this vendor?"
+#~ msgstr "क्या आप वाकई इस विक्रेता को हटाना चाहते हैं?"
+
+#~ msgid "Are you sure you want to remove the selected items?"
+#~ msgstr "क्या आप चयनित मदों को दूर करना चाहते हैं?"
+
+#, fuzzy
+#~ msgid "Click to expand"
+#~ msgstr "इस अनुभाग का विस्तार करने के लिए क्लिक करें"
+
+#~ msgid "Create record"
+#~ msgstr "रिकार्ड बनाएँ"
+
+#~ msgid "Deactivate filters"
+#~ msgstr "फिल्टर्स निष्क्रिय करें"
+
+#~ msgid "Delete license"
+#~ msgstr "लाइसेंस हटाएं"
+
+#~ msgid "Delete package"
+#~ msgstr "पैकेज हटाएं"
+
+#~ msgid "Import of record(s) failed: "
+#~ msgstr "रिकॉर्ड(ओं) का आयात विफल:  "
+
+#~ msgid "License user"
+#~ msgstr "लाइसेंस प्रयोक्ता"
+
+#~ msgid "Sushi credentials"
+#~ msgstr "सुशी क्रेडेंशियल्स"
+
+#~ msgid "The recall waiting status may have already been reverted. Please refresh the page."
+#~ msgstr "हो सकता है कि रिकॉल प्रतीक्षा स्थिति को पहले ही वापस कर दिया गया हो। कृपया पेज को रिफ्रेश करें।"
+
+#~ msgid "Update record"
+#~ msgstr "अद्यतन अभिलेख"
+
+#, fuzzy
+#~ msgid "name"
+#~ msgstr "फ़ाइल नाम"

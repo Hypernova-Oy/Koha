@@ -1,0 +1,233 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Item circulation alerts") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% FILTER collapse %]
+ <style>
+        table.grid thead th {
+            vertical-align: bottom;
+        }
+
+        table.grid tbody th {
+            text-align: right;
+        }
+
+        table.grid tbody td {
+            font-size: xx-small;
+        }
+
+        table.grid tbody td.info {
+            background-color: #fff !important;
+        }
+
+        table.grid.active tbody td {
+            width: 10%;
+            cursor: pointer;
+        }
+
+        table.grid tbody td {
+            background-color: #cfc !important;
+            color: #111;
+        }
+
+        table.grid td.disabled {
+            background-color: #fcc !important;
+        }
+
+        table.grid td.default {
+            background-color: #f88 !important;
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="admin_item_circulation_alerts" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lånenotifikationer för exemplar</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ <div class="row">
+ <div class="col-md-6">
+<h1>Lånenotifikationer för exemplar</h1>
+<h2>Välj ett bibliotek:</h2>
+<form id="branch_selector" method="get" action="/cgi-bin/koha/admin/item_circulation_alerts.pl">
+<select id="branch" name="branch">
+ <option value="*">Standard</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => branch, unfiltered => 1 ) %]
+</select>
+<input class="btn btn-primary" name="pick" type="submit" value="Välj" />
+</form>
+</div>
+ <div class="col-md-6">
+<table class="grid">
+<caption>Bildtext</caption>
+<thead>
+<tr>
+ <th>Färg</th>
+ <th>Betydelse</th>
+</tr>
+</thead>
+<tbody>
+ <tr>
+ <td width="100" class="default">&nbsp;</td>
+ <td class="info">Dessa är avaktiverade för ALLA bibliotek. För att ändra dessa inställningar väljer du biblioteket "Standard".</td>
+ </tr>
+ <tr>
+ <td class="disabled">&nbsp;</td>
+ <td class="info">Dessa är avaktiverade för det aktuella biblioteket.</td>
+ </tr>
+ <tr>
+ <td>&nbsp;</td>
+ <td class="info">Dessa är aktiverade.</td>
+ </tr>
+</tbody>
+</table>
+ </div> <!-- /.col-md-6 -->
+ </div> <!-- /.row -->
+
+ <h2>Utlåningsnotifikationer för [% Branches.GetName( branch ) || 'Default' | html %]</h2>
+ <p>Klicka på rutnätet för att växla inställningarna.</p>
+
+ [% WRAPPER tabs id= "alerttabs" %]
+ [% WRAPPER tabs_nav %]
+ [% WRAPPER tab_item tabname= "checkout" bt_active= 1 %] <span>Utlåning</span> [% END %]
+ [% WRAPPER tab_item tabname= "checkin" %] <span>Återlämna</span> [% END %]
+ [% END %]
+
+ [% WRAPPER tab_panels %]
+ [% WRAPPER tab_panel tabname="checkout" bt_active= 1 %]
+ <h3>Utlåning</h3>
+ <table class="grid active" width="100%">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ [% FOREACH item_type IN item_types %]
+ <th>[% item_type.description | html %]</th>
+ [% END %]
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH grid_checkou IN grid_checkout %]
+ <tr>
+ <th>[% grid_checkou.description | html %]</th>
+ [% FOREACH item IN grid_checkou.items %]
+ <td class="[% item.class | html %]" id="[% item.id | html %]">[% item.text | html %]</td>
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- /.grid.active -->
+ [% END #/ #checkout %]
+
+ [% WRAPPER tab_panel tabname="checkin" %]
+ <h3>Återlämna</h3>
+ <table class="grid active" width="100%">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ [% FOREACH item_type IN item_types %]
+ <th>[% item_type.description | html %]</th>
+ [% END %]
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH grid_checki IN grid_checkin %]
+ <tr>
+ <th>[% grid_checki.description | html %]</th>
+ [% FOREACH item IN grid_checki.items %]
+ <td class="[% item.class | html %]" id="[% item.id | html %]">[% item.text | html %]</td>
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% END # /#checkin %]
+ [% END # /.tab_panels %]
+
+ [% END # //#alerttabs %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ <script>
+        var $branch = "[% branch | html %]";
+        $(function(){
+
+            var blocked            = _("Blockerad!");
+            var saving             = _("Sparar...");
+            var disabledForAll     = _("Avaktiverad för alla");
+            var disabledForCurrent = _("Avaktiverad för %s").format($branch);
+
+            $('#branch_selector input:submit').hide();
+            $('#branch').change(function(){
+                $('#branch_selector').submit();
+            });
+
+            $('table.grid.active tbody td').click(function(ev){
+                var id = this.id;
+                var td = $(this);
+                if (td.hasClass('default') && $branch != '*') {
+                    td.html(blocked);
+                    window.setTimeout(
+                      function(){ td.html(disabledForAll) },
+                      3000
+                    );
+                } else {
+                    td.html(saving);
+                    $.ajax({
+                        url      : '/cgi-bin/koha/admin/item_circulation_alerts.pl',
+                        type     : 'POST',
+                        dataType : 'json',
+                        data     : { op: 'cud-toggle', id: id, branch: $branch, csrf_token: $('meta[name="csrf-token"]').attr("content") },
+                        success  : function(response){
+                            if ($branch == '*' && response.classes.match(/default/)) {
+                                td.html(disabledForAll);
+                            } else if (response.classes.match(/disabled/)) {
+                                td.html(disabledForCurrent);
+                            } else {
+                                td.html(' ');
+                            }
+                            td.attr('class', response.classes);
+                        }
+                    });
+                }
+            });
+
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

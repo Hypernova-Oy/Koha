@@ -1,0 +1,123 @@
+---
+logs.pref:
+  Felsökning:
+  - - När åtgärder loggas, lagra en stackspårning som går högst
+    - class: integer
+      pref: ActionLogsTraceDepth
+    - nivåer ned.
+  - - choices:
+        '0': Dumpa inte
+        '1': Dumpa
+      pref: DumpTemplateVarsIntranet
+    - alla Template Toolkit-variabler till en kommentar i HTML-källkoden i personalklienten.
+  - - choices:
+        '0': Dumpa inte
+        '1': Dumpa
+      pref: DumpTemplateVarsOpac
+    - alla Template Toolkit-variabler till en kommentar i HTML-källkoden i OPAC.
+  - - choices:
+        '0': Dumpa inte
+        '1': Dumpa
+      pref: DumpSearchQueryTemplate
+    - en sökfråga till en kommentar i HTML-källkoden i OPAC och personalklienten.
+  Loggning:
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: ClaimsLog
+    - när beställningskrav eller reklamationer skickas.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: BorrowersLog
+    - ändringar av låntagarposter och låntagarbegränsningar.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: CataloguingLog
+    - ändringar av biblioposter eller exemplarposter.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: AuthoritiesLog
+    - ändringar av auktoritetsposter.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: FinesLog
+    - när avgifter debiteras, betalas eller efterskänks.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: HoldsLog
+    - alla åtgärder på reservationer (skapa, avbryt, pausa, återuppta etc).
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: IllLog
+    - när fjärrlånebeställningar ändras.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: AcquisitionLog
+    - åtgärder i inköpsmodulen.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: IssueLog
+    - när exemplar lånas ut.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: ReturnLog
+    - när exemplar återlämnas.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: RenewalLog
+    - när exemplar lånas om.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: SubscriptionLog
+    - när periodika läggs till, tas bort eller ändras.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: CronjobLog
+    - information från cron-jobb.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: ReportsLog
+    - när rapporter läggs till, tas bort eller ändras.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: AuthFailureLog
+    - autentiseringsfel.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: AuthSuccessLog
+    - lyckade autentiseringar.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: NoticesLog
+    - ändringar av meddelandemallar.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: NewsLog
+    - när nyheter eller annat innehåll som hanteras i Verktyg › Nyheter ändras.
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: RecallsLog
+    - alla åtgärder på reservationer (skapa, avbryt, pausa, återuppta etc).
+  - - choices:
+        '0': Logga inte
+        '1': Logga
+      pref: SuggestionsLog
+    - any changes to purchase suggestions (create, modify, delete ).

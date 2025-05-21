@@ -1,0 +1,401 @@
+---
+enhanced_content.pref:
+  Alla:
+  - - <strong>OBS!</strong> Du kan bara välja en källa för omslagsbilder nedan, annars
+      kommer Koha att visa bilder från alla valda källor.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: FRBRizeEditions
+    - andra utgåvor av ett exemplar i personalklienten (om hittad av en av tjänsterna
+      nedan).
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 0
+      pref: OPACFRBRizeEditions
+    - andra utgåvor av ett exemplar i OPAC.
+  Amazon:
+  - - Använd Amazon-data från den
+    - choices:
+        CA: kanadensiska
+        DE: tyska
+        FR: franska
+        IN: indiska
+        JP: japanska
+        UK: brittiska
+        US: amerikanska
+      pref: AmazonLocale
+    - webbplatsen.
+  - - Placera "Associates"-taggen
+    - pref: AmazonAssocTag
+    - på länkar till Amazon. Detta kan göra att ditt bibliotek erhåller ersättning
+      om en låntagare köper ett exemplar.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 1
+      pref: AmazonCoverImages
+    - omslagsbilder från Amazon i sökresultat och detaljsidor för exemplar i personalgränssnittet.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: 1
+      pref: OPACAmazonCoverImages
+    - omslagsbilder från Amazon i sökresultat och detaljsidor för exemplar i OPAC.
+  Babelthèque:
+  - - choices:
+        '0': Inkludera inte
+        '1': Inkludera
+      pref: Babeltheque
+    - information (som recensioner och citat) från Babelthèque i detaljsidorna för
+      exemplar i OPAC.
+  - - 'Använd denna URL för Babelthèque-javascript-filen: '
+    - class: url
+      pref: Babeltheque_url_js
+    - (t.ex. http://www.babeltheque.com/bw_XX.js).
+  - - 'Använd denna URL för att regelbundet uppdatera Babelthèque-javascript-filen: '
+    - class: url
+      pref: Babeltheque_url_update
+    - (t.ex. http://www.babeltheque.com/.../file.csv.bz2).
+  Baker and Taylor:
+  - - choices:
+        '0': Lägg inte till
+        '1': Lägg till
+      pref: BakerTaylorEnabled
+    - Baker and Taylor-länkar och omslagsbilder till OPAC och personalklienten. Detta
+      kräver att du angett ett användarnamn och lösenord (som kan ses i bildlänkar).
+  - - Baker and Taylor "My Library Bookstore"-länkar ska öppnas på <code>https://
+    - class: url
+      pref: BakerTaylorBookstoreURL
+    - <em>isbn</em></code> (detta ska fyllas i enligt följande format <code>ocls.mylibrarybookstore.com/MLB/actions/searchHandler.do?nextPage=bookDetails&amp;parentNum=10923&amp;key=</code>).
+      Lämna tomt för att inaktivera dessa länkar.
+  - - Åtkomst till Baker and Taylor med användarnamn
+    - class: password
+      pref: BakerTaylorUsername
+    - och lösenord
+    - class: password
+      pref: BakerTaylorPassword
+    - .
+  Coce-bildbank:
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: OpacCoce
+    - en Coce-bildbankstjänst i OPAC.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: IntranetCoce
+    - en Coce-bildbankstjänst i personalklienten.
+  - - URL till Coce-servern
+    - class: url
+      pref: CoceHost
+  - - Använd följande leverantörer för att hämta omslagsbilder
+    - multiple:
+        aws: Amazon Web Services
+        gb: Google Books
+        ol: Open Library
+      pref: CoceProviders
+  Google:
+  - - choices:
+        '0': Lägg inte till
+        '1': Lägg till
+      pref: GoogleJackets
+    - omslagsbilder från Google Books i sökresultat och detaljsidor för exemplar i
+      OPAC.
+  HTML5-media:
+  - - Visa en flik med en HTML5-mediaspelare för filer katalogiserade i fält 856
+    - choices:
+        both: i OPAC och personalklienten.
+        not: inte alls.
+        opac: i OPAC.
+        staff: i personalklienten.
+      pref: HTML5MediaEnabled
+  - - Filändelser för mediafiler
+    - class: multi
+      pref: HTML5MediaExtensions
+    - (separerad med |).
+  - - choices:
+        '0': Lägg inte in
+        '1': Lägg in
+      pref: HTML5MediaYouTube
+    - YouTube-länkar som videoklipp.
+  Library Thing:
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: ThingISBN
+    - ThingISBN-tjänsten för att visa andra utgåvor av en titel (när antingen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=FRBRizeEditions">FRBRizeEditions</a>
+      eller <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFRBRizeEditions">OPACFRBRizeEditions</a>
+      är aktiverat). Detta är skilt från LibraryThing for Libraries.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: LibraryThingForLibrariesEnabled
+    - 'recensioner, liknande exemplar och taggar från LibraryThing for Libraries på
+      sidor med detaljinformation om exemplar i OPAC. Om du har aktiverat detta, måste
+      du '
+    - <a href="https://www.librarything.com/forlibraries/">registrera dig</a>, och
+      ange sedan ditt ID nedan.
+  - - Åtkomst till LibraryThing for Libraries med kund-ID
+    - pref: LibraryThingForLibrariesID
+    - .
+  - - Visa innehåll från LibraryThing for Libraries
+    - choices:
+        '0': i samstämmighet med den bibliografiska informationen.
+        '1': i flikar.
+      pref: LibraryThingForLibrariesTabbedView
+  Lokala eller externa omslagsbilder:
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: LocalCoverImages
+    - lokala omslagsbilder på detaljsidor och i sökresultat i personalklienten.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OPACLocalCoverImages
+    - lokala omslagsbilder på detaljsidor och sidor för OPAC-sökning.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: AllowMultipleCovers
+    - att flera bilder kopplas till varje bibliografisk post och exemplar.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: CustomCoverImages
+    - anpassade omslagsbilder i personalklienten.<br/>
+    - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OPACCustomCoverImages
+    - anpassade omslagsbilder i OPAC.<br/>
+    - 'Använd följande URL:'
+    - class: url
+      pref: CustomCoverImagesURL
+    - 'Du kan ange det enligt följande: {isbn}, {issn}, {normalized_isbn}.<br/>'
+    - 'Eller följande syntax för att specificera ett fält$subfield value: {field$subfield}.
+      T.ex. {024$a}.'
+    - För kontrollfält kan du använda {field}, som {001}.
+  Manual:
+  - - Adress till Koha-manualen
+    - class: url
+      pref: KohaManualBaseURL
+    - Du kan ange sökvägen till den Koha-manual som ska användas. Som standard är
+      den https://koha-community.org/manual/
+    - Om strängen börjar med '/'  kommer värdet <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=staffClientBaseURL">staffClientBaseURL</a>
+      att användas som prefix.
+    - Observera att den kommer att få ett suffix enligt version / språk / format (/17.11/en/html)
+  - - Onlinemanualens språk
+    - choices:
+        ar: Arabiska
+        cs: Tjeckiska
+        de: Tyska
+        en: Engelska
+        es: Spanska
+        fr: Franska
+        it: Italienska
+        pt_BR: Portugisiska – Brasilien
+        tr: Turkiska
+        zh_TW: Kinesiska – Taiwan
+      pref: KohaManualLanguage
+    - Det kommer att användas som fallback-värde om gränssnittets språk saknar onlinemanual.
+  Novelist Select:
+  - - choices:
+        '0': Lägg inte till
+        '1': Lägg till
+      pref: NovelistSelectEnabled
+    - Novelist Select-innehåll i OPAC (kräver att du har angett en användarprofil
+      och ett lösenord, som kan ses i bildlänkar).
+  - - Visa innehåll från Novelist Select
+    - choices:
+        above: ovanför samlingstabellen
+        below: under samlingstabellen
+        right: under rullgardinsmenyn Spara post, till höger
+        tab: i en OPAC-flik
+      pref: NovelistSelectView
+    - .
+  - - Åtkomst till Novelist Select med användarprofil
+    - pref: NovelistSelectProfile
+    - i OPAC
+  - - Åtkomst till Novelist Select med användarprofil
+    - pref: NovelistSelectStaffProfile
+    - i personalklienten.
+  - - Åtkomst till Novelist Select med lösenord
+    - class: password
+      pref: NovelistSelectPassword
+    - .
+  - - choices:
+        '0': Lägg inte till
+        '1': Lägg till
+      pref: NovelistSelectStaffEnabled
+    - Novelist Select-innehåll i personalklienten (kräver att du har skrivit in användarprofil
+      och lösenord vilket kan ses i bildlänkar).
+  - - Visa Novelist Select-innehåll i personalklienten
+    - choices:
+        above: ovanför holdingstabellen
+        below: nedanför holdingstabellen
+        tab: i en flik
+      pref: NovelistSelectStaffView
+    - .
+  Open Library:
+  - - choices:
+        '0': Lägg inte till
+        '1': Lägg till
+      pref: OpenLibraryCovers
+    - omslagsbilder från Open Library i sökresultat och detaljsidor för exemplar i
+      OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: OpenLibrarySearch
+    - sökresultat från Open Library i OPAC.
+  OverDrive:
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: OPACOverDrive
+    - OverDrive-integrering i Koha.
+  - - Inkludera information om OverDrive-tillgänglighet med klientnyckeln
+    - pref: OverDriveClientKey
+    - och klientlösenord
+    - pref: OverDriveClientSecret
+    - .
+  - - 'Autentisera med OverDrive-sidans id #'
+    - pref: OverDriveWebsiteID
+    - .
+  - - Autentisera med OverDrive Authname
+    - pref: OverDriveAuthName
+    - (kommer att användas som standardvärde om 'authname' för den enskilda enheten
+      inte är angivet i <a href="/cgi-bin/koha/admin/overdrive.pl">OverDrive library
+      authnames-tabellen</a>).
+  - - 'Visa exemplar från bibliotekets OverDrive-katalog #'
+    - pref: OverDriveLibraryID
+    - .
+  - - choices:
+        '0': Möjliggör inte
+        '1': Möjliggör
+      pref: OverDriveCirculation
+    - användare att låna exemplar och komma åt sin OverDrive-lånehistorik. <br />
+    - Overdrive använder låntagarens
+    - choices:
+        cardnumber: kortnummer
+        userid: användarnamn
+      pref: OverDriveUsername
+    - för att ge användare tillgång till OverDrive. <br />
+    - Ett lösenord är
+    - choices:
+        '0': Inte obligatoriskt
+        '1': Obligatoriskt
+      pref: OverDrivePasswordRequired
+    - för att ge användare tillgång till OverDrive. <br />
+    - Om du möjliggör access måste du ha en SIP-anslutning registrerad hos
+    - OverDrive för låntagarautentisering i Koha
+  Syndetics:
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: SyndeticsEnabled
+    - innehåll från Syndetics. Detta kräver att du registrerat dig för tjänsten och
+      angett din kundkod nedan.
+  - - Använd kundkoden
+    - pref: SyndeticsClientCode
+    - för att få tillgång till Syndetics.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsCoverImages
+    - omslagsbilder från Syndetics i sökresultat och detaljsidor för exemplar i OPAC
+      och personalklienten i en
+    - choices:
+        LC: stor
+        MC: medium
+      pref: SyndeticsCoverImageSize
+    - storlek.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsAuthorNotes
+    - kommentarer om författaren av en titel från Syndetics på sidor med detaljinformation
+      om exemplar i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsAwards
+    - information från Syndetics om de priser en titel har vunnit på detaljsidorna
+      för exemplar i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsEditions
+    - information från Syndetics om andra utgåvor av en titel på detaljsidorna för
+      exemplar i OPAC (när <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFRBRizeEditions">OPACFRBRizeEditions</a>
+      är aktiverat).
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsExcerpt
+    - utdrag från en titel från Syndetics på sidor med detaljinformation om exemplar
+      i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsReviews
+    - recensioner av en titel från Syndetics på sidor med detaljinformation om exemplar
+      i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsSeries
+    - information från Syndetics om andra böcker i en titels serie på detaljsidorna
+      för posten i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsSummary
+    - en sammanfattning för en titel från Syndetics på sidor med detaljinformation
+      om exemplar i OPAC.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SyndeticsTOC
+    - innehållsförteckningen för en titel från Syndetics på sidor med detaljinformation
+      för exemplar i OPAC.
+  Taggning:
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: TagsEnabled
+    - låntagare och personal att lägga till taggar till exemplar.
+  - - choices:
+        '0': Kräv inte
+        '1': Kräv
+      pref: TagsModeration
+    - att taggar som har föreslagits av låntagare granskas av en bibliotekarie innan
+      de visas.
+  - - Visa
+    - class: integer
+      pref: TagsShowOnList
+    - taggar för sökresultat i OPAC.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: TagsInputOnList
+    - låntagare att lägga till taggar för sökresultat i OPAC.
+  - - Visa
+    - class: integer
+      pref: TagsShowOnDetail
+    - taggar på sidor med detaljinformation om exemplar i OPAC.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: TagsInputOnDetail
+    - låntagare att lägga till taggar på sidor med detaljinformation om exemplar i
+      OPAC.
+  - - Tillåt taggar i ispell-programmets ordbok
+    - class: file
+      pref: TagsExternalDictionary
+    - på servern att godkännas utan kontroll.

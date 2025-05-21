@@ -1,0 +1,215 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Barcode image generator") | html %] &rsaquo;
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% Asset.css("css/humanmsg.css") | $raw %]
+[% FILTER collapse %]
+ <style>
+        input[type='range'] {
+            display: inline-block;
+            width: auto;
+        }
+        #barcode_container {
+            background-color:#FFF;
+            min-height:200px;
+            overflow: scroll;
+            padding:2em;
+            text-align:center;
+        }
+        #barcode_image {
+            border:1px dashed #B9D8D9;
+            display: block;
+            margin: 1em auto;
+            padding: 1em;
+        }
+        #modulesize_text {
+            background-color: #FFF;
+            border: 1px solid #EEE;
+            border-radius: 2px;
+            padding: .2em .4em;
+        }
+        #urltext {
+            border:1px solid #B9D8D9;
+            border-radius:2px;
+            margin:1em 0;
+            padding:.5em;
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="labels_spinelabel-home" class="tools labels">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Kuvailu</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Viivakoodikuvan luonti</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ <h2>Viivakoodikuvan luonti</h2>
+
+ <form action="/cgi-bin/koha/svc/barcode" id="barcodegen" method="get" >
+ <fieldset class="brief">
+ <div class="row">
+ <div class="col-sm-6">
+ <ol>
+ <li>
+ <label for="type">Viivakoodityyppi:</label>
+ <select name="type" id="type">
+ <option value="Code39">Code39</option>
+ <option value="COOP2of5">COOP2/5</option>
+ <option value="EAN13">EAN13</option>
+ <option value="EAN8">EAN8</option>
+ <option value="IATA2of5">IATA2/5</option>
+ <option value="Industrial2of5">Teollinen 2/5</option>
+ <option value="ITF">ITF</option>
+ <option value="Matrix2of5">Matriisi 2/5</option>
+ <option value="NW7">NW7</option>
+ <option value="QRcode">QR-koodi</option>
+ <option value="UPCA">UPCA</option>
+ <option value="UPCE">UPCE</option>
+ </select>
+ </li>
+ <li class="qrcode">
+ <label for="modulesize">QR-koodiosan koko:</label>
+ <input name="modulesize" id="modulesize" type="range" min="1" max="10" value="3" />
+ <span id="modulesize_text">3</span>
+ <div class="hint">Moduulin koko viittaa kunkin mustan tai valkoisen neliön pikselimittoihin luodussa QR-koodissa.</div>
+ </li>
+ <li class="bcode">
+ <label for="notext">Piilota teksti <input type="checkbox" id="notext" name="notext" value="1" /></label>
+ </li>
+ <li class="bcode">
+ <label for="height">Viivakoodin korkeus:</label>
+ <input type="text" id="height" name="height" value="50" />
+ </li>
+ <li>
+ <label class="bcode" for="barcode">Viivakoodi: </label>
+ <label class="qrcode" for="barcode">Teksti, URL tai viivakoodi, jne: </label>
+ <input type="text" name="barcode" id="barcode" size="50" />
+ <div class="hint qrcode">QR-koodin koko riippuu koodattujen merkkien määrästä.</div>
+ <div class="hint bcode">Viivakoodin täytyy olla numeerinen (0-9)</div>
+ </li>
+ </ol>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Näytä viivakoodi" />
+ </fieldset>
+ </div>
+ <div class="col-sm-6">
+ <div id="barcode_container">
+ <img id="barcode_image" />
+ <textarea readonly="readonly" rows="5" cols="40" id="urltext"></textarea>
+ </div>
+ </div>
+ </div>
+ </fieldset>
+ </form>
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("lib/jquery/plugins/humanmsg.js") | $raw %]
+ <script>
+        var base_url = "[% Koha.Preference('staffClientBaseURL') | html %]";
+
+        function showBarcodeText( path, dimensions ){
+            var params = new URLSearchParams( path );
+            var tag = '<img src="' + path + '" alt="' + params.get("barcode") + '" width="' + dimensions.width + '" height="' + dimensions.height + '" />';
+            $("#urltext").show().text( tag );
+            if( Number( dimensions.width  ) > 250 ){
+                $("#urltext").css("width", dimensions.width )
+            }
+        }
+
+        function showBarcode( barcodeform ){
+            if( $("#barcode").val() == "" ){
+                $("#barcode_container").hide();
+            } else {
+                var url = barcodeform.attr("action");
+                var params = barcodeform.serialize();
+                $("#barcode_container").show();
+                $("#barcode_image").attr("src", url + "?" + params );
+            }
+        }
+
+        function showQrcodeOptions( type ){
+            if( type.val() == "QRcode" ){
+                $(".qrcode").show().find("input,range").prop("disabled", false );
+                $(".bcode").hide().find("input").prop("disabled", true );
+            } else {
+                $(".qrcode").hide().find("input,range").prop("disabled", true );
+                $(".bcode").show().find("input").prop("disabled", false );
+            }
+        }
+        $(document).ready(function(){
+            showQrcodeOptions( $("#type") );
+            showBarcode( $("#barcodegen") );
+            $("#type").on("change", function(){
+                showQrcodeOptions( $(this) );
+            })
+            $("#barcodegen").on("change submit", function(e){
+                e.preventDefault();
+                showBarcode( $(this) );
+            });
+            $("#modulesize").on("input", function(){
+                $("#modulesize_text").text( $(this).val() );
+            });
+            $("#urltext").on("click", function(){
+                $(this).select();
+                var text = $(this).text();
+                navigator.clipboard.writeText( text ).then(function() {
+                    /* clipboard successfully set */
+                    humanMsg.displayAlert( _("HTML kopioitu leikepöydälle") );
+                }, function() {
+                    /* clipboard write failed */
+                    humanMsg.displayAlert( _("HTML:ää ei voitu kopioida automaattisesti leikepöydälle") );
+                });
+            });
+            $("#barcode_image")[0].onload = function (){
+                showBarcodeText( this.src, { width: this.width, height: this.height } );
+            }
+            $("#barcode_image")[0].onerror = function(){
+                var barcodetype = $("#type").val();
+                if( barcodetype !== "QRcode" ){
+                    if( Number.isNaN( Number( $("#barcode").val() ) ) ){
+                        humanMsg.displayAlert( _("Viivakoodit tyyppiä %s pitää olla numeerisia").format( barcodetype ) );
+                    } else {
+                        humanMsg.displayAlert( _("Viivakoodikuvan luonnissa tapahtui tuntematon virhe. Tarkista, että viivakoodi on viivakoodityypin mukainen" ) );
+                    }
+                } else {
+                    humanMsg.displayAlert( _("Viivakoodikuvan luonnissa tapahtui tuntematon virhe") );
+                }
+            }
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

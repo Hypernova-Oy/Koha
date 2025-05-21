@@ -1,0 +1,491 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("UNIMARC field 128c builder") | html %] &rsaquo;
+ [% t("Cataloguing") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_unimarc_field_128c" class="cat value_builder">
+ <h1>UNIMARC field 128c builder</h1>
+ <form method="get" name="f_pop" action="">
+ <div class="page-section">
+ <table>
+ <tr>
+ <td><label for="f1">Instrument eller röster för solister </label></td>
+ <td>
+ <select name="f1" id="f1">
+ [% IF ( f1ba ) %]
+ <option value="ba" selected="selected">Horn </option>
+ [% ELSE %]
+ <option value="ba">Horn </option>
+ [% END %]
+ [% IF ( f1bb ) %]
+ <option value="bb" selected="selected">Trumpet </option>
+ [% ELSE %]
+ <option value="bb">Trumpet </option>
+ [% END %]
+ [% IF ( f1bc ) %]
+ <option value="bc" selected="selected">Kornett</option>
+ [% ELSE %]
+ <option value="bc">Kornett</option>
+ [% END %]
+ [% IF ( f1bd ) %]
+ <option value="bd" selected="selected">Trombon</option>
+ [% ELSE %]
+ <option value="bd">Trombon</option>
+ [% END %]
+ [% IF ( f1be ) %]
+ <option value="be" selected="selected">Tuba </option>
+ [% ELSE %]
+ <option value="be">Tuba </option>
+ [% END %]
+ [% IF ( f1bf ) %]
+ <option value="bf" selected="selected">Baryton </option>
+ [% ELSE %]
+ <option value="bf">Baryton </option>
+ [% END %]
+ [% IF ( f1bt ) %]
+ <option value="bt" selected="selected">Etniska bleckblåsinstrument </option>
+ [% ELSE %]
+ <option value="bt">Etniska bleckblåsinstrument </option>
+ [% END %]
+ [% IF ( f1bu ) %]
+ <option value="bu" selected="selected">Ospecificerade bleckblåsinstrument </option>
+ [% ELSE %]
+ <option value="bu">Ospecificerade bleckblåsinstrument </option>
+ [% END %]
+ [% IF ( f1bz ) %]
+ <option value="bz" selected="selected">Andra bleckblåsinstrument </option>
+ [% ELSE %]
+ <option value="bz">Andra bleckblåsinstrument </option>
+ [% END %]
+ [% IF ( f1ca ) %]
+ <option value="ca" selected="selected">Blandad kör </option>
+ [% ELSE %]
+ <option value="ca">Blandad kör </option>
+ [% END %]
+ [% IF ( f1cb ) %]
+ <option value="cb" selected="selected">Kvinnokör </option>
+ [% ELSE %]
+ <option value="cb">Kvinnokör </option>
+ [% END %]
+ [% IF ( f1cc ) %]
+ <option value="cc" selected="selected">Manskör </option>
+ [% ELSE %]
+ <option value="cc">Manskör </option>
+ [% END %]
+ [% IF ( f1cd ) %]
+ <option value="cd" selected="selected">Barnkör </option>
+ [% ELSE %]
+ <option value="cd">Barnkör </option>
+ [% END %]
+ [% IF ( f1ct ) %]
+ <option value="ct" selected="selected">Etnisk kör </option>
+ [% ELSE %]
+ <option value="ct">Etnisk kör </option>
+ [% END %]
+ [% IF ( f1cu ) %]
+ <option value="cu" selected="selected">Ospecificerad kör </option>
+ [% ELSE %]
+ <option value="cu">Ospecificerad kör </option>
+ [% END %]
+ [% IF ( f1oa ) %]
+ <option value="oa" selected="selected">Full orkester</option>
+ [% ELSE %]
+ <option value="oa">Full orkester</option>
+ [% END %]
+ [% IF ( f1ob ) %]
+ <option value="ob" selected="selected">Kammarorkester </option>
+ [% ELSE %]
+ <option value="ob">Kammarorkester </option>
+ [% END %]
+ [% IF ( f1oc ) %]
+ <option value="oc" selected="selected">Strängorkester</option>
+ [% ELSE %]
+ <option value="oc">Strängorkester</option>
+ [% END %]
+ [% IF ( f1od ) %]
+ <option value="od" selected="selected">Band</option>
+ [% ELSE %]
+ <option value="od">Band</option>
+ [% END %]
+ [% IF ( f1oe ) %]
+ <option value="oe" selected="selected">Dansband </option>
+ [% ELSE %]
+ <option value="oe">Dansband </option>
+ [% END %]
+ [% IF ( f1of ) %]
+ <option value="of" selected="selected">Större blåsorkester</option>
+ [% ELSE %]
+ <option value="of">Större blåsorkester</option>
+ [% END %]
+ [% IF ( f1ot ) %]
+ <option value="ot" selected="selected">Etnisk orkester </option>
+ [% ELSE %]
+ <option value="ot">Etnisk orkester </option>
+ [% END %]
+ [% IF ( f1ou ) %]
+ <option value="ou" selected="selected">Ospecificerad orkester </option>
+ [% ELSE %]
+ <option value="ou">Ospecificerad orkester </option>
+ [% END %]
+ [% IF ( f1oz ) %]
+ <option value="oz" selected="selected">Annan orkester </option>
+ [% ELSE %]
+ <option value="oz">Annan orkester </option>
+ [% END %]
+ [% IF ( f1pa ) %]
+ <option value="pa" selected="selected">Puka </option>
+ [% ELSE %]
+ <option value="pa">Puka </option>
+ [% END %]
+ [% IF ( f1pb ) %]
+ <option value="pb" selected="selected">Xylofon </option>
+ [% ELSE %]
+ <option value="pb">Xylofon </option>
+ [% END %]
+ [% IF ( f1pc ) %]
+ <option value="pc" selected="selected">Marimba </option>
+ [% ELSE %]
+ <option value="pc">Marimba </option>
+ [% END %]
+ [% IF ( f1pd ) %]
+ <option value="pd" selected="selected">Trumma </option>
+ [% ELSE %]
+ <option value="pd">Trumma </option>
+ [% END %]
+ [% IF ( f1pt ) %]
+ <option value="pt" selected="selected">Etniska slaginstrument </option>
+ [% ELSE %]
+ <option value="pt">Etniska slaginstrument </option>
+ [% END %]
+ [% IF ( f1pu ) %]
+ <option value="pu" selected="selected">Ospecificerade slagverk</option>
+ [% ELSE %]
+ <option value="pu">Ospecificerade slagverk</option>
+ [% END %]
+ [% IF ( f1pz ) %]
+ <option value="pz" selected="selected">Andra slagverksinstrument </option>
+ [% ELSE %]
+ <option value="pz">Andra slagverksinstrument </option>
+ [% END %]
+ [% IF ( f1sa ) %]
+ <option value="sa" selected="selected">Violon</option>
+ [% ELSE %]
+ <option value="sa">Violon</option>
+ [% END %]
+ [% IF ( f1sb ) %]
+ <option value="sb" selected="selected">Viola </option>
+ [% ELSE %]
+ <option value="sb">Viola </option>
+ [% END %]
+ [% IF ( f1sc ) %]
+ <option value="sc" selected="selected">Cello </option>
+ [% ELSE %]
+ <option value="sc">Cello </option>
+ [% END %]
+ [% IF ( f1sd ) %]
+ <option value="sd" selected="selected">Kontrabas</option>
+ [% ELSE %]
+ <option value="sd">Kontrabas</option>
+ [% END %]
+ [% IF ( f1se ) %]
+ <option value="se" selected="selected">Fiol</option>
+ [% ELSE %]
+ <option value="se">Fiol</option>
+ [% END %]
+ [% IF ( f1sf ) %]
+ <option value="sf" selected="selected">viola d'amore </option>
+ [% ELSE %]
+ <option value="sf">viola d'amore </option>
+ [% END %]
+ [% IF ( f1sg ) %]
+ <option value="sg" selected="selected">Viola da gamba </option>
+ [% ELSE %]
+ <option value="sg">Viola da gamba </option>
+ [% END %]
+ [% IF ( f1st ) %]
+ <option value="st" selected="selected">Etniska stråkinstrument</option>
+ [% ELSE %]
+ <option value="st">Etniska stråkinstrument</option>
+ [% END %]
+ [% IF ( f1su ) %]
+ <option value="su" selected="selected">Ospecificerade stråkinstrument </option>
+ [% ELSE %]
+ <option value="su">Ospecificerade stråkinstrument </option>
+ [% END %]
+ [% IF ( f1sz ) %]
+ <option value="sz" selected="selected">Andra stråkinstrument </option>
+ [% ELSE %]
+ <option value="sz">Andra stråkinstrument </option>
+ [% END %]
+ [% IF ( f1uu ) %]
+ <option value="uu" selected="selected">Ospecificerad</option>
+ [% ELSE %]
+ <option value="uu">Ospecificerad</option>
+ [% END %]
+ [% IF ( f1ea ) %]
+ <option value="ea" selected="selected">Synthesizer </option>
+ [% ELSE %]
+ <option value="ea">Synthesizer </option>
+ [% END %]
+ [% IF ( f1eb ) %]
+ <option value="eb" selected="selected">Band </option>
+ [% ELSE %]
+ <option value="eb">Band </option>
+ [% END %]
+ [% IF ( f1ec ) %]
+ <option value="ec" selected="selected">Dator </option>
+ [% ELSE %]
+ <option value="ec">Dator </option>
+ [% END %]
+ [% IF ( f1ed ) %]
+ <option value="ed" selected="selected">Ondes Martenot</option>
+ [% ELSE %]
+ <option value="ed">Ondes Martenot</option>
+ [% END %]
+ [% IF ( f1eu ) %]
+ <option value="eu" selected="selected">Ospecificerad elektronisk</option>
+ [% ELSE %]
+ <option value="eu">Ospecificerad elektronisk</option>
+ [% END %]
+ [% IF ( f1ez ) %]
+ <option value="ez" selected="selected">Annan elektronisk</option>
+ [% ELSE %]
+ <option value="ez">Annan elektronisk</option>
+ [% END %]
+ [% IF ( f1ka ) %]
+ <option value="ka" selected="selected">Piano </option>
+ [% ELSE %]
+ <option value="ka">Piano </option>
+ [% END %]
+ [% IF ( f1kb ) %]
+ <option value="kb" selected="selected">Orgel </option>
+ [% ELSE %]
+ <option value="kb">Orgel </option>
+ [% END %]
+ [% IF ( f1kc ) %]
+ <option value="kc" selected="selected">Cembalo </option>
+ [% ELSE %]
+ <option value="kc">Cembalo </option>
+ [% END %]
+ [% IF ( f1kd ) %]
+ <option value="kd" selected="selected">Klavikord</option>
+ [% ELSE %]
+ <option value="kd">Klavikord</option>
+ [% END %]
+ [% IF ( f1ke ) %]
+ <option value="ke" selected="selected">Kontinuerl</option>
+ [% ELSE %]
+ <option value="ke">Kontinuerl</option>
+ [% END %]
+ [% IF ( f1kf ) %]
+ <option value="kf" selected="selected">Celesta</option>
+ [% ELSE %]
+ <option value="kf">Celesta</option>
+ [% END %]
+ [% IF ( f1kt ) %]
+ <option value="kt" selected="selected">Etnisk klaviatur </option>
+ [% ELSE %]
+ <option value="kt">Etnisk klaviatur </option>
+ [% END %]
+ [% IF ( f1ku ) %]
+ <option value="ku" selected="selected">Ospecificerad klaviatur </option>
+ [% ELSE %]
+ <option value="ku">Ospecificerad klaviatur </option>
+ [% END %]
+ [% IF ( f1kz ) %]
+ <option value="kz" selected="selected">Autre</option>
+ [% ELSE %]
+ <option value="kz">Autre</option>
+ [% END %]
+ [% IF ( f1va ) %]
+ <option value="va" selected="selected">Sopran</option>
+ [% ELSE %]
+ <option value="va">Sopran</option>
+ [% END %]
+ [% IF ( f1vb ) %]
+ <option value="vb" selected="selected">Mezzosopran</option>
+ [% ELSE %]
+ <option value="vb">Mezzosopran</option>
+ [% END %]
+ [% IF ( f1vc ) %]
+ <option value="vc" selected="selected">Alto</option>
+ [% ELSE %]
+ <option value="vc">Alto</option>
+ [% END %]
+ [% IF ( f1vd ) %]
+ <option value="vd" selected="selected">Tenor </option>
+ [% ELSE %]
+ <option value="vd">Tenor </option>
+ [% END %]
+ [% IF ( f1ve ) %]
+ <option value="ve" selected="selected">Baryton </option>
+ [% ELSE %]
+ <option value="ve">Baryton </option>
+ [% END %]
+ [% IF ( f1vf ) %]
+ <option value="vf" selected="selected">Bas </option>
+ [% ELSE %]
+ <option value="vf">Bas </option>
+ [% END %]
+ [% IF ( f1vg ) %]
+ <option value="vg" selected="selected">Kontratenor </option>
+ [% ELSE %]
+ <option value="vg">Kontratenor </option>
+ [% END %]
+ [% IF ( f1vh ) %]
+ <option value="vh" selected="selected">Röster hög röst</option>
+ [% ELSE %]
+ <option value="vh">Röster hög röst</option>
+ [% END %]
+ [% IF ( f1vi ) %]
+ <option value="vi" selected="selected">Röster medelhög röst</option>
+ [% ELSE %]
+ <option value="vi">Röster medelhög röst</option>
+ [% END %]
+ [% IF ( f1vj ) %]
+ <option value="vj" selected="selected">Röster låg röst</option>
+ [% ELSE %]
+ <option value="vj">Röster låg röst</option>
+ [% END %]
+ [% IF ( f1vt ) %]
+ <option value="vt" selected="selected">Etniska röster </option>
+ [% ELSE %]
+ <option value="vt">Etniska röster </option>
+ [% END %]
+ [% IF ( f1vu ) %]
+ <option value="vu" selected="selected">Ospecificerade röster </option>
+ [% ELSE %]
+ <option value="vu">Ospecificerade röster </option>
+ [% END %]
+ [% IF ( f1ta ) %]
+ <option value="ta" selected="selected">Harpa </option>
+ [% ELSE %]
+ <option value="ta">Harpa </option>
+ [% END %]
+ [% IF ( f1tb ) %]
+ <option value="tb" selected="selected">Gitarrfamilj</option>
+ [% ELSE %]
+ <option value="tb">Gitarrfamilj</option>
+ [% END %]
+ [% IF ( f1tc ) %]
+ <option value="tc" selected="selected">Lutfamilj</option>
+ [% ELSE %]
+ <option value="tc">Lutfamilj</option>
+ [% END %]
+ [% IF ( f1td ) %]
+ <option value="td" selected="selected">Mandolin </option>
+ [% ELSE %]
+ <option value="td">Mandolin </option>
+ [% END %]
+ [% IF ( f1tt ) %]
+ <option value="tt" selected="selected">Etniska knäppinstrument </option>
+ [% ELSE %]
+ <option value="tt">Etniska knäppinstrument </option>
+ [% END %]
+ [% IF ( f1tu ) %]
+ <option value="tu" selected="selected">Ospecificerade knäppinstrument </option>
+ [% ELSE %]
+ <option value="tu">Ospecificerade knäppinstrument </option>
+ [% END %]
+ [% IF ( f1tz ) %]
+ <option value="tz" selected="selected">Andra knäppinstrument </option>
+ [% ELSE %]
+ <option value="tz">Andra knäppinstrument </option>
+ [% END %]
+ [% IF ( f1wa ) %]
+ <option value="wa" selected="selected">Flöjt </option>
+ [% ELSE %]
+ <option value="wa">Flöjt </option>
+ [% END %]
+ [% IF ( f1wb ) %]
+ <option value="wb" selected="selected">Oboe </option>
+ [% ELSE %]
+ <option value="wb">Oboe </option>
+ [% END %]
+ [% IF ( f1wc ) %]
+ <option value="wc" selected="selected">Klarinett </option>
+ [% ELSE %]
+ <option value="wc">Klarinett </option>
+ [% END %]
+ [% IF ( f1wd ) %]
+ <option value="wd" selected="selected">Fagott </option>
+ [% ELSE %]
+ <option value="wd">Fagott </option>
+ [% END %]
+ [% IF ( f1we ) %]
+ <option value="we" selected="selected">Piccolo </option>
+ [% ELSE %]
+ <option value="we">Piccolo </option>
+ [% END %]
+ [% IF ( f1wf ) %]
+ <option value="wf" selected="selected">Engelskt horn </option>
+ [% ELSE %]
+ <option value="wf">Engelskt horn </option>
+ [% END %]
+ [% IF ( f1wg ) %]
+ <option value="wg" selected="selected">Basklarinett </option>
+ [% ELSE %]
+ <option value="wg">Basklarinett </option>
+ [% END %]
+ [% IF ( f1wh ) %]
+ <option value="wh" selected="selected">Inspelare</option>
+ [% ELSE %]
+ <option value="wh">Inspelare</option>
+ [% END %]
+ [% IF ( f1wi ) %]
+ <option value="wi" selected="selected">Saxofon </option>
+ [% ELSE %]
+ <option value="wi">Saxofon </option>
+ [% END %]
+ [% IF ( f1wt ) %]
+ <option value="wt" selected="selected">Etniska träblåsinstrument </option>
+ [% ELSE %]
+ <option value="wt">Etniska träblåsinstrument </option>
+ [% END %]
+ [% IF ( f1wu ) %]
+ <option value="wu" selected="selected">Ospecificerade träblåsinstrument </option>
+ [% ELSE %]
+ <option value="wu">Ospecificerade träblåsinstrument </option>
+ [% END %]
+ [% IF ( f1wz ) %]
+ <option value="wz" selected="selected">Andra träblåsinstrument </option>
+ [% ELSE %]
+ <option value="wz">Andra träblåsinstrument </option>
+ [% END %]
+ </select>
+ </td></tr>
+ </table>
+ </div> <!-- /.page-section -->
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input type="button" class="btn btn-primary" onclick="report();" value="Save" />
+ <button class="btn btn-default close_window">Avbryt</button>
+ </fieldset>
+ </div>
+ </nav>
+
+ </form>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        var dateformat = "[% Koha.Preference('dateformat') | html %]";
+        function report() {
+            var doc   = opener.document;
+            var field = doc.getElementById("[% index | html %]");
+            field.value =  document.f_pop.f1.value;
+            window.close();
+            return false;
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

@@ -1,0 +1,1141 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Context %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE KohaDates %]
+[% USE Categories %]
+[% USE TablesSettings %]
+[% USE ItemTypes %]
+[% USE Price %]
+[% USE AuthorisedValues %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% SET destination = "circ" %]
+<title>[% FILTER collapse %]
+ [% IF patron %]
+ [% patron_in_title = INCLUDE 'patron-title.inc' invert_name = 1 no_html = 1 %]
+ [% tx("Checking out to {patron}", { patron = patron_in_title }) | html %] &rsaquo;
+ [% END %]
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="circ_circulation" class="circ">
+
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Lainaus ja palautus</a>
+ [% END %]
+ [% IF patron %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation.pl">Lainat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% INCLUDE 'patron-title.inc' %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lainat</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <main>
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ [% INCLUDE 'messages.inc' %]
+
+ [% IF patron %]
+ [% INCLUDE 'members-toolbar.inc' %]
+ [% END %]
+
+ <h1>Lainat</h1>
+
+ <!-- INITIAL BLOC : PARAMETERS & BORROWER INFO -->
+ [% IF ( was_renewed ) %]
+ <div class="alert alert-info">Asiakkaan tili on uusittu ja on voimassa [% expiry | $KohaDates %] saakka</div>
+ [% END %]
+
+ [% IF autoswitched %]
+ <div id="autoswitched" class="alert alert-info">Asiakas vaihdettiin automaattisesti lukemalla kirjastokortti lainauksen aikana. Varmista, että käsittelet oikean asiakkaan lainoja.</div>
+ [% END %]
+
+ [% IF ADDITIONAL_MATERIALS && !NEEDSCONFIRMATION %]
+ <div id="materials" class="alert alert-info">
+ <span class="mats_spec_label">Huomautus sisältyvästä materiaalista: </span>
+ <span class="mats_spec_message">[% ADDITIONAL_MATERIALS | html %]</span>
+ </div>
+ [% END %]
+
+ [% IF CLAIM_RESOLUTION %]
+ <div class="alert alert-info">Aiemmin palautetuksi ilmoitettu nide palautettiin, merkitään automaattisesti palautusilmoitus ratkaistuksi.</div>
+ [% END %]
+ [% IF ( alert.ITEM_LOST ) %]
+ <div class="alert alert-info">Tämä nide on kadonnut, tila: "[% alert.ITEM_LOST | html %]"</div>
+ [% END %]
+
+ [% IF ( alert.OTHER_CHARGES ) %]
+ <div class="alert alert-info">Asiakkaalla on maksamattomia maksuja, jotka eivät vaikuta lainauskieltoon: [% alert.OTHER_CHARGES | $Price %]</div>
+ [% END %]
+
+ [% IF alert.HIGHHOLDS %]
+ <div class="alert alert-info">Suosittu nide. <strong>Laina-ajan lyhennys peruttiin.</strong> Aikaistettu eräpäivä olisi ollut [% alert.HIGHHOLDS.returndate | $KohaDates %] ([% alert.HIGHHOLDS.duration  | html %] päivää).</div>
+ [% END %]
+
+ [% IF alert.RETURNED_FROM_ANOTHER %]
+ <div class="alert alert-warning">Nide oli lainassa asiakkaalla [% INCLUDE 'patron-title.inc' patron = alert.RETURNED_FROM_ANOTHER.patron %] ja se palautettiin automaattisesti.</div>
+ [% END %]
+
+ [% IF alert.BOOKED %]
+ <div class="alert alert-warning">Niteeseen on ennakkovaraus tälle asiakkaalle</div>
+ [% END %]
+
+ [% IF ( nopermission ) %]
+ <div class="alert alert-warning">Kirjaston henkilökunnalla ei ole oikeutta antaa velattomuusilmoitusta asiakkaille eikä asiakkailla oikeutta pyytää velattomuusilmoitusta.</div>
+ [% END %]
+
+ [% IF is_anonymous %]
+ <div class="alert alert-warning">Tämä on lainahistorian anonymisointiin käytettävä asiakas, jolle lainaaminen ei ole sallittua.</div>
+ [% END %]
+
+ [% IF ( NEEDSCONFIRMATION ) %]
+ <div id="circ_needsconfirmation" class="alert alert-warning audio-alert-action focus" tabindex="-1">
+ [% IF CAN_user_circulate_force_checkout or ADDITIONAL_MATERIALS %]
+ <h3>Vahvista lainaus</h3>
+ [% ELSE %]
+ <h3>Ei voi lainata</h3>
+ [% END %]
+
+ <ul>
+ [%IF ( AGE_RESTRICTION ) %]
+ <li class="needsconfirm age_restriction">
+ Ikärajoitus [% AGE_RESTRICTION | html %]. [% IF CAN_user_circulate_force_checkout %] Lainataanko silti? [% END %] </li>
+ [% END %]
+
+
+ [% IF ( DEBT ) %]
+ <li class="needsconfirm debt">Asiakkaalla on velkoja [% DEBT | $Price %].</li>
+ [% END %]
+
+ [% IF ( DEBT_GUARANTEES ) %]
+ <li class="needsconfirm debt_guarantees">Asiakkaan taattavilla on yhteensä maksuja [% DEBT_GUARANTEES | $Price %] €.</li>
+ [% END %]
+
+ [% IF ( DEBT_GUARANTORS ) %]
+ <li class="needsconfirm debt_guarantors">Asiakkaan takaajilla ja heidän muilla taattavillaan on maksuja yhteensä [% DEBT_GUARANTORS | $Price %].</li>
+ [% END %]
+
+ [% IF ( RENTALCHARGE && RENTALCHARGE > 0 ) %]
+ <li class="needsconfirm rentalcharge">Lainausmaksu tälle niteelle: [% RENTALCHARGE | $Price %]</li>
+ [% END %]
+
+ [% IF ( RENEW_ISSUE ) %]
+ <li class="needsconfirm renew_issue">Nide <em>[% getTitleMessageIteminfo | html %]</em> ([% getBarcodeMessageIteminfo | html %]) on jo lainassa tällä asiakkaalla. Uusitaanko laina?</li>
+ [% END %]
+
+ [% IF ( RESERVE_WAITING ) %]
+ <li class="needsconfirm reserve_waiting">Nide <em>[% getTitleMessageIteminfo | html %]</em> ([% getBarcodeMessageIteminfo | html %]) on noudettavissa asiakkaalle <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% resborrowernumber | uri %]">[% resfirstname | html %] [% ressurname | html %]</a> ([% rescardnumber | html %]) kirjastossa [% Branches.GetName( resbranchcode ) | html %] [% reswaitingdate | $KohaDates %] lähtien</li>
+ [% END %]
+
+ [% IF ( TRANSFERRED ) %]
+ <li class="needsconfirm transferred">Nide <em>[% getTitleMessageIteminfo | html %]</em> ([% getBarcodeMessageIteminfo | html %]) on varattuna <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% resborrowernumber | uri %]">[% resfirstname | html %] [% ressurname | html %]</a> ([% rescardnumber | html %]) ja kuljetaan kirjastoon [% Branches.GetName( resbranchcode ) | html %]</li>
+ [% END %]
+
+ [% IF ( PROCESSING ) %]
+ <li class="needsconfirm processing">Nide <em>[% getTitleMessageIteminfo | html %]</em> ([% getBarcodeMessageIteminfo | html %]) on käsiteltävänä asiakkaalle <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% resborrowernumber | uri %]">[% resfirstname | html %] [% ressurname | html %]</a> ([% rescardnumber | html %]) kirjastossa [% Branches.GetName( resbranchcode ) | html %]</li>
+ [% END %]
+
+ [% IF ( RESERVED ) %]
+ <li class="needsconfirm reserved">Nide <em>[% getTitleMessageIteminfo | html %]</em> ([% getBarcodeMessageIteminfo | html %]) - teoksesta on hyllyvaraus asiakkaalle <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% resborrowernumber | uri %]">[% resfirstname | html %] [% ressurname | html %]</a> ([% rescardnumber | html %]) kirjastossa [% Branches.GetName( resbranchcode ) | html %] [% resreservedate | $KohaDates %] lähtien</li>
+ [% END %]
+
+ [% IF ( ISSUED_TO_ANOTHER ) %]
+ <li class="needsconfirm issued_to_another">Nide <em>[% getTitleMessageIteminfo | html %]</em> ([% getBarcodeMessageIteminfo | html %]) on lainassa asiakkaalla <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% issued_borrowernumber | uri %]">[% issued_firstname | html %] [% issued_surname | html %]</a> ([% issued_cardnumber | html %]). [% IF CAN_user_circulate_force_checkout %] Palautetaanko ja lainataanko? [% END %] </li>
+ [% END %]
+
+ [% IF TOO_MANY and TOO_MANY == 'TOO_MANY_CHECKOUTS' %]
+ <li class="needsconfirm too_many_checkouts">Liian monta nidettä lainassa. [% current_loan_count | html %] lainassa, [% max_loans_allowed | html %] sallittu.</li>
+ <li class="needsconfirm too_many_checkouts2">
+ Lainojen maksimimäärä laskettu laina- ja maksusäännöstä [% INCLUDE circulation_rule_criteria rule=circulation_rule_TOO_MANY %] </li>
+ [% END %]
+
+ [% IF TOO_MANY and TOO_MANY == 'TOO_MANY_ONSITE_CHECKOUTS' %]
+ <li class="needsconfirm too_many_onsite_checkouts">Liian monta nidettä on-site-lainassa. [% current_loan_count | html %] on-site-lainassa, vain [% max_loans_allowed | html %] sallittu.</li>
+ <li class="needsconfirm too_many_onsite_checkouts2">
+ Lainojen maksimimäärä laskettu laina- ja maksusäännöstä [% INCLUDE circulation_rule_criteria rule=circulation_rule_TOO_MANY %] </li>
+ [% END %]
+
+ [% IF ( BORRNOTSAMEBRANCH ) %]
+ <li class="needsconfirm borrower_not_same_branch">Tämä asiakas on toisesta kirjastosta ([% Branches.GetName( BORRNOTSAMEBRANCH ) | html %])</li>
+ [% END %]
+
+ [% IF ( PATRON_CANT ) %]
+ <li class="needsconfirm patron_cant">Tämä asiakas ei voi lainata tätä aineistoa, koska kirjaston lainaussäännöt estävät sen.</li>
+ [% END %]
+
+ [% IF ( TOO_MANY and TOO_MANY == 'NO_RULE_DEFINED' ) %]
+ <li class="needsconfirm no_rule_defined">Tälle asiakas-nidetyyppi-yhdistelmälle ei ole määritetty lainasääntöä.</li>
+ [% END %]
+
+ [% IF ( NOT_FOR_LOAN_FORCING ) %]
+ <li class="needsconfirm not_for_loan_forcing">
+ [% IF ( itemtype_notforloan ) %]
+ <span>Nidetyyppi ei ole yleensä lainattavissa.</span>
+ [% ELSIF ( item_notforloan ) %]
+ [% item_notforloan_lib = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => item.notforloan ) %]
+ <span>Nide ei ole yleensä lainattavissa</span>[% IF (item_notforloan_lib) %] ([% item_notforloan_lib | html %])[% END %].
+ [% END %]
+ [% IF CAN_user_circulate_force_checkout %]
+ <span>Lainaa siitä huolimatta?</span>
+ [% END %]
+ </li>
+ [% END %]
+
+ [% IF ( USERBLOCKEDOVERDUE ) %]
+ <li class="needsconfirm userblocked_overdue">Asiakkaalla on [% USERBLOCKEDOVERDUE %] myöhästynyttä lainaa. [% IF CAN_user_circulate_force_checkout %] Lainataanko silti? [% END %] </li>
+ [% END %]
+
+ [% IF ( ITEM_LOST ) %]
+ <li class="needsconfirm item_lost">Tämä nide on kadonnut, tila: "[% ITEM_LOST | html %]". [% IF CAN_user_circulate_force_checkout %] Lainataanko se silti? [% END %] </li>
+ [% END %]
+
+ [% IF HIGHHOLDS %]
+ <li class="needsconfirm highholds">Paljon kysytty aineisto. Laina-aika lyhennetty [% HIGHHOLDS.duration | html %] päivään (eräpäivä [% HIGHHOLDS.returndate | $KohaDates %]). Lainataanko silti?</li>
+ [% END %]
+
+ [% IF PREVISSUE %]
+ <li class="needsconfirm previssue">Asiakas on aiemmin lainannut tämän teoksen: <strong>[% biblio.title | html %] [% IF biblio.author %] / [% biblio.author | html %][% END %]</strong>. Lainaa siitä huolimatta?</li>
+ [% END %]
+
+ [% IF BIBLIO_ALREADY_ISSUED %]
+ <li class="needsconfirm already_issued">
+ Asiakkaalla on jo lainassa yksi nide tästä tietueesta. [% IF CAN_user_circulate_force_checkout %] Lainataanko silti? [% END %] </li>
+ [% END %]
+
+ [% IF ADDITIONAL_MATERIALS %]
+ <li class="needsconfirm additional_materials">
+ <span class="mats_spec_label">Vahvista, että lisämateriaalit ovat mukana:</span>
+ <span class="mats_spec_message">[% ADDITIONAL_MATERIALS | html %]</span>
+ </li>
+ [% END %]
+
+ [% IF RECALLED %]
+ [% IF RECALLED.waiting %]
+ <li class="needsconfirm recalled">Nide <i>[% RECALLED.biblio.title | html %]</i> ([% RECALLED.item.barcode | html %]) on noudettavissa asiakkaalle <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% RECALLED.patron_id | uri %]">[% RECALLED.patron.firstname | html %] [% RECALLED.patron.surname | html %]</a> ([% RECALLED.patron.cardnumber | html %]) kirjastossa [% Branches.GetName( RECALLED.pickup_library_id ) | html %] [% RECALLED.waiting_date | $KohaDates %] lähtien</li>
+ [% ELSIF RECALLED.requested or RECALLED.overdue %]
+ <li class="needsconfirm recalled2">Nide <i>[% RECALLED.biblio.title | html %]</i> [% IF RECALLED.item %]([% RECALLED.item.barcode | html %])[% END %] palautuspyyntö asiakkaalle <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% RECALLED.patron_id | uri %]">[% RECALLED.patron.firstname | html %] [% RECALLED.patron.surname | html %]</a> ([% RECALLED.patron.cardnumber | html %]) kirjastossa [% Branches.GetName( RECALLED.pickup_library_id ) | html %] [% RECALLED.created_date | $KohaDates %] lähtien</li>
+ [% END %]
+ [% END %]
+
+ [% IF ( BOOKED_TO_ANOTHER ) %]
+ <li class="needsconfirm booked_to_another">
+ Eräpäivä toisen asiakkaan käyttövarauksen vuoksi: [% BOOKED_TO_ANOTHER.start_date | $KohaDates %] </li>
+ [% END %]
+
+ [% IF ( BOOKED_EARLY ) %]
+ <li class="needsconfirm booked_early">
+ Asiakkaalla on tähän niteeseen ennakkovaraus, joka tulee lainattavaksi [% BOOKED_EARLY.start_date | $KohaDates %] </li>
+ [% END %]
+ </ul>
+
+ [% IF CAN_user_circulate_force_checkout or HIGHHOLDS %]
+ <form method="post" action="/cgi-bin/koha/circ/circulation.pl" autocomplete="off" class="confirmation-required-form">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset>
+ <input type="hidden" name="restoreduedatespec" />
+ <input type="hidden" name="op" value="cud-checkout" />
+ [% FOREACH conf IN sessionConfirmationKeys %]
+ <input type="hidden" name="session_confirmations" id="session_confirmations" value="[% conf | html %]" />
+ [% END %]
+
+ [% IF (forceallow) %]<input type="hidden" name="forceallow" value="1">[% END %]
+
+ [% IF HIGHHOLDS %]
+ <p class="circ-override-high-holds">
+ <input type="checkbox" name="override_high_holds_tmp" id="override_high_holds_tmp" value="1" />
+ <label for="override_high_holds_tmp">Älä pidennä laina-aikaa varausten pohjalta</label>
+ </p>
+ [% END %]
+
+ [% IF ( RESERVED ) %]
+ <p>
+ <input type="checkbox" id="cancelreserve" name="cancelreserve" value="cancel" />
+ <label for="cancelreserve">Peruuta varaus</label>
+ </p>
+ [% END %]
+
+ [% IF ( RESERVE_WAITING ) %]
+ <p>
+ <label for="cancelreserve">Peruuta varaus</label>
+ <input type="radio" value="cancel" name="cancelreserve" id="cancelreserve" /><br />
+ <label for="revertreserve">Peruuta odottava-tila</label>
+ <input type="radio" value="revert" name="cancelreserve" id="revertreserve" checked="checked"/>
+ </p>
+ [% END %]
+
+ [% IF ( TRANSFERRED ) %]
+ <p>
+ <label for="cancelreserve">Peruuta varaus</label>
+ <input type="radio" value="cancel" name="cancelreserve" id="cancelreserve" /><br />
+ <label for="revertreserve">Peruuta kuljetustila</label>
+ <input type="radio" value="revert" name="cancelreserve" id="revertreserve" checked="checked"/>
+ </p>
+ [% END %]
+
+ [% IF ( PROCESSING ) %]
+ <p>
+ <label for="cancelreserve">Peruuta varaus</label>
+ <input type="radio" value="cancel" name="cancelreserve" id="cancelreserve" /><br />
+ <label for="revertreserve">Peruuta käsittelyssä-tila</label>
+ <input type="radio" value="revert" name="cancelreserve" id="revertreserve" checked="checked"/>
+ </p>
+ [% END %]
+
+ [% IF ( RECALLED ) %]
+ <p>
+ <label for="cancelrecall">Peruuta palautuspyyntö</label>
+ <input type="radio" value="cancel" name="cancel_recall" id="cancelrecall" />
+ <input type="hidden" value="[% RECALLED.id | html %]" name="recall_id" />
+ </p>
+ [% IF RECALLED.waiting %]
+ <p>
+ <label for="revertrecall">Peruuta odottava-tila</label>
+ <input type="radio" value="revert" name="cancel_recall" id="revertrecall" checked="checked"/>
+ <input type="hidden" value="[% RECALLED.id | html %]" name="recall_id" />
+ </p>
+ [% END %]
+ [% END %]
+
+ <input type="hidden" name="barcode" value="[% barcode | html %]" />
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="issueconfirmed" value="1" />
+ <input type="hidden" name="override_high_holds" value="[% override_high_holds | html %]"/>
+
+ [% IF ( DEBT ) %]<input type="hidden" name="debt_confirmed" value="1" />[% END %]
+
+ [% IF ( INVALID_DATE ) %]
+ <p>
+ <input type="text" size="20" id="confirm_duedatespec" name="duedatespec" value="[% duedatespec | html %]" class="flatpickr" data-flatpickr-enable-time="true" data-flatpickr-on-close-focus="#barcode" />
+ <label for="duedatespec">Eräpäivä</label>
+ </p>
+ [% ELSE %]
+ <input type="hidden" name="duedatespec" value="[% duedatespec | html %]" />
+ [% END %]
+
+ [% IF ( BOOKED_TO_ANOTHER ) %]
+ <p>
+ <label for="reduceddue">Eräpäivä lyhennetään tähän päivään: <label>
+ <input type="text" size="20" id="reduceddue" name="reduceddue" value="[% reduceddue | html %]" class="flatpickr" data-flatpickr-futuredate="true" data-flatpickr-maxdate="[% reduceddue | html %]" required="required">
+ </p>
+ [% END %]
+
+ [% IF ( BOOKED_EARLY ) %]
+ <p>
+ Salli aikainen haku? </p>
+ [% END %]
+
+ <input type="hidden" name="stickyduedate" value="[% stickyduedate | html %]" />
+ <input type="hidden" name="branch" value="[% branch | html %]" />
+
+ [% IF ( RENEW_ISSUE ) %]
+ <button type="submit" class="btn btn-default approve" accesskey="y"><i class="fa fa-check"></i> Kyllä, uusi (Y)</button>
+ [% ELSE %]
+ <p>
+ <label for="patron_session_confirmation">Muista istunnolle tälle asiakkaalle</label>
+ <input type="checkbox" id="patron_session_confirmation" name="patron_session_confirmation" />
+ </p>
+ <button type="submit" class="btn btn-default approve" accesskey="y"><i class="fa fa-check"></i> Kyllä, lainaa (Y)</button>
+ [% END %]
+
+ <input type="hidden" name="onsite_checkout" value="[% onsite_checkout | html %]" />
+ <input type="hidden" name="auto_renew" value="[% auto_renew | html %]" />
+ </fieldset>
+ </form>
+ [% END # /IF CAN_user_circulate_force_checkout or HIGHHOLDS %]
+
+ [% IF ADDITIONAL_MATERIALS && !CAN_user_circulate_force_checkout %]
+ <form method="post" action="/cgi-bin/koha/circ/circulation.pl" autocomplete="off" class="confirmation-required-form">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-checkout" />
+ <input type="hidden" name="restoreduedatespec" />
+ [% FOREACH conf IN sessionConfirmationKeys %]
+ <input type="hidden" name="session_confirmations" id="session_confirmations" value="[% conf | html %]" />
+ [% END %]
+
+ [% IF (forceallow) %]<input type="hidden" name="forceallow" value="1">[% END %]
+
+ <input type="hidden" name="barcode" value="[% barcode | html %]" />
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="issueconfirmed" value="1" />
+ <input type="hidden" name="override_high_holds" value="[% override_high_holds | html %]"/>
+ <input type="hidden" name="stickyduedate" value="[% stickyduedate | html %]" />
+ <input type="hidden" name="branch" value="[% branch | html %]" />
+
+ [% IF ( RENEW_ISSUE ) %]
+ <button type="submit" class="btn btn-default approve" accesskey="y"><i class="fa fa-check"></i> Kyllä, uusi (Y)</button>
+ [% ELSE %]
+ <p>
+ <label for="patron_session_confirmation">Muista istunnolle tälle asiakkaalle</label>
+ <input type="checkbox" id="patron_session_confirmation" name="patron_session_confirmation" />
+ </p>
+ <button type="submit" class="btn btn-default approve" accesskey="y"><i class="fa fa-check"></i> Kyllä, lainaa (Y)</button>
+ [% END %]
+
+ <input type="hidden" name="onsite_checkout" value="[% onsite_checkout | html %]" />
+ <input type="hidden" name="auto_renew" value="[% auto_renew | html %]" />
+ </form>
+ [% END # /IF ADDITIONAL_MATERIALS %]
+
+ [% IF ( RESERVED or RESERVE_WAITING or TRANSFERRED or PROCESSING ) %]
+ <form method="post" action="/cgi-bin/koha/circ/circulation.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-confirm_hold" />
+ <input type="hidden" name="restoreduedatespec" />
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="duedatespec" value="[% duedatespec | html %]" />
+ <input type="hidden" name="confirm_hold" value="[% reserve_id | html %]" />
+ <input type="hidden" name="hold_branch" value="[% resbranchcode | html %]" />
+ <input type="hidden" name="hold_borrower" value="[% resborrowernumber | html %]" />
+ <input type="hidden" name="hold_itemnumber" value="[% item.itemnumber | html %]" />
+ <input type="hidden" name="stickyduedate" value="[% stickyduedate | html %]" />
+ <button class="btn btn-default print" type="submit" onclick="Dopop('hold-transfer-slip.pl?reserve_id=[% reserve_id | uri %]&itemnumber=[% item.id | html %]');this.form.submit();"><i class="fa fa-print"></i> Älä lainaa, vahvista varaus ja tulosta infokuitti (P)</button>
+ </form>
+ [% END %]
+
+ [% IF ( RECALLED ) %]
+ <form method="get" action="/cgi-bin/koha/circ/circulation.pl">
+ <button class="btn btn-default print" type="submit" onclick="Dopop('/cgi-bin/koha/recalls/recall_pickup_slip.pl?recall_id=[% RECALLED.id | html %]');this.form.submit();"><i class="fa fa-print"></i> Älä lainaa ja tulosta infokuitti (P)</button>
+ </form>
+ [% END %]
+
+ <form method="get" action="/cgi-bin/koha/circ/circulation.pl">
+ [% IF (forceallow) %]<input type="hidden" name="forceallow" value="1">[% END %]
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="duedatespec" value="[% duedatespec | html %]" />
+ <input type="hidden" name="restoreduedatespec" />
+ <input type="hidden" name="stickyduedate" value="[% stickyduedate | html %]" />
+ [% IF CAN_user_circulate_force_checkout or HIGHHOLDS or ADDITIONAL_MATERIALS %]
+ [% IF ( RENEW_ISSUE ) %]
+ <button type="submit" class="btn btn-default deny" accesskey="n"><i class="fa fa-times"></i> Ei, älä uusi (N)</button>
+ [% ELSE %]
+ <button type="submit" class="btn btn-default deny" accesskey="n"><i class="fa fa-times"></i> Ei, älä lainaa (N)</button>
+ [% END %]
+ [% ELSE %]
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-times"></i> Jatka</button>
+ [% END %]
+ </form>
+
+ [% IF ( RESERVED || ISSUED_TO_ANOTHER || RECALLED ) && (CAN_user_reserveforothers_place_holds ) %]
+ [% UNLESS noissues %]
+ <button class="btn btn-default" type="submit" onclick="window.location.href='/cgi-bin/koha/reserve/request.pl?biblionumber=[% itembiblionumber | html %]&borrowernumber=[% patron.borrowernumber | html %]'"><i class="fa-solid fa-note-sticky"></i> Peruuta lainaus ja tee varaus [% INCLUDE 'patron-title.inc' %]</button>
+ [% END %]
+ [% END %]
+ </div> <!-- /#circ_needsconfirmation -->
+ [% END # /NEEDSCONFIRMATION %]
+
+ [% IF ( IMPOSSIBLE ) %]
+ <div id="circ_impossible" class="alert alert-warning audio-alert-warning focus" tabindex="-1">
+ [% IF ( UNKNOWN_BARCODE ) %]
+ <h3>Viivakoodeja ei löytynyt</h3>
+ [% END %]
+
+ <!-- RESULT OF ISSUING REQUEST -->
+ <ul>
+ [% IF ( DEBT_GUARANTORS ) %]
+ <li>Asiakkaan takaajilla ja heidän muilla taattavillaan on maksuja yhteensä [% DEBT_GUARANTORS | $Price %].</li>
+ [% END %]
+
+ [% IF ( STATS ) %]
+ <li>Sisäinen käyttö tilastoitu</li>
+ [% IF ( CHECKEDIN ) %]
+ <li>Nide palautettu asiakkaalta: <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% BORROWER.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' patron=BORROWER %]</a></li>
+ [% END %]
+ [% IF ( MESSAGES.ResFound ) %]
+ <li>Niteeseen on varaus, palauta se.</li>
+ [% END %]
+ [% IF ( MESSAGES.ReturnClaims ) %]
+ <li>Nide on ilmoitettu palautetuksi, palauta se.</li>
+ [% END %]
+ [% IF ( MESSAGES.RecallFound ) %]
+ <li>Nide voi täyttää takaisinpyynnön, palauta se.</li>
+ [% END %]
+ [% IF ( MESSAGES.WasLost ) %]
+ [% IF ( Koha.Preference('BlockReturnOfLostItems') ) %]
+ <li>Nide on merkitty kadonneeksi, ei voida palauttaa.</li>
+ [% ELSE %]
+ <li>Nide oli kadonnut, nyt löytynyt.</li>
+ [% END %]
+ [% END %]
+ [% IF ( MESSAGES.withdrawn ) %]
+ [% IF ( Koha.Preference('BlockReturnOfWithdrawnItems') ) %]
+ <li>Nide on pois kierrosta, ei voida palauttaa.</li>
+ [% ELSE %]
+ <li>Nide on poistettu kierrosta</li>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% IF ( INVALID_DATE ) %]
+ <li>Virheellinen eräpäivä &quot;[% INVALID_DATE | $KohaDates %]&quot;</li>
+ [% END %]
+
+ [% IF ( UNKNOWN_BARCODE ) %]
+ <li>Viivakoodia ei löytynyt: <span class="ex">[% barcode | html %]</span>
+ <div>
+ [% IF ( FALLBACK ) %]
+ [% IF options %]
+ <button type="button" class="btn btn-default approve" data-bs-toggle="modal" data-bs-target="#itemSearchFallback"><i class="fa fa-search"></i> Näytä täsmäävät nimekkeet</button>
+ [% ELSE %]
+ <div>Haulla ei löytynyt niteitä.</div>
+ [% END %]
+ [% END %]
+
+ [% IF ( fast_cataloging ) %]
+ [% IF ( CAN_user_editcatalogue_fast_cataloging ) %]
+ <a class="btn btn-default approve" href="/cgi-bin/koha/cataloguing/addbiblio.pl?frameworkcode=FA&amp;barcode=[% barcode |uri %]&amp;circborrowernumber=[% patron.borrowernumber | html %]&amp;branch=[% branch | html %]&amp;duedatespec=[% duedatespec | html %]&amp;stickyduedate=[% stickyduedate | html %]"><i class="fa fa-plus"></i> Lisää tietue käyttäen pikakuvailua</a>
+ [% END %]
+ [% END %]
+ </div>
+ </li>
+ [% END %]
+
+ [% IF ( NOT_FOR_LOAN ) %]
+ <li>
+ [% IF ( itemtype_notforloan ) %] Nidetyyppi ei ole lainattavissa. [% ELSIF ( item_notforloan ) %] [% item_notforloan_lib = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => item.notforloan ) %] Nide ei ole lainattavissa[% IF (item_notforloan_lib) %] ([% item_notforloan_lib | html %])[% END %]. [% END %] </li>
+ [% END %]
+
+ [% IF ( WTHDRAWN ) %]
+ <li>
+ <span>Nide on poistettu kierrosta</span>
+ [% item_withdrawn_lib = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.withdrawn', authorised_value => item.withdrawn ) %]
+ [% IF (item_withdrawn_lib) %]<span class="co-withdrawn">([% item_withdrawn_lib | html %])</span>[% END %]
+ </li>
+ [% END %]
+
+ [% IF ( RESTRICTED ) %]
+ <li>Niteellä on rajoituksia</li>
+ [% END %]
+
+ [% IF ( GNA ) %]
+ <li>Tarkista osoite</li>
+ [% END %]
+
+ [% IF ( CARD_LOST ) %]
+ <li>Asiakkaan kortti on kadonnut</li>
+ [% END %]
+
+ [% IF ( DEBARRED ) %]
+ <li>Asiakkaalla on lainarajoitus</li>
+ [% END %]
+
+ [% IF ( NO_MORE_RENEWALS ) %]
+ <li>Lainaa ei voi uusia</li>
+ [% END %]
+
+ [% IF NO_RENEWAL_FOR_ONSITE_CHECKOUTS %]
+ <li>Tätä nidettä ei voi uusia, koska se on on-site -lainassa</li>
+ [% END %]
+
+ [%IF ( AGE_RESTRICTION ) %]
+ <li>Ikärajoitus [% AGE_RESTRICTION | html %].</li>
+ [% END %]
+
+ [% IF ( EXPIRED ) %]
+ <li>Asiakkaan kortti on vanhentunut</li>
+ [% END %]
+
+ [% IF ( TOO_MANY ) %]
+ <li>Liian monta nidettä lainassa. [% current_loan_count | html %] lainassa, [% max_loans_allowed | html %] sallittu.</li>
+ <li>
+ Lainojen maksimimäärä laskettu laina- ja maksusäännöstä [% INCLUDE circulation_rule_criteria rule=circulation_rule_TOO_MANY %] </li>
+ [% END %]
+
+ [% IF ( ITEMNOTSAMEBRANCH ) %]
+ <li>Tämä nide kuuluu kirjastoon [% Branches.GetName( itemhomebranch ) | html %], eikä sitä voida lainata tästä kirjastosta.</li>
+ [% END %]
+
+ [% IF RETURN_IMPOSSIBLE %]
+ <li>Tämä nide pitää palauttaa kirjastoon [% Branches.GetName( branch_to_return ) | html %].</li>
+ [% END %]
+
+ [% IF ( USERBLOCKEDWITHENDDATE ) %]
+ <li>Asiakas on lainauskiellossa [% USERBLOCKEDWITHENDDATE | $KohaDates %] asti.</li>
+ [% END %]
+
+ [% IF ( USERBLOCKEDNOENDDATE ) %]
+ <li>Asiakkaalla on toistaiseksi määrätty lainauskielto.</li>
+ [% END %]
+
+ [% IF ( USERBLOCKEDOVERDUE ) %]
+ <li>Lainaus estetty, koska asiakkaalla on erääntyneitä lainoja.</li>
+ [% END %]
+
+ [% IF ( RECALLED_INTRANSIT ) %]
+ <li>Niteestä on tehty palautuspyyntö ja on kuljetettavana kirjastoon [% Branches.GetName( RECALLED_INTRANSIT ) | html %].</li>
+ [% END %]
+
+ [% IF NO_OPEN_DAYS %]
+ <li>Avoimia päiviä ei löytynyt, kun laskettiin eräpäivää. Tarkista kirjaston eräpäiväkalenteri.</li>
+ [% END %]
+
+ [% IF (forceallow) %]
+ <li>Rajoitus ohitetaan väliaikaisesti.</li>
+ [% END %]
+
+ [% IF ( BOOKED_TO_ANOTHER ) %]
+ <li>Tämä aineisto ennakkovarattu toiselle asiakkaalle</li>
+ [% END %]
+ </ul>
+ </div> <!-- /#circ_impossible -->
+
+ [% IF ( FALLBACK ) %]
+ [% IF options %]
+ <!-- Modal -->
+ <div class="modal" id="itemSearchFallback" tabindex="-1" role="dialog" aria-labelledby="itemSearchFallbackLabel">
+ <div class="modal-dialog modal-xl">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="itemSearchFallbackLabel">Viivakoodia ei löytynyt. Seuraavat niteet löytyivät haulla:</h1>
+ </div>
+ <div class="modal-body">
+ <table class="table_borrowers">
+ <thead>
+ <tr>
+ <th>Nimeke</th>
+ <th>Viivakoodi</th>
+ <th>Luokka</th>
+ <th>Nidenumero</th>
+ <th>Inventaarionumero</th>
+ <th>Kausijulkaisun numerointi</th>
+ <th>Kokoelma</th>
+ [% IF ( item_level_itypes ) %]<th>Nidetyyppi</th>[% END %]
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH item IN options %]
+ <tr>
+ <td>
+ <a target="_blank" href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% item.biblionumber | html %]">[% item.biblio.title | html %] <i class="fa-solid fa-window-restore"></i></a>
+ [% IF item.onloan %]<span style="float: right; color: red; margin-left:5px;">Lainassa</span>[% END %]
+ </td>
+ <td>
+ [% item.barcode | html %]
+ </td>
+ <td>[% item.itemcallnumber | html %]</th>
+ <td>[% item.copynumber | html %]</th>
+ <td>[% item.stocknumber| html %]</th>
+ <td>[% item.enumchron| html %]</th>
+ <td>
+ [% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.ccode', authorised_value => item.ccode ) | html %]
+ </td>
+ [% IF ( item_level_itypes ) %]
+ <td>
+ [% ItemTypes.GetDescription( item.itype ) | html %]
+ </td>
+ [% END %]
+ <td>
+ <form method="post" action="/cgi-bin/koha/circ/circulation.pl" autocomplete="off">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% IF (forceallow) %]
+ <input type="hidden" name="forceallow" value="1">
+ [% END %]
+ <input type="hidden" name="restoreduedatespec" />
+ <input type="hidden" name="op" value="cud-checkout" />
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="duedatespec" value="[% duedatespec | html %]" />
+ <input type="hidden" name="stickyduedate" value="[% stickyduedate | html %]" />
+ <input type="hidden" name="branch" value="[% branch | html %]" />
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]" />
+ <input type="hidden" name="onsite_checkout" value="[% onsite_checkout | html %]" />
+ <input type="hidden" name="auto_renew" value="[% auto_renew | html %]" />
+ <button class="btn btn-default btn-xs" type="submit" name="x"><i class="fa fa-check"></i> Lainaus</button>
+ </form>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.modal-body -->
+ <div class="modal-footer">
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Peruuta</button>
+ </div>
+ </div> <!-- /.modal-content -->
+ </div> <!-- /.modal-dialog.modal-wide -->
+ </div> <!-- /#itemSearchFallback -->
+ [% END # /IF options %]
+ [% END # /IF FALLBACK %]
+
+ [% ELSE # IF IMPOSSIBLE %]
+ [% IF (forceallow) %]
+ <div id="overridden_debarment" class="alert alert-warning">Rajoitus ohitetaan väliaikaisesti</div>
+ [% END %]
+ [% END # /IF IMPOSSIBLE %]
+
+ <span class="audio-alert-success"></span>
+
+ [% IF ( issued ) %]
+ <p>Nide lainattu</p>
+ [% END %]
+
+ [% IF ( message ) %]
+ [% INCLUDE 'patron-toolbar.inc' %]
+ <h4>Asiakasta ei löytynyt <span class="ex">[% message | html %]</span></h4>
+ [% END %]
+
+ <!-- BARCODE ENTRY -->
+
+ [% IF patron %]
+
+ [% IF patron.privacy == 2 AND NOT Koha.Preference('AnonymousPatron') %]
+ <div class="alert alert-warning">
+ <strong>Virhe:</strong> Tämä asiakas on pyytänyt lainahistoriansa poistamista palautuksessa, mutta AnonymousPatron-järjestelmäasetus on tyhjä tai epäkelpo. </div>
+ [% END %]
+
+ <div class="row">
+ [% IF ( !noissues ) || ( Koha.Preference('OnSiteCheckouts') && Koha.Preference('OnSiteCheckoutsForce') )%]
+ <div class="col-sm-6">
+ <form method="post" action="/cgi-bin/koha/circ/circulation.pl" id="mainform" name="mainform" autocomplete="off">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-checkout" />
+ <input type="hidden" name="restoreduedatespec" />
+ [% IF ( issue ) %]
+ <fieldset id="circ_circulation_issue" class="lastchecked">
+ [% ELSE %]
+ <fieldset id="circ_circulation_issue">
+ [% END %]
+
+ [% IF Koha.Preference('DisplayClearScreenButton') == 'issueslip' %]
+ <span id="clearscreen"><a href="/cgi-bin/koha/circ/circulation.pl" title="Tyhjennä näyttö">x</a></span>
+ <span class="printslip printclearscreen" data-clear="true" data-code="issueslip"><a href="#" title="Tulosta kuitti ja tyhjennä näyttö"><i class="fa fa-print"></i></a></span>
+ [% ELSIF Koha.Preference('DisplayClearScreenButton') == 'issueqslip' %]
+ <span id="clearscreen"><a href="/cgi-bin/koha/circ/circulation.pl" title="Tyhjennä näyttö">x</a></span>
+ <span class="printslip printclearscreen" data-clear="true" data-code="issueqslip"><a href="#" title="Tulosta tänään lainatut ja tyhjennä näyttö"><i class="fa fa-print"></i></a></span>
+ [% END %]
+
+ [% IF (forceallow) %]<input type="hidden" name="forceallow" value="1">[% END %]
+
+ <label class="circ_barcode" for="barcode">Lainataan asiakkaalle [% INCLUDE 'patron-title.inc' %]</label>
+
+ [% IF NEEDSCONFIRMATION %]
+ <input type="text" name="barcode" id="barcode" class="barcode focus" size="14" disabled="disabled" />
+ [% ELSE %]
+ [% IF Koha.Preference('itemBarcodeFallbackSearch') %]
+ <input class="barcode focus" id="barcode" name="barcode" placeholder="Syötä niteen viivakoodi tai hakusana" size="14" type="text" />
+ [% ELSE %]
+ <input class="barcode focus" id="barcode" name="barcode" placeholder="Syötä niteen viivakoodi" size="14" type="text" />
+ [% END %]
+ [% END %]
+
+ <div id="show-circ-settings">
+ <a href="#" title="Lainausasetukset"><i class="fa-solid fa-sliders"></i></a>
+ </div>
+
+ <button type="submit" class="btn btn-primary">Lainaus</button>
+
+ <div class="circ-settings">
+
+ [% UNLESS ( noissues && Koha.Preference('OnSiteCheckoutsForce') ) %]
+ [% IF ( SpecifyDueDate ) %]
+ <div id="specify-due-date" class="circ-setting">
+ <div class="hint">Määrittele eräpäivä [% INCLUDE 'date-format.inc' %]: </div>
+ [% IF ( duedatespec ) %]
+ <input type="text" size="20" id="duedatespec" name="duedatespec" value="[% duedatespec | html %]" class="flatpickr" data-flatpickr-enable-time="true" data-flatpickr-on-close-focus="#barcode" />
+ [% ELSE %]
+ <input type="text" size="20" id="duedatespec" name="duedatespec" value="" class="flatpickr" data-flatpickr-enable-time="true" data-flatpickr-on-close-focus="#barcode" />
+ [% END %]
+ <label for="stickyduedate"> Muista istunnolle:</label>
+ [% IF ( stickyduedate ) %]
+ <input type="checkbox" id="stickyduedate" onclick="this.form.barcode.focus();" name="stickyduedate" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" id="stickyduedate" onclick="this.form.barcode.focus();" name="stickyduedate" />
+ [% END %]
+ </div>
+ [% END %]
+ [% END %]
+
+ [% UNLESS ( noissues ) %]
+ [% IF Koha.Preference('AllowSetAutomaticRenewal') %]
+ <div id="set-automatic-renewal" class="circ-setting">
+ [% IF NEEDSCONFIRMATION %]
+ [% IF auto_renew %]
+ [% IF patron.autorenew_checkouts %]
+ <input disabled="disabled" id="auto_renew" name="auto_renew" title="Automaattinen uusinta ei käytössä asiakkaalla" type="checkbox" value="auto_renew" />
+ [% ELSE %]
+ <input type="checkbox" name="auto_renew" id="auto_renew" value="auto_renew" disabled="disabled" checked="checked" />
+ [% END %]
+ [% ELSE %]
+ <input type="checkbox" name="auto_renew" id="auto_renew" value="auto_renew" disabled="disabled" />
+ [% END %]
+ [% ELSE %]
+ [% IF ( auto_renew && patron.autorenew_checkouts ) %]
+ <input type="checkbox" name="auto_renew" id="auto_renew" value="auto_renew" class="circ_setting" checked="checked" />
+ [% ELSIF patron.autorenew_checkouts %]
+ <input type="checkbox" name="auto_renew" id="auto_renew" value="auto_renew" class="circ_setting" />
+ [% ELSE %]
+ <input disabled="disabled" id="auto_renew" name="auto_renew" title="Automaattinen uusinta ei käytössä asiakkaalla" type="checkbox" value="auto_renew" />
+ [% END %]
+ [% END %]
+
+ <label for="auto_renew">Automaattinen uusinta</label>
+ </div>
+ [% END %]
+ [% IF Koha.Preference('decreaseLoanHighHolds') %]
+ <div id="set_high_holds_overrride" class="circ-setting">
+ [% IF NEEDSCONFIRMATION %]
+ [% IF override_high_holds %]
+ <input type="checkbox" name="override_high_holds" id="override_high_holds" value="1" disabled="disabled" checked="checked"/>
+ [% ELSE %]
+ <input type="checkbox" name="override_high_holds" id="override_high_holds" value="1" disabled="disabled"/>
+ [% END %]
+ [% ELSE %]
+ [% IF override_high_holds %]
+ <input type="checkbox" name="override_high_holds" id="override_high_holds" value="1" class="circ_setting" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" name="override_high_holds" id="override_high_holds" value="1" class="circ_setting" />
+ [% END %]
+ [% END %]
+ <label for="override_high_holds">Älä lyhennä laina-aikaa varausten määrän pohjalta</label>
+ </div>
+ [% END %]
+ [% END %]
+
+ [% IF Koha.Preference('OnSiteCheckouts') %]
+ <div id="onsite_checkout-select" class="circ-setting">
+ [% IF noissues %]
+ <div class="onsite-checkout-only">
+ <input type="checkbox" id="onsite_checkout" name="onsite_checkout_forced" checked="checked" disabled="disabled" /> <label for="onsite_checkout">Vain on-site -lainat. Automaattinen eräpäivä: </label>
+ <input type="text" name="duedatespec" id="duedatespec" class="flatpickr" data-flatpickr-enable-time="true" data-flatpickr-on-close-focus="#barcode" />
+ <input type="hidden" name="onsite_checkout" checked="checked" value="1" />
+ </div>
+ [% ELSE %]
+ [% IF Koha.Preference('OnSiteCheckoutAutoCheck') && onsite_checkout == "on" %]
+ <input type="checkbox" id="onsite_checkout" name="onsite_checkout" class="circ_setting" checked="checked" /> <label for="onsite_checkout">On-site -lainat</label>
+ [% ELSE %]
+ <input type="checkbox" id="onsite_checkout" name="onsite_checkout" class="circ_setting" /> <label for="onsite_checkout">On-site -lainat</label>
+ [% END %]
+ [% END %]
+ </div>
+ [% END %]
+
+ </div> <!-- /.circ-settings -->
+
+ <input type="hidden" name="borrowernumber" id="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="branch" value="[% branch | html %]" />
+ <input type="hidden" name="debt_confirmed" value="[% debt_confirmed | html %]" />
+ [% IF ( CHARGES ) %]
+ <input type="hidden" name="charges" value="yes" />
+ [% END %]
+ </fieldset> <!-- /#circ_circulation_issue -->
+
+ [% IF ( issue ) %]
+ <div class="lastchecked">
+ <p>
+ <strong>Lainassa: </strong>
+ [% issue.item.biblio.title | html %] ([% issue.item.barcode | html %]). [% IF issue.item.is_bundle %] [% SET bundle_items_count = issue.item.bundle_items.count %] [% tnx('Bundle of {count} item', 'Bundle of {count} items', bundle_items_count, { count = bundle_items_count }) | html %]. [% END %] Eräpäivä [% issue.date_due | $KohaDates as_due_date => 1 %] </p>
+ </div>
+ [% END %]
+ </form> <!-- /#mainform -->
+ </div> <!-- /.col-sm-6 -->
+
+ [% END #/IF !noissues %]
+
+ [% IF ( noissues ) %]
+ [% IF ( Koha.Preference('OnSiteCheckouts') && Koha.Preference('OnSiteCheckoutsForce') ) %]
+ <div class="col-sm-6">
+ [% ELSE %]
+ <div>
+ [% END %]
+ [% ELSE %]
+ <div class="col-sm-6">
+ [% END %]
+
+ [% IF ( noissues ) %]
+ [% IF ( Koha.Preference('OnSiteCheckouts') && Koha.Preference('OnSiteCheckoutsForce') ) %]
+ <div id="circmessages" class="circmessage attention">
+ [% ELSE %]
+ <h4>Lainataan asiakkaalle [% INCLUDE 'patron-title.inc' %]</h4>
+ <div id="circmessages" class="circmessage warning">
+ [% END %]
+ <h3>
+ Ei voi lainata! [% IF ( Koha.Preference('OnSiteCheckouts') && Koha.Preference('OnSiteCheckoutsForce') ) %] <span class="circ-hlt">Vain on-site -lainaus sallittu</span>
+ [% END %]
+ </h3>
+ [% ELSE %]
+ <div id="circmessages" class="circmessage attention">
+ [% END %]
+
+ [% INCLUDE 'patron_messages.inc' %]
+
+ </div> <!-- /#circmessages -->
+ </div> <!-- /div or div.col-sm-6 -->
+ </div> <!-- /.row -->
+
+ [% INCLUDE 'patron-detail-tabs.inc' patronpage = "circ" %]
+
+ [% ELSIF borrowernumber # IF patron %]
+ <div class="alert alert-info">Asiakasta ei löytynyt. <a href="/cgi-bin/koha/members/members-home.pl">Palaa hakuun</a></div>
+ [% END # /IF patron %]
+
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ [% IF Koha.Preference('CircSidebar') %]
+ [% IF not( borrowernumber and patron ) %]
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-nav.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ [% END %]
+ [% END %]
+
+ [% IF borrowernumber and patron %]
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ [% END %]
+
+ </div> <!-- /.row -->
+ </main>
+
+ [% IF Koha.Preference('ClaimReturnedLostValue') || Koha.Preference('BundleLostValue') %]
+ [% INCLUDE 'modals/resolve_return_claim.inc' %]
+ [% END %]
+
+<!-- Modal -->
+<div id="barcodeSubmittedModal" class="modal" tabindex="-1" role="dialog" aria-labelledby="barcodeSubmittedModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="barcodeSubmittedModalLabel">Viivakoodi syötetty</h1>
+ </div>
+ <div class="modal-body">
+ <p>Olet jo syöttänyt viivakoodin, odota lainauksen etenemistä...</p>
+ </div>
+ </div> <!-- /.modal-content -->
+ </div> <!-- /.modal-dialog -->
+</div> <!-- /#barcodeSubmittedModal -->
+
+[% IF waiting_holds.count > 0 %]
+ <div id="circ-warnwaitingholds-modal" class="modal audio-alert-action block">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title">Asiakkaalla on odottavia varauksia</h1>
+ </div>
+ <div class="modal-body">
+ <ul>
+ <li>
+ Asiakkaalla on noudettavissa olevia varauksia, jotka ovat valmiina lainattavaksi </li>
+ </ul>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
+ </div>
+ </div>
+ </div>
+ </div>
+[% END %]
+[% INCLUDE modals/cancel_booking.inc %]
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'select2.inc' %]
+ [% PROCESS 'modal-claims.inc' %]
+ [% PROCESS 'modal-claims-js' %]
+ [% INCLUDE 'js-date-format.inc' %]
+
+ <script>
+        /* Set some variable needed in circulation.js */
+        const LoadCheckoutsTableDelay = [% Koha.Preference('LoadCheckoutsTableDelay') || 0 | html %];
+        const AlwaysLoadCheckoutsTable = [% Koha.Preference('AlwaysLoadCheckoutsTable') | html %];
+        var logged_in_user_borrowernumber = "[% logged_in_user.borrowernumber | html %]";
+        var ClaimReturnedLostValue = "[% Koha.Preference('ClaimReturnedLostValue') | html %]";
+        var ClaimReturnedChargeFee = "[% Koha.Preference('ClaimReturnedChargeFee') | html %]";
+        var UnseenRenewals = "[% Koha.Preference('UnseenRenewals') | html %]";
+        var ClaimReturnedWarningThreshold = "[% Koha.Preference('ClaimReturnedWarningThreshold') | html %]";
+        var interface = "[% interface | html %]";
+        var theme = "[% theme | html %]";
+        var borrowernumber = "[% patron.borrowernumber | html %]";
+        var branchcode = "[% branch | html %]";
+        var exports_enabled = [% Koha.Preference('ExportCircHistory') ? 1 : 0 | html %];
+        var AllowRenewalLimitOverride = [% (CAN_user_circulate_override_renewals && Koha.Preference('AllowRenewalLimitOverride') )? 1: 0 | html %];
+        var AllowRenewalOnHoldOverride = [% (CAN_user_circulate_override_renewals && Koha.Preference('AllowRenewalOnHoldOverride') )? 1: 0 | html %];
+        var AllowCirculate = [% (CAN_user_circulate_circulate_remaining_permissions)? 1 : 0 | html %];
+        var script = "circulation";
+        var relatives_borrowernumbers = new Array();
+        [% FOREACH b IN relatives_borrowernumbers %]
+            relatives_borrowernumbers.push("[% b | html %]");
+        [% END %]
+        var SuspendHoldsIntranet = [% ( Koha.Preference('SuspendHoldsIntranet') ) ? 1 : 0 | html %];
+    </script>
+ [% Asset.js("js/pages/circulation.js") | $raw %]
+ [% IF Koha.Preference('ClaimReturnedLostValue') || Koha.Preference('BundleLostValue') %]
+ [% Asset.js("js/resolve_claim_modal.js") | $raw %]
+ [% END %]
+ [% Asset.js("js/holds.js") | $raw %]
+ [% INCLUDE 'calendar.inc' %]
+ [% Asset.js("js/cancel_booking_modal.js") | $raw %]
+ [% Asset.js("js/combobox.js") | $raw %]
+ [% INCLUDE 'js-biblio-format.inc' %]
+ <script>
+        table_settings_issues_table = [% TablesSettings.GetTableSettings( 'circ', 'circulation', 'issues-table', 'json' ) | $raw %]
+        table_settings_relatives_issues_table = [% TablesSettings.GetTableSettings( 'circ', 'circulation', 'relatives-issues-table', 'json' ) | $raw %]
+        table_settings_holds_table = [% TablesSettings.GetTableSettings( 'circ', 'circulation', 'holds-table', 'json' ) | $raw %]
+        table_settings_bookings_table = [% TablesSettings.GetTableSettings( 'members', 'moremember', 'bookings-table', 'json' ) | $raw %]
+        CAN_user_circulate_manage_bookings = [% CAN_user_circulate_manage_bookings | $raw %]
+        patron_borrowernumber = [% patron.borrowernumber | $raw %]
+
+        [% IF borrowernumber and patron %]
+            if( Cookies.get("holdfor") != [% patron.borrowernumber | html %]){
+                Cookies.remove("holdfor", { path: '/', SameSite: 'Lax' });
+            }
+        [% ELSE %]
+            Cookies.remove("holdfor", { path: '/', SameSite: 'Lax' });
+        [% END %]
+
+        [% UNLESS ( patron.borrowernumber ) %]window.onload=function(){ $('#findborrower').focus(); };[% END %]
+
+        // On-site checkout
+        function toggle_onsite_checkout(){
+            const duedatespec = document.querySelector("#duedatespec");
+            if( duedatespec ){
+                const duedatespec_fp = duedatespec._flatpickr;
+                if ( $("#onsite_checkout").prop('checked') ) {
+                    duedatespec_fp.setDate("[% today_due_date_and_time | $KohaDates dateformat => 'iso', with_hours => 1 %]");
+                } else {
+                    duedatespec_fp.setDate("");
+                }
+            }
+        }
+
+        function Dopop(link) {
+            var newin = window.open(link, 'popup', 'width=600,height=400,resizable=1,toolbar=0,scrollbars=1,top');
+        }
+        $(document).ready(function() {
+            [% IF waiting_holds.count > 0 %]
+                $('#circ-warnwaitingholds-modal .btn-primary').on('click',function() {
+                    $('#mainform').submit();
+                });
+
+                var waiting_holds_barcodes = new Array();
+                [% FOREACH wh IN waiting_holds %]
+                    waiting_holds_barcodes.push("[% wh.item.barcode | html %]");
+                [% END %]
+                $("#mainform").on('submit', function(){
+                    if( $("#checkout_confirmed").length > 0 ){
+                        return true;
+                    }
+                    if ( waiting_holds_barcodes.includes($('#barcode').val().trim()) ) {
+                        return true;
+                    } else {
+                        $('#circ-warnwaitingholds-modal').modal('show');
+                        return false;
+                    }
+                });
+                $("#circ-warnwaitingholds-modal").on('hidden.bs.modal',function(){
+                    $("#mainform").append('<input type="hidden" id="checkout_confirmed" value=1>').submit();
+                });
+            [% END %]
+
+            $('#mainform').on('submit',function() {
+                if ($("#barcode") && $("#barcode").val()) {
+                    $('#barcode').on('keypress',function(event) {
+                        $('#barcodeSubmittedModal').modal('show');
+                        event.preventDefault(); }
+                    );
+                }
+            });
+
+            // listen submit to trigger qslip on empty checkout
+            $('#mainform').bind('submit',function() {
+                if ($('#barcode').val() == '') {
+                    [% IF ( CircAutoPrintQuickSlip == 'clear' ) %]
+                        window.location='/cgi-bin/koha/circ/circulation.pl';
+                        return false;
+                    [% ELSIF ( CircAutoPrintQuickSlip == 'ignore' ) %]
+                        return false;
+                    [% ELSE %]
+                        window.open("/cgi-bin/koha/members/printslip.pl?borrowernumber=" + borrowernumber + "&amp;print=issue[% CircAutoPrintQuickSlip | html %]", "printwindow");
+                        return false;
+                    [% END %]
+                }
+            });
+            [% IF Koha.Preference('OnSiteCheckoutAutoCheck') && onsite_checkout == "on" %]
+                toggle_onsite_checkout();
+            [% END %]
+            $("#onsite_checkout").click(function(){
+                toggle_onsite_checkout();
+            });
+
+            [% IF HIGHHOLDS %]
+                [% IF !override_high_holds %]
+                    $("input[name=duedatespec]:hidden").val('[% HIGHHOLDS.returndate | html %]');
+                    if ('[% duedatespec | html %]' === '') {
+                        $("input[name=restoreduedatespec]:hidden").val('highholds_empty');
+                    } else {
+                        $("input[name=restoreduedatespec]:hidden").val('[% duedatespec | html %]');
+                    }
+                [% END %]
+
+                $("#override_high_holds_tmp").on( 'change', function() {
+                    if ( this.checked ) {
+                        $("input[name=duedatespec]:hidden").val('');
+                    }
+                });
+            [% END %]
+
+            // Handle checkout for fast cataloging
+            // Check the referrer to prevent csrf, fill and submit form
+            if(document.referrer.split(window.location.origin + '/cgi-bin/koha/cataloguing/additem.pl?')[1].match(/frameworkcode=FA&circborrowernumber=/) ) {
+                let urlParams = new URLSearchParams(window.location.search);
+                let barcode = urlParams.get('barcode');
+                $('#barcode').val(barcode);
+                $('#mainform').submit();
+            }
+
+            $("#cancellation-reason").comboBox({
+                displayProperty: 'name',
+                placeholder: _("Valitse tai kirjoita syy"),
+            });
+        });
+    </script>
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ [% Asset.js("js/checkouts.js") | $raw %]
+ [% Asset.js("js/tables/bookings.js") | $raw %]
+ [% Asset.js("js/recalls.js") | $raw %]
+ [% Asset.js("js/form-submit.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]
+
+[% BLOCK circulation_rule_criteria %]
+ <ul>
+ <li>
+ Nidetyyppi: [% IF rule.itemtype %] [% ItemTypes.GetDescription( rule.itemtype ) | html %] [% ELSE %] <i>Kaikki nidetyypit</i>
+ [% END %]
+ </li>
+ <li>
+ Asiakastyyppi: [% IF rule.categorycode %] [% Categories.GetName( rule.categorycode ) | html %] [% ELSE %] <i>Kaikki asiakastyypit</i>
+ [% END %]
+ </li>
+ <li>
+ Kirjasto: [% IF rule.branchcode %] [% Branches.GetName( rule.branchcode ) | html %] [% ELSE %] <i>Kaikki kirjastot</i>
+ [% END %]
+ </li>
+ </ul>
+[% END %]

@@ -1,0 +1,192 @@
+---
+description:
+- Esimerkkiuutiset
+tables:
+- additional_contents:
+    multiline: []
+    rows:
+    - category: news
+      code: News_1
+      expirationdate: 2099-01-10
+      location: staff_only
+      number: 1
+      published_on: 2007-10-29 05:25:58
+    - category: news
+      code: News_2
+      expirationdate: 2099-01-10
+      location: staff_only
+      number: 2
+      published_on: 2007-10-29 05:34:45
+    - category: html_customizations
+      code: CatalogConcernHelp_1
+      expirationdate: 2099-01-10
+      location: CatalogConcernHelp
+      number: 1
+      published_on: 2007-10-29 05:25:58
+    - category: html_customizations
+      code: CatalogConcernTemplate_1
+      expirationdate: 2099-01-10
+      location: CatalogConcernTemplate
+      number: 1
+      published_on: 2007-10-29 05:25:58
+    - category: html_customizations
+      code: CookieConsentBar_1
+      expirationdate: 2099-01-10
+      location: CookieConsentBar
+      number: 1
+      published_on: 2007-10-29 05:25:58
+    - category: html_customizations
+      code: CookieConsentPopup_1
+      expirationdate: 2099-01-10
+      location: CookieConsentPopup
+      number: 1
+      published_on: 2007-10-29 05:25:58
+    translatable: []
+- additional_contents_localizations:
+    multiline:
+    - content
+    rows:
+    - additional_content_id: 1
+      content:
+      - Tervetuloa Kohaan. Koha on monipuolinen avoimen lähdekoodin kirjastojärjestelmä,
+        jonka Katipo Communications Ltd on kehittänyt alun perin Uudessa-Seelannissa.
+        Kohan otti ensimmäisen kerran käyttöön Horowhenua Library Trust tammikuussa
+        2000. Tällä hetkellä Kohaa ylläpitää tiimi ohjelmistojen tarjoajia ja kirjastojen
+        tekniikkahenkilökuntaa ympäri maailmaa.
+      lang: default
+      title: Tervetuloa Kohaan
+    - additional_content_id: 2
+      content:
+      - 'Olet asentanut Koha, mitä seuraavaksi? Tässä muutama ehdotus:'
+      - <ul>
+      - <li><a href="http://koha-community.org/documentation/">Lue Kohan dokumentaatio</a></li>
+      - <li><a href="http://wiki.koha-community.org">Lue/Kirjoita Kohan Wikiin</a></li>
+      - <li><a href="http://koha-community.org/support/">Lue ja osallistu keskusteluun</a></li>
+      - <li><a href="http://bugs.koha-community.org">Raportoi Kohan bugeja</a></li>
+      - <li><a href="http://wiki.koha-community.org/wiki/Version_Control_Using_Git">Lisää
+        Kohaan korjauksia käyttäen Git:ä (Version Control System)</a></li>
+      - <li><a href="http://koha-community.org/support/">Chattaa Kohan käyttäjien
+        ja kehittäjien kanssa</a></li>
+      - </ul>
+      - ''
+      lang: default
+      title: Mitä seuraavaksi?
+    - additional_content_id: 3
+      content:
+      - Kuvaile havaitsemasi ongelma selkeästi ja kirjasto pyrkii käsittelemään asian
+        mahdollisimman nopeasti
+      lang: default
+      title: Kuvailutietojen virheiden ohjeteksti
+    - additional_content_id: 4
+      content:
+      - '**Kuvaile virhe**'
+      - Selkeä ja kompakti kuvaus kuvailutiedon virheestä.
+      - ''
+      - '**Kuinka toistaa virhe**'
+      - 'Näin toistat virheen:'
+      - 1. Mene '...'
+      - 2. Klikkaa '....'
+      - 3. Vieritä kohtaan '....'
+      - 4. Huomioi virhe
+      - ''
+      - '**Odotettu toiminta**'
+      - Selkeä ja kompakti kuvaus, mitä pitäisi tapahtua.
+      lang: default
+      title: Kuvailutietojen virheiden tekstipohja
+    - additional_content_id: 5
+      content:
+      - '<p>Verkkokirjasto käyttää toiminnallisia evästeitä: Nämä ovat välttämättömiä
+        sivuston toiminnallisuuden kannalta.</p>'
+      lang: default
+      title: Evästepalkki
+    - additional_content_id: 6
+      content:
+      - <h3>Mitä evästeet ovat?</h3>
+      - <p>Cookies are small text files placed on your browser by websites. They help
+        make websites work, or work more efficiently. They also "remember" some of
+        your preferences, so you don't have to set a preference again every time you
+        switch to a different page on the same website.</p>
+      - <p>Jos evästeet aiheuttavat huolta, suosittelemme tyhjentämään evästeet säännöllisesti
+        verkkoselaimestasi, tai käyttämään yksityistä selaustilaa. Mikäli haluat vaikuttaa
+        evästeisiin, tarkista selaimesi asetukset.</p>
+      - <h3>Välttämättömät evästeet</h3>
+      - <p>Tässä on lista välttämättömistä evästeistä, joita verkkokirjasto käyttää.</p>
+      - <p>Jotkut evästeistä riippuvat kirjaston henkilökunnan määrittelemistä asetuksista.
+        Tällöin kaikki listatut evästeet eivät ehkä ole käytössä tällä sivustolla.</p>
+      - <table id="cookiesinfot" class="table table-bordered table-striped">
+      - '  <thead>'
+      - '    <tr>'
+      - '      <th>Tallennuspaikka</th>'
+      - '      <th>Nimi</th>'
+      - '      <th>Arvo</th>'
+      - '      <th>Vanhentuminen</th>'
+      - '      <th>Kuvaus</th>'
+      - '    </tr>'
+      - '  </thead>'
+      - '  <tbody>'
+      - '    <tr>'
+      - '      <td>Eväste</td>'
+      - '      <td>CGISESSID</td>'
+      - '      <td>Istunnon tunniste</td>'
+      - '      <td>Uloskirjautumisen tai istunnon päättymisen yhteydessä</td>'
+      - '      <td>Istuntoeväste</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Eväste</td>'
+      - '      <td>KohaOpacLanguage</td>'
+      - '      <td>Kielikoodi</td>'
+      - '      <td>3 vuotta</td>'
+      - '      <td>Tallentaa valitun kieliasetuksen, jotta verkkokirjasto näkyy valitulla
+        kielellä joka kerta kun käyttäjä vierailee verkkokirjastossa.</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Eväste</td>'
+      - '      <td>'
+      - '        <p>form_serialized</p>'
+      - '        <p>form_serialized_limits</p>'
+      - '      </td>'
+      - '      <td>Hakutermit ja rajoitukset</td>'
+      - '      <td>Istunnon päättyessä tai kun käyttäjä vierailee tarkennettu haku
+        -sivulla.</td>'
+      - '      <td>jQuery eväste. Tallentaa tarkennetun haun hakutermit ja rajoitukset.
+        Asetetaan kun tarkennettu haku tehdään.</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Eväste</td>'
+      - '      <td>search_path_code</td>'
+      - '      <td>ads (vähemmän) tai exs (enemmän)</td>'
+      - '      <td>Istunnon päättyessä tai kun käyttäjä vierailee tarkennettu haku
+        -sivulla.</td>'
+      - '      <td>jQuery eväste. Liittyy serialized_form* evästeeseen. Tallentaa
+        tiedon siitä, käytettiinkö tarkennettua hakua vaihtoehdoilla "enemmän"- vai
+        "vähemmän" valintoja.</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Eväste</td>'
+      - '      <td>num_paragraph</td>'
+      - '      <td>Valittujen hakuvalintojen lukumäärä</td>'
+      - '      <td>Istunnon päättyessä tai kun käyttäjä vierailee tarkennettu haku
+        -sivulla.</td>'
+      - '      <td>jQuery eväste. Käytetään tallentamaan tieto luotujen valintojen
+        lukumäärästä, kun käyttäjä valitsee enemmän hakuehtoja tarkennettu haku -näkymässä.</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Eväste</td>'
+      - '      <td>bib_list</td>'
+      - '      <td>Lista tietueiden tunnisteista (biblionumeroista) erottelumerkillä
+        /</td>'
+      - '      <td>Istunnon päättyessä tai kun kori tyhjennetään.</td>'
+      - '      <td>Tallentaa korin sisällön verkkokirjastossa. Asetetaan kun teoksia
+        lisätään koriin ensimmäistä kertaa.</td>'
+      - '    </tr>'
+      - '  </tbody>'
+      - </table>
+      - <h3>Valinnaiset evästeet</h3>
+      - <p>Kirjaston henkilökunta saattaa luoda ylimääräisiä evästeitä. Nämä evästeet
+        ovat valinnaisia ja vaatii sinun hyväksynnän ennen kuin niitä käytetään.</p>
+      - <p>Jos valinnaisia evästeitä on luotu, näkyvät ne alla.</p>
+      lang: default
+      title: Evästetiedot
+    translatable:
+    - title
+    - content

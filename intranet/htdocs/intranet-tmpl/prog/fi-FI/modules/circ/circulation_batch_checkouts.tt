@@ -1,0 +1,380 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Branches %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Price %]
+[% USE AuthorisedValues %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% SET destination = "circ" %]
+<title>[% FILTER collapse %]
+ [% IF patron %]
+ [% patron_in_title = INCLUDE 'patron-title.inc' invert_name = 1 no_html = 1 %]
+ [% tx("Batch check out to {patron}", { patron = patron_in_title }) | html %] &rsaquo;
+ [% END %]
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="circ_circulation_batch_checkouts" class="circ">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Lainaus ja palautus</a>
+ [% END %]
+ [% IF patron %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% borrowernumber | uri %]">Lainaa asiakkaalle [% INCLUDE 'patron-title.inc' %]</a>
+ [% END %]
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Erälainaus</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ [% IF patron %]
+ <div class="col-md-10 order-md-2 order-sm-1">
+ [% ELSE %]
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% END %]
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ [% IF patron %]
+ [% INCLUDE 'members-toolbar.inc' %]
+ [% END %]
+
+ <h1>Erälainaus</h1>
+
+[% IF patron and not batch_allowed %]
+ <div class="alert alert-warning">Et voi käyttää erälainausta tälle asiakkaalle</div>
+[% ELSIF patron and noissues and not checkout_infos %]
+ <div class="alert alert-warning">
+ Ei voi lainata! [% IF ( charges ) %] [% INCLUDE 'blocked-fines.inc' NoIssuesCharge = chargesamount %] [% END %] [% IF ( charges_guarantors_guarantees ) %] <li>
+ <span class="circ-hlt">Maksut:</span> Asiakkaan takaajilla ja heidän muilla taattavillaan on maksuja yhteensä [% charges_guarantors_guarantees | $Price %]. [% IF noissues %] <span class="circ-hlt">Lainaus on estetty, koska asiakkaalla on liikaa maksuja.</span>
+ [% END %]
+ </li>
+ [% END %]
+ [% IF ( charges_guarantees ) %]
+ <li>
+ <span class="circ-hlt">Maksut:</span> Asiakkaan taattavilla on yhteensä maksuja [% chargesamount_guarantees | $Price %] €. [% IF noissues %] <span class="circ-hlt">Lainaus on estetty, koska asiakkaalla on liikaa maksuja.</span>
+ [% END %]
+ </li>
+ [% END %]
+ </div>
+[% ELSIF patron and not checkout_infos %]
+ <form method="post" enctype="multipart/form-data" action="/cgi-bin/koha/circ/circulation.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <div id="circ_circulation_issue">
+ <fieldset>
+ <legend>Lainataan asiakkaalle [% INCLUDE 'patron-title.inc' %]</legend>
+ <ol>
+ <li>
+ <label for="barcodelist">Lista viivakoodeista (yksi viivakoodi per rivi): </label>
+ <textarea rows="10" cols="30" id="barcodelist" name="barcodelist"></textarea>
+ </li>
+ <li>
+ <label for="uploadfile">Käytä tiedostoa: </label>
+ <input type="file" id="uploadfile" name="uploadfile" />
+ </li>
+ </ol>
+ </fieldset>
+
+ [% IF Koha.Preference('SpecifyDueDate') || Koha.Preference('OnSiteCheckouts') %]
+ <fieldset>
+ <ol>
+ [% IF Koha.Preference('SpecifyDueDate') %]
+ <li>
+ <label for="duedatespec">Määrittele eräpäivä: [% INCLUDE 'date-format.inc' %]</label>
+ <input type="text" size="20" id="duedatespec" name="duedatespec" value="[% duedatespec | html %]" class="flatpickr" data-flatpickr-enable-time="true"/>
+ </li>
+ [% END %]
+ [% IF Koha.Preference('OnSiteCheckouts') %]
+ <li class="radio">
+ <div id="onsite_checkout-select">
+ <input type="checkbox" id="onsite_checkout" name="onsite_checkout" class="circ_setting"/>
+ <label for="onsite_checkout">On-site -lainat</label>
+ </div>
+ </li>
+ [% END %]
+ </ol>
+ </fieldset>
+ [% END %]
+ </div>
+
+ <fieldset class="action">
+ <input type="hidden" name="borrowernumber" id="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="branch" value="[% branch | html %]" />
+ <input type="hidden" name="batch" value="1" />
+ <input type="hidden" name="op" value="cud-checkout" />
+ <input class="btn btn-primary" type="submit" value="Lainaus" />
+ </fieldset>
+ </form>
+
+[% ELSIF patron %]
+ [% IF confirmation_needed && CAN_user_circulate_force_checkout %]
+ <h3>Erälainauksen vahvistaminen</h3>
+ <form method="post" action="/cgi-bin/koha/circ/circulation.pl" id="mainform" name="mainform" autocomplete="off">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% ELSE %]
+ <h3>Erälainauksen tulokset</h3>
+ [% END %]
+ <div class="page-section">
+ <table id="checkout_infos">
+ <thead>
+ <tr>
+ [% IF confirmation_needed && CAN_user_circulate_force_checkout %]
+ <th class="NoSort"></th>
+ [% END %]
+ <th>Viivakoodi</th>
+ <th class="anti-the">Nimeke</th>
+ <th>Tiedot</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOR checkout_info IN checkout_infos %]
+ <tr>
+ [% IF confirmation_needed && CAN_user_circulate_force_checkout %]
+ <td>
+ [% IF checkout_info.NEEDSCONFIRMATION %]
+ <input type="checkbox" name="barcodes" value="[% checkout_info.barcode | html %]" checked="checked" />
+ [% END %]
+ </td>
+ [% END %]
+ <td>[% checkout_info.barcode | html %]</td>
+ <td>
+ [% INCLUDE 'biblio-title.inc' biblio=checkout_info.biblio link = 1 %] [% IF checkout_info.biblio.author %], / [% checkout_info.biblio.author | html %][% END %][% IF ( checkout_info.item.itemnotes ) %]- <span class="circ-hlt">[% checkout_info.item.itemnotes | $raw %]</span>[% END %] <a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% checkout_info.biblio.biblionumber | uri %]&amp;itemnumber=[% checkout_info.item.itemnumber | uri %]#item[% checkout_info.item.itemnumber | uri %]">[% checkout_info.item.barcode | html %]</a>
+ </td>
+ <td>
+ [% IF checkout_info.NEEDSCONFIRMATION %]
+ <ul class="fa-ul warn">
+ [% IF checkout_info.AGE_RESTRICTION %]
+ <li><i class="fa fa-li fa-warning"></i>Ikärajoitus [% checkout_info.AGE_RESTRICTION | html %].</li>
+ [% END %]
+ [% IF checkout_info.RENEW_ISSUE %]
+ <li><i class="fa fa-li fa-warning"></i>Nide on jo lainassa tällä asiakkaalla. Uusitaanko laina?</li>
+ [% END %]
+ [% IF checkout_info.ADDITIONAL_MATERIALS %]
+ <li><i class="fa fa-li fa-warning"></i>Vahvista, että lisämateriaalit ovat mukana: [%  checkout_info.ADDITIONAL_MATERIALS | html %]</li>
+ [% END %]
+ [% IF checkout_info.RESERVE_WAITING %]
+ <li><i class="fa fa-li fa-warning"></i>Tämä aineisto on noudettavana toiselle asiakkaalle.</li>
+ [% END %]
+ [% IF checkout_info.TRANSFERRED %]
+ <li><i class="fa fa-li fa-warning"></i>Tämä aineisto varattu ja kuljetuksessa toiselle asiakkaalle.</li>
+ [% END %]
+ [% IF checkout_info.PROCESSING %]
+ <li><i class="fa fa-li fa-warning"></i>Tämä aineisto varattu toiselle asiakkaalle.</li>
+ [% END %]
+ [% IF checkout_info.ISSUED_TO_ANOTHER %]
+ <li><i class="fa fa-li fa-warning"></i>Tätä nide on lainassa toisella asiakkaalla. [% IF CAN_user_circulate_force_checkout %] Palauta ja lainaa? [% END %]</li>
+ [% END %]
+ [% IF checkout_info.TOO_MANY %]
+ <li><i class="fa fa-li fa-warning"></i>Liikaa lainoja.</li>
+ [% END %]
+ [% IF checkout_info.BORRNOTSAMEBRANCH %]
+ <li><i class="fa fa-li fa-warning"></i>Tämä asiakas on toisesta kirjastosta ([% Branches.GetName( checkout_info.BORRNOTSAMEBRANCH ) | html %]).</li>
+ [% END %]
+ [% IF checkout_info.PATRON_CANT %]
+ <li><i class="fa fa-li fa-warning"></i>Tämä asiakas ei voi lainata tätä aineistoa, koska kirjaston lainaussäännöt estävät sen.</li>
+ [% END %]
+ [% IF checkout_info.NOT_FOR_LOAN_FORCING %]
+ [% IF checkout_info.itemtype_notforloan %]
+ <li><i class="fa fa-li fa-warning"></i>Nidetyyppi ei ole yleensä lainattavissa.</li>
+ [% ELSIF checkout_info.item_notforloan %]
+ [% item_notforloan_lib = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => checkout_info.item_notforloan ) %]
+ <li><i class="fa fa-li fa-warning"></i>Nide ei ole yleensä lainattava [% IF item_notforloan_lib %]([% item_notforloan_lib | html %])[% END %].</li>
+ [% END %]
+ [% END %]
+ [% IF checkout_info.USERBLOCKEDOVERDUE %]
+ <li><i class="fa fa-li fa-warning"></i>Asiakkaalla on [% checkout_info.USERBLOCKEDOVERDUE | html %] nidettä myöhässä.</li>
+ [% END %]
+ [% IF checkout_info.ITEM_LOST %]
+ <li><i class="fa fa-li fa-warning"></i>Tämä nide on merkitty kadonneeksi tilaan "[% checkout_info.ITEM_LOST | html %]".</li>
+ [% END %]
+ [% IF checkout_info.HIGHHOLDS %]
+ <li><i class="fa fa-li fa-warning"></i>Paljon kysytty aineisto. Laina-aika lyhennetty [% checkout_info.HIGHHOLDS.duration | html %] päivään (eräpäivä [% checkout_info.HIGHHOLDS.returndate | html %]).</li>
+ [% END %]
+ [% IF checkout_info.HIGHHOLDS %] <!-- FIXME -->
+ <script>
+                          $(document).ready(function() {
+                              $("input[name=duedatespec]:hidden").val('[% checkout_info.HIGHHOLDS.returndate | html %]');
+                          });
+                      </script>
+ [% END %]
+
+ [% IF NOT checkout_info.IMPOSSIBLE && ( CAN_user_circulate_force_checkout || checkout_info.HIGHHOLDS ) && ( checkout_info.RESERVED || checkout_info.RESERVE_WAITING || checkout_info.TRANSFERRED || checkout_info.PROCESSING ) %] <!-- arbitrary choice, revert the hold is not possible-->
+ <li><i class="fa fa-li fa-warning"></i>Tämä aineisto varattu toiselle asiakkaalle. Varaus ohitetaan, mutta ei peruuteta.</li>
+ [% ELSIF checkout_info.RESERVED %]
+ <li><i class="fa fa-li fa-warning"></i>Tämä aineisto varattu toiselle asiakkaalle.</li>
+ [% END %]
+
+ [% IF checkout_info.PREVISSUE %]
+ <li>Nide on ollut aikaisemmin lainassa tällä asiakkaalla.</li>
+ [% END %]
+ </ul>
+ [% END %]
+
+
+ [% IF checkout_info.alert.ITEM_LOST || checkout_info.alert.OTHER_CHARGES %]
+ <ul class="info">
+ [% IF checkout_info.alert.ITEM_LOST %]
+ <li>Tämä nide on merkitty kadonneeksi tilaan "[% checkout_info.alert.ITEM_LOST | html %]".</li>
+ [% END %]
+ [% IF checkout_info.alert.OTHER_CHARGES %]
+ <li>Asiakkaalla on maksamattomia maksuja varauksista, lainoista, tms [% checkout_info.alert.OTHER_CHARGES | $Price %].</li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% IF checkout_info.alert.RETURNED_FROM_ANOTHER %]
+ <div class="alert alert-warning">Nide oli lainassa asiakkaalla [% INCLUDE 'patron-title.inc' patron = checkout_info.alert.RETURNED_FROM_ANOTHER.patron %] ja se palautettiin automaattisesti.</div>
+ [% END %]
+
+ [% IF checkout_info.IMPOSSIBLE %]
+ <ul class="fa-ul error">
+ [% IF checkout_info.STATS  %]
+ <li><i class="fa fa-li fa-exclamation"></i>Sisäinen käyttö tilastoitu.</li>
+ [% END %]
+
+ [% IF checkout_info.NOT_FOR_LOAN %]
+ [% IF checkout_info.itemtype_notforloan %]
+ <li><i class="fa fa-li fa-exclamation"></i>Nidetyyppi ei ole lainattavissa.</li>
+ [% ELSIF checkout_info.item_notforloan %]
+ [% item_notforloan_lib = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => checkout_info.item_notforloan ) %]
+ <li><i class="fa fa-li fa-exclamation"></i>Ei lainattavissa [% IF item_notforloan_lib %]([% item_notforloan_lib | html %])[% END %] .</li>
+ [% END %]
+ [% END %]
+ [% IF checkout_info.WTHDRAWN %]
+ <li><i class="fa fa-li fa-exclamation"></i>Nide on poistettu kierrosta.</li>
+ [% END %]
+ [% IF checkout_info.RESTRICTED %]
+ <li><i class="fa fa-li fa-exclamation"></i>Niteellä on rajoituksia.</li>
+ [% END %]
+ [% IF checkout_info.GNA %]
+ <li><i class="fa fa-li fa-exclamation"></i>Tarkista osoite</li>
+ [% END %]
+ [% IF checkout_info.CARD_LOST %]
+ <li><i class="fa fa-li fa-exclamation"></i>Asiakkaan kortti on kadonnut</li>
+ [% END %]
+ [% IF checkout_info.DEBARRED %]
+ <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on lainarajoitus</li>
+ [% END %]
+ [% IF checkout_info.NO_MORE_RENEWALS %]
+ <li><i class="fa fa-li fa-exclamation"></i>Ei enää uusintakertoja jäljellä.</li>
+ [% END %]
+ [% IF checkout_info.EXPIRED %]
+ <li><i class="fa fa-li fa-exclamation"></i>Asiakkaan kortti on vanhentunut.</li>
+ [% END %]
+ [% IF checkout_info.ITEMNOTSAMEBRANCH %]
+ <li><i class="fa fa-li fa-exclamation"></i>Tämä nide kuuluu kirjastoon [% Branches.GetName( checkout_info.itemhomebranch ) | html %], eikä sitä voida lainata tästä kirjastosta.</li>
+ [% END %]
+ [% IF checkout_info.USERBLOCKEDREMAINING %]
+ <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on myöhässä olevia lainoja, ja on lainauskiellossa [% checkout_info.USERBLOCKEDREMAINING | html %] päivää.</li>
+ [% END %]
+ [% IF checkout_info.USERBLOCKEDOVERDUE %]
+ <li><i class="fa fa-li fa-exclamation"></i>Lainaus estetty, koska asiakkaalla on erääntyneitä lainoja.</li>
+ [% END %]
+ [% IF checkout_info.TOO_MANY %]
+ <li><i class="fa fa-li fa-exclamation"></i>Liikaa lainoja.</li>
+ [% END %]
+ [% IF checkout_info.UNKNOWN_BARCODE %]
+ <li><i class="fa fa-li fa-exclamation"></i>Viivakoodia [% checkout_info.barcode | html %] ei löytynyt.</li>
+ [% END %]
+ [% IF checkout_info.DEBT %]
+ <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on velkoja [% checkout_info.DEBT | $Price %].</li> <!-- Need debt_confirmed -->
+ [% END %]
+ </p>
+ [% END %]
+
+ [% IF checkout_info.issue.date_due %]
+ <ul>
+ <li>Eräpäivä [% checkout_info.issue.date_due | $KohaDates as_due_date => 1 %]</li>
+ </ul>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+
+ [% IF confirmation_needed && CAN_user_circulate_force_checkout %]
+ <fieldset>
+ <legend>Vahvista lainaus</legend>
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="issueconfirmed" value="1" />
+ <input type="hidden" name="debt_confirmed" value="1" />
+ <input type="hidden" name="branch" value="[% branch | html %]" />
+ <input type="hidden" name="duedatespec" value="[% duedatespec | html %]" />
+ <input type="hidden" name="batch" value="1" />
+ <input type="hidden" name="op" value="cud-checkout" />
+ <input type="hidden" name="onsite_checkout" value="[% onsite_checkout | html %]" />
+ <input class="btn btn-primary" id="checkoutrenew" type="submit" value="Lainaa tai uusi laina" />
+ </fieldset>
+ </form>
+ [% END %]
+
+[% ELSE %]
+ <div class="alert alert-info">Asiakasta ei ole olemassa. <a href="/cgi-bin/koha/members/members-home.pl">Etsi toinen asiakas?</a></div>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+ [% IF patron %]
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ [% END %]
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            if($('#barcodelist').length) {
+                $('#barcodelist').focus();
+            } else if ($('#checkoutrenew').length) {
+                $('#checkoutrenew').focus();
+            }
+            $("#checkout_infos").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "dom": 't',
+                "order": [],
+                "columnDefs": [
+                    { "orderable": false, "searchable":  false, "targets": [ 'NoSort' ] },
+                    { "type": "anti-the", "targets":  [ "anti-the" ] }
+                ],
+                "paginate": false
+            }));
+        });
+        // On-site batch checkout
+        function toggle_onsite_checkout(){
+            if ( $("#onsite_checkout").prop('checked') ) {
+                const duedatespec_fp = document.querySelector("#duedatespec")._flatpickr;
+                duedatespec_fp.setDate("[% today_due_date_and_time | $KohaDates dateformat => 'iso', with_hours => 1 %]");
+            };
+        };
+
+        $("#onsite_checkout").click(function(){
+            toggle_onsite_checkout();
+        });
+    </script>
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

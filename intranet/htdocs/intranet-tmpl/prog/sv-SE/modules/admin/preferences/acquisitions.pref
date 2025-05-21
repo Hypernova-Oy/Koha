@@ -1,0 +1,184 @@
+---
+acquisitions.pref:
+  EDIFACT:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      default: no
+      pref: EDIFACT
+    - meddelandeutbyte för förvärv
+  - - choices:
+        automatic: Importera
+        manual: Importera inte
+      default: no
+      pref: EdifactInvoiceImport
+    - automatisk import av EDIFACT-fakturor när de laddas ner.
+  - - 'Mappa sekvenskod (GIR:LSQ) fältet till '
+    - choices:
+        ccode: avdelning
+        location: placering
+      default: location
+      pref: EdifactLSQ
+    - i exemplar.
+  Policy:
+  - - Skapa ett exemplar när
+    - choices:
+        cataloguing: posten katalogiseras.
+        ordering: beställning genomförs.
+        receiving: en beställning inkommer.
+      pref: AcqCreateItem
+    - Detta är bara grundinställningen och den kan ändras per beställning.
+  - - 'Följande <a href=''http://schema.koha-community.org/__VERSION__/tables/items.html''
+      target=''blank''>databaskolumner</a> bör vara unika för varje exemplar:'
+    - pref: UniqueItemFields
+      source: items
+      type: modalselect
+  - - När en korg stängs eller öppnas igen,
+    - choices:
+        '1': be alltid om bekräftelse.
+        '2': be inte om bekräftelse.
+      default: 1
+      pref: BasketConfirmations
+  - - choices:
+        '0': Tillåt inte att
+        '1': Tillåt
+      pref: CancelOrdersInClosedBaskets
+    - beställningsrader avbryts i stängda korgar.
+  - - Visa korgar
+    - choices:
+        all: i system, oavsett ägare.
+        branch: från den anställdes bibliotek.
+        user: skapade eller hanterade av personal.
+      pref: AcqViewBaskets
+  - - Visa valutor med följande format
+    - choices:
+        CH: 360'000.00 (CH)
+        FR: 360 000,00 (FR)
+        US: 360,000.00 (US)
+      pref: CurrencyFormat
+  - - Skattenivåer är
+    - pref: TaxRates
+    - . Ange i numeriskt format, 0,12 för 12%. Det första exemplaret i listan är valt
+      som standard. För fler än ett värde används | (lodstreck) som separator.
+    - '<br/><strong>OBS:</strong> Obs: Databasen accepterar endast värden med upp
+      till fyra decimalers precision, ytterligare decimaler avrundas.'
+    - <br/><strong>OBS:</strong> Information om leverantörens skattesats kan behöva
+      uppdateras om skattesatsvärdena tas bort.
+  - - choices:
+        '0': Exkludera
+        '1': Inkludera
+      pref: CalculateFundValuesIncludingTax
+    - skatt i de sammanräknade värdena (använt, beställt). Observera att denna regel
+      tillämpas på alla leverantörer oavsett inställning
+  - - choices:
+        '0': Varna inte
+        '1': Varna
+      pref: AcqWarnOnDuplicateInvoice
+    - när bibliotekarien försöker skapa en faktura med ett duplicerat nummer.
+  - - 'Vid ankomstregistrering av exemplar, uppdatera delfält om de skapades via inköpsmodulen
+      (t.ex. o=5|a="foo bar"):'
+    - pref: AcqItemSetSubfieldsWhenReceived
+  - - 'Om ett kvitto avbryts, uppdatera exemplarets delfält om de skapades via inköpsmodulen
+      (t.ex. o=5|a="foo bar"):'
+    - pref: AcqItemSetSubfieldsWhenReceiptIsCancelled
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: AcqEnableFiles
+    - möjligheten att ladda upp och bifoga vilka filer som helst till fakturor.
+  - - Ställ in mappningsvärden för en ny beställningsrad skapad från en MARC-post
+      i en förberedd fil.
+    - pref: MarcFieldsToOrder
+      syntax: text/x-yaml
+      type: textarea
+    - '<p>Du kan använda följande fält: price, quantity, budget_code, discount, sort1,
+      sort2</p>'
+    - '<p>Till exempel:<br/>price: 947$a|947$c<br/>quantity: 969$h<br/>budget_code:
+      922$a </p>'
+  - - Ställ in mappningsvärden för en ny beställningsrad skapad från en MARC-post
+      i en förberedd fil.
+    - pref: MarcItemFieldsToOrder
+      syntax: text/x-yaml
+      type: textarea
+    - 'Du kan använda följande fält: homebranch, holdingbranch, itype, nonpublic_note,
+      public_note, loc, ccode, notforloan, uri, copyno, price, replacementprice och
+      itemcallnumber. Specialfält: quantity och budget_code'
+    - '<br/>Till exempel:<br/>holdingbranch: 975$b<br/>itype: 975$9|975$z'
+    - '<p>Om ett fält saknas eller inte är mappat kommer <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=MarcFieldsToOrder">MarcFieldsToOrder</a>
+      att kontrolleras och användas för det fältet (undantag: quantity).</p>'
+  - - choices:
+        '0': Skicka inte
+        '1': Skicka
+      default: no
+      pref: ClaimsBccCopy
+    - dold kopia (BCC) till inloggad användare vid skickande av kravbrev för tidskrifter
+      eller inköp.
+  - - Spara accepterade eller avvisade inköpsförslag under en period av
+    - class: integer
+      pref: PurgeSuggestionsOlderThan
+    - 'dagar. Exempel: [30] Rensar förslag som är äldre än 30 dagar.'
+    - <br><strong>VARNING:</strong> Lämna det här fältet tomt om du inte vill aktivera
+      den här automatiska funktionen.
+    - <br><strong>NOTERA:</strong> Den här systeminställningen kräver cronjobbet <code>misc/cronjobs/purge_suggestions.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - choices:
+        '': Avrunda inte
+        nearest_cent: Avrunda
+      default: ''
+      pref: OrderPriceRounding
+    - till närmaste krona.<br>
+    - Avgör om exakta summan eller avrundning ska användas när en summa beräknas.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      default: no
+      pref: UseACQFrameworkForBiblioRecords
+    - ramverket 'ACQ' för fält i bibliografiska poster.
+  - - 'Välj vilken e-postadress nya inköpsförslag ska skickas till: '
+    - choices:
+        '0': ingen
+        BranchEmailAddress: bibliotekets e-postadress
+        EmailAddressForSuggestions: EmailAddressForSuggestions
+        KohaAdminEmailAddress: KohaAdminEmailAddress
+      default: 0
+      pref: EmailPurchaseSuggestions
+    - '<br>Om du väljer <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForSuggestions">EmailAddressForSuggestions</a>
+      så måste du ange en giltig e-postadress:'
+    - class: email
+      pref: EmailAddressForSuggestions
+  - - Använd från-adressen
+    - class: email
+      pref: AcquisitionsDefaultEmailAddress
+    - när meddelanden om beställningar och reklamationer skickas.
+    - '<br>Om det här lämnas tomt så kommer meddelandet gå till den första e-postadressen
+      i följande lista: bibliotekets e-post, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>
+      och <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  - - Använd reply-to-adressen
+    - class: email
+      pref: AcquisitionsDefaultReplyTo
+    - när meddelanden om beställningar och reklamationer skickas.
+    - 'Om det här lämnas tomt så kommer meddelandet gå till den första e-postadressen
+      i följande lista: Library ReplyTo, Library Email, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>
+      och <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      default: no
+      pref: MarcOrderingAutomation
+    - automatiskt skapande av orderrader från MARC-poster.
+  Utskrift:
+  - - Använd
+    - choices:
+        pdfformat::layout1page: Engelska 1 sida
+        pdfformat::layout2pages: Engelska 2 sidor
+        pdfformat::layout2pagesde: Tyska 2 sidor
+        pdfformat::layout3pages: Engelska 3 sidor
+        pdfformat::layout3pagesfr: Franska 3 sidor
+      pref: OrderPdfFormat
+    - layout vid utskrift av korggrupper.
+  - - 'Text som ska användas i tabell för beställningar i English 1-PDF. Obs: Enter
+      skapar radbrytningar.'
+    - <br><strong>OBS:</strong>För att inte det sista i din text ska försvinna, spara
+      inte fler än tre rader text i denna systempreferens.</span>
+    - pref: 1PageOrderPDFText
+      type: textarea

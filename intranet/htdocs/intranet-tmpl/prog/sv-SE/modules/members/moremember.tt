@@ -1,0 +1,818 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Context %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% USE KohaDates %]
+[% USE AuthorisedValues %]
+[% USE TablesSettings %]
+[% USE Price %]
+[% PROCESS 'member-display-address-style.inc' %]
+[% PROCESS 'member-display-alt-address-style.inc' %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% UNLESS blocking_error %]
+ [% t("Patron details for") | html %] [% INCLUDE 'patron-title.inc' no_html = 1 %]
+ [% END %] &rsaquo;
+ [% t("Patrons") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="pat_moremember" class="pat">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+ [% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Låntagare</a>
+ [% END %]
+ [% UNLESS blocking_error %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">
+ [% INCLUDE 'patron-title.inc' %]
+ </a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Detaljer</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+
+ [% INCLUDE 'members-toolbar.inc' %]
+
+ [% IF is_anonymous %]
+ <div class="alert alert-warning">Det här är en anonym låntagare.</div>
+ [% END %]
+
+ [% IF ( error ) %]
+ <div class="alert alert-warning">
+ [% IF ( error == 'CANT_DELETE_STAFF' ) %]
+ <h3>Personalanvändaren kan inte tas bort</h3>
+ <p>Otillräckliga rättigheter.</p>
+ [% END %]
+ [% IF ( error == 'CANT_DELETE_YOURSELF' ) %]
+ <h3>Får inte ta bort eget konto</h3>
+ <p>Tar du bort ditt eget konto kan du inte komma in i Koha.</p>
+ [% END %]
+ [% IF ( error == 'CANT_DELETE_OTHERLIBRARY' ) %]
+ <h3>Det går inte att ta bort låntagare från andra bibliotek med nuvarande inställningar</h3>
+ <p>Otillräckliga rättigheter.</p>
+ [% END %]
+ [% IF ( error == 'CANT_DELETE_ANONYMOUS_PATRON' ) %]
+ <h3>Det går inte att ta bort en låntagare som är satt till AnonymousPatron</h3>
+ <p>Låntagaren kan inte tas bort så länge den är AnonymousPatron i systeminställningarna.</p>
+ [% END %]
+ [% IF ( error == 'CANT_DELETE' ) %]
+ <h3>Kan inte ta bort låntagaren</h3>
+ <p>Otillräckliga rättigheter.</p>
+ [% END %]
+ </div>
+ [% END %]
+
+ <div class="row">
+
+ [% IF ( was_renewed ) %]
+ <div class="alert alert-info">
+ Låntagarens konto har förnyats till [% patron.dateexpiry | $KohaDates %] </div>
+ [% END %]
+
+ [% messages = INCLUDE 'patron_messages.inc' moremember = 1 | trim %]
+ [% IF messages %]
+ <div class="col-sm-12">
+ <div id="patron_messages" class="circmessage attention">
+ [% messages | $raw %]
+ </div>
+ </div>
+ [% END %]
+
+ <div class="col-sm-12">
+ <h1>[% INCLUDE 'patron-title.inc' no_html = 1 %]</h1>
+
+ [% IF patron.pronouns %]
+ <div class="patronpronouns">([% patron.pronouns | html %])</div>
+ [% END %]
+ </div>
+
+ <div class="col-sm-6">
+
+ <div id="patron-information" class="patroninfo-section">
+
+ <div class="patroninfo-heading">
+ <h3>Kontaktinformation</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ [% IF ( guarantor.borrowernumber ) %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=1&amp;guarantorid=[% guarantor.borrowernumber | html %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ [% ELSE %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=1"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ [% END %]
+ [% END %]
+ </div>
+
+ [% IF ( patron.othernames ) %]<div>&ldquo;[% patron.othernames | html %]&rdquo;</div>[% END %]
+
+ <div class="address">
+ <ul>
+ [% PROCESS 'display-address-style' %]
+ </ul>
+ </div>
+
+ <div class="rows">
+ <ol>
+ [% IF ( patron.preferred_name && patron.firstname ) %]
+ <li id="patron_first_name">
+ <span class="label patron_first_name">Förnamn: </span>
+ [% patron.firstname | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.phone ) %]
+ <li>
+ <span class="label">Primär telefon: </span>
+ <a href="tel:[% patron.phone | uri %]">[% patron.phone | html %]</a>
+ </li>
+ [% END %]
+ [% IF ( patron.phonepro ) %]
+ <li>
+ <span class="label">Sekundärt telefonnummer: </span>
+ <a href="tel:[% patron.phonepro | uri %]">[% patron.phonepro | html %]</a>
+ </li>
+ [% END %]
+ [% IF ( patron.mobile ) %]
+ <li>
+ <span class="label">Annan telefon: </span>
+ <a href="tel:[% patron.mobile | uri %]">[% patron.mobile | html %]</a>
+ </li>
+ [% END %]
+ [% IF ( patron.fax ) %]
+ <li>
+ <span class="label">Fax: </span>
+ [% patron.fax | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.email ) %]
+ <li class="email">
+ <span class="label">Primär e-post:</span>
+ <a title="[% patron.email | html %]" href="mailto:[% patron.email | url %]">[% patron.email | html %]</a>
+ </li>
+ [% END %]
+ [% IF ( patron.emailpro ) %]
+ <li class="email">
+ <span class="label">Sekundär e-post: </span>
+ <a title="[% patron.emailpro | html %]" href="mailto:[% patron.emailpro | url %]">[% patron.emailpro | html %]</a>
+ </li>
+ [% END %]
+ [% UNLESS ( I ) %]
+ [% IF ( patron.initials ) %]
+ <li>
+ <span class="label">Initialer: </span>
+ [% patron.initials | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.dateofbirth ) %]
+ <li>
+ <span class="label">Födelsedatum:</span>
+ [% INCLUDE 'patron-age.inc' %]
+ </li>
+ [% END %]
+ [% IF ( patron.sex ) %]
+ <li>
+ <span class="label">Kön:</span>
+ [% IF ( patron.sex == 'F' ) %]<span class="patronsex-female">Kvinna</span>[% ELSIF ( patron.sex == 'M' ) %]<span class="patronsex-male">Man</span>[% ELSIF (patron.sex == 'O' ) %]<span class="patronsex-other">[% tp('gender', 'Other') | html %]</span>[% ELSE %][% patron.sex | html %][% END %]
+ </li>
+ [% END %]
+ [% END %]
+ [% IF Koha.Preference("borrowerRelationship") %]
+ <li id="patron-privacyguarantor">
+ <span class="label">Visa lån för vårdnadshavare:</span>
+ [% IF patron.privacy_guarantor_checkouts %] Ja [% ELSE %] Nej [% END %] </li>
+
+ <li id="patron-privacy_guarantor_fines">
+ <span class="label">Visa avgifter för vårdnadshavare:</span>
+ [% IF patron.privacy_guarantor_fines %] Ja [% ELSE %] Nej [% END %] </li>
+ [% END %]
+ [% IF guarantees %]
+ <li>
+ <span class="label">Under förmyndarskap:</span>
+ <ul>
+ [% IF guarantees_fines and guarantees_fines > 0 %]
+ <li class="guarantees-fines">
+ <span class="circ-hlt">Avgifter:</span>
+ De låntagaren är vårdnadshavare för är tillsammans skyldiga [% guarantees_fines | $Price %]. <a id="view_guarantees_finesandcharges" href="#guarantees_finesandcharges_panel" >Se alla avgifter.</a>
+ </li>
+ [% END %]
+ [% FOREACH guarantee IN guarantees %]
+ [% IF logged_in_user.can_see_patron_infos( guarantee ) %]
+ <li><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% guarantee.borrowernumber | uri %]">[% guarantee.firstname | html %] [% guarantee.surname | html %]</a></li>
+ [% ELSE %]
+ <li>[% guarantee.preferred_name | html %] [% guarantee.surname | html %]</li>
+ [% END %]
+ [% END %]
+ </ul>
+ </li>
+ [% ELSIF guarantor_relationships.count > 0 OR ( patron.contactfirstname OR patron.contactname ) %]
+ <li>
+ [% IF guarantor_relationships.count > 1 OR guarantor_relationships.count == 0 AND ( patron.contactfirstname OR patron.contactname ) %]
+ <span class="label">Vårdnadshavare:</span>
+ [% ELSE %]
+ <span class="label">Vårdnadshavare:</span>
+ [% END %]
+ <ul>
+ [% FOREACH gr IN guarantor_relationships %]
+ [% SET guarantor = gr.guarantor %]
+ [% IF logged_in_user.can_see_patron_infos( guarantor ) %]
+ <li><a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% guarantor.id | uri %]">[% guarantor.preferred_name | html %] [% guarantor.surname | html %][% IF gr.relationship %] ([% gr.relationship | html %])[% END %]</a></li>
+ [% END %]
+ [% END %]
+ [% IF patron.contactfirstname OR patron.contactname %]
+ <li>[% patron.contactfirstname | html %] [% patron.contactname | html %][% IF patron.relationship %] ([% patron.relationship | html %])[% END %]</li>
+ [% END %]
+ </ul>
+ </li>
+ [% END %]
+
+ [% IF ( patron.primary_contact_method ) %]
+ <li>
+ <span class="label">Föredraget kontaktsätt: </span>
+ [% SWITCH patron.primary_contact_method %]
+ [% CASE 'phone' %]
+ <span>Primär telefon</span>
+ [% CASE 'phonepro' %]
+ <span>Sekundärt telefonnummer</span>
+ [% CASE 'mobile' %]
+ <span>Annan telefon</span>
+ [% CASE 'email' %]
+ <span>Primär e-post</span>
+ [% CASE 'emailpro' %]
+ <span>Sekundär e-post</span>
+ [% CASE 'fax' %]
+ <span>Fax</span>
+ [% END %]
+ </li>
+ [% END %]
+ </ol>
+ </div> [% # /div.rows %]
+ </div> [% # /div#patron-information %]
+
+ [% IF Koha.Preference('HouseboundModule') %]
+ <div id="houseboundroles" class="patroninfo-section">
+ [% IF ( housebound_role.housebound_chooser == 1 OR housebound_role.housebound_deliverer == 1 ) %]
+ <div class="patroninfo-heading">
+ <h3>Boken kommer-roller</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=7"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ [% END %]
+ </div>
+ <div class="rows">
+ <ol>
+ <li>
+ <span class="label">Väljare:</span>
+ [% IF ( housebound_role.housebound_chooser == 1 ) %] Ja [% ELSE %] Nej [% END %] </li>
+ <li>
+ <span class="label">Leverantör:</span>
+ [% IF ( housebound_role.housebound_deliverer == 1 ) %] Ja [% ELSE %] Nej [% END %] </li>
+ </ol>
+ </div>
+ [% ELSE %]
+ <div class="patroninfo-heading">
+ <h3>Boken kommer-roller</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=7"><i class="fa fa-plus"></i> Lägg till</a>
+ [% END %]
+ </div>
+ [% END %]
+ </div> [% #/ div#houseboundroles %]
+ [% END %]
+
+ [% IF Koha.Preference('ExtendedPatronAttributes') %]
+ [% UNLESS ( no_patron_attribute_types ) %]
+ <div id="patron-extended-attributes" class="patroninfo-section">
+ [% IF ( attributes_loop ) %]
+ <div class="patroninfo-heading">
+ <h3>Ytterligare attribut och identifierare</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=4"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ [% END %]
+ </div>
+ [% FOREACH attribute IN attributes_loop %]
+ [% IF attribute.class %]
+ <div id="aai_[% attribute.class | html %]" class="rows">
+ [% ELSE %]
+ <div id="aai" class="rows">
+ [% END %]
+ <h4>[% attribute.lib | html %]</h4>
+ <ol>
+ [% FOREACH item IN attribute.items %]
+ <li data-pa_code="[% item.type.code | replace('[^a-zA-Z0-9_-]', '') %]">
+ <span class="label">[% item.type.description | html %]: </span>
+ [% IF item.type.is_date %]
+ [% item.description | $KohaDates %]
+ [% ELSE %]
+ [% item.description | html_line_break %]
+ [% END %]
+ </li>
+ [% END %]
+ </ol>
+ </div>
+ [% END %]
+ <div class="action">
+ </div>
+ [% ELSE %]
+ <div class="patroninfo-heading">
+ <h3>Ytterligare attribut och identifierare</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=4"><i class="fa fa-plus"></i> Lägg till</a>
+ [% END %]
+ </div>
+ [% END %]
+ </div> [% # /div#patron-extended-attributes %]
+ [% END %]
+ [% END %]
+
+ [% IF ( EnhancedMessagingPreferences ) %]
+ <div id="patron-messaging-prefs" class="patroninfo-section">
+ <div class="patroninfo-heading">
+ <h3>Meddelandeinställningar för låntagare</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=5"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ [% END %]
+ </div>
+ [% INCLUDE 'messaging-preference-form.inc' %]
+ [% IF Koha.Preference('SMSSendDriver') %]
+ <div class="rows">
+ <ol>
+ [% IF patron.smsalertnumber %]
+ <li>
+ <span class="label">SMS-nummer:</span>
+ <a href="sms:[% patron.smsalertnumber | uri %]">[% patron.smsalertnumber | html %]</a>
+ </li>
+ [% END %]
+ [% IF Koha.Preference( 'SMSSendDriver') == 'Email' && patron.sms_provider.name %]
+ <li>
+ <span class="label">SMS-leverantör:</span>
+ [% patron.sms_provider.name | html %]
+ </li>
+ [% END %]
+ </ol>
+ </div>
+ [% END %]
+ </div> [% # /div#patron-messaging-prefs %]
+ [% END %]
+
+ </div> <!-- /.col-sm-6 -->
+
+ <div class="col-sm-6">
+ <div id="patron-library-details" class="patroninfo-section">
+ <div class="patroninfo-heading">
+ <h3>Biblioteksanvändning</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=3"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ [% END %]
+ </div>
+ <div class="rows">
+ <ol>
+ <li id="patron-cardnumber">
+ <span class="label">Kortnummer: </span>
+ [% patron.cardnumber | html %]
+ </li>
+ <li id="patron-borrowernumber">
+ <span class="label">Låntagarnummer: </span>
+ [% patron.borrowernumber | html %]
+ </li>
+ <li id="patron-categorydescription">
+ <span class="label">Kategori: </span>
+ [% patron.category.description | html %] ([% patron.categorycode | html %])
+ </li>
+ <li id="patron-dateenrolled">
+ <span class="label">Registreringsdatum: </span>
+ [% patron.dateenrolled | $KohaDates %]
+ </li>
+
+ [% IF ( patron.date_renewed ) %]
+ <li id="patron-daterenewed">
+ <span class="label">Förnyelsedatum: </span>
+ [% patron.date_renewed | $KohaDates %]
+ </li>
+ [% END %]
+
+ <li id="patron-expirationdate">
+ <span class="label">Utgångsdatum: </span>
+ [% IF ( was_renewed ) %]
+ <strong class="reregistrinfo">[% patron.dateexpiry | $KohaDates %]</strong>
+ [% ELSIF ( patron.is_expired ) %]
+ <span class="blocker">
+ [% patron.dateexpiry | $KohaDates %]
+ <strong><em>Utgången</em></strong>
+ <a href="/cgi-bin/koha/members/setstatus.pl?borrowernumber=[% patron.borrowernumber | uri %]&amp;reregistration=y">Låna om</a> eller <a href="/cgi-bin/koha/members/memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | uri %]">Redigera detaljer</a>
+ </span>
+ [% ELSIF ( patron.is_going_to_expire ) %]
+ [% patron.dateexpiry | $KohaDates %]
+ <strong><em>Låntagaren inaktiveras snart</em></strong>
+ <a href="/cgi-bin/koha/members/setstatus.pl?borrowernumber=[% patron.borrowernumber | uri %]&amp;reregistration=y">Låna om</a> eller <a href="/cgi-bin/koha/members/memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | uri %]">Redigera detaljer</a>
+ [% ELSE %]
+ [% patron.dateexpiry | $KohaDates %]
+ [% END %]
+ </li>
+ <li id="patron-branchname">
+ <span class="label">Bibliotek: </span>
+ [% Branches.GetName( patron.branchcode ) | html %]
+ </li>
+
+ [% IF Koha.Preference( 'OPACPrivacy') %]
+ <li id="patron-privacypref">
+ <span class="label">Sekretessinställn.:</span>
+ [% IF ( patron.privacy == 0 ) %]<span>För alltid</span>[% END %]
+ [% IF ( patron.privacy == 1 ) %]<span>Standard</span>[% END %]
+ [% IF ( patron.privacy == 2 ) %]<span>Aldrig</span>[% END %]
+ </li>
+ [% END %]
+
+ [% IF ( patron.sort1 ) %]
+ <li id="patron-sort1">
+ <span class="label">Sorteringsfält 1:</span>
+ [% AuthorisedValues.GetByCode('Bsort1', patron.sort1) | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.sort2 ) %]
+ <li id="patron-sort2">
+ <span class="label">Sorteringsfält 2:</span>
+ [% AuthorisedValues.GetByCode('Bsort2', patron.sort2) | html %]
+ </li>
+ [% END %]
+ [% UNLESS ( patron.autorenew_checkouts ) %]
+ <li id="patron-autorenew_checkouts">
+ <span class="label">Automatiskt omlån:</span>
+ Låntagaren har valt bort detta </li>
+ [% END %]
+ <li id="patron-username">
+ <span class="label">Användarnamn: </span>
+ [% patron.userid | html %]
+ </li>
+ <li id="patron-password">
+ <span class="label">Lösenord: </span>
+ [% IF ( patron.password ) %]
+ *******
+ [% ELSE %]
+ <i class="fa fa-exclamation-circle problem" aria-hidden="true"></i> <a href="/cgi-bin/koha/members/member-password.pl?member=[% patron.borrowernumber | uri %]">Odefinierad</a>
+ [% END %]
+ </li>
+ [% IF CAN_user_superlibrarian %]
+ <li id="patron-password_expiration_date">
+ <span class="label">Lösenord går ut:</span>
+ [% IF ( patron.password_expiration_date ) %]
+ [% patron.password_expiration_date | $KohaDates %]
+ [% ELSE %]
+ <span>Aldrig</span>
+ [% END %]
+ </li>
+ [% END %]
+ <li id="patron-protected">
+ <span class="label">Skyddad: </span>
+ [% IF ( patron.protected == 1 ) %] Ja [% ELSE %] Nej [% END %] </li>
+
+ [% IF ( patron.borrowernotes ) %]
+ <li id="patron-borrowernotes">
+ <span class="label">Kommentar: </span><br />
+ [% patron.borrowernotes | $raw | html_line_break %]
+ </li>
+ [% END %]
+
+ [% IF ( patron.opacnote ) %]
+ <li id="patron-opacnote">
+ <span class="label">OPAC-kommentar:</span><br />
+ [% patron.opacnote | html | html_line_break %]
+ </li>
+ [% END %]
+
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' ) %]
+ <li id="patron-checkprev">
+ <span class="label">Kontrollera tidigare lån: </span>
+ [% IF ( patron.checkprevcheckout == 'yes' ) %]
+ <span>Ja</span>
+ [% ELSIF ( patron.checkprevcheckout == 'no' ) %]
+ <span>Nej</span>
+ [% ELSE %]
+ <span>Ärvd</span>
+ [% END %]
+ </li>
+ [% END %]
+
+ [% IF Koha.Preference('TranslateNotices') %]
+ <li id="patron-translatenotices">
+ <span class="label">Valt språk för meddelanden: </span>
+ [% translated_language | html %]
+ </li>
+ [% END %]
+
+ <li id="patron-flags-gonenoaddress">
+ [% IF patron.gonenoaddress %]
+ <span class="label error">Adress i behov av kontroll:</span>
+ <span class="error">Ja</span>
+ [% ELSE %]
+ <span class="label">Adress i behov av kontroll:</span>
+ <span>Nej</span>
+ [% END %]
+ </li>
+
+ <li id="patron-flags-lostcard">
+ [% IF patron.lost %]
+ <span class="label error">Borttappat kort:</span>
+ <span class="error">Ja</span>
+ [% ELSE %]
+ <span class="label">Borttappat kort:</span>
+ <span>Nej</span>
+ [% END %]
+ </li>
+ </ol>
+ </div> [% # /div.rows %]
+ </div> [% # /div#patron-library-details %]
+
+ <div id="patron-alternate-address" class="patroninfo-section">
+ [% IF ( patron.B_phone || patron.B_email || patron.contactnote || patron.B_address || patron.B_address2 || patron.B_city || patron.B_zipcode || patron.B_country ) %]
+ <div class="patroninfo-heading">
+ <h3>Alternativ adress</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=6"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ [% END %]
+ </div>
+ <div class="address">
+ <ul>
+ [% PROCESS 'display-alt-address-style' %]
+ </ul>
+ </div>
+ <div class="rows">
+ <ol>
+ [% IF ( patron.B_phone ) %]
+ <li id="patron-bphone">
+ <span class="label">Telefon: </span>
+ <a href="tel:[% patron.B_phone | uri %]">[% patron.B_phone |html  %]</a>
+ </li>
+ [% END %]
+
+ [% IF ( patron.B_email ) %]
+ <li id="patron-bemail" class="email">
+ <span class="label">E-post: </span>
+ <a title="[% patron.B_email | html %]" href="mailto:[% patron.B_email | url %]">[% patron.B_email |html %]</a>
+ </li>
+ [% END %]
+
+ [% IF ( patron.contactnote ) %]
+ <li id="patron-contactnote">
+ <span class="label">Kontaktmeddelande: </span>
+ [% patron.contactnote |html %]
+ </li>
+ [% END %]
+ </ol>
+ </div>
+ [% ELSE %]
+ <div class="patroninfo-heading">
+ <h3 class="inline">Alternativ adress</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=6"><i class="fa fa-plus"></i> Lägg till</a>
+ [% END %]
+ </div>
+ [% END %]
+ </div> [% # /div#patron-alternate-address %]
+
+ <div id="patron-alternative-contact" class="patroninfo-section">
+ [% IF ( patron.altcontactsurname || patron.altcontactfirstname || patron.altcontactaddress1 || patron.altcontactaddress2 || patron.altcontactaddress3 || patron.altcontactstate || patron.altcontactzipcode || patron.altcontactcountry || patron.altcontactphone ) %]
+ <div class="patroninfo-heading">
+ <h3>Alternativ kontakt</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=2"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ [% END %]
+ </div>
+ <div class="rows">
+ <ol>
+ [% IF ( patron.altcontactsurname ) %]
+ <li id="patron-altcontactsurname">
+ <span class="label">Efternamn: </span>
+ [% patron.altcontactsurname | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.altcontactfirstname ) %]
+ <li id="patron-altcontactfirstname">
+ <span class="label">Förnamn: </span>
+ [% patron.altcontactfirstname | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.altcontactaddress1 ) %]
+ <li id="patron-altcontactaddress1">
+ <span class="label">Adress: </span>
+ [% patron.altcontactaddress1 | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.altcontactaddress2 ) %]
+ <li id="patron-altcontactaddress2">
+ <span class="label">Adress 2: </span>
+ [% patron.altcontactaddress2 | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.altcontactaddress3 ) %]
+ <li id="patron-altcontactaddress3">
+ <span class="label">Ort: </span>
+ [% patron.altcontactaddress3 | html %]
+ </li>
+ [% END %]
+
+ [% IF ( patron.altcontactstate ) %]
+ <li id="patron-altcontactstate">
+ <span class="label">Delstat: </span>
+ [% patron.altcontactstate | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.altcontactzipcode ) %]
+ <li id="patron-altcontactzipcode">
+ <span class="label">Postnummer: </span>
+ [% patron.altcontactzipcode | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.altcontactcountry ) %]
+ <li id="patron-altcontactcountry">
+ <span class="label">Land: </span>
+ [% patron.altcontactcountry | html %]
+ </li>
+ [% END %]
+ [% IF ( patron.altcontactphone ) %]
+ <li id="patron-altcontactphone">
+ <span class="label">Telefon: </span>
+ <a href="tel:[% patron.altcontactphone | url %]">[% patron.altcontactphone | html %]</a>
+ </li>
+ [% END %]
+ </ol>
+ </div> [% # /div.rows %]
+ [% ELSE %]
+ <div class="patroninfo-heading">
+ <h3>Alternativ kontakt</h3>
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <a class="btn btn-default btn-xs" href="memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | html %]&amp;step=2"><i class="fa fa-plus"></i> Lägg till</a>
+ [% END %]
+ </div>
+ [% END %]
+ </div> [% # /div#patron-alternative-contact %]
+
+ [% IF Koha.Preference('EnableBorrowerFiles') %]
+ <div id="patron-files" class="patroninfo-section">
+ <div class="patroninfo-heading">
+ <h3>Filer</h3>
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/members/files.pl?borrowernumber=[% patron.borrowernumber | uri %]"><i class="fa fa-list"></i> Hantera</a>
+
+ [% IF ( files ) %]
+ <div class="rows">
+ <ol>
+ [% FOREACH f IN files %]
+ <li>
+ <a href="/cgi-bin/koha/members/files.pl?borrowernumber=[% patron.borrowernumber | uri %]&amp;op=download&amp;file_id=[% f.file_id | uri %]">[% f.file_name | html %]</a>
+ [% IF ( f.file_description ) %]
+ - [% f.file_description | html %]
+ [% END %]
+ </li>
+ [% END # /FOREACH f %]
+ </ol>
+ </div>
+ [% END # /IF files %]
+
+ </div> <!-- /.patroninfo-heading -->
+ </div> <!-- /#patron-files -->
+ [% END # /IF EnableBorrowerFiles %]
+
+ </div> <!-- /div.col-sm-6 -->
+ </div> <!-- /div.row -->
+
+ [% INCLUDE 'patron-detail-tabs.inc' patronpage = "borrower" %]
+ </main>
+ </div> <!-- /.col-sm-10 order-sm-1 order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-sm-2 order-sm-2 order-md-1 -->
+ </div> <!-- /.row -->
+
+ [% IF Koha.Preference('ClaimReturnedLostValue') || Koha.Preference('BundleLostValue') %]
+ [% INCLUDE 'modals/resolve_return_claim.inc' %]
+ [% END %]
+
+ [% INCLUDE modals/cancel_booking.inc %]
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'select2.inc' %]
+ [% PROCESS 'modal-claims-js' %]
+ <script>
+        /* Set some variable needed in circulation.js */
+        var logged_in_user_borrowernumber = "[% logged_in_user.borrowernumber | html %]";
+        var ClaimReturnedLostValue = "[% Koha.Preference('ClaimReturnedLostValue') | html %]";
+        var ClaimReturnedChargeFee = "[% Koha.Preference('ClaimReturnedChargeFee') | html %]";
+        var ClaimReturnedWarningThreshold = "[% Koha.Preference('ClaimReturnedWarningThreshold') | html %]";
+        var UnseenRenewals = "[% Koha.Preference('UnseenRenewals') | html %]";
+        var interface = "[% interface | html %]";
+        var theme = "[% theme | html %]";
+        var borrowernumber = "[% patron.borrowernumber | html %]";
+        var branchcode = "[% Branches.GetLoggedInBranchcode() | html %]";
+        var exports_enabled = "[% Koha.Preference('ExportCircHistory') | html %]";
+        var AllowCirculate = [% (CAN_user_circulate_circulate_remaining_permissions)? 1 : 0 | html %];
+        var AllowRenewalLimitOverride = [% (CAN_user_circulate_override_renewals && Koha.Preference('AllowRenewalLimitOverride') )? 1: 0 | html %];
+        var AllowRenewalOnHoldOverride = [% (CAN_user_circulate_override_renewals && Koha.Preference('AllowRenewalOnHoldOverride') )? 1: 0 | html %];
+        var script = "moremember";
+        var relatives_borrowernumbers = new Array();
+        [% FOREACH b IN relatives_borrowernumbers %]
+            relatives_borrowernumbers.push("[% b | html %]");
+        [% END %]
+        var SuspendHoldsIntranet = [% ( Koha.Preference('SuspendHoldsIntranet') ) ? 1 : 0 | html %];
+    </script>
+ [% Asset.js("js/pages/circulation.js") | $raw %]
+ [% IF Koha.Preference('ClaimReturnedLostValue') || Koha.Preference('BundleLostValue') %]
+ [% Asset.js("js/resolve_claim_modal.js") | $raw %]
+ [% END %]
+ [% Asset.js("js/holds.js") | $raw %]
+ [% INCLUDE 'calendar.inc' %]
+ [% Asset.js("js/cancel_booking_modal.js") | $raw %]
+ [% Asset.js("js/combobox.js") | $raw %]
+ [% INCLUDE 'js-biblio-format.inc' %]
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ [% Asset.js("js/recalls.js") | $raw %]
+ [% Asset.js("js/form-submit.js") | $raw %]
+ <script>
+        const LoadCheckoutsTableDelay = 0;
+        const AlwaysLoadCheckoutsTable = [% Koha.Preference('AlwaysLoadCheckoutsTable') | html %];
+
+        table_settings_issues_table = [% TablesSettings.GetTableSettings( 'members', 'moremember', 'issues-table', 'json' ) | $raw %]
+        table_settings_relatives_issues_table = [% TablesSettings.GetTableSettings( 'members', 'moremember', 'relatives-issues-table', 'json' ) | $raw %]
+        table_settings_holds_table = [% TablesSettings.GetTableSettings( 'members', 'moremember', 'holds-table', 'json' ) | $raw %]
+        table_settings_bookings_table = [% TablesSettings.GetTableSettings( 'members', 'moremember', 'bookings-table', 'json' ) | $raw %]
+        CAN_user_circulate_manage_bookings = [% CAN_user_circulate_manage_bookings | $raw %]
+        patron_borrowernumber = [% patron.borrowernumber | $raw %]
+
+        function uncheck_sibling(me){
+            nodename=me.getAttribute("name");
+            if (nodename =="barcodes[]"){
+                var Node=me.parentNode.previousSibling;
+                while (Node.nodeName!="TD"){Node=Node.previousSibling}
+                var Nodes=Node.childNodes;
+                for (var i=0;i < Nodes.length;i++){
+                    if (Nodes[i].nodeName=="INPUT" && Nodes[i].getAttribute("type")=="checkbox"){
+                        Nodes[i].checked=false;
+                    }
+                }
+            } else {
+                var Node=me.parentNode.nextSibling;
+                while (Node.nodeName!="TD"){Node=Node.nextSibling}
+                var Nodes=Node.childNodes;
+                for (var i=0;i<Nodes.length;i++){
+                    if (Nodes[i].nodeName=="INPUT" && Nodes[i].getAttribute("type")=="checkbox"){
+                      Nodes[i].checked=false;
+                    }
+               }
+            }
+        }
+
+        $(document).ready(function () {
+            $("#finesholdsissues a[data-bs-toggle='tab']").on(
+                "shown.bs.tab",
+                function (e) {
+                    var oTable = $(
+                        "div.dt-container > table",
+                        $(e.target.hash)
+                    ).DataTable();
+                    if (oTable.length > 0) {
+                        oTable.columns().adjust();
+                    }
+                }
+            );
+
+            $("#view_restrictions").on("click", function () {
+                $("#reldebarments-tab").click();
+            });
+
+            $("#view_guarantees_finesandcharges").on("click", function () {
+                $("#guarantees_finesandcharges-tab").click();
+            });
+
+            $("#cancellation-reason").comboBox({
+                displayProperty: 'name',
+                placeholder: _("Select or type a reason"),
+            });
+        });
+    </script>
+ [% Asset.js("js/checkouts.js") | $raw %]
+ [% Asset.js("js/tables/bookings.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

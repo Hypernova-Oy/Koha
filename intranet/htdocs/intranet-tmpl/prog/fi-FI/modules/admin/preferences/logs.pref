@@ -1,0 +1,126 @@
+---
+Lokitiedostot:
+  Lokien kerääminen:
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: ClaimsLog
+    - hankinnan ja kausijulkaisujen reklamaatioiden lähettämisestä.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää loki
+      pref: BorrowersLog
+    - asiakastietojen ja asiakkaiden rajoitusten muutoksista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: CataloguingLog
+    - nimeketietueisiin ja niteisiin tehdyistä muutoksista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää loki
+      pref: AuthoritiesLog
+    - auktoriteettitietueiden muutoksista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: FinesLog
+    - velotetuista, maksetuista ja poistetuista maksuista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää loki
+      pref: HoldsLog
+    - kaikista varauksiin liittyvistä toimista (luonti, peruutus, keskeytys, jatkaminen,
+      jne).
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: IllLog
+    - kaukolainoihin tehdyistä muutoksista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: AcquisitionLog
+    - hankintoihin tehdyistä muutoksista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: IssueLog
+    - lainatuista niteistä.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: ReturnLog
+    - kun niteet palautetaan.
+  - - choices:
+        '0': Älä tallenna lokia
+        '1': Kerää loki
+      pref: RenewalLog
+    - milloin lainat uusitaan.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää loki
+      pref: SubscriptionLog
+    - lisätyistä, poistetuista tai muutetuista kausijulkaisuista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää loki
+      pref: CronjobLog
+    - cronjobien tiedoista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: ReportsLog
+    - raporttien lisäämisestä, poistamisesta ja muuttamisesta.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: AuthFailureLog
+    - epäonnistuneista kirjautumisista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: AuthSuccessLog
+    - onnistuneista kirjautumisista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: NoticesLog
+    - viestipohjiin tehdyistä muutoksista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää lokia
+      pref: NewsLog
+    - uutisin tehdyistä muutoksista sekä muihin uutistyökalulla tehdyistä muutoksista.
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Älä kerää lokia
+      pref: RecallsLog
+    - kaikista palautuspyyntöihin liittyvistä toimista (luodut, poistetut, vanhentuneet,
+      täytetyt).
+  - - choices:
+        '0': Älä kerää lokia
+        '1': Kerää loki
+      pref: SuggestionsLog
+    - mitä tahansa muutoksia hankintaehdotuksiin (luoda, muokata, poistaa).
+  Virheenkorjaus:
+  - - Lokitettaessa tapahtumia varastoi pinojäljitystä (stack trace), joka on korkeitaan
+    - class: integer
+      pref: ActionLogsTraceDepth
+    - tasoa.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: DumpTemplateVarsIntranet
+    - Template Toolkit -muuttujat kommentteina virkailijaliittymän HTML-lähdekoodissa.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: DumpTemplateVarsOpac
+    - Template Toolkit -muuttujat kommentteina verkkokirjaston HTML-lähdekoodissa.
+  - - choices:
+        '0': Älä dumppaa
+        '1': Dumppaa
+      pref: DumpSearchQueryTemplate
+    - Template Toolkit -muuttujia kommentteina verkkokirjaston ja virkailijaliittymän
+      HTML-lähdekoodissa.

@@ -1,0 +1,1482 @@
+---
+Lainaus ja palautus:
+  Artikkelipyynnöt:
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: ArticleRequests
+    - asiakkaiden tehdä artikkelipyyntöjä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: ArticleRequestsOpacHostRedirection
+    - ohjaa osakohteelta emolle perustuen MARC21 773$w -osakenttään, kun osakohteella
+      ei ole niteitä artikkelipyyntöä tehdessä verkkokirjastossa.
+  - - choices:
+        always: Näytä aina
+        calc: Käytä algoritmia näyttääksesi tai piilottaaksesi
+      pref: ArticleRequestsLinkControl
+    - artikkelipyyntöjen linkit hakutuloksissa.
+  - - 'Tietueille, jotka ovat tietuetasolla tai nidetasolla pyydettävissä, aseta seuraavat
+      kentät pakollisiksi:'
+    - multiple:
+        author: Tekijä
+        chapters: Luvut
+        date: Aika
+        issue: Numero
+        pages: Sivut
+        title: Nimeke
+        volume: Vuosikerta
+      pref: ArticleRequestsMandatoryFields
+    - ''
+  - - 'Tietueille, jotka ovat vain tietuetasolla pyydettävissä, aseta seuraavat kentät
+      pakollisiksi:'
+    - multiple:
+        author: Tekijä
+        chapters: Luvut
+        date: Aika
+        issue: Numero
+        pages: Sivut
+        title: Nimeke
+        volume: Vuosikerta
+      pref: ArticleRequestsMandatoryFieldsRecordOnly
+    - ''
+  - - 'Tietueille, jotka ovat vain nidetasolla pyydettävissä, aseta seuraavat kentät
+      pakollisiksi:'
+    - multiple:
+        author: Tekijä
+        chapters: Luvut
+        date: Aika
+        issue: Numero
+        pages: Sivut
+        title: Nimeke
+        volume: Vuosikerta
+      pref: ArticleRequestsMandatoryFieldsItemOnly
+    - ''
+  - - 'Seuraavat artikkelipyyntöjen muodot on tuettu:'
+    - multiple_sortable:
+        PHOTOCOPY: Photocopy
+        SCAN: Scan
+      pref: ArticleRequestsSupportedFormats
+    - The first listed format is selected by default when you request via the OPAC.
+  Asiakkaiden rajoitukset:
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: PatronRestrictionTypes
+    - asiakkaan rajoitustyypin määrittäminen, kun rajoitus lisätään käsin.
+  - - choices:
+        '0': Älä kumuloi
+        '1': Kumuloi
+      pref: CumulativeRestrictionPeriods
+    - rajoitusaikoja.
+  - - Kun palautetaan niteitä
+    - choices:
+        no: älä poista
+        when_no_overdue: poista, jos asiakkaalla ei ole myöhässä olevia niteitä
+        when_no_overdue_causing_debarment: poista, jos asiakkaalla ei ole enää lainassa
+          niteitä, jotka aiheuttavat rajoituksen
+      pref: AutoRemoveOverduesRestrictions
+      type: choice
+    - myöhästymisilmoituksen lähettämisestä johtuva rajoite. Kahden poistovaihtoehdon
+      välinen ero on, että ensimmäisessä rajoite poistetaan, jos lainassa ei ole yhtään
+      myöhässä olevaa nidettä ja toisessa rajoite poistossa otetaan huomioon mahdolliset
+      myöhästymismääritysten armonajat eikä vain sitä, milloin myöhästymisilmoitukset
+      luodaan.
+  - - Jos asiakas on lainauskiellossa,
+    - choices:
+        '0': salli
+        '1': estä
+      pref: RestrictionBlockRenewing
+    - Niteiden uusinta virkailijaliittymässä ja cronjobin <code>misc/cronjobs/automatic_renewals.pl</code>
+      avulla.
+  Erälainaus:
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: BatchCheckouts
+    - erälainaus.
+  - - 'Asiakastyypit, joille on sallittu erälainaus:'
+    - choices: patron-categories
+      class: multiple
+      pref: BatchCheckoutsValidCategories
+  Itsepalvelulainaus:
+  - - 'Käytä seuraavia JavaScript-komentoja kaikilla sivuilla itsepalvelulainauksessa:'
+    - class: code
+      pref: SCOUserJS
+      syntax: javascript
+      type: textarea
+  - - 'Käytä seuraavaa CSS:ää kaikilla sivuilla itsepalvelulainauksessa:'
+    - class: code
+      pref: SCOUserCSS
+      syntax: css
+      type: textarea
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SCOLoadCheckoutsByDefault
+    - asiakkaan lainat, kun he kirjautuvat itsepalveluun.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: ShowPatronImageInWebBasedSelfCheck
+    - asiakkaan kuva(a) itsepalvelulainauksessa (jos tallennettu).
+  - - choices:
+        '0': Älä mahdollista käyttäjille
+        '1': Mahdollista käyttäjille
+      pref: WebBasedSelfCheck
+    - 'itsepalvelulainaus (osoitteessa: /cgi-bin/koha/sco/sco-main.pl).'
+  - - Asiakkaat voivat kirjautua itsepalvelulainaukseen
+    - choices:
+        '0': kirjastokortin numerolla
+        '1': käyttäjätunnuksella ja salasanalla
+      pref: SelfCheckoutByLogin
+    - '.</br>HUOM: Jos käytetään ''kirjastokortin numeroa'' ja AutoSelfCheckAllowed,
+      pitää SelfCheckAllowByIPRanges asettaa estämään brute force-hyökkäykset asiakastietojen
+      keräämiseksi kirjaston ulkopuolelta.'
+  - - Katkaise asiakkaan istunto itsepalvelulainauksessa
+    - class: integer
+      pref: SelfCheckTimeout
+    - sekunnin kuluttua.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: SCOAllowCheckin
+    - asiakkaiden palauttaa itse aineistoa itsepalvelulainauksella.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AutoSelfCheckAllowed
+    - itsepalvelulainauspalvelun kirjautua automaattisesti tällä virkailijatunnuksella
+    - pref: AutoSelfCheckID
+    - ja tällä salasanalla
+    - class: password
+      pref: AutoSelfCheckPass
+    - .
+    - 'Huomaa: Asiakas ei voi kirjautua täällä verkkokirjastoon.'
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SelfCheckReceiptPrompt
+    - kuittitulostuksen ponnahdusikkuna, kun itsepalvelulainaus lopetetaan.
+  - - 'Salli pääsy itsepalvelulainaukseen seuraavista IP-osoitteista:'
+    - class: short
+      pref: SelfCheckAllowByIPRanges
+    - (Jätä tyhjäksi, jos ei käytössä. Käytä vaihteluväliä tai yksittäisiä IP-osoitteita,
+      jotka erotetaan toisistaan tyhjälyönnillä, kuten <code>192.168.1.1 192.168.0.0/24</code>.)
+  - - 'Asiakastyypit, joille on sallittu erälainaus Kohan itsepalvelulainauksessa:'
+    - choices: patron-categories
+      class: multiple
+      pref: SCOBatchCheckoutsValidCategories
+  Itsepalvelupalautus:
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: SelfCheckInModule
+    - 'erillinen itsepalvelupalautuksen moduli (saatavana: /cgi-bin/koha/sci/sci-main.pl).'
+  - - Tyhjennä itsepalvelupalautuksen näyttö
+    - class: integer
+      pref: SelfCheckInTimeout
+    - sekunnin kuluttua.
+  - - 'Lisää seuraava CSS kaikille itsepalvelupalautuksen näytöille:'
+    - class: code
+      pref: SelfCheckInUserCSS
+      syntax: css
+      type: textarea
+  - - 'Lisää seuraava JavaScript kaikille itsepalvelupalautuksen näytöille:'
+    - class: code
+      pref: SelfCheckInUserJS
+      syntax: javascript
+      type: textarea
+  Kadonneiden niteiden asetukset:
+  - - Aseta oletuksena niteen <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>-arvoksi
+    - choices: authval
+      pref: DefaultLongOverdueLostValue
+      source: LOST
+    - kun nide on myöhässä enemmän kuin
+    - class: integer
+      pref: DefaultLongOverdueDays
+    - päivää.
+    - <br>VAROITUS - Nämä asetukset aktivoivat automaattisen aineiston kadonneeksi
+      merkitsemisen. Jätä nämä kentät tyhjäksi, jos et halua aktivoida tätä ominaisuutta.
+    - '<br>Esimerkki: [1] [30] Asettaa niteen <a href=''/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST''>LOST</a>-arvoksi
+      1, kun se on ollut myöhässä enemmäin kuin 30 päivää.'
+    - <br>(Käytetään kun longoverdue.pl-skriptiä kutsutaan ilman --lost-parametria)
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/longoverdue.pl</code>
+      cronjobin. Pyydä kehittäjiä ajastamaan se.
+  - - 'Lisää kadonneen aineiston korvaushinta asiakkaan maksuihin, kun niteen <a href=''/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST''>LOST</a>-arvoksi
+      vaihtuu:'
+    - choices: authval
+      pref: DefaultLongOverdueChargeValue
+      source: LOST
+    - <br>Jätä tämä tyhjäksi, jos et halua veloittaa asiakkaalta kadonneita niteitä.
+    - <br>(Käytetään kun longoverdue.pl-skriptiä kutsutaan ilman --charge-parametria)
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/longoverdue.pl</code>
+      cronjobin. Pyydä kehittäjiä ajastamaan se.
+  - - The long overdue process affects patrons in the
+    - choices: patron-categories
+      class: multiple
+      pref: DefaultLongOverduePatronCategories
+    - categories.
+    - <br>Leave this field empty if you want to process long overdues for all patron
+      categories.
+    - <br>(Käytetään kun longoverdue.pl-skriptiä kutsutaan ilman --category-parametria)
+    - <br><strong>WARNING:</strong> This preference will be active only if DefaultLongOverdueSkipPatronCategories
+      is empty.
+    - <br>
+    - The long overdue process <i>does not</i> affect patrons in the
+    - choices: patron-categories
+      class: multiple
+      pref: DefaultLongOverdueSkipPatronCategories
+    - categories.
+    - <br>Leave this field empty if you want to process long overdues for all patron
+      categories.
+    - <br>(Käytetään kun longoverdue.pl-skriptiä kutsutaan ilman --skip-category-parametria)
+    - <br><strong>WARNING:</strong> This preference overrides the DefaultLongOverduePatronCategories
+      preference, so the DefaultLongOverduePatronCategories filter will not take effect.
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/longoverdue.pl</code>
+      ajastetun ajon. Pyydä kehittäjiä ajastamaan se.
+  - - Jos käytetään automaattista niteen kadonneeksi merkintää, ohita niteet, joissa
+      on joku näistä <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>-arvoista
+    - pref: DefaultLongOverdueSkipLostStatuses
+    - .
+    - <br>Jätä tämä tyhjäksi, jos et halua ohittaa mitään <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>-tilaa.
+    - <br>Tee lista arvoista pilkulla erotettuna, esim. <em>5,6,7</em>.
+  - - 'Kun lainataan aineistoa, joka on merkitty kadonneeksi, '
+    - choices:
+        alert: näytä viesti
+        confirm: vaadi vahvistus
+        nothing: älä tee mitään
+      pref: IssueLostItem
+    - .
+  - - 'Poista nide asiakkaan lainoista ("palauta"), kun se merkitään kadonneeksi '
+    - multiple:
+        additem: kun nide luetteloidaan
+        batchmod: niteiden erämuokkaustyökalussa
+        claim_returned: kun merkitään nide 'ilmoittaa palauttaneensa'-tilaan
+        cronjob: ajettaessa longoverdue cronjob
+        moredetail: niteet-välilehdellä kuvailuosiossa
+        onpayment: kun vastaanotetaan maksu niteestä
+        pendingreserves: '''Hyllyvaraukset''-listalta'
+      pref: MarkLostItemsAsReturned
+    - .
+  - - Päivitä niteen tilaksi
+    - choices: authval
+      pref: UpdateItemLostStatusWhenPaid
+      source: LOST
+    - kun maksut maksetaan.
+  - - Päivitä niteen tilaksi
+    - choices: authval
+      pref: UpdateItemLostStatusWhenWriteoff
+      source: LOST
+    - kun maksut poistetaan.
+  Kiertokokoelmat:
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: StockRotation
+    - kiertokokoelma-moduulin käyttö
+  Kotipalvelu-moduuli:
+  - - choices:
+        '0': Älä ota käyttöön
+        '1': Ota käyttöön
+      pref: HouseboundModule
+    - kotipalvelu-moduuli.
+  Kurssivarannot:
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: UseCourseReserves
+    - kurssivarantoja
+  Käyttöliittymä:
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: CircSidebar
+    - navigointivalikko kaikilla lainaus- ja palautussivuilla.
+  - - choices:
+        '0': Älä vaadi
+        '1': Vaadi
+      pref: CircConfirmItemParts
+    - virkailijaa vahvistamaan, että niteen kaikki osat ovat paikalla palautuksessa/lainauksessa.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AutoSwitchPatron
+    - automaattinen vaihto toiseen asiakkaaseen, kun asiakkaan viivakoodi luetaan
+      niteen viivakoodin sijaan.
+    - Tätä ei pitäisi sallia, jos järjestelmässäsi on samoja viivakoodeja asiakkaille
+      ja niteille.
+  - - choices:
+        '0': Älä ehdota
+        '1': Ehdota
+      pref: PatronAutoComplete
+    - asiakas(ta), kun asiakkaan nimeä tai tunnusta kirjoitetaan lainaus- tai asiakasnäytöllä.
+    - Vain 10 ensimmäistä tulosta näytetään kerrallaan.
+  - - choices:
+        EAN13: EAN-13 tai zero-padded UPC-A -muodoissa luetut viivakoodit
+        OFF: Älä suodata luettuja viivakoodeja
+        T-prefix: Poista ensimmäinen numero T-prefix-muodosta luetuista viivakoodeista
+        cuecat: Muunna CueCat-muodosta luetut viivakoodit
+        libsuite8: Muunna Libsuite8-muodosta luetut viivakoodit
+        whitespace: Poista välilyönnit luetuista viivakoodeista
+      pref: itemBarcodeInputFilter
+    - . Huomioi, että kaikki tyhjät merkit viivakoodin edessä tai lopussa poistetaan
+      ennen suodatusta.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: itemBarcodeFallbackSearch
+    - automaattinen sanahaku tietokannasta, jos lainausnäytöllä annetulla viivakoodilla
+      ei löydy nidettä.
+  - - Lajittele edelliset palautukset lainausnäytöllä
+    - choices:
+        asc: aikaisimmasta viimeisimpään
+        desc: viimeisimmästä aikaisimpaan
+      pref: previousIssuesDefaultSortOrder
+    - eräpäivän mukaan.
+  - - Lajittele kuluvan päivän lainaukset lainausnäytöllä
+    - choices:
+        asc: aikaisimmasta viimeisimpään
+        desc: viimeisimmästä aikaisimpaan
+      pref: todaysIssuesDefaultSortOrder
+      type: choice
+    - lainauspäivän mukaan.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: SpecifyDueDate
+    - henkilökunnan määrittää lainan eräpäivä(ä).
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: SpecifyReturnDate
+    - henkilökunnan määrittää palautuspäivä palautettaessa.
+  - - Aseta Hyllyvaraukset-listan oletusalkamispäivämääräksi
+    - class: integer
+      pref: HoldsToPullStartDate
+    - päivää sitten. Huomaa, että oletusloppumispäivämäärän määrittää järjestelmäasetus
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ConfirmFutureHolds">ConfirmFutureHolds</a>.
+  - - When building the holds queue, calculate hold matches using
+    - class: integer
+      pref: HoldsQueueParallelLoopsCount
+    - parallel loop(s). The more loops used, the faster it will calculate and the
+      more computing resources it will use.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowAllMessageDeletion
+    - henkilökunnan poistaa toisten kirjastojen jättämiä kommenteja.
+  - - Näytä
+    - class: integer
+      pref: numReturnedItemsToShow
+    - viimeisintä palautusta palautusnäytöllä.
+  - - choices:
+        '0': Älä huomauta
+        '1': Huomauta
+      pref: FineNotifyAtCheckin
+    - virkailijaa myöhässä palautettavien niteiden myöhästymismaksuista.
+  - - choices:
+        '0': Älä huomauta
+        '1': Huomauta
+      pref: WaitingNotifyAtCheckin
+    - henkilökunnalle lainojaan palauttavan asiakkaan odottavista varauksista.
+  - - choices:
+        '0': Älä huomauta
+        '1': Huomauta
+      pref: WaitingNotifyAtCheckout
+    - henkilökuntaa lainattaessa, jos asiakkaalla on noudettavia varauksia.
+  - - choices:
+        '0': Älä vaadi
+        '1': Vaadi
+      pref: FilterBeforeOverdueReport
+    - henkilökunnan valitsevan listalla näytettävät lainat ennen myöhässä olevien
+      niteiden listan koostamista.
+  - - choices:
+        issueqslip: Näytä 'tänään lainatut' ja 'tyhjennä näyttö ' -painikkeet
+        issueslip: Näytä 'tulosta kuitti' ja 'tyhjennä näyttö' -painikkeet
+        no: Älä näytä tyhjennä näyttö painiketta
+      pref: DisplayClearScreenButton
+    - tyhjentääksesi asiakastietonäytön lainauksessa.
+  - - choices:
+        '0': Älä tallenna
+        '1': Tallenna
+      pref: RecordLocalUseOnReturn
+    - tilastolainana, kun lainaamaton nide palautetaan.
+  - - Jos lainaustoiminnossa syötetään tyhjä viivakoodi,
+    - choices:
+        clear: tyhjennä näyttö
+        ignore: älä tee mitään
+        qslip: avaa 'tänään lainatut' -kuitin tulostusikkuna
+        slip: avaa 'tulosta kuitti' tulostusikkuna
+      pref: CircAutoPrintQuickSlip
+    - .
+  - - 'CSS-tyylitiedoston sijainti:'
+    - class: url
+      pref: NoticeCSS
+    - huomautuksissa. (Anna täydellinen URL-osoite, joka alkaa merkkijonolla<code>http://</code>)
+  - - choices:
+        '0': Älä päivitä
+        '1': Päivitä
+      pref: UpdateTotalIssuesOnCirc
+    - tietueen kokonaislainamäärä aina kun sen nide lainataan (VAROITUS! Tämä lisää
+      palvelimen kuormaa merkittävästi; jos suorituskyky on ongelma, käytä update_totalissues.pl
+      ajastettua ajoa päivittääksesi kokonaislainamäärät).
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: ExportCircHistory
+    - asiakkaan lainahistorian vienti.
+  - - 'Seuraavia kenttiä ei viedä asiakkaan lainahistorian CSV-viennissä tai MARC
+      (ISO 2709) -viennissä:'
+    - pref: ExportRemoveFields
+    - (erota kentät välilyönnein, esim. 100a 200b 300c).
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: ShowAllCheckins
+    - kaikki niteet/kaikkia niteitä "Palautetut niteet" -listalla, vaikka ne eivät
+      olisi olleet lainassa.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowCheckoutNotes
+    - asiakkaiden lisätä huomautuksia lainatuille niteille.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: UseCirculationDesks
+    - lainaustiskejä lainauksessa.
+  Lainausasetukset:
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: AlwaysLoadCheckoutsTable
+    - always load the checkouts table immediately on opening the patron account in
+      the staff interface.
+  - - Viivytä lainat-taulun automaattista lataamista lainaussivulla
+    - class: integer
+      pref: LoadCheckoutsTableDelay
+    - seconds when "Always show checkouts automatically" or <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AlwaysLoadCheckoutsTable">AlwaysLoadCheckoutsTable</a>
+      are enabled.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: OnSiteCheckoutAutoCheck
+    - on-site-lainausta oletuksena, jos edellinen lainaus oli on-site-lainaus.
+  - - choices:
+        '0': Vaadi
+        '1': Älä vaadi
+      pref: AutoReturnCheckedOutItems
+    - virkailijaa vahvistamaan lainaus, kun nide on jo lainassa toisella asiakkaalla.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowSetAutomaticRenewal
+    - henkilökunnan määrittää lainatessa niteen automaattinen uusinta.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowTooManyOverride
+    - henkilökunnan ohittaa ja lainata niteitä, kun asiakkaalla on jo lainassa enimmäismäärä
+      niteitä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowNotForLoanOverride
+    - henkilökunnan ohittaa Ei lainatavissa -tila ja lainata asiakkaalle ei-lainattavaksi
+      merkitty nide.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowRenewalLimitOverride
+    - henkilökunnan ohittaa uusintaraja ja uusia laina, vaikka se menisi yli uusintojen
+      rajan tai ohittaa "Ei uusintaa ennen" -asetuksen lainausasetuksissa tai olisi
+      ajastettu automaattiseen uusintaan.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowRenewalOnHoldOverride
+    - virkailijan uusia varattuja niteitä muokkaamalla manuaalisesti eräpäivää.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowItemsOnHoldCheckoutSIP
+    - varattujen niteiden lainaaminen toiselle asiakkaalle automaatin kautta.
+    - Jos sallittu, älä generoi VARATTU-varoitusta.
+    - '"Salli" sallii itsepalvelulainauksen noille niteille. Jos käytetään varausjonoa,
+      odottavat varaukset merkitään "ei saatavana" jos tämä asetus on "Älä salli".'
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowItemsOnLoanCheckoutSIP
+    - toiselle lainattujen niteiden lainaaminen asiakkaalle automaatin kautta.
+    - Jos sallittu, älä generoi LAINATTU TOISELLE-varoitusta.
+    - Tämä sallii niteiden itsepalvelulainauksen.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowItemsOnHoldCheckoutSCO
+    - muille varattujen niteiden lainaaminen itsepalvelulainauksessa. Jos sallitaan,
+      älä generoi RESERVE_WAITING- ja RESERVED-ilmoituksia.
+  - - choices:
+        '0': Älä edellytä
+        '1': Edellytä
+      pref: AllFinesNeedOverride
+    - henkilökuntaa käsin kumota kaikkia maksuja, vaikka maksut olisivat vähemmän
+      kuin <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge">noissuescharge</a>
+      järjestelmäasetukssa. Tämän järjestelmäasetuksen ollessa käytössä asiakas, jolla
+      on maksuja, ei voi lainata itsepalvelulainauksen tai automaatin kautta.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowFineOverride
+    - virkailijan manuaalisesti ohittaa ja lainata asiakkaalle, jolla on enemmän maksuja
+      kuin <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge">noissuescharge</a>
+      järjestelmäasetuksessa määritelty.
+  - - choices:
+        '0': Älä kuljeta
+        '1': Kuljeta
+      pref: AutomaticItemReturn
+    - niteitä automaattisesti kotikirjastoon, kun ne palautetaan.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: UseBranchTransferLimits
+    - aineistokuljetusten rajoituksia, jotka perustuvat
+    - choices:
+        ccode: kokoelmakoodiin
+        itemtype: nidetyyppiin
+      pref: BranchTransferLimitsType
+    - .
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: UseTransportCostMatrix
+    - kuljetusten painomatriisia optimoimaan varausten kiinnijääminen kirjastojen
+      välillä.
+  - - 'Käytä kalenteria ja laina- ja maksusääntöjä:'
+    - choices:
+        ItemHomeLibrary: niteen kotikirjaston säännöt.
+        PatronLibrary: Asiakkaan kotikirjaston säännöt.
+        PickupLibrary: Kirjautuneen käyttäjän kotikirjaston säännöt.
+      pref: CircControl
+      type: choice
+  - - Määrittääksesi asetetaanko nide kuljetukseen vai jääkö se palautuskirjastoon
+      palautuksen jälkeen, käytä
+    - choices:
+        CheckInLibrary: niteen palautuskirjaston laina- ja maksusääntöjä.
+        ItemHoldingLibrary: sen kirjaston laina- ja maksusääntöjä, joka pitää nidettä
+          tällä hetkellä hallussaan.
+        ItemHomeLibrary: niteen omistavan kirjaston laina- ja maksusääntöjä.
+      pref: CircControlReturnsBranch
+      type: choice
+  - - 'Käytä seuraavia laina- ja maksusääntöjä:'
+    - choices:
+        holdingbranch: niteen sijaintikirjasto.
+        homebranch: niteen kotikirjasto.
+      pref: HomeOrHoldingBranch
+      type: choice
+  - - Salli aineiston palauttaminen
+    - choices:
+        anywhere: mihin tahansa kirjastoon.
+        holdingbranch: vain lainauskirjastoon.
+        homebranch: vain aineiston kotikirjastoon.
+        homeorholdingbranch: joko aineiston kotikirjastoon tai lainauskirjastoon.
+      pref: AllowReturnToBranch
+      type: choice
+  - - Virkailijaliittymän hakutuloksissa, näytä
+    - choices:
+        holdingbranch: niteen sijaintikirjasto
+        homebranch: niteen kotikirjasto
+      pref: StaffSearchResultsDisplayBranch
+      type: choice
+  - - choices:
+        Calendar: Käytä kalenteria ohittamaan kirjaston kiinniolopäivät
+        Datedue: Käytä kalenteria palautuspäivän siirtämiseksi seuraavaan aukiolopäivään
+        Days: Älä käytä kalenteria
+        Dayweek: Käytä kalenteria siirtämään eräpäivä viikkolainoissa seuraavaan vastaavaan
+          viikonpäivään tai muuten seuraavaan aukiolopäivään
+      pref: useDaysMode
+    - kun lasketaan eräpäivä.
+  - - Laske "Uusittavissa jälleen" perustuen
+    - choices:
+        date: päivämäärään.
+        exact_time: tarkkaan kellonaikaan.
+      pref: NoRenewalBeforePrecision
+    - Vaikuttaa vain päivän mukaan laskettaessa, ei vaikuta tuntilainoihin.
+  - - Lainoja uusittaessa uusi eräpäivä määritellään
+    - choices:
+        date_due: lainan vanhan eräpäivän mukaan.
+        now: uusintapäivän mukaan (ts. tämä päivä).
+      pref: RenewalPeriodBase
+  - - choices:
+        '0': Älä lähetä
+        '1': Lähetä
+      pref: RenewalSendNotice
+    - uusintailmoitus(ta), jos asiakkaan asetuksissa on määritelty hänen haluavan
+      siitä ilmoituksen.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: UnseenRenewals
+    - uusintoja merkittävän verkkokirjastossa tehdyiksi ja niitä rajoitetaan asiakkaan
+      lainojen verkkokirjastouusinnan määrärajoituksella.
+  - - Estä varausten tekeminen verkkokirjastossa, jos asiakkaalla on maksuja yli
+    - class: currency
+      pref: maxoutstanding
+    - '[% local_currency %].'
+  - - Näytä varoitus "Vastaanotettavat kuljetukset" -näytöllä, jos nide on vielä kuljetettavana
+    - class: integer
+      pref: TransfersMaxDaysWarning
+    - päivää lähettämisen jälkeen.
+  - - choices:
+        '0': Estä
+        '1': Älä estä
+      pref: IssuingInProcess
+    - asiakkaita lainaamasta nidettä, jonka lainamaksu veisi heidät lainauskieltoon.
+  - - 'Rajoita asiakkaita lainaamasta seuraavien kohdeyleisöä kuvaavien avainsanojen
+      perusteella ikärajoitettua aineistoa:'
+    - pref: AgeRestrictionMarker
+    - Syötä kohdeyleisöä kuvaavat avainsanat erotettuina pystyviivalla (|). Esim.
+      "FSK|PEGI|Age". Älä käytä välilyöntiä pystyviivan vieressä. Muista kytkeä ikärajoitus
+      Kohassa MARC-kenttään (esim. 521$a). MARC-kentän arvo FSK 12 tai PEGI 12 tarkoittaa,
+      että asiakkaan pitää olla vähintään 12 vuotta vanha. Jätä tyhjäksi, jos et halua
+      käyttää ikärajoitusta.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AgeRestrictionOverride
+    - henkilökunnan ohittaa materiaalin ikärajoitusta lainatessa.
+  - - Estä asiakasta lainaamasta, jos hänellä on maksamattomia maksuja yli
+    - class: integer
+      pref: noissuescharge
+    - '[% local_currency %].'
+  - - Estä asiakasta lainaamasta, jos hänen taattavillaan on maksuja enemmän kuin
+    - class: integer
+      pref: NoIssuesChargeGuarantees
+    - '[% local_currency %] maksuja.'
+  - - Estä asiakasta lainaamasta, jos asiakkaalla on takaajia ja noiden takaajien
+      taattavilla on yhteensä enemmän kuin
+    - class: integer
+      pref: NoIssuesChargeGuarantorsWithGuarantees
+    - '[% local_currency %] maksuja.'
+  - - choices:
+        '0': Älä vaadi
+        '1': Vaadi
+      pref: ReturnBeforeExpiry
+    - asiakkaan palauttavan kaikki lainansa ennen käyttäjätilin vanhenemista (valinnan
+      ollessa voimassa eräpäiviä ei anneta pidemmälle kuin käyttäjätili on voimassa).
+  - - 'Lähetä kaikista ilmoituksista kopio (BCC) tähän osoitteeseen:'
+    - class: email
+      pref: NoticeBcc
+  - - choices:
+        '0': Älä käytä kalenteria
+        '1': Käytä kalenteria
+      pref: OverdueNoticeCalendar
+    - myöhästymisilmoitusten aikojen määrittelyyn.
+  - - Järjestä ja lähetä myöhästymisilmoitukset käyttäen
+    - choices:
+        cron: komentorivin asetusta
+        item-homebranch: niteen kotikirjastoa
+        item-issuebranch: lainaavaa kirjastoa
+        patron-homebranch: asiakkaan kotikirjastoa
+      pref: OverdueNoticeFrom
+    - .
+  - - Tulosta korkeintaan
+    - class: integer
+      pref: PrintNoticesMaxLines
+    - nidettä myöhästymisilmoitukseen. Jos myöhässä olevan aineiston kappalemäärä
+      on suurempi, ilmoitus päättyy pyyntöön tarkistaa täydellinen myöhässä olevan
+      aineiston lista kirjastosta tai kirjautumalla aineistotietokantaan. Arvo 0 tulostaa
+      kaikki myöhästyneet niteet.
+  - - choices:
+        block: Älä lainaa
+        confirmation: Kysy varmistus
+        noblock: Lainaa
+      pref: OverduesBlockCirc
+    - asiakkaalle, jolla on maksamattomia myöhästymismaksuja.
+  - - 'Kun lainataan nide, josta menee lainausmaksu, '
+    - choices:
+        '0': älä kysy
+        '1': kysy
+      pref: RentalFeesCheckoutConfirmation
+    - varmistus(ta).
+  - - 'Kun lainataan nide, '
+    - choices:
+        '0': älä tallenna
+        '1': tallenna
+      pref: RecordStaffUserOnCheckout
+    - kuka käyttäjä lainauksen teki.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowMultipleIssuesOnABiblio
+    - asiakkaan lainata useita niteitä samasta tietueesta. (<strong>HUOM:</strong>
+      Tämä ei vaikuta tietueisiin, joissa on kausijulkaisutilaus).
+  - - choices:
+        '0': Estä
+        '1': Salli
+      pref: OnSiteCheckouts
+    - on-site -lainausominaisuus.
+  - - choices:
+        '0': Estä
+        '1': Salli
+      pref: OnSiteCheckoutsForce
+    - on-site-lainaus kaikissa tapauksissa (vaikka asiakas olisi kiellossa tms.).
+  - - choices:
+        '0': Älä käsittele
+        '1': Käsittele
+      pref: ConsiderOnSiteCheckoutsAsNormalCheckouts
+    - on-site-lainoja kuten normaaleja lainoja.
+    - Jos käytössä, on-site-lainat lasketaan tavallisten lainojen kanssa yhteen. On-site-lainojen
+      rajoitus koskee vain on-site-lainoja.
+    - Jos estetty, kumpikin arvo tarkistetaan erikseen.
+  - - choices:
+        '0': Älä muuta
+        '1': Muuta
+      pref: SwitchOnSiteCheckouts
+    - on-site-lainat normaaleiksi lainoiksi, kun ne lainataan.
+  - - Kun asiakkaan lainaama nide on myöhässä,
+    - choices:
+        allow: salli uusinta.
+        block: estä asiakkaan kaikkien lainojen uusinta.
+        blockitem: estä vain myöhässä olevan niteen uusinta.
+      pref: OverduesBlockRenewing
+      type: choice
+  - - Jos asiakkaalla on maksuja enemmän kuin <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFineNoRenewals">OPACFineNoRenewals</a>-asetuksessa
+      määritetään,
+    - choices:
+        '0': salli
+        '1': estä
+      pref: OPACFineNoRenewalsBlockAutoRenew
+    - automaattinen lainojen uusinta.
+  - - Jos asiakas maksaa kaikki maksunsa myöhässä olevasta niteestä, josta kertyy
+      maksuja,
+    - choices:
+        '0': älä uusi
+        '1': uusi
+      pref: RenewAccruingItemWhenPaid
+    - nide automaattisesti. Jos järjestelmäasetus <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RenewalPeriodBase">RenewalPeriodBase</a>
+      on asetettu "eräpäiväksi", uusittu nide voi olla edelleen myöhässä.
+  - - Jos asiakas maksaa verkkokirjastossa kaikki maksunsa myöhässä olevasta niteestä,
+      josta kertyy maksuja,
+    - choices:
+        '0': älä uusi
+        '1': uusi
+      pref: RenewAccruingItemInOpac
+    - nide automaattisesti. Jos järjestelmäasetus <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RenewalPeriodBase">RenewalPeriodBase</a>
+      on asetettu "eräpäiväksi", uusittu nide voi olla edelleen myöhässä.
+  - - class: code
+      pref: ItemsDeniedRenewal
+      syntax: text/x-yaml
+      type: textarea
+    - Määritä säännöt, jolla estetään tiettyjä niteitä uusinnalta.
+    - <br />Voi nimetä nidetaulun minkä tahansa kentän, jonka perässä on kaksoispiste
+      ja tyhjämerkki, sitten
+    - suluissa oleva lista arvoista, jotka erotetaan toisistaan pilkulla.
+    - 'Esimerkiksi:'
+    - '<br />ccode: [NEWFIC,NULL,DVD]'
+    - '<br />itype: [NEWBK,""]'
+    - <br /> <strong>HUOM:</strong> Sanaa 'NULL' käytetään estämään uusinta määrittelemättömissä
+      kentissä, kun taas tyhjä merkki "" estää tyhjän (mutta määritellyn) kentän.
+    - <br /><strong>Asetukset:</strong> <a href='/cgi-bin/koha/admin/authorised_values.pl?searchfield=CCODE'>Kokoelmat
+      (CCODE)</a> | <a href='/cgi-bin/koha/admin/itemtypes.pl'>Hyllypaikat</a>
+  - - class: code
+      pref: UpdateItemLocationOnCheckout
+      syntax: text/x-yaml
+      type: textarea
+    - Tämä on listaus arvopareista. Ensimmäisen arvon jälkeen tulee heti kaksoispiste
+      ja tyhjämerkki, sitten toinen arvo.<br/><br/>
+    - Esimerkkejä:<br/>
+    - 'PROC: FIC - hyllypaikkaan PROC kuuluvan niteen hyllypaikka päivitetään FIC-hyllypaikkaa
+      lainatessa.<br/>'
+    - 'FIC: GEN - hyllypaikkaan FIC kuuluvan niteen hyllypaikka päivitetään GEN-hyllypaikkaan
+      lainatessa.<br/>'
+    - '_BLANK_: FIC - nide, jolla ei ole mitään hyllypaikkaa, päivitetään FIC-hyllypaikkaan
+      lainatessa.<br/>'
+    - 'FIC: _BLANK_ - hyllypaikkaan FIC kuuluvan niteen hyllypaikka päivitetään tyhjään
+      hyllypaikkaan lainatessa.<br/>'
+    - '_ALL_: FIC - kaikkien niteiden hyllypaikaksi päivitetään FIC lainatessa.<br/>'
+    - 'PROC: _PERM_ - hyllypaikkaan PROC kuuluvan niteen hyllypaikka päivitetään pysyvään
+      hyllypaikkaansa (permanent_location). <br/><br/>'
+    - 'Yleissääntö: jos kaksoispisteen (:) vasemmalla puolella oleva hyllypaikka täsmää
+      niteen nykyiseen hyllypaikkaan, se päivitetään vastaamaan kaksoispisteen (:)
+      oikealla puolella olevaa hyllypaikkaa.<br/>'
+    - 'Huomaa: PROC ja CART ovat erikoisarvoja, sillä näissä location ja permanent_location
+      voivat olla erilaiset, kaikissa muissa tapauksissa päivitys vaikuttaa molempiin.
+      CART-hyllypaikalla sijaitseva nide siirretään oikeaan hyllypaikkaansa lainatessa.<br/>'
+    - Erikoistermiä _BLANK_ voidaan käyttää arvoparin kummallakin puolella päivittämään
+      tai poistamaan hyllypaikka sellaiselta niteeltä, jolla ei ole mitään hyllypaikkaa.<br/>
+    - Erikoistermiä _ALL_ käytetään kaksoispisteen (:) vasemmalla puolella koskemaan
+      kaikkia niteitä, <strong>ja korvaa kaikki muut säännöt.</strong>
+  - - class: code
+      pref: UpdateNotForLoanStatusOnCheckout
+      syntax: text/x-yaml
+      type: textarea
+    - Tämä on lista arvopareista. Kun nide lainataan ja niteen 'ei lainattavissa'
+      -arvo vastaa tässä vasemmalla olevaa 'ei lainattavissa' -arvoa,
+    - 'se päivitetään oikeanpuoleiseen arvoon. Esim. ''-1: 0'' tarkoittaa, että nide,
+      joka oli ''Tilattu''-tilassa on nyt saatavana.'
+    - Jokaisen arvoparin pitää olla omalla rivillä.
+  - - Kun lainataan tuntilainaperustainen nide, joka erääntyy kirjaston aukioloaikojen
+      ulkopuolella,
+    - choices:
+        close: lyhennä laina-aikaa ja aseta eräpäiväksi kirjaston sulkemisaika.
+        ignore: älä huomioi kirjaston aukioloaikoja.
+        open: pidennä laina-aikaa ja aseta eräpäiväksi kirjaston avautumisaika.
+      pref: ConsiderLibraryHoursInCirculation
+  Maksuasetukset:
+  - - choices:
+        ignoreCalendar: Älä käytä kalenteria
+        noFinesWhenClosed: Käytä kalenteria
+      pref: finesCalendar
+      type: choice
+    - laskettaessa myöhästymismaksuja.
+  - - choices:
+        ignoreCalendar: Älä käytä kalenteria
+        noSuspensionsWhenClosed: Käytä kalenteria
+      pref: SuspensionsCalendar
+      type: choice
+    - kun lasketaan määräaikaisen käyttökiellon päättymispäivä.
+  - - choices:
+        off: Älä laske
+        production: Laske ja laskuta
+      pref: finesMode
+      type: choice
+    - maksut (kun <code>cronjobs/fines.pl</code> on ajettu).
+    - <br><strong>HUOM:</strong> Jos cronjobs/fines.pl cronjob on asetettu ajettavaksi,
+      kertyvät ja lopulliset maksut lasketaan kun cron ajetaan ja kertyvät maksut
+      loppuvat kun nide palautetaan. Jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CalculateFinesOnReturn">CalculateFinesOnReturn</a>
+      on sallittu, lopulliset maksut lasketaan kun nide on palautettu.<br/>
+    - choices:
+        '0': Älä laskuta
+        '1': Laskuta
+      pref: ChargeFinesOnClosedDays
+      type: choice
+    - kiinniolopäiviltä. Jos asetettu, fines.pl cronjob ei kerrytä maksuja niiltä
+      päiviltä, jotka kalenteriin on merkitty kiinniolopäiviksi.
+  - - Jos kadonnut nide palautetaan, sovella maksun hyvityksessä
+    - choices:
+        CheckinLibrary: palautuskirjaston sääntöjä.
+        ItemHoldingBranch: sijaintikirjaston sääntöjä.
+        ItemHomeBranch: niteen kotikirjaston sääntöjä.
+      pref: RefundLostOnReturnControl
+  - - choices:
+        '0': Älä sisällytä
+        '1': Sisällytä
+      pref: FinesIncludeGracePeriod
+    - anteeksiantoaika kun lasketaan myöhässä olevan aineiston maksua.
+  - - choices:
+        '0': Älä poista
+        '1': Poista
+      pref: WhenLostForgiveFine
+    - maksut niteeltä, kun se merkitään kadonneeksi.
+  - - Älä palauta kadonneen aineiston maksua, jos kadonnut nide on palautettu enemmän
+      kuin
+    - class: integer
+      pref: NoRefundOnLostReturnedItemsAge
+    - päivää kadonneeksi merkitsemisen jälkeen.
+  - - Don't refund lost fees if the fee was paid in full or if the balance of the
+      fee was paid more than
+    - class: integer
+      pref: NoRefundOnLostFinesPaidAge
+    - days ago.
+  - - choices:
+        '0': Älä veloita
+        '1': Veloita
+      pref: WhenLostChargeReplacementFee
+    - korvaushinta(a), kun asiakas kadottaa niteen.
+  - - Peri varausmaksu
+    - choices:
+        any_time_is_collected: aina kun varaus lainataan.
+        any_time_is_placed: aina, kun tehdään varaus.
+        not_always: vain, jos kaikki niteet ovat lainassa ja tietueessa on ennestään
+          vähintään yksi varaus.
+      pref: HoldFeeMode
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: useDefaultReplacementCost
+    - oletuskorvaushintaa, joka on määritelty aineistotyypille.
+  - - 'Teksti, joka syötetään sarakkeeseen ''note'' taulussa ''accountlines'', kun
+      käsittelykuluja (nidetyypille määritetty) lisätään:'
+    - class: code
+      pref: ProcessingFeeNote
+      type: textarea
+  Nidepaketit:
+  - - Käytä <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>
+      auktorisoitua arvoa
+    - choices: authval
+      pref: BundleLostValue
+      source: LOST
+    - ilmaisemaan 'puuttuu nidepaketista' palautuksen yhteydessä.
+  - - Käytä <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">NOT_LOAN</a>
+      auktorisoitua arvoa
+    - choices: authval
+      pref: BundleNotLoanValue
+      source: NOT_LOAN
+    - ilmaisemaan 'lisätty nidepakettiin', kun nide liitetään nidepakettiin.
+  Noutopalvelumoduuli:
+  - - choices:
+        '0': Älä ota käyttöön
+        '1': Ota käyttöön
+      pref: CurbsidePickup
+    - noutopalvelu
+  Palautusasetukset:
+  - - choices:
+        '0': Älä ota kiinni
+        '1': Ota kiinni
+      pref: TrapHoldsOnOrder
+    - niteet, joilla on Ei lainattavissa -tila, mutta ovat varattavissa ( notforloan
+      < 0 ) varausten kiinnittämisessä.
+  - - Älä ota koskaan kiinni niteitä, joilla on <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">'not
+      for loan'</a> -auktorisoituna arvona
+    - class: integer
+      pref: SkipHoldTrapOnNotForLoanValue
+    - varauksen täyttämiseen.
+    - (lista <a href='/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN'>Ei
+      lainata</a> -auktorisoiduista arvoista erotettuna putkimerkillä '|')
+  - - choices:
+        '0': Älä täytä
+        '1': Täytä
+      pref: HoldsAutoFill
+    - automaattisesti varaus(ta), sen sijaan että vaadit vahvistuksen virkailijalta.
+  - - choices:
+        '0': Täytä
+        '1': Älä täytä
+      pref: HoldsNeedProcessingSIP
+    - varaus(ta) automaattisesti, jos sopiva nide palautetaan SIP-protokollan kautta.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: HoldsAutoFillPrintSlip
+    - automaattisesti varauskuitin kysely(ä) automaattisesti täytetyille varauksille.
+  - - choices:
+        '0': Älä estä
+        '1': Estä
+      pref: BlockReturnOfWithdrawnItems
+    - kierrosta poistetun aineiston palauttaminen.
+  - - choices:
+        '0': Älä estä
+        '1': Estä
+      pref: BlockReturnOfLostItems
+    - kadonneeksi merkityn aineiston palauttaminen.
+  - - choices:
+        '0': Älä laske
+        '1': Laske
+      pref: CalculateFinesOnReturn
+    - ja päivitä myöhästymismaksut, kun aineisto palautetaan.
+    - <br /><strong>HUOM:</strong> Jos käytät tuntilainoja, silloin tämän pitäisi
+      olla päällä.
+    - <br /><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii, että <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=FinesMode">FinesMode</a>
+      on asetettu "Laske ja laskuta" arvoon.
+  - - choices:
+        '0': Älä laske
+        '1': Laske
+      pref: CalculateFinesOnBackdate
+    - ja päivitä myöhästymismaksuja kun nide palautetaan aikaisemmalla päivämäärällä
+      kuin palautuspäivä.
+  - - class: code
+      pref: UpdateItemLocationOnCheckin
+      syntax: text/x-yaml
+      type: textarea
+    - Tämä on listaus arvopareista. Ensimmäisen arvon jälkeen tulee heti kaksoispiste
+      ja tyhjämerkki, sitten toinen arvo.
+    - Kelvollisia arvoja ovat <a href='/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOC'>LOC</a>-auktorisoidut
+      arvot, _BLANK_, _PERM_, ja_ALL_.<br><br>
+    - Esimerkkejä:<br/>
+    - 'PROC: FIC - hyllypaikkaan PROC kuuluvan niteen hyllypaikka päivitetään FIC-hyllypaikkaan
+      palautuksessa.<br/>'
+    - 'FIC: GEN - paikkaan FIC kuuluva nide päivitetään GEN-paikkaan palautuksen yhteydessä.<br/>'
+    - '_BLANK_: FIC - nide, jolla ei ole mitään paikkaa, päivitetään FIC-paikkaan
+      palautuksen yhteydessä.<br/>'
+    - 'FIC: _BLANK_ - paikkaan FIC kuuluva nide päivitetään tyhjään paikkaan palautuksen
+      yhteydessä.<br/>'
+    - '_ALL_: FIC - kaikki niteet päivitetään FIC-paikkaan palautuksen yhteydessä.<br/>'
+    - 'PROC: _PERM_ - hyllypaikkaan PROC kuuluvan niteen hyllypaikka päivitetään pysyvään
+      hyllypaikkaansa (permanent_location). <br/><br/>'
+    - 'Yleinen sääntö: jos kaksoispisteen (:) vasemmalla puolella oleva paikka täsmää
+      niteen nykyiseen paikkaan, se päivitetään vastaamaan kaksoispisteen (:) oikealla
+      puolella olevaa paikkaa.<br/>'
+    - 'Huomaa: PROC ja CART ovat erikoisarvoja, sillä näissä location ja permanent_location
+      voivat olla erilaiset, kaikissa muissa tapauksissa päivitys vaikuttaa molempiin.
+      CART-paikassa sijaitseva nide siirretään oikeaan paikkaansa niteen palautuksessa.<br/>'
+    - Erikoistermiä _BLANK_ voidaan käyttää arvoparin kummallakin puolella päivittämään
+      tai poistamaan paikka sellaiselta niteeltä, jolla ei ole mitään paikkaa.<br/>
+    - Erikoistermi _ALL_ käytetään kaksoispisteen (:) vasemmalla puolella koskemaan
+      kaikkia niteitä, <strong>ja korvaa kaikki muut säännöt.</strong>
+  - - class: code
+      pref: UpdateNotForLoanStatusOnCheckin
+      syntax: text/x-yaml
+      type: textarea
+    - Tämä on lista nidetyypeistä ja arvopareista.<br/><br/>
+    - <strong>Esimerkkejä:</strong><br/>
+    - _ALL_:<br/>
+    - '&nbsp-1: 0<br/><br/>'
+    - CR:<br/>
+    - '&nbsp1: 0<br/><br/>'
+    - BK:<br/>
+    - '&nbsp-1: ONLYMESSAGE<br/><br/>'
+    - Kun nide palautetaan ja sen nidetyyppi täsmää arvon CR kanssa ja vasemmanpuoleinen
+      arvo (1) täsmää niteen Ei lainata -arvon kanssa, päivitetään tila oikeanpuoleiseen
+      Ei lainata -arvoon. <br/><br/>Erikoistermiä _ALL_ käytetään :-merkin vasemmalla
+      puolella, jolloin sääntö koskee kaikkia nidetyyppejä, <strong>tämä ei ohita
+      muita sääntöjä</strong><br/><br/>
+    - Jokainen nidetyyppi pitää määritellä erilliselle riville :-merkin vasemmalle
+      puolelle. <br/> Jokainen Ei lainata -tilojen pari nidetyypille pitää listata
+      omille riveillensä nidetyypin alapuolelle, sisennettynä yhdellä välilyönnillä.<br/><br/>
+    - Käytä <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">NOT_LOAN</a>
+      -auktorisoitua arvoa ja ONLYMESSAGE.<br/><br/>
+    - 'ONLYMESSAGE-määritystä voidaan käyttää näyttämään ''Ei lainattavissa'' -tilan
+      kuvaus. Esim. ''-1: ONLYMESSAGE''.<br/><br/>'
+  - - choices:
+        '0': Älä piilota
+        '1': Piilota
+      pref: HidePersonalPatronDetailOnCirculation
+    - asiakkaan puhelinnumero, sähköpostiosoite ja kotiosoite lainausnäytöltä.
+  - - choices:
+        '0': Älä estä
+        '1': Estä
+      pref: TransfersBlockCirc
+    - virkailijaa jatkamasta lainojen palautusta, kun kuljetustila aktivoituu.
+  - - choices:
+        '0': Älä kuljeta
+        '1': Kuljeta
+      pref: AutomaticConfirmTransfer
+    - automaattisesti, kun ikkunasta poistutaan valitsematta 'Kyllä'.
+  - - choices:
+        '0': Älä säilytä
+        '1': Säilytä
+      default: 0
+      pref: StoreLastBorrower
+    - tieto niteen viimeisimmästä lainaajasta. Tämä asetus ei ole riippuvainen asetuksista
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=opacreadinghistory">asiakkaan
+      lainahistoria</a> tai <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AnonymousPatron">AnonymousPatron</a>
+      järjestelmäasetuksista.
+  Palautusilmoitukset:
+  - - Kun lainattu nide merkitään "ilmoittaa palauttaneensa"-tilaan,
+    - choices:
+        ask: kysy veloitetaanko kadotetun niteen maksu
+        charge: veloita kadotetun niteen maksu
+        no_charge: älä veloita kadotetun niteen maksua
+      default: ask
+      pref: ClaimReturnedChargeFee
+    - .
+  - - Ratkaise palautusilmoitus automaattisesti ja muuta ratkaisuksi <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION">RETURN_CLAIM_RESOLUTION</a>
+      -auktorisoitu arvo
+    - choices: authval
+      pref: AutoClaimReturnStatusOnCheckin
+      source: RETURN_CLAIM_RESOLUTION
+    - kun nide palautetaan.
+  - - Ratkaise palautusilmoitus automaattisesti ja muuta ratkaisuksi <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION">RETURN_CLAIM_RESOLUTION</a>
+      -auktorisoitu arvo
+    - choices: authval
+      pref: AutoClaimReturnStatusOnCheckout
+      source: RETURN_CLAIM_RESOLUTION
+    - kun nide lainataan.
+  - - Käytä <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>
+      auktorisoitua arvoa
+    - choices: authval
+      pref: ClaimReturnedLostValue
+      source: LOST
+    - ilmaisemaan 'ilmoittaa palauttaneensa'.
+    - <span class="hint">This will not update the lost status of the item if there
+      is already an existing lost status set.</span>
+  - - Varoita virkailijaa, että asiakkaalla on liikaa 'ilmoittaa palauttaneensa' -huomautuksia,
+      jos asiakkaalla on niitä enemmän kuin
+    - class: integer
+      pref: ClaimReturnedWarningThreshold
+    - nidettä.
+  - - Poista hoidetut palautusilmoitukset, jotka ovat vanhempia kuin
+    - class: integer
+      pref: CleanUpDatabaseReturnClaims
+    - päivää.
+    - <span class="hint">Tätä järjestelmäasetusta käytetään cleanup_database.pl cronjobin
+      kanssa.</span>
+  Palautuspyynnöt:
+  - - Merkitse palautuspyyntö ongelmalliseksi, jos se on ollut odottamassa noutoa
+      yli
+    - pref: RecallsMaxPickUpDelay
+    - class: integer
+    - päivää.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: UseRecalls
+    - palautuspyyntöjä. Muista myös määrittää palautuspyyntöjä koskevat asetukset
+      <a href="/cgi-bin/koha/admin/smart-rules.pl">laina- ja maksusäännöissä</a>,
+      kun tämä asetus on otettu käyttöön.
+  SIP2:
+  - - Käytä seuraavia arvoja määritääksesi palautuksessa lajittelupaikan 'sort_bin'.<br/>
+    - Määrityksen tulee olla muodossa 'branchcode:item field:comparator:item field
+      value:sort bin number'. Jokainen määritys omalle rivilleen.<br/>
+    - '- ''branchcode'' on palautuksen sijainti (eli SIP käyttäjän kirjasto)<br/>'
+    - '- ''item field'' on tietokannan nidetaulun sarake<br/>'
+    - '- ''comparator'' on vertailun tyyppi, mahdollisia arvoja ovat eq,<,<=,>,>=,ne<br/>'
+    - '- ''item field value'' on arvo, jota verrataan ''item field'' -kohtaan määritettyyn
+      arvoon<br/>'
+    - '- ''sort bin number'' on oletettu palautuva arvo SIP vastauksen CL kentässä
+      sääntöön sopiville niteille<br/><br/>'
+    - Kenttävertailukolmikko, 'nidekenttä:vertailija:nidekentän arvo', on toistettavissa
+      yhdellä rivillä, jolloin voidaan tehdä monimutkaisempia sääntöjä
+    - 'HUOM: Määriteltäessä ''item_field_value'' edeltävällä merkillä ''\$'' ja nidekentän
+      nimi, käytetään määritetyn kentän arvoa niteiden vertailussa:<br/>'
+    - eli \$holdingbranch<br/></br>
+    - Esimerkkejä:<br/>
+    - CPL:itype:eq:BOOK:1 - Palauttaa lajittelupaikan (sort bin) 1 niteille, jotka
+      on palautettu CPL:ään, ja joiden nidetyyppi on 'BOOK'.<br/>
+    - CPL:itemcallnumber:<:339.6:3 - Palauttaa lajittelupaikan (sort bin) 3 niteille,
+      jotka on palautettu CPL:ään, ja joiden luokka on pienempi kuin 339.6.<br/>
+    - CPL:homebranch:ne:\$holdingbranch:X - Palauttaa lajittelupaikan (sort bin) arvon
+      'X' niteille, jotka on palautettu CPL:llään, ja jossa sijaintikirjasto ei ole
+      sama kuin kotikirjasto (eli mikä tahansa nide, joka kuuluu toiseen kirjastoon
+      kuin CPL).<br/>
+    - CPL:itype:eq:BOOK:ccode:eq:TEEN:5 - Palauttaa lajittelupaikan (sort bin) 5 niteille,
+      jotka on palautettu CPL:ään, ja joiden nidetyyppi on 'BOOK' ja kokoelmakoodi
+      'TEEN'.<br/><br/>
+    - class: long
+      pref: SIP2SortBinMapping
+      type: textarea
+  - - Käytä
+    - choices:
+        '0': kotikirjastoa
+        '1': permanent_location:a
+      pref: UseLocationAsAQInSIP
+    - AQ kentässä SIP protokollassa.
+  - - choices:
+        '0': Älä lähetä
+        '1': Lähetä
+      pref: SIP2AddOpacMessagesToScreenMessage
+    - asiakkaan Huomautus verkkokirjastossa -kentän tieto(a) SIP2-näyttöviestikentässä.
+  Varausasetukset:
+  - - Aseta Varauksia per nide -raportin varausten suhteeksi oletuksena
+    - class: integer
+      pref: HoldRatioDefault
+    - .
+  - - Virkailijaliittymässä, jaa varausjono eri tauluihin seuraavasti
+    - choices:
+        branch: noutokirjaston mukaan
+        branch_itemtype: noutokirjaston ja aineistotyypin mukaan
+        itemtype: varauksen aineistotyypin mukaan
+        nothing: ei jaeta ollenkaan
+      pref: HoldsSplitQueue
+    - .
+  - - choices:
+        '0': Älä ota käyttöön
+        '1': Ota käyttöön
+      pref: EnableItemGroupHolds
+    - varauksen tekeminen nideryhmiin. <br><strong>NOTE:</strong> Tämä järjestelmäasetus
+      vaatii, että <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EnableItemGroups'>EnableItemGroups</a>-järjestelmäasetus
+      on aktivoitu.
+  - - Jos varausjono on jaettu, näytä virkailijalle
+    - choices:
+        actual: todellinen prioriteetti, mikä voi olla epäjärjestyksessä
+        virtual: '''virtuaaliprioriteetin'' mukaan, missä jokainen ryhmä on numeroitu
+          erikseen'
+      pref: HoldsSplitQueueNumbering
+    - .
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: RealTimeHoldsQueue
+    - varausjonon päivittyminen reaaliajassa.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowHoldItemTypeSelection
+    - rajata varausten täyttymistä nidetyypin mukaan.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowRenewalIfOtherItemsAvailable
+    - asiakkaan uusia laina niteestä, josta on varauksia, jos vapaana on muita niteitä,
+      jotka voivat täyttää varauksen.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowHoldPolicyOverride
+    - henkilökunnan ohittaa varaussääntöjä varauksia tehdessään.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowHoldsOnDamagedItems
+    - varausten tekoa ja kiinnijäämistä vahingoittuneeseen aineistoon.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowHoldDateInFuture
+    - varaukset, jotka astuvat voimaan tulevaisuudessa.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: OPACAllowHoldDateInFuture
+    - asiakkaiden tehdä verkkokirjastossa varauksia, jotka astuvat voimaan tulevaisuudessa.
+      (Jos käytössä, täytyy myös <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AllowHoldDateInFuture">AllowHoldDateInFuture</a>-asetuksen
+      olla sallittu).
+  - - 'Määritä verkkokirjaston varauslomakkeelle pakolliseksi:'
+    - choices:
+        '': ei varauspvm:ää
+        both: kummatkin varauspvm:t
+        end: varauksen loppumispvm
+        start: varauksen aloituspvm
+      pref: OPACMandatoryHoldDates
+    - .
+    - <br><strong>HUOMAA:</strong> Varauksen "aloituspvm" -vaihtoehto on voimassa
+      ja näytetään varauslomakkeella vain, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AllowHoldDateInFuture">AllowHoldDateInFuture</a>
+      ja <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACAllowHoldDateInFuture">OPACAllowHoldDateInFuture</a>
+      järjestelmäasetukset on otettu käyttöön.
+  - - Vahvista viivästetyt varaukset (jotka alkavat myöhemmin kuin
+    - class: integer
+      pref: ConfirmFutureHolds
+    - päivää tästä päivästä) palautushetkellä. Huomaa, että tätä päivien määrää käytetään
+      myös laskettaessa oletusloppumispäivämäärää Hyllyvaraukset-raportille. Mutta
+      se ei vaikuta lainaukseen, uusintaan tai kuljetuksiin.
+  - - Tarkista
+    - choices:
+        ItemHomeLibrary: niteen kotikirjaston
+        PatronLibrary: asiakkaan kotikirjaston
+      pref: ReservesControlBranch
+    - säännöt varauksenteon yhteydessä, nähdäksesi voidaanko nide varata.
+  - - Merkitse varaus ongelmalliseksi, jos se on ollut odottamassa noutoa yli
+    - class: integer
+      pref: ReservesMaxPickUpDelay
+    - päivää.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: ExpireReservesMaxPickUpDelay
+    - varausten päättyä automaattisesti, jos niitä ei ole noudettu määräajan puitteissa.
+      Määritä määräaika <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReservesMaxPickUpDelay">ReservesMaxPickUpDelay</a>
+      -järjestelmäasetuksessa.</br>
+    - choices:
+        '0': Älä täytä
+        '1': Täytä
+      pref: ExpireReservesAutoFill
+    - seuraava(a) jonossa oleva(a) varaus(ta) automaattisesti vanhentuneista varauksista.
+    - Kun jonossa oleva varaus on täytetty vanhentuneista varauksista, lähetä sähköposti
+      ilmoitus osoitteeseen
+    - class: email
+      pref: ExpireReservesAutoFillEmail
+    - Jos tähän ei ole määritetty osoitetta, sähköposti lähtetään kirjaston reply-to
+      osoitteeseen.
+    - <br><strong>HUOM:</strong> Nämä järjestelmäasetukset vaativat <code>misc/cronjobs/holds/cancel_expired_holds.pl</code>
+      cronjobin. Pyydä kehittäjiä ajastamaan se.<br>
+  - - Jos käytetään järjestelmäasetusta <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ExpireReservesMaxPickUpDelay">ExpireReservesMaxPickUpDelay</a>,
+      veloita asiakkaalta noutamattoman varauksen maksu
+    - class: currency
+      pref: ExpireReservesMaxPickUpDelayCharge
+    - euroa.
+  - - Varausjonon tulisi ensisijaisesti täyttää varaukset täsmäyttämällä asiakkaan
+      kotikirjasto ja
+    - choices:
+        holdingbranch: niteen sijaintikirjasto.
+        homebranch: niteen kotikirjasto.
+      pref: HoldsQueuePrioritizeBranch
+      type: choice
+  - - Täytä varaukset käyttäen niteitä kirjastoista
+    - class: multi
+      pref: StaticHoldsQueueWeight
+    - (kirjastokoodeina, erotetaan pilkuilla; jos tyhjä, varaukset kohdistetaan kaikkiin
+      kirjastoihin)
+    - kun ne ovat
+    - choices:
+        '0': auki tai suljettu
+        '1': auki
+      pref: HoldsQueueSkipClosed
+    - choices:
+        '0': tässä järjestyksessä.
+        '1': satunnaisessa järjestyksessä.
+      pref: RandomizeHoldsQueueWeight
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/holds/build_holds_queue.pl</code>
+      cronjobin. Pyydä kehittäjiä ajastamaan se.
+    - ''
+  - - choices:
+        '0': Älä salli (independentbranches asetuksen kanssa)
+        '1': Salli
+      pref: canreservefromotherbranches
+    - käyttäjän varata toisen kirjaston nide(ttä)
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: OPACAllowUserToChooseBranch
+    - käyttäjän valita itse varauksen noutopiste(ttä).
+  - - 'Salli asiakkaiden vaihtaa itse varauksen noutopiste seuraaville varausten tiloille:'
+    - multiple:
+        intransit: Kuljetettavana
+        pending: Odottavat
+        suspended: Keskeytetyt
+      pref: OPACAllowUserToChangeBranch
+  - - choices:
+        '0': Merkitse varaus automaattisesti täytetyksi
+        '1': Älä täytä varausta automaattisesti
+      pref: ReservesNeedReturns
+    - ja laita odottaa-tilaan kun varaus on tehty tiettyyn niteeseen ja nide on jo
+      hyllyssä.
+  - - Asiakkaalla voi olla korkeintaan
+    - class: integer
+      pref: maxreserves
+    - varausta kerrallaan (jätä tyhjäksi tai määritä 0 poistaaksesi asetus käytöstä).
+      Lisärajoituksia voi määrittää laina- ja maksusäännöissä.
+  - - choices:
+        '0': Älä lähetä
+        '1': Lähetä
+      pref: emailLibrarianWhenHoldIsPlaced
+    - sähköpostin lähettäminen asiakkaan kirjastoon aina, kun tehdään varaus.
+    - 'Käytetään listan ensimmäistä määriteltyä osoitetta: kirjaston vastausosoite,
+      kirjaston sähköpostiosoite, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>
+      ja <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  - - choices:
+        '0': Älä lähetä sähköpostia
+        '1': Lähetä sähköposti
+      pref: EmailPatronWhenHoldIsPlaced
+    - asiakkaille, kun he tekevät varauksen.
+  - - choices:
+        '0': Älä mahdollista
+        '1': Mahdollista
+      pref: DisplayMultiPlaceHold
+    - varauksen tekeminen useampaan nimekkeeseen kerrallaan hakutuloslistasta
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: DisplayMultiItemHolds
+    - nidevarauksen tekeminen useampaan eri niteeseen kerrallaan virkailijaliittymässä
+      ja verkkokirjastossa.
+  - - choices:
+        '0': Älä aseta kuljetustilaan
+        '1': Aseta kuljetustilaan
+      pref: TransferWhenCancelAllWaitingHolds
+    - niteet, kun odottavat varaukset peruutetaan.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AutoResumeSuspendedHolds
+    - keskeytettyjen varausten automaattinen jatkuminen valittuna päivänä.
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/holds/auto_unsuspend_holds.pl</code>
+      cronjobin. Pyydä kehittäjiä ajastamaan se.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: SuspendHoldsIntranet
+    - varausten keskeyttäminen virkailijaliittymässä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: SuspendHoldsOpac
+    - varausten keskeyttäminen verkkokirjastossa.
+  - - Jos käytät <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ExpireReservesMaxPickUpDelay">ExpireReservesMaxPickUpDelay</a>,
+    - choices:
+        '0': älä salli
+        '1': salli
+      pref: ExpireReservesOnHolidays
+    - vanhentuneiden varausten peruuntua kirjaston kalenterin kiinni ollessa.
+  - - choices:
+        '0': Älä käytä kalenteria
+        '1': Käytä kalenteria
+      pref: ExcludeHolidaysFromMaxPickUpDelay
+    - kun lasketaan varauksen noutoajan viive.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: decreaseLoanHighHolds
+    - laina-ajan lyhentäminen
+    - class: integer
+      pref: decreaseLoanHighHoldsDuration
+    - päivään varatuille niteille, joilla on enemmän kuin
+    - class: integer
+      pref: decreaseLoanHighHoldsValue
+    - varauksia
+    - choices:
+        dynamic: enemmän kuin varattavissa olevia niteitä tietueessa
+        static: tietueessa
+      pref: decreaseLoanHighHoldsControl
+    - '. Älä laske mukaan niteitä, joilla on seuraavat nidetilat:'
+    - multiple:
+        damaged: Vaurioitunut
+        itemlost: Kadonnut
+        notforloan: Ei lainattavissa
+        withdrawn: Pois kierrosta
+      pref: decreaseLoanHighHoldsIgnoreStatuses
+    - 'Huom: Lyhennetty laina-aika voi olla asetettu myös lainasäännöissä ja se ohittaa
+      tämän asetuksen.'
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowHoldsOnPatronsPossessions
+    - asiakkaan varata aineistoa, jos asiakkaalla on jo lainassa yksi tai useampi
+      samaan tietueeseen kuuluva nide.
+  - - choices:
+        '0': Älä priorisoi
+        '1': Priorisoi
+      pref: LocalHoldsPriority
+    - asiakkaat, joiden varausten
+    - choices:
+        HomeLibrary: kotikirjasto(a)
+        PickupLibrary: noutokirjasto
+      pref: LocalHoldsPriorityPatronControl
+    - vastaa niteen
+    - choices:
+        holdingbranch: sijaintikirjasto(a)
+        homebranch: kotikirjasto(a)
+      pref: LocalHoldsPriorityItemControl
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: OPACHoldsIfAvailableAtPickup
+    - asiakkaiden tehdä varauksia noutopaikoihin (kirjastoihin), joissa nide on saatavana.
+  - - 'Asiakastyypit, joihin ei vaikuta järjestelmäasetus <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACHoldsIfAvailableAtPickup">OPACHoldsIfAvailableAtPickup</a>:'
+    - choices: patron-categories
+      class: multiple
+      pref: OPACHoldsIfAvailableAtPickupExceptions
+  - - choices:
+        allow: Salli niteiden merkitseminen kadonneeksi
+        allow_and_notify: Salli niteiden merkitseminen kadonneeksi ja huomautus asiakkaalle
+        do_not_allow: Älä merkitse niteitä kadonneeksi
+      pref: CanMarkHoldsToPullAsLost
+    - suoraan 'Hyllyvaraukset'-listalta. Kadonneiden arvot määritellään <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UpdateItemWhenLostFromHoldList">UpdateItemWhenLostFromHoldList</a>
+      järjestelmäasetuksessa.
+  - - Lista arvoista, jotka voidaan päivittää niteelle, kun sille on merkitty <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>-arvo
+      'Hyllyvaraukset'-raportilla.
+    - 'Esimerkki: "itemlost: 1" asettaaksesi kadonnut-arvon 1 items.itemlost-kenttään
+      kun nide merkitään <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST">LOST</a>-arvolla.
+      (Vaatii <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CanMarkHoldsToPullAsLost">CanMarkHoldsToPullAsLost</a>)'
+    - pref: UpdateItemWhenLostFromHoldList
+      syntax: text/x-yaml
+      type: textarea
+  - - choices:
+        '0': Älä aseta
+        '1': Aseta
+      default: 0
+      pref: DefaultHoldExpirationdate
+    - oletusvanhenemispäivä(ä) automaattisesti varauksille.
+    - Jos asetus on päällä, aseta vanhenemispäiväksi
+    - class: integer
+      default: 0
+      pref: DefaultHoldExpirationdatePeriod
+    - choices:
+        days: päivää
+        months: kuukautta
+        years: vuotta
+      default: days
+      pref: DefaultHoldExpirationdateUnitOfTime
+    - varauksen tekopäivästä.
+  - - Aseta virkailijaliittymässä tehtävien varausten oletusnoutopaikaksi
+    - choices:
+        holdingbranch: niteen sijaintikirjasto
+        homebranch: niteen kotikirjasto
+        loggedinlibrary: kirjautunut kirjasto
+      default: loggedinlibrary
+      pref: DefaultHoldPickupLocation
+    - .
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AutomaticCheckinAutoFill
+    - varausten täyttyä automaattisesti, kun niteet palautetaan automaattisesti.
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/automatic_checkin.pl</code>-ajastetun
+      ajon. Pyydä kehittäjiä ajastamaan se.
+  - - choices:
+        '0': Älä tee varausta
+        '1': Tee varaus
+      pref: PlaceHoldsOnOrdersFromSuggestions
+    - kun tilaus tehdään hankintaehdotuksen pohjalta.

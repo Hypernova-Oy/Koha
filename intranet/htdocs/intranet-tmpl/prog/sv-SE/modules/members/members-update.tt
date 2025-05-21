@@ -1,0 +1,225 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE Categories %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Update patron records") | html %] &rsaquo;
+ [% t("Patrons") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="pat_update" class="pat">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+[% BLOCK display_names %]
+[% SWITCH field %]
+[% CASE 'branchcode'          %]<span>Hembibliotek (filialkod)</span>
+[% CASE 'surname'             %]<span>Efternamn</span>
+[% CASE 'firstname'           %]<span>Förnamn</span>
+[% CASE 'preferred_name'      %]<span>Föredraget namn</span>
+[% CASE 'middle_name'         %]<span>Mellannamn</span>
+[% CASE 'title'               %]<span>Titel</span>
+[% CASE 'othernames'          %]<span>Andra namn</span>
+[% CASE 'initials'            %]<span>Initialer</span>
+[% CASE 'pronouns'            %]<span>Pronomen</span>
+[% CASE 'streetnumber'        %]<span>Gatunummer</span>
+[% CASE 'streettype'          %]<span>Gatutyp</span>
+[% CASE 'address'             %]<span>Adress</span>
+[% CASE 'address2'            %]<span>Adress 2</span>
+[% CASE 'city'                %]<span>Ort</span>
+[% CASE 'state'               %]<span>Delstat</span>
+[% CASE 'zipcode'             %]<span>Postnummer</span>
+[% CASE 'country'             %]<span>Land</span>
+[% CASE 'email'               %]<span>E-post</span>
+[% CASE 'phone'               %]<span>Primär telefon</span>
+[% CASE 'mobile'              %]<span>Annan telefon</span>
+[% CASE 'fax'                 %]<span>Fax</span>
+[% CASE 'emailpro'            %]<span>Sekundär e-post</span>
+[% CASE 'phonepro'            %]<span>Sekundärt telefonnummer</span>
+[% CASE 'B_streetnumber'      %]<span>Alternativ adress: Gatunummer</span>
+[% CASE 'B_streettype'        %]<span>Alternativ adress: Gatutyp</span>
+[% CASE 'B_address'           %]<span>Alternativ adress: Adress</span>
+[% CASE 'B_address2'          %]<span>Alternativ adress: Adress 2</span>
+[% CASE 'B_city'              %]<span>Alternativ adress: Ort</span>
+[% CASE 'B_state'             %]<span>Alternativ adress: Delstat</span>
+[% CASE 'B_zipcode'           %]<span>Alternativ adress: Postnummer</span>
+[% CASE 'B_email'             %]<span>Alternativ adress: E-post</span>
+[% CASE 'B_phone'             %]<span>Alternativ adress: Telefon</span>
+[% CASE 'contactnote'         %]<span>Alternativ adress: Kontaktanmärkning</span>
+[% CASE 'dateofbirth'         %]<span>Födelsedatum</span>
+[% CASE 'contactname'         %]<span>Kontakt: Efternamn</span>
+[% CASE 'contactfirstname'    %]<span>Kontakt: Förnamn</span>
+[% CASE 'contacttitle'        %]<span>Kontakt: Titel</span>
+[% CASE 'relationship'        %]<span>Kontakt: Förhållande</span>
+[% CASE 'sex'                 %]<span>Kön</span>
+[% CASE 'autorenew_checkouts' %]<span>Automatiskt omlån</span>
+[% CASE 'altcontactfirstname' %]<span>Alternativ kontakt: Förnamn</span>
+[% CASE 'altcontactsurname'   %]<span>Alternativ kontakt: Efternamn</span>
+[% CASE 'altcontactaddress1'  %]<span>Alternativ kontakt: Adress</span>
+[% CASE 'altcontactaddress2'  %]<span>Alternativ kontakt: Adress 2</span>
+[% CASE 'altcontactaddress3'  %]<span>Alternativ kontakt: Ort</span>
+[% CASE 'altcontactstate'     %]<span>Alternativ kontakt: Delstat</span>
+[% CASE 'altcontactzipcode'   %]<span>Alternativ kontakt: Postnummer</span>
+[% CASE 'altcontactcountry'   %]<span>Alternativ kontakt: Land</span>
+[% CASE 'altcontactphone'     %]<span>Alternativ kontakt: Telefon</span>
+[% CASE 'smsalertnumber'      %]<span>Nummer för SMS-notifiering</span>
+[% CASE 'extended_attributes' %]<span>Ytterligare attribut och identifierare</span>
+[% CASE %][% field | html %]
+[% END %]
+[% END %]
+
+[% BLOCK display_extended_attributes %]
+ [% IF attrs and attrs.size > 1 %]
+ <ul>
+ [% FOREACH attr IN attrs %]
+ <li>[% PROCESS display_attribute attr=attr type=type %]</li>
+ [% END %]
+ <ul>
+ [% ELSIF attrs %]
+ [% PROCESS display_attribute attr=attrs.0 type=type %]
+ [% END %]
+[% END %]
+
+[% BLOCK display_attribute %]
+ [% IF type.authorised_value_category %]
+ [% AuthorisedValues.GetByCode(type.authorised_value_category,attr.attribute) | html %]
+ [% ELSE %]
+ [% attr.attribute | html %]
+ [% END %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Låntagare</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uppdatera låntagarposter</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-8 offset-md-2">
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Uppdatera låntagarposter</h1>
+ [% IF PendingModifications %]
+ <form method="post" action="members-update-do.pl">
+ [% INCLUDE 'csrf-token.inc' %] [% WRAPPER accordion panelgroup_id="pending_updates" %] [% FOREACH pm IN PendingModifications %] [% SET borrowernumber = pm.borrowernumber %] [% WRAPPER accordion_item %] [% WRAPPER accordion_heading panel_id="panel-${pm.borrowernumber}" %] [% borrowers.$borrowernumber.surname | html %][% IF ( borrowers.$borrowernumber.firstname ) %], [% borrowers.$borrowernumber.firstname | html %][% END %] - [% Categories.GetName( borrowers.$borrowernumber.categorycode ) | html %] ([% Branches.GetName( borrowers.$borrowernumber.branchcode ) | html %]) ([% borrowers.$borrowernumber.cardnumber | html %]) - Begärd den [% pm.timestamp | $KohaDates with_hours = 1 %] [% END %] [% WRAPPER accordion_panel panel_id="panel-${pm.borrowernumber}" %] <div class="btn-toolbar">
+
+ <label for="approve_modify_[% pm.borrowernumber | html %]"><input type="radio" id="approve_modify_[% pm.borrowernumber | html %]" name="modify_[% pm.borrowernumber | html %]" value="approve" /> Godkänn</label>
+
+
+ <label for="deny_modify_[% pm.borrowernumber | html %]"><input type="radio" id="deny_modify_[% pm.borrowernumber | html %]" name="modify_[% pm.borrowernumber | html %]" value="deny" /> Neka</label>
+
+
+ <label for="ignore_modify_[% pm.borrowernumber | html %]"><input type="radio" id="ignore_modify_[% pm.borrowernumber | html %]" name="modify_[% pm.borrowernumber | html %]" value="ignore" checked="checked"/> Ignorera</label>
+ &nbsp;|&nbsp; <a target="_blank" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% pm.borrowernumber | html %]" >Låntagarinformation</a>
+ </div>
+
+ [% IF borrowers.$borrowernumber.gonenoaddress > 0 %]
+ <div class="alert alert-info" style="margin-top:.8em">
+ <h4>Låntagarens adress är okänd</h4>
+ <p>Den <strong>Ogiltig adress</strong> flagga finns för den här låntagaren. Om den begärda ändringen löser problemet, var god ta bort flaggan.</p>
+ <input type="checkbox" id="unset_gna_[% pm.borrowernumber | html %]" name="unset_gna_[% pm.borrowernumber | html %]" value="unset_gna_[% pm.borrowernumber | html %]"/>
+ <label for="unset_gna_[% pm.borrowernumber | html %]">Avaktivera spärr för ogiltig adress för denna låntagare</label>
+ </div>
+ [% END %]
+
+ [% IF !pm.extended_attributes and pm.size > 3 or pm.extended_attributes and pm.size > 4 %]
+ [%# timestamp+verification_token+borrowernumber=3 %]
+ <div class="members-update-table">
+ <table>
+ <tr>
+ <th>Fält</th>
+ <th>Gammalt värde</th>
+ <th>Nytt värde</th>
+ </tr>
+
+
+ [% FOREACH key IN pm.keys %]
+ [% IF ( key != "timestamp" and key != "extended_attributes" ) %]
+ [% IF ( ( pm.$key OR borrowers.$borrowernumber.$key ) && ( pm.$key != borrowers.$borrowernumber.$key ) ) %]
+ <tr>
+ <td>[% PROCESS display_names field = key %]</td>
+ [% IF ( key == "dateofbirth" ) %]
+ <td>[% borrowers.$borrowernumber.$key | $KohaDates %]</td>
+ <td>[% pm.$key | $KohaDates %]</td>
+ [% ELSIF key == 'branchcode' %]
+ <td>[% Branches.GetName( borrowers.$borrowernumber.$key ) | html %]</td>
+ <td>[% Branches.GetName( pm.$key ) | html %]</td>
+ [% ELSE %]
+ <td>[% borrowers.$borrowernumber.$key | html %]</td>
+ <td>[% pm.$key | html %]</td>
+ [% END %]
+ </tr>
+ [% END %]
+ [% END %]
+ [% END %]
+ </table>
+ </div> <!-- /.members-update-table -->
+ [% END # /!pm.extended_attributes %]
+ [% IF borrowers.$borrowernumber.modified_attributes %]
+ <div class="members-update-table">
+ <h4>[% PROCESS display_names field='extended_attributes' %]</h4>
+ <table>
+ <tr>
+ <th>Fält</th>
+ <th>Gammalt värde</th>
+ <th>Nytt värde</th>
+ </tr>
+ [% FOREACH attribute_group IN borrowers.$borrowernumber.modified_attributes %]
+ <tr>
+ <td>[% attribute_group.type.description | html %]</td>
+ <td>[% PROCESS display_extended_attributes attrs=attribute_group.before type=attribute_group.type %]</td>
+ <td>[% PROCESS display_extended_attributes attrs=attribute_group.after type=attribute_group.type %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </div> <!-- /.members-update-table -->
+ [% END # / borrowers.$borrowernumber.modified_attributes %]
+ [% END %]
+ [% END %]
+ [% END # /FOREACH pm %]
+ [% END # /collapse %]
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-update" />
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ </fieldset>
+ </form>
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p>Det finns inga väntande låntagarändringar.</p>
+ </div>
+ [% END %]
+
+ </div>
+ </div>
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ <script>
+        $(document).ready(function(){
+            [%- IF ( active ) -%]
+                $("#panel-" + [% active | html %] + "_panel").collapse("show");
+            [%- ELSE -%]
+                $(".panel-collapse:eq(0)").collapse("show");
+            [%- END -%]
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

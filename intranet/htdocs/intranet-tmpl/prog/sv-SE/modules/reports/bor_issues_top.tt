@@ -1,0 +1,236 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE KohaDates %]
+[% USE ItemTypes %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Patrons with the most checkouts") | html %] &rsaquo;
+ [% t("Reports") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="rep_bor_issues_top" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/reports-home.pl">Rapporter</a>
+ [% END %]
+ [% IF ( do_it ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/bor_issues_top.pl">Låntagare med flest lån</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Resultat</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Låntagare med flest lån</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% IF ( do_it ) %]
+ [% FOREACH mainloo IN mainloop %]
+ <h1>Låntagare med flest lån</h1>
+ [% IF ( mainloo.loopfilter ) %]
+ [% IF mainloo.loopfilter.size %]
+ <p>Filtrerat på:</p>
+ <ul>
+ [% FOREACH loopfilte IN mainloo.loopfilter %]
+ <li>
+ [% SWITCH loopfilte.crit -%]
+ [% CASE "Issue From" -%]
+ <span>Utlånad efter [% loopfilte.filter | $KohaDates %]</span>
+ [% CASE "Issue To" -%]
+ <span>Utlånad före [% loopfilte.filter | $KohaDates %]</span>
+ [% CASE "Return From" -%]
+ <span>Exemplar återlämnat efter [% loopfilte.filter | $KohaDates %]</span>
+ [% CASE "Return To" -%]
+ <span>Återlämnad före [% loopfilte.filter | $KohaDates %]</span>
+ [% CASE "Branch" -%]
+ <span>Bibliotek är [% Branches.GetName( loopfilte.filter ) | html %]</span>
+ [% CASE "Doc Type" -%]
+ <span>Exemplartyp är [% ItemTypes.GetDescription( loopfilte.filter ) | html %]</span>
+ [% CASE "Bor Cat" -%]
+ <span>Låntagarkategorikod är [% loopfilte.filter | html %]</span>
+ [% CASE "Day" -%]
+ <span>Dag är [% loopfilte.filter | html %]</span>
+ [% CASE "Month" -%]
+ <span>Månaden är [% loopfilte.filter | html %]</span>
+ [% CASE "Year" -%]
+ <span>Året är [% loopfilte.filter | html %]</span>
+ [% CASE # default case -%]
+ <span>[% loopfilte.crit | html %] = [% loopfilte.filter | html %]</span>
+ [% END -%]
+ </li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% END %]
+ 
+ <table>
+ <tr>
+ <th rowspan="2">Rang</th>
+ [% FOREACH loopco IN mainloo.loopcol %]
+ <th colspan="2">[% loopco.coltitle | html %]</th>
+ [% END %]
+ </tr>
+ <tr>
+ [% FOREACH loopco IN mainloo.loopcol %]
+ <th>Låntagare</th>
+ <th>Antal lån</th>
+ [% END %]
+ </tr>
+ [% FOREACH loopro IN mainloo.looprow %]
+ <tr>
+ [% IF ( loopro.hilighted ) %]<td>[% ELSE %]<td>[% END %]
+ [% loopro.rowtitle | html %]</td>
+ [% FOREACH loopcel IN loopro.loopcell %]
+ [% IF ( loopcel.hilighted ) %]<td>[% ELSE %]<td>[% END %]
+ [% IF ( loopcel.reference ) %]<a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% loopcel.reference | uri %]">[% END %]
+ [% IF ( loopcel.value ) %][% loopcel.value | html %][% END %]
+ [% IF ( loopcel.reference ) %]</a>[% END %]
+ </td>
+ [% IF ( loopcel.hilighted ) %]<td>[% ELSE %]<td>[% END %]
+ [% IF ( loopcel.count ) %][% loopcel.count | html %][% END %]
+ </td>
+ [% END %]
+ </tr>
+ [% END %]
+ </table>
+ [% END %]
+[% ELSE %]
+ <h1>Låntagare med flest lån</h1>
+ <form method="get" action="/cgi-bin/koha/reports/bor_issues_top.pl">
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="checkoutfrom">Utlåningsdatum från:</label>
+ <input type="text" size="10" id="checkoutfrom" name="Filter" class="flatpickr" data-date_to="checkoutto" />
+
+ <label class="inline" for="checkoutto">Till: </label>
+ <input size="10" id="checkoutto" name="Filter" value="" type="text" class="flatpickr" />
+ <span class="hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ <li>
+ <label for="checkinfrom">Återlämningsdatum från:</label>
+ <input type="text" size="10" id="checkinfrom" name="Filter" class="flatpickr" data-date_to="checkinto" />
+
+ <label class="inline" for="checkinto">Till: </label>
+ <input type="text" size="10" id="checkinto" name="Filter" value="" class="flatpickr" />
+ <span class="hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ <li> 
+ <label for="branch">Bibliotek: </label>
+<select name="Filter" id="branch"><option value="" > Alla bibliotek</option>
+ [% FOREACH l IN Branches.all( unfiltered => 1 ) %]
+ <option value="[% l.branchcode | html %]" >[% l.branchname | html %] </option>
+ [% END %] 
+ </select> </li>
+ <li> 
+ <label for="documenttype">Exemplartyp: </label><select name="Filter" id="documenttype"><option value="" > Alla exemplartyper</option>
+ [% FOREACH itemtype IN itemtypes %]
+ <option value="[% itemtype.itemtype | html %]" >[% itemtype.translated_description | html %] </option>
+ [% END %] 
+ </select>
+ </li>
+ <li> 
+ <label for="patroncategory">Låntagarkategori: </label><select name="Filter" id="patroncategory"><option value="" > Alla kategorikoder</option>
+ [% FOREACH patron_category IN patron_categories%]
+ <option value="[% patron_category.categorycode | html %]" >[% patron_category.description | html %] </option>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+ 
+ <fieldset class="rows">
+ <ol>
+ <li><label for="numlimit">Begränsa till: </label> <select name="Limit" id="numlimit">
+ <option value ="5" selected="selected"> 5</option>
+ <option value ="10">10</option>
+ <option value ="15">15</option>
+ <option value ="20">20</option>
+ <option value ="">Ingen begränsning</option>
+ <!-- <option value ="25">25</option>
+ <option value ="40">40</option>
+ <option value ="50">50</option>
+ <option value ="100">100</option>-->
+ </select></li>
+ <li><label for="criteria">Av: </label> <select name="Criteria" id="criteria">
+ <option value ="" selected="selected">Ingen</option>
+ <option value ="branchcode">Bibliotek</option>
+ <option value ="categorycode">Kategorikod</option>
+ <option value ="itemtype">Exemplartyp</option>
+ <option value ="Day">Dag</option>
+ <option value ="Week">Vecka</option>
+ <option value ="Month">Månad</option>
+ <option value ="Year">År</option>
+ </select></li>
+ </ol>
+ </fieldset>
+
+<fieldset class="rows">
+ <legend>Utdata</legend>
+ <ol><li><label for="outputscreen">Till skärm i webbläsare: </label><input type="radio" checked="checked" name="output" id="outputscreen" value="screen" /></li>
+ <li><label for="outputfile">Till en fil: </label><input type="radio" name="output" value="file" id="outputfile" />
+ <label class="inline" for="basename">Namngiven: </label><input id="basename" name="basename" type="text" value="Exportera" />
+ <label class="inline" for="MIME">In i ett program: </label>
+ <select name="MIME" id="MIME">
+ [% FOREACH mimeloo IN mimeloop %]
+ <option value="[% mimeloo.type | html %]">[% mimeloo.type | html %]</option>
+ [% END %]
+ </select>
+ <label class="inline" for="sep">Avgränsare: </label>
+ <select name="sep" id="sep">
+ [% FOREACH value IN CGIseplist.values.sort() %]
+ [% IF ( value == CGIseplist.default ) %]
+ <option value="[% value | html %]" selected="selected">[% value | html %]</option>
+ [% ELSE %]
+ <option value="[% value | html %]">[% value | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ <input type="hidden" name="report_name" value="[% report_name | html %]" />
+ <input type="hidden" name="do_it" value="1" />
+ </fieldset>
+ </form>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'reports-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

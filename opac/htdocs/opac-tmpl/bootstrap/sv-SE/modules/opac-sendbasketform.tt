@@ -1,0 +1,62 @@
+[% USE Koha %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Skickar din minneslista &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %]-katalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='addtolist' bodyclass='popup' %]
+ <div class="main">
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col order-first order-md-first order-lg-2">
+ <div id="usersendbasket" class="maincontent">
+ [% IF ( email_add ) %]
+
+ [% IF ( SENT ) %]
+ <h1>Meddelande skickat</h1>
+ <div class="alert alert-info">
+ <p>Minneslistan skickades till: [% email_add | html %]</p>
+ </div>
+ <p><a class="focus close" href="#">Stäng fönster</a></p>
+ [% END %]
+
+ [% IF ( error ) %]
+ <div class="alert alert-warning">
+ [% IF error == 'NO_BODY' %]
+ <p>Problem vid sändning av minneslista: Inga giltiga poster funna.</p>
+ [% ELSIF error == 'NO_REPLY_ADDRESS' %]
+ <p>Ett fel uppstod när minneslistan skulle skickas: Vi kan inte skicka e-post då det saknas e-postadress för kontot (er e-post används som reply to).</p>
+ [% ELSE %]
+ <p>Problem vid sändning av minneslista.</p>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% ELSE %]
+ <form action="/cgi-bin/koha/opac-sendbasket.pl" method="post" id="sendbasketform">
+ <fieldset class="brief">
+ <legend><h1>Skickar din minneslista</h1></legend>
+ <label for="email_add">E-postadress:</label>
+ <input type="text" id="email_add" name="email_add" size="43" class="focus form-control" />
+ <label for="comment">Kommentar:</label>
+ <textarea id="comment" name="comment" rows="4" cols="40" class="form-control"></textarea>
+ <input type="hidden" name="bib_list" value="[% bib_list | html %]" />
+ [% INCLUDE 'csrf-token.inc' %]
+ </fieldset>
+ [% IF Koha.Preference('OPACHoldRequests') || Koha.Preference('OpacRenewalAllowed') %]<p id="donotrequestbymail">Om du inte mottog detta e-postbrev kan du begära ett nytt.</p>[% END %]
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-send" />
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ <a class="cancel close" href="#">Avbryt</a>
+ </fieldset>
+ </form>
+
+ [% END # / IF email_add %]
+ </div> <!-- / #usersendbasket -->
+ </div> <!-- / .span12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' is_popup=1 %]
+[% BLOCK jsinclude %][% END %]

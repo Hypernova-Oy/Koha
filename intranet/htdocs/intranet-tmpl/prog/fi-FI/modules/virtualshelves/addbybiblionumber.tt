@@ -1,0 +1,128 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Add to list") | html %] &rsaquo;
+ [% t("Lists") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="lists_addbybiblionumber" class="lists">
+ <div class="container-fluid">
+
+[% UNLESS (authorized) %]
+ <div class="alert alert-warning">
+ <h1>Virhe lisättäessä listaan</h1>
+ [% IF (errcode==1) %]<p>Uuden listan luonti epäonnistui. Tarkista listan nimi.</p>[% END %]
+ [% IF (errcode==2) %]<p>Sinulla ei ole oikeuksia lisätä teoksia tähän listaan.</p>[% END %]
+ <button class="btn btn-default close_window focus">Sulje ikkuna</button>
+ </div>
+[% ELSE %]
+
+ [% IF ( multiple ) %]
+ <h1>Lisää [% total | html %] nimekettä [% IF ( singleshelf ) %]<em>[% shelfname | html %]</em>: [% ELSE %] listaan:[% END %]</h1>
+ [% ELSE %]
+ <h1>Lisää tähän [% IF ( singleshelf ) %]<em>[% shelfname | html %]</em>[% ELSE %] lista:[% END %]</h1>
+ [% END %]
+ <ul>
+ [% FOREACH biblio IN biblios %]
+ <li> <span class="title">[% biblio.title | html %]</span>
+ [% IF ( biblio.author ) %]<span class="author"> [% biblio.author | html %] </span>[% END %]
+ </li>
+ [% END %]
+ </ul>
+
+ <form name="f1" action="/cgi-bin/koha/virtualshelves/addbybiblionumber.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% FOREACH biblio IN biblios %] <input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]" />[% END %]
+ <input type="hidden" name="confirmed" value="1" />
+ [% IF ( shelfnumber ) %]<input type="hidden" name="shelfnumber" value="[% shelfnumber | html %]" />[% END %]
+
+[% UNLESS ( shelfnumber ) %]
+
+[% UNLESS ( newshelf ) %]
+ [% IF private_shelves.count OR public_shelves.count OR private_shelves_shared_with_me.count %]
+ <fieldset class="rows">
+ <legend>Valitse lista</legend>
+ <ol>
+ <li>
+ <label>Valitse lista</label>
+ <select name="shelfnumber" id="shelfnumber">
+ [% IF private_shelves.count %]
+ <optgroup label="Yksityiset listat">
+ [% FOREACH private_shelf IN private_shelves %]
+ <option value="[% private_shelf.shelfnumber | html %]">[% private_shelf.shelfname | html %]</option>
+ [% END %]
+ </optgroup>
+ [% END %]
+ [% IF private_shelves_shared_with_me.count %]
+ <optgroup label="Minulle jaetut yksityiset listat">
+ [% FOREACH private_shelf IN private_shelves_shared_with_me %]
+ <option value="[% private_shelf.shelfnumber | html %]">[% private_shelf.shelfname | html %]</option>
+ [% END %]
+ </optgroup>
+ [% END %]
+ [% IF public_shelves.count %]
+ <optgroup label="Julkiset listat">
+ [% FOREACH public_shelf IN public_shelves %]
+ <option value="[% public_shelf.shelfnumber | html %]">[% public_shelf.shelfname | html %]</option>
+ [% END %]
+ </optgroup>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ [% FOREACH biblio IN biblios %]<input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]" />[% END %]
+ [% UNLESS ( biblionumbers ) %]
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ [% ELSE %]
+ <input type="hidden" name="biblionumbers" value="[% biblionumbers | html %]" />
+ [% END %]
+ </fieldset>
+
+ <p>... tai...</p>
+[% END %]
+[% END %]
+
+ <fieldset class="rows"><legend>Lisää uudelle listalle:</legend>
+ <ol><li>
+ <label for="newvirtualshelf">
+ Listan nimi: </label>
+ [% FOREACH biblio IN biblios %]<input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]" />[% END %]
+ [% UNLESS ( biblionumbers ) %]
+ <input type="hidden" name="biblionumber" id="biblionumber" value="[% biblionumber | html %]" />
+ [% ELSE %]
+ <input type="hidden" name="biblionumbers" id="biblionumbers" value="[% biblionumbers | html %]" />
+ [% END %]
+ <input type="text" name="newvirtualshelf" id="newvirtualshelf" size="40" />
+ <input type="hidden" name="confirmed" value="1" />
+ </li>
+ <li>
+ <label for="category">Tyyppi:</label>
+ <select name="public" id="public">
+ <option value="0">Yksityinen</option>
+ <option value="1">Julkinen</option>
+ </select>
+ </li></ol>
+ </fieldset>
+
+
+[% END %]
+
+ <input type="hidden" name="sortfield" value="title" />
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-add" />
+ <input class="btn btn-primary" type="submit" value="Tallenna" />
+ <button class="btn btn-default close_window">Peruuta</button>
+ </fieldset>
+ </div>
+ </nav>
+ </form>
+[% END %]
+
+[% SET popup_window = 1 %]
+[% INCLUDE 'intranet-bottom.inc' %]

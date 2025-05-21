@@ -1,0 +1,231 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Add reserves") | html %] &rsaquo;
+ [% course.course_name | html %] &rsaquo;
+ [% t("Course reserves") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="courses_add_items_step1" class="course">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/course_reserves/course-reserves.pl">Kurslistor</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/course_reserves/course-details.pl?course_id=[% course.course_id | uri %]">[% course.course_name | html %][%- IF course.section -%] - [% course.section | html %][%- END -%]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lägg till kursböcker</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-8 offset-md-2">
+ [% INCLUDE 'messages.inc' %]
+ <h1>Lägg till kursböcker <em>[% course.course_name | html %]</em></h1>
+ [% IF action == 'invalid_course' %]
+ <div id="invalid-course-error" class="alert alert-warning">Ogiltig kurs!</div>
+ [% END %]
+
+ [% IF action == 'display_form' %]
+ <form method="post" action="/cgi-bin/koha/course_reserves/batch_add_items.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="course_id" value="[% course.course_id | html %]" />
+ <input type="hidden" name="op" value="cud-add" />
+
+ <fieldset class="rows">
+ <legend>Lägg till exemplar: skanna streckkoder</legend>
+ <ol>
+ <li>
+ <label class="required" for="barcodes">Exemplar streckkoder:</label>
+ <textarea rows="20" cols="50" id="barcodes" name="barcodes" class="focus"></textarea>
+ </li>
+ [% IF item_level_itypes %]
+ <li>
+ <label class="required" for="itype">Exemplartyp:</label>
+ <input type="checkbox" class="field-toggle" data-pulldown="itype" value="1" name="itype_enabled" id="itype_enabled" />
+ <select id="itype" name="itype" disabled="disabled">
+ <option value=""></option>
+
+ [% FOREACH it IN ItemTypes.Get() %]
+ <option value="[% it.itemtype | html %]">[% it.description | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ [% END %]
+
+ <li>
+ <label class="required" for="ccode">Avdelning:</label>
+ <input type="checkbox" class="field-toggle" data-pulldown="ccode" value="1" name="ccode_enabled" id="ccode_enabled" />
+ <select id="ccode" name="ccode" disabled="disabled">
+ <option value=""></option>
+ [% FOREACH c IN AuthorisedValues.Get('CCODE') %]
+ <option value="[% c.authorised_value | html %]">[% c.lib | html %]</option>
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label class="required" for="location">Placering:</label>
+ <input type="checkbox" class="field-toggle" data-pulldown="location"  value="1" name="location_enabled" id="location_enabled" />
+ <select id="location" name="location" disabled="disabled">
+ <option value=""></option>
+ [% FOREACH s IN AuthorisedValues.Get('LOC') %]
+ <option value="[% s.authorised_value | html %]">[% s.lib | html %]</option>
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label class="required" for="homebranch">Hembibliotek:</label>
+ <input type="checkbox" value="1" class="field-toggle" data-pulldown="homebranch" name="homebranch_enabled" id="homebranch_enabled" />
+ <select id="homebranch" name="homebranch" disabled="disabled">
+ <option value=""></option>
+ [% FOREACH b IN Branches.all() %]
+ <option value="[% b.branchcode | html %]">[% b.branchname | html %]</option>
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label class="required" for="holdingbranch">Nuvarande plats:</label>
+ <input type="checkbox" value="1" class="field-toggle" data-pulldown="holdingbranch" name="holdingbranch_enabled" id="holdingbranch_enabled" />
+ <select id="holdingbranch" name="holdingbranch" disabled="disabled">
+ <option value=""></option>
+ [% FOREACH b IN Branches.all() %]
+ <option value="[% b.branchcode | html %]">[% b.branchname | html %]</option>
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label for="item_staff_note">Personalkommentar:</label>
+ <textarea name="item_staff_note" id="item_staff_note">[% course_reserve.staff_note | html %]</textarea>
+ </li>
+
+ <li>
+ <label for="item_public_note">Offentlig anmärkning:</label>
+ <textarea name="item_public_note" id="item_public_note">[% course_reserve.public_note | html %]</textarea>
+ </li>
+ </ol>
+ </fieldset>
+
+ <p>
+ Om du vill att ett fält ska kunna ändras markerar du rutan bredvid fältnamnet. Fält som inte är markerade ändras inte.<br>
+ Alla exemplar med befintliga kurslistor kommer att få sina <em>på kurslista</em> statusar uppdaterade. </p>
+
+ <fieldset class="rows">
+ <legend>Eller använd biblionummer från bibliografiska poster</legend>
+ <ol>
+ <li>
+ <label class="required" for="biblionumbers">Biblionummer:</label>
+ <textarea rows="20" cols="50" id="biblionumbers" name="biblionumbers"></textarea>
+ </li>
+
+ <li>
+ <label for="biblio_staff_note">Personalkommentar:</label>
+ <textarea name="biblio_staff_note" id="biblio_staff_note">[% course_reserve.staff_note | html %]</textarea>
+ </li>
+
+ <li>
+ <label for="biblio_public_note">Offentlig anmärkning:</label>
+ <textarea name="biblio_public_note" id="biblio_public_note">[% course_reserve.public_note | html %]</textarea>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+
+ <a href="/cgi-bin/koha/course_reserves/course-details.pl?course_id=[% course.course_id | uri %]" class="cancel">Avbryt</a>
+ </fieldset>
+ </form>
+ [% END %]
+
+ [% IF action == 'display_results' %]
+ <h2>Resultat</h2>
+
+ [% IF barcodes %]
+ <h3>Tillagda exemplar</h3>
+ [% IF items_added.size > 0 %]
+ <p>Följande exemplar har tillfogats eller uppdaterats:</p>
+ <ul>
+ [% FOREACH i IN items_added %]
+ <li>[% i.biblio.title | html %] ( [% i.barcode | html %] )</li>
+ [% END %]
+ </ul>
+ [% ELSE %] Ingen giltig exemplarstreckkod hittades. [% END %] [% IF invalid_barcodes.size > 0 %] <h3>Ogiltiga streckkoder</h3>
+ <p>Följande felaktiga streckkoder hoppades över:</p>
+ <ul>
+ [% FOREACH b IN invalid_barcodes %]
+ <li>[% b | html %]</li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% ELSIF biblionumbers %]
+ <h3>Bibliografiska poster tillagda</h3>
+ [% IF biblios_added.size > 0 %]
+ <p>Följande bibliografiska poster har tillfogats eller uppdaterats:</p>
+ <ul>
+ [% FOREACH b IN biblios_added %]
+ <li>[% b.title | html %] ( [% b.biblionumber | html %] )</li>
+ [% END %]
+ </ul>
+ [% ELSE %] Inga giltiga biblionummer hittades. [% END %] [% IF invalid_biblionumbers.size > 0 %] <h3>Ogiltiga biblionummer</h3>
+ <p>Följande felaktiga streckkoder hoppades över:</p>
+ <ul>
+ [% FOREACH b IN invalid_biblionumbers %]
+ <li>[% b | html %]</li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% END %]
+
+ <p>
+ <a class='btn btn-default' href="/cgi-bin/koha/course_reserves/course-details.pl?course_id=[% course_id | html %]">Visa kurs</a>
+ </p>
+ [% END %]
+ </div>
+</div>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+    //<![CDATA[
+        $(document).ready(function(){
+            $('.field-toggle').change(function() {
+                if( this.checked ) {
+                    $('#' + $(this).data('pulldown') ).removeAttr('disabled');
+                } else {
+                    $('#' + $(this).data('pulldown') ).val('');
+                    $('#' + $(this).data('pulldown') ).attr('disabled', 'disabled');
+                }
+            });
+            $("input[type='submit']").click(function(e){
+                if ( $("#biblionumbers").val().length > 0 && $("#barcodes").val().length > 0 ) {
+                    e.preventDefault();
+                    alert(_("Ange enbart streckkoder, eller enbart biblionummer."));
+                }
+            });
+        });
+    //]]>
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

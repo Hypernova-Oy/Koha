@@ -1,0 +1,62 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+
+<title>[% FILTER collapse %]
+ [% t("Create a library") | html %] &rsaquo;
+ [% t("Web installer") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="onboarding-step1" class="installer-main col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+ <div id="logo"><a href="#">Koha</a></div>
+ <h1>Asennusohjelma &rsaquo; Luo kirjasto</h1>
+
+ [% INCLUDE 'onboarding_messages.inc' %]
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Asennus</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan <ol>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Luo kirjasto</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Luo asiakastyyppi</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Luo Kohan ylläpitäjätunnus</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Luo uusi nidetyyppi</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Luo uusi lainaussääntö</li>
+ </ol>
+ </li>
+ </ol>
+ </div>
+
+ <form name="LibraryCreation" method="post" action="onboarding.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows" >
+ <input type="hidden" name="step" value="1"/>
+ <input type="hidden" name="op" value="cud-add_validate_library"/>
+ <ol>
+ <li>
+ <label for="branchcode" class="required">Kirjaston tunnus: </label>
+ <input type="text"  pattern="[0-9A-Za-z]{1,10}" name="branchcode" id="branchcode" size="10" maxlength="10" value="" class="required" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="branchname" class="required">Nimi: </label>
+ <input type="text" name="branchname" id="branchname" size="42" class="required" required="required">
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ </ol>
+ <p>Lisätäksesi toisen kirjaston ja lisäasetuksia, mene: <span class="breadcrumbs"> Ylläpito <strong>&rsaquo;</strong> Kirjastot ja ryhmät </span>
+ </p>
+ <input class="btn btn-primary" type="submit" value="OK" />
+ </fieldset>
+ </form>
+ </div> <!-- / #onboarding-step1 -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

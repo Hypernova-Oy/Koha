@@ -1,0 +1,94 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Remove reserves") | html %] &rsaquo;
+ [% t("Course reserves") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="courses_rm_items" class="course">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/course_reserves/course-reserves.pl">Kurslistor</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Ta bort sats med kursböcker</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-8 offset-md-2">
+ [% INCLUDE 'messages.inc' %]
+ <h1>Ta bort sats med kursböcker</h1>
+ [% IF action == 'display_form' %]
+ <form method="post" action="/cgi-bin/koha/course_reserves/batch_rm_items.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-batch_rm" />
+ <fieldset class="rows">
+ <legend>Ta bort exemplar: skanna streckkoder</legend>
+ <ol>
+ <li>
+ <label class="required" for="barcodes">Exemplar streckkoder:</label>
+ <textarea rows="20" cols="50" id="barcodes" name="barcodes" class="focus"></textarea>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <p>Alla exemplar kommer att tas bort från de kurser som de är kopplade till.</p>
+ <input class="btn btn-primary" id="batch_rm_btn" type="submit" value="Skicka" />
+ <a href="/cgi-bin/koha/course_reserves/course-reserves.pl" class="cancel">Avbryt</a>
+ </fieldset>
+ </form>
+ [% END %]
+
+ [% IF action == 'display_results' %]
+ <h2>Resultat</h2>
+
+ <h3>Borttagna exemplar</h3>
+ [% IF item_and_count > 0 %]
+ <p>Följande exemplar togs bort från alla kurser:</p>
+ <ul>
+ [% FOREACH i IN item_and_count %]
+ <li>[% txn('{title} ({barcode}) was removed from {count} course.', '{title} ({barcode}) was removed from {count} courses.', i.delcount, { title = i.delitem.biblio.title, barcode = i.delitem.barcode, count = i.delcount }) | html %]</li>
+ [% END %]
+ </ul>
+ [% ELSE %] Ingen giltig exemplarstreckkod hittades. [% END %] [% IF invalid_barcodes.size > 0 %] <h3>Ogiltiga streckkoder</h3>
+ <p>Följande felaktiga streckkoder hoppades över:</p>
+ <ul>
+ [% FOREACH b IN invalid_barcodes %]
+ <li>[% b | html %]</li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ <p>
+ <a class='btn btn-default'  href="/cgi-bin/koha/course_reserves/course-reserves.pl">Återlämna</a>
+ </p>
+ [% END %]
+ </div>
+</div>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        $(document).ready(function() {
+            $("#batch_rm_btn").click(function(){
+                return confirmDelete(_("Är du säker på att du vill ta bort desaa exemplar från alla kurser?"));
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

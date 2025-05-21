@@ -1,0 +1,565 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% PROCESS 'html_helpers.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Advanced search") | html %] &rsaquo;
+ [% PROCESS 'library_name_title' %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='advsearch' bodyclass='scrollto' %]
+[% INCLUDE 'masthead.inc' %]
+[% SET AllPublicBranches = Branches.all(  search_params => { public => 1 } ) %]
+
+<form id="advsearch_form" action="/cgi-bin/koha/opac-search.pl" method="get">
+ <input type="hidden" name="advsearch" value="1"/>
+ <div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Avancerad sökning</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col order-first order-md-first order-lg-2">
+ <!-- BOOLEAN SEARCH OPTIONS -->
+ <div id="booleansearch" class="maincontent">
+ <h1>Avancerad sökning</h1>
+ <fieldset>
+ <legend>Sök efter:</legend>
+ [% IF ( expanded_options ) %]
+ <div class="advanced-search-terms extended">
+ [% ELSE %]
+ <div class="advanced-search-terms">
+ [% END # /IF ( expanded_options ) %]
+ [% FOREACH search_box IN [ 1, 2, 3] %]
+ <div class="search-term-row">
+ <div class="search-term-input">
+ [% IF ( expanded_options ) %]
+ <select name="op" class="form-select">
+ <option value="AND" selected="selected">och</option>
+ <option value="OR">eller</option>
+ <option value="NOT">inte</option>
+ </select>
+ [% ELSE %]
+ <label for="search-field_[% loop.index | html %]">
+ [% IF loop.index == 0 %] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [% ELSE %] och [% END %] </label>
+ [% END # /IF ( expanded_options ) %]
+ </div> <!-- .search-term-input -->
+
+ <div class="search-term-input">
+ <select aria-label="Välj söktyp för fält [% loop.index + 1 | html %]" class="form-select" id="search-field_[% loop.index | html %]" name="idx">
+ <option value="kw">Nyckelord</option>
+ [% IF ( expanded_options ) %]
+ <option value="kw,phr">&nbsp;&nbsp;&nbsp;&nbsp; Nyckelord som fras</option>
+ [% END %]
+ <option value="su,wrdl">Ämne</option>
+ [% IF ( expanded_options ) %]
+ <option value="su,phr">&nbsp;&nbsp;&nbsp;&nbsp; Del av ämnesnamn</option>
+ <option value="su-br">&nbsp;&nbsp;&nbsp;&nbsp; Ämne och bredare termer</option>
+ <option value="su-na">&nbsp;&nbsp;&nbsp;&nbsp; Ämne och smalare termer</option>
+ <option value="su-rl">&nbsp;&nbsp;&nbsp;&nbsp; Ämne och tillhörande termer</option>
+ [% END %]
+ <option value="ti">Titel</option>
+ [% IF ( expanded_options ) %]
+ <option value="ti,phr">&nbsp;&nbsp;&nbsp;&nbsp; Del av titel</option>
+ <option value="se,wrdl">Serietitel</option>
+ [% IF ( Koha.Preference('OPACNumbersPreferPhrase') ) %]
+ <option value="callnum,phr">Hyllsignatur</option>
+ [% ELSE %]
+ <option value="callnum">Hyllsignatur</option>
+ [% END %]
+
+ [% END %]
+ <option value="au,wrdl">Författare</option>
+ [% IF ( expanded_options ) %]
+ <option value="au,phr">&nbsp;&nbsp;&nbsp;&nbsp; Författarfras</option>
+ <option value="cpn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Företagsnamn</option>
+ <option value="cfn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Konferensnamn</option>
+ <option value="cfn,phr">&nbsp;&nbsp;&nbsp;&nbsp; Del av konferensnamn</option>
+ <option value="pn,wrdl">&nbsp;&nbsp;&nbsp;&nbsp; Personnamn</option>
+ <option value="pn,phr">&nbsp;&nbsp;&nbsp;&nbsp; Del av personnamn</option>
+ [% END %]
+ [% IF ( expanded_options ) %]
+ <option value="nt">Anteckningar/kommentarer</option>
+ [% IF (marcflavour != 'UNIMARC') %]
+ <option value="curriculum">Läroplan</option>
+ [% END %]
+ [% END %]
+ <option value="pb,wrdl">Förlag</option>
+ <option value="pl,wrdl">Förlagsort</option>
+ [% IF ( expanded_options ) %]
+ [% IF ( Koha.Preference('OPACNumbersPreferPhrase') ) %]
+ <option value="ident,phr">Standardnummer</option>
+ [% ELSE %]
+ <option value="ident">Standardnummer</option>
+ [% END %]
+ <option value="nb">&nbsp;&nbsp;&nbsp;&nbsp; ISBN</option>
+ <option value="ns">&nbsp;&nbsp;&nbsp;&nbsp; ISSN</option>
+ [% ELSE %]
+ <option value="nb">ISBN</option>
+ [% END %]
+ <option value="bc">Streckkod</option>
+ </select> <!-- /#search-field_[% loop.index | html %] -->
+ </div> <!-- .search-term-input -->
+ <div class="search-term-input">
+ <input aria-label="Ange söktermer för fält [% loop.index + 1 | html %]" class="form-control" name="q" type="text" value="" />
+ </div> <!-- .search-term-input -->
+ [% IF ( expanded_options ) %]
+ <div class="search-term-input">
+ <a class="ButtonPlus" href="#" title="Lägg till annat fält">
+ <i class="fa fa-plus-square" aria-hidden="true"></i>
+ </a>
+ <a class="ButtonLess" href="#" title="Ta bort fält">
+ <i class="fa fa-minus-square" aria-hidden="true"></i>
+ </a>
+ </div> <!-- .search-term-input -->
+ [% END %]
+ </div> <!-- /.search-term-row -->
+ [% END # FOREACH search_box %]
+ [% IF ( expanded_options ) %]
+ [% IF Koha.Preference('SearchEngine') == 'Elasticsearch' %]
+ <div id="weight_search">
+ <label>
+ <input type="checkbox" name="weight_search" checked="checked">
+ Sök med viktade fält </label>
+ </div>
+ [% END %]
+ [% ELSE %]
+ <input type="hidden" name="weight_search" value="1" />
+ [% END %]
+ [% IF Koha.Preference('IncludeSeeFromInSearches') %]
+ <div class="hint included-see-from-headings-info">
+ <i class="fa fa-info-circle" aria-hidden="true"></i>
+ Se från (hänvisningsform) är inkluderad i sökningen </div>
+ [% END %]
+ </div> <!-- /.advanced-search-terms -->
+ </fieldset>
+ </div> <!-- /#booleansearch -->
+ </div> <!-- / .col -->
+ </div> <!-- / .row -->
+
+ <div class="text-center">
+ <!-- SEARCH BUTTONS -->
+ <fieldset class="action">
+ [% PROCESS searchbuttons %]
+ </fieldset>
+ <!-- /SEARCH BUTTONS -->
+ </div>
+
+ <div class="row">
+ [%# Following on one line for translatability %]
+ [% IF ( ( OpacAdvSearchOptions and OpacAdvSearchOptions.grep('itemtype').size > 0 and not expanded_options ) or ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.grep('itemtype').size > 0 and expanded_options ) ) %]
+ <div class="col order-first order-md-first order-lg-2">
+ [% WRAPPER tabs id= "advsearches" %]
+ [% WRAPPER tabs_nav %]
+ [% FOREACH advsearchloo IN advancedsearchesloop %]
+ [% WRAPPER tab_item tabname= "advsearch-tab-${advsearchloo.advanced_search_type}" bt_active= "0" %]
+ [% IF ( advsearchloo.advanced_search_type == 'itemtypes' ) %]<span>Exemplartyp</span>
+ [% ELSIF ( advsearchloo.advanced_search_type == 'ccode' ) %]<span>Avdelning</span>
+ [% ELSIF ( advsearchloo.advanced_search_type == 'loc' ) %]<span>Placering</span>
+ [% ELSE %]<span>Något annat</span>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% END # /WRAPPER tabs_nav %]
+ [% WRAPPER tab_panels id= "advsearches" %]
+ [% FOREACH advsearchloo IN advancedsearchesloop %]
+ [% WRAPPER tab_panel tabname="advsearch-tab-${advsearchloo.advanced_search_type}" %]
+ <fieldset>
+ <legend>Begränsa till något av följande:</legend>
+ <div class="row">
+ [% FOREACH itemtypeloo IN advsearchloo.code_loop %]
+ [% IF (advsearchloo.advanced_search_type != 'itemtypes') OR (((!itemtypeloo.searchcategory) AND (itemtypeloo.cat == 0)) OR (itemtypeloo.cat == 1)) %]
+ <div class="col-sm-6 col-lg-3">
+ <input type="checkbox"
+                                                                id="[% itemtypeloo.ccl FILTER remove(',') | html %]-[% itemtypeloo.number | html %]"
+                                                                name="[% IF ( itemtypeloo.cat == 1 ) %]searchcat[% ELSE %]limit[% END %]"
+                                                                value="[% IF ( itemtypeloo.cat == 1 ) %][% itemtypeloo.code | html %][% ELSE %]mc-[% itemtypeloo.ccl | html %]:[% itemtypeloo.code | html %][% END %]"
+                                                            />
+ <label for="[% itemtypeloo.ccl FILTER remove(',') | html %]-[% itemtypeloo.number | html %]">
+ [% UNLESS ( Koha.Preference('OpacNoItemTypeImages')) %]
+ [% IF ( itemtypeloo.imageurl ) %]
+ <img class="itemtype-image" src="[% itemtypeloo.imageurl | html %]" alt="[% itemtypeloo.description | html %]" />
+ [% END %]
+ &nbsp;
+ [% END %]
+ <span class="itypetext">[% itemtypeloo.description | html %]</span>
+ </label>
+ </div>
+ [% IF ( loop.last ) %]</div>[% ELSE %][% UNLESS ( loop.count % 4 ) %]</div><div class="row">[% END %][% END %]
+ [% END %]
+ [% END %]
+ </fieldset>
+ [% END # /tab_panel#advsearch-advsearchloo.advanced_search_type %]
+ [% END # / FOREACH advancedsearchesloop %]
+ [% END # /tab_panels %]
+ [% END # /WRAPPER tabs#advsearches %]
+ </div> <!-- / .col -->
+ [% END # /IF OpacAdvSearchOptions %]
+ </div> <!-- /.row -->
+
+ <div id="advsearch_limits" class="row">
+
+ [%# Following on one line for translatability %]
+ [% IF ( ( OpacAdvSearchOptions and OpacAdvSearchOptions.grep('location').size > 0 and not expanded_options ) or ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.grep('location').size > 0 and expanded_options ) ) %]
+ [% IF ( singleBranchMode ) %]
+ <div class="col-sm-6 col-lg-3">
+ <!-- AVAILABILITY LIMITS -->
+ <div id="location" class="advsearch_limit">
+ <fieldset>
+ <legend>Tillgänglighet: </legend>
+ <div style="margin-top:.4em">
+ <label for="available-items"><input type="checkbox" id="available-items" name="limit" value="available" /> Bara exemplar som är tillgängliga för utlån eller referensexemplar</label>
+ </div>
+ </fieldset>
+ </div> <!-- / #location -->
+ <!-- /AVAILABILITY LIMITS -->
+ </div> <!-- / .col -->
+ [% ELSE %]
+ <div class="col-sm-6 col-lg-3">
+ <!-- AVAILABILITY LIMITS -->
+ <div id="location" class="advsearch_limit">
+ <fieldset>
+ [% IF AllPublicBranches.size > 1 %]
+ <label for="branchloop">Placering och tillgänglighet:</label>
+ [% ELSE %]
+ <label for="branchloop">Tillgänglighet:</label>
+ [% END %]
+
+ [% IF AllPublicBranches.size > 1 %]
+ <select class="form-select" name="limit" id="branchloop">
+ <option value="">Alla bibliotek</option>
+ [% FOREACH BranchesLoo IN AllPublicBranches %]
+ [% IF BranchesLoo.selected %]
+ <option value="branch:[% BranchesLoo.branchcode | html %]" selected="selected">[% BranchesLoo.branchname | html %]</option>
+ [% ELSE %]
+ <option value="branch:[% BranchesLoo.branchcode | html %]">[% BranchesLoo.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ [% IF search_groups %]
+ <p>ELLER</p>
+ <label for="categoryloop">Biblioteksgrupper</label>
+ <select class="form-select" name="limit" id="categoryloop">
+ <option value=""> -- Inget -- </option>
+ [% FOREACH sg IN search_groups %]
+ <option value="multibranchlimit:[% sg.id | html %]">[% sg.title | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ [% END %]
+ <div style="margin-top:.4em">
+ <label for="available-items"><input type="checkbox" id="available-items" name="limit" value="available" /> Bara exemplar som är tillgängliga för utlån eller referensexemplar</label>
+ </div>
+ </fieldset>
+ </div> <!-- / #location -->
+ <!-- /AVAILABILITY LIMITS -->
+ </div> <!-- / .col -->
+ [% END # / IF singleBranchMode %]
+ [% END %]
+
+ [%# Following on one line for translatability %]
+ [% IF ( ( OpacAdvSearchOptions and OpacAdvSearchOptions.grep('sorting').size > 0 and not expanded_options ) or ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.grep('sorting').size > 0 and expanded_options ) ) %]
+ <div class="col-sm-6 col-lg-3">
+ <!-- RANK LIMITS -->
+ <div id="sortby" class="advsearch_limit">
+ <fieldset>
+ <label for="sort_by">Sortera efter:</label>
+ <select class="form-select" id="sort_by" name="sort_by">
+ [% INCLUDE 'resort_form.inc' %]
+ </select>
+ </fieldset>
+ </div>
+ <!-- RANK LIMITS -->
+ </div> <!-- / .col -->
+ [% END %]
+
+ [%# Following on one line for translatability %]
+ [% IF ( ( OpacAdvSearchOptions and OpacAdvSearchOptions.grep('pubdate').size > 0 and not expanded_options ) or ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.grep('pubdate').size > 0 and expanded_options ) ) %]
+ <div class="col-sm-6 col-lg-3">
+ <div id="pubrange" class="advsearch_limit">
+ <!-- PUB RANGE OPTION -->
+ <fieldset>
+ <label for="limit-yr">Utgivningsdatum, intervall</label>
+ <input id="limit-yr" name="limit-yr" size="30" title="Ange söktermer" type="text" value="" />
+ <div class="hint">Exempel: 1999-2001. Du kan även använda "-1987" för allt som har publicerats före 1987 eller "2008-" för allt som har publicerats 2008 och senare.</div>
+ </fieldset>
+ <!-- /PUB RANGE OPTION -->
+ </div>
+ </div>
+ [% END %]
+
+ [%# Following on one line for translatability %]
+ [% IF ( ( OpacAdvSearchOptions and OpacAdvSearchOptions.grep('language').size > 0 and not expanded_options ) or ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.grep('language').size > 0 and expanded_options ) ) %]
+ <div class="col-sm-6 col-lg-3">
+ <div id="langfilter" class="advsearch_limit">
+ <fieldset>
+ <!-- LANGUAGE LIMIT -->
+ <label for="language-limit">Språk</label>
+ <select class="form-select" id="language-limit" name="limit">
+ <option value="">Ingen begränsning</option>
+ [% FOREACH search_languages_loo IN search_languages_loop %]
+ [% IF ( search_languages_loo.selected ) %]
+ <option value="ln,rtrn:[% search_languages_loo.iso639_2_code | html %]" selected="selected">[% search_languages_loo.language_description | html %]</option>
+ [% ELSE %]
+ <option value="ln,rtrn:[% search_languages_loo.iso639_2_code | html %]">[% search_languages_loo.language_description | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <!-- /LANGUAGE LIMIT -->
+ </fieldset>
+ </div> <!-- / #langfilter -->
+ </div> <!-- / .col -->
+ [% END %]
+ </div> <!-- / .row -->
+
+ [%# Following on one line for translatability %]
+ [% IF ( ( OpacAdvSearchOptions and OpacAdvSearchOptions.grep('subtype').size > 0 and not expanded_options ) or ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.grep('subtype').size > 0 and expanded_options ) ) %]
+ [% IF ( usmarc ) %]
+ <div id="subtypes" class="row">
+ <!-- SUBTYPE LIMITS -->
+ <div class="col-sm-6 col-lg-3">
+ <div class="advsearch_limit">
+ <fieldset>
+ <label for="subtype_audience">Målgrupp</label>
+ <select id="subtype_audience" name="limit" class="subtype form-select">
+ <option value="" selected="selected" class="menuheader">Alla målgrupper</option>
+ <option value="aud:a">Förskola</option>
+ <option value="aud:b">Primär</option>
+ <option value="aud:c">Barn och ungdom</option>
+ <option value="aud:d">Ungdom</option>
+ <option value="aud:e">Vuxen</option>
+ <option value="aud:f">Specialiserad</option>
+ <option value="aud:g">Allmänt</option>
+ <option value="aud:j">Ungdom</option>
+ </select>
+ </fieldset>
+ </div> <!-- /.advsearch_limit -->
+ </div> <!-- / .col-sm-6 col-lg-3 -->
+
+ <div class="col-sm-6 col-lg-3">
+ <div class="advsearch_limit">
+ <fieldset>
+ <label for="subtype_content">Innehåll</label>
+ <select id="subtype_content"  name="limit" class="subtype form-select">
+ <option value="" selected="selected" class="menuheader">Alla innehåll</option>
+ <option value="fic:1">Skönlitteratur</option>
+ <option value="fic:0">Ej fiktion</option>
+ <option value="bio:b">Biografi</option>
+ <option value="mus:j">Musikinspelning</option>
+ <option value="mus:i">Ej musikalisk inspelning</option>
+ </select>
+ </fieldset>
+ </div> <!-- /.advsearch_limit -->
+ </div>
+
+ <div class="col-sm-6 col-lg-3">
+ <div class="advsearch_limit">
+ <fieldset>
+ <label for="subtype_format">Format</label>
+ <select id="subtype_format" name="limit" class="subtype form-select">
+ <option value="" selected="selected" class="menuheader">Alla format</option>
+ <option value="l-format:ta">Regelbunden utskrift</option>
+ <option value="l-format:tb">Storstil</option>
+ <option value="l-format:tc or l-format:fb">Punktskrift</option>
+ <option value="">-----------</option>
+ <option value="l-format:sd">CD-ljud</option>
+ <option value="l-format:ss">Kassettinspelning</option>
+ <option value="l-format:vf">VHS-band / videokassett</option>
+ <option value="l-format:vd">DVD</option>
+ <option value="l-format:co">CD-programvara</option>
+ <option value="l-format:cr">Webbplats</option>
+ </select>
+ </fieldset>
+ </div> <!-- /.advsearch_limit -->
+ </div> <!-- / .col-sm-6 col-lg-3 -->
+
+ <div class="col-sm-6 col-lg-3">
+ <div class="advsearch_limit">
+ <fieldset>
+ <label for="subtype_additional">Ytterligare innehållstyper för böcker/tryckt material</label>
+ <select id="subtype_additional" name="limit" class="subtype form-select">
+ <option value="">Alla</option>
+ <option value="ctype:a">Sammandrag/sammanfattningar</option>
+ <option value="ctype:b">Bibliografier</option>
+ <option value="ctype:c">Kataloger</option>
+ <option value="ctype:d">Ordböcker</option>
+ <option value="ctype:e">Uppslagsverk </option>
+ <option value="ctype:f">Handböcker</option>
+ <option value="ctype:g">Juridiska artiklar</option>
+ <option value="ctype:i">Index</option>
+ <option value="ctype:j">Patentdokument</option>
+ <option value="ctype:k">Diskografier</option>
+ <option value="ctype:l">Lagstiftning</option>
+ <option value="ctype:m">Avhandlingar</option>
+ <option value="ctype:n">Översikter</option>
+ <option value="ctype:o">Recensioner</option>
+ <option value="ctype:p">Programmerade texter</option>
+ <option value="ctype:q">Filmografier</option>
+ <option value="ctype:r">Kataloger</option>
+ <option value="ctype:s">Statistik</option>
+ <option value="ctype:t">Tekniska rapporter</option>
+ <option value="ctype:v">Rättsfall och ärendeanteckningar</option>
+ <option value="ctype:w">Lagrapporter och sammanfattningar</option>
+ <option value="ctype:z">Fördrag </option>
+ </select>
+ </fieldset>
+ </div> <!-- /.advsearch_limit -->
+ </div> <!-- / .col-sm-6 col-lg-3 -->
+ </div> <!-- / #subtypes.row -->
+ <!-- SUBTYPE LIMITS -->
+ [% END # / IF usmarc %]
+
+ [% IF ( UNIMARC ) %]
+ <div id="subtypes_unimarc" class="row">
+ <!-- SUBTYPE LIMITS -->
+ [% INCLUDE 'subtypes_unimarc.inc' %]
+ </div>
+ [% END %]
+ [% END # / IF expanded_options %]
+
+ [% IF ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.size > 0 and expanded_options ) or ( OpacAdvSearchOptions and OpacAdvSearchOptions.size > 0 and not expanded_options ) %]
+ <div class="text-center">
+ <fieldset class="action">
+ <!-- SEARCH BUTTONS -->
+ [% PROCESS searchbuttons %]
+ <!-- /SEARCH BUTTONS -->
+ </fieldset>
+ </div>
+ [% END %]
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+</form>
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK searchbuttons %]
+ <p>
+ <input accesskey="s" class="btn btn-primary" name="do" title="Sök" type="submit" value="Sök" />
+
+ [% IF ( OpacAdvSearchMoreOptions and OpacAdvSearchMoreOptions.size > 0 ) %]
+ [% IF expanded_options %]
+ <a href="/cgi-bin/koha/opac-search.pl?expanded_options=0" class="btn btn-default more-less-options">Färre alternativ</a>
+ [% ELSIF not expanded_options %]
+ <a href="/cgi-bin/koha/opac-search.pl?expanded_options=1" class="btn btn-default more-less-options">Fler alternativ</a>
+ [% END %]
+ [% END %]
+
+ <a href="/cgi-bin/koha/opac-search.pl?do=Clear" class="btn btn-default new-search">Ny sökning</a>
+ </p>
+[% END %]
+
+[% BLOCK jsinclude %]
+[% Asset.js("lib/jquery/plugins/jquery.deserialize.min.js") | $raw %]
+<script>
+window.addEventListener('pageshow', function( e ){
+    $('.form-control:visible').prop('disabled' , false );
+});
+$(document).ready(function() {
+    [% IF search_groups %]
+        function branch_limit() {
+            if( $("#branchloop").val() != "" ){
+                $("#categoryloop").val("").prop('disabled',true);
+            } else {
+                $("#categoryloop").prop('disabled',false);
+            }
+            if ( $("#categoryloop").val() != "" ){
+                $("#branchloop").val("").prop('disabled',true);
+            } else {
+                $("#branchloop").prop('disabled',false);
+            }
+        }
+        branch_limit();
+        $("#branchloop,#categoryloop").on("change",function(){
+            branch_limit();
+        });
+    [% END %]
+
+    if( $("#advsearches .tab-pane.active").length < 1 ){
+        $("#advsearches li:first a").tab("show");
+    }
+
+    $('.search-term-row .search-term-input select[name="op"]').first().prop("disabled",true).hide();
+
+    [% IF ( ReturnToSearch ) %]
+        if (form_serialized = JSON.parse( Cookies.get("form_serialized") ) ) {
+            // Add missing term inputs if there were more than 3
+            var count = (form_serialized.match(/&q=/g) || []).length;
+            for(var i = 3 ; i < count ; i++) {
+                $("a.ButtonPlus:last").click();
+            }
+            $('#advsearch form').deserialize(form_serialized);
+        }
+        if (form_serialized_limits = JSON.parse( Cookies.get("form_serialized_limits") ) ) {
+            $('#language-limit')     .val(form_serialized_limits[0]);
+            $('#branchloop')         .val(form_serialized_limits[1]);
+            $('#subtype_audience')   .val(form_serialized_limits[2]);
+            $('#subtype_content')    .val(form_serialized_limits[3]);
+            $('#subtype_format')     .val(form_serialized_limits[4]);
+            $('#subtype_additional') .val(form_serialized_limits[5]);
+            $('#locloop')            .val(form_serialized_limits[6]);
+        }
+    [% ELSE %]
+        //Clear all form cookies
+        Cookies.remove("form_serialized", { path: '/'});
+        Cookies.remove("form_serialized_limits", { path: '/'});
+        Cookies.remove("search_path_code", { path: '/'});
+    [% END %]
+    $('#advsearch_form').submit(function() {
+        $('[name^="limit"]').each(function(){
+            if( $(this).val() == '' ){
+                $(this).prop("disabled","disabled");
+            }
+        });
+        $(".search-term-row").each(function(){
+            if( $(this).find('input[name="q"]').val() == "" ){
+                $(this).find('input[name="q"]').prop("disabled","disabled");
+                $(this).find('select[name="op"]').prop("disabled","disabled");
+                $(this).find('select[name="idx"]').prop("disabled","disabled");
+            }
+        });
+        form_serialized = $(this).serialize();
+        Cookies.set("form_serialized", JSON.stringify( form_serialized ), { path: '/', sameSite: 'Lax' });
+        form_serialized_limits = [
+            $('#language-limit').val(),   $('#branchloop').val(),
+            $('#subtype_audience').val(), $('#subtype_content').val(),
+            $('#subtype_format').val(),   $('#subtype_additional').val(),
+            $('#locloop').val()
+        ];
+        Cookies.set("form_serialized_limits", JSON.stringify( form_serialized_limits ),{ path: '/', sameSite: 'Lax' });
+        [% IF ( expanded_options ) %]
+            Cookies.set("search_path_code", 'exs', { path: '/', sameSite: 'Lax' });
+        [% ELSE %]
+            Cookies.set("search_path_code", 'ads', { path: '/', sameSite: 'Lax' });
+        [% END %]
+    });
+
+});
+    /* This function allows to display a new field to search.
+    */
+    $(document).on("click", '.ButtonPlus', function(e) {
+        e.preventDefault();
+        $('.ButtonLess').show();
+        var thisLine = $(this).parent().parent();
+        var newLine = thisLine.clone();
+        $(newLine).find('.search-term-input select[name="op"]').first().prop("disabled",false).show();
+        newLine.find('input').val('');
+        thisLine.after(newLine);
+    });
+
+    $(document).on("click", '.ButtonLess', function(e) {
+        e.preventDefault();
+        if( $("a.ButtonLess").length <= 2 ) {
+           $('.ButtonLess').hide();
+        }
+        $(this).parent().parent().remove();
+        $('.search-term-row .search-term-input select[name="op"]').first().prop("disabled",true).hide();
+    });
+</script>
+[% END %]

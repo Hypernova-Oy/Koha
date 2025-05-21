@@ -1,0 +1,71 @@
+---
+i18n_l10n:
+  Yleinen:
+  - - Näytä päivämäärä muodossa
+    - choices:
+        dmydot: pp.kk.vvvv
+        iso: vvvv-kk-pp
+        metric: pp/kk/vvvv
+        us: kk/pp/vvvv
+      default: us
+      pref: dateformat
+    - .
+  - - Näytä kellonaika
+    - choices:
+        12hr: 12 tunnin muodossa (esim. "02:18 PM")
+        24hr: 24 tunnin muodossa (esim. "14:18")
+      default: 24hr
+      pref: TimeFormat
+    - .
+  - - Käytä
+    - choices:
+        '0': sunnuntaita
+        '1': maanantaita
+        '2': tiistaita
+        '3': keskiviikkoa
+        '4': torstaita
+        '5': perjantaita
+        '6': lauantaita
+      default: 0
+      pref: CalendarFirstDayOfWeek
+    - kalenteriviikon ensimmäisenä päivänä.
+  - - 'Enable the following languages on the staff interface:'
+    - pref: StaffInterfaceLanguages
+      type: staff-languages
+    - This list can be sorted to modify the order of the languages on the interface.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      default: 0
+      pref: opaclanguagesdisplay
+    - asiakkaiden vaihtaa käytettävää kieltä verkkokirjastossa.
+  - - 'Verkkokirjastossa käytettävissä olevat kielet:'
+    - pref: OPACLanguages
+      type: opac-languages
+    - Tämä lista voidaan järjestää muokkaamaan käyttöliittymässä kielten järjestystä.
+  - - Käytä aakkosia
+    - class: long
+      pref: alphabet
+    - selauslinkkeinä. Tähän pitää listata aakkosten isot kirjaimet välilyönneillä
+      erotettuina.
+    - '<br/> Vinkki: Muuttamalla tietokannan ''borrowers''-taulun järjestyksen ''surname''-sarakkeen
+      mukaiseksi, helpotat sukunimen mukaan selaamista members-home.pl -sivulla, kun
+      käytetään aakkosia A-Z:n ulkopuolelta (esim. skandit).'
+  - - Muotoile postiosoitteet käyttäen
+    - choices:
+        de: saksalaista tyyliä ([lähiosoite] [katunumero] - [postinumero] [kaupunki]
+          - [maa])
+        fr: ranskalaista tyyliä ([katunumero] [osoite] - [postinumero] [postitoimipaikka]
+          - [maa])
+        us: amerikkalaista tyyliä ([katunumero], [lähiosoite] - [kaupunki], [postinumero],
+          [maa])
+      default: us
+      pref: AddressFormat
+    - .
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: TranslateNotices
+    - ilmoitusten kääntäminen toiselle kielelle.
+    - Jos asetettu, ilmoitukset ovat käännettävissä "Ilmoitukset ja kuitit" -osiossa.
+      Asiakkaan tiedoissa määritellään, minkä kielinen ilmoitus lähetetään.

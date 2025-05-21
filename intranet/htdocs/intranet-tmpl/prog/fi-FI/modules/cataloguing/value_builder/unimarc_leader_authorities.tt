@@ -1,0 +1,210 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("UNIMARC leader builder") | html %]
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="cat_unimarc_leader_authorities" class="cat value_builder">
+ <h3>000 - Nimiö</h3>
+ <form method="get" name="f_pop" onsubmit="report()" action="">
+ <div class="page-section">
+ <input name="plugin_name" value="unimarc_leader_authorities.pl" type="hidden">
+ <table>
+ <tr>
+ <td>1-4 Tietueen pituus</td>
+ <td>(laskettu automaattisesti)</td>
+ </tr>
+ <tr>
+ <td><label for="f5">5- Tietueen tila</label></td>
+ <td>
+ <select name="f5" id="f5">
+ [% IF ( f5c ) %]
+ <option value="c" selected="selected">c - Korjattu</option>
+ [% ELSE %]
+ <option value="c">c - Korjattu</option>
+ [% END %]
+ [% IF ( f5d ) %]
+ <option value="d" selected="selected">d - Poistettu</option>
+ [% ELSE %]
+ <option value="d">d - Poistettu</option>
+ [% END %]
+ [% IF ( f5n ) %]
+ <option value="n" selected="selected">n - Uusi</option>
+ [% ELSE %]
+ <option value="n">n - Uusi</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f6">6- Tietueen tyyppi</label></td>
+ <td>
+ <select name="f6" id="f6">
+ [% IF ( f6x ) %]
+ <option value="x" selected="selected">x - Auktoriteettitietue</option>
+ [% ELSE %]
+ <option value="x">x - Auktoriteettitietue</option>
+ [% END %]
+
+ [% IF ( f6y ) %]
+ <option value="y" selected="selected">y - Viitetietue</option>
+ [% ELSE %]
+ <option value="y">y - Viitetietue</option>
+ [% END %]
+
+ [% IF ( f6z ) %]
+ <option value="z" selected="selected">z - Yleinen selittävä tietue</option>
+ [% ELSE %]
+ <option value="z">z - Yleinen selittävä tietue</option>
+ [% END %]
+
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f7">7-8 Määrittelemätön</label></td>
+ <td></td>
+ </tr>
+
+ <tr>
+ <td><label for="f9">9- Kokonaisuuden tyyppi</label></td>
+ <td>
+ <select name="f9" id="f9">
+ [% IF ( f9a ) %]
+ <option value="a" selected="selected">a - Henkilön nimi</option>
+ [% ELSE %]
+ <option value="a">a - Henkilön nimi</option>
+ [% END %]
+
+ [% IF ( f9b ) %]
+ <option value="b" selected="selected">b - Yrityksen nimi</option>
+ [% ELSE %]
+ <option value="b">b - Yrityksen nimi</option>
+ [% END %]
+
+ [% IF ( f9c ) %]
+ <option value="c" selected="selected">c - Alueellinen tai maantieteellinen nimi</option>
+ [% ELSE %]
+ <option value="c">c - Alueellinen tai maantieteellinen nimi</option>
+ [% END %]
+
+ [% IF ( f9d ) %]
+ <option value="d" selected="selected">d - Tavaramerkki</option>
+ [% ELSE %]
+ <option value="d">d - Tavaramerkki</option>
+ [% END %]
+
+ [% IF ( f9e ) %]
+ <option value="e" selected="selected">e - Sukunimi</option>
+ [% ELSE %]
+ <option value="e">e - Sukunimi</option>
+ [% END %]
+
+ [% IF ( f9f ) %]
+ <option value="f" selected="selected">f - Yhtenäinen nimi</option>
+ [% ELSE %]
+ <option value="f">f - Yhtenäinen nimi</option>
+ [% END %]
+
+ [% IF ( f9g ) %]
+ <option value="g" selected="selected">g - Yhteinen yhtenäinen nimi</option>
+ [% ELSE %]
+ <option value="g">g - Yhteinen yhtenäinen nimi</option>
+ [% END %]
+
+ [% IF ( f9h ) %]
+ <option value="h" selected="selected">h - Nimi/titteli</option>
+ [% ELSE %]
+ <option value="h">h - Nimi/titteli</option>
+ [% END %]
+
+ [% IF ( f9i ) %]
+ <option value="i" selected="selected">i - Nimi/yhteinen yhtenäinen titteli</option>
+ [% ELSE %]
+ <option value="i">i - Nimi/yhteinen yhtenäinen titteli</option>
+ [% END %]
+
+ [% IF ( f9j ) %]
+ <option value="j" selected="selected">j - Ajankohtainen aihe</option>
+ [% ELSE %]
+ <option value="j">j - Ajankohtainen aihe</option>
+ [% END %]
+
+ [% IF ( f9k ) %]
+ <option value="k" selected="selected">k - Paikkaan pääsy</option>
+ [% ELSE %]
+ <option value="k">k - Paikkaan pääsy</option>
+ [% END %]
+
+ [% IF ( f9l ) %]
+ <option value="l" selected="selected">l - Muoto, genre tai fyysiset ominaisuudet</option>
+ [% ELSE %]
+ <option value="l">l - Muoto, genre tai fyysiset ominaisuudet</option>
+ [% END %]
+
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f10">10-16 indikaattorit/osakentät/tietueen pituus</label></td>
+ <td>(laskettu automaattisesti)</td>
+ </tr>
+
+ <tr>
+ <td><label for="f17">17- Koodaustaso</label></td>
+ <td>
+ <select name="f17" id="f17">
+ [% IF ( f17space ) %]
+ <option value=" " selected="selected"> - Täysi</option>
+ [% ELSE %]
+ <option value=" "> - Täysi</option>
+ [% END %]
+ [% IF ( f183 ) %]
+ <option value="3" selected="selected">3 - Osittainen</option>
+ [% ELSE %]
+ <option value="3">3 - Osittainen</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td>18-19 Määrittelemätön</td>
+ <td></td>
+ </tr>
+
+ <tr>
+ <td>20-24 kirjauskartta &amp; pituudet</td>
+ <td>(täytetty automaattisesti)</td>
+ </tr>
+ </table>
+ </div> <!-- /.page-section -->
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input class="btn btn-primary" onclick="report();" type="button" value="Tallenna" />
+ <button class="btn btn-default close_window">Peruuta</button>
+ </fieldset>
+ </div>
+ </nav>
+
+ </form>
+
+<script>
+    function report() {
+        var doc   = opener.document;
+        var field = doc.getElementById("[% index | html %]");
+
+        field.value ='     '+document.f_pop.f5.value+document.f_pop.f6.value+'  '+document.f_pop.f9.value+'22     '+document.f_pop.f17.value+'  '+'45  ';
+
+        self.close();
+        return false;
+    }
+</script>
+
+[% INCLUDE 'popup-bottom.inc' %]

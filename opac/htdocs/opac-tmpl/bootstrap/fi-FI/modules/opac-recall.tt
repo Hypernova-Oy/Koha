@@ -1,0 +1,199 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% USE AuthorisedValues %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Palautuspyyntö &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Kohan verkkokirjasto[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+<body id="opac-recall" class="scrollto">
+[% INCLUDE 'masthead.inc' %]
+
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% biblio.biblionumber | uri %]">Tiedot nimekkeestä [% biblio.title | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tee palautuspyyntö</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col col-lg-2 order-2 order-lg-1">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ <div class="col-md-12 col-lg-10 order-1 order-lg-2">
+ <div id="recall" class="maincontent">
+ <h1>Vahvista palautuspyynnöt asiakkaalle: [% INCLUDE 'patron-title.inc' patron = logged_in_user %] ([% logged_in_user.cardnumber | html %])</h1>
+ [% IF nosyspref %]
+ <span>Palautuspyynnöt eivät ole käytössä. Ota yhteys kirjastoon.</span>
+ [% ELSIF error == 'unavailable' %]
+ <span>Ei niteitä saatavilla palautuspyyntöä varten.</span>
+ <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% biblio.biblionumber | uri %]">Palauta kirjastoon [% biblio.title | html %]</a>
+ [% ELSE %]
+ [% IF error %]
+ <div class="alert alert-warning">
+ [% IF error == 'duplicate' %]
+ <span>Palautuspyyntöjen teoskohtainen enimmäismäärä on tullut täyteen.</span>
+ [% ELSIF error == 'unavailable' %]
+ <span>Ei niteitä saatavilla palautuspyyntöä varten.</span>
+ [% ELSIF error == 'cannot' %]
+ <span>Et voi tehdä varauspyyntöä tähän niteeseen.</span>
+ [% ELSE %]
+ <span>Palautuspyyntöä tehdessä tapahtui virhe. Ota yhteyttä kirjastoosi.</span>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF success %]
+ <p>Palautuspyyntösi on tehty. Niteen nykyistä lainaajaa pyydetään palauttamaan nide [% due_interval | html %] päivän sisällä viimeistään [% due_date | $KohaDates %] mennessä.</p>
+ <p>Saat ilmoituksen, kun nide on noudettavissa kirjastosta.</p>
+ [% ELSIF not error %]
+ <p>Kaikkeen lainattavaan aineistoon voidaan tehdä palautuspyyntöjä. Pyydämme lainaajaa palauttamaan tämän niteen.</p>
+ [% IF logged_in_user %]
+ <div class="dialog">
+
+ <form id="recallform" action="/cgi-bin/koha/opac-recall.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows" id="options">
+ <legend>Tee palautuspyyntö teokselle <b>[% biblio.title | html %]</b> ([% biblio.author | html %])?</legend>
+ <ul>
+
+ [% UNLESS ( single_branch_mode ) %]<li>
+ <label for="pickup">Noutopaikka:</label>
+ <select name="pickup" id="pickup">
+ [% FOREACH branch IN branches %]
+ [% IF branch.branchcode == logged_in_user.branchcode %]
+ <option value="[% branch.branchcode | html %]" selected>[% Branches.GetName( branch.branchcode ) | html %]</option>
+ [% ELSE %]
+ <option value="[% branch.branchcode | html %]">[% Branches.GetName( branch.branchcode ) | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>[% END %]
+
+ <li>
+ <label for="expirationdate">Palautuspyynnön raukeamispäivä:</label>
+ <input type="text" name="expirationdate" id="expirationdate" size="20" class="flatpickr futuredate" />
+ <span id="expiration-hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ <li class="level-option" style="display:none;"><label for="bibliolevel">Palautuspyyntö seuraavaan vapaaseen niteeseen</label> <input type="radio" name="type" id="bibliolevel" value="bibliolevel" checked></li>
+ <li class="level-option" style="display:none;"><label for="itemlevel">Palautuspyyntö tiettyyn niteeseen</label> <input type="radio" name="type" id="itemlevel" value="itemlevel"></li>
+
+ <table class="table table-bordered table-striped" id="items">
+ <caption>Valitse nide:</caption>
+ <tr>
+ <th>&nbsp;</th>
+ <th>Nidetyyppi</th>
+ <th>Viivakoodi</th>
+ [% UNLESS ( single_branch_mode ) %]
+ <th>Kotikirjasto</th>
+ <th>Viimeisin havainto</th>
+ [% END %]
+ <th>Kokoelma</th>
+ <th>Luokka</th>
+ <th>Nidenumero</th>
+ <th>Vuosikertatiedot</th>
+ <th>Tiedot</th>
+ </tr>
+ [% FOREACH item IN items %]<tr>
+ <td>
+ [% IF item.can_be_recalled( patron => logged_in_user ) %]
+ <input type="radio" class="itemnumber" name="itemnumber" value="[% item.itemnumber | html %]">
+ [% ELSE %]
+ <input disabled="disabled" type="radio" class="itemnumber" name="itemnumber" value="[% item.itemnumber | html %]" style="display:none;" />
+ <img alt="Ei voi tehdä palautuspyyntöä" src="[% interface | html %]/lib/famfamfam/cross.png" title="Ei voi tehdä palautuspyyntöä" />
+ [% END %]
+ </td>
+ <td>[% ItemTypes.GetDescription( item.effective_itemtype ) | html %]</td>
+ <td>[% item.barcode | html %]</td>
+ [% UNLESS ( single_branch_mode ) %]
+ <td>[% Branches.GetName( item.homebranch ) | html %]</td>
+ <td>[% Branches.GetName( item.holdingbranch) | html %]</td>
+ [% END %]
+ <td>[% AuthorisedValues.GetByCode( 'CCODE', item.ccode, 1 ) | html %]</td>
+ <td>[% item.itemcallnumber | html %]</td>
+ <td>[% item.copynumber | html %]</td>
+ <td>[% item.enumchron | html %]</td>
+ <td>
+ [% IF ( item.checkout ) %]
+ <span class="checkedout">Eräpäivä [% item.checkout.date_due | $KohaDates as_due_date => 1 %]</span>
+ [% ELSIF ( item.get_transfer ) %]
+ <span class="intransit">Kuljetettavana kirjastosta [% Branches.GetName( item.get_transfer.frombranch ) | html %] kirjastoon [% Branches.GetName( item.get_transfer.tobranch ) | html %] [% item.get_transfer.datesent | $KohaDates %]</span>
+ [% END %]
+ [% IF ( item.itemlost || item.withdrawn ) %]
+ <span class="lost">Ei saatavilla (kadonnut tai puuttuu)</span>
+ [% END %]
+ [% IF ( item.notforloan ) %]
+ <span class="notforloan">Ei lainata ([% item.notforloan | html %])</span>
+ [% END %]
+ [% hold = item.current_holds.next %]
+ [% IF ( item.recall ) %]
+ <span class="waiting">
+ [% IF ( item.recall.waiting_date ) %]
+ <span>Odottaa kirjastossa [% Branches.GetName( item.recall.pickup_library_id ) | html %]</span> <span>alkaen</span> [% item.recall.waiting_date | $KohaDates %].
+ [% ELSE %]
+ <span>Asiakkaan tekemä palautuspyyntö kirjastossa [% Branches.GetName( item.recall.pickup_library_id ) | html %]</span> <span>alkaen</span> [% item.recall.created_date | $KohaDates %].
+ [% END %]
+ </span>
+ [% ELSIF ( hold.waitingdate ) %]
+ <span class="waiting">
+ Odottaa kirjastossa [% Branches.GetName( hold.branchcode ) | html %] lähtien [% hold.waitingdate | $KohaDates %]. </span>
+ [% ELSIF ( hold.borrowernumber == logged_in_user.borrowernumber ) %]
+ <span class="waiting">
+ Sinulla on jo <a href="/cgi-bin/koha/opac-user.pl#opac-user-holds">varaus</a> tälle niteelle. </span>
+ [% END # / IF ( item.recall or hold ) %]
+ </td>
+ </tr>[% END %]
+ </table>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-request">
+ <input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]">
+ <input class="btn btn-primary" type="submit" value="Hyväksy">
+ <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% biblio.biblionumber | uri %]" class="cancel">Peruuta</a>
+ </fieldset>
+ </form>
+
+ </div>
+ [% ELSE %]
+ <div class="alert alert-warning">Kirjaudu sisään tehdäksesi palautuspyynnön.</div>
+ [% END %]
+ [% END %]
+ [% END %] <!-- norecalls -->
+ </div> <!-- / #recall -->
+ </div> <!-- / .col-md-12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+</div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+[% INCLUDE 'calendar.inc' %]
+<script>
+    $(document).ready(function(){
+        $(".level-option").show();
+        $("#items").hide();
+        $("#expiration-hint").hide();
+        $("#itemlevel").click(function(){
+            if ( $("#itemlevel").is(':checked') ){
+                $("#items").show();
+                $("input:radio[name='itemnumber']:not(:disabled)").first().attr("checked", "checked"); // selects first item in table
+            }
+        });
+        $("#bibliolevel").click(function(){
+            if ( $("#bibliolevel").is(':checked') ){
+                $("#items").hide();
+            }
+        });
+    });
+</script>
+[% END %]

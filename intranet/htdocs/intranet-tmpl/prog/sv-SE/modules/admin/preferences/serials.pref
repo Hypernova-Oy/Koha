@@ -1,0 +1,79 @@
+---
+serials.pref:
+  Aviseringar:
+  - - Använd avsändaradressen
+    - class: email
+      pref: SerialsDefaultEmailAddress
+    - när reklamationsmeddelanden för prenumerationer skickas.
+    - 'Om det här lämnas tomt så kommer meddelandet gå till den första e-postadressen
+      i följande lista: bibliotekets e-post och <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  - - Använd svarsadressen
+    - class: email
+      pref: SerialsDefaultReplyTo
+    - när reklamationsmeddelanden för prenumerationer skickas.
+    - '<br>Om det här lämnas tomt så kommer meddelandet gå till den första e-postadressen
+      i följande lista: bibliotekets svara till-adress, bibliotekets e-post, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>,
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  Funktioner:
+  - - Visa
+    - choices:
+        holdings: flik med bestånd
+        serialcollection: flik med periodikasamling
+        subscriptions: flik med prenumerationer
+        titlenotes: flik med titelkommentarer
+      pref: opacSerialDefaultTab
+    - som standardflik för periodika i OPAC. Notera att periodikasamlingsfliken bara
+      finns tillgänglig för UNIMARC.
+  - - choices:
+        '0': Lägg inte till
+        '1': Lägg till
+      pref: RenewSerialAddsSuggestion
+    - biblio-förslag när ansluten periodika förnyas.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: RoutingSerials
+    - funktionen för mottagarlista i periodikamodulen.
+  - - choices:
+        '0': Placera inte
+        '1': Placera
+      pref: RoutingListAddReserves
+    - mottagna periodika om de finns på en mottagarlista.
+  - - 'Inkludera följande anteckning på alla mottagarlistor:'
+    - class: code
+      pref: RoutingListNote
+      type: textarea
+  - - Visa
+    - class: integer
+      pref: StaffSerialIssueDisplayCount
+    - tidigare nummer av en periodika i personalklienten.
+  - - Visa
+    - class: integer
+      pref: OPACSerialIssueDisplayCount
+    - tidigare nummer av periodika i OPAC.
+  - - När prenumerationsinformationen visas för en bibliografisk post, förvälj
+    - choices:
+        full: full historik
+        simplified: kort historik
+      pref: SubscriptionHistory
+    - vy av periodika.
+  - - Lista med fält som inte får blir omskrivna när en prenumeration dupliceras (separeras
+      med |)
+    - pref: SubscriptionDuplicateDroppedInput
+  - - choices:
+        '0': Gör inte
+        '1': Gör
+      pref: makePreviousSerialAvailable
+    - tidigare nummer automatiskt tillgängligt när det kommer ett nytt nummer. Det
+      tidigare numret kan också få en ny exemplartyp när det kommer ett senare nummer.
+      Notera att systeminställningen<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=item-level_itypes">item-level_itypes</a>
+      måste ställas in till "specifikt exemplar".
+  - - choices:
+        '0': Fyll inte i på förhand
+        '1': Fyll i på förhand
+      pref: PreserveSerialNotes
+    - anteckningar från senaste numret "Anländ" när nästa "Förväntade" nummer genereras.
+  - - Visa endast
+    - class: integer
+      pref: SerialsSearchResultsLimit
+    - de första prenumerationerna vid avancerad sökning på periodika.

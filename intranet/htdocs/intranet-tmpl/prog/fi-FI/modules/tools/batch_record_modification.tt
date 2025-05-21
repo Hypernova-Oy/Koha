@@ -1,0 +1,406 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% PROCESS 'authorities-search-results.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF view == 'list' %]
+ [% t("Confirm selection") | html %] &rsaquo;
+ [% ELSIF view == 'enqueued' %]
+ [% t("Job enqueued") | html %] &rsaquo;
+ [% END %]
+ [% t("Batch record modification") | html %] &rsaquo;
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% Asset.css("css/humanmsg.css") | $raw %]
+</head>
+
+<body id="tools_batch_record_modification" class="tools">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+ [% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Kuvailu</a>
+ [% END %]
+ [% IF view == 'form' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tietueiden muokkaus eräajona</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/batch_record_modification.pl">Tietueiden muokkaus eräajona</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF view == 'list' %]
+ [% t("Confirm selection") | html %]
+ [% ELSIF view == 'enqueued' %]
+ [% t("Job enqueued") | html %]
+ [% END %]
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Tietueiden muokkaus eräajona</h1>
+
+ [% IF ( messages ) %]
+ <div class="alert alert-info">
+
+ [% FOREACH message IN messages %]
+ [% IF message.type == 'success' %]
+ <div><i class="fa fa-check success"></i>
+ [% ELSIF message.type == 'warning' %]
+ <div><i class="fa-solid fa-triangle-exclamation warn"></i>
+ [% ELSIF message.type == 'error' %]
+ <div><i class="fa fa-exclamation error"></i>
+ [% END %]
+ [% IF message.code == 'no_action_defined_for_the_template' %]
+ <span>Valittua kuvailupohjaa (id=[% message.mmtid | html %]) ei ole olemassa tai toimintoa ei ole määritetty.</span>
+ [% ELSIF message.code == 'biblio_not_exists' %]
+ <span>Nimeketietuetta [% message.biblionumber | html %] ei löydy tietokannasta.</span>
+ [% ELSIF message.code == 'authority_not_exists' %]
+ <span>Auktoriteettitietuetta [% message.authid | html %] ei löydy tietokannasta.</span>
+ [% ELSIF message.code == 'cannot_enqueue_job' %]
+ <span>Tätä työtä ei voi asettaa jonoon.</span>
+ [% END %]
+ [% IF message.error %]
+ <span>(Virhe oli: [% message.error | html %]. Katso lisätietoja Kohan lokitiedostosta).</span>
+ [% END %]
+ </div>
+ [% END %]
+
+ </div> <!-- /.dialog.message -->
+ [% END %]
+
+ [% IF view == 'form' %]
+ <form method="post" enctype="multipart/form-data" action="/cgi-bin/koha/tools/batch_record_modification.pl" id="record_ids_selection">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <legend>Tietuetyyppi</legend>
+ <ol class="radio">
+ <li><label for="biblio_type"><input type="radio" name="recordtype" value="biblio" id="biblio_type" checked="checked" /> Nimeketietueet</label></li>
+ <li><label for="authority_type"><input type="radio" name="recordtype" value="authority" id="authority_type" /> Auktoriteettitietue</label></li>
+ </ol>
+ </fieldset>
+
+ <br class="clear"/>
+
+ [% WRAPPER tabs id= "batch_mod_form" %]
+ [% WRAPPER tabs_nav %]
+ [% WRAPPER tab_item tabname= "uploadfile_tab" bt_active= 1 %] <span>Lataa tiedosto</span> [% END %]
+ [% IF lists.count %]
+ [% WRAPPER tab_item tabname= "shelves_tab" %] <span>Valitse lista tietueista</span> [% END %]
+ <!-- <li id="show_list_option"> -->
+ [% END %]
+ [% WRAPPER tab_item tabname= "enterlist_tab" %] <span>Syötä lista tietuenumeroista</span> [% END %]
+ [% END # /WRAPPER tabs_nav %]
+ [% WRAPPER tab_panels %]
+ [% WRAPPER tab_panel tabname="uploadfile_tab" bt_active= 1 %]
+ <fieldset class="rows">
+ <ol>
+ <li><label for="uploadfile">Tiedosto: </label> <input type="file" id="uploadfile" name="uploadfile" /></li>
+ </ol>
+ </fieldset>
+ [% END # /tab_panel %]
+
+ [% IF lists.count %]
+ [% WRAPPER tab_panel tabname="shelves_tab" %]
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="shelf_number">Lista: </label>
+ <select name="shelf_number" id="shelf_number">
+ <option value="">Valitse lista</option>
+ [% FOREACH list IN lists %]
+ <option value="[% list.shelfnumber | html %]">[% list.shelfname | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+ [% END # /tab_panel %]
+ [% END %]
+ [% WRAPPER tab_panel tabname="enterlist_tab" %]
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="recordnumber_list">Tietuenumerot: </label>
+ <textarea rows="10" cols="30" id="recordnumber_list" name="recordnumber_list"></textarea>
+ <div class="hint">Lista tietuenumeroista tai auktoriteetti ID:stä, yksi per rivi.</div>
+ </li>
+ </ol>
+ </fieldset>
+ [% END # /tab_panel %]
+ [% END # /WRAPPER tab_panels %]
+ [% END # /WRAPPER tabs %]
+
+ <fieldset class="rows">
+ <legend>MARC-muokkauksen pohja</legend>
+ <ol>
+ <li>
+ <label for="marc_modification_template_id" class="required">Mallipohja: </label>
+ <select name="marc_modification_template_id" id="marc_modification_template_id" required="required">
+ <option value="">Valitse pohja</option>
+ [% FOREACH mmt IN MarcModificationTemplatesLoop %]
+ <option value="[% mmt.template_id | html %]">[% mmt.name | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-list" />
+ <input class="btn btn-primary" type="submit" value="Jatka" />
+ <a class="cancel" href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Peruuta</a>
+ </fieldset>
+ </form> <!-- /#record_ids_selection -->
+ [% ELSIF view == 'list' %]
+ [% IF records %]
+ <form action="/cgi-bin/koha/tools/batch_record_modification.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <label for="marc_modification_template_id" class="required">Muokkaa tietuetta käyttäen tätä pohjaa: </label>
+ <select name="marc_modification_template_id" id="marc_modification_template_id" required="required">
+ <option value="">Valitse pohja</option>
+ [% FOREACH mmt IN MarcModificationTemplatesLoop %]
+ [% IF mmt.selected %]
+ <option value="[% mmt.template_id | html %]" selected="selected">[% mmt.name | html %]</option>
+ [% ELSE %]
+ <option value="[% mmt.template_id | html %]">[% mmt.name | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <div id="marcPreview" class="modal" tabindex="-1" role="dialog" aria-labelledby="marcPreviewLabel" aria-hidden="true">
+ <div class="modal-dialog modal-lg">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="marcPreviewLabel">MARC-esikatselu</h1>
+ <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <div class="modal-body">
+ <div id="loading"> <img src="[% interface | html %]/[% theme | html %]/img/spinner-small.gif" alt="" /> Ladataan </div>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Sulje</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ [% IF recordtype == 'biblio' %]
+ <div class="btn-toolbar selections-toolbar">
+ <a id="selectall" href="#"><i class="fa fa-check"></i> Valitse kaikki</a>
+ | <a id="clearall" href="#"><i class="fa fa-times"></i> Tyhjennä kaikki</a>
+ </div>
+ <div class="page-section">
+ <table id="biblios" class="records">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ <th>Tietuenumero</th>
+ <th>Nimeke</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOR biblio IN records %]
+ <tr>
+ <td><input type="checkbox" name="record_id" value="[% biblio.biblionumber | html %]" /></td>
+ <td>[% biblio.biblionumber | html %]</td>
+ <td><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblio.biblionumber | uri %]">[% biblio.title | html %]</a></td>
+ <td class="actions">
+ <a class="previewMARC btn btn-default btn-xs" data-mmtid="[% mmtid | html %]" data-record_id="[% biblio.biblionumber | html %]" data-record_type="biblio" href="/cgi-bin/koha/svc/records/preview?record_type=biblio&record_id=[% biblio.biblionumber | uri %]&mmtid=[% mmtid | uri %]&overlay_context=batchmod" title="MARCin esikatselu"><i class="fa-solid fa-eye"></i> Näytä MARC</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- /#biblios -->
+ </div>
+ <div class="alert alert-info"><i class="fa fa-exclamation"></i> Muistutus: tämä toiminto muokkaa kaikkia valittuja nimeketietueita.</div>
+ [% ELSE %]
+ <div class="btn-toolbar selections-toolbar">
+ <a id="selectall" href="#"><i class="fa fa-check"></i> Valitse kaikki</a>
+ | <a id="clearall" href="#"><i class="fa fa-times"></i> Tyhjennä kaikki</a>
+ </div>
+ <div class="page-section">
+ <table id="authorities" class="records">
+ <thead>
+ <tr>
+ <th></th>
+ <th>AuktID</th>
+ <th>Yhteenveto</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOR authority IN records %]
+ <tr>
+ <td><input type="checkbox" name="record_id" value="[% authority.authid | html %]" data-usage="[% authority.count_usage | html %]" /></td>
+ <td><a href="/cgi-bin/koha/authorities/detail.pl?authid=[% authority.authid | uri %]">[% authority.authid | html %]</a></td>
+ <td>[% PROCESS authresult summary=authority.summary authid=authority.authid %]</td>
+ <td class="actions"><a href="/cgi-bin/koha/svc/records/preview?record_type=authority&record_id=[% authority.authid | uri %]&mmtid=[% mmtid | uri %]&overlay_context=batchmod" data-record_type="authority" data-record_id="[% authority.authid | html %]" data-mmtid="[% mmtid | html %]" class="previewMARC btn btn-default btn-xs"><i class='fa fa-eye'></i> Näytä MARC</a>
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- /#authorities -->
+ </div>
+ <div class="alert alert-info"><i class="fa fa-exclamation"></i> Muistutus: tämä toiminto muokkaa kaikkia valittuja auktoriteetteja.</div>
+ [% END %]
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-modify" />
+ <input type="hidden" name="recordtype" value="[% recordtype | html %]" />
+ <input class="button" id="mainformsubmit" type="submit" value="Muokkaa valittuja tietueita" />
+ </fieldset>
+ </form> <!-- /#process -->
+ [% ELSE %]
+ <div class="alert alert-info">
+ Yhtään tietuetta ei muokattu. [% IF recordtype != 'biblio' %]<a href="/cgi-bin/koha/tools/batch_record_modification.pl" title="Uusi tietueiden muokkaus eräajona">Uusi tietueiden muokkaus eräajona</a>[% END %]
+ </div>
+ [% END %]
+ [% ELSIF view == 'errors' %]
+ [% FOR error IN errors %]
+ [% IF error == 'no_template_defined' %]
+ <div class="alert alert-info">
+ <p>Yhtään MARC-muokkauksen pohjaa ei ole määritettynä. Sinun täytyy luoda vähintään yksi pohja käyttääksesi tätä työkalua.</p>
+ [% IF ( CAN_user_tools_marc_modification_templates ) %]
+ <a class="btn btn-default" href="/cgi-bin/koha/tools/marc_modification_templates.pl"><i class="fa fa-plus"></i> Luo uusi MARC-muokkauksen pohja</a>
+ [% END %]
+ </div>
+ [% END %]
+ [% END %]
+ [% ELSIF view == 'enqueued' %]
+ <div class="alert alert-info">
+ <h1>Työ on jonossa!</h1>
+ <p>Se käsitellään niin pian kuin mahdollista.</p>
+ <p><a href="/cgi-bin/koha/admin/background_jobs.pl?op=view&id=[% job_id | uri %]" title="Tarkastele jonossa olevan työn tietoja">Tarkastele jonossa olevan työn tietoja</a>
+ | <a href="/cgi-bin/koha/tools/batch_record_modification.pl" title="Uusi tietueiden muokkaus eräajona">Uusi tietueiden muokkaus eräajona</a></p>
+ </div>
+ [% ELSE %]
+ <div class="alert alert-warning">
+ Ei määritelty toimintoa pohjalle. </div>
+ [% END %]
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% Asset.js("lib/jquery/plugins/humanmsg.js") | $raw %]
+ <script>
+        function update_tab_display(){
+            let selected_type = $('input[name="recordtype"]:checked').val();
+            if (selected_type == 'authority') {
+                $("a[href='#shelves_tab_panel']").parent().hide();
+                $("a[href='#uploadfile_tab_panel']").tab("show");
+            } else if (selected_type == 'biblio') {
+                $("a[href='#shelves_tab_panel']").parent().show();
+                $("a[href='#uploadfile_tab_panel']").tab("show");
+            }
+        }
+        $(document).ready(function() {
+
+            update_tab_display();
+            $("input[type='radio']").click(function() {
+                update_tab_display();
+            });
+
+            $("#selectall").click(function(e){
+                e.preventDefault();
+                $(".records input[type='checkbox']").each(function(){
+                    $(this).prop("checked", true);
+                });
+            });
+
+            $("#clearall").click(function(e){
+                e.preventDefault();
+                $(".records input[type='checkbox']").each(function(){
+                    $(this).prop("checked", false);
+                });
+            });
+
+            $("#selectall").click();
+
+            $("table#biblios").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "columnDefs": [
+                    { "targets": [0, 3], "orderable": false, "searchable":  false },
+                    { "targets": [1], "type": "num-html" }
+                ],
+                "dom": 't',
+                "order": [],
+                "paginate": false
+            }));
+
+            $("table#authorities").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "columnDefs": [
+                    { "targets": [0, 3], "orderable": false, "searchable":  false },
+                    { "targets": [1], "type": "num-html" }
+                ],
+                "dom": 't',
+                "order": [],
+                "paginate": false
+            }));
+
+            $("#mainformsubmit").click(function() {
+                if ($("input[type=checkbox][name='record_id']:checked").length == 0) {
+                    alert(_("Valitse ainakin yksi tietue käsiteltäväksi"));
+                    return false;
+                }
+                if ($("#marc_modification_template_id").val() <= 0) {
+                    alert(_("Valitse muokattava pohja."));
+                    return false;
+                }
+                return true;
+            });
+
+            $("#record_ids_selection").on("submit", function(e) {
+                var tab = $(this).find('#batch_mod_form li a.active:first').attr('href');
+                if (tab == '#uploadfile_tab_panel') {
+                    $("#recordnumber_list, #shelf_number").val('');
+                } else if (tab == '#shelves_tab_panel') {
+                    $("#recordnumber_list, #uploadfile").val('');
+                } else { // enterlist
+                    $("#uploadfile, #shelf_number").val('')
+                }
+            });
+
+            $("#marc_modification_template_id").change(function() {
+                var url = "/cgi-bin/koha/svc/records/preview?"
+                var mmtid = $(this).val();
+                $("a.previewMARC").each(function() {
+                    $(this).attr("href", url + "record_type=" + $(this).attr("data-record_type") + "&record_id=" + $(this).attr("data-record_id") + "&mmtid=" + mmtid + "&overlay_context=batchmod");
+                });
+            });
+
+            $("body").on("click", ".previewMARC", function(e) {
+                e.preventDefault();
+                var ltitle = $(this).text();
+                var page = $(this).attr("href");
+                $("#marcPreviewLabel").text(ltitle);
+                $("#marcPreview .modal-body").load(page + " div");
+                $('#marcPreview').modal("show");
+            });
+            $("#marcPreview").on("hidden.bs.modal", function() {
+                $("#marcPreviewLabel").html("");
+                $("#marcPreview .modal-body").html("<div id=\"loading\"><img src=\"[% interface | html %]/[% theme | html %]/img/spinner-small.gif\" alt=\"\" /> " + _("Ladataan") + "</div>");
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

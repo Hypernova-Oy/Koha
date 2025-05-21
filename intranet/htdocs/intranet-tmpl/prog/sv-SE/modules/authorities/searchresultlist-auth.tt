@@ -1,0 +1,153 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% PROCESS 'authorities-search-results.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Cataloging authority plugin") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% Asset.css("css/addbiblio.css") | $raw %]
+<style>
+.usefor {
+    padding: 0;
+    margin: 0;
+}
+.usefor li {
+    list-style-type: none;
+}
+</style>
+</head>
+
+[% BLOCK result_page_numbers %]
+ <div class="resultnumber clearfix">
+ <nav>
+ <ul class="pagination">
+ [% IF ( displayprev ) %]
+ <li class="page-item">
+ <a class="page-link" href="auth_finder.pl?startfrom=[% startfromprev | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranetamp;&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+ <i class="fa fa-fw fa-angle-left"></i> Previous
+ </a>
+ </li>
+ [% END %]
+ [% FOREACH number IN numbers %]
+ [% IF ( number.highlight ) %]
+ <li class="page-item active">
+ <a class="page-link" href="#">[% number.number | html %]</a>
+ [% ELSE %]
+ <li class="page-item">
+ <a class="page-link" href="auth_finder.pl?startfrom=[% number.startfrom | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN number.searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranet&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+ [% number.number | html %]</a>
+ </li>
+ [% END %]
+ [% END %]
+ [% IF ( displaynext ) %]
+ <li class="page-item">
+ <a class="page-link" href="auth_finder.pl?startfrom=[% startfromnext | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranet&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
+ Nästa <i class="fa fa-fw fa-angle-right"></i>
+ </a>
+ </li>
+ [% END %]
+ </ul>
+ </nav>
+ </div>
+[% END %]
+
+<body id="auth_searchresultlist_auth" class="auth">
+ <div class="container-fluid">
+
+ <h1>Auktoritetssökresultat</h1>
+ [% INCLUDE 'auth-finder-search.inc' %]
+ [% IF ( result ) %]
+ <p><strong>Resultat [% from | html %] till [% to | html %] av [% total | html %]</strong></p>
+ [% PROCESS 'result_page_numbers' %]
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p>Inga resultat hittades</p>
+ </div>
+ [% END %]
+
+ [% IF ( result ) %]
+ <div id="resultlist" class="page-section">
+ <table>
+ <tr>
+ <th>Sammanfattning</th>
+ <th>Rubriktyp</th>
+ <th>Används</th>
+ [% IF Koha.Preference('ShowHeadingUse') %]
+ <th class="heading_use">Rubrikanvändning</th>
+ [% END %]
+ <th>Skaffa!</th>
+ <th>Annan åtgärd</th>
+ </tr>
+ [% FOREACH resul IN result %]
+ <tr>
+ <td>
+ [% IF resul.html %]
+ [% resul.html | $raw %]
+ [% ELSE %]
+ [% PROCESS authresult summary=resul.summary authid=resul.authid auth_preview=1 %]
+ [% END %]
+ </td>
+ <td>[% resul.summary.label | html %]</td>
+ <td>
+ [% IF resul.used > 0 %]
+ <a href="/cgi-bin/koha/catalogue/search.pl?type=intranet&amp;op=do_search&amp;idx=an,phr&amp;q=[% resul.authid | uri %]" class="button">[% resul.used | html %] tider</a>
+ [% ELSE %] 0 gånger [% END %] </td>
+ [% IF Koha.Preference('ShowHeadingUse') %]
+ <td class="heading_use"><ul class="usefor">
+ <li>[% IF resul.main %]<i class="fa fa-check"></i>[% ELSE %]<i class="fa fa-times"></i>[% END %] Huvuduppslag/Biuppslag</li>
+ <li>[% IF resul.subject %]<i class="fa fa-check"></i>[% ELSE %]<i class="fa fa-times"></i>[% END %] Ämne</li>
+ <li>[% IF resul.series %]<i class="fa fa-check"></i>[% ELSE %]<i class="fa fa-times"></i>[% END %] Serietitel</li>
+ </ul></td>
+ [% END %]
+ <td>
+ [% IF resul.summary && resul.summary.authorized && resul.summary.authorized.size > 1 %]
+ [% FOREACH authorized IN resul.summary.authorized %]
+ <a href="javascript:doauth('[% resul.authid | uri %]', '[% index | uri %]', '[% loop.count | uri %]')" title="[% authorized.heading | html %]">[% loop.count | html %]</a>
+ [% END %]
+ [% ELSE %]
+ <a class="btn btn-xs btn-default" href="javascript:doauth('[% resul.authid | html %]', '[% index | html %]', '')"><i class="fa fa-plus"></i> Välj</a>
+ [% END %]
+ </td>
+ <td><a class="btn btn-xs btn-default" href="authorities.pl?authid=[% resul.authid | html %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera auktoritet</a></td>
+ </tr>
+ [% END %]
+ </table>
+ </div>
+ [% PROCESS 'result_page_numbers' %]
+ [% END %]
+
+ </div>
+
+[% INCLUDE 'authority-detail-modal.inc' %]
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        var index = "[% index | html %]";
+        var authtypecode = "[% authtypecode | html %]";
+    </script>
+ [% Asset.js("js/auth-finder-search.js") | $raw %]
+ [% Asset.js("js/authorities-detail-modal.js") | $raw %]
+ <script>
+        function jumpfull(page){
+            window.open(page,'','width=100,height=100,resizable=yes,toolbar=false,scrollbars=yes,top');
+        }
+
+        function doauth(authid, index, repet){
+            [% IF source == 'auth' %]
+                var e = document.getElementById("relationship");
+                var relationship = e.options[e.selectedIndex].value;
+
+                jumpfull('blinddetail-biblio-search.pl?authid=' + authid + '&index=' + index + '&repet=' + repet + '&relationship=' + relationship);
+            [% ELSE %]
+                jumpfull('blinddetail-biblio-search.pl?authid=' + authid + '&index=' + index + '&repet=' + repet);
+            [% END %]
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window = 1 %]

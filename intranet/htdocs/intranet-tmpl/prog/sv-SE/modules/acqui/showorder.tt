@@ -1,0 +1,37 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Order details") | html %] &rsaquo;
+ [% t("Acquisitions") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body id="acq_showorder" class="acq">
+ <div id="main">
+ <h1>Beställningsdetaljer</h1>
+ [% IF order %]
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <span class="label">Skapad den: </span>
+ [% order.entrydate | html %]
+ </li>
+ <li>
+ <span class="label">Beställd av: </span>
+ [% INCLUDE 'patron-title.inc' patron = creator %]
+ </li>
+ <li>
+ <span class="label">Antal reklamationer: </span>
+ [% order.claims.count | html %]
+ </li>
+ <li>
+ <span class="label">Senast begärd den: </span>
+ [% order.claims.last.claimed_on | html %]
+ </li>
+ </ol>
+ </fieldset>
+ [% ELSE %] Ingen beställning hittades [% END %] </div>
+</body>
+</html>

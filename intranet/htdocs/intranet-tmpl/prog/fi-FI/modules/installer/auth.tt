@@ -1,0 +1,86 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF ( nopermission ) %]
+ [% t("Access denied") | html %]
+ [% END %]
+ [% IF ( timed_out ) %]
+ [% t("Session timed out") | html %]
+ [% END %]
+ [% IF ( different_ip ) %]
+ [% t("IP address change") | html %]
+ [% END %]
+ [% IF ( invalid_username_or_password ) %]
+ [% t("Invalid username or password") | html %]
+ [% END %]
+ [% IF ( loginprompt ) %]
+ [% t("Log in to the Koha web installer") | html %]
+ [% END %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row justify-content-md-center">
+ <div id="installer-login" class="installer-main col-sm-6 col-md-6">
+
+ <div id="logo"><a href="#">Koha</a></div>
+
+ [% IF ( nopermission ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Virhe: </strong>Auktorisoimaton käyttäjä <a href="/cgi-bin/koha/mainpage.pl?logout.x=1">valitse kirjautuaksesi ulos</a></div>
+ [% END %]
+
+ [% IF ( timed_out ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Virhe: </strong>Istunto aikakatkaistiin, kirjaudu uudelleen</div>
+ [% END %]
+
+ [% IF ( different_ip ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Virhe: </strong>IP-osoitteesi on muuttunut. Kirjaudu uudelleen </div>
+ [% END %]
+
+ [% IF ( invalid_username_or_password ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Virhe: </strong>Väärä käyttäjätunnus tai salasana</div>
+ [% END %]
+
+ [% IF ( loginprompt ) %]
+ <h1>Tervetuloa Kohan version [%- Koha.Version.release | html -%] asennusohjelmaan</h1>
+
+ <p>Ennen aloitusta, kirjaudu sisään käyttäjätunnuksella ja salasanalla, jonka sait järjestelmän ylläpitäjältä. Tämä tunnus sijaitsee <code>koha-conf.xml</code> -tiedostossa.</p>
+
+ <form action="[% url | html %]" method="post" id="mainform">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-login" />
+ [% FOREACH INPUT IN INPUTS %]
+ [% NEXT IF INPUT.name == "op" %]
+ [% NEXT IF INPUT.name == "csrf_token" %]
+ [% NEXT IF INPUT.name == "login_userid" %]
+ [% NEXT IF INPUT.name == "login_password" %]
+ <input type="hidden" name="[% INPUT.name | html %]" value="[% INPUT.value | html %]" />
+ [% END %]
+
+ <fieldset>
+ <legend>Anna käyttäjätunnuksesi ja salasanasi</legend>
+
+ <div class="form-group">
+ <label>Käyttäjätunnus:</label>
+ <input type="text" class="form-control" name="login_userid" id="userid" value="[% userid | html %]" size="20" tabindex="1" />
+ </div>
+ <div class="form-group">
+ <label>Salasana:</label>
+ <input type="password" class="form-control" name="login_password" id="password" value="" size="20" tabindex="2" />
+ </div>
+ <div class="form-group mt-2">
+ <input class="btn btn-primary" id="submit" tabindex="3" type="submit" value="Kirjaudu" />
+ </div>
+ </fieldset>
+ </form>
+ [% END %]
+ </div> <!-- / #installer-login -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

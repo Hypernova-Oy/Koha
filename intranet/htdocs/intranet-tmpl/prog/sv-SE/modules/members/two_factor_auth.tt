@@ -1,0 +1,148 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Two-factor authentication") | html %] &rsaquo;
+ [% t("Patrons") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="pat_two_factor_auth" class="pat">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+[% PROCESS 'auth-two-factor.inc' %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Låntagare</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Hantera tvåfaktorsautentisering</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% INCLUDE 'members-toolbar.inc' %]
+
+ <h1>Hantera tvåfaktorsautentisering</h1>
+
+ [% IF ( missing_key ) %]
+ <div id="error_message" class="alert alert-info">
+ <p>
+ Operationen kan inte fortsätta. Ange en krypteringsnyckel i din konfiguration. </p>
+ </div>
+ [% ELSE %]
+ [% PROCESS registration_form %]
+
+ <div id="registration-status">
+ [% IF patron.auth_method == "two-factor" %]
+ <div id="registration-status-enabled">
+ [% ELSE %]
+ <div id="registration-status-enabled" style="display: none;">
+ [% END %]
+ <div class="alert alert-info two-factor-status">Status: aktiverad</div>
+
+ <form id="two-factor-auth" action="/cgi-bin/koha/members/two_factor_auth.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-disable-2FA" />
+ <input type="submit" value="Använd inte tvåfaktorsautentisering" />
+ </form>
+ </div>
+
+ [% IF patron.auth_method == "password" %]
+ <div id="registration-status-disabled">
+ [% ELSE %]
+ <div id="registration-status-disabled" style="display: none;">
+ [% END %]
+ <div class="alert alert-info two-factor-status">Status: avaktiverad</div>
+ [% IF Koha.Preference('TwoFactorAuthentication') == 'enforced' %]
+ <div>Tvåfaktorsautentisering är obligatorisk för att logga in. Om du inte aktiverar det nu så kommer du bli ombedd att göra det nästa gång du loggar in.</div>
+ [% END %]
+
+ <input class="btn btn-primary" id="enable-2FA" type="submit" value="Tillåt tvåfaktorsautentisering" />
+ </div>
+ </div>
+ [% END %]
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ <script>
+        $(document).ready(function(){
+            $("#enable-2FA").on("click", function(e){
+                e.preventDefault();
+                $.ajax({
+                    data: {},
+                    type: 'POST',
+                    url: '/api/v1/auth/two-factor/registration',
+                    success: function (data) {
+                        $("#qr_code").attr('src', data.qr_code);
+                        $("#secret32").val(data.secret32);
+                        $("#issuer").html(data.issuer);
+                        $("#key_id").html(data.key_id);
+                        $("#key_secret").html(data.secret32);
+                        $("#registration-form").show();
+                        $("#registration-status").hide();
+                    },
+                    error: function (data) {
+                        alert(data);
+                    },
+                });
+            });
+
+            $("#register-2FA").on("click", function(e){
+                e.preventDefault();
+                const data = {
+                    secret32: $("#secret32").val(),
+                    pin_code: $("#pin_code").val(),
+                };
+                if (!data.pin_code) return;
+
+                $.ajax({
+                    data: data,
+                    type: 'POST',
+                    url: '/api/v1/auth/two-factor/registration/verification',
+                    success: function (data) {
+                        window.location = "/cgi-bin/koha/members/two_factor_auth.pl";
+                    },
+                    error: function (data) {
+                        const error = data.responseJSON.error;
+                        if ( error == 'Invalid pin' ) {
+                            $("#errors").html(_("Ogiltig PIN-kod")).show();
+                        } else {
+                            alert(error);
+                        }
+                    },
+                });
+            });
+
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

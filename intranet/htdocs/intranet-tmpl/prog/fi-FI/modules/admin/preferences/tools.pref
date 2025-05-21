@@ -1,0 +1,49 @@
+---
+Työkalut:
+  Kirjastokortit:
+  - - Rajoita tietokantaan säilöttyjen kuvien määrä
+    - class: Integer
+      pref: ImageLimit
+    - kuvaan.
+  Lataa:
+  - - Poista automaattisesti väliaikaiset tiedostot, jotka ovat vanhempia kuin
+    - class: integer
+      pref: UploadPurgeTemporaryFilesDays
+    - 'päivää cleanup_datebase -cron jobilla. HUOM: Jos jätät tämän tyhjäksi, cron
+      job ei poista mitään tiedostoja. Toisaalta, arvo 0 tarkoittaa: poista kaikki
+      väliaikaistiedostot.'
+  Niteiden eräajo:
+  - - Käsittele korkeintaan
+    - class: integer
+      pref: MaxItemsToProcessForBatchMod
+    - nidettä yhdessä niteiden muokkauserässä.
+  - - Näytä enintään
+    - class: integer
+      pref: MaxItemsToDisplayForBatchDel
+    - nidettä yhdessä niteiden poistoerässä.
+  - - Näytä enintään
+    - class: integer
+      pref: MaxItemsToDisplayForBatchMod
+    - nidettä yhdessä niteiden muokkauserässä.
+  Uutiset:
+  - - 'Näytä uutisen kirjoittaja:'
+    - choices:
+        both: sekä verkkokirjastossa että virkailijaliittymässä
+        none: ei ollenkaan
+        opac: vain verkkokirjastossa
+        staff: vain virkailijaliittymässä
+      pref: NewsAuthorDisplay
+    - .
+  - - Oletuksena muokataan lisäsisältöä ja uutisia
+    - choices:
+        codemirror: tekstieditorin kautta (CodeMirror)
+        tinymce: WYSIWYG-editorin kautta (TinyMCE)
+      pref: AdditionalContentsEditor
+    - .
+  Viivakoodit:
+  - - Jaa viivakoodit seuraavien erottimien mukaan
+    - default: \s\r\n
+      pref: BarcodeSeparators
+    - 'erämuokkauksessa ja inventoinnissa. <br/>Huomaa: \r vastaa enteriä, \n uutta
+      riviä ja \s tyhjää merkkiä. Muita mahdollisia merkkejä ovat pystyviiva |, ajatusviiva
+      (jota edeltää kenoviiva), pilkku, puolipiste, piste ym.'

@@ -1,0 +1,86 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF ( nopermission ) %]
+ [% t("Access denied") | html %]
+ [% END %]
+ [% IF ( timed_out ) %]
+ [% t("Session timed out") | html %]
+ [% END %]
+ [% IF ( different_ip ) %]
+ [% t("IP address change") | html %]
+ [% END %]
+ [% IF ( invalid_username_or_password ) %]
+ [% t("Invalid username or password") | html %]
+ [% END %]
+ [% IF ( loginprompt ) %]
+ [% t("Log in to the Koha web installer") | html %]
+ [% END %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row justify-content-md-center">
+ <div id="installer-login" class="installer-main col-sm-6 col-md-6">
+
+ <div id="logo"><a href="#">Koha</a></div>
+
+ [% IF ( nopermission ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Fel: </strong>Obehörig användare <a href="/cgi-bin/koha/mainpage.pl?logout.x=1">klicka för att logga ut</a></div>
+ [% END %]
+
+ [% IF ( timed_out ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Fel: </strong>Sessionen löpte ut, logga in igen</div>
+ [% END %]
+
+ [% IF ( different_ip ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Fel: </strong>IP-adressen har ändrats, logga in igen </div>
+ [% END %]
+
+ [% IF ( invalid_username_or_password ) %]
+ <div id="login_error" class="alert alert-danger"><strong>Fel: </strong>Ogiltigt användarnamn eller lösenord</div>
+ [% END %]
+
+ [% IF ( loginprompt ) %]
+ <h1>Välkommen till Kohas [%- Koha.Version.release | html -%] webbinstallerare</h1>
+
+ <p>Innan vi börjar bör du kontrollera att du har korrekta inloggningsuppgifter. Logga in med det användarnamn och det lösenord som du fick av din systemadministratör och som finns i <code>koha-conf.xml</code> konfigurationsfil.</p>
+
+ <form action="[% url | html %]" method="post" id="mainform">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-login" />
+ [% FOREACH INPUT IN INPUTS %]
+ [% NEXT IF INPUT.name == "op" %]
+ [% NEXT IF INPUT.name == "csrf_token" %]
+ [% NEXT IF INPUT.name == "login_userid" %]
+ [% NEXT IF INPUT.name == "login_password" %]
+ <input type="hidden" name="[% INPUT.name | html %]" value="[% INPUT.value | html %]" />
+ [% END %]
+
+ <fieldset>
+ <legend>Ange ditt användarnamn och lösenord</legend>
+
+ <div class="form-group">
+ <label>Användarnamn:</label>
+ <input type="text" class="form-control" name="login_userid" id="userid" value="[% userid | html %]" size="20" tabindex="1" />
+ </div>
+ <div class="form-group">
+ <label>Lösenord:</label>
+ <input type="password" class="form-control" name="login_password" id="password" value="" size="20" tabindex="2" />
+ </div>
+ <div class="form-group mt-2">
+ <input class="btn btn-primary" id="submit" tabindex="3" type="submit" value="Logga in" />
+ </div>
+ </fieldset>
+ </form>
+ [% END %]
+ </div> <!-- / #installer-login -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

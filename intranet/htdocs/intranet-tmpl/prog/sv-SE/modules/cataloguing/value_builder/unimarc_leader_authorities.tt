@@ -1,0 +1,210 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("UNIMARC leader builder") | html %]
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="cat_unimarc_leader_authorities" class="cat value_builder">
+ <h3>000 - Postetikett</h3>
+ <form method="get" name="f_pop" onsubmit="report()" action="">
+ <div class="page-section">
+ <input name="plugin_name" value="unimarc_leader_authorities.pl" type="hidden">
+ <table>
+ <tr>
+ <td>1-4 Record length</td>
+ <td>(beräknas automatiskt)</td>
+ </tr>
+ <tr>
+ <td><label for="f5">Status för katalogpost</label></td>
+ <td>
+ <select name="f5" id="f5">
+ [% IF ( f5c ) %]
+ <option value="c" selected="selected">c - Korrigerad eller reviderad</option>
+ [% ELSE %]
+ <option value="c">c - Korrigerad eller reviderad</option>
+ [% END %]
+ [% IF ( f5d ) %]
+ <option value="d" selected="selected">d - Borttagen</option>
+ [% ELSE %]
+ <option value="d">d - Borttagen</option>
+ [% END %]
+ [% IF ( f5n ) %]
+ <option value="n" selected="selected">Ny</option>
+ [% ELSE %]
+ <option value="n">Ny</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f6">Typ av katalogpost</label></td>
+ <td>
+ <select name="f6" id="f6">
+ [% IF ( f6x ) %]
+ <option value="x" selected="selected">x - Auktoritetspost</option>
+ [% ELSE %]
+ <option value="x">x - Auktoritetspost</option>
+ [% END %]
+
+ [% IF ( f6y ) %]
+ <option value="y" selected="selected">y - Referenspost</option>
+ [% ELSE %]
+ <option value="y">y - Referenspost</option>
+ [% END %]
+
+ [% IF ( f6z ) %]
+ <option value="z" selected="selected">z - General explanatory entry record</option>
+ [% ELSE %]
+ <option value="z">z - General explanatory entry record</option>
+ [% END %]
+
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f7">7-8 Odefinierad</label></td>
+ <td></td>
+ </tr>
+
+ <tr>
+ <td><label for="f9">9- Typ av entitet</label></td>
+ <td>
+ <select name="f9" id="f9">
+ [% IF ( f9a ) %]
+ <option value="a" selected="selected">a - Personnamn</option>
+ [% ELSE %]
+ <option value="a">a - Personnamn</option>
+ [% END %]
+
+ [% IF ( f9b ) %]
+ <option value="b" selected="selected">b - Företagsnamn</option>
+ [% ELSE %]
+ <option value="b">b - Företagsnamn</option>
+ [% END %]
+
+ [% IF ( f9c ) %]
+ <option value="c" selected="selected">c - Territorial or geographical name</option>
+ [% ELSE %]
+ <option value="c">c - Territorial or geographical name</option>
+ [% END %]
+
+ [% IF ( f9d ) %]
+ <option value="d" selected="selected">d - Varumärke</option>
+ [% ELSE %]
+ <option value="d">d - Varumärke</option>
+ [% END %]
+
+ [% IF ( f9e ) %]
+ <option value="e" selected="selected">e - Släktnamn</option>
+ [% ELSE %]
+ <option value="e">e - Släktnamn</option>
+ [% END %]
+
+ [% IF ( f9f ) %]
+ <option value="f" selected="selected">f - Uniformt namn</option>
+ [% ELSE %]
+ <option value="f">f - Uniformt namn</option>
+ [% END %]
+
+ [% IF ( f9g ) %]
+ <option value="g" selected="selected">g - Kollektivt uniformt namn</option>
+ [% ELSE %]
+ <option value="g">g - Kollektivt uniformt namn</option>
+ [% END %]
+
+ [% IF ( f9h ) %]
+ <option value="h" selected="selected">h - Namn/titel</option>
+ [% ELSE %]
+ <option value="h">h - Namn/titel</option>
+ [% END %]
+
+ [% IF ( f9i ) %]
+ <option value="i" selected="selected">i - Namn/kollektiv uniform titel</option>
+ [% ELSE %]
+ <option value="i">i - Namn/kollektiv uniform titel</option>
+ [% END %]
+
+ [% IF ( f9j ) %]
+ <option value="j" selected="selected">j - Topical subject</option>
+ [% ELSE %]
+ <option value="j">j - Topical subject</option>
+ [% END %]
+
+ [% IF ( f9k ) %]
+ <option value="k" selected="selected">k - Place access</option>
+ [% ELSE %]
+ <option value="k">k - Place access</option>
+ [% END %]
+
+ [% IF ( f9l ) %]
+ <option value="l" selected="selected">l - Form, genre or physical characteristics</option>
+ [% ELSE %]
+ <option value="l">l - Form, genre or physical characteristics</option>
+ [% END %]
+
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f10">10-16 indicator/subfields/size</label></td>
+ <td>(beräknas automatiskt)</td>
+ </tr>
+
+ <tr>
+ <td><label for="f17">Kodningsnivå</label></td>
+ <td>
+ <select name="f17" id="f17">
+ [% IF ( f17space ) %]
+ <option value=" " selected="selected"> - Fullständig</option>
+ [% ELSE %]
+ <option value=" "> - Fullständig</option>
+ [% END %]
+ [% IF ( f183 ) %]
+ <option value="3" selected="selected">3 - Partiell</option>
+ [% ELSE %]
+ <option value="3">3 - Partiell</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td>18-19 Odefinierad</td>
+ <td></td>
+ </tr>
+
+ <tr>
+ <td>20-24 Entry map &amp; lengths</td>
+ <td>(fylls i automatiskt)</td>
+ </tr>
+ </table>
+ </div> <!-- /.page-section -->
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input type="button" class="btn btn-primary" onclick="report();" value="Save" />
+ <button class="btn btn-default close_window">Avbryt</button>
+ </fieldset>
+ </div>
+ </nav>
+
+ </form>
+
+<script>
+    function report() {
+        var doc   = opener.document;
+        var field = doc.getElementById("[% index | html %]");
+
+        field.value ='     '+document.f_pop.f5.value+document.f_pop.f6.value+'  '+document.f_pop.f9.value+'22     '+document.f_pop.f17.value+'  '+'45  ';
+
+        self.close();
+        return false;
+    }
+</script>
+
+[% INCLUDE 'popup-bottom.inc' %]

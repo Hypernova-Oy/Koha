@@ -1,0 +1,67 @@
+---
+description:
+- Standardkällor för klassificering och standardstödregler för sortering för Koha.
+tables:
+- class_sort_rules:
+    multiline: []
+    rows:
+    - class_sort_rule: dewey
+      description: Standardstödregler för sortering av DDK
+      sort_routine: Dewey
+    - class_sort_rule: lcc
+      description: Standardstödregler för sortering av LCC
+      sort_routine: LCC
+    - class_sort_rule: generic
+      description: Generiska sorteringsstödsregler för hyllsignaturer
+      sort_routine: Generic
+    translatable:
+    - description
+- class_split_rules:
+    multiline: []
+    rows:
+    - class_split_rule: dewey
+      description: Standarddelningsregler för DDK
+      split_routine: Dewey
+    - class_split_rule: lcc
+      description: Standarddelningsregler för LCC
+      split_routine: LCC
+    - class_split_rule: generic
+      description: Generiska delningsregler för hyllsignaturer
+      split_routine: Generic
+    translatable:
+    - description
+- class_sources:
+    multiline: []
+    rows:
+    - class_sort_rule: dewey
+      class_split_rule: dewey
+      cn_source: ddc
+      description: Dewey decimalklassifikation (DDK)
+      used: 1
+    - class_sort_rule: lcc
+      class_split_rule: lcc
+      cn_source: lcc
+      description: Library of Congress Classification
+      used: 1
+    - class_sort_rule: generic
+      class_split_rule: generic
+      cn_source: udc
+      description: Universella decimalklassifikationen (UDC)
+      used: 0
+    - class_sort_rule: generic
+      class_split_rule: generic
+      cn_source: sudocs
+      description: SuDoc Classification (U.S. GPO)
+      used: 0
+    - class_sort_rule: generic
+      class_split_rule: generic
+      cn_source: anscr
+      description: ANSCR (ljudinspelningar)
+      used: 0
+    - class_sort_rule: generic
+      class_split_rule: generic
+      cn_source: z
+      description: Annat/allmänt klassificeringsschema
+      used: 0
+    translatable:
+    - description

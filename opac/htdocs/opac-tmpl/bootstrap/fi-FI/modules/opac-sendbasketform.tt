@@ -1,0 +1,62 @@
+[% USE Koha %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Lähetetään koriasi &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Kohan verkkokirjasto[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='addtolist' bodyclass='popup' %]
+ <div class="main">
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col order-first order-md-first order-lg-2">
+ <div id="usersendbasket" class="maincontent">
+ [% IF ( email_add ) %]
+
+ [% IF ( SENT ) %]
+ <h1>Viesti lähetetty</h1>
+ <div class="alert alert-info">
+ <p>Kori lähetettiin sähköpostiosoitteeseen [% email_add | html %]</p>
+ </div>
+ <p><a class="focus close" href="#">Sulje ikkuna</a></p>
+ [% END %]
+
+ [% IF ( error ) %]
+ <div class="alert alert-warning">
+ [% IF error == 'NO_BODY' %]
+ <p>Ongelma korin lähettämisessä: Kelpaavia tietueita ei löytynyt.</p>
+ [% ELSIF error == 'NO_REPLY_ADDRESS' %]
+ <p>Ongelma korin lähettämisessä: Sähköpostia ei voi lähettää, koska käyttäjätilillesi ei ole asetettu sähköpostiosoitetta (osoitettasi käytetään vastausosoitteena).</p>
+ [% ELSE %]
+ <p>Ongelma korin lähettämisessä.</p>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% ELSE %]
+ <form action="/cgi-bin/koha/opac-sendbasket.pl" method="post" id="sendbasketform">
+ <fieldset class="brief">
+ <legend><h1>Lähetetään koriasi</h1></legend>
+ <label for="email_add">Sähköpostiosoite:</label>
+ <input type="text" id="email_add" name="email_add" size="43" class="focus form-control" />
+ <label for="comment">Viesti:</label>
+ <textarea id="comment" name="comment" rows="4" cols="40" class="form-control"></textarea>
+ <input type="hidden" name="bib_list" value="[% bib_list | html %]" />
+ [% INCLUDE 'csrf-token.inc' %]
+ </fieldset>
+ [% IF Koha.Preference('OPACHoldRequests') || Koha.Preference('OpacRenewalAllowed') %]<p id="donotrequestbymail">Ethän käytä tätä viestiä tehdäksesi pyyntöjä tai uusiaksesi lainojasi.</p>[% END %]
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-send" />
+ <input class="btn btn-primary" type="submit" value="Lähetä" />
+ <a class="cancel close" href="#">Peruuta</a>
+ </fieldset>
+ </form>
+
+ [% END # / IF email_add %]
+ </div> <!-- / #usersendbasket -->
+ </div> <!-- / .span12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' is_popup=1 %]
+[% BLOCK jsinclude %][% END %]

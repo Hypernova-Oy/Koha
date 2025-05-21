@@ -1,0 +1,202 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE Registers %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="tools_tools-home" class="tools">
+[% WRAPPER 'header.inc' %]
+[% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Työkalut</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+ <h1>Työkalut</h1>
+ <div class="row">
+ <div class="col-sm-6">
+ [% IF ( CAN_user_tools_manage_patron_lists || CAN_user_clubs || CAN_user_tools_moderate_comments || CAN_user_tools_import_patrons  || CAN_user_tools_edit_notices || CAN_user_tools_edit_notice_status_triggers || CAN_user_tools_label_creator || CAN_user_tools_delete_anonymize_patrons  || CAN_user_tools_edit_patrons || CAN_user_tools_batch_extend_due_dates || CAN_user_tools_moderate_tags || CAN_user_tools_rotating_collections || ( CAN_user_tools_batch_upload_patron_images && Koha.Preference('patronimages') ) ) %]
+ <h3>Asiakkaat ja lainaus</h3>
+ [% END %]
+ <dl>
+ [% IF (CAN_user_tools_manage_patron_lists) %]
+ <dt><a href="/cgi-bin/koha/patron_lists/lists.pl">Asiakaslistat</a></dt>
+ <dd>Hallinnoi asiakaslistoja</dd>
+ [% END %]
+
+ [% IF (CAN_user_clubs) %]
+ <dt><a href="/cgi-bin/koha/clubs/clubs.pl">Asiakaskerhot</a></dt>
+ <dd>Hallinnoi asiakaskerhoja</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_moderate_comments ) %]
+ <dt>
+ <a href="/cgi-bin/koha/reviews/reviewswaiting.pl">Kommentit</a>
+ [% IF ( pendingcomments ) %]
+ <span class="badge text-bg-info"><a href="/cgi-bin/koha/reviews/reviewswaiting.pl">[% pendingcomments | html %]</a></span>
+ [% END %]
+ </dt>
+ <dd>Hyväksy asiakkaiden kommentteja</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_import_patrons ) %]
+ <dt><a href="/cgi-bin/koha/tools/import_borrowers.pl">Asiakkaiden tuonti</a></dt>
+ <dd>Tuo asiakkaiden tietoja</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_edit_notices ) %]
+ <dt><a href="/cgi-bin/koha/tools/letter.pl">Ilmoitukset ja kuitit</a></dt>
+ <dd>Määrittele ilmoituksia (tulosteita ja sähköposti-ilmoituksia esim. myöhässä olevista lainoista)</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_edit_notice_status_triggers ) %]
+ <dt><a href="/cgi-bin/koha/tools/overduerules.pl">Myöhästymisilmoitusten määrittely</a></dt>
+ <dd>Määrittele myöhästymisilmoituksia myöhässä oleville niteille</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_label_creator ) %]
+ <dt><a href="/cgi-bin/koha/patroncards/home.pl">Kirjastokorttien luonti</a></dt>
+ <dd>Luo tulostettavat kirjastokortit</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_delete_anonymize_patrons ) %]
+ <dt><a href="/cgi-bin/koha/tools/cleanborrowers.pl">Asiakkaiden poisto ja anonymisointi eräajona</a></dt>
+ <dd>Asiakkaiden ja asiakkaiden lainahistorian poisto eräajona</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_edit_patrons ) %]
+ <dt><a href="/cgi-bin/koha/tools/modborrowers.pl">Asiakkaiden muokkaus eräajona</a></dt>
+ <dd>Muokkaa asiakkaita eräajona</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_batch_extend_due_dates ) %]
+ <dt><a href="/cgi-bin/koha/tools/batch_extend_due_dates.pl">Eräpäivien siirto eräajona</a></dt>
+ <dd>Muokkaa lainojen eräpäiviä eräajona</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_moderate_tags ) %]
+ <dt>
+ <a href="/cgi-bin/koha/tags/review.pl">Tagit</a>
+ [% IF ( pendingtags ) %]
+ <span class="badge text-bg-info"><a href="/cgi-bin/koha/tags/review.pl">[% pendingtags | html %]</a></span>
+ [% END %]
+ </dt>
+ <dd>Hyväksy asiakkaiden tageja</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_batch_upload_patron_images && Koha.Preference('patronimages') ) %]
+ <dt><a href="/cgi-bin/koha/tools/picture-upload.pl">Asiakaskuvien lataus</a></dt>
+ <dd>Tuo palvelimelle asiakkaiden kuvia eräajona tai yksitellen</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_rotating_collections ) %]
+ <dt><a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl">Siirtokokoelmat</a></dt>
+ <dd>Hallinnoi siirtokokoelmia</dd>
+ [% END %]
+ </dl>
+ </div> <!-- /.col-sm-6 -->
+
+ <div class="col-sm-6">
+ [% IF ( CAN_user_tools_edit_calendar || CAN_user_tools_manage_csv_profiles || CAN_user_tools_view_system_logs || CAN_user_tools_edit_additional_contents  || CAN_user_tools_schedule_tasks || CAN_user_tools_edit_quotes || ( plugins_enabled && CAN_user_plugins_tool )  || CAN_user_tools_upload_general_files || CAN_user_tools_access_files ) %]
+ <h3>Muut työkalut</h3>
+ [% END %]
+ <dl>
+ [% IF ( CAN_user_tools_edit_calendar ) %]
+ <dt><a href="/cgi-bin/koha/tools/holidays.pl">Kalenteri</a></dt>
+ <dd>Määrittele kirjaston kiinniolopäivät</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_manage_csv_profiles ) %]
+ <dt><a href="/cgi-bin/koha/tools/csv-profiles.pl">CSV-profiilit</a></dt>
+ <dd>Hallinnoi CSV-tuonnin profiileja</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_view_system_logs ) %]
+ <dt><a href="/cgi-bin/koha/tools/viewlog.pl">Lokien katselu</a></dt>
+ <dd>Selaa järjestelmän lokeja</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_edit_additional_contents ) %]
+ <dt><a href="/cgi-bin/koha/tools/additional-contents.pl?category=news">Uutiset</a></dt>
+ <dd>Kirjoita uutisia verkkokirjastoon ja virkailijaliittymään</dd>
+
+ <dt><a href="/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations">HTML-muokkaukset</a></dt>
+ <dd>Kirjoita HTML muokkauksia</dd>
+
+ <dt><a href="/cgi-bin/koha/tools/additional-contents.pl?category=pages">Sivut</a></dt>
+ <dd>Tee räätälöityjä sivuja</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_schedule_tasks ) %]
+ <dt><a href="/cgi-bin/koha/tools/scheduler.pl">Tehtävien ajastus</a></dt>
+ <dd>Ajasta tehtäviä</dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_edit_quotes ) %]
+ <dt><a href="/cgi-bin/koha/tools/quotes.pl">Sitaattien muokkaus</a></dt>
+ <dd>Muokkaa 'Päivän sitaatteja'</dd>
+ [% END %]
+
+ [% IF ( plugins_enabled && CAN_user_plugins_tool && tool_plugins ) %]
+ <dt><a href="/cgi-bin/koha/plugins/plugins-home.pl?method=tool">Työkaluliitännäiset</a></dt>
+ <dd>
+ Käytä työkaluliitännäisiä <ul>
+ [% FOREACH plugin IN tool_plugins %]
+ <li class="plugin_link">
+ <a href="/cgi-bin/koha/plugins/run.pl?class=[% plugin.class | uri %]&method=tool">
+ <span class="plugin_name">[% plugin.metadata.name | html %]</span>
+ </a>
+ </li>
+ [% END %]
+ </ul>
+ </dd>
+ [% END %]
+
+ [% IF ( CAN_user_tools_upload_general_files ) %]
+ <dt><a href="/cgi-bin/koha/tools/upload.pl">Lataukset</a></dt>
+ <dd>Lataa minkä tyyppinen tahansa tiedosto, hallinnoi latauksia</dd>
+ [% END %]
+
+ [% IF CAN_user_tools_access_files %]
+ <dt><a href="/cgi-bin/koha/tools/access_files.pl">Tiedostojen käyttö</a></dt>
+ <dd>Käytä palvelimelle tallennettuja tiedostoja, kuten lokitiedostot ja raportit</dd>
+ [% END %]
+
+ [% IF ( Koha.Preference('OPACReportProblem') && CAN_user_problem_reports ) %]
+ <dt><a href="/cgi-bin/koha/tools/problem-reports.pl">Verkkokirjaston vikailmoitukset</a></dt>
+ <dd>Hallinnoida asiakkaiden jättämiä verkkokirjaston vikailmoituksia</dd>
+ [% END %]
+ </dl>
+
+ [% IF ( Koha.Preference('UseCashRegisters') && ( CAN_user_cash_management_cashup || CAN_user_cash_management_anonymous_refund ) ) %]
+ <h3>Kassan hallinta</h3>
+ <dl>
+ <dt><a href="/cgi-bin/koha/pos/registers.pl">Tilitysten yhteenveto kirjastossa [% Branches.GetLoggedInBranchname | html %]</a></dt>
+ <dd>Näytä käteisen vienti valitussa kirjastossa</dd>
+
+ <dt><a href="/cgi-bin/koha/pos/register.pl">Tapahtumahistoria [% Registers.session_register_name | html %]</a></dt>
+ <dd>Näytä nykyisen kassarekisterin tapahtumahistoria</dd>
+ </dl>
+ [% END %]
+
+ </div> <!-- /.col-sm-6 -->
+ </div> <!-- /.row -->
+ </div> <!-- /.col-md-10 -->
+ </div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

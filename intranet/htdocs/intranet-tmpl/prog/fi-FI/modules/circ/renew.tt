@@ -1,0 +1,269 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+
+<title>[% FILTER collapse %]
+ [% tx("Renew {title}", { title = title }) | html %] &rsaquo;
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="circ_renew" class="circ">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Lainaus ja palautus</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uusinta</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-12">
+ <main>
+ <div class="row">
+
+ [% IF Koha.Preference('CircSidebar') %]
+ <div class="col-md-10 order-md-2 order-sm-1">
+ [% ELSE %]
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% END %]
+ [% INCLUDE 'messages.inc' %]
+
+ [% IF error %]
+ <div class="alert alert-warning">
+ <h1>Ei voi uusia:</h1>
+
+ [% IF error == "no_item" %]
+
+ <p>Tuntematon viivakoodi</p>
+
+ [% ELSIF error == "no_checkout" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %] ( <a href="/cgi-bin/koha/catalogue/moredetail.pl?itemnumber=[% item.itemnumber | uri %]&amp;biblionumber=[% item.biblio.biblionumber | uri %]&amp;bi=[% item.biblioitemnumber.biblioitemnumber | uri %]#item[% item.itemnumber | uri %]">[% item.barcode | html %]</a> ) ei ole lainassa asiakkaalla.</p>
+
+ [% ELSIF error == "too_many" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %] ( [% item.barcode | html %] ) teoksen uusintakerrat ovat täynnä. Käyttäjä: [% borrower.firstname | html %] [% borrower.surname | html %] ( <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% borrower.borrowernumber | uri %]"> [% borrower.cardnumber | html %] </a> )</p>
+
+ [% IF Koha.Preference('AllowRenewalLimitOverride') %]
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]"/>
+ <input type="hidden" name="override_limit" value="1" />
+ <input type="hidden" name="op" value="cud-renew" />
+ <input type="hidden" name="hard_due_date" value="[% hard_due_date | html %]" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-check"></i> Ohita rajoitus ja uusi laina</button>
+ </form>
+ [% END %]
+
+ [% ELSIF error == "too_unseen" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio %] ( [% item.barcode | html %] ) teoksen uusintakerrat ovat täynnä )</p>
+
+ [% IF Koha.Preference('AllowRenewalLimitOverride') %]
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]"/>
+ <input type="hidden" name="override_limit" value="1" />
+ <input type="hidden" name="op" value="cud-renew" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-check"></i> Ohita rajoitus ja uusi laina</button>
+ </form>
+ [% END %]
+
+ [% ELSIF error == "too_soon" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %] ( [% item.barcode | html %] ) ei voida uusia ennen kuin [% soonestrenewdate | $KohaDates %]. </p>
+
+ [% IF Koha.Preference('AllowRenewalLimitOverride') %]
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]"/>
+ <input type="hidden" name="override_limit" value="1" />
+ <input type="hidden" name="op" value="cud-renew" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-check"></i> Ohita ja uusi laina</button>
+ </form>
+ [% END %]
+
+ [% ELSIF error == "auto_too_soon" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %] ( [% item.barcode | html %] ) teoksen uusinta on ajastettu eikä sitä voi uusia ennen kuin [% soonestrenewdate | $KohaDates %]. </p>
+
+ [% IF Koha.Preference('AllowRenewalLimitOverride') %]
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]"/>
+ <input type="hidden" name="override_limit" value="1" />
+ <input type="hidden" name="op" value="cud-renew" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-check"></i> Ohita ja uusi laina</button>
+ </form>
+ [% END %]
+
+ [% ELSIF error == "auto_too_late" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %] ( [% item.barcode | html %] ) teoksen uusinta on ajastettu eikä sitä voi uusia enää [% latestautorenewdate | $KohaDates %] lähtien. </p>
+
+ [% IF Koha.Preference('AllowRenewalLimitOverride') %]
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]"/>
+ <input type="hidden" name="override_limit" value="1" />
+ <input type="hidden" name="op" value="cud-renew" />
+ <input class="btn btn-default approve" type="submit" value="Ohita ja uusi laina" />
+ </form>
+ [% END %]
+
+ [% ELSIF error == "auto_account_expired" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %] ( [% item.barcode | html %] ) teoksen uusinta on ajastettu eikä sitä voi uusia, koska asiakkaan kirjastokortti on vanhentunut</p>
+
+ [% IF Koha.Preference('AllowRenewalLimitOverride') %]
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]"/>
+ <input type="hidden" name="override_limit" value="1" />
+ <input type="hidden" name="op" value="cud-renew" />
+ <input class="btn btn-default approve" type="submit" value="Ohita ja uusi laina" />
+ </form>
+ [% END %]
+
+ [% ELSIF error == "auto_renew" or error == "auto_too_much_oweing" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %] ( [% item.barcode | html %] ) teoksen uusinta on ajastettu. </p>
+
+ [% IF Koha.Preference('AllowRenewalLimitOverride') %]
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]"/>
+ <input type="hidden" name="override_limit" value="1" />
+ <input type="hidden" name="op" value="cud-renew" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-check"></i> Ohita rajoitus ja uusi laina</button>
+ </form>
+ [% END %]
+
+ [% ELSIF error == "on_reserve" %]
+
+ <p>[% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %] ( [% item.barcode | html %] ): Tämä nide on varattu toiselle asiakkaalle.</p>
+
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]"/>
+ <input type="hidden" name="override_limit" value="1" />
+ <input type="hidden" name="override_holds" value="1" />
+ <div>
+ <label for="renewonholdduedate">Uusinnan eräpäivä:</label>
+ <input type="text" size="20" id="renewonholdduedate" name="renewonholdduedate" value="" class="flatpickr" data-flatpickr-enable-time="true" />
+ </div>
+ <input type="hidden" name="op" value="cud-renew" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-check"></i> Ohita ja uusi laina</button>
+ </form>
+
+ [% ELSIF error == "patron_restricted" %]
+
+ <p>[% borrower.firstname | html %] [% borrower.surname | html %] ( <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% borrower.borrowernumber | uri %]"> [% borrower.cardnumber | html %] </a> ) on tällä hetkellä rajoitettu.</p>
+
+ [% ELSIF error == "item_denied_renewal" %]
+
+ <p>Uusinta ei sallittu.</p>
+
+ [% ELSIF error == "onsite_checkout" %]
+ <p>Tätä nidettä ei voi uusia, koska se on on-site-laina</p>
+
+ [% ELSIF error == 'recalled' %]
+ <p>Niteestä on tehty palautuspyyntö.</p>
+
+ [% ELSE %]
+
+ [% error | html %]
+
+ [% END %]
+
+ <form method="get" action="/cgi-bin/koha/circ/renew.pl">
+ <input type="hidden" name="hard_due_date" value="[% hard_due_date | html %]" />
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-times"></i> Jatka uusimatta</button>
+ </form>
+ </div>
+ [% END %]
+
+ [% IF date_due %]
+ <div class="alert alert-info">
+ <h1>Nide uusittu:</h1>
+ <p>
+ [% INCLUDE 'biblio-title.inc' biblio=item.biblio link = 1 %]
+ ( <a href="/cgi-bin/koha/catalogue/moredetail.pl?itemnumber=[% item.itemnumber | uri %]&amp;biblionumber=[% item.biblio.biblionumber | uri %]&amp;bi=[% item.biblioitemnumber.biblioitemnumber | uri %]#item[% item.itemnumber | uri %]">[% item.barcode | html %]</a> ) uusittu asiakkaalle [% borrower.firstname | html %] [% borrower.surname | html %] ( <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% borrower.borrowernumber | uri %]"> [% borrower.cardnumber | html %] </a> ) erääntyy nyt [% date_due | $KohaDates as_due_date => 1 %] </p>
+ </div>
+ [% END %]
+
+ [% UNLESS error %]
+ <form method="post" action="/cgi-bin/koha/circ/renew.pl" autocomplete="off" >
+ [% INCLUDE 'csrf-token.inc' %]
+
+ <fieldset>
+ <h1>Uusinta</h1>
+
+ [% IF Koha.Preference('UnseenRenewals') %]
+ <div class="renew_formfield">
+ <input class="barcode focus" id="barcode" name="barcode" placeholder="Syötä niteen viivakoodi" size="14" type="text" />
+ </div>
+ <div class="renew_formfield">
+ <label for="unseen" class="hint">Tallenna uusinta verkkokirjastouusintana jos sopii: </label>
+ <input value="1" name="unseen" id="unseen" type="checkbox" />
+ </div>
+ [% ELSE %]
+ <input class="barcode focus" name="barcode" placeholder="Syötä niteen viivakoodi" size="14" type="text" />
+
+ [% END %]
+ <input type="hidden" name="op" value="cud-renew" />
+ <button type="submit" class="btn btn-primary">OK</button>
+
+ <div class="circ-settings show">
+ <div class="date-select" id="renew_date_override_fields">
+ <input class="flatpickr" data-flatpickr-enable-time="true" data-flatpickr-futuredate="true" id="hard_due_date" name="hard_due_date" placeholder="Uusinnan eräpäivä [% INCLUDE 'date-format.inc' %]" size="20" type="text" value="[% hard_due_date | html %]" />
+ </div> <!-- /.date-select -->
+ </div>
+ </fieldset>
+
+
+ </form>
+ [% END %]
+
+ [% IF Koha.Preference('CircSidebar') %]
+ </div> <!-- /.col-md-10.order-md-2 -->
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-nav.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-sm-12 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% IF error %]
+ <script>
+            $( document ).ready(function() {
+                removeFocus();
+            });
+        </script>
+ [% END %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

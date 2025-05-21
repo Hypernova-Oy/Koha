@@ -1,0 +1,78 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("UNIMARC field 686a builder") | html %]
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_unimarc_field_686a" class="cat value_builder">
+ <div class="container-fluid">
+
+ <h1>UNIMARC-kentän 686a muodostaja</h1>
+
+ <h2>Luokitus</h2>
+ <p>Valitse luokituksen arvo. Tämä kopioi auktoriteettitietueen kentän 686$a arvon nimeketietueen kenttään 686$a.</p>
+ <div class="page-section">
+ <form name="f" method="get" action="../authorities/auth_finder.pl">
+ <input type="hidden" name="op" value="do_search" />
+ <input type="hidden" name="type" value="intranet" />
+ <input type="hidden" name="nbstatements" value="[% nbstatements | html %]" />
+ <input type="hidden" name="index" value="[% index | html %]" />
+ <fieldset class="rows"><ol><li>
+ <span class="label">Auktoriteettityyppi</span>
+ [% authtypecode | html %]
+ <input type="hidden" name="authtypecode" value="[% authtypecode | html %]" />
+ </li>
+ <li>
+ <label for="mainmainentry">Pääkirjaus ($a vain)</label>
+ <input type="hidden" name="marclist" value="mainmainentry" />
+ <input type="hidden" name="and_or" value="and" />
+ <input type="hidden" name="excluding" value="" />
+ <select name="operator" id="mainmainentry">
+ <option value="contains">sisältää</option>
+ <option value="start">alkaa sanalla</option>
+ <option value="is">on</option>
+ </select>
+ <input type="text" name="value_mainstr" value="[% value_mainstr | html %]" />
+ </li>
+ <li>
+ <label for="mainentry">Pääkirjaus</label>
+ <input type="hidden" name="marclist" value="mainentry" />
+ <input type="hidden" name="and_or" value="and" />
+ <input type="hidden" name="excluding" value="" />
+ <select name="operator" id="mainentry">
+ <option value="contains">sisältää</option>
+ <option value="start">alkaa sanalla</option>
+ <option value="is">on</option>
+ </select>
+ <input type="text" name="value_main" value="[% value_main | html %]" />
+ </li>
+ <li>
+ <label for="marclist">Missä tahansa</label>
+ <input type="hidden" name="marclist" value="" />
+ <input type="hidden" name="and_or" value="and" />
+ <input type="hidden" name="excluding" value="" />
+ <select name="operator" id="marclist">
+ <option value="contains">sisältää</option>
+ <option value="start">alkaa sanalla</option>
+ <option value="is">on</option>
+ </select>
+ <input type="text" name="value_any" value="[% value_any | html %]" />
+ </li>
+ <li>
+ <label for="orderby">Järjestys </label>
+ <select name="orderby" id="orderby">
+ <option value="NoOrder">Ei tilausta</option>
+ <option value="HeadingAsc" selected="selected">Otsikko, nouseva</option>
+ <option value="HeadingDsc">Otsikko, laskeva</option>
+ </select>
+ </li></ol></fieldset>
+ <fieldset class="action"> <input class="btn btn-primary" type="submit" value="Haku" /> <a class="cancel close" href="#">Peruuta</a></fieldset>
+ </form>
+ </div> <!-- /.page-section -->
+ </div>
+[% INCLUDE 'popup-bottom.inc' %]

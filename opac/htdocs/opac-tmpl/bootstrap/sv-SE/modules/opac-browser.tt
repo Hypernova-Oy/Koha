@@ -1,0 +1,93 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE AdditionalContents %]
+[% PROCESS 'i18n.inc' %]
+[% PROCESS 'html_helpers.inc' %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Browse our catalog") | html %] &rsaquo;
+ [% PROCESS 'library_name_title' %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-browser' %]
+[% INCLUDE 'masthead.inc' %]
+
+ <div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Sök i vår katalog</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( OpacNav || OpacNavBottom ) %]
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' %]
+ </div>
+ </div>
+ <div class="col-10 order-first order-md-first order-lg-2">
+ [% ELSE %]
+ <div class="col order-first order-md-first order-lg-2">
+ [% END %]
+
+ <div id="userbrowser" class="maincontent">
+ <h1>Sök i vår katalog</h1>
+
+ [% IF ( have_hierarchy ) %]
+ <ul>
+ <li>
+ [% description | html %] <a href="opac-browser.pl">Översta nivån</a>
+ </li>
+ <li style="list-style-type: none;">
+ <ul>
+ [% FOREACH HIERARCHY_LOO IN HIERARCHY_LOOP %]
+ <li>
+ <a href="opac-browser.pl?level=[% HIERARCHY_LOO.level | uri %]&amp;filter=[% HIERARCHY_LOO.classification |uri %]">[% HIERARCHY_LOO.description | html %]</a>
+ </li>
+ <li style="list-style-type: none;">
+ [% END %]
+ <li style="list-style-type: none;">
+ <table class="table table-bordered table-striped">
+ <caption class="sr-only">Exemplar i katalog</caption>
+ <tr>
+ [% FOREACH LEVEL_LOO IN LEVEL_LOOP %]
+ <td>
+ <p>
+ [% IF ( LEVEL_LOO.endnode ) %]
+ <a href="opac-search.pl?q=Dewey-classification:[% LEVEL_LOO.classification |uri %]">[% LEVEL_LOO.description | html %]</a>
+ [% ELSE %]
+ <a href="opac-browser.pl?level=[% LEVEL_LOO.level | uri %]&amp;filter=[% LEVEL_LOO.classification |uri %]">[% LEVEL_LOO.description | html %]</a>
+ [% END %]
+ </p>
+ <p style="font-size:0.75em"><em>([% LEVEL_LOO.number | html %] biblios)</em></p>
+ </td>
+ [% IF ( LEVEL_LOO.count3 ) %]</tr><tr>[% END %]
+ [% END %]
+ </tr>
+ </table>
+ </li>
+ [% FOREACH HIERARCHY_LOO IN HIERARCHY_LOOP %]
+ </ul></li>
+ [% END %]
+ </ul>
+ </li>
+ </ul>
+ [% ELSE %]
+ <div class="warning">Webbläsartabellen är tom. Funktionen är inte fullständigt konfigurerad. Se <a href="http://wiki.koha-community.org/wiki/Opac_browse_feature">Koha-wiki</a> om du vill ha mer information om funktion och konfiguration.</div>
+ [% END # / IF have_hierarchy %]
+
+ </div> <!-- / .userbrowser -->
+
+ </div> <!-- / .col-10/12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %][% END %]

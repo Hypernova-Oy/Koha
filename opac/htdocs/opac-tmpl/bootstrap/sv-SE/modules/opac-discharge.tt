@@ -1,0 +1,66 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE AdditionalContents %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Begär borttagning &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %]-katalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+<body id="opac-discharge" class="scrollto">
+[% INCLUDE 'masthead.inc' %]
+
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Begär borttagning</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ <div class="col-10 order-first order-md-first order-lg-2">
+ <div id="discharge" class="maincontent">
+ <h1>Begär borttagning</h1>
+ [% FOR message IN messages %]
+ <div class="alert alert-[% message.type | html %]">
+ [% IF message.code == "unable_to_generate_pdf" %] Ett fel inträffar när pdf-filen skapas. Kontakta personalen för att lösa problemet. [% END %] </div>
+ [% END %]
+
+ [% IF success %]
+ <p>Din begäran om borttagning har skickats. Det kommer att synas på denna sida inom några dagar.</p>
+ [% ELSIF available %]
+ <a href="/cgi-bin/koha/opac-discharge.pl?op=get">Begär att bli borttagen</a></li>
+ [% ELSIF pending %]
+ <p>Borttagningen kommer att synas på denna sida inom några dagar.</p>
+ [% ELSIF has_issues %]
+ <p>Ditt konto kan inte tas bort eftersom du har aktiva lån. Återlämna exemplaren innan du begär borttagning.</p>
+ [% ELSIF not messages %]
+ <h2>Vad är en begäran om borttagning?</h2>
+ <p>Detta dokument intygar att du återlämnat alla lånade exemplar. Det efterfrågas ibland vid en filöverföring från en skola till en annan. Informationen om borttagning skickas av oss till din skola. Den finns även tillgänglig på ditt läskonto.</p>
+ <p><strong>Varning</strong>: Denna begäran är endast giltig om du inte har några skulder till biblioteket. När ansökan gjorts kan du inte låna biblioteksmaterial.</p>
+ [% IF has_checkouts %]
+ <div class="alert alert-info">Ditt konto kan inte tas bort eftersom du har aktiva lån. Återlämna exemplaren innan du begär borttagning.</div>
+ [% ELSE %]
+ <form action="/cgi-bin/koha/opac-discharge.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-request" />
+ <button class="btn btn-primary" type="submit">Begär borttagning</button>
+ </form>
+ [% END %]
+
+ [% END %]
+ </div> <!-- / #discharge -->
+ </div> <!-- / .col-10 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+</div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %][% END %]

@@ -1,0 +1,309 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("MARC bibliographic framework test") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="admin_checkmarc" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Test av MARC bibliografiskt ramverk</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+<h1>Test av MARC bibliografiskt ramverk</h1>
+
+[% IF ( total ) %]
+ <div class="alert alert-warning">
+ <h2>Konfigurationsfel hittades</h2>
+ Det finns [% total | html %] fel i din MARC-konfiguration. Korrigera dem innan du använder Koha </div>
+[% ELSE %]
+ <div class="alert alert-info">
+ <h2>Konfiguration ok</h2> Det finns inga fel i din MARC-konfiguration </div>
+[% END %]
+
+<div class="page-section">
+<table>
+ <tr>
+ <th>Testa</th>
+ <th>Resultat</th>
+ </tr>
+<!-- -->
+[% IF ( itemnum ) %]
+ <tr>
+ <td>exemplarnummer</td>
+ <td><ul><li>Fältet exemplarnummer MÅSTE mappas </li>
+ <li>Motsvarande delfält MÅSTE vara i fliken med -1 (ignorera)</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>itemnumber : fältet itemnumber är mappat till ett fält i flik -1</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( itemfields ) %]
+ <tr>
+ <td>exemplarfält</td>
+ <td>ALLA exemplarfält MÅSTE :<br />
+ <ul><li>vara mappad till samma tagg,</li>
+ <li>och alla måste vara i fliken 10 (exemplar)</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Alla exemplarfält är i samma tagg och i fliken exemplar</td>
+ </tr>
+[% END %]
+<!-- -->
+ [% IF ( itemtags ) %]
+ <tr>
+ <td>Exemplartagg</td>
+ <td>Det finns fler än 1 MARC-tagg kopplad till exemplarsfliken (10) : [% itemtags | html %]</td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>Endast en MARC-tagg kopplad till exemplar</td>
+ </tr>
+ [% END %]
+ <!-- -->
+[% IF ( itemtype ) %]
+ <tr>
+ <td>itemtype INTE mappad</td>
+ <td>fältet biblioitems.itemtype MÅSTE :<br />
+ <ul><li>vara mappat till ett MARC-delfält, </li>
+ <li>motsvarande delfält MÅSTE ha "Auktoriserat värde" inställt på "exemplartyp"</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>biblioitems.itemtype definition</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( branch ) %]
+ <tr>
+ <td>homebranch INTE mappad</td>
+ <td>fältet items.homebranch MÅSTE :<br />
+ <ul><li>vara mappat till ett MARC-delfält,</li>
+ <li>motsvarande delfält MÅSTE ha "Auktoriserat värde" inställt på "filialer"</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>homebranch definierad</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( holdingbranch ) %]
+ <tr>
+ <td>holdingbranch INTE mappad</td>
+ <td>fältet items.holdingbranch MÅSTE :<br />
+ <ul><li>vara mappat till ett MARC-delfält, </li>
+ <li>motsvarande delfält MÅSTE ha "Auktoriserat värde" inställt på "filialer"</li></ul></td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>holdingbranch definierad</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( itemtypes_empty ) %]
+ <tr>
+ <td>exemplartyp definieras inte</td>
+ <td>minst 1 exemplartyp måste vara definierad</td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>minst 1 exemplartyp definierad</td>
+ </tr>
+[% END %]
+<!-- -->
+[% IF ( branches_empty ) %]
+ <tr>
+ <td>bibliotek inte definierat</td>
+ <td>minst 1 bibliotek måste vara definierat</td>
+ </tr>
+[% ELSE %] 
+ <tr>
+ <td>OK</td> 
+ <td>minst 1 bibliotek definierat</td>
+ </tr> 
+[% END %]
+<!-- -->
+[% IF ( biblionumber ) %]
+ <tr>
+ <td>biblio och biblionumber</td>
+ <td>Fälten biblio.biblionumber och biblioitems.biblioitemnumber kan mappas till ett MARC-delfält,</td>
+ </tr>
+[% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>biblionumber och biblioitemnumber är korrekt mappade</td>
+ </tr>
+[% END %]
+
+ [% IF ( frameworknull ) %]
+ <tr>
+ <td>ramverksvärden</td>
+ <td>det finns ett null-värde i ramverkskoden. Kontrollera följande tabeller<br />
+ <li>select * from marc_subfield_structure where frameworkcode is NULL</li>
+ <li>select * from marc_tag_structure where frameworkcode is NULL</li>
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>inget NULL-värde i ramverkskoden</td>
+ </tr>
+ [% END %]
+
+ [% IF ( inconsistent_tabs ) %]
+ <tr>
+ <td style="vertical-align:top;">delfält inte i samma flikar</td>
+ <td>Inte alla delfält för följande taggar finns i samma flik (eller är markerade som 'ignorera'). <table>
+ <tr>
+ <th>Kod</th>
+ <th>Beskrivning</th>
+ <th>Tagg</th>
+ <th>Flikar används</th>
+ </tr>
+ [% FOREACH tab_inf IN tab_info %]
+ <tr>
+ <td>[% tab_inf.frameworkcode | html %]</td>
+ [% IF ( tab_inf.frameworkcode ) %]
+ <td>[% tab_inf.frameworktext | html %]</td>
+ [% ELSE %]
+ <td>Standardramverk</td>
+ [% END %]
+ <td>[% tab_inf.tagfield | html %]</td>
+ <td>[% tab_inf.tabs | html %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>alla delfält för alla taggar finns i samma flik (eller ignoreras)</td>
+ </tr>
+ [% END %]
+
+ [% IF ( invalid_authtypecodes ) %]
+ <tr>
+ <td style="vertical-align:top;">ogiltiga auktoritetstyper</td>
+ <td>Inte alla auktoritetstyper ramverket hänvisar till är definierade. <table>
+ <tr>
+ <th>Ramverkskod</th>
+ <th>Ramverksbeskrivning</th>
+ <th>Tagg</th>
+ <th>Delfält</th>
+ <th>Ogiltig auktoritetstyp</th>
+ </tr>
+ [% FOREACH authtypecode_inf IN authtypecode_info %]
+ <tr>
+ <td>[% authtypecode_inf.frameworkcode | html %]</td>
+ [% IF ( authtypecode_inf.frameworkcode ) %]
+ <td>[% authtypecode_inf.frameworktext | html %]</td>
+ [% ELSE %]
+ <td>Standardramverk</td>
+ [% END %]
+ <td>[% authtypecode_inf.tagfield | html %]</td>
+ <td>[% authtypecode_inf.tagsubfield | html %]</td>
+ <td>[% authtypecode_inf.authtypecode | html %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>alla auktoritetstyper som ramverket använder är definierade</td>
+ </tr>
+ [% END %]
+
+ [% IF ( permanent_location_mapped ) %]
+ <tr>
+ <td style="vertical-align:top;">items.permanent_location mappat</td>
+ <td>Följande mappningar finns för items.permanent_location, fast de inte borde. <table>
+ <tr>
+ <th>Ramverkskod</th>
+ <th>Ramverksbeskrivning</th>
+ <th>Tagg</th>
+ <th>Delfält</th>
+ </tr>
+ [% FOREACH mapped_perm_loc IN mapped_permanent_location %]
+ <tr>
+ <td>[% mapped_perm_loc.frameworkcode | html %]</td>
+ [% IF ( mapped_perm_loc.frameworkcode ) %]
+ <td>[% mapped_perm_loc.frameworktext | html %]</td>
+ [% ELSE %]
+ <td>Standardramverk</td>
+ [% END %]
+ <td>[% mapped_perm_loc.tagfield | html %]</td>
+ <td>[% mapped_perm_loc.tagsubfield | html %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>OK</td>
+ <td>items.permanent_location är inte mappat till ramverken</td>
+ </tr>
+ [% END %]
+
+<!-- -->
+[% IF ( total ) %]
+ <tr>
+ <td>TOTAL</td>
+ <td>Det finns [% total | html %] fel i din MARC-konfiguration. Korrigera dem innan du använder Koha</td>
+ </tr>
+</table>
+[% ELSE %]
+ </table>
+ </div> <!-- /.page-section -->
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

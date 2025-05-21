@@ -1,0 +1,395 @@
+---
+Kuvailu:
+  Käyttöliittymä:
+  - - Käytä
+    - choices: class-sources
+      pref: DefaultClassificationSource
+    - oletusarvoisena luokitusjärjestelmänä.
+  - - choices:
+        '0': Näytä
+        '1': Älä näytä
+      pref: advancedMARCeditor
+    - kenttien ja osakenttien kuvauksia MARC-editorissa.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: EasyAnalyticalRecords
+    - helppoja tapoja luoda analyyttisten tietueiden suhteita.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      default: 0
+      pref: EnableAdvancedCatalogingEditor
+    - kehittyneen kuvailueditorin käyttö.
+    - <br/> <strong>HUOM:</strong>
+    - Tällä hetkellä ei sisällä tukea UNIMARC-kentille.
+  - - Kun tallennetaan MARC/MARCXML-tietue kehittyneessä kuvailueditorissa tai se
+      viedään virkailijaliittymän perusnäytöltä, käytä
+    - choices:
+        biblionumber: nimeketietueen numero
+        controlnumber: kontrollinumero
+      default: biblionumber
+      pref: DefaultSaveRecordFileID
+    - tiedoston nimessä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      default: 1
+      pref: CreateAVFromCataloguing
+    - auktorisoitujen arvojen luonti kuvailumodulissa. Virkailija tarvitsee manage_auth_values
+      -oikeuden.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      default: 0
+      pref: CatalogConcerns
+    - henkilökunnan raportoida kuvailutietueissa olevista virheistä.
+    - <p><strong>HUOM:</strong> Järjestelmäasetuksessa '<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacCatalogConcerns">OpacCatalogConcerns</a>'
+      voit myös sallia saman ominaisuuden asiakkaille verkkokirjastossa.</p>
+  - - 'Käytä sähköpostia '
+    - class: email
+      default: ''
+      pref: CatalogerEmails
+    - osoitteena, johon raportit kuvailutietuiden virheistä lähetetään.
+  Näyttö:
+  - - 'Erota päänäkymä ja alemmat kohteet merkillä '
+    - class: short
+      pref: AuthoritySeparator
+    - (vain non-XSLT näkymä).
+  - - Näytä
+    - pref: URLLinkText
+    - MARC-tietueeseen upotetun linkin tekstinä.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: UseControlNumber
+    - tietueen kontrollinumeroa ($w osakentissä) ja kontrollinumeroa (001) nimeketietueiden
+      linkittämiseen.
+  - - 'Käytä URLia:'
+    - class: url
+      pref: MarcFieldDocURL
+    - MARC-kenttien dokumentaatiossa.
+    - Mahdolliset sijoitukset ovat <tt>{MARC}</tt>(marc-formaatti, esim. "MARC21"
+      or "UNIMARC"), <tt>{FIELD}</tt> (kentät, esim. "000" or "048"), <tt>{LANG}</tt>
+      (käyttäjän kieli, esim. "en" or "fi-FI").
+    - 'Jos jätetään tyhjäksi, käytetään formaattidokumentaatiota osoitteista: http://loc.gov
+      (MARC21) tai http://archive.ifla.org (UNIMARC).'
+    - Esimerkiksi <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>
+  - - choices:
+        '0': Näytä
+        '1': Älä näytä
+      pref: hide_marc
+    - MARC-näkymässä kenttänumeroita, osakenttäkoodeja ja indikaattoreita.
+  - - choices:
+        economical: Kokoa
+        standard: Älä kokoa
+      pref: LabelMARCView
+    - toistettuja samantyyppisiä avainsanoja yhdeksi tagiksi näytöllä.
+  - - 'Nimeketietueiden oletusnäyttötapa:'
+    - choices:
+        isbd: ISBD-lomake (katso alla).
+        labeled_marc: otsikoitu MARC-näyttö.
+        marc: MARC-tietue
+        normal: perusnäyttö
+      pref: IntranetBiblioDefaultView
+  - - 'Käytä seuraavaa virkailijaliittymän ISBD-pohjana:'
+    - class: code
+      pref: ISBD
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': Älä piilota
+        '1': Piilota
+      pref: OpacSuppression
+    - nimekketietueet, jotka on merkitty piilotettavaksi verkkokirjaston hakutuloksista.
+    - <br />Rajaa piilotus IP-osoiteisiin, jotka eivät ole IP-alueelta
+    - class: short
+      pref: OpacSuppressionByIPRange
+    - (Jätä tyhjäksi, jos tätä ei käytetä. Määrittele alue muodossa <code>192.168.</code>.)
+    - <br />Uudelleenohjaa verkkokirjastossa piilotettujen tietueiden perustiedot-näytöltä
+    - choices:
+        '0': virhe 404 ('Ei löytynyt')
+        '1': selityssivu ('Tämä tietue on estetty').
+      pref: OpacSuppressionRedirect
+    - <br /> Lisäohje voidaan näyttää kaikilla piilotettujen tietueiden uudelleenohjaussivuilla
+      lisäämällä se <a href='/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations'>HTML-muokkauksissa</a>
+      OpacSuppressionMessage-osiossa.
+  - - choices:
+        '0': Älä erottele
+        '1': Erottele
+      pref: SeparateHoldings
+    - nidenäyttö kahteen välilehteen, ensimmäisessä välilehdessä on niteet joiden
+    - choices:
+        holdingbranch: sijaintikirjasto
+        homebranch: kotikirjasto
+      pref: SeparateHoldingsBranch
+    - on kirjautuneen käyttäjän kirjasto. Toinen välilehti sisältää kaikki muut niteet.
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: AlwaysShowHoldingsTableFilters
+    - always show filters by default on the holdings table in the record details page
+      in the staff interface.
+  - - Älä näytä
+    - class: multi
+      pref: NotesToHide
+    - 'huomautuskenttiä ''Nimekehuomautus'' ja ''Kuvaus'' verkkokirjastossa ja virkailijaliittymän
+      perustiedot-näytöllä. Käytä pilkkua erottamaan kentät toisistaan. Esimerkki:
+      500,502 (MARC21); 300,328 (UNIMARC).'
+    - <br />
+    - Muualla kuin perustietonäkymän sivulla kenttiä piilotetaan ylläpidossa MARC-kuvailupohjien
+      osakenttien piilottamisella.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: AcquisitionDetails
+    - hankintatietoja nimekkeen perustiedot-näytöllä.
+  - - 'Näytettävät poistettujen tietueiden kentät yhdistämisen jälkeen:'
+    - pref: MergeReportFields
+    - '<br />Esimerkki: ''001,245ab,600'''
+    - 'näyttää:'
+    - <ul>
+    - <li>001:n arvo</li>
+    - <li>osakentät a ja b kentästä 245</li>
+    - <li>kaikkia 600-kentän osakenttiä</li>
+  - - Näytä lista osakohdetietueista, jotka linkitetty kentän 773 kautta
+    - choices:
+        both: sekä virkailijaliittymässä että verkkokirjastossa
+        nowhere: ei
+        opac: verkkokirjasto
+        staff: virkailijaliittymässä
+      pref: ShowComponentRecords
+    - nimekkeen perustiedot-sivulla.
+    - Korkeintaan
+    - pref: MaxComponentRecords
+    - tietuetta näytetään.
+    - <br/> UNIMARCia ei tueta.
+    - Oletuksen osakohteiden hakutulokset järjestetään
+    - choices:
+        acqdate: lisäyspvm:n
+        author: tekijän
+        biblionumber: tietuenumeron
+        call_number: luokan
+        pubdate: julkaisuajan
+        title: nimekkeen
+      default: title
+      pref: ComponentSortField
+    - mukaan
+    - choices:
+        asc: nousevassa järjestyksessä.
+        az: A:sta Ö:hön.
+        dsc: laskevassa järjestyksessä.
+        za: Ö:stä A:han.
+      pref: ComponentSortOrder
+  Selkätarrat:
+  - - Selkätarratulostinta käytettäessä
+    - choices:
+        '0': älä tuo
+        '1': tuo
+      pref: SpineLabelAutoPrint
+    - tulostusikkuna esiin automaattisesti.
+  - - 'Selkätarran pikatulostuksen vakiokentät:'
+    - (lisää sarakkeita <code>biblio</code>, <code>biblioitems</code> tai <code>items</code>-tauluista,
+      ympäröityinä &lt; ja &gt; -merkeillä.)
+    - pref: SpineLabelFormat
+      type: textarea
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SpineLabelShowPrintOnBibDetails
+    - selkätarran tulostuspainikkeita perustiedot-näytöllä.
+  - []
+  Tietuerakenne:
+  - - 'Täytä oletuskieli kenttään 008 merkkipaikkoihin 35-37 MARC21-tietueessa (esim.
+      eng, nor, ger, katso <a href="http://www.loc.gov/marc/languages/language_code.html">lista
+      kielten MARC-koodeista</a>):'
+    - pref: DefaultLanguageField008
+    - Jos tyhjä, käytetään eng.
+  - - 'Täytä oletusmaakoodi MARC21-kentän 008 merkkipaikkoihin 15-17 - Julkaisu-,
+      tuotanto- tai toteuttamismaa. (Katso <a href=''http://www.loc.gov/marc/countries/countries_code.html''>MARC
+      Code List for Countries</a>):'
+    - pref: DefaultCountryField008
+    - Tyhjä oletus on ||| - Ei koodattu.
+  - - Käännä ja tallenna MARC-tietueet
+    - choices:
+        MARC21: MARC21
+        UNIMARC: UNIMARC
+      pref: marcflavour
+    - -muodossa.
+  - - choices:
+        '0': Älä ota käyttöön
+        '1': Ota käyttöön
+      pref: EnableItemGroups
+    - nideryhmä-ominaisuus salliaksesi niteiden keräämisen yhteen tietueessa.
+  - - Käytä nidetyyppiä
+    - choices:
+        '0': nimeketietueesta
+        '1': niteestä
+      pref: item-level_itypes
+    - määräävänä nidetyyppinä (kun määritetään laina- ja maksusääntöjä, nidetyypin
+      kuvaketta verkkokirjastossa, hakutuloksissa jne.).
+  - - Määritä MARC-osakentät
+    - pref: itemcallnumber
+    - 'niteen luokkaa varten. Listaa useita pilkulla erotettuja kenttiä järjestyksessä.
+      Jokainen kenttä voi sisältää useita osakenttiä. Osakenttien järjestys tietueessa
+      säilytetään. Esimerkiksi: ''082ab,092ab'' näyttää 082$a ja 082$b, sitten 092$a
+      ja 092$b.'
+    - 'Esimerkkejä MARC21 varten: Dewey: 082ab,092ab; LOC: 050ab,090ab; Koha-tietueesta:
+      942hi. Esimerkkejä UNIMARC varten: Dewey: 676a; LOC: 680ab.'
+  - - Näytä MARC-osakentät
+    - pref: AlternateHoldingsField
+    - saatavuustietona niille tietueille, joihin ei ole liitetty niteitä (Voi sisältää
+      useita osakenttiä; esimerkiksi <code>852abhi</code> näyttäisi kentän 852 osakentät
+      a, b, h ja i.), osakenttien erottimena
+    - pref: AlternateHoldingsSeparator
+    - .
+  - - Käytä <a href="http://www.loc.gov/marc/organizations/orgshome.html">MARC-yhteisökoodia
+      (Kongressin kirjasto)</a>
+    - pref: MARCOrgCode
+    - oletuksena uusissa MARC21-tietueissa (jätä tyhjäksi, jos ei käytössä). Tämä
+      voidaan asettaa myös kirjastotasolla.
+  - - Kun uusia nidetietoja luodaan, asetetaan väliaikaiseksi sijainniksi
+    - class: short
+      pref: NewItemsDefaultLocation
+    - (pitäisi olla <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOC">hyllypaikka</a>,
+      tai tyhjä, jos ei käytössä).
+  - - choices:
+        '0': Älä kopioi
+        '1': Kopioi
+      pref: z3950NormalizeAuthor
+    - tekijätietoja UNIMARCista
+    - class: multi
+      pref: z3950AuthorAuthFields
+    - kentistä (pilkuilla erotettuina) asianomaisiin tekijätietoihin tuotaessa tietuetta
+      Z39.50-protokollalla.
+  - - Viivakoodit ovat
+    - choices:
+        EAN13: EAN-13 -muodossa, nouseva numerointi.
+        OFF: ei generoida automaattisesti.
+        annual: muotoa <year>-0001, <year>-0002.
+        hbyymmincr: muotoa <branchcode>yymm0001.
+        incremental: muotoa 1, 2, 3.
+      pref: autoBarcode
+  - - Kun uusi nide lisätään
+    - choices:
+        '0': uuden niteen tietoja ei esitäytetä edellisen luodun niteen tiedoilla.
+        '1': uuden niteen tiedot esitäytetään edellisen luodun niteen tiedoilla.
+      pref: PrefillItem
+  - - 'Listaa esitäytettävät niteen osakentät (erottele välilyönnein):'
+    - pref: SubfieldsToUseWhenPrefill
+    - . Jos jätetään tyhjäksi, kaikki osakentät esitäytetään.
+  - - Käytä kielikoodia (ISO690-2 -muodossa)
+    - class: short
+      pref: UNIMARCField100Language
+    - oletuskielenä UNIMARC kentässä 100 kun luodaan uusi tietue.
+  - - 'Määritä lista osakentistä, joiden muokkaaminen on auktorisoitu, kun items_batchmod_restricted
+      -oikeus on päällä, erotusmerkkinä tyhjä merkki:'
+    - pref: SubfieldsToAllowForRestrictedEditing
+    - 'Esimerkit:'
+    - 'UNIMARC: "995$f 995$h 995$j"'
+    - 'MARC21: "952$a 952$b 952$c"'
+    - Huomaa, että FA tallennuspohja ei lasketa.
+    - Jos järjestelmäasetus on tyhjä, mitään kenttää ei rajoiteta.
+  - - 'Määritä lista osakentistä, joiden muokkaaminen on auktorisoitu, kun items_batchmod_restricted
+      -oikeus on päällä, erotusmerkkinä tyhjä merkki:'
+    - pref: SubfieldsToAllowForRestrictedBatchmod
+    - 'Esimerkit:'
+    - 'UNIMARC: "995$f 995$h 995$j"'
+    - 'MARC21: "952$a 952$b 952$c"'
+    - Huomaa, että FA-tallennuspohjaa ei oteta huomioon.
+    - Jos järjestelmäasetus on tyhjä, mitään kenttää ei rajoiteta.
+  - - Talleta tietueen luojan asiakasid MARC-osakenttään
+    - pref: MarcFieldForCreatorId
+    - ja tietueen luojan nimi MARC-osakenttään
+    - pref: MarcFieldForCreatorName
+    - .
+    - Talleta tietueen viimeisimmän muokkaajan asiakasid MARC-osakenttään
+    - pref: MarcFieldForModifierId
+    - ja tietueen viimeisimmän muokkaajan nimi MARC-osakenttään
+    - pref: MarcFieldForModifierName
+    - . <br/><strong>HUOM:</strong> Käytä dollarin merkkiä kentän ja osakentän välissä
+      näin 123$a.
+  - - Tietueen kontrollinumero (001)
+    - choices:
+        OFF: ei generoida tietuenumerona.
+        biblionumber: generoidaan tietuenumerona.
+      pref: autoControlNumber
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: UseOCLCEncodingLevels
+    - OCLC määritellyt arvot MARC-koodaustasolle nimiön muodostajan merkkipaikalle
+      17.
+  - - Käytä kuvailupohjan oletusarvoja
+    - multiple:
+        changed: kun vaihdetaan kuvailupohjaa tietueen muokkauksen yhteydessä
+        duplicate: kun muokataan kopioitua tietuetta uutena
+        imported: tuotaessa tietuetta Z39.50-haulla
+        new: kun kuvaillaan uusia tietueita
+      pref: ApplyFrameworkDefaults
+  - - Käytä MARC-kenttää
+    - pref: ContentWarningField
+    - sisältövaroitusten tallentamiseen.
+    - <br/><strong>HUOM:</strong> Tämän kentän täytyy näkyä MARC-kuvailupohjassa,
+      jotta saavutettavuus olisi mahdollista.
+  - - choices:
+        '0': Älä poista
+        '1': Poista
+      pref: StripWhitespaceChars
+    - edessä tai lopussa olevat tyhjät merkit (mukaan lukien välilyönnit, tabulaattorit,
+      rivinvaihdot ja enterit) ja sisäisistä rivivaihdot kentistä kuvailtaessa nimeke-
+      ja auktoriteettitietueita. Asetus ei vaikuta nimiö- ja kontrollikenttiin.
+  Tuonti:
+  - - Kun yhdistetään ISBN:n perusteella tietueiden tuonnissa,
+    - choices:
+        '0': älä yritä
+        '1': yritä
+      pref: AggressiveMatchOnISBN
+    - täsmäyttää agressiivisesti fraasina tuotavat ISBN:t jo tietokannassa olevien
+      ISBN:n kanssa koittaen kaikkia ISBN:n variaatioita.
+  - - Näytä MARC-kentät/osakentät
+    - pref: AdditionalFieldsInZ3950ResultSearch
+    - '''Lisäkenttien'' sarakkeessa Z39.50 hakutuloksessa (käytä pilkkua erottimena,
+      esim.: "<code>001, 082$ab, 090$ab</code>")'
+  - - Kun täsmäytetään ISSN:llä tietueiden tuontityökalussa,
+    - choices:
+        '0': älä yritä
+        '1': yritä
+      pref: AggressiveMatchOnISSN
+    - täsmäyttää aggressiivisesti fraasina tuotavat ISSN:t jo tietokannassa olevien
+      ISSN:n kanssa koittaen kaikkia ISSN:n variaatioita.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: MARCOverlayRules
+    - MARC-yhdistelysääntöjä tuotaville tietueille, kun päätetään mitkä toiminnot
+      pätevät eri kenttiin.
+  Vienti:
+  - - 'Sisällytä seuraavat kentät BibTeX-vientiin:'
+    - pref: BibtexExportAdditionalFields
+      syntax: text/x-yaml
+      type: textarea
+    - 'Käytä yksi rivi kenttää kohden muodossa BT_TAG: TAG$SUBFIELD (esim. lccn: 010$a).'
+    - <br/>
+    - 'Määrittääksesi useita marc-kenttiä/osakenttiä kohteeksi toistettavalle BibTex
+      kentälle, käytä seuraavaa muotoa: BT_TAG: [TAG2$SUBFIELD1, TAG2$SUBFIELD2] (esim.
+      huomautukset: [501$a, 505$g] ).'
+    - <br/>
+    - Kaikki toistettavien kenttien ja osakenttien arvot kirjataan annettuun BibTeX-kenttään.
+    - <br/>
+    - Käytä '@' (lainausmerkkien kanssa) BT_TAG-merkkinä korvataksesi bibtex-tietuetyypin
+      valitsemallasi kentän arvolla.
+  - - 'Sisällytä seuraavat kentät, kun viedään RIS:'
+    - pref: RisExportAdditionalFields
+      syntax: text/x-yaml
+      type: textarea
+    - 'Käytä yksi rivi per kenttä muodossa RIS_TAG: TAG$SUBFIELD (esim. LC: 010$a).'
+    - <br/>
+    - 'Määrittääksesi useita MARC-kenttiä/osakenttiä kohteeksi toistettaville RIS-kentille,
+      käytä seuraavaa muotoa: RIS_TAG: [TAG2$SUBFIELD1, TAG2$SUBFIELD2] (esim. NT:
+      [501$a, 505$g]).'
+    - <br/>
+    - Kaikki toistuvien tagien ja osakenttien arvot tulostetaan annetulla RIS-tagilla.
+    - <br/>
+    - Käyttämällä TY:tä (tietuetyyppi) avaimena <em>korvataan</em> oletus TY valitsemallasi
+      kentän arvolla.

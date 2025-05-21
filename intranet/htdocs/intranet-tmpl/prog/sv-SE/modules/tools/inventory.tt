@@ -1,0 +1,554 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE AuthorisedValues %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE TablesSettings %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF (loop) %]
+ [% t("Results") | html %] &rsaquo;
+ [% END %]
+ [% t("Inventory") | html %] &rsaquo;
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="tools_inventory" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Katalogisering</a>
+ [% END %]
+
+ [% IF (loop) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/inventory.pl">Inventering</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Resultat</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Inventering</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Inventering</h1>
+ [% IF (moddatecount) %]<div class="alert alert-info">[% moddatecount | html %] exemplar redigerade: datelastseen ändrat till [% date | $KohaDates with_hours => 1 %]</div>
+ <div class="alert alert-warning">Antal möjliga streckkoder som lästs: [% LinesRead | html %]</div>[% END %]
+ [% IF (errorfile) %]<div class="alert alert-warning">[% errorfile | html %] kan inte öppnas</div>[% END %]
+ [% IF (err_length && err_length==1) %]<div class="alert alert-warning">Det fanns 1 streckkod som var för lång.</div>[% END %]
+ [% IF (err_length && err_length>1) %]<div class="alert alert-warning">Det fanns [% err_length | html %] streckkoder som var för långa.</div>[% END %]
+ [% IF (err_data && err_data==1) %]<div class="alert alert-warning">Det fanns 1 streckkod som innehöll minst ett tecken som inte kunde skrivas ut.</div>[% END %]
+ [% IF (err_data && err_data>1) %]<div class="alert alert-warning">Det fanns [% err_data | html %] streckkoder som innehöll minst ett tecken som inte kunde skrivas ut.</div>[% END %]
+ [% FOREACH error IN errorloop %]
+ <div class="alert alert-warning">
+ [% error.barcode | html %]
+ [% IF (error.ERR_BARCODE) %]: <span>Streckkod ej funnen.</span>[% END %]
+ [% IF (error.ERR_WTHDRAWN) %]: <span>Exemplar har dragits tillbaka.</span>[% END %]
+ [% IF (error.ERR_ONLOAN_RET) %]: <span>Exemplaret var utlånat. Det återlämnades innan det markerades som sett.</span>[% END %]
+ [% IF (error.ERR_ONLOAN_NOT_RET) %]: <span>Exemplaret var utlånat och kunde inte återlämnas.</span>[% END %]
+ </div>
+ [% END %]
+
+ [% UNLESS op %]
+ <form method="post" id="inventory_form" action="/cgi-bin/koha/tools/inventory.pl" enctype="multipart/form-data">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-inventory" />
+
+ <fieldset class="rows">
+ <legend>Använd en streckkodsfil</legend>
+ <ol>
+ <li>
+ <label for="uploadbarcodes">Streckkodsfil: </label> <input type="file" id="uploadbarcodes" name="uploadbarcodes" />
+ <input id="resetuploadbarcodes" name="resetuploadbarcodes" type="button" value="Återställning" />
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+ <legend>Eller skanna exemplar ett efter ett</legend>
+ <ol>
+ <li>
+ <label for="barcodelist">Streckkodlista (en streckkod per rad): </label>
+ <textarea rows="10" cols="30" id="barcodelist" name="barcodelist"></textarea>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+ <legend>Parametrar</legend>
+ <ol>
+ <li><label for="setdate">Ställ in inventeringsdatum till:</label> <input type="text" id="setdate" name="setdate" value="[% today | html %]" class="flatpickr" /></li>
+ <li><label for="compareinv2barcd">Jämför streckkodslista med resultat: </label><input type="checkbox" name="compareinv2barcd" id="compareinv2barcd" disabled /></li>
+ <li><label for="dont_checkin">Återlämna inte exemplar som skannas vid inventering: </label><input type="checkbox" name="dont_checkin" id="dont_checkin" disabled /></li>
+ <li><label for="out_of_order">Kontrollera om exemplar står i oordning: </label><input type="checkbox" name="out_of_order" id="out_of_order" disabled /></li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+ <legend>Exemplarplatsfilter</legend>
+ <ol>
+ <li>
+ <label for="branch">Plats: </label>
+ <input type="radio" name="branch" value="homebranch"> Hembibliotek</input>
+ <input type="radio" name="branch" value="holdingbranch"> Aktuellt bibliotek</input>
+ </li>
+
+ <li>
+ <label for="branchloop">Bibliotek: </label>
+ <select id="branchloop" name="branchcode" style="width:12em;">
+ <option value="">Alla bibliotek</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => branchcode, unfiltered => 1, ) %]
+ </select>
+ </li>
+
+ [% IF (authorised_values) %]
+ <li>
+ <label for="locationloop">Placering (items.location) är: </label>
+ <select id="locationloop" name="location">
+ <option value="">Filterplats</option>
+ [% FOREACH value IN authorised_values %]
+ [% IF (value.selected) %]
+ <option value="[% value.authorised_value | html %]" selected="selected">[% value.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% value.authorised_value | html %]">[% value.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [% END %]
+
+ [% SET ccodes = AuthorisedValues.GetAuthValueDropbox('CCODE') %]
+ [% IF ( ccodes.count > 0 ) %]
+ <li>
+ <label for="ccodeloop">Avdelning: </label>
+ <select id="ccodeloop" name="ccode">
+ <option value="">Filtrera på placering</option>
+ [% FOREACH cc IN ccodes %]
+ [% IF (ccode == cc.authorised_value) %]
+ <option value="[% cc.authorised_value | html %]" selected="selected">[% cc.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% cc.authorised_value | html %]">[% cc.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [% END %]
+
+ <li>
+ <label for="minlocation">Hyllsignatur för exemplar mellan: </label>
+ <input type="text" name="minlocation" id="minlocation" value="[% minlocation | html %]" /> (items.itemcallnumber) </li>
+ <li>
+ <label for="maxlocation">...och: </label>
+ <input type="text" name="maxlocation" id="maxlocation" value="[% maxlocation | html %]" />
+ <li>
+ <label for="class_source">Klassifikationssystem</label>
+ <select name="class_source" id="class_source">
+ [% FOREACH class_source IN class_sources %]
+ [% IF class_source.cn_source == pref_class %]
+ <option value="[% class_source.cn_source | html %]" selected="selected">[% class_source.description | html %] (standard)</option>
+ [% ELSE %]
+ <option value="[% class_source.cn_source | html %]">[% class_source.description | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="rows" id="optionalfilters">
+ <legend>Alternativa filter för inventeringslista eller för jämförelse av streckkoder</legend>
+ <span class="hint">Inskannade exemplar förväntas matcha ett av valda kriterier för "ej för utlån", om några bockats för.</span>
+ <br/>
+ <div id="statuses" style="display: block;">
+ [% FOREACH status IN statuses %]
+ [% IF (status.values) %]
+ <fieldset style="float: left; padding: 5px; margin: 5px;text-align:right">
+ <legend>[% status.fieldname | html %]</legend>
+ <ul id="statuses-[% fieldname | html %]" style="display: inline;">
+ [% FOREACH value IN status.values %]
+ [% IF (value.lib) %]
+ <li style="list-style: none;">
+ <label for="[% value.id | html %]">
+ [% IF ( status.fieldname == 'items.notforloan' && value.authorised_value == 0 && value.lib == '__IGNORE__' ) %] Lånas ut [% ELSE %] [% value.lib | html %] [% END %] </label>
+ <input type="checkbox" name="status-[% status.fieldname | html %]-[% value.authorised_value | html %]" id="[% value.id | html %]" />
+ </li>
+ [% END %]
+ [% END %]
+ </ul>
+ </fieldset>
+ [% END %]
+ [% END %]
+ </div>
+
+ <ol>
+ <li>
+ <br/>
+ <label for="datelastseen">Senaste inventeringsdatum:</label>
+ <input type="text" id="datelastseen" name="datelastseen" value="[% datelastseen | html %]" class="flatpickr" />
+ (Ignorera poster markerade som sedda på eller efter detta datum.) </li>
+ <li>
+ <label for="ignoreissued">Hoppa över utlånade exemplar: </label>
+ [% IF (ignoreissued) %]
+ <input type="checkbox" id="ignoreissued" name="ignoreissued" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" id="ignoreissued" name="ignoreissued" />
+ [% END %]
+ </li>
+ <li>
+ <label for="ignore_waiting_holds">Hoppa över reserverade exemplar som väntar på reservationshyllan: </label>
+ <input type="checkbox" id="ignore_waiting_holds" name="ignore_waiting_holds" />
+ </li>
+ <li>
+ <label>Exemplartyper: </label>
+ <div class="branchselector">
+ <p><a href="#" id="checkallitemtypes"> <i class="fa fa-check"></i> Välj alla</a> | <a href="#" id="checknoneitemtypes"> <i class="fa fa-times"></i> Rensa alla</a></p>
+ <div class="branchgridrow">
+ [% FOREACH itemtype IN itemtypes %]
+ <div class="branchgriditem">
+ <input id="itemtype-[% itemtype.itemtype | html %]" class="branch_select" type="checkbox" name="itemtype-[% itemtype.itemtype | html %]" value="[% itemtype.itemtype | html %]" />
+ <label for="itemtype-[% itemtype.itemtype | html %]">[% itemtype.description | html %]</label>
+ </div>
+ [% IF loop.count() % 4 == 0 && !loop.last() %]
+ </div>
+ <div class="branchgridrow">
+ [% END %]
+ [% END %]
+ </div>
+ </div>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+ <legend>Ytterligare alternativ</legend>
+ <ol>
+ <li>
+ <label for="CSVexport">Exportera till CSV-fil: </label>
+ <input type="checkbox" name="CSVexport" id="CSVexport" />
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ </fieldset>
+ </form>
+ [% END %]
+
+ [% IF op %]
+ <form method="post" action="/cgi-bin/koha/tools/inventory.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-inventory" />
+
+ <input type="hidden" name="minlocation" value="[% minlocation | html %]" />
+ <input type="hidden" name="maxlocation" value="[% maxlocation | html %]" />
+ <input type="hidden" name="location" value="[% location | html %]" />
+ <input type="hidden" name="branchcode" value="[% branchcode | html %]" />
+ <input type="hidden" name="datelastseen" value="[% datelastseen | html %]" />
+ <input type="hidden" name="ccode" value="[% ccode | html %]" />
+
+ [% UNLESS uploadedbarcodesflag %]
+ <div><a href="#" class="checkall"><i class="fa fa-check"></i> Välj alla</a> <a href="#" class="clearall"><i class="fa fa-times"></i> Rensa alla</a></div>
+ [% END %]
+
+ <div class="page-section">
+ <table id="inventoryt">
+ <thead>
+ <tr>
+ [% UNLESS uploadedbarcodesflag %]
+ <th>Sedd</th>
+ [% END %]
+ <th>Streckkod</th>
+ <th>Hyllsignatur</th>
+ <th>Bibliotek</th>
+ <th>Avdelning</th>
+ <th class="anti-the">Titel</th>
+ <th>Ej för utlån</th>
+ <th>Förlorad</th>
+ <th>Skadad</th>
+ <th>Återkallad</th>
+ <th>Senast sedd</th>
+ <th>Problem</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH result IN loop %]
+ <tr>
+ [% UNLESS uploadedbarcodesflag %]
+ <td>
+ <input type="checkbox" name="SEEN-[% result.itemnumber | html %]" value="1" />
+ </td>
+ [% END %]
+
+ <td>
+ [% result.barcode | html %]
+ </td>
+
+ <td data-order="[% result.cn_sort | html %]">
+ [% result.itemcallnumber | html %]
+ </td>
+
+ <td>
+ [% Branches.GetName( result.homebranch ) | html %]
+ <span class="shelvingloc">[% result.location | html %]</span>
+ </td>
+
+ <td>
+ <span class="ccode">[% result.ccode | html %]</span>
+ </td>
+
+ <td>
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% result.biblionumber | uri %]" class="openWin">[% result.title | html %]</a>
+ [% IF ( result.author ) %] av <span class="author">[% result.author | html %]</span>
+ [% END %]
+ </td>
+
+ <td>
+ [% result.notforloan | html %]
+ </td>
+
+ <td>
+ [% result.itemlost | html %]
+ </td>
+
+ <td>
+ [% result.damaged | html %]
+ </td>
+
+ <td>
+ [% result.withdrawn | html %]
+ </td>
+
+ <td data-order="[% result.datelastseen | html %]">
+ [% result.datelastseen | $KohaDates with_hours => 1 %]
+ </td>
+
+ <td>
+ [% FOREACH problem IN result.problems %]
+ [% IF problem.key == 'wrongplace' %]
+ <span>Hittades på fel plats</span><br/>
+ [% ELSIF problem.key == 'changestatus' %]
+ [% IF result.notforloan %]
+ <span>Exemplaret har en avmarkerad 'ej för utlån'-status "[% result.notforloan | html %]"</span><br/>
+ [% ELSE %]
+ <span>Item has no "not for loan" status</span><br/>
+ [% END %]
+ [% ELSIF problem.key == 'not_scanned' %]
+ <span>Saknas (inte skannad)</span><br/>
+ [% ELSIF problem.key == 'checkedout' %]
+ <span>Fortfarande utlånad</span><br/>
+ [% ELSIF problem.key == 'no_barcode' %]
+ <span>Ingen streckkod</span><br/>
+ [% ELSIF problem.key == 'out_of_order' %]
+ <span>Exemplar kan stå i oordning</span><br/>
+ [% END %]
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+
+ <div class="spacer"></div>
+
+ [% UNLESS uploadedbarcodesflag %]
+ <div style="padding : .3em 0"><a href="#" class="checkall"><i class="fa fa-check"></i> Välj alla</a> <a href="#" class="clearall"><i class="fa fa-times"></i> Rensa alla</a></div>
+ <input class="btn btn-primary" id="markseenandquit" type="submit" value="Markera som sedd och avsluta" />
+ <input id="markseenandcontinuebutton" type="submit" value="Markera som sedd och fortsätt >>" />
+ <input class="submit" id="continuewithoutmarkingbutton" type="submit" value="Fortsätt utan att markera >>" />
+ [% END %]
+ </form>
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-md-10 order-md-2 order-sm-1 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- .col-md-2 order-sm-2 order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        function checkForm() {
+            if ( $('#uploadbarcodes').val() && $('#barcodelist').val() ) {
+                alert(_("Du har både laddat upp en streckkodsfil och skannat streckkoder. Välj endast ett av alternativen."));
+                return false;
+            }
+            if ( $('#uploadbarcodes').val() || $('#barcodelist').val() ) {
+                if ( !(
+                    $('#branchloop').val()   ||
+                    $('#locationloop').val() ||
+                    $('#minlocation').val()  ||
+                    $('#maxlocation').val()  ||
+                    $('#statuses input:checked').length
+                ) ) {
+                    return confirm(
+                        _("Du har inte valt några katalogfilter och kommer att jämföra en fil med streckkoder mot hela katalogen.") + "\n\n" +
+                        _("För omfattande kataloger kan detta resultera i oväntat beteende") + "\n\n" +
+                        _("Är du säker på att du vill göra detta?")
+                    );
+                }
+            }
+
+            return true;
+        }
+
+        function barcodesProvided() {
+            if( $("#uploadbarcodes").val() || $("#barcodelist").val() ) {
+                $("#setdate").prop('disabled',false);
+                $("#compareinv2barcd").prop('disabled',false);
+                $("#compareinv2barcd").attr('checked',true); // default
+                $("#dont_checkin").prop('disabled',false);
+                $("#out_of_order").prop('disabled',false);
+                if( $("#compareinv2barcd").attr('checked') ) {
+                    $("fieldset#optionalfilters").show();
+                    $("#ignoreissued").attr('checked',true); // default
+                } else {
+                    $("fieldset#optionalfilters").hide();
+                    $("#ignoreissued").attr('checked',false);
+                }
+            } else {
+                $("#setdate").prop('disabled',true);
+                $("#compareinv2barcd").prop('disabled',true);
+                $("#compareinv2barcd").attr('checked',false);
+                $("#dont_checkin").prop('disabled',true);
+                $("#dont_checkin").attr('checked',false);
+                $("#out_of_order").prop('disabled',true);
+                $("#out_of_order").attr('checked',false);
+                $("fieldset#optionalfilters").show();
+            }
+        }
+
+        $(document).ready(function(){
+            var table_settings = [% TablesSettings.GetTableSettings( 'tools', 'inventory', 'inventoryt', 'json' ) | $raw %];
+            inventorydt = KohaTable("inventoryt", {
+                "pagingType": 'full_numbers',
+                [% IF compareinv2barcd %]
+                    // sort on callnumber
+                    "order": [[ 1, "asc" ]],
+                [% ELSE %]
+                    // first column contains checkboxes
+                    "columnDefs": [
+                        { "type": "anti-the", "targets":  [ "anti-the" ] },
+                        { "orderable": false, "searchable":  false, "targets": [ 0 ] }
+                    ],
+                    // 3rd column is callnumber
+                    "order": [[ 2, "asc" ]],
+                [% END %]
+                "drawCallback": function() {
+                    //bind the click handler script to the newly created elements held in the table
+                    $('.openWin').bind('click',function(e){
+                        e.preventDefault();
+                        openWindow(this.href,'marcview',800,600);
+                    });
+                }
+            }, table_settings );
+
+
+            $("#continuewithoutmarkingbutton").click(function(){
+                inventorydt.DataTable().page('next').draw('page');
+                return false;
+            });
+
+            $("#markseenandcontinuebutton").click(function(){
+                var param = '';
+                $("input:checked").each(function() {
+                    param += "|" + $(this).attr('name');
+                });
+                $.post('/cgi-bin/koha/tools/ajax-inventory.pl', { seen: param, op: 'cud-seen', csrf_token: $('meta[name="csrf-token"]').attr("content") });
+                inventorydt.DataTable().page('next').draw('page');
+                return false;
+            });
+
+            $("#markseenandquit").click(function(){
+                var param = '';
+                $("input:checked").each(function() {
+                    param += "|" + $(this).attr('name');
+                });
+                $.ajax({
+                  type: 'POST',
+                  url: '/cgi-bin/koha/tools/ajax-inventory.pl',
+                  data: { seen: param, op: 'cud-seen', csrf_token: $('meta[name="csrf-token"]').attr("content") },
+                  async: false
+                });
+                document.location.href = '/cgi-bin/koha/tools/inventory.pl';
+                return false;
+            });
+
+            $(".checkall").click(function(e){
+                e.preventDefault();
+                $("#inventoryt input:checkbox").each(function(){
+                    $(this).prop("checked", true);
+                });
+            });
+            $(".clearall").click(function(e){
+                e.preventDefault();
+                $("#inventoryt input:checkbox").each(function(){
+                    $(this).prop("checked", false);
+                });
+            });
+            $("#inventory_form").on("submit",function(){
+                return checkForm();
+            });
+
+            $("#resetuploadbarcodes").click(function() {
+                $("#uploadbarcodes").val("");
+                barcodesProvided();
+            });
+
+            // #uploadbarcodes and #compareinv2barcd determine the behavior of
+            // the controls within the barcode fieldset and the optional filters
+            $("#uploadbarcodes").change(barcodesProvided);
+            $("#barcodelist").on("change keyup paste", barcodesProvided);
+
+            $("#compareinv2barcd").click(function() {
+                if( $("#compareinv2barcd").attr('checked') ) {
+                    $("fieldset#optionalfilters").show();
+                    $("#ignoreissued").attr('checked',true); // default
+                } else {
+                    $("#ignoreissued").attr('checked',false);
+                    $("fieldset#optionalfilters").hide();
+                }
+            });
+
+            $("#checkallitemtypes").on("click",function(e){
+                e.preventDefault();
+                $(".branch_select").prop("checked",1);
+            });
+            $("#checknoneitemtypes").on("click",function(e){
+                e.preventDefault();
+                $(".branch_select").prop("checked",0);
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

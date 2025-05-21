@@ -1,0 +1,163 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %] [% UNLESS ( language ) %] Välj ditt språk [% END %] [% IF ( language ) %] [% UNLESS ( checkmodule ) %] [% IF ( missing_modules ) %] [% t("Perl modules missing") | html %] [% END %] [% IF ( problems ) %] [% t("Perl version obsolete") | html %] [% END %] [% END %] [% t("Check Perl dependencies") | html %] [% END %] &rsaquo; [% t("Web installer") | html %] &rsaquo; [% t("Koha") | html %] [% END %]</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="installer-step1" class="installer-main col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+
+ <div id="logo"><a href="#">Koha</a></div>
+
+ [% UNLESS ( language ) %]
+ <h1>Webbinstallerare &rsaquo; Välj ditt språk</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Välj ditt språk</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Kontrollera Perl-beroenden</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Databasinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Konfigurera databas</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Installera grundläggande konfigurationsinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Onboarding</li>
+ </ol>
+ </div>
+
+ <p>Välj ditt språk från denna lista. Om ditt språk inte listas informerar du din systemadministratör.</p>
+
+ <form name="language" action="install.pl" method="get">
+ <div class="form-group">
+ <label for="language">Välj språk: </label>
+ <select id="language" name="language">
+ [% IF ( installer_languages_loop ) %]
+ [% FOREACH installer_languages_loo IN installer_languages_loop %]
+ [% IF ( installer_languages_loo.plural ) %]
+ <optgroup label="[% installer_languages_loo.language | html %]">
+ [% FOREACH sublanguages_loo IN installer_languages_loo.sublanguages_loop %]
+ <option value="[% sublanguages_loo.rfc4646_subtag | html %]">[% IF ( sublanguages_loo.native_description ) %][% sublanguages_loo.native_description | html %][% ELSE %][% sublanguages_loo.rfc4646_subtag | html %][% END %]</option>
+ [% END %]
+ </optgroup>
+ [% ELSE %]
+ <option value="[% installer_languages_loo.rfc4646_subtag | html %]">[% IF ( installer_languages_loo.native_description ) %][% installer_languages_loo.native_description | html %][% ELSE %][% installer_languages_loo.rfc4646_subtag | html %][% END %]</option>
+ [% END %]
+ [% END %]
+ [% END %]
+ </select>
+ </div>
+ <div class="form-group mt-2">
+ <p><input class="btn btn-primary" type="submit" value="Fortsätt till nästa steg" /></p>
+ </div>
+ </form>
+ [% END %]
+
+ [% IF ( language ) %]
+ [% UNLESS ( checkmodule ) %]
+ [% IF ( missing_modules ) %]
+ <h1>Webbinstallerare &rsaquo; Perl-moduler saknas</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Välj ditt språk</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Kontrollera Perl-beroenden</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Databasinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Konfigurera databas</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Installera grundläggande konfigurationsinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Onboarding</li>
+ </ol>
+ </div>
+
+ <p>Vissa Perl-moduler saknas. <span class="badge text-bg-danger">Viktigt: </span>Nödvändiga moduler måste vara installerade innan du kan fortsätta.<br />
+ <ul>
+ [% FOREACH missing_module IN missing_modules %]
+ <li><strong>[% missing_module.name | html %]</strong> [% IF ( missing_module.require ) %]<span class="badge text-bg-danger">Obligatoriskt</span>[% END %]
+ <br /> Version: [% missing_module.min_version | html %] </li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% IF ( upgrade_modules ) %]
+ <h1>Webbinstallerare &rsaquo; Perl-moduler behöver uppgraderas</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Välj ditt språk</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Kontrollera Perl-beroenden</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Databasinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Konfigurera databas</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Installera grundläggande konfigurationsinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Onboarding</li>
+ </ol>
+ </div>
+
+ <p>Vissa Perl-moduler behöver uppgraderas. <span class="badge text-bg-danger">Viktigt: </span>Nödvändiga moduler måste vara installerade innan du kan fortsätta.<br />
+ <ul>
+ [% FOREACH upgrade_module IN upgrade_modules %]
+ <li><strong>[% upgrade_module.name | html %]</strong> [% IF ( upgrade_module.require ) %]<span class="badge text-bg-danger">Obligatoriskt</span>[% END %]
+ <br /> Version: [% upgrade_module.version | html %] <br /> Minimal version: [% upgrade_module.min_version | html %] <br /> Maximal version: [% upgrade_module.max_version | html %] </li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% IF ( problems ) %]
+ <h1>Webbinstallerare &rsaquo; Perl-version är för gammal</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Välj ditt språk</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Kontrollera Perl-beroenden</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Databasinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Konfigurera databas</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Installera grundläggande konfigurationsinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Onboarding</li>
+ </ol>
+ </div>
+
+ <p>Jag har stött på en del problem.</p>
+ <ul>
+ [% IF ( perlversion ) %]
+ <li>Systemets Perl-version är inaktuell. Uppgradera till en nyare version av Perl (som lägst version 5.10).</li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ <form method="get" name="checkmodules" action="install.pl">
+ <div class="form-group mt-2">
+ <input type="hidden" name="step" value="1" />
+ <p> <input class="btn btn-primary" type="submit" value="Klicka för att kontrollera beroenden igen" /></p>
+ </div>
+ </form>
+
+ [% ELSE # IF checkmodule %]
+ <h1>Webbinstallerare &rsaquo; kontrollera Perl-beroenden</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Välj ditt språk</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Kontrollera Perl-beroenden</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Databasinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Konfigurera databas</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Installera grundläggande konfigurationsinställningar</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Onboarding</li>
+ </ol>
+ </div>
+
+ <p>Alla Perl-moduler verkar vara installerade.</p>
+ <p> Alla delar som krävs har installerats.</p>
+
+ <form method="get" name="checkmodules" role="form" action="install.pl">
+ <div class="form-group mt-2">
+ <input type="hidden" name="step" value="2" />
+ <p> <input class="btn btn-primary" type="submit" value="Fortsätt till nästa steg" /> </p>
+ </div>
+ </form>
+ [% END # IF checkmodule%]
+ [% END # IF language %]
+ </div> <!-- / #installer-step1 -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

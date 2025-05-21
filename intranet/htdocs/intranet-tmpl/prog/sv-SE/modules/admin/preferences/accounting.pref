@@ -1,0 +1,61 @@
+---
+accounting.pref:
+  Funktioner:
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      default: no
+      pref: UseCashRegisters
+    - kassaregister med bokföringssystemet för att spåra betalningar.
+    - <p class='text-danger'><strong>Varning:</strong> Aktivering av denna inställning
+      kommer att göra registret till ett obligatoriskt fält för alla transaktioner
+      av CASH-typ; Detta inkluderar SIP00-transaktioner, så se till att dina SIP-konfigurationer
+      är uppdaterade för att mappa ett register till din SIP-enhet.</p>
+  - - 'När du tar emot en betalning, '
+    - choices:
+        '0': kräv ett kassaregister endast när betalningstyp kontant är vald
+        '1': kräv alltid ett kassaregister
+      default: no
+      pref: RequireCashRegister
+    - . (Kräver <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters">UseCashRegisters</a>)
+  - - choices:
+        '0': Inaktivera
+        '1': Aktivera
+      default: no
+      pref: EnablePointOfSale
+    - point of sale-funktionen tillåter anonyma transaktioner med redovistningssystemet.
+      (Kräver <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters">UseCashRegisters</a>)
+  - - choices:
+        '': Skapa inte automatiskt genererade kreditnummer
+        annual: Generera automatiskt kreditnummer i formen <year>-0001
+        branchyyyymmincr: Generera automatiskt kreditnummer i formen <branchcode>yyyymm0001
+        incremental: Generera automatiskt kreditnummer i formen 1, 2, 3
+      pref: AutoCreditNumber
+    - Automatisk generering måste också slås på för varje kredittyp (<a href="/cgi-bin/koha/admin/credit_types.pl">Konfigurera
+      kredittyper</a>)
+  Policy:
+  - - choices:
+        '0': Gör inte
+        '1': Gör
+      pref: AccountAutoReconcile
+    - att eventuella innestående krediter används för att automatiskt reducera avgifter
+      när dessa skapas.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: FinePaymentAutoPopup
+    - automatiskt en utskriftsdialog för kvitto när betalning görs.
+  - - choices:
+        '0': Begär inte
+        '1': Begär
+      pref: RequirePaymentType
+    - personal för att välja en betalningstyp när en betalning görs.
+    - Denna inställning har ingen effekt om <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters">UseCashRegisters</a>
+      är aktiverad eller när inga betalningstyper är definierade som auktoriserade
+      värden i <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=PAYMENT_TYPE">PAYMENT_TYPE</a>.
+  - - choices:
+        '0': Avrunda inte
+        '1': Avrunda
+      pref: RoundFinesAtPayment
+    - avgifter till närmaste krona när en mottar betalning. Att aktivera den här inställningen
+      tillåter delbetalning som kanske inte syns i gränssnittet.

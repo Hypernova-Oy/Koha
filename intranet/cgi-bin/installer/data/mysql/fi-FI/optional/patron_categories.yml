@@ -1,0 +1,150 @@
+---
+description:
+- Esimerkkiasiakastyypit. Tyypit on tällä hetkellä kovakoodattu, mutta voit hallinnoida
+  tyyppejä ylläpidossa asennuksen jälkeen.
+- ''
+- Aikuisasiakas - oletusasiakastyyppi
+- '                PT  - Asiakas'
+- '                ST  - Opiskelija'
+- '                BH  - Kotipalvelu'
+- ''
+- Lapsi - asiakas jolla takaaja
+- '                K   - Lapsi'
+- '                J   - Nuori'
+- '                YA  - Nuori aikuinen'
+- ''
+- Organisaatio - asiakas on instituutio, ei henkilö
+- '                ILL - Kaukolaina'
+- '                SC  - Koulu'
+- '                L   - Kirjasto'
+- ''
+- Ammattilainen - organisaation jäsen (organisaatio on takaaja)
+- '                T   - Opettaja'
+- '                S   - Henkilökunta'
+- '                B   - Lautakunta'
+tables:
+- categories:
+    multiline: []
+    rows:
+    - can_be_guarantee: 0
+      category_type: A
+      categorycode: PT
+      dateofbirthrequired: 18
+      description: Asiakas
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 999
+    - can_be_guarantee: 0
+      category_type: A
+      categorycode: ST
+      dateofbirthrequired: 18
+      description: Opiskelija
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 999
+    - can_be_guarantee: 0
+      category_type: A
+      categorycode: HB
+      dateofbirthrequired: 18
+      description: Kotipalvelu
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 999
+    - can_be_guarantee: 1
+      category_type: C
+      categorycode: K
+      dateofbirthrequired: 5
+      description: Lapsi
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 17
+    - can_be_guarantee: 1
+      category_type: C
+      categorycode: J
+      dateofbirthrequired: 5
+      description: Lapset ja nuoret
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 17
+    - can_be_guarantee: 1
+      category_type: C
+      categorycode: YA
+      dateofbirthrequired: 5
+      description: Nuoret aikuiset
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 17
+    - can_be_guarantee: 1
+      category_type: P
+      categorycode: T
+      dateofbirthrequired: 18
+      description: Opettaja
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 0
+      reservefee: '0.000000'
+      upperagelimit: 999
+    - can_be_guarantee: 1
+      category_type: P
+      categorycode: B
+      dateofbirthrequired: 5
+      description: Lautakunta
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 17
+    - can_be_guarantee: 0
+      category_type: I
+      categorycode: IL
+      dateofbirthrequired: 18
+      description: Kaukolaina
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 999
+    - can_be_guarantee: 0
+      category_type: I
+      categorycode: SC
+      dateofbirthrequired: 18
+      description: Koulu
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 999
+    - can_be_guarantee: 0
+      category_type: I
+      categorycode: L
+      dateofbirthrequired: 18
+      description: Kirjasto
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 1
+      reservefee: '0.000000'
+      upperagelimit: 999
+    - can_be_guarantee: 0
+      category_type: S
+      categorycode: S
+      dateofbirthrequired: 18
+      description: Henkilökunta
+      enrolmentfee: '0.000000'
+      enrolmentperiod: 99
+      overduenoticerequired: 0
+      reservefee: '0.000000'
+      upperagelimit: 999
+    translatable:
+    - description

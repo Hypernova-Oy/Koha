@@ -1,0 +1,328 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("UNIMARC leader builder") | html %]
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_unimarc_leader" class="cat value_builder">
+ <h1>UNIMARC-nimiön muodostaja</h1>
+ <form method="get" name="f_pop" action="">
+ <div class="page-section">
+ <table>
+ <tr>
+ <td>1-4 Tietueen pituus</td>
+ <td>(laskettu automaattisesti)</td>
+ </tr>
+ <tr>
+ <td><label for="f5">5- Tietueen tila</label></td>
+ <td>
+ <select name="f5" id="f5">
+ [% IF ( f5pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f5c ) %]
+ <option value="c" selected="selected">c - Korjattu tai päivitetty tietue</option>
+ [% ELSE %]
+ <option value="c">c - Korjattu tietue</option>
+ [% END %]
+ [% IF ( f5d ) %]
+ <option value="d" selected="selected">d - Poistettu tietue</option>
+ [% ELSE %]
+ <option value="d">d - Poistettu tietue</option>
+ [% END %]
+ [% IF ( f5n ) %]
+ <option value="n" selected="selected">n - New record</option>
+ [% ELSE %]
+ <option value="n">n - New record</option>
+ [% END %]
+ [% IF ( f5o ) %]
+ <option value="o" selected="selected">o - Previously issued higher level record</option>
+ [% ELSE %]
+ <option value="o">o - Previously issued higher level record</option>
+ [% END %]
+ [% IF ( f5p ) %]
+ <option value="p" selected="selected">p - Previously issued as an incomplete, pre-publication record</option>
+ [% ELSE %]
+ <option value="p">p - Previously issued as an incomplete, pre-publication record</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f6">6- Tietueen tyyppi</label></td>
+ <td>
+ <select name="f6" id="f6">
+ [% IF ( f6pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f6a ) %]
+ <option value="a" selected="selected">a - Language materials, printed</option>
+ [% ELSE %]
+ <option value="a">a - Language materials, printed</option>
+ [% END %]
+
+ [% IF ( f6b ) %]
+ <option value="b" selected="selected">b - Tekstiaineisto, käsikirjoitus</option>
+ [% ELSE %]
+ <option value="b">b - Tekstiaineisto, käsikirjoitus</option>
+ [% END %]
+
+ [% IF ( f6c ) %]
+ <option value="c" selected="selected">c - Music scores, printed</option>
+ [% ELSE %]
+ <option value="c">c - Music scores, printed</option>
+ [% END %]
+
+ [% IF ( f6d ) %]
+ <option value="d" selected="selected">d - Music scores, manuscript</option>
+ [% ELSE %]
+ <option value="d">d - Music scores, manuscript</option>
+ [% END %]
+
+ [% IF ( f6e ) %]
+ <option value="e" selected="selected">e - Kartografinen aineisto, painotuote</option>
+ [% ELSE %]
+ <option value="e">e - Kartografinen aineisto, painotuote</option>
+ [% END %]
+
+ [% IF ( f6f ) %]
+ <option value="f" selected="selected">f - Kartografinen aineisto, käsikirjoitus</option>
+ [% ELSE %]
+ <option value="f">f - Kartografinen aineisto, käsikirjoitus</option>
+ [% END %]
+
+ [% IF ( f6g ) %]
+ <option value="g" selected="selected">g - Projected and video material</option>
+ [% ELSE %]
+ <option value="g">g - Projected and video material</option>
+ [% END %]
+
+ [% IF ( f6i ) %]
+ <option value="i" selected="selected">i - Äänite, puheäänite</option>
+ [% ELSE %]
+ <option value="i">i - Äänite, puheäänite</option>
+ [% END %]
+
+ [% IF ( f6j ) %]
+ <option value="j" selected="selected">j - Äänite, musiikkiäänite</option>
+ [% ELSE %]
+ <option value="j">j - Äänite, musiikkiäänite</option>
+ [% END %]
+
+ [% IF ( f6k ) %]
+ <option value="k" selected="selected">k - Two-dimensional graphics</option>
+ [% ELSE %]
+ <option value="k">k - Two-dimensional graphics</option>
+ [% END %]
+
+ [% IF ( f6l ) %]
+ <option value="l" selected="selected">l - Electronic resources</option>
+ [% ELSE %]
+ <option value="l">l - Electronic resources</option>
+ [% END %]
+
+ [% IF ( f6m ) %]
+ <option value="m" selected="selected">m - Multimedia</option>
+ [% ELSE %]
+ <option value="m">m - Multimedia</option>
+ [% END %]
+
+ [% IF ( f6r ) %]
+ <option value="r" selected="selected">r - Esine</option>
+ [% ELSE %]
+ <option value="r">r - Esine</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f7">7- Tietueen bibliografinen taso</label></td>
+ <td>
+ <select name="f7" id="f7">
+ [% IF ( f7pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f7a ) %]
+ <option value="a" selected="selected">a - Analytic (component part)</option>
+ [% ELSE %]
+ <option value="a">a - Analytic (component part)</option>
+ [% END %]
+ [% IF ( f7i ) %]
+ <option value="i" selected="selected">i - Päivittyvä julkaisu</option>
+ [% ELSE %]
+ <option value="i">i - Päivittyvä julkaisu</option>
+ [% END %]
+ [% IF ( f7c ) %]
+ <option value="c" selected="selected">c - Collection - bibliographic item that is a made-up collection</option>
+ [% ELSE %]
+ <option value="c">c - Collection - bibliographic item that is a made-up collection</option>
+ [% END %]
+ [% IF ( f7m ) %]
+ <option value="m" selected="selected">m - Monographic - Bibliographic item</option>
+ [% ELSE %]
+ <option value="m">m - Monographic - Bibliographic item</option>
+ [% END %]
+ [% IF ( f7s ) %]
+ <option value="s" selected="selected">s - Serial - Bibliographic item</option>
+ [% ELSE %]
+ <option value="s">s - Serial - Bibliographic item</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f8">8- Hierarchical level code</label></td>
+ <td>
+ <select name="f8" id="f8">
+ [% IF ( f8pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f8space ) %]
+ <option value=" " selected="selected"> - Hierarkkinen suhde määrittelemätön</option>
+ [% ELSE %]
+ <option value=" "> - Hierarkkinen suhde määrittelemätön</option>
+ [% END %]
+
+ [% IF ( f80 ) %]
+ <option value="0" selected="selected">0 - ei hierarkista suhdetta</option>
+ [% ELSE %]
+ <option value="0">0 - ei hierarkista suhdetta</option>
+ [% END %]
+
+ [% IF ( f81 ) %]
+ <option value="1" selected="selected">1 - Täydellinen taso</option>
+ [% ELSE %]
+ <option value="1">1 - Täydellinen taso</option>
+ [% END %]
+
+ [% IF ( f82 ) %]
+ <option value="2" selected="selected">2 - Täydellistä tasoa niukempi (muut taso alempana)</option>
+ [% ELSE %]
+ <option value="2">2 - Täydellistä tasoa niukempi (muut taso alempana)</option>
+ [% END %]
+
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td>9-16 indikaattori/osakenttä/koko</td>
+ <td>(täytetty automaattisesti)</td>
+ </tr>
+ <tr>
+ <td><label for="f17">17- Koodaustaso</label></td>
+ <td>
+ <select name="f17" id="f17">
+ [% IF ( f17pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f17space ) %]
+ <option value=" " selected="selected"> Full level ("item in hand")</option>
+ [% ELSE %]
+ <option value=" "> Full level ("item in hand")</option>
+ [% END %]
+ [% IF ( f171 ) %]
+ <option value="1" selected="selected">1 - Välitaso 1 (kuvailun kohde ei käsillä)</option>
+ [% ELSE %]
+ <option value="1">1 - Välitaso 1 (kuvailun kohde ei käsillä)</option>
+ [% END %]
+ [% IF ( f172 ) %]
+ <option value="2" selected="selected">2 - Välitaso 2. Ennakkotietue</option>
+ [% ELSE %]
+ <option value="2">2 - Välitaso 2. Ennakkotietue</option>
+ [% END %]
+ [% IF ( f173 ) %]
+ <option value="3" selected="selected">3 - Välitaso 3. Epätäydellinen</option>
+ [% ELSE %]
+ <option value="3">3 - Välitaso 3. Epätäydellinen</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f18">18- Luettelointisäännöt</label></td>
+ <td>
+ <select name="f18" id="f18">
+ [% IF ( f18pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f18space ) %]
+ <option value=" " selected="selected"> - Tarkassa ISBD-muodossa</option>
+ [% ELSE %]
+ <option value=" "> - Tarkassa ISBD-muodossa</option>
+ [% END %]
+ [% IF ( f18i ) %]
+ <option value="i" selected="selected">i - In partial or incomplete ISBD form</option>
+ [% ELSE %]
+ <option value="i">i - In partial or incomplete ISBD form</option>
+ [% END %]
+ [% IF ( f18n ) %]
+ <option value="n" selected="selected">n - In non-ISBD form</option>
+ [% ELSE %]
+ <option value="n">n - In non-ISBD form</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td>19-24 Kirjauskartta &amp; pituudet</td>
+ <td>(täytetty automaattisesti)</td>
+ </tr>
+ </table>
+ </div> <!-- /.page-section -->
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input class="btn btn-primary" onclick="report();" type="button" value="Tallenna" />
+ <button class="btn btn-default close_window">Peruuta</button>
+ </fieldset>
+ </div>
+ </nav>
+
+ </form>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        function report() {
+            var doc   = opener.document;
+            var field = doc.getElementById("[% index | html %]");
+
+            field.value =  '     '+document.f_pop.f5.value +
+            document.f_pop.f6.value+ document.f_pop.f7.value+
+            document.f_pop.f8.value+ '        '+
+            document.f_pop.f17.value+ document.f_pop.f18.value+' 4500';
+            window.close();
+            return false;
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

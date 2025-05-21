@@ -1,0 +1,373 @@
+---
+Hakutoiminnot:
+  Hakulomake:
+  - - choices:
+        '0': Älä lataa
+        '1': Lataa
+      default: 0
+      pref: LoadSearchHistoryToTheFirstLoggedUser
+    - kirjautumattoman asiakkaan hakuhistoria(a) seuraavalle kirjautuvalle asiakkaalle.
+  - - Näytä tarkan haun välilehdet virkailijaliittymässä hakujen rajaamiseksi
+    - class: long
+      pref: AdvancedSearchTypes
+    - eri hakukentissä (arvot erotetaan | -merkillä). Välilehdet esitetään tässä annetussa
+      järjestyksessä.<br/>
+    - '<em>Tuetut arvot</em>: Nidetyypit(<strong>itemtypes</strong>), Kokoelma, (<strong>ccode</strong>)
+      ja Hyllypaikka (<strong>loc</strong>).'
+  - - Rajoita tarkan haun kielirajoituksen pudotusvalikkoon
+    - class: long
+      pref: AdvancedSearchLanguages
+    - ISO 639-2 kielikoodit (arvot erotetaan | tai , -merkeillä).
+    - Esimerkiksi, jos haluat rajoittaa listan ranskaan ja italiaan, syötä <em>ita|fre</em>.
+  - - Oletusarvoisesti
+    - choices:
+        '0': älä näytä
+        '1': näytä
+      pref: expandedSearchOption
+      type: boolean
+    - '"Enemmän vaihtoehtoja"-valinta hakusivuilla verkkokirjastossa ja virkailijaliittymässä.'
+  - - Oletuksena,
+    - choices:
+        '0': älä käytä
+        '1': käytä
+      pref: OPACNumbersPreferPhrase
+      type: boolean
+    - operaattoria "phr" luokissa ja standardinumeroissa verkkokirjaston hauissa.
+  - - Oletuksena,
+    - choices:
+        '0': älä käytä
+        '1': käytä
+      pref: IntranetNumbersPreferPhrase
+      type: boolean
+    - operaattoria "phr" luokka- ja standardinumeroissa virkailijaliittymän hauissa
+  Hakutulokset:
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      default: no
+      pref: numSearchResultsDropdown
+      type: boolean
+    - tuloksia sivulla -valikko(a) virkailijaliittymän hakutulossivulla.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      default: no
+      pref: OPACnumSearchResultsDropdown
+      type: boolean
+    - tuloksia sivulla -pudotusvalikko(a) asiakasliittymän hakutulossivulla.
+  - - Virkailijaliittymän hakutulosten oletusjärjestys on
+    - choices:
+        acqdate: tietokantaan lisäyspäivän mukaan
+        author: tekijän mukaan
+        call_number: luokan mukaan
+        popularity: lainausmäärän mukaan
+        pubdate: julkaisuajan mukaan
+        relevance: osuvuuden mukaan
+        title: nimekkeen mukaan
+      default: relevance
+      pref: defaultSortField
+    - ','
+    - choices:
+        asc: nouseva järjestys / vanhimmat ensin.
+        az: A:sta Ö:hön.
+        dsc: laskevassa järjestyksessä / uusimmat ensin.
+        za: Ö:stä A:han.
+      pref: defaultSortOrder
+  - - Tekijälinkkien hakutulosten oletusjärjestys on
+    - choices:
+        acqdate: tietokantaan lisäyspäivän mukaan
+        call_number: luokan mukaan
+        default: oletuskentän mukaan, joka määritetään defaultSortField tai OPACdefaultSortField
+          -asetuksissa
+        pubdate: julkaisuajan mukaan
+        title: nimekkeen mukaan
+      default: default
+      pref: AuthorLinkSortBy
+    - ','
+    - choices:
+        asc: nouseva järjestys / vanhimmat ensin
+        az: A:sta Ö:hön
+        dsc: laskevassa järjestyksessä / uusimmat ensin
+        za: Ö:stä A:han
+      pref: AuthorLinkSortOrder
+    - .
+  - - Kun rajoitetaan hakutulosta kirjastolla tai kirjastoryhmällä, rajoita niteen
+    - choices:
+        both: sekä koti- että sijaintikirjaston mukaan.
+        holdingbranch: sijaintikirjastolla mukaan.
+        homebranch: kotikirjaston mukaan.
+      pref: SearchLimitLibrary
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      default: no
+      pref: displayFacetCount
+      type: boolean
+    - fasetin lukumäärä(ä). Näiden numeroiden relevanssi riippuu <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=maxRecordsForFacets">maxRecordsForFacets</a>-asetuksesta.
+      Koskee sekä verkkokirjastoa että virkailijaliittymää.
+  - - Näytä oletusarvoisesti
+    - class: integer
+      pref: numSearchResults
+    - hakutulosta sivua kohti virkailijaliittymässä.
+  - - Niissä tietueissa, missä on useita niteitä, tarkista saatavuustilanne vain
+    - class: integer
+      pref: MaxSearchResultsItemsPerRecordStatusCheck
+    - ensimmäiselle niteelle.
+    - <br/>Saatavuus saattaa näkyä väärin hakutuloksissa, jos tietueella on niteitä
+      enemmän kuin raja-arvoksi on asetettu. Saatavuus näkyy oikein tietueen perustiedot-näytöllä.
+    - <br/>Jätä tyhjäksi, jos ei rajoiteta.
+  - - Verkkokirjaston hakutulosten oletusjärjestys on
+    - choices:
+        acqdate: tietokantaan lisäyspäivän mukaan
+        author: tekijän mukaan
+        call_number: hyllypaikan mukaan
+        popularity: lainausmäärän mukaan
+        pubdate: julkaisuajan mukaan
+        relevance: osuvuuden mukaan
+        title: nimekkeen mukaan
+      default: relevance
+      pref: OPACdefaultSortField
+    - ','
+    - choices:
+        asc: nousevassa järjestyksessä / vanhimmat ensin.
+        az: A:sta Ö:hön.
+        dsc: laskevassa järjestyksessä / uusimmat ensin.
+        za: Ö:stä A:han.
+      pref: OPACdefaultSortOrder
+    - ''
+  - - Näytä korkeintaan
+    - class: integer
+      pref: maxItemsInSearchResults
+    - nidettä nimeketietuetta kohti hakutuloksissa.
+  - - Kokoa hakutulosnäytön vasemman sivupalkin fasetit
+    - class: integer
+      default: 20
+      pref: maxRecordsForFacets
+    - hakutulosjoukon tietueista.
+  - - Näytä näin monta
+    - class: integer
+      default: 20
+      pref: FacetMaxCount
+    - fasettia kussakin kategoriassa.
+  - - Lajittele fasetit
+    - choices:
+        Alphabetical: aakkosjärjestyksessä
+        Usage: esiintymismäärän mukaan
+      default: Alphabetical
+      pref: FacetOrder
+      type: choice
+    - kussakin kategoriassa.
+  - - Oletuksena, näytä
+    - class: integer
+      pref: OPACnumSearchResults
+    - hakutulosta sivua kohden verkkokirjastossa.
+  - - Näytä fasetit
+    - choices:
+        both: sekä koti- että sijaintikirjastolle
+        holding: sijaintikirjastolle
+        home: kotikirjastolle
+      pref: DisplayLibraryFacets
+      type: choice
+    - (Vain Zebra).
+  - - Lyhennä fasettien pituudeksi
+    - class: integer
+      pref: FacetLabelTruncationLength
+    - merkkiä sekä verkkokirjastossa että virkailijaliittymässä (VAATII ZEBRAN).
+  - - Käytä seuraavaa tekstiä UNIMARC-tekijäfasettien erottimena
+    - class: short
+      pref: UNIMARCAuthorsFacetsSeparator
+  - - Kun haetaan ISBN indeksistä,
+    - choices:
+        '0': älä hae
+        '1': hae
+      pref: SearchWithISBNVariations
+    - kaikkia ISBN:n muotoja.
+  - - Kun haetaan ISSN indeksistä,
+    - choices:
+        '0': älä hae
+        '1': hae
+      pref: SearchWithISSNVariations
+    - kaikkia ISSN:n muotoja.
+  - - choices:
+        '0': Älä säilytä
+        '1': Säilytä
+      pref: RetainCatalogSearchTerms
+    - hakutermit hauissa, kun hakuja tehdään virkailijaliittymän hakulaatikon välilehdellä
+      'hae tietokannasta'.
+  - - choices:
+        '0': Älä säilytä
+        '1': Säilytä
+      pref: RetainPatronsSearchTerms
+    - hakutermit hauissa, kun hakuja tehdään virkailijaliittymän hakulaatikon välilehdillä
+      'lainaus' ja 'hae asiakkaita'.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: BiblioItemtypeInfo
+    - Kohan tietuetason nidetyypin tietoja perustiedot-näytöllä ja hakutuloksissa
+      verkkokirjastossa ja virkailijaliittymässä. Tieto näytetään myös, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=item-level_itypes">item-level_itypes</a>
+      -järjestelmäasetus on asetettu kohtaan "nimeketietueesta".
+  - - choices:
+        '0': Älä tee
+        '1': Tee
+      pref: PassItemMarcToXSLT
+      type: boolean
+    - niteen MARC-kenttiä (MARC21 952, UNIMARC 995) saatavaksi XSLT-tyylitiedostoille
+      verkkokirjastoon ja virkailijaliittymän hakutulokset sivulle.
+    - <br/>Oletus on "Älä tee", jolloin niteet näytetään muilla keinoin.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: ShowHeadingUse
+    - onko auktoriteettitietueessa sovinnainen termi, joka on sisällönkuvailun sääntöjen
+      mukainen, ja jota siksi voidaan käyttää pääkirjauksena, lisäkirjauksena, asiasanana
+      tai sarjajulkaisun nimekkeenä.
+  - - choices:
+        '0': Älä ohjaa
+        '1': Ohjaa
+      pref: RedirectToSoleResult
+    - hakutulos teoksen tietoihin verkkokirjastossa ja virkailijaliittymässä, jos
+      haku palauttaa vain yhden tuloksen.
+  Ominaisuudet:
+  - - Muodosta hakusanoista jokerihakuja (jolloin esimerkiksi hakusana <cite>Har</cite>
+      poimisi hakutulokseen kaikki tietueet, joissa esiintyvät merkkijonot <cite>Harry</cite>
+      tai <cite>harp</cite>)
+    - choices:
+        '0': vain jos käyttäjä lisää jokerimerkin *.
+        '1': automaattisesti.
+      pref: QueryAutoTruncate
+      type: boolean
+    - '<br />(Jokerimerkkiä * käytetään sanojen katkaisuun, esimerkiksi: <cite>Har*</cite>
+      tai <cite>*logging</cite>.)'
+    - <strong>Huomioi:</strong> Tietuetunnisteita (biblionumber, authid) ei koskaan
+      katkaista automaattisesti.
+  - - choices:
+        '0': Älä yritä soveltaa
+        '1': Yritä soveltaa
+      pref: QueryFuzzy
+      type: boolean
+    - samankaltaisten sanojen täsmäyttämiseksi; esim. hakuun <cite>suula</cite> osuisi
+      myös <cite>suulas</cite> ja <cite>sula</cite>. Vaikuttaa vain Zebra-hakuihin.
+      Elasticsearchin hakutermin voi muuttaa sumeaksi lisäämällä tilden ~ termin perään.
+  - - choices:
+        '0': Älä yritä soveltaa
+        '1': Yritä soveltaa
+      pref: QueryStemming
+      type: boolean
+    - löytää samanvartaloisia sanoja (esimerkiksi haku <cite>enabling</cite> löytäisi
+      merkkijonot <cite>enable</cite> ja <cite>enabled</cite>; REQUIRES ZEBRA).
+  - - choices:
+        '0': Älä yritä soveltaa
+        '1': Yritä soveltaa
+      pref: QueryWeightFields
+      type: boolean
+    - hakutulosten osumatarkkuusjärjestystä hakutuloslistauksessa (Vaatii Zebra-hakumoottorin
+      käyttöä).
+  - - choices:
+        dont_escape: Älä käytä escape-komentoa
+        escape: Käytä escape-komentoa
+        unescape_escaped: Ohita escape-komento
+      default: escape
+      pref: QueryRegexEscapeOptions
+    - säännöllisissä lausekkeissa hakumerkkijonoissa. Jos on valittu "Käytä escape-komentoa",
+      kauttaviivoja "/" ei tulkita komennoiksi vaan säännölliset lausekkeet tulkitaan
+      merkkijonoina. Jos on valittu "Ohita escape-komento", voidaan kirjoittaa säännölliset
+      lausekkeet muotoon "\/lauseke\/". Tällöin "/lauseke/" tai "/lauseke" luetaan
+      pelkkinä merkkijonoina. (Koskee vain Elasticsearchia.)
+  - - choices:
+        '0': Älä rajaa
+        '1': Rajaa
+      default: 0
+      pref: TraceCompleteSubfields
+    - asiasanojen jäljitys(tä) hakemaan vain täsmällisiä alakenttäosumia verkkokirjastossa
+      ja virkalijaliittymässä.
+  - - choices:
+        '0': Älä sisällytä
+        '1': Sisällytä
+      default: 0
+      pref: TraceSubjectSubdivisions
+    - asiasanaselauksen linkkilistaan selailun tuottamaa asiasanojen alajaottelua.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      default: 0
+      pref: UseICUStyleQuotes
+    - ICU-tyylistä merkintää ({}) asiasanojen jälityksessä. Oletuksena lainausmerkit
+      ("").
+  - - choices:
+        '0': Älä sisällytä
+        '1': Sisällytä
+      default: 0
+      pref: IncludeSeeFromInSearches
+    - '<em>katso myös</em> (ei suositeltava muoto) otsikot nimekehaussa. Huomaa: tietokanta
+      pitää uudelleenindeksoida, kun tätä asetusta muutetaan.'
+  - - choices:
+        '0': Älä sisällytä
+        '1': Sisällytä
+      default: 0
+      pref: IncludeSeeAlsoFromInSearches
+    - '<em>katso myös</em> (ei suositeltava muoto) otsikot nimekehaussa. Huomaa: tietokanta
+      pitää uudelleenindeksoida, kun tätä asetusta muutetaan.'
+  - - choices:
+        '0': Älä säilytä
+        '1': Säilytä
+      default: 0
+      pref: EnableSearchHistory
+    - asiakkaan hakuhistoria(a) virkailijaliittymässä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      default: 0
+      pref: BrowseResultSelection
+    - selata hakutulosta nimekkeen perustiedot-näytöllä virkailijaliittymässä.
+  - - choices:
+        '0': Älä yritä soveltaa
+        '1': Yritä soveltaa
+      default: 0
+      pref: ElasticsearchCrossFields
+    - cross_fields optio Elasticsearchin haussa, (tuetaan versiosta Elasticsearch
+      6.X eteenpäin)
+    - Katso dokumentaatio osoitteesta https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html#type-cross-fields
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      default: 0
+      pref: SavedSearchFilters
+    - oikeuksin varustettujen virkailijoiden luoda/muokata tallennettuja räätälöityjä
+      haun rajauksia.
+  - - 'Lista hakukentistä (indekseistä) (erotettuna | tai , -merkeillä), joita ei
+      saa katkaista automaattisesti Elasticsearchissä vaikka <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=QueryAutoTruncate''>QueryAutoTruncate</a>
+      olisi päällä:'
+    - class: long
+      pref: ESPreventAutoTruncate
+  - - choices:
+        '0': Don't
+        '1': Do
+      default: 0
+      pref: SearchCancelledAndInvalidISBNandISSN
+    - search for cancelled or invalid forms of ISBN/ISSN when performing ISBN/ISSN
+      search (when using Elasticsearch).
+  - - class: code
+      pref: z3950Status
+      syntax: text/x-yaml
+      type: textarea
+    - searching.pref#z3950Status# Define custom rules to show specific items as not
+      available in Z3950. Rules are defined with item database fields as keys and
+      an array of values.<br/>
+    - searching.pref#z3950Status# Esimerkit:<br/><br/>
+    - 'searching.pref#z3950Status# <pre>ccode: [REF,ARC]</pre><br/>  - would mark
+      all REF and ARC collections (Reference and Archives) items as unavailable in
+      Z3950 results.<br/><br/>'
+    - searching.pref#z3950Status# You can define multiple keys and values, items meeting
+      ANY of the criteria will be marked unavailable:<br/><br/>
+    - 'searching.pref#z3950Status# <pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  -
+      would mark all reference items AND items at the REPAIR branch as unavailable.'
+  Tarkoititko/oikoluku:
+  - - ruotsalainen oikolukupalvelu.<br/>
+    - LIBRIS-oikolukijan API-avain
+    - pref: LibrisKey
+    - On saatavissa osoitteesta http://api.libris.kb.se/bibspell.
+  - - 'LIBRIS: juuri-URL'
+    - class: url
+      pref: LibrisURL
+    - . Muuta tätä vain, jos olet varma, että muutos on tarpeen.

@@ -1,0 +1,208 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% title_in_title = INCLUDE 'biblio-title-head.inc' %]
+ [% tx("Stock rotation details for {title}", { title = title_in_title }) | html %] &rsaquo;
+ [% t("Catalog") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="catalog_stockrotation" class="catalog">
+[% USE KohaDates %]
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/catalogue/search.pl">Katalog</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ [% INCLUDE 'biblio-title.inc' link = 1 %]
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Specifikation av roterande samling</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+<div id="catalogue_detail_biblio">
+
+ [% IF no_op_set %]
+ <h1 class="title">Specifikation av roterande samling för [% INCLUDE 'biblio-title.inc' %]</h1>
+ [% IF rotas.count > 0 && items.size > 0 %]
+ <div class="page-section">
+ <table class="items_table dataTable no-footer" role="grid">
+ <thead>
+ <tr>
+ <th>Streckkod</th>
+ <th>Hyllsignatur</th>
+ <th>Schema</th>
+ <th>Schema-status</th>
+ <th>Under transport</th>
+ <th>Etapper &amp; varaktighet i dagar<br>(nuvarande etapp markerad)</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH item IN items %]
+ <tr>
+ <td>[% item.bib_item.barcode | html %]</td>
+ <td>[% item.bib_item.itemcallnumber | html %]</td>
+ <td>
+ [% item.rota.title | html %]
+ </td>
+ <td>
+ [% IF item.rota %]
+ [% IF !item.rota.active %]
+ <span class="highlighted-row">
+ [% END %]
+ [% IF item.rota.active %]
+ <span>Aktiv</span>
+ [% ELSE %]
+ <span>Inaktiv</span>
+ [% END %]
+ [% IF !item.rota.active %]
+ </span>
+ [% END %]
+ [% END %]
+ </td>
+ <td>
+ [% IF item.bib_item.get_transfer %]
+ <span>Ja</span>
+ [% ELSE %]
+ <span>Nej</span>
+ [% END %]
+ </td>
+ <td>
+ [% FOREACH this_stage IN item.stages %]
+ [% IF this_stage.stage_id == item.stockrotationitem.stage.stage_id %]
+ <span class="stage highlight_stage">
+ [% ELSE %]
+ <span class="stage">
+ [% END %]
+ [% Branches.GetName(this_stage.branchcode_id) | html %] ([% this_stage.duration | html %])
+ </span>
+ &raquo;
+ [% END %]
+ [% IF item.stages.size > 0 %]
+ <span class="stage">
+ [% IF item.rota.cyclical %] START [% ELSE %] SLUT [% END %] </span>
+ [% END %]
+ </td>
+ <td class="actions">
+ [% IF item.stockrotationitem %]
+ [% in_transit = item.bib_item.get_transfer %]
+ [% IF !in_transit && item.stages.size > 1 %]
+ <form id="move_to_next_stage_[% item.bib_item.id | html %]" method="post" action="/cgi-bin/koha/catalogue/stockrotation.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-move_to_next_stage" />
+ <input type="hidden" name="stage_id" value="[% item.stockrotationitem.stage.stage_id | html %]" />
+ <input type="hidden" name="item_id" value="[% item.bib_item.id | html %]" />
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-arrow-right"></i> Flytta till nästa nivå</button>
+ </form>
+ [% ELSE %]
+ <a class="btn btn-default btn-xs" disabled><i class="fa fa-arrow-right"></i> Flytta till nästa nivå</a>
+ [% END %]
+
+ [% IF !in_transit %]
+ <form id="toggle_in_demand_[% item.bib_item.id | html %]" method="post" action="/cgi-bin/koha/catalogue/stockrotation.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-toggle_in_demand" />
+ <input type="hidden" name="stage_id" value="[% item.stockrotationitem.stage.stage_id | html %]" />
+ <input type="hidden" name="item_id" value="[% item.bib_item.id | html %]" />
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-fire"></i>
+ [% IF item.stockrotationitem.indemand %] Ta bort "efterfrågan" [% ELSE %] Lägg till "efterfrågan" [% END %]</button>
+ </form>
+ [% ELSE %]
+ <a class="btn btn-default btn-xs" disabled><i class="fa fa-fire"></i>
+ [% IF item.stockrotationitem.indemand %] Ta bort "efterfrågan" [% ELSE %] Lägg till "efterfrågan" [% END %] </a>
+ [% END %]
+
+ [% IF !in_transit %]
+ <a class="btn btn-default btn-xs" href="?op=confirm_remove_from_rota&amp;stage_id=[% item.stockrotationitem.stage.stage_id | uri %]&amp;item_id=[% item.bib_item.id | uri %]&amp;biblionumber=[% biblionumber | uri %]">
+ [% ELSE %]
+ <a class="btn btn-default btn-xs" disabled>
+ [% END %]
+ <i class="fa fa-trash-can"></i>
+ Ta bort från schema</a>
+ [% ELSE %]
+ <form class="rota_select_form" method="post" enctype="multipart/form-data">
+ [% INCLUDE 'csrf-token.inc' %]
+ <select class="item_select_rota" name="rota_id">
+ [% FOREACH rota IN rotas %]
+ <option value="[% rota.rota_id | uri %]">[% rota.title | html %]</option>
+ [% END %]
+ </select>
+ <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-plus"></i> Lägg till i rotationsschema</button>
+ <input type="hidden" name="op" value="cud-add_item_to_rota" />
+ <input type="hidden" name="item_id" value="[% item.bib_item.id | uri %]" />
+ <input type="hidden" name="biblionumber" value="[% biblionumber | uri %]" />
+ </form>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.page-section -->
+ [% END %]
+ [% IF !items || items.size == 0 %]
+ <h1>Inga fysiska exemplar för denna post</h1>
+ [% END %]
+ [% IF !rotas || rotas.count == 0 %]
+ <h1>Det finns inga scheman med tilldelade etapper</h1>
+ [% END %]
+ [% ELSIF op == 'confirm_remove_from_rota' %]
+ <div class="alert alert-warning">
+ <h3>Är du säker på att du vill ta bort detta exemplar från rotationsschemat?</h3>
+ <p>
+ <form id="remove_item_from_stage_[% item.bib_item.id | html %]" method="post" action="/cgi-bin/koha/catalogue/stockrotation.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-remove_item_from_stage" />
+ <input type="hidden" name="stage_id" value="[% stage_id | html %]" />
+ <input type="hidden" name="item_id" value="[% item_id | html %]" />
+ <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+ <button class="btn btn-default btn-xs approve" type="submit"><i class="fa fa-fw fa-check"></i>Ja</button>
+ </form>
+ <a class="btn btn-default btn-xs deny" href="?biblionumber=[% biblionumber | uri %]"><i class="fa fa-fw fa-times"></i>Nej</a>
+ </p>
+ </div>
+ [% END %]
+
+</div>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'biblio-view-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/browser.js") | $raw %]
+ <script>
+        var browser = KOHA.browser('[% searchid | html %]', parseInt('[% biblionumber | html %]', 10));
+        browser.show();
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

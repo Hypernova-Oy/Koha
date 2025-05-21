@@ -1,0 +1,155 @@
+---
+Auktoriteettitietueet:
+  Linkittäjä:
+  - - Käytä
+    - choices:
+        Default: oletus
+        FirstMatch: ensimmäinen osuma
+        LastMatch: viimeinen osuma
+      default: Default
+      pref: LinkerModule
+    - linkitystoimintoa otsikkojen ja auktoriteettitietueiden yhdistämiseen.
+  - - 'Aseta seuraavat asetukset auktoriteettien linkitykselle:'
+    - class: multi
+      pref: LinkerOptions
+    - (vaihtoehdot erotetaan | -merkillä).
+  - - choices:
+        '0': Älä uudelleenlinkitä
+        '1': Uudelleenlinkitä
+      default: yes
+      pref: LinkerRelink
+    - kirjaukset, jotka olivat aikaisemmin linkitettynä auktoriteettitietueeseen.
+  - - choices:
+        '0': Älä säilytä
+        '1': Säilytä
+      default: no
+      pref: LinkerKeepStale
+    - olemassa olevat linkit auktoriteettitietueisiin niissä kirjauksissa, joille
+      linkittäjä ei löytänyt vastaavuutta.
+  - - choices:
+        '0': Älä linkitä
+        '1': Linkitä
+      default: no
+      pref: CatalogModuleRelink
+    - automaattisesti nimekkeitä, jotka on jo aiemmin linkitetty kuvailtaessa (vaatii
+      <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AutoLinkBiblios'>AutoLinkBiblios</a>-asetuksen).
+  - - choices:
+        '0': Älä uudelleenlinkitä
+        '1': Uudelleenlinkitä
+      default: no
+      pref: AutoLinkBiblios
+    - nimekkeet automaattisesti kuvailtaessa, noudattaa <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=LinkerRelink'>LinkerRelink</a>
+      ja <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CatalogModuleRelink'>CatalogModuleRelink</a>
+      -asetuksia tietueen muokkauksessa.
+  - - choices:
+        '0': Älä vertaa
+        '1': Vertaa
+      default: no
+      pref: LinkerConsiderThesaurus
+    - 6XX-termien lähteitä auktoriteetti-tesaurukseen, kun tietueita linkitetään.
+      Tämän laittaminen päälle voi vaatia uudelleenindeksoinnin ja saattaa luoda uusia
+      auktoriteettitietueita, jos AutoCreateAuthorities on päällä.
+  Yleiset:
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      default: no
+      pref: AuthDisplayHierarchy
+    - laajemmat/suppeammat termihierarkiat, kun näytetään auktoriteettejä.
+  - - Käytä seuraavaa tekstiä muuttaaksesi sitä, miten auktoriteettitietueet kontrolloivat
+      liittyvien nimeketietueiden kenttien indikaattoreita (ja mahdollisesti osakenttiä
+      $2).<br>
+    - 'Kommenttimerkillä # alkavat rivit jätetään huomiotta. Kunkin rivin tulee olla
+      muotoa: (marc21|unimarc), tag, ind1:(auth1|auth2|some_value), ind2:(auth1|auth2|thesaurus|some_value).<br>'
+    - Tässä auth1 and auth2 viittaavat auktoriteettitietueen indikaattoreihin; tag
+      on bibliografisen kentän numero tai tähti (*); ja some_value on kiinteä arvo
+      (yksi merkki).<br>
+    - MARC21-sanasto viittaa informaatiokoodeihin, joita kontrolloivat auktoriteettikentät
+      008/11 ja 040$f.
+    - pref: AuthorityControlledIndicators
+      type: textarea
+  - - Tietueita muokattaessa
+    - choices:
+        '0': älä vaadi
+        '1': vaadi
+      default: yes
+      pref: RequireChoosingExistingAuthority
+    - olemassa olevia auktoriteettien käyttöä kuvailussa. Jos valittuna "älä vaadi",
+      kuvailijat voivat lisätä kontrolloimattomia termejä kontrolloituihin kenttiin
+  - - Tietueita muokattaessa
+    - choices:
+        '0': älä luo
+        '1': luo
+      default: yes
+      pref: AutoCreateAuthorities
+    - puuttuvia auktoriteettitietueita (<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RequireChoosingExistingAuthority">RequireChoosingExistingAuthority</a>
+      -asetuksen tulee olla "älä vaadi" jotta asetus astuu voimaan).
+  - - Kun päivitetään auktoriteettitietuetta, älä päivitä nimeketietueita, jos määrä
+      ylittää
+    - default: 50
+      pref: AuthorityMergeLimit
+    - tietuetta. (Rajan ylittyessä, merge_authority -cron job yhdistää ne.)
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/merge_authorities.pl</code>
+      cronjobin. Pyydä kehittäjiä ajastamaan se.
+  - - 'Käytä seuraavaa tekstiä MARC21 kontrollikentässä 008 merkkipaikoissa 06-39
+      (kiinteämittaiset kentät). ÄLÄ sisällytä päiväystä (merkkipaikat 00-05):'
+    - class: code
+      default: '|| aca||aabn           | a|a     d'
+      pref: MARCAuthorityControlField008
+      type: textarea
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      default: yes
+      pref: UseAuthoritiesForTracings
+    - auktoriteettitietueiden numeroita tekstitiedon sijasta asiasanahauissa.
+  - - 'Käytä seuraavaa tekstiä UNIMARC-auktoriteettikentässä 100 merkkipaikoissa 08-35
+      (kiinteämittaiset kentät). ÄLÄ sisällytä päiväystä (merkkipaikat 00-07):'
+    - class: code
+      default: afrey50      ba0
+      pref: UNIMARCAuthorityField100
+      type: textarea
+  - - Kun päivitetään nimeketietueita niihin liittyvistä auktoriteettitietueista ("yhdistäminen"),
+      käsittele kyseisten nimeketietueiden osakenttiä
+    - choices:
+        loose: väljästi
+        strict: tiukasti
+      default: loose
+      pref: AuthorityMergeMode
+    - . Käsiteltäessä tiukasti, poistetaan ne osakentät, joita ei ole auktoriteettitietueessa.
+      Väljästi käsiteltäessä osakentät säilytetään. Väljäkäsittely on oletuksena.
+  - - 'Käytä seuraavaa tekstiä arvona 667$ kentälle MARC21 auktoriteettitietueissa
+      (asetuksen <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RequireChoosingExistingAuthority''>RequireChoosingExistingAuthority</a>
+      täytyy olla "älä vaadi" ja asetuksen <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AutoCreateAuthorities''>AutoCreateAuthorities</a>
+      täytyy olla "luo"):'
+    - class: code
+      default: Machine generated authority record
+      pref: GenerateAuthorityField667
+      type: textarea
+  - - 'Käytä seuraavaa tekstiä arvona 670$a -kentälle MARC21 auktoriteettitietueissa
+      (asetuksen <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RequireChoosingExistingAuthority''>RequireChoosingExistingAuthority</a>
+      täytyy olla "älä vaadi" ja asetuksen <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AutoCreateAuthorities''>AutoCreateAuthorities</a>
+      täytyy olla "luo"):'
+    - class: code
+      default: Work cat.
+      pref: GenerateAuthorityField670
+      type: textarea
+  - - Auktoriteetin tietoja katsottaessa, näytä oletuksena
+    - choices:
+        '0': 0XX
+        '1': 1XX
+        '2': 2XX
+        '3': 3XX
+        '4': 4XX
+        '5': 5XX
+        '6': 6XX
+        '7': 7XX
+        '8': 8XX
+        '9': 9XX
+      default: '0'
+      pref: DefaultAuthorityTab
+    - -välilehti. Jos valittua välilehteä ei ole olemassa, näytetään ensimmäinen välilehti.
+  - - Näytä MARC-kentät/osakentät
+    - pref: AdditionalFieldsInZ3950ResultAuthSearch
+    - '''Lisäkenttien'' sarakkeessa Z39.50 hakutuloksessa (käytä pilkkua erottimena,
+      esim.: "<code>001, 035$a</code>")'

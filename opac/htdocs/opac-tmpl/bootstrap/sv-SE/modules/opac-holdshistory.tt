@@ -1,0 +1,198 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE KohaDates %]
+[% USE TablesSettings %]
+[% USE ItemTypes %]
+[% USE AdditionalContents %]
+[% USE AuthorisedValues %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Din reservationshistorik &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %]-katalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %]
+ <style>
+
+        .controls .paginate_button {
+            font-family: 'FontAwesome';
+            text-decoration: none;
+        }
+
+        .controls .paginate_button:not(.disabled) {
+            cursor: pointer;
+        }
+
+        .controls .paginate_button.disabled {
+            color: grey;
+        }
+
+        .controls .previous:before {
+            content: "\f104";
+            padding-right: .5em;
+        }
+
+        .controls .next:after {
+            content: "\f105";
+            padding-left: .5em;
+        }
+    </style>
+[% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-holdshistory' %]
+[% INCLUDE 'masthead.inc' %]
+
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Din reservationshistorik</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col col-lg-2 order-2 order-lg-1">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ <div class="col-md-12 col-lg-10 order-1">
+ <div id="userholdshistory">
+ <h1>Reservationshistorik</h1>
+
+ [% IF !holds %] Finns inget att visa [% ELSE %] [% SET show_itemtype_column = Koha.Preference('AllowHoldItemTypeSelection') %] <div id="opac-user-holdsrec">
+ <div id="tabs-container">
+ <div class="controls">
+ <div class="resultscontrol resort d-print-none">
+ <form id="sortform" action="/cgi-bin/koha/opac-holdshistory.pl" method="get">
+ [% IF ( unlimit ) %]<input type="hidden" name="unlimit" value="1" />[% END %]
+ <select name="sort" id="sort">
+ [% IF ( sort == 'reservedate' ) %]<option value="reservedate" selected="selected">Sortera efter datum</option>[% ELSE %]<option value="reservedate">Sortera efter datum</option>[% END %]
+ [% IF ( sort == 'biblio.title' ) %]<option value="biblio.title" selected="selected">Sortera efter titel</option>[% ELSE %]<option value="biblio.title">Sortera efter titel</option>[% END %]
+ [% IF ( sort == 'biblio.author' ) %]<option value="biblio.author" selected="selected">Sortera på författare</option>[% ELSE %]<option value="biblio.author">Sortera på författare</option>[% END %]
+ </select>
+ <input class="submit clearfix" id="sortsubmit" type="submit" value="Gå" />
+ </form>
+ </div>
+
+ [% UNLESS unlimit %]
+ <p class="d-print-none">
+ Visar 50 exemplar. <a href="/cgi-bin/koha/opac-holdshistory.pl?unlimit=1[% IF ( sort ) %]&amp;sort=[% sort | url %][% END %]">Visa alla exemplar</a>
+ </p>
+ [% ELSE %]
+ <p class="d-print-none">
+ Visar alla exemplar. <a href="/cgi-bin/koha/opac-holdshistory.pl[% IF ( sort ) %]?sort=[% sort | url %][% END %]">Visa 50 exemplar</a>
+ </p>
+ [% END %]
+ </div>
+ <table id="table_holdshistory" class="table table-bordered table-striped">
+ <caption class="sr-only">Reservationshistorik</caption>
+ <thead>
+ <tr>
+ <th class="anti-the">Titel</th>
+ <th>Författare</th>
+ <th>Streckkod</th>
+ <th>Bibliotek</th>
+ <th>Reservationsdatum</th>
+ <th>Utgångsdatum</th>
+ <th>Väntar sedan</th>
+ <th>Annulleringsdatum</th>
+ [% IF show_itemtype_column %]
+ <th>Begärd exemplartyp</th>
+ [% END %]
+ <th>Status</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH hold IN holds %]
+ <tr>
+ <td>[% INCLUDE 'biblio-title.inc' biblio=hold.biblio link=>1 %]</td>
+ <td>[% hold.biblio.author | html %]</td>
+ <td>[% hold.item.barcode | html %]</td>
+ <td>[% Branches.GetName( hold.branchcode ) | html %]</td>
+ <td data-order="[% hold.reservedate | html %]">[% hold.reservedate | $KohaDates %]</td>
+ <td data-order="[% hold.expirationdate | html %]">
+ [% IF hold.expirationdate %]
+ [% hold.expirationdate | $KohaDates %]
+ [% END %]
+ </td>
+ <td data-order="[% hold.waitingdate | html %]">
+ [% IF hold.waitingdate %]
+ [% hold.waitingdate | $KohaDates %]
+ [% END %]
+ </td>
+ <td data-order="[% hold.cancellationdate | html %]">
+ [% IF hold.cancellationdate %]
+ [% hold.cancellationdate | $KohaDates %]
+ [% END %]
+ </td>
+ [% IF show_itemtype_column %]
+ <td>
+ [% IF hold.itemtype %]
+ [% ItemTypes.GetDescription( hold.itemtype ) | html %]
+ [% ELSE %]
+ <span>Alla exemplartyper</span>
+ [% END %]
+ </td>
+ [% END %]
+ <td>
+ [% IF hold.found == 'F' %]
+ <span>Genomförd</span>
+ [% ELSIF hold.cancellationdate %]
+ <span>Avbruten</span>
+ [% IF hold.cancellation_reason %]
+ ([% AuthorisedValues.GetByCode('HOLD_CANCELLATION', hold.cancellation_reason, 1) | html %])
+ [% END %]
+ [% ELSIF hold.found == 'W' %]
+ [% IF hold.cancellation_requests.count == 0 %]
+ <span>Väntar</span>
+ [% ELSE %]
+ <span>Avbruten</span>
+ [% END %]
+ [% ELSIF hold.found == 'T' %]
+ <span>Under transport</span>
+ [% ELSE %]
+ <span>Väntande</span>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- / .tabs-container -->
+ </div> <!-- / .opac-user-holdsrec -->
+ [% END # / IF old_holds_count %]
+ </div> <!-- / .userholdshistory -->
+ </div> <!-- / .span10 -->
+ </div> <!-- / .row-fluid -->
+ </div> <!-- / .container-fluid -->
+</div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+[% INCLUDE 'datatables.inc' %]
+[% INCLUDE 'columns_settings.inc' %]
+<script>
+    $(document).ready(function() {
+        $('#sort').change(function() {
+            $('#sortform').submit();
+        });
+        var table = KohaTable("#table_holdshistory", {
+            "dom": '<"top"<"table_entries"i><"table_controls"fB>>t',
+            "autoWidth": false,
+            "sorting": [[4, 'desc']],
+            "columnDefs": [
+                { "sType": "anti-the", "aTargets" : [ "anti-the" ] }
+            ],
+            "language": {
+                "search": "_INPUT_",
+                "searchPlaceholder": _("Sök")
+            }
+        });
+    });
+</script>
+[% END %]

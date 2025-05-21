@@ -1,0 +1,318 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="admin_admin-home" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Administration</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+ <h1>Koha-administration</h1>
+ [% IF ( CAN_user_parameters_manage_mana ) %]
+ [% IF ( Koha.Preference('Mana') == 1) && !mana_url %]
+ <div class="alert alert-info">
+ <h4>Mana KB-funktionen är aktiverad men inte konfigurerad.</h4>
+ <p>Med den här funktionen kan du hämta och dela data (prenumerationsmönster och rapporter) med andra Koha-bibliotek.</p>
+ <p>
+ Be din systemadministratör att konfigurera denna funktion <a href=/cgi-bin/koha/admin/share_content.pl>inaktivera systeminställningen Mana</a>.
+ </p>
+ </div>
+ [% END %]
+ [% IF ( Koha.Preference('Mana') == 2 ) %]
+ <div class="alert alert-info">
+ <h4>Dela innehåll med Mana KB?</h4>
+ <p> Du har inte bestämt om du vill aktivera Mana Knowledge Base. <a href=/cgi-bin/koha/admin/share_content.pl>Ändra dina Mana KB-inställningar</a>.</p>
+ </div>
+ [% END %]
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_usage_stats ) %]
+ [% IF ( Koha.Preference('UsageStats') == 2 ) %]
+ <div class="alert alert-info">
+ <h4>Dela anonym användarstatistik med Koha-gemenskapen?</h4>
+ <p> Du har inte bestämt om du vill aktivera delning av användarstatistik i Koha än. <a href=/cgi-bin/koha/admin/usage_statistics.pl>Ändra dina Hea-inställningar</a>.</p>
+ <p> Den här funktionen ger Koha-utvecklarna värdefull information om hur Koha används och fungerar som beslutsstöd under utvecklingscykeln</p>
+ </div>
+ [% END %]
+ [% END %]
+ <div class="row">
+ <div class="col-md-6 sysprefs">
+ [% IF ( CAN_user_parameters_manage_sysprefs ) %]
+ <form action="/cgi-bin/koha/admin/preferences.pl" method="get">
+ <fieldset>
+ <h4><a href="/cgi-bin/koha/admin/preferences.pl">Systeminställningar</a></h4>
+ <p>Hantera systeminställningar, som MARC-typ, datumformat, e-postadress till administratör och mallar.</p>
+ <input type="hidden" name="op" value="search" />
+ <input type="text" name="searchfield" value="[% searchfield | html %]" />
+ <input class="btn btn-primary" name="ok" type="submit" value="Sök" />
+ </fieldset>
+ </form>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_libraries || CAN_user_parameters_manage_itemtypes || CAN_user_parameters_manage_auth_values ) %]
+ <div class="hint"><h4>Tips:</h4><p>Konfigurera dessa parametrar i den ordning de visas.</p></div>
+ <h3>Grundparametrar</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_libraries ) %]
+ <dt><a href="/cgi-bin/koha/admin/branches.pl">Bibliotek</a></dt>
+ <dd>Definiera bibliotek</dd>
+ <dt><a href="/cgi-bin/koha/admin/library_groups.pl">Biblioteksgrupper</a></dt>
+ <dd>Definiera hierarki av biblioteksgrupper</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_itemtypes ) %]
+ <dt><a href="/cgi-bin/koha/admin/itemtypes.pl">Exemplartyper</a></dt>
+ <dd>Definiera exemplartyper som används för låneregler</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_auth_values ) %]
+ <dt><a href="/cgi-bin/koha/admin/authorised_values.pl">Auktoriserade värden</a></dt>
+ <dd>Definiera kategorier och auktoriserade värden för dem</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_patron_categories || CAN_user_parameters_manage_circ_rules || CAN_user_parameters_manage_patron_attributes || CAN_user_parameters_manage_transfers || CAN_user_parameters_manage_item_circ_alerts || CAN_user_parameters_manage_cities || CAN_user_parameters_manage_curbside_pickups ) %]
+ <h3>Låntagare och cirkulation</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_patron_categories ) %]
+ <dt><a href="/cgi-bin/koha/admin/categories.pl">Låntagarkategorier</a></dt>
+ <dd>Definiera låntagarkategorier</dd>
+ [% END %]
+ [% IF CAN_user_parameters_manage_circ_rules %]
+ <dt><a href="/cgi-bin/koha/admin/smart-rules.pl">Regler för utlån och avgifter</a></dt>
+ <dd>Definiera regler för cirkulation och avgifter för kombinationer av bibliotek, låntagarkategorier och exemplartyper</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_patron_attributes ) %]
+ <dt><a href="/cgi-bin/koha/admin/patron-attr-types.pl">Attributtyper för låntagare</a></dt>
+ <dd>Definiera utökade attribut (identifierare och statistiska kategorier) för låntagarposter</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_transfers ) %]
+ <dt><a href="/cgi-bin/koha/admin/branch_transfer_limits.pl">Överföringsbegränsningar för bibliotek</a> (<a href="/cgi-bin/koha/admin/transfer_limits.pl">Avancerad redigerare</a>)</dt>
+ <dd>Begränsa möjligheten att överföra exemplar mellan bibliotek baserat på biblioteket som skickar, biblioteket som tar emot och den exemplartyp det gäller. Dessa regler tillämpas bara om inställningen UseBranchTransferLimits är aktiverad</dd>
+ <dt><a href="/cgi-bin/koha/admin/transport-cost-matrix.pl">Fraktkostnadstabell</a></dt>
+ <dd>Definiera fraktkostnader mellan filialer</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_item_circ_alerts ) %]
+ <dt><a href="/cgi-bin/koha/admin/item_circulation_alerts.pl">Lånenotifikationer för exemplar</a></dt>
+ <dd>Definiera regler för meddelanden vid lån och återlämning för kombinationer av bibliotek, låntagarkategorier och exemplartyper</dd>
+ [% END %]
+ [% IF ( Koha.Preference('UseCirculationDesks') && CAN_user_parameters_manage_libraries ) %]
+ <dt><a href="/cgi-bin/koha/admin/desks.pl">Diskar</a></dt>
+ <dd>Definiera cirkulationsdiskar</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_cities ) %]
+ <dt><a href="/cgi-bin/koha/admin/cities.pl">Orter</a></dt>
+ <dd>Definiera de orter låntagarna bor i</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_curbside_pickups ) %]
+ <dt><a href="/cgi-bin/koha/admin/curbside_pickup.pl">Upphämtning</a></dt>
+ <dd>Konfigurera upphämtning för bibliotek</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_patron_restrictions ) %]
+ <dt><a href="/cgi-bin/koha/admin/restrictions.pl">Låntagarbegränsningar</a></dt>
+ <dd>Definiera typer av låntagarbegränsningar</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_accounts || ( Koha.Preference('UseCashRegisters') && CAN_user_parameters_manage_cash_registers ) ) %]
+ <h3>Avgifter</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_accounts ) %]
+ <dt><a href="/cgi-bin/koha/admin/debit_types.pl">Debiteringstyper</a></dt>
+ <dd>Definiera debettyp</dd>
+ <dt><a href="/cgi-bin/koha/admin/credit_types.pl">Kredittyper</a></dt>
+ <dd>Definiera kredittyp</dd>
+ [% END %]
+ [% IF ( Koha.Preference('UseCashRegisters') && CAN_user_parameters_manage_cash_registers ) %]
+ <dt><a href="/cgi-bin/koha/admin/cash_registers.pl">Kassaregister</a></dt>
+ <dd>Definiera kassor</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF plugins_enabled && ( CAN_user_plugins_manage || CAN_user_plugins_configure || ( CAN_user_plugins_admin && admin_plugins)) %]
+ <h3>Plugins</h3>
+ <dl>
+ [% IF CAN_user_plugins_manage || CAN_user_plugins_configure %]
+ <dt><a href="/cgi-bin/koha/plugins/plugins-home.pl">Hantera plugins</a></dt>
+ <dd>Visa, hantera, konfigurera och kör plugins.</dd>
+ [% END %]
+ [% IF ( CAN_user_plugins_admin && admin_plugins ) %]
+ [% FOREACH plugin IN admin_plugins %]
+ <dt><a href="/cgi-bin/koha/plugins/run.pl?class=[% plugin.class | uri %]&method=admin"><span class="plugin_name">[% plugin.metadata.name | html %]</span></a></dt>
+ <dd>[% plugin.metadata.description | html %]</dd>
+ [% END %]
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF CAN_user_parameters_manage_background_jobs %]
+ <h3>Jobb</h3>
+ <dl>
+ <dt><a href="/cgi-bin/koha/admin/background_jobs.pl">Hantera jobb</a></dt>
+ <dd>Visa, hantera och ta bort jobb.</dd>
+ </dl>
+ [% END %]
+
+ </div>
+
+ <div class="col-md-6 sysprefs">
+ [% IF ( CAN_user_parameters_manage_marc_frameworks || CAN_user_parameters_manage_classifications || CAN_user_parameters_manage_matching_rules || CAN_user_parameters_manage_oai_sets || CAN_user_parameters_manage_item_search_fields || CAN_user_parameters_manage_search_engine_config || CAN_user_parameters_manage_marc_overlay_rules || ( Koha.Preference('SavedSearchFilters') && ( CAN_user_parameters_manage_search_filters ) ) ) %]
+ <h3>Katalog</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_marc_frameworks ) %]
+ <dt><a href="/cgi-bin/koha/admin/biblio_framework.pl">MARC bibliografiskt ramverk</a></dt>
+ <dd>Skapa och hantera bibliografiska ramverk som definierar dina MARC-poster (definitioner för fält och delfält) samt mallar för MARC-redigeraren</dd>
+ <dt><a href="/cgi-bin/koha/admin/koha2marclinks.pl">Koha till MARC-mappning</a></dt>
+ <dd>Definiera mappningen mellan Kohas transaktionsdatabas (SQL) och de bibliografiska MARC-posterna</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_marc_frameworks ) %]
+ <dt><a href="/cgi-bin/koha/admin/checkmarc.pl">Test av MARC bibliografiskt ramverk</a></dt>
+ <dd>Kontrollerar MARC-strukturen. Om du ändrar det bibliografiska MARC-ramverket bör du köra det här verktyget för att hitta eventuella fel i din definition</dd>
+ <dt><a href="/cgi-bin/koha/admin/authtypes.pl">Auktoritetstyper</a></dt>
+ <dd>Skapa och hantera auktoritetsramverk som definierar dina MARC-poster (definitioner för fält och delfält)</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_classifications ) %]
+ <dt><a href="/cgi-bin/koha/admin/classsources.pl">Klassificeringsinställningar</a></dt>
+ <dd>Definiera klassificeringskällor (dvs system för hyllsignaturer) som används på avdelningen. Definiera även stödregler för sortering av hyllsignaturer och delningsregler för att dela upp hyllsignaturerna på flera rader</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_matching_rules ) %]
+ <dt><a href="/cgi-bin/koha/admin/matching-rules.pl">Regler för postmatchning</a></dt>
+ <dd>Hantera regler för att automatiskt matcha MARC-poster under postimport</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_record_sources ) %]
+ <dt><a href="/cgi-bin/koha/admin/record_sources">Postkällor</a></dt>
+ <dd>Ange postkällor att importera ifrån</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_marc_overlay_rules ) %]
+ <dt><a href="/cgi-bin/koha/admin/marc-overlay-rules.pl">Regler för överskrivning av poster</a></dt>
+ <dd>Hantera regler för att automatiskt skriva över MARC-poster under postimport</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_oai_sets ) %]
+ <dt><a href="/cgi-bin/koha/admin/oai_sets.pl">Konfiguration av OAI-uppsättningar</a></dt>
+ <dd>Hantera OAI-uppsättningar</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_item_search_fields ) %]
+ <dt><a href="/cgi-bin/koha/admin/items_search_fields.pl">Exemplarsökfält</a></dt>
+ <dd>Hantera anpassade fält för exemplarsökning</dd>
+ [% END %]
+ [% IF Koha.Preference('SavedSearchFilters') && ( CAN_user_parameters_manage_search_filters ) %]
+ <dt><a href="/cgi-bin/koha/admin/search_filters.pl">Sökfilter</a></dt>
+ <dd>Hantera anpassade sökfilter</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_search_engine_config ) %]
+ <dt><a href="/cgi-bin/koha/admin/searchengine/elasticsearch/mappings.pl">Sökmotorinställningar (Elasticsearch)</a></dt>
+ <dd>Hantera index, facetter och deras mappningar till MARC-fält och delfält</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_acquisition_currencies_manage || CAN_user_acquisition_period_manage || CAN_user_acquisition_budget_manage || ( Koha.Preference('EDIFACT') && CAN_user_acquisition_edi_manage ) || ( Koha.Preference('MarcOrderingAutomation') && CAN_user_acquisition_marc_order_manage ) ) %]
+ <h3>Inköpsparametrar</h3>
+ <dl>
+ [% IF ( CAN_user_acquisition_currencies_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/currency.pl">Valutor och växelkurser</a></dt>
+ <dd>Definiera valutor och växelkurser för inköp</dd>
+ [% END %]
+ [% IF ( CAN_user_acquisition_period_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/aqbudgetperiods.pl">Budgetar</a></dt>
+ <dd>Definiera budgetar</dd>
+ [% END %]
+ [% IF ( CAN_user_acquisition_budget_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/aqbudgets.pl">Budgetställen</a></dt>
+ <dd>Definiera budgetställen inom dina budgetar</dd>
+ [% END %]
+ [% IF ( Koha.Preference('EDIFACT') && CAN_user_acquisition_edi_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/edi_accounts.pl">EDI-konton</a></dt>
+ <dd>Hantera leverantörers EDI-konton för import/export</dd>
+ <dt><a href="/cgi-bin/koha/admin/edi_ean_accounts.pl">Biblioteks-EAN</a></dt>
+ <dd>Hantera bibliotekets EDI EAN</dd>
+ [% END %]
+ [% IF ( Koha.Preference('MarcOrderingAutomation') && CAN_user_acquisition_marc_order_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/marc_order_accounts.pl">Konton för MARC-beställningar</a></dt>
+ <dd>Manage vendor accounts for automated order line creation from MARC records</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( ( CAN_user_parameters_manage_identity_providers || CAN_user_parameters_manage_smtp_servers || CAN_user_parameters_manage_search_targets || CAN_user_parameters_manage_didyoumean || CAN_user_parameters_manage_column_config || CAN_user_parameters_manage_audio_alerts || CAN_user_parameters_manage_sms_providers && Koha.Preference('SMSSendDriver') == 'Email' ) || CAN_user_parameters_manage_usage_stats || CAN_user_parameters_manage_additional_fields || CAN_user_parameters_manage_mana || (Koha.Preference('EnableAdvancedCatalogingEditor') && CAN_user_parameters_manage_keyboard_shortcuts) ) %]
+ <h3>Fler parametrar</h3>
+ <dl>
+ <!-- <dt><a href="/cgi-bin/koha/admin/printers.pl">Network Printers</a></dt>
+ <dd>Printers (UNIX paths).</dd> -->
+ [% IF ( CAN_user_parameters_manage_identity_providers) %]
+ <dt><a href="/cgi-bin/koha/admin/identity_providers.pl">Identitetsleverantörer</a></dt>
+ <dd>Definiera vilka externa identitetsleverantörer som ska användas</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_search_targets ) %]
+ <dt><a href="/cgi-bin/koha/admin/z3950servers.pl">Z39.50/SRU-servrar</a></dt>
+ <dd>Definiera vilka externa servrar som ska tillfrågas om MARC-data</dd>
+ <dt><a href="/cgi-bin/koha/admin/oai_servers.pl">OAI repositories</a></dt>
+ <dd>Define which OAI repositories to harvest data from</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_smtp_servers ) %]
+ <dt><a href="/cgi-bin/koha/admin/smtp_servers.pl">SMTP-servrar</a></dt>
+ <dd>Definiera vilka SMTP-serverar som ska användas</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_didyoumean ) %]
+ <dt><a href="/cgi-bin/koha/admin/didyoumean.pl">Menade du?</a></dt>
+ <dd>Välj vilka plugins som ska användas för att föreslå sökningar för låntagare och personal</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_column_config ) %]
+ <dt><a href="/cgi-bin/koha/admin/columns_settings.pl">Kolumnvisning</a></dt>
+ <dd>Konfigurera och dölj/visa kolumner för tabeller</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_audio_alerts ) %]
+ <dt><a href="/cgi-bin/koha/admin/audio_alerts.pl">Ljudnotifikationer</a></dt>
+ <dd>Definiera vilka händelser som utlöser vilka ljud</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_sms_providers && Koha.Preference('SMSSendDriver') == 'Email' ) %]
+ <dt><a href="/cgi-bin/koha/admin/sms_providers.pl">SMS-leverantörer</a></dt>
+ <dd>Lista leverantörer för att sända SMS-meddelanden via e-post</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_usage_stats ) %]
+ <dt><a href="/cgi-bin/koha/admin/usage_statistics.pl">Dela din användningsstatistik</a></dt>
+ <dd>Dela användningsstatistik för din Koha-installation med Kohagemenskapen</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_mana ) %]
+ <dt><a href="/cgi-bin/koha/admin/share_content.pl">Dela innehåll med Mana KB</a></dt>
+ <dd>Dela innehåll (prenumerationer, rapporter) med Koha-gemenskapen</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_additional_fields ) %]
+ <dt><a href="/cgi-bin/koha/admin/additional-fields.pl">Ytterligare fält</a></dt>
+ <dd>Lägg till ytterligare fält till utvalda tabeller</dd>
+ [% END %]
+ [% IF Koha.Preference('EnableAdvancedCatalogingEditor') && ( CAN_user_parameters_manage_keyboard_shortcuts ) %]
+ <dt><a href="/cgi-bin/koha/admin/adveditorshortcuts.pl">Tangentbordsgenvägar</a></dt>
+ <dd>Ange vilka tangenter som aktiverar händelser i den avancerade redigeraren</dd>
+ [% END %]
+ [% IF Koha.Preference('ILLModule') && CAN_user_ill %]
+ <dt><a href="/cgi-bin/koha/admin/ill_batch_statuses.pl">Satsstatusar för fjärrlån</a></dt>
+ <dd>Hantera statusar som kan tilldelas fjärrlånebatchar</dd>
+ [% END %]
+ </dl>
+ [% END %]
+ </div>
+ </div>
+ </div>
+</div>
+
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,20 @@
+---
+Käsittelyerät:
+  Käyttöliittymä:
+  - - choices:
+        '0': Älä ota käyttöön
+        '1': Ota käyttöön
+      pref: PreservationModule
+    - Käsittelyerien moduuli
+  - - Käytä <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">NOT_LOAN</a>
+      -auktorisoitua arvoa
+    - choices: authval
+      pref: PreservationNotForLoanWaitingListIn
+      source: NOT_LOAN
+    - odotuslistalle lisätyille niteille
+  - - Käytä <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">NOT_LOAN</a>
+      -auktorisoitua arvoa
+    - choices: authval
+      pref: PreservationNotForLoanDefaultTrainIn
+      source: NOT_LOAN
+    - käsittelyjonoon lisätyille niteille.

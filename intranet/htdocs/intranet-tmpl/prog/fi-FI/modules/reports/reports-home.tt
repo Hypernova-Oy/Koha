@@ -1,0 +1,136 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Reports") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="rep_reports-home" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Raportit</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-sm-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+ <h1>Raportit</h1>
+ <div class="row">
+ <div class="col-6">
+
+ [% IF ( CAN_user_reports_execute_reports || CAN_user_reports_create_reports ) %]
+ <fieldset class="brief">
+ <h2>Ohjatut raportit</h2>
+ [% IF ( CAN_user_reports_create_reports ) %]
+ <p>
+ <a href="/cgi-bin/koha/reports/guided_reports.pl?op=add_form"><i class="fa-solid fa-code-branch"></i> Luo ohjattu raportti</a>
+ </p>
+ <p>
+ <a href="/cgi-bin/koha/reports/guided_reports.pl?op=add_form_sql"><i class="fa fa-plus"></i> Luo SQL-lausekkeesta</a>
+ </p>
+ [% END %]
+ <p>
+ <a href="/cgi-bin/koha/reports/guided_reports.pl?op=list"><i class="fa fa-list"></i> Käytä tallennettua raporttia</a>
+ </p>
+ <form action="/cgi-bin/koha/reports/guided_reports.pl" method="get">
+ <input name="op" value="list" type="hidden">
+ <input name="filter_set" value="1" type="hidden">
+ <label for="filter_keyword">Hae sanahaulla:</label>
+ <input id="filter_keyword" name="filter_keyword" value="" size="16" type="text" />
+ <input class="btn btn-primary" type="submit" value="Haku" />
+ </form>
+ </fieldset>
+ [% END %]
+ <div class="rep_dictonary">
+ <h2>Raporttisanasto</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/dictionary.pl">Katso sanastoa</a></li>
+ </ul>
+ </div>
+
+ <div class="rep_wizards">
+ <h2>Tilastovelho</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/acquisitions_stats.pl">Hankinnat</a></li>
+ <li><a href="/cgi-bin/koha/reports/borrowers_stats.pl">Asiakkaat</a></li>
+ <li><a href="/cgi-bin/koha/reports/catalogue_stats.pl">Luettelo</a></li>
+ <li><a href="/cgi-bin/koha/reports/issues_stats.pl">Lainaus ja palautus</a></li>
+ <li><a href="/cgi-bin/koha/reports/serials_stats.pl">Kausijulkaisut</a></li>
+ <li><a href="/cgi-bin/koha/reports/cash_register_stats.pl">Kassajärjestelmä</a></li>
+ <li><a href="/cgi-bin/koha/reports/reserves_stats.pl">Varaukset</a></li>
+ </ul>
+ </div>
+
+ [% IF plugins_enabled %]
+ <div class="rep_plugins">
+ <h2>Raporttiliitännäiset</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/plugins/plugins-home.pl?method=report">Raporttiliitännäiset</a></li>
+ </ul>
+ </div>
+ [% END %]
+
+ </div>
+
+ <div class="col-sm-12 col-md-6">
+ <div class="rep_top">
+ <h2>Eniten...</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/bor_issues_top.pl">Asiakkaat, joilla on eniten lainoja</a></li>
+ <li><a href="/cgi-bin/koha/reports/cat_issues_top.pl">Eniten lainattu aineisto</a></li>
+ </ul>
+ </div>
+
+ <div class="rep_inactive">
+ <h2>Ei käytössä</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/borrowers_out.pl">Asiakkaat, jotka eivät ole lainanneet</a></li>
+ <li><a href="/cgi-bin/koha/reports/catalogue_out.pl">Niteet, joita ei ole lainattu</a></li>
+ </ul>
+ </div>
+
+ <div class="rep_other">
+ <h2>Muu</h2>
+ <ul>
+ <li><a href="/cgi-bin/koha/reports/itemslost.pl">Kadonneet niteet</a></li>
+ <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Tilauksia tilin mukaan</a></li>
+ <li><a href="/cgi-bin/koha/reports/catalog_by_itemtype.pl">Luettelo aineistoittain</a></li>
+ <li><a href="/cgi-bin/koha/reports/issues_avg_stats.pl">Keskimääräinen laina-aika</a></li>
+ [% SET koha_version = Koha.Version %]
+ [% IF koha_version.development %]
+ <li><a href="http://schema.koha-community.org/main" target="blank">Kohan tietokantarakenne</a></li>
+ [% ELSE %]
+ <li><a href="http://schema.koha-community.org/[% koha_version.major | uri %]_[% koha_version.minor | uri %]" target="blank">Kohan tietokantarakenne</a></li>
+ [% END %]
+
+ <li><a href="http://wiki.koha-community.org/wiki/SQL_Reports_Library" target="blank">Kohan raporttikirjasto</a></li>
+ </ul>
+ </div>
+ [% IF ( Koha.Preference('Mana') == 2 ) %]
+ <div class="alert alert-info" style="margin:15px 0 0 0";>
+ <strong>Tietämyskanta</strong>
+ <p> Mana-tietämyskannan aktivointia ei ole vielä tehty. <a href=/cgi-bin/koha/admin/share_content.pl>Muokkaa Mana-tietämyskannan -asetuksia</a>.</p>
+ </div>
+ [% END %]
+ </div>
+ </div> <!-- /.row -->
+ </div>
+ </div>
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2" id="intranet-reports-home-html">
+ [% Koha.Preference('IntranetReportsHomeHTML') | $raw %]
+ </div>
+ </div>
+</div>
+[% INCLUDE 'intranet-bottom.inc' %]

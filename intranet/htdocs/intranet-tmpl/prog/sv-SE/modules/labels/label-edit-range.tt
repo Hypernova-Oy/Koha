@@ -1,0 +1,150 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+ [% INCLUDE 'doc-head-open.inc' %]
+ <title>[% FILTER collapse %]
+ [% t("Print barcode range") | html %] &rsaquo;
+ [% t("Label creator") | html %] &rsaquo;
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+ [% END %]</title>
+ [% INCLUDE 'doc-head-close.inc' %]
+ [% INCLUDE 'greybox.inc' %]
+</head>
+<body id="labels_label-home" class="tools labels">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Katalogisering</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/labels/label-home.pl">Etikettverktyg</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Skriv ut streckkodsintervall</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ [% INCLUDE 'labels-toolbar.inc' %]
+ <h1>Skriv ut streckkodsintervall</h1>
+ <form name="add_by_number" action="/cgi-bin/koha/labels/label-edit-batch.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add" />
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="from-input">Från:</label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="from" id="from-input" value="0" style="text-align: right;"/>
+ </li>
+ <li>
+ <label for="to-input">Till:</label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="to" id="to-input" value="0" style="text-align: right;"/>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <button type="button" class="btn btn-primary" id="print">Utskriftsintervall</button>
+ </fieldset>
+ </form>
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+ </div> <!-- /.main.container-fluid -->
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        function Xport() {
+            var str = "";
+            str += "from=" + document.getElementById("from-input").value + "&";
+            str += "to=" + document.getElementById("to-input").value;
+            return GB_showCenter('Export labels', "/cgi-bin/koha/labels/label-print.pl?" + str, 400, 800);
+        }
+
+        function checkTwoValue(_from, _to, _id){
+            var result = _from.length == _to.length;
+            if (_from[0] == "0" || _to[0] == "0") {
+                switch (_id){
+                    case 'from-input':
+                        var to_inp = $("#to-input")
+                        if (to_inp.hasClass('error')){
+                            to_inp.removeClass('error').addClass('valid');
+                            $("to-input-error").remove();
+                        }
+                        if ($('#to-input-error').length){
+                            $("#to-input-error").remove();
+                        }
+                        return result;
+                    case 'to-input':
+                        var from_inp = $("#from-input")
+                        if (from_inp.hasClass('error')){
+                            from_inp.removeClass('error').addClass('valid');
+                        }
+                        if ($('#from-input-error').length){
+                            $("#from-input-error").remove();
+                        }
+                        return result;
+                    }
+                }
+                return true;
+            }
+
+        $(document).ready(function () {
+            $('#navmenulist a[href$="/cgi-bin/koha/labels/label-home.pl"]').addClass("current");
+            $.validator.addMethod("gt", function(value, element, params) {
+                return parseInt(value) >= parseInt($(params).val());
+            }, _("Måste vara större än eller lika med från-värdet."));
+
+            $.validator.addMethod("eq", function(value, element, params) {
+                return checkTwoValue($("#from-input").val(), $("#to-input").val(), $(element).attr('id'));
+            }, _("Från- och till-värden måste ha samma längd."));
+
+            $("form[name=add_by_number]").validate({
+                rules: {
+                    from: {
+                        required: true,
+                        eq: "#from-input",
+                        eq: "#to-input",
+                    },
+                    to: {
+                        required: true,
+                        gt: "#from-input",
+                        eq: "#from-input",
+                        eq: "#to-input",
+                    }
+                }
+            });
+
+            $("#print").on("click", function () {
+                if ( $("form[name=add_by_number]").valid() ) {
+                    return Xport();
+                }
+            });
+        });
+
+
+
+
+
+
+
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,433 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF ( add_form ) %]
+ [% t("Edit subfields constraints") | html %] &rsaquo;
+ [% END %]
+
+ [% IF ( delete_confirm ) %]
+ [% tx("Confirm deletion of subfield '{subfield}'", {subfield = ass.tagsubfield }) | html %] &rsaquo;
+ [% END %]
+
+ [% IF ( add_form || delete_confirm || else ) %]
+ [% tx("Tag {tag}", { tag = tagfield}) | html %] &rsaquo;
+ [% END %]
+
+ [% IF ( authtypecode ) %]
+ [% tx("'{authtypecode}' framework", { authtypecode = authtypecode }) | html %]
+ [% ELSE %]
+ [% t("Default framework") | html %]
+ [% END %] &rsaquo;
+ [% t("Authority types") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_auth_subfields_structure" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/authtypes.pl">Auktoritetstyper</a>
+ [% END %]
+
+ [% IF ( authtypecode ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/auth_tag_structure.pl?authtypecode=[% authtypecode | uri%]">[% tx("'{authtypecode}' framework", { authtypecode = authtypecode }) | html %]</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/auth_tag_structure.pl">Standardramverk</a>
+ [% END %]
+ [% END %]
+
+ [% IF ( else ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("Tag {tag}", { tag = tagfield}) | html %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/auth_subfields_structure.pl?tagfield=[% tagfield | uri %]&amp;tagsubfield=[% tagsubfield | uri %]&amp;authtypecode=[% authtypecode |uri %]">[% tx("Tag {tag}", { tag = tagfield}) | html %]</a>
+ [% END %]
+ [% END %]
+
+ [% IF ( delete_confirm ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("Confirm deletion of subfield '{tagsubfield}'", { tagsubfield = ass.tagsubfield }) | html %]
+ [% END %]
+ [% END %]
+
+ [% IF ( add_form ) %]
+ [% IF ( use_heading_flags_p ) %]
+ [% IF ( heading_edit_subfields_p ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Redigera begränsningar för delfält</span>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% action | html %]
+ [% END %]
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% IF ( add_form ) %]
+
+ <h1>[% IF ( use_heading_flags_p ) %] [% IF ( heading_edit_subfields_p ) %]Redigera begränsningar för underordnade MARC-fält för fält [% tagfield | html %] auktoritet [% authtypecode | html %][% END %] [% ELSE %][% action | html %][% END %]</h1>
+ <div class="hint">Du kan dra och släppa delfältstabbarna för att ändra ordning.</div>
+ <form action="/cgi-bin/koha/admin/auth_subfields_structure.pl" name="Aform" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add_validate" />
+ <input type="hidden" name="tagfield" value="[% tagfield | html %]" />
+ <input type="hidden" name="authtypecode" value="[% authtypecode | html %]" />
+ <fieldset class="action"><input class="btn btn-primary" type="submit" value="Spara ändringar" /> <a class="cancel" href="/cgi-bin/koha/admin/auth_subfields_structure.pl?tagfield=[% tagfield | uri %]&amp;authtypecode=[% authtypecode | uri %]">Avbryt</a></fieldset>
+
+ [% BLOCK outputsubfield %][% FILTER collapse %] [% SWITCH ( subfieldanchor ) %] [%   CASE "@" %] I [%   CASE "%" %] % [%   CASE  %] [% subfieldanchor | html %] [% END %] [% END %][% END %] [% WRAPPER tabs id= "subfieldtabs" %] [% WRAPPER tabs_nav %] [% FOREACH loo IN loop %] [% outputsubfield = PROCESS outputsubfield subfieldanchor = loo.tagsubfield %] [% WRAPPER tab_item tabname= outputsubfield id= "tab_subfield_${outputsubfield}" %] [% IF ( loo.new_subfield ) %] <span>Ny</span>
+ [% ELSE %]
+ [% loo.tagsubfield | html %]
+ [% END # IF loo.new_subfield%]
+ [% END # WRAPPER tab_item %]
+ [% END # FOREACH loo %]
+ [% END # /WRAPPER tabs_nav %]
+
+ [% WRAPPER tab_panels %]
+ [% FOREACH loo IN loop %]
+ [% outputsubfield = PROCESS outputsubfield subfieldanchor = loo.tagsubfield %]
+ [% WRAPPER tab_panel tabname=outputsubfield %]
+ <fieldset class="rows"><ol>
+
+ [% IF ( loo.new_subfield ) %]
+ <li>
+ <label for="tagsubfieldinput[% loo.row | html %]">Kod för delfält: </label>
+ <input type="text" name="tagsubfield" value="[% loo.tagsubfield | html %]" size="1" id="tagsubfield" maxlength="1" />
+ </li>
+ [% ELSE %]
+ <li>
+ <input type="hidden" name="tagsubfield" value="[% loo.tagsubfield | html %]" />
+ </li>
+ [% END %]
+ <li>
+ <label for="repeatable[% loo.row | html %]">Upprepningsbar: </label>
+ [% IF loo.repeatable %]
+ <input type="checkbox" id="repeatable[% loo.row | html %]" name="repeatable[% loo.row | html %]" checked="checked" value="1" />
+ [% ELSE %]
+ <input type="checkbox" id="repeatable[% loo.row | html %]" name="repeatable[% loo.row | html %]" value="1" />
+ [% END %]
+ </li>
+ <li>
+ <label for="mandatory[% loo.row | html %]">Obligatorisk: </label>
+ [% IF loo.mandatory %]
+ <input type="checkbox" id="mandatory[% loo.row | html %]" name="mandatory[% loo.row | html %]" checked="checked" value="1" />
+ [% ELSE %]
+ <input type="checkbox" id="mandatory[% loo.row | html %]" name="mandatory[% loo.row | html %]" value="1" />
+ [% END %]
+ </li>
+ <li><label for="liblibrarian[% loo.row | html %]">Beskrivning i personalklienten: </label><input id="liblibrarian[% loo.row | html %]" type="text" name="liblibrarian" value="[% loo.liblibrarian | html_entity %]" size="40" maxlength="255" /></li>
+ <li><label for="libopac[% loo.row | html %]">Beskrivning i OPAC: </label><input type="text" id="libopac[% loo.row | html %]" name="libopac" value="[% loo.libopac | html_entity %]" size="40" maxlength="255" /></li>
+ <li><label for="tab[% loo.row | html %]">Hanterad i flik: </label>
+ <select name="tab" id="tab[% loo.row | html %]">
+ [%- IF ( loo.tab ==  -1 ) -%]
+ <option value="-1" selected="selected">ignorera</option>
+ [%- ELSE -%]
+ <option value="-1">ignorera</option>
+ [%- END -%]
+ [%- FOREACH t IN [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'] -%]
+ [%- IF ( loo.tab ==  t && t.length>0 ) -%]
+ <option value="[%- t | html -%]" selected="selected">[%- t | html -%]</option>
+ [%- ELSIF ( loo.tab ==  t ) -%]
+ <option value="[%- t | html -%]" selected="selected">&nbsp;</option>
+ [%- ELSE -%]
+ <option value="[%- t | html -%]">[%- t | html -%]</option>
+ [%- END -%]
+ [%- END -%]
+ </select>
+ <div class="hint"><i class="fa-solid fa-triangle-exclamation"></i> <span>Ignorera innebär att delfältet inte visas i postredigeraren och att värdet, om det finns något, kommer tas bort från posten</span></div>
+ </li>
+ <li>
+ <fieldset>
+ <legend>Visa</legend>
+ <ol>
+ <li><label for="ohidden[% loo.row | html %]">Välj om det ska visas eller inte:</label>
+ <select name="ohidden" id="ohidden[% loo.row | html %]">
+ [%- IF ( loo.hidden ==  0 ) -%]
+ <option value= "0" selected="selected">Visa alla</option>
+ <option value="1">Dölj alla</option>
+ [%- ELSE -%]
+ [%# All other non-zero values mean: Hide %]
+ <option value= "0">Visa alla</option>
+ <option value="1" selected="selected">Dölj alla</option>
+ [%- END -%]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+ </li>
+ <li>
+ <fieldset class="rows">
+ <legend>Avancerade begränsningar:</legend>
+ <ol>
+ <li>
+ <label for="isurl[% loo.row | html %]">Är en URL:</label>
+ [% IF loo.isurl %]
+ <input type="checkbox" id="isurl[% loo.row | html %]" name="isurl[% loo.row | html %]" checked="checked" value="1" />
+ [% ELSE %]
+ <input type="checkbox" id="isurl[% loo.row | html %]" name="isurl[% loo.row | html %]" value="1" />
+ [% END %]
+ <span class="hint">Markering innebär att delfältet är en URL som det går att klicka på.</span>
+ </li>
+ <li>
+ <label for="defaultvalue[% loo.row | html %]">Standardvärde:</label>
+ <input type="text" name="defaultvalue" id="defaultvalue[% loo.row | html %]" value="[% loo.defaultvalue | html %]" />
+ </li>
+ </ol>
+ </fieldset>
+ </li>
+ <li>
+ <fieldset><legend>Indata för hjälp</legend>
+ <ol>
+ <li>
+ <label for="kohafield[% loo.row | html %]">Koha-fält:</label>
+ <select name="kohafield" id="kohafield[% loo.row | html %]">
+ [%- FOREACH value IN loo.kohafields %]
+ [% IF ( value == loo.kohafield  && value.length>0 ) -%]
+ <option value="[% value | html %]" selected="selected">[% value | html %]</option>
+ [%- ELSIF ( value == loo.kohafield ) -%]
+ <option value="[% value | html %]" selected="selected">&nbsp;</option>
+ [%- ELSIF ( value.length==0 ) -%]
+ <option value="[% value | html %]">&nbsp;</option>
+ [%- ELSE -%]
+ <option value="[% value | html %]">[% value | html %]</option>
+ [%- END -%]
+ [%- END %]
+ </select>
+ </li>
+ <li>
+ <label for="authorised_value[% loo.row | html %]">Auktoriserat värde:</label>
+ <select name="authorised_value" id="authorised_value[% loo.row | html %]">
+ [%- FOREACH value IN loo.authorised_values %]
+ [% IF ( value == loo.authorised_value && value.length>0 ) -%]
+ <option value="[% value | html %]" selected="selected">[% value | html %]</option>
+ [%- ELSIF ( value == loo.authorised_value ) -%]
+ <option value="[% value | html %]" selected>&nbsp;</option>
+ [%- ELSIF ( value.length==0 ) -%]
+ <option value="[% value | html %]">&nbsp;</option>
+ [%- ELSE -%]
+ <option value="[% value | html %]">[% value | html %]</option>
+ [%- END -%]
+ [%- END %]
+ </select>
+ </li>
+ <li>
+ <label for="frameworkcode[% loo.row | html %]">Tesaurus:</label>
+ <select name="frameworkcode" id="frameworkcode[% loo.row | html %]">
+ [%- FOREACH value IN loo.frameworkcodes %]
+ [% IF ( value == loo.frameworkcode && value.length>0 ) -%]
+ <option value="[% value | html %]" selected="selected">[% value | html %]</option>
+ [%- ELSIF ( value == loo.frameworkcode ) -%]
+ <option value="[% value | html %]" selected="selected">&nbsp;</option>
+ [%- ELSIF ( value.length==0 ) -%]
+ <option value="[% value | html %]">&nbsp;</option>
+ [%- ELSE -%]
+ <option value="[% value | html %]">[% value | html %]</option>
+ [%- END -%]
+ [%- END %]
+ </select>
+ </li>
+ <li>
+ <label for="value_builder[% loo.row | html %]">Plugin:</label>
+ <select name="value_builder" id="value_builder[% loo.row | html %]">
+ [%- FOREACH value IN loo.value_builders %]
+ [% IF ( value == loo.value_builder && value.length>0 ) -%]
+ <option value="[% value | html %]" selected="selected">[% value | html %]</option>
+ [%- ELSIF ( value == loo.value_builder ) -%]
+ <option value="[% value | html %]" selected="selected">&nbsp;</option>
+ [%- ELSIF ( value.length==0 ) -%]
+ <option value="[% value | html %]">&nbsp;</option>
+ [%- ELSE -%]
+ <option value="[% value | html %]">[% value | html %]</option>
+ [%- END -%]
+ [%- END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+ </li>
+ </ol></fieldset><br class="clear" />
+ [% END # /WRAPPER   tab_panel %]
+ [% END # /FOREACH loo %]
+ [% END # /WRAPPER tab_panels %]
+ [% END # /WRAPPER tabs %]
+ </form>
+[% END %]
+
+[% IF ( delete_confirm ) %]
+
+ <div class="alert alert-warning">
+ <h1>Bekräfta borttagning av delfält <span class="ex">'[% ass.tagsubfield | html %]'?</span></h1>
+ <form action="[% delete_link | html %]" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_confirmed" />
+ <table>
+ <tr><th scope="row">Delfält:</th> <td>[% ass.tagsubfield | html %]</td></tr>
+ <tr><th scope="row">Beskrivning:</th> <td>[% ass.liblibrarian | html_entity %]</td></tr>
+ </table>
+ <input type="hidden" name="tagfield" value="[% ass.tagfield | html %]" />
+ <input type="hidden" name="tagsubfield" value="[% ass.tagsubfield | html %]" />
+ <input type="hidden" name="authtypecode" value="[% ass.authtypecode | html %]" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-fw fa-check"></i> Ja, ta bort delfältet</button>
+ </form>
+
+ <form action="[% delete_link | html %]" method="get">
+ <input type="hidden" name="tagfield" value="[% ass.tagfield | html %]" />
+ <input type="hidden" name="tagsubfield" value="[% ass.tagsubfield | html %]" />
+ <input type="hidden" name="authtypecode" value="[% ass.authtypecode | html %]" />
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-fw fa-times"></i> Nej, ta inte bort</button>
+ </form>
+ </form></div>
+[% END %]
+
+[% IF ( else ) %]
+<h1>Administration av delfältsstruktur i auktoritets-MARC för [% tagfield | html %] (auktoritet: [% authtypecode | html %])</h1>
+<p>Denna skärm visar de delfält som är kopplade till den valda taggen. Du kan redigera delfält eller lägga till ett nytt genom att klicka på redigera.</p>
+<p>Kolumnen 'Koha field' visar att delfältet är länkat med ett Koha-fält.</p>
+
+<div class="page-section">
+<table id="table_authsubfieldstructure">
+ <thead>
+ <tr>
+ <th>Delfält</th>
+ <th>Beskrivning</th>
+ <th>Begränsningar</th>
+ <th class="NoSort">&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH loo IN loop %]
+ <tr>
+ <td>
+ <a href="/cgi-bin/koha/admin/auth_subfields_structure.pl?op=add_form&tagfield=[% tagfield | uri %]&authtypecode=[% authtypecode | uri %]#sub[% subfieldanchor | uri %]field">[% loo.tagsubfield | html %]</a>
+ </td>
+ <td>
+ [% IF loo.tab == -1 %]
+ <em>[% loo.liblibrarian | html_entity %]</em>
+ [% ELSE %]
+ [% loo.liblibrarian | html_entity %]
+ [% END %]
+ </td>
+ <td>
+ [% IF loo.subfield_ignored == -1 %]
+ <em>delfält ignoreras</em>
+ [% ELSE %]
+ <strong>Tabb:</strong>[% loo.tab | html %],
+ [% IF ( loo.kohafield ) %] | <strong>Koha-fält:</strong> [% loo.kohafield | html %], [% END %]
+ [% IF ( loo.repeatable ) %]<span>Upprepningsbar</span>, [% ELSE %]<span>Inte upprepningsbar</span>,
+ [% END %]
+ [% IF ( loo.mandatory ) %]<span>Obligatorisk</span>, [% ELSE %]<span>Inte obligatorisk</span>,
+ [% END %]
+ [% IF ( loo.hidden ) %]<span>dold</span>,
+ [% END %]
+ [% IF ( loo.isurl ) %]<span>är en URL</span>,
+ [% END %]
+ [% IF ( loo.authorised_value ) %] | <strong>Förf-värde:</strong>[% loo.authorised_value | html %],
+ [% END %]
+ [% IF ( loo.frameworkcode ) %] | <strong>Auktoritet:</strong>[% loo.frameworkcode | html %],
+ [% END %]
+ [% IF ( loo.value_builder ) %] | <strong>Plugin:</strong>[% loo.value_builder | html %],[% END %]
+ [% END %]
+ </td>
+ <td class="actions">
+ <a href="/cgi-bin/koha/admin/auth_subfields_structure.pl?op=add_form&tagfield=[% tagfield | uri %]&tagsubfield=[% loo.tagsubfield | uri %]&authtypecode=[% authtypecode | uri %]#sub[% loo.tagsubfield | uri %]field" class="btn btn-default btn-xs"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ <a href="/cgi-bin/koha/admin/auth_subfields_structure.pl?op=delete_confirm&amp;tagfield=[% loo.tagfield | uri %]&amp;tagsubfield=[% loo.tagsubfield | uri %]&amp;authtypecode=[% authtypecode | uri %]" class="btn btn-default btn-xs"><i class="fa fa-trash-can" aria-hidden="true"></i> Ta bort</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+</table>
+</div> <!-- /.page-section -->
+
+ <form action="/cgi-bin/koha/admin/auth_subfields_structure.pl" method="get">
+ <fieldset class="action"><input type="hidden" name="op" value="add_form" />
+ <input type="hidden" name="tagfield" value="[% edit_tagfield | html %]" />
+ <input type="hidden" name="authtypecode" value="[% edit_authtypecode | html %]" />
+ <input class="btn btn-primary" type="submit" value="Redigera delfält" />
+ <a class="cancel" href="auth_tag_structure.pl?searchfield=[% tagfield | uri %]&amp;authtypecode=[% authtypecode | uri %]">Avbryt</a></fieldset>
+ </form>
+
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% Asset.js( "lib/sortable/Sortable.min.js" ) | $raw %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ <script>
+        $(document).ready(function() {
+            $("#table_authsubfieldstructure").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "columnDefs": [
+                    { 'sortable': false, 'targets': [ 'NoSort' ] }
+                ],
+                aaSorting: [],
+                paginate: false
+            }));
+
+            if ($("#subfieldtabs").length > 0) {
+                [% IF ( tagsubfield && tagsubfield == "@") %]
+                    $("#subfieldtabs a[href='#AT_panel']").tab("show");
+                [% ELSIF ( tagsubfield && tagsubfield != "@") %]
+                    $("#subfieldtabs a[href='#[% tagsubfield | html %]_panel']").tab("show");
+                [% ELSE  %]
+                    $("#subfieldtabs a:first").tab("show");
+                [% END %]
+
+                var subfields_list = $("#subfieldtabs > ul");
+                var sortable_subfields = new Sortable(subfields_list[0], {
+                    onEnd: function (e) {
+                        var old_index = e.oldIndex;
+                        var new_index = e.newIndex;
+                        if (old_index < new_index) new_index++;
+                        var subfield_code = e.item.id.replace(/^tab_subfield_/, "");
+                        var content = $("#" + subfield_code + "_panel");
+                        var panels = $("#subfieldtabs .tab-pane");
+                        if (new_index < $(panels).size()) {
+                            $(content).insertBefore(panels[new_index]);
+                        } else {
+                            $(content).insertAfter(panels[new_index - 1]);
+                        }
+                    },
+                });
+            }
+
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,57 @@
+---
+description:
+- Joukko oletusnidetyyppejä.
+tables:
+- itemtypes:
+    multiline: []
+    rows:
+    - description: Kirjat
+      imageurl: bridge/book.png
+      itemtype: BK
+      notforloan: 0
+      rentalcharge: 0
+      summary: ''
+    - description: Sekalainen aineisto
+      imageurl: bridge/kit.png
+      itemtype: MX
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Elektroninen aineisto
+      imageurl: bridge/computer_file.png
+      itemtype: CF
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Kartat
+      imageurl: bridge/map.png
+      itemtype: MP
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Visuaalinen aineisto
+      imageurl: bridge/dvd.png
+      itemtype: VM
+      notforloan: 1
+      rentalcharge: 5
+      summary: ''
+    - description: Musiikki
+      imageurl: bridge/sound.png
+      itemtype: MU
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Jatkuvat julkaisut
+      imageurl: bridge/periodical.png
+      itemtype: CR
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Viittaus
+      imageurl: bridge/reference.png
+      itemtype: REF
+      notforloan: 1
+      rentalcharge: 0
+      summary: ''
+    translatable:
+    - description

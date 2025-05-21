@@ -1,0 +1,576 @@
+[% USE raw %]
+[% USE To %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF( modify ) %]
+ [% t("Modify subscription") | html %] &rsaquo;
+ [% bibliotitle | html %]
+ [% ELSE %]
+ [% t("New subscription") | html %]
+ [% END %] &rsaquo;
+ [% t("Serials") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>
+fieldset.rows li.radio { width: 100%; } /* override staff-global.css */
+#mana_comment_errortext { font-weight: bold; font-family: monospace;}
+/* Prevents Bootstrap menus from being hidden inside modal */
+#mana_search_result .modal { overflow: visible; }
+#mana_search_result .modal-body { overflow-y: visible; }
+
+fieldset.rows table { clear: none; margin: 0; }
+</style>
+</head>
+
+<body id="ser_subscription-add" class="ser">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'serials-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/serials-home.pl">Periodika</a>
+ [% END %]
+ [% UNLESS ( blocking_error ) %]
+ [% IF ( modify ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscriptionid | uri %]"><em>[% bibliotitle | html %]</em></a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Redigera prenumeration</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Ny prenumeration</span>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+ <h1>[% IF ( modify ) %] Redigera prenumeration för <em>[% bibliotitle | html %]</em>[% ELSE %]Lägg till en ny prenumeration[% END %] (<span id="page_number">1/2</span>)</h1>
+ </div>
+ </div>
+ <form method="post" id="subscription_add_form" name="f" action="/cgi-bin/koha/serials/subscription-add.pl" class="validated">
+ [% INCLUDE 'csrf-token.inc' %]
+ <div class="row" id="page_1">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% IF ( modify ) %]
+ <input type="hidden" name="op" value="cud-modsubscription" />
+ <input type="hidden" name="subscriptionid" value="[% subscriptionid | html %]" />
+ [% ELSE %]
+ <input type="hidden" name="op" value="cud-addsubscription" />
+ [% END %]
+ <input type="hidden" name="user" value="[% logged_in_user.userid | html %]" />
+ <input type="hidden" name="irreg_check" value="0" />
+ <fieldset id="subscription_add_information" class="rows">
+ <legend>Prenumerationsdetaljer</legend>
+ <ol>
+ [% IF ( subscriptionid ) %]
+ <li><span class="label">Prenumerationsnummer: </span> [% subscriptionid | html %]</li>
+ [% END %]
+ <li>
+ <label for="aqbooksellerid">Leverantör: </label>
+ <input type="text" name="aqbooksellerid" id="aqbooksellerid" value="[% aqbooksellerid | html %]" size="8" /><input type="text" name="aqbooksellername" id="aqbooksellername" value="[% aqbooksellername | html %]" disabled="disabled" readonly="readonly" /><a href="#" id="vendor_search"><i class="fa fa-search"></i> Sök efter leverantör</a>
+ </li>
+ <li>
+ <label for="biblionumber" class="required">Post:</label>
+ <input type="text" name="biblionumber" id="biblionumber" value="[% bibnum | html %]" size="8" />
+ <input type="text" name="title" value="[% bibliotitle | html %]" disabled="disabled" readonly="readonly" /><span class="required" title="Prenumerationer måste vara kopplade till en bibliografisk post">Obligatoriskt</span>
+ <span id="error_bib_not_exist"></span>
+ <div class="hint">Prenumerationer måste vara kopplade till en bibliografisk post</div>
+ <div class="inputnote"> <a href="#" id="record_search"><i class="fa fa-search"></i> Sök efter post</a>
+ [% IF ( CAN_user_editcatalogue ) %]
+ [% IF ( modify ) %]
+ | <a href="#" id="biblio_add_edit" data-biblionumber="[% bibnum | html %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera post</a>
+ [% ELSE %]
+ | <a href="#" id="biblio_add_edit"><i class="fa fa-plus"></i> Skapa post</a>
+ [% END %]
+ [% END %]
+ </div>
+ </li>
+ <li>
+ <span class="label">När denna periodika tas emot:</span>
+ [% IF ( serialsadditems ) %]
+ <input type="radio" id="serialsadditems-yes" name="serialsadditems" value="1" checked="checked" />
+ <label class="radio" for="serialsadditems-yes"> Skapa en exemplarpost</label>
+ <input type="radio" id="serialsadditems-no" name="serialsadditems" value="0" />
+ <label class="radio" for="serialsadditems-no"> Skapa inte en exemplarpost</label>
+ [% ELSE %]
+ <input type="radio" id="serialsadditems-yes" name="serialsadditems" value="1"/>
+ <label class="radio" for="serialsadditems-yes"> Skapa en exemplarpost</label>
+ <input type="radio" id="serialsadditems-no" name="serialsadditems" value="0" checked="checked" />
+ <label class="radio" for="serialsadditems-no"> Skapa inte en exemplarpost</label>
+ [% END %]
+ </li>
+ <li>
+ <label for="irregular_issue">När det kommer ett oregelbundet nummer:</label>
+ [% IF (skip_serialseq) %]
+ <input type="radio" id="skip_serialseq_yes" name="skip_serialseq" value="1" checked="checked" />
+ <label class="radio" for="skip_serialseq_yes">Hoppa över exemplarnummer</label>
+ <input type="radio" id="skip_serialseq_no" name="skip_serialseq" value="0" />
+ <label class="radio" for="skip_serialseq_no">Behåll exemplarnummer</label>
+ [% ELSE %]
+ <input type="radio" id="skip_serialseq_yes" name="skip_serialseq" value="1" />
+ <label class="radio" for="skip_serialseq_yes">Hoppa över exemplarnummer</label>
+ <input type="radio" id="skip_serialseq_no" name="skip_serialseq" value="0" checked="checked" />
+ <label class="radio" for="skip_serialseq_no">Behåll exemplarnummer</label>
+ [% END %]
+ </li>
+ <li>
+ <label for="manualhistory">Manuell historik:</label>
+ [% IF (manualhistory) %]
+ <input type="checkbox" id="manualhistory" name="manualhist" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" id="manualhistory" name="manualhist" />
+ [% END %]
+ </li>
+ <li>
+ <label for="callnumber">Hyllsignatur:</label>
+ <input type="text" name="callnumber" id="callnumber" value="[% callnumber | html %]" size="20" />
+ </li>
+ <li>
+ <label for="branchcode">Bibliotek:</label>
+ <select name="branchcode" id="branchcode">
+ [% UNLESS ( Independentbranches ) %]
+ <option value="">Ingen</option>
+ [% END %]
+ [% IF CAN_user_serials_superserials %]
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => branchcode, unfiltered => 1 ) %]
+ [% ELSE %]
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => branchcode ) %]
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="notes">Offentlig anmärkning:</label>
+ <textarea name="notes" id="notes" cols="30" rows="2">[% notes | html %]</textarea>
+ </li>
+ <li>
+ <label for="internalnotes">Intern anmärkning:</label>
+ <textarea name="internalnotes" id="internalnotes" cols="30" rows="2">[% internalnotes | html %]</textarea>
+ </li>
+ <li>
+ [% IF ( letterloop ) %]
+ <label for="letter">Låntagarmeddelanden: </label>
+ <select name="letter" id="letter">
+ <option value="">Ingen</option>
+ [% FOREACH letterloo IN letterloop %]
+ [% IF ( letterloo.selected ) %]
+ <option value="[% letterloo.value | html %]" selected="selected">[% letterloo.lettername | html %]</option>
+ [% ELSE %]
+ <option value="[% letterloo.value | html %]">[% letterloo.lettername | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <div class="hint">Om ett meddelande väljs kan låntagare prenumerera på notifieringar när ett nytt nummer anländer.</div>
+ [% ELSE %]
+ <span class="label">Låntagarmeddelanden: </span>
+ <div class="hint">För att meddela låntagare om nya nummer periodika måste du <a href="/cgi-bin/koha/tools/letter.pl">definiera ett meddelande</a>.</div>
+ [% END %]
+ </li>
+ <li>
+ <label for="location">Plats:</label>
+ <select name="location" id="location">
+ <option value="">Ingen</option>
+ [% FOREACH locations_loo IN locations_loop %]
+ [% IF locations_loo.authorised_value == location %]
+ <option value="[% locations_loo.authorised_value | html %]" selected="selected">[% locations_loo.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% locations_loo.authorised_value | html %]">[% locations_loo.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [% IF serialsadditems %]
+ <li class="use_items">
+ [% ELSE %]
+ <li class="use_items" style="display:none">
+ [% END %]
+ <label for="ccode">Avdelning:</label>
+ <select name="ccode" id="ccode">
+ <option value="">Ingen</option>
+ [% FOREACH ccode_loo IN ccodes_loop %]
+ [% IF ccode_loo.authorised_value == ccode %]
+ <option value="[% ccode_loo.authorised_value | html %]" selected="selected">[% ccode_loo.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% ccode_loo.authorised_value | html %]">[% ccode_loo.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [% IF serialsadditems %]
+ <li class="use_items">
+ [% ELSE %]
+ <li class="use_items" style="display:none">
+ [% END %]
+ <label for="itemtype">Exemplartyp:</label>
+ <select name="itemtype" id="itemtype">
+ <option value=""></option>
+ [% FOREACH type IN typeloop %]
+ [% IF ( type.selected ) %]
+ <option value="[% type.code | html %]" selected="selected">[% type.value | html %]</option>
+ [% ELSE %]
+ <option value="[% type.code | html %]">[% type.value | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [%IF makePreviousSerialAvailable %]
+ <li>
+ <label for="previousitemtype">Exemplartyp för äldre nummer:</label>
+ <select name="previousitemtype" id="previousitemtype">
+ <option value=""></option>
+ [% FOREACH previous IN previoustypeloop %]
+ [% IF ( previous.selected ) %]
+ <option value="[% previous.code | html %]" selected="selected">[% previous.value | html %]</option>
+ [% ELSE %]
+ <option value="[% previous.code | html %]">[% previous.value | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [% END %]
+ <li>
+ <label for="graceperiod">Respittid:</label>
+ <input type="text" name="graceperiod" id="graceperiod" value="[% graceperiod | html %]" size="5"/> dag(ar) </li>
+ <li>
+ <label class="widelabel" for="staffdisplaycount">Antal nummer att visa internt: </label>
+ <input type="text" name="staffdisplaycount" id="staffdisplaycount" value="[% staffdisplaycount | html %]" inputmode="numeric" pattern="[0-9]*"  size="4"/>
+ <div class="hint">
+ Standard: [% Koha.Preference('StaffSerialIssueDisplayCount') | html %] [% IF ( CAN_user_parameters_manage_sysprefs ) %] (<a target="_blank" href="/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=StaffSerialIssueDisplayCount">Skickade meddelanden</a> systeminställning) [% ELSE %] (StaffSerialIssueDisplayCount systeminställning) [% END %] </div>
+ </li>
+ <li>
+ <label class="widelabel" for="opacdisplaycount">Antal nummer att visa för allmänheten: </label>
+ <input type="text" name="opacdisplaycount" id="opacdisplaycount" value="[% opacdisplaycount | html %]" inputmode="numeric" pattern="[0-9]*"  size="4"/>
+ <div class="hint">
+ Standard: [% Koha.Preference('OPACSerialIssueDisplayCount') | html %] [% IF ( CAN_user_parameters_manage_sysprefs ) %] (<a target="_blank" href="/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=OPACSerialIssueDisplayCount">OPACSerialIssueDisplayCount</a> systeminställning) [% ELSE %] (OPACSerialIssueDisplayCount systeminställning) [% END %] </div>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <button type="button" class="btn btn-primary" id="subscription_add_next" style="float:right;">Nästa <i class="fa-solid fa-right-long"></i></button>
+ </fieldset>
+ </div> <!-- /.col-md-10 offset-md-1 col-lg-8 offset-lg-2 -->
+ </div> <!-- /.row#page_1 -->
+ <div class="row" id="page_2">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% IF ( Koha.Preference('Mana') == 1) && !mana_url %]
+ <fieldset>
+ <p><center>Mana Knowledge Base kan användas för att importera prenumerationsmönster som andra bibliotek har skapat så du inte behöver göra samma arbete. Fråga din systemadministratör för att konfigurera den här tjänsten och avsluta konfigurationen, eller dölj det här meddelandet genom att slå av systeminställningen <a href=/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=request+to+mana+webservice>här</a></center></p>
+ </fieldset>
+ [% END %]
+ <div style="display:none" id="mana_search" class="alert alert-info">
+ </div>
+ <div id="subscription_form_planning">
+ <fieldset class="rows">
+ <legend>Planering periodika</legend>
+ <ol>
+ <li>
+ <label for="acqui_date" class="required">Första utgåvans utgivningsdatum:</label>
+ [% UNLESS (more_than_one_serial) %]
+ <input type="text" size="10" id="acqui_date" name="firstacquidate" value="[% firstacquidate | html %]" class="flatpickr required" required="required" />
+ [% ELSE %]
+ [% firstacquidate | $KohaDates %]
+ <input type="hidden" id="acqui_date" name="firstacquidate" value="[% firstacquidate | $KohaDates dateformat => 'iso' %]"/>
+ [% END %]
+ <span class="required">Obligatoriskt</span>
+ </li>
+ [% IF (more_than_one_serial) %]
+ <li>
+ <label for="nextacquidate">Nästa nummers utgivningsdatum:</label>
+ <input type="text" size="10" id="nextacquidate" name="nextacquidate" value="[% nextacquidate | html %]" class="flatpickr" />
+ </li>
+ [% END %]
+ <li>
+ <label for="frequency" class="required">Frekvens:</label>
+ <select name="frequency" id="frequency" class="required" required="required">
+ <option value="">-- välj --</option>
+ [% FOREACH frequency IN frequencies %]
+ [% IF (frequency.selected) %]
+ <option value="[% frequency.id | html %]" selected="selected">
+ [% ELSE %]
+ <option value="[% frequency.id | html %]">
+ [% END %]
+ [% frequency.label | html %]
+ </option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="subtype">Prenumerationstid:</label>
+ <select name="subtype" id="subtype">
+ [% FOREACH st IN subtypes %]
+ [% SWITCH st %]
+ [% CASE 'numberlength' %]
+ [% IF st == subtype %]
+ <option value="issues" selected="selected">
+ [% ELSE %]
+ <option value="issues">
+ [% END %] nummer [% CASE 'weeklength' %] [% IF st == subtype %] <option value="weeks" selected="selected">
+ [% ELSE %]
+ <option value="weeks">
+ [% END %] veckor [% CASE 'monthlength' %] [% IF st == subtype %] <option value="months" selected="selected">
+ [% ELSE %]
+ <option value="months">
+ [% END %] månader [% CASE %][% st | html %] [% END %] </option>
+ [% END %]
+ </select>
+ <input type="text" name="sublength" id="sublength" value="[% sublength | html %]" size="3" /> (ange belopp i siffror) <input type="hidden" name="issuelengthcount">
+ </li>
+ <li>
+ <label for="from" class="required"> Startdatum för prenumeration:</label>
+ <input type="text" size="10" id="from" name="startdate" value="[% startdate | html %]" class="flatpickr required" data-date_to="to" required="required" />
+ </li>
+ <li>
+ <label for="to">Slutdatum för prenumeration:</label>
+ <input type="text" size="10" id="to" name="enddate" value="[% enddate | html %]" class="flatpickr" />
+ </li>
+ <li>
+ <label for="numberpattern" class="required">Numreringsmönster:</label>
+ <select name="numbering_pattern" id="numberpattern" class="required" required="required">
+ <option value="">-- välj --</option>
+ [% FOREACH numberpattern IN numberpatterns %]
+ [% IF (numberpattern.selected) %]
+ <option value="[% numberpattern.id | html %]" selected="selected">
+ [% ELSE %]
+ <option value="[% numberpattern.id | html %]">
+ [% END %]
+ [% numberpattern.label | html %]
+ </option>
+ [% END %]
+ </select>
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="published_on_template">Mall för utgivningsdatum:</label>
+ <textarea id="published_on_template" name="published_on_template">[% published_on_template | html %]</textarea>
+ </li>
+ <li>
+ <label for="locale">Lokal:</label>
+ <select id="locale" name="locale">
+ <option value=""></option>
+ [% FOREACH l IN locales %]
+ [% IF l.language == locale %]
+ <option value="[% l.language | html %]" selected="selected">[% l.description | html %]</option>
+ [% ELSE %]
+ <option value="[% l.language | html %]">[% l.description | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <div class="hint">Om tomt så används engelska</div>
+ </li>
+ <li id="more_options">
+ <span class="label">&nbsp;</span>
+ <table id="moreoptionst">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ <th id="headerX">&nbsp;</th>
+ <th id="headerY">&nbsp;</th>
+ <th id="headerZ">&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <th scope="row">
+ [% IF (more_than_one_serial) %] Senaste värde: [% ELSE %] Börjar med: [% END %] </th>
+ <td id="beginsX"><input type="text" id="lastvaluetemp1" name="lastvaluetemp1" value="[% lastvalue1 | html %]" /></td>
+ <td id="beginsY"><input type="text" id="lastvaluetemp2" name="lastvaluetemp2" value="[% lastvalue2 | html %]" /></td>
+ <td id="beginsZ"><input type="text" id="lastvaluetemp3" name="lastvaluetemp3" value="[% lastvalue3 | html %]" /></td>
+ </tr>
+ <tr>
+ <th scope="row">Inre räknare:</th>
+ <td id="innerX"><input type="text" id="innerlooptemp1" name="innerlooptemp1" value="[% innerloop1 | html %]" /></td>
+ <td id="innerY"><input type="text" id="innerlooptemp2" name="innerlooptemp2" value="[% innerloop2 | html %]" /></td>
+ <td id="innerZ"><input type="text" id="innerlooptemp3" name="innerlooptemp3" value="[% innerloop3 | html %]" /></td>
+ </tr>
+ </tbody>
+ </table>
+ </li>
+ <li>
+ <span class="label">&nbsp;</span>
+ <a href="#" class="toggle_advanced_pattern show_advanced_pattern"><i class="fa fa-plus-square"></i> Visa avancerat mönster</a>
+ <a href="#" style="display:none;" class="toggle_advanced_pattern hide_advanced_pattern"><i class="fa fa-minus-square"></i> Dölj avancerat mönster</a>
+ </li>
+ </ol>
+
+ <div id="advancedpredictionpattern" style="display:none">
+ <ol>
+ <li>
+ <label for="patternname" class="required">Mönsternamn:</label>
+ <input id="patternname" name="patternname" type="text" readonly="readonly" class="required" required="required" />
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="numberingmethod">Numreringsformel:</label>
+ <input readonly="readonly" type="text" name="numberingmethod" id="numberingmethod" size="50" value="[% numberingmethod | html %]" />
+ </li>
+ <li>
+ <span class="label">Avancerat prognosmönster: </span>
+ <table id="advancedpredictionpatternt">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ <th>X</th>
+ <th>Y</th>
+ <th>Z</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ <th scope="row">Etikett: </th>
+ <td><input type="text" readonly="readonly" id="label1" name="label1" /></td>
+ <td><input type="text" readonly="readonly" id="label2" name="label2" /></td>
+ <td><input type="text" readonly="readonly" id="label3" name="label3" /></td>
+ </tr>
+ <tr>
+ <th scope="row">Börjar med: </th>
+ <td><input type="text" readonly="readonly" id="lastvalue1" name="lastvalue1" /></td>
+ <td><input type="text" readonly="readonly" id="lastvalue2" name="lastvalue2" /></td>
+ <td><input type="text" readonly="readonly" id="lastvalue3" name="lastvalue3" /></td>
+ </tr>
+ <tr>
+ <th scope="row">Lägg till: </th>
+ <td><input type="text" readonly="readonly" id="add1" name="add1" /></td>
+ <td><input type="text" readonly="readonly" id="add2" name="add2" /></td>
+ <td><input type="text" readonly="readonly" id="add3" name="add3" /></td>
+ </tr>
+ <tr>
+ <th scope="row">Alla: </th>
+ <td><input type="text" readonly="readonly" id="every1" name="every1" /></td>
+ <td><input type="text" readonly="readonly" id="every2" name="every2" /></td>
+ <td><input type="text" readonly="readonly" id="every3" name="every3" /></td>
+ </tr>
+ <tr>
+ <th scope="row">Ändra tillbaka till: </th>
+ <td><input type="text" readonly="readonly" id="setto1" name="setto1" /></td>
+ <td><input type="text" readonly="readonly" id="setto2" name="setto2" /></td>
+ <td><input type="text" readonly="readonly" id="setto3" name="setto3" /></td>
+ </tr>
+ <tr>
+ <th scope="row">När fler än: </th>
+ <td><input type="text" readonly="readonly" id="whenmorethan1" name="whenmorethan1" /></td>
+ <td><input type="text" readonly="readonly" id="whenmorethan2" name="whenmorethan2" /></td>
+ <td><input type="text" readonly="readonly" id="whenmorethan3" name="whenmorethan3" /></td>
+ </tr>
+ <tr>
+ <th scope="row">Inre räknare: </th>
+ <td><input type="text" readonly="readonly" id="innerloop1" name="innerloop1" /></td>
+ <td><input type="text" readonly="readonly" id="innerloop2" name="innerloop2" /></td>
+ <td><input type="text" readonly="readonly" id="innerloop3" name="innerloop3" /></td>
+ </tr>
+ <tr>
+ [% BLOCK numbering_select %]
+ <select disabled="disabled" id="[% name | html %]" name="[% name | html %]">
+ <option value=""></option>
+ <option value="dayname">Dagens namn</option>
+ <option value="dayabrv">Dagens namn (kortform)</option>
+ <option value="monthname">Månadens namn</option>
+ <option value="monthabrv">Månadens namn (kortform)</option>
+ <option value="season">Årstidens namn</option>
+ <option value="seasonabrv">Årstidens namn (kortform)</option>
+ </select>
+ [% END %]
+ <th scope="row">Formatering:</th>
+ <td>[% PROCESS numbering_select name="numbering1" %]</td>
+ <td>[% PROCESS numbering_select name="numbering2" %]</td>
+ <td>[% PROCESS numbering_select name="numbering3" %]</td>
+ </tr>
+ </tbody>
+ </table>
+ </li>
+ <li>
+ <span class="label">&nbsp;</span>
+ <a href="#" id="modifyadvancedpatternbutton"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera mönster</a>
+ <button type="button" class="btn btn-default btn-xs" id="saveadvancedpatternbutton" style="display:none"><i class="fa fa-save"></i> Spara som nytt mönster</button>
+ <a class="cancel" href="#" id="restoreadvancedpatternbutton" style="display:none">Avbryt ändringar</a>
+ </li>
+ </ol>
+ </div> <!-- /#advancedpredictionpattern -->
+ <fieldset class="action">
+ <button type="button" id="testpatternbutton" class="btn btn-default btn-sm"><i class="fa fa-play"></i> Testa prognosmönster</button>
+ </fieldset>
+ </fieldset>
+
+ [% IF additional_fields %]
+ <div id="subscription_additional_fields">
+ [% INCLUDE 'additional-fields-entry.inc' available=additional_fields values=additional_field_values %]
+ </div>
+ [% END %]
+
+ <input type="hidden" id="mana_id"  name="mana_id" value=""/>
+ <input type="hidden" id="sndescription"  name="sndescription" value=""/>
+ <input type="hidden" id="sfdescription"  name="sfdescription" value=""/>
+ <input type="hidden" id="unit"  name="unit" value=""/>
+ <input type="hidden" id="unitsperissue"  name="unitsperissue" value=""/>
+ <input type="hidden" id="issuesperunit"  name="issuesperunit" value=""/>
+ <fieldset class="action">
+ <button type="button" class="btn btn-default" id="subscription_add_previous" style="float:left"><i class="fa-solid fa-left-long"></i> Föregående</button>
+ <input accesskey="w" class="btn btn-primary" id="save-subscription" style="float:right;" type="submit" value="Spara prenumeration" />
+ </fieldset>
+ </div>
+ </div>
+ <div class="col-md-6">
+ <fieldset id="displayexample"></fieldset>
+ </div>
+ </div> <!-- /.row#page_2 -->
+ </form>
+ </div><!-- /.main -->
+
+ <!-- Mana Search Result Modal -->
+ <div class="modal" id="mana_search_result" tabindex="-1" role="dialog" aria-labelledby="mana_search_result_label">
+ <div class="modal-dialog modal-lg">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="mana_search_result_label">Dialogrutans rubrik</h1>
+ <button aria-label="Stäng" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <div class="modal-body">
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Stäng</button>
+ </div>
+ </div>
+ </div>
+ </div>
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% Asset.js("js/mana.js") | $raw %]
+ <script>
+        var subscriptionid = "[% subscriptionid | html %]";
+        var irregularity = "[% irregularity | html %]";
+        var more_than_one_serial = "[% more_than_one_serial | html %]";
+        var tags = [];
+        var interface = "[% interface | html %]";
+        var theme = "[% theme | html %]";
+        [% FOREACH field IN dont_export_field_loop %]
+            tags.push("[% field.fieldid | html %]");
+        [% END %]
+        [%- IF (Koha.Preference('Mana') == 1 && mana_url) -%]
+            var mana_enabled = 1;
+        [%- ELSE -%]
+            var mana_enabled = 0;
+        [%- END -%]
+        var BOOKSELLER_IDS = [% To.json( bookseller_ids ) || '[]' | html %];
+    </script>
+ [% Asset.js("js/subscription-add.js") | $raw %]
+ [% Asset.js("js/showpredictionpattern.js") | $raw %]
+ [% Asset.js("js/additional-fields-entry.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

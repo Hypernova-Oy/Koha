@@ -1,0 +1,199 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% USE AuthorisedValues %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Återkrav &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] katalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+<body id="opac-recall" class="scrollto">
+[% INCLUDE 'masthead.inc' %]
+
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% biblio.biblionumber | uri %]">Detaljer för: [% biblio.title | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Återkräv</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col col-lg-2 order-2 order-lg-1">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ <div class="col-md-12 col-lg-10 order-1 order-lg-2">
+ <div id="recall" class="maincontent">
+ <h1>Bekräfta återkrav för:[% INCLUDE 'patron-title.inc' patron = logged_in_user %] ([% logged_in_user.cardnumber | html %])</h1>
+ [% IF nosyspref %]
+ <span>Återkrav har inte blivit aktiverat. Kontakta ditt bibliotek.</span>
+ [% ELSIF error == 'unavailable' %]
+ <span>Det finns inga exemplar som är möjliga att återkräva.</span>
+ <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% biblio.biblionumber | uri %]">Återlämna till [% biblio.title | html %]</a>
+ [% ELSE %]
+ [% IF error %]
+ <div class="alert alert-warning">
+ [% IF error == 'duplicate' %]
+ <span>Du har nått gränsen för max antal återkrav för denna katalogpost.</span>
+ [% ELSIF error == 'unavailable' %]
+ <span>Det finns inga exemplar som är möjliga att återkräva.</span>
+ [% ELSIF error == 'cannot' %]
+ <span>Du kan inte göra ett återkrav på denna titel.</span>
+ [% ELSE %]
+ <span>Ett fel uppstod när återkravet skulle skickas. Vänligen kontakta ditt bibliotek.</span>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF success %]
+ <p>Ditt önskemål om återkrav har sparats. Nuvarande låntagare kommer att ombes att återlämna exemplaret inom [% due_interval | html %] av [% due_date | $KohaDates %].</p>
+ <p>Du kommer att få ett meddelande när ett exemplar finns att hämta på biblioteket.</p>
+ [% ELSIF not error %]
+ <p>Allt material som är utlånat kan återkrävas av en annan låntagare. Den som lånat det efterfrågade materialet kommer att ombes att återlämna det så att den som gjort återkravet kan låna.</p>
+ [% IF logged_in_user %]
+ <div class="dialog">
+
+ <form id="recallform" action="/cgi-bin/koha/opac-recall.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows" id="options">
+ <legend>Återkräv <b>[% biblio.title | html %]</b> ([% biblio.author | html %])?</legend>
+ <ul>
+
+ [% UNLESS ( single_branch_mode ) %]<li>
+ <label for="pickup">Hämta på:</label>
+ <select name="pickup" id="pickup">
+ [% FOREACH branch IN branches %]
+ [% IF branch.branchcode == logged_in_user.branchcode %]
+ <option value="[% branch.branchcode | html %]" selected>[% Branches.GetName( branch.branchcode ) | html %]</option>
+ [% ELSE %]
+ <option value="[% branch.branchcode | html %]">[% Branches.GetName( branch.branchcode ) | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>[% END %]
+
+ <li>
+ <label for="expirationdate">Återkravet behövs inte efter:</label>
+ <input type="text" name="expirationdate" id="expirationdate" size="20" class="flatpickr futuredate" />
+ <span id="expiration-hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ <li class="level-option" style="display:none;"><label for="bibliolevel">Återkräv nästa tillgängliga exemplar</label> <input type="radio" name="type" id="bibliolevel" value="bibliolevel" checked></li>
+ <li class="level-option" style="display:none;"><label for="itemlevel">Återkräv ett specifikt exemplar</label> <input type="radio" name="type" id="itemlevel" value="itemlevel"></li>
+
+ <table class="table table-bordered table-striped" id="items">
+ <caption>Välj ett särskilt exemplar:</caption>
+ <tr>
+ <th>&nbsp;</th>
+ <th>Exemplartyp</th>
+ <th>Streckkod</th>
+ [% UNLESS ( single_branch_mode ) %]
+ <th>Hembibliotek</th>
+ <th>Senaste plats</th>
+ [% END %]
+ <th>Avdelning</th>
+ <th>Hyllsignatur</th>
+ <th>Ex.nummer</th>
+ <th>Volyminfo</th>
+ <th>Information</th>
+ </tr>
+ [% FOREACH item IN items %]<tr>
+ <td>
+ [% IF item.can_be_recalled( patron => logged_in_user ) %]
+ <input type="radio" class="itemnumber" name="itemnumber" value="[% item.itemnumber | html %]">
+ [% ELSE %]
+ <input disabled="disabled" type="radio" class="itemnumber" name="itemnumber" value="[% item.itemnumber | html %]" style="display:none;" />
+ <img alt="Kan inte återkrävas" src="[% interface | html %]/lib/famfamfam/cross.png" title="Kan inte återkrävas" />
+ [% END %]
+ </td>
+ <td>[% ItemTypes.GetDescription( item.effective_itemtype ) | html %]</td>
+ <td>[% item.barcode | html %]</td>
+ [% UNLESS ( single_branch_mode ) %]
+ <td>[% Branches.GetName( item.homebranch ) | html %]</td>
+ <td>[% Branches.GetName( item.holdingbranch) | html %]</td>
+ [% END %]
+ <td>[% AuthorisedValues.GetByCode( 'CCODE', item.ccode, 1 ) | html %]</td>
+ <td>[% item.itemcallnumber | html %]</td>
+ <td>[% item.copynumber | html %]</td>
+ <td>[% item.enumchron | html %]</td>
+ <td>
+ [% IF ( item.checkout ) %]
+ <span class="checkedout">Återlämningsdatum [% item.checkout.date_due | $KohaDates as_due_date => 1 %]</span>
+ [% ELSIF ( item.get_transfer ) %]
+ <span class="intransit">Under transport från [% Branches.GetName( item.get_transfer.frombranch ) | html %] till [% Branches.GetName( item.get_transfer.tobranch ) | html %] sedan [% item.get_transfer.datesent | $KohaDates %]</span>
+ [% END %]
+ [% IF ( item.itemlost || item.withdrawn ) %]
+ <span class="lost">Ej tillgänglig (förlorad eller saknad)</span>
+ [% END %]
+ [% IF ( item.notforloan ) %]
+ <span class="notforloan">Ej för utlån: ([% item.notforloan | html %])</span>
+ [% END %]
+ [% hold = item.current_holds.next %]
+ [% IF ( item.recall ) %]
+ <span class="waiting">
+ [% IF ( item.recall.waiting_date ) %]
+ <span>Väntar på låntagare hos [% Branches.GetName( item.recall.pickup_library_id ) | html %]</span> <span>sedan</span> [% item.recall.waiting_date | $KohaDates %].
+ [% ELSE %]
+ <span>Återkrävd av låntagare och förväntas inkomma [% Branches.GetName( item.recall.pickup_library_id ) | html %]</span> <span>sedan</span> [% item.recall.created_date | $KohaDates %].
+ [% END %]
+ </span>
+ [% ELSIF ( hold.waitingdate ) %]
+ <span class="waiting">
+ Väntar på [% Branches.GetName( hold.branchcode ) | html %] sedan [% hold.waitingdate | $KohaDates %]. </span>
+ [% ELSIF ( hold.borrowernumber == logged_in_user.borrowernumber ) %]
+ <span class="waiting">
+ Du har redan gjort en <a href="/cgi-bin/koha/opac-user.pl#opac-user-holds">reservation</a> på detta exemplar. </span>
+ [% END # / IF ( item.recall or hold ) %]
+ </td>
+ </tr>[% END %]
+ </table>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-request">
+ <input type="hidden" name="biblionumber" value="[% biblio.biblionumber | html %]">
+ <input class="btn btn-primary" type="submit" value="Bekräfta">
+ <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% biblio.biblionumber | uri %]" class="cancel">Avbryt</a>
+ </fieldset>
+ </form>
+
+ </div>
+ [% ELSE %]
+ <div class="alert alert-warning">Du måste vara inloggad för att kunna göra ett återkrav.</div>
+ [% END %]
+ [% END %]
+ [% END %] <!-- norecalls -->
+ </div> <!-- / #recall -->
+ </div> <!-- / .col-md-12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+</div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+[% INCLUDE 'calendar.inc' %]
+<script>
+    $(document).ready(function(){
+        $(".level-option").show();
+        $("#items").hide();
+        $("#expiration-hint").hide();
+        $("#itemlevel").click(function(){
+            if ( $("#itemlevel").is(':checked') ){
+                $("#items").show();
+                $("input:radio[name='itemnumber']:not(:disabled)").first().attr("checked", "checked"); // selects first item in table
+            }
+        });
+        $("#bibliolevel").click(function(){
+            if ( $("#bibliolevel").is(':checked') ){
+                $("#items").hide();
+            }
+        });
+    });
+</script>
+[% END %]

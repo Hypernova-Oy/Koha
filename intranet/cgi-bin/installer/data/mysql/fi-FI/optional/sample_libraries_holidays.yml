@@ -1,0 +1,30 @@
+---
+description:
+- 'Esimerkki pyhät: sunnuntai, joulu, uusi vuosi'
+tables:
+- repeatable_holidays:
+    multiline: []
+    rows:
+    - branchcode: MPL
+      day: ~
+      description: Sunnuntai
+      id: 2
+      month: ~
+      title: ''
+      weekday: 0
+    - branchcode: MPL
+      day: 1
+      description: Uudenvuodenpäivä
+      id: 3
+      month: 1
+      title: ''
+      weekday: ~
+    - branchcode: MPL
+      day: 25
+      description: Joulu
+      id: 4
+      month: 12
+      title: ''
+      weekday: ~
+    translatable:
+    - description

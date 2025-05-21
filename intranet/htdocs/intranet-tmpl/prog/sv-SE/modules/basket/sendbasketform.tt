@@ -1,0 +1,64 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Sending your cart") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="cart_sendbasketform" class="cart">
+<div class="container">[% IF ( email_add ) %]
+
+ [% IF ( SENT ) %]
+ <div class="alert alert-info">
+ <h1>Meddelande skickat</h1>
+ <p>Minneslistan skickades till: [% email_add | html %]</p>
+ </div>
+ [% END %]
+ [% IF ( error ) %]
+ <div class="alert alert-warning">Problem vid skickade av vagn...</div>
+ [% END %]
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <button type="button" class="btn btn-default close_window focus">Stäng fönster</button>
+ </fieldset>
+ </div>
+ </nav>
+
+[% ELSE %]
+
+[% INCLUDE 'blocking_errors.inc' %]
+<form action="/cgi-bin/koha/basket/sendbasket.pl" method="post">
+<h1>Skickar din minneslista</h1>
+<fieldset class="rows"> 
+<legend class="sr-only">Ange meddelandedetaljer</legend>
+<ol> <li>
+ <label for="email_add">E-postadress:</label>
+ <input type="text" id="email_add" name="email_add" size="43" class="focus" />
+ </li>
+ <li>
+ <label for="comment">Kommentar:</label>
+ <textarea id="comment" name="comment" rows="4" cols="40"></textarea>
+ </li>
+ </ol>
+ </fieldset>
+ <input type="hidden" name="bib_list" value="[% bib_list | html %]" />
+ [% INCLUDE 'csrf-token.inc' %]
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-send" />
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ <button type="button" class="btn btn-default close_window">Avbryt</button>
+ </fieldset>
+ </div>
+ </nav>
+</form>
+
+[% END %]</div>
+</body>
+</html>

@@ -1,0 +1,97 @@
+[% USE raw %]
+[% USE HtmlTags %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Database settings") | html %] &rsaquo;
+ [% t("Web installer") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="installer-step2" class="installer-main col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+
+
+ <div id="logo"><a href="#">Koha</a></div>
+ <h1>Asennusohjelma &rsaquo; Tietokannan asetukset</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse kieli</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tarkista Perl-riippuvuudet</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Tietokanta-asetukset</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Luo tietokanta</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Asenna perusasetukset</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ <h3>Tietokanta-asetukset:</h3>
+ <ul>
+ <li><em>Tietokannan tyyppi: </em> [%- dbms | $HtmlTags tag=>'code' -%]</li>
+ <li><em>Tietokannan nimi: </em> [%- dbname | $HtmlTags tag=>'code' -%]</li>
+ <li><em>Tietokantapalvelin: </em> [%- hostname | $HtmlTags tag=>'code' -%]</li>
+ <li><em>Tietokannan portti: </em> [%- port| $HtmlTags tag=>'code' -%] (lienee OK tyhjänäkin)</li>
+ <li><em>Tietokantakäyttäjä: </em> [%- user | $HtmlTags tag=>'code' -%]</li>
+ </ul>
+
+ [% IF ( dbconnection ) %]
+ <form name="checkdbparameters" action="install.pl" method="get">
+ [% IF ( checkdatabaseaccess ) %]
+ <div class="alert alert-success" role="alert"><p>Yhteys muodostettu.</p></div>
+ [% IF ( checkdatabasecreated ) %]
+ <ul>
+ <li>Tietokanta [% dbname | $HtmlTags tag=>'code' %] on olemassa.</li>
+ [% IF ( checkgrantaccess ) %]
+ <li>Käyttäjällä [% user | $HtmlTags tag=>'code' %] on kaikki tarvittavat oikeudet tietokantaan [% dbname | $HtmlTags tag=>'code' %].</li>
+ </ul>
+ [% ELSE %]
+ </ul>
+ <p class="error">Käyttäjällä [% user | $HtmlTags tag=>'code' %] ei ole tarpeeksi oikeuksia tietokantaan [% dbname | $HtmlTags tag=>'code' %].</p>
+ <p class="hint">Pyydä tai tee muutoksia käyttäjäoikeuksiin. Käyttäjällä [% user | $HtmlTags tag=>'code' %] täytyy olla oikeudet USAGE, INSERT, UPDATE, DELETE, DROP ja CREATE tietokantaan [% dbname | $HtmlTags tag=>'code' %].</p>
+ <p>Tarvitseko apua? Jos tarvitset apua oikeuksien myöntämiseen, tee nettihaku "[% dbms | $HtmlTags tag=>'code' %] manual grant permissions" </p>
+ [% END %]
+ [% IF ( warnDbRowFormat ) %]
+ <div class="alert alert-danger" role="alert">
+ <p>Tietokannan taulut, joissa riviformaatti muuta kuin 'DYNAMIC': [% warnDbRowFormat | html %]</p>
+ <p>Sinulle voi tulla ongelmia päivittäessäsi Kohaa uudempaan versioon, jos et päivitä tietokannan taulujen riviformaattia.</p>
+ <p>Tietääksesi, kuinka välttää tämä ongelma, katso wikisivu: <a href="https://wiki.koha-community.org/wiki/Database_row_format">Tietokannan rivien formaatti</a>
+ </p>
+ </div>
+ [% END %]
+ [% ELSE %]
+ <div class="alert alert-danger" role="alert"><p>Ei havaittu tietokantaa nimeltä [% dbname | $HtmlTags tag=>'code' %].</p></div>
+ <p>Luo tietokanta ennenkuin jatkat.</p>
+ [% END %]
+ [% ELSE %]
+ <div class="alert alert-warning" role="alert">[% error | html %] : [% message | html %]</div>
+ <div class="hint">
+ <ul>
+ <li>Tarkista että tietokantasi on päällä.</li>
+ <li>Tarkista tietokanta-asetukset [% 'koha-conf.xml' | $HtmlTags Tag=>'code' %].</li>
+ <li>Tarkista isäntänimi-asetukset [% INCLUDE txt_kohaconf_xml %]. Jotkin tietokantapalvelimet vaativat ennemmin [% '127.0.0.1' | $HtmlTags tag=>'code' %] kuin [% 'localhost' | $HtmlTags tag=>'code' %].</li>
+ </ul>
+ </div>
+ <p>Korjaa nämä virheet. <a href="/cgi-bin/koha/installer/install.pl">Aloita sitten asennusohjelma uudelleen.</a>
+ [% END %]
+ [% UNLESS ( error ) %]
+ <input type="hidden" name="step" value="3" />
+ <p><input class="btn btn-primary" type="submit" value="Jatka seuraavaan vaiheeseen" /></p>
+ [% END %]
+ </form>
+ [% ELSE %]
+ <form name="checkinformation" action="install.pl" method="get">
+ <input type="hidden" name="step" value="2" />
+ <input type="hidden" name="checkdb" value="1" />
+ <p><input class="btn btn-primary" type="submit" value="Jatka seuraavaan vaiheeseen" /> </p>
+ </form>
+ [% END # / IF dbconnection %]
+ </div> <!-- / #installer-step2 -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

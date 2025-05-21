@@ -1,0 +1,102 @@
+---
+description:
+- Esimerkkinumerointikaavat kausijulkaisutilauksille
+tables:
+- subscription_numberpatterns:
+    multiline: []
+    rows:
+    - add1: 1
+      add2: ~
+      add3: ~
+      description: Yksinkertainen numerointikaava
+      displayorder: 1
+      every1: 1
+      every2: ~
+      every3: ~
+      label: Numero
+      label1: Numero
+      label2: ~
+      label3: ~
+      numbering1: ~
+      numbering2: ~
+      numbering3: ~
+      numberingmethod: Nro {X}
+      setto1: 1
+      setto2: ~
+      setto3: ~
+      whenmorethan1: 99999
+      whenmorethan2: ~
+      whenmorethan3: ~
+    - add1: 1
+      add2: 1
+      add3: 1
+      description: Vuosikerta, numerointi 1
+      displayorder: 2
+      every1: 48
+      every2: 4
+      every3: 1
+      label: Vuosikerta, Numero, Volyymi
+      label1: Vuosikerta
+      label2: Numero
+      label3: Volyymi/numero
+      numbering1: ~
+      numbering2: ~
+      numbering3: ~
+      numberingmethod: 'Vsk. {X}, nro {Y} : {Z}'
+      setto1: 1
+      setto2: 1
+      setto3: 1
+      whenmorethan1: 99999
+      whenmorethan2: 12
+      whenmorethan3: 4
+    - add1: 1
+      add2: 1
+      add3: ~
+      description: Vuosikerta Numero 1
+      displayorder: 3
+      every1: 12
+      every2: 1
+      every3: ~
+      label: Vuosikerta, numero
+      label1: Vuosikerta
+      label2: Numero
+      label3: ~
+      numbering1: ~
+      numbering2: ~
+      numbering3: ~
+      numberingmethod: Vsk. {X}, Nro {Y}
+      setto1: 1
+      setto2: 1
+      setto3: ~
+      whenmorethan1: 99999
+      whenmorethan2: 12
+      whenmorethan3: ~
+    - add1: 1
+      add2: 1
+      add3: ~
+      description: Vuodenaika
+      displayorder: 4
+      every1: 1
+      every2: 4
+      every3: ~
+      label: Kausiluonteinen
+      label1: Vuodenaika
+      label2: Vuosi
+      label3: ~
+      numbering1: season
+      numbering2: ~
+      numbering3: ~
+      numberingmethod: '{X} {Y}'
+      setto1: 0
+      setto2: 1
+      setto3: ~
+      whenmorethan1: 3
+      whenmorethan2: 99999
+      whenmorethan3: ~
+    translatable:
+    - label
+    - description
+    - numberingmethod
+    - label1
+    - label2
+    - label3

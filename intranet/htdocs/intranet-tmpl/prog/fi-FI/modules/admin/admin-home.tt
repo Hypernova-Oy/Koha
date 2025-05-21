@@ -1,0 +1,318 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="admin_admin-home" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Ylläpito</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+ <h1>Kohan ylläpito</h1>
+ [% IF ( CAN_user_parameters_manage_mana ) %]
+ [% IF ( Koha.Preference('Mana') == 1) && !mana_url %]
+ <div class="alert alert-info">
+ <h4>Mana tietämyskanta -ominaisuus on käytettävissä mutta sitä ei ole määritelty.</h4>
+ <p>Tämän ominaisuuden avulla voit hakea ja jakaa tietoja (kausijulkaisutilauksen numerointimalleja ja raportteja) muiden Koha-kirjastojen kanssa.</p>
+ <p>
+ Pyydä järjestelmän ylläpitäjää määrittämään tämä ominaisuus, tai poista tämä huomautus <a href=/cgi-bin/koha/admin/share_content.pl>poistamalla käytöstä 'Mana'-järjestelmäasetus</a>.
+ </p>
+ </div>
+ [% END %]
+ [% IF ( Koha.Preference('Mana') == 2 ) %]
+ <div class="alert alert-info">
+ <h4>Jaa sisältö Mana-tietämyskannassa?</h4>
+ <p> Mana-tietämyskannan aktivointia ei ole vielä tehty. <a href=/cgi-bin/koha/admin/share_content.pl>Muokkaa Mana-tietämyskannan -asetuksia</a>.</p>
+ </div>
+ [% END %]
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_usage_stats ) %]
+ [% IF ( Koha.Preference('UsageStats') == 2 ) %]
+ <div class="alert alert-info">
+ <h4>Jaatko Koha-yhteisölle anonymisoituja käyttötilastoja?</h4>
+ <p> Käyttötilastojen jakamista ei ole vielä aktivoitu. <a href=/cgi-bin/koha/admin/usage_statistics.pl>Muokkaa Hea-asetuksia</a>.</p>
+ <p> Tämä ominaisuus antaa Koha-kehittäjille arvokasta tietoa siitä miten Kohaa käytetään ja auttaa tekemään päätöksiä kehitysprosessin aikana</p>
+ </div>
+ [% END %]
+ [% END %]
+ <div class="row">
+ <div class="col-md-6 sysprefs">
+ [% IF ( CAN_user_parameters_manage_sysprefs ) %]
+ <form action="/cgi-bin/koha/admin/preferences.pl" method="get">
+ <fieldset>
+ <h4><a href="/cgi-bin/koha/admin/preferences.pl">Järjestelmäasetukset</a></h4>
+ <p>Hallinnoi koko järjestelmää koskevia asetuksia, kuten käytettävää MARC-formaattia, päivämäärän formaattia, ylläpitäjän sähköpostiosoitetta ja erilaisia pohjia.</p>
+ <input type="hidden" name="op" value="search" />
+ <input type="text" name="searchfield" value="[% searchfield | html %]" />
+ <input class="btn btn-primary" name="ok" type="submit" value="Haku" />
+ </fieldset>
+ </form>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_libraries || CAN_user_parameters_manage_itemtypes || CAN_user_parameters_manage_auth_values ) %]
+ <div class="hint"><h4>Vinkki:</h4><p>Määrittele nämä asetukset tässä järjestyksessä.</p></div>
+ <h3>Perusasetukset</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_libraries ) %]
+ <dt><a href="/cgi-bin/koha/admin/branches.pl">Kirjastot</a></dt>
+ <dd>Määrittele kirjastot</dd>
+ <dt><a href="/cgi-bin/koha/admin/library_groups.pl">Kirjastoryhmät</a></dt>
+ <dd>Määrittele hierarkkiset kirjastoryhmät</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_itemtypes ) %]
+ <dt><a href="/cgi-bin/koha/admin/itemtypes.pl">Nidetyypit</a></dt>
+ <dd>Määrittele nidetyypit, joita käytetään laina- ja maksusäännöissä</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_auth_values ) %]
+ <dt><a href="/cgi-bin/koha/admin/authorised_values.pl">Auktorisoidut arvot</a></dt>
+ <dd>Määrittele luokkia ja niille auktorisoituja arvoja</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_patron_categories || CAN_user_parameters_manage_circ_rules || CAN_user_parameters_manage_patron_attributes || CAN_user_parameters_manage_transfers || CAN_user_parameters_manage_item_circ_alerts || CAN_user_parameters_manage_cities || CAN_user_parameters_manage_curbside_pickups ) %]
+ <h3>Asiakkaat ja lainaus</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_patron_categories ) %]
+ <dt><a href="/cgi-bin/koha/admin/categories.pl">Asiakastyypit</a></dt>
+ <dd>Määrittele asiakastyypit</dd>
+ [% END %]
+ [% IF CAN_user_parameters_manage_circ_rules %]
+ <dt><a href="/cgi-bin/koha/admin/smart-rules.pl">Laina- ja maksusäännöt</a></dt>
+ <dd>Määrittele laina- ja maksusäännöt kirjaston, asiakastyypin ja nidetyypin mukaan</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_patron_attributes ) %]
+ <dt><a href="/cgi-bin/koha/admin/patron-attr-types.pl">Asiakasmääreet</a></dt>
+ <dd>Määrittele laajennetut määreet (tunnisteet ja tilastolliset kategoriat) asiakastietueille</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_transfers ) %]
+ <dt><a href="/cgi-bin/koha/admin/branch_transfer_limits.pl">Aineistokuljetusten rajoitukset</a> (<a href="/cgi-bin/koha/admin/transfer_limits.pl">Kehittynyt editori</a>)</dt>
+ <dd>Rajoita aineiston liikkumista kirjastojen välillä lähettävään kirjastoon, vastaanottavaan kirjastoon ja nidetyyppiin perustuen. Nämä rajoitukset ovat voimassa vain, jos UseBranchTransferLimits-järjestelmäasetus on päällä.</dd>
+ <dt><a href="/cgi-bin/koha/admin/transport-cost-matrix.pl">Kuljetusten painomatriisi</a></dt>
+ <dd>Määrittele aineiston kuljetuksen kustannukset kirjastojen välillä</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_item_circ_alerts ) %]
+ <dt><a href="/cgi-bin/koha/admin/item_circulation_alerts.pl">Nidekierron huomautukset</a></dt>
+ <dd>Määrittele säännöt palautuksen ja lainauksen huomautuksille kirjastojen, asiakastyyppien ja nidetyyppien yhdistelmille</dd>
+ [% END %]
+ [% IF ( Koha.Preference('UseCirculationDesks') && CAN_user_parameters_manage_libraries ) %]
+ <dt><a href="/cgi-bin/koha/admin/desks.pl">Tiskit</a></dt>
+ <dd>Määritä lainaustiskejä</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_cities ) %]
+ <dt><a href="/cgi-bin/koha/admin/cities.pl">Kaupungit ja kunnat</a></dt>
+ <dd>Määrittele kaupunkeja ja kuntia, joissa asiakkaat asuvat</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_curbside_pickups ) %]
+ <dt><a href="/cgi-bin/koha/admin/curbside_pickup.pl">Noutopalvelu</a></dt>
+ <dd>Määritä kirjastojen noutopalvelu</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_patron_restrictions ) %]
+ <dt><a href="/cgi-bin/koha/admin/restrictions.pl">Asiakkaan rajoitustyypit</a></dt>
+ <dd>Määrittele asiakkaiden rajoitustyyppejä</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_parameters_manage_accounts || ( Koha.Preference('UseCashRegisters') && CAN_user_parameters_manage_cash_registers ) ) %]
+ <h3>Maksut</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_accounts ) %]
+ <dt><a href="/cgi-bin/koha/admin/debit_types.pl">Maksutyypit</a></dt>
+ <dd>Määrittele maksutyypit</dd>
+ <dt><a href="/cgi-bin/koha/admin/credit_types.pl">Credit-tyypit</a></dt>
+ <dd>Määritä hyvitystyyppejä</dd>
+ [% END %]
+ [% IF ( Koha.Preference('UseCashRegisters') && CAN_user_parameters_manage_cash_registers ) %]
+ <dt><a href="/cgi-bin/koha/admin/cash_registers.pl">Kassat</a></dt>
+ <dd>Määritä kassat</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF plugins_enabled && ( CAN_user_plugins_manage || CAN_user_plugins_configure || ( CAN_user_plugins_admin && admin_plugins)) %]
+ <h3>Liitännäiset</h3>
+ <dl>
+ [% IF CAN_user_plugins_manage || CAN_user_plugins_configure %]
+ <dt><a href="/cgi-bin/koha/plugins/plugins-home.pl">Liitännäiset</a></dt>
+ <dd>Näytä, hallinnoi, muokkaa ja aja liitännäisiä.</dd>
+ [% END %]
+ [% IF ( CAN_user_plugins_admin && admin_plugins ) %]
+ [% FOREACH plugin IN admin_plugins %]
+ <dt><a href="/cgi-bin/koha/plugins/run.pl?class=[% plugin.class | uri %]&method=admin"><span class="plugin_name">[% plugin.metadata.name | html %]</span></a></dt>
+ <dd>[% plugin.metadata.description | html %]</dd>
+ [% END %]
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF CAN_user_parameters_manage_background_jobs %]
+ <h3>Taustatyöt</h3>
+ <dl>
+ <dt><a href="/cgi-bin/koha/admin/background_jobs.pl">Hallinnoi taustatöitä</a></dt>
+ <dd>Näytä, hallinnoi ja peruuta taustatöitä.</dd>
+ </dl>
+ [% END %]
+
+ </div>
+
+ <div class="col-md-6 sysprefs">
+ [% IF ( CAN_user_parameters_manage_marc_frameworks || CAN_user_parameters_manage_classifications || CAN_user_parameters_manage_matching_rules || CAN_user_parameters_manage_oai_sets || CAN_user_parameters_manage_item_search_fields || CAN_user_parameters_manage_search_engine_config || CAN_user_parameters_manage_marc_overlay_rules || ( Koha.Preference('SavedSearchFilters') && ( CAN_user_parameters_manage_search_filters ) ) ) %]
+ <h3>Luettelo</h3>
+ <dl>
+ [% IF ( CAN_user_parameters_manage_marc_frameworks ) %]
+ <dt><a href="/cgi-bin/koha/admin/biblio_framework.pl">MARC-kuvailupohjat</a></dt>
+ <dd>Luo ja hallinnoi MARC-kuvailupohjia, jotka määrittelevät kuvailueditorissa käytettävissä olevat MARC-kentät ja -osakentät.</dd>
+ <dt><a href="/cgi-bin/koha/admin/koha2marclinks.pl">Kohan MARC-määritykset</a></dt>
+ <dd>Määrittele vastaavuus Kohan tietokannan (SQL) ja MARC-nimeketietueiden välillä</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_marc_frameworks ) %]
+ <dt><a href="/cgi-bin/koha/admin/checkmarc.pl">MARC-kuvailupohjan testaus</a></dt>
+ <dd>Tarkistaa MARC-rakenteen. Jos muutat kuvailupohjaa, tarkista se tällä työkalulla.</dd>
+ <dt><a href="/cgi-bin/koha/admin/authtypes.pl">Auktoriteettityypit</a></dt>
+ <dd>Luo ja muokkaa auktoriteettipohjia. Näillä määritellään MARC-tietueiden kenttien ja osakenttien määritelmiä.</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_classifications ) %]
+ <dt><a href="/cgi-bin/koha/admin/classsources.pl">Luokitusjärjestelmät</a></dt>
+ <dd>Määrittele käytettävät luokitusjärjestelmät, luokitusoppaat ja signumien katkaisusäännöt</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_matching_rules ) %]
+ <dt><a href="/cgi-bin/koha/admin/matching-rules.pl">Tietueiden täsmäytyssäännöt</a></dt>
+ <dd>Hallinnoi sääntöjä, joilla automaattisesti tarkistetaan MARC-tietueiden vastaavuus tietojen tuonnin aikana</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_record_sources ) %]
+ <dt><a href="/cgi-bin/koha/admin/record_sources">Tietuelähteet</a></dt>
+ <dd>Valitse tietuelähde, josta tuodaan</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_marc_overlay_rules ) %]
+ <dt><a href="/cgi-bin/koha/admin/marc-overlay-rules.pl">Tietueiden yhdistämissäännöt</a></dt>
+ <dd>Hallinnoi sääntöjä, joilla automaattisesti yhdistetään MARC-tietueiden kentät tietojen tuonnin ja päivityksen aikana</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_oai_sets ) %]
+ <dt><a href="/cgi-bin/koha/admin/oai_sets.pl">OAI-joukkojen asetukset</a></dt>
+ <dd>Hallinnoi OAI-joukkoja</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_item_search_fields ) %]
+ <dt><a href="/cgi-bin/koha/admin/items_search_fields.pl">Nidehakukentät</a></dt>
+ <dd>Hallinnoi nidehaun mukautettuja kenttiä</dd>
+ [% END %]
+ [% IF Koha.Preference('SavedSearchFilters') && ( CAN_user_parameters_manage_search_filters ) %]
+ <dt><a href="/cgi-bin/koha/admin/search_filters.pl">Haun rajaukset</a></dt>
+ <dd>Hallinnoi räätälöityjä haun rajauksia</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_search_engine_config ) %]
+ <dt><a href="/cgi-bin/koha/admin/searchengine/elasticsearch/mappings.pl">Hakukoneen asetukset (Elasticsearch)</a></dt>
+ <dd>Hallinnoi indeksejä, fasetteja ja niiden kytköksiä MARC-kenttiin ja -osakenttiin</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( CAN_user_acquisition_currencies_manage || CAN_user_acquisition_period_manage || CAN_user_acquisition_budget_manage || ( Koha.Preference('EDIFACT') && CAN_user_acquisition_edi_manage ) || ( Koha.Preference('MarcOrderingAutomation') && CAN_user_acquisition_marc_order_manage ) ) %]
+ <h3>Hankinnan asetukset</h3>
+ <dl>
+ [% IF ( CAN_user_acquisition_currencies_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/currency.pl">Rahayksiköt ja vaihtokurssit</a></dt>
+ <dd>Määrittele hankinnoissa käytettävät rahayksiköt ja vaihtokurssit</dd>
+ [% END %]
+ [% IF ( CAN_user_acquisition_period_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/aqbudgetperiods.pl">Budjetit</a></dt>
+ <dd>Määrittele budjetteja</dd>
+ [% END %]
+ [% IF ( CAN_user_acquisition_budget_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/aqbudgets.pl">Tilit</a></dt>
+ <dd>Määrittele budjettien tilejä</dd>
+ [% END %]
+ [% IF ( Koha.Preference('EDIFACT') && CAN_user_acquisition_edi_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/edi_accounts.pl">EDI-tilit</a></dt>
+ <dd>Muokkaa toimittajien EDI-tilejä tuontia/vientiä varten</dd>
+ <dt><a href="/cgi-bin/koha/admin/edi_ean_accounts.pl">Kirjasto-EANit</a></dt>
+ <dd>Hallinnoi kirjaston EDI EANeja</dd>
+ [% END %]
+ [% IF ( Koha.Preference('MarcOrderingAutomation') && CAN_user_acquisition_marc_order_manage ) %]
+ <dt><a href="/cgi-bin/koha/admin/marc_order_accounts.pl">MARC-tilausten tilit</a></dt>
+ <dd>Manage vendor accounts for automated order line creation from MARC records</dd>
+ [% END %]
+ </dl>
+ [% END %]
+
+ [% IF ( ( CAN_user_parameters_manage_identity_providers || CAN_user_parameters_manage_smtp_servers || CAN_user_parameters_manage_search_targets || CAN_user_parameters_manage_didyoumean || CAN_user_parameters_manage_column_config || CAN_user_parameters_manage_audio_alerts || CAN_user_parameters_manage_sms_providers && Koha.Preference('SMSSendDriver') == 'Email' ) || CAN_user_parameters_manage_usage_stats || CAN_user_parameters_manage_additional_fields || CAN_user_parameters_manage_mana || (Koha.Preference('EnableAdvancedCatalogingEditor') && CAN_user_parameters_manage_keyboard_shortcuts) ) %]
+ <h3>Muut parametrit</h3>
+ <dl>
+ <!-- <dt><a href="/cgi-bin/koha/admin/printers.pl">Network Printers</a></dt>
+ <dd>Printers (UNIX paths).</dd> -->
+ [% IF ( CAN_user_parameters_manage_identity_providers) %]
+ <dt><a href="/cgi-bin/koha/admin/identity_providers.pl">Tunnistustietojen tarjoajat</a></dt>
+ <dd>Määrittele käytettävät ulkoiset tunnistustietojen tarjoajat</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_search_targets ) %]
+ <dt><a href="/cgi-bin/koha/admin/z3950servers.pl">Z39.50/SRU-palvelimet</a></dt>
+ <dd>Määrittele ulkoiset palvelimet, joista haetaan MARC-tietueita</dd>
+ <dt><a href="/cgi-bin/koha/admin/oai_servers.pl">OAI-tietovarannot</a></dt>
+ <dd>Määrittele OAI-tietovarannot, joista tuodaan tietoja</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_smtp_servers ) %]
+ <dt><a href="/cgi-bin/koha/admin/smtp_servers.pl">SMTP-palvelimet</a></dt>
+ <dd>Määrittele käytettävät SMTP-palvelimet</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_didyoumean ) %]
+ <dt><a href="/cgi-bin/koha/admin/didyoumean.pl">Tarkoititko?</a></dt>
+ <dd>Valitse, mitä liitännäisiä käytetään hakuehdotusten luontiin.</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_column_config ) %]
+ <dt><a href="/cgi-bin/koha/admin/columns_settings.pl">Taulujen asetukset</a></dt>
+ <dd>Määrittele ja piilota tai näytä taulujen sarakkeita</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_audio_alerts ) %]
+ <dt><a href="/cgi-bin/koha/admin/audio_alerts.pl">Äänihälytykset</a></dt>
+ <dd>Määritä mitkä tapahtumat tuottavat minkäkin äänen</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_sms_providers && Koha.Preference('SMSSendDriver') == 'Email' ) %]
+ <dt><a href="/cgi-bin/koha/admin/sms_providers.pl">SMS-puhelinoperaattorit</a></dt>
+ <dd>Listaa puhelinoperaattorit SMS-viestien lähettämiseksi sähköpostilla</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_usage_stats ) %]
+ <dt><a href="/cgi-bin/koha/admin/usage_statistics.pl">Jaa käyttötilastojasi</a></dt>
+ <dd>Jaa Koha-yhteisölle Koha-asennuksesi käyttötilastoja</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_mana ) %]
+ <dt><a href="/cgi-bin/koha/admin/share_content.pl">Jaa sisältö Mana-tietämyskannassa</a></dt>
+ <dd>Jaa tietoja (kausijulkaisutilaukset, raportit) Koha-yhteisölle</dd>
+ [% END %]
+ [% IF ( CAN_user_parameters_manage_additional_fields ) %]
+ <dt><a href="/cgi-bin/koha/admin/additional-fields.pl">Lisäkentät</a></dt>
+ <dd>Lisää lisäkenttiä tiettyihin tauluihin</dd>
+ [% END %]
+ [% IF Koha.Preference('EnableAdvancedCatalogingEditor') && ( CAN_user_parameters_manage_keyboard_shortcuts ) %]
+ <dt><a href="/cgi-bin/koha/admin/adveditorshortcuts.pl">Pikanäppäimet</a></dt>
+ <dd>Määritä edistyneen kuvailueditorin näppäinkomennot</dd>
+ [% END %]
+ [% IF Koha.Preference('ILLModule') && CAN_user_ill %]
+ <dt><a href="/cgi-bin/koha/admin/ill_batch_statuses.pl">Kaukolainaerän tilat</a></dt>
+ <dd>Hallinnoi kaukolainaerien tiloja</dd>
+ [% END %]
+ </dl>
+ [% END %]
+ </div>
+ </div>
+ </div>
+</div>
+
+[% INCLUDE 'intranet-bottom.inc' %]

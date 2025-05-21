@@ -1,0 +1,54 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% tx("Error {error_number}", {error_number = errno }) | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="err_[% errno | html %]" class="err">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="#" aria-current="page">
+ [% tx("Error {error_number}", {error_number = errno }) | html %]
+ </a>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-8 offset-md-2">
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Ett fel har inträffat!</h1>
+ <h2><em>[% tx("Error {error_number}", {error_number = errno }) | html %]</em></h2>
+ [% IF ( csrf_error ) %]
+ [% INCLUDE 'blocking_errors.inc' blocking_error => csrf_error %]
+ [% ELSE %]
+ <h3>Detta meddelande kan ha orsakats på grund av något av följande:</h3>
+ <ul style="padding-bottom: 0.5em;">
+ <li>Du använde en extern länk till ett exemplar som inte längre är tillgängligt</li>
+ <li>Du följde en gammal länk från t.ex. en sökmotor eller ett bokmärke</li>
+ <li>Du försökte komma åt en sida som kräver autenticering</li>
+ <li>En intern länk i klienten är felaktig och sidan finns inte</li>
+ </ul>
+ [% END %]
+ <h3>Vad är nästa steg?</h3>
+ <ul style="margin-bottom: 1em; padding-bottom: 1em; border-bottom: 1px solid #CCC;">
+ <li>Använd den övre menyraden för att gå till andra delar av Koha.</li>
+ <li>För att rapportera en felaktig länk eller annat problem, kontakta systemadministratören. <a href="mailto:[% admin | uri %]">Skicka e-post</a></li>
+ </ul>
+
+ </div> <!-- /.col-md-8 -->
+ </div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

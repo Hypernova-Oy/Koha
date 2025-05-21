@@ -1,0 +1,52 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE AdditionalContents %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Uppdateringar inskickade &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %]-katalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-patron-update-submitted' %]
+[% INCLUDE 'masthead.inc' %]
+
+ <div class="main">
+
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-memberentry.pl">Dina personuppgifter</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uppdateringar inskickade</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ <div class="col-10 order-first order-lg-2">
+ <div id="update-submitted" class="maincontent">
+ <div class="alert alert-success">
+ <p><strong>Tack</strong></p>
+ [% IF ( Koha.Preference('AutoApprovePatronProfileSettings') ) %]
+ <p>Dina uppdateringar har skickats in och ditt låntagarkonto har ändrats.</p>
+ [% ELSE %]
+ <p>Dina uppdateringar har skickats in. En bibliotekarie kommer att granska dina ändringar innan de förs in.</p>
+ [% END %]
+ </div>
+ </div>
+ </div> <!-- /.col-10 -->
+ </div> <!-- /.row -->
+ </div> <!-- /.container-fluid -->
+ </div> <!-- /.main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %][% END %]

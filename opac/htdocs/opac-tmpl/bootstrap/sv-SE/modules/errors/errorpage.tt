@@ -1,0 +1,98 @@
+[% USE raw %]
+[% USE AdditionalContents %]
+[% PROCESS 'i18n.inc' %]
+[% PROCESS 'html_helpers.inc' %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("An error has occurred") | html %] &rsaquo;
+ [% PROCESS 'library_name_title' %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+<body id="error[% errno | html %]" class="error">
+[% INCLUDE 'masthead.inc' %]
+
+ <div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ <span>Ett fel har uppstått</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( OpacNav || OpacNavBottom ) %]
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' %]
+ </div>
+ </div>
+ <div class="col-10 order-first order-md-first order-lg-2">
+ [% ELSE %]
+ <div class="col order-first order-md-first order-lg-2">
+ [% END %]
+ <div id="errormsg[% errno | html %]">
+ <h1>Den begärda sidan är inte tillgänglig</h1>
+ <h2>Fel [% errno | html %]</h2>
+ <p><strong>Detta meddelande kan ha följande orsak(er):</strong></p>
+ <ul>
+ [% IF ( errno == 400 ) %]
+ <li>Länken är trasig och sidan finns inte.</li>
+ [% END %]
+
+ [% IF ( errno == 401 ) %]
+ <li>Du är inte behörig att se denna sida.</li>
+ [% END %]
+
+ [% IF ( errno == 402 ) %]
+ <li>Länken är ogiltig.</li>
+ [% END %]
+
+ [% IF ( errno == 403 ) %]
+ [% IF ( csrf_error ) %]
+ [% IF csrf_error == 'wrong_csrf_token' %]
+ <li>Det gick inte att skicka formuläret (fel CSRF-token). Försök att gå tillbaka, uppdatera sidan och försök sedan igen.</li>
+ [% ELSE %]
+ [%# Programming errors, we do not want to display them at the OPAC %]
+ <li>Ett oväntat fel uppstod vid behandling av din begäran.</li>
+ [% END %]
+ [% ELSE %]
+ <li>Du är förbjuden att se denna sida.</li>
+ [% END %]
+ [% END %]
+
+ [% IF ( errno == 404 ) %]
+ <li>Du använde en extern länk till ett katalogexemplar som inte längre är tillgängligt.</li>
+ <li>Du följde en gammal länk från t.ex. en sökmotor eller ett bokmärke.</li>
+ <li>Du försökte komma åt en sida som kräver autenticering.</li>
+ <li>En intern länk på katalogens hemsida är felaktig och sidan finns inte.</li>
+ [% END %]
+ [% IF ( errno == 500 ) %]
+ <li>Ett fel uppstod vid behandling av din begäran.</li>
+ [% END %]
+ </ul>
+ <h2>Vad är nästa steg?</h2>
+ <ul>
+ [% IF ( errno == 401 ) && ( Koha.Preference( 'opacuserlogin' ) == 1 ) %]
+ <li>Vänligen logga in i katalogen och försök igen. <a href="/cgi-bin/koha/opac-user.pl">Inloggningssida</a></li>
+ [% END %]
+ <li>Du kan använda menyn och länkar i toppen på sidan</li>
+ <li>Du kan söka i katalogen med sökformuläret längst upp på denna sida.</li>
+ <li><a href="/cgi-bin/koha/opac-main.pl">Återgå till katalogens förstasida.</a></li>
+ </ul>
+ <h2>Rapportera problem och felaktiga länkar</h2>
+ <ul>
+ <li>För att rapportera detta fel, vänligen kontakta Koha-administratören. <a href="mailto:[% admin | uri %]">Skicka e-post</a>.</li>
+ </ul>
+ </div> <!-- / #errormsg[% errno | html %] -->
+ </div> <!-- / .col-lg10/12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+[% END %]

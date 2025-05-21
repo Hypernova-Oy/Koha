@@ -1,0 +1,584 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE AuthorisedValues %]
+[% SET footerjs = 1 %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Search engine configuration (Elasticsearch)") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>
+a.add, a.delete {
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body id="admin_searchengine_mappings" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Ylläpito</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Hakukoneen asetukset (Elasticsearch)</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ [% tx("An error occurred when updating mappings: {message}.", { message = m.message }) | html %]
+ [% CASE 'error_on_delete' %]
+ [% t("An error occurred when deleting the existing mappings. Nothing has been changed!") | $raw %]
+ [% tx("(search field {field_name} with mapping {marc_field}.)", { field_name = m.values.field_name, marc_field = m.values.marc_field }) | html %]
+ [% CASE 'invalid_field_weight' %]
+ [% tx("Invalid field weight '{weight}', must be a positive decimal number.", { weight = m.weight }) | html %]
+ [% CASE 'missing_mandatory_fields' %]
+ [% t("You attempted to delete all mappings for a required index, you must leave at least one mapping") | $raw %]
+ [% CASE 'error_on_update_es_mappings' %]
+ [% tx("An error occurred when updating Elasticsearch index mappings: {message}.", { message = m.message }) | html %]
+ [% CASE 'reindex_required' %]
+ [% tx("Index '{index}' needs to be reindexed.", { index = m.index }) | html %]
+ [% CASE 'recreate_required' %]
+ [% tx("Index '{index}' needs to be recreated.", { index = m.index }) | html %]
+ [% CASE 'success_on_update' %]
+ [% t("Mappings updated successfully.") | $raw %]
+ [% CASE 'success_on_reset' %]
+ [% t("Mappings have been reset successfully.") | $raw %]
+ [% CASE 'elasticsearch_disabled' %]
+ [% t("Elasticsearch is currently disabled.") | $raw %]
+ [% CASE %]
+ [% m.code | html %]
+ [% END %]
+ </div>
+ [% END %]
+
+ <h1>Hakukoneen asetukset (Elasticsearch)</h1>
+
+ [% IF errors %]
+ <div class="alert alert-warning">
+ Muutoksia ei tehty. Tarkista seuraavat arvot: <ul>
+ [% FOREACH e IN errors %]
+ <li>
+ [% IF ( e.type == "malformed_mapping" ) %]
+ <span>Arvoa "[% e.value | html %]" ei tueta kytköksissä</span>
+ [% ELSIF ( e.type == "no_mapping" ) %]
+ <span>Indeksille [% e.value | html %] ei ole mäppäystä</span>
+ [% END %]
+ </li>
+ [% END %]
+ </ul>
+ </div>
+ [% END %]
+
+ [% IF reset_confirm %]
+ <div class="alert alert-warning">
+ <h3>Näytöllä tällä hetkellä näkyvät mäppäykset poistetaan ja korvataan mappings.yaml -tiedostossa olevilla mäppäyksillä.</h3>
+ <form method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-reset_confirmed" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-fw fa-check"></i> Kyllä, nollaa määritykset</button>
+ </form>
+
+ <form method="get">
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-fw fa-times"></i> Ei, älä nollaa määrityksiä</button>
+ </form>
+ </div>
+ [% END %]
+
+ <div class="alert alert-info">
+ <i class="fa fa-exclamation"></i>
+ <strong>Varoitus:</strong> Jotta näihin asetuksiin tehdyt muutokset tulisivat voimaan ja haku toimisi oikein, pitää tietokanta indeksoida uudelleen. <p><strong>Painotus:</strong> määritä paino positiivisella numerolla. Suuremmat numerot merkitsee suurempaa relevanssia. <strong>Huomaa, että kenttien painotus toimii vain yksinkertaisessa haussa.</strong></p>
+ <ol>
+ <li>Vain nimeketietueisiin kytketyt hakukentät voidaan painottaa</li>
+ <li>Haku tehostaa/lisää painotettujen kenttien relevanssia</li>
+ </ol>
+ </div>
+
+ <form id="es_mappings" method="post">
+ [% INCLUDE 'csrf-token.inc' %] [% WRAPPER tabs id= "tabs" %] [% WRAPPER tabs_nav %] [% WRAPPER tab_item tabname= "search_fields" bt_active= 1 %] Hakukentät [% END %] [% FOREACH index IN indexes %] [% SWITCH index.index_name %] [% CASE 'biblios' %] [% WRAPPER tab_item tabname= "mapping_biblios" %] <span>Nimeketietueet</span> [% END %]
+ [% CASE 'authorities' %]
+ [% WRAPPER tab_item tabname= "mapping_authorities" %] <span>Auktoriteetit</span> [% END %]
+ [% END %]
+ [% END %]
+ [% END # /WRAPPER tabs_nav %]
+
+ [% WRAPPER tab_panels %]
+ [% WRAPPER tab_panel tabname="search_fields" bt_active= 1 %]
+ <table class="search_fields" id="search_fields_table" data-index_name="search_fields">
+ <thead>
+ <tr>
+ <th>Nimi</th>
+ <th>Aliakset</th>
+ <th>Otsikko</th>
+ <th>Tyyppi</th>
+ <th>Painotus</th>
+ <th colspan="2">Haettavissa</th>
+ <th>&nbsp;</th>
+ </tr>
+ <tr>
+ <th colspan="5" class="NoSort">&nbsp;</th>
+ <th class="NoSort">Virkailijaliittymä</th>
+ <th class="NoSort">OPAC</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH search_field IN all_search_fields %]
+ <tr>
+ <td data-order="[% search_field.name | html %]">
+ [% IF search_field.mandatory %]
+ <input type="text" name="search_field_name" value="[% search_field.name | html %]" readonly />
+ [% ELSE %]
+ <input type="text" name="search_field_name" value="[% search_field.name | html %]" />
+ [% END %]
+ </td>
+ <td>
+ [% search_field.aliases.join(', ') | html %]
+ </td>
+ <td data-order="[% search_field.label | html %]">
+ [% IF search_field.mandatory %]
+ <input type="text" name="search_field_label" value="[% search_field.label | html %]" readonly />
+ [% ELSE %]
+ <input type="text" name="search_field_label" value="[% search_field.label | html %]" />
+ [% END %]
+ </td>
+ <td data-order="[% search_field.type | html %]">
+ [% IF search_field.mandatory %]
+ <input type="hidden" name="search_field_type" value="[% search_field.type | html %]" />
+ <select name="search_field_type" disabled>
+ [% ELSE %]
+ <select name="search_field_type">
+ [% END %]
+ <option value="">Oletus</option>
+ [% IF search_field.type == "string" %]
+ <option value="string" selected="selected">Merkkijono</option>
+ [% ELSE %]
+ <option value="string">Merkkijono</option>
+ [% END %]
+ [% IF search_field.type == "date" %]
+ <option value="date" selected="selected">Pvm</option>
+ [% ELSE %]
+ <option value="date">Pvm</option>
+ [% END %]
+ [% IF search_field.type == "year" %]
+ <option value="year" selected="selected">Vuosi</option>
+ [% ELSE %]
+ <option value="year">Vuosi</option>
+ [% END %]
+ [% IF search_field.type == "number" %]
+ <option value="number" selected="selected">Numero</option>
+ [% ELSE %]
+ <option value="number">Numero</option>
+ [% END %]
+ [% IF search_field.type == "boolean" %]
+ <option value="boolean" selected="selected">Boolean</option>
+ [% ELSE %]
+ <option value="boolean">Boolean</option>
+ [% END %]
+ [% IF search_field.type == "sum" %]
+ <option value="sum" selected="selected">Summa</option>
+ [% ELSE %]
+ <option value="sum">Summa</option>
+ [% END %]
+ [% IF search_field.type == "isbn" %]
+ <option value="isbn" selected="selected">ISBN</option>
+ [% ELSE %]
+ <option value="isbn">ISBN</option>
+ [% END %]
+ [% IF search_field.type == "stdno" %]
+ <option value="stdno" selected="selected">Identifier</option>
+ [% ELSE %]
+ <option value="stdno">Identifier</option>
+ [% END %]
+ [% IF search_field.type == "callnumber" %]
+ <option value="callnumber" selected="selected">Luokka</option>
+ [% ELSE %]
+ <option value="callnumber">Luokka</option>
+ [% END %]
+ [% IF search_field.type == "geo_point" %]
+ <option value="geo_point" selected="selected">Maantieteellinen piste</option>
+ [% ELSE %]
+ <option value="geo_point">Maantieteellinen piste</option>
+ [% END %]
+ </select>
+ </td>
+ <td data-order="[% search_field.weight | html %]">
+ [% IF search_field.mapped_biblios %]
+ <input type="text" inputmode="decimal" pattern="[0-9\.]*" name="search_field_weight" value="[% search_field.weight | html %]" />
+ [% ELSE %]
+ <input type="text" name="search_field_weight" value="">
+ [% END %]
+ </td>
+ <td>
+ <select name="search_field_staff_client">
+ [% IF search_field.staff_client %]
+ <option value="1" selected="selected">Kyllä</option>
+ <option value="0">Ei</option>
+ [% ELSE %]
+ <option value="1">Kyllä</option>
+ <option value="0" selected="selected">Ei</option>
+ [% END %]
+ </select>
+ </td>
+ <td>
+ <select name="search_field_opac">
+ [% IF search_field.opac %]
+ <option value="1" selected="selected">Kyllä</option>
+ <option value="0">Ei</option>
+ [% ELSE %]
+ <option value="1">Kyllä</option>
+ <option value="0" selected="selected">Ei</option>
+ [% END %]
+ </select>
+ </td>
+ <td>
+ [% IF search_field.is_mapped %]
+ <a class="btn btn-default btn-xs disabled delete-search-field" style="cursor: pointer;"><i class="fa fa-trash"></i> Poista</a>
+ [% ELSE %]
+ <a class="btn btn-default btn-xs delete-search-field" style="cursor: pointer;"><i class="fa fa-trash"></i> Poista</a>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ <tfoot>
+ <tr data-type="search-field">
+ <td>
+ <input type="text" data-id="search_field_name"/>
+ </td>
+ <td></td>
+ <td>
+ <input type="text" data-id="search_field_label"/>
+ </td>
+ <td>
+ <select data-id="search_field_type">
+ <option value="">Oletus</option>
+ <option value="string">Merkkijono</option>
+ <option value="date">Pvm</option>
+ <option value="year">Vuosi</option>
+ <option value="number">Numero</option>
+ <option value="boolean">Boolean</option>
+ <option value="sum">Summa</option>
+ <option value="isbn">ISBN</option>
+ <option value="stdno">Identifierr</option>
+ <option value="callnumber">Luokka</option>
+ <option value="geo_point">Maantieteellinen piste</option>
+ </select>
+ </td>
+ <td>
+ <input type="text" data-id="search_field_weight" value="">
+ </td>
+ <td>
+ <select data-id="search_field_staff_client">
+ <option value="1">Kyllä</option>
+ <option value="0">Ei</option>
+ </select>
+ </td>
+ <td>
+ <select data-id="search_field_opac">
+ <option value="1">Kyllä</option>
+ <option value="0">Ei</option>
+ </select>
+ </td>
+ <td><a class="btn btn-default btn-xs add-search-field"><i class="fa fa-plus"></i> Lisää</a></td>
+ </tr>
+ </tfoot>
+ </table>
+ [% END %]
+ [% FOREACH index IN indexes %]
+ [% WRAPPER tab_panel tabname="mapping_${ index.index_name }" %]
+ <table class="mappings" data-index_name="[% index.index_name | html %]" data-ordering="false" id="mapping_[% index.index_name | html %]_table">
+ <thead>
+ <tr>
+ <th>Hakukenttä</th>
+ <th>Järjestettävissä</th>
+ <th>Fasetoitavissa</th>
+ <th>Altis</th>
+ <th>Haettavissa</th>
+ <th>Suodata</th>
+ <th>Kytkökset</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH mapping IN index.mappings %]
+ [% IF mapping.search_field_mandatory && mapping.search_field_label != loop.next.search_field_label && mapping.search_field_label != loop.prev.search_field_label %]
+ <tr>
+ <td>
+ <input type="hidden" name="mapping_index_name" value="[% index.index_name | html %]" />
+ <input type="hidden" name="mapping_search_field_name" value="[% mapping.search_field_name | html %]">
+ [% mapping.search_field_name | html %]
+ [% IF mapping.search_field_label != mapping.search_field_name %] ([% mapping.search_field_label | html %])[% END %]
+ </td>
+ <td>
+ [% IF mapping.sort == 0 %]
+ <input type="hidden" name="mapping_sort" value="0" readonly />Ei [% ELSE %] <input type="hidden" name="mapping_sort" value="1" readonly />Kyllä [% END %] </td>
+ <td>
+ <input type="hidden" name="mapping_facet" value="[% mapping.facet | html %]" readonly />[% IF mapping.facet == 1 %]Kyllä[% ELSE %]Ei[% END %] </td>
+ <td>
+ <input type="hidden" name="mapping_suggestible" value="[% mapping.suggestible | html %]" readonly />[% IF mapping.suggestible == 1 %]Kyllä[% ELSE %]Ei[% END %] </td>
+ <td>
+ <input type="hidden" name="mapping_search" value="[% mapping.search | html %]" readonly />[% IF mapping.search == 1 %]Kyllä[% ELSE %]Ei[% END %] </td>
+ <td>
+ <input type="hidden" name="mapping_filter" value="[% mapping.filter | html %]" readonly />[% IF mapping.filter == 'punctuation' %] Välimerkitys[% END %] </td>
+ <td data-search="[% mapping.marc_field | html %]">
+ <input name="mapping_marc_field" type="text" value="[% mapping.marc_field | html %]" />
+ </td>
+ <td>&nbsp;</td>
+ </tr>
+ [% ELSE %]
+ <tr>
+ <td>
+ <input type="hidden" name="mapping_index_name" value="[% index.index_name | html %]" />
+ <input type="hidden" name="mapping_search_field_name" value="[% mapping.search_field_name | html %]">
+ [% mapping.search_field_name | html %]
+ [% IF mapping.search_field_label != mapping.search_field_name %] ([% mapping.search_field_label | html %])[% END %]
+ </td>
+ <td>
+ <select name="mapping_sort">
+ [% IF mapping.sort == 0 %]
+ <option value="0" selected="selected">Ei</option>
+ <option value="1">Kyllä</option>
+ [% ELSE %]
+ <option value="0">Ei</option>
+ <option value="1" selected="selected">Kyllä</option>
+ [% END %]
+ </select>
+ </td>
+ <td>
+ [% IF mapping.is_facetable %]
+ <select name="mapping_facet">
+ [% IF mapping.facet %]
+ <option value="0">Ei</option>
+ <option value="1" selected="selected">Kyllä</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Ei</option>
+ <option value="1">Kyllä</option>
+ [% END %]
+ </select>
+ [% ELSE %]
+ <input type="hidden" name="mapping_facet" value="0" />
+ Ei [% END %] </td>
+ <td>
+ <select name="mapping_suggestible">
+ [% IF mapping.suggestible %]
+ <option value="0">Ei</option>
+ <option value="1" selected="selected">Kyllä</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Ei</option>
+ <option value="1">Kyllä</option>
+ [% END %]
+ </select>
+ </td>
+ <td>
+ <select name="mapping_search">
+ [% IF mapping.search %]
+ <option value="0">Ei</option>
+ <option value="1" selected="selected">Kyllä</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Ei</option>
+ <option value="1">Kyllä</option>
+ [% END %]
+ </select>
+ </td>
+ <td>
+ <select name="mapping_filter">
+ [% IF mapping.filter == 'punctuation' %]
+ <option value="">Ei mitään</option>
+ <option value="punctuation" selected="selected">Välimerkitys</option>
+ [% ELSE %]
+ <option value="" selected="selected">Ei mitään</option>
+ <option value="punctuation">Välimerkitys</option>
+ [% END %]
+ </select>
+ </td>
+ <td data-search="[% mapping.marc_field | html %]">
+ <input name="mapping_marc_field" type="text" value="[% mapping.marc_field | html %]" />
+ </td>
+ [% IF mapping.search_field_mandatory %]
+ <td><a class="btn btn-default btn-xs delete-mapping mandatory" data-field_name="[% mapping.search_field_name | html %]" style="cursor: pointer;"><i class="fa fa-trash"></i> Poista</a></td>
+ [% ELSE %]
+ <td><a class="btn btn-default btn-xs delete-mapping" style="cursor: pointer;"><i class="fa fa-trash"></i> Poista</a></td>
+ [% END %]
+ </tr>
+ [% END %]
+ [% END %]
+ </tbody>
+ <tfoot>
+ <tr data-type="mapping">
+ <td>
+ <input data-id="mapping_index_name" type="hidden" value="[% index.index_name | html %]" />
+ <select data-id="mapping_search_field_name">
+ [% FOREACH f IN all_search_fields %]
+ <option value="[% f.name | html %]">[% f.name | html %][% IF f.label != f.name %] ([% f.label | html %])[% END %]</option>
+ [% END %]
+ </select>
+ </td>
+ <td>
+ <select data-id="mapping_sort">
+ <option value="0">Ei</option>
+ <option value="1">Kyllä</option>
+ </select>
+ </td>
+ <td>
+ <select data-id="mapping_facet">
+ <option value="0">Ei</option>
+ <option value="1">Kyllä</option>
+ </select>
+ </td>
+ <td>
+ <select data-id="mapping_suggestible">
+ <option value="0">Ei</option>
+ <option value="1">Kyllä</option>
+ </select>
+ </td>
+ <td>
+ <select data-id="mapping_search">
+ <option value="0">Ei</option>
+ <option value="1">Kyllä</option>
+ </select>
+ </td>
+ <td>
+ <select data-id="mapping_filter">
+ <option value="">Ei mitään</option>
+ <option value="punctuation">Välimerkitys</option>
+ </select>
+ </td>
+ <td><input data-id="mapping_marc_field" type="text" /></td>
+ <td><a class="btn btn-default btn-xs add"><i class="fa fa-plus"></i> Lisää</a></td>
+ </tr>
+ </tfoot>
+ </table>
+
+ [% IF index.index_name == 'biblios' %]
+ <h3>Fasettien järjestys</h3>
+ <div class="hint">Raahaa ja pudota muuttaaksesi rivien järjestystä.</div>
+ <div id="facet_[% index.index_name | html %]">
+ <table id="facet_[% index.index_name | html %]_table" style="max-width: 50%; margin: 0;">
+ <thead>
+ <tr>
+ <th>Tilaus</th>
+ <th class="NoSort">Hakukenttä</th>
+ <th class="NoSort">Otsikko</th>
+ <th class="NoSort">Auktorisoitu arvo</th>
+ <th class="NoSort">&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH f IN facetable_fields %]
+ <tr>
+ <td>[% loop.count | html %]</td>
+ <td class="drag_handle">
+ [% f.name | html %]
+ </td>
+ <td>
+ [% SWITCH f.label %]
+ [% CASE 'Authors' %]<span>Tekijät</span>
+ [% CASE 'Item types' %]<span>Nidetyypit</span>
+ [% CASE 'Locations' %]<span>Hyllypaikat</span>
+ [% CASE 'Places' %]<span>Paikat</span>
+ [% CASE 'Series' %]<span>Sarjajulkaisu</span>
+ [% CASE 'Topics' %]<span>Asiasanat</span>
+ [% CASE 'Collections' %]<span>Kokoelmat</span>
+ [% CASE 'Holding libraries' %]<span>Nykyinen paikka</span>
+ [% CASE 'Home libraries' %]<span>Kotikirjastot</span>
+ [% CASE 'Languages' %]<span>Kielet</span>
+ [% CASE %]<span>[% f.label | html %]</span>
+ [% END %]
+ <input type="hidden" name="facet_name" value="[% f.name | html %]" />
+ </td>
+ <td>
+ [% IF f.name != 'itype' && f.name != 'location' && f.name != 'holdingbranch' && f.name != 'homebranch' && f.name != 'ln' && f.name != 'ccode' %]
+ <select name="facet_av_cat_[% f.name | html %]">
+ <option value=""></option>
+ [% FOR av_cat IN authorised_value_categories %]
+ [% IF f.authorised_value_category == av_cat %]
+ <option value="[% av_cat | html %]" selected="selected">[% av_cat | html %]</option>
+ [% ELSE %]
+ <option value="[% av_cat | html %]">[% av_cat | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ [% END %]
+ </td>
+ <td>
+ <a class="btn btn-default btn-xs delete-facet" style="cursor: pointer;"><i class="fa fa-trash"></i> Poista</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ <tfoot>
+ <tr data-type="facet">
+ <td></td>
+ <td>
+ <select data-id="facet-search-field">
+ [% FOREACH search_field IN all_search_fields %]
+ <option value="[% search_field.name | html %]" data-label="[% search_field.label | html %]">[% search_field.name | html %]</option>
+ [% END %]
+ </select>
+ </td>
+ <td></td>
+ <td>
+ <select data-id="facet-av-cat">
+ <option value=""></option>
+ [% FOR av_cat IN authorised_value_categories %]
+ <option value="[% av_cat | html %]">[% av_cat | html %]</option>
+ [% END %]
+ </select>
+ </td>
+ <td><a class="btn btn-default btn-xs add-facet"><i class="fa fa-plus"></i> Lisää</a></td>
+ </tr>
+ </tfoot>
+ </table>
+ </div>
+ [% END %]
+ [% END # /WRAPPER tab_panel#mapping_{ index.index_name} %]
+ [% END # /FOREACH index %]
+ [% END # /WRAPPER tab_panels %]
+ [% END # /WRAPPER tabs %]
+
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-edit">
+ <button class="btn btn-primary" type="submit"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i> Tallenna</button>
+ </fieldset>
+ </form>
+ <form method="get">
+ <fieldset class="action">
+ <button class="btn btn-default" type="submit" name="op" value="reset_confirm"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Nollaa määritykset</button>
+ </fieldset>
+ </form>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% Asset.js("js/elasticsearch-mappings.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

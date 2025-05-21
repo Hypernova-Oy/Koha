@@ -1,0 +1,77 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% USE AdditionalContents %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% SET SelfCheckHelpMessage = AdditionalContents.get( location => "SelfCheckHelpMessage", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+<title>Hjälp för självutlåning &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha [% END %]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Koha" /> <!-- leave this for stats -->
+<link rel="shortcut icon" href="[% IF ( Koha.Preference('OpacFavicon')  ) %][% Koha.Preference('OpacFavicon') | url %][% ELSE %][% interface | html %]/[% theme | html %]/images/favicon.ico[% END %]" type="image/x-icon" />
+[% Asset.css("lib/fontawesome/css/fontawesome.min.css") | $raw %]
+[% Asset.css("lib/fontawesome/css/brands.min.css") | $raw %]
+[% Asset.css("lib/fontawesome/css/solid.min.css") | $raw %]
+[% Asset.css("css/sco.css") | $raw %]
+[% IF ( Koha.Preference('OPACUserCSS') ) %]<style>[% Koha.Preference('OPACUserCSS') | $raw %]</style>[% END %]
+[% IF Branches.GetBranchSpecificCSS( Branches.GetLoggedInBranchcode() || default_branch) %]
+ <style>
+        [% Branches.GetBranchSpecificCSS( Branches.GetLoggedInBranchcode() || default_branch) | $raw %]
+    </style>
+[% END %]
+[% IF ( SCOUserCSS ) %]<style>[% SCOUserCSS | $raw %]</style>[% END %]
+<script>
+    var Koha = {};
+    function _(s) { return s } // dummy function for gettext
+</script>
+[% IF lang && lang != 'en' %]
+ [% Asset.js(lang _ '/js/locale_data.js') | $raw %]
+[% END %]
+[% Asset.js('js/Gettext.js') | $raw %]
+[% Asset.js('js/i18n.js') | $raw %]
+</head>
+<body id="sco_help" class="sco">
+ [% INCLUDE 'masthead-sco.inc' %]
+
+ <div class="main">
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col order-first order-md-first order-lg-2">
+ <h1>Hjälp för självutlåning</h1>
+
+ [% IF ( SelfCheckHelpMessage ) %]
+ <div id="selfcheckhelpmessage">
+ [% PROCESS koha_news_block news => SelfCheckHelpMessage %]
+ </div>
+ [% END %]
+
+ <div id="selfcheckdefaulthelpmessage">
+ <p>Om det här är första gången som du använder självutlåningssystemet, eller om systemet inte fungerar som väntat, kan du använda den här guiden för att komma igång.</p>
+
+ <h2>Steg ett: Ange ditt användar-ID[% IF ( SelfCheckoutByLogin ) %] och lösenord[% END %]</h2>
+
+ <p>Ange ditt användar-ID[% IF ( SelfCheckoutByLogin ) %] och lösenord[% END %] och klicka sedan på skicka-knappen (eller tryck på Retur-tangenten).</p>
+
+ <h2>Steg två: Skanna streckkoden för alla artiklar en i taget</h2>
+
+ <p>Skanna varje exemplar och vänta tills sidan har uppdaterats innan du skannar nästa exemplar. Lånet visas i din lånelista. Du behöver bara använda Skicka-knappen om du anger streckkoden manuellt.</p>
+
+ <h2>Steg tre: Klicka på knappen 'Slutför'</h2>
+
+ <p>Om du inte klickar på knappen 'Avsluta' går din session automatiskt ut om [% SelfCheckTimeout | html %] sekunder.</p>
+ </div>
+
+ <div class="button">
+ <a href="javascript:history.go(-1)">Tillbaka till självutlåningen</a>
+ </div>
+
+ </div> <!-- / .col -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+ [% IF ( SCOUserJS ) %]<script>[% SCOUserJS | $raw %]</script>[% END %]
+[% END %]

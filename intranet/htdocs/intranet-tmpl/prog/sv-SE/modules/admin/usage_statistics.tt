@@ -1,0 +1,368 @@
+[% USE raw %]
+[% USE Asset %]
+[% SET footerjs = 1 %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Price %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Koha usage statistics") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% Asset.css("lib/leaflet/leaflet.css") | $raw %]
+</head>
+
+<body id="admin_usage_statistics" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Användningsstatistik</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Ett fel inträffade när denna låntagarkategori uppdaterades. Kanske finns den redan i systemet.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Ett fel inträffade när låntagarkategorin lades till. Låntagarkategorin kanske redan finns.</span>
+ [% CASE 'error_on_delete' %]
+ <span>Ett fel uppstod när låntagarkategorin skulle tas bort. Titta i loggarna.</span>
+ [% CASE 'success_on_update' %]
+ <span>Låntagarkategorin har uppdaterats.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Låntagarkategori har lagts till.</span>
+ [% CASE 'success_on_delete' %]
+ <span>Låntagarkategori har tagits bort.</span>
+ [% CASE 'already_exists' %]
+ <span>Den här låntagarkategorin finns redan.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+[% IF NOT Koha.Preference('UsageStats') %]
+ <div class="alert alert-info">Du delar ingen data med Koha-communityn</div>
+[% END %]
+
+ <form id="category_form" action="/cgi-bin/koha/admin/usage_statistics.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <h1>Ändra den statistik som du delar med Koha-gemenskapen</h1>
+ <div class="row">
+ <div class="col col-md-6">
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="UsageStats">Dela min Kohastatistik: </label>
+ <select name="UsageStats" id="UsageStats">
+ [% IF Koha.Preference('UsageStats') == 1 %]
+ <option value="2">Ej definierat</option>
+ <option value="1" selected="selected">Ja</option>
+ <option value="0">Nej</option>
+ [% ELSIF Koha.Preference('UsageStats') == 0 %]
+ <option value="2">Ej definierat</option>
+ <option value="1">Ja</option>
+ <option value="0" selected="selected">Nej</option>
+ [% ELSE %]
+ <option value="2" selected="selected">Ej definierat</option>
+ <option value="1">Ja</option>
+ <option value="0">Nej</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="UsageStatsCountry">Ditt land: </label>
+ [% SET UsageStatsCountry = Koha.Preference('UsageStatsCountry') %]
+ [% SET IsUsageStatsCountryValid = 0 %]
+ [% IF NOT UsageStatsCountry %]
+ [% SET IsUsageStatsCountryValid = 1 %]
+ [% END %]
+ [% PROCESS 'country-list.inc' %]
+ <select name="UsageStatsCountry" id="UsageStatsCountry">
+ <option value="">&nbsp;</option>
+ [% FOREACH country IN country_strings.split(',') %]
+ [% IF country == UsageStatsCountry %]
+ <option value="[% country | html %]" selected="selected">[% country | html %]</option>
+ [% SET IsUsageStatsCountryValid = 1 %]
+ [% ELSE %]
+ <option value="[% country | html %]">[% country | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ [% UNLESS IsUsageStatsCountryValid %] Obs: värdet på din systeminställning 'UsageStatsCountry' är inte giltig ([% UsageStatsCountry | html %]). Vänligen välj ett giltigt. [% END %] </li>
+ <li>
+ <label for="UsageStatsLibraryName">Biblioteksnamn: </label>
+ <input type="text" value="[% Koha.Preference('UsageStatsLibraryName') | html %]" name="UsageStatsLibraryName" id="UsageStatsLibraryName" />
+ </li>
+ <li>
+ <label for="UsageStatsLibraryType">Bibliotekstyp: </label>
+ [% SET UsageStatsLibraryType = Koha.Preference('UsageStatsLibraryType') %]
+ <select name="UsageStatsLibraryType" id="UsageStatsLibraryType">
+ <option value="">&nbsp;</option>
+ [% IF UsageStatsLibraryType == 'public' %]
+ <option value="public" selected="selected">Offentlig</option>
+ [% ELSE %]
+ <option value="public">Offentlig</option>
+ [% END %]
+
+ [% IF UsageStatsLibraryType == 'school' %]
+ <option value="school" selected="selected">Skola</option>
+ [% ELSE %]
+ <option value="school">Skola</option>
+ [% END %]
+ [% IF UsageStatsLibraryType == 'academic' %]
+ <option value="academic" selected="selected">Akademisk</option>
+ [% ELSE %]
+ <option value="academic">Akademisk</option>
+ [% END %]
+ [% IF UsageStatsLibraryType == 'research' %]
+ <option value="research" selected="selected">Forskning</option>
+ [% ELSE %]
+ <option value="research">Forskning</option>
+ [% END %]
+ [% IF UsageStatsLibraryType == 'private' %]
+ <option value="private" selected="selected">Privat</option>
+ [% ELSE %]
+ <option value="private">Privat</option>
+ [% END %]
+ [% IF UsageStatsLibraryType == 'societyAssociation' %]
+ <option value="societyAssociation" selected="selected">Samhälle eller förening</option>
+ [% ELSE %]
+ <option value="societyAssociation">Samhälle eller förening</option>
+ [% END %]
+ [% IF UsageStatsLibraryType == 'corporate' %]
+ <option value="corporate" selected="selected">Gemensam</option>
+ [% ELSE %]
+ <option value="corporate">Gemensam</option>
+ [% END %]
+ [% IF UsageStatsLibraryType == 'government' %]
+ <option value="government" selected="selected">Staten</option>
+ [% ELSE %]
+ <option value="government">Staten</option>
+ [% END %]
+ [% IF UsageStatsLibraryType == 'religiousOrg' %]
+ <option value="religiousOrg" selected="selected">Religiös organisation</option>
+ [% ELSE %]
+ <option value="religiousOrg">Religiös organisation</option>
+ [% END %]
+ [% IF UsageStatsLibraryType == 'subscription' %]
+ <option value="subscription" selected="selected">Prenumeration</option>
+ [% ELSE %]
+ <option value="subscription">Prenumeration</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="UsageStatsLibraryUrl">Bibliotekets URL: </label>
+ <input type="text" name="UsageStatsLibraryUrl" value="[% Koha.Preference('UsageStatsLibraryUrl') | html %]" id="UsageStatsLibraryUrl" />
+ </li>
+ <li>
+ <span class="label">Senast uppdaterad: </span>
+ [% IF UsageStatsLastUpdateTime %]
+ [% UsageStatsLastUpdateTime | html %]
+ [% ELSE %]
+ <span>Dina uppgifter har inte delats</span>
+ [% END %]
+ </li>
+ <li>
+ <label for="UsageStatsGeolocation">Plats: </label>
+ <input id="UsageStatsGeolocation" name="UsageStatsGeolocation" value="[% Koha.Preference('UsageStatsGeolocation') | html %]" type="text" value="[% Koha.Preference('UsageStatsLibrariesInfo') | html %]" size="35" readonly="readonly" />
+ <a href="#" class="change_geolocation" data-branchname="" data-id="UsageStatsGeolocation"><img src="[% interface | html %]/lib/leaflet/images/marker-icon.png" style="max-height: 2em;" title="Ange geolocation" /></a>
+ </li>
+ <li>
+ <label for="UsageStatsLibrariesInfo">Biblioteksinformation: </label>
+ <select name="UsageStatsLibrariesInfo" id="UsageStatsLibrariesInfo">
+ [% IF Koha.Preference('UsageStatsLibrariesInfo') %]
+ <option value="1" selected="selected">Ja</option>
+ <option value="0">Nej</option>
+ [% ELSE %]
+ <option value="1">Ja</option>
+ <option value="0" selected="selected">Nej</option>
+ [% END %]
+ </select>
+ </li>
+
+ <li id="libraries_info">
+ <fieldset class="rows">
+ <legend>Bibliotek</legend>
+ <ol>
+ [% FOR l IN libraries %]
+ <li>
+ <label for="[% l.branchcode | html %]">[% l.branchname | html %]: </label>
+ <div style="float:left;">
+ <div>Land: [% l.branchcountry | html %]</div>
+ <div>Url: [% l.branchurl | html %]</div>
+ <div>
+ Plats: <input type="text" id="geolocation_[% l.branchcode | html %]" name="geolocation_[% l.branchcode | html %]" value="[% l.geolocation | html %]" size="35" readonly="readonly" />
+ <a href="#" class="change_geolocation" data-branchname="[% l.branchname | html %]" data-id="geolocation_[% l.branchcode | html %]"><img src="[% interface | html %]/lib/leaflet/images/marker-icon.png" style="max-height: 2em;" title="Ange geolocation för [% l.branchname | html %]" /></a>
+ </div>
+ </div>
+ </li>
+ [% END %]
+ </ol>
+ </fieldset>
+ </li>
+ <li>
+ <label for="MyPublicLink">Visa din offentliga sida: </label>
+ [% IF Koha.Preference('UsageStatsPublicID') %]
+ [% SET my_url = 'https://hea.koha-community.org/libraries/' _  Koha.Preference('UsageStatsPublicID') %]
+ <a href="[% my_url | url %]">[% my_url | html %]</a>
+ [% ELSE %] Du har inget offentligt än. [% END %] </li>
+
+ </ol>
+ </fieldset>
+ </div>
+ <div class="col-md-6">
+ <div>
+ <div id="mapid" style="width:100%;height: 400px;"></div>
+ </div>
+ </div>
+
+ </div>
+
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-update" />
+ <input class="btn btn-primary" type="submit" value="Uppdatera din statistikanvändning" />
+ <a class="cancel" href="/cgi-bin/koha/admin/usage_statistics.pl">Avbryt</a>
+ </fieldset>
+ </form>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% Asset.js("/lib/leaflet/leaflet.js") | $raw %]
+ <script>
+        function positionMap() {
+            var tbh = $("#mapid");
+            var mapContainer = tbh.parent();
+            mapContainer.css('position', 'relative');
+            mapContainer.css('min-height', tbh.outerHeight(true));
+            tbh.css('position', 'absolute');
+            tbh.css('right', 0);
+
+            var offsetTop = mapContainer.offset().top;
+            var s = parseInt($(window).scrollTop(), 10);
+            tbh.css('top', '').css('bottom', '');
+            if (s > offsetTop) {
+                var mapContainerOffsetBottom = offsetTop + mapContainer.innerHeight();
+                if (s + tbh.outerHeight(true) > mapContainerOffsetBottom) {
+                    tbh.css('bottom', 0);
+                } else {
+                    tbh.css('top', s - offsetTop);
+                }
+            } else {
+                tbh.css('top', 0);
+            }
+        }
+
+        $(document).ready(function() {
+            $(window).scroll(positionMap);
+            positionMap();
+        });
+
+        var map = L.map('mapid').setView([0,0], 1);
+
+        L.tileLayer('https://a.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'
+        }).addTo(map);
+
+        var default_elt = { 'text': _("Huvudbibliotek"), 'id': 'UsageStatsGeolocation' };
+        var current_elt = default_elt;
+
+        // Add the title
+        var title = L.control({position: 'topright'});
+        title.onAdd = function (map) {
+            this._div = L.DomUtil.create('div', 'title');
+            this.update();
+            return this._div;
+        };
+        title.update = function (props) {
+            this._div.innerHTML = '<h4>' + _("Klicka på kartan för att ställa in geolocation för %s").format(current_elt.text) + '</h4>';
+        };
+        title.addTo(map);
+
+        var markers = {};
+        function add_to_map(elt, latlng) {
+            var marker = markers[elt.id];
+            if (marker) map.removeLayer(marker);
+            marker = L.marker(latlng).addTo(map);
+            marker.bindPopup(elt.text);
+            marker.on('mouseover', function (e) {this.openPopup(); });
+            marker.on('mouseout',  function (e) {this.closePopup();});
+            markers[elt.id] = marker;
+        }
+
+        // Init the map
+        [% IF Koha.Preference('UsageStatsGeolocation') %]
+            var latlng = [ [% Koha.Preference('UsageStatsGeolocation') | html %] ];
+            add_to_map( current_elt, latlng );
+        [% END %]
+        [% FOR l IN libraries %]
+            [% NEXT UNLESS l.geolocation %]
+            add_to_map( { 'text': "[% l.branchname | html %]", 'id': "geolocation_[% l.branchcode | html %]" }, [ [% l.geolocation | html %] ] );
+        [% END %]
+
+        // On click, update the geolocation and the marker
+        map.on('click', function(e){
+            add_to_map( current_elt, e.latlng );
+            $("#" + current_elt.id).val(e.latlng.lat + ',' + e.latlng.lng);
+        });
+
+        // Auto zoom
+        var group = new L.featureGroup(Object.keys(markers).map(function(key){return markers[key]}));
+        if ( group.getBounds().isValid() ) map.fitBounds(group.getBounds());
+
+        // On click on the marker icons, update the title of the map
+        $(document).ready(function(){
+            $(".change_geolocation").on('click', function(e){
+                e.preventDefault();
+                if ( $(this).data('branchname') ) {
+                    current_elt = { 'text': $(this).data('branchname'), 'id': $(this).data('id') };
+                } else {
+                    current_elt = default_elt;
+                }
+                title.update();
+            });
+            $("#UsageStatsLibrariesInfo").change();
+        });
+
+        $("#UsageStatsLibrariesInfo").on('change', function(){
+            if ( $(this).val() == 1 ) $("#libraries_info").show()
+            else $("#libraries_info").hide();
+            positionMap();
+        });
+
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

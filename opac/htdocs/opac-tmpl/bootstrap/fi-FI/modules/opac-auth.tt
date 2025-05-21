@@ -1,0 +1,302 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Categories %]
+[% USE AdditionalContents %]
+[% USE AuthClient %]
+[% PROCESS 'i18n.inc' %]
+[% PROCESS 'html_helpers.inc' %]
+[% SET OpacLoginInstructions = AdditionalContents.get( location => "OpacLoginInstructions", lang => lang, library => branchcode || default_branch ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ [% t("Log in to your account") | html %]
+ [% ELSE %]
+ [% t("Catalog login disabled") | html %]
+ [% END %] &rsaquo;
+ [% PROCESS 'library_name_title' %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-login-page' bodyclass='scrollto' %]
+[% INCLUDE 'masthead.inc' %]
+
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ <span>Kirjaudu sisään</span>
+ [% ELSE %]
+ <span>Kirjautuminen on poissa käytöstä</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row justify-content-center">
+ <div class="col-md-10 col-lg-6">
+ <div id="opac-auth" class="maincontent">
+ <!--CONTENT-->
+ [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ [% IF ( nopermission ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-warning">
+ <h1>Ei käyttöoikeutta</h1>
+ <p>Sinulla ei ole käyttöoikeutta tälle sivulle. </p>
+ [% IF SCO_login %]
+ <p><a href="/cgi-bin/koha/sco/sco-main.pl?logout.x=1">Kirjaudu ulos ja yritä uudelleen toisella käyttäjätunnuksella.</a></p>
+ [% ELSIF SCI_login %]
+ <p><a href="/cgi-bin/koha/sci/sci-main.pl?logout.x=1">Kirjaudu ulos ja yritä uudelleen toisella käyttäjätunnuksella.</a></p>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF ( loginprompt ) %]
+ <!-- login prompt time-->
+ <h1>Kirjaudu sisään</h1>
+
+ [% IF ( timed_out ) %]
+ <!-- This is what is displayed if login has timed out -->
+ <div class="alert alert-info">
+ <p>Istuntosi on aikakatkaistu. Kirjaudu uudelleen.</p>
+ </div>
+ [% END %]
+
+ [% IF ( different_ip ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-info">
+ <p>Tunnuksen käyttämä IP-osoite on muuttunut. Kirjaudu uudelleen sisään.</p>
+ </div>
+ [% END %]
+
+
+ [% IF invalid_username_or_password || too_many_login_attempts %]
+ <!-- This is what is displayed if user doesn't have permission or account is locked. (Do not expose more information than needed.) -->
+ <div class="alert alert-info">
+ <p>Väärä käyttäjätunnus tai salasana. Yritä uudelleen. Huomioi, että salasana on kirjainkoosta riippuvaisia, joten pieni kirjain on eri merkki kuin ISO KIRJAIN.[% IF Koha.Preference('FailedLoginAttempts') %] Käyttäjätilisi lukitaan liian monen epäonnistuneen kirjautumisen jälkeen.[% END %] Ota yhteyttä kirjastoosi, jos kirjautumisongelmat jatkuvat.</p>
+ </div>
+ [% END %]
+
+ [% IF auth_error %]
+ <div class="alert alert-info">
+ <p>Ulkoisen tunnistustietojen tarjoajan todennuksessa oli virhe</p>
+ <p>[% auth_error | html %]</p>
+ </div>
+ [% END %]
+
+ [% IF ( shibbolethAuthentication ) %]
+ [% IF ( invalidShibLogin ) %]
+ <!-- This is what is displayed if shibboleth login has failed to match a koha user -->
+ <div class="alert alert-info">
+ <p class="shib_invalid">Shibboleth-tunnuksen tiedot eivät täsmää kirjastokortin tietojen kanssa.</p>
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ [% IF ( invalidCasLogin ) %]
+ <!-- This is what is displayed if cas login has failed -->
+ <p class="cas_invalid">CAS-kirjautuminenkin epäonnistui. Jos sinulla on paikallinen käyttäjätunnus, voit käyttää sitä.</p>
+ [% ELSE %]
+ <p>Jos sinulla on CAS-tili, voit kirjautua alla.</p>
+ [% END %]
+ [% ELSE %]
+ <p>Jos sinulla on kirjastokortti, voit kirjautua alta.</p>
+ [% END %]
+ [% END %]
+ </div>
+ [% ELSE %]
+ <h2 class="shib_title">Shibboleth-kirjautuminen</h2>
+ <p><a class="shib_url" href="[% shibbolethLoginUrl | $raw %]">Kirjaudu sisään käyttäen Shibboleth-tiliä.</a></p>
+ [% END # /IF invalidShibLogin %]
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ <h2 class="cas_title">CAS-kirjautuminen</h2>
+ <p>Jos sinulla ei ole Shibboleth-tiliä, mutta sinulla on CAS-tili, voit käyttää CASia.</p>
+ [% ELSE %]
+ <h2 class="shib_local_title">Paikallinen kirjautuminen</h2>
+ <p class="shib_local_text">Jos sinulla ei ole Shibboleth-tiliä, kirjaudu paikallisella käyttäjätunnuksellasi (kirjastokortilla).</p>
+ [% END %]
+ [% END %]
+ [% END # /IF shibbolethAuthentication %]
+
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ [% IF ( shibbolethAuthentication ) %]
+ [% IF ( casServerUrl ) %]
+ <p><a class="cas_url" href="[% casServerUrl | $raw %]">Kirjaudu sisään.</a><p>
+ [% END %]
+
+ [% IF ( casServersLoop ) %]
+ <p>Valitse tunnistautumispalvelin: </p>
+ <ul>
+ [% FOREACH casServer IN casServersLoop %]
+ <li><a class="cas_url" href="[% casServer.value | $raw %]">[% casServer.name | html %]</a></li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% ELSE %]
+ [% IF ( invalidCasLogin ) %]
+ <div class="alert alert-info">
+ <!-- This is what is displayed if cas login has failed -->
+ <p class="cas_invalid">CAS-kirjautuminen epäonnistui.</p>
+ </div>
+ [% END %]
+
+ <h2 class="cas_title">CAS-kirjautuminen</h2>
+
+ [% IF ( casServerUrl ) %]
+ <p><a class="cas_url" href="[% casServerUrl | $raw %]">Kirjaudu sisään käyttäen CAS-tiliä.</a><p>
+ [% END %]
+
+ [% IF ( casServersLoop ) %]
+ <p>Jos sinulla on CAS-tili, valitse tunnistautumispalvelin:</p>
+ <ul>
+ [% FOREACH casServer IN casServersLoop %]
+ <li><a class="cas_url" href="[% casServer.value | $raw %]">[% casServer.name | html %]</a></li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% END # /IF shibbolethAuthentication %]
+
+ [% IF ( shibbolethAuthentication ) %]
+ <p>Ei mitään</p>
+ [% ELSE %]
+ <h2>Paikallinen kirjautuminen</h2>
+ <p>Voit kirjautua ilman CAS-tiliä paikallisella tililläsi: </p>
+ [% END %]
+
+ [% END # / IF casAuthentication %]
+
+ [% SET identity_providers = AuthClient.get_providers('opac') %]
+ [% IF ( ! identity_providers.empty ) %]
+ [% FOREACH provider IN identity_providers %]
+ <p class="clearfix">
+ <a href="[% provider.url | url %]" class="btn btn-light col-md-12" id="provider_[% provider.code | html %]">
+ [% IF provider.icon_url %]
+ <img src="[% provider.icon_url | url %]" style="max-height: 20px; max-width: 20px;"/>
+ [% ELSE %]
+ <i class="fa fa-user" aria-hidden="true"></i>
+ [% END %] Kirjaudu käyttäen: [% provider.description | html %] </a>
+ </p>
+ [% END %]
+ <hr/>
+ <p>Voit kirjautua ilman ulkoista tiliä paikallisella tililläsi: </p>
+ [% END # /IF  identity_providers %]
+
+ [% IF ( Koha.Preference('GoogleOpenIDConnect') == 1 ) %]
+ [% IF ( invalidGoogleOpenIDConnectLogin ) %]
+ <h2>Google-kirjautuminen</h2>
+ <p>Google-kirjautuminen epäonnistui. <span class="error">[% invalidGoogleOpenIDConnectLogin | html %]</span></p>
+ <p>Huomioi, että Google-kirjautuminen toimii vain, jos käytät sähköpostiosoitetta, joka on tallennettu asiakastietoihisi.</p>
+ <p>Jos haluat, voit yrittää <a href="/cgi-bin/koha/svc/auth/googleopenidconnect?reauthenticate=select_account">kirjaudu sisään toisena käyttäjänä</a>
+ [% END %]
+ <a href="/cgi-bin/koha/svc/auth/googleopenidconnect" class="btn btn-light" id="openid_connect"><i class="fa-brands fa-google" aria-hidden="true"></i> Kirjaudu Google-tunnuksella</a>
+ <p>Jos sinulla ei ole Google-tiliä, voit kirjautua kirjastokortillasi: </p>
+ [% END # /IF GoogleOpenIDConnect %]
+ [% END # /UNLESS OPACShibOnly %]
+
+ [% IF !(invalid_username_or_password || too_many_login_attempts) and is_anonymous_patron %]
+ <div class="alert alert-info">
+ <p><strong>Virhe: </strong>Et voi kirjautua anonymisointiin käytettävänä asiakkaana!</p>
+ </div>
+ [% END %]
+
+ [% IF !(invalid_username_or_password || too_many_login_attempts) and password_has_expired %]
+ [% IF date_enrolled == password_expiration_date %]
+ <div class="alert alert-info">
+ <p><strong>Virhe: </strong>Kirjauduit ensimmäistä kertaa ja sinun on vaihdettava salasanasi.</p>
+ </div>
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p><strong>Virhe: </strong>Salasanasi on vanhentunut!</p>
+ </div>
+ [% END %]
+ [% IF Koha.Preference('EnableExpiredPasswordReset') %]
+ <a href="/cgi-bin/koha/opac-reset-password.pl">Vaihda salasanasi</a>.
+ [% ELSIF Koha.Preference('OpacPasswordChange') && Categories.can_any_reset_password %]
+ <div id="resetpassword">
+ <a href="/cgi-bin/koha/opac-password-recovery.pl">Vaihda salasanasi</a>
+ </div>
+ [% ELSE %]
+ <p>Ota yhteyttä kirjastoon palauttaaksesi salasanasi</p>
+ [% END %]
+ [% ELSIF !Koha.Preference('OPACShibOnly') or SCO_login or SCI_login %]
+ [% IF SCO_login %]
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="auth" id="auth" method="post" autocomplete="off">
+ [% ELSIF SCI_login %]
+ <form action="/cgi-bin/koha/sci/sci-main.pl" name="auth" id="auth" method="post" autocomplete="off">
+ [% ELSE %]
+ <form action="[% script_name | html %]" name="auth" id="auth" method="post" autocomplete="off">
+ [% END %]
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-login" />
+ <input type="hidden" name="koha_login_context" value="opac" />
+
+ <div class="local-login">
+ <fieldset class="brief">
+ [% FOREACH INPUT IN INPUTS %]
+ [% NEXT IF INPUT.name == 'logout.x' %]
+ [% NEXT IF INPUT.name == "op" %]
+ [% NEXT IF INPUT.name == "csrf_token" %]
+ [% NEXT IF INPUT.name == "koha_login_context" %]
+ <input type="hidden" name="[% INPUT.name | html %]" value="[% INPUT.value | html %]" />
+ [% END %]
+ <div class="form-group">
+ [% PROCESS login_label for="userid" %]
+ <input class="form-control" type="text"  size="25" id="userid"  name="login_userid" autocomplete="off" />
+ </div>
+ <div class="form-group">
+ <label for="password">Salasana:</label>
+ <input class="form-control" type="password"  size="25" id="password"  name="login_password" autocomplete="off" />
+ </div>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Kirjaudu" />
+ </fieldset>
+ </fieldset>
+ </div>
+
+ <div id="nologininstructions">
+ [% IF OpacLoginInstructions %]
+ [% PROCESS koha_news_block news => OpacLoginInstructions %]
+ [% ELSE %]
+ <h2>Haluatko salasanan?</h2>
+ <p>Jos sinulla ei ole salasanaa, pyydä se kirjaston asiakaspalvelupisteestä.</p>
+ <h2>Haluatko kirjastokortin?</h2>
+ <p>Jos sinulla ei ole kirjastokorttia, käväise kirjastossa.</p>
+ [% END # / IF OpacLoginInstructions %]
+ </div>
+ [% IF Koha.Preference('OpacPasswordChange') && Categories.can_any_reset_password %]
+ <div id="forgotpassword">
+ <p><a href="/cgi-bin/koha/opac-password-recovery.pl">Unohditko salasanasi?</a></p>
+ </div>
+ [% END %]
+ [% IF Koha.Preference('PatronSelfRegistration') && Categories.all( categorycode => Koha.Preference('PatronSelfRegistrationDefaultCategory') ).count %]
+ <div id="registrationinstructions">
+ <p><a href="/cgi-bin/koha/opac-memberentry.pl">Luo uusi tili</a></p>
+ </div>
+ [% END %]
+ </form>
+ [% END # / IF password_has_expired / ELSIF !OPACShibOnly or SCO_login or SCI_login %]
+ [% END # / IF loginprompt %]
+
+ [% ELSE %]
+ <h1>Kirjautuminen on estetty.</h1>
+ <ul>
+ <li>Voit ilmoittaa tästä virheestä sähköpostitse ylläpitäjälle. <a href="mailto:[% Koha.Preference( 'KohaAdminEmailAddress' ) | uri %]">Sähköposti</a></li>
+ <li>Käytä ylävalikkoa siirtyäksesi toiseen Kohan osioon.</li>
+ </ul>
+ [% END # / IF opacuserlogin %]
+
+ </div> <!-- /.opac-auth -->
+ </div> <!-- /.col-md-10 col-lg-6 -->
+ </div> <!-- /.row -->
+ </div> <!-- /.container-fluid -->
+</div> <!-- /.main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+<script>
+    // Hide circular 'Log in to Your Account' link in opac-auth.pl
+    $(document).ready(function() {
+        if ( $("#auth" ) ) { $("#members ul li a").hide(); }
+    });
+</script>
+[% END %]

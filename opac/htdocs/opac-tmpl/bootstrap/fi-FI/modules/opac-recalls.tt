@@ -1,0 +1,150 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Palautuspyyntöhistoriasi &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Kohan verkkokirjasto[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-recalls' bodyclass='scrollto' %]
+[% INCLUDE 'masthead.inc' %]
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Palautuspyyntöhistoriasi</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col col-lg-2 order-2 order-lg-1">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ <div class="col-md-12 col-lg-10 order-1 order-lg-2">
+ <div id="recalls" class="maincontent">
+ <h2>Palautuspyyntöhistoria</h2>
+ [% IF Koha.Preference('UseRecalls') %]
+ [% IF RECALLS.count %]
+ <div id="opac-user-recalls">
+ <table id="recalls-table" class="table table-bordered table-striped">
+ <thead>
+ <tr>
+ <th class="anti-the">Nimeke</th>
+ <th class="psort">Varauspvm</th>
+ <th>Vanhenee</th>
+ <th>Noutopiste</th>
+ <th>Tila</th>
+ <th>Eräpäivä</th>
+ <th class="nosort">Muokkaa</th>
+ <th></th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH RECALL IN RECALLS %]
+ <tr>
+ <td class="title">
+ <a class="title" href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% RECALL.biblio_id | html %]">
+ [% RECALL.biblio.title | html %]
+ [% FOREACH s IN RECALL.biblio.subtitle %]
+ [% s | html %]
+ [% END %]
+ </a>
+ [% RECALL.biblio.author | html %]
+ </td>
+ <td class="recalldate" data-order="[% RECALL.created_date | html %]">
+ [% RECALL.created_date | $KohaDates %]
+ </td>
+ <td class="expirationdate" data-order="[% RECALL.expiration_date | html %]">
+ [% IF ( RECALL.expiration_date ) %]
+ [% RECALL.expiration_date | $KohaDates %]
+ [% ELSIF ( !RECALL.completed ) %]
+ <span>Ei vanhene koskaan</span>
+ [% ELSE %]
+ -
+ [% END %]
+ </td>
+ <td class="branch">
+ [% RECALL.library.branchname | html %]
+ </td>
+ <td class="status">
+ [% IF ( RECALL.in_transit ) %]
+ <span>Kuljetettavana kirjastoon [% RECALL.library.branchname | html %]</span>
+ [% ELSIF ( RECALL.waiting ) %]
+ <span>Noudettavissa</span>
+ [% ELSIF ( RECALL.overdue ) %]
+ <span>Myöhässä oleva</span>
+ [% ELSIF ( RECALL.expired ) %]
+ <span>Vanhenee [% RECALL.expiration_date | $KohaDates %]</span>
+ [% ELSIF ( RECALL.cancelled ) %]
+ <span>Peruutettu [% RECALL.completed_date | $KohaDates %]</span>
+ [% ELSIF ( RECALL.fulfilled ) %]
+ <span>Toteutettu</span>
+ [% ELSE %]
+ <span>Pyydetty</span>
+ [% END %]
+ </td>
+ <td class="due_date">
+ [% IF ( RECALL.requested ) %]
+ <span>Palautettava [% RECALL.checkout.date_due | $KohaDates as_due_date => 1 %] mennessä</span>
+ [% ELSIF ( RECALL.waiting and RECALL.expiration_date ) %]
+ <span>Nouto [% RECALL.expiration_date | $KohaDates %] mennessä</span>
+ [% ELSE %]
+ -
+ [% END %]
+ </td>
+
+ <td class="cancelrecall">
+ [% IF ( RECALL.requested or RECALL.overdue ) %]
+ <form action="/cgi-bin/koha/opac-recall.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-cancel">
+ <input type="hidden" name="recall_id" value="[% RECALL.id | html %]">
+ <input type="hidden" name="biblionumber" value="[% RECALL.biblio_id | html %]">
+ <input class="btn btn-danger cancel_recall" name="submit" type="submit" value="Peruuta">
+ </form>
+ [% END %]
+ </td>
+ <td></td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+ [% ELSE %]
+ <span>Yhtään palautuspyyntöä ei ole tehty.</span>
+ [% END # / # RECALLS.count %]
+ [% ELSE %]
+ <span>Palautuspyynnöt eivät ole käytössä. Ota yhteys kirjastoon.</span>
+ [% END %]
+ </div> <!-- /#recalls -->
+ </div> <!-- /.col-md-12 -->
+ </div> <!-- /.row -->
+ </div> <!-- /.container-fluid -->
+</div> <!-- /#main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function(){
+            $(".cancel_recall").click(function(){
+                return confirmDelete(_("Haluatko varmasti poistaa tämän palautuspyynnön?"));
+            });
+            $("#recalls-table").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "responsive": {
+                    "details": { "type": 'column', "target": -1 }
+                },
+                "columnDefs": [
+                    { "targets": [ "nosort" ],"sortable": false,"searchable": false },
+                    { "type": "anti-the", "targets" : [ "anti-the" ] },
+                    { "className": "dtr-control", "orderable": false, "targets": -1 }
+                ]
+            }));
+        });
+    </script>
+[% END %]

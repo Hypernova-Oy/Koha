@@ -1,0 +1,240 @@
+---
+description:
+- Vissa grundläggande auktoriserade standardvärden för biblioteksplaceringar, förlorat-statusosv.
+- Du kan ändra dessa när som helst efter installationen.
+tables:
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: BSELL
+      category: SUGGEST
+      lib: Bästsäljare
+    - authorised_value: SCD
+      category: SUGGEST
+      lib: Hyllexemplar skadat
+    - authorised_value: LCL
+      category: SUGGEST
+      lib: Biblioteksexemplar försvunnet
+    - authorised_value: AVILL
+      category: SUGGEST
+      lib: Tillgänglig via fjärrlån
+    - authorised_value: Budget
+      category: SUGGEST
+      lib: Otillräcklig budget
+    - authorised_value: Expensive
+      category: SUGGEST
+      lib: Dokument för dyrt
+    - authorised_value: Poldoc
+      category: SUGGEST
+      lib: Dokument överensstämmer inte med vår inköpspolicy
+    translatable:
+    - lib
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: BOOK
+      category: SUGGEST_FORMAT
+      lib: Bok
+      lib_opac: Bok
+    - authorised_value: LP
+      category: SUGGEST_FORMAT
+      lib: Storstil
+      lib_opac: Storstil
+    - authorised_value: EBOOK
+      category: SUGGEST_FORMAT
+      lib: E-bok
+      lib_opac: E-bok
+    - authorised_value: AUDIOBOOK
+      category: SUGGEST_FORMAT
+      lib: Ljudbok
+      lib_opac: Ljudbok
+    - authorised_value: DVD
+      category: SUGGEST_FORMAT
+      lib: DVD
+      lib_opac: DVD
+    translatable:
+    - lib
+    - lib_opac
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: '2'
+      category: LOST
+      lib: Väldigt försenade (förkommen)
+    - authorised_value: '1'
+      category: LOST
+      lib: Förlorad
+    - authorised_value: '3'
+      category: LOST
+      lib: Förlorad och betald för
+    - authorised_value: '4'
+      category: LOST
+      lib: Saknas
+    - authorised_value: '5'
+      category: LOST
+      lib: Saknas i paket
+    - authorised_value: '1'
+      category: DAMAGED
+      lib: Skadad
+    - authorised_value: FIC
+      category: LOC
+      lib: Skönlitteratur
+    - authorised_value: CHILD
+      category: LOC
+      lib: Barnavdelning
+    - authorised_value: DISPLAY
+      category: LOC
+      lib: Visas
+    - authorised_value: NEW
+      category: LOC
+      lib: Hylla för nyinkommet
+    - authorised_value: STAFF
+      category: LOC
+      lib: Personal
+    - authorised_value: GEN
+      category: LOC
+      lib: Allmänna hyllor
+    - authorised_value: AV
+      category: LOC
+      lib: Audio visual
+    - authorised_value: REF
+      category: LOC
+      lib: Referens
+    - authorised_value: CART
+      category: LOC
+      lib: Bokvagn
+    - authorised_value: PROC
+      category: LOC
+      lib: Under arbete
+    - authorised_value: FIC
+      category: CCODE
+      lib: Skönlitteratur
+    - authorised_value: REF
+      category: CCODE
+      lib: Referens
+    - authorised_value: NFIC
+      category: CCODE
+      lib: Ej fiktion
+    - authorised_value: '1'
+      category: WITHDRAWN
+      lib: Återkallad
+    - authorised_value: '-1'
+      category: NOT_LOAN
+      lib: Beställt
+    - authorised_value: '1'
+      category: NOT_LOAN
+      lib: Ej för utlån
+    - authorised_value: '2'
+      category: NOT_LOAN
+      lib: Tjänsteexemplar
+    - authorised_value: '3'
+      category: NOT_LOAN
+      lib: Tillagd i paket
+    - authorised_value: '1'
+      category: RESTRICTED
+      lib: Begränsad tillgång
+    - authorised_value: ADDR
+      category: BOR_NOTES
+      lib: Adressanmärkning
+    translatable:
+    - lib
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: damaged
+      category: OPAC_SUG
+      lib: Exemplaret på hylla är skadat
+      lib_opac: Exemplaret på hylla är skadat
+    - authorised_value: bestseller
+      category: OPAC_SUG
+      lib: Kommande titel av populär författare
+      lib_opac: Kommande titel av populär författare
+    translatable:
+    - lib
+    - lib_opac
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: CIRC
+      category: REPORT_GROUP
+      lib: Cirkulation
+    - authorised_value: CAT
+      category: REPORT_GROUP
+      lib: Katalog
+    - authorised_value: PAT
+      category: REPORT_GROUP
+      lib: Låntagare
+    - authorised_value: ACQ
+      category: REPORT_GROUP
+      lib: Inköp
+    - authorised_value: ACC
+      category: REPORT_GROUP
+      lib: Konton
+    - authorised_value: SER
+      category: REPORT_GROUP
+      lib: Periodika
+    - authorised_value: '000'
+      category: SIP_MEDIA_TYPE
+      lib: Annat
+    - authorised_value: '001'
+      category: SIP_MEDIA_TYPE
+      lib: Bok
+    - authorised_value: '002'
+      category: SIP_MEDIA_TYPE
+      lib: Tidskrift
+    - authorised_value: '003'
+      category: SIP_MEDIA_TYPE
+      lib: Inbunden tidskrift
+    - authorised_value: '004'
+      category: SIP_MEDIA_TYPE
+      lib: Ljudband
+    - authorised_value: '005'
+      category: SIP_MEDIA_TYPE
+      lib: Videoband
+    - authorised_value: '006'
+      category: SIP_MEDIA_TYPE
+      lib: CD/CDROM
+    - authorised_value: '007'
+      category: SIP_MEDIA_TYPE
+      lib: Diskett
+    - authorised_value: '008'
+      category: SIP_MEDIA_TYPE
+      lib: Bok med diskett
+    - authorised_value: '009'
+      category: SIP_MEDIA_TYPE
+      lib: Bok med CD
+    - authorised_value: '010'
+      category: SIP_MEDIA_TYPE
+      lib: Bok med ljudkassett
+    - authorised_value: 0
+      category: ORDER_CANCELLATION_REASON
+      lib: Ingen information tillhandahållen
+    - authorised_value: 1
+      category: ORDER_CANCELLATION_REASON
+      lib: Slut i lager
+    - authorised_value: 2
+      category: ORDER_CANCELLATION_REASON
+      lib: Fylls på
+    - authorised_value: RET_BY_PATRON
+      category: RETURN_CLAIM_RESOLUTION
+      lib: Återlämnad av låntagare
+    - authorised_value: FOUND_IN_LIB
+      category: RETURN_CLAIM_RESOLUTION
+      lib: Hittad i biblioteket
+    - authorised_value: NOT_FOUND
+      category: HOLD_CANCELLATION
+      lib: Exemplaret kunde inte hittas på hyllorna
+    - authorised_value: DAMAGED
+      category: HOLD_CANCELLATION
+      lib: Exemplaret var för skadat för att få gå vidare till infångad reservation
+    - authorised_value: NOT_FOUND
+      category: AR_CANCELLATION
+      lib: Exemplaret kunde inte hittas på hyllorna
+    - authorised_value: DAMAGED
+      category: AR_CANCELLATION
+      lib: Exemplaret var för skadat för att få gå vidare till infångad artikelbeställning
+    - authorised_value: OPAC
+      category: AR_CANCELLATION
+      lib: Avbruten från användarsidan i OPAC
+    translatable:
+    - lib

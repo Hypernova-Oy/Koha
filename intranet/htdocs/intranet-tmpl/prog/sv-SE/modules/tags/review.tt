@@ -1,0 +1,323 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>[% FILTER collapse %]
+ [% IF ( filter_approved_ok ) %]
+ [% t("Approved") | html %] &rsaquo;
+ [% ELSIF ( filter_approved_pending ) %]
+ [% t("Pending") | html %] &rsaquo;
+ [% ELSIF ( filter_approved_rej ) %]
+ [% t("Rejected") | html %] &rsaquo;
+ [% END %]
+ [% t("Tags") | html %] &rsaquo;
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+ [% END %]</title>
+ [% INCLUDE 'doc-head-close.inc' %]
+ [% FILTER collapse %]<style>
+        .setlabel {
+            background-color:#E8E8E8;
+            font-family: courier;
+            width: 6em;
+        }
+        .rejected {
+             color: #CC0033;
+        }
+        .approved {
+             color: #339900;
+        }
+        .pending {
+            color: #CCC;
+            font-style: italic;
+        }
+        tr > td input,td input[type="submit"] {
+            font-size: 85%;
+            padding: 1px;
+        }
+    </style>[% END %]
+</head>
+
+<body id="tags_review" class="tools">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+ [% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Verktyg</a>
+ [% END %]
+ [% IF ( filter_approved_ok || filter_approved_pending || filter_approved_rej ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tags/review.pl">Taggar</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Taggar</span>
+ [% END %]
+ [% END %]
+ [% IF ( filter_approved_ok ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% t("Approved") | html %]
+ [% END %]
+ [% ELSIF ( filter_approved_pending ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% t("Pending") | html %]
+ [% END %]
+ [% ELSIF ( filter_approved_rej ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% t("Rejected") | html %]
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-sm-1 order-md-2">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ <h1>Taggar</h1>
+
+ <div class="row">
+ <div class="col-sm-12 col-md-8">
+ <form method="post" action="/cgi-bin/koha/tags/review.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <h4>
+ [% IF ( filter_approved_all ) %]<span>Visa alla termer</span>[% END %]
+ [% IF ( filter_approved_ok ) %]<span>Visar godkända termer</span>[% END %]
+ [% IF ( filter_approved_pending ) %]<span>Visar väntande termer</span>[% END %]
+ [% IF ( filter_approved_rej ) %]<span>Visar avvisade termer</span>[% END %]
+ </h4>
+
+ [% IF ( op_count ) %]
+ <div class="alert alert-info" id="main_status">
+ [% IF ( op == 'cud-approve' ) %] <span>Godkänd</span>
+ [% ELSIF ( op == 'cud-reject' ) %] <span>Avslagen</span>
+ [% ELSIF ( op == 'test' ) %] <span>Testad</span>
+ [% ELSE %]<span>Okänd operation ([% op | html %]) på</span>
+ [% END %]
+ <span>[% op_count | html %] term(er).</span>
+ </div>
+ [% END # /IF op_count %]
+ [% IF ( message_loop ) %]
+ <div class="alert alert-warning" id="main_error">
+ [% FOREACH message_loo IN message_loop %]
+ [% IF ( message_loo.failed_ok ) %]
+ <strong>Fel: </strong><span>Kunde inte godkänna term ([% message_loo.failed_ok | html %]).</span>
+ [% ELSIF ( message_loo.failed_rej ) %]
+ <strong>Fel: </strong><span>Kunde inte avslå term ([% message_loo.failed_rej | html %]).</span>
+ [% ELSIF ( message_loo.approver ) %]
+ <span>Ingen matchning för användaren ([% message_loo.approver | html %]). FILTER KRÄVER LÅNTAGARNUMMER (ej namn).</span>
+ [% ELSIF ( message_loo.approved_by ) %]
+ <strong>Fel: </strong><span>Ingen matchning för låntagarnummer ([% message_loo.approved_by | html %]).</span>
+ [% ELSE %]<span>Okänt fel!</span>
+ [% END %]
+ [% END %]
+ </div>
+ [% END  # /IF message_loop %]
+ [% IF ( pagination_bar ) %]
+ <div class="pages" id="pagination_top">
+ [% pagination_bar | $raw %]
+ </div>
+ [% END %]
+ [% IF ( tagloop ) %]
+ <div class="page-section">
+ <p class="check"></p>
+ <table id="tagst">
+ <thead>
+ <tr>
+ <th class="NoSort">&nbsp;</th>
+ <th>Status</th>
+ <th>Term</th>
+ <th>Vikt</th>
+ <th>Datum</th>
+ [% UNLESS ( filter_approved_pending ) %]<th>Granskare</th>[% END %]
+ <th class="NoSort noExport">Åtgärder</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH tagloo IN tagloop %]
+ <tr>
+ <td>
+ [% IF ( tagloo.approved == 0 ) %]
+ <input id="checkbox[% offset + loop.count | html %]" type="checkbox" value="[% tagloo.term | html %]" name="tags" class="pending" />
+ [% ELSIF ( tagloo.approved == 1 ) %]
+ <input id="checkbox[% offset + loop.count | html %]" type="checkbox" value="[% tagloo.term | html %]" name="tags" class="approved" />
+ [% ELSE %]
+ <input id="checkbox[% offset + loop.count | html %]" type="checkbox" value="[% tagloo.term | html %]" name="tags" class="rejected" />
+ [% END %]
+ </td>
+ <td>
+ [% IF ( tagloo.approved == -1 ) %]
+ <label for="checkbox[% offset + loop.count | html %]">
+ <span class="rejected status[% offset + loop.count | html %]">[% tp('Tags (single)', 'Rejected') | html %]</span>
+ </label>
+ [% ELSIF ( tagloo.approved == 1 ) %]
+ <label for="checkbox[% offset + loop.count | html %]">
+ <span class="approved status[% offset + loop.count | html %]">[% tp('Tags (single)', 'Approved') | html %]</span>
+ </label>
+ [% ELSE %]
+ <label for="checkbox[% offset + loop.count | html %]">
+ <span class="pending status[% offset + loop.count | html %]">[% tp('Tags (single)', 'Pending') | html %]</span>
+ </label>
+ [% END %]
+ </td>
+ <td>
+ <a href="/cgi-bin/koha/tags/list.pl?tag=[% tagloo.term|uri %]">[% tagloo.term | html %]</a>
+ </td>
+ <td>
+ [% tagloo.weight_total | html %]
+ </td>
+ <td data-order="[% tagloo.date_approved | html %]">
+ [% tagloo.date_approved | $KohaDates %]
+ </td>
+ [% IF ( tagloo.approved ) %]
+ <td>
+ [% IF ( tagloo.approved_by_name ) %]
+ <a href="/cgi-bin/koha/tags/review.pl?approved_by=[% tagloo.approved_by | uri %]&amp;approved=all">[% tagloo.approved_by_name | html %]</a>
+ [% END %]
+ </td>
+ <td class="actions">
+ <span class="ajax_buttons" style="visibility:hidden">
+ [% IF ( tagloo.approved == -1 ) %]
+ <button data-num="[% offset + loop.count | html %]" class="approval_btn ok btn btn-default btn-xs" type="submit" title="[% tagloo.term | html %]" value="Approve" name="approve"><i class="fa fa-check"></i> Godkänn</button>
+ <button data-num="[% offset + loop.count | html %]" class="approval_btn rej btn btn-default btn-xs" disabled="disabled" type="submit" title="[% tagloo.term | html %]" value="Rejected" name="reject"><i class="fa fa-times"></i> [% tp('Tags (single)', 'Rejected') | html %]</button>
+ [% ELSE %]
+ <button data-num="[% offset + loop.count | html %]" class="approval_btn ok btn btn-default btn-xs"  disabled="disabled" type="submit" title="[% tagloo.term | html %]" value="Approved" name="approve"><i class="fa fa-check"></i> [% tp('Tags (single)', 'Approved') | html %]</button>
+ <button data-num="[% offset + loop.count | html %]" class="approval_btn rej btn btn-default btn-xs" type="submit" title="[% tagloo.term | html %]" value="Reject" name="reject"><i class="fa fa-times"></i> Avslå</button>
+ [% END %]
+ </span>
+ </td>
+
+ [% ELSE %]
+ <td class="actions">
+ <span class="ajax_buttons" style="visibility:hidden">
+ <button data-num="[% offset + loop.count | html %]" class="approval_btn ok btn btn-default btn-xs"  type="submit" title="[% tagloo.term | html %]" value="Approve" name="approve"><i class="fa fa-check"></i> Godkänn</button>
+ <button data-num="[% offset + loop.count | html %]" class="approval_btn rej btn btn-default btn-xs" type="submit" title="[% tagloo.term | html %]" value="Reject" name="reject"><i class="fa fa-times"></i> Avslå</button>
+ </span>
+ </td>
+ [% UNLESS ( filter_approved_pending ) %]
+ <td>&nbsp;</td>
+ [% END %]
+ [% END # /IF ( tagloo.approved ) %]
+ </tr>
+ [% END # /FOREACH tagloo %]
+ </tbody>
+ </table> <!-- /#tagst -->
+ </div> <!-- /.page-section -->
+ [% END %]
+ [% IF ( tagloop ) %]
+ <fieldset class="action">
+ <button type="submit" value="cud-approve" class="btn btn-default" id="approve_button" name="op"><i class="fa fa-check"></i> Godkänn</button>
+ <button type="submit" value="cud-reject" class="btn btn-default"  id="reject_button" name="op"><i class="fa fa-times"></i> Avslå</button>
+ </fieldset>
+ [% END %]
+ </form>
+ </div> <!-- /.col-sm-12.col-md-8 -->
+ <div class="col-sm-12 col-md-4">
+ <aside>
+ <fieldset class="brief">
+ <h4>Termsammanfattning</h4>
+ <ul>
+ <li>
+ <a href="/cgi-bin/koha/tags/review.pl?approved=1">[% tp('Tags (multiple)', 'Approved') | html %]</a>:
+ <span id="terms_summary_approved_count">[% approved_count | html %]</span>
+ </li>
+ <li>
+ <a href="/cgi-bin/koha/tags/review.pl?approved=-1">[% tp('Tags (multiple)', 'Rejected') | html %]</a>:
+ <span id="terms_summary_rejected_count">[% rejected_count | html %]</span>
+ </li>
+ <li>
+ <a href="/cgi-bin/koha/tags/review.pl?approved=0">[% tp('Tags (multiple)', 'Pending') | html %]</a>:
+ <span id="terms_summary_unapproved_count">[% unapproved_count | html %]</span>
+ </li>
+ <li>
+ <a href="/cgi-bin/koha/tags/review.pl?approved=all">Totalt</a>:
+ <span id="terms_summary_approved_total">[% approved_total | html %]</span>
+ </li>
+ </ul>
+ <span id="terms_summary_status">&nbsp;</span>
+ </fieldset>
+ <fieldset class="brief">
+ <h4>Kontrollera listor</h4>
+ <div class="description">Ange ett ord eller en fras som ska kontrolleras mot listor med godkända/avslagna värden: </div>
+ <form method="get" action="/cgi-bin/koha/tags/review.pl">
+ <input type="hidden" name="op" value="test">
+ <input type="text" size="14" name="test" id="test" />
+ <fieldset class="action">
+ <button type="submit" value="Test" class="approval_btn btn btn-default btn-md" id="test_button" name="op-test"><i class="fas fa-check-square" aria-hidden="true"></i> Testa</button>
+ </fieldset>
+ <div id="verdict">
+ [% IF ( test_term ) %]
+ [% IF ( verdict_ok ) %]
+ <span>&quot;[% test_term | html %]&quot; är tillåtet.</span>
+ [% ELSIF ( verdict_rej ) %]
+ <span>&quot;[% test_term | html %]&quot; är förbjudet.</span>
+ [% ELSIF ( verdict_indeterminate ) %]
+ <span>&quot;[% test_term | html %]&quot; är varken tillåtet eller förbjudet.</span>
+ [% END %]
+ [% END %]
+ </div>
+ </form>
+ </fieldset>
+ </aside>
+ </div> <!-- /.col-sm-12.col-md-4 -->
+ </div> <!-- /.row -->
+ </main>
+ </div> <!-- /.col-sm-10 order-sm-1 order-md-2 -->
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ <form method="get" action="/cgi-bin/koha/tags/review.pl">
+ <fieldset class="brief">
+ <h4>Filter</h4>
+ <ol>
+ <li><label for="tag">Term:</label> <input type="text" name="tag" id="tag" value="[% filter_tag | html %]" />
+ </li>
+ <li><label for="approved">Status:</label>
+ <select name="approved" id="approved">
+ [% IF ( filter_approved_all ) %]<option selected="selected" value="all">alla</option>
+ [% ELSE %]<option value="all">alla</option>[% END %]
+ [% IF ( filter_approved_ok ) %]<option selected="selected" value="1">godkänd</option>
+ [% ELSE %]<option value="1">godkänd</option>[% END %]
+ [% IF ( filter_approved_pending ) %]<option selected="selected" value="0">väntar</option>
+ [% ELSE %]<option value="0">väntar</option>[% END %]
+ [% IF ( filter_approved_rej ) %]<option selected="selected" value="-1">avslagen</option>
+ [% ELSE %]<option value="-1">avslagen</option>[% END %]
+ </select>
+ </li>
+ <li><label for="approver">Granskare:</label> <input type="text" name="approver" id="approver" value="[% filter_approver | html %]" />
+ </li>
+ <li>
+ <label for="from">Datum: från </label>
+ <input type="text" size="10" id="from" name="from" value="[% filter_date_approved_from | html %]" class="flatpickr" data-date_to="to" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+
+ <label for="to">...till </label>
+ <input type="text" size="10" id="to" name="to" value="[% filter_date_approved_to | html %]" class="flatpickr" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <button type="submit" class="btn btn-primary"><i class="fa fa-filter" aria-hidden="true"></i> Tillämpa filter</button>
+ </fieldset>
+ </form>
+
+ [% INCLUDE 'tools-menu.inc' %]
+
+ </aside>
+ </div> <!-- /.col-sm-2 order-sm-2 order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'calendar.inc' %]
+ [% Asset.js("js/pages/tags-review.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

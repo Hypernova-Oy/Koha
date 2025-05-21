@@ -1,0 +1,98 @@
+[% USE raw %]
+[% USE AdditionalContents %]
+[% PROCESS 'i18n.inc' %]
+[% PROCESS 'html_helpers.inc' %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("An error has occurred") | html %] &rsaquo;
+ [% PROCESS 'library_name_title' %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+<body id="error[% errno | html %]" class="error">
+[% INCLUDE 'masthead.inc' %]
+
+ <div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ <span>Tapahtui virhe</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( OpacNav || OpacNavBottom ) %]
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' %]
+ </div>
+ </div>
+ <div class="col-10 order-first order-md-first order-lg-2">
+ [% ELSE %]
+ <div class="col order-first order-md-first order-lg-2">
+ [% END %]
+ <div id="errormsg[% errno | html %]">
+ <h1>Pyydetty sivu ei ole saatavilla</h1>
+ <h2>Virhe [% errno | html %]</h2>
+ <p><strong>Tälle viestille voi olla seuraavia syitä:</strong></p>
+ <ul>
+ [% IF ( errno == 400 ) %]
+ <li>Virheellinen linkki. Sivua ei löydy.</li>
+ [% END %]
+
+ [% IF ( errno == 401 ) %]
+ <li>Sinulla ei ole oikeutta nähdä tätä sivua.</li>
+ [% END %]
+
+ [% IF ( errno == 402 ) %]
+ <li>Virhellinen linkki.</li>
+ [% END %]
+
+ [% IF ( errno == 403 ) %]
+ [% IF ( csrf_error ) %]
+ [% IF csrf_error == 'wrong_csrf_token' %]
+ <li>Lomakkeen lähetys epäonnistui (väärä CSRF token). Päivitä sivu yrittääksesi uudelleen.</li>
+ [% ELSE %]
+ [%# Programming errors, we do not want to display them at the OPAC %]
+ <li>Pyyntöä käsiteltäessä tapahtui virhe.</li>
+ [% END %]
+ [% ELSE %]
+ <li>Sinulla ei ole oikeutta nähdä tätä sivua.</li>
+ [% END %]
+ [% END %]
+
+ [% IF ( errno == 404 ) %]
+ <li>Käytit ulkoista linkkiä luettelomme nimekkeeseen, joka ei ole enää saatavana.</li>
+ <li>Käytit vanhentunutta linkkiä esim. hakukoneesta tai kirjanmerkeistä.</li>
+ <li>Yritit päästä sivulle, joka vaatii tunnistaumisen.</li>
+ <li>Virheellinen linkki. Sivua ei löydy.</li>
+ [% END %]
+ [% IF ( errno == 500 ) %]
+ <li>Pyyntöä käsiteltäessä tapahtui virhe.</li>
+ [% END %]
+ </ul>
+ <h2>Mitä seuraavaksi?</h2>
+ <ul>
+ [% IF ( errno == 401 ) && ( Koha.Preference( 'opacuserlogin' ) == 1 ) %]
+ <li>Kirjaudu sisään ja yritä uudelleen. <a href="/cgi-bin/koha/opac-user.pl">Kirjautumissivu</a></li>
+ [% END %]
+ <li>Voit käyttää sivun yläreunan valikkoa ja linkkejä</li>
+ <li>Voit hakea aineistoa tämän sivun yläreunassa olevalla hakulaatikolla.</li>
+ <li><a href="/cgi-bin/koha/opac-main.pl">Palaa verkkokirjaston etusivulle.</a></li>
+ </ul>
+ <h2>Raportoi ongelmia ja rikkinäisiä linkkejä</h2>
+ <ul>
+ <li>Voit ilmoittaa tästä virheestä sähköpostitse ylläpitäjälle. <a href="mailto:[% admin | uri %]">Lähetä sähköposti</a>.</li>
+ </ul>
+ </div> <!-- / #errormsg[% errno | html %] -->
+ </div> <!-- / .col-lg10/12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+[% END %]

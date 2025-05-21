@@ -1,0 +1,157 @@
+[% SET footerjs = 1 %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>[% FILTER collapse %]
+ [% t("Search") | html %] &rsaquo;
+ [% t("Labels") | html %] &rsaquo;
+ [% t("Koha") | html %]
+ [% END %]</title>
+ [% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="labels_search" class="tools labels">
+ <div class="main container-fluid">
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Sök efter exemplar [% IF ( batch_id ) %] att lägga till i sats [% batch_id | html %] [% END %] </h1>
+
+ <form name="f" method="get" action="/cgi-bin/koha/labels/label-item-search.pl">
+ <input type="hidden" name="op" value="do_search" />
+ <input type="hidden" name="batch_id" value="[% batch_id | html %]" />
+ <input type="hidden" name="type" value="[% type | html %]" />
+
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <select name="idx" > <!-- FIXME: script does keyword search regardless -->
+ [% IF idx == 'kw' %]
+ <option value="kw" selected="selected">Nyckelord</option>
+ [% ELSE %]
+ <option value="kw">Nyckelord</option>
+ [% END %]
+
+ [% IF idx == 'au'  %]
+ <option value="au" selected="selected">Författare</option>
+ [% ELSE %]
+ <option value="au">Författare</option>
+ [% END %]
+
+ [% IF idx == 'yr'  %]
+ <option value="yr" selected="selected">Utgivningsdatum</option>
+ [% ELSE %]
+ <option value="yr">Utgivningsdatum</option>
+ [% END %]
+
+ [% IF idx == 'sn' %]
+ <option value="ident" selected="selected">Standardnummer</option>
+ [% ELSE %]
+ <option value="sn">Standardnummer</option>
+ [% END %]
+
+ [% IF idx == 'nb' %]
+ <option value="nb" selected="selected">ISBN</option>
+ [% ELSE %]
+ <option value="nb">ISBN</option>
+ [% END %]
+
+ [% IF idx == 'ns' %]
+ <option value="ns" selected="selected">ISSN</option>
+ [% ELSE %]
+ <option value="ns">ISSN</option>
+ [% END %]
+
+ [% IF idx == 'lcn,phr' %]
+ <option value="lcn,phr" selected="selected">Hyllsignatur</option>
+ [% ELSE %]
+ <option value="lcn,phr">Hyllsignatur</option>
+ [% END %]
+
+ [% IF idx == 'su' %]
+ <option value="su" selected="selected">Ämne</option>
+ [% ELSE %]
+ <option value="su">Ämne</option>
+ [% END %]
+
+ [% IF idx == 'ti' %]
+ <option value="ti" selected="selected">Titel</option>
+ [% ELSE %]
+ <option value="ti">Titel</option>
+ [% END %]
+
+ [% IF idx == 'ti,phr' %]
+ <option value="ti,phr" selected="selected">Titelfras</option>
+ [% ELSE %]
+ <option value="ti,phr">Titelfras</option>
+ [% END %]
+
+ [% IF idx == 'se' %]
+ <option value="se" selected="selected">Serietitel</option>
+ [% ELSE %]
+ <option value="se">Serietitel</option>
+ [% END %]
+
+ [% IF idx == 'bc' or not idx %]
+ <option value="bc" selected="selected">Streckkod</option>
+ [% ELSE %]
+ <option value="bc">Streckkod</option>
+ [% END %]
+
+ [% IF idx == 'acqdate' %]
+ <option value="acqdate" selected="selected">Inköpsdatum</option>
+ [% ELSE %]
+ <option value="acqdate">Inköpsdatum</option>
+ [% END %]
+ </select>
+ <input class="focus" id="ccl_textbox" name="ccl_textbox" size="30" title="Ange söktermer" type="text" value="" />
+ </li>
+ </ol>
+ </fieldset>
+
+ [% IF ( sort_by_loop ) %]
+ <fieldset>
+ <legend>Sortera efter: </legend>
+ <p>
+ <select id="sort_by" name="sort_by">
+ <option value="">Fältviktad, rangordnad efter relevans</option>
+ [% FOREACH sort_by_loo IN sort_by_loop %]
+ [% IF ( sort_by_loo.selected ) %]
+ <option value="[% sort_by_loo.value | html %]" selected="selected">[% sort_by_loo.label | html %]</option>
+ [% ELSE %]
+ <option value="[% sort_by_loo.value | html %]">[% sort_by_loo.label | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </p>
+ </fieldset>
+ [% END %]
+
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="from">Lades till på eller efter: </label>
+ <input type="text" size="10" id="from" name="datefrom" class="flatpickr" data-date_to="to" value="" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ <li>
+ <label for="to">Lades till på eller före: </label>
+ <input type="text" size="10" id="to" name="dateto" class="flatpickr" value="" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ </ol>
+ </fieldset>
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Sök" />
+ <button type="button" class="btn btn-default close_window">Stäng fönster</button>
+ </fieldset>
+ </div>
+ </nav>
+ </form>
+ </div>
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

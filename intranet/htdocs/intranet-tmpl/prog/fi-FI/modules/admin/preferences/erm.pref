@@ -1,0 +1,17 @@
+---
+Elektronisten aineistojen hallinta:
+  Käyttöliittymä:
+  - - choices:
+        '0': Älä ota käyttöön
+        '1': Ota käyttöön
+      pref: ERMModule
+    - elektronisten aineistojen hallintamoduuli(a)
+  - - Elektronisten aineistojen palveluntarjoajat hallintamoduulissa
+    - multiple:
+        ebsco: EBSCO
+        local: Paikallinen
+      pref: ERMProviders
+  - - Asiakas ID EBSCO HoldingsIQ:lle
+    - pref: ERMProviderEbscoCustomerID
+  - - API avain EBSCO HoldingsIQ:lle
+    - pref: ERMProviderEbscoApiKey

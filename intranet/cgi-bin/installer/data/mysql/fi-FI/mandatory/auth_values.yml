@@ -1,0 +1,3861 @@
+---
+description:
+- Kohan oletusauktorisoidut arvot
+tables:
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: '0'
+      category: YES_NO
+      lib: Ei
+      lib_opac: Ei
+    - authorised_value: '1'
+      category: YES_NO
+      lib: Kyllä
+      lib_opac: Kyllä
+    - authorised_value: SIP00
+      category: PAYMENT_TYPE
+      lib: Käteinen SIP2:n kautta
+      lib_opac: Käteinen
+    - authorised_value: SIP01
+      category: PAYMENT_TYPE
+      lib: Visa SIP2:n kautta
+      lib_opac: Visa
+    - authorised_value: SIP02
+      category: PAYMENT_TYPE
+      lib: Luottokortti SIP2:n kautta
+      lib_opac: Luottokortti
+    - authorised_value: CASH
+      category: PAYMENT_TYPE
+      lib: Käteinen
+      lib_opac: Käteinen
+    translatable:
+    - lib
+    - lib_opac
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: EW
+      category: HSBND_FREQ
+      lib: Joka viikko
+    - authorised_value: active
+      category: ERM_AGREEMENT_STATUS
+      lib: Aktiivinen
+    - authorised_value: in_negotiation
+      category: ERM_AGREEMENT_STATUS
+      lib: Neuvottelussa
+    - authorised_value: closed
+      category: ERM_AGREEMENT_STATUS
+      lib: Suljettu
+    - authorised_value: expired
+      category: ERM_AGREEMENT_CLOSURE_REASON
+      lib: Vanhentunut
+    - authorised_value: cancelled
+      category: ERM_AGREEMENT_CLOSURE_REASON
+      lib: Peruutettu
+    - authorised_value: for_review
+      category: ERM_AGREEMENT_RENEWAL_PRIORITY
+      lib: Tarkastettavaksi
+    - authorised_value: renew
+      category: ERM_AGREEMENT_RENEWAL_PRIORITY
+      lib: Uusinta
+    - authorised_value: cancel
+      category: ERM_AGREEMENT_RENEWAL_PRIORITY
+      lib: Peruuta
+    - authorised_value: librarian
+      category: ERM_USER_ROLES
+      lib: ERM virkailija
+    - authorised_value: subject_specialist
+      category: ERM_USER_ROLES
+      lib: Aiheasiantuntija
+    - authorised_value: local
+      category: ERM_LICENSE_TYPE
+      lib: Paikallinen
+    - authorised_value: consortial
+      category: ERM_LICENSE_TYPE
+      lib: Konsortiotasoinen
+    - authorised_value: national
+      category: ERM_LICENSE_TYPE
+      lib: Kansallinen
+    - authorised_value: alliance
+      category: ERM_LICENSE_TYPE
+      lib: Allianssi
+    - authorised_value: in_negotiation
+      category: ERM_LICENSE_STATUS
+      lib: Neuvottelussa
+    - authorised_value: not_yet_active
+      category: ERM_LICENSE_STATUS
+      lib: Ei vielä aktiivinen
+    - authorised_value: active
+      category: ERM_LICENSE_STATUS
+      lib: Aktiivinen
+    - authorised_value: rejected
+      category: ERM_LICENSE_STATUS
+      lib: Hylätty
+    - authorised_value: expired
+      category: ERM_LICENSE_STATUS
+      lib: Vanhentunut
+    - authorised_value: controlling
+      category: ERM_AGREEMENT_LICENSE_STATUS
+      lib: Määräävä
+    - authorised_value: future
+      category: ERM_AGREEMENT_LICENSE_STATUS
+      lib: Tulevaisuus
+    - authorised_value: history
+      category: ERM_AGREEMENT_LICENSE_STATUS
+      lib: Historiallinen
+    - authorised_value: filing_cabinet
+      category: ERM_AGREEMENT_LICENSE_LOCATION
+      lib: Arkistokaappi
+    - authorised_value: cupboard
+      category: ERM_AGREEMENT_LICENSE_LOCATION
+      lib: Kaappi
+    - authorised_value: local
+      category: ERM_PACKAGE_TYPE
+      lib: Paikallinen
+    - authorised_value: complete
+      category: ERM_PACKAGE_TYPE
+      lib: Täydellinen
+    - authorised_value: AggregatedFullText
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: Kokotekstikooste
+    - authorised_value: AbstractAndIndex
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: Tiivistelmä ja hakemisto
+    - authorised_value: EBook
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: E-kirja
+    - authorised_value: MixedContent
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: Sekalainen sisältö
+    - authorised_value: EJournal
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: E-lehti
+    - authorised_value: OnlineReference
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: Online-viittaus
+    - authorised_value: Print
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: Painotuote
+    - authorised_value: StreamingMedia
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: Median suoratoisto
+    - authorised_value: Unknown
+      category: ERM_PACKAGE_CONTENT_TYPE
+      lib: Tuntematon
+    - authorised_value: journal
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Lehti
+    - authorised_value: newsletter
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Uutiskirje
+    - authorised_value: report
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Raportti
+    - authorised_value: proceedings
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Proceedings
+    - authorised_value: website
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Verkkosivu
+    - authorised_value: newspaper
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Sanomalehti
+    - authorised_value: unspecified
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Määrittelemätön
+    - authorised_value: book
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Kirja
+    - authorised_value: ebook
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: E-kirja
+    - authorised_value: bookseries
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Kirjasarja
+    - authorised_value: database
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Tietokanta
+    - authorised_value: thesisdissertation
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Väitöskirja
+    - authorised_value: streamingaudio
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Äänen suoratoisto
+    - authorised_value: streamingvideo
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Videon suoratoisto
+    - authorised_value: audiobook
+      category: ERM_TITLE_PUBLICATION_TYPE
+      lib: Äänikirja
+    - authorised_value: PR
+      category: ERM_REPORT_TYPES
+      lib: PR - Alustan pääraportti
+    - authorised_value: PR_P1
+      category: ERM_REPORT_TYPES
+      lib: PR_P1 Alustan käyttö
+    - authorised_value: DR
+      category: ERM_REPORT_TYPES
+      lib: DR - Tietokannan pääraportti
+    - authorised_value: DR_D1
+      category: ERM_REPORT_TYPES
+      lib: DR_D1 Tietokannan haun ja niteiden käyttö
+    - authorised_value: DR_D2
+      category: ERM_REPORT_TYPES
+      lib: DR_D2 - Tietokantaan pääsy evätty
+    - authorised_value: TR
+      category: ERM_REPORT_TYPES
+      lib: TR - Nimekkeiden pääraportti
+    - authorised_value: TR_B1
+      category: ERM_REPORT_TYPES
+      lib: TR_B1 - Kirjapyynnöt (poislukien OA_Gold)
+    - authorised_value: TR_B2
+      category: ERM_REPORT_TYPES
+      lib: TR_B2 - Kirjoihin pääsy evätty
+    - authorised_value: TR_B3
+      category: ERM_REPORT_TYPES
+      lib: TR_B3 Kirjojen käyttö käyttötyypeittäin
+    - authorised_value: TR_J1
+      category: ERM_REPORT_TYPES
+      lib: TR_J1 - Lehtipyynnöt (pois lukien OA_Gold)
+    - authorised_value: TR_J2
+      category: ERM_REPORT_TYPES
+      lib: TR_J2 - Lehtiin pääsy evätty
+    - authorised_value: TR_J3
+      category: ERM_REPORT_TYPES
+      lib: TR_J3 - Lehtien käyttö käyttötyypeittäin
+    - authorised_value: TR_J4
+      category: ERM_REPORT_TYPES
+      lib: TR_J4 - Lehtipyynöt YOP:n mukaan (poislukien OA_Gold)
+    - authorised_value: IR
+      category: ERM_REPORT_TYPES
+      lib: IR - Niteiden pääraportti
+    - authorised_value: IR_A1
+      category: ERM_REPORT_TYPES
+      lib: IR_A1 - Lehtien artikkelipyynnöt
+    - authorised_value: IR_M1
+      category: ERM_REPORT_TYPES
+      lib: IR_M1 - Multimediapyynnöt
+    - authorised_value: Searches_Platform
+      category: ERM_PLATFORM_REPORTS_METRICS
+      lib: Etsii alustalta
+    - authorised_value: Total_Item_Investigations
+      category: ERM_PLATFORM_REPORTS_METRICS
+      lib: Yhteensä teoksen kyselyjä
+    - authorised_value: Total_Item_Requests
+      category: ERM_PLATFORM_REPORTS_METRICS
+      lib: Kokonaisnidepyynnöt
+    - authorised_value: Unique_Item_Investigations
+      category: ERM_PLATFORM_REPORTS_METRICS
+      lib: Uniikkeja teoksen kyselyjä
+    - authorised_value: Unique_Item_Requests
+      category: ERM_PLATFORM_REPORTS_METRICS
+      lib: Uniikkeja teoksen pyyntöjä
+    - authorised_value: Unique_Title_Investigations
+      category: ERM_PLATFORM_REPORTS_METRICS
+      lib: Unique title investigations
+    - authorised_value: Unique_Title_Requests
+      category: ERM_PLATFORM_REPORTS_METRICS
+      lib: Unique title requests
+    - authorised_value: Searches_Automated
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Automatisoituja hakuja
+    - authorised_value: Searches_Federated
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Yhdistettyjä hakuja
+    - authorised_value: Searches_Regular
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Tavallisia hakuja
+    - authorised_value: Total_Item_Investigations
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Yhteensä teoksen kyselyjä
+    - authorised_value: Total_Item_Requests
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Kokonaisnidepyynnöt
+    - authorised_value: Unique_Item_Investigations
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Uniikkeja teoksen kyselyjä
+    - authorised_value: Unique_Item_Requests
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Uniikkeja teoksen pyyntöjä
+    - authorised_value: Unique_Title_Investigations
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Unique title investigations
+    - authorised_value: Unique_Title_Requests
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Unique title requests
+    - authorised_value: No_License
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Ei lisenssiä
+    - authorised_value: Limit_Exceeded
+      category: ERM_DATABASE_REPORTS_METRICS
+      lib: Raja ylittyi
+    - authorised_value: Total_Item_Investigations
+      category: ERM_TITLE_REPORTS_METRICS
+      lib: Yhteensä teoksen kyselyjä
+    - authorised_value: Total_Item_Requests
+      category: ERM_TITLE_REPORTS_METRICS
+      lib: Kokonaisnidepyynnöt
+    - authorised_value: Unique_Item_Investigations
+      category: ERM_TITLE_REPORTS_METRICS
+      lib: Uniikkeja teoksen kyselyjä
+    - authorised_value: Unique_Item_Requests
+      category: ERM_TITLE_REPORTS_METRICS
+      lib: Uniikkeja teoksen pyyntöjä
+    - authorised_value: Unique_Title_Investigations
+      category: ERM_TITLE_REPORTS_METRICS
+      lib: Unique title investigations
+    - authorised_value: Unique_Title_Requests
+      category: ERM_TITLE_REPORTS_METRICS
+      lib: Unique title requests
+    - authorised_value: Limit_Exceeded
+      category: ERM_TITLE_REPORTS_METRICS
+      lib: Raja ylittyi
+    - authorised_value: No_License
+      category: ERM_TITLE_REPORTS_METRICS
+      lib: Ei lisenssiä
+    - authorised_value: Total_Item_Investigations
+      category: ERM_ITEM_REPORTS_METRICS
+      lib: Yhteensä teoksen kyselyjä
+    - authorised_value: Total_Item_Requests
+      category: ERM_ITEM_REPORTS_METRICS
+      lib: Kokonaisnidepyynnöt
+    - authorised_value: Unique_Item_Investigations
+      category: ERM_ITEM_REPORTS_METRICS
+      lib: Uniikkeja teoksen kyselyjä
+    - authorised_value: Unique_Item_Requests
+      category: ERM_ITEM_REPORTS_METRICS
+      lib: Uniikkeja teoksen pyyntöjä
+    - authorised_value: Limit_Exceeded
+      category: ERM_ITEM_REPORTS_METRICS
+      lib: Raja ylittyi
+    - authorised_value: No_License
+      category: ERM_ITEM_REPORTS_METRICS
+      lib: Ei lisenssiä
+    - authorised_value: ADMIN
+      category: VENDOR_INTERFACE_TYPE
+      lib: Ylläpitäjä
+    - authorised_value: ORDERS
+      category: VENDOR_INTERFACE_TYPE
+      lib: Tilaukset
+    - authorised_value: REPORTS
+      category: VENDOR_INTERFACE_TYPE
+      lib: Raportit
+    - authorised_value: MAINTENANCE
+      category: VENDOR_ISSUE_TYPE
+      lib: Huoltotoimenpide
+    - authorised_value: OUTAGE
+      category: VENDOR_ISSUE_TYPE
+      lib: Katkos
+    translatable:
+    - lib
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: AD
+      category: COUNTRY
+      lib: Andorra
+      lib_opac: Andorra
+    - authorised_value: AE
+      category: COUNTRY
+      lib: Arabiemiirikunnat
+      lib_opac: Arabiemiirikunnat
+    - authorised_value: AF
+      category: COUNTRY
+      lib: Afganistan
+      lib_opac: Afganistan
+    - authorised_value: AG
+      category: COUNTRY
+      lib: Antigua ja Barbuda
+      lib_opac: Antigua ja Barbuda
+    - authorised_value: AI
+      category: COUNTRY
+      lib: Anguilla
+      lib_opac: Anguilla
+    - authorised_value: AL
+      category: COUNTRY
+      lib: Albania
+      lib_opac: Albania
+    - authorised_value: AM
+      category: COUNTRY
+      lib: Armenia
+      lib_opac: Armenia
+    - authorised_value: AO
+      category: COUNTRY
+      lib: Angola
+      lib_opac: Angola
+    - authorised_value: AQ
+      category: COUNTRY
+      lib: Antarktis
+      lib_opac: Antarktis
+    - authorised_value: AR
+      category: COUNTRY
+      lib: Argentiina
+      lib_opac: Argentiina
+    - authorised_value: AS
+      category: COUNTRY
+      lib: Amerikan Samoa
+      lib_opac: Amerikan Samoa
+    - authorised_value: AT
+      category: COUNTRY
+      lib: Itävalta
+      lib_opac: Itävalta
+    - authorised_value: AU
+      category: COUNTRY
+      lib: Australia
+      lib_opac: Australia
+    - authorised_value: AW
+      category: COUNTRY
+      lib: Aruba
+      lib_opac: Aruba
+    - authorised_value: AX
+      category: COUNTRY
+      lib: Ahvenanmaa
+      lib_opac: Ahvenanmaa
+    - authorised_value: AZ
+      category: COUNTRY
+      lib: Azerbaidžan
+      lib_opac: Azerbaidžan
+    - authorised_value: BA
+      category: COUNTRY
+      lib: Bosnia ja Hertsegovina
+      lib_opac: Bosnia ja Hertsegovina
+    - authorised_value: BB
+      category: COUNTRY
+      lib: Barbados
+      lib_opac: Barbados
+    - authorised_value: BD
+      category: COUNTRY
+      lib: Bangladesh
+      lib_opac: Bangladesh
+    - authorised_value: BE
+      category: COUNTRY
+      lib: Belgia
+      lib_opac: Belgia
+    - authorised_value: BF
+      category: COUNTRY
+      lib: Burkina Faso
+      lib_opac: Burkina Faso
+    - authorised_value: BG
+      category: COUNTRY
+      lib: Bulgaria
+      lib_opac: Bulgaria
+    - authorised_value: BH
+      category: COUNTRY
+      lib: Bahrain
+      lib_opac: Bahrain
+    - authorised_value: BI
+      category: COUNTRY
+      lib: Burundi
+      lib_opac: Burundi
+    - authorised_value: BJ
+      category: COUNTRY
+      lib: Benin
+      lib_opac: Benin
+    - authorised_value: BL
+      category: COUNTRY
+      lib: Saint-Barthélemy
+      lib_opac: Saint-Barthélemy
+    - authorised_value: BM
+      category: COUNTRY
+      lib: Bermuda
+      lib_opac: Bermuda
+    - authorised_value: BN
+      category: COUNTRY
+      lib: Brunei
+      lib_opac: Brunei
+    - authorised_value: BO
+      category: COUNTRY
+      lib: Bolivia
+      lib_opac: Bolivia
+    - authorised_value: BQ
+      category: COUNTRY
+      lib: Alankomaiden Karibia
+      lib_opac: Alankomaiden Karibia
+    - authorised_value: BR
+      category: COUNTRY
+      lib: Brasilia
+      lib_opac: Brasilia
+    - authorised_value: BS
+      category: COUNTRY
+      lib: Bahama
+      lib_opac: Bahama
+    - authorised_value: BT
+      category: COUNTRY
+      lib: Bhutan
+      lib_opac: Bhutan
+    - authorised_value: BV
+      category: COUNTRY
+      lib: Bouvet’nsaari
+      lib_opac: Bouvet’nsaari
+    - authorised_value: BW
+      category: COUNTRY
+      lib: Botswana
+      lib_opac: Botswana
+    - authorised_value: BY
+      category: COUNTRY
+      lib: Valko-Venäjä
+      lib_opac: Valko-Venäjä
+    - authorised_value: BZ
+      category: COUNTRY
+      lib: Belize
+      lib_opac: Belize
+    - authorised_value: CA
+      category: COUNTRY
+      lib: Kanada
+      lib_opac: Kanada
+    - authorised_value: CC
+      category: COUNTRY
+      lib: Kookossaaret (Keelinginsaaret)
+      lib_opac: Kookossaaret (Keelinginsaaret)
+    - authorised_value: CD
+      category: COUNTRY
+      lib: Kongon demokraattinen tasavalta - Kinshasan Kongo
+      lib_opac: Kongon demokraattinen tasavalta - Kinshasan Kongo
+    - authorised_value: CF
+      category: COUNTRY
+      lib: Keski-Afrikan tasavalta
+      lib_opac: Keski-Afrikan tasavalta
+    - authorised_value: CG
+      category: COUNTRY
+      lib: Kongo - Brazzavillen Kongo
+      lib_opac: Kongo - Brazzavillen Kongo
+    - authorised_value: CH
+      category: COUNTRY
+      lib: Sveitsi
+      lib_opac: Sveitsi
+    - authorised_value: CI
+      category: COUNTRY
+      lib: Norsunluurannikko (Côte d'Ivoire)
+      lib_opac: Norsunluurannikko (Côte d'Ivoire)
+    - authorised_value: CK
+      category: COUNTRY
+      lib: Cookinsaaret
+      lib_opac: Cookinsaaret
+    - authorised_value: CL
+      category: COUNTRY
+      lib: Chile
+      lib_opac: Chile
+    - authorised_value: CM
+      category: COUNTRY
+      lib: Kamerun
+      lib_opac: Kamerun
+    - authorised_value: CN
+      category: COUNTRY
+      lib: Kiina
+      lib_opac: Kiina
+    - authorised_value: CO
+      category: COUNTRY
+      lib: Kolumbia
+      lib_opac: Kolumbia
+    - authorised_value: CR
+      category: COUNTRY
+      lib: Costa Rica
+      lib_opac: Costa Rica
+    - authorised_value: CU
+      category: COUNTRY
+      lib: Kuuba
+      lib_opac: Kuuba
+    - authorised_value: CV
+      category: COUNTRY
+      lib: Kap Verde
+      lib_opac: Kap Verde
+    - authorised_value: CW
+      category: COUNTRY
+      lib: Curaçao
+      lib_opac: Curaçao
+    - authorised_value: CX
+      category: COUNTRY
+      lib: Joulusaari
+      lib_opac: Joulusaari
+    - authorised_value: CY
+      category: COUNTRY
+      lib: Kypros
+      lib_opac: Kypros
+    - authorised_value: CZ
+      category: COUNTRY
+      lib: Tšekki
+      lib_opac: Tšekki
+    - authorised_value: DE
+      category: COUNTRY
+      lib: Saksa
+      lib_opac: Saksa
+    - authorised_value: DJ
+      category: COUNTRY
+      lib: Djibouti
+      lib_opac: Djibouti
+    - authorised_value: DK
+      category: COUNTRY
+      lib: Tanska
+      lib_opac: Tanska
+    - authorised_value: DM
+      category: COUNTRY
+      lib: Dominica
+      lib_opac: Dominica
+    - authorised_value: DO
+      category: COUNTRY
+      lib: Dominikaaninen tasavalta
+      lib_opac: Dominikaaninen tasavalta
+    - authorised_value: DZ
+      category: COUNTRY
+      lib: Algeria
+      lib_opac: Algeria
+    - authorised_value: EC
+      category: COUNTRY
+      lib: Ecuador
+      lib_opac: Ecuador
+    - authorised_value: EE
+      category: COUNTRY
+      lib: Viro
+      lib_opac: Viro
+    - authorised_value: EG
+      category: COUNTRY
+      lib: Egypti
+      lib_opac: Egypti
+    - authorised_value: EH
+      category: COUNTRY
+      lib: Länsi-Sahara
+      lib_opac: Länsi-Sahara
+    - authorised_value: ER
+      category: COUNTRY
+      lib: Eritrea
+      lib_opac: Eritrea
+    - authorised_value: ES
+      category: COUNTRY
+      lib: Espanja
+      lib_opac: Espanja
+    - authorised_value: ET
+      category: COUNTRY
+      lib: Etiopia
+      lib_opac: Etiopia
+    - authorised_value: FI
+      category: COUNTRY
+      lib: Suomi
+      lib_opac: Suomi
+    - authorised_value: FJ
+      category: COUNTRY
+      lib: Fidži
+      lib_opac: Fidži
+    - authorised_value: FK
+      category: COUNTRY
+      lib: Falklandinsaaret
+      lib_opac: Falklandinsaaret
+    - authorised_value: FM
+      category: COUNTRY
+      lib: Mikronesia
+      lib_opac: Mikronesia
+    - authorised_value: FO
+      category: COUNTRY
+      lib: Färsaaret
+      lib_opac: Färsaaret
+    - authorised_value: FR
+      category: COUNTRY
+      lib: Ranska
+      lib_opac: Ranska
+    - authorised_value: GA
+      category: COUNTRY
+      lib: Gabon
+      lib_opac: Gabon
+    - authorised_value: GB
+      category: COUNTRY
+      lib: Yhdistynyt kuningaskunta
+      lib_opac: Yhdistynyt kuningaskunta
+    - authorised_value: GD
+      category: COUNTRY
+      lib: Grenada
+      lib_opac: Grenada
+    - authorised_value: GE
+      category: COUNTRY
+      lib: Georgia
+      lib_opac: Georgia
+    - authorised_value: GF
+      category: COUNTRY
+      lib: Ranskan Guayana
+      lib_opac: Ranskan Guayana
+    - authorised_value: GG
+      category: COUNTRY
+      lib: Guernsey
+      lib_opac: Guernsey
+    - authorised_value: GH
+      category: COUNTRY
+      lib: Ghana
+      lib_opac: Ghana
+    - authorised_value: GI
+      category: COUNTRY
+      lib: Gibraltar
+      lib_opac: Gibraltar
+    - authorised_value: GL
+      category: COUNTRY
+      lib: Grönlanti
+      lib_opac: Grönlanti
+    - authorised_value: GM
+      category: COUNTRY
+      lib: Gambia
+      lib_opac: Gambia
+    - authorised_value: GN
+      category: COUNTRY
+      lib: Guinea
+      lib_opac: Guinea
+    - authorised_value: GP
+      category: COUNTRY
+      lib: Guadeloupe
+      lib_opac: Guadeloupe
+    - authorised_value: GQ
+      category: COUNTRY
+      lib: Päiväntasaajan Guinea
+      lib_opac: Päiväntasaajan Guinea
+    - authorised_value: GR
+      category: COUNTRY
+      lib: Kreikka
+      lib_opac: Kreikka
+    - authorised_value: GS
+      category: COUNTRY
+      lib: Etelä-Georgia ja Eteläiset Sandwichinsaaret
+      lib_opac: Etelä-Georgia ja Eteläiset Sandwichinsaaret
+    - authorised_value: GT
+      category: COUNTRY
+      lib: Guatemala
+      lib_opac: Guatemala
+    - authorised_value: GU
+      category: COUNTRY
+      lib: Guam
+      lib_opac: Guam
+    - authorised_value: GW
+      category: COUNTRY
+      lib: Guinea-Bissau
+      lib_opac: Guinea-Bissau
+    - authorised_value: GY
+      category: COUNTRY
+      lib: Guyana
+      lib_opac: Guyana
+    - authorised_value: HK
+      category: COUNTRY
+      lib: Hong Kong
+      lib_opac: Hong Kong
+    - authorised_value: HM
+      category: COUNTRY
+      lib: Heard ja McDonaldinsaaret
+      lib_opac: Heard ja McDonaldinsaaret
+    - authorised_value: HN
+      category: COUNTRY
+      lib: Honduras
+      lib_opac: Honduras
+    - authorised_value: HR
+      category: COUNTRY
+      lib: Kroatia
+      lib_opac: Kroatia
+    - authorised_value: HT
+      category: COUNTRY
+      lib: Haiti
+      lib_opac: Haiti
+    - authorised_value: HU
+      category: COUNTRY
+      lib: Unkari
+      lib_opac: Unkari
+    - authorised_value: ID
+      category: COUNTRY
+      lib: Indonesia
+      lib_opac: Indonesia
+    - authorised_value: IE
+      category: COUNTRY
+      lib: Irlanti
+      lib_opac: Irlanti
+    - authorised_value: IL
+      category: COUNTRY
+      lib: Israel
+      lib_opac: Israel
+    - authorised_value: IM
+      category: COUNTRY
+      lib: Mansaari
+      lib_opac: Mansaari
+    - authorised_value: IN
+      category: COUNTRY
+      lib: Intia
+      lib_opac: Intia
+    - authorised_value: IO
+      category: COUNTRY
+      lib: Brittiläinen Intian valtameren alue
+      lib_opac: Brittiläinen Intian valtameren alue
+    - authorised_value: IQ
+      category: COUNTRY
+      lib: Irak
+      lib_opac: Irak
+    - authorised_value: IR
+      category: COUNTRY
+      lib: Iran
+      lib_opac: Iran
+    - authorised_value: IS
+      category: COUNTRY
+      lib: Islanti
+      lib_opac: Islanti
+    - authorised_value: IT
+      category: COUNTRY
+      lib: Italia
+      lib_opac: Italia
+    - authorised_value: JE
+      category: COUNTRY
+      lib: Jersey
+      lib_opac: Jersey
+    - authorised_value: JM
+      category: COUNTRY
+      lib: Jamaika
+      lib_opac: Jamaika
+    - authorised_value: JO
+      category: COUNTRY
+      lib: Jordania
+      lib_opac: Jordania
+    - authorised_value: JP
+      category: COUNTRY
+      lib: Japani
+      lib_opac: Japani
+    - authorised_value: KE
+      category: COUNTRY
+      lib: Kenia
+      lib_opac: Kenia
+    - authorised_value: KG
+      category: COUNTRY
+      lib: Kirgisia
+      lib_opac: Kirgisia
+    - authorised_value: KH
+      category: COUNTRY
+      lib: Kambodža
+      lib_opac: Kambodža
+    - authorised_value: KI
+      category: COUNTRY
+      lib: Kiribati
+      lib_opac: Kiribati
+    - authorised_value: KM
+      category: COUNTRY
+      lib: Komorit
+      lib_opac: Komorit
+    - authorised_value: KN
+      category: COUNTRY
+      lib: Saint Kitts ja Nevis
+      lib_opac: Saint Kitts ja Nevis
+    - authorised_value: KP
+      category: COUNTRY
+      lib: Pohjois-Korea
+      lib_opac: Pohjois-Korea
+    - authorised_value: KR
+      category: COUNTRY
+      lib: Etelä-Korea
+      lib_opac: Etelä-Korea
+    - authorised_value: KW
+      category: COUNTRY
+      lib: Kuwait
+      lib_opac: Kuwait
+    - authorised_value: KY
+      category: COUNTRY
+      lib: Caymansaaret
+      lib_opac: Caymansaaret
+    - authorised_value: KZ
+      category: COUNTRY
+      lib: Kazakstan
+      lib_opac: Kazakstan
+    - authorised_value: LA
+      category: COUNTRY
+      lib: Laos
+      lib_opac: Laos
+    - authorised_value: LB
+      category: COUNTRY
+      lib: Libanon
+      lib_opac: Libanon
+    - authorised_value: LC
+      category: COUNTRY
+      lib: Saint Lucia
+      lib_opac: Saint Lucia
+    - authorised_value: LI
+      category: COUNTRY
+      lib: Liechtenstein
+      lib_opac: Liechtenstein
+    - authorised_value: LK
+      category: COUNTRY
+      lib: Sri Lanka
+      lib_opac: Sri Lanka
+    - authorised_value: LR
+      category: COUNTRY
+      lib: Liberia
+      lib_opac: Liberia
+    - authorised_value: LS
+      category: COUNTRY
+      lib: Lesotho
+      lib_opac: Lesotho
+    - authorised_value: LT
+      category: COUNTRY
+      lib: Liettua
+      lib_opac: Liettua
+    - authorised_value: LU
+      category: COUNTRY
+      lib: Luxemburg
+      lib_opac: Luxemburg
+    - authorised_value: LV
+      category: COUNTRY
+      lib: Latvia
+      lib_opac: Latvia
+    - authorised_value: LY
+      category: COUNTRY
+      lib: Libya
+      lib_opac: Libya
+    - authorised_value: MA
+      category: COUNTRY
+      lib: Marokko
+      lib_opac: Marokko
+    - authorised_value: MC
+      category: COUNTRY
+      lib: Monaco
+      lib_opac: Monaco
+    - authorised_value: MD
+      category: COUNTRY
+      lib: Moldova
+      lib_opac: Moldova
+    - authorised_value: ME
+      category: COUNTRY
+      lib: Montenegro
+      lib_opac: Montenegro
+    - authorised_value: MF
+      category: COUNTRY
+      lib: Saint-Martin
+      lib_opac: Saint-Martin
+    - authorised_value: MG
+      category: COUNTRY
+      lib: Madagaskar
+      lib_opac: Madagaskar
+    - authorised_value: MH
+      category: COUNTRY
+      lib: Marshallinsaaret
+      lib_opac: Marshallinsaaret
+    - authorised_value: MK
+      category: COUNTRY
+      lib: Pohjois-Makedonia
+      lib_opac: Pohjois-Makedonia
+    - authorised_value: ML
+      category: COUNTRY
+      lib: Mali
+      lib_opac: Mali
+    - authorised_value: MM
+      category: COUNTRY
+      lib: Myanmar (Burma)
+      lib_opac: Myanmar (Burma)
+    - authorised_value: MN
+      category: COUNTRY
+      lib: Mongolia
+      lib_opac: Mongolia
+    - authorised_value: MO
+      category: COUNTRY
+      lib: Macao
+      lib_opac: Macao
+    - authorised_value: MP
+      category: COUNTRY
+      lib: Pohjois-Mariaanit
+      lib_opac: Pohjois-Mariaanit
+    - authorised_value: MQ
+      category: COUNTRY
+      lib: Martinique
+      lib_opac: Martinique
+    - authorised_value: MR
+      category: COUNTRY
+      lib: Mauritania
+      lib_opac: Mauritania
+    - authorised_value: MS
+      category: COUNTRY
+      lib: Montserrat
+      lib_opac: Montserrat
+    - authorised_value: MT
+      category: COUNTRY
+      lib: Malta
+      lib_opac: Malta
+    - authorised_value: MU
+      category: COUNTRY
+      lib: Mauritius
+      lib_opac: Mauritius
+    - authorised_value: MV
+      category: COUNTRY
+      lib: Malediivit
+      lib_opac: Malediivit
+    - authorised_value: MW
+      category: COUNTRY
+      lib: Malawi
+      lib_opac: Malawi
+    - authorised_value: MX
+      category: COUNTRY
+      lib: Meksiko
+      lib_opac: Meksiko
+    - authorised_value: MY
+      category: COUNTRY
+      lib: Malesia
+      lib_opac: Malesia
+    - authorised_value: MZ
+      category: COUNTRY
+      lib: Mosambik
+      lib_opac: Mosambik
+    - authorised_value: NA
+      category: COUNTRY
+      lib: Namibia
+      lib_opac: Namibia
+    - authorised_value: NC
+      category: COUNTRY
+      lib: Uusi-Kaledonia
+      lib_opac: Uusi-Kaledonia
+    - authorised_value: NE
+      category: COUNTRY
+      lib: Niger
+      lib_opac: Niger
+    - authorised_value: NF
+      category: COUNTRY
+      lib: Norfolkinsaari
+      lib_opac: Norfolkinsaari
+    - authorised_value: NG
+      category: COUNTRY
+      lib: Nigeria
+      lib_opac: Nigeria
+    - authorised_value: NI
+      category: COUNTRY
+      lib: Nicaragua
+      lib_opac: Nicaragua
+    - authorised_value: NL
+      category: COUNTRY
+      lib: Alankomaat
+      lib_opac: Alankomaat
+    - authorised_value: NO
+      category: COUNTRY
+      lib: Norja
+      lib_opac: Norja
+    - authorised_value: NP
+      category: COUNTRY
+      lib: Nepal
+      lib_opac: Nepal
+    - authorised_value: NR
+      category: COUNTRY
+      lib: Nauru
+      lib_opac: Nauru
+    - authorised_value: NU
+      category: COUNTRY
+      lib: Niue
+      lib_opac: Niue
+    - authorised_value: NZ
+      category: COUNTRY
+      lib: Uusi-Seelanti
+      lib_opac: Uusi-Seelanti
+    - authorised_value: OM
+      category: COUNTRY
+      lib: Oman
+      lib_opac: Oman
+    - authorised_value: PA
+      category: COUNTRY
+      lib: Panama
+      lib_opac: Panama
+    - authorised_value: PE
+      category: COUNTRY
+      lib: Peru
+      lib_opac: Peru
+    - authorised_value: PF
+      category: COUNTRY
+      lib: Ranskan Polynesia
+      lib_opac: Ranskan Polynesia
+    - authorised_value: PG
+      category: COUNTRY
+      lib: Papua-Uusi-Guinea
+      lib_opac: Papua-Uusi-Guinea
+    - authorised_value: PH
+      category: COUNTRY
+      lib: Filippiinit
+      lib_opac: Filippiinit
+    - authorised_value: PK
+      category: COUNTRY
+      lib: Pakistan
+      lib_opac: Pakistan
+    - authorised_value: PL
+      category: COUNTRY
+      lib: Puola
+      lib_opac: Puola
+    - authorised_value: PM
+      category: COUNTRY
+      lib: Saint-Pierre ja Miquelon
+      lib_opac: Saint-Pierre ja Miquelon
+    - authorised_value: PN
+      category: COUNTRY
+      lib: Pitcairn (Pitcairninsaaret)
+      lib_opac: Pitcairn (Pitcairninsaaret)
+    - authorised_value: PR
+      category: COUNTRY
+      lib: Puerto Rico
+      lib_opac: Puerto Rico
+    - authorised_value: PS
+      category: COUNTRY
+      lib: Palestiinalaisalue
+      lib_opac: Palestiinalaisalue
+    - authorised_value: PT
+      category: COUNTRY
+      lib: Portugali
+      lib_opac: Portugali
+    - authorised_value: PW
+      category: COUNTRY
+      lib: Palau
+      lib_opac: Palau
+    - authorised_value: PY
+      category: COUNTRY
+      lib: Paraguay
+      lib_opac: Paraguay
+    - authorised_value: QA
+      category: COUNTRY
+      lib: Qatar
+      lib_opac: Qatar
+    - authorised_value: RE
+      category: COUNTRY
+      lib: Réunion
+      lib_opac: Réunion
+    - authorised_value: RO
+      category: COUNTRY
+      lib: Romania
+      lib_opac: Romania
+    - authorised_value: RS
+      category: COUNTRY
+      lib: Serbia
+      lib_opac: Serbia
+    - authorised_value: RU
+      category: COUNTRY
+      lib: Venäjä
+      lib_opac: Venäjä
+    - authorised_value: RW
+      category: COUNTRY
+      lib: Ruanda
+      lib_opac: Ruanda
+    - authorised_value: SA
+      category: COUNTRY
+      lib: Saudi-Arabia
+      lib_opac: Saudi-Arabia
+    - authorised_value: SB
+      category: COUNTRY
+      lib: Salomonsaaret
+      lib_opac: Salomonsaaret
+    - authorised_value: SC
+      category: COUNTRY
+      lib: Seychellit
+      lib_opac: Seychellit
+    - authorised_value: SD
+      category: COUNTRY
+      lib: Sudan
+      lib_opac: Sudan
+    - authorised_value: SE
+      category: COUNTRY
+      lib: Ruotsi
+      lib_opac: Ruotsi
+    - authorised_value: SG
+      category: COUNTRY
+      lib: Singapore
+      lib_opac: Singapore
+    - authorised_value: SH
+      category: COUNTRY
+      lib: Saint Helena
+      lib_opac: Saint Helena
+    - authorised_value: SI
+      category: COUNTRY
+      lib: Slovenia
+      lib_opac: Slovenia
+    - authorised_value: SJ
+      category: COUNTRY
+      lib: Svalbard ja Jan Mayen
+      lib_opac: Svalbard ja Jan Mayen
+    - authorised_value: SK
+      category: COUNTRY
+      lib: Slovakia
+      lib_opac: Slovakia
+    - authorised_value: SL
+      category: COUNTRY
+      lib: Sierra Leone
+      lib_opac: Sierra Leone
+    - authorised_value: SM
+      category: COUNTRY
+      lib: San Marino
+      lib_opac: San Marino
+    - authorised_value: SN
+      category: COUNTRY
+      lib: Senegal
+      lib_opac: Senegal
+    - authorised_value: SO
+      category: COUNTRY
+      lib: Somalia
+      lib_opac: Somalia
+    - authorised_value: SR
+      category: COUNTRY
+      lib: Suriname
+      lib_opac: Suriname
+    - authorised_value: SS
+      category: COUNTRY
+      lib: Etelä-Sudan
+      lib_opac: Etelä-Sudan
+    - authorised_value: ST
+      category: COUNTRY
+      lib: São Tomé ja Príncipe
+      lib_opac: São Tomé ja Príncipe
+    - authorised_value: SV
+      category: COUNTRY
+      lib: El Salvador
+      lib_opac: El Salvador
+    - authorised_value: SX
+      category: COUNTRY
+      lib: Sint Maarten
+      lib_opac: Sint Maarten
+    - authorised_value: SY
+      category: COUNTRY
+      lib: Syyria
+      lib_opac: Syyria
+    - authorised_value: SZ
+      category: COUNTRY
+      lib: Swazimaa
+      lib_opac: Swazimaa
+    - authorised_value: TC
+      category: COUNTRY
+      lib: Turks- ja Caicossaaret
+      lib_opac: Turks- ja Caicossaaret
+    - authorised_value: TD
+      category: COUNTRY
+      lib: Tšad
+      lib_opac: Tšad
+    - authorised_value: TF
+      category: COUNTRY
+      lib: Ranskan eteläiset alueet
+      lib_opac: Ranskan eteläiset alueet
+    - authorised_value: TG
+      category: COUNTRY
+      lib: Togo
+      lib_opac: Togo
+    - authorised_value: TH
+      category: COUNTRY
+      lib: Thaimaa
+      lib_opac: Thaimaa
+    - authorised_value: TJ
+      category: COUNTRY
+      lib: Tadžikistan
+      lib_opac: Tadžikistan
+    - authorised_value: TK
+      category: COUNTRY
+      lib: Tokelau
+      lib_opac: Tokelau
+    - authorised_value: TL
+      category: COUNTRY
+      lib: Itä-Timor
+      lib_opac: Itä-Timor
+    - authorised_value: TM
+      category: COUNTRY
+      lib: Turkmenistan
+      lib_opac: Turkmenistan
+    - authorised_value: TN
+      category: COUNTRY
+      lib: Tunisia
+      lib_opac: Tunisia
+    - authorised_value: TO
+      category: COUNTRY
+      lib: Tonga
+      lib_opac: Tonga
+    - authorised_value: TR
+      category: COUNTRY
+      lib: Turkki
+      lib_opac: Turkki
+    - authorised_value: TT
+      category: COUNTRY
+      lib: Trinidad ja Tobago
+      lib_opac: Trinidad ja Tobago
+    - authorised_value: TV
+      category: COUNTRY
+      lib: Tuvalu
+      lib_opac: Tuvalu
+    - authorised_value: TW
+      category: COUNTRY
+      lib: Taiwan
+      lib_opac: Taiwan
+    - authorised_value: TZ
+      category: COUNTRY
+      lib: Tansania
+      lib_opac: Tansania
+    - authorised_value: UA
+      category: COUNTRY
+      lib: Ukraina
+      lib_opac: Ukraina
+    - authorised_value: UG
+      category: COUNTRY
+      lib: Uganda
+      lib_opac: Uganda
+    - authorised_value: UM
+      category: COUNTRY
+      lib: Yhdysvaltain pienet erillissaaret
+      lib_opac: Yhdysvaltain pienet erillissaaret
+    - authorised_value: US
+      category: COUNTRY
+      lib: Yhdysvallat
+      lib_opac: Yhdysvallat
+    - authorised_value: UY
+      category: COUNTRY
+      lib: Uruguay
+      lib_opac: Uruguay
+    - authorised_value: UZ
+      category: COUNTRY
+      lib: Uzbekistan
+      lib_opac: Uzbekistan
+    - authorised_value: VA
+      category: COUNTRY
+      lib: Vatikaanivaltio
+      lib_opac: Vatikaanivaltio
+    - authorised_value: VC
+      category: COUNTRY
+      lib: Saint Vincent ja Grenadiinit
+      lib_opac: Saint Vincent ja Grenadiinit
+    - authorised_value: VE
+      category: COUNTRY
+      lib: Venezuela
+      lib_opac: Venezuela
+    - authorised_value: VG
+      category: COUNTRY
+      lib: Brittiläiset Neitsytsaaret
+      lib_opac: Brittiläiset Neitsytsaaret
+    - authorised_value: VI
+      category: COUNTRY
+      lib: Yhdysvaltain Neitsytsaaret
+      lib_opac: Yhdysvaltain Neitsytsaaret
+    - authorised_value: VN
+      category: COUNTRY
+      lib: Vietnam
+      lib_opac: Vietnam
+    - authorised_value: VU
+      category: COUNTRY
+      lib: Vanuatu
+      lib_opac: Vanuatu
+    - authorised_value: WF
+      category: COUNTRY
+      lib: Wallis ja Futuna
+      lib_opac: Wallis ja Futuna
+    - authorised_value: WS
+      category: COUNTRY
+      lib: Samoa
+      lib_opac: Samoa
+    - authorised_value: YE
+      category: COUNTRY
+      lib: Jemen
+      lib_opac: Jemen
+    - authorised_value: YT
+      category: COUNTRY
+      lib: Mayotte
+      lib_opac: Mayotte
+    - authorised_value: ZA
+      category: COUNTRY
+      lib: Etelä-Afrikka
+      lib_opac: Etelä-Afrikka
+    - authorised_value: ZM
+      category: COUNTRY
+      lib: Sambia
+      lib_opac: Sambia
+    - authorised_value: ZW
+      category: COUNTRY
+      lib: Zimbabwe
+      lib_opac: Zimbabwe
+    translatable:
+    - lib
+    - lib_opac
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: aar
+      category: LANG
+      lib: afar
+      lib_opac: afar
+    - authorised_value: abk
+      category: LANG
+      lib: abhaasi
+      lib_opac: abhaasi
+    - authorised_value: ace
+      category: LANG
+      lib: atšeh
+      lib_opac: atšeh
+    - authorised_value: ach
+      category: LANG
+      lib: atšoli
+      lib_opac: atšoli
+    - authorised_value: ada
+      category: LANG
+      lib: adangme
+      lib_opac: adangme
+    - authorised_value: ady
+      category: LANG
+      lib: adyge
+      lib_opac: adyge
+    - authorised_value: afa
+      category: LANG
+      lib: afroaasialaiset kielet
+      lib_opac: afroaasialaiset kielet
+    - authorised_value: afh
+      category: LANG
+      lib: afrihili
+      lib_opac: afrihili
+    - authorised_value: afr
+      category: LANG
+      lib: afrikaans
+      lib_opac: afrikaans
+    - authorised_value: ain
+      category: LANG
+      lib: ainu
+      lib_opac: ainu
+    - authorised_value: aka
+      category: LANG
+      lib: akan
+      lib_opac: akan
+    - authorised_value: akk
+      category: LANG
+      lib: akkadi
+      lib_opac: akkadi
+    - authorised_value: alb
+      category: LANG
+      lib: albania
+      lib_opac: albania
+    - authorised_value: ale
+      category: LANG
+      lib: aleutti
+      lib_opac: aleutti
+    - authorised_value: alg
+      category: LANG
+      lib: algonkin-kielet
+      lib_opac: algonkin-kielet
+    - authorised_value: alt
+      category: LANG
+      lib: altai
+      lib_opac: altai
+    - authorised_value: amh
+      category: LANG
+      lib: amhara
+      lib_opac: amhara
+    - authorised_value: ang
+      category: LANG
+      lib: muinaisenglanti (n. 450-1100)
+      lib_opac: muinaisenglanti (n. 450-1100)
+    - authorised_value: anp
+      category: LANG
+      lib: angika
+      lib_opac: angika
+    - authorised_value: apa
+      category: LANG
+      lib: apassikielet
+      lib_opac: apassikielet
+    - authorised_value: ara
+      category: LANG
+      lib: arabia
+      lib_opac: arabia
+    - authorised_value: arc
+      category: LANG
+      lib: aramea (700-300 eaa)
+      lib_opac: aramea (700-300 eaa)
+    - authorised_value: arg
+      category: LANG
+      lib: aragonia
+      lib_opac: aragonia
+    - authorised_value: arm
+      category: LANG
+      lib: armenia
+      lib_opac: armenia
+    - authorised_value: arn
+      category: LANG
+      lib: mapudungun
+      lib_opac: mapudungun
+    - authorised_value: arp
+      category: LANG
+      lib: arapho
+      lib_opac: arapho
+    - authorised_value: art
+      category: LANG
+      lib: keinotekoiset kielet
+      lib_opac: keinotekoiset kielet
+    - authorised_value: arw
+      category: LANG
+      lib: arawak
+      lib_opac: arawak
+    - authorised_value: asm
+      category: LANG
+      lib: assami
+      lib_opac: assami
+    - authorised_value: ast
+      category: LANG
+      lib: asturia
+      lib_opac: asturia
+    - authorised_value: ath
+      category: LANG
+      lib: athabasca-kielet
+      lib_opac: athabasca-kielet
+    - authorised_value: aus
+      category: LANG
+      lib: australialaiset kielet
+      lib_opac: australialaiset kielet
+    - authorised_value: ava
+      category: LANG
+      lib: avaari
+      lib_opac: avaari
+    - authorised_value: ave
+      category: LANG
+      lib: avesta
+      lib_opac: avesta
+    - authorised_value: awa
+      category: LANG
+      lib: awadhi
+      lib_opac: awadhi
+    - authorised_value: aym
+      category: LANG
+      lib: aimara
+      lib_opac: aimara
+    - authorised_value: aze
+      category: LANG
+      lib: azeri
+      lib_opac: azeri
+    - authorised_value: bad
+      category: LANG
+      lib: banda
+      lib_opac: banda
+    - authorised_value: bai
+      category: LANG
+      lib: bamileke-kielet
+      lib_opac: bamileke-kielet
+    - authorised_value: bak
+      category: LANG
+      lib: baškiiri
+      lib_opac: baškiiri
+    - authorised_value: bal
+      category: LANG
+      lib: belutši
+      lib_opac: belutši
+    - authorised_value: bam
+      category: LANG
+      lib: bambara
+      lib_opac: bambara
+    - authorised_value: ban
+      category: LANG
+      lib: bali
+      lib_opac: bali
+    - authorised_value: baq
+      category: LANG
+      lib: baski
+      lib_opac: baski
+    - authorised_value: bas
+      category: LANG
+      lib: basa
+      lib_opac: basa
+    - authorised_value: bat
+      category: LANG
+      lib: balttilaiset kielet
+      lib_opac: balttilaiset kielet
+    - authorised_value: bej
+      category: LANG
+      lib: bedža
+      lib_opac: bedža
+    - authorised_value: bel
+      category: LANG
+      lib: valkovenäjä
+      lib_opac: valkovenäjä
+    - authorised_value: bem
+      category: LANG
+      lib: bemba
+      lib_opac: bemba
+    - authorised_value: ben
+      category: LANG
+      lib: bengali
+      lib_opac: bengali
+    - authorised_value: ber
+      category: LANG
+      lib: berberikielet
+      lib_opac: berberikielet
+    - authorised_value: bho
+      category: LANG
+      lib: bhodžpuri
+      lib_opac: bhodžpuri
+    - authorised_value: bih
+      category: LANG
+      lib: bihari
+      lib_opac: bihari
+    - authorised_value: bik
+      category: LANG
+      lib: bikol
+      lib_opac: bikol
+    - authorised_value: bin
+      category: LANG
+      lib: bini
+      lib_opac: bini
+    - authorised_value: bis
+      category: LANG
+      lib: bislama
+      lib_opac: bislama
+    - authorised_value: bla
+      category: LANG
+      lib: siksika
+      lib_opac: siksika
+    - authorised_value: bnt
+      category: LANG
+      lib: bantukielet
+      lib_opac: bantukielet
+    - authorised_value: bos
+      category: LANG
+      lib: bosnia
+      lib_opac: bosnia
+    - authorised_value: bra
+      category: LANG
+      lib: bradž
+      lib_opac: bradž
+    - authorised_value: bre
+      category: LANG
+      lib: bretoni
+      lib_opac: bretoni
+    - authorised_value: btk
+      category: LANG
+      lib: batak
+      lib_opac: batak
+    - authorised_value: bua
+      category: LANG
+      lib: burjaatti
+      lib_opac: burjaatti
+    - authorised_value: bug
+      category: LANG
+      lib: bugi
+      lib_opac: bugi
+    - authorised_value: bul
+      category: LANG
+      lib: bulgaria
+      lib_opac: bulgaria
+    - authorised_value: bur
+      category: LANG
+      lib: burma
+      lib_opac: burma
+    - authorised_value: byn
+      category: LANG
+      lib: bilin
+      lib_opac: bilin
+    - authorised_value: cad
+      category: LANG
+      lib: caddo
+      lib_opac: caddo
+    - authorised_value: cai
+      category: LANG
+      lib: Keski-Amerikan intiaanikielet
+      lib_opac: Keski-Amerikan intiaanikielet
+    - authorised_value: car
+      category: LANG
+      lib: karibi
+      lib_opac: karibi
+    - authorised_value: cat
+      category: LANG
+      lib: katalaani
+      lib_opac: katalaani
+    - authorised_value: cau
+      category: LANG
+      lib: kaukasialaiset kielet
+      lib_opac: kaukasialaiset kielet
+    - authorised_value: ceb
+      category: LANG
+      lib: cebuano
+      lib_opac: cebuano
+    - authorised_value: cel
+      category: LANG
+      lib: kelttiläiset kielet
+      lib_opac: kelttiläiset kielet
+    - authorised_value: cha
+      category: LANG
+      lib: tšamorro
+      lib_opac: tšamorro
+    - authorised_value: chb
+      category: LANG
+      lib: tšibtša
+      lib_opac: tšibtša
+    - authorised_value: che
+      category: LANG
+      lib: tšetšeeni
+      lib_opac: tšetšeeni
+    - authorised_value: chg
+      category: LANG
+      lib: tšagatai
+      lib_opac: tšagatai
+    - authorised_value: chi
+      category: LANG
+      lib: kiina
+      lib_opac: kiina
+    - authorised_value: chk
+      category: LANG
+      lib: chuuk
+      lib_opac: chuuk
+    - authorised_value: chm
+      category: LANG
+      lib: mari
+      lib_opac: mari
+    - authorised_value: chn
+      category: LANG
+      lib: chinook-jargon
+      lib_opac: chinook-jargon
+    - authorised_value: cho
+      category: LANG
+      lib: choctaw
+      lib_opac: choctaw
+    - authorised_value: chp
+      category: LANG
+      lib: chipewyan
+      lib_opac: chipewyan
+    - authorised_value: chr
+      category: LANG
+      lib: cherokee
+      lib_opac: cherokee
+    - authorised_value: chu
+      category: LANG
+      lib: kirkkoslaavi
+      lib_opac: kirkkoslaavi
+    - authorised_value: chv
+      category: LANG
+      lib: tšuvassi
+      lib_opac: tšuvassi
+    - authorised_value: chy
+      category: LANG
+      lib: cheyenne
+      lib_opac: cheyenne
+    - authorised_value: cmc
+      category: LANG
+      lib: tsam-kielet
+      lib_opac: tsam-kielet
+    - authorised_value: cnr
+      category: LANG
+      lib: montenegro
+      lib_opac: montenegro
+    - authorised_value: cop
+      category: LANG
+      lib: kopti
+      lib_opac: kopti
+    - authorised_value: cor
+      category: LANG
+      lib: korni
+      lib_opac: korni
+    - authorised_value: cos
+      category: LANG
+      lib: korsika
+      lib_opac: korsika
+    - authorised_value: cpe
+      category: LANG
+      lib: englantiin perustuvat kreolit ja pidginit
+      lib_opac: englantiin perustuvat kreolit ja pidginit
+    - authorised_value: cpf
+      category: LANG
+      lib: ranskaan perustuvat kreolit ja pidginit
+      lib_opac: ranskaan perustuvat kreolit ja pidginit
+    - authorised_value: cpp
+      category: LANG
+      lib: portugaliin perustuvat kreolit ja pidginit
+      lib_opac: portugaliin perustuvat kreolit ja pidginit
+    - authorised_value: cre
+      category: LANG
+      lib: cree
+      lib_opac: cree
+    - authorised_value: crh
+      category: LANG
+      lib: krimintataari, kriminturkki
+      lib_opac: krimintataari, kriminturkki
+    - authorised_value: crp
+      category: LANG
+      lib: kreolit ja pidginit
+      lib_opac: kreolit ja pidginit
+    - authorised_value: csb
+      category: LANG
+      lib: kašubi
+      lib_opac: kašubi
+    - authorised_value: cus
+      category: LANG
+      lib: kuusilaiset kielet
+      lib_opac: kuusilaiset kielet
+    - authorised_value: cze
+      category: LANG
+      lib: tsekki
+      lib_opac: tsekki
+    - authorised_value: dak
+      category: LANG
+      lib: dakota
+      lib_opac: dakota
+    - authorised_value: dan
+      category: LANG
+      lib: tanska
+      lib_opac: tanska
+    - authorised_value: dar
+      category: LANG
+      lib: dargi
+      lib_opac: dargi
+    - authorised_value: day
+      category: LANG
+      lib: dajakki
+      lib_opac: dajakki
+    - authorised_value: del
+      category: LANG
+      lib: delaware
+      lib_opac: delaware
+    - authorised_value: den
+      category: LANG
+      lib: slevi
+      lib_opac: slevi
+    - authorised_value: dgr
+      category: LANG
+      lib: dogrip
+      lib_opac: dogrip
+    - authorised_value: din
+      category: LANG
+      lib: dinka
+      lib_opac: dinka
+    - authorised_value: div
+      category: LANG
+      lib: divehi
+      lib_opac: divehi
+    - authorised_value: doi
+      category: LANG
+      lib: dogri
+      lib_opac: dogri
+    - authorised_value: dra
+      category: LANG
+      lib: dravidakielet
+      lib_opac: dravidakielet
+    - authorised_value: dsb
+      category: LANG
+      lib: alasorbi
+      lib_opac: alasorbi
+    - authorised_value: dua
+      category: LANG
+      lib: duala
+      lib_opac: duala
+    - authorised_value: dum
+      category: LANG
+      lib: keskihollanti (n. 1050-1350)
+      lib_opac: keskihollanti (n. 1050-1350)
+    - authorised_value: dut
+      category: LANG
+      lib: hollanti
+      lib_opac: hollanti
+    - authorised_value: dyu
+      category: LANG
+      lib: djula
+      lib_opac: djula
+    - authorised_value: dzo
+      category: LANG
+      lib: dzongkha
+      lib_opac: dzongkha
+    - authorised_value: efi
+      category: LANG
+      lib: efik
+      lib_opac: efik
+    - authorised_value: egy
+      category: LANG
+      lib: muinaisegypti
+      lib_opac: muinaisegypti
+    - authorised_value: eka
+      category: LANG
+      lib: ekajuk
+      lib_opac: ekajuk
+    - authorised_value: elx
+      category: LANG
+      lib: elami
+      lib_opac: elami
+    - authorised_value: eng
+      category: LANG
+      lib: englanti
+      lib_opac: englanti
+    - authorised_value: enm
+      category: LANG
+      lib: keskienglanti (n. 1100-1500)
+      lib_opac: keskienglanti (n. 1100-1500)
+    - authorised_value: epo
+      category: LANG
+      lib: esperanto
+      lib_opac: esperanto
+    - authorised_value: est
+      category: LANG
+      lib: viro
+      lib_opac: viro
+    - authorised_value: ewe
+      category: LANG
+      lib: ewe
+      lib_opac: ewe
+    - authorised_value: ewo
+      category: LANG
+      lib: ewondo
+      lib_opac: ewondo
+    - authorised_value: fan
+      category: LANG
+      lib: fang
+      lib_opac: fang
+    - authorised_value: fao
+      category: LANG
+      lib: fääri
+      lib_opac: fääri
+    - authorised_value: fat
+      category: LANG
+      lib: fanti
+      lib_opac: fanti
+    - authorised_value: fij
+      category: LANG
+      lib: fidži
+      lib_opac: fidži
+    - authorised_value: fil
+      category: LANG
+      lib: filipino
+      lib_opac: filipino
+    - authorised_value: fin
+      category: LANG
+      lib: suomi
+      lib_opac: suomi
+    - authorised_value: fiu
+      category: LANG
+      lib: suomalais-ugrilaiset kielet
+      lib_opac: suomalais-ugrilaiset kielet
+    - authorised_value: fon
+      category: LANG
+      lib: fon
+      lib_opac: fon
+    - authorised_value: fre
+      category: LANG
+      lib: ranska
+      lib_opac: ranska
+    - authorised_value: frm
+      category: LANG
+      lib: keskiranska (n. 1400-1600)
+      lib_opac: keskiranska (n. 1400-1600)
+    - authorised_value: fro
+      category: LANG
+      lib: muinaisranska (n. 842-1400)
+      lib_opac: muinaisranska (n. 842-1400)
+    - authorised_value: frr
+      category: LANG
+      lib: pohjoisfriisi
+      lib_opac: pohjoisfriisi
+    - authorised_value: frs
+      category: LANG
+      lib: itäfriisi
+      lib_opac: itäfriisi
+    - authorised_value: fry
+      category: LANG
+      lib: länsifriisi
+      lib_opac: länsifriisi
+    - authorised_value: ful
+      category: LANG
+      lib: fulani
+      lib_opac: fulani
+    - authorised_value: fur
+      category: LANG
+      lib: friuli
+      lib_opac: friuli
+    - authorised_value: gaa
+      category: LANG
+      lib: ga
+      lib_opac: ga
+    - authorised_value: gay
+      category: LANG
+      lib: gajo
+      lib_opac: gajo
+    - authorised_value: gba
+      category: LANG
+      lib: gbaja
+      lib_opac: gbaja
+    - authorised_value: gem
+      category: LANG
+      lib: germaaniset kielet
+      lib_opac: germaaniset kielet
+    - authorised_value: geo
+      category: LANG
+      lib: georgia
+      lib_opac: georgia
+    - authorised_value: ger
+      category: LANG
+      lib: saksa
+      lib_opac: saksa
+    - authorised_value: gez
+      category: LANG
+      lib: ge’ez
+      lib_opac: ge’ez
+    - authorised_value: gil
+      category: LANG
+      lib: kiribati
+      lib_opac: kiribati
+    - authorised_value: gla
+      category: LANG
+      lib: gaeli
+      lib_opac: gaeli
+    - authorised_value: gle
+      category: LANG
+      lib: iiri
+      lib_opac: iiri
+    - authorised_value: glg
+      category: LANG
+      lib: galicia
+      lib_opac: galicia
+    - authorised_value: glv
+      category: LANG
+      lib: manksi
+      lib_opac: manksi
+    - authorised_value: gmh
+      category: LANG
+      lib: keskiyläsaksa (n. 1050-1500)
+      lib_opac: keskiyläsaksa (n. 1050-1500)
+    - authorised_value: goh
+      category: LANG
+      lib: muinaisyläsaksa (n. 750-1050)
+      lib_opac: muinaisyläsaksa (n. 750-1050)
+    - authorised_value: gon
+      category: LANG
+      lib: gondi
+      lib_opac: gondi
+    - authorised_value: gor
+      category: LANG
+      lib: gorontalo
+      lib_opac: gorontalo
+    - authorised_value: got
+      category: LANG
+      lib: gootti
+      lib_opac: gootti
+    - authorised_value: grb
+      category: LANG
+      lib: grebo
+      lib_opac: grebo
+    - authorised_value: grc
+      category: LANG
+      lib: muinaiskreikka (-1453)
+      lib_opac: muinaiskreikka (-1453)
+    - authorised_value: gre
+      category: LANG
+      lib: kreikka (1453-)
+      lib_opac: kreikka (1453-)
+    - authorised_value: grn
+      category: LANG
+      lib: guarani
+      lib_opac: guarani
+    - authorised_value: gsw
+      category: LANG
+      lib: sveitsinsaksa
+      lib_opac: sveitsinsaksa
+    - authorised_value: guj
+      category: LANG
+      lib: gudžarati
+      lib_opac: gudžarati
+    - authorised_value: gwi
+      category: LANG
+      lib: gwitšin
+      lib_opac: gwitšin
+    - authorised_value: hai
+      category: LANG
+      lib: haida
+      lib_opac: haida
+    - authorised_value: hat
+      category: LANG
+      lib: haiti
+      lib_opac: haiti
+    - authorised_value: hau
+      category: LANG
+      lib: hausa
+      lib_opac: hausa
+    - authorised_value: haw
+      category: LANG
+      lib: havaji
+      lib_opac: havaji
+    - authorised_value: heb
+      category: LANG
+      lib: heprea
+      lib_opac: heprea
+    - authorised_value: her
+      category: LANG
+      lib: herero
+      lib_opac: herero
+    - authorised_value: hil
+      category: LANG
+      lib: hiligaino
+      lib_opac: hiligaino
+    - authorised_value: him
+      category: LANG
+      lib: himatsali
+      lib_opac: himatsali
+    - authorised_value: hin
+      category: LANG
+      lib: hindi
+      lib_opac: hindi
+    - authorised_value: hit
+      category: LANG
+      lib: heetti
+      lib_opac: heetti
+    - authorised_value: hmn
+      category: LANG
+      lib: hmong
+      lib_opac: hmong
+    - authorised_value: hmo
+      category: LANG
+      lib: hiri-motu
+      lib_opac: hiri-motu
+    - authorised_value: hrv
+      category: LANG
+      lib: kroatia
+      lib_opac: kroatia
+    - authorised_value: hsb
+      category: LANG
+      lib: yläsorbi
+      lib_opac: yläsorbi
+    - authorised_value: hun
+      category: LANG
+      lib: unkari
+      lib_opac: unkari
+    - authorised_value: hup
+      category: LANG
+      lib: hupa
+      lib_opac: hupa
+    - authorised_value: iba
+      category: LANG
+      lib: iban
+      lib_opac: iban
+    - authorised_value: ibo
+      category: LANG
+      lib: igbo
+      lib_opac: igbo
+    - authorised_value: ice
+      category: LANG
+      lib: islanti
+      lib_opac: islanti
+    - authorised_value: ido
+      category: LANG
+      lib: ido
+      lib_opac: ido
+    - authorised_value: iii
+      category: LANG
+      lib: sichuanin-yi
+      lib_opac: sichuanin-yi
+    - authorised_value: ijo
+      category: LANG
+      lib: idzo
+      lib_opac: idzo
+    - authorised_value: iku
+      category: LANG
+      lib: inuktitut
+      lib_opac: inuktitut
+    - authorised_value: ile
+      category: LANG
+      lib: Interlingue
+      lib_opac: Interlingue
+    - authorised_value: ilo
+      category: LANG
+      lib: iloko
+      lib_opac: iloko
+    - authorised_value: ina
+      category: LANG
+      lib: interlingua
+      lib_opac: interlingua
+    - authorised_value: inc
+      category: LANG
+      lib: intialaiset kielet
+      lib_opac: intialaiset kielet
+    - authorised_value: ind
+      category: LANG
+      lib: indonesia
+      lib_opac: indonesia
+    - authorised_value: ine
+      category: LANG
+      lib: indoeurooppalaiset kielet
+      lib_opac: indoeurooppalaiset kielet
+    - authorised_value: inh
+      category: LANG
+      lib: inguuši
+      lib_opac: inguuši
+    - authorised_value: ipk
+      category: LANG
+      lib: inupiaq
+      lib_opac: inupiaq
+    - authorised_value: ira
+      category: LANG
+      lib: iranilaiset kielet
+      lib_opac: iranilaiset kielet
+    - authorised_value: iro
+      category: LANG
+      lib: irokeesikielet
+      lib_opac: irokeesikielet
+    - authorised_value: ita
+      category: LANG
+      lib: italia
+      lib_opac: italia
+    - authorised_value: jav
+      category: LANG
+      lib: jaava
+      lib_opac: jaava
+    - authorised_value: jbo
+      category: LANG
+      lib: lojban
+      lib_opac: lojban
+    - authorised_value: jpn
+      category: LANG
+      lib: japani
+      lib_opac: japani
+    - authorised_value: jpr
+      category: LANG
+      lib: juutalaispersia
+      lib_opac: juutalaispersia
+    - authorised_value: jrb
+      category: LANG
+      lib: juutalaisarabia
+      lib_opac: juutalaisarabia
+    - authorised_value: kaa
+      category: LANG
+      lib: karakalpakki
+      lib_opac: karakalpakki
+    - authorised_value: kab
+      category: LANG
+      lib: kabyyli
+      lib_opac: kabyyli
+    - authorised_value: kac
+      category: LANG
+      lib: katšin
+      lib_opac: katšin
+    - authorised_value: kal
+      category: LANG
+      lib: kalaallisut
+      lib_opac: kalaallisut
+    - authorised_value: kam
+      category: LANG
+      lib: kamba
+      lib_opac: kamba
+    - authorised_value: kan
+      category: LANG
+      lib: kannada
+      lib_opac: kannada
+    - authorised_value: kar
+      category: LANG
+      lib: karen
+      lib_opac: karen
+    - authorised_value: kas
+      category: LANG
+      lib: kašmiri
+      lib_opac: kašmiri
+    - authorised_value: kau
+      category: LANG
+      lib: kanuri
+      lib_opac: kanuri
+    - authorised_value: kaw
+      category: LANG
+      lib: kavi
+      lib_opac: kavi
+    - authorised_value: kaz
+      category: LANG
+      lib: kazakki
+      lib_opac: kazakki
+    - authorised_value: kbd
+      category: LANG
+      lib: kabardi
+      lib_opac: kabardi
+    - authorised_value: kha
+      category: LANG
+      lib: khasi
+      lib_opac: khasi
+    - authorised_value: khi
+      category: LANG
+      lib: khoisan-kielet
+      lib_opac: khoisan-kielet
+    - authorised_value: khm
+      category: LANG
+      lib: khmer
+      lib_opac: khmer
+    - authorised_value: kho
+      category: LANG
+      lib: khotani
+      lib_opac: khotani
+    - authorised_value: kik
+      category: LANG
+      lib: kikuju
+      lib_opac: kikuju
+    - authorised_value: kin
+      category: LANG
+      lib: ruanda
+      lib_opac: ruanda
+    - authorised_value: kir
+      category: LANG
+      lib: kirgiisi
+      lib_opac: kirgiisi
+    - authorised_value: kmb
+      category: LANG
+      lib: kimbundu
+      lib_opac: kimbundu
+    - authorised_value: kok
+      category: LANG
+      lib: konkani
+      lib_opac: konkani
+    - authorised_value: kom
+      category: LANG
+      lib: komi
+      lib_opac: komi
+    - authorised_value: kon
+      category: LANG
+      lib: kongo
+      lib_opac: kongo
+    - authorised_value: kor
+      category: LANG
+      lib: korea
+      lib_opac: korea
+    - authorised_value: kos
+      category: LANG
+      lib: kosrae
+      lib_opac: kosrae
+    - authorised_value: kpe
+      category: LANG
+      lib: kpelle
+      lib_opac: kpelle
+    - authorised_value: krc
+      category: LANG
+      lib: karatšai-balkaari
+      lib_opac: karatšai-balkaari
+    - authorised_value: krl
+      category: LANG
+      lib: karjala
+      lib_opac: karjala
+    - authorised_value: kro
+      category: LANG
+      lib: kru-kielet
+      lib_opac: kru-kielet
+    - authorised_value: kru
+      category: LANG
+      lib: kurukh
+      lib_opac: kurukh
+    - authorised_value: kua
+      category: LANG
+      lib: kuanjama
+      lib_opac: kuanjama
+    - authorised_value: kum
+      category: LANG
+      lib: kumykki
+      lib_opac: kumykki
+    - authorised_value: kur
+      category: LANG
+      lib: kurdi
+      lib_opac: kurdi
+    - authorised_value: kut
+      category: LANG
+      lib: kutenai
+      lib_opac: kutenai
+    - authorised_value: lad
+      category: LANG
+      lib: ladino
+      lib_opac: ladino
+    - authorised_value: lah
+      category: LANG
+      lib: lahnda
+      lib_opac: lahnda
+    - authorised_value: lam
+      category: LANG
+      lib: lamba
+      lib_opac: lamba
+    - authorised_value: lao
+      category: LANG
+      lib: lao
+      lib_opac: lao
+    - authorised_value: lat
+      category: LANG
+      lib: latina
+      lib_opac: latina
+    - authorised_value: lav
+      category: LANG
+      lib: latvia
+      lib_opac: latvia
+    - authorised_value: lez
+      category: LANG
+      lib: lezgi
+      lib_opac: lezgi
+    - authorised_value: lim
+      category: LANG
+      lib: limburg
+      lib_opac: limburg
+    - authorised_value: lin
+      category: LANG
+      lib: lingala
+      lib_opac: lingala
+    - authorised_value: lit
+      category: LANG
+      lib: liettua
+      lib_opac: liettua
+    - authorised_value: lol
+      category: LANG
+      lib: mongo
+      lib_opac: mongo
+    - authorised_value: loz
+      category: LANG
+      lib: lozi
+      lib_opac: lozi
+    - authorised_value: ltz
+      category: LANG
+      lib: luxemburg
+      lib_opac: luxemburg
+    - authorised_value: lua
+      category: LANG
+      lib: luluanluba
+      lib_opac: luluanluba
+    - authorised_value: lub
+      category: LANG
+      lib: katanganluba
+      lib_opac: katanganluba
+    - authorised_value: lug
+      category: LANG
+      lib: ganda
+      lib_opac: ganda
+    - authorised_value: lui
+      category: LANG
+      lib: luiseno
+      lib_opac: luiseno
+    - authorised_value: lun
+      category: LANG
+      lib: lunda
+      lib_opac: lunda
+    - authorised_value: luo
+      category: LANG
+      lib: luo
+      lib_opac: luo
+    - authorised_value: lus
+      category: LANG
+      lib: lusai
+      lib_opac: lusai
+    - authorised_value: mac
+      category: LANG
+      lib: makedonia
+      lib_opac: makedonia
+    - authorised_value: mad
+      category: LANG
+      lib: madura
+      lib_opac: madura
+    - authorised_value: mag
+      category: LANG
+      lib: magahi
+      lib_opac: magahi
+    - authorised_value: mah
+      category: LANG
+      lib: marshall
+      lib_opac: marshall
+    - authorised_value: mai
+      category: LANG
+      lib: maithili
+      lib_opac: maithili
+    - authorised_value: mak
+      category: LANG
+      lib: makassar
+      lib_opac: makassar
+    - authorised_value: mal
+      category: LANG
+      lib: malajalam
+      lib_opac: malajalam
+    - authorised_value: man
+      category: LANG
+      lib: mandingo
+      lib_opac: mandingo
+    - authorised_value: mao
+      category: LANG
+      lib: maori
+      lib_opac: maori
+    - authorised_value: map
+      category: LANG
+      lib: austronesialaiset kielet
+      lib_opac: austronesialaiset kielet
+    - authorised_value: mar
+      category: LANG
+      lib: marathi
+      lib_opac: marathi
+    - authorised_value: mas
+      category: LANG
+      lib: maasai
+      lib_opac: maasai
+    - authorised_value: may
+      category: LANG
+      lib: malaiji
+      lib_opac: malaiji
+    - authorised_value: mdf
+      category: LANG
+      lib: mokša
+      lib_opac: mokša
+    - authorised_value: mdr
+      category: LANG
+      lib: mandar
+      lib_opac: mandar
+    - authorised_value: men
+      category: LANG
+      lib: mende
+      lib_opac: mende
+    - authorised_value: mga
+      category: LANG
+      lib: keski-iiri (900-1200)
+      lib_opac: keski-iiri (900-1200)
+    - authorised_value: mic
+      category: LANG
+      lib: micmac
+      lib_opac: micmac
+    - authorised_value: min
+      category: LANG
+      lib: minangkabau
+      lib_opac: minangkabau
+    - authorised_value: mis
+      category: LANG
+      lib: koodaamattomat kielet
+      lib_opac: koodaamattomat kielet
+    - authorised_value: mkh
+      category: LANG
+      lib: mon-khmer-kielet
+      lib_opac: mon-khmer-kielet
+    - authorised_value: mlg
+      category: LANG
+      lib: malagassi
+      lib_opac: malagassi
+    - authorised_value: mlt
+      category: LANG
+      lib: malta
+      lib_opac: malta
+    - authorised_value: mnc
+      category: LANG
+      lib: mantšu
+      lib_opac: mantšu
+    - authorised_value: mni
+      category: LANG
+      lib: manipuri
+      lib_opac: manipuri
+    - authorised_value: mno
+      category: LANG
+      lib: manobo-kielet
+      lib_opac: manobo-kielet
+    - authorised_value: moh
+      category: LANG
+      lib: mohawk
+      lib_opac: mohawk
+    - authorised_value: mon
+      category: LANG
+      lib: mongoli
+      lib_opac: mongoli
+    - authorised_value: mos
+      category: LANG
+      lib: mossi
+      lib_opac: mossi
+    - authorised_value: mul
+      category: LANG
+      lib: useita kieliä
+      lib_opac: useita kieliä
+    - authorised_value: mun
+      category: LANG
+      lib: mundakielet
+      lib_opac: mundakielet
+    - authorised_value: mus
+      category: LANG
+      lib: creek
+      lib_opac: creek
+    - authorised_value: mwl
+      category: LANG
+      lib: mirandeesi
+      lib_opac: mirandeesi
+    - authorised_value: mwr
+      category: LANG
+      lib: marwari
+      lib_opac: marwari
+    - authorised_value: myn
+      category: LANG
+      lib: maya-kielet
+      lib_opac: maya-kielet
+    - authorised_value: myv
+      category: LANG
+      lib: ersä
+      lib_opac: ersä
+    - authorised_value: nah
+      category: LANG
+      lib: nahuatl
+      lib_opac: nahuatl
+    - authorised_value: nai
+      category: LANG
+      lib: Pohjois-Amerikan intiaanikielet
+      lib_opac: Pohjois-Amerikan intiaanikielet
+    - authorised_value: nap
+      category: LANG
+      lib: napoli
+      lib_opac: napoli
+    - authorised_value: nau
+      category: LANG
+      lib: Nauru
+      lib_opac: Nauru
+    - authorised_value: nav
+      category: LANG
+      lib: navajo
+      lib_opac: navajo
+    - authorised_value: nbl
+      category: LANG
+      lib: etelä-ndebele
+      lib_opac: etelä-ndebele
+    - authorised_value: nde
+      category: LANG
+      lib: pohjois-ndebele
+      lib_opac: pohjois-ndebele
+    - authorised_value: ndo
+      category: LANG
+      lib: ndonga
+      lib_opac: ndonga
+    - authorised_value: nds
+      category: LANG
+      lib: alasaksa
+      lib_opac: alasaksa
+    - authorised_value: nep
+      category: LANG
+      lib: nepali
+      lib_opac: nepali
+    - authorised_value: new
+      category: LANG
+      lib: newari
+      lib_opac: newari
+    - authorised_value: nia
+      category: LANG
+      lib: nias
+      lib_opac: nias
+    - authorised_value: nic
+      category: LANG
+      lib: nigeriläis-kongolaiset kielet
+      lib_opac: nigeriläis-kongolaiset kielet
+    - authorised_value: niu
+      category: LANG
+      lib: niue
+      lib_opac: niue
+    - authorised_value: nno
+      category: LANG
+      lib: norjan nynorsk
+      lib_opac: norjan nynorsk
+    - authorised_value: nob
+      category: LANG
+      lib: norjan bokmål
+      lib_opac: norjan bokmål
+    - authorised_value: nog
+      category: LANG
+      lib: nogai
+      lib_opac: nogai
+    - authorised_value: non
+      category: LANG
+      lib: muinaisnorja
+      lib_opac: muinaisnorja
+    - authorised_value: nor
+      category: LANG
+      lib: norja
+      lib_opac: norja
+    - authorised_value: nqo
+      category: LANG
+      lib: n'ko
+      lib_opac: n'ko
+    - authorised_value: nso
+      category: LANG
+      lib: pohjoissotho
+      lib_opac: pohjoissotho
+    - authorised_value: nub
+      category: LANG
+      lib: nubialaiset kielet
+      lib_opac: nubialaiset kielet
+    - authorised_value: nwc
+      category: LANG
+      lib: klassinen newari
+      lib_opac: klassinen newari
+    - authorised_value: nya
+      category: LANG
+      lib: chichewa
+      lib_opac: chichewa
+    - authorised_value: nym
+      category: LANG
+      lib: nyamwezi
+      lib_opac: nyamwezi
+    - authorised_value: nyn
+      category: LANG
+      lib: nyankole
+      lib_opac: nyankole
+    - authorised_value: nyo
+      category: LANG
+      lib: nyoro
+      lib_opac: nyoro
+    - authorised_value: nzi
+      category: LANG
+      lib: nzima
+      lib_opac: nzima
+    - authorised_value: oci
+      category: LANG
+      lib: oksitaani (1500-)
+      lib_opac: oksitaani (1500-)
+    - authorised_value: oji
+      category: LANG
+      lib: odžibwa
+      lib_opac: odžibwa
+    - authorised_value: ori
+      category: LANG
+      lib: orija
+      lib_opac: orija
+    - authorised_value: orm
+      category: LANG
+      lib: oromo
+      lib_opac: oromo
+    - authorised_value: osa
+      category: LANG
+      lib: osage
+      lib_opac: osage
+    - authorised_value: oss
+      category: LANG
+      lib: osseetti
+      lib_opac: osseetti
+    - authorised_value: ota
+      category: LANG
+      lib: osmani (1500-1928)
+      lib_opac: osmani (1500-1928)
+    - authorised_value: oto
+      category: LANG
+      lib: otomi-kielet
+      lib_opac: otomi-kielet
+    - authorised_value: paa
+      category: LANG
+      lib: papualaiset kielet
+      lib_opac: papualaiset kielet
+    - authorised_value: pag
+      category: LANG
+      lib: pangasinan
+      lib_opac: pangasinan
+    - authorised_value: pal
+      category: LANG
+      lib: pahlavi
+      lib_opac: pahlavi
+    - authorised_value: pam
+      category: LANG
+      lib: pampanga
+      lib_opac: pampanga
+    - authorised_value: pan
+      category: LANG
+      lib: pandžabi
+      lib_opac: pandžabi
+    - authorised_value: pap
+      category: LANG
+      lib: papiamentu
+      lib_opac: papiamentu
+    - authorised_value: pau
+      category: LANG
+      lib: palau
+      lib_opac: palau
+    - authorised_value: peo
+      category: LANG
+      lib: muinaispersia (n. 600-400 eKr.)
+      lib_opac: muinaispersia (n. 600-400 eKr.)
+    - authorised_value: per
+      category: LANG
+      lib: farsi, persia
+      lib_opac: farsi, persia
+    - authorised_value: phi
+      category: LANG
+      lib: filippiiniläiset kielet
+      lib_opac: filippiiniläiset kielet
+    - authorised_value: phn
+      category: LANG
+      lib: foinikia
+      lib_opac: foinikia
+    - authorised_value: pli
+      category: LANG
+      lib: paali
+      lib_opac: paali
+    - authorised_value: pol
+      category: LANG
+      lib: puola
+      lib_opac: puola
+    - authorised_value: pon
+      category: LANG
+      lib: pohnpei
+      lib_opac: pohnpei
+    - authorised_value: por
+      category: LANG
+      lib: portugali
+      lib_opac: portugali
+    - authorised_value: pra
+      category: LANG
+      lib: prakit-kielet
+      lib_opac: prakit-kielet
+    - authorised_value: pro
+      category: LANG
+      lib: muinaisprovensaali (-1500)
+      lib_opac: muinaisprovensaali (-1500)
+    - authorised_value: pus
+      category: LANG
+      lib: paštu
+      lib_opac: paštu
+    - authorised_value: qaa-qtz
+      category: LANG
+      lib: Suomalaiset kentät
+      lib_opac: Suomalaiset kentät
+    - authorised_value: que
+      category: LANG
+      lib: ketšua
+      lib_opac: ketšua
+    - authorised_value: raj
+      category: LANG
+      lib: radšastani
+      lib_opac: radšastani
+    - authorised_value: rap
+      category: LANG
+      lib: rapanui
+      lib_opac: rapanui
+    - authorised_value: rar
+      category: LANG
+      lib: rarotonga
+      lib_opac: rarotonga
+    - authorised_value: roa
+      category: LANG
+      lib: romaaniset kielet
+      lib_opac: romaaniset kielet
+    - authorised_value: roh
+      category: LANG
+      lib: retoromaani
+      lib_opac: retoromaani
+    - authorised_value: rom
+      category: LANG
+      lib: romani
+      lib_opac: romani
+    - authorised_value: rum
+      category: LANG
+      lib: romania
+      lib_opac: romania
+    - authorised_value: run
+      category: LANG
+      lib: rundi
+      lib_opac: rundi
+    - authorised_value: rup
+      category: LANG
+      lib: aromania
+      lib_opac: aromania
+    - authorised_value: rus
+      category: LANG
+      lib: venäjä
+      lib_opac: venäjä
+    - authorised_value: sad
+      category: LANG
+      lib: sandawe
+      lib_opac: sandawe
+    - authorised_value: sag
+      category: LANG
+      lib: sango
+      lib_opac: sango
+    - authorised_value: sah
+      category: LANG
+      lib: jakuutti
+      lib_opac: jakuutti
+    - authorised_value: sai
+      category: LANG
+      lib: Etelä-Amerikan intiaanikielet
+      lib_opac: Etelä-Amerikan intiaanikielet
+    - authorised_value: sal
+      category: LANG
+      lib: salisialaiset kielet
+      lib_opac: salisialaiset kielet
+    - authorised_value: sam
+      category: LANG
+      lib: samarianaramea
+      lib_opac: samarianaramea
+    - authorised_value: san
+      category: LANG
+      lib: sanskrit
+      lib_opac: sanskrit
+    - authorised_value: sas
+      category: LANG
+      lib: sasak
+      lib_opac: sasak
+    - authorised_value: sat
+      category: LANG
+      lib: santali
+      lib_opac: santali
+    - authorised_value: scn
+      category: LANG
+      lib: sisilia
+      lib_opac: sisilia
+    - authorised_value: sco
+      category: LANG
+      lib: skotti
+      lib_opac: skotti
+    - authorised_value: sel
+      category: LANG
+      lib: selkuppi
+      lib_opac: selkuppi
+    - authorised_value: sem
+      category: LANG
+      lib: seemiläiset kielet
+      lib_opac: seemiläiset kielet
+    - authorised_value: sga
+      category: LANG
+      lib: muinaisiiri (-900)
+      lib_opac: muinaisiiri (-900)
+    - authorised_value: sgn
+      category: LANG
+      lib: viittomakielet
+      lib_opac: viittomakielet
+    - authorised_value: shn
+      category: LANG
+      lib: shan
+      lib_opac: shan
+    - authorised_value: sid
+      category: LANG
+      lib: sidamo
+      lib_opac: sidamo
+    - authorised_value: sin
+      category: LANG
+      lib: sinhala
+      lib_opac: sinhala
+    - authorised_value: sio
+      category: LANG
+      lib: sioux-kielet
+      lib_opac: sioux-kielet
+    - authorised_value: sit
+      category: LANG
+      lib: sinotiibetiläiset kielet
+      lib_opac: sinotiibetiläiset kielet
+    - authorised_value: sla
+      category: LANG
+      lib: slaavilaiset kielet
+      lib_opac: slaavilaiset kielet
+    - authorised_value: slo
+      category: LANG
+      lib: slovakki
+      lib_opac: slovakki
+    - authorised_value: slv
+      category: LANG
+      lib: sloveeni
+      lib_opac: sloveeni
+    - authorised_value: sma
+      category: LANG
+      lib: eteläsaame
+      lib_opac: eteläsaame
+    - authorised_value: sme
+      category: LANG
+      lib: pohjoissaame
+      lib_opac: pohjoissaame
+    - authorised_value: smi
+      category: LANG
+      lib: saamelaiskielet
+      lib_opac: saamelaiskielet
+    - authorised_value: smj
+      category: LANG
+      lib: luulajansaame
+      lib_opac: luulajansaame
+    - authorised_value: smn
+      category: LANG
+      lib: inarinsaame
+      lib_opac: inarinsaame
+    - authorised_value: smo
+      category: LANG
+      lib: samoa
+      lib_opac: samoa
+    - authorised_value: sms
+      category: LANG
+      lib: koltansaame
+      lib_opac: koltansaame
+    - authorised_value: sna
+      category: LANG
+      lib: šona
+      lib_opac: šona
+    - authorised_value: snd
+      category: LANG
+      lib: sindhi
+      lib_opac: sindhi
+    - authorised_value: snk
+      category: LANG
+      lib: soninke
+      lib_opac: soninke
+    - authorised_value: sog
+      category: LANG
+      lib: sogdi
+      lib_opac: sogdi
+    - authorised_value: som
+      category: LANG
+      lib: somali
+      lib_opac: somali
+    - authorised_value: son
+      category: LANG
+      lib: songhai
+      lib_opac: songhai
+    - authorised_value: sot
+      category: LANG
+      lib: pohjoissotho
+      lib_opac: pohjoissotho
+    - authorised_value: spa
+      category: LANG
+      lib: espanja
+      lib_opac: espanja
+    - authorised_value: srd
+      category: LANG
+      lib: sardi
+      lib_opac: sardi
+    - authorised_value: srn
+      category: LANG
+      lib: sranan
+      lib_opac: sranan
+    - authorised_value: srp
+      category: LANG
+      lib: serbia
+      lib_opac: serbia
+    - authorised_value: srr
+      category: LANG
+      lib: serer
+      lib_opac: serer
+    - authorised_value: ssa
+      category: LANG
+      lib: niililäis-saharalaiset kielet
+      lib_opac: niililäis-saharalaiset kielet
+    - authorised_value: ssw
+      category: LANG
+      lib: swazi
+      lib_opac: swazi
+    - authorised_value: suk
+      category: LANG
+      lib: sukuma
+      lib_opac: sukuma
+    - authorised_value: sun
+      category: LANG
+      lib: sunda
+      lib_opac: sunda
+    - authorised_value: sus
+      category: LANG
+      lib: susu
+      lib_opac: susu
+    - authorised_value: sux
+      category: LANG
+      lib: sumeri
+      lib_opac: sumeri
+    - authorised_value: swa
+      category: LANG
+      lib: swahili
+      lib_opac: swahili
+    - authorised_value: swe
+      category: LANG
+      lib: ruotsi
+      lib_opac: ruotsi
+    - authorised_value: syc
+      category: LANG
+      lib: klassinen syyria
+      lib_opac: klassinen syyria
+    - authorised_value: syr
+      category: LANG
+      lib: muinaissyyria
+      lib_opac: muinaissyyria
+    - authorised_value: tah
+      category: LANG
+      lib: tahiti
+      lib_opac: tahiti
+    - authorised_value: tai
+      category: LANG
+      lib: thaikielet
+      lib_opac: thaikielet
+    - authorised_value: tam
+      category: LANG
+      lib: tamili
+      lib_opac: tamili
+    - authorised_value: tat
+      category: LANG
+      lib: tataari
+      lib_opac: tataari
+    - authorised_value: tel
+      category: LANG
+      lib: telugu
+      lib_opac: telugu
+    - authorised_value: tem
+      category: LANG
+      lib: temne
+      lib_opac: temne
+    - authorised_value: ter
+      category: LANG
+      lib: tereno
+      lib_opac: tereno
+    - authorised_value: tet
+      category: LANG
+      lib: tetum
+      lib_opac: tetum
+    - authorised_value: tgk
+      category: LANG
+      lib: tadžikki
+      lib_opac: tadžikki
+    - authorised_value: tgl
+      category: LANG
+      lib: tagalog
+      lib_opac: tagalog
+    - authorised_value: tha
+      category: LANG
+      lib: thai
+      lib_opac: thai
+    - authorised_value: tib
+      category: LANG
+      lib: tiibet
+      lib_opac: tiibet
+    - authorised_value: tig
+      category: LANG
+      lib: tigre
+      lib_opac: tigre
+    - authorised_value: tir
+      category: LANG
+      lib: tigrinja
+      lib_opac: tigrinja
+    - authorised_value: tiv
+      category: LANG
+      lib: tiv
+      lib_opac: tiv
+    - authorised_value: tkl
+      category: LANG
+      lib: Tokelau
+      lib_opac: Tokelau
+    - authorised_value: tlh
+      category: LANG
+      lib: klingon
+      lib_opac: klingon
+    - authorised_value: tli
+      category: LANG
+      lib: tlingit
+      lib_opac: tlingit
+    - authorised_value: tmh
+      category: LANG
+      lib: tamašek
+      lib_opac: tamašek
+    - authorised_value: tog
+      category: LANG
+      lib: tonga (Malawi)
+      lib_opac: tonga (Malawi)
+    - authorised_value: ton
+      category: LANG
+      lib: tonga (Tonga)
+      lib_opac: tonga (Tonga)
+    - authorised_value: tpi
+      category: LANG
+      lib: tok-pisin
+      lib_opac: tok-pisin
+    - authorised_value: tsi
+      category: LANG
+      lib: tsimši
+      lib_opac: tsimši
+    - authorised_value: tsn
+      category: LANG
+      lib: tswana
+      lib_opac: tswana
+    - authorised_value: tso
+      category: LANG
+      lib: tsonga
+      lib_opac: tsonga
+    - authorised_value: tuk
+      category: LANG
+      lib: turkmeeni
+      lib_opac: turkmeeni
+    - authorised_value: tum
+      category: LANG
+      lib: tumbuka
+      lib_opac: tumbuka
+    - authorised_value: tup
+      category: LANG
+      lib: tupi-kielet
+      lib_opac: tupi-kielet
+    - authorised_value: tur
+      category: LANG
+      lib: turkki
+      lib_opac: turkki
+    - authorised_value: tut
+      category: LANG
+      lib: altailaiset kielet
+      lib_opac: altailaiset kielet
+    - authorised_value: tvl
+      category: LANG
+      lib: Tuvalu
+      lib_opac: Tuvalu
+    - authorised_value: twi
+      category: LANG
+      lib: twi
+      lib_opac: twi
+    - authorised_value: tyv
+      category: LANG
+      lib: tuva
+      lib_opac: tuva
+    - authorised_value: udm
+      category: LANG
+      lib: udmurtti
+      lib_opac: udmurtti
+    - authorised_value: uga
+      category: LANG
+      lib: ugarit
+      lib_opac: ugarit
+    - authorised_value: uig
+      category: LANG
+      lib: uiguuri
+      lib_opac: uiguuri
+    - authorised_value: ukr
+      category: LANG
+      lib: ukraina
+      lib_opac: ukraina
+    - authorised_value: umb
+      category: LANG
+      lib: mbundu
+      lib_opac: mbundu
+    - authorised_value: und
+      category: LANG
+      lib: ei määritelty
+      lib_opac: ei määritelty
+    - authorised_value: urd
+      category: LANG
+      lib: urdu
+      lib_opac: urdu
+    - authorised_value: uzb
+      category: LANG
+      lib: uzbekki
+      lib_opac: uzbekki
+    - authorised_value: vai
+      category: LANG
+      lib: vai
+      lib_opac: vai
+    - authorised_value: ven
+      category: LANG
+      lib: venda
+      lib_opac: venda
+    - authorised_value: vie
+      category: LANG
+      lib: vietnam
+      lib_opac: vietnam
+    - authorised_value: vol
+      category: LANG
+      lib: volapük
+      lib_opac: volapük
+    - authorised_value: vot
+      category: LANG
+      lib: vatja
+      lib_opac: vatja
+    - authorised_value: wak
+      category: LANG
+      lib: wakash-kielet
+      lib_opac: wakash-kielet
+    - authorised_value: wal
+      category: LANG
+      lib: wolaitta
+      lib_opac: wolaitta
+    - authorised_value: war
+      category: LANG
+      lib: waray
+      lib_opac: waray
+    - authorised_value: was
+      category: LANG
+      lib: washo
+      lib_opac: washo
+    - authorised_value: wel
+      category: LANG
+      lib: kymri
+      lib_opac: kymri
+    - authorised_value: wen
+      category: LANG
+      lib: sorbin kielet
+      lib_opac: sorbin kielet
+    - authorised_value: wln
+      category: LANG
+      lib: valloni
+      lib_opac: valloni
+    - authorised_value: wol
+      category: LANG
+      lib: wolof
+      lib_opac: wolof
+    - authorised_value: xal
+      category: LANG
+      lib: kalmukki
+      lib_opac: kalmukki
+    - authorised_value: xho
+      category: LANG
+      lib: xhosa
+      lib_opac: xhosa
+    - authorised_value: yao
+      category: LANG
+      lib: jao
+      lib_opac: jao
+    - authorised_value: yap
+      category: LANG
+      lib: japi
+      lib_opac: japi
+    - authorised_value: yid
+      category: LANG
+      lib: jiddiš
+      lib_opac: jiddiš
+    - authorised_value: yor
+      category: LANG
+      lib: joruba
+      lib_opac: joruba
+    - authorised_value: ypk
+      category: LANG
+      lib: jupikkikielet
+      lib_opac: jupikkikielet
+    - authorised_value: zap
+      category: LANG
+      lib: zapoteekki
+      lib_opac: zapoteekki
+    - authorised_value: zbl
+      category: LANG
+      lib: blisskieli
+      lib_opac: blisskieli
+    - authorised_value: zen
+      category: LANG
+      lib: zenaga
+      lib_opac: zenaga
+    - authorised_value: zgh
+      category: LANG
+      lib: vakioitu tamazight
+      lib_opac: vakioitu tamazight
+    - authorised_value: zha
+      category: LANG
+      lib: zhuang
+      lib_opac: zhuang
+    - authorised_value: znd
+      category: LANG
+      lib: zande
+      lib_opac: zande
+    - authorised_value: zul
+      category: LANG
+      lib: zulu
+      lib_opac: zulu
+    - authorised_value: zun
+      category: LANG
+      lib: zuni
+      lib_opac: zuni
+    - authorised_value: zxx
+      category: LANG
+      lib: ei kielellistä sisältöä
+      lib_opac: ei kielellistä sisältöä
+    - authorised_value: zza
+      category: LANG
+      lib: zaza
+      lib_opac: zaza
+    translatable:
+    - lib
+    - lib_opac
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: '000'
+      category: qualif
+      lib: Määrittelemätön suhde
+      lib_opac: Määrittelemätön suhde
+    - authorised_value: '005'
+      category: qualif
+      lib: Toimija
+      lib_opac: Toimija
+    - authorised_value: '010'
+      category: qualif
+      lib: Muokkaaja
+      lib_opac: Muokkaaja
+    - authorised_value: '015'
+      category: qualif
+      lib: Jäljenteen julkaisija/kustantaja
+      lib_opac: Jäljenteen julkaisija/kustantaja
+    - authorised_value: '018'
+      category: qualif
+      lib: Animaattori
+      lib_opac: Animaattori
+    - authorised_value: '020'
+      category: qualif
+      lib: Muistiinpanojen tekijä
+      lib_opac: Muistiinpanojen tekijä
+    - authorised_value: '030'
+      category: qualif
+      lib: Sovittaja
+      lib_opac: Sovittaja
+    - authorised_value: '040'
+      category: qualif
+      lib: Kuvataiteilija, graafikko
+      lib_opac: Kuvataiteilija, graafikko
+    - authorised_value: '050'
+      category: qualif
+      lib: Käsittelijä
+      lib_opac: Käsittelijä
+    - authorised_value: '060'
+      category: qualif
+      lib: Kohteeseen liittyvä tekijä
+      lib_opac: Kohteeseen liittyvä tekijä
+    - authorised_value: '062'
+      category: qualif
+      lib: Tekijä, oletettu/väitetty
+      lib_opac: Tekijä, oletettu/väitetty
+    - authorised_value: '065'
+      category: qualif
+      lib: Huutokauppameklari
+      lib_opac: Huutokauppameklari
+    - authorised_value: '070'
+      category: qualif
+      lib: Tekijä
+      lib_opac: Tekijä
+    - authorised_value: '072'
+      category: qualif
+      lib: Lainausten tai tekstiotteiden tekijä
+      lib_opac: Lainausten tai tekstiotteiden tekijä
+    - authorised_value: '075'
+      category: qualif
+      lib: Jäkisanojen, jälkikirjoituksen, kolofonin yms. tekijä
+      lib_opac: Jäkisanojen, jälkikirjoituksen, kolofonin yms. tekijä
+    - authorised_value: '080'
+      category: qualif
+      lib: Esipuheen yms tekijä
+      lib_opac: Esipuheen yms tekijä
+    - authorised_value: '090'
+      category: qualif
+      lib: Dialogin tekijä
+      lib_opac: Dialogin tekijä
+    - authorised_value: '100'
+      category: qualif
+      lib: Bibliografinen edeltäjä
+      lib_opac: Bibliografinen edeltäjä
+    - authorised_value: '110'
+      category: qualif
+      lib: Sitoja on toimija, joka on tehnyt sidoksen.
+      lib_opac: Sitoja on toimija, joka on tehnyt sidoksen.
+    - authorised_value: '120'
+      category: qualif
+      lib: Sidoksen suunnittelija
+      lib_opac: Sidoksen suunnittelija
+    - authorised_value: '130'
+      category: qualif
+      lib: Graafinen suunnittelija
+      lib_opac: Graafinen suunnittelija
+    - authorised_value: '140'
+      category: qualif
+      lib: Kansipaperin suunnittelija
+      lib_opac: Kansipaperin suunnittelija
+    - authorised_value: '150'
+      category: qualif
+      lib: Exlibriksen suunnittelija
+      lib_opac: Exlibriksen suunnittelija
+    - authorised_value: '160'
+      category: qualif
+      lib: Kirjakauppias
+      lib_opac: Kirjakauppias
+    - authorised_value: '170'
+      category: qualif
+      lib: Kalligrafi
+      lib_opac: Kalligrafi
+    - authorised_value: '180'
+      category: qualif
+      lib: Kartoittaja
+      lib_opac: Kartoittaja
+    - authorised_value: '190'
+      category: qualif
+      lib: Sensori
+      lib_opac: Sensori
+    - authorised_value: '195'
+      category: qualif
+      lib: Kuoronjohtaja
+      lib_opac: Kuoronjohtaja
+    - authorised_value: '200'
+      category: qualif
+      lib: Koreografi
+      lib_opac: Koreografi
+    - authorised_value: '202'
+      category: qualif
+      lib: Sirkustaiteilija
+      lib_opac: Sirkustaiteilija
+    - authorised_value: '205'
+      category: qualif
+      lib: Yhteistyökumppani
+      lib_opac: Yhteistyökumppani
+    - authorised_value: '206'
+      category: qualif
+      lib: Kenttämateriaalin kerääjä
+      lib_opac: Kenttämateriaalin kerääjä
+    - authorised_value: '207'
+      category: qualif
+      lib: Koomikko
+      lib_opac: Koomikko
+    - authorised_value: '210'
+      category: qualif
+      lib: Selostaja
+      lib_opac: Selostaja
+    - authorised_value: '212'
+      category: qualif
+      lib: Tekstin kommentaattori
+      lib_opac: Tekstin kommentaattori
+    - authorised_value: '220'
+      category: qualif
+      lib: Kokoaja
+      lib_opac: Kokoaja
+    - authorised_value: '230'
+      category: qualif
+      lib: Säveltäjä
+      lib_opac: Säveltäjä
+    - authorised_value: '233'
+      category: qualif
+      lib: Sovitetun teoksen säveltäjä
+      lib_opac: Sovitetun teoksen säveltäjä
+    - authorised_value: '236'
+      category: qualif
+      lib: Pääteoksen säveltäjä
+      lib_opac: Pääteoksen säveltäjä
+    - authorised_value: '240'
+      category: qualif
+      lib: Latoja
+      lib_opac: Latoja
+    - authorised_value: '245'
+      category: qualif
+      lib: Ideoija
+      lib_opac: Ideoija
+    - authorised_value: '250'
+      category: qualif
+      lib: Johtaja
+      lib_opac: Johtaja
+    - authorised_value: '255'
+      category: qualif
+      lib: Projektikonsultti
+      lib_opac: Projektikonsultti
+    - authorised_value: '257'
+      category: qualif
+      lib: Jatkaja
+      lib_opac: Jatkaja
+    - authorised_value: '260'
+      category: qualif
+      lib: Oikeudenomistaja
+      lib_opac: Oikeudenomistaja
+    - authorised_value: '270'
+      category: qualif
+      lib: Korjauslukija
+      lib_opac: Korjauslukija
+    - authorised_value: '273'
+      category: qualif
+      lib: Näyttelyn kuraattori
+      lib_opac: Näyttelyn kuraattori
+    - authorised_value: '275'
+      category: qualif
+      lib: Tanssija
+      lib_opac: Tanssija
+    - authorised_value: '280'
+      category: qualif
+      lib: Kappale omistettu
+      lib_opac: Kappale omistettu
+    - authorised_value: '290'
+      category: qualif
+      lib: Teoksen omistuskirjoituksen tekijä
+      lib_opac: Teoksen omistuskirjoituksen tekijä
+    - authorised_value: '295'
+      category: qualif
+      lib: Arvosanan antaja
+      lib_opac: Arvosanan antaja
+    - authorised_value: '300'
+      category: qualif
+      lib: Ohjaaja
+      lib_opac: Ohjaaja
+    - authorised_value: '303'
+      category: qualif
+      lib: DJ
+      lib_opac: DJ
+    - authorised_value: '305'
+      category: qualif
+      lib: tutkielman tai lopputyön esittelijä
+      lib_opac: tutkielman tai lopputyön esittelijä
+    - authorised_value: '310'
+      category: qualif
+      lib: Jakaja
+      lib_opac: Jakaja
+    - authorised_value: '320'
+      category: qualif
+      lib: Lahjoittaja
+      lib_opac: Lahjoittaja
+    - authorised_value: '330'
+      category: qualif
+      lib: Kyseenalainen tekijä
+      lib_opac: Kyseenalainen tekijä
+    - authorised_value: '340'
+      category: qualif
+      lib: Editori
+      lib_opac: Editori
+    - authorised_value: '350'
+      category: qualif
+      lib: Kaivertaja
+      lib_opac: Kaivertaja
+    - authorised_value: '355'
+      category: qualif
+      lib: Epitomaattori
+      lib_opac: Epitomaattori
+    - authorised_value: '360'
+      category: qualif
+      lib: Etsaaja
+      lib_opac: Etsaaja
+    - authorised_value: '365'
+      category: qualif
+      lib: Asiantuntija
+      lib_opac: Asiantuntija
+    - authorised_value: '370'
+      category: qualif
+      lib: Leikkaaja
+      lib_opac: Leikkaaja
+    - authorised_value: '380'
+      category: qualif
+      lib: Väärentäjä
+      lib_opac: Väärentäjä
+    - authorised_value: '385'
+      category: qualif
+      lib: Aikaisempi oletettu/väitetty tekijä
+      lib_opac: Aikaisempi oletettu/väitetty tekijä
+    - authorised_value: '390'
+      category: qualif
+      lib: Aikaisempi omistaja
+      lib_opac: Aikaisempi omistaja
+    - authorised_value: '395'
+      category: qualif
+      lib: Perustaja
+      lib_opac: Perustaja
+    - authorised_value: '400'
+      category: qualif
+      lib: Rahoittaja
+      lib_opac: Rahoittaja
+    - authorised_value: '405'
+      category: qualif
+      lib: Pelisuunnittelija
+      lib_opac: Pelisuunnittelija
+    - authorised_value: '407'
+      category: qualif
+      lib: Glossaattori
+      lib_opac: Glossaattori
+    - authorised_value: '410'
+      category: qualif
+      lib: Graafinen teknikko
+      lib_opac: Graafinen teknikko
+    - authorised_value: '420'
+      category: qualif
+      lib: Juhlajulkaisun kohde
+      lib_opac: Juhlajulkaisun kohde
+    - authorised_value: '430'
+      category: qualif
+      lib: Illuminoinnin tekijä
+      lib_opac: Illuminoinnin tekijä
+    - authorised_value: '440'
+      category: qualif
+      lib: Kuvittaja
+      lib_opac: Kuvittaja
+    - authorised_value: '445'
+      category: qualif
+      lib: Impressaari
+      lib_opac: Impressaari
+    - authorised_value: '450'
+      category: qualif
+      lib: Omistuskirjoituksen kirjoittaja
+      lib_opac: Omistuskirjoituksen kirjoittaja
+    - authorised_value: '460'
+      category: qualif
+      lib: Haastateltava
+      lib_opac: Haastateltava
+    - authorised_value: '470'
+      category: qualif
+      lib: Haastattelija
+      lib_opac: Haastattelija
+    - authorised_value: '475'
+      category: qualif
+      lib: Julkaisija
+      lib_opac: Julkaisija
+    - authorised_value: '480'
+      category: qualif
+      lib: Libretisti
+      lib_opac: Libretisti
+    - authorised_value: '490'
+      category: qualif
+      lib: Lisenssinhaltija
+      lib_opac: Lisenssinhaltija
+    - authorised_value: '500'
+      category: qualif
+      lib: Lisenssinantaja
+      lib_opac: Lisenssinantaja
+    - authorised_value: '510'
+      category: qualif
+      lib: Litografi
+      lib_opac: Litografi
+    - authorised_value: '520'
+      category: qualif
+      lib: Sanoittaja
+      lib_opac: Sanoittaja
+    - authorised_value: '530'
+      category: qualif
+      lib: Metallikaivertaja
+      lib_opac: Metallikaivertaja
+    - authorised_value: '535'
+      category: qualif
+      lib: Miimikko
+      lib_opac: Miimikko
+    - authorised_value: '540'
+      category: qualif
+      lib: Valvoja
+      lib_opac: Valvoja
+    - authorised_value: '545'
+      category: qualif
+      lib: Muusikko
+      lib_opac: Muusikko
+    - authorised_value: '550'
+      category: qualif
+      lib: Kertoja
+      lib_opac: Kertoja
+    - authorised_value: '552'
+      category: qualif
+      lib: Notaari
+      lib_opac: Notaari
+    - authorised_value: '555'
+      category: qualif
+      lib: Vastaväittäjä
+      lib_opac: Vastaväittäjä
+    - authorised_value: '557'
+      category: qualif
+      lib: Järjestäjä
+      lib_opac: Järjestäjä
+    - authorised_value: '560'
+      category: qualif
+      lib: Perustaja
+      lib_opac: Perustaja
+    - authorised_value: '570'
+      category: qualif
+      lib: Muu
+      lib_opac: Muu
+    - authorised_value: '580'
+      category: qualif
+      lib: Paperinvalmistaja
+      lib_opac: Paperinvalmistaja
+    - authorised_value: '582'
+      category: qualif
+      lib: Patentinhakija
+      lib_opac: Patentinhakija
+    - authorised_value: '584'
+      category: qualif
+      lib: Patentin keksijä
+      lib_opac: Patentin keksijä
+    - authorised_value: '587'
+      category: qualif
+      lib: Patentinsaaja
+      lib_opac: Patentinsaaja
+    - authorised_value: '590'
+      category: qualif
+      lib: Esittäjä
+      lib_opac: Esittäjä
+    - authorised_value: '595'
+      category: qualif
+      lib: Tutkimuksen esittäjä
+      lib_opac: Tutkimuksen esittäjä
+    - authorised_value: '600'
+      category: qualif
+      lib: Valokuvaaja
+      lib_opac: Valokuvaaja
+    - authorised_value: '605'
+      category: qualif
+      lib: Juontaja
+      lib_opac: Juontaja
+    - authorised_value: '610'
+      category: qualif
+      lib: Painaja
+      lib_opac: Painaja
+    - authorised_value: '620'
+      category: qualif
+      lib: Laattojen painaja
+      lib_opac: Laattojen painaja
+    - authorised_value: '630'
+      category: qualif
+      lib: Tuottaja
+      lib_opac: Tuottaja
+    - authorised_value: '640'
+      category: qualif
+      lib: Oikolukija
+      lib_opac: Oikolukija
+    - authorised_value: '650'
+      category: qualif
+      lib: Julkaisija
+      lib_opac: Julkaisija
+    - authorised_value: '651'
+      category: qualif
+      lib: Päätoimittaja
+      lib_opac: Päätoimittaja
+    - authorised_value: '655'
+      category: qualif
+      lib: Nukettaja
+      lib_opac: Nukettaja
+    - authorised_value: '660'
+      category: qualif
+      lib: Kirjeiden vastaanottaja
+      lib_opac: Kirjeiden vastaanottaja
+    - authorised_value: '665'
+      category: qualif
+      lib: Äänitetuottaja
+      lib_opac: Äänitetuottaja
+    - authorised_value: '670'
+      category: qualif
+      lib: Äänittäjä
+      lib_opac: Äänittäjä
+    - authorised_value: '672'
+      category: qualif
+      lib: Uudelleenmiksaaja
+      lib_opac: Uudelleenmiksaaja
+    - authorised_value: '673'
+      category: qualif
+      lib: Tutkimusryhmän johtaja
+      lib_opac: Tutkimusryhmän johtaja
+    - authorised_value: '677'
+      category: qualif
+      lib: Tutkimusryhmän jäsen
+      lib_opac: Tutkimusryhmän jäsen
+    - authorised_value: '675'
+      category: qualif
+      lib: Kriitikko
+      lib_opac: Kriitikko
+    - authorised_value: '678'
+      category: qualif
+      lib: Entisöijä
+      lib_opac: Entisöijä
+    - authorised_value: '680'
+      category: qualif
+      lib: Rubrikoija
+      lib_opac: Rubrikoija
+    - authorised_value: '690'
+      category: qualif
+      lib: Elokuvakäsikirjoittaja
+      lib_opac: Elokuvakäsikirjoittaja
+    - authorised_value: '695'
+      category: qualif
+      lib: Tieteellinen neuvonantaja
+      lib_opac: Tieteellinen neuvonantaja
+    - authorised_value: '700'
+      category: qualif
+      lib: Kirjuri
+      lib_opac: Kirjuri
+    - authorised_value: '705'
+      category: qualif
+      lib: Kuvanveistäjä
+      lib_opac: Kuvanveistäjä
+    - authorised_value: '710'
+      category: qualif
+      lib: Sihteeri
+      lib_opac: Sihteeri
+    - authorised_value: '720'
+      category: qualif
+      lib: Allekirjoittaja
+      lib_opac: Allekirjoittaja
+    - authorised_value: '721'
+      category: qualif
+      lib: Laulaja
+      lib_opac: Laulaja
+    - authorised_value: '723'
+      category: qualif
+      lib: Tukija
+      lib_opac: Tukija
+    - authorised_value: '725'
+      category: qualif
+      lib: Standardisoimiselin
+      lib_opac: Standardisoimiselin
+    - authorised_value: '726'
+      category: qualif
+      lib: Stunt-esiintyjä
+      lib_opac: Stunt-esiintyjä
+    - authorised_value: '727'
+      category: qualif
+      lib: Opinnäytetyön ohjaaja
+      lib_opac: Opinnäytetyön ohjaaja
+    - authorised_value: '730'
+      category: qualif
+      lib: Kääntäjä
+      lib_opac: Kääntäjä
+    - authorised_value: '735'
+      category: qualif
+      lib: Translitteroija
+      lib_opac: Translitteroija
+    - authorised_value: '740'
+      category: qualif
+      lib: Kirjasinlajin suunnittelija
+      lib_opac: Kirjasinlajin suunnittelija
+    - authorised_value: '750'
+      category: qualif
+      lib: Latoja
+      lib_opac: Latoja
+    - authorised_value: '753'
+      category: qualif
+      lib: Toimittaja
+      lib_opac: Toimittaja
+    - authorised_value: '755'
+      category: qualif
+      lib: Laulusolisti
+      lib_opac: Laulusolisti
+    - authorised_value: '760'
+      category: qualif
+      lib: Puupiirtäjä (ksylografia)
+      lib_opac: Puupiirtäjä (ksylografia)
+    - authorised_value: '770'
+      category: qualif
+      lib: Liiteaineiston tekijä
+      lib_opac: Liiteaineiston tekijä
+    translatable:
+    - lib
+    - lib_opac

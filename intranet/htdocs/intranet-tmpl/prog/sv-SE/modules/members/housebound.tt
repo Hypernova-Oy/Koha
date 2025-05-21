@@ -1,0 +1,464 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Details for") | html %] [% INCLUDE 'patron-title.inc' no_html = 1 %] &rsaquo;
+ [% t("Housebound") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="housebound-home" class="housebound">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+[% BLOCK 'homebound-details' %]
+ <div class="rows">
+ <ol>
+ <li>
+ <span class="label required"> Leveransdag:</span>
+ [% hpd = housebound_profile.day %]
+ [% IF hpd == 'any' %]<span>Alla</span>
+ [% ELSIF hpd == 'monday' %]<span>Måndag</span>
+ [% ELSIF hpd == 'tuesday' %]<span>Tisdag</span>
+ [% ELSIF hpd == 'wednesday' %]<span>Onsdag</span>
+ [% ELSIF hpd == 'thursday' %]<span>Torsdag</span>
+ [% ELSIF hpd == 'friday' %]<span>Fredag</span>
+ [% ELSIF hpd == 'saturday' %]<span>Lördag</span>
+ [% ELSIF hpd == 'sunday' %]<span>Söndag</span>
+ [% END %]
+ </li>
+ <li>
+ <span class="label required">Frekvens:</span>
+ [% AuthorisedValues.GetByCode( 'HSBND_FREQ', housebound_profile.frequency, 0 ) || housebound_profile.frequency | html %]
+ </li>
+ <li>
+ <span class="label">Material:</span><br />
+ [% housebound_profile.fav_itemtypes | html | html_line_break %]
+ </li>
+ <li>
+ <span class="label">Ämnen:</span><br />
+ [% housebound_profile.fav_subjects | html | html_line_break %]
+ </li>
+ <li>
+ <span class="label">Författare:</span><br />
+ [% housebound_profile.fav_authors | html | html_line_break %]
+ </li>
+ <li>
+ <span class="label">Referera:</span><br />
+ [% housebound_profile.referral | html | html_line_break %]
+ </li>
+ <li>
+ <span class="label">Kommentarer:</span><br />
+ [% housebound_profile.notes | html | html_line_break %]
+ </li>
+ </ol>
+ </div>
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Låntagare</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Boken kommer-detaljer</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% INCLUDE 'members-toolbar.inc' %]
+
+ <h1>Boken kommer detaljer för [% INCLUDE 'patron-title.inc' %]</h1>
+
+ [% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_profile_store' %]
+ <span>Ett fel uppstod när boken kommer-profilen skulle uppdateras</span>
+ [% CASE 'error_on_profile_create' %]
+ <span>Ett fel uppstod när boken kommer-profilen skulle skapas</span>
+ [% CASE 'error_on_visit_load' %]
+ <span>Ett fel uppstod när boken kommer-besöket skulle laddas</span>
+ [% CASE 'error_on_visit_delete' %]
+ <span>Ett fel uppstod när ett boken kommer-besök skulle tas bort</span>
+ [% CASE 'error_on_visit_store' %]
+ <span>Ett fel uppstod när ett boken kommer-besök skulle uppdateras</span>
+ [% CASE 'error_on_visit_create' %]
+ <span>Ett fel uppstod när ett nytt boken kommer-besök skulle skapas</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ <span>Vänligen försök på nytt senare</span>
+ </div>
+ [% END %]
+
+ <!-- Create or edit housebound_profile -->
+ [% IF ( op == 'update_or_create' ) %]
+ <form id="editform" method="post" name="editform" action="/cgi-bin/koha/members/housebound.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ [% IF ( housebound_profile ) %]
+ <input type="hidden" name="op" value="cud-updateconfirm" />
+ [% ELSE %]
+ <input type="hidden" name="op" value="cud-createconfirm" />
+ [% END %]
+ <fieldset id="houseboundentry" class="rows">
+ <legend>Hantera boken kommer-profil</legend>
+ <ol>
+ <li>
+ <label for="day" class="required">Leveransdag:</label>
+ <select id="day" name="day" class="required" required="required">
+ <option value="">Välj en dag</option>
+ [% IF ( housebound_profile ) %]
+ [% IF ( housebound_profile.day == 'any' ) %]
+ <option value="any" selected='selected'>Alla</option>
+ [% ELSE %]
+ <option value="any">Alla</option>
+ [% END %]
+ [% IF ( housebound_profile.day == 'monday' ) %]
+ <option value="monday" selected='selected'>Måndag</option>
+ [% ELSE %]
+ <option value="monday">Måndag</option>
+ [% END %]
+ [% IF ( housebound_profile.day == 'tuesday' ) %]
+ <option value="tuesday" selected='selected'>Tisdag</option>
+ [% ELSE %]
+ <option value="tuesday">Tisdag</option>
+ [% END %]
+ [% IF ( housebound_profile.day == 'wednesday' ) %]
+ <option value="wednesday" selected='selected'>Onsdag</option>
+ [% ELSE %]
+ <option value="wednesday">Onsdag</option>
+ [% END %]
+ [% IF ( housebound_profile.day == 'thursday' ) %]
+ <option value="thursday" selected='selected'>Torsdag</option>
+ [% ELSE %]
+ <option value="thursday">Torsdag</option>
+ [% END %]
+ [% IF ( housebound_profile.day == 'friday' ) %]
+ <option value="friday" selected='selected'>Fredag</option>
+ [% ELSE %]
+ <option value="friday">Fredag</option>
+ [% END %]
+ [% IF ( housebound_profile.day == 'saturday' ) %]
+ <option value="saturday" selected='selected'>Lördag</option>
+ [% ELSE %]
+ <option value="saturday">Lördag</option>
+ [% END %]
+ [% IF ( housebound_profile.day == 'sunday' ) %]
+ <option value="sunday" selected='selected'>Söndag</option>
+ [% ELSE %]
+ <option value="sunday">Söndag</option>
+ [% END %]
+ [% ELSE %]
+ <option value="any">Alla</option>
+ <option value="monday">Måndag</option>
+ <option value="tuesday">Tisdag</option>
+ <option value="wednesday">Onsdag</option>
+ <option value="thursday">Torsdag</option>
+ <option value="friday">Fredag</option>
+ <option value="saturday">Lördag</option>
+ <option value="sunday">Söndag</option>
+ [% END %]
+ </select>
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="frequency" class="required">Frekvens:</label>
+ <select id="frequency" name="frequency" class="required" required="required">
+ <option value="">Välj en frekvens</option>
+ [% FOREACH frequency IN AuthorisedValues.GetAuthValueDropbox('HSBND_FREQ') %]
+ [% IF housebound_profile.frequency == frequency.authorised_value %]
+ <option value="[% frequency.authorised_value | html %]" selected="selected">[% frequency.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% frequency.authorised_value | html %]">[% frequency.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="fav_itemtypes">Föredragna material:</label>
+ [% IF ( housebound_profile ) %]
+ <textarea id="fav_itemtypes" name="fav_itemtypes" cols="110" rows="10">[% housebound_profile.fav_itemtypes | html  %]</textarea>
+ [% ELSE %]
+ <textarea id="fav_itemtypes" name="fav_itemtypes" cols="110" rows="10"></textarea>
+ [% END %]
+ </li>
+ <li>
+ <label for="fav_subjects">Ämnen:</label>
+ [% IF ( housebound_profile ) %]
+ <textarea id="fav_subjects" name="fav_subjects" cols="110" rows="10">[% housebound_profile.fav_subjects | html %]</textarea>
+ [% ELSE %]
+ <textarea id="fav_subjects" name="fav_subjects" cols="110" rows="10"></textarea>
+ [% END %]
+ </li>
+ <li>
+ <label for="fav_authors">Författare:</label>
+ [% IF ( housebound_profile ) %]
+ <textarea id="fav_authors" name="fav_authors" cols="110" rows="10">[% housebound_profile.fav_authors | html %]</textarea>
+ [% ELSE %]
+ <textarea id="fav_authors" name="fav_authors" cols="110" rows="10"></textarea>
+ [% END %]
+ </li>
+ <li>
+ <label for="referral">Referera:</label>
+ [% IF ( housebound_profile ) %]
+ <textarea id="referral" name="referral" cols="110" rows="10">[% housebound_profile.referral | html %]</textarea>
+ [% ELSE %]
+ <textarea id="referral" name="referral" cols="110" rows="10"></textarea>
+ [% END %]
+ </li>
+ <li>
+ <label for="notes">Kommentarer:</label>
+ [% IF ( housebound_profile ) %]
+ <textarea id="notes" name="notes" cols="110" rows="10">[% housebound_profile.notes | html %]</textarea>
+ [% ELSE %]
+ <textarea id="notes" name="notes" cols="110" rows="10"></textarea>
+ [% END %]
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Spara ändringar</button>
+ <a class="cancel btn btn-link"
+                        href="/cgi-bin/koha/members/housebound.pl?borrowernumber=[% patron.borrowernumber | html %]">
+ Avbryt </a>
+ </fieldset>
+ </form>
+
+ <!-- Create or edit housebound_visit -->
+ [% ELSIF ( op == 'visit_update_or_create' ) %]
+ <h4>Hantera leverans till boken kommer</h4>
+ <form name="form" id="instance_form" method="post" action="/cgi-bin/koha/members/housebound.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% IF ( visit ) %]
+ <input type="hidden" name="op" value="cud-editvisitconfirm" />
+ <input type="hidden" name="visit_id" value="[% visit.id | html %]" />
+ [% ELSE %]
+ <input type="hidden" name="op" value="cud-addvisitconfirm" />
+ [% END %]
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <fieldset class="rows" id="instance">
+ <legend>Leveransdetaljer</legend>
+ <ol>
+ <li>
+ <label for="date" class="required">Datum: </label>
+ [% IF ( visit ) %]
+ <input type="text" id="date" class="flatpickr required"
+                               value="[% visit.appointment_date | $KohaDates %]"
+                               name="date" size="20" required="required"/>
+ [% ELSE %]
+ <input type="text" id="date" class="flatpickr required"
+                               value="" name="date" size="20" required="required"/>
+ [% END %]
+ <span class="required">Obligatoriskt</span>
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ <li>
+ <label for="segment" class="required">Tid:</label>
+ <select id="segment" name="segment" required="required"
+                              class="required">
+ <option value="">Välj en tid</option>
+ [% IF ( visit ) %]
+ [% IF ( visit.day_segment == 'morning' ) %]
+ <option value="morning" selected="selected">
+ Morgon </option>
+ [% ELSE %]
+ <option value="morning">Morgon</option>
+ [% END %]
+ [% IF ( visit.day_segment == 'afternoon' ) %]
+ <option value="afternoon" selected="selected">
+ Eftermiddag </option>
+ [% ELSE %]
+ <option value="afternoon">Eftermiddag</option>
+ [% END %]
+ [% IF ( visit.day_segment == 'evening' ) %]
+ <option value="evening" selected="selected">
+ Kväll </option>
+ [% ELSE %]
+ <option value="evening">Kväll</option>
+ [% END %]
+ [% ELSE %]
+ <option value="morning">Morgon</option>
+ <option value="afternoon">Eftermiddag</option>
+ <option value="evening">Kväll</option>
+ [% END %]
+ </select>
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="chooser" class="required"> Väljare:</label>
+ <select id="chooser" name="chooser" class="required" required="required">
+ <option value="">Utse en väljare</option>
+ [% IF ( visit ) %]
+ [% FOREACH chooser IN choosers %]
+ [% IF ( visit.chooser_brwnumber == chooser.borrowernumber ) %]
+ <option value="[% chooser.borrowernumber | html %]" selected="selected">
+ [% INCLUDE 'patron-title.inc' patron = chooser invert_name = 0 %]
+ </option>
+ [% ELSE %]
+ <option value="[% chooser.borrowernumber | html %]">
+ [% INCLUDE 'patron-title.inc' patron = chooser invert_name = 0 %]
+ </option>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ [% FOREACH chooser IN choosers %]
+ <option value="[% chooser.borrowernumber | html %]">
+ [% INCLUDE 'patron-title.inc' patron = chooser invert_name = 0 %]
+ </option>
+ [% END %]
+ [% END %]
+ </select>
+ <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="deliverer" class="required">Leverantör:</label>
+ <select id="deliverer" name="deliverer" class="required" required="required">
+ <option value="">Välj vem som levererar</option>
+ [% IF ( visit ) %]
+ [% FOREACH deliverer IN deliverers %]
+ [% IF ( visit.deliverer_brwnumber == deliverer.borrowernumber ) %]
+ <option value="[% deliverer.borrowernumber | html %]" selected="selected">
+ [% INCLUDE 'patron-title.inc' patron = deliverer invert_name = 0 %]
+ </option>
+ [% ELSE %]
+ <option value="[% deliverer.borrowernumber | html %]">
+ [% INCLUDE 'patron-title.inc' patron = deliverer invert_name = 0 %]
+ </option>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ [% FOREACH deliverer IN deliverers %]
+ <option value="[% deliverer.borrowernumber | html %]">
+ [% INCLUDE 'patron-title.inc' patron = deliverer invert_name = 0 %]
+ </option>
+ [% END %]
+ [% END %]
+ </select>
+ <span class="required">Obligatoriskt</span>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Spara</button>
+ <a class="cancel"
+                     href="/cgi-bin/koha/members/housebound.pl?borrowernumber=[% patron.borrowernumber | html %]">
+ Avbryt </a>
+ </fieldset>
+ </form>
+ <div class="page-section">
+ <h3>Boken kommer-detaljer</h3>
+ [% PROCESS 'homebound-details' %]
+ <!-- Display a housebound_profile -->
+ </div> <!-- /.page-section -->
+ [% ELSIF ( housebound_profile ) %]
+ <div class="page-section">
+ [% PROCESS 'homebound-details' %]
+ <div class="action">
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/members/housebound.pl?borrowernumber=[% patron.borrowernumber | html %]&op=update_or_create"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ </div>
+ </div> <!-- /.page-section -->
+
+ <div class="page-section">
+ <h3>Leveranser</h3>
+ [% housebound_visits = housebound_profile.housebound_visits %]
+ [% IF  housebound_visits.count > 0 %]
+ <table id="deliveries">
+ <thead>
+ <tr>
+ <th>ID</th>
+ <th>Datum</th>
+ <th>Väljare</th>
+ <th>Leverantör</th>
+ <th class="noExport">Åtgärder</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH entry IN housebound_visits %]
+ <tr>
+ <td>[% entry.id | html %]</td>
+ <td data-order="[% entry.appointment_date | html %]">[% entry.appointment_date | $KohaDates %] ([% entry.day_segment | html %])</td>
+ <td>
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% entry.chooser.borrowernumber | uri %]">
+ [% INCLUDE 'patron-title.inc' patron = entry.chooser invert_name = 0 %]
+ </a>
+ </td>
+ <td>
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% entry.deliverer.borrowernumber | uri %]">
+ [% INCLUDE 'patron-title.inc' patron = entry.deliverer invert_name = 0 %]
+ </a>
+ </td>
+ <td class="actions">
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/members/housebound.pl?op=visit_update_or_create&visit_id=[% entry.id | html %]&borrowernumber=[% patron.borrowernumber | html %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ <form action="/cgi-bin/koha/members/housebound.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-visit_delete" />
+ <input type="hidden" name="visit_id" value="[% entry.id | html %]" />
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <button class="delete btn btn-default btn-xs"><i class="fa fa-trash-can"></i> Ta bort</button>
+ </form>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% END %]
+ <div class="action">
+ <a href="/cgi-bin/koha/members/housebound.pl?op=visit_update_or_create&borrowernumber=[% patron.borrowernumber | uri %]"
+                        class="btn btn-default btn-sm">
+ <i class="fa fa-plus"></i> Lägg till en ny leverans </a>
+ </div>
+ </div> <!-- /.page-section -->
+
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        $(document).ready(function() {
+            $(".delete").click(function(){
+                return confirm(_("Är du säker på att du vill ta bort leveransen?"));
+            });
+        });
+        KohaTable("deliveries", {
+            "pagingType": "full",
+            "autoWidth": false,
+        });
+    </script>
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

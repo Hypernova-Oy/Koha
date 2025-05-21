@@ -1,0 +1,932 @@
+[% USE raw %]
+[% USE To %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE Biblio %]
+[% USE KohaDates %]
+[% USE KohaPlugins %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% SET CoverImagePlugins = KohaPlugins.get_plugins_intranet_cover_images %]
+[% USE AuthorisedValues %]
+[% INCLUDE 'doc-head-open.inc' %]
+
+<title>[% FILTER collapse %]
+ [% IF ( searchdesc ) %]
+ [% IF ( query_desc ) %]
+ [% IF ( limit_desc ) %]
+ [% tx("Results of search for {query_desc} with limit(s): '{limit_desc}'", { query_desc = query_desc, limit_desc = limit_desc }) | html %]
+ [% ELSE %]
+ [% tx("Results of search for {query_desc}", { query_desc = query_desc }) | html %]
+ [% END %]
+ [% ELSE %]
+ [% IF ( limit_desc ) %]
+ [% tx("Results of search for {limit_desc}", { limit_desc = limit_desc }) | html %]
+ [% ELSE %]
+ [% t("Results of search") | html %]
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ [% t("You did not specify any search criteria") | html %]
+ [% END %] &rsaquo;
+ [% t("Catalog") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="catalog_results" class="catalog">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% IntranetCoce    = Koha.Preference('IntranetCoce') %]
+[% CoceProviders   = Koha.Preference('CoceProviders') %]
+[% CoceHost        = Koha.Preference('CoceHost') %]
+[% SyndeticsCovers = Koha.Preference('SyndeticsEnabled') && Koha.Preference('SyndeticsCoverImages') %]
+[% SyndeticsCoverImageSize = Koha.Preference('SyndeticsCoverImageSize') %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/catalogue/search.pl">Luettelo</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF ( query_desc ) %]
+ [% IF ( limit_desc ) %]
+ <span>Hakutulokset haulle '[% query_desc | html %]' rajauksella: '[% limit_desc | html %]'</span>
+ [% ELSE %]
+ <span>Hakutulokset haulle '[% query_desc | html %]'</span>
+ [% END %]
+ [% ELSE %]
+ <span>Haku</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Hakutulokset</h1>
+
+ [% IF ( outer_sup_results_loop ) %]
+ <div class="row">
+ <div class="col-sm-8">
+ [% END %]
+
+ [% IF ( total ) %]
+
+ <h3>
+ [% total | html %] osuma(a) [% IF ( query_desc ) %]haulle <span class="results_query_desc">'[% query_desc | html %]'</span>[% END %][% IF limit_desc  %]&nbsp;rajauksella: <span class="results_limit_desc">'[% limit_desc | html %]'</span>[% END %][% IF ( LibraryName ) %] kirjaston [% LibraryName | html %] aineistoluettelossa[% END %]. </h3>
+
+ [% UNLESS scan %]
+ <a href="/cgi-bin/koha/catalogue/search.pl?advsearch=1&edit_search=1&[% query_cgi | $raw %]&[% limit_cgi | $raw %]&sort_by=[% sort_by | uri %]">Muokkaa hakua</a>
+ [% IF ( Koha.Preference('SavedSearchFilters') && CAN_user_parameters_manage_search_filters ) %]
+ | <a href="#" id="save_search_filter">Tallenna haku rajauksena</a>
+ [% END %]
+
+ <div id="search_within_results">
+ <form method="get" id="refine_search">
+ <label for="limit">Hae tuloksista</label>
+ [% IF ( Koha.Preference('IntranetCatalogSearchPulldown') ) %]
+ [% INCLUDE 'search_indexes.inc' ms_kw = 1 refiner = 1 %]
+ [% END %]
+ <input id="refiner" name="limit" title="Hakutulokset" type="text">
+ <input class="btn btn-primary btn-xs" id="refine" type="submit" value="Haku" />
+ </form>
+ </div>
+
+ <div class="searchheader sticky" id="searchheader">
+ <div id="selection_ops">
+ <a href="#" class="btn btn-link" id="select_all"><i class="fa fa-check"></i> Valitse kaikki</a>
+ <a href="#" class="btn btn-link" id="clear_all"><i class="fa fa-times"></i> Tyhjennä kaikki</a>
+ |
+ [% IF Koha.Preference("StaffHighlightedWords") == 1 %]
+ <a href="#" class="highlight_toggle" id="highlight_toggle_off">Poista korostus</a>
+ <a href="#" class="highlight_toggle" id="highlight_toggle_on">Korosta</a>
+ |
+ [% END %]
+
+ [% IF (Koha.Preference("intranetbookbag")) %]
+ <div class="btn-group">
+ <a id="cartsubmit" class="btn btn-default btn-xs" href="#"><i class="fa fa-shopping-cart"></i> Lisää koriin</a>
+ </div>
+ [% END %]
+
+ [% IF Koha.Preference('virtualshelves') %]
+ <div class="btn-group">
+ <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa fa-list"></i> Lisää listalle </button>
+ <ul class="dropdown-menu">
+ [% IF add_to_some_private_shelves.count %]
+ <li><h6 class="dropdown-header">Listasi</h6></li>
+ [% SET number_of_private_shelves = 0 %]
+ [% FOREACH s IN add_to_some_private_shelves %]
+ [% IF shelfnumber != s.shelfnumber %]
+ <li>
+ <a href="#" class="addtolist dropdown-item" data-shelfnumber="[% s.shelfnumber | html %]">[% s.shelfname | html %]</a>
+ </li>
+ [% SET number_of_private_shelves = number_of_private_shelves + 1 %]
+ [% IF number_of_private_shelves == 10 %][% LAST %][% END %]
+ [% END %]
+ [% END %]
+ [% END %]
+ [% IF add_to_some_public_shelves.count %]
+ <li><h6 class="dropdown-header">Julkiset listat</h6></li>
+ [% SET number_of_public_shelves = 0 %]
+ [% FOREACH s IN add_to_some_public_shelves %]
+ [% IF shelfnumber != s.shelfnumber %]
+ <li>
+ <a class="addtolist dropdown-item" href="#" data-shelfnumber="[% s.shelfnumber | html %]">[% s.shelfname | html %]</a>
+ </li>
+ [% SET number_of_public_shelves = number_of_public_shelves + 1 %]
+ [% IF number_of_public_shelves == 10 %][% LAST %][% END %]
+ [% END %]
+ [% END %]
+ [% END %]
+ <li><hr class="dropdown-divider"></li>
+ [% IF add_to_some_private_shelves.count > 10 or add_to_some_public_shelves.count > 10 %]
+ <li>
+ <a href="#" class="addtolist morelists dropdown-item">Enemmän listoja</a>
+ </li>
+ [% END %]
+ <li>
+ <a href="#" class="dropdown-item addtolist newlist dropdown-item">Uusi lista</a>
+ </li>
+ </ul>
+ </div>
+ [% END # /IF virtualshelves %]
+
+ [% IF ( CAN_user_reserveforothers_place_holds && DisplayMultiPlaceHold ) %]
+ [% IF ( holdfor or holdforclub ) %]
+ <div id="placeholdc" class="btn-group">
+ <button class="btn btn-default btn-xs placehold"><i class="fa-solid fa-bookmark"></i> Varaa</button>
+ <button class="btn btn-default btn-xs dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+
+ </button>
+ <ul class="dropdown-menu">
+ <li><a href="#" class="placehold dropdown-item">Varaa</a></li>
+ [% IF holdfor %]
+ <li><a href="#" class="placeholdfor dropdown-item">Varaa asiakkaalle [% INCLUDE 'patron-title.inc' patron => holdfor_patron no_title => 1 no_cardnumber => 1 %]</a></li>
+ <li><hr class="dropdown-divider" /></li>
+ <li><a class="dropdown-item" href="#" id="forgetholdfor">Unohda [% INCLUDE 'patron-title.inc' patron => holdfor_patron no_title => 1 no_cardnumber => 1 %]</a></li>
+ [% END %]
+ [% IF holdforclub %]
+ <li><a href="#" class="placeholdforclub dropdown-item">Varaa asiakkaalle [% holdforclub_name | html %]</a></li>
+ <li><hr class="dropdown-divider" /></li>
+ <li><a class="dropdown-item" href="#" id="forgetholdforclub">Unohda [% holdforclub_name | html %]</a></li>
+ [% END %]
+ </ul>
+ </div>
+ [% ELSE %]
+ <div id="placeholdc" class="btn-group">
+ <a class="btn btn-default btn-xs placehold" href="#"><i class="fa-solid fa-bookmark"></i> Varaa</a>
+ </div>
+ [% END # /IF holfor %]
+ [% END # /IF CAN_user_reserveforothers_place_holds %]
+
+ [% IF Koha.Preference('BrowseResultSelection') %]
+ <div id="browse_selection" class="btn-group">
+ <a class="btn btn-default btn-xs browse_selection" href="#"><i class="fa-solid fa-note-sticky"></i> Selaa valittuja tietueita</a>
+ </div>
+ [% END %]
+
+ [% IF ( CAN_user_editcatalogue_edit_catalogue ) %]
+ <div class="btn-group">
+ <a class="btn btn-default btn-xs" id="z3950submit" href="#"><i class="fa fa-search"></i> Z39.50/SRU-haku</a>
+ </div>
+
+ <div class="btn-group">
+ <button type="button" id="results_batch_ops" class="btn btn-default btn-xs dropdown-toggle disabled" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ <i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa </button>
+ [% IF ( CAN_user_tools_records_batchmod || CAN_user_tools_records_batchdel || CAN_user_editcatalogue_edit_catalogue ) %]
+ <ul class="dropdown-menu">
+ [% IF ( CAN_user_tools_records_batchmod ) %]
+ <li><a class="results_batch_op dropdown-item" data-op="edit" href="#">Tietueiden erämuokkaus</a></li>
+ [% END %]
+ [% IF ( CAN_user_tools_records_batchdel ) %]
+ <li><a class="results_batch_op dropdown-item" data-op="delete" href="#">Tietueiden poisto eräajona</a></li>
+ [% END %]
+ <li><a class="results_batch_op dropdown-item" data-op="merge" href="#">Yhdistä tietueita</a></li>
+ </ul>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF ( searchdesc ) %]
+ [% BLOCK sort_search_query ~%]
+ [%~ FOREACH QUERY_INPUT IN QUERY_INPUTS ~%]
+ &amp;[% QUERY_INPUT.input_name | uri %]=[% QUERY_INPUT.input_value | uri %]
+ [%~ END ~%]
+ [%~ FOREACH LIMIT_INPUT IN LIMIT_INPUTS ~%]
+ &amp;[% LIMIT_INPUT.input_name | uri %]=[% LIMIT_INPUT.input_value | uri %]
+ [%~ END ~%]
+ [%~ END %]
+ [% END %]
+
+ <div class="btn-group">
+ <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ Järjestä </button>
+ <ul class="dropdown-menu">
+ [% IF ( sort_by == "relevance" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=relevance[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Osuvuuden mukaan</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=relevance[% PROCESS sort_search_query %]">Osuvuuden mukaan</a></li>
+ [% END %]
+ <li><h6 class="dropdown-header">Suosio</h6></li>
+ [% IF ( sort_by == "popularity_dsc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=popularity_dsc[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Suosion mukaan (eniten lainatut ensin)</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=popularity_dsc[% PROCESS sort_search_query %]">Suosion mukaan (eniten lainatut ensin)</a></li>
+ [% END %]
+
+ [% IF ( sort_by == "popularity_asc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=popularity_asc[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Suosion mukaan (vähiten lainatut ensin)</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=popularity_asc[% PROCESS sort_search_query %]">Suosion mukaan (vähiten lainatut ensin)</a></li>
+ [% END %]
+
+ <li><h6 class="dropdown-header">Tekijä</h6></li>
+
+ [% IF ( sort_by == "author_az" || sort_by == "author_asc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=author_a[% PROCESS sort_search_query %]z"><i class="fa fa-check"></i> Tekijän mukaan (nouseva)</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=author_az[% PROCESS sort_search_query %]">Tekijän mukaan (nouseva)</a></li>
+ [% END %]
+
+ [% IF ( sort_by == "author_za" || sort_by == "author_dsc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=author_za[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Tekijän mukaan (laskeva)</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=author_za[% PROCESS sort_search_query %]">Tekijän mukaan (laskeva)</a></li>
+ [% END %]
+
+ <li><h6 class="dropdown-header">Luokka</h6></li>
+
+ [% IF ( sort_by == "call_number_asc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=call_number_asc[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Luokka (nouseva)</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=call_number_asc[% PROCESS sort_search_query %]">Luokka (nouseva)</a></li>
+ [% END %]
+
+ [% IF ( sort_by == "call_number_dsc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=call_number_dsc[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Luokka (laskeva)</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=call_number_dsc[% PROCESS sort_search_query %]">Luokka (laskeva)</a></li>
+ [% END %]
+
+ <li><h6 class="dropdown-header">Päivämäärät</h6></li>
+ [% IF ( sort_by == "pubdate_dsc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=pubdate_dsc[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Julkaisuvuosi: uusimmasta vanhimpaan</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=pubdate_dsc[% PROCESS sort_search_query %]">Julkaisuvuosi: uusimmasta vanhimpaan</a></li>
+ [% END %]
+
+ [% IF ( sort_by == "pubdate_asc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=pubdate_asc[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Julkaisuvuosi: vanhimmasta uusimpaan</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=pubdate_asc[% PROCESS sort_search_query %]">Julkaisuvuosi: vanhimmasta uusimpaan</a></li>
+ [% END %]
+
+ [% IF ( sort_by == "acqdate_dsc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=acqdate_dsc[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Hankintapäivä: uusimmasta vanhimpaan</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=acqdate_dsc[% PROCESS sort_search_query %]">Hankintapäivä: uusimmasta vanhimpaan</a></li>
+ [% END %]
+
+ [% IF ( sort_by == "acqdate_asc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=acqdate_asc[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Hankintapäivä: vanhimmasta uusimpaan</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=acqdate_asc[% PROCESS sort_search_query %]">Hankintapäivä: vanhimmasta uusimpaan</a></li>
+ [% END %]
+
+ <li><h6 class="dropdown-header">Nimeke</h6></li>
+ [% IF ( sort_by == "title_az" || sort_by == "title_asc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=title_az[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Nimeke (A-Z)</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=title_az[% PROCESS sort_search_query %]">Nimeke (A-Z)</a></li>
+ [% END %]
+
+ [% IF ( sort_by == "title_za" || sort_by == "title_dsc" ) %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=title_za[% PROCESS sort_search_query %]"><i class="fa fa-check"></i> Nimeke (Z-A)</a></li>
+ [% ELSE %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% results_per_page | uri %]&sort_by=title_za[% PROCESS sort_search_query %]">Nimeke (Z-A)</a></li>
+ [% END %]
+ </ul>
+ </div> <!-- /.btn-group -->
+
+ [% IF Koha.Preference('numSearchResultsDropdown') %]
+ <div class="btn-group">
+ <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ Tuloksia sivulla: [% results_per_page | html %] </button>
+ <ul class="dropdown-menu">
+ [% IF Koha.Preference('numSearchResults') %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=[% Koha.Preference('numSearchResults') | uri %][% PROCESS sort_search_query %]" id="resultsperpage-default">
+ [% IF results_per_page == Koha.Preference('numSearchResults') %]
+ <i class="fa fa-check"></i>
+ [% END %] [% Koha.Preference('numSearchResults') | html %] (oletus) </a></li>
+ [% END %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=20[% PROCESS sort_search_query %]">[% IF results_per_page == '20' %]<i class="fa fa-check"></i>[% END %] 20</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=40[% PROCESS sort_search_query %]" id="resultsperpage-40">[% IF results_per_page == '40' %]<i class="fa fa-check"></i>[% END %] 40</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=60[% PROCESS sort_search_query %]" id="resultsperpage-60">[% IF results_per_page == '60' %]<i class="fa fa-check"></i>[% END %] 60</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=80[% PROCESS sort_search_query %]" id="resultsperpage-80">[% IF results_per_page == '80' %]<i class="fa fa-check"></i>[% END %] 80</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/catalogue/search.pl?count=100[% PROCESS sort_search_query %]" id="resultsperpage-100">[% IF results_per_page == '100' %]<i class="fa fa-check"></i>[% END %] 100</a></li>
+ </ul>
+ </div> <!-- /.btn-group -->
+ [% END %]
+
+ </div> <!-- /#selection_ops -->
+ <form id="build_batch_record_modification" method="post" action="/cgi-bin/koha/tools/batch_record_modification.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="recordtype" value="biblio">
+ <input type="hidden" name="op" value="cud-list">
+ <textarea id="recordnumber_list" name="bib_list" style="display:none"></textarea>
+ </form>
+ </div> <!-- /#searchheader -->
+ [% END %]
+
+ [% ELSE # /IF total %]
+ <div id="toolbar" class="btn-toolbar fz3950bigrpad" style="background-color:transparent">
+ <div>
+ <a class="btn btn-default" type="button" id="z3950submit"><i class="fa fa-search"></i> Z39.50/SRU-haku</a>
+ </div>
+ </div>
+
+
+ <div id="searchheader">
+ <h3>Ei hakutuloksia</h3>
+ [% IF ( searchdesc ) %]
+ <p>
+ Hakutuloksia ei löytynyt [% IF ( query_desc ) %]haulla <span style="font-weight: bold;">'[% query_desc | html %]'</span>[% END %][% IF ( limit_desc ) %]&nbsp;rajauksella: <span style="font-weight: bold;">'[% limit_desc | html %]'</span>[% END %][% IF ( LibraryName ) %] kirjaston [% LibraryName | html %] aineistoluettelossa[% END %]. </p>
+ [% IF CAN_user_acquisition_order_manage && searchtoorder_basketno && searchtoorder_vendorid %][%# Coming from the basket or vendor view %]
+ <p><a href="/cgi-bin/koha/acqui/basket.pl?basketno=[% searchtoorder_basketno | uri %]">Näytä kori<a></p>
+ [% END %]
+ <a href="/cgi-bin/koha/catalogue/search.pl?advsearch=1&edit_search=1&[% query_cgi | $raw %]&[% limit_cgi | $raw %]&sort_by=[% sort_by | uri %]">Muokkaa hakua</a>
+ [% IF ( Koha.Preference('SavedSearchFilters') && CAN_user_parameters_manage_search_filters ) %]
+ | <a href="#" id="save_search_filter">Tallenna haku rajauksena</a>
+ [% END %]
+ [% ELSE %]
+ <p>Anna hakuehto.</p>
+ [% END %]
+ </div>
+ [% END # /IF total %]
+
+ [% IF ( query_error ) %]
+ <div class="alert alert-warning"><p><strong>Virhe:</strong> [% query_error | html %]</p></div>
+ [% END %]
+
+ <!-- Search Results Table -->
+ [% IF ( total ) %]
+ [% IF ( scan ) %]
+ <div class="page-section">
+ <h2>Selaa indeksiä</h2>
+ <form action="/cgi-bin/koha/catalogue/search.pl" method="get">
+ <label for="scan-index">Selaa indeksiä:</label>
+ <select name="idx" id="scan-index">
+ [% IF ( header_pulldown == "" ) %]<option selected="selected" value="">Mikä sana tahansa</option>
+ [% ELSE %]<option selected="selected" value="">Mikä sana tahansa</option>[% END %]
+ [% IF ( header_pulldown == "ms_anycommaphr" ) %]<option selected="selected" value="any,phr">Kaikki fraasit</option>
+ [% ELSE %]<option value="any,phr">Kaikki fraasit</option>[% END %]
+ [% IF ( header_pulldown == "ms_ti" ) %]<option selected="selected" value="ti">Nimeke</option>
+ [% ELSE %]<option value="ti">Nimeke</option>[% END %]
+ [% IF ( header_pulldown == "ms_ticommaphr" ) %]<option selected="selected" value="ti,phr">Otsikkofraasi</option>
+ [% ELSE %]<option value="ti,phr">Otsikkofraasi</option>[% END %]
+ [% IF ( header_pulldown == ( "ms_au" || "ms_aucommaphr" ) ) %]<option selected="selected" value="au,phr">Tekijä</option>
+ [% ELSE %]<option value="au,phr">Tekijä</option>[% END %]
+ [% IF ( header_pulldown == "ms_su" ) %]<option selected="selected" value="su">Asiasana</option>
+ [% ELSE %]<option value="su">Asiasana</option>[% END %]
+ [% IF ( header_pulldown == "ms_sucommaphr" ) %]<option selected="selected" value="su,phr">Aihefraasi</option>
+ [% ELSE %]<option value="su,phr">Aihefraasi</option>[% END %]
+ [% IF ( header_pulldown ==  "ms_se" ) %]<option selected="selected" value="se">Sarjajulkaisu</option>
+ [% ELSE %]<option value="se">Sarjajulkaisu</option>[% END %]
+ [% IF ( header_pulldown ==  "ms_pb" ) %]<option selected="selected" value="pb">Julkaisija</option>
+ [% ELSE %]<option value="pb">Julkaisija</option>[% END %]
+ [% IF ( header_pulldown ==  "ms_nt" ) %]<option selected="selected" value="nt">Huomautukset</option>
+ [% ELSE %]<option value="nt">Huomautukset</option>[% END %]
+ [% IF ( header_pulldown ==  "ms_sn" ) %]<option selected="selected" value="sn">ISBN</option>
+ [% ELSE %]<option value="sn">ISBN</option>[% END %]
+ [% IF ( header_pulldown ==  "ms_ss" ) %]<option selected="selected" value="ss">ISSN</option>
+ [% ELSE %]<option value="ss">ISSN</option>[% END %]
+ [% IF ( header_pulldown ==  "ms_callnum" ) %]<option selected="selected" value="callnum">Luokka</option>
+ [% ELSE %]<option value="callnum">Luokka</option>[% END %]
+ </select>
+ [% IF ( scan_search_term_to_use ) %]
+ <input type="text" name="q" id="scan-index-term" size="35" value="[% scan_search_term_to_use | html %]" />
+ [% ELSE %] Hae indeksistä: <input type="text" name="q" id="scan-index-term" size="35" value="" />
+ [% END %]
+ <input type="hidden" name="scan" value="1" />
+ <input class="submit" type="submit" value="OK" />
+ </form>
+
+ <form action="/cgi-bin/koha/catalogue/search.pl" method="get">
+ <table>
+ <tr>
+ <th>Sana/Fraasi</th>
+ <th>Määrä</th>
+ </tr>
+ [% FOREACH SEARCH_RESULT IN SEARCH_RESULTS %]
+ <tr>
+ <td>
+ <a href="/cgi-bin/koha/catalogue/search.pl?idx=[% scan_index_to_use | uri %]&amp;q=[% SEARCH_RESULT.scan_use |url %]&quot;[% SEARCH_RESULT.title | uri %]&quot;">[% SEARCH_RESULT.title | html %]</a>
+ </td>
+ <td>
+ [% SEARCH_RESULT.author | html %]
+ </td>
+ </tr>
+ [% END %]
+ </table>
+ </form>
+ </div>
+ [% ELSE # /IF scan %]
+
+ <div id="searchresults">
+ [% INCLUDE 'page-numbers.inc' %]
+
+ <form action="/cgi-bin/koha/catalogue/search.pl" method="get" name="bookbag_form" id="bookbag_form">
+ [% IF ( searchdesc ) %]
+ [% FOREACH QUERY_INPUT IN QUERY_INPUTS %]
+ <input type="hidden" name="[% QUERY_INPUT.input_name | html %]" value="[% QUERY_INPUT.input_value | html %]"/>
+ [% END %]
+ [% FOREACH LIMIT_INPUT IN LIMIT_INPUTS %]
+ <input type="hidden" name="[% LIMIT_INPUT.input_name | html %]" value="[% LIMIT_INPUT.input_value | html %]"/>
+ [% END %]
+ [% END %]
+
+ <!-- TABLE RESULTS START -->
+ <table>
+ <thead>
+ <tr>
+ [% IF ( CoverImagePlugins || AmazonCoverImages  || LocalCoverImages || ( SyndeticsCovers ) || (Koha.Preference('CustomCoverImages') && Koha.Preference('CustomCoverImagesURL')) ) %]
+ <th>&nbsp;</th>
+ [% END %]
+ <th colspan="2">Tulokset</th>
+ <th>Paikka</th>
+ </tr>
+ </thead>
+ <!-- Actual Search Results -->
+ [% SET MaxSearchResultsItemsPerRecordStatusCheck = Koha.Preference('MaxSearchResultsItemsPerRecordStatusCheck') %]
+ <tbody>
+ [% FOREACH SEARCH_RESULT IN SEARCH_RESULTS %]
+ <tr id="row[% SEARCH_RESULT.biblionumber | html %]">
+ [% IF ( CoverImagePlugins || AmazonCoverImages  || LocalCoverImages || IntranetCoce || ( SyndeticsCovers ) || (Koha.Preference('CustomCoverImages') && Koha.Preference('CustomCoverImagesURL')) ) %]
+ <td class="bookcoverimg">
+ <div id="cover-slides-[% SEARCH_RESULT.biblionumber | html %]" class="cover-slides" data-biblionumber="[% SEARCH_RESULT.biblionumber | html %]" data-isbn="[% To.json(SEARCH_RESULT.normalized_isbn) | $raw %]" data-processedbiblio="[% PROCESS biblio_a_href biblionumber => SEARCH_RESULT.biblionumber | $raw %]">
+ [% IF ( LocalCoverImages && SEARCH_RESULT.has_local_cover_image ) %]
+ <div id="local-coverimg-[% SEARCH_RESULT.biblionumber | html %]" class="cover-image local-coverimg">
+ <a href="[% PROCESS biblio_a_href biblionumber => SEARCH_RESULT.biblionumber %]">
+ <img alt="Paikallinen kansikuva" src="/cgi-bin/koha/catalogue/image.pl?thumbnail=1&biblionumber=[% SEARCH_RESULT.biblionumber | uri %]" />
+ </a>
+ <div class="hint">Paikallinen kansikuva</div>
+ </div>
+ [% END %]
+
+ [% IF ( AmazonCoverImages && SEARCH_RESULT.normalized_isbn ) %]
+ <div id="amazon-bookcoverimg-[% SEARCH_RESULT.biblionumber | html %]" class="cover-image amazon-bookcoverimg">
+ <a href="[% PROCESS biblio_a_href biblionumber => SEARCH_RESULT.biblionumber %]">
+ <img alt="Kansikuva Amazon.comilta" src="https://images-na.ssl-images-amazon.com/images/P/[% SEARCH_RESULT.normalized_isbn | html %].01.TZZZZZZZ.jpg" />
+ </a>
+ <div class="hint">Amazon kansikuva</div>
+ </div>
+ [% END # /IF AmazonCoverImages %]
+
+ [% IF ( SyndeticsCovers ) %]
+ [% IF ( SEARCH_RESULT.normalized_isbn || SEARCH_RESULT.normalized_upc || SEARCH_RESULT.normalized_oclc ) %]
+ <div id="syndetics-bookcoverimg-[% SEARCH_RESULT.biblionumber | html %]" class="cover-image syndetics-bookcoverimg">
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% SEARCH_RESULT.biblionumber | uri %]">
+ <img alt="Kansi Syndeticsista" src="https://secure.syndetics.com/index.aspx?isbn=[% SEARCH_RESULT.normalized_isbn | html %]/[% SyndeticsCoverImageSize | uri %].GIF&client=[% Koha.Preference('SyndeticsClientCode') | html %]&type=xw10&upc=[% SEARCH_RESULT.normalized_upc | html %]&oclc=[% SEARCH_RESULT.normalized_oclc | html %]" />
+ </a>
+ <div class="hint">Syndeticsin kansikuva</div>
+ </div>
+ [% END %]
+ [% END %]
+
+ [% IF ( IntranetCoce && CoceProviders && SEARCH_RESULT.normalized_isbn ) %]
+ [% coce_id = SEARCH_RESULT.normalized_ean || SEARCH_RESULT.normalized_isbn %]
+ [% IF ( coce_id ) %]
+ <div id="coce-coverimg-[% SEARCH_RESULT.biblionumber | html %]" class="cover-image coce-coverimg">
+ <a href="[% PROCESS biblio_a_href biblionumber => SEARCH_RESULT.biblionumber %]">
+ <span style="block" title="[% SEARCH_RESULT.biblionumber | url %]" class="[% coce_id | html %]" id="coce-thumbnail[% SEARCH_RESULT.biblionumber | html %]"></span>
+ </a>
+ <div class="hint">Coce kansikuva</div>
+ </div>
+ [% END %]
+ [% END %]
+
+ [% IF Koha.Preference('CustomCoverImages') && Koha.Preference('CustomCoverImagesURL') %]
+ [% SET custom_cover_image_url = SEARCH_RESULT.biblio_object.custom_cover_image_url %]
+ [% IF custom_cover_image_url %]
+ <div id="custom-coverimg-[% SEARCH_RESULT.biblionumber | html %]" class="cover-image custom-coverimg">
+ <a class="custom_cover_image" href="[% custom_cover_image_url | url %]">
+ <img alt="Ulkoinen kansikuva" src="[% custom_cover_image_url | url %]" />
+ </a>
+ <div class="hint">Ulkoinen kansikuva</div>
+ </div>
+ [% END %]
+ [% END %]
+ </div>
+ </td>
+[% END # /IF( AmazonCoverImages || LocalCoverImages || IntranetCoce )%]
+
+ <td>
+ <input type="checkbox" class="selection" id="bib[% SEARCH_RESULT.biblionumber | html %]" name="biblionumber" value="[% SEARCH_RESULT.biblionumber | html %]" style="display:none" />
+ </td>
+
+ <td>
+ [% IF ( !item_level_itypes ) || Koha.Preference('BiblioItemtypeInfo') %]
+ <div class="result-biblio-itemtype">
+ [% IF !noItemTypeImages && SEARCH_RESULT.imageurl %]
+ <img class="itemtype-image" src="[% SEARCH_RESULT.imageurl | html %]" alt="[%  SEARCH_RESULT.description | html %]" />
+ [% END %]
+ <span class="itypetext">[% SEARCH_RESULT.description | html %]</span>
+ </div>
+ [% END %]
+
+ [% SEARCH_RESULT.result_number | html %].
+ [% SEARCH_RESULT.XSLTResultsRecord | $raw %]
+
+ <p class="hold">
+ [% IF ( SEARCH_RESULT.norequests ) %]
+ <span class="noholdstext">Ei varattavissa</span>
+ [% ELSE %]
+ [% IF CAN_user_reserveforothers_place_holds %]
+ <a id="reserve_[% SEARCH_RESULT.biblionumber | html %]" href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% SEARCH_RESULT.biblionumber | html %]">Varaukset ([% SEARCH_RESULT.biblio_object.holds.count | html %])</a>
+ [% IF ( holdfor ) %] <span class="holdforlink">| <a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% SEARCH_RESULT.biblionumber | uri %]&amp;findborrower=[% holdfor_patron.cardnumber | uri %]">Varaa asiakkaalle [% INCLUDE 'patron-title.inc' patron => holdfor_patron no_title => 1 no_cardnumber => 1 %]</a></span>[% END %]
+ [% IF ( holdforclub ) %] <span class="holdforlink">| <a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% SEARCH_RESULT.biblionumber | uri %]&amp;club=[% holdforclub | uri %]">Varaa asiakkaalle [% holdforclub_name | html %]</a></span>[% END %]
+ [% ELSE %]
+ <span>Varaukset ([% SEARCH_RESULT.biblio_object.holds.count | html %])</span>
+ [% END %]
+ [% END # /IF SEARCH_RESULT.norequests %]
+ [% IF Koha.Preference('UseRecalls') and CAN_user_recalls %]
+ | <a id="recall_[% SEARCH_RESULT.biblionumber | html %]" href="/cgi-bin/koha/recalls/request.pl?biblionumber=[% SEARCH_RESULT.biblionumber | html %]">Palautuspyynnöt ([% SEARCH_RESULT.biblio_object.recalls.search( completed => 0 ).count | html %])</a>
+ [% END %]
+
+ [% IF Koha.Preference('intranetbookbag') == 1 %]
+ [% IF ( SEARCH_RESULT.incart ) %]
+ | <a class="addtocart" id="cart[% SEARCH_RESULT.biblionumber | html %]" href="#">Korissa</a> <a class="cartRemove" id="cartR[% SEARCH_RESULT.biblionumber | html %]" href="#">(poista)</a>
+ [% ELSE %]
+ | <a class="addtocart" id="cart[% SEARCH_RESULT.biblionumber | html %]" href="#">Lisää koriin</a> <a style="display:none;" class="cartRemove" id="cartR[% SEARCH_RESULT.biblionumber | html %]" href="#">(poista)</a>
+ [% END %]
+ [% END # / IF intranetbookbag %]
+
+ [% IF Koha.Preference('ArticleRequests') %]
+ | <a id="requst_article_[% SEARCH_RESULT.biblionumber | html %]" href="/cgi-bin/koha/circ/request-article.pl?biblionumber=[% SEARCH_RESULT.biblionumber | html %]">Pyydä artikkelia</a>
+ [% END %]
+
+ [% IF ( CAN_user_editcatalogue_edit_catalogue ) %]
+ | <a href="/cgi-bin/koha/cataloguing/addbiblio.pl?biblionumber=[% SEARCH_RESULT.biblionumber | uri %]">Muokkaa tietuetta</a>
+ [% END %]
+ [% IF ( CAN_user_editcatalogue_edit_items ) %]
+ | <a href="/cgi-bin/koha/cataloguing/additem.pl?biblionumber=[% SEARCH_RESULT.biblionumber | uri %]">Muokkaa niteitä</a>
+ [% END %]
+
+ [% IF ( CAN_user_acquisition_order_manage ) %]
+ [% IF ( searchtoorder_basketno && searchtoorder_vendorid ) %]
+ | <a href="/cgi-bin/koha/acqui/neworderempty.pl?booksellerid=[% searchtoorder_vendorid | uri %]&amp;basketno=[% searchtoorder_basketno | uri %]&amp;biblionumber=[% SEARCH_RESULT.biblionumber | uri %]">Lisää tilaus</a>
+ [% END %]
+ [% END %]
+
+ [% IF ( OPACBaseURL ) %]
+ <span class="view-in-opac">
+ | <a href="[% Koha.Preference('OPACBaseURL') | url %]/cgi-bin/koha/opac-detail.pl?biblionumber=[% SEARCH_RESULT.biblionumber | uri %]" target="_blank">Verkkokirjasto</a>
+ </span>
+ [% END %]
+ </p> <!-- /.holds -->
+ </td>
+
+ <td>
+ <div class="availability">
+ [% IF ( SEARCH_RESULT.items_count ) %]
+ <div class="results_available_count">
+ [% IF MaxSearchResultsItemsPerRecordStatusCheck && SEARCH_RESULT.items_count > MaxSearchResultsItemsPerRecordStatusCheck %]
+ <span class="blocker inaccurate-item-statuses" title="Niteen tila voi olla virheellinen. Tarkista tietueen perustiedot-näytöltä niteiden oikea tila">
+ [% END %]
+
+ [% tnx('{count} item', '{count} items', SEARCH_RESULT.items_count, {count = SEARCH_RESULT.items_count}) | html %][% IF ( SEARCH_RESULT.availablecount ) %], [% SEARCH_RESULT.availablecount | html %] <span>saatavana:</span>[% ELSE %], <span>Ei yhtään saatavilla</span>[% END %]
+
+ [% IF MaxSearchResultsItemsPerRecordStatusCheck && SEARCH_RESULT.items_count > MaxSearchResultsItemsPerRecordStatusCheck %]
+ </span>
+ [% END %]
+ </div> <!-- /.results_available_count -->
+
+ [% BLOCK search_result_items %]
+ [% IF status_count == "onloancount" %]
+ [% IF SEARCH_RESULT.${status_count} > 0 %]
+ <div class="results_checkedout">[% SEARCH_RESULT.${status_count} | html %] lainassa:</div>
+ [% END %]
+ [% ELSIF status_count == "othercount" %]
+ [% IF SEARCH_RESULT.${status_count} > 0 %]
+ <div class="results_unavailable">[% SEARCH_RESULT.${status_count} | html %] ei saatavilla:</div>
+ [% END %]
+ [% END %]
+ [% IF SEARCH_RESULT.${items_loop}.size > 0 %]
+ <ul class="[% items_loop | html %]_items">
+ [% FOREACH items_loo IN SEARCH_RESULT.${items_loop} %]
+ [% IF item_level_itypes && !noItemTypeImages && items_loo.imageurl %]
+ <li class="result_itype_image [% items_loo.branchcode | html %]">
+ <img class="itemtype-image" src="[% items_loo.imageurl | html %]" title="[% items_loo.description | html %]" alt="[% items_loo.description | html %]" />
+ [% ELSE %]
+ <li class="[% items_loo.branchcode | html %]">
+ [% END %]
+ [% IF ( items_loo.branchname ) %]
+ [% items_loo.branchname | html %]
+ [% END %]
+ [% IF ( items_loo.location ) %]
+ <span class="shelvingloc">[% items_loo.location | html %]</span>
+ [% END %]
+ [% IF ( items_loo.collectioncode ) %]
+ <span class="ccode">[% items_loo.collectioncode | html %]</span>
+ [% END %]
+
+ [% IF ( items_loo.itemcallnumber ) %]
+ <a href="/cgi-bin/koha/catalogue/search.pl?idx=callnum&amp;q=%22[% items_loo.itemcallnumber |uri %]%22">[% items_loo.itemcallnumber | html %]</a>
+ [% END %]
+ <div class="result_item_details">
+ [% IF ( items_loo.withdrawn ) %]
+ ([% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.withdrawn', authorised_value => items_loo.withdrawn ) | html %])
+ [% END %]
+ [% IF ( items_loo.itemlost ) %]
+ ([% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.itemlost', authorised_value => items_loo.itemlost ) | html %])
+ [% END %]
+ [% IF ( items_loo.damaged ) %]
+ ([% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.damaged', authorised_value => items_loo.damaged ) | html %])
+ [% END %]
+ [% IF ( items_loo.intransit ) %]
+ (<span>Kuljetettavana</span>)
+ [% END %]
+ [% IF ( items_loo.onhold ) %]
+ (<span>Varattu</span>)
+ [% END %]
+ [% IF ( items_loo.notforloan ) %]
+ [% items_loo.notforloan | html %]
+ [% END %]
+ <span class="item_count">[% items_loo.count | html %]</span>
+ </div> <!-- /.result_item_details -->
+
+ [% IF status_count == "onloancount" %]
+ <span class="item-date-due">
+ Eräpäivä: [% items_loo.due_date | $KohaDates %] </span>
+ [% END %]
+
+ [% IF item_level_itypes && items_loo.description %]
+ <span class="item-itype-desc itypetext">[% items_loo.description | html %]</span>
+ [% END %]
+ </li>
+ [% END # /FOREACH other_items_loo %]
+ </ul> <!-- /.[% items_loop | html %]_items -->
+ [% END # /IF SEARCH_RESULT.${items_loop}.size %]
+ [% END # /BLOCK search_result_items %]
+
+ [% PROCESS search_result_items status_count="availablecount" items_loop="available_items_loop" %]
+
+ [% PROCESS search_result_items status_count="onloancount" items_loop="onloan_items_loop" %]
+
+ [% PROCESS search_result_items status_count="othercount" items_loop="other_items_loop" %]
+
+
+ [% ELSE # /IF ( SEARCH_RESULT.items_count ) %]
+
+ [% IF ( SEARCH_RESULT.ALTERNATEHOLDINGS.size ) %]
+ <strong id="altholdings_heading">Muut kokoelmat:</strong>
+ <ul>
+ [% FOREACH ALTERNATEHOLDING IN SEARCH_RESULT.ALTERNATEHOLDINGS %]
+ <li id="alternateholdings">[% ALTERNATEHOLDING.holding | html %]</li>
+ [% END %]
+ </ul>
+ [% ELSE %]
+ <span class="unavailable">Ei niteitä</span>
+ [% END %]
+ [% END # /IF ( SEARCH_RESULT.items_count ) %]
+ </div> <!-- /.availability -->
+ </td>
+ </tr>
+ [% END # /FOREACH SEARCH_RESULT %]
+ </tbody>
+ </table>
+ </form>
+ </div> <!-- /#bookbag_form -->
+ [% END # /IF scan %]
+ [% INCLUDE 'page-numbers.inc' %]
+ [% ELSE #/IF total %]
+ <!-- No Results Found -->
+ [% END #/IF total %]
+
+ [% IF ( outer_sup_results_loop ) %]
+ </div>
+ <div class="col-sm-4">
+ [% FOREACH outer_sup_results_loo IN outer_sup_results_loop %]
+ [% IF ( outer_sup_results_loo.inner_sup_results_loop ) %]
+ [% outer_sup_results_loo.servername | html %]
+ [% FOREACH inner_sup_results_loo IN outer_sup_results_loo.inner_sup_results_loop %]
+ <div>
+ <a href="/cgi-bin/koha/catalogue/search.pl?[% inner_sup_results_loo.query_cgi | $raw %][% inner_sup_results_loo.limit_cgi | $raw %][% inner_sup_results_loo.sort_by | uri %][% inner_sup_results_loo.link | uri %]">[% inner_sup_results_loo.title | html %]</a>
+ </div>
+ [% END %]
+ [% END %]
+ [% END # FOREACH outer_sup_results_loo %]
+ </div> <!-- /.col-sm-4 -->
+ </div>
+ [% END #/IF outer_sup_results_loop %]
+
+ [% IF ( Koha.Preference('SavedSearchFilters') && CAN_user_parameters_manage_search_filters ) %]
+ <div id="search_filters_modal" class="modal" role="dialog" aria-hidden="true">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="search_filters_label">Tallenna: '[% query_desc | html %]' käyttäen rajauksena '[% limit_desc | html %]'</h1>
+ <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <div class="modal-body">
+ <h6>Näkyvyys:</h6>
+ <label for="show_filter_opac">Näytä verkkokirjastossa?</label>
+ <input type="checkbox" id="show_filter_opac" name="show_filter_opac">
+ <label for="show_filter_staff_client">Näytä virkailijaliittymässä?</label>
+ <input type="checkbox" id="show_filter_staff_client" name="show_filter_staff_client">
+ <hr>
+ <h6>Tallenna uutena haun rajauksena:</h6>
+ <label for="new_filter">Nimi:</label>
+ <input id="new_filter" name="new_filter" type="text">
+ <a id="save_new_filter" class="btn btn-default btn-xs" href="#">Tallenna</a>
+ <span class="existing_filters_section">
+ </br>TAI</br>
+ <h6>Korvaa olemassa oleva haun rajaus:</h6>
+ <label for="existing_filters">Valitse</label>
+ <select id="existing_filters" name="existing_filters" class="search_filters_list"></select>
+ <a id="replace_existing_filter" class="btn btn-default btn-xs" href="#">Korvaa</a>
+ </span>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Peruuta</button>
+ </div>
+ </div>
+ </div>
+ </div>
+ [% END %]
+
+ <form id="hold_form" method="get" action="/cgi-bin/koha/reserve/request.pl">
+ <!-- Value will be set here by placeHold() -->
+ <input type="hidden" name="findborrower" id="holdFor" value="" />
+ <input type="hidden" name="club" id="holdForClub" value="" />
+ </form>
+
+ <form id="list_form" method="get" action="/cgi-bin/koha/reserve/request.pl">
+ <!-- Value will be set here by addToList() -->
+ <input type="hidden" name="multi_listadd" value="1"/>
+ </form>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'facets.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+<input type="hidden" id="query_json" value="[% query_json | html %]">
+<input type="hidden" id="limit_json" value="[% limit_json | html %]">
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/browser.js") | $raw %]
+ [% Asset.js("js/coce.js") | $raw %]
+ [% Asset.css("css/humanmsg.css") | $raw %]
+ [% Asset.js("lib/jquery/plugins/humanmsg.js") | $raw %]
+ [% INCLUDE 'select2.inc' %]
+ <script>
+        var PREF_AmazonCoverImages = parseInt( "[% Koha.Preference('AmazonCoverImages') | html %]", 10);
+        var q_array = new Array();  // will hold search terms, if present
+        var PREF_IntranetCoce = parseInt( "[% Koha.Preference('IntranetCoce') | html %]", 10);
+        var PREF_CoceProviders = "[% Koha.Preference('CoceProviders') | html %]";
+        var CoceHost = "[% CoceHost | html %]";
+        var CoceProviders = "[% CoceProviders | html %]";
+        var PREF_BrowseResultSelection = parseInt( "[% Koha.Preference('BrowseResultSelection') | html %]", 10);
+        var PREF_StaffHighlightedWords = "[% Koha.Preference('StaffHighlightedWords') | html %]";
+        var PREF_NotHighlightedWords = "[% Koha.Preference('NotHighlightedWords') | html %]";
+        var biblionumber = "[% biblionumber | html %]";
+        var holdfor_cardnumber = "[% holdfor_patron.cardnumber | html %]";
+        var holdforclub = "[% holdforclub | html %]";
+        [% IF SEARCH_RESULTS %]
+            var SEARCH_RESULTS = 1;
+        [% ELSE %]
+            var SEARCH_RESULTS = 0;
+        [% END %]
+        var new_results_browser = [
+            [%- FOREACH result IN SEARCH_RESULTS -%]
+                [%- result.biblionumber | html -%],
+            [%- END -%]
+        ];
+        var strQuery="&frameworkcode=";
+        [%- FOREACH z3950_search_param IN z3950_search_params -%]
+            strQuery += "&" + "[% z3950_search_param.name |uri %]" + "=" + "[% z3950_search_param.value |uri %]";
+        [%- END -%]
+
+        var search_result = {
+            query_desc: "[% To.json( query_desc ) | html %]",
+            query_cgi: "[% query_cgi | html %]",
+            limit_cgi: "[% limit_cgi | html %]",
+            query_json: JSON.parse($('#query_json').val()),
+            limit_json: JSON.parse($('#limit_json').val()),
+            sort_by: "[% sort_by | html %]",
+            gotoPage: "[% gotoPage | html %]",
+            gotoNumber: "[% gotoNumber | html %]",
+            searchid: "[% searchid | html %]",
+            total: "[% total | html %]",
+            first_result_number: "[% SEARCH_RESULTS.first.result_number | html %]",
+            first_biblionumber: "[% SEARCH_RESULTS.first.biblionumber | html %]",
+            last_biblionumber: "[% SEARCH_RESULTS.last.biblionumber | html %]",
+        }
+
+        $("#refine_search").on('submit',function(e){
+            e.preventDefault();
+            var index = $("#refine_search #refiner_idx").val() || "";
+            if( index){index += ":";}
+            window.location.href = "/cgi-bin/koha/catalogue/search.pl?[% query_cgi | $raw %]&[% limit_cgi | $raw %]&[% sort_cgi | $raw %]&limit="+index+escape_str( $("#refiner").val() );
+        });
+
+        [% IF ( CAN_user_parameters_manage_search_filters ) %]
+            function getFilters(id) {
+                const select = $("#existing_filters");
+                $("option[value!='']", select).remove();
+                return new Promise(function(resolve, reject) {
+                    $.ajax("/api/v1/search_filters")
+                    .then(resolve, reject);
+                })
+                .then(function(filters) {
+                    if( filters.length == 0 ){
+                       $(".existing_filters_section").hide();
+                    } else {
+                       $(".existing_filters_section").show();
+                    }
+                    filters.forEach(function(filter) {
+                        const opt = $("<option/>");
+                        select.append(opt);
+                        if(id && filter.search_filter_id == id) {
+                            opt.prop('selected', true);
+                        }
+                        opt.attr("value", filter.search_filter_id);
+                        opt.attr("title", "Query:" + filter.query + " Limit:"+filter.limits);
+                        opt.text(filter.name);
+                        opt.data("filter", filter);
+                    });
+                })
+                .then(function(){
+                    select.change();
+                });
+            }
+            $("#save_search_filter").click(function(){
+                getFilters();
+                $("#search_filters_modal").modal('show');
+            });
+            $("#save_new_filter").click(function(){
+                let name = $("#new_filter").val().trim();
+                if(!name){
+                    humanMsg.displayAlert( _("Sinun on annettava nimi uudelle rajaukselle"), { className: 'human Error' } );
+                    return;
+                }
+                let opac = $("#show_filter_opac").prop('checked');
+                let staff = $("#show_filter_staff_client").prop('checked');
+                save_search_filter(name,null,opac,staff);
+            });
+            $("#replace_existing_filter").click(function(){
+                let id = $("#existing_filters").val();
+                let name = $("#existing_filters option[value="+id+"]").text();
+                save_search_filter(name,id);
+            });
+            function save_search_filter(name,id,opac,staff){
+                let options = {
+                    url: '/api/v1/search_filters',
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        name: name,
+                        query: JSON.stringify(search_result.query_json),
+                        limits: JSON.stringify(search_result.limit_json),
+                        opac: opac,
+                        staff_client: staff,
+                    })
+                };
+                if (id){
+                    options.method = "PUT";
+                    options.url = options.url+"/"+id
+                } else {
+                    options.method = "POST";
+                }
+                $.ajax(options)
+                    .then(function(result) {
+                        $("#search_filters_modal").modal('hide');
+                        humanMsg.displayAlert( _("Tallennetut rajaukset: ") + name  , { className: 'human Success' } );
+                        getFilters();
+                    })
+                    .fail(function(err) {
+                        humanMsg.displayAlert( _("Tallennuksen yhteydessä tapahtui virhe:") + err.responseText, { className: 'humanError' } );
+                    });
+            }
+
+        [% END %]
+    </script>
+ [% Asset.js("js/pages/results.js") | $raw %]
+ [% CoverImagePlugins | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

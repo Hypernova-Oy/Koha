@@ -1,0 +1,18 @@
+---
+preservation.pref:
+  Gränssnitt:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: PreservationModule
+    - underhållsmodulen
+  - - Använd det auktoriserade <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">NOT_LOAN</a>-värdet
+    - choices: authval
+      pref: PreservationNotForLoanWaitingListIn
+      source: NOT_LOAN
+    - för att tillämpa på exemplar som har lagts till på väntelistan.
+  - - Använd det auktoriserade <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=NOT_LOAN">NOT_LOAN</a>-värdet
+    - choices: authval
+      pref: PreservationNotForLoanDefaultTrainIn
+      source: NOT_LOAN
+    - för exemplar som läggs till ett tåg.

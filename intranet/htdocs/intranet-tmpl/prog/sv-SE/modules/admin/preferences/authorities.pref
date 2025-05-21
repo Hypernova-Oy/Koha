@@ -1,0 +1,156 @@
+---
+authorities.pref:
+  Allmänt:
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: no
+      pref: AuthDisplayHierarchy
+    - bredare eller smalare termhierarkier vid granskning av auktoriteter.
+  - - Använd följande text för att redigera hur auktoritetsposter kontrollerar indikatorer
+      för bifogade bibliografiska fält (och eventuellt underfält $2).<br>
+    - 'Rader som börjar med en kommentarsymbol (#) hoppas över. Varje rad ska ha formen:
+      (marc21|unimarc), tag, ind1:(auth1|auth2|some_value), ind2:(auth1|auth2|thesaurus|some_value).<br>'
+    - Här hänvisar auth1 och auth2 till indikatorerna för auktoritetsposten, taggen
+      är ett bibliografiskt fältnummer eller en asterisk (*), och some_value är ett
+      fast värde (ett tecken).<br>
+    - MARC21-alternativets tesaurus hänvisar till indikatorer som kontrolleras av
+      auktoritetsfält 008/11 och 040$f.
+    - pref: AuthorityControlledIndicators
+      type: textarea
+  - - Vid redigering av poster,
+    - choices:
+        '0': kräv inte
+        '1': kräv
+      default: yes
+      pref: RequireChoosingExistingAuthority
+    - katalogiserare för att referera till befintliga auktoriteter. Om inställt på
+      kräv inte kan katalogiserare manuellt ange okontrollerade termer i kontrollerade
+      fält
+  - - Vid redigering av poster,
+    - choices:
+        '0': generera inte
+        '1': generera
+      default: yes
+      pref: AutoCreateAuthorities
+    - måste auktoritetsposter som saknas (<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RequireChoosingExistingAuthority">RequireChoosingExistingAuthority</a>
+      vara inställda på "don't require" för att detta ska ha effekt).
+  - - Vid ändringar av en auktoritetspost, uppdatera inte bibliografiska poster kopplade
+      till denna om antalet poster är fler än
+    - default: 50
+      pref: AuthorityMergeLimit
+    - poster. (Över denna gräns kommer cron-jobbet merge_authority att slå samman
+      dem.)
+    - <br><strong>NOTERA:</strong> Den här systeminställningen kräver cronjobbet <code>misc/cronjobs/merge_authorities.pl</code>.
+      Be din systemadministratör att schemalägga det.
+  - - 'Använd följande text för innehållet i MARC21 auktoritetsstyrningsfält 008 position
+      06-39 (dataelement med fast längd). Inkludera INTE datumet (position 00-05):'
+    - class: code
+      default: '|| aca||aabn           | a|a     d'
+      pref: MARCAuthorityControlField008
+      type: textarea
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      default: yes
+      pref: UseAuthoritiesForTracings
+    - auktoritetspost-nummer istället för textsträngar för sökningar från ämneslänkar.
+  - - 'Använd följande text för innehållet i UNIMARC auktoritetsfält 100 position
+      08-35 (dataelement med fast längd). Inkludera INTE datumet (position 00-07):'
+    - class: code
+      default: afrey50      ba0
+      pref: UNIMARCAuthorityField100
+      type: textarea
+  - - När du uppdaterar bibliografiska poster från en bifogad auktoritetsspost ("sammanslagning"),
+      hantera underfält av relevanta bibliografiska postfält i
+    - choices:
+        loose: avslappnat
+        strict: strikt
+      default: loose
+      pref: AuthorityMergeMode
+    - läge. I strikt läge raderas underfält som inte finns i auktoritetsposten. Avslappnat
+      läge kommer att behålla dem. Avslappnat läge är det historiska beteendet och
+      fortfarande standard.
+  - - 'Använd följande text som förvalt värde för fält 667$a i MARC21 auktoritetsposter
+      (ska inte kräva <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RequireChoosingExistingAuthority''>RequireChoosingExistingAuthority</a>
+      och måste tillåta <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AutoCreateAuthorities''>AutoCreateAuthorities</a>):'
+    - class: code
+      default: Machine generated authority record
+      pref: GenerateAuthorityField667
+      type: textarea
+  - - 'Använd följande text som förvalt värde för fält 670$a i MARC21 auktoritetsposter
+      (ska inte kräva <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=RequireChoosingExistingAuthority''>RequireChoosingExistingAuthority</a>
+      och måste tillåta <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AutoCreateAuthorities''>AutoCreateAuthorities</a>):'
+    - class: code
+      default: Work cat.
+      pref: GenerateAuthorityField670
+      type: textarea
+  - - När auktoritetsdetaljer visas, använd som standard
+    - choices:
+        '0': 0XX
+        '1': 1XX
+        '2': 2XX
+        '3': 3XX
+        '4': 4XX
+        '5': 5XX
+        '6': 6XX
+        '7': 7XX
+        '8': 8XX
+        '9': 9XX
+      default: '0'
+      pref: DefaultAuthorityTab
+    - fliken. Om vald flik inte existerar, använder vyn den första fliken.
+  - - Visa MARC-fält/delfält
+    - pref: AdditionalFieldsInZ3950ResultAuthSearch
+    - 'i kolumnen "Ytterligare fält" i Z39.50 sökresultat (använd kommatecken som
+      avgränsare t.ex.: "<code>001, 035$a</code>")'
+  Länkmodul:
+  - - Använd
+    - choices:
+        Default: standard
+        FirstMatch: första sökträff
+        LastMatch: sista träff
+      default: Default
+      pref: LinkerModule
+    - länkmodul för att koppla rubriker till auktoritetsposter.
+  - - 'Ställ in följande alternativ för auktoritetslänkaren:'
+    - class: multi
+      pref: LinkerOptions
+    - (separera alternativ med |).
+  - - choices:
+        '0': Välj inte
+        '1': Välj
+      default: yes
+      pref: LinkerRelink
+    - att länka om rubriker som tidigare länkats till auktoritetsposter.
+  - - choices:
+        '0': Behåll inte
+        '1': Behåll
+      default: no
+      pref: LinkerKeepStale
+    - befintliga länkar till auktoritetsposter för sidhuvuden där länkverktyget inte
+      hittar målet.
+  - - choices:
+        '0': Välj inte
+        '1': Välj
+      default: no
+      pref: CatalogModuleRelink
+    - automatiskt återskapa länkar för rubriker som tidigare var länkade när poster
+      sparas i katalogmodulen (kräver <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AutoLinkBiblios'>AutoLinkBiblios</a>).
+  - - choices:
+        '0': Försök inte att
+        '1': Försök att
+      default: no
+      pref: AutoLinkBiblios
+    - automatiskt länka rubriker när du sparar poster i katalogiseringsmodulen, följer
+      <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=LinkerRelink'>LinkerRelink</a>
+      och <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CatalogModuleRelink'>CatalogModuleRelink</a>
+      för postredigeringar.
+  - - choices:
+        '0': Jämför inte
+        '1': Jämför
+      default: no
+      pref: LinkerConsiderThesaurus
+    - 6XX-rubriker med tesaurus för auktoritetsposter vid länkning. Aktivering av
+      denna inställning kan kräva en omindexering och kan skapar nya auktoritetsposter
+      om AutoCreateAuthorities är aktiverad.

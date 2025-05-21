@@ -1,0 +1,52 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Add offline circulations to queue") | html %] &rsaquo;
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="ocirc_enqueue_koc" class="circ ocirc">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Cirkulation</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lägg till offline-lån till kön</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Koha offline-utlåning</h1>
+ <div class="page-section">
+ <p>Filen har laddats upp. När alla filer har laddats upp, bearbetar du dem i väntande åtgärder för offline-cirkulation.</p>
+
+ [% FOREACH message IN messages %]
+ [% IF ( message.message ) %]
+ [% IF ( message.ERROR_file_version ) %]
+ <div class="alert alert-warning"><p>Varning: denna fil är för version [% message.upload_version | html %], men jag vet bara hur man importerar version [% message.current_version | html %]. Jag ska göra så gott det går.</div>
+ [% END %]
+ [% END %]
+ [% END %]
+
+ <p><a href="process_koc.pl">Ladda upp en annan KOC-fil</a></p>
+
+ <p><a href="list.pl">Visa väntande åtgärder för offline-utlåning</a></p>
+ </div> <!-- /.page-section -->
+ </div>
+ </div>
+
+[% INCLUDE 'intranet-bottom.inc' %]

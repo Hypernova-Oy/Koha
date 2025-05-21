@@ -1,0 +1,1 @@
+[% IF ( dateformat == "us" ) %](KK/PP/VVVV )[% ELSIF ( dateformat == "metric" ) %](PP/KK/VVVV)[% ELSIF ( dateformat == "dmydot" ) %](PP.KK.VVVV)[% ELSE %](VVVV-KK-PP)[% END %] 

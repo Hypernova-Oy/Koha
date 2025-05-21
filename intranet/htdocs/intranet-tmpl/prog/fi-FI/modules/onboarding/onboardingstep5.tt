@@ -1,0 +1,184 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF all_done %]
+ [% t("Onboarding complete") | html %]
+ [% ELSE %]
+ [% t("Create circulation rule") | html %]
+ [% END %] &rsaquo;
+ [% t("Web installer") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="onboarding-step5" class="installer-main col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+ <div id="logo"><a href="#">Koha</a></div>
+
+ [% IF all_done %]
+
+ <h1>Asennusohjelma &rsaquo; Valmis</h1>
+ [% INCLUDE 'onboarding_messages.inc' %]
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Asennus</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ <h3>Onnittelut, olet nyt valmis käyttämään Kohaa</h3>
+ <a class="btn btn-success" href="/cgi-bin/koha/mainpage.pl">Aloita Kohan käyttö</a>
+
+ [% ELSE %]
+
+ <h2>Asennusohjelma &rsaquo; Luo uusi lainaussääntö </h2>
+
+ [% INCLUDE 'onboarding_messages.inc' %]
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Asennus</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo kirjasto</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo asiakastyyppi</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo Kohan ylläpitäjätunnus</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo uusi nidetyyppi</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Luo uusi lainaussääntö</li>
+ </ol>
+ </li>
+ </ol>
+ </div>
+
+ <form name="createcirculationrule" method="post" action="onboarding.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <input type="hidden" name="step" value="5"/>
+ <input type="hidden" name="op" value="cud-add_validate_circ_rule" />
+ <ol>
+ <li>
+ <label for="branchname" class="required"> Kirjastoyksikkö</label>
+ <select name="branch" id="branchname" required="required">
+ <option value=""> Valitse</option>
+ <option value="*" selected="selected">Kaikki</option>
+ [% FOREACH library IN libraries %]
+ <option value="[% library.branchcode | html %]"> [% library.branchname | html %]</option>
+ [% END %]
+ </select>
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="categorycode" class="required">Asiakastyyppi: </label>
+ <select name="categorycode" id="categorycode" required="required">
+ <option value=""> Valitse</option>
+ <option value="*" selected="selected">Kaikki</option>
+ [% FOREACH category IN categories %]
+ <option value = "[% category.categorycode | html %]"> [% category.description | html %]</option>
+ [%END%]
+ </select>
+ <span class="required">Pakollinen tieto</span>
+ </li>
+
+ <li>
+ <label for="itemtype" class="required">Nidetyyppi: </label>
+ <select id="itemtype" name="itemtype" required="required">
+ <option value=""> Valitse </option>
+ <option value="*" selected="selected">Kaikki</option>
+ [% FOREACH item IN itemtypes %]
+ <option value = "[% item.itemtype | html %]"> [% item.itemtype | html %]
+ [%END%]
+ </select>
+ <span class="required"> Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="maxissueqty" class="required">Sallittu lainamäärä: </label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="maxissueqty" id="maxissueqty" size="10" value="50" class="required" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+
+ <li>
+ <label for="issuelength" class="required">Laina-aika: </label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="issuelength" id="issuelength" size="10" value="14" class="required" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="lengthunit" class="required">Yksikköjä: </label>
+ <select name="lengthunit" id="lengthunit" required="required">
+ <option value=""> Valitse </option>
+ [% SET units = 'days' %]
+ [% IF category %]
+ [% SET default_privacy = category.default_privacy %]
+ [% END %]
+
+ [% SWITCH units %]
+ [% CASE 'days' %]
+ <option value="days" selected="selected">Päiviä</option>
+ <option value="hours">Tunteja</option>
+ [% CASE 'hours' %]
+ <option value="days">Päiviä</option>
+ <option value="hours" selected="selected">Tunteja</option>
+ [% END %]
+ </select>
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="renewalsallowed" class="required">Sallitut uusintakerrat: </label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="renewalsallowed" id="renewalsallowed" size="10" value="10" class="required" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+
+ <li>
+ <label for="renewalperiod" class="required">Uusinta-aika: </label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="renewalperiod" id="renewalperiod" size="10" value="14" class="required" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+
+ <li>
+ <label for="reservesallowed">Varauksia sallittu (yhteensä): </label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="reservesallowed" id="reservesallowed" size="10" value="10" />
+ </li>
+
+ <li>
+ <label for="holds_per_day">Varauksia sallittu (päivittäin): </label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="holds_per_day" id="holds_per_day" size="10" value="10" />
+ </li>
+
+ <li>
+ <label for="holds_per_record">Varauksia tietuetta kohti (määrä): </label>
+ <input type="text" inputmode="numeric" pattern="[0-9]*" name="holds_per_record" id="holds_per_record" size="10" value="1" />
+ </li>
+
+ <li>
+ <label for="onshelfholds">Hyllyvaraukset sallittu: </label>
+ <select name="onshelfholds" id="onshelfholds" required="required">
+ <option value="">Valitse</option>
+ <option value="1" selected="selected">Kyllä</option>
+ <option value="0">Jos jokin ei ole saatavana</option>
+ <option value="2">Jos yhtään ei ole saatavilla</option>
+ </select>
+ </li>
+ </ol>
+ <p>
+ Luodaksesi lainaussäännön, mene: <span class="breadcrumbs">Ylläpito &rsaquo; Laina- ja maksusäännöt </span>
+ </p>
+
+ </fieldset>
+
+ <input class="btn btn-primary" type="submit" value="OK" />
+ </form>
+ [% END %]
+ </div> <!-- / #onboarding-step5 -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'validator-strings.inc' %]
+ [% INCLUDE 'installer-strings.inc' %]
+ <script src="[% interface | html %]/[% theme | html %]/js/onboarding.js"></script>
+[% END %]
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

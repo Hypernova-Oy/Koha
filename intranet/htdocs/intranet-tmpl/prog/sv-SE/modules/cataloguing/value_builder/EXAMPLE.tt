@@ -1,0 +1,48 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Framework plugin example") | html %] &rsaquo;
+ [% t("Cataloguing") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="EXAMPLE" class="cat value_builder">
+<form method="get" name="f_pop" onsubmit="report()" action="">
+
+<h1>EXEMPEL-plugin</h1>
+<p>Hej, detta är resultatet av att starta EXEMPEL-pluginen.</p>
+<p>Jag mottog detta från dig:</p>
+<input type="text" id="received" value="[% result | html %]" disabled />
+
+<p>Jag kommer att skicka tillbaka det du skriver här, om du trycker på OK.</p>
+
+<input type="text" id="return" value="[% result | html %]" />
+
+<nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input type="button" class="btn btn-primary" value="OK"  onclick="submitMyForm();" />
+ <button class="btn btn-default close_window">Avbryt</button>
+ </fieldset>
+ </div>
+</nav>
+
+</form>
+
+<script>
+    $(document).ready(function () {
+        $('#return').focus();
+    });
+
+    // The following function just puts back the value of the input #return
+    // into the caller's field, referenced by index. And closes the popup.
+    function submitMyForm() {
+        $(window.opener.document).find('#[% index | html %]').val($('#return').val() );
+        window.close();
+    }
+</script>
+
+[% INCLUDE 'popup-bottom.inc' %]

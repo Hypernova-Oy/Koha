@@ -1,0 +1,321 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF step == 2 %]
+ [% t("Confirm") | html %] &rsaquo;
+ [% END %]
+ [% IF step == 3 %]
+ [% t("Finished") | html %] &rsaquo;
+ [% END %]
+ [% t("Batch patron deletion and anonymization") | html %] &rsaquo;
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="tools_cleanborrowers" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Työkalut</a>
+ [% END %]
+
+ [% IF step == 1 %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Asiakkaiden poisto ja anonymisointi eräajona</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/cleanborrowers.pl">Asiakkaiden poisto ja anonymisointi eräajona</a>
+ [% END %]
+ [% END %]
+
+ [% IF step == 2 %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Hyväksy</span>
+ [% END %]
+ [% END %]
+
+ [% IF step == 3 %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Valmis</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% IF !OnlyMine %]
+ [% IF current_branch == '*' %]
+ <h1>Asiakkaiden poisto ja anonymisointi eräajona</h1>
+ [% ELSE %]
+ <h1>Asiakkaiden poisto ja anonymisointi eräajona kirjastolle [% Branches.GetName( current_branch ) | html %]</h1>
+ [% END %]
+ [% IF step == 1 %]
+ <form method="get" action="/cgi-bin/koha/tools/cleanborrowers.pl" id="selectlibrary">
+ Valitse kirjasto : <select name="branch" id="branch" style="width:20em;">
+ <option value="*">Kaikki kirjastot</option>
+ [% FOREACH branch IN Branches.all( selected => current_branch ) %]
+ [% IF branch.selected %]
+ <option value="[% branch.branchcode | html %]" selected="selected">[% branch.branchname | html %]</option>
+ [% ELSE %]
+ <option value="[% branch.branchcode | html %]">[% branch.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </form>
+ [% END %]
+[% ELSE %]
+ <h1>Asiakkaiden poisto ja anonymisointi eräajona kirjastolle [% Branches.GetLoggedInBranchname | html %]</h1>
+[% END %]
+
+[% IF step == 1 %]
+<!-- step 1 START -->
+
+<div class="help">
+ <p>Tällä työkalulla voit poistaa asiakkaita tai anonymisoida asiakkaiden lainahistorian. Asiakkaiden poistossa voidaan käyttää mitä tahansa rajoitteita. Asiakkaita ei poisteta, mikäli joku seuraavista estää sen:</p>
+<ul>
+<li>Asiakkaalla on lainoja.</li>
+<li>Asiakkaalla on maksuja.</li>
+<li>He ovat takaajana toiselle asiakkaalle.</li>
+<li>Asiakastyyppinä on kirjaston henkilökunta.</li>
+<li>Heille on määritelty oikeuksia.</li>
+</ul>
+</div>
+<div id="step1">
+ <form name="f1" id="delete_patrons_form" action="/cgi-bin/koha/tools/cleanborrowers.pl" method="get">
+ <fieldset>
+ <legend>Poista asiakkaita</legend>
+ <h3><input id="checkborrower" type="checkbox" name="checkbox" value="borrower" /><label for="checkborrower"> Vahvista: Haluat varmasti poistaa asiakkaita</label></h3>
+ <br />
+ <h5>Poista asiakkaat, jotka:</h5>
+ <ul>
+ <li>
+ <label for="date1">jotka eivät ole lainanneet sitten:</label>
+ <input size="10" id="date1" name="not_borrowed_since" type="text" class="flatpickr" />
+ <span class="hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ <li>
+ <label for="borrower_dateexpiry">joiden tili vanhenee ennen:</label>
+ <input size="10" id="borrower_dateexpiry" name="borrower_dateexpiry" type="text" class="flatpickr" />
+ <span class="hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ [% IF Koha.Preference('TrackLastPatronActivityTriggers') %]
+ <li>
+ <label for="borrower_lastseen">jotka eivät ole olleet aktiivisia sitten:</label>
+ <input size="10" id="borrower_lastseen" name="borrower_lastseen" type="text" class="flatpickr" />
+ <span class="hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ [% END %]
+ <li>
+ <label for="borrower_categorycode">joiden asiakastyyppi on:</label>
+ <select id="borrower_categorycode" name="borrower_categorycode">
+ <option value="" selected="selected">Kaikki</option>
+ [% FOREACH bc IN borrower_categorycodes %]
+ [% UNLESS bc.category_type == 'S' %]
+ <option value="[% bc.categorycode | html %]">[% bc.description | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ [% IF patron_lists %]
+ <li>
+ <label for="patron_list_id">jotka ovat asiakaslistalla: </label>
+ <select id="patron_list_id" name="patron_list_id">
+ <option value=""></option>
+ [% FOREACH pl IN patron_lists %]
+ <option value="[% pl.patron_list_id | html %]">[% pl.name | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ [% END %]
+ </ul>
+ </fieldset>
+
+ <fieldset>
+ <legend>Anonymisoi asiakkaiden lainaustietoja</legend>
+ [% UNLESS Koha.Preference('AnonymousPatron') %]
+ <div class="alert alert-info">AnonymousPatron -järjestelmäasetusta ei ole määritelty. Voit käyttää tätä asetusta siitä huolimatta, mutta lainahistoriaa päivitettäessä käytetään arvoa NULL.</div>
+ [% END %]
+ <h3><input id="checkissue" type="checkbox" name="checkbox" value="issue" /><label for="checkissue"> Vahvista: Haluat anonymisoida asiakkaiden lainahistorian</label></h3>
+ <br />
+ <ul>
+ <li>
+ <label for="date2">Poista pysyvästi lainahistoriatapahtumat, jotka ovat vanhempia kuin</label>
+ <input size="10" id="date2" name="last_issue_date" type="text" class="flatpickr" />
+ <span class="hint">[% INCLUDE 'date-format.inc' %]</span>
+ </li>
+ </ul>
+
+ <!-- hidden here -->
+ <input type="hidden" name="step" value="2" />
+ <input type="hidden" name="branch" value="[% current_branch | html %]" />
+ </fieldset>
+ <fieldset class="action"><input class="btn btn-primary" type="submit" value="Seuraava >>" /></fieldset>
+ </form>
+</div>
+<!-- step 1 END -->
+[% END %]
+
+[% IF step == 2 %]
+<!-- STEP 2 START -->
+<div id="step2">
+ <form name="f2" action="/cgi-bin/koha/tools/cleanborrowers.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete" />
+
+ <div class="alert alert-warning">
+ <h3>Varoitus</h3>
+ <ul>
+ <li>[% patrons_to_delete.size || 0 | html %] asiakasta poistetaan</li>
+ <li>[% patrons_to_anonymize.count || 0 | html %] asiakkaiden lainahistoriat anonymisoidaan</li>
+ </ul>
+ </div>
+
+ [% IF patrons_to_delete.size %]
+ <fieldset>
+ <legend>Kuinka asiakkaat tulisi poistaa?</legend>
+ <p>
+ <input id="delete" type="radio" name="radio" value="delete" />
+ <label for="delete">Poistetaanko näiden asiakkaiden tiedot pysyvästi</label>
+ <div class="hint">
+ Poistaa asiakkaat suoraan tietokannasta. Asiakasdata ei ole palautettavissa. </div>
+ </p>
+ <p>
+ <input id="trash" type="radio" name="radio" value="trash" />
+ <label for="trash">Siirrä näiden asiakkaiden tiedot roskakoriin</label>
+ <div class="hint">
+ Siirrä asiakkaat poistettujen asiakkaiden tauluun. Heidät voi poistaa pysyvästi <code>cleanup_database</code> komentojono. </div>
+ </p>
+ <p>
+ <input id="testrun" type="radio" name="radio" value="testrun" checked="checked" />
+ <label for="testrun">Testiajo: Älä poista asiakastietoja.</label>
+ <input type="hidden" name="do_delete" value="[% patrons_to_delete.size | html %]" /></fieldset>
+ </p>
+ </fieldset>
+ [% END %]
+
+ [% IF patrons_to_anonymize.count %]
+ <fieldset>
+ [% patrons_to_anonymize.count | html %] asiakkaan lainahistoria anonymisoidaan <input type="hidden" name="do_anonym" value="[% patrons_to_anonymize.count | html %]" />
+ </fieldset>
+ [% END %]
+
+ <input type="hidden" name="step" value="3" />
+ <input type="hidden" name="not_borrowed_since" value="[% not_borrowed_since | $KohaDates dateformat => 'iso' %]" />
+ <input type="hidden" name="last_issue_date" value="[% last_issue_date | $KohaDates dateformat => 'iso' %]" />
+ <input type="hidden" name="borrower_dateexpiry" value="[% borrower_dateexpiry | $KohaDates dateformat => 'iso' %]" />
+ [% IF Koha.Preference('TrackLastPatronActivityTriggers') %]
+ <input type="hidden" name="borrower_lastseen" value="[% borrower_lastseen | $KohaDates dateformat => 'iso' %]" />
+ [% END %]
+ <input type="hidden" name="borrower_categorycode" value="[% borrower_categorycode | html %]" />
+ <input type="hidden" name="patron_list_id" value="[% patron_list_id | html %]" />
+ <input type="hidden" name="branch" value="[% current_branch | html %]" />
+ <fieldset class="action"><input class="btn btn-primary" type="submit" value="Valmis" /> <a class="cancel" href="/cgi-bin/koha/tools/cleanborrowers.pl">Peruuta</a></fieldset>
+ </form>
+</div>
+<!-- STEP 2 END -->
+[% END %]
+
+[% IF step == 3 %]
+<!-- Step 3 START -->
+
+ <div id="step3">
+ [% IF ( testrun ) %]
+ <h4>[% TotalDel | html %] asiakas(ta) olisi siirretty roskakoriin (jos tämä ei olisi ollut testiajo)</h4>
+ <h4>Asiakastietoja ei poistettu</h4>
+ [% ELSE %]
+ [% IF ( do_delete ) %]
+ [% IF ( trash ) %]
+ <h4>[% TotalDel | html %] asiakas(ta) on siirretty roskakoriin</h4>
+ [% ELSE %]
+ <h4>[% TotalDel | html %] asiakas(ta) on poistettu</h4>
+ [% END %]
+ [% ELSE %]
+ <h4>Yhtään asiakastietoa ei poistettu</h4>
+ [% END %]
+ [% END %]
+ [% IF do_anonym %]
+ <h4>Kaikki lainat ([% do_anonym | html %]), jotka ovat vanhempia kuin [% last_issue_date | $KohaDates %] anonymisoitiin</h4>
+ [% ELSE %]
+ <h4>Yhtään asiakastietoa ei anonymisoitu</h4>
+ [% END %]
+
+ </div>
+<!-- Step 3 END -->
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ [% INCLUDE 'calendar.inc' %]
+ <script>
+        $(document).ready(function(){
+            $("#delete_patrons_form").on("submit",function(){
+                return checkForm( this );
+            });
+
+            $('#branch').change(function() {
+                $('#selectlibrary').submit();
+            });
+            $("form[name='f2']").on('submit',function(){
+                if( $("#delete").prop("checked") ){
+                    if( !confirm(_("Nämä asiakastiedot poistetaan pysyvästi tietokannasta eikä niitä voida palauttaa")) ){
+                        return false;
+                    }
+                }
+            });
+        });
+
+        /**
+         *  checkForm(form)
+         *  This function check the form is correctly filled.
+         */
+        function checkForm(form) {
+            if((form.checkbox[0].checked)){
+                if ( (!form.date1.value) && (!form.borrower_dateexpiry.value) [% IF Koha.Preference('TrackLastPatronActivityTriggers') %]&& (!form.borrower_lastseen.value) [% END %]&& (!form.borrower_categorycode.value) && (!form.patron_list_id.value)){
+                  alert(_("Syötä ainakin yksi poistosääntö."));
+                  return false;
+                }
+            }
+            if((form.checkbox[1].checked)){
+                if(!(form.date2.value)){
+                    alert(_("Syötä päivämäärä."));
+                    return false;
+                }
+            }
+            if(!form.checkbox[0].checked && !form.checkbox[1].checked) {
+              alert( _("Valitse ainakin yksi toiminto") );
+              return false;
+            }
+            return true;
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

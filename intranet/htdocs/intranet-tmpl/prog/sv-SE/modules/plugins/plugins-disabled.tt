@@ -1,0 +1,43 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Plugins disabled") | html %] &rsaquo;
+ [% t("Plugins") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% INCLUDE 'calendar.inc' %]
+</head>
+
+<body id="plugins_plugins_disabled" class="plugins">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Insticksprogram avaktiverade</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col-sm-6 offset-sm-3">
+ [% IF ( plugins_restricted.defined ) && ( plugins_restricted == 1 ) %]
+ <h1>Uppladdning av plugins är begränsad till de som listas av din serveradministratör</h1>
+ <p>För att tillåta uppladdning av insticksprogram utan begränsning, be administratören att ändra inställningen plugins_restricted i Kohas konfigurationsfil</p>
+ [% ELSE %]
+ <h1>Insticksprogram avaktiverade</h1>
+ <p>För att tillåta insticksprogram i Koha så måste flaggan 'enable_plugins' vara inställd i Kohas konfigurationsfil</p>
+ [% END %]
+ </div>
+ </div>
+
+[% INCLUDE 'intranet-bottom.inc' %]

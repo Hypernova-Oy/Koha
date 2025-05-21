@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE stylesheet>
+
+<Tagfield tag="007" xmlns="http://koha-community.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="./marc21_field_CF.xsd">
+ <Material id="MPS"><name>Kartor</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description></description>
+ <Value code="a"><description>Karta </description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Särskild klass av kartografiskt material som föremålet tillhör. Vanligtvis klassen av fysiska objekt, t.ex. ett diagram.</description>
+ <Value code="d"><description>Atlas</description></Value>
+ <Value code="g"><description>Diagram </description></Value>
+ <Value code="j"><description>Karta </description></Value>
+ <Value code="k"><description>Profil</description></Value>
+ <Value code="q"><description>Modell</description></Value>
+ <Value code="r"><description>Fjärravkänningsbild</description></Value>
+ <Value code="s"><description>Avsnitt</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="y"><description>Visa</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description>
+ </Position>
+ <Position pos="03"><name>Färg</name><description>Om exemplaret är enfärgat eller mångfärgat</description>
+ <Value code="a"><description>En färg</description></Value>
+ <Value code="c"><description>c- Kartan är i flera färger</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>Fysisk beskrivning </name><description>Material av vilket det kartografiska föremålet är tillverkat.</description>
+ <Value code="a"><description>Papper</description></Value>
+ <Value code="b"><description>Trä</description></Value>
+ <Value code="c"><description>Sten</description></Value>
+ <Value code="d"><description>Metall</description></Value>
+ <Value code="e"><description>e- Syntetiskt material</description></Value>
+ <Value code="f"><description>f- Skinn</description></Value>
+ <Value code="g"><description>Textilier</description></Value>
+ <Value code="i"><description>Plast </description></Value>
+ <Value code="j"><description>Glas </description></Value>
+ <Value code="l"><description>Vinyl </description></Value>
+ <Value code="n"><description>n- Velin</description></Value>
+ <Value code="p"><description>i- Gips</description></Value>
+ <Value code="q"><description>q- Positivt foto på mjuk bas</description></Value>
+ <Value code="r"><description>r- Negativt foto på mjuk bas</description></Value>
+ <Value code="s"><description>s- Positivt foto på hård bas</description></Value>
+ <Value code="t"><description>t- Negativt foto på hård bas</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="v"><description>Läder</description></Value>
+ <Value code="w"><description>Pergament </description></Value>
+ <Value code="x"><description>Ej tillämpligt</description></Value>
+ <Value code="y"><description>y- Annat fotografiskt medium</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>05 Typ av reproduktion</name><description>Om det kartografiska exemplaret är ett faksimil eller annan typ av reproduktion.</description>
+ <Value code="f"><description>Faksimil</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06"><name>06 Produktionstekniska detaljer</name><description>Fotografisk teknik för att producera det kartografiska exemplaret</description>
+ <Value code="a"><description>a- Blåkopia</description></Value>
+ <Value code="b"><description>Fotokopia</description></Value>
+ <Value code="c"><description>c- Korrekturavdrag, färgprov</description></Value>
+ <Value code="d"><description>Film</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="07"><name>Positiv/negativ aspekt</name><description>Positiv/negativ aspekt hos den kartografiska kopian eller filmen, även kallad polaritet.</description>
+ <Value code="a"><description>Positiv </description></Value>
+ <Value code="b"><description>Negativ </description></Value>
+ <Value code="m"><description>m- Positiv och negativ polaritet i kombination</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="ER"><name>Elektroniska resurser</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description>Alfabetisk kod (ett tecken) som anger vilken kategori av material som föremålet tillhör är elektronisk resurs (t.ex. program, datafiler, bildfiler, digitaliserade ljud- och videoband etc.).</description>
+ <Value code="c"><description>Elektronisk resurs </description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Särskild materialklass (vanligtvis klassen fysiskt föremål) som ett föremål tillhör (t.ex. en magnetskiva).</description>
+ <Value code="a"><description>Bandkassett</description></Value>
+ <Value code="b"><description>b- Datorminnesmodul</description></Value>
+ <Value code="c"><description>c- Datorskivmagasin</description></Value>
+ <Value code="d"><description>d- Datorskiva (ospecificerad typ)</description></Value>
+ <Value code="e"><description>e- Datorsskivmagasin (ospecificerad typ)</description></Value>
+ <Value code="f"><description>Kassett</description></Value>
+ <Value code="h"><description>Bandspole </description></Value>
+ <Value code="j"><description>Magnetisk skiva </description></Value>
+ <Value code="k"><description>k- Datorkort</description></Value>
+ <Value code="m"><description>m- Magnet-optisk skiva</description></Value>
+ <Value code="o"><description>Optisk skiva</description></Value>
+ <Value code="r"><description>r- Fjärranslutning</description></Value>
+ <Value code="s"><description>Fristående enhet </description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description>
+ </Position>
+ <Position pos="03"><name>Färg</name><description>Om exemplaret har en eller flera färger.</description>
+ <Value code="a"><description>En färg</description></Value>
+ <Value code="b"><description>Svartvit</description></Value>
+ <Value code="c"><description>c- Kartan är i flera färger</description></Value>
+ <Value code="g"><description>Gråskala</description></Value>
+ <Value code="m"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>Dimensioner</name><description>Mått på mediet som används för att koda den elektroniska resursen. Endast de vanligaste måtten anges. I många fall gäller måtten för behållaren i vilken ett magnetiskt eller optiskt medium är inneslutet. Fältet 007/04-kod som motsvarar de mått som anges i beskrivningen av artikeln används. Om ingen kod exakt matchar måtten på mediet (eller behållaren), används kod z. </description>
+ <Value code="a"><description>3,5 tum </description></Value>
+ <Value code="e"><description>e- 12 tum</description></Value>
+ <Value code="g"><description>g- 4 3/4 tum eller 12 cm</description></Value>
+ <Value code="i"><description>1 1/8 x 2 3/8 in.</description></Value>
+ <Value code="j"><description>j- 3 7/8 x 2 1/2 tum</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="o"><description>o- 5 1/4 tum</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="v"><description>8 tum</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>Ljud</name><description>Huruvida produktion av ljud är en integrerad del av en elektronisk resurs.</description>
+ <Value code="#"><description>Inget ljud (tyst) </description></Value>
+ <Value code="a"><description>Ljud</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06-08"><name>06-08 Bit-djup i bildfiler</name><description>Exakt bitdjup för det skannade bildmaterialet som utgör den elektroniska resursen, eller en alfabetisk kod med tre tecken som indikerar att det exakta bitdjupet inte kan registreras. Eftersom endast exakt bitdjup är användbart, bör kodning inte inkludera saknade siffror representerade av bindestreck (-).</description>
+ <Value code="001-999"><description>Exakt bitdjup</description></Value>
+ <Value code="mmm"><description>mmm- Flera bit-djup förekommer</description></Value>
+ <Value code="nnn"><description>Ej tillämpligt</description></Value>
+ <Value code="---"><description>Okänt</description></Value>
+ <Value code="|||"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="09"><name>Filformat </name><description>Om filen/filerna som utgör den elektroniska resursen är av samma format eller typ för digitalt omformaterat material.</description>
+ <Value code="a"><description>a- Ett genomgående filformat</description></Value>
+ <Value code="m"><description>m- Flera olika filformat</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="10"><name>10 Kvalitetstest</name><description>Huruvida kvalitetssäkringsmål har inkluderats på lämpligt sätt vid tidpunkten för omformatering/skapande av den elektroniska resursen. </description>
+ <Value code="a"><description>a- Testbilder etc saknas</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="p"><description>På plats</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="11"><name>11 Master/Källa</name><description>Avser digitalt reformaterat material. </description>
+ <Value code="a"><description>a- Filens källa är en originalresurs</description></Value>
+ <Value code="b"><description>b- Filens källa är en mikroform</description></Value>
+ <Value code="c"><description>c- Filens källa är en maskinläsbar fil</description></Value>
+ <Value code="d"><description>d- Filens källa är ett mellanoriginal. Avser ej mikroformer.</description></Value>
+ <Value code="m"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="12"><name>12 Kompression</name><description>Typ av komprimering den elektroniska resursen har utsatts för. Används för att bedöma filens trohet mot originalet.</description>
+ <Value code="a"><description>a- Filen är ej komprimerad</description></Value>
+ <Value code="b"><description>b- Filen är komprimerad utan risk för informationsförlust</description></Value>
+ <Value code="d"><description>d- Filen är komprimerad och dekomprimering medför informationsförlust</description></Value>
+ <Value code="m"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="13"><name>13 Reformateringskvalitet</name><description>Den elektroniska resursens reformateringskvalitet; en samlad bedömning av den elektroniska resursens fysiska kvalitet i förhållande till dess avsedda användning. Den kan användas för att bedöma kvaliteten på en fil och en institutions åtagande att bibehålla dess tillgänglighet över tid.</description>
+ <Value code="a"><description>a- Brukskopia, ej arkivkvalitet</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="p"><description>p- Arkivkvalitet för långtidslagring</description></Value>
+ <Value code="r"><description>r- Arkivkvalitet som kan duga som ersättningsexemplar</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="GL"><name>Glob</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description>d- Alfabetisk kod (ett tecken) som indikerar kategorin av material som föremålet tillhör är glob, vilket definieras som modellen av en himlakropp, vanligtvis jorden eller himmelssfären, avbildad på ytan av en sfär. Kod d används när 008/25 (Typ av kartografiskt material) innehåller kod d. Ett fyllningstecken (|) är inte tillåtet i denna position.</description>
+ <Value code="d"><description>Glob</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Särskild klass av material (vanligtvis klassen av fysiskt föremål) som ett föremål tillhör, t.ex. en glob.</description>
+ <Value code="a"><description>a- Himmelsglob</description></Value>
+ <Value code="b"><description>b- Planet- eller månglob</description></Value>
+ <Value code="c"><description>c- Jordglob</description></Value>
+ <Value code="e"><description>e- Månglob</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description>
+ </Position>
+ <Position pos="03"><name>Färg</name><description>Om globen har en färg eller flera.</description>
+ <Value code="a"><description>En färg</description></Value>
+ <Value code="c"><description>c- Kartan är i flera färger</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>04 Material</name><description>Material som globen består av.</description>
+ <Value code="a"><description>Papper</description></Value>
+ <Value code="b"><description>Trä</description></Value>
+ <Value code="c"><description>Sten</description></Value>
+ <Value code="d"><description>Metall</description></Value>
+ <Value code="e"><description>e- Syntetiskt material</description></Value>
+ <Value code="f"><description>f- Skinn</description></Value>
+ <Value code="g"><description>g- Textil</description></Value>
+ <Value code="i"><description>Plast </description></Value>
+ <Value code="l"><description>Vinyl </description></Value>
+ <Value code="n"><description>n- Velin</description></Value>
+ <Value code="p"><description>i- Gips</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="v"><description>Läder</description></Value>
+ <Value code="w"><description>Pergament </description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>05 Typ av reproduktion</name><description>Om globen är ett faksimil eller annan typ av reproduktion.</description>
+ <Value code="f"><description>Faksimil</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="TM"><name>f- Taktil resurs</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description>Alfabetisk kod (ett tecken) som anger vilken kategori av material som föremålet tillhör är en taktil resurs. Används för material som är avsett att läsas genom beröring. Ett fyllnadstecken (|) är inte tillåtet i denna position.</description>
+ <Value code="f"><description>f- Taktil resurs</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Specialklass av taktilt material; specifikt material som föremålet tillhör.</description>
+ <Value code="a"><description>a- Moonskrift</description></Value>
+ <Value code="b"><description>Punktskrift</description></Value>
+ <Value code="c"><description>Kombination</description></Value>
+ <Value code="d"><description>d- Taktilt (ej skrift)</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description>
+ </Position>
+ <Position pos="03-04"><name>b- Punktskrift</name><description>Punktskriftsfamilj som föremålet tillhör. Detta är inte den specifika punktskriftskoden, utan den typ av punktskriftskod som används, som representerar olika typer av skrivna symboler. Upp till två punktskriftstyper kan anges, eller så kan katalogiseringsbyrån välja att endast koda den dominerande typen. Flera koder kodas i dominansordning, om någon. Om färre än två koder tilldelas lämnas koderna rättfärdiga och oanvända positioner innehåller blanksteg (#).</description>
+ <Value code="#"><description>Ospecificerad punktskriftstyp</description></Value>
+ <Value code="a"><description>a- Litterär punktskrift</description></Value>
+ <Value code="b"><description>b- Punktskrift för formatering</description></Value>
+ <Value code="c"><description>c- Matematisk och vetenskaplig punktskrift</description></Value>
+ <Value code="d"><description>d- Punktskrift för databehandling</description></Value>
+ <Value code="e"><description>e- Punktskrift för musik</description></Value>
+ <Value code="m"><description>m- Flera typer av punktskriftssystem.</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="||"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>05 Kontraktioner (kortskriftsnivå)</name><description>Om kontraktioner används. Kontraktioner är förkortningar som består av en eller flera punktskrift eller Moontecken för att representera vanliga bokstavskombinationer.</description>
+ <Value code="a"><description>a- Resursen är okontraherad (fullskrift)</description></Value>
+ <Value code="b"><description>b- Resursen är kontraherad (kortskrift)</description></Value>
+ <Value code="m"><description>Kombination</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06"><name>06-08 Format för musiknoter i punktskrift 1</name><description>Kod med tre tecken för musiknoter i punktskrift. Avser hur takter, sektioner, delar och besläktad information såsom ord presenteras i relation till varandra. Upp till tre format kan anges, vänsterställda. Anges färre än tre fylls lediga platser med blanktecken (#).</description>
+ <Value code="#"><description>Inget specifikt punktskriftsformat för musik </description></Value>
+ <Value code="a"><description>a- Bar over bar</description></Value>
+ <Value code="b"><description>b- Bar by bar</description></Value>
+ <Value code="c"><description>c- Line over line</description></Value>
+ <Value code="d"><description>Stycke</description>></Value>
+ <Value code="e"><description>e- Single line</description></Value>
+ <Value code="f"><description>Sektionsvis</description></Value>
+ <Value code="g"><description>Rad för rad</description></Value>
+ <Value code="h"><description>h- Open score</description></Value>
+ <Value code="i"><description>Spanner particell</description></Value>
+ <Value code="j"><description>Particell</description></Value>
+ <Value code="k"><description>k- Outline</description></Value>
+ <Value code="l"><description>l- Vertical score</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="07"><name>07 Format för musiknoter i punktskrift 2</name><description></description>
+ <Value code="#"><description>Inget specifikt punktskriftsformat för musik </description></Value>
+ <Value code="a"><description>a- Bar over bar</description></Value>
+ <Value code="b"><description>b- Bar by bar</description></Value>
+ <Value code="c"><description>c- Line over line</description></Value>
+ <Value code="d"><description>Stycke</description>></Value>
+ <Value code="e"><description>e- Single line</description></Value>
+ <Value code="f"><description>Sektionsvis</description></Value>
+ <Value code="g"><description>Rad för rad</description></Value>
+ <Value code="h"><description>h- Open score</description></Value>
+ <Value code="i"><description>Spanner particell</description></Value>
+ <Value code="j"><description>Particell</description></Value>
+ <Value code="k"><description>k- Outline</description></Value>
+ <Value code="l"><description>l- Vertical score</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="08"><name>08 Format för musiknoter i punktskrift 3</name><description></description>
+ <Value code="#"><description>Inget specifikt punktskriftsformat för musik </description></Value>
+ <Value code="a"><description>a- Bar over bar</description></Value>
+ <Value code="b"><description>b- Bar by bar</description></Value>
+ <Value code="c"><description>c- Line over line</description></Value>
+ <Value code="d"><description>Stycke</description>></Value>
+ <Value code="e"><description>e- Single line</description></Value>
+ <Value code="f"><description>Sektionsvis</description></Value>
+ <Value code="g"><description>Rad för rad</description></Value>
+ <Value code="h"><description>h- Open score</description></Value>
+ <Value code="i"><description>Spanner particell</description></Value>
+ <Value code="j"><description>Particell</description></Value>
+ <Value code="k"><description>k- Outline</description></Value>
+ <Value code="l"><description>l- Vertical score</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="09"><name>Speciella fysiska egenskaper</name><description>Andra speciella fysiska egenskaper hos punktskriften.</description>
+ <Value code="a"><description>a- Tryck och punktskrift sida vid sida</description></Value>
+ <Value code="b"><description>Förstorad punktskrift</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="PG"><name>Projicerad bild</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description>Enteckens alfabetisk kod som anger vilken kategori av material som föremålet tillhör är projicerad grafik som definieras som en tvådimensionell representation avsedd att projiceras utan rörelse med hjälp av en optisk anordning, till exempel en filmremsa, dia eller genomskinlighet. Ett fyllnadstecken (|) är inte tillåtet i denna position.</description>
+ <Value code="g"><description>Projicerad bild</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Specialklass av projicerad grafik som föremålet tillhör, t.ex. en diabild.</description>
+ <Value code="c"><description>c- Film- eller bildbandsmagasin</description></Value>
+ <Value code="d"><description>d- Filmremsa</description></Value>
+ <Value code="f"><description>f- Bildband (ospecificerad typ)</description></Value>
+ <Value code="o"><description>o- Bildbandsrulle</description></Value>
+ <Value code="s"><description>Diabild </description></Value>
+ <Value code="t"><description>Transparency</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description></Position>
+ <Position pos="03"><name>Färg</name><description>03- Färg</description>
+ <Value code="a"><description>En färg</description></Value>
+ <Value code="b"><description>Svartvit</description></Value>
+ <Value code="c"><description>c- Kartan är i flera färger</description></Value>
+ <Value code="h"><description>Handkolorerad</description></Value>
+ <Value code="m"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>Bärande material (emulsion)</name><description>Det material som är underlag för bild, filmremsa, objektglas eller transparens.</description>
+ <Value code="d"><description>Glas </description></Value>
+ <Value code="e"><description>e- Syntetiskt material</description></Value>
+ <Value code="j"><description>j- Fotografisk säkerhetsfilm</description></Value>
+ <Value code="k"><description>k- Fotografisk film, ej säkerhetsfilm</description></Value>
+ <Value code="m"><description>m- Samling i blandade material</description></Value>
+ <Value code="o"><description>Papper</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>05 Ljud och dess plats</name><description>Om ljudet är på eller är skilt från den projicerade grafiken (dvs på det medföljande materialet). </description>
+ <Value code="#"><description>Inget ljud (tyst) </description></Value>
+ <Value code="a"><description>a- Ljud finns på samma bärare</description></Value>
+ <Value code="b"><description>b- Ljud finns på separat bärare</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06"><name>06 Ljudbärare</name><description>Specifikt medium som används för att bära ljudet av ett objekt (oavsett om ljudet är på den projicerade grafiken eller separat) och den typ av ljuduppspelning som krävs för objektet.</description>
+ <Value code="#"><description>Inget ljud (tyst) </description></Value>
+ <Value code="a"><description>a- Optiskt ljudspår på spelfilm</description></Value>
+ <Value code="b"><description>b- Magnetiskt ljudspår på spelfilm</description></Value>
+ <Value code="c"><description>c- Magnetiskt ljudband i magasin</description></Value>
+ <Value code="d"><description>Ljudskiva</description></Value>
+ <Value code="e"><description>Magnetband för ljud på spole</description></Value>
+ <Value code="f"><description>Magnetband för ljud i kassett</description></Value>
+ <Value code="g"><description>g- Optiskt och magnetiskt ljudspår på spelfilm</description></Value>
+ <Value code="h"><description>Videoband </description></Value>
+ <Value code="i"><description>i- Videoskiva</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="07"><name>Dimensioner</name><description>Bredd eller dimensioner för det projicerade grafiska objektet.</description>
+ <Value code="a"><description>Standard 8 mm filmbredd </description></Value>
+ <Value code="b"><description>b- Super-8 / Single 8 mm</description></Value>
+ <Value code="c"><description>c- 9,5 mm film</description></Value>
+ <Value code="d"><description>d- 16 mm film</description></Value>
+ <Value code="e"><description>e- 28 mm film</description></Value>
+ <Value code="f"><description>f- 35 mm film</description></Value>
+ <Value code="g"><description>g- 70 mm film</description></Value>
+ <Value code="j"><description>j- 2 x 2 tum (5 x 5 cm) (diabild)</description></Value>
+ <Value code="k"><description>k- 2 1/4 x 2 1/4 tum (6 x 6 cm) (diabild)</description></Value>
+ <Value code="s"><description>s- 4 x 5 (10 x 13 cm) (OH-bild)</description></Value>
+ <Value code="t"><description>t- 5 x 7 (13 x 18 cm) (OH-bild)</description></Value>
+ <Value code="v"><description>v- 8 x 10 tum (21 x 26 cm) (OH-bild)</description></Value>
+ <Value code="w"><description>w- 9 x 9 tum (23 x 23 cm) (OH-bild)</description></Value>
+ <Value code="x"><description>x- 10 x 10 tum (26 x 26 cm) (OH-bild)</description></Value>
+ <Value code="y"><description>y- 7 x 7 tum (18 x 18 cm) (OH-bild)</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="08"><name>Sekundärt stödmaterial </name><description>Typ av material för monteringen av en dia eller transparens för en projicerad grafik.</description>
+ <Value code="#"><description>Inget sekundärt stöd</description></Value>
+ <Value code="c"><description>Kartong</description></Value>
+ <Value code="d"><description>Glas </description></Value>
+ <Value code="e"><description>e- Syntetiskt material</description></Value>
+ <Value code="h"><description>Metall</description></Value>
+ <Value code="j"><description>Metall och glas</description></Value>
+ <Value code="k"><description>Synthetic and glass</description></Value>
+ <Value code="m"><description>m- Samling i blandade material</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="MF"><name>Microform</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description>One-character alphabetic code that indicates the category of material to which the item belongs is microform. Microform is a generic term for any medium, transparent or opaque, bearing microimages. A microimage is a unit (e.g., a page) of textual, graphic, or computer-generated material that is contained on aperture cards, microfiche, microfilm, microopaques, or other microformats and that is too small to be read without magnification. Microforms may be reproductions of existing textual or graphic materials or they may be original publications. A fill character (|) is not allowed in this position.</description>
+ <Value code="h"><description>Microform</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Special class of microform to which the item belongs. (e.g., a microopaque).</description>
+ <Value code="a"><description>a- Fönsterkort</description></Value>
+ <Value code="b"><description>Mikrofilmkassett</description></Value>
+ <Value code="c"><description>Mikrofilmkassett</description></Value>
+ <Value code="d"><description>Mikrofilmspole</description></Value>
+ <Value code="e"><description>Mikrofiche</description></Value>
+ <Value code="f"><description>mikrofichekassett</description></Value>
+ <Value code="g"><description>Mikrokort</description></Value>
+ <Value code="h"><description>Microfilm slip</description></Value>
+ <Value code="j"><description>Microfilm roll</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description></Position>
+ <Position pos="03"><name>Positiv/negativ aspekt</name><description>Positive/negative polarity of the microform.</description>
+ <Value code="a"><description>Positiv </description></Value>
+ <Value code="b"><description>Negativ </description></Value>
+ <Value code="m"><description>m- Positiv och negativ polaritet i kombination</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>Dimensioner</name><description>Dimensions of the microform; does not indicate the dimensions of the image.</description>
+ <Value code="a"><description>8 mm</description></Value>
+ <Value code="d"><description>d- 16 mm</description></Value>
+ <Value code="f"><description>35 mm</description></Value>
+ <Value code="g"><description>g- 70 mm</description></Value>
+ <Value code="h"><description>105 mm.</description></Value>
+ <Value code="l"><description>g- 3x5 tum eller 8x13 cm</description></Value>
+ <Value code="m"><description>g- 4 3/4 tum eller 12 cm</description></Value>
+ <Value code="o"><description>o- 6 x 9 tum (16 x 23 cm) (höjd x bredd).</description></Value>
+ <Value code="p"><description>p- 3 1/4 x 7 3/8 tum (9 x 19 cm).</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>Reduction ratio range</name><description>Reduction ratio range for a microform. The specific reduction ratio is recorded in 007/06-08 (Reduction ratio).</description>
+ <Value code="a"><description>Low reduction ratio</description></Value>
+ <Value code="b"><description>Normal reduction</description></Value>
+ <Value code="c"><description>High reduction</description></Value>
+ <Value code="d"><description>Very high reduction</description></Value>
+ <Value code="e"><description>Ultra high reduction</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="v"><description>Reduction rate varies</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06-08"><name>Reduction ratio</name><description>Number specifying the reduction ratio for a microform, recorded as three digits. The number is right justified and each unused position contains a zero (e.g., 015, 048). A hyphen is used for any unknown portion of the reduction ratio (e.g., 03-, 1--, or ---)</description>
+ <Value code="#"><description>Ratio element is not applicable</description></Value>
+ <Value code="1"><description>Ratio</description></Value>
+ <Value code="2"><description>Ratio</description></Value>
+ <Value code="3"><description>Ratio</description></Value>
+ </Position>
+ <Position pos="09"><name>Färg</name><description>09- Färg</description>
+ <Value code="b"><description>Svartvit</description></Value>
+ <Value code="c"><description>c- Kartan är i flera färger</description></Value>
+ <Value code="m"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="10"><name>10 Filmemulsion</name><description>Typ av ljuskänsligt material på filmen.</description>
+ <Value code="a"><description>Silver halide</description></Value>
+ <Value code="b"><description>b- Diazo</description></Value>
+ <Value code="c"><description>Vesicular</description></Value>
+ <Value code="m"><description>Mixed emulsion</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="11"><name>Generation</name><description>Generation aspect of a microform. </description>
+ <Value code="a"><description>First generation (master)</description></Value>
+ <Value code="b"><description>Printing master</description></Value>
+ <Value code="c"><description>Service copy</description></Value>
+ <Value code="m"><description>Mixed generation</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="12"><name>Filmbas</name><description>Filmbas</description>
+ <Value code="a"><description>Safety base, undetermined</description></Value>
+ <Value code="c"><description>Safety base, acetate undetermined</description></Value>
+ <Value code="d"><description>Safety base, diacetate</description></Value>
+ <Value code="i"><description>Nitrate base</description></Value>
+ <Value code="m"><description>Mixed base (nitrate and safety)</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="p"><description>Safety base, polyester</description></Value>
+ <Value code="r"><description>Safety base, mixed</description></Value>
+ <Value code="t"><description>Safety base, triacetate</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="NG"><name>Nonprojected graphic</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description></description>
+ <Value code="k"><description>Nonprojected graphic</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Special class of nonprojected graphic to which the item belongs, (e.g., a picture).</description>
+ <Value code="a"><description>a- Aktivitetskort</description></Value>
+ <Value code="c"><description>Kollage</description></Value>
+ <Value code="d"><description>d- Teckning</description></Value>
+ <Value code="e"><description>Painting</description></Value>
+ <Value code="f"><description>Photomechanical print</description></Value>
+ <Value code="g"><description>Fotonegativ </description></Value>
+ <Value code="h"><description>Photoprint</description></Value>
+ <Value code="i"><description>Bild </description></Value>
+ <Value code="j"><description>Utskrift</description></Value>
+ <Value code="k"><description>Affisch</description></Value>
+ <Value code="l"><description>Technical drawing</description></Value>
+ <Value code="n"><description>Diagram</description></Value>
+ <Value code="o"><description>Flash card</description></Value>
+ <Value code="p"><description>Vykort </description></Value>
+ <Value code="q"><description>Ikon</description></Value>
+ <Value code="r"><description>Radiograph</description></Value>
+ <Value code="s"><description>Study print</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="v"><description>Fotografi, ospecificerad typ </description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description>
+ </Position>
+ <Position pos="03"><name>Färg</name><description>03- Färg</description>
+ <Value code="a"><description>En färg</description></Value>
+ <Value code="b"><description>Svartvit</description></Value>
+ <Value code="c"><description>c- Kartan är i flera färger</description></Value>
+ <Value code="h"><description>Handkolorerad</description></Value>
+ <Value code="m"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>Primärt stödmaterial </name><description>Type of material used for the support or base on which an image is printed or executed.</description>
+ <Value code="a"><description>Canvas</description></Value>
+ <Value code="b"><description>b- Bristol board</description></Value>
+ <Value code="c"><description>Kartong/illustration board</description></Value>
+ <Value code="d"><description>Glas </description></Value>
+ <Value code="e"><description>e- Syntetiskt material</description></Value>
+ <Value code="f"><description>f- Skinn</description></Value>
+ <Value code="g"><description>g- Textil</description></Value>
+ <Value code="h"><description>Metall</description></Value>
+ <Value code="i"><description>Plast </description></Value>
+ <Value code="l"><description>Vinyl </description></Value>
+ <Value code="m"><description>m- Samling i blandade material</description></Value>
+ <Value code="n"><description>n- Velin</description></Value>
+ <Value code="o"><description>Papper</description></Value>
+ <Value code="p"><description>i- Gips</description></Value>
+ <Value code="q"><description>Hardboard</description></Value>
+ <Value code="r"><description>Porslin </description></Value>
+ <Value code="s"><description>Sten</description></Value>
+ <Value code="t"><description>Trä</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="v"><description>Läder</description></Value>
+ <Value code="w"><description>Pergament </description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>Sekundärt stödmaterial </name><description>Type of material (other than normal museum matting) to which the primary support (007/04) is attached.</description>
+ <Value code="#"><description>Inget sekundärt stöd</description></Value>
+ <Value code="a"><description>Canvas</description></Value>
+ <Value code="b"><description>b- Bristol board</description></Value>
+ <Value code="c"><description>Kartong/illustration board</description></Value>
+ <Value code="d"><description>Glas </description></Value>
+ <Value code="e"><description>e- Syntetiskt material</description></Value>
+ <Value code="f"><description>f- Skinn</description></Value>
+ <Value code="g"><description>g- Textil</description></Value>
+ <Value code="h"><description>Metall</description></Value>
+ <Value code="i"><description>Plast </description></Value>
+ <Value code="l"><description>Vinyl </description></Value>
+ <Value code="m"><description>m- Samling i blandade material</description></Value>
+ <Value code="n"><description>n- Velin</description></Value>
+ <Value code="o"><description>Papper</description></Value>
+ <Value code="p"><description>i- Gips</description></Value>
+ <Value code="q"><description>Hardboard</description></Value>
+ <Value code="r"><description>Porslin </description></Value>
+ <Value code="s"><description>Sten</description></Value>
+ <Value code="t"><description>Trä</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="v"><description>Läder</description></Value>
+ <Value code="w"><description>Pergament </description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="MP"><name>Spelfilm</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description></description>
+ <Value code="m"><description>Spelfilm</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Special class of motion picture to which the item belongs., e.g., a film reel.</description>
+ <Value code="c"><description>Film cartridge</description></Value>
+ <Value code="f"><description>Film cassette</description></Value>
+ <Value code="o"><description>Film roll</description></Value>
+ <Value code="r"><description>Film reel</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description>
+ </Position>
+ <Position pos="03"><name>Färg</name><description>03- Färg</description>
+ <Value code="b"><description>Svartvit</description></Value>
+ <Value code="c"><description>c- Kartan är i flera färger</description></Value>
+ <Value code="h"><description>Handkolorerad</description></Value>
+ <Value code="m"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>Motion picture presentation format</name><description>Presentation format for motion pictures.</description>
+ <Value code="a"><description>Standard sound aperture (reduced frame)</description></Value>
+ <Value code="b"><description>Nonanamorphic (wide-screen)</description></Value>
+ <Value code="c"><description>3D</description></Value>
+ <Value code="d"><description>d- Anamorf vidfilm</description></Value>
+ <Value code="e"><description>Other wide-screen format</description></Value>
+ <Value code="f"><description>Standard silent aperture (full frame)</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>05 Ljud och dess plats</name><description>Whether the sound is on the item or separate from the item. </description>
+ <Value code="#"><description>Inget ljud (tyst) </description></Value>
+ <Value code="a"><description>a- Ljud finns på samma bärare</description></Value>
+ <Value code="b"><description>b- Ljud finns på separat bärare</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06"><name>06 Ljudbärare</name><description>Specific medium used to carry the sound of an item (whether that sound is carried on the item itself or is in the form of accompanying material) and the type of sound playback required.</description>
+ <Value code="#"><description>Inget ljud (tyst) </description></Value>
+ <Value code="a"><description>a- Optiskt ljudspår på spelfilm</description></Value>
+ <Value code="b"><description>b- Magnetiskt ljudspår på spelfilm</description></Value>
+ <Value code="c"><description>c- Magnetiskt ljudband i magasin</description></Value>
+ <Value code="d"><description>Ljudskiva</description></Value>
+ <Value code="e"><description>Magnetband för ljud på spole</description></Value>
+ <Value code="f"><description>Magnetband för ljud i kassett</description></Value>
+ <Value code="g"><description>g- Optiskt och magnetiskt ljudspår på spelfilm</description></Value>
+ <Value code="h"><description>Videoband </description></Value>
+ <Value code="i"><description>i- Videoskiva</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="07"><name>Dimensioner</name><description>Filmbredd</description>
+ <Value code="a"><description>Standard 8 mm </description></Value>
+ <Value code="b"><description>Super 8 mm./single 8 mm.</description></Value>
+ <Value code="c"><description>9,5 mm</description></Value>
+ <Value code="d"><description>d- 16 mm</description></Value>
+ <Value code="e"><description>28 mm</description></Value>
+ <Value code="f"><description>35 mm</description></Value>
+ <Value code="g"><description>g- 70 mm</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="08"><name>08- Ljudkonfiguration</name><description>08- Ljudkonfiguration</description>
+ <Value code="k"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="m"><description>Monaural</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="q"><description>Kvadrofonisk, multikanal, eller surround</description></Value>
+ <Value code="s"><description>Stereofonisk </description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="09"><name>Produktionselement </name><description>Whether the film is part of a complete production or is a preliminary or post-production element.</description>
+ <Value code="a"><description>Workprint</description></Value>
+ <Value code="b"><description>Trims</description></Value>
+ <Value code="c"><description>Outtakes</description></Value>
+ <Value code="d"><description>Rushes</description></Value>
+ <Value code="e"><description>Mixing tracks</description></Value>
+ <Value code="f"><description>Title bands/inter-title rolls</description></Value>
+ <Value code="g"><description>Production rolls</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="10"><name>Positiv/negativ aspekt</name><description>Whether the film is positive or negative.</description>
+ <Value code="a"><description>Positiv </description></Value>
+ <Value code="b"><description>Negativ </description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="11"><name>Generation</name><description>How far away from the original material the item is (e.g., the actual negative film or original videotape in the camera). Generation data is used to evaluate the quality of available copies, to make preservation decisions, and to identify materials available for viewing and research.</description>
+ <Value code="d"><description>Duplicera</description></Value>
+ <Value code="e"><description>e- master</description></Value>
+ <Value code="o"><description>Ursprunglig</description></Value>
+ <Value code="r"><description>Reference print/viewing copy</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="12"><name>Filmbas</name><description></description>
+ <Value code="a"><description>Safety base, undetermined</description></Value>
+ <Value code="c"><description>Safety base, acetate undetermined</description></Value>
+ <Value code="d"><description>Safety base, diacetate</description></Value>
+ <Value code="i"><description>Nitrate base</description></Value>
+ <Value code="m"><description>Mixed base (nitrate and safety)</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="p"><description>Safety base, polyester</description></Value>
+ <Value code="r"><description>Safety base, mixed</description></Value>
+ <Value code="t"><description>Safety base, triacetate</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="13"><name>Refined categories of color</name><description>More specific color characteristics of the moving image than are contained in 007/03 (Color). </description>
+ <Value code="a"><description>Integrerad trelagersteknik</description></Value>
+ <Value code="b"><description>b- Två färger, röd-grön Technicolor, på samma remsa</description></Value>
+ <Value code="c"><description>Undetermined 2 color</description></Value>
+ <Value code="d"><description>Undetermined 3 color</description></Value>
+ <Value code="e"><description>e- Technicolor med tre separata filmremsor för grönt, rött, blått</description></Value>
+ <Value code="f"><description>f- Färgverkan erhålles genom samverkan från två separata negativ</description></Value>
+ <Value code="g"><description>Red strip</description></Value>
+ <Value code="h"><description>Blue strip eller Green strip</description></Value>
+ <Value code="i"><description>i- Cyan strip</description></Value>
+ <Value code="j"><description>Magenta strip</description></Value>
+ <Value code="k"><description>Yellow strip</description></Value>
+ <Value code="l"><description>S E N 2</description></Value>
+ <Value code="m"><description>S E N 3</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="p"><description>p- Sepiatonad svartvit film</description></Value>
+ <Value code="q"><description>Other tone</description></Value>
+ <Value code="r"><description>Tint</description></Value>
+ <Value code="s"><description>Tinted and toned</description></Value>
+ <Value code="t"><description>Stencilfärg</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="v"><description>Handkolorerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="14"><name>Kind of color stock or print</name><description>Type of color film stock or color print the item represents.</description>
+ <Value code="a"><description>Imbibition dye transfer prints</description></Value>
+ <Value code="b"><description>Three-layer stock</description></Value>
+ <Value code="c"><description>Three layer stock, low fade</description></Value>
+ <Value code="d"><description>d- Dubbelsidig emulsion</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="15"><name>Försämringsgrad</name><description>Level of deterioration of the motion picture film.</description>
+ <Value code="a"><description>None apparent</description></Value>
+ <Value code="b"><description>b- Nitratfilm: misstänkt lukt</description></Value>
+ <Value code="c"><description>c- Nitratfilm: påträngande lukt</description></Value>
+ <Value code="d"><description>d- Nitratfilm: Missfärgning, blekning, viss brun ton</description></Value>
+ <Value code="e"><description>e- Nitratfilm: klibbig</description></Value>
+ <Value code="f"><description>f- Nitratfilm: bubblor och blåsor</description></Value>
+ <Value code="g"><description>g- Nitratfilm: hopklibbad</description></Value>
+ <Value code="h"><description>h- Nitratfilm: smulor</description></Value>
+ <Value code="k"><description>k- Icke nitratfilm: Märkbart sönderfall</description></Value>
+ <Value code="l"><description>l- Icke nitratfilm: Framskridet sönderfall</description></Value>
+ <Value code="m"><description>m- Icke nitratfilm: Obrukbar</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="16"><name>Fullständighet </name><description>Whether or not the item being cataloged is judged to be complete.</description>
+ <Value code="c"><description>Komplett</description></Value>
+ <Value code="i"><description>Ofullständig</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="17-22"><name>Film inspection date</name><description>Six characters that indicate the most recent film inspection date; the date is recorded in the pattern ccyymm (century/year/month). A hyphen is used for any unknown portion of the date. Six fill characters (||||||) are used if no attempt is made to code these character positions.</description>
+ </Position>
+ </Material>
+ <Material id="KT"><name>Kit</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description></description>
+ <Value code="o"><description>Kit</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Special class of textual material to which an item belongs.</description>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="NM"><name>Noterad musik</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description></description>
+ <Value code="q"><description>Noterad musik</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Special class of textual material to which an item belongs.</description>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="RI"><name>Fjärravkänningsbild</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description></description>
+ <Value code="r"><description>Fjärravkänningsbild</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Special class of material, usually the class of physical object, to which an item belongs.</description>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description>
+ </Position>
+ <Position pos="03"><name>Sensorhöjd</name><description>General position of the sensor relative to to the object under study.</description>
+ <Value code="a"><description>Surface</description></Value>
+ <Value code="b"><description>Luftburen</description></Value>
+ <Value code="c"><description>Spaceborne</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>Sensorhöjd</name><description>General angle of the device from which the remote-sensing image is made.</description>
+ <Value code="a"><description>Low oblique</description></Value>
+ <Value code="b"><description>High oblique</description></Value>
+ <Value code="c"><description>Vertikal </description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>Molntäcke </name><description>Avser molntäcket vid tidpunkten för undersökningen.</description>
+ <Value code="0"><description>0-9%</description></Value>
+ <Value code="1"><description>10-19%</description></Value>
+ <Value code="2"><description>2- 20-29%</description></Value>
+ <Value code="3"><description>3- 30-39%</description></Value>
+ <Value code="4"><description>4- 40-49%</description></Value>
+ <Value code="5"><description>5- 50-59%</description></Value>
+ <Value code="6"><description>6- 60-69%</description></Value>
+ <Value code="7"><description>7- 70-79%</description></Value>
+ <Value code="8"><description>8- 80-89%</description></Value>
+ <Value code="9"><description>9- 90-100%</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06"><name>Platform construction type</name><description>Type of construction of the platform serving as the base for the remote-sensing device. For the purposes of this data element, "platform" refers to any structure that serves as a base, not only flat surfaces.</description>
+ <Value code="a"><description>a- Ballong</description></Value>
+ <Value code="b"><description>b- Flygplan på låg höjd (under 9.000 meter)</description></Value>
+ <Value code="c"><description>c- Flygplan på medelhöjd (9.000 - 15.000 meter)</description></Value>
+ <Value code="d"><description>d- Flygplan på hög höjd (över 15.000 meter)</description></Value>
+ <Value code="e"><description>Bemannad rymdfarkost</description></Value>
+ <Value code="f"><description>Obemannad rymdfarkost</description></Value>
+ <Value code="g"><description>Land-based remote-sensing device</description></Value>
+ <Value code="h"><description>Water surface-based remote-sensing device</description></Value>
+ <Value code="i"><description>Submersible remote-sensing device</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="07"><name>Platform use category</name><description>Primary use intended for the platform specified in 007/06 (Platform construction type).</description>
+ <Value code="a"><description>Meteorologisk</description></Value>
+ <Value code="b"><description>Surface observing</description></Value>
+ <Value code="c"><description>Space observing</description></Value>
+ <Value code="m"><description>Mixed uses</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="08"><name>Sensor type</name><description>For the recording mode of the remote-sensing device, specifically, whether the sensor is involved in the creation of the transmission it eventually measures.</description>
+ <Value code="a"><description>Aktiv</description></Value>
+ <Value code="b"><description>Passiv</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="09-10"><name>Datatyp</name><description>Spectral, acoustic, or magnetic characteristics of the data received by the device producing the remote-sensing image. It can be used to indicate both the wave length of radiation measured and the type of sensor used to measure it.</description>
+ <Value code="aa"><description>Visible light</description></Value>
+ <Value code="da"><description>Near infrared</description></Value>
+ <Value code="db"><description>Middle infrared</description></Value>
+ <Value code="dc"><description>dc- Far infrared</description></Value>
+ <Value code="dd"><description>Thermal infrared</description></Value>
+ <Value code="de"><description>Shortwave infrared (SWIR)</description></Value>
+ <Value code="df"><description>Reflective infrared</description></Value>
+ <Value code="dv"><description>dv- Kombinationer</description></Value>
+ <Value code="dz"><description>Other infrared data</description></Value>
+ <Value code="ga"><description>Sidelooking airborne radar (SLAR)</description></Value>
+ <Value code="gb"><description>Synthetic aperture radar (SAR)-Single frequency</description></Value>
+ <Value code="gc"><description>SAR-multi-frequency (multichannel)</description></Value>
+ <Value code="gd"><description>SAR-like polarization</description></Value>
+ <Value code="ge"><description>SAR-cross polarization</description></Value>
+ <Value code="gf"><description>Infometric SAR</description></Value>
+ <Value code="gg"><description>gg- polarmetric SAR</description></Value>
+ <Value code="gu"><description>Passive microwave mapping</description></Value>
+ <Value code="gz"><description>Other microwave data</description></Value>
+ <Value code="ja"><description>ja- Far ultraviolet</description></Value>
+ <Value code="jb"><description>Middle ultraviolet</description></Value>
+ <Value code="jc"><description>Near ultraviolet</description></Value>
+ <Value code="jv"><description>Ultraviolet combinations</description></Value>
+ <Value code="jz"><description>Other ultraviolet data</description></Value>
+ <Value code="ma"><description>Multi-spectral, multidata</description></Value>
+ <Value code="mb"><description>Multi-temporal</description></Value>
+ <Value code="mm"><description>mm- Combination of various data types</description></Value>
+ <Value code="nn"><description>Ej tillämpligt</description></Value>
+ <Value code="pa"><description>pa- Sonar--water depth</description></Value>
+ <Value code="pb"><description>pb- Sonar--bottom topography images, sidescan</description></Value>
+ <Value code="pc"><description>pc- Sonar--bottom topography, near-surface</description></Value>
+ <Value code="pd"><description>pd- Sonar--bottom topography, near-bottom</description></Value>
+ <Value code="pe"><description>Seismiska undersökningar</description></Value>
+ <Value code="pz"><description>Other acoustical data</description></Value>
+ <Value code="ra"><description>Gravity anomalies (general)</description></Value>
+ <Value code="rb"><description>Free-air</description></Value>
+ <Value code="rc"><description>rc- Bouger</description></Value>
+ <Value code="rd"><description>Isostatic</description></Value>
+ <Value code="sa"><description>Magnetic field</description></Value>
+ <Value code="ta"><description>ta- radiometric surveys</description></Value>
+ <Value code="uu"><description>Okänt</description></Value>
+ <Value code="zz"><description>Annat</description></Value>
+ <Value code="||"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="SR"><name>Ljudinspelning</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description></description>
+ <Value code="s"><description>Ljudinspelning</description></Value>
+ </Position>
+ <Position pos="01">Specifik materialbenämning <name></name><description>Special class of sound recording to which the item belongs (e.g., a cylinder).</description>
+ <Value code="b"><description>Belt</description></Value>
+ <Value code="d"><description>Ljudskiva</description></Value>
+ <Value code="e"><description>Cylinder </description></Value>
+ <Value code="g"><description>Sound cartridge</description></Value>
+ <Value code="i"><description>Ljudfilm</description></Value>
+ <Value code="q"><description>Roll</description></Value>
+ <Value code="r"><description>r- Fjärranslutning</description></Value>
+ <Value code="s"><description>Ljudkassett </description></Value>
+ <Value code="t"><description>Sound-tape reel</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="w"><description>Trådinspelning </description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|)</description>
+ </Position>
+ <Position pos="03"><name>Hastighet </name><description>Playback speed of the sound recording. This code is only intended to relate to the playing speed of a sound recording rendered on a mechanical device.</description>
+ <Value code="d"><description>Ljudskiva</description></Value>
+ <Value code="a"><description>a- 16 v/m (skiva) </description></Value>
+ <Value code="b"><description>33 v/m (grammofonskiva)</description></Value>
+ <Value code="c"><description>45 v/m (grammofonskiva)</description></Value>
+ <Value code="d"><description>78 v/m (grammofonskiva)</description></Value>
+ <Value code="e"><description>8 v/m (grammofonskiva)</description></Value>
+ <Value code="f"><description>1.4 m. per sekund (cd)</description></Value>
+ <Value code="h"><description>120 v/m (cylinder)</description></Value>
+ <Value code="i"><description>160 v/m (cylinder)</description></Value>
+ <Value code="k"><description>k- 38 cm/s (magnetband)</description></Value>
+ <Value code="l"><description>1 7/8 ips (kassettband)</description></Value>
+ <Value code="m"><description>m- 9,5 cm/s (magnetband) </description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="o"><description>19 cm/s (magnetband)</description></Value>
+ <Value code="p"><description>p- 38 cm/s (magnetband)</description></Value>
+ <Value code="r"><description>r- 30 tum per sekund (rulle, kassett, spole)</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>08- Ljudkonfiguration</name><description>04- Ljudkonfiguration</description>
+ <Value code="m"><description>Monaural</description></Value>
+ <Value code="q"><description>Kvadrofonisk, multikanal, eller surround</description></Value>
+ <Value code="s"><description>Stereofonisk </description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>Groove width/groove pitch</name><description>Width of the groove of the recording for discs or the pitch of the groove for cylinders.</description>
+ <Value code="m"><description>m- mikrospår</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="s"><description>s- Standardspår</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06"><name>Dimensioner</name><description>06- Avser ljudsspolar (diameter), ljudskivor (diameter), ljudkassetter, ljudmagasin och ljudcylindrar.</description>
+ <Value code="a"><description>3 tums diameter</description></Value>
+ <Value code="b"><description>5 tums diameter</description></Value>
+ <Value code="c"><description>7 tums diameter</description></Value>
+ <Value code="d"><description>d- 10 tums diameter </description></Value>
+ <Value code="e"><description>e- 12 tums diameter</description></Value>
+ <Value code="f"><description>f- 16 tums diameter</description></Value>
+ <Value code="g"><description>g- 4 3/4 tum eller 12 cm i diameter</description></Value>
+ <Value code="j"><description>j- 3 7/8 x 2 1/2 tum</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="o"><description>o- 5 1/4 x 3 7/8 tum</description></Value>
+ <Value code="s"><description>s- 2 ¾ x 4 tum (diameter x längd)</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="07"><name>Bandbredd </name><description>Bandbredd.</description>
+ <Value code="l"><description>1/8 in.</description></Value>
+ <Value code="m"><description>1/4 in.</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="o"><description>1/2 in.</description></Value>
+ <Value code="p"><description>1 in.</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="08"><name>Bandkonfiguration</name><description>Antal spår på ett band. </description>
+ <Value code="a"><description>Full (1) track</description></Value>
+ <Value code="b"><description>Half (2) track</description></Value>
+ <Value code="c"><description>Quarter (4) track</description></Value>
+ <Value code="d"><description>d- Åtta spår</description></Value>
+ <Value code="e"><description>Twelve track</description></Value>
+ <Value code="f"><description>Sixteen track</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="09"><name>Kind of disc, cylinder or tape</name><description></description>
+ <Value code="a"><description>Masterband</description></Value>
+ <Value code="b"><description>Tape duplication master</description></Value>
+ <Value code="d"><description>d- Negativ modermatris</description></Value>
+ <Value code="i"><description>Instantaneous (recorded on the spot)</description></Value>
+ <Value code="m"><description>Massproducerad</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="r"><description>Modermatris (positiv)</description></Value>
+ <Value code="s"><description>Stamper (negative)</description></Value>
+ <Value code="t"><description>Provskiva</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="10"><name>Materialtyp </name><description>Kind of material used in the manufacture of sound recordings (both instantaneous and mass-produced). This code is only intended to relate to a sound recording rendered on a mechanical device.</description>
+ <Value code="a"><description>Lacquer coating</description></Value>
+ <Value code="b"><description>b- Cellulosanitrat</description></Value>
+ <Value code="c"><description>c- Acetatbas med järnoxidyta</description></Value>
+ <Value code="g"><description>Glass with lacquer</description></Value>
+ <Value code="i"><description>Aluminium, lack</description></Value>
+ <Value code="l"><description>Metall</description></Value>
+ <Value code="m"><description>Plast med metall </description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="p"><description>Plast </description></Value>
+ <Value code="r"><description>Papper med lack eller järnoxid </description></Value>
+ <Value code="s"><description>Schellack</description></Value>
+ <Value code="w"><description>Vax</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="11"><name>Kind of cutting</name><description>Kind of cutting of the grooves used on a disc.</description>
+ <Value code="a"><description>Lacquer coating</description></Value>
+ <Value code="h"><description>Vertikalgraverad</description></Value>
+ <Value code="l"><description>Lateral or combined cutting</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="12"><name>Speciella uppspelningsegenskaper</name><description>Playback characteristics for sound recordings, including special equipment or equalization necessary for proper playback. This code is not used to indicate special processes used during recording unless those processes must be applied during playback.</description>
+ <Value code="a"><description>Lacquer coating</description></Value>
+ <Value code="a"><description>NAB-standard</description></Value>
+ <Value code="b"><description>b- CCIR standard</description></Value>
+ <Value code="c"><description>Dolby-B-kodad </description></Value>
+ <Value code="d"><description>dbx-kodad</description></Value>
+ <Value code="e"><description>Digital inspelning </description></Value>
+ <Value code="f"><description>Dolby-A-kodad </description></Value>
+ <Value code="g"><description>Dolby-C-kodad </description></Value>
+ <Value code="h"><description>CX-kodad</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="13"><name>Original capture and storage technique</name><description>How the sound was originally captured and stored. Sound recordings should be coded for the original capture and storage techniques, regardless of the physical format of the manifestation being cataloged or whether the sound content of the manifestation being cataloged has been enhanced using other techniques.</description>
+ <Value code="a"><description>Acoustical capture, analog direct storage</description></Value>
+ <Value code="b"><description>Electrical capture, analog direct storage</description></Value>
+ <Value code="d"><description>Electrical capture, digital storage</description></Value>
+ <Value code="e"><description>Electrical capture, analog electrical storage</description></Value>
+ <Value code="u"><description>Unknown capture and storage</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="TC"><name>Text</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description></description>
+ <Value code="t"><description>Text</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description></description>
+ <Value code="a"><description>Regelbunden utskrift</description></Value>
+ <Value code="b"><description>Storstil</description></Value>
+ <Value code="c"><description>Punktskrift</description></Value>
+ <Value code="d"><description>Lösblad</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="VR"><name>Videoinspelning</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description>One-character alphabetic code that indicates the category of material to which the item belongs is videorecording, which is defined as a recording on which visual images, usually in motion and accompanied by sound, have been registered. It is designed for playback on a television receiver, or video monitor. A fill character (|) is not allowed in this position.</description>
+ <Value code="v"><description>Videoinspelning</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Special class of videorecording to which an item belongs.</description>
+ <Value code="c"><description>Videocartridge</description></Value>
+ <Value code="d"><description>i- Videoskiva</description></Value>
+ <Value code="f"><description>Videokassett </description></Value>
+ <Value code="r"><description>Videoreel</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="02"><name>Odefinierad</name><description>Innehåller ett tomt tecken (#) eller har ett fyllnadstecken (|). </description>
+ </Position>
+ <Position pos="03"><name>Färg</name><description>03- Färg</description>
+ <Value code="a"><description>En färg</description></Value>
+ <Value code="b"><description>Svartvit</description></Value>
+ <Value code="c"><description>c- Kartan är i flera färger</description></Value>
+ <Value code="m"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="04"><name>Videorecording format</name><description>Videotape or videodisc recording format.</description>
+ <Value code="a"><description>a- Beta (1/2 tum, videokassett)</description></Value>
+ <Value code="b"><description>VHS (1/2 in., videocassette)</description></Value>
+ <Value code="c"><description>U-matic (3/4 in., videocasstte)</description></Value>
+ <Value code="d"><description>d- EIAJ (1/2 tum, videospole)</description></Value>
+ <Value code="e"><description>Type C (1 in., reel)</description></Value>
+ <Value code="f"><description>Quadruplex (1 in. or 2 in., reel)</description></Value>
+ <Value code="g"><description>Laserdisc</description></Value>
+ <Value code="h"><description>h- CED (Capacitance Electronic Disc) videodisc</description></Value>
+ <Value code="i"><description>i- Betacam (1/2 tum, videokassett)</description></Value>
+ <Value code="j"><description>j- Betacam SP (1/2 tum, videokassett)</description></Value>
+ <Value code="k"><description>Super-VHS (1/2 in., videocassette)</description></Value>
+ <Value code="m"><description>M-II (1/2 in., videocassette)</description></Value>
+ <Value code="o"><description>o- D-2 (3/4 tum, videokassett)</description></Value>
+ <Value code="p"><description>8 mm</description></Value>
+ <Value code="q"><description>Hi-8 mm.</description></Value>
+ <Value code="s"><description>s- Blu-ray disc</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="v"><description>DVD</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="05"><name>05 Ljud och dess plats</name><description>Whether the sound is on the item or separate from the item (i.e., on the accompanying material). </description>
+ <Value code="#"><description>Inget ljud (tyst) </description></Value>
+ <Value code="a"><description>a- Ljud finns på samma bärare</description></Value>
+ <Value code="b"><description>b- Ljud finns på separat bärare</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="06"><name>06 Ljudbärare</name><description>Specific medium used to carry the sound of an item, whether that sound is carried on the videorecording or is separate, and the type of sound playback required for the item.</description>
+ <Value code="#"><description>Inget ljud (tyst) </description></Value>
+ <Value code="a"><description>a- Optiskt ljudspår på spelfilm</description></Value>
+ <Value code="b"><description>b- Magnetiskt ljudspår på spelfilm</description></Value>
+ <Value code="c"><description>c- Magnetiskt ljudband i magasin</description></Value>
+ <Value code="d"><description>Ljudskiva</description></Value>
+ <Value code="e"><description>Magnetband för ljud på spole</description></Value>
+ <Value code="f"><description>Magnetband för ljud i kassett</description></Value>
+ <Value code="g"><description>g- Optiskt och magnetiskt ljudspår på spelfilm</description></Value>
+ <Value code="h"><description>Videoband </description></Value>
+ <Value code="i"><description>i- Videoskiva</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="07"><name>Dimensioner</name><description> Width of the videorecording. For videorecordings, only codes that exactly match the measurements of the item as given in the physical description should be used. If no code exactly matches, code z is used.</description>
+ <Value code="a"><description>8 mm</description></Value>
+ <Value code="m"><description>1/4 in.</description></Value>
+ <Value code="o"><description>1/2 in.</description></Value>
+ <Value code="p"><description>1 in.</description></Value>
+ <Value code="q"><description>2 tum</description></Value>
+ <Value code="r"><description>3/4 tum</description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ <Position pos="08"><name>08- Ljudkonfiguration</name><description>Konfiguration av kanaler för ljuddelen av en videoinspelning</description>
+ <Value code="k"><description>m- Kombination av flera färgtekniker</description></Value>
+ <Value code="m"><description>Monaural</description></Value>
+ <Value code="n"><description>Ej tillämpligt</description></Value>
+ <Value code="q"><description>Kvadrofonisk, multikanal, eller surround</description></Value>
+ <Value code="s"><description>Stereofonisk </description></Value>
+ <Value code="u"><description>Okänt</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+ <Material id="UN"><name>Ospecificerad</name><description></description>
+ <Position pos="00"><name>Materialkategori </name><description>One-character alphabetic code that indicates the category of material to which the item belongs is unspecified, which means that the item is not identified by one of the other 007 code values or that its multiple physical forms are not being specifically denoted (for instance, when the item in hand is a collection containing different material categories and an institution chooses not to input separate 007 fields for the various components). A fill character (|) is not allowed in this position.</description>
+ <Value code="z"><description>Ospecificerad</description></Value>
+ </Position>
+ <Position pos="01"><name>Specifik materialbenämning </name><description>Special class of material to which the item belongs</description>
+ <Value code="m"><description>Multiple physical forms</description></Value>
+ <Value code="u"><description>Ospecificerad</description></Value>
+ <Value code="z"><description>Annat</description></Value>
+ <Value code="|"><description>Inget försök att koda</description></Value>
+ </Position>
+ </Material>
+</Tagfield>

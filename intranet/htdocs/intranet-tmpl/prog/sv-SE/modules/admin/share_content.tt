@@ -1,0 +1,175 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Share content with Mana KB") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_share_content" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Dela innehåll med Mana KB</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ [% INCLUDE 'messages.inc' %]
+ [% IF result.code != 201 && result.msg %]
+ <div class="alert alert-warning" role="alert">
+ [% result.msg | html %]
+ </div>
+ [% END %]
+
+ [% IF result.code == 201  %]
+ <div class="alert alert-info" role="alert">
+ Du har skapat ett Mana KB-konto. Kontrollera din e-post och följ instruktionerna. </div>
+ [% END %]
+
+ [% UNLESS (mana_url) %]
+ <div class="alert alert-warning" role="alert">
+ Manakonfigurationen är just nu tom. Den här funktionen fungerar inte. Kontakta din systemadministratör. </div>
+ [% ELSIF (bad_url) %]
+ <div class="alert alert-warning" role="alert">
+ Hittar inte mana server vid <strong>[% mana_url | url %]</strong>, vänligen be en administratör att kontrollera din behörighet. </div>
+ [% END %]
+
+ <h1>Dela innehåll med Koha-gemenskapen med Mana KB</h1>
+ <p>Mana KB är en global knowledge base för bibliotekscentrerad data. Det har ursprungligen utvecklats för att interagera med Koha, ett bibliotekssystem baserat på öppen källkod, men kan användas av annan programvara.</p>
+
+ <p>Mana centraliserar information mellan olika Kohainstallationer för att underlätta skapandet av nya prenumerationer, leverantörer, rapporter etc. Du kan söka, dela, importera och kommentera på innehåll i Mana. Den delade informationen i Mana KB delas under <a href="https://creativecommons.org/choose/zero/">CC-0-licens</a>.
+
+ <p>Läs mer om Mana KB på <a href="https://wiki.koha-community.org/wiki/Mana_central_database">officiell dokumentation av Mana KB</a>.</p>
+
+ [% IF mana_url && !bad_url %]
+ [% IF (mana_url) %]
+ <p>Din Mana KB-server är just nu: <strong>[% mana_url | url %]</strong></p>
+ [% END %]
+
+ <form id="mana_preference" method="post" class="clearfix">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="mana">Använd Mana KB för att dela innehåll: </label>
+ <select name="mana" id="mana">
+ [% IF Koha.Preference('Mana') == 0 %]
+ <option value="0" selected="selected">Nej</option>
+ [% ELSE %]
+ <option value="0">Nej</option>
+ [% END %]
+
+ [% IF Koha.Preference('Mana') == 1 %]
+ <option value="1" selected="selected">Ja</option>
+ [% ELSE %]
+ <option value="1">Ja</option>
+ [% END %]
+ [% IF Koha.Preference('Mana') == 2 %]
+ <option value="2" selected="selected">Nej, låt mig fundera på det</option>
+ [% ELSE %]
+ <option value="2">Nej, låt mig fundera på det</option>
+ [% END %]
+ </select>
+ <div class="hint">Aktivera Mana KB för att söka, importera och kommentera innehåll från Mana KB-servern och dela ditt eget.</div>
+ </li>
+ <li>
+ <label for="autosharewithmana">Automatisk delning av prenumerationer: </label>
+ [% IF Koha.Preference('AutoShareWithMana').grep('subscription').size == 0 %]
+ <input id="autosharewithmana" type="checkbox" name="autosharewithmana">
+ [% ELSE %]
+ <input id="autosharewithmana" type="checkbox" name="autosharewithmana" checked="checked">
+ [% END %]
+ <span class="hint">Om ikryssad kommer nya prenumerationer automatiskt delas med Mana KB.</span>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-save" />
+ <input class="btn btn-primary" type="submit" value="Spara" />
+ </fieldset>
+ </form>
+
+ [% UNLESS Koha.Preference('ManaToken') %]
+ <h3>Konfigurera Mana KB</h3>
+
+ <p>När du har aktiverat Mana måste det konfigureras. Ange namn och e-postadress och skicka in, så sänds en begäran om konto till Mana KB, som i sin tur skickar tillbaka ett Mana KB-token (ett krypterat ID som unikt identifierar din Kohainstallation). Detta token kommer automatiskt att sparas i din databas. Därefter får du ett mejl. Läs det och följ instruktionerna.</p>
+ [% END %]
+
+ [% IF Koha.Preference('ManaToken') %]
+ <form id="mana_token" method="post" class="clearfix">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <legend>Mana KB-token</legend>
+ <ol>
+ <li>
+ <label for="token">Manatoken: </label>
+ <input type="text" id="token" name="token" value="[% Koha.Preference('ManaToken') | html %]" size="50" disabled="disabled" />
+ <div class="hint">Din unika säkerhetstoken för autentisering på Mana KB (antispam).</div>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-reset" />
+ <input class="btn btn-primary" type="submit" value="Återställ din token" />
+ </fieldset>
+ </form>
+ [% ELSE %]
+ <form id="mana_request" method="post" class="clearfix">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows" id="mana_subscription">
+ <ol>
+ <li>
+ <label for="name">Ditt namn: </label>
+ <input id="name" type="text" name="name" />
+ <div class="hint">Ange personnamn eller organisation.</div>
+ </li>
+ <li>
+ <label for="email">E-post: </label>
+ <input id="email" type="text" name="email" size="45" required="required" />
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-send" />
+ <input class="btn btn-primary" type="submit" value="Skicka till Mana KB" />
+ </fieldset>
+ </form>
+ [% END %]
+ [% END # /IF mana_url && !bad_url %]
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ <script>
+        $(document).ready(function() {
+            $('#mana_token').submit(function() {
+                return confirm( _("Det här kommer att ta bort Mana KB-token från Koha. Vill du fortsätta?") );
+            });
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

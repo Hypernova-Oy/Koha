@@ -1,0 +1,37 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Order details") | html %] &rsaquo;
+ [% t("Acquisitions") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body id="acq_showorder" class="acq">
+ <div id="main">
+ <h1>Tilauksen tiedot</h1>
+ [% IF order %]
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <span class="label">Luontipvm: </span>
+ [% order.entrydate | html %]
+ </li>
+ <li>
+ <span class="label">Tilaaja: </span>
+ [% INCLUDE 'patron-title.inc' patron = creator %]
+ </li>
+ <li>
+ <span class="label">Reklamaatioita: </span>
+ [% order.claims.count | html %]
+ </li>
+ <li>
+ <span class="label">Viimeisin reklamointipvm: </span>
+ [% order.claims.last.claimed_on | html %]
+ </li>
+ </ol>
+ </fieldset>
+ [% ELSE %] Ei tilauksia [% END %] </div>
+</body>
+</html>

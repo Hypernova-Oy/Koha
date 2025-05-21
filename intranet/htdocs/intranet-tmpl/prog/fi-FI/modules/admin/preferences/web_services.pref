@@ -1,0 +1,138 @@
+---
+Verkkopalvelut:
+  ILS-DI:
+  - - choices:
+        '0': Poista käytöstä
+        '1': Ota käyttöön
+      pref: ILS-DI
+    - 'ILS-DI-palvelut verkkokirjaston käyttäjille (sijainti: /cgi-bin/koha/ilsdi.pl)'
+  - - Allow only IP addresses
+    - class: Text
+      pref: ILS-DI:AuthorizedIPs
+    - to use the ILS-DI services (when enabled). Separate the IP addresses with commas
+      and without spaces. Enter '0:0:0:0/0' or '::/0' to allow any IP.
+  IdRef:
+  - - choices:
+        '0': Poista käytöstä
+        '1': Ota käyttöön
+      pref: IdRef
+    - idRef-palvelu verkkokirjaston perustiedot-näytöllä. IdRed sallii auktoriteettien
+      pyytämisen Sudoc-tietokannasta.
+    - Ota huomioon, että tämä ominaisuus toimii vain UNIMARCin kanssa.
+  Mana-tietämyskanta:
+  - - choices:
+        '0': Poista käytöstä
+        '1': Ota käyttöön
+        '2': Älä ota käyttöön, harkitsen ensin
+      pref: Mana
+    - tietojen vienti Mana-tietämyskantaan. Mana keskittää tietoa Koha asennusten
+      välillä ja helpottaa uusien kausijulkaisutilausten, toimittajien, raporttien
+      yms. luontia. Voit etsiä, jakaa, tuoda ja kommentoida Manassa olevaa sisältöä.
+      Mana-tietämyskannassa jaettu tieto on jaettu <a href="https://creativecommons.org/choose/zero/">CC-0-lisenssillä</a>
+  - - 'Mana-tietämyskantaan tunnistautumisessa käytettävä suojausavain:'
+    - class: Text
+      pref: ManaToken
+    - Hae suojausavain <a href="/cgi-bin/koha/admin/share_content.pl">Mana-tietämyskannan
+      hallintasivulta</a>.
+  - - 'Kentät, jotka jaetaan automaattisesti Mana-tietämyskannalle:'
+    - multiple:
+        subscription: kausijulkaisutilaustiedot
+      pref: AutoShareWithMana
+  OAI-PMH:
+  - - choices:
+        '0': Poista käytöstä
+        '1': Ota käyttöön
+      pref: OAI-PMH
+    - Koha-tietokannan
+    - '<a href="http://www.openarchives.org/pmh/">OAI-PMH-palvelin</a>. (Saatavilla:
+      /cgi-bin/koha/oai.pl?verb=Identify)'
+  - - Lisää tämän tietokannan tietueiden eteen tunniste
+    - pref: OAI-PMH:archiveID
+    - 'Lisää etuliite ilman loppuun laitettua kaksoispistettä (":"). ArchiveID:n täytyy
+      noudattaa OAI:n määrittelyjä. Katso '
+    - '<a href="http://www.openarchives.org/OAI/2.0/guidelines-oai-identifier.htm">Implementation
+      guidelines</a>. '
+    - 'Esimerkki: "oai:example-library.org"'
+  - - Palauta korkeintaan
+    - class: integer
+      pref: OAI-PMH:MaxCount
+    - tietuetta kerrallaan ListRecords- tai ListIdentifiers-kyselyihin.
+  - - 'YAML OAI Koha-palvelimen konfiguraatiotiedosto:'
+    - class: file
+      pref: OAI-PMH:ConfFile
+    - web_services.pref#OAI-PMH:ConfFile# . Jos tyhjä, Kohan OAI-palvelin toimii normaalitilassa,
+      muuten se toimii laajennetussa tilassa. Laajennetussa tilassa voidaan määrittää
+      muitakin formaatteja kuin marcxml tai Dublin Core. <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OAI-PMH:ConfFile">OAI-PMH:ConfFile</a>
+      määrittää YAML-konfiguraatiotiedoston, joka listaa saatavilla olevat metadataformaatit
+      ja XSL-tiedoston, jota käytetään niiden luomiseen marcxml-tietueista.
+  - - choices:
+        '0': Poista käytöstä
+        '1': Ota käyttöön
+      pref: OAI-PMH:AutoUpdateSets
+    - OAI-PMH-joukkojen automaattiset päivitykset, kun bibliografisia tietueita luodaan
+      tai muokataan.
+  - - choices:
+        '0': Poista käytöstä
+        '1': Ota käyttöön
+      pref: OAI-PMH:AutoUpdateSetsEmbedItemData
+    - niteen tietojen upottaminen kun OAI-PMH-setit päivitetään automaattisesti.
+    - <br><strong>HUOM:</strong> Tämä tarvitsee <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OAI-PMH:AutoUpdateSets">OAI-PMH:AutoUpdateSets</a>
+      järjestelmäasetuksen toimiakseen.
+  - - Kohan deletedbiblio-taulu
+    - choices:
+        no: ei sisällä koskaan tietoa (ei)
+        persistent: ei koskaan tyhjennetä tai katkaista (jatkuva)
+        transient: voidaan tyhjentää tai katkaista jossain pisteessä (tilapäinen)
+      pref: OAI-PMH:DeletedRecord
+    - .
+  - - After an OAI-PMH harvest, send a report email to the email address
+    - class: Text
+      pref: OAI-PMH:HarvestEmailReport
+    - .
+  REST API:
+  - - choices:
+        '0': Estä
+        '1': Salli
+      pref: RESTBasicAuth
+    - <a href="https://www.w3.org/Protocols/HTTP/1.0/spec.html#BasicAA" target="_blank">Autentikointi</a>
+      REST APIa varten.
+  - - Aseta oletusmääräksi tuloksille, jotka palautetaan REST APIn endpointin kautta
+    - class: integer
+      pref: RESTdefaultPageSize
+    - sivua kohti.
+  - - choices:
+        '0': Estä
+        '1': Salli
+      pref: RESTOAuth2ClientCredentials
+    - Oauth2-asiakkaan valtuutus REST API:ssa. Vaatii, että Net::OAuth2::AuthorizationServer
+      on asennettu.
+  - - choices:
+        '0': Estä
+        '1': Salli
+      pref: RESTPublicAnonymousRequests
+    - nimetön pääsy julkisiin reitteihin (jotka eivät vaadi tunnistautunutta pääsyä)
+  - - choices:
+        '0': Estä
+        '1': Salli
+      pref: RESTPublicAPI
+    - /public nimiavaruus APIlle.
+  - - Käytä
+    - choices:
+        apirenew: '''APIRenew'''
+        apiuserbranch: API-käyttäjän kotikirjastoa
+        checkoutbranch: niteen lainannutta kirjastoa
+        itemhomebranch: niteen kotikirjastoa
+        none: NULL
+        patronhomebranch: asiakkaan kotikirjastoa
+      pref: RESTAPIRenewalBranch
+    - REST APIn kautta tehdyn uusinnan kirjastokoodina tilastoinnissa.
+  Raportointi:
+  - - Palauta vain
+    - class: integer
+      pref: SvcMaxReportRows
+    - riviä raportista, joka on tehty nettipalvelun kautta.
+  Yleiset:
+  - - Aseta Access-Control-Allow-Origin-headeriksi
+    - class: Text
+      pref: AccessControlAllowOrigin
+    - .

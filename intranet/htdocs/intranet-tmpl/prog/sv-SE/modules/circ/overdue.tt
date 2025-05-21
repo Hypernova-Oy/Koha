@@ -1,0 +1,364 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE AuthorisedValues %]
+[% USE KohaDates %]
+[% USE Koha %]
+[%- USE Branches -%]
+[%- USE Price -%]
+[%- USE ItemTypes -%]
+[%- USE Categories -%]
+[%- USE TablesSettings -%]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% PROCESS 'modal-claims.inc' %]
+<title>[% FILTER collapse %]
+ [% date_in_title = todaysdate | $KohaDates %]
+ [% tx("Items overdue as of {date}", { date = date_in_title }) | html %] &rsaquo;
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% FILTER collapse %]
+ <style>
+        .sql {display:none;}
+        .select2-container--open .select2-dropdown--below,
+        .select2-search.select2-search--dropdown {
+            border: 1px solid #AAA;
+        }
+        .select2-container--open .select2-dropdown--below,
+        .select2-search.select2-search--dropdown,
+        .select2-results {
+            background-color: #FFF;
+            width: 20em !important;
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="circ_overdue" class="circ">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Cirkulation</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Försenade sedan [% todaysdate | $KohaDates %]</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% IF ( noreport ) %]
+ <h1>Förseningsrapport</h1>
+ <p>Välj ett eller flera filter för att fortsätt.</p>
+[% ELSE %]
+
+[% IF ( overdueloop ) %]
+
+ <h2>[% nnoverdue | html %] [% IF ( noverdue_is_plural ) %]Exemplar[% ELSE %]Exemplar[% END %] försenat från den [% todaysdate | $KohaDates %][% IF ( isfiltered ) %] <span style="font-size:70%;">(Filtrerad. <a href="/cgi-bin/koha/circ/overdue.pl">Återställ filter</a>)</span>[% END %]</h2>
+
+ <p>
+ [% IF ( isfiltered ) %]
+ [% SET url_params = '' %]
+ [% FOR var IN filters.keys %]
+ [% url_params = BLOCK %][% url_params | $raw %]&amp;[% var | uri %]=[% filters.$var | uri %][% END %]
+ [% END %]
+ <a href="overdue.pl?op=csv[% url_params | $raw %]">Ladda ner fil med alla visade försenade</a>
+ [% ELSE %]
+ <a href="overdue.pl?op=csv">Ladda ner fil med alla försenade</a>
+ [% END %]
+ </p>
+
+ <div class="sql"><pre>[% sql | html %]</pre></div>
+ <div class="page-section searchresults">
+ <table id="overduest">
+ <thead>
+ <tr>
+ <th>Återlämningsdatum</th>
+ <th>Låntagare</th>
+ <th>Låntagarkategori</th>
+ <th>Låntagarens bibliotek</th>
+ <th class="anti-the">Titel</th>
+ <th>Hembibliotek</th>
+ <th>Nuvarande plats</th>
+ <th>Placering</th>
+ <th>Utlånad den</th>
+ <th>Streckkod</th>
+ <th>Hyllsignatur</th>
+ <th>Exemplartyp</th>
+ <th>Pris</th>
+ <th>Intern anmärkning</th>
+ [% IF Koha.Preference('ClaimReturnedLostValue') %]
+ <th>Påstås återlämnad</th>
+ [% END %]
+ </tr>
+ </thead>
+ [%- BLOCK subject -%]Försenade:[%- END -%] <tbody>
+ [% FOREACH overdueloo IN overdueloop %]
+ <tr>
+ <td data-order="[% overdueloo.duedate | html %]"><span class='overdue'>[% overdueloo.duedate | $KohaDates %]</span></td>
+ <td>
+ [% INCLUDE 'patron-title.inc' patron=overdueloo.patron hide_patron_infos_if_needed=1 %]
+ [% IF logged_in_user.can_see_patron_infos( overdueloo.patron ) %]
+ [% IF ( overdueloo.email ) %][<a href="mailto:[% overdueloo.email | uri %]?subject=[% INCLUDE subject %] [% overdueloo.title | uri %]">e-post</a>][% END %]
+ [% IF ( overdueloo.phone ) %]([% overdueloo.phone | html %])[% ELSIF ( overdueloo.mobile ) %]([% overdueloo.mobile | html %])[% ELSIF ( overdueloo.phonepro ) %]([% overdueloo.phonepro | html %])[% END %]
+ [% END %]
+ </td>
+ <td>[% Categories.GetName( overdueloo.patron.categorycode ) | html %]</td>
+ <td>[% Branches.GetName( overdueloo.patron.branchcode ) | html %]</td>
+ <td>[% INCLUDE 'biblio-title.inc' biblio=overdueloo link = 1 %] [% IF ( overdueloo.author ) %], av [% overdueloo.author | html %][% END %][% IF ( overdueloo.enumchron ) %], [% overdueloo.enumchron | html %][% END %]</td>
+ <td>[% Branches.GetName( overdueloo.homebranchcode ) | html %]</td>
+ <td>[% Branches.GetName( overdueloo.holdingbranchcode ) | html %]</td>
+ <td>[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => overdueloo.location ) | html %]</td>
+ <td data-order="[% overdueloo.datelastborrowed | html %]"><span class='overdue'>[% overdueloo.datelastborrowed | $KohaDates %]</span></td>
+ <td><a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% overdueloo.biblionumber | uri %]&amp;itemnumber=[% overdueloo.itemnum | uri %]#item[% overdueloo.itemnum | uri %]">[% overdueloo.barcode | html %]</a></td>
+ <td>[% overdueloo.itemcallnumber | html %]</td>
+ <td>[% ItemTypes.GetDescription( overdueloo.itemtype ) | html %]</td>
+ <td>[% overdueloo.replacementprice | $Price %]</td>
+ <td>[% overdueloo.itemnotes_nonpublic | html %]</td>
+ [% IF Koha.Preference('ClaimReturnedLostValue') %]
+ <td>
+ [% IF ( overdueloo.return_claim_created_on ) %]
+ <span class="badge">[% overdueloo.return_claim_created_on | $KohaDates with_hours => 1 %]</span>
+ [% ELSE %]
+ <a class="btn btn-default btn-xs claim-returned-btn" data-itemnumber=[% overdueloo.itemnum | html %]>
+ <i class="fa fa-exclamation-circle"></i> Påstås återlämnad </a>
+ [% END %]
+ </td>
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+
+ <!-- Claims Returned Modal -->
+ [% PROCESS 'modal-claims-display' %]
+
+[% ELSE %]
+
+ <h1>Förseningsrapport</h1>
+ [% IF ( isfiltered ) %]
+ <p>Det finns inga övertider som matchar din sökning. <a href="/cgi-bin/koha/circ/overdue.pl">Återställ filter</a></p>
+ [% ELSE %]
+ <p>Det finns inga övertider.</p>
+ [% END %]
+
+[% END %] <!-- overdueloop -->
+[% END %] <!-- noreport -->
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+
+<form method="post" action="/cgi-bin/koha/circ/overdue.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="brief">
+<h4>Filtrera på:</h4>
+ <fieldset><legend>Förfallodatum:</legend>
+ <ol>
+ <li class="radio">
+ <label for="showall">
+ [% IF ( showall ) %]
+ <input type="checkbox" id="showall" name="showall" value="show" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" id="showall" name="showall" value="show" />
+ [% END %] Visa alla exemplar som är utlånade för närvarande </label>
+ </li>
+
+ <li class="date_due_filter">
+ <label for="from">Från:</label>
+ <input type="text" id="from" name="dateduefrom" size="10" value="[% filters.dateduefrom | html %]" class="flatpickr" data-date_to="to" />
+ </li>
+ <li class="date_due_filter">
+ <label for="to">Till:</label>
+ <input type="text" id="to" name="datedueto" size="10" value="[% filters.datedueto | html %]" class="flatpickr" />
+ </li>
+ </ol>
+ </fieldset>
+ <ol>
+ <li><label>Namn eller kortnummer:</label><input type="text" name="borname" value="[% filters.borname | html %]" /></li>
+ <li><label>Låntagarkategori:</label><select name="borcat" id="borcat"><option value="">Alla</option>
+ [% FOREACH borcatloo IN borcatloop %]
+ [% IF ( borcatloo.selected ) %]<option value="[% borcatloo.value | html %]" selected="selected">[% borcatloo.catname | html %]</option>[% ELSE %]<option value="[% borcatloo.value | html %]">[% borcatloo.catname | html %]</option>[% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li><label>Låntagarflaggor:</label>
+ <select name="borflag" id="borflag">
+ <option value="">Ingen</option>
+ [% IF ( borflag_gonenoaddress ) %]<option value="gonenoaddress" selected="selected">Adressen det gäller</option>
+ [% ELSE %]<option value="gonenoaddress">Adressen det gäller</option>[% END %]
+ [% IF ( borflag_debarred ) %]<option value="debarred" selected="selected">Begränsad</option>
+ [% ELSE %]<option value="debarred">Begränsad</option>[% END %]
+ [% IF ( borflag_lost ) %]<option value="lost" selected="selected">Förlorat kort</option>
+ [% ELSE %]<option value="lost">Förlorat kort</option>[% END %]
+ </select>
+ </li>
+ [% FOREACH patron_attr_filter_loo IN patron_attr_filter_loop %]
+ <!-- domid cgivalue ismany isclone ordinal code description repeatable is_date authorised_value_category -->
+ <li>
+ <label>[% patron_attr_filter_loo.description | html %]:</label>
+ [% IF ( patron_attr_filter_loo.authorised_value_category ) %]
+ [% SET authvals = AuthorisedValues.GetAuthValueDropbox( patron_attr_filter_loo.authorised_value_category ) %]
+ <select id="pattrodue-input-[% patron_attr_filter_loo.domid | html %]" name="patron_attr_filter_[% patron_attr_filter_loo.code | html %]" class="pattrodue-input">
+ <option></option>
+ [% FOREACH authval IN authvals %]
+ [% IF ( patron_attr_filter_loo.cgivalue == authval.authorised_value ) -%]
+ <option value="[% authval.authorised_value | html %]" selected="selected">[% authval.lib | html %]</option>
+ [% ELSE -%]
+ <option value="[% authval.authorised_value | html %]">[% authval.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ [% ELSIF ( patron_attr_filter_loo.is_date ) %]
+ <input type="text" name="patron_attr_filter_[% patron_attr_filter_loo.code | html %]" value="[% patron_attr_filter_loo.cgivalue | html %]" class="flatpickr"/>
+ [% ELSE %]
+ <input type="text" name="patron_attr_filter_[% patron_attr_filter_loo.code | html %]" value="[% patron_attr_filter_loo.cgivalue | html %]"/>
+ [% END %]
+ [% IF ( patron_attr_filter_loo.repeatable ) %]
+ <a href="#" class="btn btn-link clone-attribute" data-original-id="pattrodue-input-[% patron_attr_filter_loo.domid | html %]"><i class="fa fa-plus"></i> Lägg till</a>
+ [% IF ( patron_attr_filter_loo.isclone ) %]
+ <a href="#" class="btn btn-link delete_clone"><i class="fa fa-times"></i> Ta bort</a>
+ [% ELSIF ( patron_attr_filter_loo.ismany ) %]
+ <a href="#" class="btn btn-link delete_clone"><i class="fa fa-times"></i> Ta bort</a>
+ [% ELSE %]
+ <a href="#" class="btn btn-link delete_clone" style="display:none"><i class="fa fa-times"></i> Ta bort</a>
+ [% END %]
+ [% END %]
+ </li>
+ [% END %]
+
+ <li><label>Exemplartyp:</label><select name="itemtype" id="itemtype"><option value="">Alla</option>
+ [% FOREACH itemtypeloo IN itemtypeloop %][% IF ( itemtypeloo.selected ) %]
+ <option value="[% itemtypeloo.value | html %]" selected="selected">[% itemtypeloo.itemtypename | html %]</option>[% ELSE %]
+ <option value="[% itemtypeloo.value | html %]">[% itemtypeloo.itemtypename | html %]</option>[% END %]
+ [% END %]
+ </select>
+ </li>
+
+ <li>
+ <label>Hembibliotek för exemplar:</label>
+ <select name="homebranch" id="homebranch">
+ <option value="">Alla</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => filters.homebranch ) %]
+ </select>
+ </li>
+
+ <li>
+ <label>Exemplarets nuvarande plats:</label>
+ <select name="holdingbranch" id="holdingbranch">
+ <option value="">Alla</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => filters.holdingbranch ) %]
+ </select>
+ </li>
+
+ <li>
+ <label>Låntagarens bibliotek:</label>
+ <select name="branch" id="branch">
+ <option value="">Alla</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => filters.branch, only_from_group => 1 ) %]
+ </select>
+ </li>
+
+</ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tillämpa filter" />
+ <input type="hidden" name="op" value="cud-apply filter" />
+ </fieldset>
+ </form>
+
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'select2.inc' %]
+ [% INCLUDE 'js-date-format.inc' %]
+ [% PROCESS 'modal-claims-js' %]
+ <script>
+        function clone_input( node, original_id ) {
+            var original = node;
+            var clone = original.clone();
+            var appendid = original_id + "-" + Math.floor(Math.random()*1000+1);
+            clone.find(".delete_clone").show();
+            if( clone.find("select").length ){
+                /* <select> element is present */
+                clone.find("select").removeClass("select2-hidden-accessible").removeAttr("data-select2-id").attr("id", appendid );
+                clone.find(".select2").remove();
+                original.after( clone );
+                $("#" + appendid ).select2();
+            } else if( clone.find(".flatpickr").length ){
+                clone.attr("id", appendid );
+                original.after( clone );
+                apply_flatpickr(clone.find(".flatpickr"));
+            } else {
+                clone.attr("id", appendid );
+                original.after( clone );
+            }
+        }
+
+        function update_date_due_filters_visibility(){
+            if( $("#showall").is(":checked")) {
+                $(".date_due_filter").hide();
+                $("#from").prop("disabled", true);
+                $("#to").prop("disabled", true);
+            } else {
+                $(".date_due_filter").show();
+                $("#from").prop("disabled", false);
+                $("#to").prop("disabled", false);
+            }
+        }
+
+        $(document).ready(function(){
+            var table_settings = [% TablesSettings.GetTableSettings( 'circ', 'overdues', 'circ-overdues', 'json' ) | $raw %];
+
+            [% IF !Koha.Preference('ClaimReturnedLostValue') %]
+                table_settings['columns'].splice(13, 1);
+            [% END %]
+
+            KohaTable("overduest", {
+                "pagingType": "full",
+                "autoWidth": false,
+            }, table_settings);
+
+            $("#showall").on("change", function(){
+                update_date_due_filters_visibility();
+            });
+            update_date_due_filters_visibility();
+
+            $(".pattrodue-input").each(function(){
+                $(this).select2();
+            });
+
+            $("body").on("click", ".delete_clone", function(e){
+                e.preventDefault();
+                $(this).parent().remove();
+            });
+
+            $("body").on("click", ".clone-attribute", function(e){
+                e.preventDefault();
+                clone_input( $(this).parent(), $(this).data("original-id") );
+            })
+        });
+  </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

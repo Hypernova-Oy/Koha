@@ -1,0 +1,183 @@
+---
+Hankinnat:
+  Asetukset:
+  - - Luo nide, kun
+    - choices:
+        cataloguing: luetteloidaan tietue.
+        ordering: tehdään tilaus.
+        receiving: vastaanotetaan tilaus.
+      pref: AcqCreateItem
+    - Tämä on vain oletustoiminto, se voidaan muuttaa tilauskorikohtaisesti.
+  - - 'Seuraavat <a href=''http://schema.koha-community.org/__VERSION__/tables/items.html''
+      target=''blank''>tietokannan sarakkeet</a> pitäisi olla niteellä uniikkeja:'
+    - pref: UniqueItemFields
+      source: items
+      type: modalselect
+  - - Tilauskoria suljettaessa tai avattaessa,
+    - choices:
+        '1': kysy aina varmistus.
+        '2': älä kysy varmistusta.
+      default: 1
+      pref: BasketConfirmations
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: CancelOrdersInClosedBaskets
+    - suljettujen tilauskorien tilausrivien peruuttamista.
+  - - Näytä tilauskorit
+    - choices:
+        all: kaikki tietokannassa olevat, omistajuudesta riippumatta.
+        branch: työntekijän kirjastosta.
+        user: työntekijän luomat tai hallinnoimat.
+      pref: AcqViewBaskets
+  - - Näytä rahayksikkö muodossa
+    - choices:
+        CH: 360'000.00 (CH)
+        FR: 360 000,00 (EU)
+        US: 360,000.00 (US)
+      pref: CurrencyFormat
+  - - Veroprosentit ovat
+    - pref: TaxRates
+    - . Syötä numeromuodossa, 0.12 tarkoittaa 12%. Ensimmäinen luku listalla on oletusarvo.
+      Jos arvoja on enemmän kuin yksi, erotetaan |-merkillä.
+    - <br/><strong>HUOM:</strong> Tietokanta hyväksyy lukuja korkeintaan neljän desimaalin
+      tarkkuudella, loput pyöristetään.
+    - <br/><strong>HUOM:</strong> Toimittajan veroprosenttitiedot saattavat vaatia
+      päivitystä, jos veroprosenttiarvoja poistetaan.
+  - - choices:
+        '0': Älä sisällytä
+        '1': Sisällytä
+      pref: CalculateFundValuesIncludingTax
+    - verot tilien laskettuihin arvoihin (käytetty, tilattu). Huomaa, että tämä sääntö
+      koskee kaikkia toimittajia riippumatta niiden asetuksista
+  - - choices:
+        '0': Älä varoita
+        '1': Varoita
+      pref: AcqWarnOnDuplicateInvoice
+    - jos virkailija yrittää luoda laskua samalle numerolle.
+  - - 'Niteitä vastaanottaessa, päivitä niteen osakentät, jos nide on luotu tilausta
+      tehtäessä (e.g. o=5|a="foo bar"):'
+    - pref: AcqItemSetSubfieldsWhenReceived
+  - - 'Kun vastaanotto perutaan, päivitä niteen osakentät, jos ne luotiin tilausta
+      tehtäessä (esim. o=5|a="bar foo"):'
+    - pref: AcqItemSetSubfieldsWhenReceiptIsCancelled
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AcqEnableFiles
+    - ladata ja liittää yksittäisiä tiedostoja laskuun.
+  - - Aseta vertailuarvot uudelle tilausriville, joka on luotu välivarastoidusta MARC-tietueesta.
+    - pref: MarcFieldsToOrder
+      syntax: text/x-yaml
+      type: textarea
+    - '<p>Voit käyttää seuraavia kenttiä: price, replacementprice, quantity, budget_code,
+      discount, sort1, sort2</p>'
+    - '<p>Esimerkiksi:<br/>hinta: 947$a|947$c<br/>määrä: 969$h<br/>tilikoodi: 922$a</p>'
+  - - Määrittele arvojen vastaavuudet uusille nidetietueille, jotka luodaan välivarastoiduista
+      MARC-tietueista.
+    - pref: MarcItemFieldsToOrder
+      syntax: text/x-yaml
+      type: textarea
+    - 'Voit käyttää seuraavia kenttiä: homebranch, holdingbranch, itype, nonpublic_note,
+      public_note, loc, ccode, notforloan, uri, copyno, price, replacementprice, itemcallnumber,
+      coded_location_qualifier, barcode ja enumchron. Erityiskentät: quantity and
+      budget_code'
+    - '<br/>Esimerkiksi:<br/>holdingbranch: 975$b<br/>itype: 975$9|975$z'
+    - <p>Jos kenttä puuttuu tai sitä ei ole mäpätty, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=MarcFieldsToOrder">MarcFieldsToOrder</a>
+      tarkistetaan ja käytetään sille kentälle (paitsi määrä).</p>
+  - - choices:
+        '0': Älä lähetä
+        '1': Lähetä
+      default: no
+      pref: ClaimsBccCopy
+    - piilokopio(ta) (BCC) kirjautuneelle käyttäjälle, kun lähetetään reklamaatioita
+      kausijulkaisuista tai tilauksista.
+  - - Säilytä hyväksytyt tai hylätyt hankintaehdotukset
+    - class: integer
+      pref: PurgeSuggestionsOlderThan
+    - 'päivän ajan. Esimerkki: [30] Tyhjentää hankintaehdotukset, jotka tehtiin yli
+      30 päivää sitten.'
+    - <br><strong>VAROITUS:</strong> Jätä tämä kenttä tyhjäksi, jos et halua aktivoida
+      tätä automaattista toimintaa.
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/purge_suggestions.pl</code>
+      cronjobin. Pyydä kehittäjiä ajastamaan se.
+  - - choices:
+        '': Älä pyöristä
+        nearest_cent: Pyöristä
+      default: ''
+      pref: OrderPriceRounding
+    - lähimpään senttiin.<br>
+    - Määrittää käytetäänkö pyöristystä vai alkuperäisiä arvoja hintoja laskettaessa.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      default: no
+      pref: UseACQFrameworkForBiblioRecords
+    - kuvailupohjaa 'ACQ' nimeketietueen kenttiin.
+  - - 'Valitse sähköpostiosoite, johon uudet hankintaehdotukset lähetetään: '
+    - choices:
+        '0': ei mitään
+        BranchEmailAddress: kirjaston sähköpostiosoite
+        EmailAddressForSuggestions: EmailAddressForSuggestions
+        KohaAdminEmailAddress: KohaAdminEmailAddress
+      default: 0
+      pref: EmailPurchaseSuggestions
+    - '<br>Jos valitset <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForSuggestions">EmailAddressForSuggestions</a>,
+      syötä toimiva sähköpostiosoite:'
+    - class: email
+      pref: EmailAddressForSuggestions
+  - - Käytä lähettäjäosoitteena
+    - class: email
+      pref: AcquisitionsDefaultEmailAddress
+    - kun lähetetään tilaus- ja reklamointiviestejä.
+    - 'Jos tämä jätetään tyhjäksi, käytetään ensimmäistä määriteltyä osoitetta tästä
+      listasta: kirjaston osoite, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  - - Käytä vastausosoitteena
+    - class: email
+      pref: AcquisitionsDefaultReplyTo
+    - kun lähetetään tilaus- ja reklamointiviestejä.
+    - 'Jos tämä jätetään tyhjäksi, käytetään ensimmäistä määriteltyä osoitetta tästä
+      listasta: kirjaston vastausosoite, kirjaston sähköpostiosoite, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>
+      ja <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
+  - - choices:
+        '0': Disable
+        '1': Enable
+      default: no
+      pref: MarcOrderingAutomation
+    - automatic order line creation from MARC records.
+  EDIFACT:
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      default: no
+      pref: EDIFACT
+    - EDIFACT sanomanvaihtoa hankinnassa
+  - - choices:
+        automatic: Tuo
+        manual: Älä tuo
+      default: no
+      pref: EdifactInvoiceImport
+    - automaattisesti EDIFACT-sanomien tiedostot kun ne on ladattu.
+  - - 'Määritä järjestyskoodi (GIR:LSQ) niteen '
+    - choices:
+        ccode: kokoelma
+        location: hyllypaikka
+      default: location
+      pref: EdifactLSQ
+    - kenttään.
+  Tulostus:
+  - - Käytä
+    - choices:
+        pdfformat::layout1page: englantilaista 1-sivuista
+        pdfformat::layout2pages: englantilaista 2-sivuista
+        pdfformat::layout2pagesde: saksalaista 2-sivuista
+        pdfformat::layout3pages: englantilaista 3-sivuista
+        pdfformat::layout3pagesfr: ranskalaista 3-sivuista
+      pref: OrderPdfFormat
+    - asettelua tilausryhmän tulostamiseen.
+  - - 'Teksti, joka lisätään tilaustauluun englantilaisessa yhden sivun PDF-muotoisessa
+      tilaustiedostossa. Huomioi: Käytä enteriä lisätäksesi rivinvaihtoja lauseisiin.'
+    - <br><strong>Huomioi:</strong> Jotta tekstin alareuna ei leikkaudu pois tilaustaululla,
+      älä lisää tähän asetukseen enempää kuin kolme riviä tekstiä.</span>
+    - pref: 1PageOrderPDFText
+      type: textarea

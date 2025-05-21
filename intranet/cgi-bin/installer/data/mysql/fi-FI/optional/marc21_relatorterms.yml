@@ -1,0 +1,903 @@
+---
+description:
+- 'MARC funktiokoodien lista osoitteessa: http://www.loc.gov/marc/relators/relaterm.html'
+tables:
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: abr
+      category: RELTERMS
+      lib: Lyhentäjä
+    - authorised_value: acp
+      category: RELTERMS
+      lib: Taidekopioija
+    - authorised_value: act
+      category: RELTERMS
+      lib: Toimija
+    - authorised_value: adi
+      category: RELTERMS
+      lib: Lavastaja
+    - authorised_value: adp
+      category: RELTERMS
+      lib: Muokkaaja
+    - authorised_value: aft
+      category: RELTERMS
+      lib: Jälkisanojen, kolofonin yms. tekijä
+    - authorised_value: anc
+      category: RELTERMS
+      lib: Kuuluttaja
+    - authorised_value: anl
+      category: RELTERMS
+      lib: Analyytikko
+    - authorised_value: anm
+      category: RELTERMS
+      lib: Animaattori
+    - authorised_value: ann
+      category: RELTERMS
+      lib: Muistiinpanojen tekijä
+    - authorised_value: ant
+      category: RELTERMS
+      lib: Bibliografinen edeltäjä
+    - authorised_value: ape
+      category: RELTERMS
+      lib: Muutoksenhakijan vastapuoli
+    - authorised_value: apl
+      category: RELTERMS
+      lib: Muutoksenhakija
+    - authorised_value: app
+      category: RELTERMS
+      lib: Hakija
+    - authorised_value: aqt
+      category: RELTERMS
+      lib: Lainausten tai tiivistelmän tekijä
+    - authorised_value: arc
+      category: RELTERMS
+      lib: Arkkitehti
+    - authorised_value: ard
+      category: RELTERMS
+      lib: Taiteellinen johtaja
+    - authorised_value: arr
+      category: RELTERMS
+      lib: Sovittaja
+    - authorised_value: art
+      category: RELTERMS
+      lib: Kuvataiteilija, graafikko
+    - authorised_value: asg
+      category: RELTERMS
+      lib: Käsittelijä
+    - authorised_value: asn
+      category: RELTERMS
+      lib: Kohteeseen liittyvä tekijä
+    - authorised_value: ato
+      category: RELTERMS
+      lib: Nimikirjoituksen kirjoittaja
+    - authorised_value: att
+      category: RELTERMS
+      lib: Oletettu/väitetty tekijä
+    - authorised_value: auc
+      category: RELTERMS
+      lib: Huutokauppameklari
+    - authorised_value: aud
+      category: RELTERMS
+      lib: Dialogin tekijä
+    - authorised_value: aue
+      category: RELTERMS
+      lib: Ääniteknikko
+    - authorised_value: aui
+      category: RELTERMS
+      lib: Esipuheen yms tekijä
+    - authorised_value: aup
+      category: RELTERMS
+      lib: Äänituottaja
+    - authorised_value: aus
+      category: RELTERMS
+      lib: Käsikirjoittaja
+    - authorised_value: aut
+      category: RELTERMS
+      lib: Tekijä
+    - authorised_value: bdd
+      category: RELTERMS
+      lib: Sidoksen suunnittelija
+    - authorised_value: bjd
+      category: RELTERMS
+      lib: Kansipaperin suunnittelija
+    - authorised_value: bka
+      category: RELTERMS
+      lib: Kirjataitelija
+    - authorised_value: bkd
+      category: RELTERMS
+      lib: Graafinen suunnittelija
+    - authorised_value: bkp
+      category: RELTERMS
+      lib: Kirjan tuottaja
+    - authorised_value: blw
+      category: RELTERMS
+      lib: Lievetekstin kirjoittaja
+    - authorised_value: bnd
+      category: RELTERMS
+      lib: Sitoja
+    - authorised_value: bpd
+      category: RELTERMS
+      lib: Exlibriksen suunnittelija
+    - authorised_value: brd
+      category: RELTERMS
+      lib: Lähetyksestä vastaava
+    - authorised_value: brl
+      category: RELTERMS
+      lib: Pistekirjoituksen valmistaja
+    - authorised_value: bsl
+      category: RELTERMS
+      lib: Kirjakauppias
+    - authorised_value: cad
+      category: RELTERMS
+      lib: Roolittaja
+    - authorised_value: cas
+      category: RELTERMS
+      lib: Valaja
+    - authorised_value: ccp
+      category: RELTERMS
+      lib: Ideoija
+    - authorised_value: chr
+      category: RELTERMS
+      lib: Koreografi
+    - authorised_value: cli
+      category: RELTERMS
+      lib: Asiakas
+    - authorised_value: cll
+      category: RELTERMS
+      lib: Kalligrafi
+    - authorised_value: clr
+      category: RELTERMS
+      lib: Värittäjä
+    - authorised_value: clt
+      category: RELTERMS
+      lib: Kollotypian valmistaja
+    - authorised_value: cmm
+      category: RELTERMS
+      lib: Selostaja
+    - authorised_value: cmp
+      category: RELTERMS
+      lib: Säveltäjä
+    - authorised_value: cmt
+      category: RELTERMS
+      lib: Latoja
+    - authorised_value: cng
+      category: RELTERMS
+      lib: Kuvaaja
+    - authorised_value: cnd
+      category: RELTERMS
+      lib: Johtaja
+    - authorised_value: cns
+      category: RELTERMS
+      lib: Sensori
+    - authorised_value: coe
+      category: RELTERMS
+      lib: Kilpailija valituksen vastaajana
+    - authorised_value: col
+      category: RELTERMS
+      lib: Keräilijä
+    - authorised_value: com
+      category: RELTERMS
+      lib: Kokoaja
+    - authorised_value: con
+      category: RELTERMS
+      lib: Konservaattori
+    - authorised_value: cop
+      category: RELTERMS
+      lib: Kameraoperaattori
+    - authorised_value: cor
+      category: RELTERMS
+      lib: Kokoelman luetteloija
+    - authorised_value: cos
+      category: RELTERMS
+      lib: Kilpailija
+    - authorised_value: cot
+      category: RELTERMS
+      lib: Kilpailija valittajana
+    - authorised_value: cou
+      category: RELTERMS
+      lib: Voimassaoleva tuomioistuin
+    - authorised_value: cov
+      category: RELTERMS
+      lib: Kansisuunnittelija
+    - authorised_value: cpc
+      category: RELTERMS
+      lib: Tekijänoikeuden omistaja
+    - authorised_value: cpe
+      category: RELTERMS
+      lib: Asianomistaja valituksen vastaajana
+    - authorised_value: cph
+      category: RELTERMS
+      lib: Oikeudenomistaja
+    - authorised_value: cpl
+      category: RELTERMS
+      lib: Asianomistaja
+    - authorised_value: cpt
+      category: RELTERMS
+      lib: Asianomistaja valittajana
+    - authorised_value: cre
+      category: RELTERMS
+      lib: Tekijä
+    - authorised_value: crp
+      category: RELTERMS
+      lib: Kirjeenvaihtaja
+    - authorised_value: crr
+      category: RELTERMS
+      lib: Korjauslukija
+    - authorised_value: crt
+      category: RELTERMS
+      lib: Tuomioistuimen kirjuri
+    - authorised_value: csl
+      category: RELTERMS
+      lib: Konsultti
+    - authorised_value: csp
+      category: RELTERMS
+      lib: Projektikonsultti
+    - authorised_value: cst
+      category: RELTERMS
+      lib: Pukusuunnittelija
+    - authorised_value: ctb
+      category: RELTERMS
+      lib: Muu tekijä
+    - authorised_value: cte
+      category: RELTERMS
+      lib: Kiistäjä valituksen vastaajana
+    - authorised_value: ctg
+      category: RELTERMS
+      lib: Kartoittaja
+    - authorised_value: ctr
+      category: RELTERMS
+      lib: Urakoitsija
+    - authorised_value: cts
+      category: RELTERMS
+      lib: Vastaaja
+    - authorised_value: ctt
+      category: RELTERMS
+      lib: Kiistäjä valittajana
+    - authorised_value: cur
+      category: RELTERMS
+      lib: Kuraattori
+    - authorised_value: cwt
+      category: RELTERMS
+      lib: Tekstin kommentaattori
+    - authorised_value: dbd
+      category: RELTERMS
+      lib: Dubbausohjaaja
+    - authorised_value: dbp
+      category: RELTERMS
+      lib: Julkaisu-/kustannupaikka
+    - authorised_value: dfd
+      category: RELTERMS
+      lib: Vastaaja
+    - authorised_value: dfe
+      category: RELTERMS
+      lib: Vastaaja valituksen vastaajana
+    - authorised_value: dft
+      category: RELTERMS
+      lib: Vastaaja valittajana
+    - authorised_value: dgc
+      category: RELTERMS
+      lib: Opinnäytteen tarkastaja
+    - authorised_value: dgg
+      category: RELTERMS
+      lib: Oppiarvon myöntävä yhteisö
+    - authorised_value: dgs
+      category: RELTERMS
+      lib: Opinnäytteen ohjaaja
+    - authorised_value: dis
+      category: RELTERMS
+      lib: tutkielman tai lopputyön esittelijä
+    - authorised_value: djo
+      category: RELTERMS
+      lib: DJ
+    - authorised_value: dln
+      category: RELTERMS
+      lib: Tekninen piirtäjä
+    - authorised_value: dnc
+      category: RELTERMS
+      lib: Tanssija
+    - authorised_value: dnr
+      category: RELTERMS
+      lib: Lahjoittaja
+    - authorised_value: dpc
+      category: RELTERMS
+      lib: Kuvattu
+    - authorised_value: dpt
+      category: RELTERMS
+      lib: Tallettaja
+    - authorised_value: drm
+      category: RELTERMS
+      lib: Piirtäjä
+    - authorised_value: drt
+      category: RELTERMS
+      lib: Ohjaaja
+    - authorised_value: dsr
+      category: RELTERMS
+      lib: Suunnittelija
+    - authorised_value: dst
+      category: RELTERMS
+      lib: Jakaja
+    - authorised_value: dtc
+      category: RELTERMS
+      lib: Tiedon tallentaja
+    - authorised_value: dte
+      category: RELTERMS
+      lib: Kappale omistettu
+    - authorised_value: dtm
+      category: RELTERMS
+      lib: Tiedonhallinnoija
+    - authorised_value: dto
+      category: RELTERMS
+      lib: Teoksen omistuskirjoituksen tekijä
+    - authorised_value: dub
+      category: RELTERMS
+      lib: Kyseenalainen tekijä
+    - authorised_value: edc
+      category: RELTERMS
+      lib: Kokoomateoksen toimittaja
+    - authorised_value: edd
+      category: RELTERMS
+      lib: Toimituspäällikkö
+    - authorised_value: edm
+      category: RELTERMS
+      lib: Leikkaaja
+    - authorised_value: edt
+      category: RELTERMS
+      lib: Editori
+    - authorised_value: egr
+      category: RELTERMS
+      lib: Kaivertaja
+    - authorised_value: elg
+      category: RELTERMS
+      lib: Sähköasentaja
+    - authorised_value: elt
+      category: RELTERMS
+      lib: Metallityöntekijä (elektrotypia)
+    - authorised_value: eng
+      category: RELTERMS
+      lib: Insinööri
+    - authorised_value: enj
+      category: RELTERMS
+      lib: Säätävä lainkäyttöalue
+    - authorised_value: etr
+      category: RELTERMS
+      lib: Etsaaja
+    - authorised_value: evp
+      category: RELTERMS
+      lib: Tapahtumapaikka
+    - authorised_value: exp
+      category: RELTERMS
+      lib: Asiantuntija
+    - authorised_value: fac
+      category: RELTERMS
+      lib: Jäljenteen toteuttaja
+    - authorised_value: fds
+      category: RELTERMS
+      lib: Elokuvan jakelija
+    - authorised_value: fld
+      category: RELTERMS
+      lib: Kenttäjohtaja
+    - authorised_value: flm
+      category: RELTERMS
+      lib: Leikkaaja
+    - authorised_value: fmd
+      category: RELTERMS
+      lib: Elokuvaohjaaja
+    - authorised_value: fmk
+      category: RELTERMS
+      lib: Elokuvantekijä
+    - authorised_value: fmo
+      category: RELTERMS
+      lib: Aikaisempi omistaja
+    - authorised_value: fmp
+      category: RELTERMS
+      lib: Elokuvantuottaja
+    - authorised_value: fon
+      category: RELTERMS
+      lib: Perustaja
+    - authorised_value: fpy
+      category: RELTERMS
+      lib: Ensimmäinen osapuoli
+    - authorised_value: fnd
+      category: RELTERMS
+      lib: Rahoittaja
+    - authorised_value: frg
+      category: RELTERMS
+      lib: Väärentäjä
+    - authorised_value: gdv
+      category: RELTERMS
+      lib: Pelikehittäjä
+    - authorised_value: gis
+      category: RELTERMS
+      lib: Paikkatietoasiantuntija
+    - authorised_value: his
+      category: RELTERMS
+      lib: Isäntäorganisaatio
+    - authorised_value: hnr
+      category: RELTERMS
+      lib: Juhlajulkaisun kohde
+    - authorised_value: hst
+      category: RELTERMS
+      lib: Palvelin
+    - authorised_value: ill
+      category: RELTERMS
+      lib: Kuvittaja
+    - authorised_value: ilu
+      category: RELTERMS
+      lib: Illuminoinnin tekijä
+    - authorised_value: ins
+      category: RELTERMS
+      lib: Omistuskirjoituksen kirjoittaja
+    - authorised_value: inv
+      category: RELTERMS
+      lib: Keksijä
+    - authorised_value: isb
+      category: RELTERMS
+      lib: Julkaisija
+    - authorised_value: itr
+      category: RELTERMS
+      lib: Soittaja
+    - authorised_value: ive
+      category: RELTERMS
+      lib: Haastateltava
+    - authorised_value: ivr
+      category: RELTERMS
+      lib: Haastattelija
+    - authorised_value: jud
+      category: RELTERMS
+      lib: Tuomari
+    - authorised_value: jug
+      category: RELTERMS
+      lib: Soveltava lainkäyttöalue
+    - authorised_value: lbr
+      category: RELTERMS
+      lib: Laboratorio
+    - authorised_value: lbt
+      category: RELTERMS
+      lib: Libretisti
+    - authorised_value: ldr
+      category: RELTERMS
+      lib: Laboratoriopäällikkö
+    - authorised_value: led
+      category: RELTERMS
+      lib: Vetäjä
+    - authorised_value: lee
+      category: RELTERMS
+      lib: Kunnianloukkaustuomiosta valituksen vastaaja
+    - authorised_value: lel
+      category: RELTERMS
+      lib: Kunnianloukkausasian vastaaja
+    - authorised_value: len
+      category: RELTERMS
+      lib: Lainaaja
+    - authorised_value: let
+      category: RELTERMS
+      lib: Kunnianloukkaustuomiosta valittaja
+    - authorised_value: lgd
+      category: RELTERMS
+      lib: Valosuunnittelija
+    - authorised_value: lie
+      category: RELTERMS
+      lib: Kunnianaloukkautuomion haastaja vastaajana
+    - authorised_value: lil
+      category: RELTERMS
+      lib: Kunnianaloukkausasian haastaja
+    - authorised_value: lit
+      category: RELTERMS
+      lib: Kunnianaloukkaustuomion haastaja valittajana
+    - authorised_value: lsa
+      category: RELTERMS
+      lib: Maisema-arkkitehti
+    - authorised_value: lse
+      category: RELTERMS
+      lib: Lisenssinhaltija
+    - authorised_value: lso
+      category: RELTERMS
+      lib: Lisenssinantaja
+    - authorised_value: ltg
+      category: RELTERMS
+      lib: Litografi
+    - authorised_value: lyr
+      category: RELTERMS
+      lib: Sanoittaja
+    - authorised_value: mcp
+      category: RELTERMS
+      lib: Musiikin kopioija
+    - authorised_value: med
+      category: RELTERMS
+      lib: Meedio
+    - authorised_value: mfp
+      category: RELTERMS
+      lib: Valmistuspaikka
+    - authorised_value: mfr
+      category: RELTERMS
+      lib: Valmistaja
+    - authorised_value: mdc
+      category: RELTERMS
+      lib: Metadatakontakti
+    - authorised_value: mka
+      category: RELTERMS
+      lib: Meikkitaiteilija
+    - authorised_value: mod
+      category: RELTERMS
+      lib: Moderoija
+    - authorised_value: mon
+      category: RELTERMS
+      lib: Valvoja
+    - authorised_value: mrb
+      category: RELTERMS
+      lib: Marmoroija
+    - authorised_value: mrk
+      category: RELTERMS
+      lib: Koodaaja
+    - authorised_value: msd
+      category: RELTERMS
+      lib: Musiikkijohtaja
+    - authorised_value: mte
+      category: RELTERMS
+      lib: Metallikaivertaja
+    - authorised_value: mtk
+      category: RELTERMS
+      lib: Pöytäkirjan laatija
+    - authorised_value: mup
+      category: RELTERMS
+      lib: Musiikkiohjelmoija
+    - authorised_value: mus
+      category: RELTERMS
+      lib: Muusikko
+    - authorised_value: mxe
+      category: RELTERMS
+      lib: Miksaaja
+    - authorised_value: 'nan'
+      category: RELTERMS
+      lib: Uutisankkuri
+    - authorised_value: nrt
+      category: RELTERMS
+      lib: Kertoja
+    - authorised_value: onp
+      category: RELTERMS
+      lib: Osallistuja
+    - authorised_value: opn
+      category: RELTERMS
+      lib: Vastaväittäjä
+    - authorised_value: org
+      category: RELTERMS
+      lib: Perustaja
+    - authorised_value: orm
+      category: RELTERMS
+      lib: Järjestäjä
+    - authorised_value: osp
+      category: RELTERMS
+      lib: Esittelijä
+    - authorised_value: oth
+      category: RELTERMS
+      lib: Muu
+    - authorised_value: own
+      category: RELTERMS
+      lib: Omistaja
+    - authorised_value: pad
+      category: RELTERMS
+      lib: Osoite
+    - authorised_value: pan
+      category: RELTERMS
+      lib: Panelisti
+    - authorised_value: pat
+      category: RELTERMS
+      lib: Asiakas
+    - authorised_value: pbd
+      category: RELTERMS
+      lib: Päätoimittaja
+    - authorised_value: pbl
+      category: RELTERMS
+      lib: Julkaisija
+    - authorised_value: pdr
+      category: RELTERMS
+      lib: Projektipäällikkö
+    - authorised_value: pfr
+      category: RELTERMS
+      lib: Oikolukija
+    - authorised_value: pht
+      category: RELTERMS
+      lib: Valokuvaaja
+    - authorised_value: plt
+      category: RELTERMS
+      lib: Painolaatan valmistaja
+    - authorised_value: pma
+      category: RELTERMS
+      lib: Luvanantaja
+    - authorised_value: pmn
+      category: RELTERMS
+      lib: Tuotantopäällikkö
+    - authorised_value: pop
+      category: RELTERMS
+      lib: Laattojen painaja
+    - authorised_value: ppm
+      category: RELTERMS
+      lib: Paperinvalmistaja
+    - authorised_value: ppt
+      category: RELTERMS
+      lib: Nukettaja
+    - authorised_value: pra
+      category: RELTERMS
+      lib: Preeses
+    - authorised_value: prc
+      category: RELTERMS
+      lib: Prosessin yhteyshenkilö
+    - authorised_value: prd
+      category: RELTERMS
+      lib: Tuotantohenkilökunta
+    - authorised_value: pre
+      category: RELTERMS
+      lib: Juontaja
+    - authorised_value: prf
+      category: RELTERMS
+      lib: Esittäjä
+    - authorised_value: prg
+      category: RELTERMS
+      lib: Ohjelmoija
+    - authorised_value: prm
+      category: RELTERMS
+      lib: Kuvalaatan valmistaja
+    - authorised_value: prn
+      category: RELTERMS
+      lib: Tuotantoyhtiö
+    - authorised_value: pro
+      category: RELTERMS
+      lib: Tuottaja
+    - authorised_value: prp
+      category: RELTERMS
+      lib: Tuotantopaikka
+    - authorised_value: prs
+      category: RELTERMS
+      lib: Tuotantosuunnittelija
+    - authorised_value: prt
+      category: RELTERMS
+      lib: Painaja
+    - authorised_value: prv
+      category: RELTERMS
+      lib: Tarjoaja
+    - authorised_value: pta
+      category: RELTERMS
+      lib: Patentinhakija
+    - authorised_value: pte
+      category: RELTERMS
+      lib: Kantaja valituksen vastaajana
+    - authorised_value: ptf
+      category: RELTERMS
+      lib: Kantaja
+    - authorised_value: pth
+      category: RELTERMS
+      lib: Patentinhaltija
+    - authorised_value: ptt
+      category: RELTERMS
+      lib: Kantaja valittajana
+    - authorised_value: pup
+      category: RELTERMS
+      lib: Julkaisu-/kustannuspaikka
+    - authorised_value: rap
+      category: RELTERMS
+      lib: Kokouksen raportoija
+    - authorised_value: rbr
+      category: RELTERMS
+      lib: Rubrikoija
+    - authorised_value: rcd
+      category: RELTERMS
+      lib: Taltioija
+    - authorised_value: rce
+      category: RELTERMS
+      lib: Äänittäjä
+    - authorised_value: rcp
+      category: RELTERMS
+      lib: Vastaanottaja
+    - authorised_value: rdd
+      category: RELTERMS
+      lib: Radio-ohjelman ohjaaja
+    - authorised_value: red
+      category: RELTERMS
+      lib: Toimittaja
+    - authorised_value: ren
+      category: RELTERMS
+      lib: Renderoija
+    - authorised_value: res
+      category: RELTERMS
+      lib: Tutkija
+    - authorised_value: rev
+      category: RELTERMS
+      lib: Kriitikko
+    - authorised_value: rpc
+      category: RELTERMS
+      lib: Radiotuottaja
+    - authorised_value: rps
+      category: RELTERMS
+      lib: Säilytyspaikka
+    - authorised_value: rpt
+      category: RELTERMS
+      lib: Toimittaja
+    - authorised_value: rpy
+      category: RELTERMS
+      lib: Vastaava toimittaja
+    - authorised_value: rse
+      category: RELTERMS
+      lib: Vastaaja valituksen vastaajana
+    - authorised_value: rsg
+      category: RELTERMS
+      lib: Uudelleenesittäjä
+    - authorised_value: rsp
+      category: RELTERMS
+      lib: Respondentti
+    - authorised_value: rsr
+      category: RELTERMS
+      lib: Entisöijä
+    - authorised_value: rst
+      category: RELTERMS
+      lib: Vastaaja valittajana
+    - authorised_value: rth
+      category: RELTERMS
+      lib: Tutkimusryhmän johtaja
+    - authorised_value: rtm
+      category: RELTERMS
+      lib: Tutkimusryhmän jäsen
+    - authorised_value: rxa
+      category: RELTERMS
+      lib: Uudelleenmiksaaja
+    - authorised_value: sad
+      category: RELTERMS
+      lib: Tieteellinen neuvonantaja
+    - authorised_value: sce
+      category: RELTERMS
+      lib: Elokuvakäsikirjoittaja
+    - authorised_value: scl
+      category: RELTERMS
+      lib: Kuvanveistäjä
+    - authorised_value: scr
+      category: RELTERMS
+      lib: Kirjuri
+    - authorised_value: sde
+      category: RELTERMS
+      lib: Ääniteknikko
+    - authorised_value: sgd
+      category: RELTERMS
+      lib: Näyttämöohjaaja
+    - authorised_value: sds
+      category: RELTERMS
+      lib: Äänisuunnittelija
+    - authorised_value: sec
+      category: RELTERMS
+      lib: Sihteeri
+    - authorised_value: sfx
+      category: RELTERMS
+      lib: Erikoistehosteiden tekijä
+    - authorised_value: sgn
+      category: RELTERMS
+      lib: Allekirjoittaja
+    - authorised_value: sht
+      category: RELTERMS
+      lib: Tukija
+    - authorised_value: sll
+      category: RELTERMS
+      lib: Myyjä
+    - authorised_value: sng
+      category: RELTERMS
+      lib: Laulaja
+    - authorised_value: spk
+      category: RELTERMS
+      lib: Puhuja
+    - authorised_value: spn
+      category: RELTERMS
+      lib: Tukija
+    - authorised_value: spy
+      category: RELTERMS
+      lib: Toinen osapuoli
+    - authorised_value: srv
+      category: RELTERMS
+      lib: Kartoittaja
+    - authorised_value: std
+      category: RELTERMS
+      lib: Lavastaja
+    - authorised_value: stg
+      category: RELTERMS
+      lib: Kehys
+    - authorised_value: stl
+      category: RELTERMS
+      lib: Tarinankertoja
+    - authorised_value: stm
+      category: RELTERMS
+      lib: Näyttämömestari
+    - authorised_value: stn
+      category: RELTERMS
+      lib: Standardisoimiselin
+    - authorised_value: str
+      category: RELTERMS
+      lib: Laakapainaja
+    - authorised_value: swd
+      category: RELTERMS
+      lib: Ohjelmistokehittäjä
+    - authorised_value: tau
+      category: RELTERMS
+      lib: Televisiokäsikirjoittaja
+    - authorised_value: tcd
+      category: RELTERMS
+      lib: Tekninen johtaja
+    - authorised_value: tch
+      category: RELTERMS
+      lib: Opettaja
+    - authorised_value: ths
+      category: RELTERMS
+      lib: Opinnäytetyön ohjaaja
+    - authorised_value: tld
+      category: RELTERMS
+      lib: Televisio-ohjaaja
+    - authorised_value: tlg
+      category: RELTERMS
+      lib: Ohjelmavieras
+    - authorised_value: tlh
+      category: RELTERMS
+      lib: Ohjelmaisäntä
+    - authorised_value: tlp
+      category: RELTERMS
+      lib: Televisiotuottaja
+    - authorised_value: trc
+      category: RELTERMS
+      lib: Transkriboija
+    - authorised_value: trl
+      category: RELTERMS
+      lib: Kääntäjä
+    - authorised_value: tyd
+      category: RELTERMS
+      lib: Kirjasinlajin suunnittelija
+    - authorised_value: tyg
+      category: RELTERMS
+      lib: Latoja
+    - authorised_value: uvp
+      category: RELTERMS
+      lib: Yliopiston kotipaikka
+    - authorised_value: vac
+      category: RELTERMS
+      lib: Ääninäyttelijä
+    - authorised_value: vdg
+      category: RELTERMS
+      lib: Kuvaaja
+    - authorised_value: vfx
+      category: RELTERMS
+      lib: Visuaalisten tehosteiden tekijä
+    - authorised_value: wac
+      category: RELTERMS
+      lib: Kommentaarin kirjoittaja
+    - authorised_value: wal
+      category: RELTERMS
+      lib: Lisätyn sanoituksen kirjoittaja
+    - authorised_value: wam
+      category: RELTERMS
+      lib: Liiteaineiston tekijä
+    - authorised_value: wat
+      category: RELTERMS
+      lib: Lisätyn tekstin kirjoittaja
+    - authorised_value: wdc
+      category: RELTERMS
+      lib: Puupiirtäjä
+    - authorised_value: wde
+      category: RELTERMS
+      lib: Puupiirtäjä (ksylografia)
+    - authorised_value: wfs
+      category: RELTERMS
+      lib: Elokuvan tarinan käsikirjoittaja
+    - authorised_value: wft
+      category: RELTERMS
+      lib: Elokuvan välitekstien kirjoittaja
+    - authorised_value: win
+      category: RELTERMS
+      lib: Johdannon kirjoittaja
+    - authorised_value: wit
+      category: RELTERMS
+      lib: Todistaja
+    - authorised_value: wpr
+      category: RELTERMS
+      lib: Esipuheen kirjoittaja
+    - authorised_value: wst
+      category: RELTERMS
+      lib: Ohiestekstin kirjoittaja
+    - authorised_value: wts
+      category: RELTERMS
+      lib: Television tarinan alkuperäiskirjoittaja
+    translatable:
+    - lib

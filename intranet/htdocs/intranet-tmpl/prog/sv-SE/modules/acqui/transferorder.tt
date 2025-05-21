@@ -1,0 +1,180 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Transfer order") | html %] &rsaquo;
+ [% t("Acquisitions") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[%- USE KohaDates -%]
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="acq_transferorder" class="acq">
+ <div class="container-fluid">
+ <h1>Överför beställning</h1>
+
+ [% IF ( show_baskets ) %]
+ [% IF ( basketsloop ) %]
+ <div class="page-section">
+ <h3>Korgar för [% booksellertoname | html %]</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>Korg (#)</th>
+ <th>[% tp('basket created by', 'Created by') | html %]</th>
+ <th>Datum</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH basket IN basketsloop %]
+ <tr>
+ <td>[% basket.basketname | html %] (#[% basket.basketno | html %])</td>
+ <td>[% basket.createdby | html %]</td>
+ <td>[% basket.creationdate | $KohaDates %]</td>
+ <td><a class="btn btn-default btn-xs confirm_transfer" href="transferorder.pl?basketno=[% basket.basketno | html %]&ordernumber=[% ordernumber | html %]">Välj</a>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+ [% ELSE %]
+ <p>Det finns inga öppna korgar för denna leverantör.</p>
+ [% END %]
+ [% ELSIF ( ordersloop ) %]
+ <h3>Beställningar för [% booksellerfromname | html %]</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>[% tp('noun', 'Order') | html %]</th>
+ <th>Sammanfattning</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH ordersloo IN ordersloop %]
+ <tr>
+ <td><a href="neworderempty.pl?ordernumber=[% ordersloo.ordernumber | uri %]">[% ordersloo.ordernumber | html %]</a></td>
+ <td>
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% ordersloo.biblionumber | uri %]">[% ordersloo.title | html %]</a>
+ [% IF ( ordersloo.author ) %] av [% ordersloo.author | html %][% END %] [% IF ( ordersloo.isbn ) %] &ndash; [% ordersloo.isbn | html %][% END %] [% IF ( ordersloo.publishercode ) %] <br /><span>Förlag: [% ordersloo.publishercode | html %]</span>
+ [%- IF    ( ordersloo.publicationyear > 0) -%], [% ordersloo.publicationyear | html %]
+ [%- ELSIF ( ordersloo.copyrightdate   > 0) -%] [% ordersloo.copyrightdate | html %]
+ [% END %]
+ [% END %]
+ </td>
+ <td><a class="btn btn-default btn-xs" href="transferorder.pl?bookselleridfrom=[% ordersloo.bookselleridfrom | html %]&ordernumber=[% ordersloo.ordernumber | html %]">Överför</a></td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% ELSIF ( do_search ) %]
+ [% IF booksellers.count %]
+ [% IF ( bookselleridfrom ) %]
+ <h3>Välj en leverantör att överföra till</h3>
+ [% ELSE %]
+ <h3>Välj en leverantör att överföra från</h3>
+ [% END %]
+ <div class="page-section">
+ <table>
+ <thead>
+ <tr>
+ <th>Namn</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH bookseller IN booksellers %]
+ <tr>
+ <td>[% bookseller.name | html %]</td>
+ <td><a class="btn btn-default btn-xs" href="transferorder.pl?[% IF (bookselleridfrom) %]bookselleridto[% ELSE %]bookselleridfrom[% END %]=[% bookseller.id | html %][% IF (ordernumber) %]&ordernumber=[% ordernumber | html %][% END %][% IF (query) %]&query=[% query | html %][% END %]">Välj</a></td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+ [% ELSE %]
+ <p>Inga resultat hittades.</p>
+ [% END %]
+ [% ELSE %]
+ [% IF ( bookselleridfrom ) %]
+ <h3>Sök efter en leverantör att överföra till</h3>
+ <div class="transferinfo">
+ <ul>
+ <li><span class="label">Från leverantör: </span>[% booksellerfromname | html %]</li>
+ <li><span class="label">Korg: </span>[% basketfromname | html %]</li>
+ <li><span class="label">[% tp('noun', 'Order') | html %]: </span>[% ordernumber | html %]</li>
+ </ul>
+ </div>
+ [% ELSE %]
+ <h3>Sök efter en leverantör att överföra från</h3>
+ [% END %]
+ <form method="get" id="vendor_search_form" action="transferorder.pl">
+ <fieldset class="brief">
+ <input type="hidden" name="op" value="do_search" />
+ [% IF ( ordernumber ) %]
+ <input type="hidden" name="ordernumber" value="[% ordernumber | html %]" />
+ [% END %]
+ [% IF ( bookselleridfrom ) %]
+ <input type="hidden" name="bookselleridfrom" value="[% bookselleridfrom | html %]" />
+ [% END %]
+ <ol>
+ <li>
+ <label for="query">Leverantör:</label>
+ <input type="text" id="query" name="query" autofocus="autofocus" />
+ </li>
+ </ol>
+ </fieldset>
+ </form>
+ [% END %]
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ [% IF ( show_baskets ) %]
+ <form action="/cgi-bin/koha/acqui/transferorder.pl">
+ <input type="hidden" name="op" value="do_search" />
+ <input type="hidden" name="query" value="[% query | html %]" />
+ <input type="hidden" name="bookselleridfrom" value="[% bookselleridfrom | html %]" />
+ <input type="hidden" name="ordernumber" value="[% ordernumber | html %]" />
+ <button class="btn btn-default" type="submit"><i class="fa fa-arrow-left"></i> Välj annan leverantör</button>
+ </form>
+ [% ELSIF ( do_search ) %]
+ <form action="/cgi-bin/koha/acqui/transferorder.pl">
+ <input type="hidden" name="ordernumber" value="[% ordernumber | html %]" />
+ <button class="btn btn-default" type="submit"><i class="fa fa-arrow-left"></i> Sök igen</button>
+ </form>
+ [% ELSE %]
+ <input class="btn btn-primary" id="vendor_search_submit" type="submit" value="Sök" />
+ [% END %]
+ <button type="button" class="btn btn-default close_window">Stäng fönster</button>
+ </fieldset>
+ </div>
+ </nav>
+
+[% MACRO jsinclude BLOCK %]
+ [% IF transferred %]
+ <script>
+            opener.location.reload();
+            window.close();
+        </script>
+ [% END %]
+
+ [% IF ( bookselleridfrom ) %]
+ <script>
+            $(document).ready(function(){
+                $(".confirm_transfer").on("click",function(){
+                    return confirm( _("Överför beställning till denna korg?") );
+                });
+                $("#vendor_search_submit").on("click", function(e){
+                    e.preventDefault();
+                    $("#vendor_search_form").submit();
+                });
+            });
+        </script>
+ [% END %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

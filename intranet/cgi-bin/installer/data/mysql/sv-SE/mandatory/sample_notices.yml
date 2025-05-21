@@ -1,0 +1,2723 @@
+---
+description:
+- Exempelmeddelanden
+tables:
+- letter:
+    multiline:
+    - content
+    rows:
+    - branchcode: ''
+      code: ACQ_NOTIF_ON_RECEIV
+      content:
+      - Kära <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - ' Beställningen <<aqorders.ordernumber>> (<<biblio.title>>) har tagits emot.'
+      - ''
+      - Ditt bibliotek.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: acquisition
+      name: Notifiera vid mottagning
+      title: Beställning mottagen
+    - branchcode: ''
+      code: BOOKING_CANCELLATION
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE KohaDates -%]'
+      - Kära [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
+      - <br>
+      - We regret to inform you, that the following booking has been cancelled.<br>
+      - <br>
+      - 'Title: [%- INCLUDE ''biblio-title.inc'' biblio=booking.biblio link = 0 -%]<br>'
+      - <br>
+      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+        %]<br>'
+      - <br>
+      - 'Reason: [% booking.cancellation_reason | html %]<br>'
+      - <br>
+      - Kind regards<br>
+      - <br>
+      - '[% booking.pickup_library.branchname %]'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: bookings
+      name: Booking cancellation notice
+      title: A library booking was cancelled
+    - branchcode: ''
+      code: BOOKING_MODIFICATION
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE KohaDates -%]'
+      - Kära [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
+      - <br>
+      - Your booking of [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
+        = 0 -%] has been modified.<br>
+      - <br>
+      - The new details are:<br>
+      - <br>
+      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+        %]<br>'
+      - <br>
+      - 'Pickup at: [% booking.pickup_library.branchname %]<br>'
+      - Kind regards<br>
+      - <br>
+      - '[% booking.pickup_library.branchname %]'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: bookings
+      name: Booking modification notice
+      title: A library booking was modified
+    - branchcode: ''
+      code: BOOKING_CONFIRMATION
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE KohaDates -%]'
+      - Kära [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
+      - <br>
+      - Your booking of [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
+        = 0 -%] has been confirmed.<br>
+      - <br>
+      - The details are:<br>
+      - <br>
+      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+        %]<br>'
+      - <br>
+      - 'Pickup at: [% booking.pickup_library.branchname %]<br>'
+      - Kind regards<br>
+      - <br>
+      - '[% booking.pickup_library.branchname %]'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: bookings
+      name: Booking confirmation notice
+      title: A library booking was confirmed
+    - branchcode: ''
+      code: TICKET_ACKNOWLEDGE
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Kära [%- INCLUDE 'patron-title.inc' patron => ticket.reporter -%],<br>
+      - <br>
+      - Tack för din rapport rörande [%- INCLUDE 'biblio-title.inc' biblio=ticket.biblio
+        link = 0 -%].<br>
+      - <br>
+      - 'You reported: <br>'
+      - '[%- ticket.body -%]<br>'
+      - <br>
+      - Tack
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Concern acknowledgement
+      title: Katalogärende - bekräftelse
+    - branchcode: ''
+      code: TICKET_ASSIGNED
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE Koha -%]'
+      - Bästa katalogisatör, <br>
+      - '[%- INCLUDE ''patron-title.inc'' patron => librarian -%] has assigned the
+        following concern with <a href=''[%- Koha.Preference(''staffClientBaseURL'')
+        -%]/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% ticket.biblio.biblionumber
+        %]'' >[%- INCLUDE ''biblio-title.inc'' biblio=ticket.biblio link = 0 -%]</a>
+        to you<br>'
+      - <br>
+      - '[%- ticket.body -%]<br>'
+      - <br>
+      - You can action this concern from the <a href='[%- Koha.Preference('staffClientBaseURL')
+        -%]/cgi-bin/koha/cataloguing/concerns.pl'>concern management page</a>.
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Concern assigned notification
+      title: Catalog concern assigned
+    - branchcode: ''
+      code: TICKET_RESOLVE
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Kära [%- INCLUDE 'patron-title.inc' patron => ticket_update.ticket.reporter
+        -%],<br>
+      - <br>
+      - Biblioteket har markerat ditt ärende angående [%- INCLUDE 'biblio-title.inc'
+        biblio=ticket_update.ticket.biblio link = 0 -%] som löst.<br>
+      - <br>
+      - 'Följande kommentar har lämnats: <br>'
+      - '[%- ticket_update.message -%]<br>'
+      - <br>
+      - Tack
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Ärende löst
+      title: Katalogärende löst
+    - branchcode: ''
+      code: TICKET_UPDATE
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Kära [%- INCLUDE 'patron-title.inc' patron => ticket_update.ticket.reporter
+        -%],<br>
+      - <br>
+      - Biblioteket har uppdaterat det ärende som du har rapporterat angående [%-
+        INCLUDE 'biblio-title.inc' biblio=ticket_update.ticket.biblio link = 0 -%].<br>
+      - <br>
+      - 'Följande kommentar har lämnats: <br>'
+      - '[%- ticket_update.message -%]<br>'
+      - <br>
+      - Tack
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Ärende uppdaterat
+      title: Katalogärende uppdaterat
+    - branchcode: ''
+      code: TICKET_NOTIFY
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE Koha -%]'
+      - Bästa katalogisatör, <br>
+      - '[%- INCLUDE ''patron-title.inc'' patron => ticket.reporter -%] rapporterade
+        följande problem med <a href=''[%- Koha.Preference(''staffClientBaseURL'')
+        -%]/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% ticket.biblio.biblionumber
+        %]'' >[%- INCLUDE ''biblio-title.inc'' biblio=ticket.biblio link = 0 -%]</a><br>'
+      - <br>
+      - '[%- ticket.body -%]<br>'
+      - <br>
+      - Du kan markera detta problem som löst från %problemhanteringssidan<a href='[%-
+        Koha.Preference('staffClientBaseURL') -%]/cgi-bin/koha/cataloguing/concerns.pl'>.
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Ärendeavisering
+      title: Katalogärende rapporterat
+    - branchcode: ''
+      code: ACCOUNT_CREDIT
+      content:
+      - '[%- USE AuthorisedValues -%]'
+      - '[%- USE KohaDates -%]'
+      - '[%- USE Price -%]'
+      - '[%- PROCESS "accounts.inc" -%]'
+      - <table>
+      - '    [% IF ( LibraryName ) %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h3>[% LibraryName | html %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF credit.library %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h2>[% credit.library.branchname | html %]</h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h3>[% today | $KohaDates %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Transaktions-ID: </td>'
+      - '      <td>[% credit.accountlines_id %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Operatörs-ID: </td>'
+      - '      <td>[% credit.manager_id %]</td>'
+      - '    </tr>'
+      - '    [% IF credit.payment_type %]'
+      - '    <tr>'
+      - '      <td>Betalningstyp: </td>'
+      - '      <td>[% AuthorisedValues.GetByCode(''PAYMENT_TYPE'', credit.payment_type)
+        %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h2><u>[%- PROCESS credit_type_description credit_type = credit.credit_type
+        -%] kvitto</u></h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% IF ( credit.credit_type_code == ''PAYMENT'' ) %]'
+      - '    <tr>'
+      - '      <th colspan="2">'
+      - '        Mottagen med tack från  [% credit.patron.firstname | html %] [% credit.patron.surname
+        | html %] <br>'
+      - '        Kortnummer: [% credit.patron.cardnumber | html %]<br>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% ELSIF ( credit.credit_type_code == ''CREDIT'' ) %]'
+      - '    <tr>'
+      - '      <th colspan="2">'
+      - '        Kredit tillagd till konto för [% credit.patron.firstname | html %]
+        [% credit.patron.surname | html %] <br>'
+      - '        Kortnummer: [% credit.patron.cardnumber | html %]<br>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% ELSIF ( credit.credit_type_code == ''WRITEOFF'' ) %]'
+      - '    <tr>'
+      - '      <th colspan="2">'
+      - '        Avskrivning tillagd till konto för [% credit.patron.firstname | html
+        %] [% credit.patron.surname | html %] <br>'
+      - '        Kortnummer: [% credit.patron.cardnumber | html %]<br>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF credit.amountoutstanding + 0 != 0 %]'
+      - '    <tr>'
+      - '      <th>Beskrivning av kredit</th>'
+      - '      <th>Belopp</th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>[%- PROCESS credit_type_description credit_type = credit.credit_type
+        -%]</td>'
+      - '      <td>[% credit.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <th style="text-align:right;">Totalt tillgängligt:</th>'
+      - '      <td>[% credit.amountoutstanding * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF credit.amount != credit.amountoutstanding %]'
+      - '    <tr>'
+      - '      <th>Beskrivning av avgifter</th>'
+      - '      <th>Belopp</th>'
+      - '    </tr>'
+      - '    [% FOREACH offset IN credit.credit_offsets %]'
+      - '    <tr>'
+      - '      <td>[% PROCESS account_type_description account=offset.debit %][% IF
+        ( offset.debit.itemnumber ) %] - [% offset.debit.item.biblio.title %][% END
+        %]</td>'
+      - '      <td>[% offset.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% END %]'
+      - '  <tfoot>'
+      - '    <tr class="highlight">'
+      - '      <td>Totalt:</td>'
+      - '      <td>[% credit.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% IF change.defined %]'
+      - '    <tr>'
+      - '      <td>Växel tillbaka: </td>'
+      - '      <td>[% change | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <td colspan="2"></td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Kontosaldo per datum:</td>'
+      - '      <td>[% credit.patron.account.balance * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '  </tfoot>'
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Din betalning
+      title: Din betalning
+    - branchcode: ''
+      code: ACCOUNT_DEBIT
+      content:
+      - '[% USE Price %]'
+      - '[% USE KohaDates %]'
+      - '[% PROCESS "accounts.inc" %]'
+      - <table>
+      - '    [% IF ( LibraryName ) %]'
+      - '    <tr>'
+      - '      <th colspan="3" class="centerednames">'
+      - '        <h3>[% LibraryName | html %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF debit.library %]'
+      - '    <tr>'
+      - '      <th colspan="3" class="centerednames">'
+      - '        <h2>[% debit.library.branchname | html %]</h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <td colspan="2" style="text-align:right;">Avgifts-ID: </td>'
+      - '      <td>[% debit.accountlines_id %]</td>'
+      - '    </tr>'
+      - '    [% IF credit.manager_id %]'
+      - '    <tr>'
+      - '      <td colspan="2" style="text-align:right;">Operatörs-ID: </td>'
+      - '      <td>[% credit.manager_id %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <th colspan="3" class="centerednames">'
+      - '        <h2><u>Faktura</u></h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <th colspan="3" >'
+      - '        Fakturera: [% debit.patron.firstname | html %] [% debit.patron.surname
+        | html %] <br>'
+      - '        Kortnummer: [% debit.patron.cardnumber | html %]<br>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% IF debit.amountoutstanding != 0 %]'
+      - '    <tr>'
+      - '      <th>Datum</th>'
+      - '      <th>Beskrivning av avgifter</th>'
+      - '      <th>Belopp</th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>[% debit.date | $KohaDates %]</td>'
+      - '      <td>[% PROCESS account_type_description account=debit %]</td>'
+      - '      <td>[% debit.amount | $Price %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td colspan="2" style="text-align:right;">Totalt utestående:</td>'
+      - '      <td>[% debit.amount | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF debit.amount != debit.amountoutstanding %]'
+      - '    <tr>'
+      - '      <th>Datum</th>'
+      - '      <th>Beskrivning av betalningar</th>'
+      - '      <th>Belopp</th>'
+      - '    </tr>'
+      - '    [% FOREACH offset IN debit.debit_offsets %]'
+      - '    <tr>'
+      - '      <td>[% offset.credit.date | $KohaDates %]</td>'
+      - '      <td>[% PROCESS account_type_description account=offset.credit %]</td>'
+      - '      <td>[% offset.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr class="highlight">'
+      - '      <td colspan="2" style="text-align:right;">Totalt betalat:</td>'
+      - '      <td>[% debit.amount - debit.amountoutstanding | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    </tr>'
+      - '      <td colspan="3"></td>'
+      - '    <tr>'
+      - '  <tfoot>'
+      - '    <tr>'
+      - '      <th colspan="2" style="text-align:right;">Totalt utestående:</th>'
+      - '      <td>[% debit.amountoutstanding | $Price %]</td>'
+      - '    </tr>'
+      - '  </tfoot>'
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Avgift för konto
+      title: Avgift för konto
+    - branchcode: ''
+      code: ACCOUNT_PAYMENT
+      content:
+      - '[%- USE Price -%]'
+      - En betalning på [% credit.amount * -1 | $Price %] har gjorts på ditt konto.
+      - ''
+      - 'Betalningen berör följande avgifter:'
+      - '[%- FOREACH o IN offsets %]'
+      - 'Beskrivning: [% o.debit.description %]'
+      - 'Betalt belopp: [% o.amount * -1 | $Price %]'
+      - 'Återstående belopp: [% o.debit.amountoutstanding | $Price %]'
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Din betalning
+      title: Din betalning
+    - branchcode: ''
+      code: ACCOUNT_WRITEOFF
+      content:
+      - '[%- USE Price -%]'
+      - En avskrivning på [% credit.amount * -1 | $Price %] har gjorts på ditt konto.
+      - ''
+      - 'Betalningen berör följande avgifter:'
+      - '[%- FOREACH o IN offsets %]'
+      - 'Beskrivning: [% o.debit.description %]'
+      - 'Betalt belopp: [% o.amount * -1 | $Price %]'
+      - 'Återstående belopp: [% o.debit.amountoutstanding | $Price %]'
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Kontoavskrivning
+      title: Kontoavskrivning
+    - branchcode: ''
+      code: AR_CANCELED
+      content:
+      - Hej <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>),
+      - ''
+      - 'Din artikelbeställning från <<biblio.title>> (<<items.barcode>>) har avbrutits
+        av följande anledning:'
+      - ''
+      - <<reason>>
+      - ''
+      - 'Artikel beställd:'
+      - 'Titel: <<article_requests.title>>'
+      - 'Författare: <<article_requests.author>>'
+      - 'Volym: <<article_requests.volume>>'
+      - 'Nummer: <<article_requests.issue>>'
+      - 'Datum: <<article_requests.date>>'
+      - 'TOC: [% IF article_request.toc_request %]Yes[% ELSE %]No[% END %]'
+      - 'Pages: <<article_requests.pages>>'
+      - 'Kapitel: <<article_requests.chapters>>'
+      - 'Kommentarer: <<article_requests.patron_notes>>'
+      - 'Format: [% IF article_request.format == ''PHOTOCOPY'' %]Copy[% ELSIF article_request.format
+        == ''SCAN'' %]Scan[% END %]'
+      - ''
+      - Ditt bibliotek
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikelbeställning - avbruten
+      title: Artikelbeställning har avbrutits
+    - branchcode: ''
+      code: AR_COMPLETED
+      content:
+      - Hej <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>),
+      - ''
+      - We have completed your request for an article from <<biblio.title>> (<<items.barcode>>).
+      - ''
+      - 'Artikel beställd:'
+      - 'Titel: <<article_requests.title>>'
+      - 'Författare: <<article_requests.author>>'
+      - 'Volym: <<article_requests.volume>>'
+      - 'Nummer: <<article_requests.issue>>'
+      - 'Datum: <<article_requests.date>>'
+      - 'TOC: [% IF article_request.toc_request %]Yes[% ELSE %]No[% END %]'
+      - 'Pages: <<article_requests.pages>>'
+      - 'Kapitel: <<article_requests.chapters>>'
+      - 'Kommentarer: <<article_requests.patron_notes>>'
+      - 'Format: [% IF article_request.format == ''PHOTOCOPY'' %]Copy[% ELSIF article_request.format
+        == ''SCAN'' %]Scan[% END %]'
+      - ''
+      - '[% IF article_request.format == ''PHOTOCOPY'' %]You may pick up your article
+        at [% branch.branchname %].[% ELSIF article_request.format == ''SCAN'' %]You
+        can download the scanned materials via the following URL(s): [% article_request.urls
+        %].[% END %]'
+      - ''
+      - Tack!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikelbeställning - fullföljd
+      title: Artikelbeställning är fullföljd
+    - branchcode: ''
+      code: AR_PENDING
+      content:
+      - Dear <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>)
+      - ''
+      - Your request for an article from <<biblio.title>> (<<items.barcode>>) is now
+        in pending state.
+      - ''
+      - 'Artikel beställd:'
+      - 'Titel: <<article_requests.title>>'
+      - 'Författare: <<article_requests.author>>'
+      - 'Volym: <<article_requests.volume>>'
+      - 'Nummer: <<article_requests.issue>>'
+      - 'Datum: <<article_requests.date>>'
+      - 'TOC: [% IF article_request.toc_request %]Yes[% ELSE %]No[% END %]'
+      - 'Pages: <<article_requests.pages>>'
+      - 'Kapitel: <<article_requests.chapters>>'
+      - 'Kommentarer: <<article_requests.patron_notes>>'
+      - ''
+      - ''
+      - Tack!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikelbeställning - väntande
+      title: Väntande artikelbeställning
+    - branchcode: ''
+      code: AR_REQUESTED
+      content:
+      - Dear <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>)
+      - ''
+      - Vi har mottagit din beställning av en artikel från <<biblio.title>> (<<items.barcode>>).
+      - ''
+      - 'Artikel beställd:'
+      - 'Titel: <<article_requests.title>>'
+      - 'Författare: <<article_requests.author>>'
+      - 'Volym: <<article_requests.volume>>'
+      - 'Nummer: <<article_requests.issue>>'
+      - 'Datum: <<article_requests.date>>'
+      - 'TOC: [% IF article_request.toc_request %]Yes[% ELSE %]No[% END %]'
+      - 'Pages: <<article_requests.pages>>'
+      - 'Kapitel: <<article_requests.chapters>>'
+      - 'Kommentarer: <<article_requests.patron_notes>>'
+      - 'Format: [% IF article_request.format == ''PHOTOCOPY'' %]Copy[% ELSIF article_request.format
+        == ''SCAN'' %]Scan[% END %]'
+      - ''
+      - Tack!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikelbeställning - ny
+      title: Artikelbeställning mottagen
+    - branchcode: ''
+      code: AR_PROCESSING
+      content:
+      - Hej <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>),
+      - ''
+      - We are now processing your request for an article from <<biblio.title>> (<<items.barcode>>).
+      - ''
+      - 'Artikel beställd:'
+      - 'Titel: <<article_requests.title>>'
+      - 'Författare: <<article_requests.author>>'
+      - 'Volym: <<article_requests.volume>>'
+      - 'Nummer: <<article_requests.issue>>'
+      - 'Datum: <<article_requests.date>>'
+      - 'TOC: [% IF article_request.toc_request %]Yes[% ELSE %]No[% END %]'
+      - 'Pages: <<article_requests.pages>>'
+      - 'Kapitel: <<article_requests.chapters>>'
+      - 'Kommentarer: <<article_requests.patron_notes>>'
+      - 'Format: [% IF article_request.format == ''PHOTOCOPY'' %]Copy[% ELSIF article_request.format
+        == ''SCAN'' %]Scan[% END %]'
+      - ''
+      - Tack!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikelbeställning - under behandling
+      title: Artikelbeställning under behandling
+    - branchcode: ''
+      code: AR_SLIP
+      content:
+      - 'Article request:'
+      - ''
+      - <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>),
+      - ''
+      - 'Titel: <<biblio.title>>'
+      - 'Streckkod: <<items.barcode>>'
+      - ''
+      - 'Artikel beställd:'
+      - 'Titel: <<article_requests.title>>'
+      - 'Författare: <<article_requests.author>>'
+      - 'Volym: <<article_requests.volume>>'
+      - 'Nummer: <<article_requests.issue>>'
+      - 'Datum: <<article_requests.date>>'
+      - 'TOC: [% IF article_request.toc_request %]Yes[% ELSE %]No[% END %]'
+      - 'Pages: <<article_requests.pages>>'
+      - 'Kapitel: <<article_requests.chapters>>'
+      - 'Kommentarer: <<article_requests.patron_notes>>'
+      - 'Format: [% IF article_request.format == ''PHOTOCOPY'' %]Copy[% ELSIF article_request.format
+        == ''SCAN'' %]Scan[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Artikelbeställning - kvitto
+      title: Artikelbeställning
+    - branchcode: ''
+      code: CHECKIN
+      content:
+      - 'The following items have been checked in:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Tack.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Återlämning av exemplar (sammanfattning)
+      title: Återlämningar
+    - branchcode: ''
+      code: CHECKIN
+      content:
+      - 'The following items have been checked in:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Tack.
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Återlämning av exemplar (sammanfattning)
+      title: Återlämningar
+    - branchcode: ''
+      code: CHECKOUT
+      content:
+      - 'The following items have been checked out:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Tack för att du besöker [% branch.branchname %].
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Utlån av exemplar (sammanfattning)
+      title: Lån
+    - branchcode: ''
+      code: CHECKOUT
+      content:
+      - 'The following items have been checked out:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Tack för att du besöker [% branch.branchname %].
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Utlån av exemplar (sammanfattning)
+      title: Lån
+    - branchcode: ''
+      code: CHECKOUT_NOTE
+      content:
+      - <<borrowers.firstname>> <<borrowers.surname>> har lagt till en anteckning
+        till exemplaret <<biblio.title>> - <<biblio.author>> (<<biblio.biblionumber>>).
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Kommentar för utlånat exemplar (lämnad av låntagare)
+      title: Utlåningsmeddelande
+    - branchcode: ''
+      code: DUE
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'The following item is now due:'
+      - ''
+      - '[% biblio.title %], [% biblio.author %] ([% item.barcode %])'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Påminnelse om förfallodatum
+      title: Påminnelse om förfallodatum
+    - branchcode: ''
+      code: DUE
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'The following item is now due:'
+      - ''
+      - '[% biblio.title %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Påminnelse om förfallodatum
+      title: Påminnelse om förfallodatum
+    - branchcode: ''
+      code: DUEDGST
+      content:
+      - Kära <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'The following item(s) are now due:'
+      - ''
+      - <<items.content>>
+      - ''
+      - Tack.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Påminnelse om förfallodatum (sammanfattning)
+      title: Påminnelse om förfallodatum
+    - branchcode: ''
+      code: DUEDGST
+      content:
+      - Kära <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - You have <<count>> item(s) that are now due
+      - ''
+      - Tack.
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Påminnelse om förfallodatum (sammanfattning)
+      title: Påminnelse om förfallodatum
+    - branchcode: ''
+      code: HOLD_SLIP
+      content:
+      - '<h5>Datum: [% today | $KohaDates %]</h5>'
+      - <br>
+      - <h3> Transfer to/Hold in [% branch.branchname %]</h3>
+      - <br>
+      - <h3>[% borrower.surname %], [% borrower.firstname %]</h3>
+      - <br>
+      - <ul>
+      - '    <li>[% borrower.cardnumber %]</li>'
+      - '    <li>[% borrower.phone %]</li>'
+      - '    <li> [% borrower.address %]<br>'
+      - '         [% borrower.address2 %]<br>'
+      - '         [% borrower.city %] [% borrower.zipcode %]'
+      - '    </li>'
+      - '    <li>[% borrower.email %]</li>'
+      - </ul>
+      - <br>
+      - <h3>ITEM ON HOLD</h3>
+      - <h4>[% biblio.title %]</h4>
+      - <h5>[% biblio.author %]</h5>
+      - <ul>
+      - '   <li>[% item.barcode %]</li>'
+      - '   <li>[% item.itemcallnumber %]</li>'
+      - '   <li>[% reserve.waitingdate | $KohaDates %]</li>'
+      - </ul>
+      - '<p>Kommentarer:'
+      - <pre>[% reserve.reservenotes %]</pre>
+      - </p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Reservationslapp
+      title: Reservationslapp
+    - branchcode: ''
+      code: ISSUEQSLIP
+      content:
+      - '[%~ USE KohaDates ~%]'
+      - <h3><<branches.branchname>></h3>
+      - Utlånad till <<borrowers.title>> <<borrowers.firstname>> <<borrowers.initials>>
+        <<borrowers.surname>> <br>
+      - (<<borrowers.cardnumber>>) <br>
+      - <br>
+      - <<today>><br>
+      - <br>
+      - <h4>Utlånade idag</h4>
+      - <checkedout>
+      - <p>
+      - <<biblio.title>> <br>
+      - 'Streckkod: <<items.barcode>><br>'
+      - 'Förfallodatum: <<issues.date_due>><br>'
+      - </p>
+      - </checkedout>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Snabbkvitto
+      title: Snabbkvitto
+    - branchcode: ''
+      code: ISSUESLIP
+      content:
+      - <h3><<branches.branchname>></h3>
+      - Utlånad till <<borrowers.title>> <<borrowers.firstname>> <<borrowers.initials>>
+        <<borrowers.surname>> <br>
+      - (<<borrowers.cardnumber>>) <br>
+      - <br>
+      - <<today>><br>
+      - <br>
+      - <h4>Utlånad(</h4>)
+      - <checkedout>
+      - <p>
+      - <<biblio.title>> <br>
+      - 'Streckkod: <<items.barcode>><br>'
+      - 'Förfallodatum: <<issues.date_due>><br>'
+      - </p>
+      - </checkedout>
+      - <br>
+      - <h4>Förseningar</h4>
+      - <overdue>
+      - <p>
+      - <<biblio.title>> <br>
+      - 'Streckkod: <<items.barcode>><br>'
+      - 'Förfallodatum: <<issues.date_due>><br>'
+      - </p>
+      - </overdue>
+      - <br>
+      - <hr>
+      - <br>
+      - '[% IF additional_contents.count %]'
+      - '<h4 style="text-align: center; font-style:italic;">News</h4>'
+      - '[% FOREACH content IN additional_contents %]'
+      - <div class="newsitem">
+      - '<h5 style="margin-bottom: 1px; margin-top: 1px"><b>[% content.title %]</b></h5>'
+      - '<p style="margin-bottom: 1px; margin-top: 1px">[% content.content %]</p>'
+      - '<p class="newsfooter" style="font-size: 8pt; font-style:italic; margin-bottom:
+        1px; margin-top: 1px">Posted on [% content.published_on | $KohaDates %]</p>'
+      - <hr />
+      - </div>
+      - '[% END %]'
+      - '[% END %]'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Utlån - kvitto
+      title: Utlån - kvitto
+    - branchcode: ''
+      code: ODUE
+      content:
+      - Kära <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - According to our current records, you have items that are overdue.Your library
+        does not charge late fines, but please return or renew them at the branch
+        below as soon as possible.
+      - ''
+      - <<branches.branchname>>
+      - <<branches.branchaddress1>>
+      - <<branches.branchaddress2>> <<branches.branchaddress3>>
+      - 'Telefon: <<branches.branchphone>>'
+      - 'Fax: <<branches.branchfax>>'
+      - 'E-post: <<branches.branchemail>>'
+      - ''
+      - If you have registered a password with the library, and you have a renewal
+        available, you may renew online. If an item becomes more than 30 days overdue,
+        you will be unable to use your library card until the item is returned.
+      - ''
+      - 'Följande exemplar är för tillfället försenade:'
+      - ''
+      - '<item>"<<biblio.title>>" by <<biblio.author>>, <<items.itemcallnumber>>,
+        Barcode: <<items.barcode>> Fine: <<items.fine>></item>'
+      - ''
+      - Thank-you for your prompt attention to this matter.
+      - ''
+      - <<branches.branchname>> Personal
+      - ''
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Förseningsmeddelande
+      title: Exemplaret är försenat
+    - branchcode: ''
+      code: OVERDUES_SLIP
+      content:
+      - 'Följande exemplar är för tillfället försenade:'
+      - ''
+      - '<item>"<<biblio.title>>" by <<biblio.author>>, <<items.itemcallnumber>>,
+        Barcode: <<items.barcode>> Fine: <<items.fine>></item>'
+      - ''
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Förseningslapp
+      title: Förseningslapp
+    - branchcode: ''
+      code: PREDUE
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'The following item will be due soon:'
+      - ''
+      - '[% biblio.title %], [% biblio.author %] ([% item.barcode %])'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Utskick i förväg om förfallodatum
+      title: Utskick i förväg om förfallodatum
+    - branchcode: ''
+      code: PREDUE
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'The following item will be due soon:'
+      - ''
+      - '[% biblio.title %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Utskick i förväg om förfallodatum
+      title: Utskick i förväg om förfallodatum
+    - branchcode: ''
+      code: PREDUEDGST
+      content:
+      - Kära <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'The following item(s) will be due soon:'
+      - ''
+      - <<items.content>>
+      - ''
+      - Tack.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Utskick i förväg om förfallodatum (sammanfattning)
+      title: Utskick i förväg om förfallodatum
+    - branchcode: ''
+      code: PREDUEDGST
+      content:
+      - Kära <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - You have <<count>> item(s) that will be due soon.
+      - ''
+      - Tack.
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Utskick i förväg om förfallodatum (sammanfattning)
+      title: Utskick i förväg om förfallodatum
+    - branchcode: ''
+      code: RENEWAL
+      content:
+      - 'Följande exemplar har blivit omlånade:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Tack för att du besöker [% branch.branchname %].
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Omlånade exemplar
+      title: Omlånade exemplar
+    - branchcode: ''
+      code: SR_SLIP
+      content:
+      - 'Beståndsrotationsrapport för för [% branch.name %]:'
+      - ''
+      - '[% IF branch.items.size %][% branch.items.size %] exemplar är under behandling
+        för detta bibliotek.'
+      - '[% ELSE %]Inga exemplar är under behandling för denna enhet'
+      - '[% END %][% FOREACH item IN branch.items %][% IF item.reason != ''in-demand''
+        %]Titel: [% item.title %]'
+      - 'Författare: [% item.author %]'
+      - 'Hyllsignatur: [% item.callnumber %]'
+      - 'Plats: [% item.location %]'
+      - 'Streckkod: [% item.barcode %]'
+      - 'Utlånad?: [% item.onloan %]'
+      - 'Status: [% item.reason %]'
+      - 'Aktuellt bibliotek: [% item.branch.branchname %] [% item.branch.branchcode
+        %]'
+      - ''
+      - '[% END %][% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Kvitto för beståndsrotation
+      title: Rapport för beståndsrotation
+    - branchcode: ''
+      code: TRANSFERSLIP
+      content:
+      - '<h5>Datum: <<today>></h5>'
+      - <br>
+      - <h3>Överför till <<branches.branchname>></h3>
+      - <br>
+      - <h3>EXEMPLAR</h3>
+      - <h4><<biblio.title>></h4>
+      - <h5><<biblio.author>></h5>
+      - <ul>
+      - '   <li><<items.barcode>></li>'
+      - '   <li><<items.itemcallnumber>></li>'
+      - </ul>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Överföringslapp
+      title: Överföringslapp
+    - branchcode: ''
+      code: ACQCLAIM
+      content:
+      - <<aqbooksellers.name>>
+      - <<aqbooksellers.address1>>
+      - <<aqbooksellers.address2>>
+      - <<aqbooksellers.address3>>
+      - <<aqbooksellers.address4>>
+      - <<aqbooksellers.phone>>
+      - ''
+      - <order>Ordernumber <<aqorders.ordernumber>> (<<biblio.title>>) (<<aqorders.quantity>>
+        beställt) (<<aqorders.listprice>> kr styck) har inte tagits emot.</order>
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: claimacquisition
+      name: Inköpsreklamation
+      title: Exemplaret inte mottaget
+    - branchcode: ''
+      code: SFTP_FAILURE
+      content:
+      - 'SFTP upload failed:'
+      - ''
+      - <<sftp_status>>
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: commandline
+      name: File SFTP failed
+      title: The SFTP by sftp_file.pl failed
+    - branchcode: ''
+      code: SFTP_SUCCESS
+      content:
+      - SFTP upload succeeded
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: commandline
+      name: File SFTP success
+      title: The SFTP by sftp_file.pl was successful
+    - branchcode: ''
+      code: ILL_PICKUP_READY
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Fjärrlånebeställningsnummer [% illrequest.illrequest_id %] för:'
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - finns att hämta hos [% branch.branchname %].
+      - ''
+      - Hälsningar
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Fjärrlånebeställning klar att hämta
+      title: Fjärrlånebeställning finns att hämta
+    - branchcode: ''
+      code: ILL_REQUEST_UNAVAIL
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Fjärrlånebeställningsnummer [% illrequest.illrequest_id %] för
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - är dessvärre inte tillgänglig.
+      - ''
+      - Hälsningar
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Fjärrlånebeställning ej tillgänglig
+      title: Interlibrary loan request unavailable
+    - branchcode: ''
+      code: ILL_REQUEST_CANCEL
+      content:
+      - 'Låntagaren knuten till fjärrlånebeställning [% illrequest.illrequest_id %],
+        med följande detaljer, har önskat avbryta denna beställning:'
+      - ''
+      - '[% ill_full_metadata %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Fjärrlånebeställning avbruten
+      title: Fjärrlånebeställning avbruten
+    - branchcode: ''
+      code: ILL_REQUEST_MODIFIED
+      content:
+      - 'Låntagaren knuten till fjärrlånebeställning [% illrequest.illrequest_id %],
+        med följande detaljer, har redigerat denna fjärrlånebeställning:'
+      - ''
+      - '[% ill_full_metadata %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Fjärrlånebeställning har ändrats
+      title: Fjärrlånebeställning ändrad
+    - branchcode: ''
+      code: ILL_PARTNER_REQ
+      content:
+      - Hej,
+      - ''
+      - 'Vi skulle vilja beställa ett fjärrlån på en titel som matchar följande beskrivning:'
+      - ''
+      - '[% ill_full_metadata %]'
+      - ''
+      - Vänligen meddela oss om ni kan leverera detta till oss.
+      - ''
+      - Hälsningar
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: ILL request to partners
+      title: Interlibrary loan request to partners
+    - branchcode: ''
+      code: ILL_REQUEST_UPDATE
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Fjärrlånebeställningsnummer [% illrequest.illrequest_id %] för
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - har uppdaterats.
+      - ''
+      - 'Information om uppdateringen nedan:'
+      - ''
+      - '[% additional_text %]'
+      - ''
+      - Hälsningar
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Fjärrlånebeställning uppdaterad
+      title: Fjärrlånebeställning uppdaterad
+    - branchcode: ''
+      code: ILL_PICKUP_READY
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Fjärrlånebeställningsnummer [% illrequest.illrequest_id %] för:'
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - finns att hämta hos [% branch.branchname %].
+      - ''
+      - Hälsningar
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Fjärrlånebeställning klar att hämta
+      title: Fjärrlånebeställning finns att hämta
+    - branchcode: ''
+      code: ILL_REQUEST_UNAVAIL
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Fjärrlånebeställningsnummer [% illrequest.illrequest_id %] för
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - är dessvärre inte tillgänglig.
+      - ''
+      - Hälsningar
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Fjärrlånebeställning ej tillgänglig
+      title: Interlibrary loan request unavailable
+    - branchcode: ''
+      code: ILL_REQUEST_CANCEL
+      content:
+      - 'Låntagaren knuten till fjärrlånebeställning [% illrequest.illrequest_id %],
+        med följande detaljer, har önskat avbryta denna beställning:'
+      - ''
+      - '[% ill_full_metadata %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Fjärrlånebeställning avbruten
+      title: Fjärrlånebeställning avbruten
+    - branchcode: ''
+      code: ILL_REQUEST_MODIFIED
+      content:
+      - 'Låntagaren knuten till fjärrlånebeställning [% illrequest.illrequest_id %],
+        med följande detaljer, har redigerat denna fjärrlånebeställning:'
+      - ''
+      - '[% ill_full_metadata %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Fjärrlånebeställning har ändrats
+      title: Fjärrlånebeställning ändrad
+    - branchcode: ''
+      code: ILL_PARTNER_REQ
+      content:
+      - Hej,
+      - ''
+      - 'Vi skulle vilja beställa ett fjärrlån på en titel som matchar följande beskrivning:'
+      - ''
+      - '[% ill_full_metadata %]'
+      - ''
+      - Vänligen meddela oss om ni kan leverera detta till oss.
+      - ''
+      - Hälsningar
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: ILL request to partners
+      title: Interlibrary loan request to partners
+    - branchcode: ''
+      code: ILL_REQUEST_UPDATE
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Fjärrlånebeställningsnummer [% illrequest.illrequest_id %] för
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - har uppdaterats.
+      - ''
+      - 'Information om uppdateringen nedan:'
+      - ''
+      - '[% additional_text %]'
+      - ''
+      - Hälsningar
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Fjärrlånebeställning uppdaterad
+      title: Fjärrlånebeställning uppdaterad
+    - branchcode: ''
+      code: SHARE_ACCEPT
+      content:
+      - Hej
+      - ''
+      - Vi vill informera dig om att <<borrowers.firstname>> <<borrowers.surname>>
+        tackade ja till din inbjudan att dela din lista <<listname>> i vår bibliotekskatalog.
+      - ''
+      - Tack.
+      - ''
+      - Ditt bibliotek.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: lists
+      name: Notification about an accepted share
+      title: Share on list <<listname>> accepted
+    - branchcode: ''
+      code: SHARE_INVITE
+      content:
+      - Hej
+      - ''
+      - En av våra låntagare, <<borrowers.firstname>> <<borrowers.surname>>, inbjuder
+        dig att dela en lista <<listname>> i vår bibliotekskatalog.
+      - ''
+      - För att komma åt denna delade lista, klicka på följande URL eller kopiera
+        och klistra in den i webbläsarens adressfält.
+      - ''
+      - <<shareurl>>
+      - ''
+      - Om du inte är beskyddare i vårt bibliotek eller inte vill acceptera denna
+        inbjudan, vänligen ignorera detta mejl. Observera också att denna inbjudan
+        går ut inom två veckor.
+      - ''
+      - Tack.
+      - ''
+      - Ditt bibliotek.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: lists
+      name: En inbjudan att dela lista
+      title: Dela listan <<listname>
+    - branchcode: ''
+      code: TRANSFER_OWNERSHIP
+      content:
+      - Kära [%- INCLUDE 'patron-title.inc' patron => owner -%],<br>
+      - <br>
+      - A public list, titled <em>[% shelf.shelfname | html %]</em>, has been transferred
+        to you[% IF ( librarian ) %] by [%- INCLUDE 'patron-title.inc' patron => librarian
+        %][% END %].<br>
+      - <br>
+      - '[% IF old_owner %]The list was previously owned by [%- INCLUDE ''patron-title.inc''
+        patron => old_owner -%].<br><br>[% END %]'
+      - Thank you<br>
+      - <br>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: lists
+      name: Transfer ownership
+      title: A list has been transferred to you
+    - branchcode: ''
+      code: DISCHARGE
+      content:
+      - ''
+      - <<today>>
+      - <h1>Bekräfta godkännande av begäran om att bli borttagen</h1>
+      - <p><<branches.branchname>> godkänner att följande låntagare:<br>
+      - '<<borrowers.firstname>> <<borrowers.surname>> (kortnummer: <<borrowers.cardnumber>>)<br>'
+      - har återlämnat alla exemplar.</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Bekräfta godkännande av begäran om att bli borttagen
+      title: Godkänn begäran om borttagning för <<borrowers.firstname>> <<borrowers.surname>>
+    - branchcode: ''
+      code: MEMBERSHIP_EXPIRY
+      content:
+      - Hej <<borrowers.title>> <<borrowers.firstname>><<borrowers.surname>>,
+      - ''
+      - 'Ditt lånekort går ut snart:'
+      - ''
+      - <<borrowers.dateexpiry>>
+      - ''
+      - Tack,
+      - ''
+      - Bibliotekarie
+      - ''
+      - <<branches.branchname>>
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Account expiration
+      title: Account expiration
+    - branchcode: ''
+      code: MEMBERSHIP_RENEWED
+      content:
+      - '[%- USE Price -%]'
+      - Hej [% borrower.title %] [% borrower.firstname %][% borrower.surname %],
+      - ''
+      - 'Ditt bibliotekskonto har förnyats. Nytt utgångsdatum är: [% borrower.dateexpiry
+        %].'
+      - |-
+        [% IF borrower.category.enrolmentfee > 0 %]
+        An enrollment fee of [% borrower.category.enrolmentfee | $Price with_symbol => 1 %] has been applied.
+        [% END %]
+      - Tack,
+      - ''
+      - Ditt bibliotek,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Förnyelse av konto
+      title: Förnyelse av konto
+    - branchcode: ''
+      code: OPAC_REG_VERIFY
+      content:
+      - Hej!
+      - ''
+      - 'Ditt bibliotekskonto har skapats. Vänligen verifiera din e-postadress genom
+        att klicka på den här länken för att slutföra registreringsprocessen:'
+      - ''
+      - <<OPACBaseURL>>/cgi-bin/koha/opac-registration-verify.pl?token=<<borrower_modifications.verification_token>>
+      - ''
+      - Om du inte initierade denna begäran kan du säkert ignorera detta engångsmeddelande.
+        Begäran löper ut inom kort.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Verifieringsmail för självregistrering i OPAC
+      title: Verifiera ditt konto
+    - branchcode: ''
+      code: PASSWORD_CHANGE
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Vi vill meddela dig att ditt lösenord har ändrats. Om du inte har ändrat det
+        själv (eller begärt det), kontakta bibliotekspersonalen.
+      - ''
+      - Ditt bibliotek.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Meddelande om ändring av lösenord
+      title: Avisering om ändring av lösenord
+    - branchcode: ''
+      code: PASSWORD_RESET
+      content:
+      - <p>En förfrågan om att återställa lösenordet för det här konto har gjorts
+        och därför får du det här e-postmeddelandet <strong><<user>></strong>.
+      - </p>
+      - <p>
+      - 'Du kan nu skapa ditt nya lösenord med följande länk:'
+      - <br><a href="<<passwordreseturl>>"><<passwordreseturl>></a>
+      - </p>
+      - '%Den här länken kommer att vara giltig i 2 dagar från det här e-postmeddelandets
+        mottagning, sedan måste du ansöka igen om du inte ändrar ditt lösenord.<p>'
+      - <p>Tack.</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Återställning av lösenord
+      title: Återställning av lösenord i Koha
+    - branchcode: ''
+      code: STAFF_PASSWORD_RESET
+      content:
+      - <p>Personal har återställt lösenordet för kontot <strong><<user>></strong>.
+      - </p>
+      - <p>
+      - 'Vänligen skapa ditt nya lösenord med följande länk:'
+      - <br><a href="<<passwordreseturl>>"><<passwordreseturl>></a>
+      - </p>
+      - '%Den här länken kommer att vara giltig i 5 dagar från det att detta e-postmeddelande
+        togs emot, sedan måste du ansöka igen om du inte ändrar ditt lösenord.<p>'
+      - <p>Tack.</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Återställning av lösenord
+      title: Återställning av lösenord i Koha
+    - branchcode: ''
+      code: WELCOME
+      content:
+      - '[% USE Koha %]'
+      - Hej [% borrower.title %] [% borrower.firstname %] [% borrower.surname %].<br>
+      - <br>
+      - Tack för att du har anslutit dig till [% IF Koha.Preference('LibraryName')
+        %][% Koha.Preference('LibraryName') %][% ELSE %]biblioteket[% END %]
+      - <br>
+      - Du kan söka efter allt vårt material i vår <a href='[% Koha.Preference('OPACBaseURL')
+        %]'>katalog</a>.<br>
+      - <br>
+      - Ditt kortnummer är [% borrower.cardnumber %]<br>
+      - <br>
+      - Om du har några problem eller frågor om ditt konto, kontakta biblioteket.
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: 'Välkomstmeddelande '
+      title: '[% USE Koha %][% IF Koha.Preference(''LibraryName'') %]Välkommen till
+        [% Koha.Preference(''LibraryName'') %][% ELSE %]Välkommen till biblioteket[%
+        END %]'
+    - branchcode: ''
+      code: 2FA_OTP_TOKEN
+      content:
+      - Dear [% borrower.firstname %] [% borrower.surname %] ([% borrower.cardnumber
+        %])
+      - ''
+      - Din autentiseringstoken är [% otp_token %].
+      - Den är giltig en minut.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: two-authentication step token
+      title: Two-authentication token
+    - branchcode: ''
+      code: ACCOUNTS_SUMMARY
+      content:
+      - '[% USE Branches %]'
+      - '[% USE Koha %]'
+      - '[% USE KohaDates %]'
+      - '[% USE Price %]'
+      - '[% PROCESS ''accounts.inc'' %]'
+      - <table>
+      - '  [% IF ( Koha.Preference(''LibraryName'') ) %]'
+      - '    <tr>'
+      - '      <th colspan=''4'' class=''centerednames''>'
+      - '        <h1>[% Koha.Preference(''LibraryName'') | html %]</h1>'
+      - '      </th>'
+      - '    </tr>'
+      - '  [% END %]'
+      - ''
+      - '  <tr>'
+      - '    <th colspan=''4'' class=''centerednames''>'
+      - '      <h2>[% Branches.GetName( borrower.branchcode ) | html %]</h2>'
+      - '    </th>'
+      - '  </tr>'
+      - ''
+      - '  <tr>'
+      - '    <th colspan=''4'' class=''centerednames''>'
+      - '      <h3>Utestående konton</h3>'
+      - '    </th>'
+      - '  </tr>'
+      - ''
+      - '  <tr>'
+      - '    <th colspan=''4'' class=''centerednames''>'
+      - '      <h4>Avgifter</h4>'
+      - '    </th>'
+      - '  </tr>'
+      - '  [% IF borrower.account.outstanding_debits.total_outstanding %]'
+      - '  <tr>'
+      - '    <th>Datum</th>'
+      - '    <th>Avgift</th>'
+      - '    <th>Belopp</th>'
+      - '    <th>Utestående</th>'
+      - '  </tr>'
+      - '  [% FOREACH debit IN borrower.account.outstanding_debits %]'
+      - '  <tr>'
+      - '    <td>[% debit.date | $KohaDates %]</td>'
+      - '    <td>'
+      - '      [% PROCESS account_type_description account=debit %]'
+      - '      [%- IF debit.description %], [% debit.description | html %][% END %]'
+      - '    </td>'
+      - '    <td class=''debit''>[% debit.amount | $Price %]</td>'
+      - '    <td class=''debit''>[% debit.amountoutstanding | $Price %]</td>'
+      - '  </tr>'
+      - '  [% END %]'
+      - '  [% ELSE %]'
+      - '  <tr>'
+      - '    <td colspan=''4''>Det finns inga utestående skulder på ditt konto</td>'
+      - '  </tr>'
+      - '  [% END %]'
+      - ''
+      - '  <tr>'
+      - '    <th colspan=''4'' class=''centerednames''>'
+      - '      %Krediter<h4>'
+      - '    </th>'
+      - '  </tr>'
+      - '  [% IF borrower.account.outstanding_credits.total_outstanding %]'
+      - '  <tr>'
+      - '    <th>Datum</th>'
+      - '    <th>Kredit</th>'
+      - '    <th>Belopp</th>'
+      - '    <th>Utestående</th>'
+      - '  </tr>'
+      - '  [% FOREACH credit IN borrower.account.outstanding_credits %]'
+      - '  <tr>'
+      - '    <td>[% credit.date | $KohaDates%]</td>'
+      - '    <td>'
+      - '      [% PROCESS account_type_description account=credit %]'
+      - '      [%- IF credit.description %], [% credit.description | html %][% END
+        %]'
+      - '    </td>'
+      - '    <td class=''credit''>[% credit.amount *-1 | $Price %]</td>'
+      - '    <td class=''credit''>[% credit.amountoutstanding *-1 | $Price %]</td>'
+      - '  </tr>'
+      - '  [% END %]'
+      - '  [% ELSE %]'
+      - '  <tr>'
+      - '    <td colspan=''4''>Det finns inga utestående krediter på ditt konto</td>'
+      - '  </tr>'
+      - '  [% END %]'
+      - ''
+      - '  <tfoot>'
+      - '    <td colspan=''3''>'
+      - '      [% IF borrower.account.balance < 0 %]'
+      - '        Total kredit per [% today | $KohaDates %]:'
+      - '      [% ELSE %]'
+      - '        Totala utestående avgifter per [% today | $KohaDates %]:'
+      - '      [% END %]'
+      - '    </td>'
+      - '    [% IF ( borrower.account.balance <= 0 ) %]<td class=''credit''>[% borrower.account.balance
+        * -1 | $Price %]</td>'
+      - '    [% ELSE %]<td class=''debit''>[% borrower.account.balance | $Price %]</td>[%
+        END %]'
+      - '  </tfoot>'
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: members
+      name: Account balance slip
+      title: Kontosammanfattning för [% borrower.firstname %] [% borrower.surname
+        %]
+    - branchcode: ''
+      code: ACQORDER
+      content:
+      - <<aqbooksellers.name>>
+      - <<aqbooksellers.address1>>
+      - <<aqbooksellers.address2>>
+      - <<aqbooksellers.address3>>
+      - <<aqbooksellers.address4>>
+      - <<aqbooksellers.phone>>
+      - ''
+      - 'Beställ till biblioteket:'
+      - ''
+      - '<order>Ordernumber <<aqorders.ordernumber>> (<<biblio.title>>) (antal: <<aqorders.quantity>>)
+        (<<aqorders.listprice>> kr styck).</order>'
+      - ''
+      - Tack,
+      - ''
+      - <<branches.branchname>>
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: orderacquisition
+      name: Inköpsbeställning
+      title: Beställning
+    - branchcode: ''
+      code: RECEIPT
+      content:
+      - '[% USE KohaDates %]'
+      - '[% USE Branches %]'
+      - '[% USE Price %]'
+      - '[% PROCESS "accounts.inc" %]'
+      - <table>
+      - '[% IF ( LibraryName ) %]'
+      - ' <tr>'
+      - '    <th colspan="2" class="centerednames">'
+      - '        <h3>[% LibraryName | html %]</h3>'
+      - '    </th>'
+      - ' </tr>'
+      - '[% END %]'
+      - ' <tr>'
+      - '    <th colspan="2" class="centerednames">'
+      - '        <h2>[% Branches.GetName( credit.branchcode ) | html %]</h2>'
+      - '    </th>'
+      - ' </tr>'
+      - <tr>
+      - '    <th colspan="2" class="centerednames">'
+      - '        <h3>[% credit.date | $KohaDates %]</h3>'
+      - </tr>
+      - <tr>
+      - '  <td>Transaktions-ID: </td>'
+      - '  <td>[% credit.accountlines_id %]</td>'
+      - </tr>
+      - <tr>
+      - '  <td>Operatörs-ID: </td>'
+      - '  <td>[% credit.manager_id %]</td>'
+      - </tr>
+      - <tr>
+      - '  <td>Betalningstyp: </td>'
+      - '  <td>[% credit.payment_type %]</td>'
+      - </tr>
+      - ' <tr></tr>'
+      - ' <tr>'
+      - '    <th colspan="2" class="centerednames">'
+      - '        <h2><u>Kvitto för avgift</u></h2>'
+      - '    </th>'
+      - ' </tr>'
+      - ' <tr></tr>'
+      - ' <tr>'
+      - '    <th>Beskrivning av avgifter</th>'
+      - '    <th>Belopp</th>'
+      - '  </tr>'
+      - ''
+      - '  [% FOREACH debit IN credit.debits %]'
+      - '    <tr>'
+      - '        <td>[% PROCESS account_type_description account=debit %]</td>'
+      - '        <td>[% debit.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '  [% END %]'
+      - ''
+      - <tfoot>
+      - '  <tr class="highlight">'
+      - '    <td>Totalt: </td>'
+      - '    <td>[% credit.amount * -1| $Price %]</td>'
+      - '  </tr>'
+      - '  <tr>'
+      - '    <td>Inlämnat: </td>'
+      - '    <td>[% collected | $Price %]</td>'
+      - '  </tr>'
+      - '  <tr>'
+      - '    <td>Ändring: </td>'
+      - '    <td>[% change | $Price %]</td>'
+      - '    </tr>'
+      - </tfoot>
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: pos
+      name: Kvitto för försäljningsställe
+      title: Kvitto
+    - branchcode: ''
+      code: RECEIPT
+      content:
+      - '[% USE KohaDates %]'
+      - '[% USE Branches %]'
+      - '[% USE Price %]'
+      - '[% PROCESS "accounts.inc" %]'
+      - <table>
+      - '    [% IF ( LibraryName ) %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h3>[% LibraryName | html %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF credit.library %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h2>[% payment.library.branchname | html %]</h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h3>[% payment.date | $KohaDates %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Transaktions-ID: </td>'
+      - '      <td>[% payment.accountlines_id %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Operatörs-ID: </td>'
+      - '      <td>[% payment.manager_id %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Betalningstyp: </td>'
+      - '      <td>[% payment.payment_type %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h2><u>Kvitto för avgift</u></h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <th>Beskrivning av avgifter</th>'
+      - '      <th>Belopp</th>'
+      - '    </tr>'
+      - '    [% FOREACH offset IN payment.credit_offsets %]'
+      - '    <tr>'
+      - '        <td>[% PROCESS account_type_description account=debit %]</td>'
+      - '        <td>[% debit.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '  <tfoot>'
+      - '    <tr class="highlight">'
+      - '      <td>Totalt:</td>'
+      - '      <td>[% payment.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Inlämnat: </td>'
+      - '      <td>[% collected | $Price %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Växel tillbaka: </td>'
+      - '      <td>[% change | $Price %]</td>'
+      - '    </tr>'
+      - '  </tfoot>'
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: pos
+      name: Kvitto för försäljningsställe
+      title: Kvitto
+    - branchcode: ''
+      code: CANCEL_HOLD_ON_LOST
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Vi beklagar att meddela dig att följande exemplar inte kan tillhandahållas
+        på grund av att den saknas. Din reservation har tagits bort.
+      - ''
+      - 'Titel: [% biblio.title %]'
+      - 'Författare: [% biblio.author %]'
+      - 'Exemplar: [% item.copynumber %]'
+      - 'Plats: [% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Reservation har avbrutits
+      title: Reservation har avbrutits
+    - branchcode: ''
+      code: HOLD
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Du har en reservation att hämta sedan [% hold.waitingdate | $KohaDates %]:'
+      - ''
+      - 'Titel: [% biblio.title %]'
+      - 'Författare: [% biblio.author %]'
+      - 'Exemplar: [% item.copynumber %]'
+      - 'Plats: [% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %] [% branch.branchzip %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Reservation finns att hämta
+      title: Reservation finns att hämta hos <<branches.branchname>>
+    - branchcode: ''
+      code: HOLDDGST
+      content:
+      - 'Du har en eller flera reservationer att hämta:'
+      - '----'
+      - 'Titel: [% hold.biblio.title %]'
+      - 'Författare: [% hold.biblio.author %]'
+      - 'Exemplar: [% hold.item.copynumber %]'
+      - 'Väntar sedan: [% hold.waitingdate %]'
+      - 'Väntar hos: [% hold.branch.branchname %]'
+      - '[% hold.branch.branchaddress1 %]'
+      - '[% hold.branch.branchaddress2 %]'
+      - '[% hold.branch.branchaddress3 %]'
+      - '[% hold.branch.branchcity %] [% hold.branch.branchzip %]'
+      - '----'
+      - Tack!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Reservation(er) finns att hämta
+      title: Reservation(er) finns att hämta
+    - branchcode: ''
+      code: HOLDDGST
+      content:
+      - 'Du har en eller flera reservationer att hämta:'
+      - ''
+      - '----'
+      - 'Titel: [% hold.biblio.title %]'
+      - '----'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: reserves
+      name: Reservation(er) finns att hämta
+      title: Reservation(er) finns att hämta
+    - branchcode: ''
+      code: HOLD
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Din reservation för [% biblio.title %] är tillgänglig för hämtning.
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: reserves
+      name: Reservation finns att hämta
+      title: Hold available for pickup at [% branch.branchname %]
+    - branchcode: ''
+      code: HOLD
+      content:
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - ''
+      - ''
+      - Change service requested
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - '[% borrower.firstname %] [% borrower.surname %]'
+      - '[% borrower.address %]'
+      - '[% borrower.city %] [% borrower.zipcode %]'
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - '[% borrower.firstname %] [% borrower.surname %] [% borrower.cardnumber %]'
+      - ''
+      - 'Du har en reservation att hämta sedan [% hold.waitingdate | $KohaDates %]:'
+      - ''
+      - 'Titel: [% biblio.title %]'
+      - 'Författare: [% biblio.author %]'
+      - 'Exemplar: [% item.copynumber %]'
+      - ''
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: reserves
+      name: Reservation finns att hämta
+      title: Reservation finns att hämta (meddelandekvitto)
+    - branchcode: ''
+      code: HOLDPLACED
+      content:
+      - 'En reservation har lagts på följande exemplar : <<biblio.title>> (<<biblio.biblionumber>>)
+        av användare <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>).'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Reservation lagd
+      title: Reservation lagd
+    - branchcode: ''
+      code: HOLD_CHANGED
+      content:
+      - The patron picking up <<biblio.title>> (<<items.barcode>>) has changed to
+        <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>).
+      - Uppdatera reservationsinformationen för det här exemplaret.
+      - 'Titel: <<biblio.title>>'
+      - 'Författare: <<biblio.author>>'
+      - 'Exemplar: <<items.itemcallnumber>>'
+      - 'Avhämtningsbibliotek: <<branches.branchname>>'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Avbruten reservation tillgänglig för annan låntagare
+      title: Avbruten reservation tillgänglig för annan låntagare
+    - branchcode: ''
+      code: HOLD_REMINDER
+      content:
+      - |-
+        Dear [% borrower.firstname %] [% borrower.surname %],
+
+        The following holds are waiting at [% branch.branchname %]:
+
+        [% FOREACH hold IN holds %]
+            [% hold.biblio.title %] : waiting since [% hold.waitingdate | $KohaDates %]
+        [% END %]
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Påminnelse om reservation
+      title: Du har väntande reservationer.
+    - branchcode: ''
+      code: NEW_CURBSIDE_PICKUP
+      content:
+      - '[%- USE KohaDates -%]'
+      - '[%- SET cp = curbside_pickup -%]'
+      - ''
+      - Du har en upphämtning är planerad till [% cp.scheduled_pickup_datetime | $KohaDates
+        with_hours => 1 %] kl. [% cp.library.branchname %].
+      - |-
+        Any holds waiting for you at the pickup time will be included in this pickup. At this time, that list includes:
+        [%- FOREACH h IN cp.patron.holds %]
+        [%- IF h.branchcode == cp.branchcode && h.found == 'W' %]
+        * [% h.biblio.title %], [% h.biblio.author %] ([% h.item.barcode %])
+        [%- END %]
+        [%- END %]
+      - ''
+      - Once you have arrived, please call your library or log into your account and
+        click the "Alert staff of your arrival" button to let them know you are there.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: New curbside pickup
+      title: You have scheduled a curbside pickup for [% branch.branchname %]
+    - branchcode: ''
+      code: SERIAL_ALERT
+      content:
+      - <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Följande nummer är nu tillgängligt:'
+      - ''
+      - <<biblio.title>>, <<biblio.author>> (<<items.barcode>>)
+      - ''
+      - Vänligen hämta när det passar dig.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: serial
+      name: New serial issue
+      title: New serial issue is now available
+    - branchcode: ''
+      code: ACCEPTED
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Du har föreslagit att biblioteket ska köpa in [% suggestion.title %] av [%
+        suggestion.author %].
+      - ''
+      - Biblioteket har granskat ditt förslag idag. Titeln kommer att beställas så
+        snart som möjligt. Du kommer att meddelas per epost när beställningen är klar,
+        och igen när exemplaret anländer till biblioteket.
+      - ''
+      - Om du har några frågor, mejla oss på [% branch.branchemail %].
+      - ''
+      - Tack,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Förslag godkänt
+      title: Inköpsförslag är accepterat
+    - branchcode: ''
+      code: AVAILABLE
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Du har föreslagit att biblioteket ska köpa in [% suggestion.title %] av [%
+        suggestion.author %].
+      - ''
+      - Vi är glada att kunna meddela att titeln du efterfrågade nu finns på biblioteket.
+      - ''
+      - Om du har några frågor, mejla oss på [% branch.branchemail %].
+      - ''
+      - Tack,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Inköpsförslag tillgängligt
+      title: Inköpsförslag är tillgängligt
+    - branchcode: ''
+      code: NEW_SUGGESTION
+      content:
+      - <h3>Förslag som väntar på godkännande</h3>
+      - '    <p><h4>Föreslaget av</h4>'
+      - '    <ul>'
+      - '    <li>[% borrower.firstname %] [% borrower.surname %]</li>'
+      - '    <li>[% borrower.cardnumber %]</li>'
+      - '    [%- IF borrower.phone -%]'
+      - '        <li>[% borrower.phone %]</li>'
+      - '    [%- END -%]'
+      - '    [%- IF borrower.email -%]'
+      - '        <li>[% borrower.email %]</li>'
+      - '    [%- END -%]'
+      - '    </ul>'
+      - '    </p>'
+      - '    <p><h4>Föreslagen titel</h4>'
+      - '    <ul>'
+      - '    <li><b>Bibliotek:</b> [% branch.branchname %]</li>'
+      - '    <li><b>Titlel:</b> [% suggestion.title %]</li>'
+      - '    <li><b>Författare:</b> [% suggestion.author %]</li>'
+      - '    <li><b>Copyrightdatum:</b> [% suggestion.copyrightdate %]</li>'
+      - '    <li><b>Standardnummer (ISBN, ISSN eller annat):</b> [% suggestion.isbn
+        %]</li>'
+      - '    <li><b>Förläggare:</b> [% suggestion.publishercode %]</li>'
+      - '    <li><b>Titel på samling:</b> [% suggestion.collectiontitle %]</li>'
+      - '    <li><b>Utgivningsort:</b> [% suggestion.place %]</li>'
+      - '    <li>%Antal:<b> </b>[% suggestion.quantity %]'
+      - '    <li><b>Exemplartyp:</b>  [% suggestion.itemtype %]</li>'
+      - '    <li><b>Anledning till förslag:</b> [% suggestion.patronreason %]</li>'
+      - '    <li><b>Kommentarer:</b> [% suggestion.note %]</li>'
+      - '    </ul>'
+      - '    </p>'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Nytt inköpsförslag
+      title: Nytt inköpsförslag
+    - branchcode: ''
+      code: ORDERED
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Du har föreslagit att biblioteket ska köpa in [% suggestion.title %] av [%
+        suggestion.author %].
+      - ''
+      - Vi är glada att kunna meddela att titeln du efterfrågade nu har beställts.
+        Den bör anlända snart och kommer då att läggas in i bibliotekets bestånd.
+      - ''
+      - Du kommer att meddelas igen när boken är tillgänglig.
+      - ''
+      - Om du har några frågor, mejla oss på [% branch.branchemail %]
+      - ''
+      - Tack,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Inköpsförslag beställt
+      title: Inköpsförslag beställt
+    - branchcode: ''
+      code: REJECTED
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Du har föreslagit att biblioteket ska köpa in [% suggestion.title %] av [%
+        suggestion.author %].
+      - ''
+      - Biblioteket har granskat din begäran idag och har beslutat att inte acceptera
+        förslaget för närvarande.
+      - ''
+      - 'Den angivna orsaken är: [% suggestion.reason %]'
+      - ''
+      - Om du har några frågor, mejla oss på [% branch.branchemail %].
+      - ''
+      - Tack,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Förslag avslaget
+      title: Inköpsförslag avslaget
+    - branchcode: ''
+      code: TO_PROCESS
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Det finns ett nytt inköpsförslag att hantera: [% suggestion.title %] av [%
+        suggestion.author %].'
+      - ''
+      - Tack,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Avisera ansvarig för budgetställe
+      title: Ett förslag är redo att behandlas
+    - branchcode: ''
+      code: NOTIFY_MANAGER
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Du har ett nytt inköpsförslag att hantera: [% suggestion.title %].'
+      - ''
+      - Tack,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Avisera hanterare av inköpsförslag
+      title: Du har ett inköpsförslag att hantera
+    - branchcode: ''
+      code: PROBLEM_REPORT
+      content:
+      - 'Användarnamn: <<problem_reports.username>>'
+      - ''
+      - 'Problemsida: <<problem_reports.problempage>>'
+      - ''
+      - 'Titel: <<problem_reports.title>>'
+      - ''
+      - 'Meddelande: <<problem_reports.content>>'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: OPAC-problemrapport
+      title: OPAC-problemrapport
+    - branchcode: ''
+      code: AUTO_RENEWALS
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - '[% IF checkout.auto_renew_error == ''auto_renew_final'' %]'
+      - Exemplaret [% biblio.title %] har blivit omlånat och har fått återlämningsdatum
+        [% checkout.date_due | $KohaDates as_due_date => 1 %]
+      - Exemplaret har lånats om automatiskt maximalt antal gånger och kan inte längre
+        lånas om.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_unseen_final'' %]'
+      - Exemplaret [% biblio.title %] har blivit omlånat och har fått återlämningsdatum
+        [% checkout.date_due | $KohaDates as_due_date => 1 %]
+      - Det här exemplaret har nått det maximala antalet osedda omlån och kommer att
+        behöva lånas om på biblioteket.
+      - '[% ELSIF checkout.auto_renew_error %]'
+      - 'Exemplaret [% biblio.title %] har inte blivit omlånat eftersom:'
+      - '[% IF checkout.auto_renew_error == ''too_many'' %]'
+      - Du har nått gränsen för max antal möjliga omlån för detta exemplar.
+      - '[% ELSIF checkout.auto_renew_error == ''on_reserve'' %]'
+      - Exemplaret är reserverat för en annan låntagare.
+      - '[% ELSIF checkout.auto_renew_error == ''restriction'' %]'
+      - Du är för närvarande begränsad.
+      - '[% ELSIF checkout.auto_renew_error == ''overdue'' %]'
+      - Du har försenade lån.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_too_late'' %]'
+      - Det är för sent att låna om det här exemplaret.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_too_much_oweing'' %]'
+      - Du har för höga obetalda avgifter totalt.
+      - '[% ELSIF checkout.auto_renew_error == ''too_unseen'' %]'
+      - Detta exemplar måste lånas om på biblioteket.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_account_expired'' %]'
+      - Kontot är inte längre giltigt.
+      - '[% END %]'
+      - '[% ELSE %]'
+      - Exemplaret [% biblio.title %] har blivit omlånat och har fått återlämningsdatum
+        [% checkout.date_due | $KohaDates as_due_date => 1 %]
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Notification of automatic renewal
+      title: Meddelande om automatiskt omlån
+    - branchcode: ''
+      code: CHECKINSLIP
+      content:
+      - <h3>[% branch.branchname %]</h3>
+      - Återlämnade exemplar för [% borrower.title %] [% borrower.firstname %] [%
+        borrower.initials %] [% borrower.surname %] <br>
+      - ([% borrower.cardnumber %]) <br>
+      - <br>
+      - '[% today | $KohaDates %]<br>'
+      - <br>
+      - <h4>Återlämnade idag</h4>
+      - '[% FOREACH checkin IN old_checkouts %]'
+      - '[% SET item = checkin.item %]'
+      - <p>
+      - '[% item.biblio.title %] <br>'
+      - 'Streckkod: [% item.barcode %] <br>'
+      - </p>
+      - '[% END %]'
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Återlämningskvitto
+      title: Återlämningskvitto
+    - branchcode: ''
+      code: OVERDUE_FINE_DESC
+      content:
+      - '[% item.biblio.title %] [% checkout.date_due | $KohaDates %]'
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Overdue item fine description
+      title: Overdue item fine description
+    - branchcode: ''
+      code: AUTO_RENEWALS_DGST
+      content:
+      - Kära [% borrower.firstname %] [% borrower.surname %],
+      - '[% IF error %]'
+      - '[% error %] exemplar lånades inte om.'
+      - '[% END %]'
+      - '[% IF success %]'
+      - '[% success %] exemplar lånades om.'
+      - '[% END %]'
+      - '[% FOREACH checkout IN checkouts %]'
+      - '[% NEXT IF (checkout.auto_renew_error == ''auto_too_soon'') %]'
+      - '[% checkout.item.biblio.title %] : [% checkout.item.barcode %]'
+      - '[% IF !checkout.auto_renew_error %]'
+      - lånades om till [% checkout.date_due | $KohaDates as_due_date => 1%]
+      - '[% ELSIF checkout.auto_renew_error == ''too_many'' %]'
+      - Du har nått gränsen för max antal möjliga omlån för detta exemplar.
+      - '[% ELSIF checkout.auto_renew_error == ''on_reserve'' %]'
+      - Exemplaret är reserverat för en annan låntagare.
+      - '[% ELSIF checkout.auto_renew_error == ''restriction'' %]'
+      - Du är för närvarande begränsad.
+      - '[% ELSIF checkout.auto_renew_error == ''overdue'' %]'
+      - Du har försenade lån.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_too_late'' %]'
+      - Det är för sent att låna om det här exemplaret.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_too_much_oweing'' %]'
+      - Du har för höga obetalda avgifter totalt.
+      - '[% ELSIF checkout.auto_renew_error == ''too_unseen'' %]'
+      - Detta exemplar måste lånas om på biblioteket.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_renew_final'' %]'
+      - lånades om till [% checkout.date_due | $KohaDates as_due_date => 1%]
+      - Exemplaret har lånats om automatiskt maximalt antal gånger och kan inte längre
+        lånas om.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_unseen_final'' %]'
+      - lånades om till [% checkout.date_due | $KohaDates as_due_date => 1%]
+      - Det här exemplaret har nått det maximala antalet osedda omlån och kommer att
+        behöva lånas om på biblioteket.
+      - '[% END %]'
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Notification on auto renewals
+      title: Automatiskt omlån (Förkortat)
+    - branchcode: ''
+      code: RETURN_RECALLED_ITEM
+      content:
+      - 'Datum: <<today>>'
+      - ''
+      - <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Ett återkrav har gjorts på följande exemplar: <<biblio.title>> / <<biblio.author>>
+        (<<items.barcode>>). Förfallodatumet har uppdaterats, och är nu <<issues.date_due>>.
+        Vänligen återlämna exemplaret före detta datum.'
+      - ''
+      - Tack!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Notification to return a recalled item
+      title: Notification to return a recalled item
+    - branchcode: ''
+      code: PICKUP_RECALLED_ITEM
+      content:
+      - 'Datum: <<today>>'
+      - ''
+      - <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Ett krav som du har registrerat på följande exemplar: <<biblio.title>> /
+        <<biblio.author>> (<<items.barcode>>) finns nu att hämta hos <<recalls.pickup_library_id>>.
+        Hämta detta senast den <<recalls.expiration_date>>.'
+      - ''
+      - Tack!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Recalled item awaiting pickup
+      title: Recalled item awaiting pickup
+    - branchcode: ''
+      code: RETURN_RECALLED_ITEM
+      content:
+      - 'Your item has been recalled: <<biblio.title>> (<<items.barcode>>). Please
+        return it by <<issues.date_due>.'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Notification to return a recalled item
+      title: Återlämna återkrävt exemplar
+    - branchcode: ''
+      code: PICKUP_RECALLED_ITEM
+      content:
+      - 'A recalled item: <<biblio.title>> (<<items.barcode>>) is ready for you to
+        pick up at <<recalls.branchcode>>. Please collect by <<recalls.expirationdate>>.'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Recalled item awaiting pickup
+      title: Recalled item awaiting pickup
+    - branchcode: ''
+      code: RECALL_REQUESTER_DET
+      content:
+      - 'Datum: <<today>>'
+      - ''
+      - Återkrav för upphämtning på <<branches.branchname>>
+      - <<borrowers.surname>>, <<borrowers.firstname>> (<<borrowers.cardnumber>>)
+      - <<borrowers.phone>>
+      - <<borrowers.streetnumber>> <<borrowers.address>>, <<borrowers.address2>>,
+        <<borrowers.city>> <<borrowers.zipcode>>
+      - <<borrowers.email>>
+      - ''
+      - EXEMPLAR ÅTERKRÄVT
+      - <<biblio.title>> av <<biblio.author>>
+      - 'Streckkod: <<items.barcode>>'
+      - 'Hyllsignatur: <<items.itemcallnumber>>'
+      - 'Väntar sedan: <<recalls.waiting_date>>'
+      - 'Kommentarer: <<recalls.notes>>'
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Details of patron who recalled item
+      title: Details of patron who recalled item
+    - branchcode: ''
+      code: 2FA_DISABLE
+      content:
+      - <p>Hej [% borrower.firstname %] [% borrower.surname %],</p>
+      - <p>Det här bekräftar att någon har inaktiverat tvåfaktorsautentiseringen för
+        ditt konto.</p>
+      - <p>om du inte har gjort detta så kan någon annan ha använt ditt konto. Var
+        vänlig kontakta biblioteket.</p>
+      - <p>Ditt bibliotek</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Confirmation of disabling two factor authentication
+      title: Confirmation of disabling two factor authentication
+    - branchcode: ''
+      code: 2FA_ENABLE
+      content:
+      - <p>Hej [% borrower.firstname %] [% borrower.surname %],</p>
+      - <p>Det här bekräftar att någon har aktiverat tvåfaktorsautentiseringen för
+        ditt konto.</p>
+      - <p>om du inte har gjort detta så kan någon annan ha använt ditt konto. Var
+        vänlig kontakta biblioteket.</p>
+      - <p>Ditt bibliotek</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Confirmation of enabling two factor authentication
+      title: Confirmation of enabling two factor authentication
+    - branchcode: ''
+      code: OPAC_REG
+      content:
+      - <h3>Ny självregistrering i OPAC</h3>
+      - <p><h4>Självregistrering utförd:</h4>
+      - <ul>
+      - <li> [% borrower.firstname %] [% borrower.surname %]</li>
+      - '[% IF borrower.cardnumber %]<li>Kortnummer: [% borrower.cardnumber %]</li>[%
+        END %]'
+      - '[% IF borrower.email %]<li>E-post: [% borrower.email %]</li>[% END %]'
+      - '[% IF borrower.phone %]<li>Telefon: [% borrower.phone %]</li>[% END %]'
+      - '[% IF borrower.mobile %]<li>Mobil: [% borrower.mobile %]</li>[% END %]'
+      - '[% IF borrower.fax %]<li>Fax: [% borrower.fax %]</li>[% END %]'
+      - '[% IF borrower.emailpro %]<li>Sekundär e-post: [% borrower.emailpro %]</li>[%
+        END %]'
+      - '[% IF borrower.phonepro %]<li>Sekundärt telefonnummer: [% borrower.phonepro
+        %]</li>[% END %]'
+      - '[% IF borrower.branchcode %]<li>Hembibliotek: [% borrower.branchcode %]</li>[%
+        END %]'
+      - '[% IF borrower.categorycode %]<li>Temporär låntagarkategori: [% borrower.categorycode
+        %]</li>[% END %]'
+      - </ul>
+      - </p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Ny självregistrering i OPAC utförd
+      title: New OPAC self-registration
+    - branchcode: ''
+      code: LIST
+      content:
+      - '[%- USE Branches -%]'
+      - '[%- USE AuthorisedValues -%]'
+      - '[%- USE Koha -%]'
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Hej,<br><br>
+      - '[% borrower.firstname | html %] [% borrower.surname | html %] skickade en
+        lista till dig, från vår onlinekatalog, som heter: [% listname | html %].<br>'
+      - Observera att den bifogade filen är en bibliografisk fil i MARC-format som
+        kan importeras till bibliografisk programvara, t.ex. EndNote, Reference Manager
+        eller ProCite.<br>
+      - '[% IF ( comment ) %]<hr><br>[% comment | html | html_line_break %]<br><br>[%
+        END %]<hr>'
+      - <ol>[% FOREACH biblio IN biblios %]<li>
+      - '[% biblio.title | html %]'
+      - '[% IF ( biblio.subtitle ) %][% FOREACH subtitle IN biblio.subtitle.split(''
+        | '') %][% subtitle | html %][% END %][% END %][% biblio.part_number | html
+        %] [% biblio.part_name | html %]<br>'
+      - '[% IF ( biblio.author || biblio.get_marc_contributors.size ) %]Författare:
+        [% IF ( biblio.author ) %][% biblio.author | html %][% END %][% IF ( biblio.get_marc_contributors
+        ) %][% IF ( biblio.author ) %]; [% END %][% FOREACH author IN biblio.get_marc_contributors
+        %][% FOREACH subfield IN author.MARCAUTHOR_SUBFIELDS_LOOP %][% subfield.separator
+        | html %][% subfield.value | html %][% END %][% UNLESS ( loop.last ) %];[%
+        END %][% END %][% END %]<br>[% END %]'
+      - '[% SET biblioitem = biblio.biblioitem %][% IF ( biblioitem.isbn ) %]ISBN:
+        [% FOREACH isbn IN biblioitem.isbn %][% isbn | html %][% UNLESS ( loop.last
+        ) %]; [% END %][% END %]<br>[% END %]'
+      - '[% IF ( biblioitem.publishercode ) %]Utigven av: [% biblioitem.publishercode
+        | html %][% IF ( biblioitem.publicationyear ) %] i [% biblioitem.publicationyear
+        | html %][% END %][% IF ( biblioitem.pages ) %], [% biblioitem.pages | html
+        %][% END %]<br>[% END %]'
+      - '%Samling: [% IF ( biblio.seriestitle ) %][% biblio.seriestitle | html %]<br>'
+      - 'Utgivningsår: [% IF ( biblio.copyrightdate ) %]'
+      - '[% IF ( biblio.notes ) %]Anmärkning: [% biblio.notes | html %]<br>[% END
+        %]'
+      - '[% IF ( biblio.unititle ) %]Enhetlig titel: [% biblio.unititle | html %]<br>[%
+        END %]'
+      - '[% IF ( biblio.serial ) %]Periodika: [% biblio.serial | html %]<br>[% END
+        %]'
+      - '[% IF ( biblioitem.lccn ) %]LCCN: [% biblioitem.lccn | html %]<br>[% END
+        %]'
+      - '[% IF ( biblio.get_marc_host_only || biblio.get_marc_hostinfo_only ) %]I:
+        [% IF biblio.get_marc_host_only.biblionumber %][% INCLUDE ''biblio-title.inc''  biblio=biblio.get_marc_host_only
+        %] [% biblio.get_marc_relatedparts_only %][% ELSE %][% biblio.get_marc_hostinfo_only
+        %][% END %]<br>[% END %]'
+      - '[% IF ( biblioitem.url ) %]URL: [% biblioitem.url | html %]<br>[% END %]'
+      - '[<a href=''[% Koha.Preference(''OpacBaseUrl'') %]/cgi-bin/koha/opac-detail.pl?biblionumber=[%
+        biblio.biblionumber | html %]''>Se i onlinekatalog</a>'
+      - '[% IF ( biblio.items.count > 0 ) %]<br>Exemplar: <ul>[% FOREACH item IN biblio.items
+        %]<li>[% Branches.GetName( item.holdingbranch ) | html %]'
+      - '[% IF ( item.location ) %], [% AuthorisedValues.GetDescriptionByKohaField(
+        kohafield => ''items.location'', authorised_value => item.location ) | html
+        %][% END %][% IF item.itemcallnumber %]([% item.itemcallnumber | html %])[%
+        END %][% item.barcode | html %]</li>[% END %]</ul>[% END %]'
+      - <hr></li>[% END %]</ol>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: lists
+      name: Skicka lista
+      title: 'Din lista: [% listname | html %]'
+    - branchcode: ''
+      code: CART
+      content:
+      - '[%- USE Branches -%]'
+      - '[%- USE AuthorisedValues -%]'
+      - '[%- USE Koha -%]'
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Hej,<br><br>
+      - '[% borrower.firstname | html %] [% borrower.surname | html %] skickade dig
+        en minneslista från vår online-katalog.<br>'
+      - Observera att den bifogade filen är en bibliografisk fil i MARC-format som
+        kan importeras till bibliografisk programvara, t.ex. EndNote, Reference Manager
+        eller ProCite.<br>
+      - '[% IF ( comment ) %]<hr><br>[% comment | html | html_line_break %]<br><br>[%
+        END %]<hr>'
+      - <ol>[% FOREACH biblio IN biblios %]<li>
+      - '[% biblio.title | html %]'
+      - '[% IF ( biblio.subtitle ) %][% FOREACH subtitle IN biblio.subtitle.split(''
+        | '') %][% subtitle | html %][% END %][% END %][% biblio.part_number | html
+        %] [% biblio.part_name | html %]<br>'
+      - '[% IF ( biblio.author || biblio.get_marc_contributors.size ) %]Författare:
+        [% IF ( biblio.author ) %][% biblio.author | html %][% END %][% IF ( biblio.get_marc_contributors
+        ) %][% IF ( biblio.author ) %]; [% END %][% FOREACH author IN biblio.get_marc_contributors
+        %][% FOREACH subfield IN author.MARCAUTHOR_SUBFIELDS_LOOP %][% subfield.separator
+        | html %][% subfield.value | html %][% END %][% UNLESS ( loop.last ) %];[%
+        END %][% END %][% END %]<br>[% END %]'
+      - '[% SET biblioitem = biblio.biblioitem %][% IF ( biblioitem.isbn ) %]ISBN:
+        [% FOREACH isbn IN biblioitem.isbn %][% isbn | html %][% UNLESS ( loop.last
+        ) %]; [% END %][% END %]<br>[% END %]'
+      - '[% IF ( biblioitem.publishercode ) %]Utigven av: [% biblioitem.publishercode
+        | html %][% IF ( biblioitem.publicationyear ) %] i [% biblioitem.publicationyear
+        | html %][% END %][% IF ( biblioitem.pages ) %], [% biblioitem.pages | html
+        %][% END %]<br>[% END %]'
+      - '%Samling: [% IF ( biblio.seriestitle ) %][% biblio.seriestitle | html %]<br>'
+      - 'Utgivningsår: [% IF ( biblio.copyrightdate ) %]'
+      - '[% IF ( biblio.notes ) %]Anmärkning: [% biblio.notes | html %]<br>[% END
+        %]'
+      - '[% IF ( biblio.unititle ) %]Enhetlig titel: [% biblio.unititle | html %]<br>[%
+        END %]'
+      - '[% IF ( biblio.serial ) %]Periodika: [% biblio.serial | html %]<br>[% END
+        %]'
+      - '[% IF ( biblioitem.lccn ) %]LCCN: [% biblioitem.lccn | html %]<br>[% END
+        %]'
+      - '[% IF ( biblio.get_marc_host_only || biblio.get_marc_hostinfo_only ) %]I:
+        [% IF biblio.get_marc_host_only.biblionumber %][% INCLUDE ''biblio-title.inc''  biblio=biblio.get_marc_host_only
+        %] [% biblio.get_marc_relatedparts_only %][% ELSE %][% biblio.get_marc_hostinfo_only
+        %][% END %]<br>[% END %]'
+      - '[% IF ( biblioitem.url ) %]URL: [% biblioitem.url | html %]<br>[% END %]'
+      - <a href='[% Koha.Preference('OpacBaseUrl') %]/cgi-bin/koha/opac-detail.pl?biblionumber=[%
+        biblio.biblionumber | html %]'>Se i onlinekatalog</a>
+      - '[% IF ( biblio.items.count > 0 ) %]<br>Exemplar: <ul>[% FOREACH item IN biblio.items
+        %]<li>[% Branches.GetName( item.holdingbranch ) | html %]'
+      - '[% IF ( item.location ) %], [% AuthorisedValues.GetDescriptionByKohaField(
+        kohafield => ''items.location'', authorised_value => item.location ) | html
+        %][% END %][% IF item.itemcallnumber %]([% item.itemcallnumber | html %])[%
+        END %][% item.barcode | html %]</li>[% END %]</ul>[% END %]'
+      - <hr></li>[% END %]</ol>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Skicka minnelista
+      title: Din minneslista
+    - branchcode: ''
+      code: PRES_TRAIN_ITEM
+      content:
+      - '[%~ USE AuthorisedValues ~%]'
+      - '[%~ SET train = train_item.train ~%]'
+      - '[%~ SET item = train_item.catalogue_item ~%]'
+      - 'Train name: [% train.name %]'
+      - 'Skickat den: [% train.sent_on | $KohaDates %]'
+      - ''
+      - '[% train.default_processing.name %]'
+      - ''
+      - 'Exemplarnummer #[% train_item.user_train_item_id %]'
+      - ''
+      - '[% FOREACH item_attribute IN train_item.attributes %]'
+      - '    [%~ SET value = item_attribute.value ~%]'
+      - '    [%~ IF item_attribute.processing_attribute.type == ''authorised_value''
+        ~%]'
+      - '        [%~ SET value = AuthorisedValues.GetByCode(item_attribute.processing_attribute.option_source,
+        item_attribute.value) ~%]'
+      - '    [%~ END ~%]'
+      - '    [% item_attribute.processing_attribute.name %]: [% value %]'
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: preservation
+      name: Train item slip
+      title: Train item slip
+    - branchcode: ''
+      code: HOLDPLACED_PATRON
+      content:
+      - Hej [% borrower.firstname %] [% borrower.surname %] ([% borrower.cardnumber
+        %]),
+      - Din reservation på [% hold.biblio.title %] ([% hold.biblio.id %]) har bekräftats.
+      - Du får ett meddelande från biblioteket när ditt exemplar är tillgänglig för
+        upphämtning.
+      - Tack!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Reservation är bekräftad
+      title: Din reservation hos [% hold.biblio.title %] är bekräftad
+    - branchcode: ''
+      code: OAI_HARVEST_REPORT
+      content:
+      - 'OAI harvest report for [% servername %]:'
+      - ''
+      - 'Endpoint: [% endpoint %]'
+      - 'Set: [% set %]'
+      - 'Data format: [% dataformat %]'
+      - 'Record type: [% recordtype %]'
+      - ''
+      - '[% added %] records added'
+      - '[% updated %] records updated'
+      - '[% deleted %] records deleted'
+      - '[% skipped %] records skipped'
+      - '[% in_error %] records in error'
+      - '[% total %] total'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: OAI harvest report
+      title: OAI harvest report for [% servername %]
+    translatable:
+    - name
+    - title
+    - content

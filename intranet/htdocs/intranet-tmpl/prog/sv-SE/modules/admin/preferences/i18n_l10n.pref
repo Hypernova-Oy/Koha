@@ -1,0 +1,68 @@
+---
+i18n_l10n.pref:
+  Global:
+  - - Formatera datum enligt
+    - choices:
+        dmydot: dd.mm.åååå
+        iso: åååå-mm-dd
+        metric: dd/mm/åååå
+        us: mm/dd/åååå
+      default: us
+      pref: dateformat
+    - .
+  - - Formatera tider enligt
+    - choices:
+        12hr: 12-timmarsformat (t.ex. "02:18 PM")
+        24hr: 24-timmarsformat (t.ex. "14:18")
+      default: 24hr
+      pref: TimeFormat
+    - .
+  - - Använd
+    - choices:
+        '0': Söndag
+        '1': Måndag
+        '2': Tisdag
+        '3': Onsdag
+        '4': Torsdag
+        '5': Fredag
+        '6': Lördag
+      default: 0
+      pref: CalendarFirstDayOfWeek
+    - som första dagen i veckan i kalendern.
+  - - 'Aktivera följande språk i personalgränssnittet:'
+    - pref: StaffInterfaceLanguages
+      type: staff-languages
+    - Den här listan kan användas för att ändra språkordningen i gränssnittet.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: opaclanguagesdisplay
+    - låntagare ändra det språk de ser i OPAC.
+  - - 'Aktivera följande språk i OPAC:'
+    - pref: OPACLanguages
+      type: opac-languages
+    - Den här listan kan användas för att ändra språkordningen i gränssnittet.
+  - - Använd alfabetet
+    - class: long
+      pref: alphabet
+    - för listor med navigerbara bokstäver. Detta bör vara en lista med stora bokstäver
+      separerade av mellanslag.
+    - '<br/> Tips: Att byta kollationering i databasen för kolumnen ''surname'' (efternamn)
+      i tabellen ''borrowers'' (låntagare) underlättar bläddring på efternamn i members-home.pl
+      när man använder alfabet som har fler bokstäver än A-Z.'
+  - - Formatera postadresser enligt
+    - choices:
+        de: tyskt format ([Adress] [Gatunummer] - [Postnummer] [Ort] - [Land])
+        fr: franskt format ([Gatunummer] [Adress] - [Postnummer] [Ort] - [Land])
+        us: USA-format ([Gatunummer], [Adress] - [Ort], [Postnummer], [Land])
+      default: us
+      pref: AddressFormat
+    - .
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: TranslateNotices
+    - att meddelanden översätts.
+    - Om inställningen är aktiv, kan texterna översättas på sidan "Meddelanden och
+      kvitton". Vid utskick används det språk som är valt på sidan för låntagarkontot.

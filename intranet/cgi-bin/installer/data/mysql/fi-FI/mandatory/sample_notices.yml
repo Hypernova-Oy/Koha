@@ -1,0 +1,2724 @@
+---
+description:
+- Esimerkki-ilmoitukset
+tables:
+- letter:
+    multiline:
+    - content
+    rows:
+    - branchcode: ''
+      code: ACQ_NOTIF_ON_RECEIV
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - ' Tilaus <<aqorders.ordernumber>> (<<biblio.title>>) on vastaanotettu.'
+      - ''
+      - Kirjastosi.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: acquisition
+      name: Tilaus vastaanotettu
+      title: Tilaus vastaanotettu
+    - branchcode: ''
+      code: BOOKING_CANCELLATION
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE KohaDates -%]'
+      - Hyvä [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
+      - <br>
+      - We regret to inform you, that the following booking has been cancelled.<br>
+      - <br>
+      - 'Title: [%- INCLUDE ''biblio-title.inc'' biblio=booking.biblio link = 0 -%]<br>'
+      - <br>
+      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+        %]<br>'
+      - <br>
+      - 'Reason: [% booking.cancellation_reason | html %]<br>'
+      - <br>
+      - Kind regards<br>
+      - <br>
+      - '[% booking.pickup_library.branchname %]'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: bookings
+      name: Booking cancellation notice
+      title: A library booking was cancelled
+    - branchcode: ''
+      code: BOOKING_MODIFICATION
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE KohaDates -%]'
+      - Hyvä [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
+      - <br>
+      - Your booking of [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
+        = 0 -%] has been modified.<br>
+      - <br>
+      - The new details are:<br>
+      - <br>
+      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+        %]<br>'
+      - <br>
+      - 'Pickup at: [% booking.pickup_library.branchname %]<br>'
+      - Kind regards<br>
+      - <br>
+      - '[% booking.pickup_library.branchname %]'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: bookings
+      name: Booking modification notice
+      title: A library booking was modified
+    - branchcode: ''
+      code: BOOKING_CONFIRMATION
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE KohaDates -%]'
+      - Hyvä [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
+      - <br>
+      - Your booking of [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
+        = 0 -%] has been confirmed.<br>
+      - <br>
+      - The details are:<br>
+      - <br>
+      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+        %]<br>'
+      - <br>
+      - 'Pickup at: [% booking.pickup_library.branchname %]<br>'
+      - Kind regards<br>
+      - <br>
+      - '[% booking.pickup_library.branchname %]'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: bookings
+      name: Booking confirmation notice
+      title: A library booking was confirmed
+    - branchcode: ''
+      code: TICKET_ACKNOWLEDGE
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Hyvä [%- INCLUDE 'patron-title.inc' patron => ticket.reporter -%],<br>
+      - <br>
+      - Kiitos raportoimastasi virheestä [%- INCLUDE 'biblio-title.inc' biblio=ticket.biblio
+        link = 0 -%].<br>
+      - <br>
+      - 'Ilmoitit: <br>'
+      - '[%- ticket.body -%]<br>'
+      - <br>
+      - Kiitos
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Virheilmoitus vastaanotettu
+      title: Kuvailutietojen virheilmoitus vastaanotettu
+    - branchcode: ''
+      code: TICKET_ASSIGNED
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE Koha -%]'
+      - Hyvä kuvailija,<br>
+      - '[%- INCLUDE ''patron-title.inc'' patron => librarian -%] has assigned the
+        following concern with <a href=''[%- Koha.Preference(''staffClientBaseURL'')
+        -%]/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% ticket.biblio.biblionumber
+        %]'' >[%- INCLUDE ''biblio-title.inc'' biblio=ticket.biblio link = 0 -%]</a>
+        to you<br>'
+      - <br>
+      - '[%- ticket.body -%]<br>'
+      - <br>
+      - You can action this concern from the <a href='[%- Koha.Preference('staffClientBaseURL')
+        -%]/cgi-bin/koha/cataloguing/concerns.pl'>concern management page</a>.
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Concern assigned notification
+      title: Catalog concern assigned
+    - branchcode: ''
+      code: TICKET_RESOLVE
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Hyvä [%- INCLUDE 'patron-title.inc' patron => ticket_update.ticket.reporter
+        -%],<br>
+      - <br>
+      - Kirjasto on nyt merkinnyt raportoimasi virheen [%- INCLUDE 'biblio-title.inc'
+        biblio=ticket_update.ticket.biblio link = 0 -%] ratkaistuksi.<br>
+      - <br>
+      - 'Seuraava kommentti on tallennettu: <br>'
+      - '[%- ticket_update.message -%]<br>'
+      - <br>
+      - Kiitos
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Virheilmoitus ratkaistu
+      title: Kuvailutietojen virhe ratkaistu
+    - branchcode: ''
+      code: TICKET_UPDATE
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Hyvä [%- INCLUDE 'patron-title.inc' patron => ticket_update.ticket.reporter
+        -%],<br>
+      - <br>
+      - Kirjasto on päivittänyt ilmoitustasi, jonka teit virheestä [%- INCLUDE 'biblio-title.inc'
+        biblio=ticket_update.ticket.biblio link = 0 -%].<br>
+      - <br>
+      - 'Seuraava kommentti on tallennettu: <br>'
+      - '[%- ticket_update.message -%]<br>'
+      - <br>
+      - Kiitos
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Virheilmoitus päivitetty
+      title: Kuvailutietojen virheilmoitus päivitetty
+    - branchcode: ''
+      code: TICKET_NOTIFY
+      content:
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - '[%- USE Koha -%]'
+      - Hyvä kuvailija,<br>
+      - '[%- INCLUDE ''patron-title.inc'' patron => ticket.reporter -%] raportoi seuraavan
+        kuvailutietojen virheen <a href=''[%- Koha.Preference(''staffClientBaseURL'')
+        -%]/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% ticket.biblio.biblionumber
+        %]'' >[%- INCLUDE ''biblio-title.inc'' biblio=ticket.biblio link = 0 -%]</a><br>'
+      - <br>
+      - '[%- ticket.body -%]<br>'
+      - <br>
+      - Voit merkitä tämän virheilmoituksen käsitellyksi <a href='[%- Koha.Preference('staffClientBaseURL')
+        -%]/cgi-bin/koha/cataloguing/concerns.pl'>virheilmoitusten käsittelysivulla</a>.
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Virheilmoitus saapunut
+      title: Kuvailutietojen virhe raportoitu
+    - branchcode: ''
+      code: ACCOUNT_CREDIT
+      content:
+      - '[%- USE AuthorisedValues -%]'
+      - '[%- USE KohaDates -%]'
+      - '[%- USE Price -%]'
+      - '[%- PROCESS "accounts.inc" -%]'
+      - <table>
+      - '    [% IF ( LibraryName ) %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h3>[% LibraryName | html %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF credit.library %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h2>[% credit.library.branchname | html %]</h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h3>[% today | $KohaDates %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Tapahtuman ID: </td>'
+      - '      <td>[% credit.accountlines_id %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Operaattorin ID: </td>'
+      - '      <td>[% credit.manager_id %]</td>'
+      - '    </tr>'
+      - '    [% IF credit.payment_type %]'
+      - '    <tr>'
+      - '      <td>Maksun tyyppi: </td>'
+      - '      <td>[% AuthorisedValues.GetByCode(''PAYMENT_TYPE'', credit.payment_type)
+        %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h2><u>[%- PROCESS credit_type_description credit_type = credit.credit_type
+        -%] kuitti</u></h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% IF ( credit.credit_type_code == ''PAYMENT'' ) %]'
+      - '    <tr>'
+      - '      <th colspan="2">'
+      - '        Vastaanotettu asiakkaalta  [% credit.patron.firstname | html %] [%
+        credit.patron.surname | html %] <br>'
+      - '        Kirjastokortin numero: [% credit.patron.cardnumber | html %]<br>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% ELSIF ( credit.credit_type_code == ''CREDIT'' ) %]'
+      - '    <tr>'
+      - '      <th colspan="2">'
+      - '        Hyvitystä lisätty asiakkaalle [% credit.patron.firstname | html %]
+        [% credit.patron.surname | html %] <br>'
+      - '        Kirjastokortin numero: [% credit.patron.cardnumber | html %]<br>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% ELSIF ( credit.credit_type_code == ''WRITEOFF'' ) %]'
+      - '    <tr>'
+      - '      <th colspan="2">'
+      - '        Maksu poistettu asiakkaalta [% credit.patron.firstname | html %]
+        [% credit.patron.surname | html %] <br>'
+      - '        Kirjastokortin numero: [% credit.patron.cardnumber | html %]<br>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF credit.amountoutstanding + 0 != 0 %]'
+      - '    <tr>'
+      - '      <th>Hyvityksen kuvaus</th>'
+      - '      <th>Summa</th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>[%- PROCESS credit_type_description credit_type = credit.credit_type
+        -%]</td>'
+      - '      <td>[% credit.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <th style="text-align:right;">Yhteensä:</th>'
+      - '      <td>[% credit.amountoutstanding * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF credit.amount != credit.amountoutstanding %]'
+      - '    <tr>'
+      - '      <th>Maksujen kuvaus</th>'
+      - '      <th>Summa</th>'
+      - '    </tr>'
+      - '    [% FOREACH offset IN credit.credit_offsets %]'
+      - '    <tr>'
+      - '      <td>[% PROCESS account_type_description account=offset.debit %][% IF
+        ( offset.debit.itemnumber ) %] - [% offset.debit.item.biblio.title %][% END
+        %]</td>'
+      - '      <td>[% offset.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% END %]'
+      - '  <tfoot>'
+      - '    <tr class="highlight">'
+      - '      <td>Yhteensä:</td>'
+      - '      <td>[% credit.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% IF change.defined %]'
+      - '    <tr>'
+      - '      <td>Vaihtorahaa annettu: </td>'
+      - '      <td>[% change | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <td colspan="2"></td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Tilin saldo tällä hetkellä:</td>'
+      - '      <td>[% credit.patron.account.balance * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '  </tfoot>'
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Maksu
+      title: Maksu
+    - branchcode: ''
+      code: ACCOUNT_DEBIT
+      content:
+      - '[% USE Price %]'
+      - '[% USE KohaDates %]'
+      - '[% PROCESS "accounts.inc" %]'
+      - <table>
+      - '    [% IF ( LibraryName ) %]'
+      - '    <tr>'
+      - '      <th colspan="3" class="centerednames">'
+      - '        <h3>[% LibraryName | html %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF debit.library %]'
+      - '    <tr>'
+      - '      <th colspan="3" class="centerednames">'
+      - '        <h2>[% debit.library.branchname | html %]</h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <td colspan="2" style="text-align:right;">Maksun ID: </td>'
+      - '      <td>[% debit.accountlines_id %]</td>'
+      - '    </tr>'
+      - '    [% IF credit.manager_id %]'
+      - '    <tr>'
+      - '      <td colspan="2" style="text-align:right;">Operaattorin ID: </td>'
+      - '      <td>[% credit.manager_id %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <th colspan="3" class="centerednames">'
+      - '        <h2><u>Lasku</u></h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <th colspan="3" >'
+      - '        Lasku asiakkaalle: [% debit.patron.firstname | html %] [% debit.patron.surname
+        | html %] <br>'
+      - '        Kirjastokortin numero: [% debit.patron.cardnumber | html %]<br>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% IF debit.amountoutstanding != 0 %]'
+      - '    <tr>'
+      - '      <th>Pvm</th>'
+      - '      <th>Maksujen kuvaus</th>'
+      - '      <th>Summa</th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>[% debit.date | $KohaDates %]</td>'
+      - '      <td>[% PROCESS account_type_description account=debit %]</td>'
+      - '      <td>[% debit.amount | $Price %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td colspan="2" style="text-align:right;">Velat yhteensä:</td>'
+      - '      <td>[% debit.amount | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF debit.amount != debit.amountoutstanding %]'
+      - '    <tr>'
+      - '      <th>Pvm</th>'
+      - '      <th>Maksun kuvaus</th>'
+      - '      <th>Summa</th>'
+      - '    </tr>'
+      - '    [% FOREACH offset IN debit.debit_offsets %]'
+      - '    <tr>'
+      - '      <td>[% offset.credit.date | $KohaDates %]</td>'
+      - '      <td>[% PROCESS account_type_description account=offset.credit %]</td>'
+      - '      <td>[% offset.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr class="highlight">'
+      - '      <td colspan="2" style="text-align:right;">Maksettu yhteensä:</td>'
+      - '      <td>[% debit.amount - debit.amountoutstanding | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    </tr>'
+      - '      <td colspan="3"></td>'
+      - '    <tr>'
+      - '  <tfoot>'
+      - '    <tr>'
+      - '      <th colspan="2" style="text-align:right;">Maksettava yhteensä:</th>'
+      - '      <td>[% debit.amountoutstanding | $Price %]</td>'
+      - '    </tr>'
+      - '  </tfoot>'
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Käyttäjätilimaksu
+      title: Käyttäjätilimaksu
+    - branchcode: ''
+      code: ACCOUNT_PAYMENT
+      content:
+      - '[%- USE Price -%]'
+      - Maksusuoritus [% credit.amount * -1 | $Price %] on laitettu tilillesi.
+      - ''
+      - 'Tämä suorite kohdistuu seuraaviin maksuihin:'
+      - '[%- FOREACH o IN offsets %]'
+      - 'Kuvaus: [% o.debit.description %]'
+      - 'Maksettu määrä: [% o.amount * -1 | $Price %]'
+      - 'Jäljelle jäänyt määrä: [% o.debit.amountoutstanding | $Price %]'
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Maksu
+      title: Maksu
+    - branchcode: ''
+      code: ACCOUNT_WRITEOFF
+      content:
+      - '[%- USE Price -%]'
+      - Maksuistasi on poistettu summa [% credit.amount * -1 | $Price %].
+      - ''
+      - 'Poisto vaikuttaa seuraaviin maksuihin:'
+      - '[%- FOREACH o IN offsets %]'
+      - 'Kuvaus: [% o.debit.description %]'
+      - 'Maksettu määrä: [% o.amount * -1 | $Price %]'
+      - 'Jäljelle jäänyt määrä: [% o.debit.amountoutstanding | $Price %]'
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Käyttäjätilin poistaminen
+      title: Käyttäjätilin poistaminen
+    - branchcode: ''
+      code: AR_CANCELED
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>),
+      - ''
+      - 'Artikkelipyyntösi <<biblio.title>> (<<items.barcode>>) on peruutettu, koska:'
+      - ''
+      - <<reason>>
+      - ''
+      - 'Artikkelia pyydetty:'
+      - 'Otsikko: <<article_requests.title>>'
+      - 'Tekijä: <<article_requests.author>>'
+      - 'Vuosikerta: <<article_requests.volume>>'
+      - 'Numero: <<article_requests.issue>>'
+      - 'Pvm: <<article_requests.date>>'
+      - 'Sisällysluettelo: [% IF article_request.toc_request %]Kyllä[% ELSE %]Ei[%
+        END %]'
+      - 'Sivua: <<article_requests.pages>>'
+      - 'Luvut: <<article_requests.chapters>>'
+      - 'Huomautukset: <<article_requests.patron_notes>>'
+      - 'Muoto: [% IF article_request.format == ''PHOTOCOPY'' %]Valokopio[% ELSIF
+        article_request.format == ''SCAN'' %]Skannaus[% END %]'
+      - ''
+      - Kirjastosi
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikkelipyyntö - peruttu
+      title: Artikkelipyyntö peruttu
+    - branchcode: ''
+      code: AR_COMPLETED
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>),
+      - ''
+      - Olemme käsitelleet pyyntösi artikkelista <<biblio.title>> (<<items.barcode>>).
+      - ''
+      - 'Artikkelia pyydetty:'
+      - 'Otsikko: <<article_requests.title>>'
+      - 'Tekijä: <<article_requests.author>>'
+      - 'Vuosikerta: <<article_requests.volume>>'
+      - 'Numero: <<article_requests.issue>>'
+      - 'Pvm: <<article_requests.date>>'
+      - 'Sisällysluettelo: [% IF article_request.toc_request %]Kyllä[% ELSE %]Ei[%
+        END %]'
+      - 'Sivua: <<article_requests.pages>>'
+      - 'Luvut: <<article_requests.chapters>>'
+      - 'Huomautukset: <<article_requests.patron_notes>>'
+      - 'Muoto: [% IF article_request.format == ''PHOTOCOPY'' %]Valokopio[% ELSIF
+        article_request.format == ''SCAN'' %]Skannaus[% END %]'
+      - ''
+      - '[% IF article_request.format == ''PHOTOCOPY'' %]Voit noutaa artikkelin kirjastosta:
+        [% branch.branchname %].[% ELSIF article_request.format == ''SCAN'' %]Voit
+        ladata skannatut materiaalit tämän linkin kautta: [% article_request.urls
+        %].[% END %]'
+      - ''
+      - Kiitos!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikkelipyyntö - valmis
+      title: Artikkelipyyntö on valmis
+    - branchcode: ''
+      code: AR_PENDING
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>)
+      - ''
+      - Toimittajalta <<biblio.title>> (<<items.barcode>>) tekemääsi artikkelipyyntöä
+        käsitellään.
+      - ''
+      - 'Artikkelia pyydetty:'
+      - 'Otsikko: <<article_requests.title>>'
+      - 'Tekijä: <<article_requests.author>>'
+      - 'Vuosikerta: <<article_requests.volume>>'
+      - 'Numero: <<article_requests.issue>>'
+      - 'Pvm: <<article_requests.date>>'
+      - 'Sisällysluettelo: [% IF article_request.toc_request %]Kyllä[% ELSE %]Ei[%
+        END %]'
+      - 'Sivua: <<article_requests.pages>>'
+      - 'Luvut: <<article_requests.chapters>>'
+      - 'Huomautukset: <<article_requests.patron_notes>>'
+      - ''
+      - ''
+      - Kiitos!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikkelipyyntö - odottava
+      title: Artikkelipyyntö odottaa
+    - branchcode: ''
+      code: AR_REQUESTED
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>)
+      - ''
+      - Olemme vastaanottaneet pyyntösi artikkelista <<biblio.title>> (<<items.barcode>>).
+      - ''
+      - 'Artikkelia pyydetty:'
+      - 'Otsikko: <<article_requests.title>>'
+      - 'Tekijä: <<article_requests.author>>'
+      - 'Vuosikerta: <<article_requests.volume>>'
+      - 'Numero: <<article_requests.issue>>'
+      - 'Pvm: <<article_requests.date>>'
+      - 'Sisällysluettelo: [% IF article_request.toc_request %]Kyllä[% ELSE %]Ei[%
+        END %]'
+      - 'Sivua: <<article_requests.pages>>'
+      - 'Luvut: <<article_requests.chapters>>'
+      - 'Huomautukset: <<article_requests.patron_notes>>'
+      - 'Muoto: [% IF article_request.format == ''PHOTOCOPY'' %]Valokopio[% ELSIF
+        article_request.format == ''SCAN'' %]Skannaus[% END %]'
+      - ''
+      - Kiitos!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikkelipyyntö - uusi
+      title: Artikkelipyyntö saapunut
+    - branchcode: ''
+      code: AR_PROCESSING
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>),
+      - ''
+      - Käsittelemme pyyntöäsi artikkelista <<biblio.title>> (<<items.barcode>>).
+      - ''
+      - 'Artikkelia pyydetty:'
+      - 'Otsikko: <<article_requests.title>>'
+      - 'Tekijä: <<article_requests.author>>'
+      - 'Vuosikerta: <<article_requests.volume>>'
+      - 'Numero: <<article_requests.issue>>'
+      - 'Pvm: <<article_requests.date>>'
+      - 'Sisällysluettelo: [% IF article_request.toc_request %]Kyllä[% ELSE %]Ei[%
+        END %]'
+      - 'Sivua: <<article_requests.pages>>'
+      - 'Luvut: <<article_requests.chapters>>'
+      - 'Huomautukset: <<article_requests.patron_notes>>'
+      - 'Muoto: [% IF article_request.format == ''PHOTOCOPY'' %]Valokopio[% ELSIF
+        article_request.format == ''SCAN'' %]Skannaus[% END %]'
+      - ''
+      - Kiitos!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Artikkelipyyntö - käsiteltävänä
+      title: Artikkelipyyntö käsiteltävänä
+    - branchcode: ''
+      code: AR_SLIP
+      content:
+      - 'Artikkelipyyntö:'
+      - ''
+      - <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>),
+      - ''
+      - 'Otsikko: <<biblio.title>>'
+      - 'Viivakoodi: <<items.barcode>>'
+      - ''
+      - 'Artikkelia pyydetty:'
+      - 'Otsikko: <<article_requests.title>>'
+      - 'Tekijä: <<article_requests.author>>'
+      - 'Vuosikerta: <<article_requests.volume>>'
+      - 'Numero: <<article_requests.issue>>'
+      - 'Pvm: <<article_requests.date>>'
+      - 'Sisällysluettelo: [% IF article_request.toc_request %]Kyllä[% ELSE %]Ei[%
+        END %]'
+      - 'Sivua: <<article_requests.pages>>'
+      - 'Luvut: <<article_requests.chapters>>'
+      - 'Huomautukset: <<article_requests.patron_notes>>'
+      - 'Muoto: [% IF article_request.format == ''PHOTOCOPY'' %]Valokopio[% ELSIF
+        article_request.format == ''SCAN'' %]Skannaus[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Artikkelipyyntö - tulosta kuitti
+      title: Artikkelipyyntö
+    - branchcode: ''
+      code: CHECKIN
+      content:
+      - 'Seuraavat niteet on palautettu:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Kiitos.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Palautuskuitti (yhteenveto)
+      title: Palautukset
+    - branchcode: ''
+      code: CHECKIN
+      content:
+      - 'Seuraavat niteet on palautettu:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Kiitos.
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Palautuskuitti (yhteenveto)
+      title: Palautukset
+    - branchcode: ''
+      code: CHECKOUT
+      content:
+      - 'Seuraavat niteet on lainattu:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Kiitos kun kävit [% branch.branchname %].
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Lainauskuitti (yhteenveto)
+      title: Lainat
+    - branchcode: ''
+      code: CHECKOUT
+      content:
+      - 'Seuraavat niteet on lainattu:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Kiitos kun kävit [% branch.branchname %].
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Lainauskuitti (yhteenveto)
+      title: Lainat
+    - branchcode: ''
+      code: CHECKOUT_NOTE
+      content:
+      - <<borrowers.firstname>> <<borrowers.surname>> on lisännyt nidehuomautuksen
+        <<biblio.title>> - <<biblio.author>> (<<biblio.biblionumber>>).
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Asiakkaan tekemä huomautus niteelle
+      title: Lainahuomautus
+    - branchcode: ''
+      code: DUE
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Seuraava nide erääntyy:'
+      - ''
+      - '[% biblio.title %], [% biblio.author %] ([% item.barcode %])'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Eräpäivämuistutus
+      title: Eräpäivämuistutus
+    - branchcode: ''
+      code: DUE
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Seuraava nide erääntyy:'
+      - ''
+      - '[% biblio.title %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Eräpäivämuistutus
+      title: Eräpäivämuistutus
+    - branchcode: ''
+      code: DUEDGST
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Seuraavat niteet erääntyvät:'
+      - ''
+      - <<items.content>>
+      - ''
+      - Kiitos.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Eräpäivämuistutus (yhteenveto)
+      title: Eräpäivämuistutus
+    - branchcode: ''
+      code: DUEDGST
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - Sinulla on <<count>> tänään erääntyvä(ä) nide(ttä)
+      - ''
+      - Kiitos.
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Eräpäivämuistutus (yhteenveto)
+      title: Eräpäivämuistutus
+    - branchcode: ''
+      code: HOLD_SLIP
+      content:
+      - '<h5>Pvm: [% today | $KohaDates %]</h5>'
+      - <br>
+      - <h3> Kuljetus/Varaus [% branch.branchname %]</h3>
+      - <br>
+      - <h3>[% borrower.surname %], [% borrower.firstname %]</h3>
+      - <br>
+      - <ul>
+      - '    <li>[% borrower.cardnumber %]</li>'
+      - '    <li>[% borrower.phone %]</li>'
+      - '    <li> [% borrower.address %]<br>'
+      - '         [% borrower.address2 %]<br>'
+      - '         [% borrower.city %] [% borrower.zipcode %]'
+      - '    </li>'
+      - '    <li>[% borrower.email %]</li>'
+      - </ul>
+      - <br>
+      - <h3>VARATTU NIDE</h3>
+      - <h4>[% biblio.title %]</h4>
+      - <h5>[% biblio.author %]</h5>
+      - <ul>
+      - '   <li>[% item.barcode %]</li>'
+      - '   <li>[% item.itemcallnumber %]</li>'
+      - '   <li>[% reserve.waitingdate | $KohaDates %]</li>'
+      - </ul>
+      - '<p>Huomautukset:'
+      - <pre>[% reserve.reservenotes %]</pre>
+      - </p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Varauskuitti
+      title: Varauskuitti
+    - branchcode: ''
+      code: ISSUEQSLIP
+      content:
+      - '[%~ USE KohaDates ~%]'
+      - <h3><<branches.branchname>></h3>
+      - Lainaukset asiakkaalle <<borrowers.title>> <<borrowers.firstname>> <<borrowers.initials>>(<<borrowers.surname>>)<br>
+      - (<<borrowers.cardnumber>>) <br>
+      - <br>
+      - <<today>><br>
+      - <br>
+      - <h4>Tänään lainatut</h4>
+      - <checkedout>
+      - <p>
+      - <<biblio.title>> <br>
+      - 'Viivakoodi: <<items.barcode>><br>'
+      - 'Eräpäivä: <<issues.date_due>><br>'
+      - </p>
+      - </checkedout>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Tänään lainatut
+      title: Tänään lainatut
+    - branchcode: ''
+      code: ISSUESLIP
+      content:
+      - <h3><<branches.branchname>></h3>
+      - Lainaukset asiakkaalle <<borrowers.title>> <<borrowers.firstname>> <<borrowers.initials>>(<<borrowers.surname>>)<br>
+      - (<<borrowers.cardnumber>>) <br>
+      - <br>
+      - <<today>><br>
+      - <br>
+      - <h4>Lainassa</h4>
+      - <checkedout>
+      - <p>
+      - <<biblio.title>> <br>
+      - 'Viivakoodi: <<items.barcode>><br>'
+      - 'Eräpäivä: <<issues.date_due>><br>'
+      - </p>
+      - </checkedout>
+      - <br>
+      - <h4>Myöhässä</h4>
+      - <overdue>
+      - <p>
+      - <<biblio.title>> <br>
+      - 'Viivakoodi: <<items.barcode>><br>'
+      - 'Eräpäivä: <<issues.date_due>><br>'
+      - </p>
+      - </overdue>
+      - <br>
+      - <hr>
+      - <br>
+      - '[% IF additional_contents.count %]'
+      - '<h4 style="text-align: center; font-style:italic;">Uutiset</h4>'
+      - '[% FOREACH content IN additional_contents %]'
+      - <div class="newsitem">
+      - '<h5 style="margin-bottom: 1px; margin-top: 1px"><b>[% content.title %]</b></h5>'
+      - '<p style="margin-bottom: 1px; margin-top: 1px">[% content.content %]</p>'
+      - '<p class="newsfooter" style="font-size: 8pt; font-style:italic; margin-bottom:
+        1px; margin-top: 1px">Lisätty [% content.published_on | $KohaDates %]</p>'
+      - <hr />
+      - </div>
+      - '[% END %]'
+      - '[% END %]'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Lainauskuitti
+      title: Lainauskuitti
+    - branchcode: ''
+      code: ODUE
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - Tietojemme mukaan sinulla on niteitä, jotka ovat myöhässä. Kirjastosi ei peri
+        niistä myöhästymismaksuja, mutta palauta ne alla näkyvään kirjastoon tai uusi
+        ne mahdollisimman pian.
+      - ''
+      - <<branches.branchname>>
+      - <<branches.branchaddress1>>
+      - <<branches.branchaddress2>> <<branches.branchaddress3>>
+      - 'Puhelin: <<branches.branchphone>>'
+      - 'Faksi: <<branches.branchfax>>'
+      - 'Sähköposti: <<branches.branchemail>>'
+      - ''
+      - Jos sinulla on kirjautumistunnukset ja uusiminen on mahdollista, voit uusia
+        lainat verkkossa. Jos nide on myöhässä yli 30 päivää, olet lainakiellossa,
+        kunnes nide palautetaan.
+      - ''
+      - 'Seuraavat niteet ovat tällä hetkellä myöhässä:'
+      - ''
+      - '<item>"<<biblio.title>>" by <<biblio.author>>, <<items.itemcallnumber>>,
+        Barcode: <<items.barcode>> Fine: <<items.fine>></item>'
+      - ''
+      - Kiitos, että otitte asian huomioon.
+      - ''
+      - <<branches.branchname>> Henkilökunta
+      - ''
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Myöhästymisilmoitus
+      title: Lainat myöhässä
+    - branchcode: ''
+      code: OVERDUES_SLIP
+      content:
+      - 'Seuraavat niteet ovat tällä hetkellä myöhässä:'
+      - ''
+      - '<item>"<<biblio.title>>" by <<biblio.author>>, <<items.itemcallnumber>>,
+        Barcode: <<items.barcode>> Fine: <<items.fine>></item>'
+      - ''
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Erääntyneiden kuitti
+      title: Erääntyneiden kuitti
+    - branchcode: ''
+      code: PREDUE
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Seuraava nide erääntyy pian:'
+      - ''
+      - '[% biblio.title %], [% biblio.author %] ([% item.barcode %])'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Ennakkoilmoitus erääntyvästä lainasta
+      title: Ennakkoilmoitus erääntyvästä lainasta
+    - branchcode: ''
+      code: PREDUE
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Seuraava nide erääntyy pian:'
+      - ''
+      - '[% biblio.title %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Ennakkoilmoitus erääntyvästä lainasta
+      title: Ennakkoilmoitus erääntyvästä lainasta
+    - branchcode: ''
+      code: PREDUEDGST
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Seuraavat niteet erääntyvät pian:'
+      - ''
+      - <<items.content>>
+      - ''
+      - Kiitos.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Ennakkoilmoitus erääntyvästä lainasta (yhteenveto)
+      title: Ennakkoilmoitus erääntyvästä lainasta
+    - branchcode: ''
+      code: PREDUEDGST
+      content:
+      - Hyvä <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - Sinulla on <<count>> pian erääntyvä(ä) nide(ttä).
+      - ''
+      - Kiitos.
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Ennakkoilmoitus erääntyvästä lainasta (yhteenveto)
+      title: Ennakkoilmoitus erääntyvästä lainasta
+    - branchcode: ''
+      code: RENEWAL
+      content:
+      - 'Seuraavat niteet on uusittu:'
+      - '----'
+      - '[% biblio.title %]'
+      - '----'
+      - Kiitos kun kävit [% branch.branchname %].
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Niteet uusittu
+      title: Niteet uusittu
+    - branchcode: ''
+      code: SR_SLIP
+      content:
+      - 'Kiertokokoelmaraportti kohteelle [% branch.name %]:'
+      - ''
+      - '[% IF branch.items.size %][% branch.items.size %] tälle kirjastolle käsiteltävät
+        niteet.'
+      - '[% ELSE %]Tälle kirjastolle ei ole käsiteltäviä niteitä'
+      - '[% END %][% FOREACH item IN branch.items %][% IF item.reason != ''in-demand''
+        %]Nimeke: [% item.title %]'
+      - 'Tekijä: [% item.author %]'
+      - 'Luokka: [% item.callnumber %]'
+      - 'Hyllypaikka: [% item.location %]'
+      - 'Viivakoodi: [% item.barcode %]'
+      - 'Lainassa?: [% item.onloan %]'
+      - 'Tila: [% item.reason %]'
+      - 'Nykyinen kirjasto: [% item.branch.branchname %] [% item.branch.branchcode
+        %]'
+      - ''
+      - '[% END %][% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Kiertokokoelmakuitti
+      title: Kiertokokoelmaraportti
+    - branchcode: ''
+      code: TRANSFERSLIP
+      content:
+      - '<h5>Pvm: <<today>></h5>'
+      - <br>
+      - <h3>Kuljetetaan kirjastoon <<branches.branchname>></h3>
+      - <br>
+      - <h3>NIDE</h3>
+      - <h4><<biblio.title>></h4>
+      - <h5><<biblio.author>></h5>
+      - <ul>
+      - '   <li><<items.barcode>></li>'
+      - '   <li><<items.itemcallnumber>></li>'
+      - </ul>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Kuljetuskuitti
+      title: Kuljetuskuitti
+    - branchcode: ''
+      code: ACQCLAIM
+      content:
+      - <<aqbooksellers.name>>
+      - <<aqbooksellers.address1>>
+      - <<aqbooksellers.address2>>
+      - <<aqbooksellers.address3>>
+      - <<aqbooksellers.address4>>
+      - <<aqbooksellers.phone>>
+      - ''
+      - <order>Tilausta numerolla <<aqorders.ordernumber>> (<<biblio.title>>) (<<aqorders.quantity>>
+        tilattu) ($<<aqorders.listprice>> €/kpl) ei ole vastaanotettu.</order>
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: claimacquisition
+      name: Hankintavaatimus
+      title: Nidettä ei vastaanotettu
+    - branchcode: ''
+      code: SFTP_FAILURE
+      content:
+      - 'SFTP upload failed:'
+      - ''
+      - <<sftp_status>>
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: commandline
+      name: File SFTP failed
+      title: The SFTP by sftp_file.pl failed
+    - branchcode: ''
+      code: SFTP_SUCCESS
+      content:
+      - SFTP upload succeeded
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: commandline
+      name: File SFTP success
+      title: The SFTP by sftp_file.pl was successful
+    - branchcode: ''
+      code: ILL_PICKUP_READY
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Kaukolainapyynnöt [% illrequest.illrequest_id %] jotka olet tehnyt:'
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - 'on noudettavissa kirjastosta: [% branch.branchname %].'
+      - ''
+      - Ystävällisin terveisin
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Kaukolaina noudettavissa
+      title: Kaukolainapyyntö noudettavissa
+    - branchcode: ''
+      code: ILL_REQUEST_UNAVAIL
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Kaukolainapyynnöt [% illrequest.illrequest_id %] jotka olet tehnyt
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - ei valitettavasti ole saatavana.
+      - ''
+      - Ystävällisin terveisin
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Kaukolaina ei saatavilla
+      title: Kaukolainapyyntö ei saatavilla
+    - branchcode: ''
+      code: ILL_REQUEST_CANCEL
+      content:
+      - 'Kaukolainapyynnön [% illrequest.illrequest_id %] tehnyt asiakas on pyytänyt
+        kaukolainan peruutusta. Kaukolainapyynnön tiedot:'
+      - ''
+      - '[% ill_full_metadata %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Kaukolainapyyntö peruttu
+      title: Kaukolainapyyntö peruutettu
+    - branchcode: ''
+      code: ILL_REQUEST_MODIFIED
+      content:
+      - 'Kaukolainapyynnön [% illrequest.illrequest_id %] tehnyt asiakas on muokannut
+        pyyntöä. Kaukolainapyynnön tiedot:'
+      - ''
+      - '[% ill_full_metadata %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Kaukolainapyyntö muokattu
+      title: Kaukolainapyyntö muokattu
+    - branchcode: ''
+      code: ILL_PARTNER_REQ
+      content:
+      - Hyvä herra/rouva,
+      - ''
+      - 'Haluaisimme pyytää kaukolainaan seuraavaa teosta:'
+      - ''
+      - '[% ill_full_metadata %]'
+      - ''
+      - Ilmoitettahan meille, jos kaukolainapyyntö on saatavissa kauttanne.
+      - ''
+      - Ystävällisin terveisin
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Kaukolainapyyntö yhteistyökumppaneille
+      title: Kaukolainapyyntö yhteistyökumppaneille
+    - branchcode: ''
+      code: ILL_REQUEST_UPDATE
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Kaukolainapyynnöt [% illrequest.illrequest_id %] jotka olet tehnyt
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - on päivitetty.
+      - ''
+      - 'Päivityksen tarkemmat tiedot alla:'
+      - ''
+      - '[% additional_text %]'
+      - ''
+      - Ystävällisin terveisin
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: ill
+      name: Kaukolainapyynnön päivitys
+      title: Kaukolainapyynnön päivitys
+    - branchcode: ''
+      code: ILL_PICKUP_READY
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Kaukolainapyynnöt [% illrequest.illrequest_id %] jotka olet tehnyt:'
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - 'on noudettavissa kirjastosta: [% branch.branchname %].'
+      - ''
+      - Ystävällisin terveisin
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Kaukolaina noudettavissa
+      title: Kaukolainapyyntö noudettavissa
+    - branchcode: ''
+      code: ILL_REQUEST_UNAVAIL
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Kaukolainapyynnöt [% illrequest.illrequest_id %] jotka olet tehnyt
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - ei valitettavasti ole saatavana.
+      - ''
+      - Ystävällisin terveisin
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Kaukolaina ei saatavilla
+      title: Kaukolainapyyntö ei saatavilla
+    - branchcode: ''
+      code: ILL_REQUEST_CANCEL
+      content:
+      - 'Kaukolainapyynnön [% illrequest.illrequest_id %] tehnyt asiakas on pyytänyt
+        kaukolainan peruutusta. Kaukolainapyynnön tiedot:'
+      - ''
+      - '[% ill_full_metadata %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Kaukolainapyyntö peruttu
+      title: Kaukolainapyyntö peruutettu
+    - branchcode: ''
+      code: ILL_REQUEST_MODIFIED
+      content:
+      - 'Kaukolainapyynnön [% illrequest.illrequest_id %] tehnyt asiakas on muokannut
+        pyyntöä. Kaukolainapyynnön tiedot:'
+      - ''
+      - '[% ill_full_metadata %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Kaukolainapyyntö muokattu
+      title: Kaukolainapyyntö muokattu
+    - branchcode: ''
+      code: ILL_PARTNER_REQ
+      content:
+      - Hyvä herra/rouva,
+      - ''
+      - 'Haluaisimme pyytää kaukolainaan seuraavaa teosta:'
+      - ''
+      - '[% ill_full_metadata %]'
+      - ''
+      - Ilmoitettahan meille, jos kaukolainapyyntö on saatavissa kauttanne.
+      - ''
+      - Ystävällisin terveisin
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Kaukolainapyyntö yhteistyökumppaneille
+      title: Kaukolainapyyntö yhteistyökumppaneille
+    - branchcode: ''
+      code: ILL_REQUEST_UPDATE
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Kaukolainapyynnöt [% illrequest.illrequest_id %] jotka olet tehnyt
+      - ''
+      - '- [% ill_bib_title %] - [% ill_bib_author %]'
+      - ''
+      - on päivitetty.
+      - ''
+      - 'Päivityksen tarkemmat tiedot alla:'
+      - ''
+      - '[% additional_text %]'
+      - ''
+      - Ystävällisin terveisin
+      - ''
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %]'
+      - '[% branch.branchstate %]'
+      - '[% branch.branchzip %]'
+      - '[% branch.branchphone %]'
+      - '[% branch.branchillemail %]'
+      - '[% branch.branchemail %]'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: ill
+      name: Kaukolainapyynnön päivitys
+      title: Kaukolainapyynnön päivitys
+    - branchcode: ''
+      code: SHARE_ACCEPT
+      content:
+      - Hyvä asiakas,
+      - ''
+      - '<<borrowers.firstname>> <<borrowers.surname>> on hyväksynyt kutsusi kirjaston
+        kokoelman jaetulle listalle: <<listname>>.'
+      - ''
+      - Kiitos.
+      - ''
+      - Kirjastosi.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: lists
+      name: Ilmoitus jakamisen onnistumisesta
+      title: Jaetun listan <<listname>> jako hyväksytty
+    - branchcode: ''
+      code: SHARE_INVITE
+      content:
+      - Hyvä asiakas,
+      - ''
+      - 'Asiakkaamme <<borrowers.firstname>> <<borrowers.surname>> kutsuu sinut kirjaston
+        kokoelman jaetulle listalle: <<listname>>.'
+      - ''
+      - Päästäksesi tälle jaetulle listalla, klikkaa URL:a tai kopio ja liitä se selaimen
+        osoiteriville.
+      - ''
+      - <<shareurl>>
+      - ''
+      - Jos et ole kirjastomme asiakas tai et halua hyväksyä tätä kutsua, voit jättää
+        tämän viestin huomioimatta. Kutsu vanhenee kahden viikon sisällä.
+      - ''
+      - Kiitos.
+      - ''
+      - Kirjastosi.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: lists
+      name: Kutsu jakaa listaa
+      title: Jaetaan lista <<listname>>
+    - branchcode: ''
+      code: TRANSFER_OWNERSHIP
+      content:
+      - Hyvä [%- INCLUDE 'patron-title.inc' patron => owner -%],<br>
+      - <br>
+      - A public list, titled <em>[% shelf.shelfname | html %]</em>, has been transferred
+        to you[% IF ( librarian ) %] by [%- INCLUDE 'patron-title.inc' patron => librarian
+        %][% END %].<br>
+      - <br>
+      - '[% IF old_owner %]The list was previously owned by [%- INCLUDE ''patron-title.inc''
+        patron => old_owner -%].<br><br>[% END %]'
+      - Thank you<br>
+      - <br>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: lists
+      name: Transfer ownership
+      title: A list has been transferred to you
+    - branchcode: ''
+      code: DISCHARGE
+      content:
+      - ''
+      - <<today>>
+      - <h1>Velattomuusilmoituksen vahvistus</h1>
+      - <p><<branches.branchname>> vahvistaa, että asiakas:<br>
+      - '<<borrowers.firstname>> <<borrowers.surname>> (kirjastokortin numero: <<borrowers.cardnumber>>)<br>'
+      - on palauttanut kaikki niteet.</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Velattomuusilmoituksen vahvistus
+      title: Velattomuusilmoitus asiakkaalle <<borrowers.firstname>> <<borrowers.surname>>
+    - branchcode: ''
+      code: MEMBERSHIP_EXPIRY
+      content:
+      - Hyvä <<borrowers.title>> <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Kirjastokorttisi vanhenee pian:'
+      - ''
+      - <<borrowers.dateexpiry>>
+      - ''
+      - Kiitos,
+      - ''
+      - Virkailija
+      - ''
+      - <<branches.branchname>>
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Käyttäjätilin vanhentuminen
+      title: Käyttäjätilin vanhentuminen
+    - branchcode: ''
+      code: MEMBERSHIP_RENEWED
+      content:
+      - '[%- USE Price -%]'
+      - Hyvä [% borrower.title %] [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Kirjastokorttisi voimassaoloaikaa on jatkettu. Uusi vanhentumispäivä on:
+        [% borrower.dateexpiry %].'
+      - |-
+        [% IF borrower.category.enrolmentfee > 0 %]
+        An enrollment fee of [% borrower.category.enrolmentfee | $Price with_symbol => 1 %] has been applied.
+        [% END %]
+      - Kiitos,
+      - ''
+      - Kirjastosi,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Tilin uusinta
+      title: Tilin uusinta
+    - branchcode: ''
+      code: OPAC_REG_VERIFY
+      content:
+      - Hei!
+      - ''
+      - 'Olet rekisteröitynyt kirjaston asiakkaaksi. Viimeistele rekisteröinti vahvistamalla
+        sähköpostiosoitteesi klikkaamalla tätä linkkiä:'
+      - ''
+      - <<OPACBaseURL>>/cgi-bin/koha/opac-registration-verify.pl?token=<<borrower_modifications.verification_token>>
+      - ''
+      - Jos et luonut tiliä, voit jättää tämän viestin huomioimatta. Vahvistus vanhenee
+        pian.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Verkkokirjaston itserekisteröitymisen vahvistussähköposti
+      title: Vahvista käyttäjätilisi
+    - branchcode: ''
+      code: PASSWORD_CHANGE
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Salasanasi on muuttunut, jos en muuttanut salasanaasi itse (tai pyytänyt kirjastosta
+        sen muuttamista), ole yhteydessä kirjastoon.
+      - ''
+      - Kirjastosi.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Ilmoitus salasanan vaihdosta
+      title: Ilmoitus kirjastokortin salasanan muutoksesta
+    - branchcode: ''
+      code: PASSWORD_RESET
+      content:
+      - <p>Tämä sähköposti on lähetetty vastauksena tilin salasanan palautuspyyntöön
+        <strong><<user>></strong>.
+      - </p>
+      - <p>
+      - 'Voit luoda uuden salasanan tämän linkin kautta:'
+      - <br><a href="<<passwordreseturl>>"><<passwordreseturl>></a>
+      - </p>
+      - <p>Tämä linkki on voimassa kaksi päivää viestin saapumisesta. Ellet vaihda
+        salasanaa sinä aikana, sinun pitää hakea sitä uudelleen.</p>
+      - <p>Kiitos.</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Salasanan palautus
+      title: Kohan salasanan palautus
+    - branchcode: ''
+      code: STAFF_PASSWORD_RESET
+      content:
+      - <p>Tämä sähköposti on lähetetty vastauksena tilin salasanan palautuspyyntöön
+        <strong><<user>></strong>.
+      - </p>
+      - <p>
+      - 'Luo uusi salasana tämän linkin kautta:'
+      - <br><a href="<<passwordreseturl>>"><<passwordreseturl>></a>
+      - </p>
+      - <p>Tämä linkki on voimassa viisi päivää vistin saapumisesta. Ellet vaihda
+        salasanaa sinä aikana, sinun pitää hakea sitä uudelleen.</p>
+      - <p>Kiitos.</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Salasanan palautus
+      title: Kohan salasanan palautus
+    - branchcode: ''
+      code: WELCOME
+      content:
+      - '[% USE Koha %]'
+      - Hei [% borrower.title %] [% borrower.firstname %] [% borrower.surname %].
+        <br>
+      - <br>
+      - Tervetuloa asiakkaaksi [% IF Koha.Preference('LibraryName') %][% Koha.Preference('LibraryName')
+        %]kirjasto[% ELSE %][% END %]
+      - <br>
+      - Voit etsiä kaikkia aineistojamme <a href='[% Koha.Preference('OPACBaseURL')
+        %]'>kirjaston haulla</a>.<br>
+      - <br>
+      - Kirjastokorttisi numero on [% borrower.cardnumber %]<br>
+      - <br>
+      - Jos sinulla on ongelmia tai kysyttävää, ota yhteys kirjastoon.
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: 'Tervetuloilmoitus '
+      title: '[% USE Koha %][% IF Koha.Preference(''LibraryName'') %] [% Koha.Preference(''LibraryName'')
+        %] toivottaa sinut tervetulleeksi [% ELSE %]Tervetuloa kirjastoon[% END %]'
+    - branchcode: ''
+      code: 2FA_OTP_TOKEN
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %] ([% borrower.cardnumber
+        %])
+      - ''
+      - Varmennuksesi on [% otp_token %].
+      - On voimassa yhden minuutin.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Kaksivaiheisen tunnistuksen vaihe
+      title: Kaksivaiheinen tunnistus
+    - branchcode: ''
+      code: ACCOUNTS_SUMMARY
+      content:
+      - '[% USE Branches %]'
+      - '[% USE Koha %]'
+      - '[% USE KohaDates %]'
+      - '[% USE Price %]'
+      - '[% PROCESS ''accounts.inc'' %]'
+      - <table>
+      - '  [% IF ( Koha.Preference(''LibraryName'') ) %]'
+      - '    <tr>'
+      - '      <th colspan=''4'' class=''centerednames''>'
+      - '        <h1>[% Koha.Preference(''LibraryName'') | html %]</h1>'
+      - '      </th>'
+      - '    </tr>'
+      - '  [% END %]'
+      - ''
+      - '  <tr>'
+      - '    <th colspan=''4'' class=''centerednames''>'
+      - '      <h2>[% Branches.GetName( borrower.branchcode ) | html %]</h2>'
+      - '    </th>'
+      - '  </tr>'
+      - ''
+      - '  <tr>'
+      - '    <th colspan=''4'' class=''centerednames''>'
+      - '      <h3>Maksettavaa</h3>'
+      - '    </th>'
+      - '  </tr>'
+      - ''
+      - '  <tr>'
+      - '    <th colspan=''4'' class=''centerednames''>'
+      - '      <h4>Velat</h4>'
+      - '    </th>'
+      - '  </tr>'
+      - '  [% IF borrower.account.outstanding_debits.total_outstanding %]'
+      - '  <tr>'
+      - '    <th>Päivämäärä</th>'
+      - '    <th>Maksu</th>'
+      - '    <th>Summa</th>'
+      - '    <th>Maksettavaa</th>'
+      - '  </tr>'
+      - '  [% FOREACH debit IN borrower.account.outstanding_debits %]'
+      - '  <tr>'
+      - '    <td>[% debit.date | $KohaDates %]</td>'
+      - '    <td>'
+      - '      [% PROCESS account_type_description account=debit %]'
+      - '      [%- IF debit.description %], [% debit.description | html %][% END %]'
+      - '    </td>'
+      - '    <td class=''debit''>[% debit.amount | $Price %]</td>'
+      - '    <td class=''debit''>[% debit.amountoutstanding | $Price %]</td>'
+      - '  </tr>'
+      - '  [% END %]'
+      - '  [% ELSE %]'
+      - '  <tr>'
+      - '    <td colspan=''4''>Tililläsi ei ole maksuja</td>'
+      - '  </tr>'
+      - '  [% END %]'
+      - ''
+      - '  <tr>'
+      - '    <th colspan=''4'' class=''centerednames''>'
+      - '      <h4>Hyvitykset</h4>'
+      - '    </th>'
+      - '  </tr>'
+      - '  [% IF borrower.account.outstanding_credits.total_outstanding %]'
+      - '  <tr>'
+      - '    <th>Päivämäärä</th>'
+      - '    <th>Hyvitys</th>'
+      - '    <th>Summa</th>'
+      - '    <th>Maksettavaa</th>'
+      - '  </tr>'
+      - '  [% FOREACH credit IN borrower.account.outstanding_credits %]'
+      - '  <tr>'
+      - '    <td>[% credit.date | $KohaDates%]</td>'
+      - '    <td>'
+      - '      [% PROCESS account_type_description account=credit %]'
+      - '      [%- IF credit.description %], [% credit.description | html %][% END
+        %]'
+      - '    </td>'
+      - '    <td class=''credit''>[% credit.amount *-1 | $Price %]</td>'
+      - '    <td class=''credit''>[% credit.amountoutstanding *-1 | $Price %]</td>'
+      - '  </tr>'
+      - '  [% END %]'
+      - '  [% ELSE %]'
+      - '  <tr>'
+      - '    <td colspan=''4''>Tililläsi ei ole hyvityksiä</td>'
+      - '  </tr>'
+      - '  [% END %]'
+      - ''
+      - '  <tfoot>'
+      - '    <td colspan=''3''>'
+      - '      [% IF borrower.account.balance < 0 %]'
+      - '        Hyvitystä yhteensä [% today | $KohaDates %]:'
+      - '      [% ELSE %]'
+      - '        Yhteensä maksettavaa [% today | $KohaDates %]:'
+      - '      [% END %]'
+      - '    </td>'
+      - '    [% IF ( borrower.account.balance <= 0 ) %]<td class=''credit''>[% borrower.account.balance
+        * -1 | $Price %]</td>'
+      - '    [% ELSE %]<td class=''debit''>[% borrower.account.balance | $Price %]</td>[%
+        END %]'
+      - '  </tfoot>'
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: members
+      name: Tilin saldo -kuitti
+      title: Tilin yhteenveto asiakkaalle [% borrower.firstname %] [% borrower.surname
+        %]
+    - branchcode: ''
+      code: ACQORDER
+      content:
+      - <<aqbooksellers.name>>
+      - <<aqbooksellers.address1>>
+      - <<aqbooksellers.address2>>
+      - <<aqbooksellers.address3>>
+      - <<aqbooksellers.address4>>
+      - <<aqbooksellers.phone>>
+      - ''
+      - 'Tilataan kirjastoon:'
+      - ''
+      - '<order>Tilausnumero <<aqorders.ordernumber>> (<<biblio.title>>) (määrä: <<aqorders.quantity>>)
+        ($<<aqorders.listprice>> €/kpl).</order>'
+      - ''
+      - Kiitos,
+      - ''
+      - <<branches.branchname>>
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: orderacquisition
+      name: Hankintatilaus
+      title: Tilaus
+    - branchcode: ''
+      code: RECEIPT
+      content:
+      - '[% USE KohaDates %]'
+      - '[% USE Branches %]'
+      - '[% USE Price %]'
+      - '[% PROCESS "accounts.inc" %]'
+      - <table>
+      - '[% IF ( LibraryName ) %]'
+      - ' <tr>'
+      - '    <th colspan="2" class="centerednames">'
+      - '        <h3>[% LibraryName | html %]</h3>'
+      - '    </th>'
+      - ' </tr>'
+      - '[% END %]'
+      - ' <tr>'
+      - '    <th colspan="2" class="centerednames">'
+      - '        <h2>[% Branches.GetName( credit.branchcode ) | html %]</h2>'
+      - '    </th>'
+      - ' </tr>'
+      - <tr>
+      - '    <th colspan="2" class="centerednames">'
+      - '        <h3>[% credit.date | $KohaDates %]</h3>'
+      - </tr>
+      - <tr>
+      - '  <td>Tapahtuman ID: </td>'
+      - '  <td>[% credit.accountlines_id %]</td>'
+      - </tr>
+      - <tr>
+      - '  <td>Operaattorin ID: </td>'
+      - '  <td>[% credit.manager_id %]</td>'
+      - </tr>
+      - <tr>
+      - '  <td>Maksun tyyppi: </td>'
+      - '  <td>[% credit.payment_type %]</td>'
+      - </tr>
+      - ' <tr></tr>'
+      - ' <tr>'
+      - '    <th colspan="2" class="centerednames">'
+      - '        <h2><u>Maksukuitti</u></h2>'
+      - '    </th>'
+      - ' </tr>'
+      - ' <tr></tr>'
+      - ' <tr>'
+      - '    <th>Maksun kuvaus</th>'
+      - '    <th>Summa</th>'
+      - '  </tr>'
+      - ''
+      - '  [% FOREACH debit IN credit.debits %]'
+      - '    <tr>'
+      - '        <td>[% PROCESS account_type_description account=debit %]</td>'
+      - '        <td>[% debit.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '  [% END %]'
+      - ''
+      - <tfoot>
+      - '  <tr class="highlight">'
+      - '    <td>Yhteensä: </td>'
+      - '    <td>[% credit.amount * -1| $Price %]</td>'
+      - '  </tr>'
+      - '  <tr>'
+      - '    <td>Tarjottu rahamäärä: </td>'
+      - '    <td>[% collected | $Price %]</td>'
+      - '  </tr>'
+      - '  <tr>'
+      - '    <td>Vaihtoraha: </td>'
+      - '    <td>[% change | $Price %]</td>'
+      - '    </tr>'
+      - </tfoot>
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: pos
+      name: Myyntipisteen kuitti
+      title: Kuitti
+    - branchcode: ''
+      code: RECEIPT
+      content:
+      - '[% USE KohaDates %]'
+      - '[% USE Branches %]'
+      - '[% USE Price %]'
+      - '[% PROCESS "accounts.inc" %]'
+      - <table>
+      - '    [% IF ( LibraryName ) %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h3>[% LibraryName | html %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    [% IF credit.library %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h2>[% payment.library.branchname | html %]</h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h3>[% payment.date | $KohaDates %]</h3>'
+      - '      </th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Tapahtuman ID: </td>'
+      - '      <td>[% payment.accountlines_id %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Operaattorin ID: </td>'
+      - '      <td>[% payment.manager_id %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Maksun tyyppi: </td>'
+      - '      <td>[% payment.payment_type %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <th colspan="2" class="centerednames">'
+      - '        <h2><u>Maksukuitti</u></h2>'
+      - '      </th>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <th>Maksujen kuvaus</th>'
+      - '      <th>Summa</th>'
+      - '    </tr>'
+      - '    [% FOREACH offset IN payment.credit_offsets %]'
+      - '    <tr>'
+      - '        <td>[% PROCESS account_type_description account=debit %]</td>'
+      - '        <td>[% debit.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    [% END %]'
+      - '  <tfoot>'
+      - '    <tr class="highlight">'
+      - '      <td>Yhteensä:</td>'
+      - '      <td>[% payment.amount * -1 | $Price %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Tarjottu rahamäärä: </td>'
+      - '      <td>[% collected | $Price %]</td>'
+      - '    </tr>'
+      - '    <tr>'
+      - '      <td>Vaihtorahaa annettu:</td>'
+      - '      <td>[% change | $Price %]</td>'
+      - '    </tr>'
+      - '  </tfoot>'
+      - </table>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: pos
+      name: Myyntipisteen kuitti
+      title: Kuitti
+    - branchcode: ''
+      code: CANCEL_HOLD_ON_LOST
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Valitettavasti varaamasi nide on kadonnut. Olemme peruuttaneet varauksesi.
+      - ''
+      - 'Otsikko: [% biblio.title %]'
+      - 'Tekijä: [% biblio.author %]'
+      - 'Kopion numero: [% item.copynumber %]'
+      - 'Hyllypaikka: [% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Varaus on peruutettu
+      title: Varaus on peruutettu
+    - branchcode: ''
+      code: HOLD
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Sinulla on varaus noudettavissa [% hold.waitingdate | $KohaDates %]:'
+      - ''
+      - 'Otsikko: [% biblio.title %]'
+      - 'Tekijä: [% biblio.author %]'
+      - 'Kopion numero: [% item.copynumber %]'
+      - 'Hyllypaikka: [% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - '[% branch.branchaddress3 %]'
+      - '[% branch.branchcity %] [% branch.branchzip %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Varaus noudettavissa
+      title: Varaus noudettavissa kirjastosta <<branches.branchname>>
+    - branchcode: ''
+      code: HOLDDGST
+      content:
+      - 'Sinulla on varaus noudettavissa:'
+      - '----'
+      - 'Otsikko: [% hold.biblio.title %]'
+      - 'Tekijä: [% hold.biblio.author %]'
+      - 'Kopion numero: [% hold.item.copynumber %]'
+      - 'Odottaa alkaen: [% hold.waitingdate %]'
+      - 'Odottaa kirjastossa: [% hold.branch.branchname %]'
+      - '[% hold.branch.branchaddress1 %]'
+      - '[% hold.branch.branchaddress2 %]'
+      - '[% hold.branch.branchaddress3 %]'
+      - '[% hold.branch.branchcity %] [% hold.branch.branchzip %]'
+      - '----'
+      - Kiitos!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Varaus noudettavissa
+      title: Varaus noudettavissa
+    - branchcode: ''
+      code: HOLDDGST
+      content:
+      - 'Sinulla on varaus noudettavissa:'
+      - ''
+      - '----'
+      - 'Otsikko: [% hold.biblio.title %]'
+      - '----'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: reserves
+      name: Varaus noudettavissa
+      title: Varaus noudettavissa
+    - branchcode: ''
+      code: HOLD
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Varaamasi [% biblio.title %] on noudettavissa.
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: reserves
+      name: Varaus noudettavissa
+      title: Varaus noudettavissa kirjastosta [% branch.branchname %]
+    - branchcode: ''
+      code: HOLD
+      content:
+      - '[% branch.branchname %]'
+      - '[% branch.branchaddress1 %]'
+      - '[% branch.branchaddress2 %]'
+      - ''
+      - ''
+      - Palvelupyyntö
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - '[% borrower.firstname %] [% borrower.surname %]'
+      - '[% borrower.address %]'
+      - '[% borrower.city %] [% borrower.zipcode %]'
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - '[% borrower.firstname %] [% borrower.surname %] [% borrower.cardnumber %]'
+      - ''
+      - 'Sinulla on varaus noudettavissa [% hold.waitingdate | $KohaDates %]:'
+      - ''
+      - 'Otsikko: [% biblio.title %]'
+      - 'Tekijä: [% biblio.author %]'
+      - 'Kopion numero: [% item.copynumber %]'
+      - ''
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: reserves
+      name: Varaus noudettavissa
+      title: Varaus noudettavissa (tuloste)
+    - branchcode: ''
+      code: HOLDPLACED
+      content:
+      - 'Seuraavaan niteeseen on tehty varaus : <<biblio.title>> (<<biblio.biblionumber>>)
+        käyttäjän toimesta <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>).'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Nide varattu
+      title: Nide varattu
+    - branchcode: ''
+      code: HOLD_CHANGED
+      content:
+      - 'Aiempi varaaja: <<biblio.title>>, niteelle (<<items.barcode>>) on muuttunut:
+        <<borrowers.firstname>> <<borrowers.surname>> (<<borrowers.cardnumber>>).'
+      - Siirrä seuraava nide uudelle varaajalle.
+      - 'Otsikko: <<biblio.title>>'
+      - 'Tekijä: <<biblio.author>>'
+      - 'Nide: <<items.itemcallnumber>>'
+      - 'Noutopaikka: <<branches.branchname>>'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Peruutettu varaus vapautunut toiselle asiakkaalle
+      title: Peruutettu varaus vapautunut toiselle asiakkaalle
+    - branchcode: ''
+      code: HOLD_REMINDER
+      content:
+      - |-
+        Dear [% borrower.firstname %] [% borrower.surname %],
+
+        The following holds are waiting at [% branch.branchname %]:
+
+        [% FOREACH hold IN holds %]
+            [% hold.biblio.title %] : waiting since [% hold.waitingdate | $KohaDates %]
+        [% END %]
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Muistutus odottavasta varauksesta
+      title: Sinulla on odottavia varauksia.
+    - branchcode: ''
+      code: NEW_CURBSIDE_PICKUP
+      content:
+      - '[%- USE KohaDates -%]'
+      - '[%- SET cp = curbside_pickup -%]'
+      - ''
+      - Sinulla on noutopalvelu varattuna ajalle [% cp.scheduled_pickup_datetime |
+        $KohaDates with_hours => 1 %] kirjastoon [% cp.library.branchname %].
+      - |-
+        Any holds waiting for you at the pickup time will be included in this pickup. At this time, that list includes:
+        [%- FOREACH h IN cp.patron.holds %]
+        [%- IF h.branchcode == cp.branchcode && h.found == 'W' %]
+        * [% h.biblio.title %], [% h.biblio.author %] ([% h.item.barcode %])
+        [%- END %]
+        [%- END %]
+      - ''
+      - Once you have arrived, please call your library or log into your account and
+        click the "Alert staff of your arrival" button to let them know you are there.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Uusi nouto
+      title: Sinulle on ajastettu nouto kirjastossa [% branch.branchname %]
+    - branchcode: ''
+      code: SERIAL_ALERT
+      content:
+      - <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Seuraava numero on saatavana:'
+      - ''
+      - <<biblio.title>>, <<biblio.author>> (<<items.barcode>>)
+      - ''
+      - Voit noutaa numeron, kun se sinulle sopii.
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: serial
+      name: Uusi kausijulkaisun numero
+      title: Uusi kausijulkaisun numero on saatavana
+    - branchcode: ''
+      code: ACCEPTED
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Olet tehnyt kirjastolle hankintaehdotuksen kirjasta [% suggestion.title %]
+        / [% suggestion.author %].
+      - ''
+      - Kirjasto on tarkistanyt ehdotuksesi tänään ja ehdottamasi aineisto tilataan
+        pian. Saat sähköpostia, kun tilaus on tehty ja uudelleen, kun aineisto saapuu
+        kirjastolle.
+      - ''
+      - 'Jos sinulla on kysyttävää, ota yhteys kirjastoon: [% branch.branchemail %].'
+      - ''
+      - Kiitos,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Ehdotus hyväksytty
+      title: Hankintaehdotus hyväksytty
+    - branchcode: ''
+      code: AVAILABLE
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Olet tehnyt kirjastolle hankintaehdotuksen kirjasta [% suggestion.title %]
+        / [% suggestion.author %].
+      - ''
+      - Ehdottamasi aineisto on nyt käsitelty ja lainattavissa.
+      - ''
+      - 'Jos sinulla on kysyttävää, ota yhteys kirjastoon: [% branch.branchemail %].'
+      - ''
+      - Kiitos,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Hankintaehdotus saatavana
+      title: Hankintaehdotus saatavana
+    - branchcode: ''
+      code: NEW_SUGGESTION
+      content:
+      - <h3>Hyväksymistä odottava hankintaehdotus</h3>
+      - '    <p><h4>Ehdottaja</h4>'
+      - '    <ul>'
+      - '    <li>[% borrower.firstname %] [% borrower.surname %]</li>'
+      - '    <li>[% borrower.cardnumber %]</li>'
+      - '    [%- IF borrower.phone -%]'
+      - '        <li>[% borrower.phone %]</li>'
+      - '    [%- END -%]'
+      - '    [%- IF borrower.email -%]'
+      - '        <li>[% borrower.email %]</li>'
+      - '    [%- END -%]'
+      - '    </ul>'
+      - '    </p>'
+      - '    <p><h4>Ehdotetun aineiston nimeke</h4>'
+      - '    <ul>'
+      - '    <li><b>Kirjasto:</b> [% branch.branchname %]</li>'
+      - '    <li><b>Nimi:</b> [% suggestion.title %]</li>'
+      - '    <li><b>Tekijä:</b> [% suggestion.author %]</li>'
+      - '    <li><b>Tekijänoikeusvuosi:</b> [% suggestion.copyrightdate %]</li>'
+      - '    <li><b>Standardoitu numero (ISBN, ISSN tai muu):</b> [% suggestion.isbn
+        %]</li>'
+      - '    <li><b>Julkaisija:</b> [% suggestion.publishercode %]</li>'
+      - '    <li><b>Kokoelman nimi:</b> [% suggestion.collectiontitle %]</li>'
+      - '    <li><b>Julkaisu-/kustannuspaikka:</b> [% suggestion.place %]</li>'
+      - '    <li><b>Määrä:</b> [% suggestion.quantity %]</li>'
+      - '    <li><b>Nidetyyppi:</b>  [% suggestion.itemtype %]</li>'
+      - '    <li><b>Hankintaperusteet:</b> [% suggestion.patronreason %]</li>'
+      - '    <li><b>Huomautukset:</b> [% suggestion.note %]</li>'
+      - '    </ul>'
+      - '    </p>'
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Uusi ehdotus
+      title: Uusi ehdotus
+    - branchcode: ''
+      code: ORDERED
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Olet tehnyt kirjastolle hankintaehdotuksen kirjasta [% suggestion.title %]
+        / [% suggestion.author %].
+      - ''
+      - Ehdottamasi aineisto on nyt tilattu ja sen pitäisi saapua pian kirjastolle
+        käsiteltäväksi.
+      - ''
+      - Saat sähköpostin, kun aineisto on saatavana.
+      - ''
+      - 'Jos sinulla on kysyttävää, ota yhteys kirjastoon: [% branch.branchemail %]'
+      - ''
+      - Kiitos,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Ehdotus tilattu
+      title: Ehdotettu nide tilattu
+    - branchcode: ''
+      code: REJECTED
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - Olet tehnyt kirjastolle hankintaehdotuksen kirjasta [% suggestion.title %]
+        / [% suggestion.author %].
+      - ''
+      - Kirjasto on tarkistanut ehdotuksesi tänään ja päättänyt olla hankkimatta ehdotuksesi
+        mukaista aineistoa tällä kertaa.
+      - ''
+      - 'Syy: [% suggestion.reason %]'
+      - ''
+      - 'Jos sinulla on kysyttävää, ota yhteys kirjastoon: [% branch.branchemail %].'
+      - ''
+      - Kiitos,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Ehdotus hylätty
+      title: Hankintaehdotus hylätty
+    - branchcode: ''
+      code: TO_PROCESS
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Uusi hankintaehdotus on valmis käsiteltäväksi: [% suggestion.title %] by
+        [% suggestion.author %].'
+      - ''
+      - Kiitos,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Uusi hankintaehdotus (tilin hallinnoija)
+      title: Hankintaehdotus on valmis käsiteltäväksi
+    - branchcode: ''
+      code: NOTIFY_MANAGER
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - ''
+      - 'Sinulle on uusi hankintaehdotus: [% suggestion.title %].'
+      - ''
+      - Kiitos,
+      - ''
+      - '[% branch.branchname %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: suggestions
+      name: Uusi hankintaehdotus (hankintavastaava)
+      title: Sinulle on hankintaehdotus
+    - branchcode: ''
+      code: PROBLEM_REPORT
+      content:
+      - 'Käyttäjätunnus: <<problem_reports.username>>'
+      - ''
+      - 'Ongelmasivu: <<problem_reports.problempage>>'
+      - ''
+      - 'Otsikko: <<problem_reports.title>>'
+      - ''
+      - 'Viesti: <<problem_reports.content>>'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Verkkokirjaston vikailmoitukset
+      title: Verkkokirjaston vikailmoitukset
+    - branchcode: ''
+      code: AUTO_RENEWALS
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - '[% IF checkout.auto_renew_error == ''auto_renew_final'' %]'
+      - Seuraava nide, [% biblio.title %], on uusittu oikein ja erääntyy nyt [% checkout.date_due
+        | $KohaDates as_due_date => 1 %]
+      - Lainan uusimiskerrat ovat tulleet täyteen eikä uusinta ole enää mahdollista.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_unseen_final'' %]'
+      - Seuraava nide, [% biblio.title %], on uusittu oikein ja erääntyy nyt [% checkout.date_due
+        | $KohaDates as_due_date => 1 %]
+      - Lainan verkkokirjastouusimiskerrat ovat tulleet täyteen ja laina on uusittava
+        kirjastossa.
+      - '[% ELSIF checkout.auto_renew_error %]'
+      - 'Seuraavaa nidettä, [% biblio.title %], ei ole uusittu koska:'
+      - '[% IF checkout.auto_renew_error == ''too_many'' %]'
+      - Lainan uusimiskerrat ovat tulleet täyteen.
+      - '[% ELSIF checkout.auto_renew_error == ''on_reserve'' %]'
+      - Tämä nide varattu toiselle asiakkaalle.
+      - '[% ELSIF checkout.auto_renew_error == ''restriction'' %]'
+      - Sinulla on tällä hetkellä rajoitus.
+      - '[% ELSIF checkout.auto_renew_error == ''overdue'' %]'
+      - Sinulla on myöhässä olevia lainoja.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_too_late'' %]'
+      - Nidettä ei voi enää uusia.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_too_much_oweing'' %]'
+      - Maksamattomien maksujesi yhteissumma on liian korkea.
+      - '[% ELSIF checkout.auto_renew_error == ''too_unseen'' %]'
+      - Tämä nide täytyy uusia kirjastossa.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_account_expired'' %]'
+      - Kirjastokortti on vanhentunut.
+      - '[% END %]'
+      - '[% ELSE %]'
+      - Seuraava nide, [% biblio.title %], on uusittu oikein ja erääntyy nyt [% checkout.date_due
+        | $KohaDates as_due_date => 1 %]
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Ilmoitus automaattisesta uusinnasta
+      title: Ilmoitus automaattisesta uusinnasta
+    - branchcode: ''
+      code: CHECKINSLIP
+      content:
+      - <h3>[% branch.branchname %]</h3>
+      - Palautukset asiakkaalle [% borrower.title %] [% borrower.firstname %] [% borrower.initials
+        %]([% borrower.surname %])<br>
+      - ([% borrower.cardnumber %]) <br>
+      - <br>
+      - '[% today | $KohaDates %]<br>'
+      - <br>
+      - <h4>Tänään palautetut</h4>
+      - '[% FOREACH checkin IN old_checkouts %]'
+      - '[% SET item = checkin.item %]'
+      - <p>
+      - '[% item.biblio.title %] <br>'
+      - 'Viivakoodi: [% item.barcode %] <br>'
+      - </p>
+      - '[% END %]'
+      is_html: 1
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Palautuskuitti
+      title: Palautuskuitti
+    - branchcode: ''
+      code: OVERDUE_FINE_DESC
+      content:
+      - '[% item.biblio.title %] [% checkout.date_due | $KohaDates %]'
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Myöhästymismaksun kuvaus
+      title: Myöhästymismaksun kuvaus
+    - branchcode: ''
+      code: AUTO_RENEWALS_DGST
+      content:
+      - Hyvä [% borrower.firstname %] [% borrower.surname %],
+      - '[% IF error %]'
+      - '[% error %] nidettä ei uusittu.'
+      - '[% END %]'
+      - '[% IF success %]'
+      - '[% success %] nidettä uusittiin.'
+      - '[% END %]'
+      - '[% FOREACH checkout IN checkouts %]'
+      - '[% NEXT IF (checkout.auto_renew_error == ''auto_too_soon'') %]'
+      - '[% checkout.item.biblio.title %] : [% checkout.item.barcode %]'
+      - '[% IF !checkout.auto_renew_error %]'
+      - on uusittu [% checkout.date_due | $KohaDates as_due_date => 1%] asti
+      - '[% ELSIF checkout.auto_renew_error == ''too_many'' %]'
+      - Lainan uusimiskerrat ovat tulleet täyteen.
+      - '[% ELSIF checkout.auto_renew_error == ''on_reserve'' %]'
+      - Tämä nide varattu toiselle asiakkaalle.
+      - '[% ELSIF checkout.auto_renew_error == ''restriction'' %]'
+      - Sinulla on tällä hetkellä rajoitus.
+      - '[% ELSIF checkout.auto_renew_error == ''overdue'' %]'
+      - Sinulla on myöhässä olevia lainoja.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_too_late'' %]'
+      - Nidettä ei voi enää uusia.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_too_much_oweing'' %]'
+      - Maksamattomien maksujesi yhteissumma on liian korkea.
+      - '[% ELSIF checkout.auto_renew_error == ''too_unseen'' %]'
+      - Tämä nide täytyy uusia kirjastossa.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_renew_final'' %]'
+      - on uusittu [% checkout.date_due | $KohaDates as_due_date => 1%] asti
+      - Lainan uusimiskerrat ovat tulleet täyteen eikä uusinta ole enää mahdollista.
+      - '[% ELSIF checkout.auto_renew_error == ''auto_unseen_final'' %]'
+      - on uusittu [% checkout.date_due | $KohaDates as_due_date => 1%] asti
+      - Lainan verkkokirjastouusimiskerrat ovat tulleet täyteen ja laina on uusittava
+        kirjastossa.
+      - '[% END %]'
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Ilmoitus automaattisesta uusinnasta
+      title: Automaattinen uusinta (yhteenveto)
+    - branchcode: ''
+      code: RETURN_RECALLED_ITEM
+      content:
+      - 'Pvm: <<today>>'
+      - ''
+      - <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Seuraavaan niteeseen on palautuspyyntö: <<biblio.title>> / <<biblio.author>>
+        (<<items.barcode>>). Eräpäivä on muuttunu. Uusi eräpäivä on: <<issues.date_due>>.
+        Palauta nide muuttuneeseen eräpäivään mennessä.'
+      - ''
+      - Kiitos!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Palautuspyyntö niteelle
+      title: Palautuspyyntö niteelle
+    - branchcode: ''
+      code: PICKUP_RECALLED_ITEM
+      content:
+      - 'Pvm: <<today>>'
+      - ''
+      - <<borrowers.firstname>> <<borrowers.surname>>,
+      - ''
+      - 'Tekemäsi palautuspyyntö niteeseen: <<biblio.title>> / <<biblio.author>> (<<items.barcode>>)
+        on noudettavissa kirjastosta: <<recalls.pickup_library_id>>. Niteen nouto
+        <<recalls.expiration_date>> mennessä.'
+      - ''
+      - Kiitos!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: circulation
+      name: Noudettavissa olevat palautuspyynnöt
+      title: Noudettavissa olevat palautuspyynnöt
+    - branchcode: ''
+      code: RETURN_RECALLED_ITEM
+      content:
+      - 'Lainaamasi nide on takaisinkutsuttu: <<biblio.title>> (<<items.barcode>>).
+        Palauta se kirjastoon <<issues.date_due>.'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Palautuspyyntö niteelle
+      title: Palauta takaisinkutsuttu nide
+    - branchcode: ''
+      code: PICKUP_RECALLED_ITEM
+      content:
+      - 'Tekemäsi palautuspyyntö niteeseen: <<biblio.title>> (<<items.barcode>>) on
+        noudettavissa kirjastosta: <<recalls.branchcode>>. Niteen nouto <<recalls.expirationdate>>
+        mennessä.'
+      is_html: 0
+      lang: default
+      message_transport_type: sms
+      module: circulation
+      name: Noudettavissa olevat palautuspyynnöt
+      title: Noudettavissa olevat palautuspyynnöt
+    - branchcode: ''
+      code: RECALL_REQUESTER_DET
+      content:
+      - 'Pvm: <<today>>'
+      - ''
+      - 'Palautuspyyntö odottaa noutoa kirjastossa: <<branches.branchname>>'
+      - <<borrowers.surname>>, <<borrowers.firstname>> (<<borrowers.cardnumber>>)
+      - <<borrowers.phone>>
+      - <<borrowers.streetnumber>> <<borrowers.address>>, <<borrowers.address2>>,
+        <<borrowers.city>> <<borrowers.zipcode>>
+      - <<borrowers.email>>
+      - ''
+      - PALAUTUSPYYNTÖ
+      - <<biblio.title>> / <<biblio.author>>
+      - 'Viivakoodi: <<items.barcode>>'
+      - 'Luokka: <<items.itemcallnumber>>'
+      - 'Odottaa alkaen: <<recalls.waiting_date>>'
+      - 'Huomautukset: <<recalls.notes>>'
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: circulation
+      name: Palautuspyynnön tehneen asiakkaan tiedot
+      title: Palautuspyynnön tehneen asiakkaan tiedot
+    - branchcode: ''
+      code: 2FA_DISABLE
+      content:
+      - <p>Hyvä [% borrower.firstname %] [% borrower.surname %],</p>
+      - <p>Tililtäsi on poistettu käytöstä kaksivaiheinen tunnistautuminen.</p>
+      - <p>Jos et pyytänyt tätä muutosta, joku muu saattaa käyttää tiliäsi. Ota yhteys
+        kirjastoon.</p>
+      - <p>Kirjastosi</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Vahvistetaan kaksivaiheisen todennuksen käytöstäpoisto
+      title: Vahvistetaan kaksivaiheisen todennuksen käytöstäpoisto
+    - branchcode: ''
+      code: 2FA_ENABLE
+      content:
+      - <p>Hyvä [% borrower.firstname %] [% borrower.surname %],</p>
+      - <p>Olet ottanut käyttöön kaksivaiheisen tunnistautumisen tilillesi.</p>
+      - <p>Jos et pyytänyt tätä muutosta, joku muu saattaa käyttää tiliäsi. Ota yhteys
+        kirjastoon.</p>
+      - <p>Kirjastosi</p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Vahvistetaan kaksivaiheisen todennuksen käyttöönotto
+      title: Vahvistetaan kaksivaiheisen todennuksen käyttöönotto
+    - branchcode: ''
+      code: OPAC_REG
+      content:
+      - <h3>Uusi verkkokirjaston itserekisteröityminen</h3>
+      - <p><h4>Verkkokirjaston itserekisteröityminen tehty:</h4>
+      - <ul>
+      - <li> [% borrower.firstname %] [% borrower.surname %]</li>
+      - '[% IF borrower.cardnumber %]<li>Kirjastokortin numero: [% borrower.cardnumber
+        %]</li>[% END %]'
+      - '[% IF borrower.email %]<li>Sähköposti: [% borrower.email %]</li>[% END %]'
+      - '[% IF borrower.phone %]<li>Puhelin: [% borrower.phone %]</li>[% END %]'
+      - '[% IF borrower.mobile %]<li>Matkapuhelin: [% borrower.mobile %]</li>[% END
+        %]'
+      - '[% IF borrower.fax %]<li>Faksi: [% borrower.fax %]</li>[% END %]'
+      - '[% IF borrower.emailpro %]<li>Toissijainen sähköpostiosoite: [% borrower.emailpro
+        %]</li>[% END %]'
+      - '[% IF borrower.phonepro %]<li>Toissijainen puh.nro: [% borrower.phonepro
+        %]</li>[% END %]'
+      - '[% IF borrower.branchcode %]<li>Kotikirjasto: [% borrower.branchcode %]</li>[%
+        END %]'
+      - '[% IF borrower.categorycode %]<li>Väliaikainen asiakastyyppi: [% borrower.categorycode
+        %]</li>[% END %]'
+      - </ul>
+      - </p>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: members
+      name: Uusi verkkokirjaston itserekisteröityminen tehty
+      title: Uusi verkkokirjaston itserekisteröityminen
+    - branchcode: ''
+      code: LIST
+      content:
+      - '[%- USE Branches -%]'
+      - '[%- USE AuthorisedValues -%]'
+      - '[%- USE Koha -%]'
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Hei,<br><br>
+      - '[% borrower.firstname | html %] [% borrower.surname | html %] lähetti sinulle
+        verkkokirjastostamme listan nimeltään [% listname | html %].<br>'
+      - Huomaa, että liitetiedosto on MARC-formaatissa, jota käyttävät kirjastot ja
+        useimmat viitteidenhallintaohjelmat kuten EndNote, Referece Manager tai ProCite.<br>
+      - '[% IF ( comment ) %]<hr><br>[% comment | html | html_line_break %]<br><br>[%
+        END %]<hr>'
+      - <ol>[% FOREACH biblio IN biblios %]<li>
+      - '[% biblio.title | html %]'
+      - '[% IF ( biblio.subtitle ) %][% FOREACH subtitle IN biblio.subtitle.split(''
+        | '') %][% subtitle | html %][% END %][% END %][% biblio.part_number | html
+        %] [% biblio.part_name | html %]<br>'
+      - '[% IF ( biblio.author || biblio.get_marc_contributors.size ) %]Tekijä(t):
+        [% IF ( biblio.author ) %][% biblio.author | html %][% END %][% IF ( biblio.get_marc_contributors
+        ) %][% IF ( biblio.author ) %]; [% END %][% FOREACH author IN biblio.get_marc_contributors
+        %][% FOREACH subfield IN author.MARCAUTHOR_SUBFIELDS_LOOP %][% subfield.separator
+        | html %][% subfield.value | html %][% END %][% UNLESS ( loop.last ) %];[%
+        END %][% END %][% END %]<br>[% END %]'
+      - '[% SET biblioitem = biblio.biblioitem %][% IF ( biblioitem.isbn ) %]ISBN:
+        [% FOREACH isbn IN biblioitem.isbn %][% isbn | html %][% UNLESS ( loop.last
+        ) %]; [% END %][% END %]<br>[% END %]'
+      - '[% IF ( biblioitem.publishercode ) %]Julkaisija: [% biblioitem.publishercode
+        | html %][% IF ( biblioitem.publicationyear ) %] vuonna [% biblioitem.publicationyear
+        | html %][% END %][% IF ( biblioitem.pages ) %], [% biblioitem.pages | html
+        %][% END %]<br>[% END %]'
+      - '[% IF ( biblio.seriestitle ) %]Kokoelma: [% biblio.seriestitle | html %]<br>[%
+        END %]'
+      - '[% IF ( biblio.copyrightdate ) %]Tekijänoikeusvuosi: [% biblio.copyrightdate
+        | html %]<br>[% END %]'
+      - '[% IF ( biblio.notes ) %]Huomautukset: [% biblio.notes | html %]<br>[% END
+        %]'
+      - '[% IF ( biblio.unititle ) %]Yhtenäistetty nimeke: [% biblio.unititle | html
+        %]<br>[% END %]'
+      - '[% IF ( biblio.serial ) %]Kausijulkaisu: [% biblio.serial | html %]<br>[%
+        END %]'
+      - '[% IF ( biblioitem.lccn ) %]LCCN: [% biblioitem.lccn | html %]<br>[% END
+        %]'
+      - '[% IF ( biblio.get_marc_host_only || biblio.get_marc_hostinfo_only ) %]Teoksessa:
+        [% IF biblio.get_marc_host_only.biblionumber %][% INCLUDE ''biblio-title.inc''  biblio=biblio.get_marc_host_only
+        %] [% biblio.get_marc_relatedparts_only %][% ELSE %][% biblio.get_marc_hostinfo_only
+        %][% END %]<br>[% END %]'
+      - '[% IF ( biblioitem.url ) %]URL: [% biblioitem.url | html %]<br>[% END %]'
+      - '[<a href=''[% Koha.Preference(''OpacBaseUrl'') %]/cgi-bin/koha/opac-detail.pl?biblionumber=[%
+        biblio.biblionumber | html %]''>Katso verkkokirjastossa</a>'
+      - '[% IF ( biblio.items.count > 0 ) %]<br>Niteitä: <ul>[% FOREACH item IN biblio.items
+        %]<li>[% Branches.GetName( item.holdingbranch ) | html %]'
+      - '[% IF ( item.location ) %], [% AuthorisedValues.GetDescriptionByKohaField(
+        kohafield => ''items.location'', authorised_value => item.location ) | html
+        %][% END %][% IF item.itemcallnumber %]([% item.itemcallnumber | html %])[%
+        END %][% item.barcode | html %]</li>[% END %]</ul>[% END %]'
+      - <hr></li>[% END %]</ol>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: lists
+      name: Lähetä lista
+      title: 'Listasi: [% listname | html %]'
+    - branchcode: ''
+      code: CART
+      content:
+      - '[%- USE Branches -%]'
+      - '[%- USE AuthorisedValues -%]'
+      - '[%- USE Koha -%]'
+      - '[%- PROCESS ''html_helpers.inc'' -%]'
+      - Hei,<br><br>
+      - '[% borrower.firstname | html %] [% borrower.surname | html %] lähetti sinulle
+        verkkokirjastostamme korinsa.<br>'
+      - Huomaa, että liitetiedosto on MARC-formaatissa, jota käyttävät kirjastot ja
+        useimmat viitteidenhallintaohjelmat kuten EndNote, Referece Manager tai ProCite.<br>
+      - '[% IF ( comment ) %]<hr><br>[% comment | html | html_line_break %]<br><br>[%
+        END %]<hr>'
+      - <ol>[% FOREACH biblio IN biblios %]<li>
+      - '[% biblio.title | html %]'
+      - '[% IF ( biblio.subtitle ) %][% FOREACH subtitle IN biblio.subtitle.split(''
+        | '') %][% subtitle | html %][% END %][% END %][% biblio.part_number | html
+        %] [% biblio.part_name | html %]<br>'
+      - '[% IF ( biblio.author || biblio.get_marc_contributors.size ) %]Tekijä(t):
+        [% IF ( biblio.author ) %][% biblio.author | html %][% END %][% IF ( biblio.get_marc_contributors
+        ) %][% IF ( biblio.author ) %]; [% END %][% FOREACH author IN biblio.get_marc_contributors
+        %][% FOREACH subfield IN author.MARCAUTHOR_SUBFIELDS_LOOP %][% subfield.separator
+        | html %][% subfield.value | html %][% END %][% UNLESS ( loop.last ) %];[%
+        END %][% END %][% END %]<br>[% END %]'
+      - '[% SET biblioitem = biblio.biblioitem %][% IF ( biblioitem.isbn ) %]ISBN:
+        [% FOREACH isbn IN biblioitem.isbn %][% isbn | html %][% UNLESS ( loop.last
+        ) %]; [% END %][% END %]<br>[% END %]'
+      - '[% IF ( biblioitem.publishercode ) %]Julkaisija: [% biblioitem.publishercode
+        | html %][% IF ( biblioitem.publicationyear ) %] vuonna [% biblioitem.publicationyear
+        | html %][% END %][% IF ( biblioitem.pages ) %], [% biblioitem.pages | html
+        %][% END %]<br>[% END %]'
+      - '[% IF ( biblio.seriestitle ) %]Kokoelma: [% biblio.seriestitle | html %]<br>[%
+        END %]'
+      - '[% IF ( biblio.copyrightdate ) %]Tekijänoikeusvuosi: [% biblio.copyrightdate
+        | html %]<br>[% END %]'
+      - '[% IF ( biblio.notes ) %]Huomautukset: [% biblio.notes | html %]<br>[% END
+        %]'
+      - '[% IF ( biblio.unititle ) %]Yhtenäistetty nimeke: [% biblio.unititle | html
+        %]<br>[% END %]'
+      - '[% IF ( biblio.serial ) %]Kausijulkaisu: [% biblio.serial | html %]<br>[%
+        END %]'
+      - '[% IF ( biblioitem.lccn ) %]LCCN: [% biblioitem.lccn | html %]<br>[% END
+        %]'
+      - '[% IF ( biblio.get_marc_host_only || biblio.get_marc_hostinfo_only ) %]Teoksessa:
+        [% IF biblio.get_marc_host_only.biblionumber %][% INCLUDE ''biblio-title.inc''  biblio=biblio.get_marc_host_only
+        %] [% biblio.get_marc_relatedparts_only %][% ELSE %][% biblio.get_marc_hostinfo_only
+        %][% END %]<br>[% END %]'
+      - '[% IF ( biblioitem.url ) %]URL: [% biblioitem.url | html %]<br>[% END %]'
+      - <a href='[% Koha.Preference('OpacBaseUrl') %]/cgi-bin/koha/opac-detail.pl?biblionumber=[%
+        biblio.biblionumber | html %]'>Katso verkkokirjastossa</a>
+      - '[% IF ( biblio.items.count > 0 ) %]<br>Niteitä: <ul>[% FOREACH item IN biblio.items
+        %]<li>[% Branches.GetName( item.holdingbranch ) | html %]'
+      - '[% IF ( item.location ) %], [% AuthorisedValues.GetDescriptionByKohaField(
+        kohafield => ''items.location'', authorised_value => item.location ) | html
+        %][% END %][% IF item.itemcallnumber %]([% item.itemcallnumber | html %])[%
+        END %][% item.barcode | html %]</li>[% END %]</ul>[% END %]'
+      - <hr></li>[% END %]</ol>
+      is_html: 1
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: Lähetä kori
+      title: Korisi
+    - branchcode: ''
+      code: PRES_TRAIN_ITEM
+      content:
+      - '[%~ USE AuthorisedValues ~%]'
+      - '[%~ SET train = train_item.train ~%]'
+      - '[%~ SET item = train_item.catalogue_item ~%]'
+      - 'Käsittelyerän nimi: [% train.name %]'
+      - 'Lähetetty: [% train.sent_on | $KohaDates %]'
+      - ''
+      - '[% train.default_processing.name %]'
+      - ''
+      - 'Niteen numero käsittelyerässä #[% train_item.user_train_item_id %]'
+      - ''
+      - '[% FOREACH item_attribute IN train_item.attributes %]'
+      - '    [%~ SET value = item_attribute.value ~%]'
+      - '    [%~ IF item_attribute.processing_attribute.type == ''authorised_value''
+        ~%]'
+      - '        [%~ SET value = AuthorisedValues.GetByCode(item_attribute.processing_attribute.option_source,
+        item_attribute.value) ~%]'
+      - '    [%~ END ~%]'
+      - '    [% item_attribute.processing_attribute.name %]: [% value %]'
+      - '[% END %]'
+      is_html: 0
+      lang: default
+      message_transport_type: print
+      module: preservation
+      name: Käsittelyeräkuitti
+      title: Käsittelyeräkuitti
+    - branchcode: ''
+      code: HOLDPLACED_PATRON
+      content:
+      - Hei [% borrower.firstname %] [% borrower.surname %] ([% borrower.cardnumber
+        %]),
+      - Varauksesi [% hold.biblio.title %] ([% hold.biblio.id %]) on vahvistettu.
+      - Saat ilmoituksen kun nide on noudettavissa.
+      - Kiitos!
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: reserves
+      name: Varaus on vahvistettu
+      title: Varauksesi teokseen [% hold.biblio.title %] on vahvistettu
+    - branchcode: ''
+      code: OAI_HARVEST_REPORT
+      content:
+      - 'OAI harvest report for [% servername %]:'
+      - ''
+      - 'Endpoint: [% endpoint %]'
+      - 'Set: [% set %]'
+      - 'Data format: [% dataformat %]'
+      - 'Record type: [% recordtype %]'
+      - ''
+      - '[% added %] records added'
+      - '[% updated %] records updated'
+      - '[% deleted %] records deleted'
+      - '[% skipped %] records skipped'
+      - '[% in_error %] records in error'
+      - '[% total %] total'
+      is_html: 0
+      lang: default
+      message_transport_type: email
+      module: catalogue
+      name: OAI harvest report
+      title: OAI harvest report for [% servername %]
+    translatable:
+    - name
+    - title
+    - content

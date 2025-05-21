@@ -1,0 +1,61 @@
+---
+Maksut:
+  Ominaisuudet:
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      default: no
+      pref: UseCashRegisters
+    - kassoja seurataksesi maksusuorituksia Kohan maksujärjestelmässä.
+    - <p class='text-danger'><strong>Varoitus:</strong> Tämän asetuksen käyttäminen
+      vaatii kassan pakolliseksi kentäksi kaikissa CASH-tyyppisissä tapahtumissa.
+      Tämä sisältää SIP00 tapahtumat, joten varmista, että SIP asetukset on päivitetty
+      yhteensopiviksi kassan SIP asetusten kanssa.</p>
+  - - 'Maksuja vastaanotettaessa '
+    - choices:
+        '0': vaadi kassan käyttöä vain kun maksusuoritustyyppi CASH on valittuna
+        '1': vaadi aina kassan käyttöä
+      default: no
+      pref: RequireCashRegister
+    - . (Vaatii <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters">UseCashRegisters</a>-järjestelmäasetuksen)
+  - - choices:
+        '0': Älä laita päälle myyntipiste-ominaisuutta
+        '1': Laita päälle myyntipiste-ominaisuus
+      default: no
+      pref: EnablePointOfSale
+    - anonyymien myyntitapahtumien mahdollistamiseksi kirjanpitojärjestelmään. (Vaatii
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters">UseCashRegisters</a>-järjestelmäasetuksen)
+  - - choices:
+        '': Älä luo automaattisesti hyvitysnumeroita
+        annual: Luo automaattisesti hyvitysnumerot muodossa <year>-0001
+        branchyyyymmincr: Luo automaattisesti hyvitysnumerot muodossa <branchcode>vvvvkk0001
+        incremental: Luo automaattisesti hyvitysnumerot muodossa 1, 2, 3
+      pref: AutoCreditNumber
+    - Automaattinen luonti pitää olla päällä myös yksittäisillä hyvitystyypeillä (<a
+      href="/cgi-bin/koha/admin/credit_types.pl">Määrittele hyvitystyypit</a>)
+  Säännöt:
+  - - choices:
+        '0': Älä täsmäytä
+        '1': Täsmäytä
+      pref: AccountAutoReconcile
+    - asiakkaan maksusaldo automaattisesti jokaisessa tapahtumassa, kun lisätään maksuja
+      (debit) tai hyvityksiä (credit).
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: FinePaymentAutoPopup
+    - automaattisesti maksukuitin tulostusikkuna(a), kun tehdään maksusuoritus.
+  - - choices:
+        '0': Älä vaadi
+        '1': Vaadi
+      pref: RequirePaymentType
+    - valitsemaan maksusuoritustyyppi maksusuoritusta tehdessä.
+    - Tämä järjestelmäasetus ei vaikuta mitenkään, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters">UseCashRegisters</a>
+      on päällä tai jos <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=PAYMENT_TYPE">PAYMENT_TYPE</a>-maksusuoritustyyppejä
+      ei ole määritelty auktorisoituihin arvoihin.
+  - - choices:
+        '0': Älä pyöristä
+        '1': Pyöristä
+      pref: RoundFinesAtPayment
+    - maksuja lähimpään senttiin, kun otetaan vastaan maksuja. Tämän asetuksen laittaminen
+      päälle sallii käyttöliittymässä näkymättömien sentin osien maksamisen.

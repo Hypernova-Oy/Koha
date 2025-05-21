@@ -1,0 +1,139 @@
+---
+web_services.pref:
+  Allmänt:
+  - - Sätt rubriken Access-Control-Allow-Origin till
+    - class: Text
+      pref: AccessControlAllowOrigin
+    - .
+  ILS-DI:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: ILS-DI
+    - 'ILS-DI-tjänster för OPAC-användare (tillgänglig på: /cgi-bin/koha/ilsdi.pl)'
+  - - Allow only IP addresses
+    - class: Text
+      pref: ILS-DI:AuthorizedIPs
+    - to use the ILS-DI services (when enabled). Separate the IP addresses with commas
+      and without spaces. Enter '0:0:0:0/0' or '::/0' to allow any IP.
+  IdRef:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: IdRef
+    - IdRef-webbtjänsten från detaljsidan i OPAC. IdRef tillåter efterfrågning av
+      auktoriteter från Sudoc-databasen.
+    - Denna funktion är endast tillgänglig för UNIMARC.
+  Mana KB:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+        '2': Nej, jag vill fundera på
+      pref: Mana
+    - bidrag till Mana KB. Mana centraliserar information mellan andra Koha-installationer
+      för att underlätta skapandet av nya prenumerationer, leverantörer, rapporter
+      etc. Du kan söka, dela, importera och kommentera innehållet i Mana. Informationen
+      som delas med Mana KB delas under <a href="https://creativecommons.org/choose/zero/">CC-0-licens</a>
+  - - 'Säkerhetstoken som används för att autentisera Mana KB:'
+    - class: Text
+      pref: ManaToken
+    - Skaffa säkerhetstoken på <a href="/cgi-bin/koha/admin/share_content.pl">administrationssidan
+      för Mana KB</a>.
+  - - 'Fält som automatiskt delas med Mana KB:'
+    - multiple:
+        subscription: prenumerationer
+      pref: AutoShareWithMana
+  OAI-PMH:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: OAI-PMH
+    - Kohas
+    - '<a href="http://www.openarchives.org/pmh/">OAI-PMH</a>-server. (tillgänglig
+      på: /cgi-bin/koha/oai.pl?verb=Identify)'
+  - - Identifiera poster på denna plats med prefixet
+    - pref: OAI-PMH:archiveID
+    - 'Lägg till prefix utan kolon (":"). ArchiveID ska acceptera OAI-specifikation.
+      Se '
+    - '<a href="http://www.openarchives.org/OAI/2.0/guidelines-oai-identifier.htm">Riktlinjer
+      för implementering</a>. '
+    - 'Exempel: "oai:example-library.org"'
+  - - Visa endast
+    - class: integer
+      pref: OAI-PMH:MaxCount
+    - poster i taget för ListRecords- eller ListIdentifiers-frågor.
+  - - 'YAML-konfigurationsfil för OAI Koha-server:'
+    - class: file
+      pref: OAI-PMH:ConfFile
+    - . Om tomt fungerar Koha OAI-servern i normalt läge, annars fungerar den i utökat
+      läge. I utökat läge är det möjligt att använda parametrar för andra format än
+      marcxml eller Dublin Core. <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OAI-PMH:ConfFile">OAI-PMH:ConfFile</a>
+      specificerar en YAML-konfigurationsfil som listar tillgängliga metadataformat
+      och XSL-filer som används för att skapa dem från marcxml-poster.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: OAI-PMH:AutoUpdateSets
+    - automatisk uppdatering av OAI-PMH-uppsättningar när en bibliografisk post skapas
+      eller uppdateras.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: OAI-PMH:AutoUpdateSetsEmbedItemData
+    - inbäddning av exemplardata vid automatisk uppdatering av OAI-PMH-set.
+    - <br><strong>NOTERA:</strong> För det här behöver systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OAI-PMH:AutoUpdateSets">OAI-PMH:AutoUpdateSets</a>
+      vara aktiverad.
+  - - Kohas tabell deletedbiblio
+    - choices:
+        no: kommer aldrig att ha några data (no)
+        persistent: kommer aldrig att tömmas eller kortas av (beständig)
+        transient: kan vid något tillfälle tömmas eller kortas av (tillfälligt)
+      pref: OAI-PMH:DeletedRecord
+    - .
+  - - After an OAI-PMH harvest, send a report email to the email address
+    - class: Text
+      pref: OAI-PMH:HarvestEmailReport
+    - .
+  REST API:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: RESTBasicAuth
+    - <a href="https://www.w3.org/Protocols/HTTP/1.0/spec.html#BasicAA" target="_blank">Autentisering</a>
+      för REST API.
+  - - Ange som standard följande antal returnerade resultat från REST API-byggstenar
+      till
+    - class: integer
+      pref: RESTdefaultPageSize
+    - per sida.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: RESTOAuth2ClientCredentials
+    - OAuth2-kundreferenser för REST API. Kräver att Net::OAuth2::AuthorizationServer
+      är installerad.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: RESTPublicAnonymousRequests
+    - anonym access till publika vägar (som inte kräver autentiserad access)
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: RESTPublicAPI
+    - namnrymden /public i API:et.
+  - - Använd
+    - choices:
+        apirenew: '''APIRenew'''
+        apiuserbranch: API-användarens bibliotek
+        checkoutbranch: biblioteket som exemplaret lånades ut från
+        itemhomebranch: exemplarets hembibliotek
+        none: NULL
+        patronhomebranch: låntagarens hembibliotek
+      pref: RESTAPIRenewalBranch
+    - som filialkod att lagra i statistiktabellen.
+  Rapportering:
+  - - Visa endast
+    - class: integer
+      pref: SvcMaxReportRows
+    - rader av en rapport som begärts via webbtjänsten för rapporter.

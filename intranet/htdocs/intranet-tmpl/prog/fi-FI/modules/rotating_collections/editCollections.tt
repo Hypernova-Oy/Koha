@@ -1,0 +1,191 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF ( op == "new" || op == "edit" ) %]
+ [% IF ( previousActionEdit ) %]
+ [% t("Edit collection") | html %] &rsaquo;
+ [% tx("Collection '{collection_title}'", { collection_title = editColTitle }) | html %]
+ [% ELSE %]
+ [% t("Add a new collection") | html %]
+ [% END %]
+ [% ELSIF ( op == "cud-delete" ) %]
+ [% t("Collection deleted") | html %]
+ [% ELSIF ( op == "cud-create" ) %]
+ [% IF ( createSuccess ) %]
+ [% t("Collection created successfully") | html %]
+ [% ELSE %]
+ [% t("Collection creation failed") | html %]
+ [% END %]
+ [% END %] &rsaquo;
+ [% t("Rotating collections") | html %] &rsaquo;
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="rcoll_editCollections" class="tools rcoll">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Työkalut</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl">Siirtokokoelmat</a>
+ [% END %]
+
+ [%- IF ( op == "new" ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lisää uusi kokoelma</span>
+ [% END %]
+ [% ELSIF ( op == "cud-delete" ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kokoelma poistettu</span>
+ [% END %]
+ [% ELSIF ( op == "cud-create" ) %]
+ [% IF ( createSuccess ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kokoelma luotu</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kokoelman luonti epäonnistui</span>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/rotating_collections/addItems.pl?colId=[% editColId | uri %]">[% tx("Collection '{collection_title}'", { collection_title = editColTitle }) | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% t("Edit collection") | html %]
+ [% END %]
+ [% END -%]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% IF ( previousActionCreate ) %]
+ [% IF ( createSuccess ) %]
+ <div class="alert alert-info">
+ <p>Kokoelma <em>[% createdTitle | html %]</em> lisättiin</p>
+ <p><a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl">Palaa siirtokokoelmiin</a></p>
+ </div>
+ [% ELSE %]
+ <div class="alert alert-warning">
+ <p>Kokoelma <em>[% createdTitle | html %]</em> lisäys epäonnistui</p>
+ <p>
+ [% IF failureMessage == "NO_TITLE" %]
+ <span>Nimekettä ei annettu.</span>
+ [% ELSIF failureMessage == "DUPLICATE_TITLE" %]
+ <span>Nimeke on jo käytössä.</span>
+ [% ELSIF failureMessage == "NO_DESCRIPTION" %]
+ <span>Ei syötettyä kuvausta.</span>
+ [% ELSE %]
+ [% failureMessage | html %]
+ [% END %]
+ </p>
+ </div>
+ [% END %]
+ [% END %]
+
+ [% IF ( previousActionDelete ) %]
+ [% IF ( deleteSuccess ) %]
+ <div class="alert alert-info">
+ <p>Kokoelma on poistettu</p>
+ <p><a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl">Palaa siirtokokoelmiin</a></p>
+ </div>
+ [% ELSE %]
+ <div class="alert alert-warning">Kokoelman poisto epäonnistui</div>
+ [% END %]
+ [% END %]
+
+ [% IF ( previousActionUpdate ) %]
+ [% IF ( updateSuccess ) %]
+ <div class="alert alert-info">
+ <p>Kokoelma <em>[% updatedTitle | html %]</em> päivitys onnistui</p>
+ <p><a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl">Palaa siirtokokoelmiin</a></p>
+ </div>
+ [% ELSE %]
+ <div class="alert alert-warning">
+ <p>Kokoelma <em>[% updatedTitle | html %]</em> päivitys epäonnistui</p>
+ <p>
+ [% IF failureMessage == "NO_ID" %] Kokoelman tunnusta ei ole annettu. [% ELSIF failureMessage == "DUPLICATE_TITLE" %] Nimi on jo käytössä. [% ELSE %] [% failureMessage | html %] [% END %] </p>
+ </div>
+ [% END %]
+ [% END %]
+
+ <div>
+
+ [% IF op == "new" || op == "edit" %]
+ [% IF ( previousActionEdit ) %]
+ <h1>Muokkaa kokoelmia <em>[% editColTitle | html %]</em></h1>
+ [% ELSE %]
+ <h1>Lisää uusi kokoelma</h1>
+ [% END %]
+
+ <form action="editCollections.pl" method="post" class="validated">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% IF ( previousActionEdit ) %]
+ <input type="hidden" name="op" value="cud-update" />
+ <input type="hidden" name="colId" value="[% editColId | html %]" />
+ [% ELSE %]
+ <input type="hidden" name="op" value="cud-create" />
+ [% END %]
+
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label class="required" for="title">Nimeke: </label>
+ [% IF ( editColTitle ) %]
+ <input id="title" type="text" name="title" value="[% editColTitle | html %]" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ [% ELSE %]
+ <input id="title" type="text" name="title" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ [% END %]
+ </li>
+ <li>
+ <label for="description">Kuvaus: </label>
+ [% IF (editColDescription ) %]
+ <input id="description" type="text" size="50" name="description" value="[% editColDescription | html %]" />
+ [% ELSE %]
+ <input id="description" type="text" size="50" name="description" />
+ [% END %]
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <p><input class="btn btn-primary" type="submit" value="OK" /> <a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl" class="cancel">Peruuta</a></p>
+ </fieldset>
+ </form>
+ [% END %]
+ </div>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ [% Asset.js("js/rotating-collections.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,306 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op == 'add_form' %]
+ [% IF authority_type.authtypecode.defined %]
+ [% IF authority_type.authtypecode %]
+ [% tx("Modify authority type '{authority_type_code}'", { authority_type_code= authority_type.authtypecode }) | html %]
+ [% ELSE %]
+ [% t("Modify default authority type") | html %]
+ [% END %]
+ [% ELSE %]
+ [% t("New authority type") | html %]
+ [% END %] &rsaquo;
+ [% ELSIF op == 'delete_confirm' %]
+ [% IF authorities_using_it %]
+ [% t("Authority type cannot be deleted") | html %]
+ [% ELSE %]
+ [% tx("Confirm deletion of authority type '{authority_type_code}'", { authority_type_code= authority_type.authtypecode } ) | html %]
+ [% END %] &rsaquo;
+ [% END %]
+ [% t("Authority types") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_authtypes" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Ylläpito</a>
+ [% END %]
+
+ [% IF op == 'add_form' || op == 'delete_confirm' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/authtypes.pl">Auktoriteettityypit</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Auktoriteettityypit</span>
+ [% END %]
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF authority_type.authtypecode.defined %]
+ [% IF authority_type.authtypecode %]
+ [% tx("Modify authority type '{authority_type_code}'", { authority_type_code= authority_type.authtypecode }) | html %]
+ [% ELSE %]
+ [% t("Modify default authority type") | html %]
+ [% END %]
+ [% ELSE %]
+ <span>Uusi auktoritettityyppi</span>
+ [% END %]
+ [% END %]
+
+ [% ELSIF op == 'delete_confirm' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF authorities_using_it %]
+ [% t("Authority type cannot be deleted") | html %]
+ [% ELSE %]
+ [% tx("Confirm deletion of authority type '{authority_type_code}'", { authority_type_code= authority_type.authtypecode } ) | html %]
+ [% END %]
+ [% END %]
+
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Auktoriteetin tyypin päivityksessä tapahtui virhe. Ehkä tyyppi on jo olemassa.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Tämän auktoriteettityypin lisäyksessä tapahtui virhe. Auktoriteettityyppi saattaa jo olla olemassa.</span>
+ [% CASE 'error_on_delete' %]
+ <span>Auktoriteettityypin poistossa tapahtui virhe. Tarkista lokit.</span>
+ [% CASE 'success_on_update' %]
+ <span>Auktoriteettityypin on päivitetty.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Auktoriteettityyppi on lisätty.</span>
+ [% CASE 'success_on_delete' %]
+ <span>Auktoriteettityyppi on poistettu.</span>
+ [% CASE %]
+ [% m.code | html %]
+ [% END %]
+ </div>
+[% END %]
+
+
+
+[% IF op == 'add_form' %]
+ <form action="/cgi-bin/koha/admin/authtypes.pl" name="Aform" method="post" class="validated">
+ [% INCLUDE 'csrf-token.inc' %]
+ <h1>
+ [% IF authority_type.authtypecode.defined %]
+ [% IF authority_type.authtypecode %]
+ [% tx("Modify authority type '{authority_type_code}'", { authority_type_code= authority_type.authtypecode }) | html %]
+ [% ELSE %]
+ [% t("Modify default authority type") | html %]
+ [% END %]
+ [% ELSE %]
+ <span>Uusi auktoritettityyppi</span>
+ [% END %]
+ </h1>
+ <fieldset class="rows">
+ <legend class="sr-only">Lisää auktoritettityypin tiedot</legend>
+ <ol>
+ <li>
+ [% IF authority_type.authtypecode.defined %]
+ <span class="label">Auktoriteettityyppi</span>
+ <input type="hidden" name="op" value="cud-add_validate" />
+ <input type="hidden" name="checked" value="0" />
+ <input type="hidden" name="authtypecode" value="[% authority_type.authtypecode | html %]" />[% authority_type.authtypecode | html %]
+ [% ELSE %]
+ <label for="authtypecode" class="required">Auktoriteettityyppi: </label>
+ <input id="authtypecode" type="text" class="required focus" required="required" name="authtypecode" size="20" maxlength="10" />
+ <span class="required">Pakollinen tieto</span>
+ <div class="hint">10 merkkiä enintään</div>
+ [% END %]
+ </li>
+ <li>
+ <label for="authtypetext" class="required">Kuvaus: </label>
+ <input type="text" id="authtypetext" name="authtypetext" size="40" maxlength="80" value="[% authority_type.authtypetext | html %]" class="required" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="summary">Yhteenveto: </label>
+ <textarea id="summary" name="summary" cols="55" rows="7">[% authority_type.summary | html %]</textarea>
+ </li>
+ <li>
+ <label for="auth_tag_to_report">Kopioitava auktoriteettikenttä: </label>
+ <input type="text" id="auth_tag_to_report" name="auth_tag_to_report" size="5" maxlength="3" value="[% authority_type.auth_tag_to_report | html %]" />
+ <div class="hint">Huomaa: 'Kopioitava auktoriteettitietue', syötä auktoriteettikenttä, joka pitäisi kopioida auktoriteettitietueesta nimeketietueeseen. Esim. MARC21: kenttä 100 auktoriteettitietueessa tulisi kopioida kenttään 100 nimeketietueessa</div>
+ <input type="hidden" name="op" value="cud-add_validate" />
+ [% IF authority_type.authtypecode.defined %]
+ <input type="hidden" name="is_a_modif" value="1" />
+ [% END %]
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="OK" />
+ <a class="cancel" href="/cgi-bin/koha/admin/authtypes.pl">Peruuta</a>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'delete_confirm' %]
+ <div class="alert alert-warning">
+ [% IF authorities_using_it %]
+ <h1>Tätä auktoriteettityyppiä ei voi poistaa</h1>
+ <p><strong><span class="ex">[% authority_type.authtypecode | html %]</span></strong></p>
+ <p>[% tnx('This authority type is used {count} time.', 'This authority type is used {count} times.', authorities_using_it, { count = authorities_using_it }) %]</p>
+ <form action="/cgi-bin/koha/admin/authtypes.pl" method="get">
+ <button type="submit"><i class="fa fa-fw fa-arrow-left"></i> Palaa auktoritettityyppeihin</button>
+ </form>
+ [% ELSE %]
+ <h1>Vahvista auktoriteettimääritelmän poisto kohteelle <span class="ex">'[% authority_type.authtypetext | html %]' ([% authority_type.authtypecode | html %])</span></h1>
+ <form action="/cgi-bin/koha/admin/authtypes.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_confirmed" />
+ <input type="hidden" name="authtypecode" value="[% authority_type.authtypecode | html %]" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-fw fa-check"></i> Kyllä, poista</button>
+ </form>
+ <form action="/cgi-bin/koha/admin/authtypes.pl" method="get">
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-fw fa-times"></i> Ei, älä poista</button>
+ </form>
+ [% END %]
+ </div>
+[% END %]
+
+[% IF op == 'list' %]
+ <div id="toolbar" class="btn-toolbar">
+ <a id="authtype" class="btn btn-default" href="/cgi-bin/koha/admin/authtypes.pl?op=add_form"><i class="fa fa-plus"></i> Uusi auktoritettityyppi</a>
+ </div>
+
+ <h1>Auktoriteettityypit</h1>
+ <p>Määrittele auktoriteettityypit, sitten auktoriteettien MARC-rakenne, kuten nidetyyppien ja nimekkeiden MARC-kenttien rakenne. Auktoriteettiarvoja käsitellään liitännäisten avulla</p>
+
+ <div class="page-section">
+ <table id="authtypes">
+ <thead>
+ <tr>
+ <th>Tunnus</th>
+ <th>Kuvaus</th>
+ <th>Yhteenveto</th>
+ <th>Auktorisointikenttä kopioitu</th>
+ <th>&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH authority_type IN authority_types %]
+ <tr>
+ <td>[% authority_type.authtypecode | html %]</td>
+ <td>[% authority_type.authtypetext | html %]</td>
+ <td>[% authority_type.summary | html %]</td>
+ <td>[% authority_type.auth_tag_to_report | html %]</td>
+ <td>
+ <div class="btn-group dropup">
+ <a class="btn btn-default btn-xs dropdown-toggle" id="authtypeactions[% authority_type.authtypecode | html %]" role="button" data-bs-toggle="dropdown" href="#">
+ Toiminnot </a>
+ <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-labelledby="authtypeactions[% authority_type.authtypecode | html %]">
+ <li><a href="auth_tag_structure.pl?authtypecode=[% authority_type.authtypecode | uri %]" class="button parameters dropdown-item"><i class="fa-solid fa-eye"></i> MARC-rakenne</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/admin/authtypes.pl?op=add_form&amp;authtypecode=[% authority_type.authtypecode | uri %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa</a></li>
+ [% IF authority_type.authtypecode %]
+ <li><a class="dropdown-item" href="/cgi-bin/koha/admin/authtypes.pl?op=delete_confirm&amp;authtypecode=[% authority_type.authtypecode | uri %]"><i class="fa fa-trash-can"></i> Poista</a></li>
+ [% END %]
+ <!-- Button to trigger modal -->
+ <li><a class="dropdown-item" data-bs-target="#exportModal_[% authority_type.authtypecode | html %][% loop.count | html %]" data-bs-toggle="modal" href="#" title="Vie auktoriteettityyppi (kentät, osakentät) taulukkolaskentatiedoston muodossa (.csv, .ods)"><i class="fa fa-upload"></i> Vie</a></li>
+ <!-- Button to trigger modal -->
+ <li><a class="dropdown-item" data-bs-target="#importModal_[% authority_type.authtypecode | html %][% loop.count | html %]" data-bs-toggle="modal" href="#" title="Tuo auktoriteettityyppi (kentät, osakentät) taulukkolaskentatiedoston muodossa (.csv, .ods)"><i class="fa fa-download"></i> Tuo</a></li>
+ </ul>
+ </div>
+
+ <!-- Modal for export -->
+ <div class="modal" id="exportModal_[% authority_type.authtypecode | html %][% loop.count | html %]" tabindex="-1" role="dialog" aria-labelledby="exportLabelexportModal_[% authority_type.authtypecode | html %][% loop.count | html %]" aria-hidden="true">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="exportLabelexportModal_[% authority_type.authtypecode | html %][% loop.count | html %]">Vie [% authority_type.authtypetext | html %] auktoriteettityyppi</h1>
+ <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <form action="/cgi-bin/koha/admin/import_export_authtype.pl" name="form_[% authority_type.authtypecode | html %]" method="get" target="_blank" class="form_export">
+ <div class="modal-body">
+ <fieldset>
+ <input type="hidden" name="op" value="export" />
+ <input type="hidden" name="authtypecode" value="[% authority_type.authtypecode | html %]" />
+ <p><label for="csv_type_export_[% authority_type.authtypecode | html %][% loop.count | html %]"><input type="radio" name="type_export_[% authority_type.authtypecode | html %]" value="csv" id="csv_type_export_[% authority_type.authtypecode | html %][% loop.count | html %]" checked="checked" /> Vie CSV-taulukkona</label></p>
+ <p><label for="ods_type_export_[% authority_type.authtypecode | html %][% loop.count | html %]"><input type="radio" name="type_export_[% authority_type.authtypecode | html %]" value="ods" id="ods_type_export_[% authority_type.authtypecode | html %][% loop.count | html %]" /> Vie OpenDocument-taulukkolaskentamuodossa</label></p>
+ </fieldset>
+ </div>
+ <div class="modal-footer">
+ <button type="submit" class="btn btn-primary">Vie</button>
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Sulje</button>
+ </div>
+ </form>
+ </div>
+ </div>
+ </div>
+
+ <!-- Modal for import -->
+ <div class="modal" id="importModal_[% authority_type.authtypecode | html %][% loop.count | html %]" tabindex="-1" role="dialog" aria-labelledby="importLabelexportModal_[% authority_type.authtypecode | html %][% loop.count | html %]" aria-hidden="true">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="importLabelexportModal_[% authority_type.authtypecode | html %][% loop.count | html %]">Tuo [% authority_type.authtypecode | html %] auktoriteettityyppi (kentät, osakentät) taulukkolaskentatiedoston muodossa (.csv, .ods)</h1>
+ <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <form action="/cgi-bin/koha/admin/import_export_authtype.pl" name="form_i_[% authority_type.authtypecode | html %]" id="form_i_[% authority_type.authtypecode | html %]" method="post" enctype="multipart/form-data" class="form_import">
+ [% INCLUDE 'csrf-token.inc' %]
+ <div class="modal-body">
+ <input type="hidden" name="authtypecode" value="[% authority_type.authtypecode | html %]" />
+ <input type="hidden" name="op" value="cud-import" />
+ <p><label for="file_import_[% authority_type.authtypecode | html %]">Lähetä tiedosto:</label> <input type="file" name="file_import_[% authority_type.authtypecode | html %]" id="file_import_[% authority_type.authtypecode | html %]" class="input_import" /></p>
+ <div id="importing_[% authority_type.authtypecode | html %]" style="display:none" class="importing"><img src="[% interface | html %]/[% theme | html %]/img/loading-small.gif" alt="" /><span class="importing_msg"></span></div>
+ </div>
+ <div class="modal-footer">
+ <button type="submit" class="btn btn-primary">Tuo</button>
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Sulje</button>
+ </div>
+ </form>
+ </div>
+ </div>
+ </div>
+
+ </td>
+ </tr>
+ [% END %]
+ <tbody>
+ </table>
+ </div> <!-- /.page-section -->
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% Asset.js("js/authtype.js") | $raw %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,307 @@
+---
+Ylläpitoasetukset:
+  CAS-tunnistautuminen:
+  - - 'Käytä CAS:ia tunnistautumiseen: '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      default: 0
+      pref: casAuthentication
+  - - 'Kirjaudu ulos CAS:sta, kun Kohasta kirjaudutaan ulos: '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      default: 0
+      pref: casLogout
+  - - 'CAS-kirjautumispalvelimen URL: '
+    - class: url
+      pref: casServerUrl
+  - - 'Käytettävän CAS-palvelun versio: '
+    - choices:
+        '2': CAS 2 tai varhaisempi
+        '3': CAS 3 tai uudempi
+      pref: casServerVersion
+  Google OpenID Connect:
+  - - 'Käytä Google OpenID Connect -kirjautumista verkkokirjastossa: '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      pref: GoogleOpenIDConnect
+    - Kun luodaan sovellusta Googlen pilven konsolissa, valitaan OAuth2, asetetaan
+      verkkolähteeksi your_opac_url ja asetetaan uudelleenohjaus osoitteeseen your_opac_url/cgi-bin/koha/svc/auth/googleopenidconnect.
+      Vaatii, että on asetettu <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOAuth2ClientID">GoogleOAuth2ClientID</a>
+      ja <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOAuth2ClientSecret">GoogleOAuth2ClientSecret</a>.
+  - - 'Google OAuth2 asiakastunnus: '
+    - pref: GoogleOAuth2ClientID
+    - Käytettynä yhdessä <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOAuth2ClientSecret">GoogleOAuth2ClientSecret</a>:n
+      kanssa mahdollistaa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>:n
+      käytön
+  - - 'Google OAuth2 asiakassalaus: '
+    - pref: GoogleOAuth2ClientSecret
+    - Käytettynä yhdessä <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOAuth2ClientID">GoogleOAuth2ClientID</a>:n
+      kanssa mahdollistaa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect.</a>:n
+      käytön.
+  - - 'Rajoita Google OpenID Connect tähän toimialueeseen (tai sen alitoimialueeseen): '
+    - pref: GoogleOpenIDConnectDomain
+    - Jätä tyhjäksi, jotta käytetään kaikkia Googlen domaineja. Vaatii <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: GoogleOpenIDConnectAutoRegister
+    - asiakkaiden kirjautua Google Open ID:llä rekisteröityäkseen automaattisesti.
+      Vaatii <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>.
+  - - 'Käytä tätä asiakastyyppiä, kun asiakas rekisteröidään automaattisesti Google
+      Open ID:n kautta: '
+    - choices: patron-categories
+      pref: GoogleOpenIDConnectDefaultCategory
+    - Vaatii <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>.
+  - - 'Käytä tätä kirjastokoodia, kun asiakas rekisteröidään automaattisesti Google
+      Open ID:n kautta: '
+    - pref: GoogleOpenIDConnectDefaultBranch
+    - Vaatii <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=GoogleOpenIDConnect">GoogleOpenIDConnect</a>.
+  Hakukone:
+  - - 'Käytä hakukoneena: '
+    - choices:
+        Elasticsearch: Elasticsearch
+        Zebra: Zebra
+      default: Zebra
+      pref: SearchEngine
+  - - 'Elasticsearch MARC-formaatti: '
+    - choices:
+        ARRAY: Haettavissa oleva matriisi
+        ISO2709: ISO2709 (tiedonsiirtomuoto)
+      default: ISO2709
+      pref: ElasticsearchMARCFormat
+    - <br>ISO2709-formaattia suositellaan, koska se on nopeampi ja tiiviimpi, mutta
+      matriisiformaatissa koko MARC-tietue on haettavissa.
+    - <br><strong>HUOM:</strong> Koko tietueen tekeminen haettavaksi voi huonontaa
+      hakutulosten relevanssinmukaista järjestystä.
+  Jaa anonyymejä käyttötilastoja:
+  - - 'Jaa anonyymiä Kohan käyttötietoa Koha Communityn kanssa: '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+        '2': Ei, harkitsen asiaa
+      default: 2
+      pref: UsageStats
+    - .
+    - <br>Käyttötilastot julkaistaan sivulla <a href="https://hea.koha-community.org">Hea
+      Koha community website</a>.
+    - <br><strong>HUOM:</strong> Muut <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a>
+      -järjestelmäasetukset eivät vaikuta mitenkään, jos tähän on asetettu “Ei” (älä
+      jaa).
+    - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/purge_suggestions.pl</code>
+      cronjobin. Pyydä kehittäjiä ajastamaan se.
+    - <br><strong>HUOM:</strong> Käytä <a href="/cgi-bin/koha/admin/usage_statistics.pl">käyttötilastot-asetussivua</a>
+      muokataksesi jakamiasi tilastoja.
+  - - 'Käytä seuraavaa nimeä kirjastollesi Hea Communityn verkkosivuilla: '
+    - pref: UsageStatsLibraryName
+    - Jos tämä kenttä on tyhjä, tiedot lähetetään anonyymisti.
+    - <br><strong>HUOM:</strong> Arvolla ei ole vaikutusta, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a>
+      järjestelmäasetus on asetettu "Ei" (älä jaa).
+  - - 'Maa, jossa kirjastosi sijaitee näytettäväksi Hea Communityn verkkosivuilla: '
+    - pref: UsageStatsCountry
+      type: countries
+    - Tämä näkyy osoitteessa <a href="https://hea.koha-community.org">Hea Koha community
+      website</a>.
+    - <br><strong>HUOM:</strong> Arvolla ei ole vaikutusta, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a>
+      järjestelmäasetus on asetettu "Ei" (älä jaa).
+  - - 'Hea Communityn verkkosivuilla näytettävä kirjaston verkko-osoite: '
+    - class: url
+      pref: UsageStatsLibraryUrl
+    - <br><strong>HUOM:</strong> Arvolla ei ole vaikutusta, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a>
+      järjestelmäasetus on asetettu "Ei" (älä jaa).
+  - - 'Hea Communityn verkkosivuilla näytetään kirjastotyyppinä: '
+    - choices:
+        '': ' '
+        academic: akateeminen
+        corporate: yrityskirjasto
+        government: valtiollinen
+        private: yksityinen
+        public: yleinen
+        religiousOrg: uskonnollinen yhteisö
+        research: tutkimus
+        school: koulu
+        societyAssociation: yhteisö tai yhdistys
+        subscription: jäsenmaksullinen
+      default: ''
+      pref: UsageStatsLibraryType
+    - <br><strong>HUOM:</strong> Arvolla ei ole vaikutusta, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a>
+      järjestelmäasetus on asetettu "Ei" (älä jaa).
+  - - choices:
+        '0': Älä jaa
+        '1': Jaa
+      pref: UsageStatsLibrariesInfo
+    - kirjaston tietoja (nimi, URL, maa).
+    - <br><strong>HUOM:</strong> Arvolla ei ole vaikutusta, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a>
+      järjestelmäasetus on asetettu "Ei" (älä jaa).
+  - - 'Pääkirjaston maantieteellinen sijainti: '
+    - pref: UsageStatsGeolocation
+    - <br><strong>HUOM:</strong> Arvolla ei ole vaikutusta, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UsageStats">UsageStats</a>
+      järjestelmäasetus on asetettu "Ei" (älä jaa).
+    - <br><strong>HUOM:</strong> Käytä <a href="/cgi-bin/koha/admin/usage_statistics.pl">käyttötilastot-asetussivua</a>
+      määritelläksesi ja muokataksesi järjestelmäasetusta.
+  Jobs:
+  - - 'Use '
+    - choices:
+        STOMP: STOMP
+        polling: polling
+      default: STOMP
+      pref: JobsNotificationMethod
+    - as the preferred job worker notification method. STOMP (default) requires RabbitMQ
+      running. Polling will be used as a fallback if RabbitMQ is not accessible.
+  Kirjautumisasetukset:
+  - - 'Kirjaa passiiviset käyttäjät automaattisesti ulos näin monen sekunnin päästä: '
+    - class: integer
+      pref: timeout
+    - Jos käytetään d-kirjainta, määrittyy aika päivissä, esim. 1d tarkoittaa, että
+      aikakatkaisu on yhden päivän.
+  - - 'Rajoita kirjautumisessa Kirjasto-valikon sisältö käyttäjän tietokoneen IP-osoitteen
+      perusteella. Rajoita kirjastoihin, jotka ovat kirjastojen ylläpidossa kirjastolle
+      määritetyn IP-osoiteavaruuden sisällä ja kirjastoihin, joilla ei ole IP-osoiterajoitusta: '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      default: 0
+      pref: StaffLoginRestrictLibraryByIP
+    - <a href="/cgi-bin/koha/admin/branches.pl">Linkki kirjastojen ylläpitoon</a>
+    - Käyttäjät voivat valita kirjautumiskirjastonsa vain, jos heillä on "loggedinlibrary"-käyttäjäoikeus.
+      Tämä asetus ohittaa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=StaffLoginLibraryBasedOnIP">StaffLoginLibraryBasedOnIP</a>
+      -järjestelmäasetuksen. Jos useammalla kirjastoyksiköllä on sama IP-osoite, käytetään
+      aakkosissa ensimmäistä kirjastoyksikköä.
+  - - 'Salli etä-IP-osoitteen muuttumisen tarkistaminen istunnon turvaamiseksi: '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      default: 1
+      pref: SessionRestrictionByIP
+    - (Ota pois käytöstä vain, jos etä-IP-osoite muuttuu usein.)
+  - - 'Aseta henkilökunnan kirjautumiskirjasto automaattisesti, jos heidän nykyinen
+      IP-osoitteensa vastaa kirjaston asetuksia: '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      default: 0
+      pref: StaffLoginLibraryBasedOnIP
+    - 'Huomioi: Jos IP-osoitteet ovat osittain päällekäisiä, käytetään ensimmäistä
+      vastaavaa.'
+    - Tämä asetus ohitetaan <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=StaffLoginRestrictLibraryByIP">StaffLoginRestrictLibraryByIP</a>
+      -järjestelmäasetuksella. Jos useammalla kirjastoyksiköllä on sama IP-osoite,
+      käytetään aakkosissa ensimmäistä kirjastoyksikköä.
+  - - 'Kirjautuneiden istuntojen tiedot tallennetaan: '
+    - choices:
+        Pg: PostgreSQL-tietokanta (ei tuettu)
+        memcached: Memcached-palvelimelle
+        mysql: MySQL-tietokantaan
+        tmp: Väliaikaistiedostoon
+      default: mysql
+      pref: SessionStorage
+  - - 'Estä henkilökuntaa (ei koske superlibrarianeja) muokkaamasta toisen kirjaston
+      tietoja (varaukset, niteet, asiakkaat, jne.). '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      default: 0
+      pref: IndependentBranches
+    - <p class='text-danger'><strong>Varoitus:</strong> Tämän järjestelmäasetuksen
+      muuttaminen vaikuttaa radikaalisti Kohan käyttäytymiseen. Tämän asetuksen muuttamista
+      tuotannossa ei suositella.</p>
+  - - 'Estä henkilökuntaa (ei koske superlibrarianeja) näkemästä ja hyväksymästä/hylkäämästä
+      toisten kirjastojen asiakkaiden tietojen muokkauspyyntöjä. '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      default: 0
+      pref: IndependentBranchesPatronModifications
+  - - 'henkilökuntaa (ei koske superlibrariania) kuljettamasta niteitä muihin kirjastoihin: '
+    - choices:
+        '0': Älä estä
+        '1': Estä
+      default: 0
+      pref: IndependentBranchesTransfers
+  - - choices:
+        '0': Älä pakota
+        '1': Pakota
+      pref: ForceLibrarySelection
+    - käyttäjä(ä) valitsemaan kirjautumiskirjasto virkailijaliittymään kirjautuessa.
+  Käyttöliittymäasetukset:
+  - - 'Koha-ylläpidon sähköpostiosoite: '
+    - class: email
+      pref: KohaAdminEmailAddress
+    - (Tämä on lähettäjän oletussähköpostiosoite, jos kirjastolle ei ole määritetty
+      osoitetta ja siihen viitataan, kun tapahtuu sisäisiä virheitä.)
+  - - 'Vastaus-sähköpostiosoite: '
+    - class: email
+      pref: ReplytoDefault
+  - - 'Palautuspolku tai palautusosoite perille menemättömille sähköpostiviesteille: '
+    - class: email
+      pref: ReturnpathDefault
+    - Jos jätät tämän tyhjäksi, käytetään lähettäjän sähköpostiosoitetta (joka on
+      monesti myös ylläpidon sähköpostiosoite).
+  - - 'Lähetä kaikki sähköpostit osoitteeseen: '
+    - class: email
+      pref: SendAllEmailsTo
+    - (Jätä tämä kenttä tyhjäksi, jos haluat lähettää viestit normaalisti vastaanottajille.)
+  - - 'Lähetä myöhästymisilmoitukset, joiden lähetys epäonnistuu, osoitteeseen: '
+    - class: email
+      pref: AddressForFailedOverdueNotices
+    - 'Jos tämä jätetään tyhjäksi, käytetään ensimmäistä määriteltyä osoitetta tästä
+      listasta: Library ReplyTo, Library Email, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>
+      ja <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>'
+  - - 'Kuinka paljon näytetään tietoa tapahtuneesta virheestä selaimessa, kun tulee
+      sisäinen virhe: '
+    - choices:
+        '0': Ei mitään
+        '1': Jonkin verran
+        '2': Kaikki
+      default: 0
+      pref: DebugLevel
+  - - choices:
+        '0': Näytä
+        '1': Älä näytä
+      default: 0
+      pref: noItemTypeImages
+    - nidetyyppien kuvakkeet virkailijaliittymässä.
+  - - 'Sarakkeiden oletuserotinmerkki viedyissä CSV-tiedostoissa: '
+    - choices:
+        '#': '#''s'
+        ',': pilkku
+        /: kauttaviiva
+        ;: puolipiste
+        \: kenoviiva
+        tabulation: tabulaattori
+      default: ','
+      pref: CSVDelimiter
+  - - 'Salli henkilökunnan ja asiakkaiden luoda ja katsella tallennettuja nimekelistoja: '
+    - choices:
+        '0': Ei
+        '1': Kyllä
+      pref: virtualshelves
+  - - 'Näytettävät oletussäännöt, kun muokataan lainasääntöjä: '
+    - choices:
+        '0': Kaikkien kirjastojen
+        '1': Kirjautuneen kirjaston
+      pref: DefaultToLoggedInLibraryCircRules
+  - - 'Oletusnäkymä, kun muokataan ilmoituksia ja kuitteja: '
+    - choices:
+        '0': Kaikkien kirjastojen
+        '1': Kirjautuneen kirjaston
+      pref: DefaultToLoggedInLibraryNoticesSlips
+  - - 'Oletusnäkymä, kun muokataan myöhästymisilmoituksia: '
+    - choices:
+        '0': Kaikkien kirjastojen
+        '1': Kirjautuneen kirjaston
+      pref: DefaultToLoggedInLibraryOverdueTriggers
+  - - choices:
+        '0': Älä lähetä sähköpostiviestiä
+        '1': Lähetä sähköpostiviesti
+      pref: EmailOverduesNoEmail
+    - palautuskehotuksesta henkilökunnalle, jos asiakkaalla ei ole sähköpostiosoitetta.
+  SSL-asiakkaan varmenteen todennus:
+  - - 'Käytä SSL-asiakkaan varmennetodistuksessa kenttää: '
+    - choices:
+        Common Name: Yleinen nimi (Common Name)
+        None: Ei mitään
+        emailAddress: Sähköpostiosoite (emailAddress)
+      default: None
+      pref: AllowPKIAuth

@@ -1,0 +1,75 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Create a new item type") | html %] &rsaquo;
+ [% t("Web installer") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="onboarding-step4" class="installer-main col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+ <div id="logo"><a href="#">Koha</a></div>
+ <h1>Webbinstallerare &rsaquo; Skapa ny exemplartyp</h1>
+
+ [% INCLUDE 'onboarding_messages.inc' %]
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Installera</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Onboarding <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Skapa ett bibliotek</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Skapa en ny låntagarkategori</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Skapa Koha-administratör</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Skapa en ny exemplartyp</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Skapa ny låneregel</li>
+ </ol>
+ </li>
+ </ol>
+ </div>
+
+ <!--Create a item type screen 1-->
+
+ <p> Exemplartyper används för att gruppera liknande exemplar. Exempel på exemplartyper kan vara böcker, CD, eller DVD.</p>
+ <p> När du lägger till i din institutions katalog skapar du ett exemplar med särskild exemplartyp.</p>
+ <p> Viktigt!: Exemplartyper är det som styrs av cirkulationsregler. Cirkulationsregler styr hur din institution lånar ut sina exemplar: Lånetid, omlåne-policy, reservationspolicy, etc. Till exempel: en cirkulationsregel applicerad på exemplartypen DVD framtvingar en avgift på 1$ för utlån av varje DVD.</p>
+
+ <form id="createitemform" method="post" action="onboarding.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <input type="hidden" name="step" value="4" />
+ <input type="hidden" name="op" value="cud-add_validate_itemtype" />
+ <ol>
+ <li>
+ <label for="itemtype" class="required">Exemplartypskod: </label>
+ <input type="text" name="itemtype" pattern="[0-9A-Za-z]{1,10}" id="itemtype" size="10" maxlength="10"  class="required" required="required" value="[% itemtype.itemtype | html %]" />
+ <span class="required">Obligatoriskt</span>
+ </li>
+
+ <li>
+ <label for="description" class="required">Beskrivning: </label>
+ <input type="text" name="description" id="description" size="42" value="[% itemtype.description | html %]" class="required" required="required">
+ <span class="required">Obligatoriskt</span>
+ </li>
+ </ol>
+
+ <p> Lägg till ytterligare exemplartyper och gör andra inställningar här: <span class="breadcrumbs"> Administration &rsaquo; Exemplartyper </span>
+ </p>
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ </fieldset>
+ </form>
+ </div> <!-- / #onboarding-step4 -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'validator-strings.inc' %]
+ [% INCLUDE 'installer-strings.inc' %]
+ <script src="[% interface | html %]/[% theme | html %]/js/onboarding.js"></script>
+[% END %]
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

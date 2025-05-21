@@ -1,0 +1,390 @@
+---
+Sisältölaajennukset:
+  Amazon:
+  - - Käytä Amazonin sisältöjä sen
+    - choices:
+        CA: kanadalaiselta
+        DE: saksalaiselta
+        FR: ranskalaiselta
+        IN: intialaiselta
+        JP: japanilaiselta
+        UK: englantilaiselta
+        US: yhdysvaltalaiselta
+      pref: AmazonLocale
+    - verkkosivulta.
+  - - Aseta tagit
+    - pref: AmazonAssocTag
+    - linkeiksi Amazoniin. Tämä voi tuottaa kirjastolle palkkioita, jos käyttäjä päättää
+      ostaa teoksen.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      default: 1
+      pref: AmazonCoverImages
+    - kansikuvat Amazonista virkailijakäyttöliittymän hakutuloksissa ja perustiedot-näytöllä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      default: 1
+      pref: OPACAmazonCoverImages
+    - kansikuvia Amazonista hakutuloksissa ja verkkokirjaston perustiedot-näytöllä.
+  Babelthèque:
+  - - choices:
+        '0': Älä liitä
+        '1': Liitä
+      pref: Babeltheque
+    - tietoja (mm. arvioita ja sitaatteja) Babelthèquesta asiakaskäyttöliittymän perustiedot-näytölle.
+  - - 'Käytä tätä URL:ia Babelthèquen javascript-tiedostolle: '
+    - class: url
+      pref: Babeltheque_url_js
+    - (esim. http://www.babeltheque.com/bw_XX.js).
+  - - 'Käytä tätä URL:ia Babelthèquen määräaikapäivityksille: '
+    - class: url
+      pref: Babeltheque_url_update
+    - (esim. http://www.babeltheque.com/.../file.csv.bz2).
+  Baker and Taylor:
+  - - choices:
+        '0': Älä lisää
+        '1': Lisää
+      pref: BakerTaylorEnabled
+    - Baker and Taylor linkkejä ja kansikuvia verkkokirjastoon ja virkailijaliittymään.
+      Vaatii toimiakseen käyttäjätunnuksen ja salasanan (ne näkyvät kuvalinkeissä).
+  - - Baker and Taylor "My Library Bookstore" linkit ovat osoitteessa <code>https://
+    - class: url
+      pref: BakerTaylorBookstoreURL
+    - <em>isbn</em></code> (tähän pitäisi lisätä osoite tyyliin <code>ocls.mylibrarybookstore.com/MLB/actions/searchHandler.do?nextPage=bookDetails&amp;parentNum=10923&amp;key=</code>).
+      Jätä tyhjäksi, jos et halua käyttää linkkejä.
+  - - Baker and Taylor -palvelun käyttäjätunnus
+    - class: password
+      pref: BakerTaylorUsername
+    - ja salasana
+    - class: password
+      pref: BakerTaylorPassword
+    - .
+  Coce kansikuvien välimuisti:
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: OpacCoce
+    - Coce kuvavälimuistipalvelua verkkokirjastossa.
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: IntranetCoce
+    - Coce kuvavälimuistipalvelua virkailijaliittymässä.
+  - - Coce-palvelimen URL
+    - class: url
+      pref: CoceHost
+  - - Käytä seuraavia palveluntarjoajia kansikuvien hakuun
+    - multiple:
+        aws: Amazon Web Services
+        gb: Google Books
+        ol: Open Library
+      pref: CoceProviders
+  Google:
+  - - choices:
+        '0': Älä lisää
+        '1': Lisää
+      pref: GoogleJackets
+    - kansikuvia Google Booksista hakutuloksiin ja perustiedot-näytölle verkkokirjastossa.
+  HTML5 media:
+  - - Näytä välilehti, jossa on HTML5-mediasoitin tiedostoille, jotka on luetteloitu
+      kenttään 856
+    - choices:
+        both: verkkokirjastossa ja virkailijaliittymässä.
+        not: ei ollenkaan.
+        opac: verkkokirjastossa
+        staff: virkailijaliittymässä
+      pref: HTML5MediaEnabled
+  - - Mediatiedostojen laajennokset
+    - class: multi
+      pref: HTML5MediaExtensions
+    - (erotetaan | -merkillä).
+  - - choices:
+        '0': Älä upota
+        '1': Upota
+      pref: HTML5MediaYouTube
+    - YouTube-linkkejä videoina.
+  Kaikki:
+  - - <strong>HUOM:</strong> voit valita vain yhden kansikuvalähteen alapuolelta,
+      muuten Koha näyttää kuvat kaikista valituista lähteistä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      default: 0
+      pref: FRBRizeEditions
+    - muut teoksen painokset virkailijaliittymässä (jos löytyy alla olevista palveluista).
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      default: 0
+      pref: OPACFRBRizeEditions
+    - teoksen muita painoksia verkkokirjastossa.
+  Käyttöohjeet:
+  - - Koha-manuaalin sijainti
+    - class: url
+      pref: KohaManualBaseURL
+    - Voit määrittää Koha-manuaalin sijainnin käyttöön. Oletuksena se on https://koha-community.org/manual/
+    - Jos alkaa merkillä '/',  the value of <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=staffClientBaseURL">staffClientBaseURL</a>
+      arvo käytetään etuliitteenä.
+    - Huomaa, että siihen laitetaan version / kielen / formaatin takaliite (/17.11/en/html)
+  - - Online-manuaalin kieli
+    - choices:
+        ar: arabia
+        cs: tsekki
+        de: saksa
+        en: englanti
+        es: espanja
+        fr: ranska
+        it: italia
+        pt_BR: portugali - Brasilia
+        tr: turkki
+        zh_TW: kiina - Taiwan
+      pref: KohaManualLanguage
+    - Sitä käytetään, jos käyttöliittymän kielellä ei ole olemassa online manuaalia.
+  Library Thing:
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: ThingISBN
+    - palvelua ThingISBN näyttämään teoksen muita painoksia (kun joko <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=FRBRizeEditions">FRBRizeEditions</a>
+      tai <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFRBRizeEditions">OPACFRBRizeEditions</a>
+      on käytössä). Tämä on eri kuin Library Thing for Libraries.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: LibraryThingForLibrariesEnabled
+    - 'arvioita, samanlaisia teoksia ja tageja Library Thing for Libraries -palvelusta
+      verkkokirjaston perustiedot-näytölle. Tämän ominaisuuden käyttämiseksi sinun
+      pitää '
+    - <a href="https://www.librarything.com/forlibraries/">Rekisteröidy</a> ja lisää
+      sitten alle asiakastunnuksesi.
+  - - Yhdistä palveluun Library Thing for Libraries käyttäen asiakastunnusta
+    - pref: LibraryThingForLibrariesID
+    - .
+  - - Näytä sisältö palvelusta Library Thing for Libraries
+    - choices:
+        '0': yhdessä bibliografisten tietojen kanssa.
+        '1': välilehdillä.
+      pref: LibraryThingForLibrariesTabbedView
+  Novelist Select:
+  - - choices:
+        '0': Älä lisää
+        '1': Lisää
+      pref: NovelistSelectEnabled
+    - Novelist Select -sisältöjä verkkokirjastoon (edellyttää, että olet syöttänyt
+      käyttäjätunnuksen ja salasanan. Tunnus ja salasana näkyvät verkkokirjaston kuvalinkeissä).
+  - - Näytä Novelist Select -sisältö
+    - choices:
+        above: Kokoelmat-välilehden yläpuolella
+        below: Kokoelmat-välilehden alapuolella
+        right: Tietueen tallennus -pudotusvalikon alla, oikealla puolella
+        tab: verkkokirjaston välilehdellä
+      pref: NovelistSelectView
+    - .
+  - - Käyttäjätunnus Novelist Select -palveluun
+    - pref: NovelistSelectProfile
+    - (verkkokirjastossa)
+  - - 'Käyttäjätunnus Novelist Select -palveluun:'
+    - pref: NovelistSelectStaffProfile
+    - (virkailijaliittymässä)
+  - - 'Salasana Novelist Select -palveluun:'
+    - class: password
+      pref: NovelistSelectPassword
+    - .
+  - - choices:
+        '0': Älä lisää
+        '1': Lisää
+      pref: NovelistSelectStaffEnabled
+    - Novelist Select -palvelun sisältöjä virkailijaliittymään (vaatii käyttäjätunnuksen
+      ja salasanan määrittämistä. Tunnus ja salasana näkyvät kuvalinkeissä).
+  - - Näytä Novelist Select -palvelun virkailijaliittymän sisältö
+    - choices:
+        above: Kokoelmat-välilehden yläpuolella
+        below: Kokoelmat-välilehden alapuolella
+        tab: omalla välilehdellä
+      pref: NovelistSelectStaffView
+    - .
+  Open Library:
+  - - choices:
+        '0': Älä lisää
+        '1': Lisää
+      pref: OpenLibraryCovers
+    - kansikuvia Open Library -palvelusta hakutuloksia ja lisätietoja näytettäessä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: OpenLibrarySearch
+    - Open Libraryn hakutuloksia verkkokirjastossa.
+  OverDrive:
+  - - choices:
+        '0': Don't enable
+        '1': Enable
+      pref: OPACOverDrive
+    - OverDrive integration in the OPAC.
+  - - Sisällytä OverDrive-saatavuustieto asiakasavaimeen
+    - pref: OverDriveClientKey
+    - ja asiakkaan salasanaan
+    - pref: OverDriveClientSecret
+    - .
+  - - 'Tunnistaudutaan käyttäen OverDrive-verkkosivun ID:tä #'
+    - pref: OverDriveWebsiteID
+    - .
+  - - Tunnistautuminen käyttäen OverDriven auktorisoitua nimeä
+    - pref: OverDriveAuthName
+    - (käytetään varasuunnitelmana, jos yksittäisen kirjaston auktorisoitua nimeä
+      ei ole määritetty <a href="/cgi-bin/koha/admin/overdrive.pl">OverDrive kirjaston
+      auktorisoitujen nimien kirjastoon</a>).
+  - - 'Näytä niteet kirjaston OverDrive-luettelosta #'
+    - pref: OverDriveLibraryID
+    - .
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: OverDriveCirculation
+    - asiakkaiden nähdä OverDrive-lainahistoriansa sekä lainata ja palauttaa aineistoja.<br
+      />
+    - OverDrive uses the patron's
+    - choices:
+        cardnumber: kirjastokortin numeron
+        userid: käyttäjätunnusta
+      pref: OverDriveUsername
+    - OverDrive-palveluun yhdistämiseksi. <br />
+    - Salasana(a)
+    - choices:
+        '0': ei vaadita
+        '1': vaaditaan
+      pref: OverDrivePasswordRequired
+    - OverDrive-palveluun yhdistämiseksi. <br />
+    - Jos sallit pääsyn, täytyy SIP-yhteyden olla rekisteröitynä
+    - OverDriven kanssa, jotta asiakkaiden tunnistauminen Kohan kautta toimii
+  Paikalliset tai ulkoiset kansikuvat:
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: LocalCoverImages
+    - paikallisia kansikuvia virkailijaliittymän haussa ja perustiedot-näytöillä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: OPACLocalCoverImages
+    - paikallisia kansikuvia verkkokirjaston hakutulos- ja perustiedot-näytöillä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AllowMultipleCovers
+    - useiden kuvien liittäminen nimeketietueeseen ja niteeseen.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: CustomCoverImages
+    - muokattuja ulkoisen URLin kuvia virkailijaliittymässä.<br/>
+    - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: OPACCustomCoverImages
+    - muokattuja ulkoisen URLin kuvia verkkokirjastossa.<br/>
+    - 'Käytä seuraavaa URLia:'
+    - class: url
+      pref: CustomCoverImagesURL
+    - 'Voit määritellä sen seuraavan mallin mukaan: {isbn}, {issn}, {normalized_isbn}.<br/>'
+    - 'Tai voit käyttää seuraavaa syntaksia määrittelemään kentän$osakentän arvon:
+      {field$subfield}. Esimerkiksi {024$a}.'
+    - Kiinteämittaisissa kentissä voit käyttää yksinkertaisesti {kenttä}, kuten {001}.
+  Syndetics:
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      pref: SyndeticsEnabled
+    - Syndeticsin tarjoamaa sisältöä. Huomaa, että tämän ominaisuuden käyttö edellyttää
+      rekisteröitymistä palveluun ja asiakaskoodin syöttämistä alapuolella olevaan
+      kenttään.
+  - - Käytä asiakaskoodia
+    - pref: SyndeticsClientCode
+    - kirjauduttaessa Syndeticsiin.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsCoverImages
+    - Syndeticsista tuotuja kansikuvia verkkokirjaston ja virkailijaliittymän hakutuloksissa
+      ja perustiedot-näytöllä
+    - choices:
+        LC: suurina
+        MC: keskisuurina
+      pref: SyndeticsCoverImageSize
+    - .
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsAuthorNotes
+    - Syndeticsistä tuotavia tekijää koskevia lisätietoja verkkokirjaston perustiedot-näytöillä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsAwards
+    - verkkokirjastossa Syndeticsistä tuotua tietoa nimekkeen voittamista palkinnoista.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsEditions
+    - verkkokirjaston perustiedot-näytöllä Syndeticsistä tuotuja tietoja teoksen muista
+      painoksista (kun <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACFRBRizeEditions">OPACFRBRizeEditions</a>
+      on käytössä).
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsExcerpt
+    - Syndeticsistä katkelmia nimekkeistä verkkokirjaston perustiedot-näytöllä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsReviews
+    - Syndeticsin teosarvioita verkkokirjaston perustiedot-näytöllä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsSeries
+    - Syndeticsin tietoja teossarjan muista osista verkkokirjaston perustiedot-näytöllä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsSummary
+    - Syndeticsin teostietojen yhteenveto(a) verkkokirjaston perustiedot-näytöllä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: SyndeticsTOC
+    - Syndeticsin teoksen sisällysluetteloa verkkokirjaston perustiedot-näytöllä.
+  Tagit:
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: TagsEnabled
+    - käyttäjien ja henkilökunnan lisätä tageja.
+  - - choices:
+        '0': Älä hyväksytä
+        '1': Hyväksytä
+      pref: TagsModeration
+    - asiakkaiden lisäämät omat tagit kirjaston henkilökunnalla.
+  - - Näytä
+    - class: integer
+      pref: TagsShowOnList
+    - tagia verkkokirjaston hakutulosnäkymässä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: TagsInputOnList
+    - asiakkaiden lisätä tageja verkkokirjaston hakutulosnäytön kautta.
+  - - Näytä
+    - class: integer
+      pref: TagsShowOnDetail
+    - tagia verkkokirjaston perustiedot-näytöllä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: TagsInputOnDetail
+    - asiakkaiden lisätä tageja verkkokirjaston perustiedot-näytön kautta.
+  - - Salli tagien hyväksyminen ispell-sanakirjasta
+    - class: file
+      pref: TagsExternalDictionary
+    - palvelimella ilman ennakkotarkastusta.

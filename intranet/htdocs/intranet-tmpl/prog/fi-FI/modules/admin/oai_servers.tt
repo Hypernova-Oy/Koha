@@ -1,0 +1,236 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE I18N %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% PROCESS 'i18n.inc' %]
+
+<title>
+ [% IF op == 'edit' %] Muokkaa OAI-tietovarantoa [% server.servername | html %] &rsaquo; [% END %] [% IF op ==  'add' %] Uusi OAI-tietovaranto &rsaquo; [% END %] OAI-tietovarannot &rsaquo; Ylläpito &rsaquo; Koha </title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_oai_servers" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'oai-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Ylläpito</a>
+ [% END %]
+
+ [% IF op == 'edit' || op == 'add' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/oai_servers.pl">OAI-tietovarannot</a>
+ [% END %]
+ [% END %]
+
+ [% IF op == 'edit' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Muokkaa OAI-tietovarantoa [% server.servername | html %]</span>
+ [% END %]
+
+ [% ELSIF op == 'add' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uusi OAI-tietovaranto</span>
+ [% END %]
+
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>OAI-tietovarannot</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+
+[% IF msg_deleted %]
+ <div class="alert alert-warning">OAI-tietovaranto poistettu ([% msg_add | html %])</div>
+[% ELSIF msg_updated %]
+ <div class="alert alert-info">OAI-tietovaranto päivitetty ([% msg_add | html %])</div>
+[% ELSIF msg_added %]
+ <div class="alert alert-info">OAI-tietovaranto lisätty ([% msg_add | html %])</div>
+[% ELSIF msg_notfound %]
+ <div class="alert alert-warning">Virhe: Palvelinta, jonka tunnus on [% msg_add | html %] ei löydy</div>
+[% END %]
+
+[% IF ( add_form ) %]
+ <form action="/cgi-bin/koha/admin/oai_servers.pl" name="Aform" method="post" id="serverentry">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% IF op == 'edit' %]
+ <h1>Muokkaa OAI-tietovarantoa</h1>
+ <input type="hidden" name="id" value="[% server.oai_server_id | html %]" />
+ [% ELSE %]
+ <h1>Uusi OAI-tietovaranto</h1>
+ [% END %]
+
+ <input type="hidden" name="op" value="cud-add_validated" />
+ <fieldset class="rows">
+ <ol>
+ <li><label for="name" class="required">Tietovarannon nimi: </label>
+ [% IF server.servername %]
+ <input type="text" name="servername" id="servername" size="65" maxlength="100" value="[% server.servername | html %]" required="required" />
+ [% ELSE %]
+ <input type="text" name="servername" id="servername" class="focus" size="65" maxlength="100" value="[% server.servername | html %]" required="required" />
+ [% END %]
+ <span class="required">Pakollinen tieto</span>
+ </li>
+
+ <li><label for="endpoint" class="required">Päätepiste: </label> <input type="text" name="endpoint" id="endpoint" size="30" value="[% server.endpoint | html %]" required="required" /> <span class="required">Pakollinen tieto</span>
+ </li>
+ <li><label for="oai_set">[% I18N.tp('OAI', 'Set:') | html %] </label> <input type="text" name="oai_set" id="oai_set" value="[% server.oai_set | html %]" />
+ </li>
+ <li>
+ <label for="dataformat">Tiedon tallennusmuoto: </label>
+ <select name="dataformat" id="dataformat">
+ <option value="oai_dc">Dublin Core (oai_dc)</option>
+ <option value="marc-xml">Marcxml (marc-xml)</option>
+ <option value="marcxml">Marcxml (marcxml)</option>
+ </select>
+ <div class="hint">OAI voi lähettää tietueita useissa eri muodoissa. Valitse yksi.</div>
+ </li>
+
+ <li><label for="recordtype">Tietuetyyppi: </label>
+ <select name="recordtype" id="recordtype">
+ <option value="biblio">Bibliografia</option>
+ <option value="authority">Auktoriteetti</option>
+ </select>
+ </li>
+ <li>
+ <label for="add_xslt">XSLT-tiedosto tulosten muuntamiseen: </label>
+ <input type="text" name="add_xslt" id="add_xslt" size="100" placeholder="[% xslt_path | html %]" value="[% server.add_xslt | html %]"/>
+ </li>
+
+ </ol>
+ </fieldset>
+
+ <fieldset class="action"><input class="btn btn-primary" type="submit" value="Tallenna" /> <a class="cancel" href="/cgi-bin/koha/admin/oai_servers.pl">Peruuta</a></fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'list' %]
+ <div id="toolbar" class="btn-toolbar">
+ <a id="newserver" class="btn btn-default" href="/cgi-bin/koha/admin/oai_servers.pl?op=add"><i class="fa fa-plus"></i> Uusi OAI-tietovaranto</a>
+ </div>
+ <h1>OAI-tietovarannot</h1>
+ [% IF id %]
+ <span>Hait tieuetta [% id | html %]</span>
+ [% ELSIF searchfield %]
+ </span>Hait [% searchfield | html %]<span>
+ [% END %]
+
+ <div class="page-section">
+ <table id="serverst">
+
+ <thead><tr><th>ID</th><th>Tietovarannon nimi</th><th>Päätepiste</th><th>[% tp('OAI', 'Set') | html %]</th><th>Tiedon tallennusmuoto</th><th>Tietuetyyppi</th><th class="noExport NoSort">Toiminnot</th>
+ </tr></thead>
+ <tbody>
+ [% FOREACH loo IN loop %]
+ <tr>
+ <td>[% loo.oai_server_id | html %]</td>
+ <td><a href="/cgi-bin/koha/admin/oai_servers.pl?op=edit&amp;id=[% loo.oai_server_id | uri %]">[% loo.servername | html %]</a></td><td>[% loo.endpoint | html %]</td><td>[% loo.oai_set | html %]</td>
+ <td>[% loo.dataformat | html %]</td>
+ <td>[% IF ( loo.recordtype == 'biblio' )  %]
+ <span>Bibliografia</span>
+ [% ELSIF ( loo.recordtype == 'authority' ) %]
+ <span>Auktoriteetti</span>
+ [% END %]
+ </td>
+ <td>
+ <div class="btn-group dropup">
+ <a class="btn btn-default btn-xs dropdown-toggle" id="reportactions[% savedreport.id | html %]" role="button" data-bs-toggle="dropdown" href="#">
+ Toiminnot </a>
+ <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="reportactions[% savedreport.id | html %]">
+ <li><a class="dropdown-item" href="/cgi-bin/koha/admin/oai_servers.pl?op=edit&amp;id=[% loo.oai_server_id | uri %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/admin/oai_servers.pl?op=add&amp;id=[% loo.oai_server_id | uri %]"><i class="fa fa-copy"></i> Kopioi</a></li>
+ <li>
+ <a href="#" class="dropdown-item delete" data-formid="server_row_[% loo.oai_server_id | uri %]" data-servername="[% loo.servername | html %]"><i class="fa fa-trash-can"></i> Poista</a>
+ <form id="server_row_[% loo.oai_server_id | uri %]" action="/cgi-bin/koha/admin/oai_servers.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_confirmed">
+ <input type="hidden" name="id" value="[% loo.oai_server_id | uri %]">
+ </form>
+ </li>
+
+ </ul>
+ </div>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.page-section -->
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% IF op == 'list' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% END %]
+
+ <script>
+        [% IF ( add_form ) %]
+            $(document).ready(function(){
+                // Update selects for dataformat and recordtype
+                [% IF server %]
+                    $("#dataformat").val('[% server.dataformat | html %]');
+                    $("#recordtype").val('[% server.recordtype | html %]');
+                [% END %]
+                $( "#serverentry" ).validate({
+                    rules: {
+                        servername: { required: true },
+                        host: { required: true },
+                        port: {
+                            number: true
+                        },
+                        rank: { number: true },
+                    }
+                });
+                $("#serverentry").submit(function( event ) {
+                    // enable recordtype to include field in post
+                    $('#recordtype').prop('disabled',false);
+                });
+                $("#servername").on("blur",function(){
+                    toUC(this);
+                });
+            });
+        [% ELSE %]
+            $(document).ready(function() {
+                $("#serverst").dataTable($.extend(true, {}, dataTablesDefaults, {
+                    "columnDefs": [
+                        { 'sortable': false, 'targets': [ 'NoSort' ] }
+                    ],
+                    "pagingType": "full",
+                }));
+                $(".delete").on("click",function(e){
+                    var servername = $(this).data("servername");
+                    let formid = $(this).data("formid");
+                    if( confirm( _("Haluatko varmasti poistaa tietovarannon %s?").format(servername) ) ) {
+                        $('#'+formid).submit();
+                        return true;
+                    } else {
+                        e.preventDefault();
+                    }
+                });
+            });
+        [% END %]
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

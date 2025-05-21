@@ -1,0 +1,499 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE Branches %]
+[% USE Categories %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op == 'add_form' %]
+ [% t("New identity provider domain") | html %] &rsaquo;
+ [% ELSIF op == 'edit_form' %]
+ [% tx("Modify identity provider domain '{domain}'", {domain = identity_provider_domain.domain}) | html %] &rsaquo;
+ [% END %]
+ [% tx("Identity provider domains for '{identity_provider_code}'", {identity_provider_code = identity_provider_code}) | html %] &rsaquo;
+ [% t("Identity providers") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_identity_provider_domains" class="admin">
+[% INCLUDE 'header.inc' %]
+[% INCLUDE 'prefs-admin-search.inc' %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Ylläpito</a>
+ [% END %]
+
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/identity_providers.pl">Tunnistustietojen tarjoajat</a>
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/identity_providers.pl?domain_ops=1&amp;identity_provider_id=[%- identity_provider_id | uri -%]">[% tx("Domains for '{identity_provider_code}'", {identity_provider_code = identity_provider_code}) | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uusi tunnistustietojen tarjoajan domain</span>
+ [% END %]
+
+ [% ELSIF op == 'edit_form' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/identity_providers.pl?domain_ops=1&amp;identity_provider_id=[%- identity_provider_id | uri -%]">[% tx("Domains for '{identity_provider_code}'", {identity_provider_code = identity_provider_code}) | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("Modify identity provider domain '{domain}'", {domain = identity_provider_domain.domain}) | html %]
+ [% END %]
+
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>[% tx("Domains for '{identity_provider_code}'", {identity_provider_code = identity_provider_code}) | html %]</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% FOREACH m IN messages %]
+ <div class="alert alert-[% m.type | html %]" id="identity_provider_domain_action_result_dialog">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Tunnistustietojen tarjoajan avaamisessa muokkaustilaan tapahtui virhe. Annettu ID on virheellinen.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Tunnistustietojen tarjoajan domainin lisäämisessä tapahtui virhe. Tarkista lokit.</span>
+ [% CASE 'success_on_update' %]
+ <span>Tunnistustietojen tarjoajan verkkotunnus on päivitetty.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Tunnistustietojen tarjoajan verkkotunnus on lisätty.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+ <div class="alert alert-info" id="identity_provider_domain_delete_success" style="display: none;"></div>
+ <div class="alert alert-warning"   id="identity_provider_domain_delete_error"   style="display: none;"></div>
+
+[% IF op == 'add_form' %]
+ <h1>[% tx("New identity provider domain for '{identity_provider_code}'", {identity_provider_code = identity_provider_code}) | html %]</h1>
+
+ <form action="/cgi-bin/koha/admin/identity_providers.pl" id="add" name="add" class="validated" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add" />
+ <input type="hidden" name="domain_ops" value="1" />
+ <input type="hidden" name="identity_provider_id" value="[%- identity_provider_id | html -%]" />
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="domain">Domain: </label>
+ <input type="text" name="domain" id="domain" size="60" />
+ <div class="hint">Sähköpostin domain vastaamaan sääntöä. <button class="more btn btn-ligth" data-bs-target="domain"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
+ <div class="hint more-domain" style="display: none">
+ <p>Jos tämä on tyhjä tai '*' mikä tahansa sähköpostin domain täsmää sääntöön.</p>
+ <p>Voit lisätä jokerimerkin domainin alkuun. Esimerkiksi domain '*library.com' täsmää 'students.library.com' kanssa, mutta täsmää myös 'otherlibrary.com' kanssa</p>
+ <p>Tarkat vastaavuudet ovat etusijalla jokerimerkeistä, joten 'library.com' domain asettuu etusijalle '*library.com':sta, kun sähköposti on 'somebody@library.com'</p>
+ <p>Samoin pisin vastaava asettuu etusijalle, joten '*teacher.university.com asettuu etusijalle '*.university.com':sta, jos sähköposti on '*user@math.teacher.university.com'</p>
+ </div>
+ </li>
+ <li>
+ <label for="update_on_auth">Päivitä kirjautumisen yhteydessä: </label>
+ <select name="update_on_auth" id="update_on_auth">
+ <option value="1">Päivitä</option>
+ <option value="0" selected="selected">Älä päivitä</option>
+ </select>
+ <span>käyttäjädata kirjautuessa</span>
+ </li>
+ <li>
+ <label for="auto_register">Automaattinen rekisteröinti: </label>
+ <select name="auto_register" id="auto_register">
+ <option value="1">Salli</option>
+ <option value="0" selected="selected">Älä salli</option>
+ </select>
+ <span>käyttäjien rekisteröityä automaattisesti kirjautumisen yhteydessä</span>
+ </li>
+ <li>
+ <label for="default_library_id">Oletuskirjasto: </label>
+ <select id="default_library_id" name="default_library_id">
+ <option value="">Ei mitään</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( unfiltered => 1, do_not_select_my_library => 1 ) %]
+ </select>
+ <div class="hint">Käytät tätä kirjastoa asiakkaalle automaattisen rekisteröinnin yhteydessä</div>
+ </li>
+ <li>
+ <label for="default_category_id">Oletuskategoria: </label>
+ [% SET categories = Categories.all() %]
+ <select name="default_category_id" id="default_category_id">
+ <option value="">Ei mitään</option>
+ [% FOREACH category IN categories %]
+ <option value="[% category.categorycode | html %]">[% category.description | html %]</option>
+ [% END %]
+ </select>
+ <div class="hint">Käytä tätä kategoriaa asiakkaalle automaattisen rekisteröinnin yhteydessä</div>
+ </li>
+ <li>
+ <label for="allow_opac">Salli verkkokirjastossa: </label>
+ <select name="allow_opac" id="allow_opac">
+ <option value="1" selected="selected">Salli</option>
+ <option value="0">Älä salli</option>
+ </select>
+ <span>verkkokirjaston käyttäjien kirjautua tällä domainilla tältä tunnistustietojen tarjoajalta.</span>
+ </li>
+ <li>
+ <label for="allow_staff">Salli henkilökunta: </label>
+ <select name="allow_staff" id="allow_staff">
+ <option value="1">Salli</option>
+ <option value="0" selected="selected">Älä salli</option>
+ </select>
+ <span>tältä verkkotunnukselta kirjautua tällä tunnistustietojen tarjoajalla</span>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="submit" value="OK" />
+ <a class="cancel" href="/cgi-bin/koha/admin/identity_providers.pl?domain_ops=1&amp;identity_provider_id=[%- identity_provider_id | html -%]">Peruuta</a>
+ </fieldset>
+ </form>
+
+[% END %]
+
+[% IF op == 'edit_form' %]
+ <h1>[% tx("Modify identity provider domain '{domain}'", {domain = identity_provider_domain.domain}) | html %]</h1>
+
+ <form action="/cgi-bin/koha/admin/identity_providers.pl" id="edit_save" name="edit_save" class="validated" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-edit_save" />
+ <input type="hidden" name="domain_ops" value="1" />
+ <input type="hidden" name="identity_provider_id" value="[%- identity_provider_id | html -%]" />
+ <input type="hidden" name="identity_provider_domain_id" value="[%- identity_provider_domain.identity_provider_domain_id | html -%]" />
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="domain">Domain: </label>
+ <input type="text" name="domain" id="domain" size="60" value="[%- identity_provider_domain.domain | html -%]"/>
+ <div class="hint">Sähköpostin domain vastaamaan sääntöä. <button class="more btn btn-ligth" data-bs-target="domain"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
+ <div class="hint more-domain" style="display: none">
+ <p>Jos tämä on tyhjä tai '*' mikä tahansa sähköpostin domain täsmää sääntöön.</p>
+ <p>Voit lisätä jokerimerkin domainin alkuun. Esimerkiksi domain '*library.com' täsmää 'students.library.com' kanssa, mutta täsmää myös 'otherlibrary.com' kanssa</p>
+ <p>Tarkat vastaavuudet ovat etusijalla, joten 'library.com' domain asettuu etusijalle '*library.com':sta, kun sähköposti on 'somebody@library.com'</p>
+ <p>Samoin pisin vastaava asettuu etusijalle, joten '*teacher.university.com asettuu etusijalle '*.university.com':sta, jos sähköposti on '*user@math.teacher.university.com'</p>
+ </div>
+ </li>
+ <li>
+ <label for="update_on_auth">Päivitä kirjautumisen yhteydessä: </label>
+ <select name="update_on_auth" id="update_on_auth">
+ [% IF identity_provider_domain.update_on_auth == "1" %]
+ <option value="1" selected="selected">Päivitä</option>
+ <option value="0">Älä päivitä</option>
+ [% ELSE %]
+ <option value="1">Päivitä</option>
+ <option value="0" selected="selected">Älä päivitä</option>
+ [% END %]
+ </select>
+ <span>käyttäjädata kirjautuessa</span>
+ </li>
+ <li>
+ <label for="auto_register">Automaattinen rekisteröinti: </label>
+ <select name="auto_register" id="auto_register">
+ [% IF identity_provider_domain.auto_register == "1" %]
+ <option value="1" selected="selected">Salli</option>
+ <option value="0">Älä salli</option>
+ [% ELSE %]
+ <option value="1">Salli</option>
+ <option value="0" selected="selected">Älä salli</option>
+ [% END %]
+ </select>
+ <span>käyttäjien rekisteröityä automaattisesti kirjautumisen yhteydessä</span>
+ </li>
+ <li>
+ <label for="default_library_id">Oletuskirjasto: </label>
+ <select id="default_library_id" name="default_library_id">
+ <option value="">Ei mitään</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => identity_provider_domain.default_library_id, unfiltered => 1, do_not_select_my_library => 1 ) %]
+ </select>
+ <div class="hint">Käytät tätä kirjastoa asiakkaalle automaattisen rekisteröinnin yhteydessä</div>
+ </li>
+ <li>
+ <label for="default_category_id">Oletuskategoria: </label>
+ [% SET categories = Categories.all() %]
+ <select name="default_category_id" id="default_category_id">
+ <option value="">Ei mitään</option>
+ [% FOREACH category IN categories %]
+ [% IF category.categorycode == identity_provider_domain.default_category_id %]
+ <option value="[% category.categorycode | html %]" selected="selected">[% category.description | html %]</option>
+ [% ELSE %]
+ <option value="[% category.categorycode | html %]">[% category.description | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <div class="hint">Käytä tätä kategoriaa asiakkaalle automaattisen rekisteröinnin yhteydessä</div>
+ </li>
+ <li>
+ <label for="allow_opac">Salli verkkokirjastossa: </label>
+ <select name="allow_opac" id="allow_opac">
+ [% IF identity_provider_domain.allow_opac == "1" %]
+ <option value="1" selected="selected">Salli</option>
+ <option value="0">Älä salli</option>
+ [% ELSE %]
+ <option value="1">Salli</option>
+ <option value="0" selected="selected">Älä salli</option>
+ [% END %]
+ </select>
+ <span>verkkokirjaston käyttäjien kirjautua tällä domainilla tältä tunnistustietojen tarjoajalta.</span>
+ </li>
+ <li>
+ <label for="allow_staff">Salli henkilökunta: </label>
+ <select name="allow_staff" id="allow_staff">
+ [% IF identity_provider_domain.allow_staff == "1" %]
+ <option value="1" selected="selected">Salli</option>
+ <option value="0">Älä salli</option>
+ [% ELSE %]
+ <option value="1">Salli</option>
+ <option value="0" selected="selected">Älä salli</option>
+ [% END %]
+ </select>
+ <span>virkailijat tältä verkkotunnukselta kirjautuma tällä tunnistustietojen tarjoajalla</span>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="submit" value="OK" />
+ <a class="cancel" href="/cgi-bin/koha/admin/identity_providers.pl?domain_ops=1&amp;identity_provider_id=[%- identity_provider_id | html -%]">Peruuta</a>
+ </fieldset>
+ </form>
+
+[% END %]
+
+[% IF op == 'list' %]
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="new_identity_provider_domain" href="/cgi-bin/koha/admin/identity_providers.pl?domain_ops=1&amp;identity_provider_id=[%- identity_provider_id | html -%]&amp;op=add_form"><i class="fa fa-plus"></i> Uusi tunnistustietojen tarjoajan domain</a>
+ </div>
+
+ <h1>[% tx("Identity provider domains for '{identity_provider_code}'", {identity_provider_code = identity_provider_code}) | html %]</h1>
+ <div class="page-section">
+ <table id="identity_provider_domains">
+ <thead>
+ <tr>
+ <th>Domain</th>
+ <th>Päivitä kirjautumisen yhteydessä</th>
+ <th>Automaattinen rekisteröinti</th>
+ <th>Oletuskirjasto</th>
+ <th>Oletuskategoria</th>
+ <th>Salli verkkokirjasto</th>
+ <th>Salli henkilökunta</th>
+ <th data-class-name="actions noExport">Toiminnot</th>
+ </tr>
+ </thead>
+ </table>
+ </div>
+[% END %]
+
+ <div id="delete_confirm_modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="delete_confirm_modal_label" aria-hidden="true">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="delete_confirm_modal_label">Vahvista tunnistustietojen tarjoajan domainin poisto</h1>
+ <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <div class="modal-body">
+ <div id="delete_confirm_dialog"></div>
+ </div>
+ <div class="modal-footer">
+ <a href="#" class="btn btn-danger" id="delete_confirm_modal_button" role="button" data-bs-toggle="modal">Poista</a>
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Sulje</button>
+ </div>
+ </div> <!-- /.modal-content -->
+ </div> <!-- /.modal-dialog -->
+ </div> <!-- #delete_confirm_modal -->
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+
+            var identity_provider_domains_url = '/api/v1/auth/identity_providers/[%- identity_provider_id | html -%]/domains';
+            [% SET categories = Categories.all() %]
+            var categories = {
+            [% FOREACH category IN categories %]
+                "[% category.categorycode | html %]": "[% category.description | html %]",
+            [% END %]
+            };
+            [% SET libraries = Branches.all() %]
+            var libraries = {
+            [% FOREACH library IN libraries %]
+                "[% library.branchcode | html %]": "[% library.branchname | html %]",
+            [% END %]
+            };
+            window.identity_provider_domains = $("#identity_provider_domains").kohaTable({
+                "ajax": {
+                    "url": identity_provider_domains_url
+                },
+                'language': {
+                    'emptyTable': '<div class="alert alert-info">'+_("Tunnistustietojen tarjoajien verkkotunnuksia ei ole määritetty.")+'</div>'
+                },
+                "columnDefs": [ {
+                    "targets": [1],
+                    "render": function (data, type, row, meta) {
+                        if ( type == 'display' ) {
+                            if ( data != null ) {
+                                return data.escapeHtml();
+                            }
+                            else {
+                                return "";
+                            }
+                        }
+                        return data;
+                    }
+                } ],
+                "columns": [
+                    {
+                        "data": "domain",
+                        "searchable": true,
+                        "orderable": true,
+                        "render": function(data, type, row, meta) {
+                            if ( data != null ) {
+                                return data.escapeHtml();
+                            }
+                            else {
+                                return "*";
+                            }
+                        }
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+                            if (row.update_on_auth) {
+                                return _("Kyllä");
+                            } else {
+                                return _("Ei");
+                            }
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+                            if (row.auto_register) {
+                                return _("Kyllä");
+                            } else {
+                                return _("Ei");
+                            }
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+                            return libraries[row.default_library_id] || "";
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+                            return categories[row.default_category_id] || "";
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+                            if (row.allow_opac) {
+                                return _("Kyllä");
+                            } else {
+                                return _("Ei");
+                            }
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+                            if (row.allow_staff) {
+                                return _("Kyllä");
+                            } else {
+                                return _("Ei");
+                            }
+                        },
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+                            var result = '<a class="btn btn-default btn-xs" role="button" href="/cgi-bin/koha/admin/identity_providers.pl?domain_ops=1&amp;identity_provider_id=[%- identity_provider_id | html -%]&amp;op=edit_form&amp;identity_provider_domain_id='+ encodeURIComponent(row.identity_provider_domain_id) +'"><i class="fa-solid fa-pencil" aria-hidden="true"></i> '+_("Edit")+'</a>'+"\n";
+                            result += '<a class="btn btn-default btn-xs delete_identity_provider_domain" role="button" href="#" data-bs-toggle="modal" data-bs-target="#delete_confirm_modal" data-auth-provider-domain-id="'+ encodeURIComponent(row.identity_provider_domain_id) +'" data-auth-provider-domain="'+ encodeURIComponent((row.domain || '').escapeHtml()) +'"><i class="fa fa-trash-can" aria-hidden="true"></i> '+_("Poista")+'</a>';
+                            return result;
+                        },
+                        "searchable": false,
+                        "orderable": false
+                    }
+                ],
+                createdRow: function (row, data, dataIndex) {
+                    if ( data.debug ) {
+                        $(row).addClass('debug');
+                    }
+                },
+            });
+
+            $('#identity_provider_domains').on( "click", '.delete_identity_provider_domain', function () {
+                var identity_provider_domain_id   = $(this).data('auth-provider-domain-id');
+                var identity_provider_domain = decodeURIComponent($(this).data('auth-provider-domain'));
+
+                $("#delete_confirm_dialog").html(
+                    _("Olet poistamassa '%s' tunnistustietojen tarjoajan verkkotunnusta.").format(identity_provider_domain)
+                );
+                $("#delete_confirm_modal_button").data('auth-provider-domain-id', identity_provider_domain_id);
+                $("#delete_confirm_modal_button").data('auth-provider-domain', identity_provider_domain);
+            });
+
+            $("#delete_confirm_modal_button").on( "click", function () {
+
+                var identity_provider_domain_id   = $(this).data('auth-provider-domain-id');
+                var identity_provider_domain = $(this).data('auth-provider-domain');
+
+                $.ajax({
+                    method: "DELETE",
+                    url: identity_provider_domains_url+"/"+identity_provider_domain_id
+                }).success(function() {
+                    window.identity_provider_domains.api().ajax.reload(function (data) {
+                        $("#smtp_action_result_dialog").hide();
+                        $("#smtp_delete_success").html(_("Palvelin '%s' on poistettu.").format(identity_provider_domain)).show();
+                    });
+                }).fail(function () {
+                    $("#smtp_delete_error").html(_("Virhe poistettaessa palvelinta '%s'. Tarkista lokit.").format(identity_provider_domain)).show();
+                }).done(function () {
+                    $("#delete_confirm_modal").modal('hide');
+                });
+            });
+
+            $('button.more').on('click', function(event) {
+                event.preventDefault();
+                var target = $(this).hide().data('target');
+                $('.more-'+target).show();
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

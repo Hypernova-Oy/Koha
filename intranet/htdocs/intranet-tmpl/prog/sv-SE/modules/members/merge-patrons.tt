@@ -1,0 +1,342 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE Branches %]
+[% USE Categories %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Merge patron records") | html %] &rsaquo;
+ [% t("Patrons") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% FILTER collapse %]
+ <style>
+        ins {
+            background-color: #e6ffe6;
+        }
+        del {
+            background-color: #ffe6e6;
+        }
+        .col0,
+        .col1 {
+            display: none;
+        }
+        .col3 ins,
+        .col2 del {
+            display: none;
+        }
+        #col-label,
+        .col2,
+        .col3 {
+            border-right: 1px solid #EEE;
+            flex-grow: 1;
+            margin-right:1em;
+        }
+        #col-label {
+            font-family: monospace;
+        }
+        #col-label div {
+            white-space: none;
+        }
+        .compare {
+            display: flex;
+        }
+        .modal-lg {
+            width: 90%;
+        }
+    </style>
+[% END %]
+</head>
+<body id="pat_merge" class="pat">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+[% BLOCK display_names %]
+ [% SWITCH rs %]
+ [% CASE 'Accountline'           %]<span>kontorader</span>
+ [% CASE 'ArticleRequest'        %]<span>artikelbeställningar</span>
+ [% CASE 'BorrowerAttribute'     %]<span>utökade låntagarattribut</span>
+ [% CASE 'BorrowerDebarment'     %]<span>låntagarbegränsningar</span>
+ [% CASE 'BorrowerFile'          %]<span>låntagarfiler</span>
+ [% CASE 'BorrowerModification'  %]<span>låntagares begäran om ändring av kontouppgifter</span>
+ [% CASE 'ClubEnrollment'        %]<span>klubbmedlemskap</span>
+ [% CASE 'Issue'                 %]<span>lån</span>
+ [% CASE 'ItemsLastBorrower'     %]<span>markerar som senaste låntagare av exemplaret</span>
+ [% CASE 'Linktracker'           %]<span>spårade länkklick</span>
+ [% CASE 'Message'               %]<span>låntagarmeddelanden</span>
+ [% CASE 'MessageQueue'          %]<span>Låntagarmeddelanden</span>
+ [% CASE 'OldIssue'              %]<span>Tidigare lån</span>
+ [% CASE 'OldReserve'            %]<span>infångade reservationer</span>
+ [% CASE 'Rating'                %]<span>betyg</span>
+ [% CASE 'Reserve'               %]<span>nuvarande reservationer</span>
+ [% CASE 'Review'                %]<span>recensioner</span>
+ [% CASE 'Statistic'             %]<span>statistik</span>
+ [% CASE 'SearchHistory'         %]<span>historiska sökningar</span>
+ [% CASE 'Suggestion'            %]<span>inköpsförslag</span>
+ [% CASE 'TagAll'                %]<span>taggar</span>
+ [% CASE 'Virtualshelfcontent'   %]<span>exemplarlista</span>
+ [% CASE 'Virtualshelfshare'     %]<span>delade listor</span>
+ [% CASE 'Virtualshelve'         %]<span>listor</span>
+ [% CASE %][% rs | html %]
+ [% END %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Låntagare</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Sammanfoga låntagarposter</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+ <h1>Sammanfoga låntagarposter</h1>
+
+ [% IF op == 'show' %]
+ [% IF patrons.count > 1 %]
+ [% IF ( patrons.count == 2 ) %]
+ <div id="toolbar" class="btn-toolbar">
+ <div class="btn-group">
+ <button class="btn btn-default" id="compare_patrons">
+ <i class="fa fa-arrows-h"></i> Jämför låntagare </button>
+ </div>
+ </div>
+ [% END %]
+
+ <p>Välj låntagare som ska vara kvar. Data från de andra låntagarna kommer att överföras till den här låntagarposten och de återstående låntagarposterna kommer att tas bort.</p>
+
+ <form method="post" action="merge-patrons.pl" id="patron-merge-form">
+ [% INCLUDE 'csrf-token.inc' %]
+ <table id="patron-merge-table" class="datatable">
+ <thead>
+ <tr>
+ <th>&nbsp;</th>
+ <th>Kort</th>
+ <th>Namn</th>
+ <th>Födelsedatum</th>
+ <th>Kategori</th>
+ <th>Bibliotek</th>
+ <th>Utgår den</th>
+ </tr>
+ </thead>
+
+ <tbody>
+ [% FOREACH p IN patrons %]
+ <tr>
+ <td><input class="keeper" type="radio" name="keeper" value="[% p.id | html %]" data-borrowernumber="[% p.id | html %]" id="keeper_[% p.id | html %]" /></td>
+ <td>
+ <label for="keeper_[% p.id | html %]">
+ <strong>[% p.cardnumber | html %]</strong>
+ </label>
+ </td>
+ <td>
+ <a target="_blank" href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% p.borrowernumber | uri %]">
+ [% INCLUDE 'patron-title.inc' patron = p %]
+ <i class="fa-solid fa-window-restore"></i>
+ </a>
+ </td>
+ <td>[% p.dateofbirth | $KohaDates %]</td>
+ <td>[% Categories.GetName( p.categorycode ) | html %] ([% p.categorycode | html %])</td>
+ <td>[% Branches.GetName( p.branchcode ) | html %]</td>
+ <td>[% p.dateexpiry | $KohaDates %]</td>
+ [% END %]
+ </tbody>
+ </table>
+
+ <fieldset class="action">
+ [% FOREACH p IN patrons %]
+ <input type="hidden" name="id" value="[% p.id | html %]" />
+ [% END %]
+ <input type="hidden" name="op" value="cud-merge" />
+ <input class="btn btn-primary" id="merge-patrons" type="submit" value="Sammanfoga låntagare" />
+ [% PROCESS 'members-patron-selections.inc' id="patron-merge-form" %]
+ </fieldset>
+
+ [% ELSE %]
+ <div class="alert alert-warning">Fel: två eller flera låntagare måste väljas för sammanslagning</div>
+ [% END %]
+ </form>
+ [% ELSIF op == 'cud-merge' %]
+ <h4>Resultat</h4>
+ [% IF error %]
+ [% IF error == 'INVALID_KEEPER' %]
+ <div class="alert alert-warning">Sammanfogning misslyckades! Låntagaren att behålla var ogiltig.</div>
+ [% ELSE %]
+ <div class="alert alert-warning">Sammanfogning misslyckades! Följande fel har rapporterats: [% error | html %].</div>
+ [% END %]
+ [% ELSIF !results.merged.keys.size %]
+ <div class="alert alert-warning">Inga giltiga låntagare att sammanfoga hittades.</div>
+ [% ELSE %]
+ <p>
+ Låntagarposter slogs ihop till <a href="moremember.pl?borrowernumber=[% keeper.id | uri %]">[% INCLUDE 'patron-title.inc' patron = keeper %]</a>
+ </p>
+
+ [% FOREACH pair IN results.merged.pairs %]
+ [% SET patron = pair.value.patron %]
+
+ <h5>[% INCLUDE 'patron-title.inc' %]</h5>
+
+ [% FOREACH r IN pair.value.updated.pairs %]
+ [% SET name = r.key %]
+ [% SET count = r.value %]
+ [% IF count %]
+ <p>
+ <span>[% count | html %] [% PROCESS display_names rs = name %] överförd.</span>
+ [% IF name == 'Reserve' %]
+ <strong>Det är tillrådligt att kontrollera och lösa dubbla reservationer på grund av sammanslagning.</strong>
+ [% END %]
+ </p>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% UNLESS error %]
+ <a class="btn btn-default" href="moremember.pl?borrowernumber=[% keeper.id | html %]">Visa låntagarpost</a>
+ [% END %]
+ [% END %]
+ </div>
+ </div>
+
+ <!-- Modal -->
+ <div class="modal" id="compareModal" tabindex="-1" role="dialog" aria-labelledby="compareModalLabel">
+ <div class="modal-dialog modal-lg">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="compareModalLabel">Jämför låntagare för sammanslagning</h1>
+ <button aria-label="Stäng" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <div class="modal-body">
+ <div class="compare">
+ <div id="col-label">
+ <div><strong>Namn:</strong></div>
+ <div><strong>Initialer:</strong></div>
+ <div><strong>Annat namn:</strong></div>
+ <div><strong>Bibliotek:</strong></div>
+ <div><strong>Kortnummer:</strong></div>
+ <div><strong>Kategori:</strong></div>
+ <br />
+ <div><strong>Adressrad 1:</strong></div>
+ <div><strong>Adressrad 2:</strong></div>
+ <div><strong>Ort:</strong></div>
+ <div><strong>Delstat:</strong></div>
+ <div><strong>Postnummer:</strong></div>
+ <div><strong>Land:</strong></div>
+ <br />
+ <div><strong>Registreringsdatum:</strong></div>
+ <div><strong>Förnyelsedatum:</strong></div>
+ <div><strong>Utgångsdatum:</strong></div>
+ <div><strong>Födelsedatum:</strong></div>
+ <div><strong>Begränsad:</strong></div>
+ <div><strong>Primär e-post:</strong></div>
+ <div><strong>Sekundär e-post:</strong></div>
+ <div><strong>Telefonnummer:</strong></div>
+ <div><strong>Sekundärt telefonnummer:</strong></div>
+ <div><strong>Annan telefon:</strong></div>
+ <div><strong>Kön:</strong></div>
+ <div><strong>Uppdaterad:</strong></div>
+ <div><strong>Användarnamn:</strong></div>
+ </div>
+
+ [% FOREACH p IN patrons %]
+ <div id="col-[% p.borrowernumber | html %]-orig"class="col[% loop.index | html %]">
+<!-- <pre> block is unindented to avoid unwanted whitespace -->
+<pre>
+[% IF ( p.surname ) %][% p.surname | html %], [% p.firstname | html %][% ELSE %]-[% END %]
+[% IF ( p.initials ) %][% p.initials | html %][% ELSE %]-[% END %]
+[% IF ( p.othernames ) %][% p.othernames | html %][% ELSE %]-[% END %]
+[% IF ( p.branchcode ) %][% p.branchcode | html %][% ELSE %]-[% END %]
+[% IF ( p.cardnumber ) %][% p.cardnumber | html %][% ELSE %]-[% END %]
+[% IF ( p.categorycode ) %][% p.categorycode | html %][% ELSE %]-[% END %]
+
+[% IF ( p.address ) %][% p.address | html %][% ELSE %]-[% END %]
+[% IF ( p.address2 ) %][% p.address2 | html %][% ELSE %]-[% END %]
+[% IF ( p.city ) %][% p.city | html %][% ELSE %]-[% END %]
+[% IF ( p.state ) %][% p.state | html %][% ELSE %]-[% END %]
+[% IF ( p.zipcode ) %][% p.zipcode | html %][% ELSE %]-[% END %]
+[% IF ( p.country ) %][% p.country | html %][% ELSE %]-[% END %]
+
+[% IF ( p.dateenrolled ) %][% p.dateenrolled | html %][% ELSE %]-[% END %]
+[% IF ( p.date_renewed ) %][% p.date_renewed | html %][% ELSE %]-[% END %]
+[% IF ( p.dateexpiry ) %][% p.dateexpiry | html %][% ELSE %]-[% END %]
+[% IF ( p.dateofbirth ) %][% p.dateofbirth | html %][% ELSE %]-[% END %]
+[% IF ( p.debarred ) %][% p.debarred | html %][% ELSE %]-[% END %]
+[% IF ( p.email ) %][% p.email | html %][% ELSE %]-[% END %]
+[% IF ( p.emailpro ) %][% p.emailpro | html %][% ELSE %]-[% END %]
+[% IF ( p.phone ) %][% p.phone | html %][% ELSE %]-[% END %]
+[% IF ( p.phonepro ) %][% p.phonepro | html %][% ELSE %]-[% END %]
+[% IF ( p.mobile ) %][% p.mobile | html %][% ELSE %]-[% END %]
+[% IF ( p.sex ) %][% p.sex | html %][% ELSE %]-[% END %]
+[% IF ( p.updated_on ) %][% p.updated_on | html %][% ELSE %]-[% END %]
+[% IF ( p.userid ) %][% p.userid | html %][% ELSE %]-[% END %]
+</pre>
+ </div>
+ [% END %]
+ [% FOREACH p IN patrons %]
+ <div id="col-[% p.borrowernumber | html %]-diff" class="col[% ( loop.index + 2 ) | html %]"><pre></pre></div>
+ [% END %]
+ </div>
+ </div>
+ <div class="modal-footer">
+ <button type="button" class="btn btn-default" id="submit-merge-form"><i class="fa fa-compress" aria-hidden="true"></i> Sammanfoga låntagare</button>
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> Stäng</button>
+ </div>
+ </div> <!-- /.modal-content -->
+ </div> <!-- /.modal-dialog -->
+ </div> <!-- /#compareModal -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ [% Asset.js("js/members-patron-selections.js") | $raw %]
+ [% Asset.js("lib/jsdiff/jsdiff.min.js") | $raw %]
+ <script>
+    $(document).ready(function() {
+        var controls = $("#merge-patrons, #compare_patrons");
+        controls.prop('disabled', true);
+        $('#patron-merge-table').on('change', 'input', function() {
+            if ( $('.keeper:checked').length > 0 ) {
+                controls.prop('disabled', false);
+            } else {
+                controls.prop('disabled', true);
+            }
+        });
+
+        $("#compare_patrons").on("click", function(e){
+            e.preventDefault();
+            $("#compareModal").modal("show");
+        });
+
+        $("#compareModal").on("shown.bs.modal", function(){
+            /* Find which column is the basis for merging */
+            var col0 = $(".keeper:checked").data("borrowernumber");
+            var col1 = $(".keeper:not(:checked)").data("borrowernumber");
+            /* Get the original patron data for comparison */
+            var diff1 = $("#col-" + col0 + "-orig pre").text();
+            var diff2 = $("#col-" + col1 + "-orig pre").text();
+
+            var diffs = diffString(diff2, diff1);
+            /* Load the diff HTML in the empty columns */
+            $(".col2 pre, .col3 pre").html(diffs);
+        });
+
+        $("#submit-merge-form").on("click", function(){
+            $("#patron-merge-form").submit();
+        });
+    });
+
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,219 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Items with no checkouts") | html %] &rsaquo;
+ [% t("Reports") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>
+    .sql {display: none;}
+</style>
+</head>
+
+<body id="rep_catalogue_out" class="rep">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/reports-home.pl">Rapporter</a>
+ [% END %]
+ [% IF ( do_it ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/reports/catalogue_out.pl">Exemplar utan lån</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Resultat</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Exemplar utan lån</span>
+ [% END %]
+ [% END # /IF ( do_it ) %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ [% IF ( do_it ) %]
+ <h1>Exemplar utan lån</h1>
+ [% FOREACH mainloo IN mainloop %]
+ [% IF ( mainloo.loopfilter ) %]
+ <p>Filtrerat på:</p>
+ <ul>
+ [% FOREACH loopfilte IN mainloo.loopfilter %]
+ [% IF ( loopfilte.err ) %]
+ <p class="error">Fel: [% loopfilte.filter | html %]</p>
+ [% ELSIF ( loopfilte.sql ) %]
+ <span class="sql">
+ [% loopfilte.crit | html %] = [% loopfilte.filter | html %]
+ </span>
+ [% ELSE %]
+ [% SWITCH loopfilte.crit %]
+ [% CASE 'homelibrary' %]<li>Hembibliotek: [% Branches.GetName( loopfilte.filter ) | html %]</li>
+ [% CASE 'itemtype' %]<li>Exemplartyp: [% ItemTypes.GetDescription( loopfilte.filter ) | html %]</li>
+ [% CASE 'limit' %]<li>Begränsning: [% loopfilte.filter | html %]</li>
+ [% CASE 'by' %]
+ <li>Av: [% group_by = loopfilte.filter %] [% IF ( group_by == "homebranch") %] Hembibliotek [% ELSIF ( group_by == "itype" ) %] Exemplartyp [% ELSE %] Ingen [% END %] </li>
+ [% CASE %]<li>[% loopfilte.crit | html %]: [% loopfilte.filter | html %]</li>
+ [% END %]
+ [% END %]
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% IF ( mainloo.looptables ) %]
+ <div class="page-section">
+ <h3>Sammanfattning</h3>
+ <table id="summary_table">
+ <tr>
+ <th>Grupp</th>
+ <th>Hyllsignaturintervall</th>
+ <th>Antal exemplar som visas</th>
+ <th>Totalt antal exemplar i grupp</th>
+ </tr>
+ [% FOREACH looptable IN mainloo.looptables %]
+ <tr>
+ <td>
+ [% IF ( group_by=="itype" ) %]
+ <a href="#table[% looptable.coltitle | uri %]">[% ItemTypes.GetDescription( looptable.coltitle ) | html %]</a>
+ [% ELSIF ( group_by=="homebranch" ) %]
+ <a href="#table[% looptable.coltitle | uri %]">[% Branches.GetName( looptable.coltitle ) | html %]</a>
+ [% ELSE %]
+ <a href="#table[% looptable.coltitle | uri %]">Ogrupperat</a>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( looptable.looptable_count ) %] [% looptable.looptable_first | html %] till [% looptable.looptable_last | html %] [% END %] </td>
+ <td>[% looptable.looptable_count | html %]</td>
+ <td>[% looptable.coltitle_count | html %]</td>
+ </tr>
+ [% END %]
+ <tr>
+ <th>TOTAL</th>
+ <th></th>
+ <th>[% mainloo.total_looptable_count | html %]</th>
+ <th>[% mainloo.total_coltitle_count | html %]</th>
+ </tr>
+ </table>
+ </div>
+ [% END %]
+
+ [% FOREACH looptable IN mainloo.looptables %]
+ <div class="page-section">
+ <h3>
+ [% IF ( group_by=="itype" ) %]
+ <a id="table[% looptable.coltitle | html %]" >[% ItemTypes.GetDescription( looptable.coltitle ) | html %]</a>
+ [% ELSIF ( group_by=="homebranch" ) %]
+ <a id="table[% looptable.coltitle | html %]" >[% Branches.GetName( looptable.coltitle ) | html %]</a>
+ [% ELSE %] Ogrupperad [% END %] </h3>
+ <table>
+ <tr>
+ <th>#</th>
+ <th>Hyllsignatur</th>
+ <th>Streckkod</th>
+ <th>Exemplarinformation</th>
+ </tr>
+ [% IF ( looptable.looprow ) %]
+ [% FOREACH loopro IN looptable.looprow %]
+ <tr>
+ <td>[% loop.count | html %]</td>
+ <td>[% IF ( loopro.itemcallnumber ) %][% loopro.itemcallnumber | html %][% ELSE %]Ingen hyllsignatur[% END %]</td>
+ <td>[% IF ( loopro.barcode ) %][% loopro.barcode | html %][% ELSE %]Ingen streckkod[% END %]</td>
+ <td>
+ <p><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% loopro.biblionumber | uri %]">[% IF ( loopro.title ) %][% loopro.title | html %][% ELSE %]INGEN TITEL[% END %]</a> [% IF ( loopro.author ) %] av [% loopro.author | html %][% END %]</p>
+ [% IF ( loopro.branch ) %]vid [% Branches.GetName( loopro.branch ) | html %][% END %] </td>
+ </tr>
+ [% END %]
+ [% ELSE %]
+ <tr>
+ <td colspan="4">Inga exemplar för [% looptable.coltitle | html %]</td>
+ </tr>
+ [% END %]
+ </table>
+ </div>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+
+ <h1>Exemplar utan lån</h1>
+
+ <form method="get" action="/cgi-bin/koha/reports/catalogue_out.pl">
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="branch">Bibliotek: </label>
+ <select name="Filter" id="branch">
+ <option value="">Alla bibliotek</option>
+ [% PROCESS options_for_libraries libraries => Branches.all() %]
+ </select>
+ </li>
+ <li>
+ <label for="documenttype">Exemplartyp: </label>
+ <select name="Filter" id="documenttype">
+ <option value="">Alla exemplartyper</option>
+ [% FOREACH itemtype IN itemtypes %]
+ <option value="[% itemtype.itemtype | html %]">[% itemtype.translated_description | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="rows">
+ <legend>Begränsningar</legend>
+ <ol>
+ <li>
+ <label for="numberlimit">Begränsa till: </label>
+ <select name="Limit" id="numberlimit">
+ <option value ="10">10</option>
+ <option value ="20">20</option>
+ <option value ="50">50</option>
+ <option value ="100">100</option>
+ <option value ="200">200</option>
+ <option value ="300">300</option>
+ <option value ="400">400</option>
+ <option value ="500">500</option>
+ <option value ="1000">1000</option>
+ </select>
+ </li>
+ <li>
+ <label for="criteria">Av: </label>
+ <select name="Criteria" id="criteria">
+ <option value ="" selected="selected">Ingen</option>
+ <option value ="homebranch">Bibliotek</option>
+ <option value ="itype">Exemplartyp</option>
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ <input type="hidden" name="report_name" value="[% report_name | html %]" />
+ <input type="hidden" name="do_it" value="1" />
+ <input type="hidden" name="output" value="screen" />
+ </fieldset>
+ </form>
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'reports-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+</div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

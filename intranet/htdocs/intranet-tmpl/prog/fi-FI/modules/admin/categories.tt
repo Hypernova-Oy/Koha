@@ -1,0 +1,814 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE KohaDates %]
+[% USE Price %]
+[% USE TablesSettings %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op == 'add_form' %]
+ [% IF ( categorycode ) %]
+ [% tx("Modify category '{categorycode}'", { categorycode = categorycode }) | html %]
+ [% ELSE %]
+ [% t("New category") | html %]
+ [% END %] &rsaquo;
+ [% END %]
+ [% IF op == 'delete_confirm' %]
+ [% IF ( patrons_in_category > 0 ) %]
+ [% tx("Cannot delete category '{categorycode}'", { categorycode = categorycode }) | html %]
+ [% ELSE %]
+ [% tx("Confirm deletion of category '{categorycode}'", { categorycode = categorycode }) | html %]
+ [% END %] &rsaquo;
+ [% END %]
+ [% t("Patron categories") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% Asset.css("lib/jquery/plugins/multiple-select/multiple-select.min.css") | $raw %]
+<style>#enrolmentmessage.hint { display : none; }</style>
+</head>
+
+<body id="admin_categorie" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patrons-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Ylläpito</a>
+ [% END %]
+
+ [% IF op == 'add_form' || op == 'delete_confirm' || op == 'delete_confirmed' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/categories.pl">Asiakastyypit</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Asiakastyypit</span>
+ [% END %]
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% IF ( categorycode ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("Modify category '{categorycode}'", { categorycode = categorycode }) | html %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uusi luokka</span>
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% IF op == 'delete_confirm' %]
+ [% IF ( patrons_in_category > 0 ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("Cannot delete category '{categorycode}'", { categorycode = categorycode }) | html %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("Confirm deletion of category '{categorycode}'", { categorycode = categorycode }) | html %]
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% IF op == 'delete_confirmed' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Asiakastyyppi poistettu</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Asiakastyypin päivityksessä tapahtui virhe. Ehkä asiakastyyppi on jo olemassa.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Asiakastyypin lisäyksessä tapahtui virhe. Asiakastyyppi on jo olemassa.</span>
+ [% CASE 'error_on_delete' %]
+ <span>Asiakastyypin poistossa tapahtui virhe. Tarkista lokit.</span>
+ [% CASE 'success_on_update' %]
+ <span>Asiakastyyppi on päivitetty.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Asiakastyyppi on lisätty.</span>
+ [% CASE 'success_on_delete' %]
+ <span>Asiakastyyppi on poistettu.</span>
+ [% CASE 'already_exists' %]
+ <span>Asiakastyyppi on jo olemassa.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+[% IF op == 'add_form' %]
+ <form id="category_form" action="/cgi-bin/koha/admin/categories.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add_validate" />
+ <input type="hidden" name="checked" value="0" />
+ [% IF category %]
+ <h1>[% tx("Modify category '{categorycode}'", { categorycode = categorycode }) | html %]</h1>
+ [% ELSE %]
+ <h1>Uusi luokka</h1>
+ [% END %]
+ <fieldset class="rows">
+ <ol>
+ [% IF category %]
+ <li>
+ <span class="label">Tyyppikoodi: </span>[% categorycode | html %]
+ <input type="hidden" name="categorycode" value="[% category.categorycode | html %]" /><input type="hidden" name="is_a_modif" value="1" />
+ </li>
+ [% ELSE %]
+ <li>
+ <label for="categorycode" class="required">Tyyppikoodi: </label>
+ <input type="text" name="categorycode" id="categorycode" size="10" maxlength="10" class="required focus" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ [% END %]
+ <li>
+ <label for="description" class="required">Kuvaus: </label>
+ <input type="text" name="description" id="description" size="40" maxlength="80" class="required" required="required" value="[% category.description | html %]" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <span class="label">Voimassaoloaika: </span>
+ <fieldset>
+ <legend>Valitse jompikumpi</legend>
+ <ol>
+ <li>
+ <label for="enrolmentperiod">Kuukausissa: </label>
+ [% IF category.enrolmentperiod %]
+ <input type="text" class="enrollmentperiod" name="enrolmentperiod" id="enrolmentperiod" size="3" maxlength="3" value="[% category.enrolmentperiod | html %]" /> kuukautta [% ELSE %] <input type="text" class="enrollmentperiod" name="enrolmentperiod" id="enrolmentperiod" size="3" maxlength="3" value="" /> kuukautta [% END %] </li>
+ <li>
+ <label for="enrolmentperioddate">Tähän päivään asti: </label>
+ <input type="text" class="enrollmentperiod flatpickr" data-flatpickr-futuredate="true" name="enrolmentperioddate" id="enrolmentperioddate" value="[% category.enrolmentperioddate | html %]" />
+ </li>
+ </ol>
+ </fieldset>
+ </li>
+ <li>
+ <label for="password_expiry_days">Salasana vanhenee: </label>
+ <input type="text" name="password_expiry_days" id="password_expiry_days" value="[% category.password_expiry_days | html %]" size="3" maxlength="5" /> päivää </li>
+ <li>
+ <label for="dateofbirthrequired">Vaadittu ikä: </label>
+ <input type="text" name="dateofbirthrequired" id="dateofbirthrequired" value="[% category.dateofbirthrequired | html %]" size="3" maxlength="3" /> vuotta </li>
+ <li>
+ <label for="upperagelimit">Ikäraja: </label>
+ <input type="text" name="upperagelimit" id="upperagelimit" size="3" maxlength="3" value="[% category.upperagelimit | html %]" /> vuotta </li>
+ <li>
+ <label for="enrolmentfee">Rekisteröintimaksu: </label>
+ <input type="text" name="enrolmentfee" id="enrolmentfee" size="6" value="[% category.enrolmentfee | $Price on_editing => 1 %]" />
+ </li>
+ <li>
+ <label for="overduenoticerequired">Myöhästymisilmoitus: </label>
+ <select name="overduenoticerequired" id="overduenoticerequired">
+ [% IF category.overduenoticerequired %]
+ <option value="0">Ei</option>
+ <option value="1" selected="selected">Kyllä</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Ei</option>
+ <option value="1">Kyllä</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="hidelostitems">Näytetäänkö kadonneet niteet virkailijaliittymässä: </label>
+ <select name="hidelostitems" id="hidelostitems">
+ [% IF category.hidelostitems %]
+ <option value="0">Näytetään</option>
+ <option value="1" selected="selected">Piilotettu (oletus)</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Näytetään</option>
+ <option value="1">Piilotettu (oletus)</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="reservefee">Varausmaksu: </label>
+ <input type="text" name="reservefee" id="reservefee" size="6" value="[% category.reservefee | $Price on_editing => 1 %]" />
+ </li>
+ <li>
+ <label for="category_type" class="required">Luokkatyyppi: </label>
+ <select name="category_type" id="category_type">
+ [% UNLESS category %]<option value="" selected="selected">Valitse asiakastyyppi</option>[% ELSE %]<option value="">Valitse asiakastyyppi</option>[% END %]
+ [% IF category and category.category_type == 'A' %]<option value="A" selected="selected">Aikuiset</option>[% ELSE %]<option value="A">Aikuiset</option>[% END %]
+ [% IF category and category.category_type == 'C' %]<option value="C" selected="selected">Huollettava</option>[% ELSE %]<option value="C">Huollettava</option>[% END %]
+ [% IF category and category.category_type == 'S' %]<option value="S" selected="selected">Henkilökunta</option>[% ELSE %]<option value="S">Henkilökunta</option>[% END %]
+ [% IF category and category.category_type == 'I' %]<option value="I" selected="selected">Yhteisö</option>[% ELSE %]<option value="I">Yhteisö</option>[% END %]
+ [% IF category and category.category_type == 'P' %]<option value="P" selected="selected">Ammattilainen</option>[% ELSE %]<option value="P">Ammattilainen</option>[% END %]
+ [% IF category and category.category_type == 'X' %]<option value="X" selected="selected">Tilastoyksikkö</option>[% ELSE %]<option value="X">Tilastoyksikkö</option>[% END %]
+ </select>
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="can_be_guarantee">Voi olla taattava:</label>
+ <select name="can_be_guarantee" id="can_be_guarantee">
+ [% IF category.can_be_guarantee %]
+ <option value="1" selected>Kyllä</option>
+ <option value="0">Ei</option>
+ [% ELSE %]
+ <option value="1">Kyllä</option>
+ <option value="0" selected>Ei</option>
+ [% END %]
+ <select>
+ </li>
+ <li><label for="branches">Kirjastorajoitukset: </label>
+ <select id="branches" name="branches" multiple size="10">
+ <option value="">Kaikki kirjastot</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => category.get_library_limits, unfiltered => 1, do_not_select_my_library => 1 ) %]
+ </select>
+ <div class="hint">Valitse <em>Kaikki kirjastot</em> jos tämä tyyppi näytetään aina. Muuten valitse kirjastot, joissa tämä arvo näytetään. </div>
+ </li>
+ <li>
+ <label for="reset_password">Salasanan palautus verkkokirjastossa: </label>
+ <select name="reset_password" id="reset_password">
+ [% IF category.reset_password.defined %]
+ [% IF category.reset_password %]
+ [% IF Koha.Preference('OpacResetPassword') %]
+ <option value="-1">Noudata järjestelmäasetusta OpacResetPassword (aktivoitu)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta OpacResetPassword (pois käytöstä)</option>
+ [% END %]
+ <option value="1" selected="selected">Sallittu</option>
+ <option value="0">Ei sallittu</option>
+ [% ELSE %]
+ [% IF Koha.Preference('OpacResetPassword') %]
+ <option value="-1">Noudata järjestelmäasetusta OpacResetPassword (aktivoitu)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta OpacResetPassword (pois käytöstä)</option>
+ [% END %]
+ <option value="1">Sallittu</option>
+ <option value="0" selected="selected">Ei sallittu</option>
+ [% END %]
+ [% ELSE %]
+ [% IF Koha.Preference('OpacResetPassword') %]
+ <option value="-1" selected="selected">Noudata järjestelmäasetusta OpacResetPassword (aktivoitu)</option>
+ [% ELSE %]
+ <option value="-1" selected="selected">Noudata järjestelmäasetusta OpacResetPassword (pois käytöstä)</option>
+ [% END %]
+ <option value="1">Sallittu</option>
+ <option value="0">Ei sallittu</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="change_password">Salasanan vaihto verkkokirjastossa: </label>
+ <select name="change_password" id="change_password">
+ [% IF category.change_password.defined %]
+ [% IF category.change_password %]
+ [% IF Koha.Preference('OpacPasswordChange') %]
+ <option value="-1">Noudata järjestelmäasetusta OpacPasswordChange (aktivoitu)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta OpacPasswordChange (pois päältä)</option>
+ [% END %]
+ <option value="1" selected="selected">Sallittu</option>
+ <option value="0">Ei sallittu</option>
+ [% ELSE %]
+ [% IF Koha.Preference('OpacPasswordChange') %]
+ <option value="-1">Noudata järjestelmäasetusta OpacPasswordChange (aktivoitu)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta OpacPasswordChange (pois päältä)</option>
+ [% END %]
+ <option value="1">Sallittu</option>
+ <option value="0" selected="selected">Ei sallittu</option>
+ [% END %]
+ [% ELSE %]
+ [% IF Koha.Preference('OpacPasswordChange') %]
+ <option value="-1" selected="selected">Noudata järjestelmäasetusta OpacPasswordChange (aktivoitu)</option>
+ [% ELSE %]
+ <option value="-1" selected="selected">Noudata järjestelmäasetusta OpacPasswordChange (pois päältä)</option>
+ [% END %]
+ <option value="1">Sallittu</option>
+ <option value="0">Ei sallittu</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="min_password_length">Salasanan minimipituus:</label>
+ <input id="min_password_length" type="text" inputmode="numeric" name="min_password_length" value="[% category.min_password_length | html %]"/>
+ <div class="hint">Jätä tyhjäksi käyttääksesi järjestelmän oletusta ([% Koha.Preference('minPasswordLength') | html %])</div>
+ </li>
+ <li class="pwd_setting_wrapper">
+ <label for="require_strong_password">Vaadi vahva salasana:</label>
+ <select id="require_strong_password" name="require_strong_password">
+ [% IF category.require_strong_password.defined %]
+ [% IF category.require_strong_password %]
+ [% IF Koha.Preference('RequireStrongPassword') %]
+ <option value="-1">Noudata järjestelmäasetusta RequireStrongPassword (kyllä)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta RequireStrongPassword (ei)</option>
+ [% END %]
+ <option value="1" selected="selected">Kyllä</option>
+ <option value="0">Ei</option>
+ [% ELSE %]
+ [% IF Koha.Preference('RequireStrongPassword') %]
+ <option value="-1">Noudata järjestelmäasetusta RequireStrongPassword (kyllä)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta RequireStrongPassword (ei)</option>
+ [% END %]
+ <option value="1">Kyllä</option>
+ <option value="0" selected="selected">Ei</option>
+ [% END %]
+ [% ELSE %]
+ [% IF Koha.Preference('RequireStrongPassword') %]
+ <option value="-1">Noudata järjestelmäasetusta RequireStrongPassword (kyllä)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta RequireStrongPassword (ei)</option>
+ [% END %]
+ <option value="1">Kyllä</option>
+ <option value="0">Ei</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="force_password_reset_when_set_by_staff">Pakota uudelle asiakkaalle salasanan palautus: </label>
+ <select name="force_password_reset_when_set_by_staff" id="force_password_reset_when_set_by_staff">
+ [% IF category.force_password_reset_when_set_by_staff.defined %]
+ [% IF category.force_password_reset_when_set_by_staff %]
+ [% IF Koha.Preference('ForcePasswordResetWhenSetByStaff') %]
+ <option value="-1">Noudata järjestelmäasetusta ForcePasswordResetWhenSetByStaff (Pakota)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta ForcePasswordResetWhenSetByStaff (Älä pakota)</option>
+ [% END %]
+ <option value="1" selected="selected">Pakota</option>
+ <option value="0">Älä pakota</option>
+ [% ELSE %]
+ [% IF Koha.Preference('ForcePasswordResetWhenSetByStaff') %]
+ <option value="-1">Noudata järjestelmäasetusta ForcePasswordResetWhenSetByStaff (Pakota)</option>
+ [% ELSE %]
+ <option value="-1">Noudata järjestelmäasetusta ForcePasswordResetWhenSetByStaff (Älä pakota)</option>
+ [% END %]
+ <option value="1">Pakota</option>
+ <option value="0" selected="selected">Älä pakota</option>
+ [% END %]
+ [% ELSE %]
+ [% IF Koha.Preference('ForcePasswordResetWhenSetByStaff') %]
+ <option value="-1" selected="selected">Noudata järjestelmäasetusta ForcePasswordResetWhenSetByStaff (Pakota)</option>
+ [% ELSE %]
+ <option value="-1" selected="selected">Noudata järjestelmäasetusta ForcePasswordResetWhenSetByStaff (Älä pakota)</option>
+ [% END %]
+ <option value="1">Pakota</option>
+ <option value="0">Älä pakota</option>
+ [% END %]
+ </select>
+ <div class="hint">
+ Valitse, pakotetaanko henkilökunnan tällä asiakastyypillä lisäämät asiakkaat vaihtamaan salasanansa, kun he kirjautuvat ensimmäisen kerran Kohan verkkokirjastoon. </div>
+ </li>
+ <li><label for="block_expired">Estä vanhentuneet asiakkaat verkkokirjastossa:</label>
+ <select name="BlockExpiredPatronOpacActions" id="block_expired" multiple="multiple">
+ <optgroup label="Noudata järjestelmäasetusta">
+ [% IF category and category.BlockExpiredPatronOpacActions_contains('follow_syspref_BlockExpiredPatronOpacActions') %]
+ <option value="follow_syspref_BlockExpiredPatronOpacActions" selected="selected"> Järjestelmäasetus BlockExpiredPatronOpacActions määrittää </option>
+ [% ELSE %]
+ <option value="follow_syspref_BlockExpiredPatronOpacActions"> Järjestelmäasetus BlockExpiredPatronOpacActions määrittää </option>
+ [% END %]
+ </optgroup>
+ <optgroup label="Estä määritetyt tapahtumat">
+ [% IF category and category.BlockExpiredPatronOpacActions_contains('hold') %]
+ <option value="hold" selected="selected"> Niteen varaaminen </option>
+ [% ELSE %]
+ <option value="hold"> Niteen varaaminen </option>
+ [% END %]
+ [% IF category and category.BlockExpiredPatronOpacActions_contains('ill_request') %]
+ <option value="ill_request" selected="selected"> Kaukopalvelupyynnön tekeminen </option>
+ [% ELSE %]
+ <option value="ill_request"> Kaukopalvelupyynnön tekeminen </option>
+ [% END %]
+ [% IF category and category.BlockExpiredPatronOpacActions_contains('renew') %]
+ <option value="renew" selected="selected"> Niteen uusinta </option>
+ [% ELSE %]
+ <option value="renew"> Niteen uusinta </option>
+ [% END %]
+ </optgroup>
+ </select>
+ <div class="hint">
+ Jos asiakkaan tili on vanhentunut, valitse ne toiminnot, mitä hän ei voi verkkokirjastossa käyttää. Vaihtoehtoisesti käytä järjestelmäsetusta <a href="/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=BlockExpiredPatronOpacActions">BlockExpiredPatronOpacActions</a> voidaan käyttää sen sijaan. </li>
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' )  %]
+ <li><label for="checkprevcheckout">Tarkasta edelliset lainat: </label>
+ <select name="checkprevcheckout" id="checkprevcheckout">
+ [% IF category.checkprevcheckout == 'yes' %]
+ <option value="yes" selected="selected">Kyllä ja yritä ohittaa järjestelmäasetukset</option>
+ <option value="no">Ei ja yritä ohittaa järjestelmäasetukset</option>
+ <option value="inherit">Peri järjestelmäasetuksista</option>
+ [% ELSIF category.checkprevcheckout == 'no' %]
+ <option value="yes">Kyllä ja yritä ohittaa järjestelmäasetukset</option>
+ <option value="no" selected="selected">Ei ja yritä ohittaa järjestelmäasetukset</option>
+ <option value="inherit">Peri järjestelmäasetuksista</option>
+ [% ELSE %]
+ <option value="yes">Kyllä ja yritä ohittaa järjestelmäasetukset</option>
+ <option value="no">Ei ja yritä ohittaa järjestelmäasetukset</option>
+ <option value="inherit" selected="selected">Peri järjestelmäasetuksista</option>
+ [% END %]
+ </select>
+ <div class="hint">
+ Valitse, muistutetaanko tähän luokkaan kuuluvia asiakkaita oletuksena, että he ovat lainaamassa nidettä, jonka he ovat lainanneet aikaisemmin. </div>
+ </li>
+ [% END %]
+ [% IF ( Koha.Preference('ILLModule') ) %]
+ <li>
+ <label for="can_place_ill_in_opac">Voi tehdä kaukolainapyynnön verkkokirjastossa: </label>
+ <select id="can_place_ill_in_opac" name="can_place_ill_in_opac">
+ [% IF category.can_place_ill_in_opac %]
+ <option value="0">Ei</option>
+ <option value="1" selected="selected">Kyllä</option>
+ [% ELSE %]
+ <option value="0" selected="selected">Ei</option>
+ <option value="1">Kyllä</option>
+ [% END %]
+ </select>
+ <div class="hint">
+ Valitse, voiko tämän asiakastyypin asiakkaat tehdä kaukolainapyyntöjä. </div>
+ </li>
+ [% END %]
+ <li>
+ <label for="default_privacy">Oletusarvo yksityisyydelle: </label>
+ <select id="default_privacy" name="default_privacy">
+ [% SET default_privacy = 'default' %]
+ [% IF category %][% SET default_privacy = category.default_privacy %][% END %]
+ [% SWITCH default_privacy %]
+ [% CASE 'forever' %]
+ <option value="default">Oletus</option>
+ <option value="never">Ei koskaan</option>
+ <option value="forever" selected="selected">Toistaiseksi</option>
+ [% CASE 'never' %]
+ <option value="default">Oletus</option>
+ <option value="never" selected="selected">Ei koskaan</option>
+ <option value="forever">Toistaiseksi</option>
+ [% CASE %]
+ <option value="default" selected="selected">Oletus</option>
+ <option value="never">Ei koskaan</option>
+ <option value="forever">Toistaiseksi</option>
+ [% END %]
+ </select>
+ <div class="hint">Määrittelee, kuinka kauan tämän asiakastyypin lainahistoriaa säilytetään. "Ei koskaan" anonymisoi historian palautettaessa, ja "Aina" säilyttää lainahistorian aina. Kun asetuksena on "Oletus", historian pituus määritellään cronjobissa <em>batch_anonymise.pl</em> järjestelmäsi pääkäyttäjän tulisi asettaa nämä.</div>
+ </li>
+ <li>
+ <label for="exclude_from_local_holds_priority">Jätä pois paikallisten varausten jonosta:</label>
+ <select id="exclude_from_local_holds_priority" name="exclude_from_local_holds_priority">
+ [% IF category.exclude_from_local_holds_priority %]
+ <option value="1" selected>Kyllä</option>
+ <option value="0">Ei</option>
+ [% ELSE %]
+ <option value="1">Kyllä</option>
+ <option value="0" selected>Ei</option>
+ [% END %]
+ </select>
+ <div class="hint">Jos <i>Kyllä</i>, tämän asiakastyypin asiakkaiden tekemiä varauksia ei aseteta etusijalle</div>
+ </li>
+ <li>
+ <label for="noissuescharge">Lainausmaksun rajoitus: </label>
+ <input type="text" pattern="^\d+(\.\d{2})?$" name="noissuescharge" id="noissuescharge" value="[% category.noissuescharge | $Price on_editing => 1 %]" class="decimal" size="3" maxlength="4" />
+ <div class="hint">Jos määritetty, tämä ylikirjoittaa yleisen määrityksen järjestelmäasetuksessa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge&ok=Search">noissuescharge</a> asetus</div>
+ </li>
+ <li>
+ <label for="noissueschargeguarantees">Taattavien maksurajoitus: </label>
+ <input type="text" pattern="^\d+(\.\d{2})?$" name="noissueschargeguarantees" id="noissueschargeguarantees" value="[% category.noissueschargeguarantees | $Price on_editing => 1 %]" class="decimal" size="3" maxlength="4" />
+ <div class="hint">Jos määritetty, tämä ylikirjoittaa yleisen määrityksen järjestelmäasetuksessa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge&ok=Search">NoIssuesChargeGuarantees</a> asetus</div>
+ </li>
+ <li>
+ <label for="noissueschargeguarantorswithguarantees">Takaajien, joilla on taattavia, lainarajoituksen maksuraja: </label>
+ <input type="text" pattern="^\d+(\.\d{2})?$" name="noissueschargeguarantorswithguarantees" id="noissueschargeguarantorswithguarantees" value="[% category.noissueschargeguarantorswithguarantees | $Price on_editing => 1 %]" class="decimal" size="3" maxlength="4" />
+ <div class="hint">Jos määritetty, tämä ylikirjoittaa yleisen määrityksen järjestelmäasetuksessa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge&ok=Search">NoIssuesChargeGuarantorsWithGuarantees</a> asetus</div>
+ </li>
+ </ol>
+ </fieldset>
+
+ [% IF ( EnhancedMessagingPreferences ) %]
+ <fieldset class="rows">
+ <legend>Viestien oletusasetukset tälle asiakastyypille</legend>
+ [% INCLUDE 'messaging-preference-form.inc' %]
+ </fieldset>
+ [% END %]
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tallenna" />
+ <a href="/cgi-bin/koha/admin/categories.pl" class="cancel">Peruuta</a>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'delete_confirm' %]
+ <h1>
+ [% IF patrons_in_category > 0 %]
+ [% tx("Cannot delete category '{categorycode}'", { categorycode = categorycode }) | html %]
+ [% ELSE %]
+ [% tx("Confirm deletion of category '{categorycode}'", { categorycode = categorycode }) | html %]
+ [% END %]
+ </h1>
+
+ [% IF patrons_in_category > 0  %]
+ <div class="alert alert-warning">
+ <strong>Tätä tyyppiä on käytetty [% patrons_in_category | html %] kertaa</strong>. Poisto ei mahdollista. </div>
+ [% END %]
+
+ <div class="page-section">
+ <table>
+ <tr><th scope="row">Tyyppikoodi: </th><td>[% category.categorycode | html %]</td></tr>
+ <tr><th scope="row">Kuvaus: </th><td>[% category.description | html %]</td></tr>
+ <tr><th scope="row">Voimassaoloaika: </th>
+ <td>
+ [% IF category.enrolmentperiod %] [% category.enrolmentperiod | html %] kuukautta, [% ELSE %] [% category.enrolmentperioddate | $KohaDates %] saakka. [% END %] </td>
+ </tr>
+ <tr><th scope="row">Salasana vanhenee: </th><td>[% category.password_expiry_days | html %] päivää</td></tr>
+ <tr><th scope="row">Vaadittu ikä: </th><td>[% category.dateofbirthrequired | html %] vuotta</td></tr>
+ <tr><th scope="row">Ikäraja: </th><td>[% category.upperagelimit | html %] vuotta</td></tr>
+ <tr><th scope="row">Rekisteröintimaksu: </th><td>[% category.enrolmentfee | $Price %]</td></tr>
+ <tr><th scope="row">Myöhästymisilmoitukset: </th><td>[% IF category. overduenoticerequired %]Kyllä[% ELSE %]Ei[% END %]</td></tr>
+ <tr><th scope="row">Näytä kadonneet niteet virkailijaliittymässä:</th><td>[% IF category.hidelostitems %]Piilotettu (oletus)[% ELSE %]Näytetään[% END %]</td></tr>
+ <tr><th scope="row">Varausmaksu: </th><td>[% category.reservefee | $Price %]</td></tr>
+
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' ) %]
+ <tr>
+ <th scope="row">Tarkasta edelliset lainat: </th>
+ <td>
+ [% SWITCH category.checkprevcheckout %]
+ [% CASE 'yes' %]
+ <span>Kyllä</span>
+ [% CASE 'no' %]
+ <span>Ei</span>
+ [% CASE 'inherit' %]
+ <span>Peri</span>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ <tr><th scope="row">Voi olla taattava:</th><td>[% IF category.can_be_guarantee %]Kyllä[% ELSE %]Ei[% END %]</td></tr>
+ [% IF ( Koha.Preference('ILLModule') ) %]
+ <tr>
+ <th scope="row">Voi tehdä kaukolainapyynnön verkkokirjastossa: </th>
+ <td>[% IF category.can_place_ill_in_opac %]Kyllä[% ELSE %]Ei[% END %]</td>
+ </tr>
+ [% END %]
+ <tr><th scope="row">Voi olla taattava</th><td>[% IF category.can_be_guarantee %]Kyllä[% ELSE %]Ei[% END %]</td></tr>
+ <tr>
+ <th scope="row">Oletusarvo yksityisyydelle: </th>
+ <td>
+ [% SWITCH category.default_privacy %]
+ [% CASE 'default' %]
+ <span>Oletus</span>
+ [% CASE 'never' %]
+ <span>Ei koskaan</span>
+ [% CASE 'forever' %]
+ <span>Toistaiseksi</span>
+ [% END %]
+ </td>
+ </tr>
+ </table>
+ </div> <!-- /.page-section -->
+
+ <form action="/cgi-bin/koha/admin/categories.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="action">
+ [% IF patrons_in_category > 0 %]
+ <input type="submit" class="btn btn-primary" value="OK" />
+ [% ELSE %]
+ <input type="hidden" name="op" value="cud-delete_confirmed" />
+ <input type="hidden" name="categorycode" value="[% categorycode | html %]" />
+ <input class="btn btn-primary" type="submit" value="Poista tämä kategoria" />
+ <a class="cancel" href="/cgi-bin/koha/admin/categories.pl">Peruuta</a>
+ [% END %]
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'list' %]
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="newcategory" href="/cgi-bin/koha/admin/categories.pl?op=add_form"><i class="fa fa-plus"></i> Uusi luokka</a>
+ </div>
+
+ <h1>Asiakastyypit</h1>
+ <div class="page-section">
+ [% IF searchfield %] Hakusi oli [% searchfield | html %]</span>
+ [% END %]
+ [% IF categories %]
+ <table id="patron_categories">
+ <thead>
+ <tr>
+ <th scope="col" data-colname="code">Tunnus</th>
+ <th scope="col" data-colname="category_name">Asiakastyypin nimi</th>
+ <th scope="col" data-colname="type">Tyyppi</th>
+ <th scope="col" data-colname="enrollment_period">Voimassaoloaika</th>
+ <th scope="col" data-colname="password_expiration">Salasana vanhenee</th>
+ <th scope="col" data-colname="age_required">Vaadittu ikä</th>
+ <th scope="col" data-colname="upper_age_limit">Yläikäraja</th>
+ <th scope="col" data-colname="enrollment_fee">Rekisteröintimaksu</th>
+ <th scope="col" data-colname="overdue">Myöhässä</th>
+ <th scope="col" data-colname="lost_items">Kadonnut aineisto</th>
+ <th scope="col" data-colname="hold_fee">Varausmaksu</th>
+ [% IF ( EnhancedMessagingPreferences ) %]
+ <th scope="col" data-colname="messaging">Viestitys</th>
+ [% END %]
+ <th scope="col" data-colname="branches_limitations">Kirjastorajoitukset</th>
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' ) %]
+ <th scope="col" data-colname="check_previous_checkout">Tarkasta edelliset lainat?</th>
+ [% END %]
+ [% IF ( Koha.Preference('ILLModule') ) %]
+ <th scope="col" data-colname="can_place_ill_in_opac">Voi tehdä kaukolainapyynnön verkkokirjastossa?</th>
+ [% END %]
+ <th scope="col" data-colname="can_be_guarantee">Voi olla taattava</th>
+ <th scope="col" data-colname="default_privacy">Oletusarvo yksityisyydelle</th>
+ <th scope="col" data-colname="exclude_from_local_holds_priority">Jätä pois paikallisten varausten jonosta</th>
+ <th scope="col" data-colname="checkout_charge_limit">Lainauksen maksuraja</th>
+ <th scope="col" data-colname="guarantees_checkout_charge_limit">Taattavien maksuraja</th>
+ <th scope="col" data-colname="guarantors_checkout_charge_limit">Takaajien, joilla on taattavia, lainarajoituksen maksuraja</th>
+ <th scope="col" data-colname="actions">Toiminnot</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH category IN categories %]
+ <tr>
+ <td>[% category.categorycode | html %]</td>
+ <td>
+ <a href="/cgi-bin/koha/admin/categories.pl?op=add_form&amp;categorycode=[% category.categorycode |uri %]">[% category.description | html %]</a>
+ </td>
+ <td>
+ [% SWITCH category.category_type %]
+ [% CASE 'A' %]<span>Aikuiset</span>
+ [% CASE 'C' %]<span>Huollettava</span>
+ [% CASE 'P' %]<span>Prof.</span>
+ [% CASE 'I' %]<span>Org.</span>
+ [% CASE 'S' %]<span>Henkilökunta</span>
+ [% CASE 'X' %]<span>Tilastoyksikkö</span>
+ [% END %]
+ </td>
+ <td>
+ [% IF ( category.enrolmentperiod ) %] [% category.enrolmentperiod | html %] kuukautta, [% ELSE %] [% category.enrolmentperioddate | $KohaDates %] saakka. [% END %] </td>
+ [% IF (category.password_expiry_days) %]
+ <td>[% category.password_expiry_days | html %] päivää</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ [% IF (category.dateofbirthrequired) %]
+ <td>[% category.dateofbirthrequired | html %] vuotta</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ [% IF (category.upperagelimit) %]
+ <td>[% category.upperagelimit | html %] vuotta</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ [% IF (category.enrolmentfee > 0) %]
+ <td>[% category.enrolmentfee | $Price %]</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ <td>[% IF ( category.overduenoticerequired ) %]Kyllä[% ELSE %]Ei[% END %]</td>
+ <td>[% IF ( category.hidelostitems ) %]Piilotettu[% ELSE %]Näytetään[% END %]</td>
+ [% IF (category.reservefee > 0) %]
+ <td>[% category.reservefee | $Price %]</td>
+ [% ELSE %]
+ <td>-</td>
+ [% END %]
+ [% IF Koha.Preference('EnhancedMessagingPreferences') %]
+ <td style="white-space: nowrap; font-size:80%;">
+ [% SET default_messaging = category.default_messaging %]
+ [% IF default_messaging.size %]
+ [% FOREACH prefs IN default_messaging %]
+ [% NEXT IF !Koha.Preference( 'ILLModule' ) && prefs.message_name.match('^Ill_') %]
+ [% FOREACH transport IN prefs.transports %]
+ [% IF ( transport.transport ) %]
+ [% IF ( prefs.Item_Due ) %]<span>Ilmoitus eräpäivänä</span>
+ [% ELSIF ( prefs.Advance_Notice ) %]<span>Ennakkoilmoitus</span>
+ [% ELSIF ( prefs.Hold_Filled ) %]<span>Saapumisilmoitus</span>
+ [% ELSIF ( prefs.Item_Check_in ) %]<span>Palautuskuitti</span>
+ [% ELSIF ( prefs.Item_Checkout ) %]<span>Lainauskuitti</span>
+ [% ELSIF ( prefs.Ill_ready ) %]<span>Kaukolainat</span>
+ [% ELSIF ( prefs.Ill_unavailable ) %]<span>Kaukolaina ei ole käytettävissä</span>
+ [% ELSIF ( prefs.Ill_update ) %]<span>Kaukolaina on päivitetty</span>
+ [% ELSIF ( prefs.Auto_Renewals ) %]<span>Automaattinen uusinta</span>
+ [% ELSIF ( prefs.Hold_Reminder ) %]<span>Varauksen noutomuistutus</span>
+ [% ELSE %]<span>Tuntematon</span>
+ [% END %]:
+ <strong>[% transport.transport | html %]</strong><br />
+ [% ELSE %]<span>Ei mitään</span><br />[% END %]
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ <span>Ei mitään</span>
+ [% END %]
+ </td>
+ [% END %]
+ <td>
+ [% SET library_limits = category.library_limits %]
+ [% IF library_limits.count > 0 %]
+ [% library_str = "" %]
+ [% FOREACH library IN library_limits %]
+ [%- IF loop.first -%]
+ [% library_str = library.branchname _ " (" _ library.branchcode _ ")" %]
+ [% ELSE %]
+ [% library_str = library_str _ "\n" _ library.branchname _ " (" _ library.branchcode _ ")" %]
+ [% END %]
+ [% END %]
+ <span class="library_limitation" title="[% library_str | html %]">
+ [% IF library_limits.count > 1 %]
+ <span>[% library_limits.count | html %] kirjastorajoitus(ta)</span>
+ [% ELSE %]
+ <span>[% library_limits.count | html %] kirjastorajoitus(ta)</span>
+ [% END %]
+ [% ELSE %]
+ <span>Ei rajoitusta</span>
+ [% END %]
+ </td>
+ [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' ) %]
+ <td>
+ [% SWITCH category.checkprevcheckout %]
+ [% CASE 'yes' %]
+ <span>Kyllä</span>
+ [% CASE 'no' %]
+ <span>Ei</span>
+ [% CASE 'inherit' %]
+ <span>Peri</span>
+ [% END %]
+ </td>
+ [% END %]
+ [% IF ( Koha.Preference('ILLModule') ) %]
+ <td>[% IF category.can_place_ill_in_opac %] Kyllä [% ELSE %] Ei [% END %]</td>
+ [% END %]
+ <td>[% IF category.can_be_guarantee %] Kyllä [% ELSE %] Ei [% END %]</td>
+ <td>
+ [% SWITCH category.default_privacy %]
+ [% CASE 'default' %]
+ <span>Oletus</span>
+ [% CASE 'never' %]
+ <span>Ei koskaan</span>
+ [% CASE 'forever' %]
+ <span>Toistaiseksi</span>
+ [% END %]
+ </td>
+ <td>
+ [% IF category.exclude_from_local_holds_priority %]
+ <span>Kyllä</span>
+ [% ELSE %]
+ <span>Ei</span>
+ [% END %]
+ </td>
+ [% IF (category.noissuescharge) %]
+ <td>[% category.noissuescharge | $Price %]</td>
+ [% ELSE %]
+ <td>[% 0.00 | $Price %]</td>
+ [% END %]
+ [% IF (category.noissueschargeguarantees) %]
+ <td>[% category.noissueschargeguarantees | $Price %]</td>
+ [% ELSE %]
+ <td>[% 0.00 | $Price %]</td>
+ [% END %]
+ [% IF (category.noissueschargeguarantorswithguarantees) %]
+ <td>[% category.noissueschargeguarantorswithguarantees | $Price %]</td>
+ [% ELSE %]
+ <td>[% 0.00 | $Price %]</td>
+ [% END %]
+ <td class="actions">
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/categories.pl?op=add_form&amp;categorycode=[% category.categorycode |uri %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa</a>
+ <a class="btn btn-default btn-xs" href="/cgi-bin/koha/admin/categories.pl?op=delete_confirm&amp;categorycode=[% category.categorycode |uri %]"><i class="fa fa-trash-can"></i> Poista</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% ELSE %]
+ <div class="alert alert-warning">Asiakastyyppejä ei ole määritelty. <a href="/cgi-bin/koha/admin/categories.pl?op=add_form">Luo uusi tyyppi</a>.</div>
+ [% END %]
+ </div>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        var TalkingTechItivaPhoneNotification = [% Koha.Preference('TalkingTechItivaPhoneNotification') || 0 | html %];
+        var PhoneNotification = [% Koha.Preference('PhoneNotification') || 0 | html %];
+    </script>
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% Asset.js("js/messaging-preference-form.js") | $raw %]
+ [% Asset.js("lib/jquery/plugins/multiple-select/multiple-select.min.js") | $raw %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        var table_settings = [% TablesSettings.GetTableSettings( 'admin', 'categories', 'patron_categories', 'json' ) | $raw %];
+    </script>
+ [% Asset.js("js/categories.js") | $raw %]
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

@@ -1,0 +1,62 @@
+[% USE Koha %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Lähetetään listaasi &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Kohan verkkokirjasto[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='sendshelf' bodyclass='popup' %]
+ <div class="main">
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col order-first order-md-first order-lg-2">
+ <div id="usersendshelfform" class="maincontent">
+ [% IF ( email ) %]
+ [% IF ( SENT ) %]
+ <h1>Viesti lähetetty</h1>
+ <div class="alert alert-success">
+ <p>Lista lähetettiin sähköpostiin [% email | html %]</p>
+ </div>
+ <p><a class="focus close" href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=[% shelfid | html %]">Takaisin listoihin</a></p>
+ [% END %]
+ [% IF ( error ) %]
+ <div class="alert alert-warning">
+ <p>Ongelma listan lähettämisessä.</p>
+ </div>
+ [% END %]
+ [% ELSE %]
+ [% IF ( invalidlist ) %]
+ <div class="alert alert-warning">
+ <p>Sinulla ei ole oikeutta lähettää tätä listaa.</p>
+ </div>
+ <p><a class="button close" href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=[% shelfid | html %]">Takaisin listoihin</a></p>
+ [% ELSE %]
+ <form action="/cgi-bin/koha/opac-sendshelf.pl" method="post" id="sendshelfform">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="brief">
+ <legend><h1>Lähetetään listaasi</h1></legend>
+ <label for="email">Sähköpostiosoite:</label>
+ <input type="text" id="email" name="email" size="43" class="focus form-control" />
+
+ <label for="comment">Viesti:</label>
+ <textarea id="comment" name="comment" rows="4" cols="40" class="form-control"></textarea>
+
+ <input type="hidden" name="shelfid" value="[% shelfid | html %]" />
+ <input type="hidden" name="op" value="cud-send" />
+ </fieldset>
+ [% IF Koha.Preference('OPACHoldRequests') || Koha.Preference('OpacRenewalAllowed') %]<p id="donotrequestbymail">Ethän käytä tätä viestiä tehdäksesi pyyntöjä tai uusiaksesi lainojasi.</p>[% END %]
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Lähetä" />
+ <a class="cancel close" href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=[% shelfid | html %]">Peruuta</a>
+ </fieldset>
+ </form>
+
+ [% END # / IF invalidlist %]
+ [% END # / IF email %]
+ </div> <!-- / #usersendshelfform -->
+ </div> <!-- / .span12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' is_popup=1 %]
+[% BLOCK jsinclude %][% END %]

@@ -1,0 +1,96 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Duplicate warning") | html %] &rsaquo;
+ [% tx("Basket {basketnumber}", { basketnumber = basketno }) | html %] &rsaquo;
+ [% t("Acquisitions") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="acq_neworderempty_duplicate" class="acq">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'acquisitions-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/acqui-home.pl">Hankinnat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/basket.pl?basketno=[% basketno | uri %]">Tilauskori [% basketno | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kopiovaroitus</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-2">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+<div class="alert alert-warning">
+<h1>Kopiovaroitus</h1>
+<p>Valitsit ulkoisesta lähteestä tietueen, joka täsmää tietokannassa olevaan tietueeseen: <a href="[% PROCESS biblio_a_href biblionumber => biblionumber %]" target="_blank" title="Avaa uudessa ikkunassa"><i class="fa-solid fa-window-restore"></i> [% duplicatetitle | html %]</a></p>
+</div>
+
+<div class="row">
+<div class="col-sm-4">
+<div style="border: 1px solid #DDD; padding:1em;">
+<form method="get" action="/cgi-bin/koha/acqui/neworderempty.pl">
+<h4>Käytä olemassa olevaa tietuetta</h4>
+<p>Älä luo uutta kopiota tietueesta. Lisää tilaus olemassa olevasta tietueesta.</p>
+<input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+<input type="hidden" name="basketno" value="[% basketno | html %]" />
+<input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
+<input class="btn btn-primary" type="submit" value="Käytä olemassa olevaa" />
+</form>
+</div>
+</div>
+
+<div class="col-sm-4">
+<div style="border: 1px solid #DDD; padding:1em;">
+<form method="get" action="/cgi-bin/koha/acqui/basket.pl">
+<h4>Peruuta ja palaa tilaukseen</h4>
+<p>Palaa tilauskorin tietoihin tekemättä uutta tilausta.</p>
+<input type="hidden" name="basketno" value="[% basketno | html %]" />
+<input class="btn btn-primary" type="submit" value="Peruuta" />
+</form>
+</div>
+</div>
+
+<div class="col-sm-4">
+<div style="border: 1px solid #DDD; padding:1em;">
+<form method="post" action="/cgi-bin/koha/acqui/neworderempty.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+<h4>Luo uusi tietue</h4>
+<p>Luo uusi tietue tuomalla uusi (kopio)tietue.</p>
+<input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+<input type="hidden" name="basketno" value="[% basketno | html %]" />
+<input type="hidden" name="breedingid" value="[% breedingid | html %]" />
+<input type="hidden" name="op" value="cud-use_external_source" />
+<input class="btn btn-primary" type="submit" value="Luo uusi" />
+</form>
+</div>
+</div>
+
+</div>
+
+</main>
+</div> <!-- /.col-md-10.order-md-2 -->
+
+<div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'acquisitions-menu.inc' %]
+ </aside>
+</div> <!-- /.col-md-2.order-md-1 -->
+</div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

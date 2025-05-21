@@ -1,0 +1,160 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% USE Koha %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE TablesSettings %]
+[% USE ItemTypes %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Holds history for") | html %] [% INCLUDE 'patron-title.inc' no_html = 1 %] &rsaquo;
+ [% t("Patrons") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="pat_holdshistory" class="pat">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Låntagare</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Reservationshistorik</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% INCLUDE 'members-toolbar.inc' %]
+<h1>Reservationshistorik</h1>
+
+[% UNLESS Koha.Preference('IntranetReadingHistoryHolds') %]
+ <div class="alert alert-warning">Personal har inte rätt att komma åt låntagares lånehistorik</div>
+[% ELSIF is_anonymous %]
+ <div class="alert alert-warning">Detta är en anonym låntagare, så ingen lånehistorik visas.</div>
+[% ELSIF ( !holds ) %]
+ <div class="alert alert-info">Denna låntagare har ingen reservationshistorik.</div>
+[% ELSE %]
+
+[% SET show_itemtype_column = Koha.Preference('AllowHoldItemTypeSelection') %]
+
+<div id="holdshistory" class="page-section">
+ <table id="table_holdshistory">
+ <thead>
+ <tr>
+ <th class="anti-the">Titel</th>
+ <th>Författare</th>
+ <th>Streckkod</th>
+ <th>Hyllsignatur</th>
+ <th>Bibliotek</th>
+ <th>Reservationsdatum</th>
+ <th>Utgångsdatum</th>
+ <th>Väntar sedan</th>
+ <th>Annulleringsdatum</th>
+ [% IF show_itemtype_column %]
+ <th>Begärd exemplartyp</th>
+ [% END %]
+ <th>Status</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH hold IN holds %]
+ <tr>
+ <td>[% INCLUDE 'biblio-title.inc' biblio=hold.biblio link = 1 %]</td>
+ <td>[% hold.biblio.author | html %]</td>
+ <td>[% hold.item.barcode | html %]</td>
+ <td>[% hold.item.itemcallnumber | html %]</td>
+ <td>[% Branches.GetName( hold.branchcode ) | html %]</td>
+ <td data-order="[% hold.reservedate | html %]">[% hold.reservedate | $KohaDates %]</td>
+ <td data-order="[% hold.expirationdate | html %]">
+ [% hold.expirationdate | $KohaDates %]
+ </td>
+ <td data-order="[% hold.waitingdate | html %]">
+ [% hold.waitingdate | $KohaDates %]
+ </td>
+ <td data-order="[% hold.cancellationdate | html %]">
+ [% hold.cancellationdate | $KohaDates %]
+ </td>
+ [% IF show_itemtype_column %]
+ <td>
+ [% IF hold.itemtype %]
+ [% ItemTypes.GetDescription( hold.itemtype ) | html %]
+ [% ELSE %]
+ <span>Alla exemplartyper</span>
+ [% END %]
+ </td>
+ [% END %]
+ <td>
+ [% IF hold.found == 'F' %]
+ <span>Genomförd</span>
+ [% ELSIF hold.cancellationdate %]
+ <span>Avbruten</span>
+ [% IF hold.cancellation_reason %]
+ ([% AuthorisedValues.GetByCode('HOLD_CANCELLATION', hold.cancellation_reason) | html %])
+ [% END %]
+ [% ELSIF hold.found == 'W' %]
+ <span>Väntar</span>
+ [% ELSIF hold.found == 'P' %]
+ <span>Bearbetar</span>
+ [% ELSIF hold.found == 'T' %]
+ <span>Under transport</span>
+ [% ELSE %]
+ <span>Väntande</span>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+</div>
+
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ <script>
+        $(document).ready(function() {
+            var table_settings = [% TablesSettings.GetTableSettings('members', 'holdshistory', 'holdshistory-table', 'json') | $raw %];
+            [% UNLESS show_itemtype_column %]
+              //Remove item type column settings
+              table_settings['columns'] = table_settings['columns'].filter(function(c){return c['columnname'] != 'itemtype';});
+            [% END %]
+            var table = KohaTable("table_holdshistory", {
+                "pagingType": "full",
+                "order": [[4, 'desc']]
+            }, table_settings);
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

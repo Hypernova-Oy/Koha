@@ -1,0 +1,4985 @@
+# Compendium of zh_CN.
+msgid ""
+msgstr ""
+"Project-Id-Version: Koha 24.11.03.000\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-23 04:07+0000\n"
+"PO-Revision-Date: 2024-09-28 03:01+0000\n"
+"Last-Translator: Atron Chen <atron@customer-support.com.tw>\n"
+"Language-Team: Koha Translation Team\n"
+"Language: zh-Hans-CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.6.2\n"
+"X-Pootle-Revision: 1\n"
+"X-Pootle-Path: /zh_CN/22.11/zh-Hans-CN-messages-js.po\n"
+
+#: koha-tmpl/intranet-tmpl/prog/js/acq.js:10
+msgid "ERROR: Price is not a valid number, please check the price and try again!"
+msgstr "错误：价格不是有效的数字，请检查价格并再试！"
+
+#: koha-tmpl/intranet-tmpl/prog/js/acq.js:314
+msgid "Fund amount exceeds parent allocation"
+msgstr "基金超过上层的配置额度"
+
+#: koha-tmpl/intranet-tmpl/prog/js/acq.js:316
+msgid "Fund amount exceeds period allocation"
+msgstr "基金超过年度的配置额度"
+
+#: koha-tmpl/intranet-tmpl/prog/js/acq.js:348
+msgid "New budget-parent is beneath budget"
+msgstr "新增上层预算"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:10
+msgid "Form not submitted because of the following problem(s)"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:14
+#, javascript-format
+msgid "%s item mandatory fields empty"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:31
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:64
+msgid "Update item"
+msgstr "更新馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:36
+msgid "You can't receive any more items"
+msgstr "您不能再签收任何馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:187
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:653
+msgid "Edit"
+msgstr "编辑"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:108
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1125
+#: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:9
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:592
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:67
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:18
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:18
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:16
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:16
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:193
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:102
+msgid "Delete"
+msgstr "删除"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:195
+msgid "Add item"
+msgstr "新增馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:196
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:106
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:338
+msgid "Clear"
+msgstr "清除"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:197
+#, fuzzy
+msgid "Add multiple items"
+msgstr "多重表单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:199
+#, fuzzy
+msgid "Number of items to add"
+msgstr "新增期数"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:200
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:84
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:78
+msgid "Add"
+msgstr "新增"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:201
+msgid "NOTE: Fields listed in the 'UniqueItemFields' system preference will not be copied"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:288
+msgid "is duplicated"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:313
+msgid "already exists in database"
+msgstr "已经在数据库里"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:52
+msgid "There is no record selected"
+msgstr "未选定纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:63
+msgid "quantity values are not filled in or are not numbers"
+msgstr "未填入数量或填入的不是数字"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:70
+#, fuzzy
+msgid "Some funds are not defined in item records"
+msgstr "期刊收条并未成为馆藏纪录。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:78
+msgid "Some required item subfields are not set"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/addorderiso2709.js:99
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:5
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:73
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:134
+#: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:110
+msgid "Loading"
+msgstr "载入中"
+
+#: koha-tmpl/intranet-tmpl/prog/js/ajax.js:18
+msgid "Internal Server Error, please reload the page"
+msgstr "服务器内部错误，请再上传页面"
+
+#: koha-tmpl/intranet-tmpl/prog/js/ajax.js:25
+msgid "You need to log in again, your session has timed out"
+msgstr "您必须重新登录，您的工作时间已过"
+
+#: koha-tmpl/intranet-tmpl/prog/js/ajax.js:31
+msgid "Error; your data might not have been saved"
+msgstr "错误：可能不能存储您的数据"
+
+#: koha-tmpl/intranet-tmpl/prog/js/ajax.js:35
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:20
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:4
+#: koha-tmpl/intranet-tmpl/prog/js/pages/circulation.js:98
+#: koha-tmpl/intranet-tmpl/prog/js/pages/circulation.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Dialog.vue:114
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:21
+msgid "Loading..."
+msgstr "载入中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/audio_alerts.js:53
+#, fuzzy
+msgid "Please select or enter a sound."
+msgstr "请从 %s 至 %s 之间选择一个。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/audio_alerts.js:76
+msgid "Are you sure you want to delete the selected audio alerts?"
+msgstr "确定删除选定的音效提示？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/audio_alerts.js:78
+msgid "Check the box next to the alert you want to delete."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/authorities-detail-modal.js:13
+msgid "Authority"
+msgstr "权威"
+
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:37
+#, fuzzy, javascript-format
+msgid "Error importing the authority type %s"
+msgstr "无效的容许值类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:44
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:76
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:73
+msgid "Please select a CSV (.csv) or ODS (.ods) spreadsheet file."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:59
+msgid "Do you really want to import the authority type fields and subfields? This will overwrite the current configuration. For safety reasons please use the export option to make a backup"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/authtype.js:61
+#, fuzzy, javascript-format
+msgid "Importing to authority type: %s. Importing from file: %s"
+msgstr "无效的容许值类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:91
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:82
+msgid "Your cart is currently empty"
+msgstr "您的采购单是空的"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:119
+#, fuzzy
+msgid "This record is already in your cart"
+msgstr "此馆藏已经在您的采购单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:136
+#, fuzzy
+msgid "This record has been added to your cart"
+msgstr "此馆藏新增至您的采购单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:208
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:213
+#, fuzzy, javascript-format
+msgid "%s record(s) added to your cart"
+msgstr "%s 馆藏新增至您的采购清单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:210
+#, javascript-format
+msgid "%s already in your cart"
+msgstr "%s 已在您的采购单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:218
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:311
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:429
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:444
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:454
+#, fuzzy
+msgid "No record was selected"
+msgstr "未选定馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:221
+#, fuzzy
+msgid "No record was added to your cart (already in your cart)!"
+msgstr "无馆藏新增到您的书目清单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:260
+#, fuzzy
+msgid "The record has been removed from your cart"
+msgstr "此馆藏已从您的书目清单移除"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:339
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:245
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:300
+msgid "Are you sure you want to empty your cart?"
+msgstr "确定清空您的采购单吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:358
+#, fuzzy
+msgid "Are you sure you want to remove the selected records?"
+msgstr "确定删除指定的馆藏吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:412
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:415
+#, fuzzy, javascript-format
+msgid "Records in your cart: %s"
+msgstr "采购单里的馆藏：%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:487
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:495
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:498
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:509
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:111
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:421
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:429
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:437
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:440
+msgid "Add to cart"
+msgstr "新增到书目清单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:490
+#: koha-tmpl/intranet-tmpl/prog/js/basket.js:512
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:418
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:426
+msgid "In your cart"
+msgstr "在您的书目清单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:36
+#, fuzzy
+msgid "Error importing the framework"
+msgstr "输出 %s 框架"
+
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:57
+#, javascript-format
+msgid "Are you sure you want to replace the fields and subfields for the %s framework structure? The existing structure will be overwritten! For safety reasons, it is recommended to use the export option to make a backup first."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:59
+#, fuzzy, javascript-format
+msgid "Importing to framework: %s. Importing from file: %s."
+msgstr "无效的容许值类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:88
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:90
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:13
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:14
+msgid "Previous"
+msgstr "上一页"
+
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:93
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:95
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:12
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:13
+msgid "Next"
+msgstr "下一页"
+
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:97
+msgid "Results"
+msgstr "结果"
+
+#: koha-tmpl/intranet-tmpl/prog/js/browser.js:122
+#, fuzzy
+msgid "Go back to the results"
+msgstr "返回结果"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:3
+#, javascript-format
+msgid "Please enter a valid date (should match %s)."
+msgstr "请输入一个有效的日期 (应匹配 %s)。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Fri"
+msgstr "星期五"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Mon"
+msgstr "星期一"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Sat"
+msgstr "星期六"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Sun"
+msgstr "星期日"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Thu"
+msgstr "星期四"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Tue"
+msgstr "星期二"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
+msgid "Wed"
+msgstr "星期三"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Friday"
+msgstr "星期五"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Monday"
+msgstr "星期一"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Saturday"
+msgstr "星期六"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Sunday"
+msgstr "星期日"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Thursday"
+msgstr "星期四"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Tuesday"
+msgstr "星期二"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:139
+msgid "Wednesday"
+msgstr "星期三"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Apr"
+msgstr "四月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Aug"
+msgstr "八月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Dec"
+msgstr "十二月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Feb"
+msgstr "二月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Jan"
+msgstr "一月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Jul"
+msgstr "七月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Jun"
+msgstr "六月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Mar"
+msgstr "三月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "May"
+msgstr "五月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Nov"
+msgstr "十一月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Oct"
+msgstr "十月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:143
+msgid "Sep"
+msgstr "九月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "April"
+msgstr "四月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "August"
+msgstr "八月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "December"
+msgstr "十二月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "February"
+msgstr "二月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "January"
+msgstr "一月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "July"
+msgstr "七月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "June"
+msgstr "六月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "March"
+msgstr "三月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "November"
+msgstr "十一月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "October"
+msgstr "十月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/calendar.js:144
+msgid "September"
+msgstr "九月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cancel_booking_modal.js:47
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1188
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1256
+#, fuzzy
+msgid "Failure"
+msgstr "失败"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cart.js:6
+#: koha-tmpl/intranet-tmpl/prog/js/cart.js:28
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:17
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:77
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:96
+msgid "No item was selected"
+msgstr "未选定馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cart.js:83
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:351
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:350
+msgid "Place hold"
+msgstr "预约"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cashup_modal.js:23
+msgid "{credit_type_description} against {debit_type_description}"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:12
+msgid "Please note that this external search could replace the current record."
+msgstr "请注意此外部寻找寻找可能取代现在的纪录。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:33
+#, javascript-format
+msgid "%s item(s) are attached to this record. You must delete all items before deleting this record."
+msgstr "%s 与此记录相关的馆藏。你必须先删除所有馆藏才能删除记录。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:36
+#, fuzzy, javascript-format
+msgid "Warning: This record is used in %s order(s). These orders will be cancelled. Are you sure you want to delete this record?"
+msgstr "警告：此记录已使用于 %s 订单。删除它可能对采访模块发生严重的问题。确定删除此记录吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:38
+#, javascript-format
+msgid "%s order(s) are using this record. You need order managing permissions to delete this record."
+msgstr "%s 使用此记录的订单。需要订单管理权限才能删除此记录。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:42
+#, javascript-format
+msgid "%s deleted order(s) are using this record. Are you sure you want to delete this record?"
+msgstr "%s 以此记录删除订单。确定删除此记录吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:44
+#, javascript-format
+msgid "%s deleted order(s) are using this record. You need order managing permissions to delete this record."
+msgstr "%s 以此记录删除订单。需要订单管理权限才能删除此记录。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:47
+#, javascript-format
+msgid "%s holds(s) for this record. Are you sure you want to delete this record?"
+msgstr "%s 此记录的馆藏。确定删除此记录吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:49
+#, fuzzy, javascript-format
+msgid "%s subscription(s) are attached to this record. You must delete all subscription before deleting this record."
+msgstr "%s 与此记录相关的馆藏。必须先删除馆藏才能删除记录。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:51
+msgid "Are you sure you want to delete this record?"
+msgstr "确定要删除此记录吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:67
+#, javascript-format
+msgid "%s hold(s) on this record. You must delete all holds before deleting all items."
+msgstr "%s 此记录的馆藏。必须先删除所有馆藏才能删除此记录。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/catalog.js:69
+#, javascript-format
+msgid "Are you sure you want to delete the %s attached items?"
+msgstr "确定删除此 %s 附加的馆藏吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cataloging.js:124
+#, fuzzy
+msgid "(select to create)"
+msgstr "新增"
+
+# pattern是指？式样或其它意思？
+#: koha-tmpl/intranet-tmpl/prog/js/cataloging.js:649
+#, fuzzy
+msgid "Something went wrong. Maybe the value already exists?"
+msgstr "出错了。不能新增编号模式。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/cataloging_additem.js:158
+msgid "Template name is required."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:14
+msgid "Category code can only contain the following characters: letters, numbers, - and _."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:32
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:111
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:116
+msgid "Please choose an enrollment period in months OR by date."
+msgstr "请祗选择以月计或日计的注册期间。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:124
+#, fuzzy
+msgid "Please select ..."
+msgstr "请选择一个 ..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:127
+#, fuzzy
+msgid "All selected"
+msgstr "未勾选。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:128
+#, fuzzy, javascript-format
+msgid "# of % selected"
+msgstr "未勾选。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/categories.js:129
+#, fuzzy
+msgid "No matches found"
+msgstr "未找到匹配的纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:13
+#, javascript-format
+msgid "Note: %s out of %s renewals have been logged"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:24
+#, fuzzy
+msgid "Renewed by"
+msgstr "续借到期日："
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:24
+#, fuzzy
+msgid "manually"
+msgstr "一月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:26
+msgid "Automatic"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:26
+#, fuzzy
+msgid "Renewal type:"
+msgstr "续借失败："
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:34
+msgid "Loading... you may continue scanning."
+msgstr "装入中......您可继续扫瞄。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:69
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:443
+msgid "Today's checkouts"
+msgstr "今天的借出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:71
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:445
+msgid "Previous checkouts"
+msgstr "稍早的借出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:128
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:858
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:156
+msgid "by _AUTHOR_"
+msgstr "by _AUTHOR_"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:149
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:879
+msgid "On-site checkout"
+msgstr "现场借出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:153
+#, fuzzy
+msgid "This item has been recalled and the due date updated"
+msgstr "此馆藏新增至您的采购单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:255
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:385
+#, fuzzy
+msgid "Recalled"
+msgstr "RecallItem "
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:262
+msgid "Booked"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:268
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:387
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:314
+msgid "On hold"
+msgstr "预约中"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:275
+msgid "Not renewable"
+msgstr "不可续借"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:282
+msgid "Must be renewed at the library"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:740
+msgid "Not allowed: patron restricted"
+msgstr "不允许：读者停权"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:294
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:742
+msgid "Not allowed: overdue"
+msgstr "不允许：逾期"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:301
+#, javascript-format
+msgid "No renewal before %s"
+msgstr "无法在 %s 之前续借"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:308
+msgid "Can no longer be auto-renewed - number of checkout days exceeded"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:315
+#, fuzzy
+msgid "Automatic renewal failed, patron has unpaid fines"
+msgstr "%s 无法自动续借，您的账号已过期。 "
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:322
+#, fuzzy
+msgid "Automatic renewal failed, account expired"
+msgstr "%s 无法自动续借，您的账号已过期。 "
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:331
+msgid "Renewal denied by syspref"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:366
+#, fuzzy
+msgid "{renewals_left} of {renewals_allowed} renewals remaining"
+msgstr "%s 里的 %s 仍在续借中"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:368
+#, fuzzy
+msgid " and {renewals_left} of {renewals_allowed} unseen renewals remaining"
+msgstr "%s 里的 %s 仍在续借中"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:374
+msgid "Scheduled for automatic renewal"
+msgstr "排定自动续借"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:389
+#, fuzzy, javascript-format
+msgid "Confirm (%s)"
+msgstr "确认"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:403
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:405
+msgid "Claim returned"
+msgstr "声称还入"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:460
+#, fuzzy
+msgid "No itemtype"
+msgstr "Koha馆藏类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:466
+#, fuzzy
+msgid "Number of checkouts by item type"
+msgstr "借出次数"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:637
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:639
+msgid "Checked in"
+msgstr "还入"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:641
+msgid "Patron note"
+msgstr "读者说明"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:644
+msgid "Unable to check in"
+msgstr "不能还入"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:727
+msgid "Renewed, due:"
+msgstr "续借到期日："
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:730
+msgid "Renew failed:"
+msgstr "续借失败："
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:732
+msgid "not checked out"
+msgstr "未借出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:734
+msgid "too many renewals"
+msgstr "续借过多"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:736
+msgid "too many consecutive renewals without being seen by the library"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:738
+msgid "on hold"
+msgstr "保留中"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:744
+#, fuzzy
+msgid "Unable to find an open day"
+msgstr "不能删除读者"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:748
+#, fuzzy
+msgid "reason unknown"
+msgstr "日期不明"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:796
+#, fuzzy
+msgid "There are no items to be renewed."
+msgstr "未选定纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1080
+#, fuzzy
+msgid "Double click to edit"
+msgstr "勾选以编辑"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1128
+msgid "Resolve"
+msgstr "解决"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1133
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:100
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:107
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:161
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:398
+msgid "Actions"
+msgstr "动作"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1136
+#, fuzzy
+msgid "Edit notes"
+msgstr "编辑馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1195
+#, fuzzy
+msgid "Show 1 claim"
+msgid_plural "Show all {count} claims"
+msgstr[0] "显示所有字段"
+msgstr[1] "显示所有字段"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1200
+msgid "Show 1 unresolved claim"
+msgid_plural "Show {count} unresolved claims"
+msgstr[0] ""
+msgstr[1] ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1224
+msgid "Update"
+msgstr "更新"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1225
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:415
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:111
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:48
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:167
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:84
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:406
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:133
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:371
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:378
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:78
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:192
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:89
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:106
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:142
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:100
+msgid "Cancel"
+msgstr "取消"
+
+#: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1266
+#, fuzzy
+msgid "Are you sure you want to delete this return claim?"
+msgstr "您确定删除此译文吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:10
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:11
+msgid "First"
+msgstr "第一项"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:11
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:12
+msgid "Last"
+msgstr "最后项"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:15
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1072
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:16
+msgid "No data available in table"
+msgstr "窗体内无可用的资料"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:16
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:17
+#, fuzzy
+msgid "Showing _START_ to _END_ of _TOTAL_ entries"
+msgstr "显示 _START_ to _END_ of _TOTAL_"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:17
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:18
+msgid "No entries to show"
+msgstr "暂无项目"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:18
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:19
+msgid "(filtered from _MAX_ total entries)"
+msgstr "(筛选自 _MAX_ total 款目)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:19
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:20
+msgid "Show _MENU_ entries"
+msgstr "显示_MENU_项目"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:21
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:22
+msgid "Processing..."
+msgstr "处理中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:22
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:23
+msgid "Search:"
+msgstr "搜寻："
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:23
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:24
+msgid "No matching records found"
+msgstr "未找到匹配的纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:25
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:26
+msgid "Copy to clipboard"
+msgstr "复制至剪贴簿"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:26
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:27
+msgid "Press <i>ctrl</i> or <i>⌘</i> + <i>C</i> to copy the table data<br>to your system clipboard.<br><br>To cancel, click this message or press escape."
+msgstr "按<i>ctrl</i>或<i>⌘</i> + <i>C</i> 就能复制表格数据<br>到系统的剪贴簿。<br><br>点选此讯息或按 ESC 键，就能取消。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:28
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:29
+#, javascript-format
+msgid "Copied %d rows to clipboard"
+msgstr "复制 %d 列至剪贴簿"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:29
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:30
+msgid "Copied one row to clipboard"
+msgstr "复制一列至剪贴簿"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:31
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:32
+msgid "Print"
+msgstr "打印"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:32
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:695
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:33
+msgid "Copy"
+msgstr "复制"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:33
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:34
+msgid "CSV"
+msgstr "CSV"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:34
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:35
+msgid "Excel"
+msgstr "Excel"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:41
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:688
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:690
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:62
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:64
+msgid "Clear filter"
+msgstr "清除筛选器"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:55
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:124
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:27
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:43
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:27
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:16
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:27
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:18
+msgid "All"
+msgstr "所有"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:242
+#: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:92
+msgid "a an the"
+msgstr "a an the"
+
+# pattern是指？式样或其它意思？
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:400
+#, fuzzy, javascript-format
+msgid ""
+"Something went wrong when loading the table.\n"
+"%s: %s. \n"
+"%s"
+msgstr "出错了。不能新增编号模式。"
+
+# pattern是指？式样或其它意思？
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:406
+#, fuzzy
+msgid "Something went wrong when loading the table."
+msgstr "出错了。不能新增编号模式。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:723
+msgid "Columns settings"
+msgstr "设定栏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:724
+msgid "Columns"
+msgstr "栏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:738
+msgid "Export or print"
+msgstr "汇出或印出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:739
+msgid "Export"
+msgstr "汇出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:747
+msgid "Copied!"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:754
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:755
+msgid "Copy shareable link"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:775
+msgid "Configure table"
+msgstr "配置表"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:776
+#, fuzzy
+msgid "Configure"
+msgstr "确认"
+
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:866
+#, fuzzy, javascript-format
+msgid "%s search"
+msgstr "搜寻："
+
+#: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:71
+msgid "This field is mandatory and must have at least one mapping"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:152
+#, fuzzy, javascript-format
+msgid "Search field '%s' already exists"
+msgstr "已经在数据库里"
+
+#: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:174
+#, fuzzy, javascript-format
+msgid "Facet '%s' already exists"
+msgstr "已经在数据库里"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:6
+msgid "This pickup location is not allowed according to circulation rules"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:211
+#, fuzzy
+msgid " (current) "
+msgstr "当前模块"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:245
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:101
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:135
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:370
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:73
+msgid "No"
+msgstr "不"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:246
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:91
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:136
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:370
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:71
+msgid "Yes"
+msgstr "是的"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:263
+msgid "Resume"
+msgstr "恢复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:266
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:414
+msgid "Suspend"
+msgstr "暂停"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:275
+msgid "Hold is <strong>suspended</strong>"
+msgstr "预约被 <strong>中止</strong>"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:277
+#, javascript-format
+msgid "until %s"
+msgstr "直到 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:283
+#, javascript-format
+msgid "Next available %s item"
+msgstr "下个可取得 %s 馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:287
+#, fuzzy, javascript-format
+msgid "Next available item group <strong>%s</strong> item"
+msgstr "下个可用的馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:295
+msgid "Item is <strong>waiting here</strong>"
+msgstr "馆藏 <strong>等待中</strong>"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:297
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:301
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
+#, javascript-format
+msgid "at %s"
+msgstr "在 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:300
+msgid "Item is <strong>waiting</strong>"
+msgstr "馆藏 <strong>等待中</strong>"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:309
+#, javascript-format
+msgid "Item is <strong>in transit</strong> from %s since %s"
+msgstr "馆藏 <strong>转移</strong> 自 %s 自从 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
+#, javascript-format
+msgid "Item hasn't been transferred yet from %s"
+msgstr "馆藏还没有从 %s 转送"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:350
+msgid "Unable to resume, hold not found"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:353
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:439
+#, fuzzy
+msgid "Your request could not be processed. Check the logs for details."
+msgstr "不能新增文件。检查您的权限。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:399
+#, fuzzy
+msgid "Suspend hold on"
+msgstr "保留您的预约 "
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:406
+msgid "Suspend until:"
+msgstr "暂停至："
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:409
+msgid "Clear date to suspend indefinitely"
+msgstr "无限延搁清除曰期"
+
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:436
+#, fuzzy
+msgid "Unable to suspend, hold not found."
+msgstr "不能删除读者"
+
+#: koha-tmpl/intranet-tmpl/prog/js/item_search_fields.js:5
+#, fuzzy
+msgid "Please enter letters or numbers"
+msgstr "请键入 {0} 以内的字符。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/item_search_fields.js:10
+msgid "Are you sure you want to delete this field?"
+msgstr "您确定删除此字段吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:21
+#, javascript-format
+msgid "A default letter with the code '%s' already exists."
+msgstr "含代码 '%s' 的缺省信件已经存在。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:23
+#, javascript-format
+msgid "A letter with the code '%s' already exists for '%s'."
+msgstr "含代码 '%s' 的缺省信件已经存在可供 '%s' 使用。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:47
+#, fuzzy, javascript-format
+msgid "A letter with the code '%s' already exists for '%s'. Overwrite this letter?"
+msgstr "含代码 '%s' 的缺省信件已经存在可供 '%s' 使用。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:52
+msgid "Existing format settings for all notices of the same language will be overwritten by these format settings."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:110
+#, javascript-format
+msgid "Please specify title and content for %s"
+msgstr "请指定 %s 的题名与内容"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:119
+msgid "Please fill at least one template."
+msgstr "至少请选择一个模板。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/letter.js:156
+msgid " characters"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:19
+msgid "Both subfield values should be filled or empty."
+msgstr "两个分栏的值都应填入或空白。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:24
+msgid "The destination should be filled."
+msgstr "目的地应填写。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:29
+msgid "If the field is a control field, the subfield should be empty"
+msgstr "控制字段的分栏，应为空白"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:35
+msgid "The source subfield should be filled for update."
+msgstr "来源字段应填入更新的数据。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:40
+msgid "The source field should be filled."
+msgstr "来源字段应填入数据。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:45
+#, fuzzy
+msgid "The conditional field should be filled."
+msgstr "来源字段应填入数据。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:49
+#, fuzzy
+msgid "The conditional comparison operator should be filled."
+msgstr "目的地应填写。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:55
+#, fuzzy
+msgid "The conditional regular expression should be filled."
+msgstr "目的地应填写。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:58
+#, fuzzy
+msgid "The conditional value should be filled."
+msgstr "目的地应填写。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:111
+#, fuzzy
+msgid "Are you sure you wish to delete this template action?"
+msgstr "确定删除此模板吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:115
+msgid "Are you sure you wish to delete this template?"
+msgstr "确定删除此模板吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:122
+msgid "Every"
+msgstr "每次"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:308
+#, javascript-format
+msgid "Edit action %s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:311
+msgid "Update action"
+msgstr "更新作业"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:39
+#, fuzzy
+msgid "Are you sure you want to delete this message? This cannot be undone."
+msgstr "确定删除此读者照片吗？删除后不能恢复。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:139
+msgid "Dates of birth should be entered in the format 'MM/DD/YYYY'"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:141
+msgid "Dates of birth should be entered in the format 'YYYY-MM-DD'"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:143
+msgid "Dates of birth should be entered in the format 'DD/MM/YYYY'"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:145
+msgid "Dates of birth should be entered in the format 'DD.MM.YYYY'"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:154
+#, fuzzy
+msgid "Are you sure you want to update this child to an Adult category? This cannot be undone."
+msgstr "确定删除此读者照片吗？删除后不能恢复。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-menu.js:169
+#, fuzzy
+msgid "Are you sure you want to renew this patron's registration?"
+msgstr "您确定删除此译文吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members-patron-selections.js:21
+#, fuzzy, javascript-format
+msgid "Patrons selected: %s"
+msgstr "未勾选。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:20
+msgid "Please confirm whether this is a duplicate patron"
+msgstr "请确认是否为重复的读者"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:82
+#, javascript-format
+msgid "Minimum password length: %s"
+msgstr "密码最短长度：%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:178
+msgid "Age"
+msgstr "时间"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:182
+#, fuzzy, javascript-format
+msgid "%s year"
+msgstr "%s 年"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:182
+#, javascript-format
+msgid "%s years"
+msgstr "%s 年"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:187
+#, fuzzy, javascript-format
+msgid "%s month"
+msgstr "3 个月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/members.js:187
+#, fuzzy, javascript-format
+msgid "%s months"
+msgstr "3 个月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/merge-record.js:72
+#, fuzzy
+msgctxt "Bibliographic record"
+msgid "The field is non-repeatable and already exists in the destination record. Therefore, you cannot add it."
+msgstr "此字段不可重复，且已经存在于目标纪录里。因此，不可新增它。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/merge-record.js:107
+#, fuzzy
+msgctxt "Bibliographic record"
+msgid "The subfield is non-repeatable and already exists in the destination record. Therefore, you cannot add it."
+msgstr "此分字段不可重复且已经存在于目标纪录里。因此，不可新增它。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/messaging-preference-form.js:18
+msgid "Change messaging preferences to default for this category?"
+msgstr "修改此类型的缺省消息首选吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/add_catalog_concern.js:41
+#: koha-tmpl/opac-tmpl/bootstrap/js/modals/catalog_concern.js:56
+msgid "Your concern was successfully submitted."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/add_catalog_concern.js:54
+#: koha-tmpl/opac-tmpl/bootstrap/js/modals/catalog_concern.js:61
+msgid "There was an error when submitting your concern, please contact a librarian."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:49
+msgid "Assignee"
+msgstr "代理人"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:59
+msgid "Loading updates . . ."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:93
+msgid "Public"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:96
+msgid "Private"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:194
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:110
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:718
+#, fuzzy
+msgid "years"
+msgstr "%s 年"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:217
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:129
+msgid "Search for a patron"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:250
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:296
+#, javascript-format
+msgid "Concern #%s updated successfully."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:261
+#: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:307
+#, javascript-format
+msgid "Error resolving concern #%s. Check the logs for details."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:43
+#, fuzzy
+msgid "Edit booking"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:46
+#, fuzzy
+msgid "Place booking"
+msgstr "预约"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:198
+msgid "Pickup location"
+msgstr "提取地点"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:249
+#, fuzzy
+msgid "Item type"
+msgstr "Koha馆藏类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1177
+msgid "Booking successfully placed"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1245
+msgid "Booking successfully updated"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/circulation.js:72
+#, fuzzy
+msgid "Remove restriction?"
+msgstr "年龄限制"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/circulation.js:113
+msgid "You must select checkout(s) to export"
+msgstr "您必须选择借出才能输出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:10
+msgid "Error: presence of invalid data prevent saving. Please make the corrections and try again."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:48
+msgid "Nothing to save"
+msgstr "未存储任何数据"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:51
+msgid "Saving..."
+msgstr "储存..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:76
+#, javascript-format
+msgid "Saved preference %s"
+msgstr "存储引用 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:97
+msgid "modified"
+msgstr "修改过"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:104
+msgid "You have made changes to system preferences."
+msgstr "必须改变系统首选。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:202
+#, fuzzy
+msgid "Are you sure you want to delete this consent item?"
+msgstr "确定删除此封面吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:268
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:284
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:299
+#, fuzzy
+msgid "Collapse this section"
+msgstr "勾选以展开此块"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:278
+#, fuzzy
+msgid "Expand this section"
+msgstr "勾选以展开此块"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:329
+msgid "Note: _ALL_ value will override all other values"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:343
+#, fuzzy
+msgid "The following values are not formatted correctly:"
+msgstr "发生以上的错误："
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:483
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:17
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:46
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:303
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:126
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:154
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:155
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:195
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:106
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageTitlesList.vue:58
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:217
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlePackagesList.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:92
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:194
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:77
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:304
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:73
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:229
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:130
+msgid "Name"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:490
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:504
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:534
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:548
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:562
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:31
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:53
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:29
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:40
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:64
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:67
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:31
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:40
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:56
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:45
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:67
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:89
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:60
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:176
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:203
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:226
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:249
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:274
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:297
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:55
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:100
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:146
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:178
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:40
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:32
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:54
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:83
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:111
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:146
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:171
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:36
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:125
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:111
+msgid "Required"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:497
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:333
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:45
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:225
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:43
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:12
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:87
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:321
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:136
+msgid "Description"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:511
+msgid "Requires consent in OPAC"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:519
+msgid "Requires consent in staff interface"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:527
+msgid "String used to identify cookie name"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:541
+msgid "Cookie domain"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:555
+msgid "Cookie path"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:578
+msgid "Expand"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:585
+#, fuzzy
+msgid "Collapse"
+msgstr "勾选以展开此块"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:609
+msgid "You must complete all fields"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:657
+msgid "Unable to Base64 decode value stored in CookieConsentedJS syspref: "
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:665
+msgid "Unable to JSON parse decoded value stored in CookieConsentedJS syspref: "
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:681
+msgid "Add new code"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:57
+msgid "Coce image from Amazon.com"
+msgstr "来自Amazon.com的Coce图片"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:59
+msgid "Coce image from Google Books"
+msgstr "来自谷歌Books的Coce图片"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:61
+msgid "Coce image from Open Library"
+msgstr "来自开放图书馆的Coce图片"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:98
+#: koha-tmpl/opac-tmpl/bootstrap/js/amazonimages.js:10
+#: koha-tmpl/opac-tmpl/bootstrap/js/amazonimages.js:12
+#: koha-tmpl/opac-tmpl/bootstrap/js/bakertaylorimages.js:9
+#: koha-tmpl/opac-tmpl/bootstrap/js/google-jackets.js:78
+#: koha-tmpl/opac-tmpl/bootstrap/js/localcovers.js:26
+#: koha-tmpl/opac-tmpl/bootstrap/js/localcovers.js:56
+#: koha-tmpl/opac-tmpl/bootstrap/js/openlibrary.js:66
+msgid "No cover image available"
+msgstr "无可用的封面"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:331
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:361
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:369
+#, fuzzy
+msgid "Nothing is selected"
+msgstr "未勾选。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:422
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:434
+#, fuzzy
+msgid "You must select at least one record"
+msgstr "您必须选择至少一个馆藏。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/results.js:447
+msgid "At least two records must be selected for merging"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:37
+#, javascript-format
+msgid "AJAX failed to approve tag: %s"
+msgstr "AJAX 不能审核标签：%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:43
+#, javascript-format
+msgid "AJAX failed to reject tag: %s"
+msgstr "AJAX 不能拒绝标签：%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:46
+#, javascript-format
+msgid "%s is permitted!"
+msgstr "%s 是允许的！"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:49
+#, javascript-format
+msgid "%s is prohibited!"
+msgstr "%s 是禁止的！"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:52
+#, javascript-format
+msgid "%s is neither permitted nor prohibited!"
+msgstr "%s 即不允许，也不禁止！"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:57
+msgid " Test"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:70
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:187
+msgid "Clear all"
+msgstr "全部清除"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:70
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:154
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:184
+msgid "Select all"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:70
+#, fuzzy
+msgid "Select all pending"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:113
+msgid "Reject"
+msgstr "拒绝"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:115
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:118
+msgid "Approved"
+msgstr "通过"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:136
+msgid "Approve"
+msgstr "通过"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:138
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:141
+msgid "Rejected"
+msgstr "拒绝"
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:151
+msgid "Testing..."
+msgstr "测试..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:163
+#, javascript-format
+msgid "AJAX error (%s alert)"
+msgstr "AJAX 错误 (%s 报警)"
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:112
+#, fuzzy
+msgid "No camera detected."
+msgstr "还没有选择订单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:116
+msgid "Could not access camera."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:120
+#, fuzzy
+msgid "Access to camera denied."
+msgstr "权限不足"
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:123
+msgid "This feature is available only in secure contexts (HTTPS)."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:126
+#, fuzzy
+msgid "An unknown error occurred: "
+msgstr "发生不明的错误。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:6
+msgid "Are you sure you want to remove this recall?"
+msgstr "您确定要消除此催还通知吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:12
+msgid "The recall may have already been cancelled. Please refresh the page."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:14
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:94
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:153
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:165
+msgid "Cancelled"
+msgstr "已取消"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:26
+#, fuzzy
+msgid "Are you sure you want to expire this recall?"
+msgstr "确定要删除此记录吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:32
+msgid "The recall may have already been expired. Please refresh the page."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:34
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:734
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:139
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:164
+msgid "Expired"
+msgstr "过期"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:46
+#, fuzzy
+msgid "Are you sure you want to revert the waiting status of this recall?"
+msgstr "确定删除此题名的标签吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:52
+msgid "The recall may have already been reverted. Please refresh the page."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:54
+#, fuzzy
+msgid "Waiting status reverted"
+msgstr "标签状态在此。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:66
+#, fuzzy
+msgid "Are you sure you want to mark this recall as overdue?"
+msgstr "确定要删除此记录吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:72
+msgid "The recall may have already been marked as overdue. Please refresh the page."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:74
+#, fuzzy
+msgid "Marked overdue"
+msgstr "不允许：逾期"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:86
+#, fuzzy
+msgid "Are you sure you want to remove this recall and return the item to it's home library?"
+msgstr "确定删除这个虚拟书架里的馆藏吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:92
+msgid "The recall may have already been removed. Please refresh the page."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:116
+#, fuzzy
+msgid "Are you sure you want to remove the selected recall(s)?"
+msgstr "确定删除指定的馆藏吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/recalls.js:118
+#, fuzzy
+msgid "Please make a selection."
+msgstr "请选择一个 ..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/resolve_claim_modal.js:9
+#, fuzzy, javascript-format
+msgid "%s (current status)"
+msgstr "当前模块"
+
+#: koha-tmpl/intranet-tmpl/prog/js/rotating-collections.js:7
+#, fuzzy
+msgid "Are you sure you want to delete this rotating collection?"
+msgstr "您确定删除此译文吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/rotating-collections.js:12
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:491
+#, fuzzy
+msgid "Are you sure you want to remove this item?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:8
+#, fuzzy
+msgid "The results could not be loaded"
+msgstr "不能分析的标题"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:11
+#, fuzzy, javascript-format
+msgid "Please delete %s character(s)"
+msgstr "请键入至少 {0} 字符。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:15
+#, fuzzy, javascript-format
+msgid "Please enter %s or more characters"
+msgstr "请键入 {0} 以内的字符。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:20
+#, fuzzy
+msgid "Loading more results…"
+msgstr "存储报表结果"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:22
+#, javascript-format
+msgid "You can only select %s item(s)"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:49
+msgid "No results found"
+msgstr "未找到结果"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:25
+#, fuzzy
+msgid "Searching…"
+msgstr "寻找"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:26
+#, fuzzy
+msgid "Remove all items"
+msgstr "移除指定的馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/select2.js:27
+#, fuzzy
+msgid "Remove item"
+msgstr "移除栏位"
+
+#: koha-tmpl/intranet-tmpl/prog/js/serials-toolbar.js:9
+msgid "Are you sure you want to delete this subscription?"
+msgstr "确定删除此订阅吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/serials-toolbar.js:12
+msgid "Are you sure you want to reopen this subscription?"
+msgstr "确定再打开此订阅吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/serials-toolbar.js:15
+msgid "Are you sure you want to close this subscription?"
+msgstr "您确定要关闭此订阅吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/sms_providers.js:36
+msgid "Add an SMS cellular provider"
+msgstr "新增 SMS 电信商"
+
+#: koha-tmpl/intranet-tmpl/prog/js/sms_providers.js:44
+#, fuzzy, javascript-format
+msgid "Edit provider %s"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/sms_providers.js:67
+#, fuzzy, javascript-format
+msgid "Are you sure you want to delete %s? %s patron(s) are using it!"
+msgstr "确定删除此 %s 附加的馆藏吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/sms_providers.js:69
+#, fuzzy, javascript-format
+msgid "Are you sure you want to delete %s?"
+msgstr "确定删除 %s %s 吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:154
+#, fuzzy
+msgid "Please enter a decimal number in the format: 0.0"
+msgstr "请键入此模式的名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:305
+#: koha-tmpl/opac-tmpl/bootstrap/js/global.js:337
+#, fuzzy
+msgid "Back to top"
+msgstr "回到工具"
+
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:652
+#, fuzzy
+msgid "An error occurred. Check the logs for details."
+msgstr "发生错误。%s "
+
+#: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:739
+#, fuzzy
+msgid "Restricted"
+msgstr "拒绝"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:19
+msgid "Frequency and subscription length provided doesn't combine well. Please consider entering an issue count rather than a time period."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:51
+msgid "If you wish to claim late or missing issues you must link this subscription to a vendor. Click OK to ignore or Cancel to return and enter a vendor"
+msgstr "催缺馆藏时，必须先连结此订阅至代理商。勾选忽略或取消，回到上一页，并选择代理商"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:58
+#, fuzzy
+msgid "The vendor does not exist"
+msgstr "无此馆藏。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:65
+#, fuzzy
+msgid "You must choose or create a bibliographic record"
+msgstr "订阅必须有书目纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:72
+#, fuzzy
+msgid "Bibliographic record does not exist!"
+msgstr "书目纪录 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:77
+msgid "Number of issues to display to staff must be a number"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:81
+msgid "Number of issues to display to the public must be a number"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:91
+msgid "You must choose a first publication date"
+msgstr "您必须选择一个首次出版日期"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:96
+msgid "You must choose a subscription length or an end date."
+msgstr "您必须选择订阅长度或结束日期。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:100
+msgid "You have modified the advanced prediction pattern. Please save your work or cancel modifications."
+msgstr "您已修改高级预测模式。请存储您的工作或取消修改。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:105
+msgid "Warning! Present pattern has planned irregularities. Click on 'Test prediction pattern' to check if it's still valid"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:107
+msgid "Please click on 'Test prediction pattern' before saving subscription."
+msgstr "存储订阅前请先勾选 '测试预测模式'。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:288
+#, fuzzy
+msgid "Frequency is not defined"
+msgstr "- 未指定币别"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:293
+#, fuzzy
+msgid "First publication date is not defined"
+msgstr "- 首期出版日期不确定"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:299
+#, fuzzy
+msgid "Next issue publication date is not defined"
+msgstr "- 首期出版日期不确定"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:305
+#, javascript-format
+msgid "Cannot test prediction pattern for the following reason(s): %s"
+msgstr "因为下列的原因不能查看预测模式：%s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:354
+msgid "Please enter a name for this pattern"
+msgstr "请键入此模式的名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:369
+msgid "This pattern name already exists. Do you want to modify it?"
+msgstr "此模式已存在。您仍要修改它吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:370
+msgid "Warning: This will modify the pattern for all subscriptions that are using it."
+msgstr ""
+
+# pattern是指？式样或其它意思？
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:400
+msgid "Something went wrong. Unable to create a new numbering pattern."
+msgstr "出错了。不能新增编号模式。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:421
+msgid "Searching for subscription in Mana Knowledge Base"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:432
+msgid "Results from Mana Knowledge Base"
+msgstr "Mana 知识库的结果"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:446
+#, fuzzy
+msgid "Show Mana results"
+msgstr "显示分析"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:446
+#, fuzzy
+msgid "Subscription found on Mana Knowledge Base:"
+msgstr "订阅终止日期："
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:449
+#, fuzzy
+msgid "No subscription found on Mana Knowledge Base"
+msgstr "此订阅视另个供应商而定"
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:449
+msgid "Please feel free to share your pattern with all others librarians once you are done"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:735
+#, fuzzy
+msgid "This bibliographic record does not exist"
+msgstr "无此馆藏。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:40
+msgid "Booking ID"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:47
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:339
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:155
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:71
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:242
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:55
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:18
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:327
+msgid "Status"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:52
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:216
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:173
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:346
+msgid "Title"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:63
+msgid "Item"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:66
+#, fuzzy
+msgid "Any item"
+msgstr "新增馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:82
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:20
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:54
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:93
+msgid "Start date"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:91
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:33
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:65
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:103
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:227
+msgid "End date"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:143
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:167
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:424
+msgid "Active"
+msgstr "使用中"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:147
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:166
+#, fuzzy
+msgid "Pending"
+msgstr "预约"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:150
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:169
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:117
+msgid "New"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:156
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:168
+msgid "Completed"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:161
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:65
+msgid "Unknown"
+msgstr "不详"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:179
+#, fuzzy
+msgid "Show expired"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:180
+#, fuzzy
+msgid "Hide expired"
+msgstr "已到期"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:71
+msgid "Are you sure you want to delete this cover image?"
+msgstr "确定删除此封面吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "Directory is not writeable"
+msgstr "不能覆写目录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "Error code 0 not used"
+msgstr "未使用错误代码 0"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "File already exists"
+msgstr "馆藏已存在"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "Root directory for uploads not defined"
+msgstr "未定义待更新的根目录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:109
+msgid "Temporary directory for uploads not defined"
+msgstr "未定义上传用的暂存目录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:113
+msgid "Upload status: "
+msgstr "上传状态："
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:114
+msgid "Failed"
+msgstr "失败"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:115
+msgid "Denied"
+msgstr "拒绝"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:143
+#, fuzzy
+msgid "An error occurred while uploading."
+msgstr "发生错误。%s "
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:173
+msgid "Error:"
+msgstr "错误："
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:173
+#, fuzzy
+msgid "This tool only accepts ZIP files or GIF, JPEG, PNG, or XPM images."
+msgstr "请确认上传的是GIF、JPEG、PNG、XPM图片档。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:180
+msgid "File name:"
+msgstr "文件名"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:181
+#, fuzzy
+msgid "File type:"
+msgstr "文件类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:182
+#, fuzzy
+msgid "File size:"
+msgstr "文件名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:214
+#: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:219
+msgid "An error occurred on deleting this image"
+msgstr "当删除这个封面时发生程序错误"
+
+#: koha-tmpl/intranet-tmpl/prog/js/viewlog.js:16
+#, fuzzy
+msgid "View comparison"
+msgstr "单纯检视"
+
+#: koha-tmpl/intranet-tmpl/prog/js/viewlog.js:33
+#, fuzzy, javascript-format
+msgid "Showing results for %s"
+msgstr "%s 未找到结果 %s "
+
+#: koha-tmpl/intranet-tmpl/prog/js/viewlog.js:40
+msgid "You can select maximum of two checkboxes"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/viewlog.js:118
+#, fuzzy
+msgid "You must select two entries to compare"
+msgstr "您必须至少选择两个收据以备合并。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsDisplay.vue:7
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:7
+msgid "Additional fields"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:6
+#, fuzzy, javascript-format
+msgid "Edit record source #%s"
+msgstr "文件名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:11
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:27
+msgid "Add record source"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:28
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:51
+msgid "Can be edited"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:110
+#, fuzzy
+msgid "Record source updated!"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:120
+#, fuzzy
+msgid "Record source created!"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:21
+#, fuzzy
+msgid "There are no record sources defined"
+msgstr "未选定纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:36
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:14
+#, fuzzy
+msgid "Record sources"
+msgstr "文件名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:381
+msgid "ID"
+msgstr "账号"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:118
+#, fuzzy
+msgid "Are you sure you want to delete this record source?"
+msgstr "确定要删除此记录吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:121
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:246
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:416
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:192
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:190
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:147
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:344
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:169
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:224
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:98
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:137
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:212
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:80
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:149
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:159
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:427
+msgid "Yes, delete"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:122
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:247
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:417
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:193
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:191
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:148
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:345
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:170
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:225
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:99
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:138
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:213
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:81
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:150
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:160
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:428
+msgid "No, do not delete"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:132
+#, fuzzy, javascript-format
+msgid "Record source '%s' deleted"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ButtonSubmit.vue:11
+msgid "Submit"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Dialog.vue:19
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:336
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageAgreements.vue:34
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:108
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:238
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:115
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:258
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:150
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:113
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:82
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:108
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:276
+msgid "Close"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Dialog.vue:110
+#, fuzzy
+msgid "Submitting..."
+msgstr "存储..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:151
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:79
+msgid "Licenses"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:11
+#, fuzzy, javascript-format
+msgid "Agreement license %s"
+msgstr "移除指定的馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:14
+#, fuzzy
+msgid "Remove this license"
+msgstr "移除指定的馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:20
+msgid "License"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:156
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:310
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:70
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:124
+msgid "Physical location"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:69
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:52
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:68
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:157
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:317
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:90
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:127
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:284
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:62
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:209
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:145
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:131
+msgid "Notes"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:79
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:158
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:314
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:82
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:128
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:138
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:111
+msgid "URI"
+msgstr "URL"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:90
+msgid "Add new license"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementLicenses.vue:92
+msgid "There are no licenses created yet"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:90
+msgid "Periods"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:11
+#, fuzzy, javascript-format
+msgid "Agreement period %s"
+msgstr "移除指定的馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:14
+#, fuzzy
+msgid "Remove this period"
+msgstr "移除栏位"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:43
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:95
+#, fuzzy
+msgid "Cancellation deadline"
+msgstr "已取消"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementPeriods.vue:64
+msgid "Add new period"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:204
+msgid "Related agreements"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:11
+#, fuzzy, javascript-format
+msgid "Related agreement %s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:14
+#, fuzzy
+msgid "Remove this relationship"
+msgstr "年龄限制"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:22
+msgid "Related agreement"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:46
+msgid "Relationship"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:83
+msgid "Add new related agreement"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:86
+msgid "There are no other agreements created yet"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:5
+#, fuzzy, javascript-format
+msgid "Edit agreement #%s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:7
+msgid "New agreement"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:29
+#, fuzzy
+msgid "Agreement name"
+msgstr "移除指定的馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:318
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:217
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:36
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:93
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:232
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:74
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:209
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:33
+msgid "Vendor"
+msgstr "供货商"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:71
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:350
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:60
+msgid "Closure reason"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:86
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:364
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:69
+msgid "Is perpetual"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:113
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:375
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:76
+msgid "Renewal priority"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:125
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:85
+msgid "License info"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:267
+msgid "A license is used several times"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:281
+msgid "An agreement is used as relationship several times"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:290
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:297
+msgid "Only one controlling license is allowed"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:309
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:213
+#, javascript-format
+msgid "File size exceeds maximum allowed: %s MB"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:317
+#, javascript-format
+msgid "Agreement user %s is missing a user"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:379
+msgid "Agreement updated"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:387
+msgid "Agreement created"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:12
+msgid "Filter by expired"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:19
+#, fuzzy
+msgid "on"
+msgstr "星期一"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:27
+msgid "Show mine only"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:55
+msgid "There are no agreements defined"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:149
+#, fuzzy
+msgid "Select"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:243
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:413
+#, fuzzy
+msgid "Are you sure you want to remove this agreement?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsList.vue:254
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:424
+#, fuzzy, javascript-format
+msgid "Agreement %s deleted"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:23
+#, fuzzy, javascript-format
+msgid "Agreement #%s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:93
+#, fuzzy
+msgid "Period start"
+msgstr "读者姓名"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:94
+msgid "Period end"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:96
+#, fuzzy
+msgid "Period note"
+msgstr "读者姓名"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:123
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:74
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:3
+msgid "Users"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:127
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:78
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:36
+msgid "Role"
+msgstr "角色"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:238
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:122
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:232
+msgid "Packages"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:264
+msgid "(EBSCO)"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:280
+#, fuzzy
+msgid "local"
+msgstr "在地"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:287
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:101
+msgid "Documents"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:306
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:60
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:120
+msgid "Uploaded on"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:11
+#, javascript-format
+msgid "Document %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:14
+#, fuzzy
+msgid "Remove this document"
+msgstr "移除栏位"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:19
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:5
+msgid "File"
+msgstr "档案"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:8
+#, fuzzy
+msgid "Select a file"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:31
+#, fuzzy
+msgid "Update file"
+msgstr "更新馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:18
+msgid "File name"
+msgstr "文件名"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:45
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:22
+#, fuzzy
+msgid "File type"
+msgstr "文件类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:49
+msgid "File description"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Documents.vue:103
+msgid "Add new document"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageAgreements.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:67
+#, fuzzy
+msgid "Add agreement"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageAgreements.vue:65
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:49
+msgid "Add new agreement"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageAgreements.vue:137
+#, fuzzy
+msgid "This agreement is already linked with this package"
+msgstr "此馆藏已经在您的采购单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:7
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:7
+#, fuzzy
+msgid "Hide filters"
+msgstr "取消筛选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:7
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:7
+#, fuzzy
+msgid "Show filters"
+msgstr "取消筛选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:177
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:11
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:249
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:139
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageTitlesList.vue:73
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:38
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:230
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:205
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:157
+msgid "Publication type"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:38
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:22
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:25
+#, fuzzy
+msgid "Selection status"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:25
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:28
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:28
+#, fuzzy
+msgid "Selected"
+msgstr "拒绝"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:45
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:26
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:29
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:29
+#, fuzzy
+msgid "Not selected"
+msgstr "未勾选。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:170
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:210
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:154
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:233
+#, fuzzy
+msgid "Is selected"
+msgstr "未勾选。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:4
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:30
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlePackagesList.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:29
+msgid "Package name"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:11
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:240
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:68
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:261
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:53
+#, fuzzy
+msgid "Content type"
+msgstr "Koha馆藏类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:49
+#, javascript-format
+msgid "%s packages found locally"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesList.vue:226
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:34
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:247
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:49
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:231
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:49
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:90
+msgid "Type"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:5
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:23
+#, fuzzy, javascript-format
+msgid "Package #%s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:13
+msgid "Add package to holdings"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:22
+msgid "Remove package from holdings"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:40
+msgid "External ID"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:59
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:44
+msgid "Package type"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:77
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:275
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:66
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:238
+msgid "Created on"
+msgstr "已建立"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:91
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:92
+#, javascript-format
+msgid "Titles (%s)"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:5
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:5
+#, fuzzy, javascript-format
+msgid "Resource #%s"
+msgstr "文件名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:13
+msgid "Add title to holdings"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:22
+msgid "Remove title from holdings"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:28
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:9
+msgid "Resource information"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:31
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:12
+msgid "Resource identifier"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:37
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:4
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:17
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:18
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:23
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:33
+msgid "Publication title"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:240
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:133
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:32
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:219
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:151
+msgid "Publisher name"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:63
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:29
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:36
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:45
+msgid "Print-format identifier"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:69
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:35
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:50
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:47
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:51
+msgid "Online-format identifier"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:80
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:61
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:21
+msgid "Package"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:99
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:80
+msgid "Package content type"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOResourcesShow.vue:109
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalResourcesShow.vue:90
+msgid "Coverage dates"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:38
+#, fuzzy
+msgid "Please enter a search term"
+msgstr "请键入此模式的名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:55
+#, javascript-format
+msgid "%s titles found locally"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:263
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:219
+msgid "Identifier"
+msgstr "标识符"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:273
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:229
+#, javascript-format
+msgid "ISBN (Print): %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesList.vue:280
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:236
+#, javascript-format
+msgid "ISBN (Online): %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:5
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:21
+#, fuzzy, javascript-format
+msgid "Title #%s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:11
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:27
+msgid "Title identifier"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:24
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:40
+#, fuzzy
+msgid "Local bibliographic record"
+msgstr "订阅必须有书目纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:44
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:60
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:69
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:60
+msgid "Date of first serial issue available online"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:55
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:79
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:88
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:71
+#, fuzzy
+msgid "Number of first volume available online"
+msgstr "表单内无可用的资料"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:65
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:98
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:107
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:81
+#, fuzzy
+msgid "Number of first issue available online"
+msgstr "表单内无可用的资料"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:75
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:116
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:123
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:91
+#, fuzzy
+msgid "Date of last issue available online"
+msgstr "表单内无可用的资料"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:85
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:132
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:141
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:101
+#, fuzzy
+msgid "Number of last volume available online"
+msgstr "表单内无可用的资料"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:95
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:151
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:159
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:111
+#, fuzzy
+msgid "Number of last issue available online"
+msgstr "表单内无可用的资料"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:103
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:166
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:119
+msgid "Title-level URL"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:109
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:177
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:127
+msgid "First author"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:115
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:188
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:133
+msgid "Embargo information"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:121
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:199
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:139
+msgid "Coverage depth"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:153
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:245
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:254
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:171
+msgid "Date the monograph is first published in print"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:165
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:264
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:273
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:183
+msgid "Date the monograph is first published online"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:175
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:282
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:289
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:193
+msgid "Number of volume for monograph"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:182
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:296
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:200
+msgid "Edition of the monograph"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:188
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:307
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:206
+msgid "First editor"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:197
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:320
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:329
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:215
+msgid "Title identifier of the parent publication"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:209
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:339
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:348
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:227
+msgid "Title identifier of any preceding publication title"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOTitlesShow.vue:218
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:358
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:236
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:151
+msgid "Access type"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:3
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:70
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:48
+msgid "Agreements"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:14
+#, javascript-format
+msgid "Agreement %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:17
+#, fuzzy
+msgid "Remove this agreement"
+msgstr "移除栏位"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:23
+#, fuzzy
+msgid "Agreement"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackageAgreements.vue:52
+msgid "There are no agreements created yet"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:5
+#, fuzzy, javascript-format
+msgid "Edit package #%s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:7
+msgid "New package"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:45
+#, fuzzy
+msgid "Content type: "
+msgstr "Koha馆藏类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:159
+msgid "An agreement is used several times"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:192
+msgid "Package updated"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:202
+msgid "Package created"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:28
+msgid "There are no packages defined"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:189
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:187
+#, fuzzy
+msgid "Are you sure you want to remove this package?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesList.vue:200
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:198
+#, javascript-format
+msgid "Local package %s deleted"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:5
+#, fuzzy, javascript-format
+msgid "Edit title #%s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:7
+msgid "New title"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:378
+#, fuzzy
+msgid "Update linked bibliographic record"
+msgstr "订阅必须有书目纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:379
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:61
+#, fuzzy
+msgid "Create linked bibliographic record"
+msgstr "订阅必须有书目纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:385
+#, fuzzy
+msgid "Update bibliographic record"
+msgstr "订阅必须有书目纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:386
+#, fuzzy
+msgid "Create bibliographic record"
+msgstr "订阅必须有书目纪录"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:497
+msgid "A package is used several times"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:528
+#, fuzzy
+msgid "Title updated"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:538
+#, fuzzy
+msgid "Title created"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:10
+#, fuzzy, javascript-format
+msgid "Package %s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:13
+msgid "Remove from this package"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:74
+msgid "Proxy"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:85
+msgid "Add to another package"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAddResources.vue:87
+msgid "There are no packages created yet"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:202
+msgid "Import from a list"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:4
+msgid "Import in progress,"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:9
+#, javascript-format
+msgid "see job #%s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:36
+msgid "To the following local package"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:67
+msgid "Cannot import, no package selected"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormImport.vue:138
+msgid "Import"
+msgstr "汇入"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:210
+msgid "Import from a KBART file"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:5
+msgid "Requirements:"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:7
+msgid "The file must be in TSV or CSV format"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:11
+msgid "The file should not contain any additional information / header rows, e.g. a file with a single title would be structured as follows:"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:15
+#, fuzzy
+msgid "Column headings row"
+msgstr "设置栏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:16
+#, fuzzy
+msgid "Title data row"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:21
+#, fuzzy
+msgid "Select file for upload"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:75
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:30
+#: koha-tmpl/opac-tmpl/bootstrap/js/autofill.js:30
+#, fuzzy
+msgid "Clear form"
+msgstr "清除字段"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:146
+#, javascript-format
+msgid "Your file was too large to process in one job, the file has been split into %s jobs to meet the maximum size limits."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:151
+#, javascript-format
+msgid "Job %s for uploaded file has been queued"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:155
+#, fuzzy
+msgid "see progress"
+msgstr "处理中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:162
+msgid "Information:"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:165
+msgid "Additional columns were detected in your report, please see the list below:"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:171
+msgid "The data in these columns will not be imported."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:177
+msgid "The file must be in .tsv or .csv format, please convert your file and try again."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:36
+msgid "There are no titles defined"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:144
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:341
+#, fuzzy
+msgid "Are you sure you want to remove this title?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:155
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:352
+#, javascript-format
+msgid "Local title %s deleted"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:190
+msgid "Contributors"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:243
+#, fuzzy, javascript-format
+msgid "Packages (%s)"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:5
+#, fuzzy, javascript-format
+msgid "Edit license %s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:7
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:66
+msgid "New license"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:27
+#, fuzzy
+msgid "License name"
+msgstr "文件名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:221
+#, javascript-format
+msgid "License user %s is missing a user"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:260
+#, fuzzy
+msgid "License updated"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:268
+#, fuzzy
+msgid "License created"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:23
+msgid "There are no licenses defined"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:166
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:221
+#, fuzzy
+msgid "Are you sure you want to remove this license?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:177
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:232
+#, fuzzy, javascript-format
+msgid "License %s deleted"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:253
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:65
+msgid "Started on"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:262
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:70
+msgid "Ended on"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:21
+#, fuzzy, javascript-format
+msgid "License #%s"
+msgstr "文件名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Main.vue:138
+msgid "The e-resource management module is disabled, turn on <a href='/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule'>ERMModule</a> to use it"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:2
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:169
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:27
+#, fuzzy
+msgid "Data provider"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:6
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:21
+#, fuzzy
+msgid "Data provider name"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:23
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:425
+#, fuzzy
+msgid "Inactive"
+msgstr "使用中"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:28
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:113
+#, fuzzy
+msgid "Service type"
+msgstr "文件类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:34
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:134
+msgid "Report types"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:40
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:123
+#, fuzzy
+msgid "Service platform"
+msgstr "文件类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:47
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:180
+msgid "SUSHI credentials"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:191
+msgid "Service URL"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:214
+msgid "Report release"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:63
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:237
+msgid "Customer ID"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:69
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:260
+msgid "Requestor ID"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:75
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:285
+msgid "API key"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:81
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:302
+msgid "Requestor name"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:87
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:313
+msgid "Requestor email"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:13
+msgid "There are no import logs defined"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:55
+msgid "Download"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:95
+#, fuzzy
+msgid "Are you sure you want to remove this file?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:108
+#, fuzzy, javascript-format
+msgid "File %s deleted"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:123
+msgid "Filename"
+msgstr "文件名"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:130
+msgid "Import date"
+msgstr "汇入日期"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:140
+#, fuzzy
+msgid "Imported by"
+msgstr "输出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:149
+msgid "Cronjob"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:4
+msgid "Manual upload:"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:95
+msgid "Job for uploaded file has been queued"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:100
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:256
+msgid "Check job progress"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:6
+#, fuzzy, javascript-format
+msgid "Edit usage data provider #%s"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:11
+msgid "New usage data provider"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:210
+msgid "Type at least two characters to search"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:46
+#, fuzzy
+msgid "Searching..."
+msgstr "存储..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:71
+#, fuzzy
+msgid "Create manually"
+msgstr "一月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:82
+msgid "Create from registry"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:100
+msgid "Harvester status"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:161
+#, fuzzy
+msgid "Unselect all"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:324
+msgid "Credentials information"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:327
+msgid "Customer ID info"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:332
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:342
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:352
+#, fuzzy
+msgid "No information provided"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:337
+msgid "Requestor ID info"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:347
+msgid "API key info"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:356
+#, fuzzy
+msgid "Please refer to the "
+msgstr "请键入此模式的名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:358
+msgid "COUNTER registry"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:360
+msgid "for more information."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:519
+msgid "This provider does not currently support any COUNTER 5 reports via SUSHI."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:591
+msgid "Data provider updated"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:607
+msgid "Data provider created"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:16
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:338
+#, fuzzy
+msgid "Data providers summary"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:32
+msgid "There are no usage data providers defined"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:78
+msgid "Run now"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:84
+msgid "Test"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:134
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:209
+#, fuzzy
+msgid "Are you sure you want to remove this data provider?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:147
+#, fuzzy, javascript-format
+msgid "Data provider %s deleted"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:166
+msgid "This data provider is set to 'Inactive', do you wish to update the status to 'Active'?"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:169
+msgid "Yes, update status"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:170
+msgid "No, do not update status"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:192
+#, javascript-format
+msgid "Updated status for usage data provider %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:209
+#, fuzzy
+msgid "Are you sure you want to run the harvester for this data provider?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:212
+msgid "Yes, run"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:213
+msgid "No, do not run"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:220
+msgid "Begin date"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:251
+#, javascript-format
+msgid "Job for report type <strong>%s</strong> has been queued"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:277
+#, javascript-format
+msgid "Harvester connection was successful for usage data provider %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:284
+#, javascript-format
+msgid "No connection for usage data provider %s, please check your credentials and try again."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:295
+msgid "This data provider is inactive - connection testing is not possible"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:336
+msgid "Last run"
+msgstr "最新的执行"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:30
+#, fuzzy, javascript-format
+msgid "Data provider #%s"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:44
+msgid "Detail"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:70
+msgid "Manual upload"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:80
+#, fuzzy
+msgid "Import logs"
+msgstr "输出"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:167
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:161
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:255
+msgid "Titles"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:172
+#, fuzzy
+msgid "Platforms"
+msgstr "清除字段"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:174
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:178
+msgid "Items"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:178
+msgid "Databases"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:223
+#, fuzzy, javascript-format
+msgid "Usage data provider %s deleted"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:13
+#, fuzzy
+msgid "Data providers list"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:82
+msgid "Provider"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:96
+msgid "Start"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:103
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:115
+msgid "N/A"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:108
+msgid "End"
+msgstr "结束"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:135
+#, fuzzy
+msgid "Title reports"
+msgstr "储存报表"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:137
+#, fuzzy
+msgid "Platform reports"
+msgstr "清除字段"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:139
+#, fuzzy
+msgid "Database reports"
+msgstr "储存报表"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:141
+#, fuzzy
+msgid "Item reports"
+msgstr "储存报表"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersToolbar.vue:7
+#, fuzzy
+msgid "New data provider"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:9
+#, fuzzy, javascript-format
+msgid "No %s data has been harvested for this provider"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:84
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:51
+#, fuzzy
+msgid "Platform"
+msgstr "清除字段"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:93
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:39
+msgid "Publisher"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:102
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:63
+msgid "Publisher ID"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:111
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:99
+msgid "DOI"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:120
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:87
+#, fuzzy
+msgid "Print ISSN"
+msgstr "列印"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:129
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:75
+msgid "Online ISSN"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:3
+msgid "Build a custom report"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:7
+#, fuzzy
+msgid "Select report data"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:11
+msgid "Data display"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:21
+#, fuzzy
+msgid "By month"
+msgstr "3 个月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:26
+msgid "By month with period total"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:31
+#, fuzzy
+msgid "By year"
+msgstr "%s 年"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:35
+#, fuzzy
+msgid "By metric type"
+msgstr "Koha馆藏类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:40
+#, fuzzy
+msgid "By data provider totals"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:59
+#, fuzzy
+msgid "Choose data provider"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:78
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:21
+msgid "Choose report"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:104
+#, fuzzy
+msgid "Choose metric type"
+msgstr "Koha馆藏类型"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:120
+msgid "Choose access type"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:135
+msgid "Start year"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:142
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:174
+#, fuzzy
+msgid "Please enter year in format YYYY"
+msgstr "请键入此模式的名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:150
+#, fuzzy
+msgid "Start month"
+msgstr "3 个月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:168
+#, fuzzy
+msgid "End year"
+msgstr "%s 年"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:182
+#, fuzzy
+msgid "End month"
+msgstr "3 个月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:200
+msgid "Keyword"
+msgstr "关键词"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:218
+msgid "Select report columns"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:251
+#, fuzzy
+msgid "Select date display method"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:256
+msgid "Display data filtered by year"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:271
+msgid "Yes - Table will be limited to 12 columns (Jan-Dec) with the option to switch between years"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:290
+msgid "No - Table will include one column for every month of data selected"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:297
+msgid "Select which months to display"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:352
+msgid "Save report"
+msgstr "储存报表"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:4
+msgid "Usage statistics reports"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:16
+msgid "Saved reports"
+msgstr "储存报表"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:28
+msgid "Create report"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsHome.vue:86
+msgid "No data providers have been created -  no report data will be available"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:5
+msgid "Display by year"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:142
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:269
+msgid "YOP"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:158
+msgid "Metric"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:175
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportsViewer.vue:332
+#, fuzzy
+msgid "Period total"
+msgstr "读者姓名"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:7
+msgid "You have not saved any reports yet, please create a report."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:16
+#, fuzzy
+msgid "Select saved report"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:51
+#, fuzzy
+msgid "Delete report"
+msgstr "删除"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:100
+msgid "Report deleted successfully"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsSavedReports.vue:112
+msgid "No report was selected - could not delete"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:13
+#, fuzzy
+msgid "Remove this user"
+msgstr "移除栏位"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:19
+msgid "User"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:30
+#, fuzzy
+msgid "Select user"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UserRoles.vue:64
+msgid "Add new user"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Help.vue:9
+msgid "Help"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/InfiniteScrollSelect.vue:27
+#, fuzzy
+msgid "Loading more options..."
+msgstr "存储报表结果"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:199
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:91
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:85
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:672
+#, fuzzy
+msgid "Remove"
+msgstr "移除栏位"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Main.vue:87
+msgid "The preservation module is disabled, turn on <a href=\"/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=PreservationModule\">PreservationModule</a> to use it"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:5
+#, fuzzy
+msgid "Edit preservation settings"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:13
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:83
+msgid "General settings"
+msgstr "一般设定"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:21
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:88
+msgid "Status for item added to waiting list"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:51
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:101
+msgid "Default status for item added to train"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/Settings.vue:173
+#, fuzzy
+msgid "Settings updated"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:3
+#, fuzzy
+msgid "Processings"
+msgstr "处理中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:23
+#, fuzzy
+msgid "Remove this processing"
+msgstr "移除栏位"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:32
+msgid "Edit this processing"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:42
+msgid "Add new processing"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:77
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:146
+#, fuzzy
+msgid "Are you sure you want to remove this processing?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:88
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:159
+#, fuzzy, javascript-format
+msgid "Processing %s deleted"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:105
+msgid "This processing cannot be deleted, it is already in used."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:5
+#, fuzzy, javascript-format
+msgid "Edit processing #%s"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:7
+#, fuzzy
+msgid "New processing"
+msgstr "处理中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:14
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:25
+#, fuzzy
+msgid "Processing name"
+msgstr "处理中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:27
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:33
+msgid "Letter template for printing slip"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:48
+msgid "Attributes"
+msgstr "属性"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:49
+msgid "Be careful when removing attributes from this processing: the items using it will be impacted as well!"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:60
+#, javascript-format
+msgid "Attribute %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:65
+#, fuzzy
+msgid "Remove this attribute"
+msgstr "移除栏位"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:118
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:153
+#, fuzzy
+msgid "Options"
+msgstr "动作"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:132
+msgid "DOES NOT EXIST!"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:178
+msgid "Add new attribute"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:232
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:56
+msgid "Authorized value"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:236
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:59
+msgid "Free text"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:240
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:62
+msgid "Database column"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:297
+#, fuzzy
+msgid "Processing updated"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:305
+#, fuzzy
+msgid "Processing created"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:19
+#, fuzzy, javascript-format
+msgid "Processing #%s"
+msgstr "处理中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:41
+#, fuzzy
+msgid "Edit this template"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:72
+msgid "There are no attributes defined for this processing."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:5
+#, fuzzy, javascript-format
+msgid "Edit train #%s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:7
+msgid "New train"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:41
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:162
+msgid "Status for item added to this train"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:57
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:170
+msgid "Default processing"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:183
+#, fuzzy
+msgid "Train updated"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:191
+#, fuzzy
+msgid "Train created"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:5
+#, fuzzy, javascript-format
+msgid "Edit item #%s"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:7
+#, fuzzy, javascript-format
+msgid "Add new item to %s"
+msgstr "新增馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:14
+#, fuzzy
+msgid "Itemnumber"
+msgstr "九月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:20
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:16
+msgid "Processing"
+msgstr "处理"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:117
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:367
+msgid "Barcode"
+msgstr "条形码"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:241
+msgid "Cannot find item with this barcode. It must be in the waiting list."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:364
+#, fuzzy
+msgid "Item updated"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:375
+#, fuzzy
+msgid "Item added to train"
+msgstr "馆藏新增到您的书目清单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:4
+#, javascript-format
+msgid "Add new items to %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:10
+#, fuzzy
+msgid "Itemnumbers"
+msgstr "九月"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:61
+#, javascript-format
+msgid "Cannot be edited now, the value will be retrieved from %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:266
+#, fuzzy, javascript-format
+msgid "%s items have been added to train %s."
+msgstr "此馆藏新增至您的采购单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:275
+#, fuzzy
+msgid "No items have been added to the train."
+msgstr "此馆藏已加入您的书目清单"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:12
+msgid "Filter by"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:24
+msgid "Closed"
+msgstr "已关闭"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:30
+msgid "Sent"
+msgstr "寄送"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:36
+msgid "Received"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:56
+msgid "There are no trains defined"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:113
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:91
+msgid "Add items"
+msgstr "新增馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:156
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:424
+#, fuzzy
+msgid "Are you sure you want to remove this train?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:167
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:435
+#, fuzzy, javascript-format
+msgid "Train %s deleted"
+msgstr "被重复"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:179
+msgid "Cannot add items to a closed train"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:247
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:142
+msgid "Closed on"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:256
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:148
+msgid "Sent on"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsList.vue:265
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:154
+msgid "Received on"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:14
+msgid "Copy item to the following train"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:30
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:88
+#, fuzzy
+msgid "Select a train"
+msgstr "全选"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:114
+msgid "Send"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:120
+msgid "Receive"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:124
+#, fuzzy, javascript-format
+msgid "Train #%s"
+msgstr "文件名称"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:189
+#, fuzzy
+msgid "Actions: "
+msgstr "动作"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:194
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:197
+#, fuzzy
+msgid "Print slips"
+msgstr "列印"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:217
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:617
+msgid "Cannot print slip, this item does not have a processing with a letter template defined."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:493
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:323
+msgid "Yes, remove"
+msgstr "是的，移除"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:494
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:324
+msgid "No, do not remove"
+msgstr "不，不要移除"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:502
+msgid "Item removed"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:537
+msgid "Item copied successfully."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:543
+msgid "Item cannot be copied to a train, it is already in a non-received train."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:716
+#, fuzzy
+msgid "Print slip"
+msgstr "列印"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:14
+msgid "Add items to waiting list"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:30
+msgid "Barcode list"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:72
+msgid "Add items to a train"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:139
+msgid "You need to configure this module first."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:149
+#, fuzzy
+msgid "Add to waiting list"
+msgstr "新增到购物车"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:159
+#, javascript-format
+msgid "Add last %s items to a train"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:173
+msgid "There are no items in the waiting list"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:279
+#, javascript-format
+msgid "%s new items added. %s items not found."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:288
+#, javascript-format
+msgid "%s new items added."
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:303
+#, fuzzy
+msgid "No items added"
+msgstr "新增期数"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:320
+#, fuzzy
+msgid "Are you sure you want to remove this item from the waiting list?"
+msgstr "确定移除此共享吗？"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:331
+msgid "Item removed from the waiting list"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:355
+msgid "Author"
+msgstr "著者"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:361
+msgid "Call number"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:7
+msgid "Administration"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:33
+msgid "Edit record source"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:38
+msgid "E-resource management"
+msgstr "电子资源管理"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:61
+#, fuzzy
+msgid "Show agreement"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:73
+#, fuzzy
+msgid "Edit agreement"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:92
+#, fuzzy
+msgid "Show license"
+msgstr "移除指定的馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:98
+#, fuzzy
+msgid "Add license"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:104
+#, fuzzy
+msgid "Edit license"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:110
+#, fuzzy
+msgid "eHoldings"
+msgstr "预约"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:116
+msgid "Local"
+msgstr "在地"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:139
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:249
+#, fuzzy
+msgid "Show package"
+msgstr "删除"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:147
+#, fuzzy
+msgid "Add package"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:155
+#, fuzzy
+msgid "Edit package"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:178
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:272
+msgid "Show title"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:186
+#, fuzzy
+msgid "Add title"
+msgstr "新增馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:194
+#, fuzzy
+msgid "Edit title"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:218
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:280
+msgid "Resource"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:226
+msgid "EBSCO"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:291
+msgid "eUsage"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:297
+#, fuzzy
+msgid "Data providers"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:314
+#, fuzzy
+msgid "Show provider"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:322
+#, fuzzy
+msgid "Add data provider"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:330
+#, fuzzy
+msgid "Edit data provider"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:359
+msgid "View report"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:28
+msgid "Preservation"
+msgstr "保存"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:34
+msgid "Home"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:39
+msgid "Trains"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:50
+#, fuzzy
+msgid "Show train"
+msgstr "显示所有字段"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:66
+#, fuzzy
+msgid "Add item to train"
+msgstr "新增馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:72
+#, fuzzy
+msgid "Add items to train"
+msgstr "新增馆藏"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:78
+msgid "Edit item in train"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:88
+#, fuzzy
+msgid "Add train"
+msgstr "新增到购物车"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:94
+#, fuzzy
+msgid "Edit train"
+msgstr "编辑动作 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:100
+msgid "Waiting list"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:113
+msgid "Settings"
+msgstr "设定"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:129
+#, fuzzy
+msgid "Show processing"
+msgstr "处理中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:135
+#, fuzzy
+msgid "Add processing"
+msgstr "处理中..."
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:141
+#, fuzzy
+msgid "Edit processing"
+msgstr "编辑预算 %s"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:14
+msgid "supersedes"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:15
+msgid "is superseded by"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:18
+msgid "provides post-cancellation access for"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:22
+msgid "has post-cancellation access in"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:26
+msgid "tracks demand-driven acquisitions for"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:30
+msgid "has demand-driven acquisitions in"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:32
+msgid "has backfile in"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:33
+msgid "has frontfile in"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/stores/authorised-values.js:34
+msgid "related to"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/xmlControlfield.js:215
+#, javascript-format
+msgid "AJAX error: receiving data from %s"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:9
+msgid "The page entered is not a number."
+msgstr "键入的页数不是数字。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:12
+#, javascript-format
+msgid "The page should be a number between 1 and %s."
+msgstr "页数应为数字，1至 %s之间。"
+
+#: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:56
+msgid "Please choose at least one external target"
+msgstr "请至少选择一个外部标的"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/autofill.js:31
+msgid "Search Google Books"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/autofill.js:84
+msgid "Sorry, nothing found."
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/barcode-generator.js:24
+#, fuzzy
+msgid "Error: "
+msgstr "错误："
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/barcode-generator.js:26
+msgid "Unable to generate barcode"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:111
+#, fuzzy
+msgctxt "Bibliographic record"
+msgid "The item is already in your cart"
+msgstr "这个馆藏已经在您的书目清单"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:128
+#, fuzzy
+msgctxt "Bibliographic record"
+msgid "The item has been added to your cart"
+msgstr "此馆藏已加入您的书目清单"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:166
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:169
+#, fuzzy
+msgctxt "Bibliographic record"
+msgid " item(s) added to your cart"
+msgstr "馆藏新增到您的书目清单"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:166
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:177
+msgid "already in your cart"
+msgstr "已经在您的书目清单"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:174
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:269
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:351
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:382
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:397
+#, fuzzy
+msgctxt "Bibliographic record"
+msgid "No item was selected"
+msgstr "未选定馆藏"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:177
+#, fuzzy
+msgctxt "Bibliographic record"
+msgid "No item was added to your cart"
+msgstr "无馆藏新增到您的书目清单"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:218
+#, fuzzy
+msgctxt "Bibliographic record"
+msgid "The item has been removed from your cart"
+msgstr "此馆藏已从您的书目清单移除"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/global.js:339
+msgid "Scroll to the top of the page"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:79
+#, fuzzy
+msgid "Log in to your OverDrive account"
+msgstr "以您的帐号登入"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:127
+#, fuzzy
+msgid "OverDrive account page"
+msgstr "取消与续借"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:138
+#, fuzzy
+msgid "Log out of your OverDrive account"
+msgstr "以您的帐号登入"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:145
+msgid "Checkouts"
+msgstr "借出"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:155
+msgid "Holds"
+msgstr "预约"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:291
+msgid "Checked out until: "
+msgstr "借出直到: "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:296
+#, fuzzy
+msgid "Get item"
+msgstr "有了！"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:302
+msgid "Check in"
+msgstr "还入"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:303
+msgid "Are you sure you want to return this item?"
+msgstr "确定还入此馆藏吗？"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:320
+msgid "Check out"
+msgstr "借出"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:321
+msgid "Are you sure you want to check out this item?"
+msgstr "确定借出此馆藏吗？"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:356
+msgid "Cancel hold"
+msgstr "取消预约"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:357
+msgid "Are you sure you want to cancel this hold?"
+msgstr "确定您要取消新增此馆藏？"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:386
+#, fuzzy
+msgid "Item cannot be checked out. There are no available formats"
+msgstr "馆藏不能借出。"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/privacy.js:4
+msgid "Warning: Cannot be undone. Please confirm once again"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/ratings.js:35
+#, javascript-format
+msgid "Your rating: %s."
+msgstr "您的评分：%s."
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/ratings.js:42
+#, javascript-format
+msgid "Average rating: %s (%s votes)"
+msgstr "平均评分：%s (%s 票数)"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:32
+msgid "With selected titles: "
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:35
+#, fuzzy
+msgid "Select titles to: "
+msgstr "全选"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:55
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:64
+msgid "You must be logged in to create or add to lists"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:102
+#: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:210
+#, fuzzy
+msgid "No tag was specified."
+msgstr "未选定馆藏"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:44
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:100
+msgid "Tags added: "
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:45
+msgid "Tags deleted: "
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:46
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:110
+#, fuzzy
+msgid "Errors: "
+msgstr "错误："
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:62
+msgid "Sorry, tags are not enabled on this system."
+msgstr "抱歉，此系统没有启动卷标功能。"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:63
+msgid "Error! Your tag was entirely markup code.  It was NOT added.  Please try again with plain text."
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:64
+msgid "Error! Illegal parameter"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:65
+msgid "Note: your tag contained markup code that was removed. The tag was added as "
+msgstr "说明：您的卷标包括标示语法，已被删除。此标签新增为 "
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:66
+msgid "Error! Adding tags failed at"
+msgstr "错误！不能执行新增卷标作业"
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:66
+msgid "Note: you can only tag an item with a given term once.  Check 'Tags' to see your current tags."
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:67
+msgid "Error! You cannot delete the tag"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:67
+msgid "Note: you can only delete your own tags."
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:68
+msgid "You must be logged in to add tags."
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:130
+msgid "Unable to add one or more tags."
+msgstr ""
+
+#, fuzzy, javascript-format
+#~ msgid "%s linked biblio record"
+#~ msgstr "订阅必须有书目纪录"
+
+#~ msgid "A control field cannot be used with a regular field."
+#~ msgstr "控制字段不能做为一般字段使用。"
+
+#, fuzzy
+#~ msgid "Activate filters"
+#~ msgstr "取消筛选"
+
+#, fuzzy
+#~ msgid "Are you sure you want to delete this vendor?"
+#~ msgstr "确定要删除此记录吗？"
+
+#~ msgid "Are you sure you want to remove the selected items?"
+#~ msgstr "确定删除指定的馆藏吗？"
+
+#, fuzzy
+#~ msgid "Click to expand"
+#~ msgstr "勾选以展开此块"
+
+#, fuzzy
+#~ msgid "Create record"
+#~ msgstr "删除"
+
+#, fuzzy
+#~ msgid "Deactivate filters"
+#~ msgstr "寻找筛选器"
+
+#, fuzzy
+#~ msgid "License user"
+#~ msgstr "文件名称"
+
+#, fuzzy
+#~ msgid "Update record"
+#~ msgstr "更新作业"
+
+#, fuzzy
+#~ msgid "name"
+#~ msgstr "文件名称"

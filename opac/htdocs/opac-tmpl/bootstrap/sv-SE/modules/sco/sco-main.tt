@@ -1,0 +1,649 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE AudioAlerts %]
+[% USE To %]
+[% USE Price %]
+[% USE AdditionalContents %]
+[% USE Branches %]
+[% SET SCOMainUserBlock = AdditionalContents.get( location => "SCOMainUserBlock", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% PROCESS 'html_helpers.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Självutlåning &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha [% END %]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Koha" /> <!-- leave this for stats -->
+[% IF ( Koha.Preference('OpacFavicon') ) %]
+<link rel="shortcut icon" href="[% Koha.Preference('OpacFavicon') | url %]" type="image/x-icon" />
+[% ELSE %]
+<link rel="shortcut icon" href="[% interface | html %]/[% theme | html %]/images/favicon.ico" type="image/x-icon" />
+[% END %]
+[% Asset.css("lib/fontawesome/css/fontawesome.min.css") | $raw %]
+[% Asset.css("lib/fontawesome/css/brands.min.css") | $raw %]
+[% Asset.css("lib/fontawesome/css/solid.min.css") | $raw %]
+[% IF ( bidi ) %]
+ [% Asset.css("css/sco-rtl.css") | $raw %]
+[% ELSE %]
+ [% Asset.css("css/sco.css") | $raw %]
+[% END %]
+[% IF ( Koha.Preference('OPACUserCSS') ) %]<style>[% Koha.Preference('OPACUserCSS') | $raw %]</style>[% END %]
+[% IF Branches.GetBranchSpecificCSS( Branches.GetLoggedInBranchcode() || default_branch) %]
+ <style>
+        [% Branches.GetBranchSpecificCSS( Branches.GetLoggedInBranchcode() || default_branch) | $raw %]
+    </style>
+[% END %]
+[% IF ( Koha.Preference('SCOUserCSS') ) %]<style>[% Koha.Preference('SCOUserCSS') | $raw %]</style>[% END %]
+<script>
+    var Koha = {};
+    function _(s) { return s } // dummy function for gettext
+</script>
+[% IF lang && lang != 'en' %]
+ [% Asset.js(lang _ '/js/locale_data.js') | $raw %]
+[% END %]
+[% Asset.js('js/Gettext.js') | $raw %]
+[% Asset.js('js/i18n.js') | $raw %]
+</head>
+<body id="sco_main" class="sco">
+ [% INCLUDE 'masthead-sco.inc' %]
+
+ <div class="main">
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( display_patron_image ) %]
+ <div class="col-10 order-first order-md-first order-lg-2">
+ [% ELSE %]
+ <div class="col order-first order-md-first order-lg-2">
+ [% END %]
+
+ <div id="masthead"><h1>[% LibraryName | html %] Självutlåningsautomat</h1></div>
+
+ [% FOREACH item IN impossible %]<!-- We tried to issue, but failed. -->
+ <div class="alert alert-warning">
+ <span class="sco-alert-warning noissue"></span>
+ <h2>Exemplaret kan inte lånas ut.</h2>
+ <p>Det går inte att låna exemplaret på den här stationen.</p>
+ [% IF ( item.title ) %]
+ <p>Titel: <em>[% item.title | html %]</em> </p>
+ [% END %]
+
+ <p>
+ [% IF ( item.circ_error_UNKNOWN_BARCODE ) %]
+ <span id="ce_unknown_barcode">Systemet känner inte igen den här streckkoden.</span>
+ [% ELSIF ( item.circ_error_max_loans_allowed ) %]
+ <span id="ce_max_loans_allowed">Du har nått maxgränsen för antal utlån.</span>
+ [% ELSIF ( item.circ_error_ISSUED_TO_ANOTHER ) %]
+ <span id="ce_issued_to_another">Exemplaret är utlånat till någon annan.</span>
+ [% ELSIF ( item.circ_error_NO_MORE_RENEWALS ) %]
+ <span id="ce_no_more_renewals">Du kan inte låna om det här exemplaret igen.</span>
+ [% ELSIF ( item.circ_error_NOT_FOR_LOAN ) %]
+ <span id="ce_not_for_loan">Exemplaret lånas inte ut.</span>
+ [% ELSIF ( item.circ_error_DEBT ) %]
+ <span id="ce_too_much_debt">Du är skyldig biblioteket [% item.DEBT | $Price with_symbol => 1%] och kan inte låna material.</span>
+ [% ELSIF ( item.circ_error_WTHDRAWN ) %]
+ <span id="ce_wthdrawn">Exemplaret har tagits bort från avdelningen.</span>
+ [% ELSIF ( item.circ_error_RESTRICTED ) %]
+ <span id="ce_restricted">Exemplaret är begränsat.</span>
+ [% ELSIF ( item.circ_error_RESERVED ) %]
+ <span id="ce_reserved">Exemplaret är reserverat för en annan låntagare.</span>
+ [% ELSIF ( item.circ_error_ITEMNOTSAMEBRANCH ) %]
+ <span id="ce_itemnotsamebranch">Exemplaret tillhör ett annat bibliotek.</span>
+ [% ELSIF ( item.circ_error_EXPIRED ) %]
+ <span id="ce_expired">Kontot är inte längre giltigt.</span>
+ [% ELSIF ( item.circ_error_DEBARRED ) %]
+ <span id="ce_debarred">Ditt konto har blivit avstängt.</span>
+ [% ELSIF ( item.circ_error_CARD_LOST ) %]
+ <span id="ce_card_lost">Ditt lånekort har registrerats som förlorat.</span>
+ [% ELSIF ( item.circ_error_GNA ) %]
+ <span id="ce_gna">Din kontaktinformation verkar inte vara komplett.</span>
+ [% ELSIF ( item.circ_error_INVALID_DATE ) %]
+ <span id="ce_invalid_date">Återlämningsdatumet är inte giltigt.</span>
+ [% ELSIF ( item.circ_error_ADDITIONAL_MATERIALS ) %]
+ <span id="ce_addtional_materials">Exemplaret måste lånas ut i informationsdisken.</span>
+ [% END %]
+ <span id ="ce_see_staff">Kontakta någon ur bibliotekspersonalen.</span>
+ </p>
+
+ [% IF ( item.returnitem && Koha.Preference('SCOAllowCheckin') ) %]
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="errorForm" class="inline" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend class="sr-only">Återlämna</legend>
+ <input type="hidden" name="op" value="cud-returnbook" />
+ <input type="hidden" name="patronid" value="[% patronid | html %]" />
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]" />
+ <input type="hidden" name="load_checkouts" value="[% load_checkouts | html %]" />
+ <input type="hidden" name="newissues" value="[% newissues | html %]" />
+ <button type="submit" name="returnbook" class="btn btn-primary"><i class="fa fa-undo" aria-hidden="true"></i> Lämna tillbaka det här exemplaret</button>
+ </form>
+ [% END %]
+
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="errorForm" class="inline" method="get">
+ <legend class="sr-only">Fel</legend>
+ <input type="hidden" name="op" value="" />
+ <input type="hidden" name="patronid" value="[% patronid | html %]" />
+ <input type="hidden" name="barcode" value="[% item.barcode | html %]" />
+ <input type="hidden" name="load_checkouts" value="[% load_checkouts | html %]" />
+ <input type="hidden" name="newissues" value="[% newissues | html %]" />
+ <input class="btn btn-info back focus" name="confirm" type="submit" value="Tillbaka till kontosammanfattningen" />
+ </form>
+ </div> <!-- / .alert -->
+ [% END # / FOREACH impossible %]
+
+ [% FOREACH c IN confirm %]<!-- We need to confirm the issue.. -->
+ <div class="alert alert-warning"><h2>Bekräfta lån:</h2>
+ <span class="sco-alert-warning confirm"></span>
+ [% IF ( c.confirm_renew_issue ) %]
+ <p>Det här exemplaret har redan lånats ut till dig: <b>[% c.confirm | html %]</b> <i>([% c.barcode | html %])</i></p>
+ [% END %]
+
+ [% IF ( c.renew && Koha.Preference('SCOAllowCheckin') ) %]
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="confirmForm" class="inline" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend class="sr-only">Återlämna</legend>
+ <input type="hidden" name="op" value="cud-returnbook" />
+ <input type="hidden" name="patronid" value="[% patronid | html %]" />
+ <input type="hidden" name="barcode" value="[% c.barcode | html %]" />
+ <input type="hidden" name="load_checkouts" value="[% load_checkouts | html %]" />
+ <input type="hidden" name="confirmed" value="" />
+ <input type="hidden" name="newissues" value="[% newissues | html %]" />
+ <button type="submit" name="returnbook" class="btn btn-primary"><i class="fa fa-undo" aria-hidden="true"></i> Lämna tillbaka det här exemplaret</button>
+ </form>
+ [% END %]
+
+ [% UNLESS ( c.renew ) %]
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="confirmForm" class="inline" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend class="sr-only">Låna om</legend>
+ <input type="hidden" name="op" value="cud-renew" />
+ <input type="hidden" name="patronid" value="[% patronid | html %]" />
+ <input type="hidden" name="barcode" value="[% c.barcode | html %]" />
+ <input type="hidden" name="load_checkouts" value="[% load_checkouts | html %]" />
+ <input type="hidden" name="confirmed" value="1" />
+ <input type="hidden" name="newissues" value="[% newissues | html %]" />
+ <button type="submit" name="confirm" class="btn btn-primary"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Låna om exemplar</button>
+ </form>
+ [% ELSE %]
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="confirmForm" class="inline" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend class="sr-only">Låna om</legend>
+ <input type="hidden" name="op" value="cud-renew" />
+ <input type="hidden" name="patronid" value="[% patronid | html %]" />
+ <input type="hidden" name="barcode" value="[% c.barcode | html %]" />
+ <input type="hidden" name="load_checkouts" value="[% load_checkouts | html %]" />
+ <input type="hidden" name="confirmed" value="1" />
+ <input type="hidden" name="newissues" value="[% newissues | html %]" />
+ <button type="submit" class="btn btn-primary"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Låna om exemplar</button>
+ </form>
+ [% END %]
+
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="confirmForm" class="inline" method="get">
+ <legend class="sr-only">Avbryt</legend>
+ <input type="hidden" name="op" value="" />
+ <input type="hidden" name="patronid" value="[% patronid | html %]" />
+ <input type="hidden" name="load_checkouts" value="[% load_checkouts | html %]" />
+ <input type="hidden" name="newissues" value="[% newissues | html %]" />
+ <button type="submit" class="btn btn-primary"><i class="fa fa-cancel" aria-hidden="true"></i> Avbryt</button>
+ </form>
+ </div>
+ [% END # / FOREACH confirm %]
+
+ [% IF ( nopermission ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-warning">
+ <span class="sco-alert-warning nopermission"></span>
+ <h2>Åtkomst nekad</h2>
+ <p>Den här självutlåningsstationen har förlorat inloggningen. Kontakta administratören för att lösa problemet.</p>
+ </div>
+ [% END %]
+
+ [% IF ( different_ip ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-warning">
+ <span class="sco-alert-warning sessionlost"></span>
+ <h2>Session avbruten</h2>
+ <p>Du ansluter till självutlåningen från en annan IP-adress! Logga in igen.</p>
+ </div>
+ [% END %]
+
+ [% IF ( invalid_username_or_password ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-warning">
+ <span class="sco-alert-warning notfound"></span>
+ <h2>Posten hittades inte</h2>
+ <p>Ditt användar-ID saknas i databasen. Försök igen.</p>
+ </div>
+ [% END %]
+
+ [% IF ( issued ) %]
+ [% IF batch_checkouts_allowed %]
+ [% FOREACH barcode IN newissues.split(',') %]
+ <span class="sco-alert-success issue"></span>
+ <div class="alert alert-info">
+ <p>Exemplaret utlånat <i>([% barcode | html %])</i></p>
+ </div>
+ [% END %]
+ [% ELSE %]
+ <span class="sco-alert-success issue"></span>
+ <div class="alert alert-info">
+ <p>Exemplaret utlånat <i>([% newissues.split(',').last | html %])</i></p>
+ </div>
+ [% END %]
+ [% ELSIF ( renewed ) %]
+ <span class="sco-alert-success renew"></span>
+ <div class="alert alert-info">
+ <p>Exemplaret omlånat <i>([% barcode | html %])</i></p>
+ </div>
+ [% ELSIF ( renewed == 0) %]
+ <span class="sco-alert-warning renew"></span>
+ <div class="alert alert-info">
+ <p>Exemplaret har inte lånats om</p>
+ </div>
+ [% ELSIF ( returned == 0 ) %]
+ <span class="sco-alert-warning return"></span>
+ <div class="alert alert-info">
+ <p>Exemplaret går ej att återlämna, kontakta personal för hjälp</p>
+ </div>
+ [% ELSIF ( returned == 1 ) %]
+ <span class="sco-alert-success return"></span>
+ <div class="alert alert-info">
+ <p>Exemplaret återlämnat <i>([% barcode | html %])</i></p>
+ </div>
+ [% END %]
+
+ [% UNLESS ( hide_main ) %]
+
+ [% IF ( patronid ) %]
+ [% IF ( validuser ) %]
+ <div class="alert alert-info">Du är inloggad som [% borrowername | html %].</div>
+ [% INCLUDE 'opac-note.inc' sco="true" %]
+ [% IF patron_has_hold_fee %]
+ <div class="alert alert-warning">En reservationsavgift för detta exemplar har lagts på ditt konto.</div>
+ [% END %]
+ [% END %]
+
+ [% IF ( nouser ) %]
+ <div class="alert alert-warning">
+ <h3>Tyvärr</h3>
+ <p>Användar-ID <strong>[% patronid | html %]</strong> hittades inte i databasen. Försök igen.</p>
+ </div>
+ [% END %]
+ [% END # / IF patronid %]
+
+ [% IF ( validuser ) %]
+ <div id="newcheckout" class="sco_entry">
+ <form id="scan_form" name="scan_form" method="post" action="/cgi-bin/koha/sco/sco-main.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend><h2>
+ [% IF ( Koha.Preference('SCOAllowCheckin') ) %]
+ <span>Låna, återlämna eller låna om ett exemplar:</span>
+ [% ELSE %]
+ <span>Låna eller låna om ett exemplar:</span>
+ [% END %]
+ </h2></legend>
+ <div class="row">
+ <div class="col">
+ <label for="barcode">Skanna ett nytt exemplar eller ange exemplarets streckkod[% IF batch_checkouts_allowed %] (eller för <b>endast utlån av flera exemplar,</b> ange en lista med streckkoder, en per rad)[% END %]:</label>
+ </div>
+ <div class="col-3">
+ [% IF batch_checkouts_allowed %]
+ <textarea id="barcode" name="barcode" rows="10" cols="30" class="focus form-control"></textarea>
+ [% ELSE %]
+ <input id="barcode" name="barcode" size="20" type="text" class="focus form-control" autocomplete="off" />
+ [% END %]
+ </div>
+ <div class="col-auto">
+ <button type="submit" class="btn btn-primary">Skicka</button>
+ </div>
+ <div class="col ml-auto">
+ <button type="button" id="logout_form" class="btn btn-info"><i class="fa fa-check" aria-hidden="true"></i> Avsluta</button>
+ <input type="hidden" name="op" value="cud-checkout" />
+ <input type="hidden" name="patronid" value="[% patronid | html %]" />
+ <input type="hidden" name="load_checkouts" value="[% load_checkouts | html %]" />
+ <input type="hidden" name="newissues" value="[% newissues | html %]" />
+ </div>
+ </div> <!-- /.row -->
+ </form> <!-- /#scan_form -->
+ </div> <!-- / #newcheckout -->
+ </div> <!-- / .span12/12 -->
+ [% IF ( display_patron_image ) %]
+ <div class="col-lg-2">
+ <img src="/cgi-bin/koha/sco/sco-patron-image.pl" alt="" />
+ </div>
+ [% END %]
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col order-first order-md-first order-lg-2">
+ [% WRAPPER tabs %]
+ [% WRAPPER tabs_nav %]
+ [% WRAPPER tab_item tabname= "checkouts" bt_active= 1 %]
+ <span>Lån ([% issues_count | html %])</span>
+ [% END %]
+ [% WRAPPER tab_item tabname= "holds" %]
+ [% IF waiting_holds_count %]
+ <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+ [% END %]
+ <span>Reservationer</span> ([% HOLDS.count | html %])
+ [% END %]
+ [% WRAPPER tab_item tabname= "account" %]
+ <span>Avgifter ([% total | $Price %])</span>
+ [% END %]
+ [% END # /WRAPPER tabs_nav %]
+
+ [% WRAPPER tab_panels %]
+ [% WRAPPER tab_panel tabname="checkouts" bt_active= 1 %]
+ <div id="checkouts-tab" class="tab-pane show active" aria-labelledby="checkouts">
+ <div id="borrowerdetails">
+ [% IF ( new_issue ) %]
+ <div class="lastchecked">
+ <p>
+ <strong>Utlånad: </strong>
+ [% new_issue.item.biblio.title | html %] ([% new_issue.item.barcode | html %]). [% IF new_issue.item.is_bundle %] [% SET bundle_items_count = new_issue.item.bundle_items.count %] [% tnx('Bundle of {count} item', 'Bundle of {count} items', bundle_items_count, { count = bundle_items_count }) | html %]. [% END %] Återlämnas den [% new_issue.date_due | $KohaDates as_due_date => 1 %] </p>
+ </div>
+ [% END %]
+ [% IF ( issues_count ) %]
+ [% IF ( Koha.Preference('SCOLoadCheckoutsByDefault') || load_checkouts ) %]
+ <table id="loanTable" class="table table-bordered table-striped">
+ <caption>Utlåning för [% borrowername | html %] <span class="count">([% issues_count | html %] totalt)</span></caption>
+ <!-- ISSUES TABLE ROWS -->
+ <thead>
+ <tr>
+ <th class="noshow">Utlånad den</th>
+ <th class="all anti-the">Titel</th>
+ <th>Hyllsignatur</th>
+ <th class="psort">Återlämnas</th>
+ <th class="all nosort">Låna om</th>
+ [% UNLESS ( nofines ) %]
+ <th>Avgifter</th>
+ [% END %]
+ <th></th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH ISSUE IN ISSUES %]
+ <tr>
+ <td>[% ISSUE.issuedate | html %]</td>
+ <td>
+ [% UNLESS ( noitemlinks ) %]
+ <a href="/cgi-bin/koha/opac-detail.pl?bib=[% ISSUE.  biblionumber | uri %]">[% ISSUE.title | html %]</a>
+ [% ELSE %]
+ <strong>[% ISSUE.title | html %]</strong>
+ [% END %]
+ [% IF ( newissues.match(ISSUE.barcode)) %]
+ <span class="badge text-bg-info">NY</span>
+ [% END %]
+ <span class="item-details">[% ISSUE.author | html %]</span>
+ ([% ISSUE.barcode | html %])
+ </td>
+ <td>[% ISSUE.itemcallnumber | html %]</td>
+ [% IF ( ISSUE.overdue ) %]
+ <td class="overdue" data-order="[% ISSUE.date_due | html %]">
+ [% ISSUE.date_due | $KohaDates as_due_date => 1 %]
+ </td>
+ [% ELSE   %]
+ <td data-order="[% ISSUE.date_due | html %]">
+ [% ISSUE.date_due | $KohaDates as_due_date => 1 %]
+ </td>
+ [% END %]
+ <td>
+ <form action="/cgi-bin/koha/sco/sco-main.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend class="sr-only">Exemplaret omlånat</legend>
+ <input type="hidden" name="patronid" value="[% patronid | html %]" />
+ <input type="hidden" name="load_checkouts" value="[% load_checkouts | html %]" />
+ <input type="hidden" name="barcode" value="[% ISSUE.barcode | html %]" />
+ <input type="hidden" name="newissues" value="[% newissues | html %]" />
+ [% IF ISSUE.can_be_renewed %]
+ <input type="hidden" name="op" value="cud-renew" />
+ <input type="hidden" name="confirmed" value="1" />
+ [% UNLESS ( ISSUE.renew ) %]
+ <input class="btn btn-primary btn-sm renew" name="confirm  " type="submit" value="Låna om exemplar" />
+ [% ELSE %]
+ <input class="btn btn-primary btn-sm renew" type="submit" value="Låna om exemplar" />
+ [% END %]
+ [% ELSE %]
+ [% IF ISSUE.renew_error == 'onsite_checkout' %]
+ <span>Detta är ett lån på plats och kan inte lånas om.</span>
+ [% ELSIF ISSUE.renew_error == 'too_unseen' %]
+ <span>Du har nått gränsen för max antal omlån för detta exemplar.</span>
+ [% ELSIF ISSUE.renew_error == 'too_soon' %]
+ <span>Det här exemplaret kan inte lånas om.</span>
+ [% ELSE %]
+ <span>Inga omlån tillåts</span>
+ [% END %]
+ [% IF Koha.Preference('SCOAllowCheckin') %]
+ <div>
+ <input class="btn btn-info btn-sm return" name="confirm" type="submit" value="Lämna tillbaka exemplar" />
+ <input type="hidden" name="op" value="cud-returnbook" />
+ <input type="hidden" name="confirmed" value=""  />
+ </div>
+ [% END %]
+ [% END %]
+ [% IF ISSUE.auto_renew %]
+ <br><span>Detta exemplar kommer att lånas om automatiskt</span>
+ [% END %]
+ </form>
+ </td>
+ [% UNLESS ( nofines ) %]
+ <td>
+ [% IF ( ISSUE.charges ) %]Ja[% ELSE %]Nej[% END %] </td>
+ [% END %]
+ <td></td>
+ </tr>
+ [% END # / FOREACH ISSUE %]
+ </tbody>
+ </table>
+ [% ELSE %]
+ <a class="btn btn-secondary" href="?load_checkouts=1#scan_form"><i class="fa fa-book" aria-hidden="true"></i> Visa din utlån</a>
+ [% END # / IF ( Koha.preference('SCOLoadCheckoutsByDefault') || load_checkouts ) %]
+ [% ELSE %]
+ <h3>Du har inte lånat något.</h3>
+ [% END # / IF issues_count %]
+ </div> <!-- / #borrowerdetails -->
+ </div>
+ [% END # /tab_panel %]
+ [% WRAPPER tab_panel tabname="holds" %]
+ [% IF HOLDS.count > 0 %]
+ [% PROCESS 'holds-table.inc' HOLDS = HOLDS, SuspendHoldsOpac = SuspendHoldsOpac, showpriority = showpriority, AutoResumeSuspendedHolds = AutoResumeSuspendedHolds, onlyinfo = 'true' %]
+ [% ELSE %]
+ <h3>Du har för närvarande inga väntande reservationer.</h3>
+ [% END %]
+ [% END # /tab_panel %]
+ [% WRAPPER tab_panel tabname="account" %]
+ [% PROCESS 'account-table.inc' %]
+ [% END # /tab_panel %]
+ [% END # /WRAPPER tab_panels %]
+ [% END # /WRAPPER tabs %]
+
+
+ [% ELSE # IF validuser %]
+ <div class="sco_entry" >
+ <form id="mainform" action="/cgi-bin/koha/sco/sco-main.pl" name="mainform" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset>
+ <legend>Logga in på ditt konto</legend>
+ <div class="row">
+ <div class="col-md-6">
+ [% IF ( Koha.Preference('SelfCheckoutByLogin') ) %]
+ <div class="row">
+ <div class="col-md-12">
+ [% PROCESS login_label for="patronlogin" %]
+ </div>
+ <div class="col-md-12">
+ <input type="text" id="patronlogin" class="form-control focus noEnterSubmit" size="20" name="patronlogin" autocomplete="off"/>
+ </div>
+ <div class="col-md-12">
+ <label for="patronpw">Lösenord:</label>
+ </div>
+ <div class="col-md-12">
+ <input type="password" id="patronpw" class="form-control" size="20" name="patronpw" autocomplete="off"/>
+ </div>
+ <div class="col-md-12">
+ <button type="submit" class="btn btn-primary">Logga in</button>
+ </div>
+ </div> <!-- /.row -->
+ [% ELSE %]
+ <div class="row">
+ <div class="col-md-12">
+ <label for="patronid">Ange ditt kortnummer:</label>
+ </div>
+ <div class="col-md-12">
+ <input type="text" id="patronid" class="form-control focus" size="20" name="patronid" autocomplete="off" />
+ </div>
+ <div class="col-md-12">
+ <button type="submit" class="btn btn-primary">Skicka</button>
+ </div>
+ </div> <!-- /.row -->
+ [% END %]
+ </div> <!-- /.col-md-6 -->
+ </div> <!-- /.row -->
+ [% FOREACH INPUT IN INPUTS %]
+ <input type="hidden" name="[% INPUT.name | html %]" value="[% INPUT.value | html %]">
+ [% END %]
+ <input type="hidden" name="op" value="cud-login" />
+ </fieldset>
+ </form> <!-- /#mainform -->
+ </div> <!-- / .sco_entry -->
+ [% END # / IF validuser %]
+ [% END # / UNLESS ( hide_main %]
+ [% IF ( SCOMainUserBlock ) %]
+ <div id="scomainuserblock">
+ [% PROCESS koha_news_block news => SCOMainUserBlock %]
+ </div>
+ [% END %]
+ </div> <!-- / .span12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+ <span id="audio-alert"></span>
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        function mungeHistory() {
+            // prevent back button from allowing form resubmission
+            if (history && history.pushState) {
+                history.replaceState(null, document.title, window.location.href);
+            }
+        }
+        var mainTimeout;
+        function sco_init() {
+            mainTimeout = setTimeout(function() {
+                location.href = '/cgi-bin/koha/sco/sco-main.pl?op=logout';
+            }, [% SelfCheckTimeout | html %]);
+        }
+        function dofocus() {    // named function req'd for body onload event by some FF and IE7 security models
+            // alert("dofocus called");
+            $(".focus:last").select();
+        }
+        var slip_re = /slip/;
+        function printx_window(print_type) {
+          var handler = print_type.match(slip_re) ? "printslip" : "moremember";
+
+          return false;
+        }
+        function checkout_confirm(patronid) {
+            var   barcode = $("#barcode").val();
+            // alert("checkout_confirm('" + patronid + "') called for barcode '" + barcode + "'");
+            if (! barcode) { dofocus(); return false; }    // no barcode
+            if (barcode == "__KOHA_NEW_CIRC__") {   // magic barcode
+                window.location.href='/cgi-bin/koha/sco/sco-main.pl?op=logout';
+                return false;
+            }
+            return true;
+        }
+        [% IF Koha.Preference('AudioAlerts') %]
+            var AUDIO_ALERTS = JSON.parse( "[% To.json(AudioAlerts.AudioAlerts) | $raw %]" );
+            $( document ).ready(function() {
+                if ( AUDIO_ALERTS ) {
+                    for ( var k in AUDIO_ALERTS ) {
+                        var alert = AUDIO_ALERTS[k];
+                        if ( $( alert.selector ).length ) {
+                            playSound( alert.sound );
+                            break;
+                        }
+                    }
+                }
+            });
+            function playSound( sound ) {
+                if (!(sound.indexOf("http://") === 0 || sound.indexOf("https://") === 0)) {
+                    sound = '[% interface | html %]' + '/bootstrap/sound/' + sound;
+                    document.getElementById("audio-alert").innerHTML = '<audio src="' + sound + '" autoplay="autoplay" autobuffer="autobuffer"></audio>';
+                }
+            }
+        [% END %]
+
+        $( window ).on( "load", function() {
+            dofocus();
+        });
+
+        $( window ).on( "unload", function() {
+            mungeHistory();
+        });
+
+        $(document).ready(function() {
+            dofocus();
+            [% IF ( patronid ) %]sco_init();[% END %]
+
+            var dTables = $("#loanTable, #holdst, #finestable");
+            dTables.each(function(){
+                var thIndex = $(this).find("th.psort").index();
+                $(this).dataTable($.extend(true, {}, dataTablesDefaults, {
+                    "sorting" : [[ thIndex, 'asc' ]],
+                    "dom": '<"top"<"table_entries"><"table_controls"f>>t<"clear">',
+                    "columnDefs": [
+                        { "targets": [ "nosort" ],"sortable": false,"searchable": false },
+                        { "targets": [ "noshow" ], "visible": false, "searchable": false },
+                        { "type": "anti-the", "targets" : [ "anti-the" ] },
+                        { "visible": false, "targets" : [ "hidden" ] },
+                        { "className": 'dtr-control', "orderable": false, "targets": -1 }
+                    ],
+                    "language": {
+                        "search": "_INPUT_",
+                        "searchPlaceholder": _("Sök")
+                    },
+                    "responsive": {
+                        details: {
+                            type: 'column',
+                            target: -1
+                        }
+                    }
+                }));
+            });
+
+            $('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (event) {
+                dTables.DataTable().responsive.recalc();
+            } );
+
+            $("#logout_form").on("click", function(e){
+                e.preventDefault(e);
+                clearTimeout(mainTimeout);
+                [% IF Koha.Preference('SelfCheckReceiptPrompt') %]
+                    var confirmStart = Date.now();
+                    confirmModal("", _("Vill du skriva ut ett kvitto?"), _("Skriv ut kvitto och avsluta session"), _("Avsluta session"), function(result) {
+                        if ( result && (Date.now() - confirmStart) < [% SelfCheckTimeout | html %] ) {
+                            var win = window.open("/cgi-bin/koha/sco/printslip.pl?print=qslip");
+                            location.href = '/cgi-bin/koha/sco/sco-main.pl?op=logout';
+                        } else {
+                            location.href = '/cgi-bin/koha/sco/sco-main.pl?op=logout';
+                        }
+                    })
+                sco_init();
+                [% ELSE %]
+                    location.href = '/cgi-bin/koha/sco/sco-main.pl?op=logout';
+                [% END %]
+
+                return true;
+            });
+
+            $("#scan_form").on("submit", function(){
+                return checkout_confirm('[% patronid | html %]');
+            });
+    });
+
+    </script>
+
+ [% IF ( Koha.Preference('SCOUserJS') ) %]<script>[% Koha.Preference('SCOUserJS') | $raw %]</script>[% END %]
+[% END %]

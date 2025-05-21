@@ -1,0 +1,577 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op == 'add_form' %]
+ [% IF ( action_modify || action_add_value ) %]
+ [% IF ( action_modify ) %]
+ [% t("Modify authorized value") | html %] &rsaquo;
+ [% END %]
+ [% IF ( action_add_value ) %]
+ [% t("New authorized value") | html %] &rsaquo;
+ [% END %]
+ [% tx("Authorized values for category {category_name}", { category_name = category_name }) | html %] &rsaquo;
+ [% END %]
+ [% IF ( action_add_category ) %]
+ [% t("New category") | html %] &rsaquo;
+ [% END %]
+
+ [% ELSIF ( loop || searchfield ) %]
+ [% tx("Authorized values for category {category_name}", { category_name = category.category_name }) | html %] &rsaquo;
+ [% END # /IF op == 'add_form' %]
+
+ [% t("Authorized values") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+
+[% FILTER collapse %]
+ <style>
+        fieldset.rows div.toptabs li {
+            clear: none;
+            margin-right:.4em;
+            padding-bottom: 0;
+            width: auto;
+        }
+        #lib,
+        #lib_opac {
+            width: 75%;
+        }
+        .authval-icons {
+            display: flex;
+            flex-wrap: wrap;
+            clear: both;
+        }
+        .authval-icons label {
+            float: none;
+            width: auto;
+        }
+        #authorised_value:invalid {
+            color:red;
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="admin_authorised_values" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'prefs-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
+ [% END %]
+
+ [% IF ( op == 'add_form' || loop || searchfield ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/authorised_values.pl">Auktoriserade värden</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Auktoriserade värden</span>
+ [% END %]
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% IF ( action_modify || action_add_value ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=[% category_name | uri %]">Auktoriserade värden för kategori [% category_name | html %]</a>
+ [% END %]
+ [% IF ( action_modify ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Redigera auktoriserat värde</span>
+ [% END %]
+ [% END %]
+ [% IF ( action_add_value ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Nytt auktoriserat värde</span>
+ [% END %]
+ [% END %]
+ [% END %]
+ [% IF ( action_add_category ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Ny kategori</span>
+ [% END %]
+ [% END %]
+
+ [% ELSIF ( loop || searchfield ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Auktoriserade värden för kategori [% category.category_name | html %]</span>
+ [% END %]
+ [% END # /IF op == 'add_form' %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% IF op == 'add_form' OR op == 'edit_form' %]
+ <h1>
+ [% IF ( action_modify ) %]<span>Redigera auktoriserat värde</span>[% END %]
+ [% IF ( action_add_value ) %]<span>Nytt auktoriserat värde</span>[% END %]
+ [% IF ( action_add_category ) %]<span>Ny kategori</span>[% END %]
+ [% IF ( op == 'edit_form' ) %]<span>Redigera kategori</span>[% END %]
+ </h1>
+
+ [% IF ( action_modify ) %]
+ <div class="alert alert-info">
+ <i class="fa fa-exclamation"></i> <strong>Kommentar:</strong> Om du ändrar en kod för ett auktoriserat värde, kommer befintliga poster som använder det inte att uppdateras. Ändringar i värdebeskrivningar visas direkt. </div>
+ [% END %]
+
+ <form action="/cgi-bin/koha/admin/authorised_values.pl" name="Aform" id="Aform" method="post" class="validated">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ [% IF action_add_category %]
+ <ol>
+ <li>
+ <label for="category" class="required">Kategori: </label>
+ <input type="text" name="category"  id="category" size="32" maxlength="32" class="focus required" />
+ <span class="required">Obligatoriskt</span>
+ <input type="hidden" name="op" value="cud-add_category" />
+ </li>
+ <li>
+ <input type="checkbox" name="is_integer_only" id="is_integer_only"/><label for="is_integer_only">Begränsa värdet till enbart siffror</label></input>
+ </li>
+ </ol>
+ [% ELSIF op == 'edit_form' %]
+ <ol>
+ <li>
+ <label for="category" class="required">Kategori: </label>
+ <input type="text" disabled value="[% category_name | html %]"/>
+ </li>
+ <li>
+ [% IF category.is_integer_only %]
+ <input type="checkbox" checked name="is_integer_only" id="is_integer_only"/><label for="is_integer_only">Begränsa värdet till enbart siffror</label></input>
+ [% ELSE %]
+ <input type="checkbox" name="is_integer_only" id="is_integer_only"/><label for="is_integer_only">Begränsa värdet till enbart siffror</label></input>
+ [% END %]
+ </li>
+ </ol>
+ <input type="hidden" name="op" value="cud-edit_category" />
+ <input type="hidden" name="category" value="[% category_name | html %]" />
+ <input type="hidden" name="searchfield" value="[% category_name | html %]" />
+ [% ELSE %]
+ <ol>
+ <li>
+ <span class="label">Kategori</span>
+ <input type="hidden" name="op" value="cud-add" />
+ <input type="hidden" name="category" value="[% category_name | html %]" /> [% category_name | html %]
+ </li>
+ <li>
+ <label for="authorised_value">Auktoriserat värde: </label>
+ [% IF ( action_modify ) %]
+ <input type="hidden" id="id" name="id" value="[% av.id | html %]" />
+ [% END %]
+ [% IF ( av && av.is_integer_only ) || category.is_integer_only %]
+ <input class="focus" id="authorised_value" inputmode="numeric" max="127" min="-128" name="authorised_value" pattern="[% num_pattern | $raw %]" required/="required/" title="Borde vara numerisk (-128..127)" type="text" value="[% av.authorised_value | html %]">
+ [% ELSE %]
+ <input type="text" id="authorised_value" name="authorised_value" value="[% av.authorised_value | html %]" maxlength="80" class="focus"/>
+ [% END %]
+ </li>
+ <li>
+ <label for="lib">Beskrivning: </label>
+ <input type="text" name="lib" id="lib" value="[% av.lib | html %]" maxlength="200" />
+ </li>
+ <li>
+ <label for="lib_opac">Beskrivning (OPAC): </label>
+ <input type="text" name="lib_opac" id="lib_opac" value="[% av.lib_opac | html %]" maxlength="200" />
+ </li>
+ <li><label for="branches">Biblioteksbegränsning: </label>
+ <select id="branches" name="branches" multiple size="10">
+ <option value="">Alla bibliotek</option>
+ [% FOREACH branch IN branches_loop %]
+ [% IF ( branch.selected ) %]
+ <option selected="selected" value="[% branch.branchcode | html %]">[% branch.branchname | html %]</option>
+ [% ELSE %]
+ <option value="[% branch.branchcode | html %]">[% branch.branchname | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <div class="hint">Välj 'Alla bibliotek' om detta auktoriserade värde alltid ska visas. I annat fall väljer du bibliotek som ska kopplas till detta värde.</div>
+ </li>
+ </ol>
+
+ [% INCLUDE 'admin-icon-selection.inc' context = "authval" %]
+
+ [% END # /IF action_add_category %]
+ </fieldset>
+
+ <fieldset class="action">
+ <input type="hidden" name="id" value="[% av.id | html %]" />
+ <input class="btn btn-primary" type="submit" value="Spara" />
+ <a class="cancel" href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=[% category_name | url %]">Avbryt</a>
+ </fieldset>
+ </form>
+ [% END # /IF op == 'add_form' %]
+
+ [% IF op == 'list' %]
+ <div id="toolbar" class="btn-toolbar">
+ <a id="addcat" class="btn btn-default" href= "/cgi-bin/koha/admin/authorised_values.pl?op=add_form"><i class="fa fa-plus"> </i> Ny kategori</a>
+ [% IF ( searchfield ) %]
+ <a id="editcat" class="btn btn-default" href= "/cgi-bin/koha/admin/authorised_values.pl?op=edit_form&amp;category=[% category.category_name | url %]"><i class="fa fa-plus"> </i> Redigera kategori</a>
+ <a id="addauth" class="btn btn-default" href= "/cgi-bin/koha/admin/authorised_values.pl?op=add_form&amp;category=[% category.category_name | url %]"><i class="fa fa-plus"> </i> Nytt auktoriserat värde för [% category.category_name | html %]</a>
+ [% END %]
+ </div>
+
+ [% IF ( searchfield ) %]
+ <h1>Auktoriserade värden för kategori [% category.category_name | html %]</h1>
+ [% PROCESS category_descriptions code_category = category.category_name %]
+ [% ELSE %]
+ <h1>Auktoriserade värden</h1>
+ [% END %]
+
+ [% IF ( searchfield ) %]
+ <div class="alert alert-info">
+ <i class="fa fa-exclamation"></i> <strong>Kommentar:</strong> Om du ändrar en kod för ett auktoriserat värde, kommer befintliga poster som använder det inte att uppdateras. Ändringar i värdebeskrivningar visas direkt. </div>
+ [% END %]
+
+ [% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Ett fel inträffade när det auktoriserade värdet uppdaterades. Kanske finns redan aktuellt värde i systemet.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Ett fel inträffade när det auktoriserade värdet lades till. Kategorin kanske redan finns.</span>
+ [% CASE 'error_on_edit_cat' %]
+ <span>Ett fel inträffade när denna kategori för auktoriserade värden uppdaterades.</span>
+ [% CASE 'error_on_insert_cat' %]
+ <span>Ett fel inträffade när den auktoriserade värde-kategorin lades till. Namnet på kategorin kanske redan finns.</span>
+ [% CASE 'error_on_delete' %]
+ <span>Ett fel uppstod när det auktoriserade värdet skulle tas bort. Titta i loggarna.</span>
+ [% CASE 'error_on_delete_category' %]
+ <span>Ett fel uppstod när den auktoriserade värdekategorin skulle tas bort. Titta i loggarna.</span>
+ [% CASE 'success_on_update' %]
+ <span>Ett auktoriserat värde har uppdaterats.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Ett auktoriserat värde har lagts till.</span>
+ [% CASE 'success_on_insert_cat' %]
+ <span>Den auktoriserade värdekategorin har lagts till.</span>
+ [% CASE 'success_on_delete' %]
+ <span>Det auktoriserade värdet har tagits bort.</span>
+ [% CASE 'success_on_delete_category' %]
+ <span>Den auktoriserade värdekategorin har tagits bort.</span>
+ [% CASE 'cat_already_exists' %]
+ <span>Kategorin med auktoriserade värden finns redan.</span>
+ [% CASE 'invalid_category_name' %]
+ <span>De auktoriserade värde-kategorierna "branches", "itemtypes" och "cn_source" används internt av Koha och är inte giltiga.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+ [% END # /FOR m IN messages %]
+
+ <div class="page-section">
+ [% IF ( searchfield ) %]
+
+ <form action="/cgi-bin/koha/admin/authorised_values.pl" method="get" id="category">
+ <p>
+ <label for="category_search">Visa kategori: </label>
+ <select name="searchfield" id="category_search">
+ [% FOR c IN category_names %]
+ [% IF c == searchfield %]
+ <option value="[% c | html %]" selected="selected">[% c | html %]</option>
+ [% ELSE %]
+ <option value="[% c | html %]">[% c | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </p>
+ </form> <!-- /#category -->
+
+ [% IF loop %]
+ <table id="categoriest" class="authorized_values_table">
+ <thead>
+ <tr>
+ <th>Auktoriserat värde</th>
+ <th>Beskrivning</th>
+ <th>Beskrivning (OPAC)</th>
+ <th>Ikon</th>
+ <th>Biblioteksbegränsning</th>
+ <th class="noExport NoSort">Åtgärder</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH loo IN loop %]
+ <tr>
+ <td>[% loo.authorised_value | html %]</td>
+ <td>[% loo.lib | html %]</td>
+ <td>[% loo.lib_opac | html %]</td>
+ <td>
+ [% IF ( loo.image ) %]<img class="itemtype-image" src="[% loo.image | url %]" alt=""/>[% ELSE %]&nbsp;[% END %]</td>
+ <td>
+ [% IF loo.branches.size > 0 %]
+ [% branches_str = "" %]
+ [% FOREACH branch IN loo.branches %]
+ [%- IF loop.first -%]
+ [% branches_str = branch.branchname _ " (" _ branch.branchcode _ ")" %]
+ [% ELSE %]
+ [% branches_str = branches_str _ "\n" _ branch.branchname _ " (" _ branch.branchcode _ ")" %]
+ [% END %]
+ [% END %]
+ <span class="library_limitation" data-bs-toggle="tooltip" title="[% branches_str | html %]">
+ [% IF loo.branches.size > 1 %]
+ <span>[% loo.branches.size | html %] biblioteksbegränsningar</span>
+ [% ELSE %]
+ <span>[% loo.branches.size | html %] biblioteksbegränsning</span>
+ [% END %]
+ [% ELSE %]
+ <span>Ingen begränsning</span>
+ [% END # /IF loo.branches.size > 0 %]
+ </td>
+ <td class="actions">
+ <a href="/cgi-bin/koha/admin/authorised_values.pl?op=add_form&amp;id=[% loo.id | uri %]" class="btn btn-default btn-xs"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera</a>
+ <form action="/cgi-bin/koha/admin/authorised_values.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete" />
+ <input type="hidden" name="searchfield" value="[% searchfield | html %]" />
+ <input type="hidden" name="id" value="[% loo.id | html %]" />
+ <button type="submit" class="delete btn btn-default btn-xs"><i class="fa fa-trash-can"></i> Ta bort</button>
+ </form>
+ </td>
+ </tr>
+ [% END # /FOREACH loop %]
+ </tbody>
+ </table> <!-- /#categoriest -->
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p>Inga auktoriserade värden är definierade för [% category.category_name | html %]</p>
+ <form action="/cgi-bin/koha/admin/authorised_values.pl" method="get">
+ <input type="hidden" name="op" value="add_form" />
+ <input type="hidden" name="category" value="[% category.category_name | html %]" />
+ <button type="submit"><i class="fa fa-plus"></i> Lägg till ett nytt auktoriserat värde</button>
+ </form>
+ [% UNLESS category.is_system %]
+ <form id="delete_category" action="/cgi-bin/koha/admin/authorised_values.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_category" />
+ <input type="hidden" name="category_name" value="[% category.category_name | html %]" />
+ <button type="submit"><i class="fa fa-plus"></i> Ta bort kategorin '[% category.category_name | html %]' </button>
+ </form>
+ [% END %]
+ </div>
+ [% END # /IF loop %]
+
+ [% ELSE # category was selected %]
+ <table id="categoriest" class="authorized_values_table">
+ <thead>
+ <tr>
+ <th>Kategori</th>
+ <th>Beskrivning</th>
+ <th class="noExport">&nbsp;</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOR c IN category_names %]
+ <tr>
+ <td><a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=[% c | uri %]">[% c | html %]</a></td>
+ <td>
+ [% PROCESS category_descriptions code_category = c %]
+ </td>
+ <td>
+ <a id="addauth" class="btn btn-default btn-xs" href= "/cgi-bin/koha/admin/authorised_values.pl?op=add_form&amp;category=[% c | uri %]"><i class="fa fa-plus"> </i> Lägg till</a>
+ </td>
+ </tr>
+ [% END # /FOR c %]
+ </tbody>
+ </table> <!-- /#categoriest -->
+ [% END # /IF ( searchfield  )%]
+ </div>
+
+ [% END # /IF op == 'list' %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+        $(document).ready(function() {
+
+            KohaTable("categoriest", {
+                "order": [[ 0, "asc" ]],
+                "pagingType": "full"
+            });
+
+            if ( $("#branches option:selected").length < 1 ) {
+                $("#branches option:first").attr("selected", "selected");
+            }
+
+            $(".delete").click(function(){
+                return confirm(_("Är du säker på att du vill ta bort detta auktoriserade värde?"));
+            });
+            $('#category_search').change(function() {
+                $('#category').submit();
+            });
+
+            $("#delete_category").on('submit', function(){
+                return confirm(_("Är du säker på att du vill ta bort denna kategori för auktoriserade värden?"));
+            });
+
+            if( $("#icons .tab-pane.active").length < 1 ){
+                $("#icons a:first").tab("show");
+            }
+
+            $("#Aform").submit(function() {
+                if ( $('#authorised_value').length ) {
+                    if ( ! $('#authorised_value').get(0).checkValidity() ) {
+                        alert( _("Ett auktoriserat värde ska vara numeriskt.") );
+                        $('#authorised_value').focus();
+                        return false;
+                    }
+                }
+                return true;
+            });
+        });
+    </script>
+[% END %]
+
+[% BLOCK category_descriptions %]
+ [% SWITCH code_category %]
+ [% CASE 'Asort1' %]
+ <p>Används för inköpsstatistik</p>
+ [% CASE 'Asort2' %]
+ <p>Används för inköpsstatistik</p>
+ [% CASE 'BOR_NOTES' %]
+ <p>Värden för anpassade låntagarmeddelanden som visas på cirkulationsskärmen och i OPAC:en. Värdet i beskrivningsfältet ska vara meddelandetexten och är begränsad till 200 tecken</p>
+ [% CASE 'branches' %]
+ <p></p>
+ [% CASE 'Bsort1' %]
+ <p>Värden som kan anges i låntagarens sorteringsfält 1, som kan användas i statistiksyfte</p>
+ [% CASE 'Bsort2' %]
+ <p>Värden som kan anges i låntagarens sorteringsfält 2, som kan användas i statistiksyfte</p>
+ [% CASE 'CAND' %]
+ <p></p>
+ [% CASE 'CCODE' %]
+ <p>Avdelningar (visas vid katalogisering och arbete med exemplar)</p>
+ [% CASE 'cn_source' %]
+ <p></p>
+ [% CASE 'CONTROL_NUM_SEQUENCE' %]
+ <p></p>
+ [% CASE 'COUNTRY' %]
+ <p>Används i UNIMARC 102 $a</p>
+ [% CASE 'DAMAGED' %]
+ <p>Beskrivning av exemplar märkta som skadade (visas när en katalogiserar och arbetar med exemplar)</p>
+ [% CASE 'DEPARTMENT' %]
+ <p>Institutioner krävs och används av modulen för kurslistor</p>
+ [% CASE 'ETAT' %]
+ <p>Används i franska UNIMARC-installationer i fält 995 $o för att identifiera exemplarstatus, jfr NOT_LOAN</p>
+ [% CASE 'ERM_AGREEMENT_CLOSURE_REASON' %]
+ <p>Stäng anledningar för avtal (modul för e-resurshantering)</p>
+ [% CASE 'ERM_AGREEMENT_LICENSE_LOCATION' %]
+ <p>Placeringar för licensavtal (modul för e-resurshantering)</p>
+ [% CASE 'ERM_AGREEMENT_LICENSE_STATUS' %]
+ <p>Statusar för licensavtalen (modul för e-resurshantering)</p>
+ [% CASE 'ERM_AGREEMENT_RENEWAL_PRIORITY' %]
+ <p>Prioriteringar för förnyelse av avtal (modul för e-resurshantering)</p>
+ [% CASE 'ERM_AGREEMENT_STATUS' %]
+ <p>Statusar för avtal (modul för e-resurshantering)</p>
+ [% CASE 'ERM_USER_ROLES' %]
+ <p>Roll för användare (modul för e-resurshantering)</p>
+ [% CASE 'ERM_LICENSE_STATUS' %]
+ <p>Statusar för licenser (modul för e-resurshantering)</p>
+ [% CASE 'ERM_LICENSE_TYPE' %]
+ <p>Typer av licenser (modul för e-resurshantering)</p>
+ [% CASE 'ERM_PACKAGE_CONTENT_TYPE' %]
+ <p>Innehållstyp för paketen (modul för e-resurshantering)</p>
+ [% CASE 'ERM_PACKAGE_TYPE' %]
+ <p>Typer av paket (modul för e-resurshantering)</p>
+ [% CASE 'ERM_TITLE_PUBLICATION_TYPE' %]
+ <p>Publikationstyper av titlarna (modul för e-resurshantering)</p>
+ [% CASE 'HINGS_AS' %]
+ <p>Allmänna reservationer: Inköpsstatusbetäckning :: Ett dataelement som specificerar införskaffningsstatus för enheten vid tiden för reservationsrapporten.</p>
+ [% CASE 'HINGS_C' %]
+ <p>Bestånd: fullständighetsbeteckning</p>
+ [% CASE 'HINGS_PF' %]
+ <p>Fysisk information</p>
+ [% CASE 'HINGS_RD' %]
+ <p>Bestånd: lagringsbeteckning :: Detta värde specificerar lagringspolicyn för enheten vid tidpunkten för beståndsrapporten.</p>
+ [% CASE 'HINGS_UT' %]
+ <p>Bestånd: typ av enhetsbeteckning</p>
+ [% CASE 'HOLD_CANCELLATION' %]
+ <p>Anledningar till varför en reservation har avbrutits</p>
+ [% CASE 'ILL_STATUS_ALIAS' %]
+ <p>Olika status-kommandon för fjärrlånebegäran som används av fjärrlånemodulen</p>
+ [% CASE 'AR_CANCELLATION' %]
+ <p>Anledningar till varför en artikelbeställning har avbrutits</p>
+ [% CASE 'HSBND_FREQ' %]
+ <p>Frekvenser som används av boken kommer-modulen. De visas i boken kommer-fliken för låntagarkontot i personalgränssnittet.</p>
+ [% CASE 'ITEMTYPECAT' %]
+ <p>Tillåt flera exemplartyper för sökning i en kategori. Kategorier kan skrivas in i det auktoriserade värdet ITEMTYPECAT. För att kombinera exemplartyper i denna kategori, ange denna sökkategori för alla exemplartyper</p>
+ [% CASE 'itemtypes' %]
+ <p></p>
+ [% CASE 'LANG' %]
+ <p>ISO 639-2 standard språkkoder</p>
+ [% CASE 'LOC' %]
+ <p>Placering (syns vanligtvis när du lägger till eller redigerar ett exempel). LOC mappar till items.location i Kohadatabasen.</p>
+ [% CASE 'LOST' %]
+ <p>Beskrivning av exemplar märkta som förkomna (visas när en katalogiserar och arbetar med exemplar)</p>
+ [% CASE 'NOT_LOAN' %]
+ <p>Statusar som beskriver varför ett exemplar är ej för utlån</p>
+ [% CASE 'OPAC_SUG' %]
+ <p>En lista med anledningar som visas i inköpsförslagsformuläret i OPAC:en.</p>
+ [% CASE 'ORDER_CANCELLATION_REASON' %]
+ <p>Anledningar till varför en beställning har avbrutits</p>
+ [% CASE 'PAYMENT_TYPE' %]
+ <p>Fyller en rullgardinslista med anpassade betalningstyper vid betalning av avgifter</p>
+ [% CASE 'qualif' %]
+ <p>Funktionskoder (författare, redaktör, medarbetare, etc.) använd i UNIMARC 7XX $4 (franska)</p>
+ [% CASE 'RELTERMS' %]
+ <p>Lista med funktionskoder och termer enligt <a target="_blank" href="https://www.loc.gov/marc/relators/">MARC-lista med funktionskoder</a></p>
+ [% CASE 'REPORT_GROUP' %]
+ <p>Ett sätt att sortera och filtrera dina rapporter, standardvärdena i denna kategori inkluderar Koha-modulerna (Konton, Inköp, Katalog, Utlåning, Låntagare)</p>
+ [% CASE 'REPORT_SUBGROUP' %]
+ <p>Kan användas för att sortera och filtrera rapporter ytterligare. Denna kategori är som standard tom. Värden här måste inkludera den auktoriserade värdekoden från REPORT_GROUP i fältet Beskrivning (OPAC) för att länka undergruppen till rätt grupp.</p>
+ [% CASE 'RESTRICTED' %]
+ <p>Begränsad status för ett exemplar</p>
+ [% CASE 'ROADTYPE' %]
+ <p>Gatutyper att användas i låntagaradresser</p>
+ [% CASE 'SIP_MEDIA_TYPE' %]
+ <p>Används för att skapa eller redigera en exemplartyp som är knuten till utrustning som använder SIP, såsom låneautomater.</p>
+ [% CASE 'STACK' %]
+ <p>Kontrollnummer för hyllplats</p>
+ [% CASE 'SUGGEST' %]
+ <p>Skäl att avslå eller godkänna låntagarförslag (synliga vid hantering av förslag)</p>
+ [% CASE 'SUGGEST_FORMAT' %]
+ <p>Lista med exemplartyper som visas i en rullgardinsmeny i inköpsförslagsformuläret i Opacen. När du skapar auktoriserade värden för SUGGEST_FORMAT, ange en beskrivning här så det blir synligt för användare i Opacen.</p>
+ [% CASE 'SUGGEST_STATUS' %]
+ <p>Lista på ytterligare statusvärden som kan användas utöver standardvärdena för inköpsförslag.</p>
+ [% CASE 'TERM' %]
+ <p>Termer som används i modulen för kurslistor. Ange termer som ska listas i den meny du använder när du skapar en kurslista (t.ex. höst, vår, sommar).</p>
+ [% CASE 'TICKET_STATUS' %]
+ <p>En lista med anpassade statusvärden som kan användas utöver standardvärdena för "Ny" och "Löst".</p>
+ [% CASE 'TICKET_RESOLUTION' %]
+ <p>En lista med egna värden för ärenden som kan användas utöver standarden "Löst".</p>
+ [% CASE 'UPLOAD' %]
+ <p>Kategorier att tilldelas fil som laddas upp. Utan kategori kan en uppladdning ses som temporär och den kanske tas bort under automatisk städning.</p>
+ [% CASE 'VENDOR_TYPE' %]
+ <p>Värden som kan anges i fältet "Leverantörtyp" i inköpsmodulen, för att användas i statistiksyfte</p>
+ [% CASE 'VENDOR_INTERFACE_TYPE' %]
+ <p>Värden som kan anges för att fylla i fältet 'Gränssnittstyp' i förvärvsmodulen</p>
+ [% CASE 'VENDOR_ISSUE_TYPE' %]
+ <p>Värden som kan anges i fältet "Ärendetyp" i inköpsmodulen</p>
+ [% CASE 'WITHDRAWN' %]
+ <p>Beskrivning av ett återkallat exemplar (visas när du lägger till eller redigerar ett exemplar)</p>
+ [% CASE 'YES_NO' %]
+ <p>'JA/NEJ' är ett allmänt auktoriserat värde-fält som kan användas överallt där du behöver en enkel rullgardinsmeny med ja/nej.</p>
+ [% END %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

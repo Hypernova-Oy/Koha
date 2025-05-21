@@ -1,0 +1,79 @@
+---
+Kaukolainat:
+  Ilmoitukset:
+  - - 'Lähetä nämä kaukolaina-viestit kirjastolle:'
+    - class: multi
+      pref: ILLSendStaffNotices
+    - (erotetaan | -merkillä). Esim. jos ILL_REQUEST_CANCEL|ILL_REQUEST_MODIFIED jätetään
+      tyhjäksi, kirjastolle ei lähetetä yhtään kaukolaina-viestiä.
+  - - 'Sähköposti, johon kirjaston kaukolaina-viestit lähetetään, jos kirjaston sähköpostia
+      ei ole:'
+    - class: email
+      pref: ILLDefaultStaffEmail
+  Ominaisuudet:
+  - - choices:
+        '0': Älä käytä
+        '1': Käytä
+      default: 0
+      pref: ILLModule
+    - kaukolaina-moduulia ("master switch").
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      default: 0
+      pref: ILLModuleUnmediated
+    - asiakkaiden lähettämät kaukolainapyynnöt. Jos sallittu ja kaukolainayhteydet
+      tukevat ominaisuutta, uudet pyynnöt lähetetään suoraa eteenpäin.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      default: 0
+      pref: CirculateILL
+    - kaukolainapyydettyjen niteiden lainaus ja palautus.
+  - - 'Kaukolainastatukset, joita pidetään valmiina, ja joita ei tulisi näyttää kaukolainamoduulissa: '
+    - class: multi
+      pref: ILLHiddenRequestStatuses
+    - (erotetaan | -merkillä). Jos jätetään tyhjäksi, kaikki kaukolainapyynnöt näytetään.
+      Pyyntökoodit määritetään taustajärjestelmässä ja lisäaliaksia voi määrittää
+      auktorisoidun arvon luokkaan <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=ILL_STATUS_ALIAS">ILL_STATUS_ALIAS</a>.
+  - - Käytä asiakastyypin
+    - choices: patron-categories
+      pref: ILLPartnerCode
+    - asiakkaita kaukolainapyyntöjen tekijöinä.
+  Työnkulku:
+  - - choices:
+        '0': Älä tarkista
+        '1': Tarkista
+      default: 0
+      pref: ILLCheckAvailability
+    - saatavuutta ulkoisista lähteistä pyyntöprosessin aikana.
+  - - Jos kaukolainayhteys tukee sitä, YAML sallii pyyntötyypin vastuunvapausvaiheen
+      pyyntöä luotaessa antaen käyttäjälle pyyntötyyppiä vastaavan vastuunvapausilmoituksen
+      (virkailijaliittymä ja verkkokirjasto).
+    - 'Jokaiselle pyyntötyypille on mahdollista tehdä kolme asetusmääritystä: <code>text</code>,
+      <code>av_category_code</code> ja <code>bypass</code><ul>'
+    - <li><code>text</code> on HTML, joka näkyy tietyille pyyntötyypeille</li>
+    - <li><code>av_category_code</code> -auktorisoidun arvon tyyppiä käytetään vastuunvapausvaiheessa.</li>
+    - <li><code>bypass</code> sallii tiettyjen pyyntöjen ohittaa vastuunvapausvaiheen.</li></ul>
+    - 'Esimerkki (liitä koodi tekstikenttään): <br>'
+    - <code>all:<br>
+    - '&nbsp;text: |<br>'
+    - '&nbsp;&nbsp;&lt;h2&gt;HTML-otsikko&lt;/h2&gt;<br>'
+    - '&nbsp;&nbsp;&lt;p&gt;Tämä on HTML-kappale&lt;/p&gt;<br>'
+    - '&nbsp;&nbsp;&lt;p&gt;Tämä on toinen HTML-kappale&lt;/p&gt;<br>'
+    - '&nbsp;av_category_code: YES_NO<br>'
+    - article:<br>
+    - '&nbsp;text: tekijänoikeusteksti kaikille artikkelityyppisille pyynnöille<br>'
+    - '&nbsp;av_category_code: YES_NO<br>'
+    - '&nbsp;bypass: 1<br>'
+    - </code>
+    - class: code
+      pref: ILLModuleDisclaimerByType
+      syntax: text/x-yaml
+      type: textarea
+  Verkkokirjasto:
+  - - 'Salli kaukolainayhteydet verkkokirjastossa tehdyille pyynnöille:'
+    - class: multi
+      pref: ILLOpacbackends
+    - (erotetaan | -merkillä). Jos jätetään tyhjäksi, kaikki määritetyt kaukolainayhteydet
+      sallitaan.

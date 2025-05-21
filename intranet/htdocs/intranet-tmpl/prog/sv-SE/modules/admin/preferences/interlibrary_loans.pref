@@ -1,0 +1,80 @@
+---
+interlibrary_loans.pref:
+  Arbetsflöde:
+  - - choices:
+        '0': Kontrollera inte
+        '1': Kontrollera
+      default: 0
+      pref: ILLCheckAvailability
+    - externa källor för tillgänglighet under beställningsprocessen.
+  - - If the ILL backend supports it, adding YAML will enable the request type disclaimer
+      stage in request creation, prompting the user with a request type specific disclaimer
+      as defined (staff interface and OPAC).
+    - 'För varje beställningstyp finns tre inställningsalternativ: <code>text</code>,
+      <code>av_category_code</code> och <code>bypass</code><ul>'
+    - <li><code>text</code> är den HTML som syns för den valda beställningstypen.</li>
+    - <li><code>av_category_code</code> är kategorin för auktoriserade värden som
+      används för alternativ vid friskrivningsavsnittet.</li>
+    - <li><code>bypass</code> tillåter en specifik begäran om att hoppa över friskrivningssteget.</li></ul>
+    - Exempel (klistra in koden i textrutan):<br>
+    - <code>all:</br>
+    - '&nbsp;text: |<br>'
+    - '&nbsp;&nbsp;&lt;h2&gt;HTML-titel&lt;/h2&gt;<br>'
+    - '&nbsp;&nbsp;&lt;p&gt;Detta är ett HTML-stycke&lt;/p&gt;<br>'
+    - '&nbsp;&nbsp;&lt;p&gt;Detta är ett annat HTML-stycke&lt;/p&gt;<br>'
+    - '&nbsp;av_category_code: YES_NO<br>'
+    - artikel:<br>
+    - '&nbsp;text: copyright-text för alla slags artikelbeställningar<br>'
+    - '&nbsp;av_category_code: YES_NO<br>'
+    - '&nbsp;bypass: 1<br>'
+    - </code>
+    - class: code
+      pref: ILLModuleDisclaimerByType
+      syntax: text/x-yaml
+      type: textarea
+  Funktioner:
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      default: 0
+      pref: ILLModule
+    - fjärrlånemodulen (huvudströmbrytaren).
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      default: 0
+      pref: ILLModuleUnmediated
+    - direkta fjärrlånebeställningar. Om inställningen är aktiverad och ILL-backend
+      stödjer denna, kommer nya beställningar att hanteras automatiskt.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      default: 0
+      pref: CirculateILL
+    - cirkulation av exemplar beställda som fjärrlån.
+  - - 'Fjärrlånestatusar som ska anses färdiga och inte ska visas i fjärrlånemodulen: '
+    - class: multi
+      pref: ILLHiddenRequestStatuses
+    - (åtskilda med |). Om fältet lämnas tomt så kommer alla fjärrlånebeställningar
+      att visas. Beställningskoderna kan hittas i den auktoriserade värde-kategorin
+      <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=ILL_STATUS_ALIAS">ILL_STATUS_ALIAS</a>.
+  - - Använd låntagare från kategori
+    - choices: patron-categories
+      pref: ILLPartnerCode
+    - som samarbetspartners vid fjärrlånebeställningar.
+  Notifieringar:
+  - - 'Skicka följande fjärrlånemeddelanden till personalen när det är lämpligt:'
+    - class: multi
+      pref: ILLSendStaffNotices
+    - (åtskilda med |). t.ex. ILL_REQUEST_CANCEL|ILL_REQUEST_MODIFIED Om fältet lämnas
+      tomt kommer inga personalmeddelanden för fjärrlån att skickas.
+  - - 'Reservadress för personalens fjärrlånemeddelanden om e-postadress till biblioteket
+      saknas:'
+    - class: email
+      pref: ILLDefaultStaffEmail
+  OPAC:
+  - - 'Aktiverade ILL-backends för beställningar via OPAC:'
+    - class: multi
+      pref: ILLOpacbackends
+    - (åtskilda med |). Om fältet lämnas tomt, kommer alla installerade backends att
+      aktiveras.

@@ -1,0 +1,70 @@
+[% USE KohaDates %]
+<h2>Ilmestymisen ennustuskaava</h2>
+[% IF (not_consistent_end_date) %]
+ <p><em>Loppumispäivä ei vastaa kausijulkaisutilauksen pituutta.</em></p>
+[% END %]
+[% IF (ask_for_irregularities) %]
+ <p><em>Tarkista numerot, joita ei ole julkaistu</em></p>
+ [% IF (daily_options) %]
+ <p><em>
+ Jos on olemassa päivä (tai useita) viikossa, kun lehteä ei koskaan julkaista, voit valita ne laatikot alapuolelta. </em></p>
+ <input type="checkbox" id="monday" data-dow="1" class="skipday" />
+ <label for="monday">Maanantai</label>
+ <input type="checkbox" id="tuesday" data-dow="2" class="skipday" />
+ <label for="tuesday">Tiistai</label>
+ <input type="checkbox" id="wednesday" data-dow="3" class="skipday" />
+ <label for="wednesday">Keskiviikko</label>
+ <input type="checkbox" id="thursday" data-dow="4" class="skipday" />
+ <label for="thursday">Torstai</label>
+ <input type="checkbox" id="friday" data-dow="5" class="skipday" />
+ <label for="friday">Perjantai</label>
+ <input type="checkbox" id="saturday" data-dow="6" class="skipday" />
+ <label for="saturday">Lauantai</label>
+ <input type="checkbox" id="sunday" data-dow="7" class="skipday" />
+ <label for="sunday">Sunnuntai</label>
+ [% END %]
+[% END %]
+[% IF (predictions_loop) %]
+<table id="predictionst">
+ <thead>
+ <tr>
+ <th>Numero</th>
+ <th>Julkaisuvuosi</th>
+ [% IF (ask_for_irregularities) %]
+ <th>Ei julkaistu</th>
+ [% END %]
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH prediction IN predictions_loop %]
+ <tr>
+ <td>
+ [% IF ( matches = prediction.number.match('(.*)Spring(.*)') ) %] [% matches.0 | html %]Kevät[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Summer(.*)') ) %] [% matches.0 | html %]Kesä[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Fall(.*)') ) %] [% matches.0 | html %]Syksy[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Winter(.*)') ) %] [% matches.0 | html %]Talvi[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Spr(.*)') ) %] [% matches.0 | html %]Kevät[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Sum(.*)') ) %] [% matches.0 | html %]Kesä[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Fal(.*)') ) %] [% matches.0 | html %]Syksy[% matches.1 | html %] [% ELSIF ( matches = prediction.number.match('(.*)Win(.*)') ) %] [% matches.0 | html %]Talvi[% matches.1 | html %] [% ELSE %] [% prediction.number | html %] [% END %] </td>
+ <td>
+ [% IF (prediction.publicationdate) %]
+ [% prediction.publicationdate | $KohaDates %]
+ [% ELSE %]
+ <span>tuntematon</span>
+ [% END %]
+ </td>
+ [% IF (ask_for_irregularities) %]
+ <td style="text-align:center">
+ [% UNLESS (loop.first) %]
+ [% IF (prediction.not_published) %]
+ <input type="checkbox" name="irregularity" value="[% prediction.issuenumber | html %]" data-dow="[% prediction.dow | html %]" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" name="irregularity" value="[% prediction.issuenumber | html %]" data-dow="[% prediction.dow | html %]" />
+ [% END %]
+ </td>
+ [% END %]
+ [% END %]
+ </tr>
+ [% END %]
+ </tbody>
+</table>
+
+<fieldset class="action">
+ <button class="btn btn-default btn-sm" id="hidepredictionpattern">Valmis</button>
+</fieldset>
+
+[% END %]

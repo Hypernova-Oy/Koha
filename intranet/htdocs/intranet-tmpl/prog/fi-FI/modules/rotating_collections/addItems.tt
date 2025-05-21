@@ -1,0 +1,169 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Manage items") | html %] &rsaquo;
+ [% tx("Collection '{collection_title}'", { collection_title = colTitle }) | html %] &rsaquo;
+ [% t("Rotating collections") | html %] &rsaquo;
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="rcoll_addItems" class="tools rcoll">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Työkalut</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl">Siirtokokoelmat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/rotating_collections/addItems.pl?colId=[% colId | uri %]">[% tx("Collection '{collection_title}'", { collection_title = colTitle }) | html %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Hallinnoi niteitä</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ [% IF ( ! colId ) %]
+ <div class="alert alert-info">
+ <p>Virheellinen kokoelmatunnus</p>
+ <p><a href="/cgi-bin/koha/rotating_collections/rotatingCollections.pl">Palaa siirtokokoelmiin</a></p>
+ </div>
+ [% ELSE %]
+ [% INCLUDE 'rotating-collections-toolbar.inc' %]
+ <h1>[% tx("Manage items for '{collection_title}'", { collection_title = colTitle }) | html %]</h1>
+
+ [% IF ( previousActionAdd ) %]
+ [% IF ( addSuccess ) %]
+ <div class="alert alert-info">Nide viivakoodilla '[% barcode | html %]' on lisätty</div>
+ [% ELSE %]
+ <div class="alert alert-warning">
+ <p>Niteen lisääminen viivakoodilla epäonnistui <em>[% barcode | html %]</em>:
+ <p>
+ [% IF failureMessage == "NO_ITEM" %]
+ <span>Ei nidettä viivakoodilla</span>
+ [% ELSIF failureMessage == "IN_COLLECTION_OTHER" %]
+ <span>Tämä aineisto on osa toista siirtokokoelmaa.</span>
+ [% ELSIF failureMessage == "IN_COLLECTION" %]
+ <span>Nide on jo tässä kokoelmassa</span>
+ [% ELSE %]
+ [% failureMessage | html %]
+ [% END %]
+ </p>
+ </div>
+ [% END %]
+ [% END %]
+
+ [% IF ( previousActionRemove ) %]
+ [% IF ( removeSuccess ) %]
+ <div class="alert alert-info">Niteen viivakoodi <em>[% barcode | html %]</em> poistettu</div>
+ [% ELSE %]
+ <div class="alert alert-warning">
+ Niteen poistaminen viivakoodilla epäonnistui <em>[% barcode | html %]</em>:
+ <p>
+ [% IF failureMessage == "NO_ITEM" %]
+ <span>Ei nidettä viivakoodilla</span>
+ [% ELSIF failureMessage == "NOT_IN_COLLECTION" %]
+ <span>Nide ei ole tässä kokoelmassa</span>
+ [% ELSE %]
+ [% failureMessage | html %]
+ [% END %]
+ </p>
+ </div>
+ [% END %]
+ [% END %]
+
+ <div>
+ <form action="addItems.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="brief">
+ <legend>Lisää tai poista niteitä</legend>
+ <ol>
+ <li>
+ <label for="barcode">Viivakoodi: </label>
+ <input type="text" id="barcode" name="barcode" />
+ [% IF ( removeChecked ) %]
+ <label class="inline"><input type="checkbox" name="removeItem" checked="checked" /> Poista nide kokoelmasta</label>
+ [% ELSE %]
+ <label class="inline"><input type="checkbox" name="removeItem" /> Poista nide kokoelmasta</label>
+ [% END %]
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" id="colId" name="colId" value="[% colId | html %]" />
+ <input type="hidden" name="op" value="cud-add" />
+ <input class="btn btn-primary" type="submit" value="OK" />
+ </fieldset>
+
+ </form>
+ </div>
+
+ <div class="page-section">
+ [% IF ( collectionItemsLoop ) %]
+ <h2>Niteet kokoelmassa</h2>
+ <p>Yhteensä niteitä: [% collectionItemsLoop.size | html%]</p>
+ <table>
+ <tr>
+ <th>Nimeke</th>
+ <th>Luokka</th>
+ <th>Viivakoodi</th>
+ <th>&nbsp;</th>
+ </tr>
+ [% FOREACH collectionItemsLoo IN collectionItemsLoop %]
+ <tr>
+ <td>[% INCLUDE 'biblio-title.inc' biblio=collectionItemsLoo link = 1 %]</td>
+ <td>[% collectionItemsLoo.itemcallnumber | html %]</td>
+ <td>[% collectionItemsLoo.barcode | html %]</td>
+ <td>
+ <form action="/cgi-bin/koha/rotating_collections/addItems.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add" />
+ <input type="hidden" name="colId" value="[% colId | html %]" />
+ <input type="hidden" name="barcode" value="[% collectionItemsLoo.barcode | html %]" />
+ <input type="hidden" name="removeItem" value="1" />
+ <button type="submit" class="btn btn-default btn-xs removeitem"><i class="fa fa-trash"></i> Poista</a>
+ </form>
+ </td>
+ </tr>
+ [% END %]
+ </table>
+ [% ELSE %]
+ <div class="alert alert-info">Ei niteitä tässä kokoelmassa.</div>
+ [% END %]
+ </div>
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ [% Asset.js("js/rotating-collections.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

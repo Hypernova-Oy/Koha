@@ -1,0 +1,299 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE TablesSettings %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op =='add_form' %]
+ [% IF city.cityid %]
+ [% tx("Modify city '{city}'", { city = city.city_name }) | html %]
+ [% ELSE %]
+ [% t("New city") | html %]
+ [% END %] &rsaquo;
+ [% ELSE %]
+ [% IF op == 'delete_confirm' %]
+ [% tx("Confirm deletion of city '{city}'", { city = city.city_name }) | html %] &rsaquo;
+ [% END %]
+ [% END %]
+ [% t("Cities") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_cities" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cities-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Administration</a>
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/cities.pl">Orter</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ [% IF city.cityid %]
+ [% tx("Modify city '{city}'", { city = city.city_name }) | html %]
+ [% ELSE %]
+ <span>Ny ort</span>
+ [% END %]
+ [% END %]
+
+ [% ELSIF op == 'delete_confirm' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/cities.pl">Orter</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ [% tx("Confirm deletion of city '{city}'", { city = city.city_name }) | html %]
+ [% END %]
+
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ <span>Orter</span>
+ [% END %]
+ [% END #/IF op = add_form %]
+
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Ett fel uppstod när orten skulle uppdateras. Den kanske redan finns.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Ett fel uppstod när orten skulle läggas till. Ortens ID kanske redan finns.</span>
+ [% CASE 'error_on_delete' %]
+ <span>Ett fel uppstod när orten skulle tas bort. Titta i loggarna.</span>
+ [% CASE 'success_on_update' %]
+ <span>Orten har uppdaterats.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Orten har lagts till.</span>
+ [% CASE 'success_on_delete' %]
+ <span>Orten har tagits bort.</span>
+ [% CASE 'already_exists' %]
+ <span>Den här orten finns redan.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+[% IF op == 'add_form' %]
+ [% IF city %]
+ <h1>
+ [% tx("Modify city '{city}'", { city = city.city_name }) | html %]
+ </h1>
+ [% ELSE %]
+ <h1>Ny ort</h1>
+ [% END %]
+
+ <form action="/cgi-bin/koha/admin/cities.pl" name="Aform" method="post" class="validated">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add_validate" />
+ <input type="hidden" name="cityid" value="[% city.cityid | html %]" />
+
+ <fieldset class="rows">
+ <ol>
+ [% IF city %]
+ <li><span class="label">Ort-ID: </span>[% city.cityid | html %]</li>
+ [% END %]
+ <li>
+ <label for="city_name" class="required">Ort: </label>
+ <input type="text" name="city_name" id="city_name" size="80" maxlength="100" value="[% city.city_name | html %]" required="required" class="required focus" /> <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="city_state">Delstat: </label>
+ <input type="text" name="city_state" id="city_state" size="80" maxlength="100" value="[% city.city_state | html %]" />
+ </li>
+ <li>
+ <label for="city_zipcode" class="required">Postnummer: </label>
+ <input type="text" name="city_zipcode" id="city_zipcode" size="20" maxlength="20" value="[% city.city_zipcode | html %]" required="required" class="required" /> <span class="required">Obligatoriskt</span>
+ </li>
+ <li>
+ <label for="city_country">Land: </label>
+ <input type="text" name="city_country" id="city_country" size="80" maxlength="100" value="[% city.city_country | html %]" />
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ <a class="cancel" href="/cgi-bin/koha/admin/cities.pl">Avbryt</a>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'delete_confirm' %]
+ <div class="alert alert-warning">
+ <h1>
+ [% tx("Confirm deletion of city '{city}'", { city = city.city_name }) | html %]
+ </h1>
+ <table>
+ <tr><th>Ort-ID</th>
+ <td>[% city.cityid | html %]</td>
+ </tr>
+ <tr><th>Ort</th>
+ <td>[% city.city_name | html %]</td>
+ </tr>
+ <tr><th>Delstat</th>
+ <td>[% city.city_state | html %]</td>
+ </tr>
+ <tr><th>Postnummer</th>
+ <td>[% city.city_zipcode | html %]</td>
+ </tr>
+ <tr><th>Land</th>
+ <td>[% city.city_country | html %]</td>
+ </tr>
+ </table>
+ <form action="/cgi-bin/koha/admin/cities.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_confirmed" />
+ <input type="hidden" name="cityid" value="[% city.cityid | html %]" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-fw fa-check"></i> Ja, ta bort</button>
+ </form>
+ <form action="/cgi-bin/koha/admin/cities.pl" method="get">
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-fw fa-times"></i> Nej, ta inte bort</button>
+ </form>
+ </div>
+[% END %]
+
+[% IF op == 'list' %]
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="newcity" href="/cgi-bin/koha/admin/cities.pl?op=add_form"><i class="fa fa-plus"></i> Ny ort</a>
+ </div>
+
+ <h1>Orter</h1>
+ [% IF city_name_filter %]
+ <span>Söker: [% city_name_filter | html %]</span>
+ [% END %]
+
+ [% IF cities_count > 0 %]
+ <div class="page-section">
+ <div class="table_cities_table_controls"></div>
+ <table id="table_cities">
+ <thead>
+ <tr>
+ <th>Ort-ID</th>
+ <th>Ort</th>
+ <th>Delstat</th>
+ <th>Postnummer</th>
+ <th>Land</th>
+ <th data-class-name="actions noExport">Åtgärder</th>
+ </tr>
+ </thead>
+ </table>
+ </div><!-- /.page-section -->
+ [% ELSE %]
+ <div class="alert alert-info">
+ Inga orter är definierade. <a href="/cgi-bin/koha/admin/cities.pl?op=add_form">Skapa en ny ort</a>.
+ </div>
+ [% END %]
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+
+        var table_settings = [% TablesSettings.GetTableSettings( 'admin', 'cities', 'table_cities', 'json' ) | $raw %];
+        $(document).ready(function() {
+            var cities_table_url = '/api/v1/cities?';
+
+        [% IF city_name_filter %]
+            var city_name_filter = {
+                'name': {
+                    "like": '%[%- city_name_filter | html -%]%'
+                }
+            };
+            cities_table_url += 'q='+ encodeURIComponent(JSON.stringify(city_name_filter));
+        [% END %]
+
+            var cities_table = $("#table_cities").kohaTable({
+                "ajax": {
+                    "url": cities_table_url
+                },
+                "order": [[ 1, "asc" ]],
+                "columnDefs": [ {
+                    "targets": [0,1,2,3,4],
+                    "render": function (data, type, row, meta) {
+                        if ( type == 'display' ) {
+                            if ( data != null ) {
+                                return data.escapeHtml();
+                            } else {
+                                return "";
+                            }
+                        }
+                        return data;
+                    }
+                } ],
+                "columns": [
+                    {
+                        "data": "city_id",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "name",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "state",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "postal_code",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "country",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+
+                            var result = '<a class="btn btn-default btn-xs" role="button" href="/cgi-bin/koha/admin/cities.pl?op=add_form&amp;cityid='+ encodeURIComponent(row.city_id) +'"><i class="fa-solid fa-pencil" aria-hidden="true"></i> '+_("Redigera")+'</a>'+"\n";
+                            result += '<a class="btn btn-default btn-xs" role="button" href="/cgi-bin/koha/admin/cities.pl?op=delete_confirm&amp;cityid='+ encodeURIComponent(row.city_id) +'"><i class="fa fa-trash-can" aria-hidden="true"></i> '+_("Ta bort")+'</a>';
+                            return result;
+
+                        },
+                        "searchable": false,
+                        "orderable": false
+                    }
+                ]
+            }, table_settings, 1);
+
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

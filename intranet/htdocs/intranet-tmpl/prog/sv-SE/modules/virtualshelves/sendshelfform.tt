@@ -1,0 +1,64 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Sending your list") | html %] &rsaquo;
+ [% t("Lists") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="lists_sendshelfform" class="lists">
+[% INCLUDE 'blocking_errors.inc' %]
+<div class="container-fluid">[% IF ( email ) %]
+
+ [% IF ( SENT ) %]
+ <h3>Meddelande skickat</h3>
+ <p>Listan skickades till: [% email | html %]</p>
+ [% END %]
+ [% IF ( error ) %]
+ <p>Problem vid skickade av lista...</p>
+ [% END %]
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <button class="btn btn-default close_window focus">Stäng fönster</button>
+ </fieldset>
+ </div>
+ </nav>
+
+[% ELSE %]
+
+<form action="/cgi-bin/koha/virtualshelves/sendshelf.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+
+<h1>Skicka din lista</h1>
+<fieldset class="rows">
+ <legend class="sr-only">Ange meddelandedetaljer</legend>
+<ol> <li>
+ <label for="email">E-postadress:</label>
+ <input type="text" id="email" name="email" size="43" class="focus" />
+ </li>
+ <li>
+ <label for="comment">Kommentar:</label>
+ <textarea id="comment" name="comment" rows="4" cols="40"></textarea>
+ </li>
+ <li>
+ <input type="hidden" name="shelfid" value="[% shelfid | html %]" />
+ </li></ol></fieldset>
+ <input type="hidden" name="op" value="cud-send" />
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ <button class="btn btn-default close_window">Avbryt</button>
+ </fieldset>
+ </div>
+ </nav>
+</form>
+
+[% END %]</div>
+</body>
+</html>

@@ -1,0 +1,232 @@
+---
+Virkailijaliittymä:
+  Asetukset:
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: viewMARC
+    - henkilökunnan katsoa tietueita pelkistetyssä MARC-formaatissa virkailijaliittymässä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: viewLabeledMARC
+    - henkilökunnan katsoa tietueita otsikoidussa MARC-muodossa virkailijaliittymässä.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: viewISBD
+    - henkilökunnan katsoa tietueita ISBD-korttimuodossa virkailijaliittymässä.
+  - - choices:
+        '0': Näytä
+        '1': Älä näytä
+      pref: HidePatronName
+    - niteen lainanneen tai varanneen asiakkaan nimeä perustiedot-näytöllä tai varausta
+      tehtäessä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: showLastPatron
+    - linkki viimeisimpään
+    - class: integer
+      pref: showLastPatronCount
+    - haettuun asiakkaaseen virkailijaliittymässä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: intranetbookbag
+    - koritoiminto(a) virkailijaliittymässä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: UseWYSIWYGinSystemPreferences
+    - WYSIWYG-editori kun muokataan tiettyjä HTML-järjestelmäasetuksia.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: AudioAlerts
+    - äänihälytyksiä, jotka on määritelty <a href="/cgi-bin/koha/admin/audio_alerts.pl">
+      äänihälytysten</a> osiossa ylläpidossa.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: IntranetAddMastheadLibraryPulldown
+    - kirjastot-pudotusvalikko(a) virkailijaliittymän hakulaatikon vieressä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: IntranetCatalogSearchPulldown
+    - pudotusvalikko haku-kentissä.
+  - - Download a maximum of
+    - class: integer
+      pref: ReportsExportLimit
+    - 'records when downloading from the reports module.<br>NOTE: Only a positive
+      value will enforce a limit. A specific limit in the report overrides this setting.'
+  Tunnistautuminen:
+  - - choices:
+        '0': Salli
+        '1': Älä salli
+      pref: staffShibOnly
+    - henkilökunnan kirjautua muutoin kuin Shibbolethin kautta.
+  - - choices:
+        disabled: Älä salli
+        enabled: Salli
+        enforced: Käytä
+      pref: TwoFactorAuthentication
+    - kaksivaiheinen tunnistautuminen (2FA) virkailijoille.
+  Ulkonäköasetukset:
+  - - 'Näytä auktoriteettitulokset virkailijaliittymässä käyttäen XSLT-tyylitiedostoa
+      osoitteesta: '
+    - class: file
+      pref: AuthorityXSLTResultsDisplay
+    - <br />Options:<ul><li>Put a path to define a XSLT file</li><li>Put an URL for
+      an external specific stylesheet.</li></ul>{langcode} will be replaced with current
+      interface language and {authtypecode} will be replaced by the authority type
+      code
+  - - 'Display authority details in the staff interface using XSLT stylesheet at: '
+    - class: file
+      pref: AuthorityXSLTDetailsDisplay
+    - <br />Options:<ul><li>Put a path to define a XSLT file</li><li>Put an URL for
+      an external specific stylesheet.</li></ul>{langcode} will be replaced with current
+      interface language and {authtypecode} will be replaced by the authority type
+      code
+  - - 'Näytä kielivalinta '
+    - choices:
+        both: sekä ylä- että alareunassa
+        footer: vain alareunassa
+        top: yläreunassa
+      pref: StaffLangSelectorMode
+  - - Käytä
+    - choices: staff-templates
+      pref: template
+    - teemaa virkailijaliittymässä.
+  - - Virkailijaliittymä sijaitsee osoitteessa
+    - class: url
+      pref: staffClientBaseURL
+    - Tämän pitäisi olla täydellinen URL, joka alkaa merkkijonolla http:// tai https://.
+      Älä lisää URLin loppuun kauttaviivaa. (Tämä pitää olla täytetty oikein, jotta
+      CAS, svc ja load_testing toimisivat.)
+  - - Käytä CSS-tyylitiedostoa
+    - class: url
+      pref: intranetstylesheet
+    - ohittaaksesi oletustyylitiedoston asetukset (jätä tyhjäksi, jos ei käytössä).
+      Syötä vain tiedostonimi, koko paikallinen polku tai täydellinen URL, joka alkaa
+      merkkijonolla <code>http://</code> (jos tiedosto sijaitsee ulkoisella palvelimella).
+      Huomaa, jos syötät vain tiedostonimen, tiedoston pitää sijaita css-alihakemistossa
+      kunkin aktiivisen teeman ja kielen mukaan Kohan pohjien hakemistossa. Täydellinen
+      paikallinen polku alkaa HTTP-dokumentin juuresta.
+  - - 'Käytä seuraavaan JavaScriptiä kuittien tulostamiseen. Katso tarkempi kuvaus
+      <a href=''https://wiki.koha-community.org/wiki/Setting_up_slip_printer_to_print_silently''>Koha
+      Wikistä</a> ja Firefox lisäosaan <a href=''https://github.com/edabg/jsprintsetup/wiki''>jsPrintSetup
+      dokumentaatiosta</a>:'
+    - class: code
+      pref: IntranetSlipPrinterJS
+      syntax: javascript
+      type: textarea
+  - - 'Käytä seuraavaa CSS-tyylitiedostoa virkailijaliittymän kaikilla sivuilla:'
+    - class: code
+      pref: IntranetUserCSS
+      syntax: css
+      type: textarea
+  - - Sisällytä lisätyylitiedosto (CSS)
+    - class: file
+      pref: intranetcolorstylesheet
+    - ohittaaksesi oletustyylitiedoston asetukset (jätä tyhjäksi, jos ei käytössä).
+      Syötä vain tiedostonimi, koko paikallinen polku tai täydellinen URL, joka alkaa
+      merkkijonolla <code>http://</code> (jos tiedosto sijaitsee ulkoisella palvelimella).
+      Huomaa, jos syötät vain tiedostonimen, tiedoston pitää sijaita css-alihakemistossa
+      kunkin aktiivisen teeman ja kielen mukaan Kohan pohjien hakemistossa. Täydellinen
+      paikallinen polku alkaa HTTP-dokumentin juuresta.
+  - - Käytä mallipohjahakemiston hakemistossa
+    - class: file
+      pref: intranet_includes
+    - olevia include-tiedostoja <code>includes/</code>-hakemiston sijaan. (Jätä tyhjäksi,
+      jos ei käytössä)
+  - - 'Näytä seuraava HTML-koodi virkailijaliittymän Muita toimintoja -valikon oikealla
+      puolella (yleensä linkkilista tai tyhjä, jos ei käytössä):'
+    - class: code
+      pref: IntranetNav
+      syntax: html
+      type: textarea
+  - - 'Sisällytä seuraava JavaScript kaikille virkailijaliittymän sivuille:'
+    - class: code
+      pref: IntranetUserJS
+      syntax: javascript
+      type: textarea
+  - - Käytä kuvaa osoitteessa
+    - class: url
+      pref: IntranetFavicon
+    - virkailijaliittymän suosikkikuvakkeena (favicon). (Anna täydellinen URL-osoite,
+      joka alkaa merkkijonolla <code>http://</code>.)
+  - - 'Näytä listat virkailijaliittymässä käyttäen XSLT-tyylitiedostoa: '
+    - class: file
+      pref: XSLTListsDisplay
+    - <br />Vaihtoehdot:<ul><li>Lisää "<a href="#" class="set_syspref" data-syspref="XSLTListsDisplay"
+      data-value="default">default</a>" oletustyylitiedostoon.</li><li>Lisää XSLT-tiedoston
+      hakemistopolku</li><li>Lisää ulkoisen tyylitiedoston URL.</li></ul>Jos eri kieliä
+      varten on useita eri tyylitiedostoja, paikanpitäjä {langcode} korvautuu käytössä
+      olevalla kielellä.
+  - - 'Näytä virkailijaliittymän hakutulokset käyttäen XSLT-tyylitiedostoa osoitteesta: '
+    - class: file
+      pref: XSLTResultsDisplay
+    - '<br />Vaihtoehdot:<ul><li>Lisää "<a href="#" class="set_syspref" data-syspref="XSLTLResultsDisplay"
+      data-value="default">default</a>" oletustyylitiedostoon.</li><li>Lisää XSLT-tiedoston
+      hakemistopolku</li><li>Lisää ulkoisen tyylitiedoston URL.</li><li>HUOM: Järjestelmäasetuksen
+      <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PassItemMarcToXSLT">PassItemMarcToXSLT</a>
+      täytyy olla päällä, jos räätälöity tyylitiedosto käyttää nidekentissä olevaa
+      dataa</li></ul>Jos eri kieliä varten on useita eri tyylitiedostoja, paikanpitäjä
+      {langcode} korvautuu käytössä olevalla kielellä.'
+  - - 'Näytä tarkat tiedot virkailijaliittymässä käyttäen XSLT-tyylitiedostoa osoitteesta: '
+    - class: file
+      pref: XSLTDetailsDisplay
+    - <br />Vaihtoehdot:<ul><li>Lisää "<a href="#" class="set_syspref" data-syspref="XSLTDetailsDisplay"
+      data-value="default">default</a>" oletustyylitiedostoon.</li><li>Lisää XSLT-tiedoston
+      hakemistopolku</li><li>Lisää ulkoisen tyylitiedoston URL.</li></ul>Jos eri kieliä
+      varten on useita eri tyylitiedostoja, paikanpitäjä {langcode} korvautuu käytössä
+      olevalla kielellä.
+  - - choices:
+        '0': Älä näytä
+        '1': Näytä
+      pref: DisplayIconsXSLT
+    - muodon, kohdeyleisön ja aineistotyyppien kuvakkeet ja kuvaukset XSLT MARC21
+      -tuloksissa ja perustiedot-näytöllä virkailijaliittymässä.
+  - - 'Kentän 856u antama URI esitetään kuvana: '
+    - choices:
+        Both: Sekä hakutulokset- että perustiedot-sivulla
+        Details: Vain perustiedot-sivulla
+        OFF: Ei perustiedot- eikä hakutulokset-sivulla
+        Results: Hakutulokset-sivulla
+      pref: Display856uAsImage
+    - '. Huomaa: Vastaava XSLT-valinta pitää olla päällä.'
+  - - Käytä tyylitiedostoa osoitteesta
+    - class: url
+      pref: SlipCSS
+    - lainaus- ja varauskuittien muotoilussa. (Täydellinen URL, joka alkaa merkkijonolla
+      <code>http://</code>.)
+  - - 'Näytä seuraava HTML-koodi omassa osiossansa Lainaus ja palautus -moduulin aloitussivun
+      alareunassa:'
+    - class: code
+      pref: IntranetCirculationHomeHTML
+      syntax: text/html
+      type: textarea
+  - - 'Näytä seuraava HTML-koodi omassa osiossansa Raportit-moduulin aloitussivun
+      alareunassa:'
+    - class: code
+      pref: IntranetReportsHomeHTML
+      syntax: text/html
+      type: textarea
+  - - Näytä seuraava HTML virkailijaliittymän kirjautumissivulla
+    - class: code
+      pref: StaffLoginInstructions
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': Älä korosta
+        '1': Korosta
+      pref: StaffHighlightedWords
+      type: boolean
+    - virkailijaliittymän hakutuloksissa haettuja sanoja.
+  - - choices:
+        '0': Do not allow
+        '1': Allow
+      pref: ReportsExportFormatODS
+    - Open Document Spreadsheet (ODS) as download format in reports.

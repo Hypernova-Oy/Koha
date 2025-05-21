@@ -1,0 +1,74 @@
+---
+description:
+- Esimerkki ilmestymistiheys kausijulkaisutilauksille
+tables:
+- subscription_frequencies:
+    multiline: []
+    rows:
+    - description: 2/päivä
+      displayorder: 1
+      issuesperunit: 2
+      unit: day
+      unitsperissue: 1
+    - description: 1/päivä
+      displayorder: 2
+      issuesperunit: 1
+      unit: day
+      unitsperissue: 1
+    - description: 3/viikko
+      displayorder: 3
+      issuesperunit: 3
+      unit: week
+      unitsperissue: 1
+    - description: 1/viikko
+      displayorder: 4
+      issuesperunit: 1
+      unit: week
+      unitsperissue: 1
+    - description: 1/2 viikkoa
+      displayorder: 5
+      issuesperunit: 1
+      unit: week
+      unitsperissue: 2
+    - description: 1/3 viikkoa
+      displayorder: 6
+      issuesperunit: 1
+      unit: week
+      unitsperissue: 3
+    - description: 1/kuukausi
+      displayorder: 7
+      issuesperunit: 1
+      unit: month
+      unitsperissue: 1
+    - description: 1/2 kuukautta
+      displayorder: 8
+      issuesperunit: 1
+      unit: month
+      unitsperissue: 2
+    - description: 1/3 kuukautta
+      displayorder: 9
+      issuesperunit: 1
+      unit: month
+      unitsperissue: 3
+    - description: 2/vuosi
+      displayorder: 10
+      issuesperunit: 1
+      unit: month
+      unitsperissue: 6
+    - description: 1/vuosi
+      displayorder: 11
+      issuesperunit: 1
+      unit: year
+      unitsperissue: 1
+    - description: 1/2 vuotta
+      displayorder: 12
+      issuesperunit: 1
+      unit: year
+      unitsperissue: 2
+    - description: Epäsäännöllinen
+      displayorder: 13
+      issuesperunit: 1
+      unit: ~
+      unitsperissue: 1
+    translatable:
+    - description

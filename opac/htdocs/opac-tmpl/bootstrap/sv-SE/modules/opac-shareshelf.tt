@@ -1,0 +1,150 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE AdditionalContents %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Dela en lista &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %]-katalog</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+
+[% INCLUDE 'bodytag.inc' bodyid='opac-shareshelf' bodyclass='scrollto' %]
+[% INCLUDE 'masthead.inc' %]
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-shelves.pl">Listor</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Dela en lista</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( OpacNav ) %]
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ [% END %]
+
+ <div class="col-10 order-first order-md-first order-lg-2">
+ <div id="shareshelf" class="maincontent">
+
+ [%# This section contains the essential code for error messages and operations: show, invited and accept. %]
+ <h1>
+ [% IF op == 'show' || op == 'invited' %]Dela en lista med annan låntagare [% ELSIF op == 'accept' %]Acceptera en delad lista från annan låntagare [% END %] </h1>
+
+ [% IF errcode %]
+ [% IF errcode==1 && op %]
+ <div class="alert alert-warning">Operationen [% op | html %] stöds inte.</div>
+ [% END %]
+ [% IF errcode==1 && !op %]
+ <div class="alert alert-warning">Ingen parameter har getts.</div>
+ [% END %]
+ [% IF errcode==2 %]
+ <div class="alert alert-warning">Ogiltigt hyllnummer.</div>
+ [% END %]
+ [% IF errcode==3 %]
+ <div class="alert alert-warning">Funktionen att dela listor används inte i detta bibliotek.</div>
+ [% END %]
+ [% IF errcode==4 %]
+ <div class="alert alert-warning">Du kan bara dela en lista om du är ägaren.</div>
+ [% END %]
+ [% IF errcode==5 %]
+ <div class="alert alert-warning">Du kan inte dela en publik lista.</div>
+ [% END %]
+ [% IF errcode==6 %]
+ <div class="alert alert-warning">Du angav inte en giltig e-postadress.</div>
+ [% END %]
+ [% IF errcode==7 %]
+ <div class="alert alert-warning">Vi kunde tyvärr inte acceptera denna nyckel. Inbjudan kan ha gått ut. Kontakta låntagaren som skickade dig inbjudan.</div>
+ [% END %]
+ [% IF errcode==8 %]
+ <div class="alert alert-warning">Som ägare av en lista kan du inte godkänna en inbjudan att dela den.</div>
+ [% END %]
+ <p><a href="/cgi-bin/koha/opac-shelves.pl?op=list">Återvänd till dina listor</a></p>
+
+ [% ELSIF op == 'show' %]
+ <div id="invite">
+ <form method="post" id="share_list">
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend class="sr-only">Dela listan</legend>
+ <fieldset class="rows">
+ <input type="hidden" name="op" value="cud-invite"/>
+ <input type="hidden" name="shelfnumber" value="[% shelfnumber | html %]"/>
+ <ol>
+ <li>
+ <label for="name">Listnamn:</label> [% shelfname | html %]
+ </li>
+ <li>
+ <label for="invite_address">E-postadress:</label>
+ <input type="text" id="invite_address" name="invite_address" size="40" />
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Skicka" />
+ <a href="/cgi-bin/koha/opac-shelves.pl?op=list" class="cancel">Avbryt</a>
+ </fieldset>
+ </form> <!-- /#share_list -->
+ </div> <!-- /#invite -->
+
+ [% ELSIF op == 'invited' %]
+ <div id="conf_invite">
+ [% IF approvedaddress %]
+ <p>En inbjudan att dela lista <em>[% shelfname | html %]</em> skickas snart till [% approvedaddress | html %].</p>
+ [% END %]
+ [% IF failaddress %]
+ <p>Något gick fel när följande adresser skulle bearbetas. Vänligen se över dem. Adresserna är: [% failaddress | html %]</p>
+ [% END %]
+ [% IF approvedaddress %]
+ <p>Du kommer att få en e-postnotis om någon godkänner din delning innan den förfaller.</p>
+ [% END %]
+ <p><a href="/cgi-bin/koha/opac-shelves.pl?op=list">Återvänd till dina listor</a></p>
+ </div>
+
+ [% ELSIF op == 'accept' %]
+ <div id="accept">
+ <form method="post" id="accept_share">
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend class="sr-only">Acceptera delad lista</legend>
+ <p>En av våra låntagare har skickat inbjudan om att dela sin lista [% shelfname | html %].</p>
+ <input type="hidden" name="op" value="cud-accept"/>
+ <input type="hidden" name="shelfnumber" value="[% shelfnumber | html %]"/>
+ <input type="hidden" name="key" value="[% key | html %]"/>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Godkänn" />
+ <a href="/cgi-bin/koha/opac-shelves.pl?op=list" class="cancel">Avbryt</a>
+ </fieldset>
+ </form> <!-- /#accept_share -->
+ </div> <!-- /#accept -->
+
+ [% END %]
+ [%# End of essential part %]
+
+ </div> <!-- / #shareshelf.maincontent -->
+ </div> <!-- / .span10 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+</div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+ <script>
+        $(document).ready(function(){
+            $("#share_list").on('submit', function(e) {
+                var address = $("#invite_address").val();
+                if ( address.length == 0) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+[% END %]

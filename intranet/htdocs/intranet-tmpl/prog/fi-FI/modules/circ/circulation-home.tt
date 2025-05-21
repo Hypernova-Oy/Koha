@@ -1,0 +1,182 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="circ_circulation-home" class="circ">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lainaus ja palautus</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Lainaus ja palautus</h1>
+
+ <div class="row">
+
+ <div class="col-12 col-sm-4">
+ <h3>Lainaus ja palautus</h3>
+
+ <ul class="buttons-list">
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/circulation.pl"><i class="fa fa-upload"></i> Lainaus</a>
+ </li>
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/returns.pl"><i class="fa fa-download"></i> Palauta</a>
+ </li>
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/renew.pl"><i class="fa fa-retweet"></i> Uusinta</a>
+ </li>
+ [% IF ( CAN_user_superlibrarian || CAN_user_loggedinlibrary ) %]
+ <li>
+ [% IF Koha.Preference('UseCirculationDesks') %]
+ <a class="circ-button" href="/cgi-bin/koha/circ/set-library.pl"><i class="fa fa-home"></i> Aseta kirjasto ja tiski</a>
+ [% ELSE %]
+ <a class="circ-button" href="/cgi-bin/koha/circ/set-library.pl"><i class="fa fa-home"></i> Aseta kirjasto</a>
+ [% END %]
+ </li>
+ [% ELSIF Koha.Preference('UseCirculationDesks') %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/set-library.pl"><i class="fa fa-home"></i> Aseta tiski</a>
+ </li>
+ [% END %]
+ [% IF ( fast_cataloging ) %]
+ [% IF ( CAN_user_editcatalogue_fast_cataloging ) %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/cataloguing/addbiblio.pl?frameworkcode=FA"><i class="fa fa-plus"></i> Pikakuvailu</a>
+ </li>
+ [% END %]
+ [% END %]
+ [% IF ( Koha.Preference('AllowCheckoutNotes') && CAN_user_circulate_manage_checkout_notes ) %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/checkout-notes.pl"><i class="fa fa-sticky-note"></i> Lainahuomautukset</a>
+ </li>
+ [% END %]
+ [% IF Koha.Preference('OnSiteCheckouts') %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/on-site_checkouts.pl"><i class="fa-solid fa-location-dot"></i> Odottavat on-site -lainat</a>
+ </li>
+ [% END %]
+ </ul>
+ </div>
+
+ <div class="col-12 col-sm-4">
+ <h3>Varaukset ja käyttövaraukset</h3>
+
+ <ul class="buttons-list">
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/view_holdsqueue.pl"><i class="fa fa-tasks"></i> Varausjono</a>
+ </li>
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/pendingreserves.pl"><i class="fa-solid fa-hand-back-fist"></i> Hyllyvaraukset</a>
+ </li>
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/waitingreserves.pl"><i class="fa-solid fa-calendar-days"></i> Noudettavissa olevat varaukset</a>
+ </li>
+ [% IF ( Koha.Preference('CurbsidePickup') && CAN_user_circulate_manage_curbside_pickups ) %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/curbside_pickups.pl"><i class="fa-solid fa-rotate"></i> Noutopalvelu</a>
+ </li>
+ [% END %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/reserveratios.pl"><i class="fa-solid fa-chart-line"></i> Varauksia per nide</a>
+ </li>
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/pendingbookings.pl"><i class="fa-solid fa-calendar-days"></i> Kerättävät käyttövaraukset</a>
+ </li>
+ </ul>
+
+ [% IF Koha.Preference('UseRecalls') and CAN_user_recalls %]
+ <h3>Palautuspyynnöt</h3>
+
+ <ul class="buttons-list">
+ <li><a class="circ-button" href="/cgi-bin/koha/recalls/recalls_queue.pl" title="Kaikki aktiiviset palautuspyynnöt"><i class="fa fa-tasks"></i> Palautuspyyntöjono</a></li>
+ <li><a class="circ-button" href="/cgi-bin/koha/recalls/recalls_to_pull.pl" title="Palautuspyynnöt, jotka voitaisiin täyttää, mutta ei ole asetettu odottamaan"><i class="fa-solid fa-hand-back-fist"></i> Palautuspyynnöt</a></li>
+ <li><a class="circ-button" href="/cgi-bin/koha/recalls/recalls_overdue.pl" title="Myöhässä olevat niteet, joihin on palautuspyyntö"><i class="fa-solid fa-clock"></i> Myöhässä olevat palautuspyynnöt</a></li>
+ <li><a class="circ-button" href="/cgi-bin/koha/recalls/recalls_waiting.pl" title="Noudettavissa olevat palautuspyynnöt"><i class="fa-solid fa-calendar-days"></i> Noudettavissa olevat palautuspyynnöt</a></li>
+ <li><a class="circ-button" href="/cgi-bin/koha/recalls/recalls_old_queue.pl" title="Ei voimassa olevat palautuspyynnöt"><i class="fa fa-tasks"></i> Vanhat palautuspyynnöt</a></li>
+ </ul>
+ [% END %]
+ </div>
+
+ <div class="col-12 col-sm-4">
+ [% IF Koha.Preference('ArticleRequests') %]
+ <h3>Asiakkaan pyyntö</h3>
+ <ul class="buttons-list">
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/article-requests.pl" title="Artikkelipyynnöt"><i class="fa-solid fa-newspaper"></i> Artikkelipyynnöt</a>
+ </li>
+ </ul>
+ [% END %]
+
+ <h3>Kuljetukset ja siirrot</h3>
+
+ <ul class="buttons-list">
+ [% IF !Koha.Preference('IndependentBranchesTransfers') || CAN_user_superlibrarian %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/branchtransfers.pl"><i class="fa-solid fa-right-left"></i> Siirto</a>
+ </li>
+ [% END %]
+ [% IF Koha.Preference('StockRotation') %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/transfers_to_send.pl"><i class="fa-solid fa-right-from-bracket"></i> Lähetettävät kuljetukset</a>
+ </li>
+ [% END %]
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/transferstoreceive.pl"><i class="fa-solid fa-right-to-bracket"></i> Vastaanotettavat kuljetukset</a>
+ </li>
+ </ul>
+
+ [% IF ( CAN_user_circulate_overdues_report ) %]
+ <h3>Myöhässä</h3>
+
+ <ul class="buttons-list">
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/overdue.pl" title="Varoitus: Tämä raportti vaatii paljon järjestelmäresursseja, jos tietokannassa on paljon myöhässä olevia lainoja."><i class="fa-solid fa-clock"></i> Myöhässä</a>
+ </li>
+ <li>
+ <a class="circ-button" href="/cgi-bin/koha/circ/branchoverdues.pl" title="Rajattu omaan kirjastoosi. Katso raportin ohjeista lisätietoja."><i class="fa-solid fa-clock"></i> Myöhässä ja maksuja</a>
+ </li>
+ </ul>
+ [% END %]
+ </div>
+ </div>
+ <div class="row" id="intranet-circulation-home-html">
+ <div class="col-md-12">
+ [% Koha.Preference('IntranetCirculationHomeHTML') | $raw  %]
+ </div>
+ </div>
+ <div class="row" id="offline-circulation">
+ <div class="col-md-12">
+ <h4>Yhteydettömän tilan lainaus ja palautus</h4>
+ <div class="col-sm-5 col-md-3">
+ <p><a href="/cgi-bin/koha/offline_circ/process_koc.pl">Lähetä yhteydettömän tilan lainaustiedosto (*.koc)</a></p>
+ <p><a href="/cgi-bin/koha/offline_circ/list.pl">Odottavat yhteydettömän tilan toimet</a></p>
+ </div>
+ <div class="col-sm-5 col-md-3">
+ <p><a href="https://github.com/bywatersolutions/koha-offline-circulation/releases"><i class="fa-solid fa-window-maximize"></i> Lataa työpöytäsovellus</a></p>
+ <p><a href="https://addons.mozilla.org/[% lang | uri %]/firefox/addon/koct/"><i class="fa-brands fa-firefox"></i> Lataa Firefox-selaimen lisäosa</a></p>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+[% INCLUDE 'intranet-bottom.inc' %]

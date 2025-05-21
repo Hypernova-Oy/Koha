@@ -1,0 +1,299 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE TablesSettings %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF op =='add_form' %]
+ [% IF city.cityid %]
+ [% tx("Modify city '{city}'", { city = city.city_name }) | html %]
+ [% ELSE %]
+ [% t("New city") | html %]
+ [% END %] &rsaquo;
+ [% ELSE %]
+ [% IF op == 'delete_confirm' %]
+ [% tx("Confirm deletion of city '{city}'", { city = city.city_name }) | html %] &rsaquo;
+ [% END %]
+ [% END %]
+ [% t("Cities") | html %] &rsaquo;
+ [% t("Administration") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="admin_cities" class="admin">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cities-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/admin-home.pl">Ylläpito</a>
+ [% END %]
+
+ [% IF op == 'add_form' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/cities.pl">Kaupungit ja kunnat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ [% IF city.cityid %]
+ [% tx("Modify city '{city}'", { city = city.city_name }) | html %]
+ [% ELSE %]
+ <span>Uusi kaupunki/kunta</span>
+ [% END %]
+ [% END %]
+
+ [% ELSIF op == 'delete_confirm' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/cities.pl">Kaupungit ja kunnat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ [% tx("Confirm deletion of city '{city}'", { city = city.city_name }) | html %]
+ [% END %]
+
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active = 1 %]
+ <span>Kaupungit ja kunnat</span>
+ [% END %]
+ [% END #/IF op = add_form %]
+
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% FOR m IN messages %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'error_on_update' %]
+ <span>Kaupungin/kunnan päivittämisessä tapahtui virhe. Ehkä kaupunki on jo olemassa.</span>
+ [% CASE 'error_on_insert' %]
+ <span>Tämän kaupungin/kunnan lisäyksessä tapahtui virhe. Tunnus saattaa jo olla olemassa.</span>
+ [% CASE 'error_on_delete' %]
+ <span>Kaupungin/kunnan poistossa tapahtui virhe. Tarkista lokit.</span>
+ [% CASE 'success_on_update' %]
+ <span>Kaupunki/kunta on päivitetty.</span>
+ [% CASE 'success_on_insert' %]
+ <span>Kaupunki/kunta on lisätty.</span>
+ [% CASE 'success_on_delete' %]
+ <span>Kaupunki/kunta on poistettu.</span>
+ [% CASE 'already_exists' %]
+ <span>Kaupunki/kunta on jo olemassa.</span>
+ [% CASE %]
+ <span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+[% END %]
+
+[% IF op == 'add_form' %]
+ [% IF city %]
+ <h1>
+ [% tx("Modify city '{city}'", { city = city.city_name }) | html %]
+ </h1>
+ [% ELSE %]
+ <h1>Uusi kaupunki/kunta</h1>
+ [% END %]
+
+ <form action="/cgi-bin/koha/admin/cities.pl" name="Aform" method="post" class="validated">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add_validate" />
+ <input type="hidden" name="cityid" value="[% city.cityid | html %]" />
+
+ <fieldset class="rows">
+ <ol>
+ [% IF city %]
+ <li><span class="label">Kuntatunnus: </span>[% city.cityid | html %]</li>
+ [% END %]
+ <li>
+ <label for="city_name" class="required">Kunta: </label>
+ <input type="text" name="city_name" id="city_name" size="80" maxlength="100" value="[% city.city_name | html %]" required="required" class="required focus" /> <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="city_state">Osavaltio: </label>
+ <input type="text" name="city_state" id="city_state" size="80" maxlength="100" value="[% city.city_state | html %]" />
+ </li>
+ <li>
+ <label for="city_zipcode" class="required">Postinumero: </label>
+ <input type="text" name="city_zipcode" id="city_zipcode" size="20" maxlength="20" value="[% city.city_zipcode | html %]" required="required" class="required" /> <span class="required">Pakollinen tieto</span>
+ </li>
+ <li>
+ <label for="city_country">Maa: </label>
+ <input type="text" name="city_country" id="city_country" size="80" maxlength="100" value="[% city.city_country | html %]" />
+ </li>
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="OK" />
+ <a class="cancel" href="/cgi-bin/koha/admin/cities.pl">Peruuta</a>
+ </fieldset>
+ </form>
+[% END %]
+
+[% IF op == 'delete_confirm' %]
+ <div class="alert alert-warning">
+ <h1>
+ [% tx("Confirm deletion of city '{city}'", { city = city.city_name }) | html %]
+ </h1>
+ <table>
+ <tr><th>Kuntatunnus</th>
+ <td>[% city.cityid | html %]</td>
+ </tr>
+ <tr><th>Kunta</th>
+ <td>[% city.city_name | html %]</td>
+ </tr>
+ <tr><th>Osavaltio</th>
+ <td>[% city.city_state | html %]</td>
+ </tr>
+ <tr><th>Postinumero</th>
+ <td>[% city.city_zipcode | html %]</td>
+ </tr>
+ <tr><th>Maa</th>
+ <td>[% city.city_country | html %]</td>
+ </tr>
+ </table>
+ <form action="/cgi-bin/koha/admin/cities.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_confirmed" />
+ <input type="hidden" name="cityid" value="[% city.cityid | html %]" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-fw fa-check"></i> Kyllä, poista</button>
+ </form>
+ <form action="/cgi-bin/koha/admin/cities.pl" method="get">
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-fw fa-times"></i> Ei, älä poista</button>
+ </form>
+ </div>
+[% END %]
+
+[% IF op == 'list' %]
+
+ <div id="toolbar" class="btn-toolbar">
+ <a class="btn btn-default" id="newcity" href="/cgi-bin/koha/admin/cities.pl?op=add_form"><i class="fa fa-plus"></i> Uusi kaupunki/kunta</a>
+ </div>
+
+ <h1>Kaupungit ja kunnat</h1>
+ [% IF city_name_filter %]
+ <span>Haetaan: [% city_name_filter | html %]</span>
+ [% END %]
+
+ [% IF cities_count > 0 %]
+ <div class="page-section">
+ <div class="table_cities_table_controls"></div>
+ <table id="table_cities">
+ <thead>
+ <tr>
+ <th>Kuntatunnus</th>
+ <th>Kunta</th>
+ <th>Osavaltio</th>
+ <th>Postinumero</th>
+ <th>Maa</th>
+ <th data-class-name="actions noExport">Toiminnot</th>
+ </tr>
+ </thead>
+ </table>
+ </div><!-- /.page-section -->
+ [% ELSE %]
+ <div class="alert alert-info">
+ Kaupunkeja/kuntia ei ole määritelty. <a href="/cgi-bin/koha/admin/cities.pl?op=add_form">Luo uusi kaupunki/kunta</a>.
+ </div>
+ [% END %]
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'admin-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/admin-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ <script>
+
+        var table_settings = [% TablesSettings.GetTableSettings( 'admin', 'cities', 'table_cities', 'json' ) | $raw %];
+        $(document).ready(function() {
+            var cities_table_url = '/api/v1/cities?';
+
+        [% IF city_name_filter %]
+            var city_name_filter = {
+                'name': {
+                    "like": '%[%- city_name_filter | html -%]%'
+                }
+            };
+            cities_table_url += 'q='+ encodeURIComponent(JSON.stringify(city_name_filter));
+        [% END %]
+
+            var cities_table = $("#table_cities").kohaTable({
+                "ajax": {
+                    "url": cities_table_url
+                },
+                "order": [[ 1, "asc" ]],
+                "columnDefs": [ {
+                    "targets": [0,1,2,3,4],
+                    "render": function (data, type, row, meta) {
+                        if ( type == 'display' ) {
+                            if ( data != null ) {
+                                return data.escapeHtml();
+                            } else {
+                                return "";
+                            }
+                        }
+                        return data;
+                    }
+                } ],
+                "columns": [
+                    {
+                        "data": "city_id",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "name",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "state",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "postal_code",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": "country",
+                        "searchable": true,
+                        "orderable": true
+                    },
+                    {
+                        "data": function( row, type, val, meta ) {
+
+                            var result = '<a class="btn btn-default btn-xs" role="button" href="/cgi-bin/koha/admin/cities.pl?op=add_form&amp;cityid='+ encodeURIComponent(row.city_id) +'"><i class="fa-solid fa-pencil" aria-hidden="true"></i> '+_("Muokkaa")+'</a>'+"\n";
+                            result += '<a class="btn btn-default btn-xs" role="button" href="/cgi-bin/koha/admin/cities.pl?op=delete_confirm&amp;cityid='+ encodeURIComponent(row.city_id) +'"><i class="fa fa-trash-can" aria-hidden="true"></i> '+_("Poista")+'</a>';
+                            return result;
+
+                        },
+                        "searchable": false,
+                        "orderable": false
+                    }
+                ]
+            }, table_settings, 1);
+
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

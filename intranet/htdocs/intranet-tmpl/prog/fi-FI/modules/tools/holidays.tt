@@ -1,0 +1,665 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% tx("{library} calendar", { library = Branches.GetName( branch ) }) | html %] &rsaquo;
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% Asset.css("css/calendar.css") | $raw %]
+</head>
+<body id="tools_holidays" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Työkalut</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% tx("{library} calendar", { library = Branches.GetName( branch ) }) | html %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>[% tx("{library} calendar", { library = Branches.GetName( branch ) }) | html %]</h1>
+
+ <div class="row">
+ <div class="col-sm-6">
+ <div class="page-section">
+ <label for="branch">Määrittele kiinniolopäivät kirjastolle:</label>
+ <select id="branch" name="branch">
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => branch ) %]
+ </select>
+
+ <div class="panel" id="showHoliday">
+ <form action="/cgi-bin/koha/tools/exceptionHolidays.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-edit" />
+ <input type="hidden" id="showHolidayType" name="showHolidayType" value="" />
+ <fieldset class="brief">
+ <h3>Muokkaa kiinniolopäivää</h3>
+ <span id="holtype"></span>
+ <ol>
+ <li>
+ <strong>Kirjasto:</strong> <span id="showBranchNameOutput"></span>
+ <input type="hidden" id="showBranchName" name="showBranchName" />
+ </li>
+ <li>
+ <strong>Päivästä:</strong>
+ <span id="showDaynameOutput"></span>,
+ [% IF ( dateformat == "us" ) %]
+ <span id="showMonthOutput"></span>/<span id="showDayOutput"></span>/<span id="showYearOutput"></span>
+ [% ELSIF ( dateformat == "metric") %]
+ <span id="showDayOutput"></span>/<span id="showMonthOutput"></span>/<span id="showYearOutput"></span>
+ [% ELSIF ( dateformat == "dmydot") %]
+ <span id="showDayOutput"></span>.<span id="showMonthOutput"></span>.<span id="showYearOutput"></span>[% ELSE %]<span id="showYearOutput"></span>/<span id="showMonthOutput"></span>/<span id="showDayOutput"></span>
+ [% END %]
+
+ <input type="hidden" id="showDayname" name="showDayname" />
+ <input type="hidden" id="showWeekday" name="showWeekday" />
+ <input type="hidden" id="showDay" name="showDay" />
+ <input type="hidden" id="showMonth" name="showMonth" />
+ <input type="hidden" id="showYear" name="showYear" />
+ </li>
+ <li class="dateinsert">
+ <strong>Päivään: </strong>
+ <input type="text" id="datecancelrange" name="datecancelrange" size="20" value="[% datecancelrange | html %]" class="flatpickr" />
+ </li>
+ <li>
+ <label for="showTitle">Nimeke: </label><input type="text" name="showTitle" id="showTitle" size="35" />
+ </li>
+ <!-- showTitle is necessary for exception radio button to work properly -->
+ <li>
+ <label for="showDescription">Kuvaus:</label>
+ <textarea rows="2" cols="40" id="showDescription" name="showDescription"></textarea>
+ </li>
+ <li class="radio">
+ <div class="exceptionPossibility" style="position:static">
+ <input type="radio" name="showOperation" id="showOperationExc" value="exception" /> <label for="showOperationExc">Luo poikkeus tälle toistetulle kiinniololle.</label>
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Voit asettaa kiinnioloajalle poikkeuksen. Esimerkiksi, jos kirjasto on joka viikko kiinni lauantaisin ja sunnuntaisin, voit asettaa jonkin tietyn lauantain poikkeuksena, jolloin kirjasto on sinä lauantaina auki.</div>
+ </div>
+ </li>
+ <li class="radio">
+ <div class="exceptionPossibility" style="position:static">
+ <input type="radio" name="showOperation" id="showOperationExcRange" value="exceptionrange" />
+ <label for="showOperationExcRange">Luo poikkeukset aikavälille.</label>
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Voit asettaa vuosittain toistuvalle kiinniolopäivälle poikkeuksen.</div>
+ </div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="showOperation" id="showOperationDel" value="cud-delete" />
+ <label for="showOperationDel" id="showOperationDelLabel">Poista tämä päivä</label>
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Tämä poistaa kiinniolopäivän ja tarkistaa toistettavien kiinniolopäivien mahdolliset poikkeukset. Jos poikkeus löytyy, se muutetaan normaaliksi kiinniolopäiväksi.</div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="showOperation" id="showOperationDelRange" value="deleterange" /> <label for="showOperationDelRange" id="showOperationDelLabelRange">Poista yksittäiset kiinniolot aikavälillä</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Tämä poistaa vain yksittäisten kiinniolopäivien sääntöjä. Toistettuja kiinniolopäiviä ja niiden poikkeuksia ei poisteta.</div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="showOperation" id="showOperationDelRangeRepeat" value="deleterangerepeat" /> <label for="showOperationDelRangeRepeat" id="showOperationDelLabelRangeRepeat">Poista toistuvat kiinniolot aikavälillä</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Tämä poistaa vain toistettujen kiinniolopäivien sääntöjä. Toistetut kiinniolopäivät poistetaan, mutta ei niiden poikkeuksia.</div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="showOperation" id="showOperationDelRangeRepeatExcept" value="deleterangerepeatexcept" /> <label for="showOperationDelRangeRepeatExcept" id="showOperationDelLabelRangeRepeatExcept">Poista poikkeukset aikaväliltä</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Tämä poistaa poikkeukset valitulta ajanjaksolta. Käytä aikarajausta varoen, jos valitset liian ison aikavälin, saatat hidastaa Kohaa.</div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="showOperation" id="showOperationEdit" value="cud-edit" checked="checked" /> <label for="showOperationEdit">Muokkaa kiinniolopäivää</label>
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Tämä tallentaa muutokset kiinniolopäivän nimeen ja kuvaukseen. Jos tämä on toistettu kiinniolopäivä, muutokset vaikuttavat kaikkiin toistettuihin päiviin.</div></li>
+ <li class="checkbox">
+ <input type="checkbox" name="allBranches" id="allBranches" />
+ <label for="allBranches">Kopioi muutokset kaikkiin kirjastoihin</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Jos valitset tämän, muutokset kiinnioloajalle kopioidaan kaikille kirjastoille. Jos kirjastolle ei ole määritelty tätä kiinnioloaikaa, lisätään se kalenteriin. Huom! Tämä saattaa ylikirjoittaa kaletereissa jo olevia kiinnioloja.</div>
+ </li>
+ </ol>
+ <fieldset class="action">
+ <input class="btn btn-primary" name="submit" type="submit" value="Tallenna" />
+ <a href="#" class="cancel hidePanel showHoliday">Peruuta</a>
+ </fieldset>
+ </fieldset> <!-- /.brief -->
+ </form>
+ </div> <!-- /#showHoliday -->
+
+ <!-- Panel to deal with new holidays -->
+ <div class="panel" id="newHoliday">
+ <form action="/cgi-bin/koha/tools/newHolidays.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add" />
+ <fieldset class="brief">
+ <h3>Lisää kiinniolopäivä</h3>
+ <ol>
+ <li>
+ <strong>Kirjasto:</strong>
+ <span id="newBranchNameOutput"></span>
+ <input type="hidden" id="newBranchName" name="newBranchName" />
+ </li>
+ <li>
+ <strong>Päivästä:</strong>
+ <span id="newDaynameOutput"></span>,
+
+ [% IF ( dateformat == "us" ) %]
+ <span id="newMonthOutput"></span>/<span id="newDayOutput"></span>/<span id="newYearOutput"></span>
+ [% ELSIF ( dateformat == "metric" ) %]
+ <span id="newDayOutput"></span>/<span id="newMonthOutput"></span>/<span id="newYearOutput"></span>
+ [% ELSIF ( dateformat == "dmydot" ) %]
+ <span id="newDayOutput"></span>.<span id="newMonthOutput"></span>.<span id="newYearOutput"></span>
+ [% ELSE %]
+ <span id="newYearOutput"></span>/<span id="newMonthOutput"></span>/<span id="newDayOutput"></span>
+ [% END %]
+
+ <input type="hidden" id="newDayname" name="showDayname" />
+ <input type="hidden" id="newWeekday" name="newWeekday" />
+ <input type="hidden" id="newDay" name="newDay" />
+ <input type="hidden" id="newMonth" name="newMonth" />
+ <input type="hidden" id="newYear" name="newYear" />
+ </li>
+ <li class="dateinsert">
+ <strong>Päivään: </strong>
+ <input type="text" id="dateofrange" name="dateofrange" size="20" value="[% dateofrange | html %]" class="flatpickr" />
+ <div class="hint">Tätä kenttää käytetään vain, jos kiinniolopäivät lisätään aikavälille.</div>
+ </li>
+ <li>
+ <label for="title">Nimeke: </label>
+ <input type="text" name="newTitle" id="title" size="35" /></li>
+ <li>
+ <label for="newDescription">Kuvaus:</label>
+ <textarea rows="2" cols="40" id="newDescription" name="newDescription"></textarea>
+ </li>
+ <li class="radio">
+ <input type="radio" name="newOperation" id="newOperationOnce" value="holiday" checked="checked" />
+ <label for="newOperationOnce">Kiinni vain tänä päivänä</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Yksittäinen kiinniolopäivä. Valitsemalla esimerkiksi 1.8.2012 kirjaston kiinniolopäiväksi, valinta ei vaikuta muihin päiviin tai vuosiin.</div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="newOperation" id="newOperationDay" value="weekday" />
+ <label for="newOperationDay">Kiinni joka viikko tänä päivänä</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Viikonpäivä, jolloin kirjasto on aina kiinni.</div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="newOperation" id="newOperationYear" value="repeatable" />
+ <label for="newOperationYear">Kiinni joka vuosi samana päivänä</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Kirjasto on kiinni joka vuosi samana päivänä, esim. 26. joukukuuta.</div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="newOperation" id="newOperationField" value="holidayrange" />
+ <label for="newOperationField">Kiinni aikavälillä</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Kirjasto on kiinni valitulla aikavälillä.</div>
+ </li>
+ <li class="radio">
+ <input type="radio" name="newOperation" id="newOperationFieldyear" value="holidayrangerepeat" />
+ <label for="newOperationFieldyear">Kiinni aikavälillä joka vuosi</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Kirjasto on kiinni valitulla aikavälillä, samat päivät joka vuosi.</div>
+ </li>
+ <li class="checkbox">
+ <input type="checkbox" name="allBranches" id="allBranches" />
+ <label for="allBranches">Kopioi kaikkiin kirjastoihin</label>.
+ <a href="#" class="helptext">[?]</a>
+ <div class="hint">Jos valitset tämän, kiinnioloaika kopioidaan kaikille kirjastoille. Jos kirjastolle on jo määritelty kiinnioloaika, valinta ei korvaa aiemmin määriteltyä kiinnioloa.</div>
+ </li>
+ </ol>
+ <fieldset class="action">
+ <input class="btn btn-primary" name="submit" type="submit" value="Tallenna" />
+ <a href="#" class="cancel hidePanel newHoliday">Peruuta</a>
+ </fieldset>
+ </fieldset> <!-- /.brief -->
+ </form>
+ </div> <!-- /#newHoliday -->
+
+ <div id="calendar-container">
+ <h3>Kalenteri</h3>
+ <span id="calendar-anchor"></span>
+ </div>
+ <div style="margin-top: 2em;">
+ <form action="copy-holidays.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-copy" />
+ <input type="hidden" name="from_branchcode" value="[% branch | html %]" />
+ <label for="branchcode">Kopioi kiinniolopäivät kirjastolle:</label>
+ <select id="branchcode" name="branchcode">
+ <option value=""></option>
+ [% FOREACH l IN Branches.all() %]
+ <option value="[% l.branchcode | html %]">[% l.branchname | html %]</option>
+ [% END %]
+ </select>
+ <input class="btn btn-primary" type="submit" value="Kopioi" />
+ </form>
+ </div>
+ </div> <!-- /.page-section -->
+ </div> <!-- /.col-sm-6 -->
+
+ <div class="col-sm-6">
+ <div class="page-section">
+ <div class="help">
+ <h4>Vinkit</h4>
+ <ul>
+ <li>Hae kalenterista päivä, jonka haluat asettaa kiinniolopäiväksi.</li>
+ <li>Klikkaa päivää lisätäksesi tai muokataksesi kiinnioloaikaa.</li>
+ <li>Syötä otsikko ja kuvaus kiinniololle.</li>
+ <li>Määrittele, kuinka kiinniolo toistuu.</li>
+ <li>Klikkaa Tallenna.</li>
+ </ul>
+ <h4>Selitteet</h4>
+ <p>
+ <span class="key normalday">Työpäivä</span>
+ <span class="key holiday">Yksittäinen</span>
+ <span class="key repeatableweekly">Toistuu viikottain</span>
+ <span class="key repeatableyearly">Toistuu vuosittain</span>
+ <span class="key exception">Poikkeus</span>
+ </p>
+ </div> <!-- /#help -->
+
+ <div id="holiday-list">
+ <!-- Exceptions First -->
+ <!-- this will probably always have the least amount of data -->
+ [% IF ( EXCEPTION_HOLIDAYS_LOOP ) %]
+ <h3>Poikkeukset</h3>
+ <label class="controls">
+ <input type="checkbox" name="show_past" id="show_past_holidayexceptions" class="show_past" />
+ Näytä menneet kiinniolojaksot </label>
+ <table id="holidayexceptions">
+ <thead>
+ <tr>
+ <th class="exception">Pvm</th>
+ <th class="exception">Nimeke</th>
+ <th class="exception">Kuvaus</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH EXCEPTION_HOLIDAYS_LOO IN EXCEPTION_HOLIDAYS_LOOP %]
+ <tr data-date="[% EXCEPTION_HOLIDAYS_LOO.DATE_SORT | html %]">
+ <td data-order="[% EXCEPTION_HOLIDAYS_LOO.DATE_SORT | html %]">
+ <a href="/cgi-bin/koha/tools/holidays.pl?branch=[% branch | uri %]&amp;calendardate=[% EXCEPTION_HOLIDAYS_LOO.DATE | uri %]">
+ [% EXCEPTION_HOLIDAYS_LOO.DATE | html %]
+ </a>
+ </td>
+ <td>[% EXCEPTION_HOLIDAYS_LOO.TITLE | html %]</td>
+ <td>[% EXCEPTION_HOLIDAYS_LOO.DESCRIPTION | html %]</td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- /#holidayexceptions -->
+ [% END # /IF ( EXCEPTION_HOLIDAYS_LOOP ) %]
+
+ [% IF ( WEEK_DAYS_LOOP ) %]
+ <h3>Viikoittain toistuvat kiinniolot</h3>
+ <table id="holidayweeklyrepeatable">
+ <thead>
+ <tr>
+ <th class="repeatableweekly">Viikonpäivä</th>
+ <th class="repeatableweekly">Nimeke</th>
+ <th class="repeatableweekly">Kuvaus</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH WEEK_DAYS_LOO IN WEEK_DAYS_LOOP %]
+ <tr>
+ <td>[% WEEK_DAYS_LOO.KEY | html %]</td>
+ <td>[% WEEK_DAYS_LOO.TITLE | html %]</td>
+ <td>[% WEEK_DAYS_LOO.DESCRIPTION | html %]</td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- /#holidayweeklyrepeatable -->
+ [% END # / IF ( WEEK_DAYS_LOOP ) %]
+
+ [% IF ( DAY_MONTH_HOLIDAYS_LOOP ) %]
+ <h3>Vuosittain toistuvat kiinniolot</h3>
+ <table id="holidaysyearlyrepeatable">
+ <thead>
+ <tr>
+ [% IF ( dateformat == "metric" ) %]
+ <th class="repeatableyearly">Päivä/Kuukausi</th>
+ [% ELSE %]
+ <th class="repeatableyearly">Kuukausi/päivä</th>
+ [% END %]
+ <th class="repeatableyearly">Nimeke</th>
+ <th class="repeatableyearly">Kuvaus</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH DAY_MONTH_HOLIDAYS_LOO IN DAY_MONTH_HOLIDAYS_LOOP %]
+ <tr>
+ <td data-order="[% DAY_MONTH_HOLIDAYS_LOO.DATE_SORT | html %]">
+ [% DAY_MONTH_HOLIDAYS_LOO.DATE | html %]
+ </td>
+ <td>[% DAY_MONTH_HOLIDAYS_LOO.TITLE | html %]</td>
+ <td>[% DAY_MONTH_HOLIDAYS_LOO.DESCRIPTION | html %]</td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- /#holidaysyearlyrepeatable -->
+ [% END # /IF ( DAY_MONTH_HOLIDAYS_LOOP ) %]
+
+ [% IF ( HOLIDAYS_LOOP ) %]
+ <h3>Yksittäinen kiinniolopäivä</h3>
+ <label class="controls">
+ <input type="checkbox" name="show_past" id="show_past_holidaysunique" class="show_past" />
+ Näytä menneet kiinniolojaksot </label>
+ <table id="holidaysunique">
+ <thead>
+ <tr>
+ <th class="holiday">Pvm</th>
+ <th class="holiday">Nimeke</th>
+ <th class="holiday">Kuvaus</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH HOLIDAYS_LOO IN HOLIDAYS_LOOP %]
+ <tr data-date="[% HOLIDAYS_LOO.DATE_SORT | html %]">
+ <td data-order="[% HOLIDAYS_LOO.DATE_SORT | html %]">
+ <a href="/cgi-bin/koha/tools/holidays.pl?branch=[% branch | uri %]&amp;calendardate=[% HOLIDAYS_LOO.DATE | uri %]">
+ [% HOLIDAYS_LOO.DATE | html %]
+ </a>
+ </td>
+ <td>[% HOLIDAYS_LOO.TITLE | html %]</td>
+ <td>[% HOLIDAYS_LOO.DESCRIPTION.replace('\\\r\\\n', '<br />') | html %]</td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table> <!-- #holidaysunique -->
+ [% END # /IF ( HOLIDAYS_LOOP ) %]
+ </div> <!-- /#holiday-list -->
+ </div> <!-- /.page-section -->
+ </div> <!-- /.col-sm-6 -->
+ </div> <!-- /.row -->
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ </aside>
+ </div> <!-- .col-sm-2.order-sm-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ <script>
+        var weekdays = new Array(_("Sunnuntai"),_("Maanantai"),_("Tiistai"),_("Keskiviikko"),_("Torstai"),_("Perjantai"),_("Lauantai"));
+
+        /* Creates all the structures to deal with all different kinds of holidays */
+        var week_days = new Array();
+        var holidays = new Array();
+        var holidates = new Array();
+        var exception_holidays = new Array();
+        var day_month_holidays = new Array();
+        var hola= "[% code | html %]";
+        [% FOREACH WEEK_DAYS_LOO IN WEEK_DAYS_LOOP %]
+            week_days["[% WEEK_DAYS_LOO.KEY | html %]"] = {title:"[% WEEK_DAYS_LOO.TITLE | replace('"','\"') | html %]", description:"[% WEEK_DAYS_LOO.DESCRIPTION | replace('"','\"') | html %]"};
+        [% END %]
+        [% FOREACH HOLIDAYS_LOO IN HOLIDAYS_LOOP %]
+            holidates.push("[% HOLIDAYS_LOO.KEY | html %]");
+            holidays["[% HOLIDAYS_LOO.KEY | html %]"] = {title:"[% HOLIDAYS_LOO.TITLE | replace('"','\"') | html %]", description:"[% HOLIDAYS_LOO.DESCRIPTION | replace('"','\"') | html %]"};
+        [% END %]
+        [% FOREACH EXCEPTION_HOLIDAYS_LOO IN EXCEPTION_HOLIDAYS_LOOP %]
+            exception_holidays["[% EXCEPTION_HOLIDAYS_LOO.KEY | html %]"] = {title:"[% EXCEPTION_HOLIDAYS_LOO.TITLE | replace('"','\"') | html %]", description:"[% EXCEPTION_HOLIDAYS_LOO.DESCRIPTION | replace('"','\"') | html %]"};
+        [% END %]
+        [% FOREACH DAY_MONTH_HOLIDAYS_LOO IN DAY_MONTH_HOLIDAYS_LOOP %]
+            day_month_holidays["[% DAY_MONTH_HOLIDAYS_LOO.KEY | html %]"] = {title:"[% DAY_MONTH_HOLIDAYS_LOO.TITLE | replace('"','\"') | html %]", description:"[% DAY_MONTH_HOLIDAYS_LOO.DESCRIPTION | replace('"','\"') | html %]"};
+        [% END %]
+
+        function holidayOperation(formObject, opType) {
+            var op = document.getElementsByName('operation');
+            op[0].value = opType;
+            formObject.submit();
+        }
+
+        // This function shows the "Show Holiday" panel //
+        function showHoliday (exceptionPossibility, dayName, day, month, year, weekDay, title, description, holidayType) {
+            $("#newHoliday").slideUp("fast");
+            $("#showHoliday").slideDown("fast");
+            $('#showDaynameOutput').html(dayName);
+            $('#showDayname').val(dayName);
+            $('#showBranchNameOutput').html($("#branch :selected").text());
+            $('#showBranchName').val($("#branch").val());
+            $('#showDayOutput').html(day);
+            $('#showDay').val(day);
+            $('#showMonthOutput').html(month);
+            $('#showMonth').val(month);
+            $('#showYearOutput').html(year);
+            $('#showYear').val(year);
+            $('#showDescription').val(description);
+            $('#showWeekday:first').val(weekDay);
+            $('#showTitle').val(title);
+            $('#showHolidayType').val(holidayType);
+
+            if (holidayType == 'exception') {
+                $("#showOperationDelLabel").html(_("Poista tämä poikkeus."));
+                $("#holtype").attr("class","key exception").html(_("Poikkeus"));
+            } else if(holidayType == 'weekday') {
+                $("#showOperationDelLabel").html(_("Poista tämä päivä."));
+                $("#holtype").attr("class","key repeatableweekly").html(_("Toistuu viikottain"));
+            } else if(holidayType == 'daymonth') {
+                $("#showOperationDelLabel").html(_("Poista tämä päivä."));
+                $("#holtype").attr("class","key repeatableyearly").html(_("Toistuu vuosittain"));
+            } else {
+                $("#showOperationDelLabel").html(_("Poista tämä päivä."));
+                $("#holtype").attr("class","key holiday").html(_("Yksittäinen"));
+            }
+
+            if (exceptionPossibility == 1) {
+                $(".exceptionPossibility").parent().show();
+            } else {
+                $(".exceptionPossibility").parent().hide();
+            }
+        }
+
+        // This function shows the "Add Holiday" panel //
+        function newHoliday (dayName, day, month, year, weekDay) {
+            $("#showHoliday").slideUp("fast");
+            $("#newHoliday").slideDown("fast");
+            $("#newDaynameOutput").html(dayName);
+            $("#newDayname").val(dayName);
+            $("#newBranchNameOutput").html($('#branch :selected').text());
+            $("#newBranchName").val($('#branch').val());
+            $("#newDayOutput").html(day);
+            $("#newDay").val(day);
+            $("#newMonthOutput").html(month);
+            $("#newMonth").val(month);
+            $("#newYearOutput").html(year);
+            $("#newYear").val(year);
+            $("#newWeekday:first").val(weekDay);
+        }
+
+        function hidePanel(aPanelName) {
+            $("#"+aPanelName).slideUp("fast");
+        }
+
+        function changeBranch () {
+            var branch = $("#branch option:selected").val();
+            location.href='/cgi-bin/koha/tools/holidays.pl?branch=' + branch + '&calendardate=' + "[% calendardate | html %]";
+        }
+
+        /**
+        * Build settings to be passed to the formatDay function for each day in the calendar
+        * @param  {object} dayElem - HTML node passed from Flatpickr
+        * @return {void}
+        */
+        function dateStatusHandler( dayElem ) {
+            var day = dayElem.dateObj.getDate();
+            var month = dayElem.dateObj.getMonth() + 1;
+            var year = dayElem.dateObj.getFullYear();
+            var weekDay = dayElem.dateObj.getDay();
+            var dayMonth = month + '/' + day;
+            var dateString = year + '/' + month + '/' + day;
+            if (exception_holidays[dateString] != null) {
+                formatDay( [ "exception", _("Poikkeus: %s").format(exception_holidays[dateString].title)], dayElem );
+            } else if ( week_days[weekDay] != null ){
+                formatDay( [ "repeatableweekly", _("Viikoittainen kiinniolo: %s").format(week_days[weekDay].title)], dayElem );
+            } else if ( day_month_holidays[dayMonth] != null ) {
+                formatDay( [ "repeatableyearly", _("Vuosittainen kiinniolo: %s").format(day_month_holidays[dayMonth].title)], dayElem );
+            } else if (holidays[dateString] != null) {
+                formatDay( [ "holiday", _("Yksittäinen kiinniolopäivä: %s").format(holidays[dateString].title)], dayElem );
+            } else {
+                formatDay( [ "normalday", _("Normaalipäivä")], dayElem );
+            }
+        }
+
+        /**
+        * Adds style and title attribute to a day on the calendar
+        * @param  {object} settings - span class attribute ([0]) and title attribute ([1])
+        * @param  {node}   dayElem  - HTML node passed from Flatpickr
+        * @return {void}
+        */
+        function formatDay( settings, dayElem ){
+            $(dayElem).attr("title", settings[1]).addClass( settings[0]);
+        }
+
+        /**
+        * Triggers an action based on a click on a calendar day: If a holiday exists on
+        * that day it loads an edit form. If there is no existing holiday one can be created
+        * @param  {object} calendar - a Date object corresponding to the clicked day
+        * @return {void}
+        */
+        function dateChanged( calendar ) {
+            var day = calendar.getDate();
+            var month = calendar.getMonth() + 1;
+            var year = calendar.getFullYear();
+            var weekDay = calendar.getDay();
+            var dayName = weekdays[weekDay];
+            var dayMonth = month + '/' + day;
+            var dateString = year + '/' + month + '/' + day;
+            if (holidays[dateString] != null) {
+                showHoliday(0, dayName, day, month, year, weekDay, holidays[dateString].title,     holidays[dateString].description, 'ymd');
+            } else if (exception_holidays[dateString] != null) {
+                showHoliday(0, dayName, day, month, year, weekDay, exception_holidays[dateString].title, exception_holidays[dateString].description, 'exception');
+            } else if (week_days[weekDay] != null) {
+                showHoliday(1, dayName, day, month, year, weekDay, week_days[weekDay].title,     week_days[weekDay].description, 'weekday');
+            } else if (day_month_holidays[dayMonth] != null) {
+                showHoliday(1, dayName, day, month, year, weekDay, day_month_holidays[dayMonth].title, day_month_holidays[dayMonth].description, 'daymonth');
+            } else {
+                newHoliday(dayName, day, month, year, weekDay);
+            }
+        };
+
+        /* Custom table search configuration: If a table row
+            has an "expired" class, hide it UNLESS the
+            show_expired checkbox is checked */
+        $.fn.dataTable.ext.search.push(
+            function( settings, searchData, index, rowData, counter ) {
+                var table = settings.nTable.id;
+                var row = $(settings.aoData[index].nTr);
+                if( row.hasClass("date_past") && !$("#show_past_" + table ).prop("checked") ){
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        );
+
+        // Create current date variable
+        var date = new Date();
+        var datestring = date.toISOString().substring(0, 10);
+
+        $(document).ready(function() {
+
+            $(".helptext + .hint").hide();
+            $("#branch").change(function(){
+                changeBranch();
+            });
+            $("#holidayweeklyrepeatable>tbody>tr").each(function(){
+                var first_td = $(this).find('td').first();
+                first_td.html(weekdays[first_td.html()]);
+            });
+            $("#holidayweeklyrepeatable").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "dom": 't',
+                "paginate": false
+            }));
+            var tables = $("#holidayexceptions, #holidaysyearlyrepeatable, #holidaysunique").DataTable($.extend(true, {}, dataTablesDefaults, {
+                "dom": 't',
+                "paginate": false,
+                "createdRow": function( row, data, dataIndex ) {
+                    var holiday = $(row).data("date");
+                    if( holiday < datestring ){
+                        $(row).addClass("date_past");
+                    }
+                }
+            }));
+
+            $(".show_past").on("change", function(){
+                tables.draw();
+            });
+
+            $("a.helptext").click(function(){
+                $(this).parent().find(".helptext + .hint").toggle(); return false;
+            });
+
+            const dateofrange = document.querySelector("#dateofrange")._flatpickr;
+            const datecancelrange = document.querySelector("#datecancelrange")._flatpickr;
+
+            $("#dateofrange").each(function () { this.value = "" });
+            $("#datecancelrange").each(function () { this.value = "" });
+
+            var maincalendar = $("#calendar-anchor").flatpickr({
+                inline: true,
+                onReady: function( selectedDates, dateStr, instance ){
+                    // We do not want to display the 'close' icon in this case
+                    $(instance.input).siblings('.flatpickr-input').hide();
+                },
+                onDayCreate: function( dObj, dStr, fp, dayElem ){
+                    /* for each day on the calendar, get the
+                      correct status information for the date */
+                    dateStatusHandler( dayElem );
+                },
+                onChange: function( selectedDates, dateStr, instance ){
+                    var fromdate = selectedDates[0];
+                    var enddate = dateofrange.selectedDates[0];
+
+                    dateChanged( fromdate );
+
+                    dateofrange.set( 'defaultDate', fromdate );
+                    dateofrange.set( 'minDate', fromdate );
+
+                    if ( enddate != undefined ) {
+                        if ( enddate < fromdate ) {
+                            dateofrange.set("defaultDate", fromdate);
+                            dateofrange.setDate(fromdate);
+                        }
+                    }
+
+                },
+                defaultDate: new Date("[% keydate | html %]")
+            });
+
+            $(".hidePanel").on("click",function(){
+                if( $(this).hasClass("showHoliday") ){
+                    hidePanel("showHoliday");
+                } else {
+                    hidePanel("newHoliday");
+                }
+            })
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

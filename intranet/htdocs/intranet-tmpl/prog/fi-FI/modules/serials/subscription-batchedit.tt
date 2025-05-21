@@ -1,0 +1,177 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE ItemTypes %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+ <title>[% FILTER collapse %]
+ [% t("Batch edit") | html %] &rsaquo;
+ [% t("Serials") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+ [% INCLUDE 'doc-head-close.inc' %]
+ [% INCLUDE 'calendar.inc' %]
+</head>
+<body id="ser_subscription-batchedit" class="ser">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'serials-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/serials-home.pl">Kausijulkaisut</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Erämuokkaus</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Kausijulkaisutilauksen erämuokkaus</h1>
+
+ <div class="page-section">
+ <p>Olet muokkaamassa seuraavia kausijulkaisutilauksia:</p>
+ <table>
+ <thead>
+ <tr>
+ <th>ISSN</th>
+ <th>Nimeke</th>
+ <th>Toimittaja</th>
+ <th>Paikka</th>
+ <th>Kirjasto</th>
+ <th>Nidetyyppi</th>
+ <th>Yleiset huomautukset</th>
+ <th>Sisäiset huomautukset</th>
+ <th>Luokka</th>
+ <th>Luo nide vastaanotettaessa</th>
+ <th>Vanhentumispvm</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH subscription IN subscriptions %]
+ <tr>
+ <td>[% subscription.biblio.biblioitem.issn | html %]</td>
+ <td><a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscription.subscriptionid | uri %]">[% subscription.biblio.title | html %] (#[% subscription.subscriptionid | html %])</a></td>
+ <td><a href="/cgi-bin/koha/acqui/supplier.pl?booksellerid=[% subscription.vendor.id | uri %]">[% subscription.vendor.name | html %]</a></td>
+ <td>[% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => subscription.location ) | html %]</td>
+ <td>[% Branches.GetName(subscription.branchcode) | html %]</td>
+ <td>[% ItemTypes.GetDescription( subscription.itemtype ) | html %]</td>
+ <td>[% subscription.notes | html %]</td>
+ <td>[% subscription.internalnotes | html %]</td>
+ <td>[% subscription.callnumber | html %]</td>
+ <td>
+ [% IF subscription.serialsadditems %]
+ <span>Kyllä</span>
+ [% ELSE %]
+ <span>Ei</span>
+ [% END %]
+ </td>
+ <td>[% subscription.enddate | $KohaDates %]</td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+
+ <form method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% FOREACH subscription IN subscriptions %]
+ <input type="hidden" name="subscriptionid" value="[% subscription.subscriptionid | html %]"/>
+ [% END %]
+ [% IF referrer %]
+ <input type="hidden" name="referrer" value="[% referrer | html %]"/>
+ [% END %]
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <label for="booksellerid">Toimittaja: </label>
+ <select id="booksellerid" name="booksellerid">
+ <option value="">Ei muutosta</option>
+ [% FOREACH bookseller IN booksellers %]
+ <option value="[% bookseller.id | html %]">[% bookseller.name | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="location">Sijainti: </label>
+ <select id="location" name="location">
+ <option value="">Ei muutosta</option>
+ [% FOREACH av IN AuthorisedValues.Get('LOC') %]
+ <option value="[% av.authorised_value | html %]">[% av.lib | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="branchcode">Kirjasto: </label>
+ <select id="branchcode" name="branchcode">
+ <option value="">Ei muutosta</option>
+ [% FOREACH branch IN Branches.all %]
+ <option value="[% branch.branchcode | html %]">[% branch.branchname | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="itemtype">Nidetyyppi: </label>
+ <select id="itemtype" name="itemtype">
+ <option value="">Ei muutosta</option>
+ [% FOREACH itemtype IN ItemTypes.Get() %]
+ <option value="[% itemtype.itemtype | html %]">[% itemtype.description | html %]</option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="notes">Yleinen huomautus: </label>
+ <textarea id="notes" name="notes" placeholder="Ei muutosta"></textarea>
+ </li>
+ <li>
+ <label for="internalnotes">Sisäinen huomautus: </label>
+ <textarea id="internalnotes" name="internalnotes" placeholder="Ei muutosta"></textarea>
+ </li>
+ <li>
+ <label for="serialsadditems">Luo nide vastaanotettaessa: </label>
+ <select id="serialsadditems" name="serialsadditems">
+ <option value="">Ei muutosta</option>
+ <option value="0">Ei</option>
+ <option value="1">Kyllä</option>
+ </select>
+
+ </li>
+ <li>
+ <label for="enddate">Vanhentumispvm: </label>
+ <input class="flatpickr" id="enddate" name="enddate" placeholder="Ei muutosta" type="text" />
+ </li>
+ [% IF available_additional_fields.count %]
+ [% INCLUDE 'additional-fields-entry.inc' available=available_additional_fields values=additional_field_values batch_edit=1 %]
+ [% END %]
+ </ol>
+ </fieldset>
+
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-batchedit" />
+ <button type="submit" class="btn btn-primary">Tallenna</button>
+ <a class="cancel" href="[% referrer | url %]">Peruuta</a>
+ </fieldset>
+ </form>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'serials-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+ [% Asset.js("js/additional-fields-entry.js") | $raw %]
+ [% INCLUDE 'intranet-bottom.inc' %]

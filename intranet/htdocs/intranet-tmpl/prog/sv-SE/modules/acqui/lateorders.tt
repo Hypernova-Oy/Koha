@@ -1,0 +1,431 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% USE Branches %]
+[% USE TablesSettings %]
+[% USE Price %]
+[% SET footerjs = 1 %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Late orders") | html %] &rsaquo;
+ [% t("Acquisitions") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="acq_lateorders" class="acq">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'acquisitions-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/acqui-home.pl">Inköp</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Sena beställningar</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-2">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+<h1>[% IF bookseller_filter %][% bookseller_filter.name | html %] : [% END %]Sena beställningar</h1>
+<div id="acqui_lateorders" class="page-section">
+
+[% IF error_claim %]
+ [% IF ( error_claim == "no_email" ) %]
+ <div class="alert alert-warning">Denna leverantör har ingen e-postadress</div>
+ [% ELSIF ( error_claim == "no_order_selected" ) %]
+ <div class="alert alert-warning">Ingen beställning vald</div>
+ [% ELSE %]
+ <div class="alert alert-warning">[% error_claim | html %]</div>
+ [% END %]
+[% END %]
+[% IF info_claim %]
+ <div class="alert alert-info">E-post har skickats.</div>
+[% END %]
+[% IF lateorders.size %]
+<form action="lateorders.pl" name="claim" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-send_alert" />
+ <input type="hidden" name="delay" value="[% delay | html %]" />
+ <input type="hidden" name="booksellerid" value="[% bookseller_filter.id | html %]" />
+ [% IF ( letters ) %]
+ <p><label for="letter_code">Reklamera med meddelande: </label><select name="letter_code" id="letter_code">
+ [% FOREACH letter IN letters %]
+ <option value="[% letter.code | html %]">[% letter.name | html %]</option>
+ [% END %]
+ </select>
+ </p>
+ [% END %]
+ [% SET total = 0 %]
+ [% SET total_quantity = 0 %]
+ [% IF bookseller_filter %]
+ <p><a id="CheckAll" href="#"><i class="fa fa-check"></i> Markera alla</a> <a id="CheckNone" href="#"><i class="fa fa-times"></i> Avmarkera alla</a></p>
+ [% END %]
+ <table id="late_orders">
+ <thead>
+ <tr>
+ <th class="NoSort"></th>
+ <th>Beställningsrad</th>
+ <th>Orderdatum</th>
+ <th>Uppskattat leveransdatum</th>
+ <th>Leverantör</th>
+ <th class="anti-the">Information</th>
+ <th>Kvantitet</th>
+ <th>Total kostnad</th>
+ <th>Korg</th>
+ <th>Korgdatum</th>
+ <th>Korggrupp</th>
+ <th>Bibliotek</th>
+ <th>Budget</th>
+ <th>Budgetställe</th>
+ <th>Antal reklamationer</th>
+ <th>Reklamationsdatum</th>
+ <th>Intern kommentar</th>
+ <th>Kommentar till leverantör</th>
+ <th>ISBN</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH lateorder IN lateorders %]
+ <tr>
+ <td>
+ <input type="checkbox" value="[% lateorder.ordernumber | html %]" data-booksellerid="[% lateorder.basket.booksellerid | html %]" name="ordernumber">
+ </td>
+ <td>
+ [% lateorder.ordernumber | $raw %]
+ </td>
+ <td data-order="[% lateorder.basket.closedate | html %]">
+ [% lateorder.basket.closedate | $KohaDates %] ([% lateorder.basket.late_since_days | html %] dagar) </td>
+ [% IF lateorder.get_column('estimated_delivery_date') %]
+ [% SET estimated_delivery_date = lateorder.get_column('estimated_delivery_date') %]
+ [% ELSIF lateorder.get_column('calculated_estimated_delivery_date') %]
+ [% SET estimated_delivery_date = lateorder.get_column('calculated_estimated_delivery_date') %]
+ [% END %]
+ <td data-order="[% estimated_delivery_date | html %]">
+ <p class="delivery_date">
+ <span>[% estimated_delivery_date | $KohaDates %]</span>
+ [% IF CAN_user_acquisition_order_manage %]
+ <a class="edit_delivery_date noExport" data-delivery_date="[% estimated_delivery_date | html %]" data-ordernumber="[% lateorder.ordernumber | html %]" href="/cgi-bin/koha/acqui/moddeliverydate.pl?ordernumber=[% lateorder.ordernumber | html %]" id="delivery_date_[% lateorder.ordernumber | html %]" title="Redigera leveransdatum">
+ <i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera </a>
+ [% END %]
+ </p>
+ </td>
+ <td>
+ [% lateorder.basket.bookseller.name | html %]
+ ([% lateorder.basket.bookseller.id | html %])
+ </td>
+ <td>
+ <span class="title">[% INCLUDE 'biblio-title.inc' biblio=lateorder.biblio link=1 %]</span>
+ [% IF ( lateorder.biblio.author ) %]<br/><em>Författare:</em> [% lateorder.biblio.author | html %][% END %]
+ [% IF ( lateorder.biblio.biblioitem.publishercode ) %]
+ <br/><em>Utgiven av:</em> [% lateorder.biblio.biblioitem.publishercode | html %]
+ [% IF ( lateorder.biblio.biblioitem.publicationyear ) %]
+ <em> i </em>[% lateorder.biblio.biblioitem.publicationyear | html %]
+ [% END %]
+ [% END %]
+ </td>
+ <td>
+ [% lateorder.quantity | html %]
+ [% SET total_quantity = total_quantity + lateorder.quantity %]
+ </td>
+ <td>
+ [% SET subtotal = (lateorder.quantity - lateorder.quantityreceived) * lateorder.rrp %] [% SET total = total + subtotal %] [% lateorder.rrp | html %]x[% lateorder.quantity - lateorder.quantityreceived | html %] = [% subtotal | $Price %] </td>
+ <td>
+ [% IF ( CAN_user_acquisition_order_manage ) %]
+ <a href="basket.pl?basketno=[% lateorder.basketno | uri %]" title="korg">[% lateorder.basket.basketname | html %] ([% lateorder.basketno | html %])</a>
+ [% ELSE %]
+ [% lateorder.basket.basketname | html %] ([% lateorder.basketno | html %])
+ [% END %]
+ </td>
+ <td data-order="[% lateorder.basket.creationdate | html %]">[% lateorder.basket.creationdate | $KohaDates %]</td>
+ <td>
+ [% IF ( lateorder.basket.basketgroupid ) %]
+ [% IF ( CAN_user_acquisition_group_manage ) %]
+ <a href="basketgroup.pl?op=add&booksellerid=[% lateorder.basket.booksellerid | uri %]&basketgroupid=[% lateorder.basket.basketgroupid | uri %]" title="korggrupp">[% lateorder.basket.basket_group.name | html %] ([% lateorder.basket.basketgroupid | html %])</a>
+ [% ELSE %]
+ [% lateorder.basket.basket_group.name | html %] ([% lateorder.basket.basketgroupid | html %])</a>
+ [% END %]
+ [% END %]
+ </td>
+ <td>[% Branches.GetName( lateorder.basket.authorizer.branchcode ) | html %]
+ </td>
+ <td>[% lateorder.fund.budget.budget_period_description | html %]</td>
+ <td>[% lateorder.fund.budget_name | html %]</td>
+ <td>[% lateorder.claims.count | html %]</td>
+ <td data-order="[% lateorder.claims.last.claimed_on | html %]">
+ [% FOR claim IN lateorder.claims %]
+ [% claim.claimed_on | $KohaDates %]
+ [% UNLESS loop.last %]<br/>[% END %]
+ [% END %]
+ </td>
+ <td>
+ [% IF lateorder.order_internalnote %]
+ <p class="ordernote">
+ <span id="internal-note-[% lateorder.ordernumber | html %]">[% lateorder.order_internalnote | html %]</span>
+ <a class="edit_note noExport" data-note_type="internal" data-ordernumber="[% lateorder.ordernumber | html %]" href="/cgi-bin/koha/acqui/modordernotes.pl?ordernumber=[% lateorder.ordernumber | html %]&type=internal" title="Redigera intern kommentar">
+ <i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera intern anmärkning </a>
+ </p>
+ [% ELSE %]
+ <a class="edit_note noExport" data-note_type="internal" data-ordernumber="[% lateorder.ordernumber | html %]" href="/cgi-bin/koha/acqui/modordernotes.pl?ordernumber=[% lateorder.ordernumber | html %]&type=internal" title="Lägg till intern anteckning">
+ <i class="fa fa-plus"></i> Lägg till intern anteckning </a>
+ [% END %]
+ </td>
+ <td>
+ [% IF lateorder.order_vendornote %]
+ <p class="ordernote">
+ <span id="vendor-note-[% lateorder.ordernumber | html %]">[% lateorder.order_vendornote | html %]</span>
+ <a class="edit_note noExport" data-note_type="vendor" data-ordernumber="[% lateorder.ordernumber | html %]" href="/cgi-bin/koha/acqui/modordernotes.pl?ordernumber=[% lateorder.ordernumber | html %]&type=vendor" title="Redigera leverantörskommentar">
+ <i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera leverantörskommentar </a>
+ </p>
+ [% ELSE %]
+ <a class="edit_note noExport" data-note_type="vendor" data-ordernumber="[% lateorder.ordernumber | html %]" href="/cgi-bin/koha/acqui/modordernotes.pl?ordernumber=[% lateorder.ordernumber | html %]&type=vendor" title="Lägg till leverantörskommentar">
+ <i class="fa fa-plus"></i> Lägg till leverantörskommentar </a>
+ [% END %]
+ </td>
+ <td>[% lateorder.biblio.biblioitem.isbn | $raw %]</td>
+ </tr>
+ [% END %]
+ </tbody>
+ <tfoot>
+ <tr>
+ <th colspan="6">Totalt</th>
+ <th>[% total_quantity | html %]</th>
+ <th>[% total | $Price %]</th>
+ <th colspan="10">&nbsp;</th>
+ </tr>
+ </tfoot>
+ </table>
+
+ <fieldset class="action">
+ <div class="btn-group">
+ <a id="exportbutton" class="btn btn-default" href="/cgi-bin/koha/acqui/lateorders-export.pl"><i class="fa fa-download"></i> Exportera som CSV</a>
+ <a class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"></a>
+ <ul class="dropdown-menu" id="export-csv-menu">
+ <li><a class="dropdown-item dropdown-menu-end" href="#">Standard</a></li>
+ [% IF csv_profiles.count %]
+ [% FOR csv IN csv_profiles %]
+ <li><a class="dropdown-item" href="#" data-value="[% csv.export_format_id | html %]">[% csv.profile | html %]</a></li>
+ [% END %]
+ [% END %]
+ </ul>
+ </div>
+
+ <input class="btn btn-default" type="submit" value="Reklamera beställning" />
+ </fieldset>
+</form>
+[% ELSE %]<p>Det finns inga sena beställningar.</p>
+[% END %]
+</div> <!-- /#acqui_lateorders -->
+</main>
+</div> <!-- /.col-md-10.order-md-2 -->
+
+<div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+<form action="lateorders.pl" method="get">
+<fieldset class="brief">
+<h4>Filtrera resultat:</h4>
+[% FOREACH ERROR_LOO IN ERROR_LOOP %]
+[% IF ( ERROR_LOO.delay_digits ) %]<p class="error">Antal dagar ([% ERROR_LOO.bad_delay | html %]) måste vara ett nummer mellan 0 och 999.</p>[% END %]
+[% END %]
+<ol>
+ <li><label for="delay">Orderdatum:</label><input size="3" maxlength="3" id="delay" type="text" name="delay" value="[% delay | html %]" /> dagar sedan</li>
+ <li><label for="from">Uppskattat leveransdatum från: </label>
+ <input type="text" size="10" id="from" name="estimateddeliverydatefrom" value="[% estimateddeliverydatefrom | html %]" class="flatpickr" data-date_to="to"/>
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ <li><label for="to">Till: </label>
+ <input type="text" size="10" id="to" name="estimateddeliverydateto" value="[% estimateddeliverydateto | html %]" class="flatpickr" />
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+
+ <li><label for="booksellerid">Leverantör:</label>
+ <select id="booksellerid" tabindex="" name="booksellerid">
+ <option value=""></option>
+ [% FOREACH bookseller IN booksellers %]
+ [% IF bookseller.id == bookseller_filter.id %]
+ <option value="[% bookseller.id | html %]" selected="selected">[% bookseller.name | html %]</option>
+ [% ELSE %]
+ <option value="[% bookseller.id | html %]">[% bookseller.name | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+</ol>
+</fieldset>
+ <fieldset class="action"><input type="submit" class="btn btn-primary" value="Filter" /></fieldset>
+ </form>
+[% INCLUDE 'acquisitions-menu.inc' %]
+</aside>
+</div> <!-- /.col-md-2.order-md-1 -->
+</div>
+
+<!-- Modal for editing vendor and internal notes -->
+<div class="modal" id="noteEditor" tabindex="-1" role="dialog" aria-labelledby="noteEditorLabel">
+ <div class="modal-dialog">
+ <form id="modify_order_notes" action="/cgi-bin/koha/acqui/modordernotes.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="noteEditorLabel">Orderanmärkning</h1>
+ <button aria-label="Stäng" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <div class="modal-body">
+ <textarea id="ordernotes" name="ordernotes" rows="3" cols="30" class="focus">[% ordernotes | html %]</textarea>
+ <input type="hidden" id="notes_ordernumber" name="ordernumber" value="" />
+ <input type="hidden" name="op" value="cud-save" />
+ <input type="hidden" id="type" name="type" value="" />
+ </div>
+ <div class="modal-footer">
+ <button type="submit" class="btn btn-primary">Spara</button>
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Stäng</button>
+ </div>
+ </div>
+ </form>
+ </div>
+</div>
+
+<!-- Modal for editing estimated delivery date -->
+<div class="modal" id="dateEditor" tabindex="-1" role="dialog" aria-labelledby="dateEditorLabel">
+ <div class="modal-dialog">
+ <form id="modify_estimated_delivery_date" action="/cgi-bin/koha/acqui/moddeliverydate.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="dateEditorLabel">Uppskattat leveransdatum</h1>
+ <button aria-label="Stäng" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <div class="modal-body">
+ <input type="text" id="estimated_delivery_date" size="10" name="estimated_delivery_date" class="flatpickr" value="[% estimated_delivery_date | html %]"/>
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ <input type="hidden" id="date_ordernumber" name="ordernumber" value="" />
+ <input type="hidden" name="op" value="cud-save" />
+ </div>
+ <div class="modal-footer">
+ <button type="submit" class="btn btn-primary">Spara</button>
+ <button type="button" class="btn btn-default" data-bs-dismiss="modal">Avbryt</button>
+ </div>
+ </div>
+ </form>
+ </div>
+</div>
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/acquisitions-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% INCLUDE 'calendar.inc' %]
+ <script>
+        var late_orderst;
+        function check_uncheck() {
+            var all_nodes = late_orderst.DataTable().rows().nodes();
+            if ( $(all_nodes).find("input:checkbox[name=ordernumber]:checked").length > 0) {
+                var booksellerid = $(all_nodes).find("input:checkbox[name=ordernumber]:checked:first").attr("data-booksellerid");
+                $(all_nodes).find("input:checkbox[name=ordernumber][data-booksellerid!="+booksellerid+"]").prop('disabled', true);
+            } else {
+                $("input:checkbox[name=ordernumber]").prop('disabled', false);
+            }
+        }
+
+        $(document).ready(function() {
+
+            var table_settings = [% TablesSettings.GetTableSettings( 'acqui', 'lateorders', 'late_orders', 'json' ) | $raw %];
+            late_orderst = KohaTable("late_orders", {
+                "sorting": [[ 1, "asc" ]],
+                "pagingType": "full",
+                "autoWidth": false,
+                "drawCallback": function() {
+                    if ( typeof late_orderst != 'undefined' ) {
+                        check_uncheck();
+                        $('input:checkbox[name=ordernumber]').bind('click', check_uncheck);
+                    };
+                }
+            }, table_settings );
+            $('input:checkbox[name=ordernumber]').bind('click', check_uncheck);
+            $('#CheckAll').click(function(e){
+                e.preventDefault();
+                $("#late_orders input:checkbox").prop("checked", true);
+            });
+            $('#CheckNone').click(function(e){
+                e.preventDefault();
+                $("#late_orders input:checkbox").prop("checked", false);
+            });
+
+            // Generates a dynamic link for exporting the selection's data as CSV
+            $("#exportbutton, #export-csv-menu a").click(function() {
+                var all_nodes = late_orderst.DataTable().rows().nodes();
+                var selected = $(all_nodes).find("input[name='ordernumber']:checked");
+
+                if (selected.length == 0) {
+                    alert(_("Välj minst ett exemplar att exportera."));
+                    return false;
+                }
+
+                var url = $('#exportbutton').attr('href') + '?';
+                // Building the url from currently checked boxes
+                for (var i = 0; i < selected.length; i++) {
+                    url += '&amp;ordernumber=' + selected[i].value;
+                }
+                if($(this).attr("data-value")) {
+                    url += '&amp;csv_profile=' + $(this).attr("data-value");
+                }
+                // And redirecting to the CSV page
+                location.href = url;
+                return false;
+            });
+
+            $(".edit_note").on("click", function(e) {
+                e.preventDefault();
+                var ordernumber = $(this).data("ordernumber");
+                var note_type = $(this).data("note_type");
+                var modalTitle = _("%s (ordernummer %s)").format($(this).attr("title"), ordernumber);
+                var note_text = $( "#" + note_type + "-note-" + ordernumber ).html();
+                $("#noteEditor .modal-title").text(modalTitle);
+                $("#notes_ordernumber").val( ordernumber );
+                $("#ordernotes").html( note_text );
+                $("#type").val( note_type );
+                $("#noteEditor").modal("show");
+                $("#ordernotes").focus();
+            });
+
+             $("#noteEditor").on('hidden.bs.modal', function (e) {
+                $("#noteEditorLabel").html("");
+                $("#noteEditor .modal-title").text("");
+                $("#ordernotes").html( "" );
+                $("#notes_ordernumber").val("");
+                $("#type").val("");
+            });
+
+            $(".edit_delivery_date").on("click", function(e) {
+                e.preventDefault();
+                var ordernumber = $(this).data("ordernumber");
+                var order_number_text = _("(ordernummer %s)").format(ordernumber);
+                var modalTitle = $(this).attr("title") + " " + order_number_text;
+                var delivery_date = $( "#delivery_date_" + ordernumber ).data("delivery_date");
+                const estimated_delivery_date = document.querySelector("#estimated_delivery_date")._flatpickr;
+                estimated_delivery_date.setDate( delivery_date );
+                $("#dateEditor .modal-title").text(modalTitle);
+                $("#date_ordernumber").val(ordernumber);
+                $("#dateEditor").modal("show");
+            });
+
+             $("#dateEditor").on('hidden.bs.modal', function (e) {
+                $("#dateEditorLabel").html("");
+                $("#dateEditor .modal-title").text("");
+                $("#estimated_delivery_date").html( "" );
+                $("#date_ordernumber").val("");
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

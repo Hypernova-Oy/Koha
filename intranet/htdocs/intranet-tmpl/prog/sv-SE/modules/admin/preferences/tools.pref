@@ -1,0 +1,49 @@
+---
+tools.pref:
+  Ladda upp:
+  - - Ta automatiskt bort temporära uppladdningar som är äldre än
+    - class: integer
+      pref: UploadPurgeTemporaryFilesDays
+    - 'dagar i cronjobbet cleanup_database. Notera: om du lämnar det här fältet tomt
+      så kommer cronjobbet inte att ta bort några filer. Å andra sidan, ett värde
+      av 0 betyder: ta bort alla temporära filer.'
+  Lånekort:
+  - - Begränsa antalet bilder som lagras i databasen till
+    - class: Integer
+      pref: ImageLimit
+    - bilder.
+  Nyheter:
+  - - 'Visa författare för nyhetsobjekt:'
+    - choices:
+        both: i både OPAC och personalklient
+        none: inte alls
+        opac: endast i OPAC
+        staff: endast i personalklient
+      pref: NewsAuthorDisplay
+    - .
+  - - Som standard, redigera ytterligare innehåll och nyheter med
+    - choices:
+        codemirror: en textredigerare (CodeMirror)
+        tinymce: en WYSIWYG-redigerare (TinyMCE)
+      pref: AdditionalContentsEditor
+    - .
+  Satsmodifiering av exemplar:
+  - - Bearbeta upp till
+    - class: integer
+      pref: MaxItemsToProcessForBatchMod
+    - exemplar i en sats som ska redigeras.
+  - - Visa upp till
+    - class: integer
+      pref: MaxItemsToDisplayForBatchDel
+    - exemplar i en enda ändrings- eller borttagningssats.
+  - - Visa upp till
+    - class: integer
+      pref: MaxItemsToDisplayForBatchMod
+    - exemplar i en enda redigeringssats.
+  Streckkoder:
+  - - Separera streckkoder med följande tecken
+    - default: \s\r\n
+      pref: BarcodeSeparators
+    - 'i satsmodifiering och inventering.<br/>OBS: Skriv \r för vagnretur, \n för
+      ny rad och \s för blanksteg. Övriga som kan inkluderas är lodsteck |, bindestreck
+      (inled med omvänt snedstreck), komma, semikolon, punkt etc.'

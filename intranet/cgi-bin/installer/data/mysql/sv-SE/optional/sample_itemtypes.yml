@@ -1,0 +1,57 @@
+---
+description:
+- En uppsättning standardmässiga medietyper.
+tables:
+- itemtypes:
+    multiline: []
+    rows:
+    - description: Böcker
+      imageurl: bridge/book.png
+      itemtype: BK
+      notforloan: 0
+      rentalcharge: 0
+      summary: ''
+    - description: Mixed Materials
+      imageurl: bridge/kit.png
+      itemtype: MX
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Datorfiler
+      imageurl: bridge/computer_file.png
+      itemtype: CF
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Kartor
+      imageurl: bridge/map.png
+      itemtype: MP
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Visuella material
+      imageurl: bridge/dvd.png
+      itemtype: VM
+      notforloan: 1
+      rentalcharge: 5
+      summary: ''
+    - description: Musik
+      imageurl: bridge/sound.png
+      itemtype: MU
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Periodika
+      imageurl: bridge/periodical.png
+      itemtype: CR
+      notforloan: 0
+      rentalcharge: 5
+      summary: ''
+    - description: Referens
+      imageurl: bridge/reference.png
+      itemtype: REF
+      notforloan: 1
+      rentalcharge: 0
+      summary: ''
+    translatable:
+    - description

@@ -1,0 +1,101 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE AdditionalContents %]
+[% PROCESS 'i18n.inc' %]
+[% PROCESS 'html_helpers.inc' %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Authority search") | html %] &rsaquo;
+ [% PROCESS 'library_name_title' %]
+[% END %]</title>
+<meta name="robots" content="noindex">
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-authorities' bodyclass='scrollto' %]
+[% INCLUDE 'masthead.inc' %]
+
+ <div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Auktoriteettihaku</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( OpacNav || OpacNavBottom ) %]
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' %]
+ </div>
+ </div>
+ <div class="col-10 order-first order-md-first order-lg-2">
+ [% ELSE %]
+ <div class="col order-first order-md-first order-lg-2">
+ [% END %]
+ <div id="userauthhome" class="maincontent">
+ <form name="f" action="/cgi-bin/koha/opac-authorities-home.pl" method="get">
+ <input type="hidden" name="op" value="do_search" />
+ <input type="hidden" name="type" value="opac" />
+ <fieldset class="rows">
+ <legend><h1>Auktoriteettihaku</h1></legend>
+ <ol>
+ <li>
+ <label for="authtypecode">Auktoriteettityyppi: </label>
+ <select name="authtypecode" id="authtypecode">
+ [% FOREACH authority_type IN authority_types %]
+ [% IF authority_type.authtypecode == authtypecode %]
+ <option value="[% authority_type.authtypecode | html %]" selected="selected">[% authority_type.authtypetext | html %]</option>
+ [% ELSE %]
+ <option value="[% authority_type.authtypecode | html %]">[% authority_type.authtypetext | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="anywhere">Hakuasetukset:</label>
+ <select name="operator" id="anywhere">
+ <option value="contains">sisältää</option>
+ <option value="start">alkaa sanalla</option>
+ <option value="exact">on</option>
+ </select>
+ </li>
+ <li>
+ <label for="value">Hakusanat:</label>
+ <input type="text" name="value" id="value" value="[% value | html %]" />
+ </li>
+ <li>
+ <label for="marclist">Missä:</label>
+ <select name="marclist" id="marclist">
+ <option value="all" selected="selected">Täydellisessä tietueessa</option>
+ <option value="match">Missä tahansa otsikossa</option>
+ <option value="mainentry">Pääkirjauksessa</option>
+ </select>
+ </li>
+ <li>
+ <input type="hidden" name="and_or" value="and" />
+ <input type="hidden" name="excluding" value="" />
+ <label for="orderby">Järjestys: </label>
+ <select name="orderby" id="orderby">
+ <option value="">Ei mitään</option>
+ <option value="HeadingAsc" selected="selected">Otsikko, nouseva</option>
+ <option value="HeadingDsc">Otsikko, laskeva</option>
+ </select>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="OK" />
+ </fieldset>
+ </form>
+ </div> <!-- / #userauthhome -->
+ </div> <!-- / .col-lg-10/12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+ </div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %][% END %]

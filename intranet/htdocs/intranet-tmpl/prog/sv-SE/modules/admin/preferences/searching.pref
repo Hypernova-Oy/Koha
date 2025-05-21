@@ -1,0 +1,375 @@
+---
+searching.pref:
+  Funktioner:
+  - - Utför trunkerad sökning (där t.ex. <cite>Har</cite> skulle få träffar på <cite>Harry</cite>
+      och <cite>harpa</cite>)
+    - choices:
+        '0': endast om * läggs till.
+        '1': automatiskt.
+      pref: QueryAutoTruncate
+      type: boolean
+    - '<br />(Tecknet * kan användas på följande sätt: <cite>Har*</cite> eller <cite>*logging</cite>.)'
+    - <strong>OBS:</strong> Postidentifikatorer (biblionummer, authid) kommer aldrig
+      att autotrunkeras.
+  - - choices:
+        '0': Försök inte
+        '1': Försök att
+      pref: QueryFuzzy
+      type: boolean
+    - för att få träffar som stavas på liknande sätt i en sökning (exempelvis skulle
+      en sökning på <cite>flang</cite> också inkludera träffar på <cite>flange</cite>
+      och <cite>fang</cite>; berör bara just nu Zebra. Alla Elasticsearch-termer kan
+      göras "luddiga" genom att lägga till ett ~/tilde direkt efter termen).
+  - - choices:
+        '0': Försök inte
+        '1': Försök att
+      pref: QueryStemming
+      type: boolean
+    - searching.pref#QueryStemming# för att få träffar på ord som har samma stam i
+      en sökning (exempelvis skulle en sökning på <cite>enabling</cite> också inkludera
+      träffar på <cite>enable</cite> och <cite>enabled</cite>; KRÄVER ZEBRA).
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      pref: QueryWeightFields
+      type: boolean
+    - rangordning av sökresultat efter relevans (KRÄVER ZEBRA).
+  - - choices:
+        dont_escape: Escapea inte
+        escape: Escapea
+        unescape_escaped: Unescape escaped
+      default: escape
+      pref: QueryRegexEscapeOptions
+    - reguljära uttryck inom sökfrågor. Om "Escape" välj kommer "/" i sökfrågor automatiskt
+      att ignoreras, och reguljära uttryck tolkas som vanliga strängar. Om "Unescape
+      escaped" är valt tillåts reguljära uttryck "\/som detta\/" medan "/detta/",
+      "eller/detta" kommer att excapeas och tolkas som vanliga söksträngar. (Endast
+      Elasticsearch.)
+  - - choices:
+        '0': Tvinga inte
+        '1': Tvinga
+      default: 0
+      pref: TraceCompleteSubfields
+    - ämneslänkar i OPAC och personalklienten ska endast söka efter kompletta underliggande
+      fält som överensstämmer.
+  - - choices:
+        '0': Inkludera inte
+        '1': Inkludera
+      default: 0
+      pref: TraceSubjectSubdivisions
+    - uppdelningar för sökningar som genererats av klickningar på ämneslänkar.
+  - - choices:
+        '0': Använder inte
+        '1': Använd
+      default: 0
+      pref: UseICUStyleQuotes
+    - ICU-citattecken ({}) för att länka ämnen. Som standard används vanliga citattecken
+      ("").
+  - - choices:
+        '0': Inkludera inte
+        '1': Inkludera
+      default: 0
+      pref: IncludeSeeFromInSearches
+    - '<em>see from</em> (non-preferred form) headings in bibliographic searches.
+      Please note: you will need to reindex your bibliographic database when changing
+      this system preference.'
+  - - choices:
+        '0': Don't include
+        '1': Include
+      default: 0
+      pref: IncludeSeeAlsoFromInSearches
+    - '<em>see also from</em> headings in bibliographic searches. Please note: you
+      will need to reindex your bibliographic database when changing this preference.'
+  - - choices:
+        '0': Spara inte
+        '1': Spara
+      default: 0
+      pref: EnableSearchHistory
+    - sökhistorik för låntagare i personalklienten.
+  - - choices:
+        '0': Inaktivera
+        '1': Aktivera
+      default: 0
+      pref: BrowseResultSelection
+    - möjligheten att bläddra bland sökresultat från katalogpostens detaljsida i personalgränssnittet.
+  - - choices:
+        '0': Avaktivera
+        '1': Aktivera
+      default: 0
+      pref: ElasticsearchCrossFields
+    - alternativet cross_fields för Elasticsearch-sökningar, stöds i Elasticsearch
+      6.X och senare.
+    - Se dokumentation på https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html#type-cross-fields
+  - - choices:
+        '0': Inaktivera
+        '1': Aktivera
+      default: 0
+      pref: SavedSearchFilters
+    - alternativet för behörig personal att skapa/ändra egna sökfilter.
+  - - 'Lista med sökfält (åtskilda med | eller ,) som inte ska autotrunkeras via Elasticsearch
+      även om <a href=''/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=QueryAutoTruncate''>QueryAutoTruncate</a>
+      är inställd på ''Ja'':'
+    - class: long
+      pref: ESPreventAutoTruncate
+  - - choices:
+        '0': Don't
+        '1': Do
+      default: 0
+      pref: SearchCancelledAndInvalidISBNandISSN
+    - search for cancelled or invalid forms of ISBN/ISSN when performing ISBN/ISSN
+      search (when using Elasticsearch).
+  - - class: code
+      pref: z3950Status
+      syntax: text/x-yaml
+      type: textarea
+    - Define custom rules to show specific items as not available in Z3950. Rules
+      are defined with item database fields as keys and an array of values.<br/>
+    - Examples:<br/><br/>
+    - '<pre>ccode: [REF,ARC]</pre><br/>  - would mark all REF and ARC collections
+      (Reference and Archives) items as unavailable in Z3950 results.<br/><br/>'
+    - You can define multiple keys and values, items meeting ANY of the criteria will
+      be marked unavailable:<br/><br/>
+    - '<pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  - would mark all
+      reference items AND items at the REPAIR branch as unavailable.'
+  Menade du/stavningskontroll:
+  - - Svensk tjänst för stavningskontroll.<br/>
+    - LIBRIS stavningskontroll API-nyckel
+    - pref: LibrisKey
+    - Kan erhållas på http://api.libris.kb.se/bibspell.
+  - - LIBRIS bas-URL
+    - class: url
+      pref: LibrisURL
+    - Ändra bara den här om du vet att den behöver ändras.
+  Resultatvisning:
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: no
+      pref: numSearchResultsDropdown
+      type: boolean
+    - resultat per sida i personalklienten.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: no
+      pref: OPACnumSearchResultsDropdown
+      type: boolean
+    - resultat per sida i OPAC.
+  - - Sortera som standard sökresultat i personalgränssnittet per
+    - choices:
+        acqdate: lades till datum
+        author: författare
+        call_number: hyllsignatur
+        popularity: totalt antal lån
+        pubdate: publiceringsdatum
+        relevance: relevans
+        title: titel
+      default: relevance
+      pref: defaultSortField
+    - ','
+    - choices:
+        asc: stigande.
+        az: från A till Z.
+        dsc: fallande.
+        za: från Z till A.
+      pref: defaultSortOrder
+  - - Sortera som standard sökresultat från författarlänkar i formatet MARC21 i personalgränssnittet
+      enligt
+    - choices:
+        acqdate: date added
+        call_number: hyllsignatur
+        default: standardordning angiven i defaultSortField eller OPACdefaultSortField
+        pubdate: publiceringsdatum
+        title: titel
+      default: default
+      pref: AuthorLinkSortBy
+    - ','
+    - choices:
+        asc: stigande
+        az: från A till Z
+        dsc: fallande
+        za: från Z till A
+      pref: AuthorLinkSortOrder
+    - .
+  - - När du begränsar sökresultat med ett bibliotek eller en biblioteksgrupp, begränsa
+      med exemplarets
+    - choices:
+        both: hembibliotek och nuvarande bibliotek.
+        holdingbranch: nuvarande bibliotek.
+        homebranch: hembibliotek.
+      pref: SearchLimitLibrary
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      default: no
+      pref: displayFacetCount
+      type: boolean
+    - searching.pref#displayFacetCount# fasetttantal. Hur relevanta dessa värden är
+      beror till hög grad på värdet av inställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=maxRecordsForFacets">maxRecordsForFacets</a>.
+      Gäller OPAC och personalgränssnitt.
+  - - Visa som standard
+    - class: integer
+      pref: numSearchResults
+    - resultat per sida i personalgränssnittet.
+  - - För poster med flera exemplar, kontrollera endast tillgänglighetsstatus för
+      den första
+    - class: integer
+      pref: MaxSearchResultsItemsPerRecordStatusCheck
+    - exemplar.
+    - <br/>Tillgänglighetsstatus kan visas inkorrekt i sökresultaten om en post har
+      fler exemplar än det satta gränsvärdet. Statusar kommer att visas korrekt i
+      postens detaljvy.
+    - <br/>Lämna blankt för obegränsat.
+  - - Sortera som standard sökresultat i OPAC per
+    - choices:
+        acqdate: lades till datum
+        author: författare
+        call_number: hyllsignatur
+        popularity: totalt antal lån
+        pubdate: publiceringsdatum
+        relevance: relevans
+        title: titel
+      default: relevance
+      pref: OPACdefaultSortField
+    - ','
+    - choices:
+        asc: stigande.
+        az: från A till Z.
+        dsc: fallande.
+        za: från Z till A.
+      pref: OPACdefaultSortOrder
+    - ''
+  - - Visa upp till
+    - class: integer
+      pref: maxItemsInSearchResults
+    - exemplar per bibliografisk post i sökresultaten
+  - - Bygg fasetter baserat på
+    - class: integer
+      default: 20
+      pref: maxRecordsForFacets
+    - poster från sökresultaten.
+  - - Visa upp till
+    - class: integer
+      default: 20
+      pref: FacetMaxCount
+    - fasetter för varje kategori.
+  - - Facettsortering
+    - choices:
+        Alphabetical: alfabetiskt
+        Usage: efter användning
+      default: Alphabetical
+      pref: FacetOrder
+      type: choice
+    - för varje kategori.
+  - - Visa som standard
+    - class: integer
+      pref: OPACnumSearchResults
+    - resultat per sida i OPAC.
+  - - Visa fasetter för
+    - choices:
+        both: både hembibliotek och nuvarande plats
+        holding: nuvarande plats
+        home: hembibliotek
+      pref: DisplayLibraryFacets
+      type: choice
+    - (endast Zebra).
+  - - Korta av fasetters längd till
+    - class: integer
+      pref: FacetLabelTruncationLength
+    - tecken i OPAC-/personalgränssnittet (KRÄVER ZEBRA).
+  - - Använd följande text som separator för författarfasetter i UNIMARC
+    - class: short
+      pref: UNIMARCAuthorsFacetsSeparator
+  - - Vid sökning på ISBN-index,
+    - choices:
+        '0': visa inte
+        '1': visa
+      pref: SearchWithISBNVariations
+    - på alla varianter av ISBN.
+  - - Vid sökning på ISSN-index,
+    - choices:
+        '0': sök inte
+        '1': sök
+      pref: SearchWithISSNVariations
+    - på alla varianter av ISSN.
+  - - choices:
+        '0': Spara inte
+        '1': Spara
+      pref: RetainCatalogSearchTerms
+    - söktermer mellan sökningar när personalklientens "sök katalogen" används.
+  - - choices:
+        '0': Spara inte
+        '1': Spara
+      pref: RetainPatronsSearchTerms
+    - söktermer mellan sökningar när personalklientens 'Låna ut' och 'Sök låntagare'
+      används.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: BiblioItemtypeInfo
+    - postens exemplartypinformation på detaljsidorna och resultatsidorna i OPAC och
+      personalgränssnittet. Denna information visas också om systeminställningen <a
+      href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=item-level_itypes">item-level_itypes</a>
+      är inställd på postnivå.
+  - - choices:
+        '0': Gör inte
+        '1': Gör
+      pref: PassItemMarcToXSLT
+      type: boolean
+    - MARC-fälten (MARC21 952, UNIMARC 995) tillgängliga i XSLT-mallarna för resultatsidorna
+      i OPAC och personalgränssnittet.
+    - <br/>Standard är "Gör inte", exemplar visas på andra sätt.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: ShowHeadingUse
+    - om en auktoritetspost innehåller en etablerad rubrik som följer deskriptiva
+      katalogiseringsregler, och därför kan användas som huvuduppslag, eller ämne
+      eller serietitel.
+  - - choices:
+        '0': Omdirigera inte
+        '1': Omdirigera
+      pref: RedirectToSoleResult
+    - till resultatet om en katalogsökning via OPAC eller personalgränssnittet returnerar
+      endast en post.
+  Sökformulär:
+  - - choices:
+        '0': Lägg inte till
+        '1': Lägg till
+      default: 0
+      pref: LoadSearchHistoryToTheFirstLoggedUser
+    - sökhistorik från en oinloggad låntagare till nästa låntagare som loggar in.
+  - - Visa flikar i OPAC och avancerad sökning för personal för att begränsa sökning
+      efter
+    - class: long
+      pref: AdvancedSearchTypes
+    - fält (separerar värden med |). Flikar visas i den ordning de listas.<br/>
+    - '<em>För närvarande stödda värden</em>: Exemplartyper (<strong>itemtypes</strong>),
+      Avdelningar (<strong>ccode</strong>) och Placering (<strong>loc</strong>).'
+  - - begränsa språken som listas i den avancerade rullgardinsmenyn till
+    - class: long
+      pref: AdvancedSearchLanguages
+    - ISO 639-2-språkkoder (separera värden med | eller ,).
+    - Om du t.ex. vill begränsa resultatet till franska och italienska, anger du <em>ita|fre</em>.
+  - - Som standard,
+    - choices:
+        '0': visa inte
+        '1': visa
+      pref: expandedSearchOption
+      type: boolean
+    - '"Fler alternativ" i OPAC:ens och personalgränssnittets avancerade söksidor.'
+  - - Som standard,
+    - choices:
+        '0': använd inte
+        '1': använd
+      pref: OPACNumbersPreferPhrase
+      type: boolean
+    - operatorn "phr" i sökningar med hyllsignatur och vanliga numeriska OPAC-sökningar.
+  - - Som standard,
+    - choices:
+        '0': använd inte
+        '1': använd
+      pref: IntranetNumbersPreferPhrase
+      type: boolean
+    - operatorn "phr" i sökningar med hyllsignatur och vanliga numeriska sökningar
+      i personalklienten.

@@ -1,0 +1,302 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Categories %]
+[% USE AdditionalContents %]
+[% USE AuthClient %]
+[% PROCESS 'i18n.inc' %]
+[% PROCESS 'html_helpers.inc' %]
+[% SET OpacLoginInstructions = AdditionalContents.get( location => "OpacLoginInstructions", lang => lang, library => branchcode || default_branch ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ [% t("Log in to your account") | html %]
+ [% ELSE %]
+ [% t("Catalog login disabled") | html %]
+ [% END %] &rsaquo;
+ [% PROCESS 'library_name_title' %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-login-page' bodyclass='scrollto' %]
+[% INCLUDE 'masthead.inc' %]
+
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ <span>Logga in på ditt konto</span>
+ [% ELSE %]
+ <span>Kataloginloggning inaktiverad</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row justify-content-center">
+ <div class="col-md-10 col-lg-6">
+ <div id="opac-auth" class="maincontent">
+ <!--CONTENT-->
+ [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ [% IF ( nopermission ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-warning">
+ <h1>Åtkomst nekad</h1>
+ <p>Enligt systemet saknar du behörighet för att komma åt den här sidan. </p>
+ [% IF SCO_login %]
+ <p><a href="/cgi-bin/koha/sco/sco-main.pl?logout.x=1">Logga ut och försök igen med en annan användare.</a></p>
+ [% ELSIF SCI_login %]
+ <p><a href="/cgi-bin/koha/sci/sci-main.pl?logout.x=1">Logga ut och försök igen med en annan användare.</a></p>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF ( loginprompt ) %]
+ <!-- login prompt time-->
+ <h1>Logga in på ditt konto</h1>
+
+ [% IF ( timed_out ) %]
+ <!-- This is what is displayed if login has timed out -->
+ <div class="alert alert-info">
+ <p>Sessionen har upphört att gälla. Logga in igen.</p>
+ </div>
+ [% END %]
+
+ [% IF ( different_ip ) %]
+ <!-- This is what is displayed if user doesn't have permission -->
+ <div class="alert alert-info">
+ <p>Du loggar in från en annan IP-adress. Logga in igen.</p>
+ </div>
+ [% END %]
+
+
+ [% IF invalid_username_or_password || too_many_login_attempts %]
+ <!-- This is what is displayed if user doesn't have permission or account is locked. (Do not expose more information than needed.) -->
+ <div class="alert alert-info">
+ <p>Du skrev ett felaktigt användarnamn eller lösenord. Försök igen! Notera att lösenord gör skillnad på små och stora bokstäver[% IF Koha.Preference('FailedLoginAttempts') %] och att ditt konto kommer att låsas efter ett visst antal misslyckade inloggningsförsök[% END %]. Kontakta personalen om problemen kvarstår.</p>
+ </div>
+ [% END %]
+
+ [% IF auth_error %]
+ <div class="alert alert-info">
+ <p>Problem vid autentisering mot extern identitetsleverantör</p>
+ <p>[% auth_error | html %]</p>
+ </div>
+ [% END %]
+
+ [% IF ( shibbolethAuthentication ) %]
+ [% IF ( invalidShibLogin ) %]
+ <!-- This is what is displayed if shibboleth login has failed to match a koha user -->
+ <div class="alert alert-info">
+ <p class="shib_invalid">Din Shibboleth-identitet överensstämmer inte med en giltig biblioteksidentitet.</p>
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ [% IF ( invalidCasLogin ) %]
+ <!-- This is what is displayed if cas login has failed -->
+ <p class="cas_invalid">CAS-inloggningen misslyckades. Om du har ett lokalt inloggningsnamn kan du använda det nedan.</p>
+ [% ELSE %]
+ <p>Om du har ett CAS-konto, kan du använda det nedan.</p>
+ [% END %]
+ [% ELSE %]
+ <p>Om du har ett lokalt konto, kan du använda det nedan.</p>
+ [% END %]
+ [% END %]
+ </div>
+ [% ELSE %]
+ <h2 class="shib_title">Shibboleth-inloggning</h2>
+ <p><a class="shib_url" href="[% shibbolethLoginUrl | $raw %]">Logga in med ett Shibboleth-konto.</a></p>
+ [% END # /IF invalidShibLogin %]
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ <h2 class="cas_title">CAS-inloggning</h2>
+ <p>Om du inte har ett Shibboleth-konto, men du har ett CAS-konto, kan du använda CAS.</p>
+ [% ELSE %]
+ <h2 class="shib_local_title">Lokal inloggning</h2>
+ <p class="shib_local_text">Om du inte har ett Shibboleth-konto, men har ett lokalt inloggningsnamn, kan du logga in nedan.</p>
+ [% END %]
+ [% END %]
+ [% END # /IF shibbolethAuthentication %]
+
+ [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
+ [% IF ( casAuthentication ) %]
+ [% IF ( shibbolethAuthentication ) %]
+ [% IF ( casServerUrl ) %]
+ <p><a class="cas_url" href="[% casServerUrl | $raw %]">Logga in.</a><p>
+ [% END %]
+
+ [% IF ( casServersLoop ) %]
+ <p>Vänligen välj mot vilken du vill autenticera: </p>
+ <ul>
+ [% FOREACH casServer IN casServersLoop %]
+ <li><a class="cas_url" href="[% casServer.value | $raw %]">[% casServer.name | html %]</a></li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% ELSE %]
+ [% IF ( invalidCasLogin ) %]
+ <div class="alert alert-info">
+ <!-- This is what is displayed if cas login has failed -->
+ <p class="cas_invalid">CAS-inloggningen misslyckades.</p>
+ </div>
+ [% END %]
+
+ <h2 class="cas_title">CAS-inloggning</h2>
+
+ [% IF ( casServerUrl ) %]
+ <p><a class="cas_url" href="[% casServerUrl | $raw %]">Logga in med ett CAS-konto.</a><p>
+ [% END %]
+
+ [% IF ( casServersLoop ) %]
+ <p>Om du har ett CAS-konto, vänligen välj mot vilken du vill autentisera:</p>
+ <ul>
+ [% FOREACH casServer IN casServersLoop %]
+ <li><a class="cas_url" href="[% casServer.value | $raw %]">[% casServer.name | html %]</a></li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% END # /IF shibbolethAuthentication %]
+
+ [% IF ( shibbolethAuthentication ) %]
+ <p>Inget</p>
+ [% ELSE %]
+ <h2>Lokal inloggning</h2>
+ <p>Om du inte har ett CAS-konto, men har ett lokalt konto, kan du ändå logga in: </p>
+ [% END %]
+
+ [% END # / IF casAuthentication %]
+
+ [% SET identity_providers = AuthClient.get_providers('opac') %]
+ [% IF ( ! identity_providers.empty ) %]
+ [% FOREACH provider IN identity_providers %]
+ <p class="clearfix">
+ <a href="[% provider.url | url %]" class="btn btn-light col-md-12" id="provider_[% provider.code | html %]">
+ [% IF provider.icon_url %]
+ <img src="[% provider.icon_url | url %]" style="max-height: 20px; max-width: 20px;"/>
+ [% ELSE %]
+ <i class="fa fa-user" aria-hidden="true"></i>
+ [% END %] Logga in med [% provider.description | html %] </a>
+ </p>
+ [% END %]
+ <hr/>
+ <p>Om du inte har ett externt konto, men har ett lokalt konto, kan du ändå logga in: </p>
+ [% END # /IF  identity_providers %]
+
+ [% IF ( Koha.Preference('GoogleOpenIDConnect') == 1 ) %]
+ [% IF ( invalidGoogleOpenIDConnectLogin ) %]
+ <h2>Google-inloggning</h2>
+ <p>Google-inloggningen misslyckades. <span class="error">[% invalidGoogleOpenIDConnectLogin | html %]</span></p>
+ <p>Vänligen notera att Google-inloggningen endast fungerar om du använder den e-postadress som du anmält till biblioteket.</p>
+ <p>Om du vill kan du prova att <a href="/cgi-bin/koha/svc/auth/googleopenidconnect?reauthenticate=select_account">logga in med ett annat konto</a>
+ [% END %]
+ <a href="/cgi-bin/koha/svc/auth/googleopenidconnect" class="btn btn-light" id="openid_connect"><i class="fa-brands fa-google" aria-hidden="true"></i> Logga in med Google</a>
+ <p>Om du inte har ett Google-konto, men har ett lokalt konto, kan du ändå logga in: </p>
+ [% END # /IF GoogleOpenIDConnect %]
+ [% END # /UNLESS OPACShibOnly %]
+
+ [% IF !(invalid_username_or_password || too_many_login_attempts) and is_anonymous_patron %]
+ <div class="alert alert-info">
+ <p><strong>Fel: </strong>Du kan inte logga in som anonym låntagare!</p>
+ </div>
+ [% END %]
+
+ [% IF !(invalid_username_or_password || too_many_login_attempts) and password_has_expired %]
+ [% IF date_enrolled == password_expiration_date %]
+ <div class="alert alert-info">
+ <p><strong>Fel: </strong>Detta är första gången du loggar in. Du behöver återställa ditt lösenord.</p>
+ </div>
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p><strong>Fel: </strong>Ditt lösenord har gått ut!</p>
+ </div>
+ [% END %]
+ [% IF Koha.Preference('EnableExpiredPasswordReset') %]
+ <a href="/cgi-bin/koha/opac-reset-password.pl">Återställ lösenord</a>.
+ [% ELSIF Koha.Preference('OpacPasswordChange') && Categories.can_any_reset_password %]
+ <div id="resetpassword">
+ <a href="/cgi-bin/koha/opac-password-recovery.pl">Återställ lösenord</a>
+ </div>
+ [% ELSE %]
+ <p>Kontakta biblioteket för att ändra ditt lösenord</p>
+ [% END %]
+ [% ELSIF !Koha.Preference('OPACShibOnly') or SCO_login or SCI_login %]
+ [% IF SCO_login %]
+ <form action="/cgi-bin/koha/sco/sco-main.pl" name="auth" id="auth" method="post" autocomplete="off">
+ [% ELSIF SCI_login %]
+ <form action="/cgi-bin/koha/sci/sci-main.pl" name="auth" id="auth" method="post" autocomplete="off">
+ [% ELSE %]
+ <form action="[% script_name | html %]" name="auth" id="auth" method="post" autocomplete="off">
+ [% END %]
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-login" />
+ <input type="hidden" name="koha_login_context" value="opac" />
+
+ <div class="local-login">
+ <fieldset class="brief">
+ [% FOREACH INPUT IN INPUTS %]
+ [% NEXT IF INPUT.name == 'logout.x' %]
+ [% NEXT IF INPUT.name == "op" %]
+ [% NEXT IF INPUT.name == "csrf_token" %]
+ [% NEXT IF INPUT.name == "koha_login_context" %]
+ <input type="hidden" name="[% INPUT.name | html %]" value="[% INPUT.value | html %]" />
+ [% END %]
+ <div class="form-group">
+ [% PROCESS login_label for="userid" %]
+ <input class="form-control" type="text"  size="25" id="userid"  name="login_userid" autocomplete="off" />
+ </div>
+ <div class="form-group">
+ <label for="password">Lösenord:</label>
+ <input class="form-control" type="password"  size="25" id="password"  name="login_password" autocomplete="off" />
+ </div>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Logga in" />
+ </fieldset>
+ </fieldset>
+ </div>
+
+ <div id="nologininstructions">
+ [% IF OpacLoginInstructions %]
+ [% PROCESS koha_news_block news => OpacLoginInstructions %]
+ [% ELSE %]
+ <h2>Saknar du lösenord?</h2>
+ <p>Om du saknar lösenord så säg till i lånedisken nästa gång du besöker biblioteket. Vi ger dig ett lösenord.</p>
+ <h2>Har du inget lånekort?</h2>
+ <p>Om du inte har något lånekort, skaffar du ett sådant på ditt lokala bibliotek.</p>
+ [% END # / IF OpacLoginInstructions %]
+ </div>
+ [% IF Koha.Preference('OpacPasswordChange') && Categories.can_any_reset_password %]
+ <div id="forgotpassword">
+ <p><a href="/cgi-bin/koha/opac-password-recovery.pl">Har du glömt lösenordet?</a></p>
+ </div>
+ [% END %]
+ [% IF Koha.Preference('PatronSelfRegistration') && Categories.all( categorycode => Koha.Preference('PatronSelfRegistrationDefaultCategory') ).count %]
+ <div id="registrationinstructions">
+ <p><a href="/cgi-bin/koha/opac-memberentry.pl">Registrera ett nytt konto</a></p>
+ </div>
+ [% END %]
+ </form>
+ [% END # / IF password_has_expired / ELSIF !OPACShibOnly or SCO_login or SCI_login %]
+ [% END # / IF loginprompt %]
+
+ [% ELSE %]
+ <h1>Biblioteket har inte installerat funktionen "inloggning till katalogen".</h1>
+ <ul>
+ <li>För att rapportera detta fel kan du e-posta Koha-administratören. <a href="mailto:[% Koha.Preference( 'KohaAdminEmailAddress' ) | uri %]">E-post</a></li>
+ <li>Använd den övre menyraden för att gå till andra delar av Koha.</li>
+ </ul>
+ [% END # / IF opacuserlogin %]
+
+ </div> <!-- /.opac-auth -->
+ </div> <!-- /.col-md-10 col-lg-6 -->
+ </div> <!-- /.row -->
+ </div> <!-- /.container-fluid -->
+</div> <!-- /.main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+[% BLOCK jsinclude %]
+<script>
+    // Hide circular 'Log in to Your Account' link in opac-auth.pl
+    $(document).ready(function() {
+        if ( $("#auth" ) ) { $("#members ul li a").hide(); }
+    });
+</script>
+[% END %]

@@ -1,0 +1,677 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("UNIMARC field 110 builder") | html %] &rsaquo;
+ [% t("Cataloguing") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_unimarc_field_110" class="cat value_builder">
+ <h1>UNIMARC-kentän 110 muodostaja</h1>
+ <form method="get" name="f_pop" action="">
+ <div class="page-section">
+ <table>
+ <tr>
+ <td><label for="f1">Type of continuing resource designator</label></td>
+ <td>
+ <select name="f1" id="f1">
+ [% IF ( f1pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f1a ) %]
+ <option value="a" selected="selected">aikakauslehti</option>
+ [% ELSE %]
+ <option value="a">aikakauslehti</option>
+ [% END %]
+ [% IF ( f1b ) %]
+ <option value="b" selected="selected">monographic series</option>
+ [% ELSE %]
+ <option value="b">monographic series</option>
+ [% END %]
+ [% IF ( f1c ) %]
+ <option value="c" selected="selected">sanomalehti</option>
+ [% ELSE %]
+ <option value="c">sanomalehti</option>
+ [% END %]
+ [% IF ( f1d ) %]
+ <option value="d" selected="selected">hakemisto</option>
+ [% ELSE %]
+ <option value="d">hakemisto</option>
+ [% END %]
+ [% IF ( f1e ) %]
+ <option value="e" selected="selected">updating loose-leaf</option>
+ [% ELSE %]
+ <option value="e">updating loose-leaf</option>
+ [% END %]
+ [% IF ( f1f ) %]
+ <option value="f" selected="selected">updating database</option>
+ [% ELSE %]
+ <option value="f">updating database</option>
+ [% END %]
+ [% IF ( f1g ) %]
+ <option value="g" selected="selected">updating website</option>
+ [% ELSE %]
+ <option value="g">updating website</option>
+ [% END %]
+ [% IF ( f1h ) %]
+ <option value="h" selected="selected">blog</option>
+ [% ELSE %]
+ <option value="h">blog</option>
+ [% END %]
+ [% IF ( f1i ) %]
+ <option value="i" selected="selected">repository</option>
+ [% ELSE %]
+ <option value="i">repository</option>
+ [% END %]
+ [% IF ( f1j ) %]
+ <option value="j" selected="selected">journal</option>
+ [% ELSE %]
+ <option value="j">journal</option>
+ [% END %]
+ [% IF ( f1m ) %]
+ <option value="m" selected="selected">magazine</option>
+ [% ELSE %]
+ <option value="m">magazine</option>
+ [% END %]
+ [% IF ( f1n ) %]
+ <option value="n" selected="selected">newsletter</option>
+ [% ELSE %]
+ <option value="n">newsletter</option>
+ [% END %]
+
+ [% IF ( f1z ) %]
+ <option value="z" selected="selected">muu</option>
+ [% ELSE %]
+ <option value="z">muu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f2">Kausijulkaisun ilmestymistiheys</label></td>
+ <td>
+ <select name="f2" id="f2">
+ [% IF ( f2pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f2a ) %]
+ <option value="a" selected="selected">päivittäin</option>
+ [% ELSE %]
+ <option value="a">päivittäin</option>
+ [% END %]
+ [% IF ( f2b ) %]
+ <option value="b" selected="selected">semiweekly (twice a week)</option>
+ [% ELSE %]
+ <option value="b">semiweekly (twice a week)</option>
+ [% END %]
+ [% IF ( f2c ) %]
+ <option value="c" selected="selected">kerran viikossa</option>
+ [% ELSE %]
+ <option value="c">kerran viikossa</option>
+ [% END %]
+
+ [% IF ( f2d ) %]
+ <option value="d" selected="selected">joka toinen viikko</option>
+ [% ELSE %]
+ <option value="d">joka toinen viikko</option>
+ [% END %]
+
+ [% IF ( f2e ) %]
+ <option value="e" selected="selected">semimonthly (twice a month)</option>
+ [% ELSE %]
+ <option value="e">semimonthly (twice a month)</option>
+ [% END %]
+
+ [% IF ( f2f ) %]
+ <option value="f" selected="selected">monthly</option>
+ [% ELSE %]
+ <option value="f">monthly</option>
+ [% END %]
+
+ [% IF ( f2g ) %]
+ <option value="g" selected="selected">joka toinen kuukausi</option>
+ [% ELSE %]
+ <option value="g">joka toinen kuukausi</option>
+ [% END %]
+
+ [% IF ( f2h ) %]
+ <option value="h" selected="selected">quarterly</option>
+ [% ELSE %]
+ <option value="h">quarterly</option>
+ [% END %]
+
+ [% IF ( f2i ) %]
+ <option value="i" selected="selected">three times a year</option>
+ [% ELSE %]
+ <option value="i">three times a year</option>
+ [% END %]
+
+ [% IF ( f2j ) %]
+ <option value="j" selected="selected">semiannual (twice a year)</option>
+ [% ELSE %]
+ <option value="j">semiannual (twice a year)</option>
+ [% END %]
+ [% IF ( f2k ) %]
+ <option value="k" selected="selected">kerran vuodessa</option>
+ [% ELSE %]
+ <option value="k">kerran vuodessa</option>
+ [% END %]
+ [% IF ( f2l ) %]
+ <option value="l" selected="selected">kerran kahdessa vuodessa</option>
+ [% ELSE %]
+ <option value="l">kerran kahdessa vuodessa</option>
+ [% END %]
+ [% IF ( f2m ) %]
+ <option value="m" selected="selected">triennial (every three years)</option>
+ [% ELSE %]
+ <option value="m">triennial (every three years)</option>
+ [% END %]
+ [% IF ( f2n ) %]
+ <option value="n" selected="selected">three times a week</option>
+ [% ELSE %]
+ <option value="n">three times a week</option>
+ [% END %]
+ [% IF ( f2o ) %]
+ <option value="o" selected="selected">three times a month</option>
+ [% ELSE %]
+ <option value="o">three times a month</option>
+ [% END %]
+ [% IF ( f2p ) %]
+ <option value="p" selected="selected">continuously updated</option>
+ [% ELSE %]
+ <option value="p">continuously updated</option>
+ [% END %]
+ [% IF ( f2u ) %]
+ <option value="u" selected="selected">tuntematon</option>
+ [% ELSE %]
+ <option value="u">tuntematon</option>
+ [% END %]
+ [% IF ( f2y ) %]
+ <option value="y" selected="selected">ei ilmestymistiheyttä (eli epäsäännöllinen)</option>
+ [% ELSE %]
+ <option value="y">ei ilmestymistiheyttä (eli epäsäännöllinen)</option>
+ [% END %]
+ [% IF ( f2i ) %]
+ <option value="i" selected="selected">muu</option>
+ [% ELSE %]
+ <option value="i">muu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f3">Säännöllisyys</label></td>
+ <td>
+ <select name="f3" id="f3">
+ [% IF ( f3pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f3u ) %]
+ <option value="u" selected="selected">not known</option>
+ [% ELSE %]
+ <option value="u">not known</option>
+ [% END %]
+
+ [% IF ( f3a ) %]
+ <option value="a" selected="selected">regular</option>
+ [% ELSE %]
+ <option value="a">regular</option>
+ [% END %]
+
+ [% IF ( f3b ) %]
+ <option value="b" selected="selected">normalised irregular</option>
+ [% ELSE %]
+ <option value="b">normalised irregular</option>
+ [% END %]
+
+ [% IF ( f3y ) %]
+ <option value="y" selected="selected">Epäsäännöllinen</option>
+ [% ELSE %]
+ <option value="y">Epäsäännöllinen</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f4">Aineistotyyppikoodi</label></td>
+ <td>
+ <select name="f4" id="f4">
+ [% IF ( f4pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f4space ) %]
+ <option value=" " selected="selected">non required value</option>
+ [% ELSE %]
+ <option value=" ">non required value</option>
+ [% END %]
+
+ [% IF ( f4a ) %]
+ <option value="a" selected="selected">bibliografia</option>
+ [% ELSE %]
+ <option value="a">bibliografia</option>
+
+ [% END %]
+
+ [% IF ( f4b ) %]
+ <option value="b" selected="selected">kokoelma</option>
+ [% ELSE %]
+ <option value="b">kokoelma</option>
+ [% END %]
+
+ [% IF ( f4c ) %]
+ <option value="c" selected="selected">hakemisto</option>
+ [% ELSE %]
+ <option value="c">hakemisto</option>
+ [% END %]
+
+ [% IF ( f4d ) %]
+ <option value="d" selected="selected">tiivistelmä tai lyhennelmä</option>
+ [% ELSE %]
+ <option value="d">tiivistelmä tai lyhennelmä</option>
+ [% END %]
+
+ [% IF ( f4e ) %]
+ <option value="e" selected="selected">sanakirja, sanasto</option>
+ [% ELSE %]
+ <option value="e">sanakirja, sanasto</option>
+ [% END %]
+
+ [% IF ( f4f ) %]
+ <option value="f" selected="selected">tietosanakirja</option>
+ [% ELSE %]
+ <option value="f">tietosanakirja</option>
+ [% END %]
+
+ [% IF ( f4g ) %]
+ <option value="g" selected="selected">hakemisto</option>
+ [% ELSE %]
+ <option value="g">hakemisto</option>
+ [% END %]
+
+ [% IF ( f4h ) %]
+ <option value="h" selected="selected">vuosikirja</option>
+ [% ELSE %]
+ <option value="h">vuosikirja</option>
+ [% END %]
+
+ [% IF ( f4i ) %]
+ <option value="i" selected="selected">tilastot</option>
+ [% ELSE %]
+ <option value="i">tilastot</option>
+ [% END %]
+
+ [% IF ( f4j ) %]
+ <option value="j" selected="selected">programmed texts</option>
+ [% ELSE %]
+ <option value="j">programmed texts</option>
+ [% END %]
+
+ [% IF ( f4k ) %]
+ <option value="k" selected="selected">arvostelut</option>
+ [% ELSE %]
+ <option value="k">arvostelut</option>
+ [% END %]
+
+ [% IF ( f4l ) %]
+ <option value="l" selected="selected">laws and legislation</option>
+ [% ELSE %]
+ <option value="l">laws and legislation</option>
+ [% END %]
+
+ [% IF ( f4m ) %]
+ <option value="m" selected="selected">tuomioistuinpäätökset</option>
+ [% ELSE %]
+ <option value="m">tuomioistuinpäätökset</option>
+ [% END %]
+
+ [% IF ( f4n ) %]
+ <option value="n" selected="selected">artiklat, pykälät</option>
+ [% ELSE %]
+ <option value="n">artiklat, pykälät</option>
+ [% END %]
+
+ [% IF ( f4o ) %]
+ <option value="o" selected="selected">oikeustapauskeskustelut</option>
+ [% ELSE %]
+ <option value="o">oikeustapauskeskustelut</option>
+ [% END %]
+
+ [% IF ( f4p ) %]
+ <option value="p" selected="selected">elämäkerta</option>
+ [% ELSE %]
+ <option value="p">elämäkerta</option>
+ [% END %]
+
+ [% IF ( f4r ) %]
+ <option value="r" selected="selected">kirjallisuuskatsaukset, arvostelut</option>
+ [% ELSE %]
+ <option value="r">kirjallisuuskatsaukset, arvostelut</option>
+ [% END %]
+
+ [% IF ( f4t ) %]
+ <option value="t" selected="selected">sarjakuvat</option>
+ [% ELSE %]
+ <option value="t">sarjakuvat</option>
+ [% END %]
+
+ [% IF ( f4z ) %]
+ <option value="z" selected="selected">other kinds of contents</option>
+ [% ELSE %]
+ <option value="z">other kinds of contents</option>
+ [% END %]
+
+ </select>
+ </td>
+
+ </tr>
+ <tr>
+ <td><label for="f5">Sisältötyyppikoodi</label></td>
+ <td><input type="text" name="f5" id="f5" maxlength="3" size="4" value="[% f5 | html %]" /></td>
+
+ </tr>
+ <tr>
+ <td><label for="f6">Konferenssijulkaisun indikaattori</label></td>
+ <td>
+ <select name="f6" id="f6">
+ [% IF ( f6pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f60 ) %]
+ <option value="0" selected="selected">not a conference publication</option>
+ [% ELSE %]
+ <option value="0">not a conference publication</option>
+ [% END %]
+ [% IF ( f61 ) %]
+ <option value="1" selected="selected">kokousjulkaisu</option>
+ [% ELSE %]
+ <option value="1">kokousjulkaisu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f7">Title-page availability code</label></td>
+ <td>
+ <select name="f7" id="f7">
+ [% IF ( f7pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f7a ) %]
+ <option value="a" selected="selected">in last issue of volume - loose</option>
+ [% ELSE %]
+ <option value="a">in last issue of volume - loose</option>
+ [% END %]
+
+ [% IF ( f7b ) %]
+ <option value="b" selected="selected">in last issue of volume - attached</option>
+ [% ELSE %]
+ <option value="b">in last issue of volume - attached</option>
+ [% END %]
+
+
+ [% IF ( f7c ) %]
+ <option value="c" selected="selected">in first issue of next volume - loose</option>
+ [% ELSE %]
+ <option value="c">in first issue of next volume - loose</option>
+ [% END %]
+
+
+ [% IF ( f7d ) %]
+ <option value="d" selected="selected">in first issue of next volume - attached</option>
+ [% ELSE %]
+ <option value="d">in first issue of next volume - attached</option>
+ [% END %]
+
+
+ [% IF ( f7e ) %]
+ <option value="e" selected="selected">published separately - free upon request</option>
+ [% ELSE %]
+ <option value="e">published separately - free upon request</option>
+ [% END %]
+
+ [% IF ( f7f ) %]
+ <option value="f" selected="selected">published separately-free - sent automatically</option>
+ [% ELSE %]
+ <option value="f">published separately-free - sent automatically</option>
+ [% END %]
+
+
+ [% IF ( f7g ) %]
+ <option value="g" selected="selected">published separately - purchase-request</option>
+ [% ELSE %]
+ <option value="g">published separately - purchase-request</option>
+ [% END %]
+
+ [% IF ( f7u ) %]
+ <option value="u" selected="selected">unknown at time of record creation</option>
+ [% ELSE %]
+ <option value="u">unknown at time of record creation</option>
+ [% END %]
+
+ [% IF ( f7x ) %]
+ <option value="x" selected="selected">ei sovellettavissa</option>
+ [% ELSE %]
+ <option value="x">ei sovellettavissa</option>
+ [% END %]
+
+ [% IF ( f7y ) %]
+ <option value="y" selected="selected">no title-page issued</option>
+ [% ELSE %]
+ <option value="y">no title-page issued</option>
+ [% END %]
+
+ [% IF ( f7z ) %]
+ <option value="z" selected="selected">muu</option>
+ [% ELSE %]
+ <option value="z">muu</option>
+ [% END %]
+
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f8">Hakemiston saatavuuskoodi</label></td>
+ <td>
+ <select name="f8" id="f8">
+ [% IF ( f8pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f8a ) %]
+ <option value="a" selected="selected">each issue contains an index to its own contents - loose</option>
+ [% ELSE %]
+ <option value="a">each issue contains an index to its own contents - loose</option>
+ [% END %]
+
+
+ [% IF ( f8b ) %]
+ <option value="b" selected="selected">in last issue of volume-loose - separately paged</option>
+ [% ELSE %]
+ <option value="b">in last issue of volume-loose - separately paged</option>
+ [% END %]
+
+
+ [% IF ( f8c ) %]
+ <option value="c" selected="selected">in last issue of volume - unpaged</option>
+ [% ELSE %]
+ <option value="c">in last issue of volume - unpaged</option>
+ [% END %]
+
+
+ [% IF ( f8d ) %]
+ <option value="d" selected="selected">in last issue of volume - attached</option>
+ [% ELSE %]
+ <option value="d">in last issue of volume - attached</option>
+ [% END %]
+
+
+ [% IF ( f8e ) %]
+ <option value="e" selected="selected">in first issue of next volume loose - separately paged</option>
+ [% ELSE %]
+ <option value="e">in first issue of next volume loose - separately paged</option>
+ [% END %]
+
+
+ [% IF ( f8f ) %]
+ <option value="f" selected="selected">in first issue of next volume loose - unpaged</option>
+ [% ELSE %]
+ <option value="f">in first issue of next volume loose - unpaged</option>
+ [% END %]
+
+
+ [% IF ( f8g ) %]
+ <option value="g" selected="selected">in first issue of next volume - attached</option>
+ [% ELSE %]
+ <option value="g">in first issue of next volume - attached</option>
+ [% END %]
+
+
+ [% IF ( f8h ) %]
+ <option value="h" selected="selected">published separately free - sent automatically</option>
+ [% ELSE %]
+ <option value="h">published separately free - sent automatically</option>
+ [% END %]
+
+
+ [% IF ( f8i ) %]
+ <option value="i" selected="selected">published separately - free upon request</option>
+ [% ELSE %]
+ <option value="i">published separately - free upon request</option>
+ [% END %]
+
+
+ [% IF ( f8j ) %]
+ <option value="j" selected="selected"> published separately - bound from publisher free - sent automatically</option>
+ [% ELSE %]
+ <option value="j"> published separately - bound from publisher free - sent automatically</option>
+ [% END %]
+
+
+ [% IF ( f8k ) %]
+ <option value="k" selected="selected"> published separately-bound from publisher - free upon request</option>
+ [% ELSE %]
+ <option value="k"> published separately-bound from publisher - free upon request</option>
+ [% END %]
+
+
+ [% IF ( f8l ) %]
+ <option value="l" selected="selected"> published separately-bound from publisher - purchase uponrequest</option>
+ [% ELSE %]
+ <option value="l"> published separately-bound from publisher - purchase uponrequest</option>
+ [% END %]
+
+
+ [% IF ( f8m ) %]
+ <option value="m" selected="selected"> this continuing resource is a supplement or subseries indexed in its parent continuing resource</option>
+ [% ELSE %]
+ <option value="m"> this continuing resource is a supplement or subseries indexed in its parent continuing resource</option>
+ [% END %]
+
+
+ [% IF ( f8u ) %]
+ <option value="u" selected="selected">unknown at time of record creation</option>
+ [% ELSE %]
+ <option value="u">unknown at time of record creation</option>
+ [% END %]
+
+
+ [% IF ( f8x ) %]
+ <option value="x" selected="selected">ei sovellettavissa</option>
+ [% ELSE %]
+ <option value="x">ei sovellettavissa</option>
+ [% END %]
+
+
+ [% IF ( f8y ) %]
+ <option value="y" selected="selected">index is not available</option>
+ [% ELSE %]
+ <option value="y">index is not available</option>
+ [% END %]
+
+
+ [% IF ( f8z ) %]
+ <option value="z" selected="selected">muu</option>
+ [% ELSE %]
+ <option value="z">muu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f9">Kumuloituvan hakemiston saatavuuskoodi</label></td>
+ <td>
+ <select name="f9" id="f9">
+ [% IF ( f9pipe ) %]
+ <option value="|" selected="selected">|- Täyttömerkki</option>
+ [% ELSE %]
+ <option value="|">|- Täyttömerkki</option>
+ [% END %]
+
+ [% IF ( f90 ) %]
+ <option value="0" selected="selected">no cumulative index or table of contents</option>
+ [% ELSE %]
+ <option value="0">no cumulative index or table of contents</option>
+ [% END %]
+ [% IF ( f91 ) %]
+ <option value="1" selected="selected">cumulative index or table of contents available</option>
+ [% ELSE %]
+ <option value="1">cumulative index or table of contents available</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ </table>
+ </div> <!-- /.page-section -->
+
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input class="btn btn-primary" onclick="report();" type="button" value="Tallenna" />
+ <button class="btn btn-default close_window">Peruuta</button>
+ </fieldset>
+ </div>
+ </nav>
+ </form>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        function report() {
+            document.f_pop.f5.value=document.f_pop.f5.value+'   ';
+            document.f_pop.f5.value=document.f_pop.f5.value.substring(0,3);
+            var doc   = opener.document;
+            var field = doc.getElementById("[% index | html %]");
+            field.value =  document.f_pop.f1.value +document.f_pop.f2.value+document.f_pop.f3.value+document.f_pop.f4.value+document.f_pop.f5.value+document.f_pop.f6.value+document.f_pop.f7.value+document.f_pop.f8.value+document.f_pop.f9.value;
+            self.close();
+            return false;
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

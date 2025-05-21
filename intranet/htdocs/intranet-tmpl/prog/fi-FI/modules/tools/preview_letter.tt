@@ -1,0 +1,86 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Preview notice template") | html %] &rsaquo;
+ [% t("Notices") | html %] &rsaquo;
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ </head>
+ <body id="preview_letter" class="catalog">
+ <div class="main container-fluid">
+ [% INCLUDE 'messages.inc' %]
+ <h1>Esikatsele viestipohjaa</h1>
+ [% FOR m IN messages %]
+ [%# FIXME The message block does not appear at the top of the modal! %]
+ <div class="alert alert-[% m.type | html %]">
+ [% SWITCH m.code %]
+ [% CASE 'no_data_for_preview' %]<span>Määritä tiedot esikatselua varten.</span>
+ [% CASE 'preview_not_available' %]<span>Esikatselu ei ole mahdollista ilmoituksille '[% m.letter_code | html %]'.</span>
+ [% CASE 'not_checked_in_yet' %]<span>Ethän unohda palauttaa.</span>
+ [% CASE 'not_checked_out_yet' %]<span>Ethän unohda lainata.</span>
+ [% CASE 'no_checkout' %]<span>Tämä nide ei ole lainassa.</span>
+ [% CASE 'no_item_or_no_patron' %]<span>Nidettä tai asiakasta ei ole olemassa.</span>
+ [% CASE 'no_hold' %]<span>Tämä asiakas ei ole tehnyt yhtään varausta tälle nimeketietueelle.</span>
+ [% CASE %]<span>[% m.code | html %]</span>
+ [% END %]
+ </div>
+ [% END %]
+
+ [% IF rendered_tt_message %]
+ [% IF messages_are_similar %]
+ <div class="alert alert-info">Muodostuneet ilmoitukset ovat täysin samanlaisia!</div>
+ [% ELSE %]
+ <div class="alert alert-warning">Muodostuneet ilmoitukset ovat erilaisia!</div>
+ [% END %]
+ [% END %]
+
+ [% IF rendered_message %]
+ <div class="row">
+ <div class="col-6">
+ <h3>Alkuperäinen versio</h3>
+ <span style="font-family:monospace">
+ [% FILTER html_line_break %]
+ [% original_content | html %]
+ [% END %]
+ </span>
+ </div>
+ <div class="col-6">
+ <h3>Alkuperäinen viesti, renderöity:</h3>
+ <span style="font-family:monospace">
+ [% FILTER html_line_break %]
+ [% rendered_message.content | html %]
+ [% END %]
+ </span>
+ </div>
+ </div>
+ [% END %]
+
+
+ [% IF rendered_tt_message %]
+ <hr />
+ <div class="row">
+ <div class="col-6">
+ <h3>Konvertoitu versio</h3>
+ <span style="font-family:monospace">
+ [% FILTER html_line_break %]
+ [% tt_content | html %]
+ [% END %]
+ </span>
+ </div>
+ <div class="col-6">
+ <h3>Konvertoitu viesti, tehty:</h3>
+ <span style="font-family:monospace">
+ [% FILTER html_line_break %]
+ [% rendered_tt_message.content | html %]
+ [% END %]
+ </span>
+ </div>
+ </div>
+ [% END %]
+ </div> <!-- /.main -->
+
+ </body>
+</html>

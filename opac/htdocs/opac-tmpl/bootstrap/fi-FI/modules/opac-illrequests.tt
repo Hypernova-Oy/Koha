@@ -1,0 +1,368 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE AdditionalContents %]
+[% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
+[% SET ILLModuleCopyrightClearance = AdditionalContents.get( location => "ILLModuleCopyrightClearance", lang => lang, library => logged_in_user.branchcode || default_branch ) %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Kaukolainapyynnöt &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Kohan verkkokirjasto[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% BLOCK cssinclude %][% END %]
+</head>
+[% INCLUDE 'bodytag.inc' bodyid='opac-illrequests' bodyclass='scrollto' %]
+[% BLOCK messages %]
+ [% IF message == "1" %]
+ <div class="alert alert-success" role="alert">Pyyntö päivitetty</div>
+ [% ELSIF message == "2" %]
+ <div class="alert alert-success" role="alert">Pyyntö tehty</div>
+ [% END %]
+[% END %]
+[% INCLUDE 'masthead.inc' %]
+<div class="main">
+ [% WRAPPER breadcrumbs %]
+ [% IF ( logged_in_user ) %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
+ [% END %]
+ [% END %]
+
+ [% IF op != 'list' %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/opac-illrequests.pl">Kaukolainapyynnöt</a>
+ [% END %]
+ [% IF op == 'cud-create' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Uusi kaukolainapyyntö</span>
+ [% END %]
+ [% ELSIF op == 'view' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Katso kaukolainapyyntö</span>
+ [% END %]
+ [% ELSIF op == 'typedisclaimer' %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kaukolainapyynnön vastuusvapauslauseke</span>
+ [% END %]
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <a href="#" aria-current="page">Kaukolainapyynnöt</a>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+
+ <div class="container-fluid">
+ <div class="row">
+ [% IF ( OpacNav||loggedinusername ) && !print %]
+ <div class="col-lg-2">
+ <div id="navigation">
+ [% INCLUDE 'navigation.inc' IsPatronPage=1 %]
+ </div>
+ </div>
+ [% END %]
+
+ [% IF ( OpacNav||loggedinusername ) %]
+ <div class="col-lg-10 order-first order-md-first order-lg-2">
+ [% ELSE %]
+ <div class="col order-first order-md-first order-lg-2">
+ [% END %]
+
+ [% IF !backends_available %]
+ <div class="alert alert-warning">Kaukolainamoduulin asetuksissa on virhe. Ole hyvä ja ota yhteyttä kirjastoon.</div>
+ [% ELSE %]
+ <div id="illrequests" class="maincontent">
+ [% IF op == 'cud-create' %]
+ <h1>Uusi kaukolainapyyntö</h1>
+ [% IF stage == 'copyrightclearance' %]
+ [% INCLUDE messages %]
+ <div>
+ <p>
+ [% IF ( ILLModuleCopyrightClearance ) %]
+ <div id="ILLModuleCopyrightClearance">
+ [% PROCESS koha_news_block news => ILLModuleCopyrightClearance %]
+ </div>
+ [% END %]
+ </p>
+ [% USE link_url = url('/cgi-bin/koha/opac-illrequests.pl', whole.value.other) %]
+ <a href="[% link_url _ '&amp;stage=copyrightclearance' | $raw %]"
+                                    class="btn btn-sm btn-primary"><i class="fa fa-fw fa-check" aria-hidden="true"></i> Kyllä</a>
+ <a href="/cgi-bin/koha/opac-illrequests.pl"
+                                    class="btn btn-sm btn-danger"><i class="fa fa-fw fa-times" aria-hidden="true"></i> Ei</a>
+ </div>
+ [% ELSE %]
+ [% INCLUDE messages %]
+ [% IF backends %]
+ <form method="get" id="illrequestcreate-form" novalidate="novalidate">
+ <legend class="sr-only">Kaukolainayhteydet</legend>
+ <fieldset class="rows">
+ <label for="backend">Kaukolainayhteys:</label>
+ <select name="backend">
+ [% FOREACH backend IN backends %]
+ <option value="[% backend | html %]">[% backend | html %]</option>
+ [% END %]
+ </select>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="add_form" />
+ <input class="btn btn-sm btn-primary" type="submit" value="Seuraava" />
+ </fieldset>
+ </form>
+ [% ELSE %]
+ [% PROCESS $whole.opac_template %]
+ [% END %]
+ [% END # /IF stage == 'copyrightclearance' %]
+ [% ELSIF op == 'list' %]
+ <h1>Kaukolainapyynnöt</h1>
+ [% INCLUDE messages %]
+
+ [% IF can_patron_place_ill_in_opac %]
+ <div id="illrequests-create-button" class="dropdown btn-group">
+ [% IF backends.size > 1 %]
+ <button class="btn btn-primary dropdown-toggle" type="button" id="ill-backend-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+ <i class="fa fa-plus" aria-hidden="true"></i> Luo uusi kaukolainapyyntö <span class="caret"></span>
+ </button>
+ <div id="backend-dropdown-options" class="dropdown-menu nojs" aria-labelledby="ill-backend-dropdown">
+ [% FOREACH backend IN backends %]
+ <a class="dropdown-item" href="/cgi-bin/koha/opac-illrequests.pl?op=add_form&amp;backend=[% backend | uri %]">[% backend | html %]</a>
+ [% END %]
+ </div>
+ [% ELSE %]
+ <a id="ill-new" class="btn btn-primary" href="/cgi-bin/koha/opac-illrequests.pl?op=add_form&amp;backend=[% backends.0 | html %]">
+ <i class="fa fa-plus" aria-hidden="true"></i> Luo uusi kaukolainapyyntö </a>
+ [% END %]
+ </div>
+ [% END %]
+
+ <table id="illrequestlist" class="table table-bordered table-striped">
+ <caption class="sr-only">Pyynnöt</caption>
+ <thead>
+ <tr>
+ <th>Pyynnön ID</th>
+ <th>Tekijä</th>
+ <th>Nimeke</th>
+ <th>Pyydetty kohteesta</th>
+ <th>Pyynnön tyyppi</th>
+ <th>Tila</th>
+ <th>Pyyntö tehty</th>
+ <th>Viimeksi päivitetty</th>
+ <th></th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH request IN requests %]
+ [% status = request.status | html %]
+ [% type = request.get_type %]
+ <tr>
+ <td>[% request.id | html %]</td>
+ <td>
+ [% IF request.metadata.Author %][% request.metadata.Author | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ </td>
+ <td>
+ [% IF request.metadata.Title %][% request.metadata.Title | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ </td>
+ <td>[% request.backend | html %]</td>
+ <td>
+ [% IF type %][% type | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ </td>
+ <td>[% request.status_alias ? request.statusalias.lib_opac : request.capabilities.$status.name | html %]</td>
+ <td data-order="[% request.placed | html %]">[% request.placed | $KohaDates %]</td>
+ <td data-order="[% request.updated | html %]">[% request.updated | $KohaDates %]</td>
+ <td>
+ <a href="/cgi-bin/koha/opac-illrequests.pl?op=view&amp;illrequest_id=[% request.id | uri %]" class="btn btn-primary btn-sm">Näytä</a>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ [% ELSIF op == 'view' %]
+ <h1>Katso kaukolainapyyntö</h1>
+ [% INCLUDE messages %]
+ [% status = request.status %]
+ <form method="post" id="illrequestupdate-form" novalidate="novalidate">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <legend id="library_legend">Tiedot kirjastolta</legend>
+ <ol>
+ [% type = request.get_type %]
+ <li>
+ <label for="request_id">Pyynnön ID:</label>
+ [% request.id | html %]
+ </li>
+ <li>
+ <label for="backend">Pyydetty kohteesta:</label>
+ [% request.backend | html %]
+ </li>
+ [% IF request.biblio_id %]
+ <li>
+ <label for="biblio">Pyydetty nide:</label>
+ <a href="/cgi-bin/koha/opac-detail.pl?biblionumber=[% request.biblio_id | uri %]">Katso pyydettyä nidettä</a>
+ </li>
+ [% END %]
+ <li>
+ <label for="branchcode">Noutopaikka:</label>
+ [% Branches.GetName(request.branchcode) | html %]
+ </li>
+ <li>
+ <label for="status">Tila:</label>
+ [% request.status_alias ? request.statusalias.lib_opac : request.capabilities.$status.name | html %]
+ </li>
+ <li>
+ <label for="medium">Pyynnön tyyppi:</label>
+ [% IF type %][% type | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ </li>
+ <li>
+ <label for="placed">Pyyntö tehty:</label>
+ [% request.placed | $KohaDates %]
+ </li>
+ <li>
+ <label for="updated">Viimeisin päivitys:</label>
+ [% request.updated | $KohaDates %]
+ </li>
+ <li>
+ <label for="notesopac">Huomautukset:</label>
+ [% IF !request.completed %]
+ <textarea name="notesopac" rows="5" cols="50">[% request.notesopac | html %]</textarea>
+ [% ELSE %]
+ [% request.notesopac | html %]
+ [% END %]
+ </li>
+ </ol>
+ </fieldset>
+ <div id="ill-supplier-metadata" class="rows">
+ <legend id="backend_legend">Tiedot kaukolainayhteydestä [% request.backend | html %]</legend>
+ [% FOREACH meta IN request.metadata %]
+ <div class="requestattr-[% meta.key | replace(' ', '_') | html %]">
+ <span class="label">[% meta.key | html %]:</span>
+ <span class="value">[% IF meta.value %][% meta.value | html %][% ELSE %]N/A[% END %]</span>
+ </div>
+ [% END %]
+ </div>
+ [% IF can_patron_place_ill_in_opac %]
+ <fieldset class="action illrequest-actions">
+ <input type="hidden" name="illrequest_id" value="[% request.illrequest_id | html %]" />
+ <input type="hidden" name="op" value="cud-update" />
+ [% IF !request.completed %]
+ [% IF request.status == "NEW" %]
+ <a class="cancel-illrequest btn btn-danger" href="/cgi-bin/koha/opac-illrequests.pl?op=cancreq&amp;illrequest_id=[% request.illrequest_id | html %]">Pyynnön peruutus</a>
+ [% END %]
+ <input class="update-illrequest btn btn-primary" type="submit" value="Tallenna muutokset" />
+ [% END %]
+ <span class="cancel"><a href="/cgi-bin/koha/opac-illrequests.pl">Peruuta</a></span>
+ </fieldset>
+ [% END %]
+ </form>
+ [% ELSIF op == 'availability' %]
+ <h1>Kaukolainaniteen saatavuus</h1>
+ <div id="results">
+ <form method="POST" action="/cgi-bin/koha/opac-illrequests.pl">
+ [%# This will get its name="op" value="cud-" from the loop over whole.keys below %]
+ [% INCLUDE 'csrf-token.inc' %]
+ <legend><h2>Näytetään saatavuustiedot</h2></legend>
+ [% FOREACH key IN whole.keys %]
+ [% value = whole.$key %]
+ [% IF key != 'custom_key' && key != 'custom_value' && key != 'csrf_token' %]
+ <input type="hidden" name="[% key | html %]" value="[% value | html %]">
+ [% END %]
+ [% END %]
+ [% custom_keys = whole.custom_key.split('\0') %]
+ [% custom_values = whole.custom_value.split('\0') %]
+ [% i = 0 %]
+ [% FOREACH custom_key IN custom_keys %]
+ <input type="hidden" name="custom_key" value="[% custom_key | html %]">
+ <input type="hidden" name="custom_value" value="[% custom_values.$i | html %]">
+ [% i = i + 1 %]
+ [% END %]
+ <input type="hidden" name="checked_availability" value="1">
+ <div id="continue-request-row" class="alert">
+ Jos et löydä etsimääsi, voit <button class="button btn btn-primary" type="submit">jatka pyyntösi luomista</button> tai <a href="/cgi-bin/koha/opac-illrequests.pl">peru pyyntö</a>
+ </div>
+ </form>
+ [% FOR service IN services %]
+ <h3 class="ill_availability_sourcename">[% service.name | html %]</h3>
+ [% INCLUDE 'ill-availability-table.inc' service=service %]
+ [% END %]
+ </div> <!-- /#illrequestupdate-form -->
+ [% ELSIF op == 'typedisclaimer' %]
+ <h1>Kaukolainapyynnön vastuuvapauslauseke</h1>
+ <div id="results" class="page-section">
+ [% INCLUDE messages %]
+ <form method="post" id="typedisclaimer-form">
+ [%# This will get its name="op" value="cud-" from the loop over whole.keys below %]
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ [% disclaimer.text | $raw %]
+ [% SET disc_av_category_code = AuthorisedValues.GetAuthValueDropbox(disclaimer.av_cat) %]
+ [% IF disc_av_category_code.count %]
+ <br>
+ <select name="type_disclaimer_value">
+ [% FOR av_option IN disc_av_category_code %]
+ <option value="[% av_option.lib_opac | html %]">[% av_option.lib_opac | html %]</option>
+ [% END %]
+ </select>
+ [% END %]
+ </fieldset>
+ <fieldset class="action">
+ [% FOREACH key IN whole.keys %]
+ [% value = whole.$key %]
+ [% IF key != 'custom_key' && key != 'custom_value' && key != 'csrf_token' %]
+ <input type="hidden" name="[% key | html %]" value="[% value | html %]">
+ [% END %]
+ [% END %]
+ [% custom_keys = whole.custom_key.split('\0') %]
+ [% custom_values = whole.custom_value.split('\0') %]
+ [% i = 0 %]
+ [% FOREACH custom_key IN custom_keys %]
+ <input type="hidden" name="custom_key" value="[% custom_key | html %]">
+ <input type="hidden" name="custom_value" value="[% custom_values.$i | html %]">
+ [% i = i + 1 %]
+ [% END %]
+ <input type="hidden" name="type_disclaimer_submitted" value="1">
+ <input class="btn btn-primary" type="submit" value="OK" />
+ <a class="action" href="/cgi-bin/koha/opac-illrequests.pl">Peruuta</a>
+ </fieldset>
+ </form>
+ </div>
+ [% END # / IF op == 'cud-create' %]
+ </div> <!-- / #illrequests -->
+ [% END # /IF !backends_available %]
+ </div> <!-- / .col-lg-10/12 -->
+ </div> <!-- / .row -->
+ </div> <!-- / .container-fluid -->
+</div> <!-- / .main -->
+
+[% INCLUDE 'opac-bottom.inc' %]
+
+[% BLOCK jsinclude %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $("#illrequestlist").dataTable($.extend(true, {}, dataTablesDefaults, {
+            "columnDefs": [
+                { "targets": [ -1 ], "sortable": false, "searchable": false }
+            ],
+            "order": [[ 3, "desc" ]],
+        }));
+        $("#backend-dropdown-options").removeClass("nojs");
+        [% IF services_json.length > 0 %]
+            var services = [% services_json | $raw %];
+        [% ELSE %]
+            var services = [];
+        [% END %]
+        [% IF metadata.length > 0 %]
+            var metadata = "[% metadata | $raw %]";
+        [% END %]
+    </script>
+ [% IF op == 'availability' %]
+ [% Asset.js("js/ill-availability.js") | $raw %]
+ <script>
+            $(document).ready(function() {
+                window.doSearch();
+            });
+        </script>
+ [% END %]
+ [% TRY %]
+ [% PROCESS backend_jsinclude %]
+ [% CATCH %]
+ [% END %]
+[% END %]

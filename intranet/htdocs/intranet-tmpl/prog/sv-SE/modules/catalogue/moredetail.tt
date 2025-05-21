@@ -1,0 +1,527 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE Price %]
+[% USE AuthorisedValues %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% title_in_title = INCLUDE 'biblio-title-head.inc' %]
+ [% tx("Item details for {title}", { title = title_in_title }) | html %] &rsaquo;
+ [% t("Catalog") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>.listgroup .rows{margin-left:1em;}</style>
+</head>
+<body id="catalog_moredetail" class="catalog">
+[% USE KohaDates %]
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/catalogue/search.pl">Katalog</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ [% INCLUDE 'biblio-title.inc' link = 1 %]
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Exemplarinformation</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ [% INCLUDE 'cat-toolbar.inc' %]
+
+ <h1>Exemplarinformation för [% INCLUDE 'biblio-title-head.inc' %]</h1>
+
+ <div id="catalogue_detail_biblio">
+ <div class="page-section clearfix">
+ <h2>[% title | html %]</h2>
+ [% IF ( subtitle ) %]
+ <h4>[% FOREACH subtitl IN subtitle %] [% subtitl | html %][% END %]</h4>
+ [% END %]
+ [% IF ( author ) %]
+ <h4>av [% author | html %]</h4>
+ [% END %]
+ <div class="listgroup">
+ <div class="rows">
+ <ol class="bibliodetails">
+ <li class="biblionumber"><span class="label">Biblio-nummer:</span> [% biblionumber | html %]&nbsp;</li>
+ [% UNLESS ( item_level_itypes ) %]
+ <li class="itemtype"><span class="label">Exemplartyp:</span> [% itemtypename | html %]&nbsp;</li>
+ [% END %]
+ [% IF ( rentalcharge ) %]
+ <li class="rentalcharge"><span class="label">Hyreskostnad:</span>[% rentalcharge | $Price %]&nbsp;</li>
+ [% END %]
+ [% IF ( rentalcharge_daily ) %]
+ <li class="rentalcharge_daily"><span class="label">Hyreskostnad per dag:</span>[% rentalcharge_daily | $Price %]&nbsp;</li>
+ [% END %]
+ [% IF ( rentalcharge_hourly ) %]
+ <li class="rentalcharge_hourly"><span class="label">Hyreskostnad per timme:</span>[% rentalcharge_hourly | $Price %]&nbsp;</li>
+ [% END %]
+ <li class="isbn"><span class="label">ISBN:</span> [% isbn | html %]&nbsp;</li>
+ <li class="publication_details"><span class="label">Utgivningsinformation:</span>[% place | html %] [% publishercode | html %] [% publicationyear | html %]&nbsp;</li>
+ [% IF ( volumeddesc ) %]
+ <li class="volume"><span class="label">Volym:</span> [% volumeddesc | html %]</li>
+ [% END %]
+ <li class="physical_details"><span class="label">Fysisk information:</span> [% pages | html %] [% illus | html %] [% size | html %]&nbsp;</li>
+ [% IF ( bnotes ) %]
+ <li class="biblio_note"><span class="label">Kommentarer:</span> [% bnotes | html %]</li>
+ [% END %]
+ <li class="item_count">
+ <span class="label">Antal exemplar:</span>
+ [% count | html %] [% IF ( hiddencount ) %] totalt ([% showncount | html %] visade / [% hiddencount | html %] dolda) <a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% biblionumber | uri %]&amp;showallitems=1">Visa alla exemplar</a>
+ [% END %]
+ </li>
+ </ol> <!-- /.bibliodetails -->
+ </div> <!-- /.rows -->
+ </div> <!-- /.listgroup -->
+ </div> <!-- /.page-section -->
+
+ [% IF ( ONLY_ONE ) %]
+ <div class="alert alert-info">Du ser bara ett exemplar. <a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% biblionumber | uri %]&amp;bi=[% biblioitemnumber | uri %]#item[% itemnumber | uri %]">Visa alla</a></div>
+ [% END %]
+
+ [% IF updated_exclude_from_local_holds_priority.defined %]
+ <div class="alert alert-info">
+ [% IF updated_exclude_from_local_holds_priority %] Exkludera från prioritet för lokala reservationer uppdaterat till 'Ja' [% ELSE %] Exkludera från prioritet för lokala reservationer uppdaterat till 'Nej' [% END %] </div>
+ [% END %]
+
+ [% FOREACH ITEM_DAT IN ITEM_DATA %]
+ <div class="page-section clearfix">
+ [% SET not_for_loan = 0 %]
+ [% IF ITEM_DAT.notforloan || ITEM_DAT.effective_itemtype.notforloan %]
+ [% SET not_for_loan = 1 %]
+ [% SET not_for_loan_description = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => item.notforloan ) %]
+ [% END %]
+ <div class="listgroup">
+ <h3 id="item[% ITEM_DAT.itemnumber | html %]">
+ Streckkod [% ITEM_DAT.barcode | html %] [% IF not_for_loan %][% not_for_loan_description | html %] [% END %] </h3>
+
+ <h4>
+ Exemplarinformation [% UNLESS ( ITEM_DAT.nomod ) %] [% IF ( CAN_user_editcatalogue_edit_items ) %] <a href="/cgi-bin/koha/cataloguing/additem.pl?op=edititem&amp;biblionumber=[% ITEM_DAT.biblionumber | uri %]&amp;itemnumber=[% ITEM_DAT.itemnumber | uri %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera exemplar</a>
+ [% END %]
+ [% END %]
+ </h4>
+
+ <div class="rows">
+ <ol class="bibliodetails">
+ <li class="homebranch"><span class="label">Hembibliotek:</span> [% Branches.GetName( ITEM_DAT.homebranch ) | html %]&nbsp;</li>
+ [% IF ( item_level_itypes ) %]
+ <li class="itype"><span class="label">Exemplartyp:</span> [% ITEM_DAT.itype | html %]&nbsp;</li>
+ [% END %]
+ [% IF ( ITEM_DAT.ccode) %]
+ <li class="ccode"><span class="label">Avdelning:</span> [% ITEM_DAT.ccode | html %]</li>
+ [% END %]
+ <li class="itemcallnumber"><span class="label">Hyllsignatur för exemplar:</span> [% ITEM_DAT.itemcallnumber | html %]</li>
+ [% IF ( ITEM_DAT.displaycopy ) %]
+ <li class="copynumber"><span class="label">Ex.nummer:</span> [% ITEM_DAT.copyvol | html %]&nbsp;</li>
+ [% END %]
+ [% IF ( ITEM_DAT.location ) %]
+ <li class="location">
+ <span class="label">Placering:</span>
+ [% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => ITEM_DAT.location ) | html %]
+ </li>
+ [% END %]
+ [% IF ( ITEM_DAT.replacementprice ) %]
+ <li class="replacementprice"><span class="label">Ersättningspris:</span> [% ITEM_DAT.replacementprice | $Price %]&nbsp;</li>
+ [% END %]
+ [% IF ITEM_DAT.materials %]
+ <li class="materials"><span class="label">Del av materialet som avses:</span> [% ITEM_DAT.materials | html %]</li>
+ [% END %]
+ </ol> <!-- /.bibliodetails -->
+ </div> <!-- /.rows -->
+ </div> <!-- /.listgroup -->
+
+ <div class="listgroup">
+ <h4>
+ <span>Statusar</span>
+ [% IF ( ITEM_DAT.status_advisory ) %]
+ ([% IF ( not_for_loan ) %]
+ [% IF not_for_loan_description %]
+ [% not_for_loan_description | html %]
+ [% ELSE %]
+ <span>Ej för utlån</span>
+ [% END %]
+ [% END %]
+ [% IF ( ITEM_DAT.itemlost ) %]<span>Förlorad</span>[% END %]
+ [% IF ( ITEM_DAT.damaged ) %]<span>Skadad</span>[% END %]
+ [% IF ( ITEM_DAT.withdrawn ) %]<span>Återkallad</span>[% END %]
+ )
+ [% END %]
+ </h4>
+
+ <div class="rows">
+ <ol class="bibliodetails">
+ <li class="holdingbranch"><span class="label">Aktuellt bibliotek:</span> [% Branches.GetName( ITEM_DAT.holdingbranch ) | html %]&nbsp;</li>
+ <li class="checkout_status">
+ <span class="label">Utlåningsstatus:</span>
+ [% SET checkout = ITEM_DAT.object.checkout %]
+ [% IF ( checkout ) %]
+ <span>Utlånad till [% INCLUDE 'patron-title.inc' patron => checkout.patron hide_patron_infos_if_needed=1 %]</span>
+ [% IF ( checkout.lastreneweddate ) %]
+ <span>Senast omlånad den [% checkout.lastreneweddate | $KohaDates %]</span>,
+ [% END %]
+ [% IF ( checkout.date_due ) %]
+ <span>Återlämningsdatum [% checkout.date_due | $KohaDates as_due_date => 1 %]</span>
+ [% ELSE %]
+ <span>Inte utlånad</span>
+ [% END %]
+ [% END %]
+ </li>
+ [% IF ITEM_DAT.object.checkout.renewals_count %]
+ <li class="renewals_count">
+ <span class="label">Aktuella omlån:</span>
+ [% ITEM_DAT.object.checkout.renewals_count | html %]
+ [ <a class="checkout_renewals_view" data-renewals="[% ITEM_DAT.object.checkout.renewals_count | html | html %]" data-issueid="[% ITEM_DAT.object.checkout.id | html %]" href="#">Visa</a> ]
+ </li>
+ [% END %]
+ [% IF itemlostloop %]
+ <li class="lost">
+ <span class="label">Förlorad-status:</span>
+ [% IF ( CAN_user_circulate ) %]
+ [% SET ClaimReturnedLostValue = Koha.Preference('ClaimReturnedLostValue') %]
+ <form action="updateitem.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="biblionumber" value="[% ITEM_DAT.biblionumber | html %]" />
+ <input type="hidden" name="biblioitemnumber" value="[% ITEM_DAT.biblioitemnumber | html %]" />
+ <input type="hidden" name="itemnumber" value="[% ITEM_DAT.itemnumber | html %]" />
+
+ <select name="itemlost">
+ <option value="">Välj</option>
+ [% FOREACH itemlostloo IN itemlostloop %]
+ [% IF itemlostloo.authorised_value == ITEM_DAT.itemlost %]
+ <option value="[% itemlostloo.authorised_value | html %]" selected="selected">[% itemlostloo.lib | html %]</option>
+ [% ELSIF ClaimReturnedLostValue && itemlostloo.authorised_value == ClaimReturnedLostValue #Filter claims returned status from pulldown %]
+ <option disabled="disabled" title="Påstådd återlämning hanteras på låntagarens detaljinfosida" value="[% itemlostloo.authorised_value | html %]">[% itemlostloo.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% itemlostloo.authorised_value | html %]">[% itemlostloo.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <input type="hidden" name="withdrawn" value="[% ITEM_DAT.withdrawn | html %]" />
+ <input type="hidden" name="damaged" value="[% ITEM_DAT.damaged | html %]" />
+
+ <input type="hidden" name="op" value="cud-set_lost" />
+ <input class="btn btn-primary btn-xs" name="submit" type="submit" value="Ställ in status" />
+ [% IF ClaimReturnedLostValue && ITEM_DAT.has_return_claim %]
+ <p class="help-block">Exemplaret har hävdats som returnerat.</p>
+ [% END %]
+ </form>
+ [% ELSE %]
+ [% FOREACH itemlostloo IN itemlostloop %]
+ [% IF ( itemlostloo.selected ) %]
+ [% itemlostloo.lib | html %]
+ [% END %]
+ [% END %]
+ [% END %]
+ </li>
+ [% IF ITEM_DAT.itemlost != "" && ITEM_DAT.itemlost_on %]
+ <li><span class="label">Förlorat den:</span>[% ITEM_DAT.itemlost_on | $KohaDates %]</li>
+ [% END %]
+ [% END %]
+
+ [% IF itemdamagedloop %]
+ <li class="damaged">
+ <span class="label">Skadestatus:</span>
+ [% IF ( CAN_user_circulate ) %]
+ <form action="updateitem.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="biblionumber" value="[% ITEM_DAT.biblionumber | html %]" />
+ <input type="hidden" name="biblioitemnumber" value="[% ITEM_DAT.biblioitemnumber | html %]" />
+ <input type="hidden" name="itemnumber" value="[% ITEM_DAT.itemnumber | html %]" />
+ <select name="damaged" >
+ <option value="">Välj</option>
+ [% FOREACH itemdamagedloo IN itemdamagedloop %]
+ [% IF itemdamagedloo.authorised_value == ITEM_DAT.damaged %]
+ <option value="[% itemdamagedloo.authorised_value | html %]" selected="selected">[% itemdamagedloo.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% itemdamagedloo.authorised_value | html %]">[% itemdamagedloo.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <input type="hidden" name="op" value="cud-set_damaged" />
+ <input class="btn btn-primary btn-xs" name="submit" type="submit" value="Ställ in status" />
+ </form>
+ [% ELSE %]
+ [% FOREACH itemdamagedloo IN itemdamagedloop %]
+ [% IF ( itemdamagedloo.selected ) %]
+ [% itemdamagedloo.lib | html %]
+ [% END %]
+ [% END %]
+ [% END %]
+ </li>
+ [% IF ITEM_DAT.damaged != "" && ITEM_DAT.damaged_on %]
+ <li><span class="label">Skadad:</span>[% ITEM_DAT.damaged_on | $KohaDates %]</li>
+ [% END %]
+ [% END %]
+
+ [% IF itemwithdrawnloop %]
+ <li class="withdrawn">
+ <span class="label">Särskild status:</span>
+ [% IF ( CAN_user_circulate ) %]
+ <form action="updateitem.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="biblionumber" value="[% ITEM_DAT.biblionumber | html %]" />
+ <input type="hidden" name="biblioitemnumber" value="[% ITEM_DAT.biblioitemnumber | html %]" />
+ <input type="hidden" name="itemnumber" value="[% ITEM_DAT.itemnumber | html %]" />
+ <select name="withdrawn" >
+ <option value="">Välj</option>
+ [% FOREACH itemwithdrawn IN itemwithdrawnloop %]
+ [% IF itemwithdrawn.authorised_value == ITEM_DAT.withdrawn %]
+ <option value="[% itemwithdrawn.authorised_value | html %]" selected="selected">[% itemwithdrawn.lib | html %]</option>
+ [% ELSE %]
+ <option value="[% itemwithdrawn.authorised_value | html %]">[% itemwithdrawn.lib | html %]</option>
+ [% END %]
+ [% END %]
+ </select>
+ <input type="hidden" name="op" value="cud-set_withdrawn" />
+ <input class="btn btn-primary btn-xs" name="submit" type="submit" value="Ställ in status" />
+ </form>
+ [% ELSE %]
+ [% FOREACH itemwithdrawn IN itemwithdrawnloop %]
+ [% IF itemwithdrawn.authorised_value == ITEM_DAT.withdrawn %]
+ [% itemwithdrawn.lib | html %]
+ [% END %]
+ [% END %]
+ [% END %]
+ </li>
+ [% IF ITEM_DAT.withdrawn != "" && ITEM_DAT.withdrawn_on %]
+ <li><span class="label">Återkallad den:</span>[% ITEM_DAT.withdrawn_on | $KohaDates %]</li>
+ [% END %]
+ [% END %]
+
+ </ol> <!-- /.bibliodetails -->
+ </div> <!-- /.rows -->
+ </div> <!-- /.listgroup -->
+
+ <div class="listgroup">
+ <h4>Köplats</h4>
+ <div class="rows">
+ <ol class="bibliodetails">
+ <li class="local_holds_priority">
+ <span class="label">Exkludera från prioritet för lokala reservationer:</span>
+ <form action="updateitem.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="biblionumber" value="[% ITEM_DAT.biblionumber | html %]" />
+ <input type="hidden" name="biblioitemnumber" value="[% ITEM_DAT.biblioitemnumber | html %]" />
+ <input type="hidden" name="itemnumber" value="[% ITEM_DAT.itemnumber | html %]" />
+ <select id="exclude_from_local_holds_priority" name="exclude_from_local_holds_priority">
+ [% IF ITEM_DAT.exclude_from_local_holds_priority %]
+ <option value="1" selected>Ja</option>
+ <option value="0">Nej</option>
+ [% ELSE %]
+ <option value="1">Ja</option>
+ <option value="0" selected>Nej</option>
+ [% END %]
+ </select>
+ <input type="hidden" name="op" value="cud-set_exclude_priority" />
+ <input class="btn btn-primary btn-xs" name="submit" type="submit" value="Uppdatering" />
+ </form>
+ </li>
+ <li class="bookable">
+ <span class="label">
+ Bokningsbar: </span>
+ [% IF ( CAN_user_circulate ) %]
+ <form action="updateitem.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="biblionumber" value="[% ITEM_DAT.biblionumber | html %]" />
+ <input type="hidden" name="biblioitemnumber" value="[% ITEM_DAT.biblioitemnumber | html %]" />
+ <input type="hidden" name="itemnumber" value="[% ITEM_DAT.itemnumber | html %]" />
+ <select name="bookable">
+ [% IF ITEM_DAT.bookable == 1 %]
+ <option value="">Follow item type</option>
+ <option value="1" selected="selected">Ja</option>
+ <option value="0">Nej</option>
+ [% ELSIF ITEM_DAT.bookable == 0 %]
+ <option value="">Follow item type</option>
+ <option value="1">Ja</option>
+ <option value="0" selected="selected">Nej</option>
+ [% ELSE %]
+ <option value="" selected="selected">Follow item type</option>
+ <option value="1">Ja</option>
+ <option value="0">Nej</option>
+ [% END %]
+ </select>
+ <input type="hidden" name="op" value="cud-set_bookable" />
+ <input class="btn btn-primary btn-xs" name="submit" type="submit" value="Uppdatering" />
+ </form>
+ [% ELSE %]
+ [% IF ITEM_DAT.bookable == 1 %] Yes [% ELSIF ITEM_DAT.bookable == 0 %] No [% ELSE %] Follow item type [% END %]
+ [% END %]
+ <span class="hint"> Bokningsbar exemplartyp: [% IF ITEM_DAT.effective_itemtype.bookable == 1 %]Ja[% ELSE %]Nej[% END %]</span>
+ </li>
+
+ </ol> <!-- /.bibliodetails -->
+ </div> <!-- /.rows -->
+ </div> <!-- /.listgroup -->
+
+ <div class="listgroup">
+ <h4>Historik</h4>
+ <div class="rows">
+ <ol class="bibliodetails">
+
+ [% IF ITEM_DAT.basketno %]
+ <li class="order_info">
+ <span class="label">Orderdatum:</span>
+ [% IF ( CAN_user_acquisition_order_manage ) %]
+ <a href="/cgi-bin/koha/acqui/basket.pl?basketno=[% ITEM_DAT.basketno | uri %]">[% ITEM_DAT.orderdate | $KohaDates %]</a>
+ [% ELSE %]
+ [% ITEM_DAT.orderdate | $KohaDates %]
+ [% END %]
+ </li>
+ <li>
+ <span class="label">Leverantör:</span>
+ [% ITEM_DAT.vendor | html %]
+ </li>
+ [% END %]
+
+ [% IF ITEM_DAT.dateaccessioned %]
+ <li class="dateaccessioned">
+ <span class="label">Accessionsdatum:</span>
+ [% IF ( CAN_user_acquisition_order_receive && ITEM_DAT.invoiceid ) %]
+ <a href="/cgi-bin/koha/acqui/parcel.pl?invoiceid=[% ITEM_DAT.invoiceid | uri %]">[% ITEM_DAT.dateaccessioned | $KohaDates %]</a>
+ [% ELSE %]
+ [% ITEM_DAT.dateaccessioned | $KohaDates %]
+ [% END %]
+ </li>
+ [% END %]
+
+ [% IF ( ITEM_DAT.invoicenumber ) %]
+ <li class="invoice">
+ <span class="label">Fakturanummer:</span>
+ [% ITEM_DAT.invoicenumber | html %]
+ </li>
+ [% END %]
+
+ <li class="issues">
+ <span class="label">Totalt antal lån:</span>
+ [% IF ( ITEM_DAT.issues ) %] [% ITEM_DAT.issues | html %] [% ELSE %] 0 [% END %] (<a href="/cgi-bin/koha/circ/bookcount.pl?&amp;biblionumber=[% ITEM_DAT.biblionumber | uri %]&amp;itm=[% ITEM_DAT.itemnumber | uri %]">Visa exemplarets utlåningshistorik</a>)
+ </li>
+
+ <li class="datelastseen">
+ <span class="label">Senast sedd:</span>
+ [% IF ( ITEM_DAT.datelastseen ) %]
+ [% ITEM_DAT.datelastseen | $KohaDates with_hours => 1 %]
+ [%END %]
+ </li>
+ <li class="datelastborrowed">
+ <span class="label">Senast lånad:</span>
+ [% IF (ITEM_DAT.datelastborrowed ) %][% ITEM_DAT.datelastborrowed | $KohaDates %][% END %]
+ </li>
+ [% IF Koha.Preference('StoreLastBorrower') && ITEM_DAT.object.last_returned_by %]
+ <li>
+ <span class="label">Senast återlämnad av:</span>
+ <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% ITEM_DAT.object.last_returned_by.borrowernumber | uri %]">[% ITEM_DAT.object.last_returned_by.cardnumber | html %]</a>
+ </li>
+ [% END %]
+ [% FOR i IN ITEM_DAT.old_issues %]
+ [% SET b = i.patron %]
+ <li class="previous_borrowers">
+ [% IF loop.first %]
+ <span class="label">Senaste låntagare:</span>
+ [% ELSE %]
+ <span class="label">Föregående låntagare:</span>
+ [% END %]
+ <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% b.borrowernumber | uri %]">[% b.cardnumber | html %]</a>&nbsp;
+ </li>
+ [% END %]
+ [% IF ( ITEM_DAT.paidfor ) %]
+ <li class="paidfor">
+ <span class="label">Betalad?:</span>
+ [% INCLUDE 'patron-title.inc' patron=ITEM_DAT.paidfor.patron hide_patron_infos_if_needed=1 %] på [% ITEM_DAT.paidfor.created_on | $KohaDates %] </li>
+ [% END %]
+
+ [% IF ( ITEM_DAT.enumchron ) %]
+ <li class="enumchron">
+ <span class="label">Numrering för serie:</span>
+ [% ITEM_DAT.enumchron | html %]&nbsp;
+ </li>
+ [% END %]
+
+ <li class="itemnotes">
+ <span class="label">Offentlig anmärkning:</span>
+ [% IF ( CAN_user_editcatalogue_edit_items ) %]
+ <form class="inline" action="updateitem.pl" method="post"><input type="hidden" name="biblionumber" value="[% ITEM_DAT.biblionumber | html %]" />
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="biblioitemnumber" value="[% ITEM_DAT.biblioitemnumber | html %]" /><input type="hidden" name="itemnumber" value="[% ITEM_DAT.itemnumber | html %]" />
+ <input type="hidden" name="op" value="cud-set_public_note" />
+ <textarea name="itemnotes" rows="2" cols="30">[% ITEM_DAT.itemnotes | html %]</textarea><input class="btn btn-primary btn-xs" name="submit" type="submit" value="Uppdatering" />
+ </form>
+ [% ELSE %]
+ [% ITEM_DAT.itemnotes | html %]
+ [% END %]
+ </li>
+
+ <li class="itemnotes_nonpublic">
+ <span class="label">Intern anmärkning:</span>
+ [% IF ( CAN_user_editcatalogue_edit_items ) %]
+ <form class="inline" action="updateitem.pl" method="post"><input type="hidden" name="biblionumber" value="[% ITEM_DAT.biblionumber | html %]" />
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="biblioitemnumber" value="[% ITEM_DAT.biblioitemnumber | html %]" /><input type="hidden" name="itemnumber" value="[% ITEM_DAT.itemnumber | html %]" />
+ <input type="hidden" name="op" value="cud-set_non_public_note" />
+ <textarea name="itemnotes_nonpublic" rows="2" cols="30">[% ITEM_DAT.itemnotes_nonpublic | html %]</textarea><input class="btn btn-primary btn-xs" name="submit" type="submit" value="Uppdatering" />
+ </form>
+ [% ELSE %]
+ [% ITEM_DAT.itemnotes_nonpublic | html %]
+ [% END %]
+ </li>
+ </ol> <!-- /.bibliodetails -->
+ </div> <!-- /.rows -->
+ </div> <!-- /.listgroup -->
+ </div> <!-- /.page-section -->
+ [% END # /FOREACH ITEM_DAT %]
+ </div> <!-- /#catalogue_detail_biblio -->
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'biblio-view-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% IF ( Koha.Preference('CatalogConcerns') ) %]
+[% INCLUDE 'modals/add_catalog_concern.inc' %]
+[% END %]
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'catalog-strings.inc' %]
+ [% INCLUDE 'modals/checkout_renewals.inc' %]
+ [% INCLUDE 'js-date-format.inc' %]
+ [% Asset.js("lib/dayjs/plugin/isSameOrAfter.js") | $raw %]
+ [% Asset.js("lib/dayjs/plugin/isSameOrBefore.js") | $raw %]
+ <script>dayjs.extend(window.dayjs_plugin_isSameOrAfter)</script>
+ <script>dayjs.extend(window.dayjs_plugin_isSameOrBefore)</script>
+ [% INCLUDE 'js-patron-format.inc' %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'select2.inc' %]
+ [% Asset.js("js/catalog.js") | $raw %]
+ [% Asset.js("js/modals/place_booking.js") | $raw %]
+ [% Asset.js("js/browser.js") | $raw %]
+ [% Asset.js("js/checkout_renewals_modal.js") | $raw %]
+ [% IF ( Koha.Preference('CatalogConcerns') ) %]
+ <script>
+            /* Set a variable needed by add_catalog_concern.js */
+            var logged_in_user_borrowernumber = "[% logged_in_user.borrowernumber | html %]";
+        </script>
+ [% Asset.js("js/modals/add_catalog_concern.js") | $raw %]
+ [% END %]
+ <script>
+        var browser = KOHA.browser('[% searchid | html %]', parseInt('[% biblionumber | html %]', 10));
+        browser.show();
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

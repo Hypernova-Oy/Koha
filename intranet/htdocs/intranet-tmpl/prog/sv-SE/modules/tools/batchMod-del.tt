@@ -1,0 +1,232 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Asset %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF ( show ) %]
+ [% t("Confirm selection") | html %] &rsaquo;
+ [% END %]
+ [% IF op == 'enqueued' %]
+ [% t("Job enqueued") | html %] &rsaquo;
+ [% END %]
+ [% t("Batch item deletion") | html %] &rsaquo;
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<!--[if IE]>
+<style>#selections { display: none; }</style>
+<![endif]-->
+</head>
+<body id="tools_batchMod-del" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Katalogisering</a>
+ [% END %]
+ [% IF ( show || op == "enqueued") %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/batchMod.pl">Satsvis borttagning av exemplar</a>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Satsvis borttagning av exemplar</span>
+ [% END %]
+ [% END %]
+ [% IF ( op == 'enqueued' ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% t("Job enqueued") | html %]
+ [% END %]
+ [% END %]
+ [% IF ( show ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% t("Confirm selection") | html %]
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Satsvis borttagning av exemplar</h1>
+
+ [% FOREACH message IN messages %]
+ [% IF message.type == 'success' %]
+ <div class="alert alert-info">
+ [% ELSIF message.type == 'warning' %]
+ <div class="alert alert-warning">
+ [% ELSIF message.type == 'error' %]
+ <div class="alert alert-warning" style="margin:auto;">
+ [% END %]
+ [% IF message.code == 'cannot_enqueue_job' %]
+ <span>Kan inte lägga till jobbet i jobbkön.</span>
+ [% END %]
+ [% IF message.error %]
+ <span>(Felet var: [% message.error | html %]. Se Kohas loggfil för mer information).</span>
+ [% END %]
+ </div>
+ [% END %]
+
+
+ [% UNLESS ( action ) %]
+
+ [% IF ( notfoundbarcodes.size ) %]
+ <div class="alert alert-warning">
+ [% IF ( itemresults ) %]<p>Varning, följande streckkoder hittades inte:</p>[% ELSE %]<p>Varning: inga streckkoder hittades</p>[% END %]
+ </div>
+ <table style="margin:auto;">
+ <thead>
+ <tr><th>Streckkoder ej hittade</th></tr>
+ </thead>
+ <tbody>
+ [% FOREACH notfoundbarcode IN notfoundbarcodes %]
+ <tr><td>[% notfoundbarcode |html %]</td></td>
+ [% END %]
+ </tbody>
+ </table>
+ [% END %] <!-- /notfoundbarcodes -->
+ [% IF ( notfounditemnumbers.size ) %]
+ <div class="alert alert-warning">
+ [% IF ( itemresults ) %]<p>Varning, följande exemplarnummer hittades inte:</p>[% ELSE %]<p>Varning: inga exemplarnummer hittades</p>[% END %]
+ </div>
+ <table style="margin:auto;">
+ <thead>
+ <tr><th>Exemplarnummer hittades ej</th></tr>
+ </thead>
+ <tbody>
+ [% FOREACH notfounditemnumber IN notfounditemnumbers %]
+ <tr><td>[% notfounditemnumber |html %]</td></td>
+ [% END %]
+ </tbody>
+ </table>
+ [% END %] <!-- /notfounditemnumbers -->
+
+ [% IF cannot_be_deleted.size %]
+ <div class="alert alert-warning">
+ <p>Varning, följande exemplar kan inte tas bort: </p>
+ </div>
+ <table style="margin:auto;">
+ <thead>
+ <tr><th>Kan inte tas bort</th></tr>
+ </thead>
+ <tbody>
+ [% FOREACH barcode IN cannot_be_deleted %]
+ <tr><td>[% barcode | html %]</td></td>
+ [% END %]
+ </tbody>
+ </table>
+ [% END %]
+
+ [% IF ( notfoundbarcodes.size || notfounditemnumbers.size || cannot_be_deleted.size ) && !too_many_items_display && item_loop %]
+ <h4>Följande streckkoder hittades: </h4>
+ [% END %]
+
+
+<form name="f" action="batchMod.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="biblionumber" id="biblionumber" value="[% biblionumber | html %]" />
+ <input type="hidden" name="op" value="[% op | html %]" />
+ <input type="hidden" name="searchid" value="[% searchid | html %]" />
+ <input type="hidden" name="src" id="src" value="[% src | html %]" />
+ [% IF biblionumber %]
+ <input type="hidden" name="biblionumber" id="biblionumber" value="[% biblionumber | html %]" />
+ [% END %]
+
+[% IF items.size %]
+ [% PROCESS items_table_batchmod headers => item_header_loop, items => items, checkboxes_delete => 1, display_columns_selection => 1 %]
+[% END %]
+
+[% IF ( simple_items_display ) %]
+ <ul>
+ [% FOREACH simple_items_displa IN simple_items_display %]
+ <li>
+ <a href="[% simple_items_displa.itemnumber | url %]">[% simple_items_displa.barcode | html %]</a>
+ </li>
+ [% END %]
+ </ul>
+[% END %]
+
+
+[% IF ( show ) %]
+
+[% IF ( too_many_items_display ) %]
+ <p>För många exemplar ([% too_many_items_display | html %]) för att visa enskilda.</p>
+ [% FOREACH itemnumber IN itemnumbers_array %]
+ <input type="hidden" name="itemnumber" value="[% itemnumber | html %]" />
+ [% END %]
+[% END %]
+
+ [% IF ( itemresults ) %]
+ <div id="cataloguing_additem_newitem" class="item_edit_form">
+ <input type="hidden" name="op" value="[% op | html %]" />
+ <p>Detta innebär att [% IF ( too_many_items_display ) %]alla[% ELSE %]valda[% END %] exemplar tas bort.</p>
+ <input type="hidden" name="del" value="1" />
+ <input type="checkbox" name="del_records" id="del_records" /> <label for="del_records">Ta bort poster om inga exemplar kvarstår.</label>
+
+ <fieldset class="action">
+ [% IF too_many_items_display %]
+ <input class="btn btn-primary" name="mainformsubmit" type="submit" value="Ta bort ALLA inskickade exemplar" />
+ [% ELSE %]
+ <input class="btn btn-primary" name="mainformsubmit" type="submit" value="Ta bort valda exemplar" />
+ [% END %]
+
+ <a href="/cgi-bin/koha/tools/batchMod.pl?del=1" class="cancel">Avbryt</a>
+ </fieldset>
+ </div>
+ [% ELSE %]
+ <p><a href="/cgi-bin/koha/tools/batchMod.pl?del=1">Återgå till satsvis borttagning av exemplar</a></p>
+ [% END %]
+ [% END %]
+ </form>
+ [% END %]
+
+
+ [% IF op == 'enqueued' %]
+ <div class="alert alert-info">
+ <h1>Jobbet är köat!</h1>
+ <p>Det kommer att behandlas så snart som möjligt.</p>
+ <p><a href="/cgi-bin/koha/admin/background_jobs.pl?op=view&id=[% job_id | uri %]" title="Visa information om jobbet i jobbkön">Visa information om jobbet i jobbkön</a>
+ | <a href="/cgi-bin/koha/tools/batchMod.pl?del=1" title="Ny satsvis borttagning av exemplar">Ny satsvis borttagning av exemplar</a></p>
+ </div>
+
+ <fieldset class="action">
+ [% IF src == 'CATALOGUING' # from catalogue/detail.pl > Delete items in a batch%]
+ [% IF searchid %]
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblionumber | uri %]&searchid=[% searchid | uri %]">Åter till posten</a>
+ [% ELSE %]
+ <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblionumber | uri %]">Åter till posten</a>
+ [% END %]
+ [% ELSIF src %]
+ <a href="[% src | url %]">Återgå till tidigare skärm</a>
+ [% ELSE %]
+ <a href="/cgi-bin/koha/tools/batchMod.pl?del=1">Återgå till satsvis borttagning av exemplar</a>
+ [% END %]
+ </fieldset>
+ [% END %]
+
+ </div>
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ [% INCLUDE 'columns_settings.inc' %]
+ [% Asset.js("js/pages/batchMod.js") | $raw %]
+ [% Asset.js("js/browser.js") | $raw %]
+ <script>
+        [% IF searchid %]
+            browser = KOHA.browser('[% searchid | html %]');
+            browser.show_back_link();
+        [% END %]
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

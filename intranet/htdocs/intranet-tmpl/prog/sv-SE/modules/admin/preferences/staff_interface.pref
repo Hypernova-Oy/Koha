@@ -1,0 +1,231 @@
+---
+Personalklient:
+  Alternativ:
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: viewMARC
+    - personal att se poster i vanligt MARC-format i personalklienten.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: viewLabeledMARC
+    - personal att se poster i markerat MARC-format i personalklienten.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      pref: viewISBD
+    - personal att se poster i ISBD-format i personalklienten.
+  - - choices:
+        '0': Visa
+        '1': Visa inte
+      pref: HidePatronName
+    - namnen på låntagare som har exemplar till låns eller reserverade på detaljsidorna
+      eller i skärmen "Reservera".
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: showLastPatron
+    - en länk till senaste
+    - class: integer
+      pref: showLastPatronCount
+    - sökta låntagare i personalklienten.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: intranetbookbag
+    - alternativet minneslista i personalklienten.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: UseWYSIWYGinSystemPreferences
+    - WYSIWYG-redigerare vid redigering av vissa HTML-systeminställningar.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: AudioAlerts
+    - ljudvarningar för händelser som definieras i <a href="/cgi-bin/koha/admin/audio_alerts.pl">audio
+      alerts</a>-delen av administrationen.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: IntranetAddMastheadLibraryPulldown
+    - en rullgardinsmeny för att välja bibliotek i personalklientens sidhuvud.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: IntranetCatalogSearchPulldown
+    - en rullgardinsmeny för sökfält för "Sök i katalogen"-rutor.
+  - - Download a maximum of
+    - class: integer
+      pref: ReportsExportLimit
+    - 'records when downloading from the reports module.<br>NOTE: Only a positive
+      value will enforce a limit. A specific limit in the report overrides this setting.'
+  Autentisering:
+  - - choices:
+        '0': Tillåt
+        '1': Tillåt inte
+      pref: staffShibOnly
+    - personal att logga in på andra sätt än via shibboleth.
+  - - choices:
+        disabled: Aktivera inte
+        enabled: Aktivera
+        enforced: Tvinga
+      pref: TwoFactorAuthentication
+    - tvåfaktorsautentisering (2FA) för personal.
+  Utseende:
+  - - 'Visa auktoritetsresultat i personalklienten med XSLT-stilmallen: '
+    - class: file
+      pref: AuthorityXSLTResultsDisplay
+    - <br />Options:<ul><li>Put a path to define a XSLT file</li><li>Put an URL for
+      an external specific stylesheet.</li></ul>{langcode} will be replaced with current
+      interface language and {authtypecode} will be replaced by the authority type
+      code
+  - - 'Display authority details in the staff interface using XSLT stylesheet at: '
+    - class: file
+      pref: AuthorityXSLTDetailsDisplay
+    - <br />Options:<ul><li>Put a path to define a XSLT file</li><li>Put an URL for
+      an external specific stylesheet.</li></ul>{langcode} will be replaced with current
+      interface language and {authtypecode} will be replaced by the authority type
+      code
+  - - 'Visa språkval '
+    - choices:
+        both: i både sidhuvud och sidfot
+        footer: endast i sidfot
+        top: i sidhuvud
+      pref: StaffLangSelectorMode
+  - - Använd
+    - choices: staff-templates
+      pref: template
+    - temat för personalklienten.
+  - - Personalklienten finns på
+    - class: url
+      pref: staffClientBaseURL
+    - Detta bör vara en fullständig URL, som inleds med http:// eller https://. Inkludera
+      inte ett avslutande snedstreck i URL. (Detta måste fyllas i korrekt för att
+      CAS, svc och load_testing ska fungera.)
+  - - Använd CSS-stilmallen
+    - class: url
+      pref: intranetstylesheet
+    - på alla sidor i personalklienten istället för standard-CSS:en (som används om
+      det här fältet lämnas tomt). Ange ett filnamn, en komplett lokal sökväg eller
+      en komplett URL som börjar med <code>http://</code> (om filen finns på en extern
+      server). Observera att om du bara anger ett filnamn, måste filen finnas i css-underkatalogen
+      för varje aktivt tema och språk i Kohas mallkatalog. En komplett lokal sökväg
+      förutsätts starta från HTTP-dokumentets rot.
+  - - 'Använd följande JavaScript för att skriva ut lappar. Se den detaljerade beskrivningen
+      på <a href=''https://wiki.koha-community.org/wiki/Setting_up_slip_printer_to_print_silently''>Koha
+      Wikin</a> och slutligen Firefox add-on <a href=''https://github.com/edabg/jsprintsetup/wiki''>jsPrintSetup
+      documentation</a>:'
+    - class: code
+      pref: IntranetSlipPrinterJS
+      syntax: javascript
+      type: textarea
+  - - 'Inkludera följande CSS på alla sidor i personalklienten:'
+    - class: code
+      pref: IntranetUserCSS
+      syntax: css
+      type: textarea
+  - - Inkludera annan CSS-stilmall
+    - class: file
+      pref: intranetcolorstylesheet
+    - för att åsidosätta specificerade inställningar från standardstilmallen (lämna
+      tomt för att inaktivera.) Ange ett filnamn, en komplett lokal sökväg eller en
+      komplett URL som börjar på <code>http://</code> (om filen finns på en extern
+      server). Observera att om du bara anger ett filnamn, måste filen finnas i css-underkatalogen
+      för varje aktivt tema och språk i Kohas mallkatalog. En komplett lokal sökväg
+      förutsätts starta från HTTP-dokumentets rot.
+  - - Använd include-filer från
+    - class: file
+      pref: intranet_includes
+    - -katalogen i mallkatalogen, istället för <code>includes/</code>. (Lämna tomt
+      för att avaktivera.)
+  - - 'Visa följande HTML till vänster om menyn Mer längst upp i varje sida på personalklienten
+      (ska vara en lista med länkar eller tom):'
+    - class: code
+      pref: IntranetNav
+      syntax: html
+      type: textarea
+  - - 'Inkludera följande JavaScript på alla sidor i personalklienten:'
+    - class: code
+      pref: IntranetUserJS
+      syntax: javascript
+      type: textarea
+  - - Använd bilden
+    - class: url
+      pref: IntranetFavicon
+    - som personalklientens favicon. (Detta bör vara en komplett URL, som börjar med
+      <code>http://</code>.)
+  - - 'Visa listor i personalklienten med XSLT-stilmallen: '
+    - class: file
+      pref: XSLTListsDisplay
+    - staff_interface.pref#XSLTListsDisplay# <br />Alternativ:<ul><li>Ange "<a href="#"
+      class="set_syspref" data-syspref="XSLTListsDisplay" data-value="default">default</a>"
+      för standardstilmallen</li><li>Ange en sökväg för att definiera en XSLT-fil</li><li>Ange
+      en URL för en extern specifik stilmall.</li></ul>Om du har flera stilmallar
+      för olika språk så kommer biten {langcode} att ersättas med nuvarande gränssnitts
+      språk.
+  - - 'Visa resultat i personalklienten med XSLT-stilmallen: '
+    - class: file
+      pref: XSLTResultsDisplay
+    - '<br />Alternativ:<ul><li>Ange "<a href="#" class="set_syspref" data-syspref="XSLTResultsDisplay"
+      data-value="default">default</a>" för standardstilmallen</li><li>Ange en sökväg
+      för att definiera en XSLT-fil</li><li>Ange en URL för en extern specifik stilmall.</li><li>NOTERA:
+      Systeminställningen <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PassItemMarcToXSLT">PassItemMarcToXSLT</a>
+      måste vara aktiverad om din egen stilmall använder data i exemplarfälten</li></ul>Om
+      du har flera stilmallar för olika språk så kommer biten {langcode} att ersättas
+      med nuvarande gränssnitts språk.'
+  - - 'Visa detaljer i personalklienten med XSLT-stilmallen: '
+    - class: file
+      pref: XSLTDetailsDisplay
+    - staff_interface.pref#XSLTDetailsDisplay# <br />Alternativ:<ul><li>Ange "<a href="#"
+      class="set_syspref" data-syspref="XSLTListsDisplay" data-value="default">default</a>"
+      för standardstilmallen</li><li>Ange en sökväg för att definiera en XSLT-fil</li><li>Ange
+      en URL för en extern specifik stilmall.</li></ul>Om du har flera stilmallar
+      för olika språk så kommer biten {langcode} att ersättas med nuvarande gränssnitts
+      språk.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: DisplayIconsXSLT
+    - ikonerna för format, målgrupp och materialtyp i XSLT MARC21-resultaten och i
+      detaljsidorna i personalklienten.
+  - - 'Visa URI:n i 856u-fältet som en bild på: '
+    - choices:
+        Both: Både resultat- och detaljsidor
+        Details: Bara detaljsida
+        OFF: Varken resultat- eller detaljsidor
+        Results: Resultatsida
+      pref: Display856uAsImage
+    - 'Kommentar: Motsvarande alternativ för XSLT måste vara aktiverat.'
+  - - Inkludera stilmallen i
+    - class: url
+      pref: SlipCSS
+    - på låne- och reservationskvitteringar. (Detta ska vara en komplett URL som börjar
+      med <code>http://</code>.)
+  - - 'Visa följande HTML i sin egen kolumn på huvudsidan i personalklienten:'
+    - class: code
+      pref: IntranetCirculationHomeHTML
+      syntax: text/html
+      type: textarea
+  - - 'Visa följande HTML i sin egen div längst ner på sidan bland Rapporter:'
+    - class: code
+      pref: IntranetReportsHomeHTML
+      syntax: text/html
+      type: textarea
+  - - Visa följande HTML på inloggningssidan för personalklienten
+    - class: code
+      pref: StaffLoginInstructions
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': Markera inte
+        '1': Markera
+      pref: StaffHighlightedWords
+      type: boolean
+    - ord i sökningar på resultatsidorna i personaklienten.
+  - - choices:
+        '0': Do not allow
+        '1': Allow
+      pref: ReportsExportFormatODS
+    - Open Document Spreadsheet (ODS) as download format in reports.

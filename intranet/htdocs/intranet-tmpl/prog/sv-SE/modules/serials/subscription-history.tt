@@ -1,0 +1,101 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Subscription history") | html %] &rsaquo;
+ [% title | html %] &rsaquo;
+ [% t("Serials") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="ser_subscription_history" class="ser">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'serials-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/serials-home.pl">Periodika</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscriptionid | uri %]"><em>[% title | html %]</em></a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Prenumerationshistorik</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Subscription history for <em>[% title | html %]</em></h1>
+
+ <div id="subscription_form_history">
+ <form method="post" action="/cgi-bin/koha/serials/subscription-history.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-mod" />
+ <input type="hidden" name="subscriptionid" value="[% subscriptionid | html %]" />
+ <p>Tips: du kan uppdatera periodikahistorik manuellt. Det kan vara praktiskt för en gammal prenumeration eller för att rensa i den befintliga historiken. Var försiktig när du redigerar dessa fält eftersom mottagning av periodika i framtiden kommer att fortsätta att uppdatera dem automatiskt.</p>
+ <fieldset class="rows">
+ <table>
+ <tr>
+ <td>Startdatum för prenumeration</td>
+ <td>
+ <input type="text" size="10" name="histstartdate" value="[% histstartdate | html %]" class="flatpickr" data-date_to="histenddate" /> (startdatum för den första prenumerationen) <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </td>
+ </tr>
+ <tr>
+ <td>Slutdatum för prenumeration</td>
+ <td>
+ <input type="text" size="10" id="histenddate" name="histenddate" value="[% histenddate | html %]" class="flatpickr" />(om tom är prenumerationen fortfarande är aktiv) <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </td>
+ </tr>
+ <tr>
+ <td>Mottagna nummer</td>
+ <td><textarea name="receivedlist" cols="60" rows="5">[% receivedlist | html %]</textarea></td>
+ </tr>
+ <tr>
+ <td>Saknar nummer</td>
+ <td><textarea name="missinglist" cols="60" rows="5">[% missinglist | html %]</textarea></td>
+ </tr>
+ <tr>
+ <td>Kommentar för OPAC</td>
+ <td><textarea name="opacnote" cols="60" rows="5">[% opacnote | html %]</textarea></td>
+ </tr>
+ <tr>
+ <td>Kommentar för personal</td>
+ <td><textarea name="librariannote" cols="60" rows="5">[% librariannote | html %]</textarea></td>
+ </tr>
+ </table>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Spara prenumerationshistorik" />
+ </fieldset>
+ </form>
+ </div>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'serials-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

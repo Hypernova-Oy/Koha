@@ -1,0 +1,203 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Koha %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Sent notices for") | html %] [% INCLUDE 'patron-title.inc' no_html = 1 %]
+ [% t("Patrons") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+<style>
+    .notice { display: none; }
+</style>
+</head>
+
+<body id="pat_notices" class="pat">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Asiakkaat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% borrowernumber | uri %]">
+ [% INCLUDE 'patron-title.inc' %]
+ </a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lähetetyt ilmoitukset</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% INCLUDE 'members-toolbar.inc' %]
+ <h1>Lähetetyt ilmoitukset [% INCLUDE 'patron-title.inc' %]</h1>
+
+ [% IF ( QUEUED_MESSAGES ) %]
+ <div class="page-section">
+ <table id="noticestable">
+ <thead>
+ <tr>
+ <th>Ilmoitus</th>
+ <th>Tyyppi</th>
+ <th>Tila</th>
+ <th>Päivitetty</th>
+ <th>Luontiaika</th>
+ <th>Toimitushuomautus</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH QUEUED_MESSAGE IN QUEUED_MESSAGES %]
+ <tr>
+ <td>
+ <a class="notice-title" data-noticeid="[% QUEUED_MESSAGE.message_id | html %]" href="/cgi-bin/koha/members/notices.pl?borrowernumber=[% borrowernumber | uri %]&amp;noticeid=[% QUEUED_MESSAGE.message_id | uri %]">[% QUEUED_MESSAGE.subject | html %]</a>
+ <iframe class="notice" id="notice[% QUEUED_MESSAGE.message_id | html %]" srcdoc="[% QUEUED_MESSAGE.html_content | html %]"></iframe>
+ </td>
+ <td>
+ [% IF ( QUEUED_MESSAGE.message_transport_type == 'email' ) %]<span>sähköposti</span>
+ [% ELSIF ( QUEUED_MESSAGE.message_transport_type == 'print' ) %]<span>tuloste</span>
+ [% ELSIF ( QUEUED_MESSAGE.message_transport_type == 'feed' ) %]<span>syöte</span>
+ [% ELSIF ( QUEUED_MESSAGE.message_transport_type == 'sms' ) %]<span>tekstiviesti</span>
+ [% ELSE %][% QUEUED_MESSAGE.message_transport_type | html %][% END %]
+ </td>
+ <td>
+ [% IF ( QUEUED_MESSAGE.status == 'sent' ) %]<span>lähetetty</span>
+ [% ELSIF ( QUEUED_MESSAGE.status == 'pending' ) %]<span>odottavat</span>
+ [% ELSIF ( QUEUED_MESSAGE.status == 'failed' ) %]<span>epäonnistui</span>
+ [% ELSIF ( QUEUED_MESSAGE.status == 'deleted' ) %]<span>poistettu</span>
+ [% ELSE %][% QUEUED_MESSAGE.status | html %][% END %]
+ [% IF ( QUEUED_MESSAGE.status != 'pending' ) %]
+ <div class="notice">
+ <form id="resend_notice[% QUEUED_MESSAGE.message_id | html %]" action="/cgi-bin/koha/members/notices.pl?borrowernumber=[% borrowernumber | html %]" method="POST">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-resend_notice" />
+ <input type="hidden" name="borrowernumber" value="[% borrowernumber | html %]" />
+ <input type="hidden" name="message_id" value="[% QUEUED_MESSAGE.message_id | html %]" />
+ </form>
+ </div>
+ [% END %]
+ </td>
+ <td data-order="[% QUEUED_MESSAGE.updated_on | html %]">[% QUEUED_MESSAGE.updated_on | $KohaDates  with_hours => 1 %]</td>
+ <td data-order="[% QUEUED_MESSAGE.time_queued | html %]">[% QUEUED_MESSAGE.time_queued | $KohaDates  with_hours => 1 %]</td>
+ <td>
+ [% IF ( QUEUED_MESSAGE.failure_code ) %]
+ [% IF ( QUEUED_MESSAGE.failure_code == "INVALID_BORNUMBER" ) %]<span class="clearfix">Virheellinen asiakkaan ID [% borrowernumber | html %]</span>
+ [% ELSIF ( QUEUED_MESSAGE.failure_code == 'NO_EMAIL' ) %]<span class="clearfix">Asiakkaalle ei löydy sähköpostiosoitetta</span>
+ [% ELSIF (matches = QUEUED_MESSAGE.failure_code.match('INVALID_EMAIL:(\w+)') ) %]<span class="clearfix">Virheellinen [% matches.0 | html %] sähköpostiosoite löydetty [% borrowernumber | html %]</span>
+ [% ELSIF ( QUEUED_MESSAGE.failure_code == 'NO_FROM' ) %]<span class="clearfix">Puuttuu sähköpostiosoitteesta</span>
+ [% ELSIF ( QUEUED_MESSAGE.failure_code == 'MISSING_SMS' ) %]<span class="clearfix">Tekstiviestinumero puuttuu</span>
+ [% ELSIF ( QUEUED_MESSAGE.failure_code == 'DUPLICATE_MESSAGE' ) %]<span class="clearfix">Viesti on kaksoiskappale</span>
+ [% ELSIF ( QUEUED_MESSAGE.failure_code == 'NO_NOTES' ) %]<span class="clearfix">Ei huomautuksia SMS-ohjaimelta</span>
+ [% ELSIF ( QUEUED_MESSAGE.failure_code == 'SMS_SEND_DRIVER_MISSING' ) %]<span class="clearfix">SMS-ohjainta ei voitu ladata</span>
+ [% ELSIF ( QUEUED_MESSAGE.failure_code == 'SENDMAIL' ) %]<span class="clearfix">Käsittelemätön sähköpostivirhe, tarkista lisätiedot lokeista</span>
+ [% ELSIF ( QUEUED_MESSAGE.failure_code == "UNKNOWN_ERROR" ) %]<span class="clearfix">Tuntematon virhe</span>
+ [% ELSE %]
+ <span class="clearfix">Viestin lähetys epäonnistui seuraavan virheen vuoksi: [% QUEUED_MESSAGE.failure_code | html %].</span>
+ [% END %]
+ [% END %]
+ [% IF ( QUEUED_MESSAGE.status == 'sent' ) %]
+ [% IF ( QUEUED_MESSAGE.from_address ) %]
+ <span class="clearfix"><span class="label">Alkaen:</span> [% QUEUED_MESSAGE.from_address | html %]</span>
+ [% END %]
+ [% IF ( QUEUED_MESSAGE.to_address ) %]
+ <span class="clearfix"><span class="label">Saakka:</span> [% QUEUED_MESSAGE.to_address | html %]</span>
+ [% END %]
+ [% IF ( QUEUED_MESSAGE.cc_address ) %]
+ <span class="clearfix"><span class="label">CC:</span> [% QUEUED_MESSAGE.cc_address | html %]</span>
+ [% END %]
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.page-section -->
+ [% ELSE %]
+ <div class="alert alert-info">Tälle asiakkaalle ei tiettävästi ole lähetetty yhtään viestiä.</div>
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+ <!-- Modal -->
+ <div class="modal" id="noticeModal" tabindex="-1" aria-labelledby="noticeModalLabel" aria-hidden="true">
+ <div class="modal-dialog">
+ <div class="modal-content">
+ <div class="modal-header">
+ <h1 class="modal-title" id="noticeModalLabel">Ilmoitus</h1>
+ <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+ </div>
+ <div class="modal-body">
+ ...
+ </div>
+ <div class="modal-footer">
+ <button type="button" id="resend-notice" class="btn btn-default" style="display:none"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Lähetä uudelleen</button>
+ <button type="button" class="btn btn-default deny cancel" data-bs-dismiss="modal"><i class="fa fa-times"></i> Sulje</button>
+ </div>
+ </div> <!-- /.modal-content -->
+ </div> <!-- /.modal-dialog -->
+ </div> <!-- /.modal -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            $("#noticestable").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "order": [[ 3, "desc" ]],
+                "pagingType": "full"
+            }));
+
+            $("#noticestable").on("click", ".notice-title", function(e){
+                e.preventDefault();
+                var title = $(this).text();
+                var noticeid = $(this).data("noticeid");
+                var body = $("#notice" + noticeid ).attr("srcdoc");
+                if( $("#resend_notice" + noticeid ).length ){
+                    $("#resend-notice").show();
+                }
+                $("#resend-notice").data("noticeid", noticeid );
+                $("#noticeModalLabel").text( title );
+                $("#noticeModal .modal-body").html( body );
+                $("#noticeModal").modal("show");
+            });
+
+            $("#resend-notice").on("click", function(e){
+                e.preventDefault();
+                var noticeid = $(this).data("noticeid");
+                $("#resend_notice" + noticeid ).submit();
+            });
+
+            $("#noticeModal").on("hide.bs.modal", function(){
+                $("#resend-notice").removeData("noticeid").hide();
+                $("#noticeModalLabel").text("");
+                $("#noticeModal .modal-body").html("");
+            });
+        });
+    </script>
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

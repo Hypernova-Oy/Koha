@@ -1,0 +1,498 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+
+<title>[% FILTER collapse %]
+ [% IF ( proposeimport ) %]
+ [% t("Set up database") | html %]
+ [% END %]
+ [% IF ( importdatastructure ) %]
+ [% IF ( error ) %]
+ [% t("Error creating database tables") | html %]
+ [% ELSE %]
+ [% t("Database tables created") | html %]
+ [% END %]
+ [% END %]
+ [% IF ( default ) %]
+ [% IF ( upgrading ) %]
+ [% t("Update database") | html %]
+ [% ELSE %]
+ [% t("Install basic configuration settings") | html %]
+ [% END %]
+ [% END %]
+ [% IF ( updatestructure ) %]
+ [% t("Updating database structure") | html %]
+ [% END %]
+ [% IF ( choosemarc ) %]
+ [% t("Select your MARC flavor") | html %]
+ [% END %]
+ [% IF ( selectframeworks ) %]
+ [% t("Selecting default settings") | html %]
+ [% END %]
+ [% IF ( addframeworks ) %]
+ [% t("Default data loaded") | html %]
+ [% END %]
+ [% IF ( finish ) %]
+ [% t("Installation complete") | html %]
+ [% END %] &rsaquo;
+ [% t("Web installer") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+
+[% INCLUDE 'installer-doc-head-close.inc' %]
+</head>
+
+<body id="installer" class="installer">
+ <div class="container-fluid">
+ <div class="row">
+ <div id="installer-step3" class="installer-main col-sm-10 col-md-8 offset-sm-1 offset-md-2">
+ <div id="logo"><a href="#">Koha</a></div>
+ [% IF ( finish ) %]
+ <h1>Asennusohjelma &rsaquo; Asennus valmis</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse kieli</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tarkista Perl-riippuvuudet</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tietokanta-asetukset</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo tietokanta</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Asenna perusasetukset</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ <h3>Asennus on valmis</h3>
+ <p><a class="btn btn-primary" href="/cgi-bin/koha/installer/onboarding.pl">Aloita asennusprosessi</a></p>
+ [% END %]
+
+ [% IF ( choosemarc ) %]
+ <h2>Valitse MARC-formaatti</h2>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse kieli</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tarkista Perl-riippuvuudet</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tietokanta-asetukset</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo tietokanta</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Asenna perusasetukset</li>
+ <ol>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Valitse MARC-formaatti</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Valitaan oletusasetukset</li>
+ </ol>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ <form name="frameworkselection" method="post" action="/cgi-bin/koha/installer/install.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="step" value="3" />
+ <input type="hidden" name="op" value="cud-selectframeworks" />
+
+ <p>MARC on lyhenne sanoista "Machine Readable Cataloging". MARC-tietue sisältää teoksen bibliografiset tiedot. MARC21:stä käytetään maailmanlaajuisesti, kun taas UNIMARCia käytetään muutamissa Euroopan maissa. </p>
+
+ [% FOREACH flavourloo IN flavourloop %]
+ [% IF ( flavourloo.label == "Unimarc") %]
+ <p>
+ <label><input type="radio" name="marcflavour" id="marcflavour" value="[% flavourloo.code | html %]" /> [% flavourloo.label | html %]</label>
+ </p>
+ [% ELSE %]
+ <p>
+ <label><input type="radio" name="marcflavour" id="marcflavour" value="[% flavourloo.code | html %]" checked="checked" /> [% flavourloo.label | html %]</label>
+ </p>
+ [% END %]
+ [% END %]
+ <p><input class="btn btn-primary" type="submit" value="Jatka seuraavaan vaiheeseen" /></p>
+ </form>
+ [% END # / IF choosemarc %]
+
+ [% IF ( selectframeworks ) %]
+ <h1>Asennusohjelma &rsaquo; Valitaan oletusasetukset</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse kieli</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tarkista Perl-riippuvuudet</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tietokanta-asetukset</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo tietokanta</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Asenna perusasetukset</li>
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse MARC-formaatti</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Valitaan oletusasetukset</li>
+ </ol>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ <form name="frameworkselection" method="post" action="/cgi-bin/koha/installer/install.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="step" value="3" />
+ <input type="hidden" name="op" value="cud-addframeworks" />
+ [% IF ( frameworksloop ) %]
+ <h3>MARC-kuvailupohjat: [% marcflavour | html %]</h3>
+ [% IF ( en_marc_frameworks ) %]
+ <h4><span class="error">Yhtään MARC-kuvailupohjaa ei ole saatavana kielelläsi. Oletuksena on englanninkielinen kuvailupohja (en)<span></h4>
+ [% END %]
+ [% FOREACH frameworksloo IN frameworksloop %]
+ [%- SWITCH frameworksloo.label -%]
+ [%- CASE 'mandatory' -%]<h4>Pakollinen</h4>
+ [%- CASE 'optional'  -%]<h4>Valinnainen</h4>
+ [%- END -%]
+
+ <div class="checkboxes">
+
+ <p>
+ <a class="selectall [% frameworksloo.label FILTER lower | html %]" href="#">Valitse kaikki</a>
+ <a class="deselectall [% frameworksloo.label FILTER lower | html %]" href="#">Älä valitse mitään</a>
+ </p>
+
+ [% FOREACH framework IN frameworksloo.frameworks %]
+ <div class="checkbox">
+ <label>
+ [% IF ( framework.checked ) %]
+ <input type="checkbox" name="framework" value="[% framework.fwkfile | html %]" id ="[% framework.fwkname | html %]" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" name="framework" value="[% framework.fwkfile | html %]" id ="[% framework.fwkname | html %]" />
+ [% END %]
+ [% FOREACH description IN framework.fwkdescription %]
+ [% description | html %]<br />
+ [% END %]
+ <em>([% framework.fwkname | html %])</em>
+ </label>
+ </div>
+ <hr />
+ [% END # / FOREACH framework %]
+ </div>
+ [% END # / FOREACH frameworksloo %]
+ [% END # / IF frameworkdsloop %]
+
+ <h3>Muu data</h3>
+
+ [% IF ( en_sample_data ) %]
+ <h4><span class="error">Kielelläsi ei ole näytedataa eikä asetuksia. Oletuksena on englanninkielisten näytteiden toimittaminen (en)<span></h4>
+ [% END %]
+
+ [% FOREACH levelloo IN levelloop %]
+ [%- SWITCH levelloo.label -%]
+ [%- CASE 'mandatory' -%]<h4>Pakollinen</h4>
+ [%- CASE 'optional'  -%]<h4>Valinnainen</h4>
+ [%- END -%]
+
+ <div class="checkboxes">
+
+ <p>
+ <a class="selectall [% levelloo.label FILTER lower | html %]" href="#">Valitse kaikki</a>
+ <a class="deselectall [% levelloo.label FILTER lower | html %]" href="#">Älä valitse mitään</a>
+ </p>
+
+ [% FOREACH framework IN levelloo.frameworks %]
+ <div class="checkbox">
+ <label for="[% framework.fwkname | html %]">
+ [% IF ( framework.checked ) %]
+ <input type="checkbox" name="framework" value="[% framework.fwkfile | html %]" id="[% framework.fwkname | html %]" checked="checked" />
+ [% ELSE %]
+ <input type="checkbox" name="framework" value="[% framework.fwkfile | html %]" id="[% framework.fwkname | html %]" />
+ [% END %]
+ [% FOREACH description IN framework.fwkdescription %]
+ [% description | html %]<br />
+ [% END %]
+ </label>
+ </div> <!-- /div.checkbox -->
+ [% END # / FOREACH framework %]
+ </div>
+ [% END # / FOREACH levelloo %]
+
+ <p>Kun olet tehnyt valintasi, klikkaa 'Tuonti' aloittaaksesi. Voit joutua odottamaan hetken prosessin valmistumista.</p>
+
+ <p><input class="btn btn-primary" type="submit" value="Tuo" /></p>
+ </form>
+ [% END # / IF selectframeworks %]
+
+ [% IF ( addframeworks ) %]
+ <h1>Asennusohjelma &rsaquo; Oletustiedot ladattu</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse kieli</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tarkista Perl-riippuvuudet</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tietokanta-asetukset</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo tietokanta</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Asenna perusasetukset</li>
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse MARC-formaatti</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitaan oletusasetukset</li>
+ </ol>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ [% FOREACH lis IN list %]
+ [% IF lis.level == 'mandatory' %]
+ <h3>Pakollinen tieto lisätty</h3>
+ [% ELSIF lis.level == 'optional' %]
+ <h3>Lisätiedot lisättiin</h3>
+ [% ELSIF lis.level == 'mysql' %]
+ <h3>MySQL-tieto lisättiin</h3>
+ [% ELSIF lis.level == 'localization' %]
+ <h3>Lokalisointidata lisättiin</h3>
+ [% ELSE %]
+ <h3>[% lis.level FILTER ucfirst | html %] lisäys tehty</h3>
+ [% END %]
+ <ul>
+ [% FOREACH fwklis IN lis.fwklist %]
+ <li>
+ [% fwklis.fwkname | html %]
+ [% IF ( fwklis.error ) %]<p class="bg-danger">[% fwklis.error | html %]</p>[% END %]
+ </li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ <h3>Perusasennus on valmis.</h3>
+
+ <p>Seuraavissa vaiheissa määritellään joitain perusvaatimuksia kuten Koha-käyttäjä, jolla on kaikki ylläpito-oikeudet (superlibrarian).</p>
+
+ <form action="/cgi-bin/koha/installer/install.pl" method="post" name="finish">
+ [% INCLUDE 'csrf-token.inc' %]
+ <h4>
+ Voit auttaa Koha-yhteisöä jakamalla tilastotietoja kanssamme. </h4>
+ <p>
+ Jos haluat jakaa tietojasi, laita toiminnallisuus päälle "Jaa käyttäjätietojasi"-osiossa Ylläpidossa. </p>
+
+ <input type="hidden" name="step" value="3" />
+ <input type="hidden" name="op" value="cud-finish" />
+ <p>
+ <input class="btn btn-primary" type="submit" value="Asenna joitain Kohan perusvaatimuksia" />
+ </p>
+ </form>
+
+ [% END # / IF addframeworks %]
+
+ [% IF ( importdatastructure ) %]
+ [% IF ( error ) %]
+ <p>Seuraava virhe ilmeni tietokannan rakennetta tuotaessa:</p>
+ <div class="alert alert-warning"><p>[% error | html %] </p></div>
+ <p>Ota yhteyttä järjestelmän ylläpitäjään</p>
+ [% ELSE %]
+ <h1>Asennusohjelma &rsaquo; Valmis</h1>
+ <div class="alert alert-success"><p>Tietokantataulut on luotu</p></div>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse kieli</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tarkista Perl-riippuvuudet</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tietokanta-asetukset</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo tietokanta</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Asenna perusasetukset</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ <form action="/cgi-bin/koha/installer/install.pl" method="get">
+ <input type="hidden" name="step" value="3" />
+ <p><input class="btn btn-primary" type="submit" value="Jatka seuraavaan vaiheeseen" /></p>
+ </form>
+ [% END %]
+ [% END # / IF importdatastructure %]
+
+ [% IF ( proposeimport ) %]
+ <h1>Asennusohjelma &rsaquo; Asenna tietokanta</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse kieli</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tarkista Perl-riippuvuudet</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tietokanta-asetukset</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Luo tietokanta</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Asenna perusasetukset</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ <p>Nyt olemme valmiita luomaan tietokannan taulut ja täyttämään ne jollain oletusdatalla.</p>
+ <form action="/cgi-bin/koha/installer/install.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="step" value="3" />
+ <input type="hidden" name="op" value="cud-importdatastructure" />
+ <p><input class="btn btn-primary" type="submit" value="Jatka seuraavaan vaiheeseen" /></p>
+ </form>
+ [% END # / proposeimport %]
+
+ [% IF ( default ) %]
+ [% IF ( upgrading ) %]
+ <h1>Asennusohjelma &rsaquo; Päivitä tietokanta</h1>
+ <p>Päivitämme Kohan versiosta [% dbversion | html %] versioon [% kohaversion | html %]</p>
+ <form action="/cgi-bin/koha/installer/install.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="step" value="3" />
+ <input type="hidden" name="op" value="cud-updatestructure" />
+ <p><input class="btn btn-primary" type="submit" value="Päivitä tietokantasi" /></p>
+ </form>
+ [% ELSE %]
+ <h1>Asennusohjelma &rsaquo; Asenna perusasetukset</h1>
+
+ <div id="steps">
+ <ol>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Valitse kieli</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tarkista Perl-riippuvuudet</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Tietokanta-asetukset</li>
+ <li class="complete"><i class="fa fa-check-square" aria-hidden="true"></i> Luo tietokanta</li>
+ <li class="current open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Asenna perusasetukset</li>
+ <li class="open"><i class="fa-svg-icon checkbox-square" aria-hidden="true"></i> Ladataan</li>
+ </ol>
+ </div>
+
+ <p>Olemme valmiina tekemään joitain perusasetuksia.</p>
+ <form action="/cgi-bin/koha/installer/install.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="step" value="3" />
+ <input type="hidden" name="op" value="cud-choosemarc" />
+ <p><input class="btn btn-primary" type="submit" value="Jatka seuraavaan vaiheeseen" /></p>
+ </form>
+ [% END %]
+ [% END # / IF default %]
+
+ [% IF ( updatestructure ) %]
+ <h1>Asennusohjelma &rsaquo; Tietokantarakenteen päivitys</h1>
+ [% IF has_update_succeeds || success %]
+ <p>Päivitysraportti:</p>
+ [% END %]
+
+ [%# Success for old versions %]
+ [% IF has_update_succeeds %]
+ <ul>
+ [% FOREACH l IN update_report %]
+ [% SET line = l.line %]
+ [% IF line.match('^Upgrade to') %]
+ <li>[% line | $raw %]</li>
+ [% ELSE %]
+ [% line | $raw %]<br/>
+ [% END %]
+ [% END %]
+ </ul>
+ [% END %]
+
+ [%# Success for new versions %]
+ [% IF success.size %]
+ <ul>
+ [% FOR s IN success %]
+ [% FOR o IN s.output %]
+ <li>[% o | $raw %]</li>
+ [% IF s.output.size > 1 %]
+ [% IF loop.first %]<ul>[% ELSIF loop.last %]</ul>[% END %]
+ [% END %]
+ [% END %]
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% IF atomic_updates.success.size %]
+ <p>Päivitykset:</p>
+ <ul>
+ [% FOR s IN atomic_updates.success %]
+ [% FOR o IN s.output %]
+ <li>[% o | $raw %]</li>
+ [% IF s.output.size > 1 %]
+ [% IF loop.first %]<ul>[% ELSIF loop.last %]</ul>[% END %]
+ [% END %]
+ [% END %]
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% IF has_update_errors OR error.size %]
+ <p>Päivitysvirheet:</p>
+ [%# Errors for old versions %]
+ [% IF has_update_errors %]
+ <ul>
+ [% FOREACH update_error IN update_errors %]
+ <li class="update_error">[% update_error.line | html %]</li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ [%# Errors for new versions %]
+ [% IF error.size %]
+ <ul>
+ [% FOR e IN error %]
+ [% FOR o IN e.output %]
+ [% o | $raw %]
+ <br/>
+ [% IF e.output.size > 1 %]
+ [% IF loop.first %]<ul>[% ELSIF loop.last %]</ul>[% END %]
+ [% END %]
+ [% END %]
+ <li class="update_error">
+ VIRHE: [% e.error | $raw %] </li>
+ [% END %]
+ </ul>
+ [% END %]
+ [% END %]
+
+ [% IF atomic_updates.error.size %]
+ <p>Päivitysvirhe :</p>
+ <ul>
+ [% FOR e IN atomic_updates.error %]
+ [% FOR o IN e.output %]
+ [% o | $raw %]
+ <br/>
+ [% IF e.output.size > 1 %]
+ [% IF loop.first %]<ul>[% ELSIF loop.last %]</ul>[% END %]
+ [% END %]
+ [% END %]
+ <li class="update_error">
+ VIRHE: [% e.error | $raw %] </li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% UNLESS error OR atomic_updates.error.size OR has_update_errors %]
+ <p>Virheitä ei havaittu. Päivitys on tehty.</p>
+ <p><a href="install.pl?step=3&amp;op=finished" class="btn btn-primary">Jatka kirjautumista</a></p>
+ [% ELSE %]
+ <p>
+ <form action="/cgi-bin/koha/installer/install.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="step" value="3" />
+ <input type="hidden" name="op" value="cud-updatestructure" />
+ <p><input class="btn btn-primary" type="submit" value="Yritä uudelleen" /></p>
+ </form>
+ </p>
+ [% END %]
+ [% END # / IF updatestructure %]
+ </div> <!-- / #installer-step3 -->
+ </div> <!-- / .row -->
+ </div><!-- / .container-fluid -->
+
+[% IF ( selectframeworks ) %]
+ [% MACRO jsinclude BLOCK %]
+ <script>
+            $(document).ready(function(){
+                $(".selectall,.deselectall").on("click",function(e){
+                    e.preventDefault();
+                    var container = $(this).parent().parent();
+                    if( $(this).hasClass("selectall") ){
+                        var state = true;
+                    } else {
+                        var state = false;
+                    }
+                    $( container ).find("input").prop("checked", state);
+                    $( container ).find(".selectall,.deselectall").toggle();
+                    update_sample_libraries_dependencies();
+                });
+                let required_text = _("(vaatii näytekirjastoja)");
+                $("#sample_libraries_holidays, #sample_patrons").parent().after(" <span class='hint'>"+required_text+"</span>");
+                function update_sample_libraries_dependencies(){
+                    let checked = $("#sample_libraries").prop("checked");
+                    $("#sample_libraries_holidays, #sample_patrons").prop("disabled", !checked);
+                    if (!checked) {
+                        $("#sample_libraries_holidays, #sample_patrons").prop("checked", false);
+                    }
+                };
+                $("#sample_libraries").on("change", update_sample_libraries_dependencies);
+                $("#sample_libraries").change();
+            });
+        </script>
+ [% END %]
+[% END %]
+
+[% INCLUDE 'installer-intranet-bottom.inc' %]

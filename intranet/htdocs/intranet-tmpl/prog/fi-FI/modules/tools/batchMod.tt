@@ -1,0 +1,103 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF ( del ) %]
+ [% t("Batch item deletion") | html %]
+ [% ELSE %]
+ [% t("Batch item modification") | html %]
+ [% END %] &rsaquo;
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+<body id="tools_batchMod" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Kuvailu</a>
+ [% END %]
+
+ [% IF ( del ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Niteiden poisto eräajona</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Niteiden muokkaus eräajona</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Niteiden [% IF ( del ) %]poisto[% ELSE %]muokkaus[% END %] eräajona</h1>
+ <form method="post" enctype="multipart/form-data" action="/cgi-bin/koha/tools/batchMod.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="rows">
+ <legend>Käytä tiedostoa</legend>
+ <ol>
+ <li>
+ <label for="barcode_file">Viivakooditiedosto: </label><input type="radio" name="filecontent" value="barcode_file" id="barcode_file" checked="checked" /></li>
+ <li>
+ <label for="itemid_file">Nidenumerotiedosto: </label><input type="radio" name="filecontent" value="itemid_file" id="itemid_file" />
+ </li>
+ <li><label for="uploadfile">Tiedosto: </label> <input type="file" id="uploadfile" name="uploadfile" /></li>
+ </ol>
+ </fieldset>
+ <fieldset class="rows">
+ <legend>Tai lue niteet yksi kerrallaan</legend>
+ <ol>
+ <li>
+ <label for="barcodelist">Lista viivakoodeista (koodi per rivi): </label>
+ <textarea rows="10" cols="30" id="barcodelist" name="barcodelist"></textarea>
+ </li>
+ </ol>
+ <input type="hidden" name="op" value="cud-show" />
+ </fieldset>
+
+ [% UNLESS del %]
+ <fieldset class="rows">
+ <legend>Käytä oletusarvoja</legend>
+ <ol class="radio">
+ <li>
+ <label for="use_default_values">Käytä oletusarvoja:</label>
+ <input type="checkbox" name="use_default_values" id="use_default_values" />
+ <span class="hint">Täytä kentät oletusarvoilla, oletuspohjasta</span>
+ </li>
+ </ol>
+ </fieldset>
+ [% END %]
+
+ <fieldset class="action">
+ [% IF ( del ) %]<input type="hidden" name="del" value="1" />[% END %]
+ <input class="btn btn-primary" type="submit" value="Jatka" />
+ <a class="cancel" href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Peruuta</a>
+ </fieldset>
+
+ </form>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% INCLUDE 'intranet-bottom.inc' %]

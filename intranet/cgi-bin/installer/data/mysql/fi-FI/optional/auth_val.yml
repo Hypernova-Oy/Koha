@@ -1,0 +1,240 @@
+---
+description:
+- Tärkeimmät oletusarvot sijaintitiedoille, kadonnut-tilolle jne.
+- Voit muuttaa näitä missä vaiheessa vaan asennuksen jälkeen.
+tables:
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: BSELL
+      category: SUGGEST
+      lib: Menestysteos
+    - authorised_value: SCD
+      category: SUGGEST
+      lib: Hyllykappale vaurioitunut
+    - authorised_value: LCL
+      category: SUGGEST
+      lib: Kirjaston nide kadonnut
+    - authorised_value: AVILL
+      category: SUGGEST
+      lib: Saatavissa kaukolainauksella
+    - authorised_value: Budget
+      category: SUGGEST
+      lib: Riittämätön budjetti
+    - authorised_value: Expensive
+      category: SUGGEST
+      lib: Liian kallis
+    - authorised_value: Poldoc
+      category: SUGGEST
+      lib: Hankinta ei ole kokoelmapolitiikkamme mukainen
+    translatable:
+    - lib
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: BOOK
+      category: SUGGEST_FORMAT
+      lib: Kirja
+      lib_opac: Kirja
+    - authorised_value: LP
+      category: SUGGEST_FORMAT
+      lib: Isoteksti
+      lib_opac: Isoteksti
+    - authorised_value: EBOOK
+      category: SUGGEST_FORMAT
+      lib: E-kirja
+      lib_opac: E-kirja
+    - authorised_value: AUDIOBOOK
+      category: SUGGEST_FORMAT
+      lib: Äänikirja
+      lib_opac: Äänikirja
+    - authorised_value: DVD
+      category: SUGGEST_FORMAT
+      lib: DVD
+      lib_opac: DVD
+    translatable:
+    - lib
+    - lib_opac
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: '2'
+      category: LOST
+      lib: Palauttamaton (Kadonnut)
+    - authorised_value: '1'
+      category: LOST
+      lib: Kadonnut
+    - authorised_value: '3'
+      category: LOST
+      lib: Kadonnut ja korvattu
+    - authorised_value: '4'
+      category: LOST
+      lib: Puuttuu
+    - authorised_value: '5'
+      category: LOST
+      lib: Puuttuu nidepaketista
+    - authorised_value: '1'
+      category: DAMAGED
+      lib: Vahingoittunut
+    - authorised_value: FIC
+      category: LOC
+      lib: Kaunokirjallisuus
+    - authorised_value: CHILD
+      category: LOC
+      lib: Lastenosasto
+    - authorised_value: DISPLAY
+      category: LOC
+      lib: Esillä
+    - authorised_value: NEW
+      category: LOC
+      lib: Uutuushylly
+    - authorised_value: STAFF
+      category: LOC
+      lib: Henkilökunnan työtila
+    - authorised_value: GEN
+      category: LOC
+      lib: Yleiskokoelma
+    - authorised_value: AV
+      category: LOC
+      lib: AV-aineisto
+    - authorised_value: REF
+      category: LOC
+      lib: Viittaus
+    - authorised_value: CART
+      category: LOC
+      lib: Tänään palautetut
+    - authorised_value: PROC
+      category: LOC
+      lib: Käsittelyssä
+    - authorised_value: FIC
+      category: CCODE
+      lib: Kaunokirjallisuus
+    - authorised_value: REF
+      category: CCODE
+      lib: Viittaus
+    - authorised_value: NFIC
+      category: CCODE
+      lib: Tietokirjallisuus
+    - authorised_value: '1'
+      category: WITHDRAWN
+      lib: Pois kierrosta
+    - authorised_value: '-1'
+      category: NOT_LOAN
+      lib: Tilattu
+    - authorised_value: '1'
+      category: NOT_LOAN
+      lib: Ei lainattavissa
+    - authorised_value: '2'
+      category: NOT_LOAN
+      lib: Henkilökunnan kokoelma
+    - authorised_value: '3'
+      category: NOT_LOAN
+      lib: Lisätty nidepakettiin
+    - authorised_value: '1'
+      category: RESTRICTED
+      lib: Rajoitettu käyttö
+    - authorised_value: ADDR
+      category: BOR_NOTES
+      lib: Osoitteen huomautukset
+    translatable:
+    - lib
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: damaged
+      category: OPAC_SUG
+      lib: Hyllyssä oleva nide on vahingoittunut
+      lib_opac: Hyllyssä oleva nide on vahingoittunut
+    - authorised_value: bestseller
+      category: OPAC_SUG
+      lib: Suositun kirjailijan tulossa oleva teos
+      lib_opac: Suositun kirjailijan tulossa oleva teos
+    translatable:
+    - lib
+    - lib_opac
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: CIRC
+      category: REPORT_GROUP
+      lib: Lainaus ja palautus
+    - authorised_value: CAT
+      category: REPORT_GROUP
+      lib: Luettelo
+    - authorised_value: PAT
+      category: REPORT_GROUP
+      lib: Asiakkaat
+    - authorised_value: ACQ
+      category: REPORT_GROUP
+      lib: Hankinnat
+    - authorised_value: ACC
+      category: REPORT_GROUP
+      lib: Käyttäjätilit
+    - authorised_value: SER
+      category: REPORT_GROUP
+      lib: Kausijulkaisut
+    - authorised_value: '000'
+      category: SIP_MEDIA_TYPE
+      lib: Muu
+    - authorised_value: '001'
+      category: SIP_MEDIA_TYPE
+      lib: Kirja
+    - authorised_value: '002'
+      category: SIP_MEDIA_TYPE
+      lib: Aikakauslehti
+    - authorised_value: '003'
+      category: SIP_MEDIA_TYPE
+      lib: Yhteensidottu lehti
+    - authorised_value: '004'
+      category: SIP_MEDIA_TYPE
+      lib: Ääninauha
+    - authorised_value: '005'
+      category: SIP_MEDIA_TYPE
+      lib: Videonauha
+    - authorised_value: '006'
+      category: SIP_MEDIA_TYPE
+      lib: CD/CD-ROM-levy
+    - authorised_value: '007'
+      category: SIP_MEDIA_TYPE
+      lib: Levyke
+    - authorised_value: '008'
+      category: SIP_MEDIA_TYPE
+      lib: Kirjan liitteenä levyke
+    - authorised_value: '009'
+      category: SIP_MEDIA_TYPE
+      lib: Kirjan liitteenä CD-levy
+    - authorised_value: '010'
+      category: SIP_MEDIA_TYPE
+      lib: Kirjan liitteenä ääninauha
+    - authorised_value: 0
+      category: ORDER_CANCELLATION_REASON
+      lib: Ei syytä
+    - authorised_value: 1
+      category: ORDER_CANCELLATION_REASON
+      lib: Loppunut varastosta
+    - authorised_value: 2
+      category: ORDER_CANCELLATION_REASON
+      lib: Varastoa täydennetään
+    - authorised_value: RET_BY_PATRON
+      category: RETURN_CLAIM_RESOLUTION
+      lib: Asiakas palauttanut
+    - authorised_value: FOUND_IN_LIB
+      category: RETURN_CLAIM_RESOLUTION
+      lib: Löytyi kirjastosta
+    - authorised_value: NOT_FOUND
+      category: HOLD_CANCELLATION
+      lib: Nide ei löydy hyllystä
+    - authorised_value: DAMAGED
+      category: HOLD_CANCELLATION
+      lib: Varattu nide vahingoittunut. Varausta ei voida täyttää.
+    - authorised_value: NOT_FOUND
+      category: AR_CANCELLATION
+      lib: Nide ei löydy hyllystä
+    - authorised_value: DAMAGED
+      category: AR_CANCELLATION
+      lib: Teos on vahingoittunut. Artikkelipyyntöä ei voida täyttää.
+    - authorised_value: OPAC
+      category: AR_CANCELLATION
+      lib: Peruutettu verkkokirjaston käyttäjäsivulla
+    translatable:
+    - lib

@@ -1,0 +1,227 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF ( add_form ) %]
+ [% IF ( contractnumber ) %]
+ [% tx("Modify contract {contractname}", { contractname = contractname }) | html %]
+ [% ELSE %]
+ [% t("New contract") | html %]
+ [% END %]
+ [% END %]
+ [% IF ( else ) %]
+ [% tx("Contracts of {vendor}", { vendor = booksellername }) | html %]
+ [% END %]
+ [% IF ( delete_confirm ) %]
+ [% tx("Confirm deletion of contract '{contractnumber}'", { contractnumber = contractnumber }) | html %]
+ [% END %]
+ &rsaquo;
+ [% t("Contracts") | html %] &rsaquo;
+ [% t("Acquisitions") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+
+<body id="acq_aqcontract" class="acq">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'contracts-admin-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/acqui-home.pl">Hankinnat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/acqui/supplier.pl?booksellerid=[% booksellerid | uri %]">[% booksellername | html %]</a>
+ [% END %]
+
+ [% IF ( else ) %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Sopimukset</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/admin/aqcontract.pl?booksellerid=[% booksellerid | uri %]">Sopimukset</a>
+ [% END %]
+ [% END %]
+
+ [% IF ( add_form ) %]
+ [% IF ( contractnumber ) %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Muokkaa sopimusta '[% contractname | html %]'</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Uusi sopimus</span>
+ [% END %]
+ [% END %]
+ [% END %]
+
+ [% IF ( delete_confirm ) %]
+ [% WRAPPER breadcrumb_item bc_active=1 %]
+ <span>Vahvista sopimuksen [% contractnumber | html %] poisto</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+[% INCLUDE 'acquisitions-toolbar.inc' %]
+
+[% IF error == 'not_deleted' %]
+ <div class="alert alert-warning">Sopimusta ei poistettu. Sopimukseen liittynee tilauskori.</div>
+[% END %]
+
+ [% IF ( add_form ) %]
+ <div class="page-section">
+ <form name="Aform" action="/cgi-bin/koha/admin/aqcontract.pl" id="add_modify_contract" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-add_validate" />
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <input type="hidden" name="checked" value="0" />
+ [% IF ( contractnumber ) %]
+ <h1>Muokkaa sopimusta [% contractname | html %] toimittajalle [% booksellername | html %]</h1>
+ [% ELSE %]
+ <h1>Uusi sopimus kohteelle [% booksellername | html %]</h1>
+ [% END %]
+ <fieldset class="rows">
+ <ol>
+ [% IF ( contractnumber ) %]
+ <li><span class="label">Sopimustunnus </span>[% contractnumber | html %]
+ <input type="hidden" name="contractnumber" value="[% contractnumber | html %]" />
+ <input type="hidden" name="is_a_modif" value="1" />
+ </li>
+ [% END %]
+ <li><label for="contractname" class="required">Nimi:</label> &nbsp;
+ <input type="text" name="contractname" id="contractname" size="40" maxlength="80" value="[% contractname | html %]" />
+ <span class="required">Pakollinen tieto</span>
+ </li>
+ <li><label for="contractdescription">Kuvaus: </label> &nbsp;
+ <input type="text" name="contractdescription" id="contractdescription" size="40" maxlength="80" value="[% contractdescription | html %]" />
+ </li>
+ <li><label for="from" class="required">Alkupvm:</label> &nbsp;
+ <input type="text" name="contractstartdate" id="from" value="[% contractstartdate | html %]" maxlength="10" size="10" class="flatpickr" data-date_to="to" />
+ <span class="required">Pakollinen tieto</span>
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ <li><label for="to" class="required">Loppumispvm:</label> &nbsp;
+ <input type="text" name="contractenddate" id="to" value="[% contractenddate | html %]" maxlength="10"  size="10" class="flatpickr" />
+ <span class="required">Pakollinen tieto</span>
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div>
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tallenna" /> <a class="cancel" href="/cgi-bin/koha/admin/aqcontract.pl?booksellerid=[% booksellerid | html %]&amp;contractnumber=[% contractnumber | html %]">Peruuta</a>
+ </fieldset>
+ </form>
+ </div> <!-- /.page-section -->
+ [% END %]
+
+ [% IF ( delete_confirm ) %]
+ <div class="alert alert-warning">
+ <h1>Vahvista sopimuksen poisto <em>[% contractname | html %]</em></h1>
+ <table>
+ <tr><th scope="row">Sopimusnumero:</th><td>[% contractnumber | html %]</td></tr>
+ <tr><th scope="row">Sopimuksen nimi:</th><td>[% contractname | html %]</td></tr>
+ <tr><th scope="row">Sopimuksen kuvaus:</th><td>[% contractdescription | html %]</td></tr>
+ <tr><th scope="row">Sopimuksen alkamispvm:</th><td>[% contractstartdate | $KohaDates %]</td></tr>
+ <tr><th scope="row">Sopimuksen päättymispäivä:</th><td>[% contractenddate | $KohaDates %]</td></tr>
+ <tr><th scope="row">Toimittaja:</th><td>[% booksellername | html %]</td></tr>
+ </table>
+ <form action="/cgi-bin/koha/admin/aqcontract.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-delete_confirmed" />
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <input type="hidden" name="contractnumber" value="[% contractnumber | html %]" />
+ <button type="submit" class="btn btn-default approve"><i class="fa fa-fw fa-check"></i> Poista sopimus</button>
+ </form>
+ <form action="/cgi-bin/koha/admin/aqcontract.pl" method="get">
+ <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
+ <input type="hidden" name="contractnumber" value="[% contractnumber | html %]" />
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-fw fa-times"></i> Ei, älä poista</button>
+ </form>
+ </div>
+ [% END %]
+ [% IF ( else ) %]
+ <h1>Toimittajan [% booksellername | html %] sopimukset</h1>
+ [% IF ( loop ) %]
+ <div class="page-section">
+ <table>
+ <tr>
+ <th scope="col">Nimi</th>
+ <th scope="col">Kuvaus</th>
+ <th scope="col">Alkupvm</th>
+ <th scope="col">Loppumispvm</th>
+ <th scope="col">Toiminnot</th>
+ </tr>
+ [% FOREACH loo IN loop %]
+ <tr>
+ <td>
+ <a href="/cgi-bin/koha/admin/aqcontract.pl?op=add_form&amp;booksellerid=[% loo.booksellerid | uri %]&amp;contractnumber=[% loo.contractnumber | uri %]">[% loo.contractname | html %]</a>
+ </td>
+ <td>[% loo.contractdescription | html %]</td>
+ <td>[% loo.contractstartdate | html %]</td>
+ <td>[% loo.contractenddate | html %]</td>
+ <td class="actions">
+ <a href="/cgi-bin/koha/admin/aqcontract.pl?op=add_form&amp;contractnumber=[% loo.contractnumber | uri %]&amp;booksellerid=[% loo.booksellerid | uri %]" class="btn btn-default btn-xs"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa</a>
+ <a href="/cgi-bin/koha/admin/aqcontract.pl?op=delete_confirm&amp;contractnumber=[% loo.contractnumber | uri %]&amp;booksellerid=[% loo.booksellerid | uri %]" class="btn btn-default btn-xs"><i class="fa fa-trash-can"></i> Poista</a>
+ </td>
+ </tr>
+ [% END %]
+ </table>
+ </div> <!-- /.page-section -->
+ [% ELSE %]
+ <div class="alert alert-info">
+ Tälle toimittajalle ei ole sopimuksia. [% IF active %] <a href="/cgi-bin/koha/admin/aqcontract.pl?op=add_form&amp;booksellerid=[% booksellerid | uri %]">Lisää sopimus</a>.
+ [% END %]
+ </div>
+ [% END %]
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'acquisitions-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% Asset.js("js/acq.js") | $raw %]
+ <script>
+        $(document).ready(function(){
+            $("#add_modify_contract").validate({
+                rules: {
+                    contractstartdate: "required",
+                    contractname: "required",
+                    contractenddate: {
+                        required: true,
+                        date_on_or_after: "#from"
+                    }
+                },
+                messages: {
+                    contractenddate: {
+                        date_on_or_after: _("Sopimuksen päättymispäivä ei voi olla ennen aloittamispäivää")
+                    }
+                }
+            });
+        });
+    </script>
+[% END %]
+[% INCLUDE 'intranet-bottom.inc' %]

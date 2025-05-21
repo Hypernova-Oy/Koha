@@ -1,0 +1,233 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+ [% INCLUDE 'doc-head-open.inc' %]
+ <title>[% FILTER collapse %]
+ [% IF ( template_id ) %]
+ [% t("Edit patron card template") | html %] ([% template_id | html %])
+ [% ELSE %]
+ [% t("New patron card template") | html %]
+ [% END %] &rsaquo;
+ [% t("Templates") | html %] &rsaquo;
+ [% t("Patron card creator") | html %] &rsaquo;
+ [% t("Tools") | html %] &rsaquo;
+ [% t("Koha") | html %]
+ [% END %]</title>
+ [% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="pcard_edit-template" class="tools pcard">
+ [% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/tools-home.pl">Työkalut</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/patroncards/home.pl">Kirjastokorttien luonti</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/patroncards/manage.pl?card_element=template">Mallipohjat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ [% IF (template_id) %]
+ <span>Muokkaa kirjastokorttipohjaa ([% template_id | html %])</span>
+ [% ELSE %]
+ <span>Uusi kirjastokorttipohja</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% INCLUDE 'patroncards-toolbar.inc' %]
+ <h1>
+ [% IF (template_id) %]
+ <span>Muokkaa kirjastokorttipohjaa</span>
+ [% ELSE %]
+ <span>Uusi kirjastokorttipohja</span>
+ [% END %]
+ [% IF (template_id) %] ([% template_id | html %])[% END %]
+ </h1>
+ <form name="input" action="/cgi-bin/koha/patroncards/edit-template.pl" method="post">
+ [% INCLUDE 'csrf-token.inc' %]
+ <div class="row">
+ <div class="col-sm-6">
+ <fieldset class="rows">
+ <ol>
+ <li>
+ <span class="label">Pohjan tunnus:</span>[% IF ( template_id ) %][% template_id | html %][% ELSE %]Muu[% END %] </li>
+ <li>
+ <label for="template_code">Pohjan koodi:</label>
+ <input type="text" size="30" maxlength="43" name="template_code" id="template_code" value="[% template_code | html %]" />
+ </li>
+ <li>
+ <label for="template_desc">Pohjan kuvaus:</label>
+ <textarea cols="30" rows="3" id="template_desc" name="template_desc">[% template_desc | html %]</textarea>
+ </li>
+ <li>
+ <label for="units">Yksikköjä:</label>
+ <select id="units" name="units">
+ [% FOREACH unit IN units %]
+
+ [% IF ( unit.selected ) %]
+ <option value="[% unit.type | html %]" selected="selected">
+ [% ELSE %]
+ <option value="[% unit.type | html %]">
+ [% END %]
+
+ [% SWITCH unit.type %]
+ [%   CASE 'POINT' %]
+ <span>PostScript points</span>
+ [%   CASE 'AGATE' %]
+ <span>Agatet</span>
+ [%   CASE 'INCH' %]
+ <span>Tuumat (US)</span>
+ [%   CASE 'MM' %]
+ <span>Millimetrit (SI)</span>
+ [%   CASE 'CM' %]
+ <span>Senttimetrejä (SI)</span>
+ [% END %]
+
+ </option>
+ [% END %]
+ </select>
+ </li>
+ <li>
+ <label for="page_height">Sivun korkeus:</label>
+ <input type="text" size="4" name="page_height" id="page_height" value="[% page_height | html %]" />
+ </li>
+ <li>
+ <label for="page_width">Sivun leveys:</label>
+ <input type="text" size="4" name="page_width" id="page_width" value="[% page_width | html %]" />
+ </li>
+ <li>
+ <label for="card_height">Kortin korkeus:</label>
+ <input type="text" size="4" name="card_height" id="card_height" value="[% card_height | html %]" />
+ </li>
+ <li>
+ <label for="card_width">Kortin leveys:</label>
+ <input type="text" size="4" name="card_width" id="card_width" value="[% card_width | html %]" />
+ </li>
+
+
+ </ol>
+ </fieldset>
+ </div>
+ <div class="col-sm-6">
+ <fieldset class="rows">
+ <ol><li>
+ <label for="top_margin">Sivun yläreunus:</label>
+ <input type="text" size="4" name="top_margin" id="top_margin" value="[% top_margin | html %]" />
+ </li>
+ <li>
+ <label for="left_margin">Sivun vasen reunus:</label>
+ <input type="text" size="4" name="left_margin" id="left_margin" value="[% left_margin | html %]" />
+ </li>
+ <li>
+ <label for="cols">Sarakkeita:</label>
+ <input type="text" size="4" name="cols" id="cols" value="[% cols | html %]" />
+ </li>
+ <li>
+ <label for="rows">Rivejä:</label>
+ <input type="text" size="4" name="rows" id="rows" value="[% rows | html %]" />
+ </li>
+ <li>
+ <label for="col_gap">Sarakkeiden väli:</label>
+ <input type="text" size="4" name="col_gap" id="col_gap" value="[% col_gap | html %]" />
+ </li>
+ <li>
+ <label for="row_gap">Rivien väli:</label>
+ <input type="text" size="4" name="row_gap" id="row_gap" value="[% row_gap | html %]" />
+ </li>
+
+ <li>
+ <label for="profile_id">Profiili:</label>
+ [% IF ( profile_list ) %]
+ <select id="profile_id" name="profile_id">
+ [% FOREACH profile_lis IN profile_list %]
+ [% IF ( profile_lis.selected ) %]
+ <option value="[% profile_lis.profile_id | html %]" selected="selected">
+ [% ELSE %]
+ <option value="[% profile_lis.profile_id | html %]">
+ [% END %]
+ [% profile_lis.printer_name | html %]/[% profile_lis.paper_bin | html %]
+ </option>
+ [% END %]
+ </select>
+ [% ELSE %]
+ <a href="/cgi-bin/koha/patroncards/edit-profile.pl?op=new">Määritä tulostinprofiili.</a>
+ [% END %]
+ </li>
+ </ol>
+ </fieldset>
+ </div>
+ </div>
+
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tallenna" />
+ <a class="cancel" href="/cgi-bin/koha/patroncards/manage.pl?card_element=template">Peruuta</a>
+ <input type="hidden" name="op" value="cud-save" />
+ [% IF ( template_id ) %]
+ <input type="hidden" name="template_id" value="[% template_id | html %]" />
+ [% END %]
+ </fieldset>
+ </form>
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'tools-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% Asset.js("js/tools-menu.js") | $raw %]
+ <script>
+        $(document).ready(function(){
+            var selectedUnit = $("#units option:selected").val();
+            var unitfields = $("#page_height,#page_width,#card_width,#card_height,#top_margin,#left_margin,#col_gap,#row_gap");
+            $(unitfields).after("<span class=\"unit\">"+getUnit(selectedUnit)+"</span>");
+            $("#units").change(function(){
+                $(".unit").html(getUnit($(this).val()));
+            });
+        function getUnit(unit){
+            switch(unit){
+                case "POINT":
+                    var unit = " pt";
+                    break;
+                case "AGATE":
+                    var unit = " ag";
+                    break;
+                case "INCH":
+                    var unit = " in";
+                    break;
+                case "MM":
+                    var unit = " mm";
+                    break;
+                case "CM":
+                    var unit = " cm";
+                    break;
+                default:
+                    var unit = "";
+            }
+            return unit;
+        }
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

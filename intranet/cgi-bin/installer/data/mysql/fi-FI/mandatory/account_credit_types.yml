@@ -1,0 +1,53 @@
+---
+description:
+- Kohan hyvitystyypit
+tables:
+- account_credit_types:
+    multiline: []
+    rows:
+    - can_be_added_manually: '0'
+      code: OVERPAYMENT
+      description: Liikamaksun hyvitys
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PAYMENT
+      description: Maksu
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: WRITEOFF
+      description: Maksun poisto
+      is_system: '1'
+    - can_be_added_manually: '1'
+      code: FORGIVEN
+      description: Annettu anteeksi
+      is_system: '1'
+    - can_be_added_manually: '1'
+      code: CREDIT
+      description: Hyvitys
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: DISCOUNT
+      description: Asiakkaan maksulle annettu alennus
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: REFUND
+      description: Hyvitys
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: LOST_FOUND
+      description: Kadonneen niteen maksun palautus
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PURCHASE
+      description: Osto
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: CANCELLATION
+      description: Peruutus
+      is_system: '1'
+    - can_be_added_manually: '0'
+      code: PROCESSING_FOUND
+      description: Kadonneen niteen käsittelykulun hyvitys
+      is_system: '1'
+    translatable:
+    - description

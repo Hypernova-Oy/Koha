@@ -1,0 +1,402 @@
+---
+cataloguing.pref:
+  Export:
+  - - 'Inkludera följande fält vid BibTex-export:'
+    - pref: BibtexExportAdditionalFields
+      syntax: text/x-yaml
+      type: textarea
+    - 'Använd en rad per tagg enligt formatet BT_TAG: TAG$SUBFIELD ( tex lccn: 010$a
+      ).'
+    - <br/>
+    - 'För att ange flera marc-taggar/underliggande fält som mål för en upprepad BibTex-tagg
+      använder du följande format: BT_TAG: [TAG2$SUBFIELD1, TAG2$SUBFIELD2] ( e.g.
+      notes: [501$a, 505$g] ).'
+    - <br/>
+    - Alla värden för upprepade taggar och delfält kommer att skrivas ut med BibTeX-taggen.
+    - <br/>
+    - Använd '@' (med enkla citattecken) som BT_TAG för att ersätta bibtex-posttypen
+      med ett fältvärde du valt.
+  - - 'Inkludera följande fält vid export av RIS:'
+    - pref: RisExportAdditionalFields
+      syntax: text/x-yaml
+      type: textarea
+    - 'Använd en rad per tagg i formatet RIS_TAG: TAG$SUBFIELD ( t.ex. LC: 010$a ).'
+    - <br/>
+    - 'För att ange flera marc-taggar/underliggande fält som mål för en upprepad RIS-tagg
+      använder du följande format: RIS_TAG: [TAG2$SUBFIELD1, TAG2$SUBFIELD2] ( e.g.
+      NT: [501$a, 505$g] ).'
+    - <br/>
+    - Alla värden för upprepade taggar och delfält kommer att skrivas ut med RIS-taggen.
+    - <br/>
+    - Användning av TY (posttyp) som nyckel <em>ersätter</em> standard-TY med det
+      fältvärde du väljer.
+  Gränssnitt:
+  - - Använd
+    - choices: class-sources
+      pref: DefaultClassificationSource
+    - som standardkälla för klassificering.
+  - - choices:
+        '0': Visa
+        '1': Visa inte
+      pref: advancedMARCeditor
+    - beskrivningar av fält och delfält i MARC-redigeraren.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: EasyAnalyticalRecords
+    - enkla sätt att skapa kopplingar för analysposter.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      default: 0
+      pref: EnableAdvancedCatalogingEditor
+    - den avancerade katalogredigeraren.
+    - <br/> <strong>OBS:</strong>
+    - För närvarande finns inget stöd för fasta UNIMARC-fält.
+  - - När en fil sparas i formaten MARC/MARCXML i den avancerade katalogredigeraren
+      eller om detaljinformation för ett exemplar exporteras från personalklienten,
+      använd
+    - choices:
+        biblionumber: biblionummer
+        controlnumber: kontrollnummer
+      default: biblionumber
+      pref: DefaultSaveRecordFileID
+    - i filnamnet.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 1
+      pref: CreateAVFromCataloguing
+    - att auktoriserade värden skapas i katalogiseringsmodulen. Bibliotekarien behöver
+      delrättigheten manage_auth_values.
+  - - choices:
+        '0': Tillåt inte
+        '1': Tillåt
+      default: 0
+      pref: CatalogConcerns
+    - personal att rapportera ärenden kring katalogposter.
+    - <p><strong>OBS:</strong> Du kan också aktivera `<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacCatalogConcerns">OpacCatalogConcerns</a>`
+      för att tillåta OPAC-användarna samma alternativ.</p>
+  - - 'Använd '
+    - class: email
+      default: ''
+      pref: CatalogerEmails
+    - som anmälningsadress för katalogärenden.
+  Import:
+  - - Vid matchning på ISBN med verktyget för postimport,
+    - choices:
+        '0': aktivera inte
+        '1': aktivera
+      pref: AggressiveMatchOnISBN
+    - bör man försöka matcha aggressivt genom att försöka alla variationer av ISBN-värdena
+      i den importerade posten som en fras i ISBN-fälten för redan katalogiserade
+      poster.
+  - - Visa MARC-fält/delfält
+    - pref: AdditionalFieldsInZ3950ResultSearch
+    - 'i kolumnen "Ytterligare fält" i Z39.50 sökresultat (använd kommatecken som
+      avgränsare t.ex.: "<code>001, 082$ab, 090$ab</code>")'
+  - - Vid matchning av ISSN med postimportverktyget,
+    - choices:
+        '0': försök inte att
+        '1': försök att
+      pref: AggressiveMatchOnISSN
+    - aggressivt pröva alla variationer av ISSN på den importerade posten som en fras
+      i ISSN-fältet av redan katalogiserade poster.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: MARCOverlayRules
+    - Regler för MARC-postmatchning för inkommande poster, för att bestämma vilken
+      åtgärd som ska vidtas för varje fält.
+  Poststruktur:
+  - - 'Fyll i standardspråk för fält 008 Intervall 35-37 of MARC21-poster (t ex eng,
+      nor, ger, se <a href="http://www.loc.gov/marc/languages/language_code.html">MARC
+      kodlista för språk</a>):'
+    - pref: DefaultLanguageField008
+    - Tomma värden skrivs som standard ut på engelska.
+  - - 'Fyll i landskoden för fält 008 intervall 15-17 i MARC21-poster - Plats för
+      utgivning, framställning eller utförande. (Se <a href=''http://www.loc.gov/marc/countries/countries_code.html''>MARC
+      kodlista med länder</a>):'
+    - pref: DefaultCountryField008
+    - Empty blir som standard ||| - Inget försök att koda.
+  - - Tolka och lagra MARC-poster i
+    - choices:
+        MARC21: MARC21
+        UNIMARC: UNIMARC
+      pref: marcflavour
+    - -format.
+  - - choices:
+        '0': Aktivera inte
+        '1': Aktivera
+      pref: EnableItemGroups
+    - exemplargruppsfunktionen som tillåter dig att samla grupper av exemplar under
+      en post.
+  - - Använd exemplartypen för
+    - choices:
+        '0': den bibliografiska posten
+        '1': det specifika exemplaret
+      pref: item-level_itypes
+    - som den auktoritativa exemplartypen (för att bestämma regler för cirkulation
+      och avgifter, för visning av ikoner för en exemplartyp i detaljinformation eller
+      resultat för opac, osv.).
+  - - Mappa MARC-delfälten
+    - pref: itemcallnumber
+    - 'till ett exemplars hyllsignatur. Lista flera kommaseparerade fält för att kontrollera
+      dem sekventiellt. Varje fält kan innehålla flera underfält. Ordningen på underfälten
+      i posten kommer att bevaras. Till exempel: ''082ab,092ab'' kommer att leta i
+      082$a och 082$b, sedan 092$a och 092$b.'
+    - 'Exempel för MARC21: Dewey: 082ab,092ab; LOC: 050ab,090ab; från Koha-posten:
+      942hi. Exempel för UNIMARC: Dewey: 676a; LOC: 680ab.'
+  - - Visa MARC-delfält
+    - pref: AlternateHoldingsField
+    - som beståndsinformation för poster som inte har exemplar (denna kan innehålla
+      flera underliggande fält att söka i, exempelvis skulle <code>852abhi</code>
+      leta i de underliggande fälten a, b, h och i för 852), med de underliggande
+      fälten separerade av
+    - pref: AlternateHoldingsSeparator
+    - .
+  - - Fyll i <a href="http://www.loc.gov/marc/organizations/orgshome.html">MARC-organisationskoden</a>
+    - pref: MARCOrgCode
+    - som standard i nya MARC21-poster (lämna tomt för att avaktivera). Detta kan
+      även ställas in på biblioteksnivå.
+  - - När exemplar skapas, placera dem temporärt i
+    - class: short
+      pref: NewItemsDefaultLocation
+    - (bör vara en <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOC">placeringskod</a>,
+      eller blank för att inaktivera).
+  - - choices:
+        '0': Kopiera inte
+        '1': Kopiera
+      pref: z3950NormalizeAuthor
+    - författare från UNIMARC-taggarna
+    - class: multi
+      pref: z3950AuthorAuthFields
+    - (separerade av komman) till rätt författartaggar när poster importeras via Z39.50.
+  - - Streckkoder är
+    - choices:
+        EAN13: inkrementella EAN-13-streckkoder.
+        OFF: inte genererade automatiskt.
+        annual: genererade i formatet <year>0001, <year>-0002.
+        hbyymmincr: genererade i formatet <branchcode>ååmm0001.
+        incremental: genererade i formatet 1, 2, 3.
+      pref: autoBarcode
+  - - När ett nytt exemplar läggs till,
+    - choices:
+        '0': förifylls det nya exemplaret inte med de senast skapade exemplarvärdena.
+        '1': förifylls det nya exemplaret med de senast skapade exemplarvärdena.
+      pref: PrefillItem
+  - - 'Definiera en lista med underliggande fält som ska användas när exemplar förifylls
+      (separerade av mellanslag):'
+    - pref: SubfieldsToUseWhenPrefill
+    - Om de lämnas tomma kommer alla underfält att vara förifyllda.
+  - - Använd språket (ISO 690-2)
+    - class: short
+      pref: UNIMARCField100Language
+    - som standardspråk i UNIMARC-fält 100 när en ny post skapas eller i insticksprogrammet
+      för fält.
+  - - 'Lista med underliggande fält för vilka redigering är tillåten när rättigheten
+      edit_items_restricted är aktiverad, separerade med mellanslag:'
+    - pref: SubfieldsToAllowForRestrictedEditing
+    - 'Exempel:'
+    - 'UNIMARC: "995$f 995$h 995$j"'
+    - 'MARC21: "952$a 952$b 952$c"'
+    - FA-ramverket omfattas inte av rättigheten.
+    - Om systeminställningen är tom är inga fält begränsade.
+  - - 'En lista med underliggande fält för vilka redigering är tillåten när rättigheten
+      items_batchmod_restricted är aktiverad, separerade med mellanslag:'
+    - pref: SubfieldsToAllowForRestrictedBatchmod
+    - 'Exempel:'
+    - 'UNIMARC: "995$f 995$h 995$j"'
+    - 'MARC21: "952$a 952$b 952$c"'
+    - FA-ramverket omfattas inte av rättigheten.
+    - Om systeminställningen är tom är inga fält begränsade.
+  - - Spara låntagarnumret för postens skapare i MARC-delfält
+    - pref: MarcFieldForCreatorId
+    - och namnet på postens skapare i MARC-delfält
+    - pref: MarcFieldForCreatorName
+    - .
+    - Spara låntagarnumret för den som senaste uppdaterade posten i MARC-delfält
+    - pref: MarcFieldForModifierId
+    - och namnet på den som senast uppdaterade posten i MARC-delfält
+    - pref: MarcFieldForModifierName
+    - . <br/><strong>OBS!:</strong> Använd dollartecken mellan fält och delfält enligt
+      formatet 123$a.
+  - - Kontrollnummer (001)
+    - choices:
+        OFF: genereras inte automatiskt.
+        biblionumber: genereras som biblionnummer.
+      pref: autoControlNumber
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: UseOCLCEncodingLevels
+    - OCLC definierade värden för MARC-kodningsnivån i leader value builder för position
+      17.
+  - - Tillämpa standardvärden för ramverk
+    - multiple:
+        changed: när du ändrar ramverket medan du redigerar den befintliga posten
+        duplicate: när du redigerar poster som nya (duplicerar)
+        imported: när du importerar en post via z39.50
+        new: vid katalogisering av nya poster
+      pref: ApplyFrameworkDefaults
+  - - Använd MARCfält
+    - pref: ContentWarningField
+    - för lagring av innehållsvarningar(?).
+    - <br/><strong>OBS:</strong> Fältet måste visas i MARC-ramverken för att vara
+      tillgängligt.
+  - - choices:
+        '0': Ta inte bort
+        '1': Ta bort
+      pref: StripWhitespaceChars
+    - inledande och efterföljande blanksteg (inklusive mellanslag, tabbar, radbrytningar
+      och "carriage returns") och inre rader från datafält vid katalogisering av bibliografiska
+      och auktoritetsposter. Ledar- och kontrollfälten kommer inte att påverkas.
+  Ryggetiketter:
+  - - Vid användning av skrivaren för snabbutskrift av ryggetiketter,
+    - choices:
+        '0': visa inte
+        '1': visa
+      pref: SpineLabelAutoPrint
+    - automatiskt en utskriftsdialog.
+  - - 'Inkludera följande fält på en snabbutskriven ryggetikett:'
+    - (Ange i kolumner från tabellerna <code>biblio</code>, <code>biblioitems</code>
+      eller <code>items</code>, omgärdade av &lt; och &gt;.)
+    - pref: SpineLabelFormat
+      type: textarea
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: SpineLabelShowPrintOnBibDetails
+    - knappar på bib-detaljsidan för att skriva ut ryggetiketter för exemplar.
+  - []
+  Visning:
+  - - 'Separera huvuduppgift och underavdelningar med '
+    - class: short
+      pref: AuthoritySeparator
+    - (icke-XSLT-vy enbart).
+  - - Visa
+    - pref: URLLinkText
+    - som text för inbäddade länkar i MARC-poster och exemplar.
+  - - choices:
+        '0': Använd inte
+        '1': Använd
+      pref: UseControlNumber
+    - postkontrollnummer (delfält $w) och kontrollnummer (001) för länkning av bibliografiska
+      poster.
+  - - Använd
+    - class: url
+      pref: MarcFieldDocURL
+    - som URL för MARC-fältdokumentation.
+    - Möjliga ersättningar är <tt>{MARC}</tt> (marc-smak, t.ex. "MARC21" eller "UNIMARC"),
+      <tt>{FIELD}</tt> (fältnummer, t.ex. "000" eller "048 "), <tt>{LANG}</tt> (användarspråk,
+      t.ex. "en" eller "fi-FI").
+    - Om den lämnas tom används formatdokumentationen på http://loc.gov (MARC21) eller
+      http://archive.ifla.org (UNIMARC).
+    - Till exempel <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>
+  - - choices:
+        '0': Visa
+        '1': Visa inte
+      pref: hide_marc
+    - MARC-taggnummer, koder för delfält och indikatorer i MARC-vyer.
+  - - choices:
+        economical: Minimera
+        standard: Minimera inte
+      pref: LabelMARCView
+    - upprepade taggar av samma typ till en tagg för visning.
+  - - Visa som standard bibliografiska poster i
+    - choices:
+        isbd: ISBD-format (se nedan).
+        labeled_marc: märkt MARC-format.
+        marc: MARC-format.
+        normal: normalt format.
+      pref: IntranetBiblioDefaultView
+  - - 'Använd följande som ISBD-mall i personalgränssnittet:'
+    - class: code
+      pref: ISBD
+      syntax: text/html
+      type: textarea
+  - - choices:
+        '0': Dölj inte
+        '1': Dölj
+      pref: OpacSuppression
+    - bibliografiska poster markerade som dolda från Opacens sökresultat.
+    - <br />Begränsa döljandet till IP-adresser utanför IP-intervallet
+    - class: short
+      pref: OpacSuppressionByIPRange
+    - (Lämna tomt om det inte används. Ange ett intervall som <code>192.168.</code>.)
+    - <br />Omdirigera opac-sidan för dolda poster till
+    - choices:
+        '0': sidan för 404-fel ("Not found").
+        '1': en förklarande sida ("Denna post är spärrad").
+      pref: OpacSuppressionRedirect
+    - <br /> Ett anpassat meddelande kan visas på omdirigeringssidan för dolda bibliografiska
+      poster genom att skapa en <a href='/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations'>HTML-anpassning</a>
+      under OpacSuppressionMessage.
+  - - choices:
+        '0': Separera inte
+        '1': Separera
+      pref: SeparateHoldings
+    - exemplar visas i två flikar, där den första fliken innehåller exemplar vars
+    - choices:
+        holdingbranch: nuvarande bibliotek
+        homebranch: hembibliotek
+      pref: SeparateHoldingsBranch
+    - är den inloggade användarens bibliotek. Den andra fliken innehåller alla andra
+      exemplar.
+  - - choices:
+        '0': Don't
+        '1': Do
+      pref: AlwaysShowHoldingsTableFilters
+    - always show filters by default on the holdings table in the record details page
+      in the staff interface.
+  - - Visa inte
+    - class: multi
+      pref: NotesToHide
+    - 'anteckningsfält på fliken "Titelnoteringar" och på fliken "Beskrivning" på
+      detaljsidorna för OPAC och personalgränssnitt. Använd ett kommatecken för att
+      separera flera fält. Exempel: 500 502 (MARC21); 300 328 (UNIMARC).'
+    - <br />
+    - För att dölja fält från andra sidor som den normala vyn, använd synlighetsinställningarna
+      för underfält i avsnittet MARC bibliografiska ramverk i administrationsmodulen.
+  - - choices:
+        '0': Visa inte
+        '1': Visa
+      pref: AcquisitionDetails
+    - inköpsdetaljer på detaljsidan för den bibliografiska posten.
+  - - 'Visa följande fält för raderade poster efter en sammanslagning:'
+    - pref: MergeReportFields
+    - '<br />T.ex.: ''001,245ab,600'''
+    - 'visar:'
+    - <ul>
+    - <li>värde i 001</li>
+    - <li>delfält a och b för fält 245</li>
+    - <li>alla delfält för fält 600</li>
+  - - Visa en lista över poster länkade via fält 773 på
+    - choices:
+        both: personalklientens och i OPACs
+        nowhere: inga
+        opac: OPACs
+        staff: personalklientens
+      pref: ShowComponentRecords
+    - detaljsidor för poster.
+    - Ett maxantal av
+    - pref: MaxComponentRecords
+    - poster kommer att visas.
+    - <br/> UNIMARC stöds inte.
+    - Sortera som standard sökresultat i personalgränssnittet per
+    - choices:
+        acqdate: ankomstdatum
+        author: författare
+        biblionumber: biblionummer
+        call_number: hyllsignatur
+        pubdate: publikationsdatum
+        title: titel
+      default: title
+      pref: ComponentSortField
+    - ','
+    - choices:
+        asc: stigande.
+        az: från A till Z.
+        dsc: fallande.
+        za: från Z till A.
+      pref: ComponentSortOrder

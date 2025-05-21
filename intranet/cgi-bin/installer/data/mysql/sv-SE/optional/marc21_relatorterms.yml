@@ -1,0 +1,903 @@
+---
+description:
+- MARC-lista med funktionskoder, http://www.loc.gov/marc/relators/relaterm.html
+tables:
+- authorised_values:
+    multiline: []
+    rows:
+    - authorised_value: abr
+      category: RELTERMS
+      lib: Förkortad utgåva
+    - authorised_value: acp
+      category: RELTERMS
+      lib: Art copyist
+    - authorised_value: act
+      category: RELTERMS
+      lib: Skådespelare
+    - authorised_value: adi
+      category: RELTERMS
+      lib: Art director
+    - authorised_value: adp
+      category: RELTERMS
+      lib: Bearbetare
+    - authorised_value: aft
+      category: RELTERMS
+      lib: Författare till efterord, kolofon m.m.
+    - authorised_value: anc
+      category: RELTERMS
+      lib: Speaker
+    - authorised_value: anl
+      category: RELTERMS
+      lib: Analyst
+    - authorised_value: anm
+      category: RELTERMS
+      lib: Animatör
+    - authorised_value: ann
+      category: RELTERMS
+      lib: Annotation
+    - authorised_value: ant
+      category: RELTERMS
+      lib: Baserat på
+    - authorised_value: ape
+      category: RELTERMS
+      lib: Appellee
+    - authorised_value: apl
+      category: RELTERMS
+      lib: Överklagande part i appellationsdomstol
+    - authorised_value: app
+      category: RELTERMS
+      lib: Applicant
+    - authorised_value: aqt
+      category: RELTERMS
+      lib: Citat, textudrag
+    - authorised_value: arc
+      category: RELTERMS
+      lib: Architect
+    - authorised_value: ard
+      category: RELTERMS
+      lib: Artistic director
+    - authorised_value: arr
+      category: RELTERMS
+      lib: Arrangör
+    - authorised_value: art
+      category: RELTERMS
+      lib: Konstnär
+    - authorised_value: asg
+      category: RELTERMS
+      lib: Uppdragstagare
+    - authorised_value: asn
+      category: RELTERMS
+      lib: Associerat namn
+    - authorised_value: ato
+      category: RELTERMS
+      lib: Autographer
+    - authorised_value: att
+      category: RELTERMS
+      lib: Attributerat namn
+    - authorised_value: auc
+      category: RELTERMS
+      lib: Auktionsförrättare
+    - authorised_value: aud
+      category: RELTERMS
+      lib: Author of dialog
+    - authorised_value: aue
+      category: RELTERMS
+      lib: Ljudtekniker
+    - authorised_value: aui
+      category: RELTERMS
+      lib: Författare till introduktion etc.
+    - authorised_value: aup
+      category: RELTERMS
+      lib: Audio producer
+    - authorised_value: aus
+      category: RELTERMS
+      lib: Manusförfattare
+    - authorised_value: aut
+      category: RELTERMS
+      lib: Författare
+    - authorised_value: bdd
+      category: RELTERMS
+      lib: Bokband
+    - authorised_value: bjd
+      category: RELTERMS
+      lib: Skyddsomslag
+    - authorised_value: bka
+      category: RELTERMS
+      lib: Book artist
+    - authorised_value: bkd
+      category: RELTERMS
+      lib: Bokformgivare
+    - authorised_value: bkp
+      category: RELTERMS
+      lib: Book producer
+    - authorised_value: blw
+      category: RELTERMS
+      lib: Förlags-/reklamtext
+    - authorised_value: bnd
+      category: RELTERMS
+      lib: Binder
+    - authorised_value: bpd
+      category: RELTERMS
+      lib: Exlibris, bokägarmärke
+    - authorised_value: brd
+      category: RELTERMS
+      lib: TV-/radioutsändning
+    - authorised_value: brl
+      category: RELTERMS
+      lib: Punktskriftspräglare
+    - authorised_value: bsl
+      category: RELTERMS
+      lib: Bokförsäljare
+    - authorised_value: cad
+      category: RELTERMS
+      lib: Casting director
+    - authorised_value: cas
+      category: RELTERMS
+      lib: Gjutare
+    - authorised_value: ccp
+      category: RELTERMS
+      lib: Idé, koncept
+    - authorised_value: chr
+      category: RELTERMS
+      lib: Koreograf
+    - authorised_value: cli
+      category: RELTERMS
+      lib: Client
+    - authorised_value: cll
+      category: RELTERMS
+      lib: Kalligraf
+    - authorised_value: clr
+      category: RELTERMS
+      lib: Colorist
+    - authorised_value: clt
+      category: RELTERMS
+      lib: Collotyper
+    - authorised_value: cmm
+      category: RELTERMS
+      lib: Kommentator
+    - authorised_value: cmp
+      category: RELTERMS
+      lib: Kompositör
+    - authorised_value: cmt
+      category: RELTERMS
+      lib: Kompositör
+    - authorised_value: cng
+      category: RELTERMS
+      lib: Cinematographer
+    - authorised_value: cnd
+      category: RELTERMS
+      lib: Dirigent
+    - authorised_value: cns
+      category: RELTERMS
+      lib: Censor
+    - authorised_value: coe
+      category: RELTERMS
+      lib: Contestant-appellee
+    - authorised_value: col
+      category: RELTERMS
+      lib: Samlare
+    - authorised_value: com
+      category: RELTERMS
+      lib: Sammanställare
+    - authorised_value: con
+      category: RELTERMS
+      lib: Conservator
+    - authorised_value: cop
+      category: RELTERMS
+      lib: Camera operator
+    - authorised_value: cor
+      category: RELTERMS
+      lib: Samlingsregistrator
+    - authorised_value: cos
+      category: RELTERMS
+      lib: Tävlande
+    - authorised_value: cot
+      category: RELTERMS
+      lib: Contestant-appellant
+    - authorised_value: cou
+      category: RELTERMS
+      lib: Domstols regelverk
+    - authorised_value: cov
+      category: RELTERMS
+      lib: Cover designer
+    - authorised_value: cpc
+      category: RELTERMS
+      lib: Copyright claimant
+    - authorised_value: cpe
+      category: RELTERMS
+      lib: Complainant-appellee
+    - authorised_value: cph
+      category: RELTERMS
+      lib: Upphovsrättsinnehavare
+    - authorised_value: cpl
+      category: RELTERMS
+      lib: Complainant
+    - authorised_value: cpt
+      category: RELTERMS
+      lib: Complainant-appellant
+    - authorised_value: cre
+      category: RELTERMS
+      lib: Creator
+    - authorised_value: crp
+      category: RELTERMS
+      lib: Korrespondent
+    - authorised_value: crr
+      category: RELTERMS
+      lib: Handskriftskorrektur
+    - authorised_value: crt
+      category: RELTERMS
+      lib: Court reporter
+    - authorised_value: csl
+      category: RELTERMS
+      lib: Consultant
+    - authorised_value: csp
+      category: RELTERMS
+      lib: Projektkonsult
+    - authorised_value: cst
+      category: RELTERMS
+      lib: Costume designer
+    - authorised_value: ctb
+      category: RELTERMS
+      lib: Contributor
+    - authorised_value: cte
+      category: RELTERMS
+      lib: Contestee-appellee
+    - authorised_value: ctg
+      category: RELTERMS
+      lib: Kartograf
+    - authorised_value: ctr
+      category: RELTERMS
+      lib: Contractor
+    - authorised_value: cts
+      category: RELTERMS
+      lib: Tävlande
+    - authorised_value: ctt
+      category: RELTERMS
+      lib: Contestee-appellant
+    - authorised_value: cur
+      category: RELTERMS
+      lib: Curator
+    - authorised_value: cwt
+      category: RELTERMS
+      lib: Kommentator för skriven text
+    - authorised_value: dbd
+      category: RELTERMS
+      lib: Dubbing director
+    - authorised_value: dbp
+      category: RELTERMS
+      lib: Distribution place
+    - authorised_value: dfd
+      category: RELTERMS
+      lib: Defendant
+    - authorised_value: dfe
+      category: RELTERMS
+      lib: Defendant-appellee
+    - authorised_value: dft
+      category: RELTERMS
+      lib: Defendant-appellant
+    - authorised_value: dgc
+      category: RELTERMS
+      lib: Medlem i examenskommittén
+    - authorised_value: dgg
+      category: RELTERMS
+      lib: Degree granting institution
+    - authorised_value: dgs
+      category: RELTERMS
+      lib: Degree supervisor
+    - authorised_value: dis
+      category: RELTERMS
+      lib: Disputerad
+    - authorised_value: djo
+      category: RELTERMS
+      lib: DJ
+    - authorised_value: dln
+      category: RELTERMS
+      lib: Delineator
+    - authorised_value: dnc
+      category: RELTERMS
+      lib: Dansare
+    - authorised_value: dnr
+      category: RELTERMS
+      lib: Donator
+    - authorised_value: dpc
+      category: RELTERMS
+      lib: Depicted
+    - authorised_value: dpt
+      category: RELTERMS
+      lib: Depositor
+    - authorised_value: drm
+      category: RELTERMS
+      lib: Teknisk detaljritning
+    - authorised_value: drt
+      category: RELTERMS
+      lib: Regissör
+    - authorised_value: dsr
+      category: RELTERMS
+      lib: Formgivare
+    - authorised_value: dst
+      category: RELTERMS
+      lib: Distributör
+    - authorised_value: dtc
+      category: RELTERMS
+      lib: Data contributor
+    - authorised_value: dte
+      category: RELTERMS
+      lib: Dedicerat till
+    - authorised_value: dtm
+      category: RELTERMS
+      lib: Data manager
+    - authorised_value: dto
+      category: RELTERMS
+      lib: Dedikation
+    - authorised_value: dub
+      category: RELTERMS
+      lib: Okänd författare
+    - authorised_value: edc
+      category: RELTERMS
+      lib: Sammanställande redaktör
+    - authorised_value: edd
+      category: RELTERMS
+      lib: Editorial director
+    - authorised_value: edm
+      category: RELTERMS
+      lib: Redaktör för arbete av rörlig bild
+    - authorised_value: edt
+      category: RELTERMS
+      lib: Redaktör
+    - authorised_value: egr
+      category: RELTERMS
+      lib: Gravör
+    - authorised_value: elg
+      category: RELTERMS
+      lib: Elektriker
+    - authorised_value: elt
+      category: RELTERMS
+      lib: Electrotyper
+    - authorised_value: eng
+      category: RELTERMS
+      lib: Ingenjör
+    - authorised_value: enj
+      category: RELTERMS
+      lib: Verkställande jurisdiktion
+    - authorised_value: etr
+      category: RELTERMS
+      lib: Etsare
+    - authorised_value: evp
+      category: RELTERMS
+      lib: Event place
+    - authorised_value: exp
+      category: RELTERMS
+      lib: Expert
+    - authorised_value: fac
+      category: RELTERMS
+      lib: Faksimilist
+    - authorised_value: fds
+      category: RELTERMS
+      lib: Filmdistributör
+    - authorised_value: fld
+      category: RELTERMS
+      lib: Field director
+    - authorised_value: flm
+      category: RELTERMS
+      lib: Filmredaktör
+    - authorised_value: fmd
+      category: RELTERMS
+      lib: Film director
+    - authorised_value: fmk
+      category: RELTERMS
+      lib: Filmmaker
+    - authorised_value: fmo
+      category: RELTERMS
+      lib: Tidigare ägare
+    - authorised_value: fmp
+      category: RELTERMS
+      lib: Film producer
+    - authorised_value: fon
+      category: RELTERMS
+      lib: Grundare
+    - authorised_value: fpy
+      category: RELTERMS
+      lib: First party
+    - authorised_value: fnd
+      category: RELTERMS
+      lib: Finansiär
+    - authorised_value: frg
+      category: RELTERMS
+      lib: Förfalskare
+    - authorised_value: gdv
+      category: RELTERMS
+      lib: Game developer
+    - authorised_value: gis
+      category: RELTERMS
+      lib: Geographic information specialist
+    - authorised_value: his
+      category: RELTERMS
+      lib: Värdinstitution
+    - authorised_value: hnr
+      category: RELTERMS
+      lib: Festskriftsföremål
+    - authorised_value: hst
+      category: RELTERMS
+      lib: Värddator
+    - authorised_value: ill
+      category: RELTERMS
+      lib: Illustratör
+    - authorised_value: ilu
+      category: RELTERMS
+      lib: Illuminatör
+    - authorised_value: ins
+      category: RELTERMS
+      lib: Inskription
+    - authorised_value: inv
+      category: RELTERMS
+      lib: Inventor
+    - authorised_value: isb
+      category: RELTERMS
+      lib: Lånegivande bibliotek
+    - authorised_value: itr
+      category: RELTERMS
+      lib: Instrumentalist
+    - authorised_value: ive
+      category: RELTERMS
+      lib: Intervjuobjekt
+    - authorised_value: ivr
+      category: RELTERMS
+      lib: Intervjuare
+    - authorised_value: jud
+      category: RELTERMS
+      lib: Domare
+    - authorised_value: jug
+      category: RELTERMS
+      lib: Jurisdiction governed
+    - authorised_value: lbr
+      category: RELTERMS
+      lib: Laboratory
+    - authorised_value: lbt
+      category: RELTERMS
+      lib: Librettist
+    - authorised_value: ldr
+      category: RELTERMS
+      lib: Laboratory director
+    - authorised_value: led
+      category: RELTERMS
+      lib: Chef, ledare
+    - authorised_value: lee
+      category: RELTERMS
+      lib: Libelee-appellee
+    - authorised_value: lel
+      category: RELTERMS
+      lib: Libellee
+    - authorised_value: len
+      category: RELTERMS
+      lib: Lender
+    - authorised_value: let
+      category: RELTERMS
+      lib: Libelee-appellant
+    - authorised_value: lgd
+      category: RELTERMS
+      lib: Lighting designer
+    - authorised_value: lie
+      category: RELTERMS
+      lib: Libelant-appellee
+    - authorised_value: lil
+      category: RELTERMS
+      lib: Libelant
+    - authorised_value: lit
+      category: RELTERMS
+      lib: Libelant-appellant
+    - authorised_value: lsa
+      category: RELTERMS
+      lib: Landskapsarkitekt
+    - authorised_value: lse
+      category: RELTERMS
+      lib: Licensinnehavare
+    - authorised_value: lso
+      category: RELTERMS
+      lib: Licensutfärdare
+    - authorised_value: ltg
+      category: RELTERMS
+      lib: Litograf
+    - authorised_value: lyr
+      category: RELTERMS
+      lib: Sångtext
+    - authorised_value: mcp
+      category: RELTERMS
+      lib: Music copyist
+    - authorised_value: med
+      category: RELTERMS
+      lib: Allmän medieterm
+    - authorised_value: mfp
+      category: RELTERMS
+      lib: Tillverkningsplats
+    - authorised_value: mfr
+      category: RELTERMS
+      lib: Tillverkare
+    - authorised_value: mdc
+      category: RELTERMS
+      lib: Metadata contact
+    - authorised_value: mka
+      category: RELTERMS
+      lib: Makeup-artist
+    - authorised_value: mod
+      category: RELTERMS
+      lib: Moderator
+    - authorised_value: mon
+      category: RELTERMS
+      lib: Övervakare, inspektör
+    - authorised_value: mrb
+      category: RELTERMS
+      lib: Marbler
+    - authorised_value: mrk
+      category: RELTERMS
+      lib: Markup editor
+    - authorised_value: msd
+      category: RELTERMS
+      lib: Musical director
+    - authorised_value: mte
+      category: RELTERMS
+      lib: Metallgravör
+    - authorised_value: mtk
+      category: RELTERMS
+      lib: Minute taker
+    - authorised_value: mup
+      category: RELTERMS
+      lib: Music programmer
+    - authorised_value: mus
+      category: RELTERMS
+      lib: Musiker
+    - authorised_value: mxe
+      category: RELTERMS
+      lib: Mixningstekniker
+    - authorised_value: 'nan'
+      category: RELTERMS
+      lib: Nyhetsuppläsare
+    - authorised_value: nrt
+      category: RELTERMS
+      lib: Berättare, inläsare
+    - authorised_value: onp
+      category: RELTERMS
+      lib: Deltagare via skärm
+    - authorised_value: opn
+      category: RELTERMS
+      lib: Opponent
+    - authorised_value: org
+      category: RELTERMS
+      lib: Ursprunglig upphovsman
+    - authorised_value: orm
+      category: RELTERMS
+      lib: Organisatör
+    - authorised_value: osp
+      category: RELTERMS
+      lib: Introduktör/presentatör av faktafilm
+    - authorised_value: oth
+      category: RELTERMS
+      lib: Annat
+    - authorised_value: own
+      category: RELTERMS
+      lib: Ägare
+    - authorised_value: pad
+      category: RELTERMS
+      lib: Adressort
+    - authorised_value: pan
+      category: RELTERMS
+      lib: Panelist
+    - authorised_value: pat
+      category: RELTERMS
+      lib: Låntagare
+    - authorised_value: pbd
+      category: RELTERMS
+      lib: Förlagsansvarig
+    - authorised_value: pbl
+      category: RELTERMS
+      lib: Förlag
+    - authorised_value: pdr
+      category: RELTERMS
+      lib: Projektledare
+    - authorised_value: pfr
+      category: RELTERMS
+      lib: Proofreader
+    - authorised_value: pht
+      category: RELTERMS
+      lib: Fotograf
+    - authorised_value: plt
+      category: RELTERMS
+      lib: Platemaker
+    - authorised_value: pma
+      category: RELTERMS
+      lib: Permitting agency
+    - authorised_value: pmn
+      category: RELTERMS
+      lib: Produktionsledare
+    - authorised_value: pop
+      category: RELTERMS
+      lib: Tryckare av illustrationer
+    - authorised_value: ppm
+      category: RELTERMS
+      lib: Pappersmakare
+    - authorised_value: ppt
+      category: RELTERMS
+      lib: Marionettspelare
+    - authorised_value: pra
+      category: RELTERMS
+      lib: Preses
+    - authorised_value: prc
+      category: RELTERMS
+      lib: Process contact
+    - authorised_value: prd
+      category: RELTERMS
+      lib: Production personnel
+    - authorised_value: pre
+      category: RELTERMS
+      lib: Filmpresentatör
+    - authorised_value: prf
+      category: RELTERMS
+      lib: Framförande
+    - authorised_value: prg
+      category: RELTERMS
+      lib: Programmer
+    - authorised_value: prm
+      category: RELTERMS
+      lib: Printmaker
+    - authorised_value: prn
+      category: RELTERMS
+      lib: Production company
+    - authorised_value: pro
+      category: RELTERMS
+      lib: Producent
+    - authorised_value: prp
+      category: RELTERMS
+      lib: Utgivningsort
+    - authorised_value: prs
+      category: RELTERMS
+      lib: Production designer
+    - authorised_value: prt
+      category: RELTERMS
+      lib: Tryckare
+    - authorised_value: prv
+      category: RELTERMS
+      lib: Leverantör
+    - authorised_value: pta
+      category: RELTERMS
+      lib: Patentsökande
+    - authorised_value: pte
+      category: RELTERMS
+      lib: Plaintiff-appellee
+    - authorised_value: ptf
+      category: RELTERMS
+      lib: Plaintiff
+    - authorised_value: pth
+      category: RELTERMS
+      lib: Patentinnehavare
+    - authorised_value: ptt
+      category: RELTERMS
+      lib: Plaintiff-appellant
+    - authorised_value: pup
+      category: RELTERMS
+      lib: Utgivningsort
+    - authorised_value: rap
+      category: RELTERMS
+      lib: Rapporteur
+    - authorised_value: rbr
+      category: RELTERMS
+      lib: Rubricator
+    - authorised_value: rcd
+      category: RELTERMS
+      lib: Inspelning
+    - authorised_value: rce
+      category: RELTERMS
+      lib: Inspelningstekniker
+    - authorised_value: rcp
+      category: RELTERMS
+      lib: Addressee
+    - authorised_value: rdd
+      category: RELTERMS
+      lib: Radio director
+    - authorised_value: red
+      category: RELTERMS
+      lib: Redaktor
+    - authorised_value: ren
+      category: RELTERMS
+      lib: Renderer
+    - authorised_value: res
+      category: RELTERMS
+      lib: Researcher
+    - authorised_value: rev
+      category: RELTERMS
+      lib: Granskare
+    - authorised_value: rpc
+      category: RELTERMS
+      lib: Radio producer
+    - authorised_value: rps
+      category: RELTERMS
+      lib: Repository
+    - authorised_value: rpt
+      category: RELTERMS
+      lib: Reporter
+    - authorised_value: rpy
+      category: RELTERMS
+      lib: Responsible party
+    - authorised_value: rse
+      category: RELTERMS
+      lib: Respondent-appellee
+    - authorised_value: rsg
+      category: RELTERMS
+      lib: Restager
+    - authorised_value: rsp
+      category: RELTERMS
+      lib: Respondent
+    - authorised_value: rsr
+      category: RELTERMS
+      lib: Restaturering
+    - authorised_value: rst
+      category: RELTERMS
+      lib: Respondent-appellant
+    - authorised_value: rth
+      category: RELTERMS
+      lib: Chef för forskargrupp
+    - authorised_value: rtm
+      category: RELTERMS
+      lib: Medlem av forskargrupp
+    - authorised_value: rxa
+      category: RELTERMS
+      lib: Remixartist
+    - authorised_value: sad
+      category: RELTERMS
+      lib: Vetenskaplig rådgivare
+    - authorised_value: sce
+      category: RELTERMS
+      lib: Scenario
+    - authorised_value: scl
+      category: RELTERMS
+      lib: Skulptör
+    - authorised_value: scr
+      category: RELTERMS
+      lib: Skrivare, kopist
+    - authorised_value: sde
+      category: RELTERMS
+      lib: Sound engineer
+    - authorised_value: sgd
+      category: RELTERMS
+      lib: Stage director
+    - authorised_value: sds
+      category: RELTERMS
+      lib: Sound designer
+    - authorised_value: sec
+      category: RELTERMS
+      lib: Sekreterare
+    - authorised_value: sfx
+      category: RELTERMS
+      lib: Leverantör av specialeffekter
+    - authorised_value: sgn
+      category: RELTERMS
+      lib: Signatur
+    - authorised_value: sht
+      category: RELTERMS
+      lib: Supporting host
+    - authorised_value: sll
+      category: RELTERMS
+      lib: Seller
+    - authorised_value: sng
+      category: RELTERMS
+      lib: Sångare
+    - authorised_value: spk
+      category: RELTERMS
+      lib: Röst, tal
+    - authorised_value: spn
+      category: RELTERMS
+      lib: Sponsor
+    - authorised_value: spy
+      category: RELTERMS
+      lib: Second party
+    - authorised_value: srv
+      category: RELTERMS
+      lib: Surveyor
+    - authorised_value: std
+      category: RELTERMS
+      lib: Set designer
+    - authorised_value: stg
+      category: RELTERMS
+      lib: Scensättning
+    - authorised_value: stl
+      category: RELTERMS
+      lib: Dramatisering
+    - authorised_value: stm
+      category: RELTERMS
+      lib: Stage manager
+    - authorised_value: stn
+      category: RELTERMS
+      lib: Standardkommitté
+    - authorised_value: str
+      category: RELTERMS
+      lib: Stereotyper
+    - authorised_value: swd
+      category: RELTERMS
+      lib: Programmerare
+    - authorised_value: tau
+      category: RELTERMS
+      lib: Manusförfattare för TV
+    - authorised_value: tcd
+      category: RELTERMS
+      lib: Technical director
+    - authorised_value: tch
+      category: RELTERMS
+      lib: Teacher
+    - authorised_value: ths
+      category: RELTERMS
+      lib: Avhandlingshandledare
+    - authorised_value: tld
+      category: RELTERMS
+      lib: Television director
+    - authorised_value: tlg
+      category: RELTERMS
+      lib: TV-gäst
+    - authorised_value: tlh
+      category: RELTERMS
+      lib: TV-värd
+    - authorised_value: tlp
+      category: RELTERMS
+      lib: Television producer
+    - authorised_value: trc
+      category: RELTERMS
+      lib: Transcriber
+    - authorised_value: trl
+      category: RELTERMS
+      lib: Översättare
+    - authorised_value: tyd
+      category: RELTERMS
+      lib: Typsnitt
+    - authorised_value: tyg
+      category: RELTERMS
+      lib: Typograf
+    - authorised_value: uvp
+      category: RELTERMS
+      lib: University place
+    - authorised_value: vac
+      category: RELTERMS
+      lib: Voice actor
+    - authorised_value: vdg
+      category: RELTERMS
+      lib: Videograf
+    - authorised_value: vfx
+      category: RELTERMS
+      lib: Leverantör av visuella effekter
+    - authorised_value: wac
+      category: RELTERMS
+      lib: Analys, kommentar
+    - authorised_value: wal
+      category: RELTERMS
+      lib: Writer of added lyrics
+    - authorised_value: wam
+      category: RELTERMS
+      lib: Medföljande material
+    - authorised_value: wat
+      category: RELTERMS
+      lib: Writer of added text
+    - authorised_value: wdc
+      category: RELTERMS
+      lib: Woodcutter
+    - authorised_value: wde
+      category: RELTERMS
+      lib: Xylograf
+    - authorised_value: wfs
+      category: RELTERMS
+      lib: Writer of film story
+    - authorised_value: wft
+      category: RELTERMS
+      lib: Writer of intertitles
+    - authorised_value: win
+      category: RELTERMS
+      lib: Writer of introduction
+    - authorised_value: wit
+      category: RELTERMS
+      lib: Witness
+    - authorised_value: wpr
+      category: RELTERMS
+      lib: Writer of preface
+    - authorised_value: wst
+      category: RELTERMS
+      lib: Tillagt textinnehåll
+    - authorised_value: wts
+      category: RELTERMS
+      lib: Writer of television story
+    translatable:
+    - lib

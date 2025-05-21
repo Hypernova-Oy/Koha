@@ -1,0 +1,380 @@
+[% USE raw %]
+[% USE Asset %]
+[% USE Branches %]
+[% USE Koha %]
+[% USE KohaDates %]
+[% USE Price %]
+[% USE AuthorisedValues %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+[% SET destination = "circ" %]
+<title>[% FILTER collapse %]
+ [% IF patron %]
+ [% patron_in_title = INCLUDE 'patron-title.inc' invert_name = 1 no_html = 1 %]
+ [% tx("Batch check out to {patron}", { patron = patron_in_title }) | html %] &rsaquo;
+ [% END %]
+ [% t("Circulation") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="circ_circulation_batch_checkouts" class="circ">
+
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation-home.pl">Cirkulation</a>
+ [% END %]
+ [% IF patron %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% borrowernumber | uri %]">Utlåna ut till [% INCLUDE 'patron-title.inc' %]</a>
+ [% END %]
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Satsvis utlåning</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ [% IF patron %]
+ <div class="col-md-10 order-md-2 order-sm-1">
+ [% ELSE %]
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% END %]
+ <main>
+ [% INCLUDE 'messages.inc' %]
+ [% IF patron %]
+ [% INCLUDE 'members-toolbar.inc' %]
+ [% END %]
+
+ <h1>Satsvis utlåning</h1>
+
+[% IF patron and not batch_allowed %]
+ <div class="alert alert-warning">Du får inte använda satsvis utlåning för denna låntagare</div>
+[% ELSIF patron and noissues and not checkout_infos %]
+ <div class="alert alert-warning">
+ Kan inte låna ut! [% IF ( charges ) %] [% INCLUDE 'blocked-fines.inc' NoIssuesCharge = chargesamount %] [% END %] [% IF ( charges_guarantors_guarantees ) %] <li>
+ <span class="circ-hlt">Avgifter:</span> Låntagarens vårdnadshavare och de som de är vårdnadshavare till är tillsammans skyldiga [% charges_guarantors_guarantees | $Price %]. [% IF noissues %] <span class="circ-hlt">Utlån ej tillåtet på grund av för höga avgifter.</span>
+ [% END %]
+ </li>
+ [% END %]
+ [% IF ( charges_guarantees ) %]
+ <li>
+ <span class="circ-hlt">Avgifter:</span> De låntagaren är ansvarig för är tillsammans skyldiga [% chargesamount_guarantees | $Price %]. [% IF noissues %] <span class="circ-hlt">Utlån ej tillåtet på grund av för höga avgifter.</span>
+ [% END %]
+ </li>
+ [% END %]
+ </div>
+[% ELSIF patron and not checkout_infos %]
+ <form method="post" enctype="multipart/form-data" action="/cgi-bin/koha/circ/circulation.pl">
+ [% INCLUDE 'csrf-token.inc' %]
+ <div id="circ_circulation_issue">
+ <fieldset>
+ <legend>Lånar ut till [% INCLUDE 'patron-title.inc' %]</legend>
+ <ol>
+ <li>
+ <label for="barcodelist">Streckkodlista (en streckkod per rad): </label>
+ <textarea rows="10" cols="30" id="barcodelist" name="barcodelist"></textarea>
+ </li>
+ <li>
+ <label for="uploadfile">Eller använd en fil: </label>
+ <input type="file" id="uploadfile" name="uploadfile" />
+ </li>
+ </ol>
+ </fieldset>
+
+ [% IF Koha.Preference('SpecifyDueDate') || Koha.Preference('OnSiteCheckouts') %]
+ <fieldset>
+ <ol>
+ [% IF Koha.Preference('SpecifyDueDate') %]
+ <li>
+ <label for="duedatespec">Ange förfallodatum: [% INCLUDE 'date-format.inc' %]</label>
+ <input type="text" size="20" id="duedatespec" name="duedatespec" value="[% duedatespec | html %]" class="flatpickr" data-flatpickr-enable-time="true"/>
+ </li>
+ [% END %]
+ [% IF Koha.Preference('OnSiteCheckouts') %]
+ <li class="radio">
+ <div id="onsite_checkout-select">
+ <input type="checkbox" id="onsite_checkout" name="onsite_checkout" class="circ_setting"/>
+ <label for="onsite_checkout">Lån på plats</label>
+ </div>
+ </li>
+ [% END %]
+ </ol>
+ </fieldset>
+ [% END %]
+ </div>
+
+ <fieldset class="action">
+ <input type="hidden" name="borrowernumber" id="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="branch" value="[% branch | html %]" />
+ <input type="hidden" name="batch" value="1" />
+ <input type="hidden" name="op" value="cud-checkout" />
+ <input class="btn btn-primary" type="submit" value="Låna ut" />
+ </fieldset>
+ </form>
+
+[% ELSIF patron %]
+ [% IF confirmation_needed && CAN_user_circulate_force_checkout %]
+ <h3>Bekräftelse för satsvis utlåning</h3>
+ <form method="post" action="/cgi-bin/koha/circ/circulation.pl" id="mainform" name="mainform" autocomplete="off">
+ [% INCLUDE 'csrf-token.inc' %]
+ [% ELSE %]
+ <h3>Resultat för satsutlåning</h3>
+ [% END %]
+ <div class="page-section">
+ <table id="checkout_infos">
+ <thead>
+ <tr>
+ [% IF confirmation_needed && CAN_user_circulate_force_checkout %]
+ <th class="NoSort"></th>
+ [% END %]
+ <th>Streckkod</th>
+ <th class="anti-the">Titel</th>
+ <th>Information</th>
+ </tr>
+ </thead>
+ <tbody>
+ [% FOR checkout_info IN checkout_infos %]
+ <tr>
+ [% IF confirmation_needed && CAN_user_circulate_force_checkout %]
+ <td>
+ [% IF checkout_info.NEEDSCONFIRMATION %]
+ <input type="checkbox" name="barcodes" value="[% checkout_info.barcode | html %]" checked="checked" />
+ [% END %]
+ </td>
+ [% END %]
+ <td>[% checkout_info.barcode | html %]</td>
+ <td>
+ [% INCLUDE 'biblio-title.inc' biblio=checkout_info.biblio link = 1 %] [% IF checkout_info.biblio.author %], av [% checkout_info.biblio.author | html %][% END %][% IF ( checkout_info.item.itemnotes ) %]- <span class="circ-hlt">[% checkout_info.item.itemnotes | $raw %]</span>[% END %] <a href="/cgi-bin/koha/catalogue/moredetail.pl?biblionumber=[% checkout_info.biblio.biblionumber | uri %]&amp;itemnumber=[% checkout_info.item.itemnumber | uri %]#item[% checkout_info.item.itemnumber | uri %]">[% checkout_info.item.barcode | html %]</a>
+ </td>
+ <td>
+ [% IF checkout_info.NEEDSCONFIRMATION %]
+ <ul class="fa-ul warn">
+ [% IF checkout_info.AGE_RESTRICTION %]
+ <li><i class="fa fa-li fa-warning"></i>Åldersbegränsning [% checkout_info.AGE_RESTRICTION | html %].</li>
+ [% END %]
+ [% IF checkout_info.RENEW_ISSUE %]
+ <li><i class="fa fa-li fa-warning"></i>Exemplaret är redan utlånat till denna låntagare. Låna om?</li>
+ [% END %]
+ [% IF checkout_info.ADDITIONAL_MATERIALS %]
+ <li><i class="fa fa-li fa-warning"></i>Please confirm that the accompanying materials are present: [%  checkout_info.ADDITIONAL_MATERIALS | html %]</li>
+ [% END %]
+ [% IF checkout_info.RESERVE_WAITING %]
+ <li><i class="fa fa-li fa-warning"></i>Exemplaret väntar på en annan låntagare.</li>
+ [% END %]
+ [% IF checkout_info.TRANSFERRED %]
+ <li><i class="fa fa-li fa-warning"></i>Exemplaret är reserverat för en annan låntagare.</li>
+ [% END %]
+ [% IF checkout_info.PROCESSING %]
+ <li><i class="fa fa-li fa-warning"></i>Exemplaret är reserverat för en annan låntagare.</li>
+ [% END %]
+ [% IF checkout_info.ISSUED_TO_ANOTHER %]
+ <li><i class="fa fa-li fa-warning"></i>Det här exemplaret är utlånat till någon annan. [% IF CAN_user_circulate_force_checkout %] Återlämna och låna ut? [% END %]</li>
+ [% END %]
+ [% IF checkout_info.TOO_MANY %]
+ <li><i class="fa fa-li fa-warning"></i>För många utlånade.</li>
+ [% END %]
+ [% IF checkout_info.BORRNOTSAMEBRANCH %]
+ <li><i class="fa fa-li fa-warning"></i>Denna låntagare är från ett annat bibliotek ([% Branches.GetName( checkout_info.BORRNOTSAMEBRANCH ) | html %]).</li>
+ [% END %]
+ [% IF checkout_info.PATRON_CANT %]
+ <li><i class="fa fa-li fa-warning"></i>Denna låntagare kan inte låna detta exemplar enligt bibliotekets lånepolicy.</li>
+ [% END %]
+ [% IF checkout_info.NOT_FOR_LOAN_FORCING %]
+ [% IF checkout_info.itemtype_notforloan %]
+ <li><i class="fa fa-li fa-warning"></i>Exemplaret är normalt ej för utlån.</li>
+ [% ELSIF checkout_info.item_notforloan %]
+ [% item_notforloan_lib = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => checkout_info.item_notforloan ) %]
+ <li><i class="fa fa-li fa-warning"></i>Exemplaret är normalt ej för utlån [% IF item_notforloan_lib %]([% item_notforloan_lib | html %])[% END %].</li>
+ [% END %]
+ [% END %]
+ [% IF checkout_info.USERBLOCKEDOVERDUE %]
+ <li><i class="fa fa-li fa-warning"></i>Låntagare har [% checkout_info.USERBLOCKEDOVERDUE | html %] försenade lån.</li>
+ [% END %]
+ [% IF checkout_info.ITEM_LOST %]
+ <li><i class="fa fa-li fa-warning"></i>Detta exemplar har förlorats med statusen "[% checkout_info.ITEM_LOST | html %]."</li>
+ [% END %]
+ [% IF checkout_info.HIGHHOLDS %]
+ <li><i class="fa fa-li fa-warning"></i>Efterfrågat exemplar. Låneperioden förkortad till [% checkout_info.HIGHHOLDS.duration | html %] dagar (återlämnas [% checkout_info.HIGHHOLDS.returndate | html %]).</li>
+ [% END %]
+ [% IF checkout_info.HIGHHOLDS %] <!-- FIXME -->
+ <script>
+                          $(document).ready(function() {
+                              $("input[name=duedatespec]:hidden").val('[% checkout_info.HIGHHOLDS.returndate | html %]');
+                          });
+                      </script>
+ [% END %]
+
+ [% IF NOT checkout_info.IMPOSSIBLE && ( CAN_user_circulate_force_checkout || checkout_info.HIGHHOLDS ) && ( checkout_info.RESERVED || checkout_info.RESERVE_WAITING || checkout_info.TRANSFERRED || checkout_info.PROCESSING ) %] <!-- arbitrary choice, revert the hold is not possible-->
+ <li><i class="fa fa-li fa-warning"></i>Exemplaret är reserverat för en annan låntagare. Reservationen kommer att åsidosättas, men inte annulleras.</li>
+ [% ELSIF checkout_info.RESERVED %]
+ <li><i class="fa fa-li fa-warning"></i>Exemplaret är reserverat för en annan låntagare.</li>
+ [% END %]
+
+ [% IF checkout_info.PREVISSUE %]
+ <li>Detta exemplar har tidigare lånats ut till denna låntagare.</li>
+ [% END %]
+ </ul>
+ [% END %]
+
+
+ [% IF checkout_info.alert.ITEM_LOST || checkout_info.alert.OTHER_CHARGES %]
+ <ul class="info">
+ [% IF checkout_info.alert.ITEM_LOST %]
+ <li>Detta exemplar har förlorats med statusen "[% checkout_info.alert.ITEM_LOST | html %]."</li>
+ [% END %]
+ [% IF checkout_info.alert.OTHER_CHARGES %]
+ <li>Låntagaren har obetalda avgifter för reservationer, hyra osv på [% checkout_info.alert.OTHER_CHARGES | $Price %].</li>
+ [% END %]
+ </ul>
+ [% END %]
+
+ [% IF checkout_info.alert.RETURNED_FROM_ANOTHER %]
+ <div class="alert alert-warning">Exemplaret var utlånat till [% INCLUDE 'patron-title.inc' patron = checkout_info.alert.RETURNED_FROM_ANOTHER.patron %] och återlämnades automatiskt.</div>
+ [% END %]
+
+ [% IF checkout_info.IMPOSSIBLE %]
+ <ul class="fa-ul error">
+ [% IF checkout_info.STATS  %]
+ <li><i class="fa fa-li fa-exclamation"></i>Lokal användning registrerad.</li>
+ [% END %]
+
+ [% IF checkout_info.NOT_FOR_LOAN %]
+ [% IF checkout_info.itemtype_notforloan %]
+ <li><i class="fa fa-li fa-exclamation"></i>Exemplartyp ej för utlån.</li>
+ [% ELSIF checkout_info.item_notforloan %]
+ [% item_notforloan_lib = AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.notforloan', authorised_value => checkout_info.item_notforloan ) %]
+ <li><i class="fa fa-li fa-exclamation"></i>Exemplar ej för utlån [% IF item_notforloan_lib %]([% item_notforloan_lib | html %])[% END %].</li>
+ [% END %]
+ [% END %]
+ [% IF checkout_info.WTHDRAWN %]
+ <li><i class="fa fa-li fa-exclamation"></i>Exemplaret är återkallat.</li>
+ [% END %]
+ [% IF checkout_info.RESTRICTED %]
+ <li><i class="fa fa-li fa-exclamation"></i>Exemplaret är begränsat.</li>
+ [% END %]
+ [% IF checkout_info.GNA %]
+ <li><i class="fa fa-li fa-exclamation"></i>Låntagarens adress är ogiltig.</li>
+ [% END %]
+ [% IF checkout_info.CARD_LOST %]
+ <li><i class="fa fa-li fa-exclamation"></i>Låntagarens kort är borttappat.</li>
+ [% END %]
+ [% IF checkout_info.DEBARRED %]
+ <li><i class="fa fa-li fa-exclamation"></i>Låntagaren är begränsad.</li>
+ [% END %]
+ [% IF checkout_info.NO_MORE_RENEWALS %]
+ <li><i class="fa fa-li fa-exclamation"></i>Fler omlån kan inte göras.</li>
+ [% END %]
+ [% IF checkout_info.EXPIRED %]
+ <li><i class="fa fa-li fa-exclamation"></i>Låntagarens kort har gått ut.</li>
+ [% END %]
+ [% IF checkout_info.ITEMNOTSAMEBRANCH %]
+ <li><i class="fa fa-li fa-exclamation"></i>Detta exemplar tillhör [% Branches.GetName( checkout_info.itemhomebranch ) | html %] och kan inte lånas ut härifrån.</li>
+ [% END %]
+ [% IF checkout_info.USERBLOCKEDREMAINING %]
+ <li><i class="fa fa-li fa-exclamation"></i>Låntagaren har haft försenade exemplar och är spärrad i [% checkout_info.USERBLOCKEDREMAINING | html %] dag(ar).</li>
+ [% END %]
+ [% IF checkout_info.USERBLOCKEDOVERDUE %]
+ <li><i class="fa fa-li fa-exclamation"></i>Utlåning är BLOCKERAD eftersom låntagaren har försenade exemplar.</li>
+ [% END %]
+ [% IF checkout_info.TOO_MANY %]
+ <li><i class="fa fa-li fa-exclamation"></i>För många utlånade.</li>
+ [% END %]
+ [% IF checkout_info.UNKNOWN_BARCODE %]
+ <li><i class="fa fa-li fa-exclamation"></i>Streckkoden hittades inte [% checkout_info.barcode | html %].</li>
+ [% END %]
+ [% IF checkout_info.DEBT %]
+ <li><i class="fa fa-li fa-exclamation"></i>Låntagaren har en skuld på [% checkout_info.DEBT | $Price %].</li> <!-- Need debt_confirmed -->
+ [% END %]
+ </p>
+ [% END %]
+
+ [% IF checkout_info.issue.date_due %]
+ <ul>
+ <li>Återlämningsdatum [% checkout_info.issue.date_due | $KohaDates as_due_date => 1 %]</li>
+ </ul>
+ [% END %]
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+
+ [% IF confirmation_needed && CAN_user_circulate_force_checkout %]
+ <fieldset>
+ <legend>Bekräfta lån</legend>
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]" />
+ <input type="hidden" name="issueconfirmed" value="1" />
+ <input type="hidden" name="debt_confirmed" value="1" />
+ <input type="hidden" name="branch" value="[% branch | html %]" />
+ <input type="hidden" name="duedatespec" value="[% duedatespec | html %]" />
+ <input type="hidden" name="batch" value="1" />
+ <input type="hidden" name="op" value="cud-checkout" />
+ <input type="hidden" name="onsite_checkout" value="[% onsite_checkout | html %]" />
+ <input class="btn btn-primary" id="checkoutrenew" type="submit" value="Utlån eller omlån" />
+ </fieldset>
+ </form>
+ [% END %]
+
+[% ELSE %]
+ <div class="alert alert-info">Denna låntagare finns inte. <a href="/cgi-bin/koha/members/members-home.pl">Lägg till ytterligare låntagare?</a></div>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+ [% IF patron %]
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ [% END %]
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            if($('#barcodelist').length) {
+                $('#barcodelist').focus();
+            } else if ($('#checkoutrenew').length) {
+                $('#checkoutrenew').focus();
+            }
+            $("#checkout_infos").dataTable($.extend(true, {}, dataTablesDefaults, {
+                "dom": 't',
+                "order": [],
+                "columnDefs": [
+                    { "orderable": false, "searchable":  false, "targets": [ 'NoSort' ] },
+                    { "type": "anti-the", "targets":  [ "anti-the" ] }
+                ],
+                "paginate": false
+            }));
+        });
+        // On-site batch checkout
+        function toggle_onsite_checkout(){
+            if ( $("#onsite_checkout").prop('checked') ) {
+                const duedatespec_fp = document.querySelector("#duedatespec")._flatpickr;
+                duedatespec_fp.setDate("[% today_due_date_and_time | $KohaDates dateformat => 'iso', with_hours => 1 %]");
+            };
+        };
+
+        $("#onsite_checkout").click(function(){
+            toggle_onsite_checkout();
+        });
+    </script>
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

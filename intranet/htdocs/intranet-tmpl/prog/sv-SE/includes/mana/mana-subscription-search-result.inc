@@ -1,0 +1,90 @@
+[% USE KohaDates %]
+[% USE Koha %]
+[% USE AuthorisedValues %]
+[% USE Branches %]
+[% USE raw %]
+
+[% IF statuscode == "200" %]
+ [% INCLUDE 'mana/mana-comment-status.inc' %]
+ <div id="mana_results">
+ <table id="mana_results_datatable">
+ <thead>
+ <tr>
+ <th>ISSN</th>
+ <th class="anti-the">Titel</th>
+ <th> Utgiven av </th>
+ <th>Frekvens</th>
+ <th>Numreringsmönster</th>
+ <th title="Antal bibliotek som använder det här mönstret"># av användare</th>
+ <th title="Senast ett bibliotek använde det här mönstret">Senaste importen</th>
+ <th> Kommentarer </th>
+ [% UNLESS search_only %]
+ <th class="NoSort noExport">Åtgärder</th>
+ [% END %]
+ </tr>
+ </thead>
+ <tbody>
+ [% FOREACH subscription IN subscriptions %]
+ [% UNLESS subscription.cannotdisplay %]
+ [% IF subscription.nbofcomment > highWarned  %]
+ <tr class="high-warned-row" id="row[% subscription.id | html %]" title="Den här resursen har rapporterats mer än [% highWarned | html %] gånger. Var försiktig!">
+ [% ELSIF subscription.nbofcomment > warned  %]
+ <tr class="warned-row" id="row[% subscription.id | html %]" title="Den här resursen har rapporterats mer än [% warned | html %] gånger. Var försiktig!">
+ [% ELSIF subscription.nbofcomment > lowWarned  %]
+ <tr class="highlighted-row" id="row[% subscription.id | html %]" title="Den här resursen har rapporterats mer än [% lowWarned | html %] gånger. Var försiktig!">
+ [% ELSE %]
+ <tr id="row[% subscription.id | html %]">
+ [% END %]
+ <input type="hidden" hidden class="rowid" value="[% subscription.id | html %]" />
+ <td>[% IF ( subscription.issn ) %][% subscription.issn | html %][% END %]</td>
+ <td>[% subscription.title | html %]</td>
+ <td>[% IF ( subscription.publishercode ) %][% subscription.publishercode | html %][% END %]</td>
+ <td>[% IF ( subscription.sfdescription ) %][% subscription.sfdescription | html %][% END %]</td>
+ <td>[% IF ( subscription.numberingmethod ) %][% subscription.numberingmethod | html %][% END %]</td>
+ <td>[% IF ( subscription.nbofusers ) %][% subscription.nbofusers | html %][% END %]</td>
+ <td data-order="[% subscription.lastimport | html %]">[% subscription.lastimport | $KohaDates %]</td>
+ <td>
+ [% FOREACH comment IN subscription.comments %]
+ [% comment.message | html %] ([% comment.nb | html %])<br />
+ [% END %]
+ </td>
+ [% UNLESS search_only %]
+ <td class="actions">
+ <button class="btn btn-default btn-xs mana-use" data-subscription_id="[% subscription.id | html %]" id="mana-use-[% subscription.id | html %]"><i class="fa fa-download"></i> Import</button>
+ <div class="dropup">
+ <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+ Rapport </button>
+ <ul class="dropdown-menu dropdown-menu-end mana-actions" id="mana-actions-[% subscription.id | html %]">
+ [% IF ( subscription.comments.size ) %]
+ [% FOREACH comment IN subscription.comments %]
+ <li><a class="dropdown-item" data-commentid="[% comment.id | html %]" data-resourceid="[% subscription.id | html %]" href="#">[% comment.message | html %] ([% comment.nb | html %])</a></li>
+ [% END %]
+ <li><hr class="dropdown-divider"></li>
+ [% END %]
+ <li><a class="dropdown-item" data-commentid="other" data-resourceid="[% subscription.id | html %]" href="#">Ny kommentar</a></li>
+ </ul>
+ </div>
+ </td>
+ [% END %]
+ </tr>
+ [% END %]
+ [% END %]
+ </tbody>
+ </table>
+ </div>
+ <div id="new_mana_comment" style="display:none">
+ <h4 id="mana_submit_comment"> Vänligen skriv en ny kommentar (max 35 tecken)</h4>
+ <form id="mana_comment_form" action="/cgi-bin/koha/serials/subscription-detail.pl" method="get">
+ <input type="hidden" id="mana-resource" value="subscription" />
+ <input type="hidden" id="mana-resource-id" value="[% mana_id | html %]" />
+ <input type="text" maxlength="35" size="35" id="mana-comment" required="required" />
+ <input type="hidden" id="selected_id" value="" />
+ <div class="action">
+ <button id="mana-send-comment">Skicka</button>
+ <a href="#" class="cancel" id="mana-comment-close">Avbryt</a>
+ </div>
+ </form>
+ </div>
+[% ELSE %]
+ <h4>Sökning i Mana misslyckas med koden: [% statuscode | html %] </h4>
+[% END %]

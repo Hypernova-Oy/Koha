@@ -1,0 +1,311 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% IF ( biblio ) %]
+ [% t("Upload local cover image for ") | html %] [% INCLUDE 'biblio-title-head.inc' %] &rsaquo;
+ [% END %]
+ [% t("Upload local cover image") | html %] &rsaquo;
+ [% t("Cataloging") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% FILTER collapse %]
+ <style>
+        #fileuploadstatus,
+        #fileuploadfailed,
+        #jobpanel,
+        #jobstatus,
+        #jobfailed,
+        #fileuploadform,
+        #upload_file_type,
+        #upload_options,
+        #process_images {
+            display: none;
+        }
+        #uploadpanel {
+            clear:both;
+            margin-top: .9em;
+        }
+        #filedrag {
+            background-color: #FFF;
+            outline: 2px dashed #92b0b3;
+            outline-offset: -10px;
+            font-weight: bold;
+            font-size: 130%;
+            text-align: center;
+            position: relative;
+            padding: 50px 20px;
+            margin: 1em;
+
+            cursor: default;
+        }
+
+        #click_to_select:hover {
+            color: #538200;
+            cursor: pointer;
+        }
+
+        #filedrag.hover {
+            outline-offset: -20px;
+            outline-color: #c8dadf;
+            background-color: #fff;
+        }
+
+        #messages_2 {
+            font-weight: normal;
+        }
+        .cover_preview {
+            margin:1em;
+            max-height:200px;
+            max-width:200px;
+        }
+        .progress_panel {
+            border: 0;
+            border-radius: 0;
+            margin: .9em;
+            background-color: #FFF;
+        }
+        .fa-file-zipper {
+            color: #777;
+            font-size: 300%
+        }
+    </style>
+[% END %]
+</head>
+
+<body id="tools_upload-images" class="tools">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'cat-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/cataloguing/cataloging-home.pl">Kuvailu</a>
+ [% END %]
+ [% IF uploadimage || biblio || itemnumber || biblionumber %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/tools/upload-cover-image.pl">Lataa paikallinen kansikuva</a>
+ [% END %]
+ [% END %]
+
+ [% IF ( uploadimage ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Latauksen tulokset</span>
+ [% END %]
+ [% IF ( biblionumber ) %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <em>[% INCLUDE 'biblio-title.inc' %]</em>
+ [% END %]
+ [% END %]
+ [% ELSIF biblio %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lataa kansikuva <em>[% INCLUDE 'biblio-title.inc' %]</em></span>
+ [% END %]
+ [% ELSIF itemnumber %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lataa kansikuva itemnumberille: [% itemnumber | html %]</span>
+ [% END %]
+ [% ELSIF biblionumber %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lataa kansikuva biblionumberille: [% biblionumber | html %]</span>
+ [% END %]
+ [% ELSE %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Lataa paikallinen kansikuva</span>
+ [% END %]
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+ [% UNLESS itemnumber || biblionumber %]
+ <h1>Lataa paikallinen kansikuva</h1>
+ [% ELSIF biblio %]
+ <h1>
+ Lataa paikallinen kansikuva tietueelle <a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblionumber | uri %]"><em>[% INCLUDE 'biblio-title.inc' %]</em></a>
+ [% IF ( itemnumber ) %], Nidenumero: [% itemnumber | html %][% END %] </h1>
+ [% ELSIF itemnumber %]
+ <h1>Lataa paikallinen kansikuva nidenumerolle: [% itemnumber | html %]</h1>
+ [% END %]
+
+ [% IF ( uploadimage ) %]
+ <h2>Kuvan latauksen tulokset:</h2>
+ <div id="upload_results">
+ [% IF ( error ) %]
+ <div class="alert alert-warning">
+ [% IF ( error == 'UZIPFAIL' ) %]
+ <p><strong>Arkiston purkaminen epäonnistui.<br />Tarkista, että olet lataamassa ZIP-tiedostoa, ja yritä uudelleen.</strong></p>
+ [% ELSIF ( error == 'OPNLINK' ) %]
+ <p><strong>Kansioindeksin avaaminen epäonnistui. (idlink.txt tai datalink.txt -tiedosto)<br />Vahvista, että se on olemassa.</strong></p>
+ [% ELSIF ( error == 'OPNIMG' ) %]
+ <p><strong>Tiedostoa ei voitu käsitellä kuvana.<br />Varmista, että lataat vain GIF, JPEG, PNG tai XPM-muotoisen kuvan.</strong></p>
+ [% ELSIF ( error == 'DELERR' ) %]
+ <p><strong>Tuntematon tai puuttuva kenttäerotin.<br />Varmista, että käytät heittomerkkiä tai tabulaattorimerkkiä.</strong></p>
+ [% ELSIF ( error == 'DBERR' ) %]
+ <p><strong>Kuvan tallennus tietokantaan epäonnistui.</strong></p>
+ [% ELSE %]
+ <p><strong>Tuntematon virhe.<br />Katso virhelokista lisää tietoja.</strong></p>
+ [% END %]
+ </div>
+ [% END # /IF error  %]
+ <h3>Löydettiin [% total | html %] kuva(a)</h3>
+ <ul>
+ [% FOREACH result IN results %]
+ <li><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% result.biblionumber | uri %]">[% result.title | html %]</a></li>
+ [% END %]
+ </ul>
+ <hr />
+ </div> <!-- /#upload_results -->
+ [% END # /IF uploadimage %]
+
+ <ul>
+ [% UNLESS itemnumber || biblionumber %]
+ <li>Valitse kuvatiedosto tai ZIP-pakattu tiedosto. Tämä työkalu hyväksyy GIF, JPEG, PNG, ja XPM -muotoiset kuvat.</li>
+ [% ELSE %]
+ <li>Valitse kuvatiedosto ladattavaksi. Tämä työkalu hyväksyy GIF, JPEG, PNG, ja XPM -muotoiset kuvat.</li>
+ [% END %]
+ </ul>
+
+ <div class="row">
+ [% IF ( cover_images ) %]
+ <div class="col-sm-9">
+ [% ELSE %]
+ <div class="col-sm-12">
+ [% END %]
+
+ <form method="get" action="/cgi-bin/koha/tools/upload-cover-image.pl" id="uploadfile" enctype="multipart/form-data">
+ <fieldset class="rows" >
+ <div id="fileuploadform">
+ <label for="fileToUpload">Valitse vietävä tiedosto: </label>
+ <input type="file" id="fileToUpload" name="fileToUpload" />
+ </div>
+
+ <div id="filedrag">
+ <a id="click_to_select" href="#">Pudota tiedostot tähän tai klikkaa valitaksesi tiedosto</a>
+ [%# FIXME Remove the following div and use #message instead %]
+ <div id="messages_2"></div>
+ </div>
+
+ <div id="uploadpanel">
+ <div id="fileuploadstatus" class="progress_panel">Latauksen tila: <progress max="100" value="0" id="fileuploadprogress">
+ </progress>
+ <span class="fileuploadpercent"></span>%
+ </div>
+ <div id="fileuploadfailed"></div>
+ </div>
+ </fieldset>
+ </form> <!-- /#uploadfile -->
+
+ <form method="post" id="processfile" action="/cgi-bin/koha/tools/upload-cover-image.pl" enctype="multipart/form-data">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-process" />
+ <input type="hidden" name="uploadedfileid" id="uploadedfileid" value="" />
+
+ [% IF itemnumber %]
+ <input type="hidden" id="itemnumber" name="itemnumber" value="[% itemnumber | html %]" />
+ <input type="hidden" name="filetype" value="image" />
+ [% ELSIF biblionumber %]
+ <input type="hidden" id="biblionumber" name="biblionumber" value="[% biblionumber | html %]" />
+ <input type="hidden" name="filetype" value="image" />
+ [% END %]
+
+
+ <fieldset id="upload_options" class="rows">
+ <ol>
+ [% UNLESS itemnumber || biblionumber %]
+ <li class="radio">
+ [% IF (filetype != 'image' ) %]
+ <input type="radio" id="zipfile" name="filetype" value="zip" checked="checked" />
+ [% ELSE %]
+ <input type="radio" id="zipfile" name="filetype" value="zip" />
+ [% END %]
+ <label for="zipfile">ZIP-tiedosto</label>
+ </li>
+ <li class="radio">
+ [% IF (filetype == 'image' ) %]
+ <input type="radio" id="image" name="filetype" value="image" checked="checked" />
+ [% ELSE %]
+ <input type="radio" id="image" name="filetype" value="image" />
+ [% END %]
+ <label for="image">Kuvatiedosto</label>
+ </li>
+ <li id="biblionumber_entry">
+ <label for="biblionumber">Nimeketietueen numero: </label>
+ <input type="text" id="biblionumber" name="biblionumber" value="[% biblionumber | html %]" size="15" />
+ </li>
+ [% END %]
+ <li class="radio">
+ <label for="replace">
+ [% IF AllowMultipleCovers == 0 %]
+ <input type="checkbox" id="replace" name="replace" value="" disabled="disabled" checked="checked" />
+ Olemassaolevat kannet korvataan [% ELSE %] <input type="checkbox" id="replace" name="replace" value="1" />
+ Korvaa olemassa olevat kansikuvat [% END %] </li>
+ </ol>
+ </fieldset>
+
+ <fieldset id="process_images" class="action">
+ <button type="submit" class="btn btn-primary btn-sm save_image">Käsittele kuvat</button>
+ [% IF ( biblionumber ) %]
+ <a class="cancel cancel_image" href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% biblionumber | uri %]">Peruuta</a>
+ [% ELSE %]
+ <a class="cancel cancel_image" href="/cgi-bin/koha/tools/upload-cover-image.pl">Peruuta</a>
+ [% END %]
+ </fieldset>
+ </form> <!-- /#processfile -->
+ </div> <!-- /.col-sm-9/.col-sm-12 -->
+
+ [% IF ( cover_images.size ) %]
+ <div class="col-sm-3">
+ <h3>Olemassa olevat kuvat</h3>
+ <ul class="thumbnails">
+ [% FOREACH img IN cover_images %]
+ [% IF img %]
+ <li id="imagenumber-[% img.imagenumber | html %]" class="thumbnail">
+ <a class="show_cover" data-coverimg="[% img.imagenumber | html %]" href="/cgi-bin/koha/catalogue/imageviewer.pl?biblionumber=[% biblionumber | html %]&amp;imagenumber=[% img.imagenumber | html %]">
+ [% IF ( imagenumber == img.imagenumber ) %]
+ <img alt="Esikatselukuva" class="selected" id="thumbnail_[% img.imagenumber | html %]" src="/cgi-bin/koha/catalogue/image.pl?imagenumber=[% img.imagenumber | html %]&thumbnail=1" />
+ [% ELSE %]
+ <img alt="Esikatselukuva" id="thumbnail_[% img.imagenumber | html %]" src="/cgi-bin/koha/catalogue/image.pl?imagenumber=[% img.imagenumber | html %]&thumbnail=1" />
+ [% END %]
+ </a>
+ <a href="#" class="remove" data-coverimg="[% img.imagenumber | html %]"><i class="fa fa-trash-can"></i> Poista kuva</a>
+ </li>
+ [% END # /IF img %]
+ [% END # /FOREACH img %]
+ </ul> <!-- /ul.thumbnails -->
+ </div> <!-- /.col-sm-3 -->
+ [% END # /IF images.size %]
+
+ </div> <!-- /.row -->
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'cat-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        var interface = "[% interface | html %]";
+        var theme = "[% theme | html %]";
+        var biblionumber = "[% biblionumber | html %]";
+    </script>
+ [% Asset.js("js/upload-images.js") | $raw %]
+
+ </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

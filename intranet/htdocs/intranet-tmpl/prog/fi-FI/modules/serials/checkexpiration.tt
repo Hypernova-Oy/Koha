@@ -1,0 +1,209 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Branches %]
+[% USE KohaDates %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Check expiration") | html %] &rsaquo;
+ [% t("Serials") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="ser_checkexpiration" class="ser">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'serials-search.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/serials/serials-home.pl">Kausijulkaisut</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Tarkista lehtitilauksen päättyminen</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+ [% INCLUDE 'messages.inc' %]
+
+<h1>Tarkista lehtitilauksen päättyminen</h1>
+
+ <form name="f" action="/cgi-bin/koha/serials/checkexpiration.pl" method="get" class="validated">
+<fieldset class="rows">
+ <legend>Rajaa hakua:</legend>
+ 
+ <ol>
+ <ol>
+ <li><label for="title">Nimeke:</label>
+ <input id="title" type="text" name="title" size="15" value="[% title | html %]" /></li>
+
+ <li><label for="issn">ISSN:</label>
+ <input id="issn" type="text" name="issn" size="15" value="[% issn | html %]" /></li>
+ [% IF can_change_library %]
+ <li><label for="branch">Kirjasto:</label>
+ <select id="branch" name="branch">
+ <option value="">Kaikki</option>
+ [% PROCESS options_for_libraries libraries => Branches.all( selected => branch ) %]
+ </select>
+ </li>
+ [% END %]
+
+ <li><label for="date" class="required">Vanhenee:</label>
+ <input id="date" type="text" name="date" size="10" value="[% date | html %]" class="required focus flatpickr" required="required" />
+ <span class="required">Pakollinen tieto</span>
+ <div class="hint">[% INCLUDE 'date-format.inc' %]</div></li>
+ </ol>
+
+ <li>
+ <label for="showhistoricexpired">Sisällytä ennen tätä päivää vanhenevat tilaukset:</label>
+ [% IF showhistoricexpired %]
+ <input id="showhistoricexpired" type="checkbox" name="showhistoricexpired" checked="checked" />
+ [% ELSE %]
+ <input id="showhistoricexpired" type="checkbox" name="showhistoricexpired" />
+ [% END %]
+ </li>
+ </ol>
+</fieldset>
+<fieldset class="action"><input class="btn btn-primary" type="submit" value="Haku" /></fieldset>
+</form>
+
+[% IF ( subscriptions_loop ) %]
+<h2>
+ [% expirydate = date | $KohaDates %]
+ [% tnx("Your search returned 1 subscription expiring before {date}", "Your search returned {count} subscriptions expiring before {date}", numsubscription, { date = expirydate, count = numsubscription }) %]
+</h2>
+
+<div class="page-section">
+<div class="checkexpiration-table_table_controls">
+ <a href="#" class="SelectAll"><i class="fa fa-check"></i> Valitse kaikki</a> |
+ <a href="#" class="ClearAll"><i class="fa fa-times"></i> Tyhjennä kaikki</a>
+ <span class="itemselection_actions">
+ | Toiminnot: <a class="itemselection_action_renew" title="Uusi valitut kausijulkaisutilaukset"><i class="fa-solid fa-rotate"></i> Uusi valitut kausijulkaisutilaukset</a>
+ </span>
+</div>
+
+
+<table>
+ <tr>
+ <th></th>
+ <th>ISSN</th>
+ <th>Nimeke</th>
+ [% IF can_change_library %]<th>Kirjasto</th>[% END %]
+ <th>Huomautus verkkokirjastossa</th>
+ <th>Viesti virkailijalle</th>
+ <th>Vanhentumispvm</th>
+ <th class="noExport">Toiminnot</th>
+ </tr>
+ [% FOREACH subscriptions_loo IN subscriptions_loop %]
+ <tr>
+ <td style="text-align:center;vertical-align:middle">
+ <input type="checkbox" value="[% subscriptions_loo.subscriptionid | html %]" name="subscriptionid" />
+ </td>
+ <td>
+ [% subscriptions_loo.issn | html %]
+ </td>
+ <td><a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscriptions_loo.subscriptionid |url %]">[% IF ( subscriptions_loo.title ) %]
+ [% subscriptions_loo.title | html %]
+ [% ELSE %]
+ |
+ [% END %]
+ </a>
+ </td>
+ [% IF can_change_library %]<td>
+ [% Branches.GetName( subscriptions_loo.branchcode ) | html %]
+ </td>[% END %]
+ <td>
+ [% subscriptions_loo.notes | html %]
+ </td>
+ <td>
+ [% subscriptions_loo.internalnotes | html %]
+ </td>
+ <td>
+ [% subscriptions_loo.expirationdate | $KohaDates %]
+ </td>
+ <td class="actions">
+ <a href="/cgi-bin/koha/serials/subscription-add.pl?op=modify&amp;subscriptionid=[% subscriptions_loo.subscriptionid | uri %]" class="btn btn-default btn-xs"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa</a>
+ <a href="#" data-subscriptionid="[% subscriptions_loo.subscriptionid | html %]" class="btn btn-default btn-xs renew_subscription"><i class="fa-solid fa-rotate"></i> Uusinta</a>
+ </td>
+ </tr>
+ [% END %]
+ </table>
+ </div> <!-- .page-section -->
+[% ELSIF searched %]
+ <p>Ei hakutuloksia</p>
+[% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'serials-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'calendar.inc' %]
+ <script>
+        $(document).ready(function(){
+            $(".renew_subscription").on("click",function(e){
+                e.preventDefault();
+                var subscriptionid = $(this).data("subscriptionid");
+                newin=window.open("/cgi-bin/koha/serials/subscription-renew.pl?op=renew&subscriptionid="+subscriptionid,'popup','width=590,height=440,toolbar=false,scrollbars=yes,resize=yes');
+            });
+            $('a.itemselection_action_renew').on("click", function(e){
+                e.preventDefault();
+                newin=window.open($(this).attr('href'),'popup','width=590,height=440,toolbar=false,scrollbars=yes,resize=yes');
+            });
+            function itemSelectionBuildRenewLink() {
+                var subscription_ids= new Array();
+                $("input[name='subscriptionid'][type='checkbox']:checked").each(function() {
+                    subscription_ids.push($(this).val());
+                });
+                if (subscription_ids.length > 0) {
+                    var url = '/cgi-bin/koha/serials/subscription-renew.pl?op=multi_renew';
+                    url += '&subscriptionid=' + subscription_ids.join('&subscriptionid=');
+                    $('a.itemselection_action_renew').attr('href', url);
+                } else {
+                    return false;
+                }
+                return true;
+            }
+
+            function itemSelectionBuildActionLinks() {
+                var export_link_ok = itemSelectionBuildRenewLink();
+                if (export_link_ok) {
+                    $('.itemselection_actions').show();
+                } else {
+                    $('.itemselection_actions').hide();
+                }
+            }
+
+            itemSelectionBuildActionLinks();
+
+            $("input[name='subscriptionid'][type='checkbox']").change(function() {
+                itemSelectionBuildActionLinks();
+            });
+
+            $(".SelectAll, .ClearAll").on("click",function(e){
+                e.preventDefault();
+                var checkboxes = $(this).parent().siblings('table').first().find('input[type="checkbox"]');
+                checkboxes.prop('checked', $(this).hasClass('SelectAll'));
+                itemSelectionBuildActionLinks();
+            });
+
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

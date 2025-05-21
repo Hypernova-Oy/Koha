@@ -1,0 +1,119 @@
+[% USE raw %]
+[% USE Koha %]
+[% USE Asset %]
+[% USE AuthorisedValues  %]
+[% USE Branches %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>Ilmoitusten tilaajat lehtitilaukselle [% INCLUDE 'patron-title.inc' no_html = 1 %] &rsaquo; Asiakkaat &rsaquo; Koha</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="pat_alert_subscriptions" class="pat">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'patron-search-header.inc' %]
+[% END %]
+
+[% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/members-home.pl">Asiakkaat</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% patron.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' %]</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Kausijulkaisutilausten saapumisilmoitukset</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+[% END #/ WRAPPER sub-header.inc %]
+
+<div class="main container-fluid">
+ <div class="row">
+ <div class="col-md-10 order-md-2 order-sm-1">
+ <main>
+
+ [% INCLUDE 'members-toolbar.inc' %]
+ <h1>Kausijulkaisutilausten saapumisilmoitukset</h1>
+
+ [% IF patron.alert_subscriptions.count %]
+ <div class="page-section">
+ <table id="subscriptions">
+ <thead>
+ <tr>
+ <th>ISSN</th>
+ <th>Nimeke</th>
+ <th>Kirjasto</th>
+ <th>Paikka</th>
+ <th>Luokka</th>
+ <th>Toiminnot</th>
+ </tr>
+ </thead>
+
+ <tbody>
+ [% FOREACH sub IN patron.alert_subscriptions %]
+ <tr>
+ <td>
+ [% IF sub.biblio.biblioitem.issn %][% sub.biblio.biblioitem.issn | html %][% END %]
+ </td>
+ <td>
+ <a class="button" href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% sub.subscriptionid | uri %]" title="kausijulkaisutilauksen tiedot">[% sub.biblio.title | html %] [% sub.biblio.subtitle | html %]</a>
+ </td>
+ <td>
+ [% IF ( sub.branchcode ) %][% Branches.GetName( sub.branchcode ) | html %][% END %]
+ </td>
+ <td>
+ [% IF ( sub.location ) %][% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => sub.location ) | html %][% END %]
+ </td>
+ <td>
+ [% IF ( sub.callnumber ) %][% sub.callnumber | html %][% END %]
+ </td>
+ <td class="actions">
+ <form action="/cgi-bin/koha/members/alert-subscriptions.pl" method="post" class="unsubscribe" data-title="[% sub.biblio.title | html %] [% sub.biblio.subtitle | html %]"data-patron="[% INCLUDE 'patron-title.inc' no_html = 1 %]">
+ [% INCLUDE 'csrf-token.inc' %]
+ <input type="hidden" name="op" value="cud-unsubscribe">
+ <input type="hidden" name="subscription_id" value="[% sub.subscriptionid | html %]">
+ <input type="hidden" name="borrowernumber" value="[% patron.borrowernumber | html %]">
+ <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-times"></i> Lopeta saapumisilmoituksen tilaus</button>
+ </form>
+ </td>
+ </tr>
+ [% END %]
+ </tbody>
+ </table>
+ </div> <!-- /.page-section -->
+ [% ELSE %]
+ <div class="alert alert-info">
+ <p>Tämä asiakas ei ole tilannut sähköposti-ilmoituksia mistään tilauksista.</p>
+ </div>
+ [% END %]
+
+ </main>
+ </div> <!-- /.col-md-10.order-md-2 -->
+
+ <div class="col-md-2 order-sm-2 order-md-1">
+ <aside>
+ [% INCLUDE 'circ-menu.inc' %]
+ </aside>
+ </div> <!-- /.col-md-2.order-md-1 -->
+ </div> <!-- /.row -->
+
+[% MACRO jsinclude BLOCK %]
+ [% INCLUDE 'str/members-menu.inc' %]
+ [% Asset.js("js/members-menu.js") | $raw %]
+ [% INCLUDE 'datatables.inc' %]
+ <script>
+        $(document).ready(function() {
+            $("#subscriptions").dataTable($.extend(true, {}, dataTablesDefaults, {
+            }));
+            $(".unsubscribe").submit(function(){
+                var patron = $(this).data('patron');
+                var title = $(this).data('title');
+                return confirmDelete(_("Haluatko varmasti lopettaa asiakkaan %s ilmoitusten tilauksen nimekkeelle %s?").format(patron, title));
+            });
+        });
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' %]

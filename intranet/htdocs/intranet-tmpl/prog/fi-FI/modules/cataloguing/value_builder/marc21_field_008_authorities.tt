@@ -1,0 +1,772 @@
+[% USE raw %]
+[% PROCESS 'i18n.inc' %]
+[% SET footerjs = 1 %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("008 builder") | html %] &rsaquo;
+ [% t("Authorities") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+</head>
+
+<body id="cat_marc21_field_008_authorities" class="cat value_builder">
+
+ <h1> 008 Kiinteämittaiset kentät</h1>
+
+ <form method="get" name="f_pop" onsubmit="report()" action="">
+ <input type="hidden" name="plugin_name" value="marc21_field_008_authorities.pl" />
+ <input name="f1" value="[% f1 | html %]" type="hidden" />
+
+ <div class="page-section">
+ <table>
+ <tr>
+ <td>00-05- Luontipäivä</td>
+ <td>[% f1 | html %]</td>
+ </tr>
+ <tr>
+ <td><label for="f6">06- Maantieteellisen lisämääreen käyttö</label></td>
+ <td>
+ <select name="f6" id="f6">
+ [% IF ( f6 ) %]
+ <option value=" " selected="selected">#- Ei jaettu maantieteellisesti</option>
+ [% ELSE %]
+ <option value=" ">#- Ei jaettu maantieteellisesti</option>
+ [% END %]
+ [% IF ( f6d ) %]
+ <option value="d" selected="selected">d - Lisämääre voidaan liittää suoraan</option>
+ [% ELSE %]
+ <option value="d">d - Lisämääre voidaan liittää suoraan</option>
+ [% END %]
+ [% IF ( f6i ) %]
+ <option value="i" selected="selected">i - Lisämääre voidaan liittää epäsuorasti (hierarkkisesti)</option>
+ [% ELSE %]
+ <option value="i">i - Lisämääre voidaan liittää epäsuorasti (hierarkkisesti)</option>
+ [% END %]
+ [% IF ( f6n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f6pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td><label for="f7">07- Romanisointi</label></td>
+ <td>
+ <select name="f7" id="f7">
+ [% IF ( f7a ) %]
+ <option value="a" selected="selected">a - Kansainvälinen standardi</option>
+ [% ELSE %]
+ <option value="a">a - Kansainvälinen standardi</option>
+ [% END %]
+ [% IF ( f7b ) %]
+ <option value="b" selected="selected">b- Kansallinen standardi</option>
+ [% ELSE %]
+ <option value="b">b- Kansallinen standardi</option>
+ [% END %]
+ [% IF ( f7c ) %]
+ <option value="c" selected="selected">c- Kansallisen kirjasto-organisaation standardi</option>
+ [% ELSE %]
+ <option value="c">c- Kansallisen kirjasto-organisaation standardi</option>
+ [% END %]
+ [% IF ( f7d ) %]
+ <option value="d" selected="selected">d- Kansalliskirjaston tai bibliografisen instanssin standardi</option>
+ [% ELSE %]
+ <option value="d">d- Kansalliskirjaston tai bibliografisen instanssin standardi</option>
+ [% END %]
+ [% IF ( f7e ) %]
+ <option value="e" selected="selected">e - Paikallinen standardi</option>
+ [% ELSE %]
+ <option value="e">e - Paikallinen standardi</option>
+ [% END %]
+ [% IF ( f7f ) %]
+ <option value="f" selected="selected">f- Standardin alkuperä tuntematon</option>
+ [% ELSE %]
+ <option value="f">f- Standardin alkuperä tuntematon</option>
+ [% END %]
+ [% IF ( f7g ) %]
+ <option value="g" selected="selected">g- Totuttu romanisointitapa tai totuttu nimen muoto luetteloivan organisaation kielellä</option>
+ [% ELSE %]
+ <option value="g">g- Totuttu romanisointitapa tai totuttu nimen muoto luetteloivan organisaation kielellä</option>
+ [% END %]
+ [% IF ( f7n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f7pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f8">08- Luettelon kieli</label></td>
+ <td>
+ <select name="f8" id="f8">
+ [% IF ( f8 ) %]
+ <option value=" " selected="selected">#- Tietoa ei toimitettu</option>
+ [% ELSE %]
+ <option value=" ">#- Tietoa ei toimitettu</option>
+ [% END %]
+ [% IF ( f8b ) %]
+ <option value="b" selected="selected">b- Englanti ja ranska</option>
+ [% ELSE %]
+ <option value="b">b- Englanti ja ranska</option>
+ [% END %]
+ [% IF ( f8e ) %]
+ <option value="e" selected="selected">e - Vain englanti</option>
+ [% ELSE %]
+ <option value="e">e - Vain englanti</option>
+ [% END %]
+ [% IF ( f8f ) %]
+ <option value="f" selected="selected">f- Vain ranska</option>
+ [% ELSE %]
+ <option value="f">f- Vain ranska</option>
+ [% END %]
+ [% IF ( f8pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f9">09- Tietueen laji</label></td>
+ <td>
+ <select name="f9" id="f9">
+ [% IF ( f9a ) %]
+ <option value="a" selected="selected">a- Vahvistettu otsikkomuoto</option>
+ [% ELSE %]
+ <option value="a">a- Vahvistettu otsikkomuoto</option>
+ [% END %]
+ [% IF ( f9b ) %]
+ <option value="b" selected="selected">b- Ei käytetty viittauksena</option>
+ [% ELSE %]
+ <option value="b">b- Ei käytetty viittauksena</option>
+ [% END %]
+ [% IF ( f9c ) %]
+ <option value="c" selected="selected">c- Käytetty viittauksena</option>
+ [% ELSE %]
+ <option value="c">c- Käytetty viittauksena</option>
+ [% END %]
+ [% IF ( f9d ) %]
+ <option value="d" selected="selected">d - Lisämääre</option>
+ [% ELSE %]
+ <option value="d">d - Lisämääre</option>
+ [% END %]
+ [% IF ( f9e ) %]
+ <option value="e" selected="selected">e- Alanmukaisen ryhmän otsikko</option>
+ [% ELSE %]
+ <option value="e">e- Alanmukaisen ryhmän otsikko</option>
+ [% END %]
+ [% IF ( f9f ) %]
+ <option value="f" selected="selected">f- Vahvistettu otsikkomuoto ja lisämääre</option>
+ [% ELSE %]
+ <option value="f">f- Vahvistettu otsikkomuoto ja lisämääre</option>
+ [% END %]
+ [% IF ( f9g ) %]
+ <option value="g" selected="selected">g- Viittaus ja lisämääre</option>
+ [% ELSE %]
+ <option value="g">g- Viittaus ja lisämääre</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f10">10- Luettelointisäännöt</label></td>
+ <td>
+ <select name="f10" id="f10">
+ [% IF ( f10a ) %]
+ <option value="a" selected="selected">a- Aikaisemmat säännöt</option>
+ [% ELSE %]
+ <option value="a">a- Aikaisemmat säännöt</option>
+ [% END %]
+ [% IF ( f10b ) %]
+ <option value="b" selected="selected">b- AACR 1</option>
+ [% ELSE %]
+ <option value="b">b- AACR 1</option>
+ [% END %]
+ [% IF ( f10c ) %]
+ <option value="c" selected="selected">c- AACR 2</option>
+ [% ELSE %]
+ <option value="c">c- AACR 2</option>
+ [% END %]
+ [% IF ( f10d ) %]
+ <option value="d" selected="selected">d- AACR 2 yhteensopiva</option>
+ [% ELSE %]
+ <option value="d">d- AACR 2 yhteensopiva</option>
+ [% END %]
+ [% IF ( f10n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f10z ) %]
+ <option value="z" selected="selected">z- Muu</option>
+ [% ELSE %]
+ <option value="z">z- Muu</option>
+ [% END %]
+ [% IF ( f10pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f11">11- Sanasto</label></td>
+ <td>
+ <select name="f11" id="f11">
+ [% IF ( f11a ) %]
+ <option value="a" selected="selected">a- Library of Congress Subject Headings (LCSH)</option>
+ [% ELSE %]
+ <option value="a">a- Library of Congress Subject Headings (LCSH)</option>
+ [% END %]
+ [% IF ( f11b ) %]
+ <option value="b" selected="selected">b- LC subject headings for children's literature</option>
+ [% ELSE %]
+ <option value="b">b- LC subject headings for children's literature</option>
+ [% END %]
+ [% IF ( f11c ) %]
+ <option value="c" selected="selected">c - Medical Subject Headings (MeSH)</option>
+ [% ELSE %]
+ <option value="c">c - Medical Subject Headings (MeSH)</option>
+ [% END %]
+ [% IF ( f11d ) %]
+ <option value="d" selected="selected">d- National Agricultural Library subject authority file (NAL)</option>
+ [% ELSE %]
+ <option value="d">d- National Agricultural Library subject authority file (NAL)</option>
+ [% END %]
+ [% IF ( f11k ) %]
+ <option value="k" selected="selected">k- Canadian Subject Headings</option>
+ [% ELSE %]
+ <option value="k">k- Canadian Subject Headings</option>
+ [% END %]
+ [% IF ( f11n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f11r ) %]
+ <option value="r" selected="selected">r- Art and Architecture Thesaurus</option>
+ [% ELSE %]
+ <option value="r">r- Art and Architecture Thesaurus</option>
+ [% END %]
+ [% IF ( f11s ) %]
+ <option value="s" selected="selected">s- Sears List of Subject Headings</option>
+ [% ELSE %]
+ <option value="s">s- Sears List of Subject Headings</option>
+ [% END %]
+ [% IF ( f11v ) %]
+ <option value="v" selected="selected">v - Répertoire de vedettes-matière</option>
+ [% ELSE %]
+ <option value="v">v - Répertoire de vedettes-matière</option>
+ [% END %]
+ [% IF ( f11z ) %]
+ <option value="z" selected="selected">z- Muu</option>
+ [% ELSE %]
+ <option value="z">z- Muu</option>
+ [% END %]
+ [% IF ( f11pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f12">12- Sarjan tyyppi</label></td>
+ <td>
+ <select name="f12" id="f12">
+ [% IF ( f12a ) %]
+ <option value="a" selected="selected">a- Monografiasarja</option>
+ [% ELSE %]
+ <option value="a">a- Monografiasarja</option>
+ [% END %]
+ [% IF ( f12b ) %]
+ <option value="b" selected="selected">b- Moniosainen teos</option>
+ [% ELSE %]
+ <option value="b">b- Moniosainen teos</option>
+ [% END %]
+ [% IF ( f12c ) %]
+ <option value="c" selected="selected">c- Sarjan kaltainen ilmaisu</option>
+ [% ELSE %]
+ <option value="c">c- Sarjan kaltainen ilmaisu</option>
+ [% END %]
+ [% IF ( f12n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f12z ) %]
+ <option value="z" selected="selected">z- Muu</option>
+ [% ELSE %]
+ <option value="z">z- Muu</option>
+ [% END %]
+ [% IF ( f12pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f13">13- Sarjan numerointi</label></td>
+ <td>
+ <select name="f13" id="f13">
+ [% IF ( f13a ) %]
+ <option value="a" selected="selected">a - Numeroitu</option>
+ [% ELSE %]
+ <option value="a">a - Numeroitu</option>
+ [% END %]
+ [% IF ( f13b ) %]
+ <option value="b" selected="selected">b- Numeroimaton</option>
+ [% ELSE %]
+ <option value="b">b- Numeroimaton</option>
+ [% END %]
+ [% IF ( f13c ) %]
+ <option value="c" selected="selected">c- Numerointi vaihtelee</option>
+ [% ELSE %]
+ <option value="c">c- Numerointi vaihtelee</option>
+ [% END %]
+ [% IF ( f13n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f13pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f14">14- Otsikkomuodon käyttö pää- tai lisäkirjauksena</label></td>
+ <td>
+ <select name="f14" id="f14">
+ [% IF ( f14a ) %]
+ <option value="a" selected="selected">a- Soveltuu</option>
+ [% ELSE %]
+ <option value="a">a- Soveltuu</option>
+ [% END %]
+ [% IF ( f14b ) %]
+ <option value="b" selected="selected">b- Ei sovellu</option>
+ [% ELSE %]
+ <option value="b">b- Ei sovellu</option>
+ [% END %]
+ [% IF ( f14pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f15">15- Otsikkomuodon käyttö asiasanana</label></td>
+ <td>
+ <select name="f15" id="f15">
+ [% IF ( f15a ) %]
+ <option value="a" selected="selected">a- Soveltuu</option>
+ [% ELSE %]
+ <option value="a">a- Soveltuu</option>
+ [% END %]
+ [% IF ( f15b ) %]
+ <option value="b" selected="selected">b- Ei sovellu</option>
+ [% ELSE %]
+ <option value="b">b- Ei sovellu</option>
+ [% END %]
+ [% IF ( f15pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f16">16- Otsikkomuodon käyttö sarjalisäkirjauksena</label></td>
+ <td>
+ <select name="f16" id="f16">
+ [% IF ( f16a ) %]
+ <option value="a" selected="selected">a- Soveltuu</option>
+ [% ELSE %]
+ <option value="a">a- Soveltuu</option>
+ [% END %]
+ [% IF ( f16b ) %]
+ <option value="b" selected="selected">b- Ei sovellu</option>
+ [% ELSE %]
+ <option value="b">b- Ei sovellu</option>
+ [% END %]
+ [% IF ( f16pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f17">17- Asialisämääreen tyyppi</label></td>
+ <td>
+ <select name="f17" id="f17">
+ [% IF ( f17a ) %]
+ <option value="a" selected="selected">a - Aiheenmukainen</option>
+ [% ELSE %]
+ <option value="a">a - Aiheenmukainen</option>
+ [% END %]
+ [% IF ( f17b ) %]
+ <option value="b" selected="selected">b - Muotoa ilmaiseva</option>
+ [% ELSE %]
+ <option value="b">b - Muotoa ilmaiseva</option>
+ [% END %]
+ [% IF ( f17c ) %]
+ <option value="c" selected="selected">c- Aikaa ilmaiseva</option>
+ [% ELSE %]
+ <option value="c">c- Aikaa ilmaiseva</option>
+ [% END %]
+ [% IF ( f17d ) %]
+ <option value="d" selected="selected">d- Maantieteellinen</option>
+ [% ELSE %]
+ <option value="d">d- Maantieteellinen</option>
+ [% END %]
+ [% IF ( f17e ) %]
+ <option value="e" selected="selected">e - Kieltä ilmaiseva</option>
+ [% ELSE %]
+ <option value="e">e - Kieltä ilmaiseva</option>
+ [% END %]
+ [% IF ( f17n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f17pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td>18-27 Määrittelemätön</td>
+ <td></td>
+ </tr>
+
+ <tr>
+ <td><label for="f28">28- Virallisen tahon tyyppi</label></td>
+ <td>
+ <select name="f28" id="f28">
+ [% IF ( f28 ) %]
+ <option value=" " selected="selected">#- Ei virallistaho</option>
+ [% ELSE %]
+ <option value=" ">#- Ei virallistaho</option>
+ [% END %]
+ [% IF ( f28a ) %]
+ <option value="a" selected="selected">a- Itsehallinnollinen tai puoli-itsehallinnollinen</option>
+ [% ELSE %]
+ <option value="a">a- Itsehallinnollinen tai puoli-itsehallinnollinen</option>
+ [% END %]
+ [% IF ( f28c ) %]
+ <option value="c" selected="selected">c- Monta paikallista yksikköä</option>
+ [% ELSE %]
+ <option value="c">c- Monta paikallista yksikköä</option>
+ [% END %]
+ [% IF ( f28f ) %]
+ <option value="f" selected="selected">f- Kansallinen</option>
+ [% ELSE %]
+ <option value="f">f- Kansallinen</option>
+ [% END %]
+ [% IF ( f28i ) %]
+ <option value="i" selected="selected">i- Kansainvälinen, hallitusten välinen</option>
+ [% ELSE %]
+ <option value="i">i- Kansainvälinen, hallitusten välinen</option>
+ [% END %]
+ [% IF ( f28l ) %]
+ <option value="l" selected="selected">l- Paikallishallinto</option>
+ [% ELSE %]
+ <option value="l">l- Paikallishallinto</option>
+ [% END %]
+ [% IF ( f28m ) %]
+ <option value="m" selected="selected">m- Monta aluetta</option>
+ [% ELSE %]
+ <option value="m">m- Monta aluetta</option>
+ [% END %]
+ [% IF ( f28o ) %]
+ <option value="o" selected="selected">o - Virallinen taho--tyyppi määrittelemätön</option>
+ [% ELSE %]
+ <option value="o">o - Virallinen taho--tyyppi määrittelemätön</option>
+ [% END %]
+ [% IF ( f28s ) %]
+ <option value="s" selected="selected">s- Alueellinen</option>
+ [% ELSE %]
+ <option value="s">s- Alueellinen</option>
+ [% END %]
+ [% IF ( f28u ) %]
+ <option value="u" selected="selected">u- Ei tiedetä onko otsikkomuoto virallinen taho</option>
+ [% ELSE %]
+ <option value="u">u- Ei tiedetä onko otsikkomuoto virallinen taho</option>
+ [% END %]
+ [% IF ( f28z ) %]
+ <option value="z" selected="selected">z- Muu</option>
+ [% ELSE %]
+ <option value="z">z- Muu</option>
+ [% END %]
+ [% IF ( f28pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f29">29- Viittausten arviointi</label></td>
+ <td>
+ <select name="f29" id="f29">
+ [% IF ( f29a ) %]
+ <option value="a" selected="selected">a - Viittaukset on muodostettu samojen sääntöjen mukaan</option>
+ [% ELSE %]
+ <option value="a">a - Viittaukset on muodostettu samojen sääntöjen mukaan</option>
+ [% END %]
+ [% IF ( f29b ) %]
+ <option value="b" selected="selected">b- Viittauksia ei ole muodostettu samojen sääntöjen mukaan</option>
+ [% ELSE %]
+ <option value="b">b- Viittauksia ei ole muodostettu samojen sääntöjen mukaan</option>
+ [% END %]
+ [% IF ( f29n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f29pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td>30 Määrittelemätön</td>
+ <td></td>
+ </tr>
+
+ <tr>
+ <td><label for="f31">31- Tietueen päivitys meneillään</label></td>
+ <td>
+ <select name="f31" id="f31">
+ [% IF ( f31a ) %]
+ <option value="a" selected="selected">a - Tietueen tietoja voidaan käyttää</option>
+ [% ELSE %]
+ <option value="a">a - Tietueen tietoja voidaan käyttää</option>
+ [% END %]
+ [% IF ( f31b ) %]
+ <option value="b" selected="selected">b- Tietuetta päivitetään parhaillaan</option>
+ [% ELSE %]
+ <option value="b">b- Tietuetta päivitetään parhaillaan</option>
+ [% END %]
+ [% IF ( f31pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f32">32- Samat henkilönnimet</label></td>
+ <td>
+ <select name="f32" id="f32">
+ [% IF ( f32a ) %]
+ <option value="a" selected="selected">a- Erottuva henkilönnimi</option>
+ [% ELSE %]
+ <option value="a">a- Erottuva henkilönnimi</option>
+ [% END %]
+ [% IF ( f32b ) %]
+ <option value="b" selected="selected">b- Nimi kuuluu usealle henkilölle</option>
+ [% ELSE %]
+ <option value="b">b- Nimi kuuluu usealle henkilölle</option>
+ [% END %]
+ [% IF ( f32n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f32pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f33">33- Vahvistamisen taso</label></td>
+ <td>
+ <select name="f33" id="f33">
+ [% IF ( f33a ) %]
+ <option value="a" selected="selected">a - Täysin vahvistettu</option>
+ [% ELSE %]
+ <option value="a">a - Täysin vahvistettu</option>
+ [% END %]
+ [% IF ( f33b ) %]
+ <option value="b" selected="selected">b - Muistiinpano</option>
+ [% ELSE %]
+ <option value="b">b - Muistiinpano</option>
+ [% END %]
+ [% IF ( f33c ) %]
+ <option value="c" selected="selected">c- Vahvistamaton</option>
+ [% ELSE %]
+ <option value="c">c- Vahvistamaton</option>
+ [% END %]
+ [% IF ( f33d ) %]
+ <option value="d" selected="selected">d- Alustava</option>
+ [% ELSE %]
+ <option value="d">d- Alustava</option>
+ [% END %]
+ [% IF ( f33n ) %]
+ <option value="n" selected="selected">n- Soveltumaton</option>
+ [% ELSE %]
+ <option value="n">n- Soveltumaton</option>
+ [% END %]
+ [% IF ( f33pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+
+ <tr>
+ <td>34-37 Määrittelemätön</td>
+ <td></td>
+ </tr>
+
+ <tr>
+ <td><label for="f38">38- Muokattu tietue</label></td>
+ <td>
+ <select name="f38" id="f38">
+ [% IF ( f38 ) %]
+ <option value=" " selected="selected">#- Ei muutettu</option>
+ [% ELSE %]
+ <option value=" ">#- Ei muutettu</option>
+ [% END %]
+ [% IF ( f38s ) %]
+ <option value="s" selected="selected">s - Lyhennetty</option>
+ [% ELSE %]
+ <option value="s">s - Lyhennetty</option>
+ [% END %]
+ [% IF ( f38x ) %]
+ <option value="x" selected="selected">x- Merkkejä puuttuu</option>
+ [% ELSE %]
+ <option value="x">x- Merkkejä puuttuu</option>
+ [% END %]
+ [% IF ( f38pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ <tr>
+ <td><label for="f39">39- Luetteloiva organisaatio</label></td>
+ <td>
+ <select name="f39" id="f39">
+ [% IF ( f39 ) %]
+ <option value=" " selected="selected">#- Kansallisbibliografia</option>
+ [% ELSE %]
+ <option value=" ">#- Kansallisbibliografia</option>
+ [% END %]
+ [% IF ( f39c ) %]
+ <option value="c" selected="selected">c- Luettelointiyhteistyö</option>
+ [% ELSE %]
+ <option value="c">c- Luettelointiyhteistyö</option>
+ [% END %]
+ [% IF ( f39d ) %]
+ <option value="d" selected="selected">d- Muu</option>
+ [% ELSE %]
+ <option value="d">d- Muu</option>
+ [% END %]
+ [% IF ( f39u ) %]
+ <option value="u" selected="selected">u- Tuntematon</option>
+ [% ELSE %]
+ <option value="u">u- Tuntematon</option>
+ [% END %]
+ [% IF ( f39pipe ) %]
+ <option value="|" selected="selected">|- Ei koodattu</option>
+ [% ELSE %]
+ <option value="|">|- Ei koodattu</option>
+ [% END %]
+ </select>
+ </td>
+ </tr>
+ </table>
+ <nav class="navbar navbar-default fixed-bottom">
+ <div class="container-fluid">
+ <fieldset class="action">
+ <input class="btn btn-primary" type="submit" value="Tallenna" />
+ <button class="btn btn-default close_window">Peruuta</button>
+ </fieldset>
+ </div>
+ </nav>
+ </div> <!-- /.page-section -->
+</form>
+
+[% MACRO jsinclude BLOCK %]
+ <script>
+        function report() {
+            var doc   = opener.document;
+            var field = doc.getElementById("[% index | html %]");
+
+            field.value =
+            document.f_pop.f1.value +
+            document.f_pop.f6.value +
+            document.f_pop.f7.value +
+            document.f_pop.f8.value +
+            document.f_pop.f9.value +
+            document.f_pop.f10.value +
+            document.f_pop.f11.value +
+            document.f_pop.f12.value +
+            document.f_pop.f13.value +
+            document.f_pop.f14.value +
+            document.f_pop.f15.value +
+            document.f_pop.f16.value +
+            document.f_pop.f17.value +
+            '          '+
+            document.f_pop.f28.value +
+            document.f_pop.f29.value +
+            ' '+
+            document.f_pop.f31.value +
+            document.f_pop.f32.value +
+            document.f_pop.f33.value +
+            '    '+
+            document.f_pop.f38.value +
+            document.f_pop.f39.value;
+            self.close();
+            return false;
+        }
+    </script>
+[% END %]
+
+[% INCLUDE 'intranet-bottom.inc' popup_window=1 %]

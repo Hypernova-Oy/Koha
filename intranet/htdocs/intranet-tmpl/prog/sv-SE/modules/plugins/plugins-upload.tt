@@ -1,0 +1,73 @@
+[% USE raw %]
+[% USE Koha %]
+[% PROCESS 'i18n.inc' %]
+[% INCLUDE 'doc-head-open.inc' %]
+<title>[% FILTER collapse %]
+ [% t("Upload plugin") | html %] &rsaquo;
+ [% t("Plugins") | html %] &rsaquo;
+ [% t("Koha") | html %]
+[% END %]</title>
+[% INCLUDE 'doc-head-close.inc' %]
+[% INCLUDE 'calendar.inc' %]
+</head>
+
+<body id="plugins_plugins_upload" class="plugins">
+[% WRAPPER 'header.inc' %]
+ [% INCLUDE 'circ-search.inc' %]
+[% END %]
+
+ [% WRAPPER 'sub-header.inc' %]
+ [% WRAPPER breadcrumbs %]
+ [% WRAPPER breadcrumb_item %]
+ <a href="/cgi-bin/koha/plugins/plugins-home.pl">Plugins</a>
+ [% END %]
+ [% WRAPPER breadcrumb_item bc_active= 1 %]
+ <span>Ladda upp plugin</span>
+ [% END %]
+ [% END #/ WRAPPER breadcrumbs %]
+ [% END #/ WRAPPER sub-header.inc %]
+
+ <div class="container-fluid">
+ <div class="row">
+ <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+ [% INCLUDE 'messages.inc' %]
+
+ <h1>Ladda upp plugin</h1>
+ [% IF ( ERRORS ) %]
+ <div class="alert alert-warning">
+ [% FOREACH ERROR IN ERRORS %]
+ [% IF ( ERROR.NOTKPZ ) %]<li><strong>Den uppladdade filen verkar inte vara en kpz-fil. Filändelsen är inte '.kpz'.</strong></li>
+ [% ELSIF ( ERROR.NOWRITETEMP ) %]<li><strong>Detta skript kan inte skapa i/skriva till den temporära katalog som krävs.</strong></li>
+ [% ELSIF ( ERROR.EMPTYUPLOAD ) %]<li><strong>Den uppladdade filen verkar vara tom.</strong></li>
+ [% ELSIF ( ERROR.UZIPFAIL ) %]<li><strong>[% ERROR.UZIPFAIL | html %] kunde inte packa upp.<br />Verifiera att zip-filen inte är defekt och försök igen.</strong></li>
+ [% ELSIF ( ERROR.NOWRITEPLUGINS ) %]<li><strong>Kan inte packa upp fil till instickskatalogen.<br />Verifiera att Apache-användaren har skrivrättigheter i katalogen för plugins.</strong></li>
+ [% ELSIF ( ERROR.RESTRICTED ) %]<li><strong>Kan inte installera plugin från okänd källa så länge plugins_restricted är aktiverad.<br /></strong></li>
+ [% ELSE %]<li><strong>[% ERROR.CORERR | html %] Ett okänt fel har inträffat.<br />Läs felloggen för mer information.</strong></li>[% END %]
+ [% END %]
+ </div>
+ [% END %]
+ [% IF ( !plugins_restart ) %]
+ <div class="alert alert-warning">
+ <strong>Ditt system är inte konfigurerat för att automatiskt uppdateras vid uppladdning av plugin, du kan behöva be din administratör att slutföra plugininstallationen.</strong>
+ </div>
+ [% END %]
+ <form method="post" action="/cgi-bin/koha/plugins/plugins-upload.pl" enctype="multipart/form-data">
+ [% INCLUDE 'csrf-token.inc' %]
+ <fieldset class="brief">
+ <div class="hint"><strong>Kommentar:</strong> Endast formatet KPZ stöds.</div>
+ <ol>
+ <li>
+ <label for="uploadfile">Välj fil att ladda upp: </label><input type="file" id="uploadfile" name="uploadfile" accept=".kpz" />
+ </li>
+ </ol>
+ </fieldset>
+ <fieldset class="action">
+ <input type="hidden" name="op" value="cud-Upload" />
+ <input class="btn btn-primary" type="submit" value="Ladda upp" />
+ </fieldset>
+ </form>
+
+ </div>
+ </div>
+
+[% INCLUDE 'intranet-bottom.inc' %]
