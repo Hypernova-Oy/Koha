@@ -40,6 +40,52 @@ my ( $template, $loggedinuser, $cookie, $flags ) = get_template_and_user(
 my $op  = $cgi->param('op') || 'show';
 my @ids = $cgi->multi_param('id');
 
+my $copy   = $cgi->param('copy');
+my $name   = $cgi->param('name');
+my @fields = qw(
+    preferred_name
+    initials
+    othernames
+    branchcode
+    cardnumber
+    categorycode
+    address
+    address2
+    city
+    state
+    zipcode
+    country
+    dateenrolled
+    date_renewed
+    dateexpiry
+    dateofbirth
+    debarred
+    email
+    emailpro
+    phone
+    phonepro
+    mobile
+    sex
+    updated_on
+    userid
+);
+
+my %data;
+
+for my $field (@fields) {
+    my $val = $cgi->param($field);
+
+    if ( defined $val ) {
+        $data{$field} = $val;
+    }
+}
+
+if ($name) {
+    my @names = split( ', ', $name );
+    $data{'firstname'} = $names[0];
+    $data{'surname'}   = $names[1];
+}
+
 if ( $op eq 'show' ) {
     my $patrons = Koha::Patrons->search( { borrowernumber => { -in => \@ids } } );
     $template->param( patrons => $patrons );
@@ -56,6 +102,9 @@ if ( $op eq 'show' ) {
                 keeper  => $keeper,
                 results => $results
             );
+            if ($copy) {
+                $keeper->set( \%data )->store();
+            }
         } catch {
             $template->param( error => $_ );
         }
