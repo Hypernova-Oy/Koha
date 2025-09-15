@@ -152,6 +152,15 @@
                                         </tr>
                                     [% END %]
 
+                                    [% IF ( BIBLIO_RESULT.RECORD ) %]
+                                        <tr>
+                                            <th scope="row">Medium of performance</th>
+                                            <td>
+                                                <p>[% BIBLIO_RESULT.RECORD.field('382').subfield('a').join(', ') | html %]</p>
+                                            </td>
+                                        </tr>
+                                    [% END %]
+
                                     [% IF ( BIBLIO_RESULT.publishercode ) %]
                                         <tr>
                                             <th scope="row">Publisher</th>
@@ -317,6 +326,7 @@
                                         <th class="noprint no-sort">&nbsp;</th>
                                         <th>Title</th>
                                         <th>Author</th>
+                                        <th>Medium of performance</th>
                                         <th>Year</th>
                                         <th class="no-sort">Location (Status)</th>
                                     </tr>
@@ -361,6 +371,7 @@
                                                 [% END %]
                                             </td>
                                             <td>[% BIBLIO_RESULT.author | html %]</td>
+                                            <td>[% BIBLIO_RESULT.RECORD.field('382').subfield('a').join(', ') | html %]</td>
                                             <td>
                                                 [% IF ( BIBLIO_RESULT.publicationyear ) %]
                                                     [% BIBLIO_RESULT.publicationyear | html %]
