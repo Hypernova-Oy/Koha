@@ -87,6 +87,7 @@ foreach my $biblionumber (@bibs) {
 
     $num++;
     $dat->{biblionumber} = $biblionumber;
+    $dat->{RECORD}       = $record;
     $dat->{ITEM_RESULTS} = $biblio->items->search_ordered;
     $dat->{MARCNOTES}    = $marcnotesarray;
     $dat->{MARCSUBJCTS}  = $marcsubjctsarray;

@@ -112,6 +112,7 @@ foreach my $biblionumber (@bibs) {
 
     $num++;
     $dat->{biblionumber} = $biblionumber;
+    $dat->{RECORD}       = $record;
     $dat->{ITEM_RESULTS} = $biblio->items->filter_by_visible_in_opac( { patron => $logged_in_user } );
     $dat->{MARCNOTES}    = $marcnotesarray;
     $dat->{MARCSUBJCTS}  = $marcsubjctsarray;
