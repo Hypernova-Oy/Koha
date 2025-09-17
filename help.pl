@@ -45,3 +45,4 @@ my $language   = C4::Languages::getlanguage($query);
 my $manual_url = Koha::Manual::get_url( $refer, $language );
 
 print $query->redirect($manual_url);
+print 123;
