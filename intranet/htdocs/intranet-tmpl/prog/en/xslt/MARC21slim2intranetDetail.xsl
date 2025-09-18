@@ -424,6 +424,60 @@
             </span>
         </xsl:if>
 
+        <!-- 382 - Medium of Performance -->
+        <xsl:if test="marc:datafield[@tag=382]">
+            <span class="results_summary medium_of_performance">
+                <span class="label">Medium of performance: </span>
+                <xsl:for-each select="marc:datafield[@tag=382]">
+                    <xsl:for-each select="marc:subfield">
+                        <xsl:if test="@code='a' or @code='b'">
+                            <xsl:if test="preceding-sibling::marc:subfield[@code='a'] or preceding-sibling::marc:subfield[@code='b']">
+                                <xsl:if test="preceding-sibling::marc:subfield[@code='a' or @code='b'][1]/following-sibling::marc:subfield[@code='d']/following-sibling::marc:subfield[@code='a' or @code='b'][1] = .">
+                                    <xsl:text>)</xsl:text>
+                                </xsl:if>
+                                <xsl:text>, </xsl:text>
+                            </xsl:if>
+
+                            <xsl:value-of select="text()"/>
+                        </xsl:if>
+                        <xsl:if test="@code='p'">
+                            <xsl:text> or </xsl:text>
+                            <xsl:value-of select="text()"/>
+                        </xsl:if>
+                        <xsl:if test="@code='d'">
+                            <xsl:choose>
+                                <xsl:when test="preceding-sibling::marc:subfield[@code='a' or @code='b'][1]/following-sibling::marc:subfield[@code='d'][1] = .">
+                                    <xsl:text> (doubling </xsl:text>
+                                </xsl:when>
+                                <xsl:otherwise>
+                                    <xsl:choose>
+                                        <xsl:when test="not(following-sibling::marc:subfield[@code='d']) or (following-sibling::marc:subfield[@code='a' or @code='b'][1]/following-sibling::marc:subfield[@code='d'][1]/preceding-sibling::marc:subfield[@code='d'][1] = .)">
+                                            <xsl:text> and </xsl:text>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:text>, </xsl:text>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:otherwise>
+                            </xsl:choose>
+                            <xsl:value-of select="text()"/>
+                        </xsl:if>
+                        <xsl:if test="@code='n' or @code='e'">
+                            <xsl:text> (</xsl:text>
+                            <xsl:value-of select="text()"/>
+                            <xsl:text>)</xsl:text>
+                        </xsl:if>
+                        <xsl:if test="@code='v'">
+                            <xsl:text> [</xsl:text>
+                            <xsl:value-of select="text()"/>
+                            <xsl:text>]</xsl:text>
+                        </xsl:if>
+                    </xsl:for-each>
+                    <xsl:if test="position()!=last()"><xsl:text>; </xsl:text></xsl:if>
+                </xsl:for-each>
+            </span>
+        </xsl:if>
+
         <!-- 385 - Audience -->
         <xsl:if test="marc:datafield[@tag=385]">
             <span class="results_summary audience">
