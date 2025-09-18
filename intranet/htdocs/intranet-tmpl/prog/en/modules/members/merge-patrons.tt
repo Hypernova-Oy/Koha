@@ -413,10 +413,10 @@
                     _("Field") +
                     `</div>
                     <div class="col fw-bold">` +
-                    _("Keep") +
+                    _("Destination record") +
                     `</div>
                     <div class="col fw-bold">` +
-                    _("Delete") +
+                    _("Source record") +
                     `</div>
                     <div class="col fw-bold">` +
                     _("Copy value") +
@@ -450,13 +450,17 @@
             $("#copy-fields .row input[type=checkbox]").on("click", function () {
                 let ins = $(this).closest(".row").find(".col2 pre").data("og").toString();
                 let del = $(this).closest(".row").find(".col3 pre").data("og").toString();
-                let diffs;
-                if ($(this).is(":checked")) {
-                    diffs = diffString(ins, del);
-                } else {
-                    diffs = diffString(del, ins);
-                }
-                $(this).closest(".row").find(".col2 pre, .col3 pre").html(diffs);
+                let diffs = diffString(ins, del);
+
+                $(this).closest(".row").find(".col3 pre, .col2 pre").html(diffs);
+
+                $(this)
+                    .closest(".row")
+                    .find(".col2, .col3")
+                    .each(function () {
+                        $(this).toggleClass("col2", "col3");
+                        $(this).toggleClass("col3", "col2");
+                    });
             });
         }
     </script>
