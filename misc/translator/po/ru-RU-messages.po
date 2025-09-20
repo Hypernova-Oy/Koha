@@ -1,10 +1,10 @@
 # Compendium of ru.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2025-04-24 04:07+0000\n"
+"POT-Creation-Date: 2025-08-09 03:11+0000\n"
+"PO-Revision-Date: 2025-08-23 03:10+0000\n"
 "Last-Translator: bibliochip <t.goverdovski@bibliotheca.ru>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: ru-RU\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /ru/22.11/ru-RU-messages.po\n"
 "X-POOTLE-MTIME: 1698073312.461309\n"
@@ -1563,28 +1563,30 @@ msgid ""
 "These commands are only suggestions. They are not a replacement for the database update scripts run during installations and updates.\n"
 "Review the database, the atomic update files and the table definitions in kohastructure.sql before running any of the commands below:"
 msgstr ""
+"Эти команды являются всего лишь рекомендациями. Они не заменяют скрипты обновления базы данных, запускаемые во время установки и обновлений.\n"
+"Перед выполнением любой из приведенных ниже команд ознакомьтесь с базой данных, файлами атомарного обновления и определениями таблиц в kohastructure.sql:"
 
 #: Koha/Database/Auditor.pm:84
 msgid "Warning!"
-msgstr ""
+msgstr "Внимание!"
 
 #: Koha/Database/Auditor.pm:88
 msgid "The installed database schema is correct."
-msgstr ""
+msgstr "Установленная схема базы данных верна."
 
 #: Koha/Database/Auditor.pm:89
 msgid "All is well"
-msgstr ""
+msgstr "Все хорошо"
 
 #: Koha/Database/Auditor.pm:111
 #, perl-format
 msgid "Parsing schema for database %s\n"
-msgstr ""
+msgstr "Схема синтаксического анализа для базы данных %s\n"
 
 #: Koha/Database/Auditor.pm:151
 #, perl-format
 msgid "Parsing schema for file %s\n"
-msgstr ""
+msgstr "Схема синтаксического анализа для файла %s\n"
 
 # Шифр для заказа экземпляра:
 # (длинное - разлазиться таблица)
@@ -1855,7 +1857,7 @@ msgstr "Разрешить автоматическое продление"
 
 #: Koha/Database/Columns.pm:138
 msgid "Alternate address: Address"
-msgstr "Дополнительный адрес: Улица"
+msgstr "Дополнительный адрес: Адрес"
 
 #: Koha/Database/Columns.pm:139
 msgid "Alternate address: Address 2"
@@ -1871,7 +1873,7 @@ msgstr "Дополнительный адрес: Страна"
 
 #: Koha/Database/Columns.pm:142
 msgid "Alternate address: Email"
-msgstr "Дополнительный адрес: E-mail"
+msgstr "Дополнительный адрес: Электронная почта"
 
 #: Koha/Database/Columns.pm:143
 msgid "Alternate address: Phone"
@@ -1932,7 +1934,7 @@ msgstr "Дополнительные контакты: Примечание"
 
 #: Koha/Database/Columns.pm:158
 msgid "Alternate contact: Title"
-msgstr "Дополнительные контакты: Заглавие"
+msgstr "Дополнительные контакты: Приветствие"
 
 # Коды в соответствии с «MARC Code List for Countries».
 #: Koha/Database/Columns.pm:159
@@ -1975,7 +1977,7 @@ msgstr "Электронный адрес"
 #: Koha/Database/Columns.pm:167
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:29
 msgid "Secondary email"
-msgstr "Дополнительный e-mail"
+msgstr "Электронная почта (дополн.)"
 
 #: Koha/Database/Columns.pm:168
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:28
@@ -2023,7 +2025,7 @@ msgstr "Отчество"
 
 #: Koha/Database/Columns.pm:178
 msgid "Other phone"
-msgstr "Другой телефон"
+msgstr "Домашний телефон"
 
 #: Koha/Database/Columns.pm:179
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:59
@@ -2060,7 +2062,7 @@ msgstr "Дополнительный телефон"
 #: Koha/Database/Columns.pm:186
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:11
 msgid "Preferred name"
-msgstr "Предпочтительное наименование"
+msgstr "Предпочтительное имя"
 
 #: Koha/Database/Columns.pm:187
 msgid "Primary contact method"
@@ -2085,7 +2087,7 @@ msgstr "Местоимения"
 
 #: Koha/Database/Columns.pm:192
 msgid "Protected"
-msgstr "Защищенный"
+msgstr "Защита"
 
 #: Koha/Database/Columns.pm:193
 msgid "Relationship"
@@ -2126,7 +2128,7 @@ msgstr "Область/край/район:"
 #: Koha/Database/Columns.pm:201
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:17
 msgid "Street number"
-msgstr "Улица"
+msgstr "Номер дома"
 
 #: Koha/Database/Columns.pm:202
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:18
@@ -2362,7 +2364,7 @@ msgstr "Автор"
 
 #: Koha/Database/Columns.pm:263 Koha/Database/Columns.pm:337
 msgid "Copyright date"
-msgstr "Дата авторского права"
+msgstr "Год публикации"
 
 #: Koha/Database/Columns.pm:265
 msgid "Framework code"
@@ -2582,7 +2584,7 @@ msgstr "Название коллекции"
 
 #: Koha/Database/Columns.pm:340
 msgid "Note"
-msgstr "Заметка"
+msgstr "Примечание"
 
 #: Koha/Database/Columns.pm:341
 msgid "Patron reason"
@@ -3852,7 +3854,7 @@ msgstr "Дата последней выдачи"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
 msgid "Not for loan status"
-msgstr "Статус \"не выдается\""
+msgstr "Статус \\\"не выдается\\\""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
 msgid "Serial enumeration"
@@ -3861,7 +3863,7 @@ msgstr "Нумерация сериальных изданий"
 # Коды в соответствии с «MARC Code List for Countries».
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
 msgid "Amount"
-msgstr "Количество"
+msgstr "Сумма"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
 msgid "Manager name"
@@ -4407,7 +4409,7 @@ msgstr "Отчеты"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/sendshelfform.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/shelves.tt:22
 msgid "Koha"
-msgstr ""
+msgstr "Koha"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patron-age.inc:9
 #, perl-brace-format
@@ -4419,7 +4421,7 @@ msgstr[2] "({age} лет)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:3
 msgid "Standard"
-msgstr "Стандарт"
+msgstr "По умолчанию"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:4
 msgid "Full address"
@@ -4611,7 +4613,7 @@ msgstr "Задолжности"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/restriction-types.inc:7
 msgid "Suspension"
-msgstr "Блокировка"
+msgstr "Приостановка"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/restriction-types.inc:8
 msgid "Discharge"
@@ -4835,8 +4837,8 @@ msgctxt "noun"
 msgid "Order"
 msgstr "Заказ"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1248
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:803
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1251
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:804
 msgid "Add user"
 msgstr "Добавить пользователя"
 
@@ -4917,7 +4919,7 @@ msgstr "Поиск заказов"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/result.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/serials-search.tt:12
 msgid "Search results"
-msgstr "Поиск результатов"
+msgstr "Результат поиска"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/histsearch.tt:15
 msgid "Order search"
@@ -5296,7 +5298,7 @@ msgstr "по {type}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/audio_alerts.tt:8
 msgid "Audio alerts"
-msgstr "Звуковые оповещения"
+msgstr "Звуковые уведомления"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_subfields_structure.tt:9
 msgid "Edit subfields constraints"
@@ -5352,7 +5354,7 @@ msgstr "Изменить тэг '{searchfield}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:14
 msgid "New tag"
-msgstr "Новый тэг"
+msgstr "Новый тег"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:18
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:82
@@ -5364,7 +5366,7 @@ msgstr "Подтвердить удаление тэга '{searchfield}'"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:63
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:59
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:119
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:121
 #, perl-brace-format
 msgid "Modify tag {searchfield}"
 msgstr "Изменить тэг {searchfield}"
@@ -5385,7 +5387,7 @@ msgstr "Структура авторитетной записи MARC-форма
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/authorised_values.tt:11
 msgid "Modify authorized value"
-msgstr "Изменить списочное значение"
+msgstr "Редактировать списочное значение"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/authorised_values.tt:14
 msgid "New authorized value"
@@ -5451,10 +5453,9 @@ msgstr "Детали работы #{job_id}"
 msgid "Jobs"
 msgstr "Задачи"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:329
-#, fuzzy
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:334
 msgid "Are you sure you want to cancel this job?"
-msgstr "Вы действительно хотите удалить это?"
+msgstr "Вы действительно хотите отменить задачу?"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/biblio_framework.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/biblio_framework.tt:45
@@ -5566,7 +5567,7 @@ msgstr "Категории пользователей"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/checkmarc.tt:8
 msgid "MARC bibliographic framework test"
-msgstr ""
+msgstr "Тест библиографической структуры MARC-записи"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:44
@@ -5593,14 +5594,13 @@ msgstr "Населенные пункты"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:66
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:148
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify classification source '{description}'"
-msgstr "Нормализованная классификация Koha для сортировки"
+msgstr "Редактировать классификацию '{description}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:12
-#, fuzzy
 msgid "New classification source"
-msgstr "Дьюи/классификация"
+msgstr "Новая классификация"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:75
@@ -5618,11 +5618,11 @@ msgstr "Новое правило сортировки"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:260
 #, perl-brace-format
 msgid "Modify splitting rule '{description}'"
-msgstr ""
+msgstr "Изменить правило разделения '{description}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:24
 msgid "New splitting rule"
-msgstr ""
+msgstr "Новое правило разделения"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:27
 msgid "Classification configuration"
@@ -5650,12 +5650,12 @@ msgstr "Изменить населенный пункт '{city}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:14
 msgid "New credit type"
-msgstr "Новый тип долга"
+msgstr "Новый тип зачисления"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:18
 msgid "Credit types"
-msgstr "Типы кредита"
+msgstr "Типы зачислений"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:196
 #, perl-brace-format
@@ -5978,12 +5978,12 @@ msgstr "Новый тэг {searchfield}"
 msgid "Confirm deletion of tag {searchfield}"
 msgstr "Подтвердить удаление тэга {searchfield}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:103
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:105
 #, perl-brace-format
 msgid "MARC bibliographic framework '{framework}' ({frameworkcode})"
 msgstr "Библиографическая MARC-структура'{framework}' ({frameworkcode})"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:183
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:185
 #, perl-brace-format
 msgid "Confirm deletion of tag {searchfield}?"
 msgstr "Подтвердить удаление тэга {searchfield}?"
@@ -6302,7 +6302,7 @@ msgstr "Ошибка аутентификации у внешнего прова
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/auth.tt:37
 msgid "Log in to Koha"
-msgstr "Войти в Koha"
+msgstr "Вход в систему"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/authorities/auth_finder.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/authorities/searchresultlist-auth.tt:9
@@ -6415,9 +6415,9 @@ msgid "Advanced search"
 msgstr "Расширенный поиск"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/detail.tt:32
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Details for {title}"
-msgstr "Постоянное заглавие"
+msgstr "Показать {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/detail.tt:665
 #, perl-brace-format
@@ -6558,7 +6558,7 @@ msgstr "Редактирование {title} (Номер записи {biblionum
 msgid "Add MARC record"
 msgstr "Новая MARC-запись"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:823
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:810
 msgctxt "Editing MARC record titled:"
 msgid "Editing"
 msgstr "Издание"
@@ -6568,37 +6568,36 @@ msgid "No results found"
 msgstr "Ничего не найдено"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:11
-#, fuzzy
 msgid "Items"
 msgstr "Экземпляры"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:13
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "{title} by {author}"
-msgstr "Редактировать {title} / {author}"
+msgstr "{title} / {author}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:17
 #, perl-brace-format
 msgid "(Record #{biblionumber})"
 msgstr "(Запись #1{biblionumber})"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
 #, perl-brace-format
 msgid "Edit {title} by {author}"
 msgstr "Редактировать {title} / {author}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 msgctxt "Bibliographic record number"
 msgid "Record #"
 msgstr "Запись #"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 #, perl-brace-format
 msgid "Edit {title}"
 msgstr "Редактировать {title}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:73
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:72
 msgctxt "Items attached to a bibliographic record"
 msgid "Items"
 msgstr "Экземпляры"
@@ -6608,9 +6607,8 @@ msgid "Catalog concerns"
 msgstr "Проблемы с каталогом"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/editor.tt:7
-#, fuzzy
 msgid "Editor"
-msgstr "Редактировать"
+msgstr "Редактор"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/linkitem.tt:7
 msgid "Link to host record"
@@ -6704,22 +6702,20 @@ msgid "008 builder"
 msgstr "компоновщик 008"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_field_008_classifications.tt:7
-#, fuzzy
 msgid "Classifications"
-msgstr "Классификация"
+msgstr "Классификации"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_leader.tt:7
 msgid "000 - Leader builder"
-msgstr ""
+msgstr "000 - Компоновщик начального участка записи"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_leader_authorities.tt:6
 msgid "Leader builder"
 msgstr "Компоновщик начального участка записи"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_linking_section.tt:6
-#, fuzzy
 msgid "Plugin for links"
-msgstr "Плагины"
+msgstr "Плагины для ссылок"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_100.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_100_authorities.tt:6
@@ -7042,8 +7038,8 @@ msgstr "Стастика выдач для {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:26
-#, perl-brace-format
-msgid "Overdues at {library}"
+#, fuzzy, perl-brace-format
+msgid "Overdues with fines at {library}"
 msgstr "Просроченные в {library}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchtransfers.tt:11
@@ -7059,7 +7055,7 @@ msgstr "Комментарии при выдачи"
 msgid "Checking out to {patron}"
 msgstr "Выдача для {patron}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:887
+#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:891
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:346
 #, perl-brace-format
 msgid "Bundle of {count} item"
@@ -7163,9 +7159,9 @@ msgid "Hold ratios"
 msgstr "Интенсивность заказов"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/returns.tt:33
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Check in {title}"
-msgstr "Название коллекции"
+msgstr "Возврат зарегистрирован: {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/transfers_to_send.tt:12
 msgid "Transfers to send"
@@ -7235,9 +7231,8 @@ msgid "Course reserves"
 msgstr "Резервирования курса"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/add_items-step2.tt:10
-#, fuzzy
 msgid "Edit reserve"
-msgstr "Зарезервировать"
+msgstr "Редактировать экземпляр"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/add_items-step2.tt:37
 msgctxt "Edit course reserve"
@@ -7250,9 +7245,8 @@ msgid "Reserve"
 msgstr "Зарезервировать"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/batch_rm_items.tt:8
-#, fuzzy
 msgid "Remove reserves"
-msgstr "Зарезервировать"
+msgstr "Удалить экземпляр"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/batch_rm_items.tt:65
 #, perl-brace-format
@@ -7280,9 +7274,8 @@ msgid "Edit {course_name}"
 msgstr "Редактировать {course_name}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/course.tt:11
-#, fuzzy
 msgid "New course"
-msgstr "Новый статус"
+msgstr "Новый курс"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/course.tt:108
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/course.tt:121
@@ -7396,11 +7389,11 @@ msgstr "Установка завершена"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/intranet-main.tt:11
 msgid "Koha staff interface"
-msgstr "Интерфейс сотрудника Koha"
+msgstr "Служебный интерфейс Koha"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/barcode-print.tt:8
 msgid "Barcode image generator"
-msgstr "Генератор изображений штрихкодов"
+msgstr "Генератор штрихкодов"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-edit-batch.tt:10
 #, perl-brace-format
@@ -7425,7 +7418,7 @@ msgstr "Партии"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:21
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-print.tt:6
 msgid "Label creator"
-msgstr "Создатель наклейки"
+msgstr "Редактор наклеек"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-edit-batch.tt:129
 #, perl-brace-format
@@ -7534,7 +7527,7 @@ msgstr "Поиск"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/spinelabel-home.tt:8
 msgid "Quick spine label creator"
-msgstr "Быстрый создатель наклейки на корешок"
+msgstr "Печать наклеек на корешок"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/spinelabel-print.tt:8
 msgid "Spine labels"
@@ -7542,7 +7535,7 @@ msgstr "Наклейка на корешок"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/accountline-details.tt:14
 msgid "Details of credit"
-msgstr "Информация о кредите"
+msgstr "Информация о зачислении"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/accountline-details.tt:16
 #, fuzzy
@@ -7592,12 +7585,11 @@ msgstr "История ILL-запросов для"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/mancredit.tt:12
 msgid "Create manual credit"
-msgstr "Создайте кредит самостоятельно"
+msgstr "Пополнение баланса"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/maninvoice.tt:11
-#, fuzzy
 msgid "Create manual invoice"
-msgstr "голос – декламация – мужской"
+msgstr "Начислить платёж"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/member-flags.tt:10
 #, fuzzy
@@ -7620,21 +7612,21 @@ msgstr "Новый пользователь"
 msgid "Modify patron"
 msgstr "Редактировать пользователя"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:488
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:490
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:500
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:491
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:493
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:503
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember-brief.tt:44
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:195
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:199
 msgctxt "gender"
 msgid "Other"
 msgstr "Другое"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1521
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1524
 msgctxt "patron restriction created on"
 msgid "Created"
 msgstr "Создано"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2093
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2096
 msgid "Add guarantor"
 msgstr "Добавить поручителя"
 
@@ -7763,9 +7755,9 @@ msgid "Patron lists"
 msgstr "Списки пользователей"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/list.tt:48
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Add patrons to '{patron_list_name}'"
-msgstr "Изменить населенный пункт '{city}'"
+msgstr "Редактирование списка '{patron_list_name}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-batch.tt:9
 msgid "Edit patron card batch"
@@ -7817,6 +7809,11 @@ msgstr "Новый шаблон читательского билета"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:7
 msgid "Image manager"
 msgstr "Менеджер изображений"
+
+#: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:124
+#, fuzzy, perl-brace-format
+msgid "Are you sure you want to delete image {image_id}?"
+msgstr "Вы действительно хотите удалить это поле?"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:9
 msgid "Patron card layouts"
@@ -7977,7 +7974,7 @@ msgstr "Сохранённые отчеты"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/guided_reports_start.tt:29
 msgid "Create from SQL"
-msgstr "Создать на основе SQL"
+msgstr "Новый отчет"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/guided_reports_start.tt:31
 #, fuzzy, perl-brace-format
@@ -8206,7 +8203,7 @@ msgstr "Договор of {vendor}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/claims.tt:14
 msgid "Claims"
-msgstr "Требования"
+msgstr "Претензии"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/routing-preview-slip.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/routing-preview-slip.tt:19
@@ -8301,7 +8298,7 @@ msgstr "Номер экземпляра (внутренний)"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-numberpatterns.tt:66
 #, perl-brace-format
 msgid "Modify numbering pattern '{pattern}'"
-msgstr ""
+msgstr "Измеить шаблон нумерации '{pattern}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-numberpatterns.tt:13
 #, fuzzy
@@ -8346,12 +8343,12 @@ msgstr "Создано:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:1540
 msgid "Select suggester"
-msgstr "Выберите предлагающего"
+msgstr "Выбор автора предложения"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:1543
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:1548
 msgid "Select manager"
-msgstr "Выбрать менеджера"
+msgstr "Выбрать ответственного"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/list.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/list.tt:34
@@ -8363,7 +8360,7 @@ msgstr "Результаты для тэга '{tag}'"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/list.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:16
 msgid "Tags"
-msgstr "Тэги"
+msgstr "Теги"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:65
@@ -8469,7 +8466,7 @@ msgstr "Правила"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/automatic_item_modification_by_age.tt:11
 msgid "Automatic item modifications by age"
-msgstr "Автоматическое изменение экземпляра в зависимости от возраста"
+msgstr "Автоматическое редактирование экземпляров по сроку давности"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod-del.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod-del.tt:51
@@ -8689,7 +8686,7 @@ msgstr "Партия {batch_import_number}"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/manage-marc-import.tt:15
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/showdiffmarc.tt:10
 msgid "Manage staged MARC records"
-msgstr "Управлять подготовленными MARC-записями"
+msgstr "Загруженные MARC-записи"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/marc_modification_templates.tt:18
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/marc_modification_templates.tt:54
@@ -8733,7 +8730,7 @@ msgstr "Отчеты о проблемах OPAC"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/quotes-upload.tt:8
 msgid "Quote uploader"
-msgstr "Загрузчик цитат"
+msgstr "Импорт цитат"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/quotes-upload.tt:9
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/quotes.tt:15
@@ -8828,11 +8825,11 @@ msgstr "Вы действительно хотите удалить это?"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/upload-images.tt:9
 msgid "Upload local cover image for "
-msgstr "Загрузите локальное изображение обложки для "
+msgstr "Загрузить изображение обложки для "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/upload-images.tt:11
 msgid "Upload local cover image"
-msgstr "Загрузить локальное изображение обложки"
+msgstr "Загрузка изображений обложек"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/upload.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/upload.tt:18
@@ -8913,46 +8910,51 @@ msgstr "Электронный каталог"
 msgid "Card number or username"
 msgstr "Номер чит. билета или имя пользователя"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:201
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:203
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:147
+#, fuzzy
+msgid "Are you sure you want to delete your search history?"
+msgstr "Вы действительно хотите удалить это?"
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:210
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:212
 msgid "Search the catalog by keyword"
 msgstr "Поиск по ключевым словам"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:206
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:208
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:215
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:217
 msgid "Search the catalog by title"
 msgstr "Поиск по заглавию"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:211
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:220
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:222
 msgid "Search the catalog by author"
 msgstr "Поиск по автору"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:216
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:218
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:227
 #, fuzzy
 msgid "Search the catalog by subject"
 msgstr "Искать также более широкие темы"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:221
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:223
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:230
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:232
 msgid "Search the catalog by ISBN"
 msgstr "Поиск по ISBN"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:226
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:228
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:235
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
 msgid "Search the catalog by ISSN"
 msgstr "Поиск по ISSN"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:231
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:233
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:240
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:242
 msgid "Search the catalog by series"
 msgstr "Поиск периодики"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:239
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:243
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:245
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:246
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:248
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:252
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
 msgid "Search the catalog by call number"
 msgstr "Поиск по шифру хранения"
 
@@ -9088,7 +9090,7 @@ msgstr "GetPatronInfo"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:22
 msgid "GetPatronStatus"
-msgstr ""
+msgstr "GetPatronStatus"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:24
 msgid "GetServices"
@@ -9247,7 +9249,7 @@ msgstr "другой"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:801
 #, perl-brace-format
 msgid "{renewals_left} of {renewals_allowed} renewals remaining"
-msgstr ""
+msgstr "{renewals_left} из {renewals_allowed} оставшихся продлений"
 
 #~ msgid "Biblioitem number"
 #~ msgstr "Biblioitem номер"
@@ -9285,6 +9287,10 @@ msgstr ""
 #, fuzzy
 #~ msgid "Koha itemtype"
 #~ msgstr "Тип экземпляра Koha"
+
+#, fuzzy, perl-brace-format
+#~ msgid "Overdues at with fines {library}"
+#~ msgstr "Просроченные в {library}"
 
 #, fuzzy
 #~ msgctxt "citations"

@@ -8,14 +8,14 @@
  <th class="article-request-created_on psort">Tilattu</th>
  <th class="article-request-title anti-the">Nimeke</th>
  <th class="article-request-author">Tekijä</th>
- <th class="article-request-volume">Vuosikerta</th>
+ <th class="article-request-volume">Osa</th>
  <th class="article-request-issue">Numero</th>
- <th class="article-request-date">Pvm</th>
+ <th class="article-request-date">Päivämäärä</th>
  <th class="article-request-toc" title="Sisällysluettelo">Sisällysluettelo</th>
  <th class="article-request-pages">Sivut</th>
  <th class="article-request-chapters">Luvut</th>
  <th class="article-request-notes">Huomautukset</th>
- <th class="article-request-format">Materiaali</th>
+ <th class="article-request-format">Aineistotyyppi</th>
  <th class="article-request-status">Tila</th>
  <th class="article-request-branchcode">Noutokirjasto</th>
  </tr>

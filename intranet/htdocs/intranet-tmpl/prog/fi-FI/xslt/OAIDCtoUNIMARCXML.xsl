@@ -184,7 +184,7 @@
  <subfield code="a">
  <xsl:value-of select="."/>
  </subfield>
- <subfield code="2">local</subfield>
+ <subfield code="2">paikallinen</subfield>
  </datafield>
  </xsl:for-each>
 
@@ -220,7 +220,7 @@
  <xsl:if test="dc:identifier">
  <datafield tag="856" ind1="4" ind2="1">
  <subfield code="u"><xsl:value-of select="dc:identifier[last()]" /></subfield>
- <subfield code="z">Connect to this object online.</subfield>
+ <subfield code="z">Siirry kohteeseen verkossa.</subfield>
  </datafield>
  </xsl:if>
  </record>

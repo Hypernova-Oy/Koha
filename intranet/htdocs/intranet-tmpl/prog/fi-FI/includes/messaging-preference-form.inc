@@ -31,8 +31,8 @@
  [% ELSE %]
  <span>Lainauskuitti</span>
  [% END %]
- [% ELSIF ( messaging_preference.Ill_ready ) %]<span>Kaukolainat</span>
- [% ELSIF ( messaging_preference.Ill_unavailable ) %]<span>Kaukolaina ei ole käytettävissä</span>
+ [% ELSIF ( messaging_preference.Ill_ready ) %]<span>Kaukolainan saapumisilmoitus</span>
+ [% ELSIF ( messaging_preference.Ill_unavailable ) %]<span>Kaukolaina ei saatavilla</span>
  [% ELSIF ( messaging_preference.Ill_update ) %]<span>Kaukolaina on päivitetty</span>
  [% ELSIF ( messaging_preference.Auto_Renewals ) %]<span>Automaattinen uusinta</span>
  [% ELSIF ( messaging_preference.Recall_Waiting ) %]<span>Noudettavissa oleva takaisinkutsuttu</span>

@@ -166,7 +166,7 @@
  <label for="dateofbirthrequired">Vaadittu ikä: </label>
  <input type="text" name="dateofbirthrequired" id="dateofbirthrequired" value="[% category.dateofbirthrequired | html %]" size="3" maxlength="3" /> vuotta </li>
  <li>
- <label for="upperagelimit">Ikäraja: </label>
+ <label for="upperagelimit">Yläikäraja: </label>
  <input type="text" name="upperagelimit" id="upperagelimit" size="3" maxlength="3" value="[% category.upperagelimit | html %]" /> vuotta </li>
  <li>
  <label for="enrolmentfee">Rekisteröintimaksu: </label>
@@ -204,12 +204,12 @@
  <label for="category_type" class="required">Luokkatyyppi: </label>
  <select name="category_type" id="category_type">
  [% UNLESS category %]<option value="" selected="selected">Valitse asiakastyyppi</option>[% ELSE %]<option value="">Valitse asiakastyyppi</option>[% END %]
- [% IF category and category.category_type == 'A' %]<option value="A" selected="selected">Aikuiset</option>[% ELSE %]<option value="A">Aikuiset</option>[% END %]
- [% IF category and category.category_type == 'C' %]<option value="C" selected="selected">Huollettava</option>[% ELSE %]<option value="C">Huollettava</option>[% END %]
+ [% IF category and category.category_type == 'A' %]<option value="A" selected="selected">Aikuinen</option>[% ELSE %]<option value="A">Aikuinen</option>[% END %]
+ [% IF category and category.category_type == 'C' %]<option value="C" selected="selected">Lapsi</option>[% ELSE %]<option value="C">Lapsi</option>[% END %]
  [% IF category and category.category_type == 'S' %]<option value="S" selected="selected">Henkilökunta</option>[% ELSE %]<option value="S">Henkilökunta</option>[% END %]
  [% IF category and category.category_type == 'I' %]<option value="I" selected="selected">Yhteisö</option>[% ELSE %]<option value="I">Yhteisö</option>[% END %]
  [% IF category and category.category_type == 'P' %]<option value="P" selected="selected">Ammattilainen</option>[% ELSE %]<option value="P">Ammattilainen</option>[% END %]
- [% IF category and category.category_type == 'X' %]<option value="X" selected="selected">Tilastoyksikkö</option>[% ELSE %]<option value="X">Tilastoyksikkö</option>[% END %]
+ [% IF category and category.category_type == 'X' %]<option value="X" selected="selected">Tilasto</option>[% ELSE %]<option value="X">Tilasto</option>[% END %]
  </select>
  <span class="required">Pakollinen tieto</span>
  </li>
@@ -469,17 +469,17 @@
  <div class="hint">Jos <i>Kyllä</i>, tämän asiakastyypin asiakkaiden tekemiä varauksia ei aseteta etusijalle</div>
  </li>
  <li>
- <label for="noissuescharge">Lainausmaksun rajoitus: </label>
+ <label for="noissuescharge">Lainauskiellon raja: </label>
  <input type="text" pattern="^\d+(\.\d{2})?$" name="noissuescharge" id="noissuescharge" value="[% category.noissuescharge | $Price on_editing => 1 %]" class="decimal" size="3" maxlength="4" />
  <div class="hint">Jos määritetty, tämä ylikirjoittaa yleisen määrityksen järjestelmäasetuksessa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge&ok=Search">noissuescharge</a> asetus</div>
  </li>
  <li>
- <label for="noissueschargeguarantees">Taattavien maksurajoitus: </label>
+ <label for="noissueschargeguarantees">Taattavien lainauskiellon raja: </label>
  <input type="text" pattern="^\d+(\.\d{2})?$" name="noissueschargeguarantees" id="noissueschargeguarantees" value="[% category.noissueschargeguarantees | $Price on_editing => 1 %]" class="decimal" size="3" maxlength="4" />
  <div class="hint">Jos määritetty, tämä ylikirjoittaa yleisen määrityksen järjestelmäasetuksessa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge&ok=Search">NoIssuesChargeGuarantees</a> asetus</div>
  </li>
  <li>
- <label for="noissueschargeguarantorswithguarantees">Takaajien, joilla on taattavia, lainarajoituksen maksuraja: </label>
+ <label for="noissueschargeguarantorswithguarantees">Takaajien, joilla on taattavia, lainauskiellon raja: </label>
  <input type="text" pattern="^\d+(\.\d{2})?$" name="noissueschargeguarantorswithguarantees" id="noissueschargeguarantorswithguarantees" value="[% category.noissueschargeguarantorswithguarantees | $Price on_editing => 1 %]" class="decimal" size="3" maxlength="4" />
  <div class="hint">Jos määritetty, tämä ylikirjoittaa yleisen määrityksen järjestelmäasetuksessa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=noissuescharge&ok=Search">NoIssuesChargeGuarantorsWithGuarantees</a> asetus</div>
  </li>
@@ -523,10 +523,10 @@
  </tr>
  <tr><th scope="row">Salasana vanhenee: </th><td>[% category.password_expiry_days | html %] päivää</td></tr>
  <tr><th scope="row">Vaadittu ikä: </th><td>[% category.dateofbirthrequired | html %] vuotta</td></tr>
- <tr><th scope="row">Ikäraja: </th><td>[% category.upperagelimit | html %] vuotta</td></tr>
+ <tr><th scope="row">Yläikäraja: </th><td>[% category.upperagelimit | html %] vuotta</td></tr>
  <tr><th scope="row">Rekisteröintimaksu: </th><td>[% category.enrolmentfee | $Price %]</td></tr>
  <tr><th scope="row">Myöhästymisilmoitukset: </th><td>[% IF category. overduenoticerequired %]Kyllä[% ELSE %]Ei[% END %]</td></tr>
- <tr><th scope="row">Näytä kadonneet niteet virkailijaliittymässä:</th><td>[% IF category.hidelostitems %]Piilotettu (oletus)[% ELSE %]Näytetään[% END %]</td></tr>
+ <tr><th scope="row">Näytetäänkö kadonneet niteet virkailijaliittymässä:</th><td>[% IF category.hidelostitems %]Piilotettu (oletus)[% ELSE %]Näytetään[% END %]</td></tr>
  <tr><th scope="row">Varausmaksu: </th><td>[% category.reservefee | $Price %]</td></tr>
 
  [% IF ( Koha.Preference('CheckPrevCheckout') == 'softyes' || Koha.Preference('CheckPrevCheckout') == 'softno' ) %]
@@ -621,9 +621,9 @@
  <th scope="col" data-colname="can_be_guarantee">Voi olla taattava</th>
  <th scope="col" data-colname="default_privacy">Oletusarvo yksityisyydelle</th>
  <th scope="col" data-colname="exclude_from_local_holds_priority">Jätä pois paikallisten varausten jonosta</th>
- <th scope="col" data-colname="checkout_charge_limit">Lainauksen maksuraja</th>
- <th scope="col" data-colname="guarantees_checkout_charge_limit">Taattavien maksuraja</th>
- <th scope="col" data-colname="guarantors_checkout_charge_limit">Takaajien, joilla on taattavia, lainarajoituksen maksuraja</th>
+ <th scope="col" data-colname="checkout_charge_limit">Lainauskiellon raja</th>
+ <th scope="col" data-colname="guarantees_checkout_charge_limit">Taattavien lainauskiellon raja</th>
+ <th scope="col" data-colname="guarantors_checkout_charge_limit">Takaajien, joilla on taattavia, lainauskiellon raja</th>
  <th scope="col" data-colname="actions">Toiminnot</th>
  </tr>
  </thead>
@@ -636,12 +636,12 @@
  </td>
  <td>
  [% SWITCH category.category_type %]
- [% CASE 'A' %]<span>Aikuiset</span>
- [% CASE 'C' %]<span>Huollettava</span>
- [% CASE 'P' %]<span>Prof.</span>
- [% CASE 'I' %]<span>Org.</span>
+ [% CASE 'A' %]<span>Aikuinen</span>
+ [% CASE 'C' %]<span>Lapsi</span>
+ [% CASE 'P' %]<span>Ammatillinen</span>
+ [% CASE 'I' %]<span>Yhteisö</span>
  [% CASE 'S' %]<span>Henkilökunta</span>
- [% CASE 'X' %]<span>Tilastoyksikkö</span>
+ [% CASE 'X' %]<span>Tilasto</span>
  [% END %]
  </td>
  <td>
@@ -686,8 +686,8 @@
  [% ELSIF ( prefs.Hold_Filled ) %]<span>Saapumisilmoitus</span>
  [% ELSIF ( prefs.Item_Check_in ) %]<span>Palautuskuitti</span>
  [% ELSIF ( prefs.Item_Checkout ) %]<span>Lainauskuitti</span>
- [% ELSIF ( prefs.Ill_ready ) %]<span>Kaukolainat</span>
- [% ELSIF ( prefs.Ill_unavailable ) %]<span>Kaukolaina ei ole käytettävissä</span>
+ [% ELSIF ( prefs.Ill_ready ) %]<span>Kaukolainan saapumisilmoitus</span>
+ [% ELSIF ( prefs.Ill_unavailable ) %]<span>Kaukolaina ei saatavilla</span>
  [% ELSIF ( prefs.Ill_update ) %]<span>Kaukolaina on päivitetty</span>
  [% ELSIF ( prefs.Auto_Renewals ) %]<span>Automaattinen uusinta</span>
  [% ELSIF ( prefs.Hold_Reminder ) %]<span>Varauksen noutomuistutus</span>

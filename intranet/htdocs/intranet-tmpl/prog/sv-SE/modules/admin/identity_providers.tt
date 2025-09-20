@@ -123,20 +123,20 @@
  <label for="config" class="required json">Konfiguration: </label>
  <textarea name="config" id="config" class="required" cols="75" rows="10"></textarea>
  <span class="required">Obligatoriskt</span>
- <div class="hint">Leverantörens huvudsakliga konfiguration <button class="more btn btn-ligth" data-bs-target="config"><i class="fa fa-caret-down"></i> Mer</button></div>
+ <div class="hint">Leverantörens huvudsakliga konfiguration <button class="more btn btn-light" data-target="config"><i class="fa fa-caret-down"></i> Mer</button></div>
  <div class="hint more-config" style="display: none">
  <div>Den här konfigurationen är olika för varje protokoll.</div>
  <div>Det rekommenderas att man lägger till standarkonfigurationen och sedan ersätter med lämpliga värden</div>
  </div>
  <div class="hint">
- <button class="btn btn-ligth defaults" data-default-target="config" id="default-config">Lägg till standard-OAuth-konfiguration</button>
+ <button class="btn btn-light defaults" data-default-target="config" id="default-config">Lägg till standard-OAuth-konfiguration</button>
  </div>
  </li>
  <li>
  <label for="mapping" class="required json">Mappning: </label>
  <textarea name="mapping" id="mapping" class="required" cols="75" rows="10"></textarea>
  <span class="required">Obligatoriskt</span>
- <div class="hint">Matchar leverantörens resultat till Kohas låntagarfält. <button class="more btn btn-ligth" data-bs-target="mapping"><i class="fa fa-caret-down"></i> Mer</button></div>
+ <div class="hint">Matchar leverantörens resultat till Kohas låntagarfält. <button class="more btn btn-light" data-target="mapping"><i class="fa fa-caret-down"></i> Mer</button></div>
  <div class="hint more-mapping" style="display: none">
  <div>Det är rekommenderat att lägga till standardmappningen och sedan redigera den för att passa leverantörens svar</div>
  <div>Nycklar representerar Kohas fält, och värden representerar nycklarna i leverantörens resultat</div>
@@ -145,7 +145,7 @@
  <div>Om du planerar att använda funktionen autoregistrera, antingen <i>userid</i> eller <i>kortnummer</i> måste finnas med i denna mappning</div>
  </div>
  <div class="hint">
- <button class="btn btn-ligth defaults" data-default-target="mapping" id="default-mapping">Lägg till standard-OAuth-mappning</button>
+ <button class="btn btn-light defaults" data-default-target="mapping" id="default-mapping">Lägg till standard-OAuth-mappning</button>
  </div>
  </li>
  <li>
@@ -288,20 +288,20 @@
  <label for="config" class="required json">Konfiguration: </label>
  <textarea name="config" id="config" class="required" cols="75" rows="10">[%- identity_provider.config | html -%]</textarea>
  <span class="required">Obligatoriskt</span>
- <div class="hint">Leverantörens huvudsakliga konfiguration <button class="more btn btn-ligth" data-bs-target="config"><i class="fa fa-caret-down"></i> Mer</button></div>
+ <div class="hint">Leverantörens huvudsakliga konfiguration <button class="more btn btn-light" data-target="config"><i class="fa fa-caret-down"></i> Mer</button></div>
  <div class="hint more-config" style="display: none">
  <div>Den här konfigurationen är olika för varje protokoll.</div>
  <div>Det rekommenderas att man lägger till standarkonfigurationen och sedan ersätter med lämpliga värden</div>
  </div>
  <div class="hint">
- <button class="btn btn-ligth defaults" data-default-target="config" id="default-config">Lägg till standard [%- identity_provider.protocol | html -%] konfiguration</button>
+ <button class="btn btn-light defaults" data-default-target="config" id="default-config">Lägg till standard [%- identity_provider.protocol | html -%] konfiguration</button>
  </div>
  </li>
  <li>
  <label for="mapping" class="required json">Mappning: </label>
  <textarea name="mapping" id="mapping" class="required" cols="75" rows="10">[%- identity_provider.mapping | html -%]</textarea>
  <span class="required">Obligatoriskt</span>
- <div class="hint">Matchar leverantörens resultat till Kohas låntagarfält. <button class="more btn btn-ligth" data-bs-target="mapping"><i class="fa fa-caret-down"></i> Mer</button></div>
+ <div class="hint">Matchar leverantörens resultat till Kohas låntagarfält. <button class="more btn btn-light" data-target="mapping"><i class="fa fa-caret-down"></i> Mer</button></div>
  <div class="hint more-mapping" style="display: none">
  <div>Det är rekommenderat att lägga till standardmappningen och sedan redigera den för att passa leverantörens svar</div>
  <div>Nycklar representerar Kohas fält, och värden representerar nycklarna i leverantörens resultat</div>
@@ -310,7 +310,7 @@
  <div>Om du planerar att använda funktionen autoregistrera, antingen <i>userid</i> eller <i>kortnummer</i> måste finnas med i denna mappning</div>
  </div>
  <div class="hint">
- <button class="btn btn-ligth defaults" data-default-target="mapping" id="default-mapping">Lägg till standard [%- identity_provider.protocol | html -%] mappning</button>
+ <button class="btn btn-light defaults" data-default-target="mapping" id="default-mapping">Lägg till standard [%- identity_provider.protocol | html -%] mappning</button>
  </div>
  </li>
  <li>

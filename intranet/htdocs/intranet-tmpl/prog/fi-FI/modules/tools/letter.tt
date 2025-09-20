@@ -716,7 +716,7 @@
  [% END %]
  [% IF letter.sample %]
  <li>
- <button data-noticeid="[% letter.id | html %]" data-replace="content_[% letter.message_transport_type | html %]_[% lang | html %]" class="notice-sample btn btn-default btn-sm"><i class="fa-solid fa-eye"></i> Oletusnäkymä</button>
+ <button data-noticeid="[% letter.id | html %]" data-replace="content_[% letter.message_transport_type | html %]_[% lang | html %]" class="notice-sample btn btn-default btn-sm"><i class="fa-solid fa-eye"></i> Katso oletusviestipohja</button>
  <textarea style="display:none" id="notice[% letter.id | html %]">[% letter.sample | html %]</textarea>
  </li>
  [% END %]
@@ -730,7 +730,7 @@
  <div class="panel-heading" role="tab" id="format_[% lang | html %]Heading">
  <h3 class="panel-title">
  <a role="button" class="collapsed" data-bs-toggle="collapse" data-parent="#group_[% lang | html %]" href="#format_[% lang | html %]" aria-expanded="false" aria-controls="format_[% lang | html %]">
- <span>Materiaali</span>
+ <span>Aineistotyyppi</span>
  </a>
  </h3>
  </div> <!-- /.panel-heading -->

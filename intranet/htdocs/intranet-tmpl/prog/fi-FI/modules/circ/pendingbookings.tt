@@ -233,7 +233,7 @@
                         "render": function(data,type,row,meta) {
                             if ( row.item ) {
                                 if ( row.item.checked_out_date ) {
-                                    return _("Lainassa, eräpäivä: ") . $date(row.item.checked_out_date);
+                                    return _("Lainassa, eräpäivä: ") + $date(row.item.checked_out_date);
                                 } else {
                                     return row.item._strings.location.str;
                                 }

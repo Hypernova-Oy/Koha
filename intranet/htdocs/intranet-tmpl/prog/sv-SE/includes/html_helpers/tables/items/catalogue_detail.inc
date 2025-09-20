@@ -218,6 +218,9 @@
             });
     const item_types_notforloan = new Map(all_item_types.map( it => [it.itemtype, it.notforloan] ));
 
+    const statuses = {checked_out: _("Utlånad"), local_use: _("Lån på plats"), in_transit: _("Under transport"), lost: _("Förlorad"), withdrawn: _("Återkallad"), damaged:_("Skadad"), not_for_loan: _("Ej för utlån"), on_hold: _("Reserverad"), recalled: _("Recalled"), available: _("Tillgänglig"), restricted: _("Begränsad"), in_bundle: _("In bundle")};
+    const all_statuses = Object.keys(statuses).map(k => {return {_id: k, _str: statuses[k]}}).sort();
+
     const can_edit_items_from = [% To.json(can_edit_items_from || []) | $raw %];
     const item_type_image_locations = [% To.json(item_type_image_locations) | $raw %];
     const av_loc = new Map([% To.json(AuthorisedValues.Get('LOC')) | $raw %].map( av => [av.authorised_value, av.lib]));
@@ -229,6 +232,13 @@
     [% IF Koha.Preference('UseCourseReserves') %]
         const av_courses_term = new Map([% To.json(AuthorisedValues.Get('TERM')) | $raw %].map( av => [av.authorised_value, av.lib]));
     [% END %]
+
+        var coded_values = {
+        library: new Map(all_libraries.map( l => [l.branchname, l.branchcode] )),
+        item_type: new Map(all_item_types.map( i => [i.translated_description, i.itemtype] )),
+        collection_code: new Map([% To.json(AuthorisedValues.GetDescriptionsByKohaField({ kohafield => 'items.ccode' })) | $raw %].map( av => [av.lib, av.authorised_value])),
+    };
+
     [% IF Koha.Preference('URLLinkText') %]
         const url_link_text = "[% Koha.Preference('URLLinkText') | html %]";
     [% ELSE %]
@@ -238,7 +248,7 @@
     [%# In case or SeparateHoldings we may need to display the number of biblios in each tab %]
     [%# Do we need separate/new endpoints or do we hack the somewhere client-side? %]
     let item_table_url = "/api/v1/biblios/[% biblio.biblionumber | uri %]/items?";
-    let embed = ["+strings,home_library,holding_library,checkout,checkout.patron,transfer,transfer+strings,first_hold,first_hold+strings,first_hold.patron,first_hold.desk"];
+    let embed = ["+strings,_status,checkout,checkout.patron,transfer,transfer+strings,first_hold,first_hold+strings,first_hold.patron,first_hold.desk"];
     [% IF Koha.Preference('LocalCoverImages') %]
         embed.push('cover_image_ids');
     [% END %]
@@ -268,7 +278,7 @@
         embed.push('analytics_count');
     [% END %]
 
-    let items_table_settings = {
+    var items_table_settings = {
         holdings: [% TablesSettings.GetTableSettings('catalogue', 'detail','holdings_table','json') | $raw %],
         otherholdings: [% TablesSettings.GetTableSettings('catalogue', 'detail','otherholdings_table','json')  | $raw %],
     };
@@ -280,6 +290,7 @@
     };
     function build_items_table (tab_id, add_filters, dt_options, drawcallback) {
 
+        let table_dt;
         if ( dt_options && dt_options.hasOwnProperty('destroy') ) {
             // Keep a copy of the user settings, the destroy is going to trigger the column-visibility.dt event for all columns
             let user_colvis_bak= Object.assign({}, user_colvis[tab_id]);
@@ -309,12 +320,17 @@
             items_selection[tab_id] = [];
         }
 
+        default_filters._status = function(){
+            return $("#" + tab_id + "_status select").val();
+        };
+
         let offset = 2;
         [% UNLESS Koha.Preference('LocalCoverImages') %]offset--;[% END %]
         let filters_options = {
             [offset]   : () => all_item_types,
             [offset+1] : () => all_libraries,
             [offset+2] : () => all_libraries,
+            [offset+6] : () => all_statuses,
         };
 
         var items_table = $("#" + tab_id + '_table').kohaTable({
@@ -368,6 +384,7 @@
             [% IF ( item_level_itypes ) %]
             {
                 data: "me.item_type_id", // FIXME Cannot filter by biblioitem.itemtype
+                datatype: "coded_value:item_type",
                 className: "itype",
                 searchable: true,
                 orderable: true,
@@ -386,7 +403,8 @@
             },
             [% END %]
             {
-                data: "holding_library.name:me.holding_library_id",
+                data: "me.holding_library_id",
+                datatype: "coded_value:library",
                 className: "location",
                 searchable: true,
                 orderable: true,
@@ -395,7 +413,8 @@
                 }
             },
             {
-                data: "home_library.name:me.home_library_id",
+                data: "me.home_library_id",
+                datatype: "coded_value:library",
                 className: "homebranch",
                 searchable: true,
                 orderable: true,
@@ -418,6 +437,7 @@
             },
             {
                 data: "me.collection_code",
+                datatype: "coded_value:collection_code",
                 searchable: true,
                 orderable: true,
                 render: function (data, type, row, meta) {
@@ -476,29 +496,31 @@
                 }
             },
             {
-                data: "me.lost_status",
+                data: "",
                 className: "status",
-                searchable: false, // FIXME We are losing the ability to search on the status
+                searchable: false,
                 orderable: false,
                 render: function (data, type, row, meta) {
                     let nodes = "";
-                    if ( row.checkout ) {
+                    row._status.forEach( status => {
+                    if ( status == 'checked_out' || status == 'local_use') {
+                        nodes += '<span>';
+
                         [%# Hacky for patron_to_html in case we simply want to display the patron's library name %]
                         row.checkout.patron.library = { name: libraries_names.get(row.checkout.patron.library_id) };
+                        let patron_to_html = $patron_to_html(row.checkout.patron, { url: true, display_cardnumber: true, hide_patron_name });
 
-                        nodes += '<span>';
-                        if ( row.checkout.onsite_checkout ) {
-                            let patron_to_html = $patron_to_html(row.checkout.patron, { url: true, display_cardnumber: true, hide_patron_name });
+                        if ( status == 'local_use' ) {
                             nodes += _("Används för tillfället lokalt av %s").format(patron_to_html);
                         } else {
                             nodes += '<span class="datedue">';
-                            let patron_to_html = $patron_to_html(row.checkout.patron, { url: true, display_cardnumber: true, hide_patron_name });
                             nodes += _("Utlånad till %s").format(patron_to_html);
                         }
                         nodes += ': ';
                         nodes += _("Återlämningsdatum %s").format($date(row.checkout.due_date, { as_due_date: true }));
                         nodes += "</span>"
-                    } else if ( row.transfer ) {
+                    }
+                    if ( status == 'in_transit' ) {
                         if ( row.transfer.datesent ) {
                             nodes += '<span class="intransit">%s</span>'.format(_("Under transport från %s till %s sedan %s").format(escape_str(row.transfer._strings.from_library.str), escape_str(row.transfer._strings.to_library.str), $date(row.transfer.datesent)));
                         } else {
@@ -506,33 +528,31 @@
                         }
                     }
 
-                    if ( row.lost_status ) {
+                    if ( status == 'lost' ) {
                         let lost_lib = av_lost.get(row.lost_status.toString()) || _("Ej tillgänglig (förlorad eller saknad");
                         nodes += '<span class="lost">%s</span>'.format(escape_str(lost_lib));
-                        [% IF Koha.Preference('ClaimReturnedLostValue') %]
-                            const hasReturnClaims = row.return_claims.filter(rc => !rc.resolution).length > 0 ? true : false
-                            if(hasReturnClaims) {
-                                nodes += '<span class="claimed_returned">' + _("(Påstås återlämnad)") + '</span>';
-                            }
-                        [% END %]
+                        const hasReturnClaims = row.return_claims && row.return_claims.filter(rc => !rc.resolution).length > 0 ? true : false
+                        if(hasReturnClaims) {
+                            nodes += '<span class="claimed_returned">' + _("(Påstås återlämnad)") + '</span>';
+                        }
                     }
 
-                    if ( row.withdrawn ) {
+                    if ( status == 'withdrawn' ) {
                         let withdrawn_lib = av_withdrawn.get(row.withdrawn.toString()) || _("Återkallad");
                         nodes += '<span class="wdn">%s</span>'.format(escape_str(withdrawn_lib));
                     }
 
-                    if ( row.damaged_status ) {
+                    if ( status == 'damaged' ) {
                         let damaged_lib = av_damaged.get(row.damaged_status.toString()) || _("Skadad");
                         nodes += '<span class="dmg">%s</span>'.format(escape_str(damaged_lib));
                     }
 
-                    if ( row.not_for_loan_status || item_types_notforloan.get(row.item_type_id) ) {
+                    if ( status == 'not_for_loan' ) {
                         let not_for_loan_lib = av_not_for_loan.get(row.not_for_loan_status.toString());
                         nodes += '<span class="notforloan">%s'.format(_("Ej för utlån")) + ( not_for_loan_lib ? '<span class="reason"> (%s)</span>'.format(escape_str(not_for_loan_lib)) : '' ) + '</span>';
                     }
 
-                    if ( row.first_hold ) {
+                    if ( status == 'on_hold') {
                         if ( row.first_hold.waiting_date ) {
                             if ( row.first_hold.desk ) {
                                 nodes += '<span class="waitingat">%s</span>'.format(_("Waiting at %s, %s since %s.").format(row.first_hold._strings.pickup_library_id.str, row.first_hold.desk.desk_name, $date(row.first_hold.waiting_date)));
@@ -566,18 +586,17 @@
                             }
                         }
                     [% END %]
-
-                    if ( ! ( row.not_for_loan_status || item_types_notforloan.get(row.item_type_id) || row.checked_out_date || row.lost_status || row.withdrawn || row.damaged_status || row.transfer || row.first_hold || ( row.recall && ( row.item_id === row.recall.item_id ) ) )) {
+                    if ( status == 'available' ) {
                         nodes += ' <span>%s</span>'.format(_("Tillgänglig"))
                     }
 
-                    if ( row.restricted_status ) {
+                    if ( status == 'restricted') {
                         nodes += '<span class="restricted">(%s)</span>'.format(escape_str(av_restricted.get(row.restricted_status.toString())));
                     }
-
-                    if ( row.in_bundle ) {
+                    if ( status == 'in_bundle') {
                         nodes += '<span class="bundled">%s</span>'.format(_("I paket: %s").format($biblio_to_html(row.bundle_host.biblio, { link: true })));
                     }
+                    }); //end forEach
                     return nodes;
                 }
             },
@@ -873,7 +892,7 @@
         filters_options,
         );
 
-        let table_dt = items_table.DataTable();
+        table_dt = items_table.DataTable();
         table_dt.on("column-visibility.dt", function(e, settings, column, state, recalc ){
             if (recalc === false) return;
 

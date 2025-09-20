@@ -167,17 +167,7 @@
  <a href="/cgi-bin/koha/opac-search.pl?tag=[% MY_TAG.term |uri %]&amp;q=[% MY_TAG.term |uri %]">[% MY_TAG.term | html %]</a>
  [% ELSE %] [% MY_TAG.term | html %] (ei hyväksytty) [% END %] </td>
  <td>
- [% IF ( MY_TAG.XSLTBloc ) %]
- [% MY_TAG.XSLTBloc | $raw %]
- [% ELSE %]
- [% INCLUDE 'biblio-title.inc' biblio=MY_TAG link=> 1 %]
- [% IF ( MY_TAG.author ) %]
- by [% MY_TAG.author | html %]
- [% END %]
- [% END # /IF MY_TAG.XSLTBloc %]
-
- [% INCLUDE 'title-actions-menu.inc' items=MY_TAG %]
- </td>
+ [% IF ( MY_TAG.XSLTBloc ) %] [% MY_TAG.XSLTBloc | $raw %] [% ELSE %] [% INCLUDE 'biblio-title.inc' biblio=MY_TAG link=> 1 %] [% IF ( MY_TAG.author ) %] / [% MY_TAG.author | html %] [% END %] [% END # /IF MY_TAG.XSLTBloc %] [% INCLUDE 'title-actions-menu.inc' items=MY_TAG %] </td>
  <td data-order="[% MY_TAG.date_created | html %]">
  [% MY_TAG.date_created | $KohaDates %]
  </td>

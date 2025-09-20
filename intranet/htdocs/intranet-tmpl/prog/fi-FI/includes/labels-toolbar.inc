@@ -10,7 +10,7 @@
  </ul>
  </div>
  <div class="btn-group">
- <button class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Käsittelijä</button>
+ <button class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Käsittely</button>
  <ul class="dropdown-menu">
  <li><a class="dropdown-item" href="/cgi-bin/koha/labels/label-manage.pl?label_element=batch">Tarraerät</a></li>
  <li><a class="dropdown-item" href="/cgi-bin/koha/labels/label-manage.pl?label_element=layout">Asettelut</a></li>

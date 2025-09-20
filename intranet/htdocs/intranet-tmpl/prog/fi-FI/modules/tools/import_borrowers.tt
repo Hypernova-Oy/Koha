@@ -105,7 +105,7 @@
  [% ELSIF ( f.headerrow ) %]
  <span>Löytyneet kentät: [% f.value | html %]</span>
  [% ELSIF ( f.already_in_db ) %]
- <span>Asiakastieto [% f.value | html %] on jo olemassa.</span>
+ <span>Asiakas on jo olemassa: [% f.value | html %]</span>
  [% ELSE %]
  [% f.name | html %] : [% f.value | html %]
  [% END %]

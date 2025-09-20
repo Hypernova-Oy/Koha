@@ -116,7 +116,7 @@
  <li>Sähköpostiosoitteet eivät täsmää! <a href="#borrower_repeat_email">vahvista sähköpostiosoite</a></li>
  [% END %]
  [% IF field == "ERROR_age_limitations" %]
- <li>Patron's age is incorrect for their category.</li>
+ <li>Asiakkaan ikä ei ole asiakastyypin sallituissa rajoissa.</li>
  [% END %]
  [% END %]
  </ul>
@@ -234,19 +234,19 @@
  [% IF minlength_cardnumber == maxlength_cardnumber %]
  <input type="text" id="borrower_cardnumber" name="borrower_cardnumber" size="20" value="[% borrower.cardnumber | html %]" minlength="[% minlength_cardnumber | html %]" maxlength="[% maxlength_cardnumber | html %]" class="[% required.cardnumber | html %]" />
  <div class="required_label [% required.cardnumber | html %]">Pakollinen tieto</div>
- <div class="hint">Kirjastokortin numeron on oltava täsmälleen [% minlength_cardnumber | html %] merkkiä pitkä.</div>
+ <div class="hint">Korttinumeron tulee olla [% minlength_cardnumber | html %] merkkiä pitkä.</div>
  [% ELSIF minlength_cardnumber && maxlength_cardnumber %]
  <input type="text" id="borrower_cardnumber" name="borrower_cardnumber" size="20" value="[% borrower.cardnumber | html %]" minlength="[% minlength_cardnumber | html %]" maxlength="[% maxlength_cardnumber | html %]" class="[% required.cardnumber | html %]" />
  <div class="required_label [% required.cardnumber | html %]">Pakollinen tieto</div>
- <div class="hint">Kirjastokortin numeron on oltava vähintään [% minlength_cardnumber | html %] ja korkeintaan [% maxlength_cardnumber | html %] merkkiä pitkä.</div>
+ <div class="hint">Korttinumeron pitää olla vähintään [% minlength_cardnumber | html %] ja enintään [% maxlength_cardnumber | html %] merkkiä pitkä.</div>
  [% ELSIF maxlength_cardnumber %]
  <input type="text" id="borrower_cardnumber" name="borrower_cardnumber" size="20" value="[% borrower.cardnumber | html %]" maxlength="[% maxlength_cardnumber | html %]" class="[% required.cardnumber | html %]" />
  <div class="required_label [% required.cardnumber | html %]">Pakollinen tieto</div>
- <div class="hint">Kirjastokortin numero voi olla korkeintaan [% maxlength_cardnumber | html %] merkkiä pitkä.</div>
+ <div class="hint">Korttinumero voi olla korkeintaan [% maxlength_cardnumber | html %] merkkiä pitkä.</div>
  [% ELSE %]
  <input type="text" id="borrower_cardnumber" name="borrower_cardnumber" size="20" value="[% borrower.cardnumber | html %]" class="[% required.cardnumber | html %]" />
  <div class="required_label [% required.cardnumber | html %]">Pakollinen tieto</div>
- <div class="hint">Ei merkkien määrälle ei ole vähimmäis- tai maksimipituutta.</div>
+ <div class="hint">Merkkien määrällä ei ole vähimmäis- tai enimmäispituutta.</div>
  [% END %]
  [% END %]
  </li>

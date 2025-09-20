@@ -69,7 +69,7 @@
  [% IF ( OpacMaintenanceNotice ) %]
  [% PROCESS koha_news_block news => OpacMaintenanceNotice %]
  [% ELSE %]
- <h1>Järjestelmän ylläpito</h1>
+ <h1>Järjestelmän huolto</h1>
  <p>
  <span>[% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Kohan verkkokirjasto[% END %] on suljettu järjestelmähuollon takia. Olemme pahoillamme!</span>
  [% IF ( Koha.Preference( 'ReplytoDefault' ) ) %] Jos sinulla on kysyttävää, ota yhteys kirjastoon <a href="mailto:[% Koha.Preference( 'ReplytoDefault' ) | $raw %]">Ylläpitäjä</a>

@@ -82,13 +82,14 @@
  </div>
  [% END %]
 
+ <div class="page-section">
  <table id="lostitems-table">
  <thead>
  <tr>
  [% IF csv_profiles.count %]
  <th class="NoSort"></th>
  [% END %]
- <th>Titel</th>
+ <th class="anti-the">Titel</th>
  <th>Författare</th>
  <th>Förlorad-status</th>
  <th>Förlorat den</th>
@@ -138,6 +139,8 @@
  [% END %]
  </tbody>
  </table>
+ </div>
+ <!-- /.page-section -->
  [% END %]
  [% ELSE %]
  

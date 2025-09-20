@@ -10,7 +10,7 @@
  </ul>
  </div>
  <div class="btn-group">
- <button class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Käsittelijä</button>
+ <button class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Käsittely</button>
  <ul class="dropdown-menu">
  <li><a class="dropdown-item" href="/cgi-bin/koha/patroncards/manage.pl?card_element=batch">Kirjastokorttierät</a></li>
  <li><a class="dropdown-item" href="/cgi-bin/koha/patroncards/image-manage.pl">Kuvat</a></li>

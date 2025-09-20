@@ -1,10 +1,10 @@
 # Compendium of uk.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2025-04-04 09:14+0000\n"
+"POT-Creation-Date: 2025-08-07 03:10+0000\n"
+"PO-Revision-Date: 2025-06-16 21:30+0000\n"
 "Last-Translator: Serhij Dubyk <dubyk@ukr.net>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: uk-UA\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /uk/22.11/uk-UA-opac-bootstrap.po\n"
 "X-POOTLE-MTIME: 1698162075.393464\n"
@@ -377,7 +377,7 @@ msgstr " безпосередній вищестоящий орган суб’�
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:25
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth-detail.tt:172
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:175
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:73
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:74
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-reserves.tt:44
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-curbside-pickups.tt:172
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1210
@@ -402,7 +402,7 @@ msgstr "див. також: "
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/authorities-search-results.inc:136
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/authorities-search-results.inc:146
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:99
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:397
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:406
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/catalog_cite.inc:8
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/catalog_cite.inc:17
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/catalog_concern.inc:11
@@ -449,6 +449,16 @@ msgstr "Публікація: "
 msgid "VIAF ID: "
 msgstr ""
 
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:22
+#, c-format
+msgid "ISNI ID: "
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:25
+#, c-format
+msgid "WIKIDATA ID: "
+msgstr ""
+
 #. %1$s:  info.field_of_activity | html 
 #. %2$s:  IF info.start_period || info.end_period 
 #. %3$s: ~ IF info.start_period 
@@ -458,7 +468,7 @@ msgstr ""
 #. %7$s:  info.end_period | html 
 #. %8$s:  END ~
 #. %9$s:  END 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:26
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:32
 #, fuzzy, c-format
 msgid "Field of activity: %s %s ( %sfrom: %s%s %suntil: %s%s ) %s "
 msgstr "Опубліковано: %s %s у %s %s %s, %s %s %s, %s %s "
@@ -467,7 +477,7 @@ msgstr "Опубліковано: %s %s у %s %s %s, %s %s %s, %s %s "
 #. %2$s:  info.postal_code | html 
 #. %3$s:  info.city | html 
 #. %4$s:  info.country | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:40
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:46
 #, fuzzy, c-format
 msgid "Address: %s %s %s %s"
 msgstr "%s %s / %s %s %s %s "
@@ -482,37 +492,37 @@ msgstr "%s %s / %s %s %s %s "
 #. %8$s:  END ~
 #. %9$s:  END 
 #. %10$s:  IF info.uri 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:46
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:52
 #, fuzzy, c-format
 msgid "Associated group: %s %s ( %sfrom: %s%s %suntil: %s%s ) %s %s"
 msgstr "Опубліковано: %s %s у %s %s %s, %s %s %s, %s %s "
 
 #. For the first occurrence,
 #. %1$s:  info.uri | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:54
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:79
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:60
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:85
 #, fuzzy, c-format
 msgid "URI: %s"
 msgstr "Веб-адреса: %s "
 
 #. For the first occurrence,
 #. %1$s:  info.source_of_information | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:55
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:80
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:61
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:86
 #, fuzzy, c-format
 msgid "Source of information: %s"
 msgstr "Інформація про серію:"
 
 #. For the first occurrence,
 #. %1$s:  info.authority_record_number | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:56
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:81
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:62
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:87
 #, c-format
 msgid "Authority record control number or standard number: %s"
 msgstr ""
 
 #. %1$s:  info.email_address | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:63
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:69
 #, fuzzy, c-format
 msgid "Email address: %s "
 msgstr "Адреса електронної пошти:"
@@ -527,25 +537,25 @@ msgstr "Адреса електронної пошти:"
 #. %8$s:  END ~
 #. %9$s:  END 
 #. %10$s:  IF info.uri 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:71
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:77
 #, fuzzy, c-format
 msgid "Occupation: %s %s ( %sfrom: %s%s %suntil: %s%s ) %s %s"
 msgstr "Опубліковано: %s %s у %s %s %s, %s %s %s, %s %s "
 
 #. %1$s:  info.place_of_birth | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:88
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:94
 #, fuzzy, c-format
 msgid "Place of birth: %s "
 msgstr "Дата народження: "
 
 #. %1$s:  info.place_of_death | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:96
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:102
 #, fuzzy, c-format
 msgid "Place of death: %s "
 msgstr "Встановити замовлення на "
 
 #. %1$s:  info.uri | $raw | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:104
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:110
 #, fuzzy, c-format
 msgid "URI: %s "
 msgstr "Веб-адреса: %s "
@@ -584,13 +594,20 @@ msgid "%s %s %s No title %s %s%s,%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s "
 msgstr "%s %s%s Немає назви%s%s%s : %s %s%s%s%s%s%s%s, %s %s %s : %s %s %s %s "
 
 # назва функції ILS-DI
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:7
+#. %1$s: - PROCESS 'show-biblio-title' -
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:5
+#, fuzzy, c-format
+msgid "(Deleted bibliographic record) %s"
+msgstr "Бібліографічний запис відсутній"
+
+# назва функції ILS-DI
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:11
 #, c-format
 msgid "No bibliographic record"
 msgstr "Бібліографічний запис відсутній"
 
 # варіант - заголовків?
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:9
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:13
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/js-biblio-format.inc:1
 #, fuzzy, c-format
 msgid "No title"
@@ -645,6 +662,8 @@ msgstr "Копіювати"
 msgid "Print"
 msgstr "Друк"
 
+#. IMG
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/cover-images.inc:7
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/cover-images.inc:9
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:66
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:67
@@ -653,7 +672,7 @@ msgstr "Друк"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:942
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1239
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1240
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, c-format
 msgid "Local cover image"
@@ -681,7 +700,7 @@ msgstr "Зображення обкладинки з Syndetics"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/cover-images.inc:28
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:90
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, c-format
 msgid "Image from Syndetics"
@@ -724,7 +743,7 @@ msgstr "Подивитися у книгарні „Baker &amp; Taylor“"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/cover-images.inc:69
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:131
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy, c-format
 msgid "Image from Baker &amp; Taylor"
@@ -736,7 +755,7 @@ msgstr "Подивитися у книгарні \"Baker &amp; Taylor\""
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:139
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:140
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:142
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, c-format
 msgid "Custom cover image"
@@ -766,7 +785,7 @@ msgstr "unAPI"
 #. %1$s:  HOLDS.count | html 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:7
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:714
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:356
 #, c-format
 msgid "(%s total)"
@@ -779,15 +798,15 @@ msgstr "Замовлення "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:11
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/ill-availability-table.inc:7
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:206
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:208
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:215
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:217
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/checkout.inc:20
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/resort_form.inc:60
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:74
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:47
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:292
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:59
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:64
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:65
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:100
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:145
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:119
@@ -836,7 +855,7 @@ msgid "Priority"
 msgstr "Пріоритет"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:27
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:71
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:72
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:759
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1208
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:133
@@ -913,7 +932,7 @@ msgid "Save"
 msgstr "Зберегти"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:112
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:524
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:533
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/catalog_concern.inc:43
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-detail-sidebar.inc:146
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/overdrive-checkout.inc:16
@@ -926,8 +945,8 @@ msgstr "Зберегти"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1139
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-downloadcart.tt:27
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-downloadshelf.tt:79
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:253
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:326
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:261
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:334
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-issue-note.tt:56
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-messaging.tt:249
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-passwd.tt:96
@@ -1006,7 +1025,7 @@ msgid "Pending for next available item of item type '%s'"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:159
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:163
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:168
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:995
 #, c-format
 msgid "Pending"
@@ -1063,13 +1082,13 @@ msgid "Source"
 msgstr "Джерело"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/ill-availability-table.inc:8
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:211
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:220
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:222
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/resort_form.inc:14
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:85
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:293
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:57
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:65
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:66
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:101
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:144
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:120
@@ -1083,8 +1102,8 @@ msgid "Author"
 msgstr "Автор"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/ill-availability-table.inc:9
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:221
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:223
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:230
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:232
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:111
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:109
 #, c-format
@@ -1092,8 +1111,8 @@ msgid "ISBN"
 msgstr "ISBN"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/ill-availability-table.inc:10
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:226
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:228
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:235
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:46
 #, c-format
 msgid "ISSN"
@@ -1366,7 +1385,7 @@ msgid "Welcome, %s"
 msgstr "Вітання, %s"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:118
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:144
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:153
 #, c-format
 msgid "Log out"
 msgstr "Вихід"
@@ -1375,7 +1394,7 @@ msgstr "Вихід"
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:122
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:124
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:126
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:396
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:405
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:28
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:56
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:870
@@ -1391,7 +1410,7 @@ msgid "Your account"
 msgstr "Мій обліковий запис"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:139
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:165
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:174
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/usermenu.inc:58
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:28
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:47
@@ -1401,69 +1420,69 @@ msgstr "Історія пошуків"
 
 #. A
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:139
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:163
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:172
 msgid "View your search history"
 msgstr "Перегляд історії пошуків"
-
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:141
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:87
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:1031
-#, c-format
-msgid "Clear"
-msgstr "Очистити"
 
 #. A
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:141
 msgid "Delete your search history"
 msgstr "Вилучити Вашу історію пошуків"
 
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:149
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:87
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:1031
+#, c-format
+msgid "Clear"
+msgstr "Очистити"
+
 #. A name=Your cookies
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:153
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:162
 msgid "View and amend cookies you have consented to"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:155
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:164
 #, fuzzy, c-format
 msgid "Your cookies"
 msgstr "Мої згоди"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:198
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:207
 #, fuzzy, c-format
 msgid "Search the catalog by:"
 msgstr "Історія пошуків"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:201
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:203
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:210
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:212
 #, c-format
 msgid "Library catalog"
 msgstr "Загальний пошук"
 
 # UNIMARCslim2OPACDetail.xsl: 610 Неконтрольовані предметні терміни (ключові слова)
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:216
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:218
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:227
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:67
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:58
 #, c-format
 msgid "Subject"
 msgstr "Тематика"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:231
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:233
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:240
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:242
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:55
 #, c-format
 msgid "Series"
 msgstr "Серія"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:239
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:243
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:245
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:246
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:248
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:252
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/checkout.inc:21
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/resort_form.inc:26
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:79
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:81
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:50
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:69
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:70
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1194
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:122
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recall.tt:102
@@ -1481,26 +1500,26 @@ msgid "Call number"
 msgstr "Шифр зберігання"
 
 #. %1$s:  Branches.GetName( mylibraryfirst ) | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:253
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:262
 #, c-format
 msgid "Search the catalog by keyword in %s"
 msgstr ""
 
 #. INPUT type=text name=q
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:256
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:257
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:263
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:265
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:266
 #, c-format
 msgid "Search the catalog by keyword"
 msgstr "Пошук за ключовими словами"
 
 #. INPUT type=text name=q
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:263
 #, fuzzy
 msgid "Searching in %s only"
 msgstr "Пошук основного заголовку (лише підполе $a)%s"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:264
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:273
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-topissues.inc:25
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:245
 #, c-format
@@ -1508,8 +1527,8 @@ msgid "All libraries"
 msgstr "Усі бібліотеки/підрозділи"
 
 #. OPTGROUP
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:266
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:379
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:275
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:388
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-library.tt:67
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-library.tt:74
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-library.tt:110
@@ -1518,29 +1537,29 @@ msgid "Libraries"
 msgstr "Бібліотеки/підрозділи"
 
 #. OPTGROUP
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:278
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:287
 msgid "Groups"
 msgstr "Групи"
 
 #. BUTTON
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:307
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:316
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:451
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:86
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1138
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:183
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:188
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:227
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:96
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:144
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:199
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:241
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:293
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:533
 #, c-format
 msgid "Search"
 msgstr "Пошук"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:324
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:333
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:24
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:33
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:61
@@ -1549,7 +1568,7 @@ msgstr "Пошук"
 msgid "Advanced search"
 msgstr "Детальніший пошук"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:328
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:337
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:27
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-reserves.tt:24
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1224
@@ -1558,12 +1577,12 @@ msgid "Course reserves"
 msgstr "Резервування курсів"
 
 # \"Перегляд за ієрархією\" (якщо не лише розбір класифікаційних індексів)
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:333
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:342
 #, c-format
 msgid "Browse by hierarchy"
 msgstr "Перегляд за класифікацією"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:338
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:347
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth-MARCdetail.tt:32
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth-detail.tt:35
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-authorities-home.tt:23
@@ -1573,33 +1592,33 @@ msgstr "Перегляд за класифікацією"
 msgid "Authority search"
 msgstr "Пошук серед авторитетних джерел"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:343
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:352
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-showreviews.tt:19
 #, c-format
 msgid "Recent comments"
 msgstr "Останні коментарі"
 
 # Хмара тематик
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:348
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:357
 #, c-format
 msgid "Tag cloud"
 msgstr "Хмара міток"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:353
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:362
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-tags_subject.tt:17
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-tags_subject.tt:35
 #, c-format
 msgid "Subject cloud"
 msgstr "Хмара тематик"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:358
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:367
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-topissues.tt:64
 #, c-format
 msgid "Most popular"
 msgstr "Найпопулярніші заголовки"
 
 # \"Перегляд за ієрархією\" (якщо не лише розбір класифікаційних індексів)
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:363
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:372
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:23
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:45
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:48
@@ -1608,7 +1627,7 @@ msgstr "Найпопулярніші заголовки"
 msgid "Browse search"
 msgstr "Оглядач пошуків"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:369
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:378
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/usermenu.inc:102
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:31
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:38
@@ -1618,7 +1637,7 @@ msgstr "Оглядач пошуків"
 msgid "Purchase suggestions"
 msgstr "Пропозиції на придбання"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:377
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:386
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:48
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:515
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:128
@@ -1628,37 +1647,37 @@ msgstr "Пропозиції на придбання"
 msgid "Library"
 msgstr "Бібліотека"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:404
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:413
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:193
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:182
 #, c-format
 msgid "Log in with Google"
 msgstr "Увійти за допомогою Google"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:405
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:414
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:194
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:183
 #, c-format
 msgid "If you do not have a Google account, but do have a local account, you can still log in: "
 msgstr "Якщо у Вас немає облікового запису Google, але є локальний обліковий запис, Ви все ще можете увійти: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:411
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:420
 #, c-format
 msgid "Sorry, your Shibboleth identity does not match a valid library identity. If you have a local login, you may use that below."
 msgstr "На жаль, Ваш профіль Шібболет не відповідає чинному профілю у бібліотеці. Якщо у Вас є локальний вхід в систему, Ви можете скористатися ним нижче. "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:414
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:423
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:106
 #, c-format
 msgid "Shibboleth login"
 msgstr "Вхід через Шібболет"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:415
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:424
 #, c-format
 msgid "Log in using a Shibboleth account"
 msgstr "Вхід з використанням облікового запису Шібболет"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:417
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:426
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:114
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:162
 #, c-format
@@ -1668,21 +1687,21 @@ msgstr "Локальний вхід"
 #. For the first occurrence,
 #. %1$s:  END 
 #. %2$s:  provider.description | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:430
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:439
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:176
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:193
 #, fuzzy, c-format
 msgid "%s Log in with %s "
 msgstr "%sУвійти за допомогою Google%s"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:437
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:446
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:183
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:200
 #, c-format
 msgid "If you do not have an external account, but do have a local account, you can still log in: "
 msgstr "Якщо у Вас немає зовнішнього облікового запису, але є локальний, Ви все одно можете увійти в систему: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:443
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:452
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/overdrive-login.inc:12
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:249
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:205
@@ -1695,7 +1714,7 @@ msgid "Password:"
 msgstr "Пароль: "
 
 #. INPUT type=submit
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:446
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:455
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:253
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:209
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-registration-confirmation.tt:126
@@ -1704,7 +1723,7 @@ msgstr "Пароль: "
 msgid "Log in"
 msgstr "Увійти"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:456
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:465
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:270
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:219
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-reset-password.tt:100
@@ -1713,7 +1732,7 @@ msgstr "Увійти"
 msgid "Forgot your password?"
 msgstr "Забули свій пароль?"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:461
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:470
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:275
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:224
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-registration-confirmation.tt:130
@@ -1721,39 +1740,39 @@ msgstr "Забули свій пароль?"
 msgid "Create an account"
 msgstr "Створити обліковий запис"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:483
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:521
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:492
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:530
 #, c-format
 msgid "Accept all cookies"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:485
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:519
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:494
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:528
 #, c-format
 msgid "Accept essential cookies"
 msgstr ""
 
 #. BUTTON
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:486
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:495
 msgid "Click to view more information about your cookie consents"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:486
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:495
 #, fuzzy, c-format
 msgid "More information"
 msgstr "Інформація про серію:"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:494
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:503
 #, c-format
 msgid "Cookies policy"
 msgstr ""
 
 #. INPUT type=checkbox name=consentCheckbox
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:507
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:516
 msgid "Consent to cookie"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:522
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:531
 #, c-format
 msgid "Accept selected non-essential cookies"
 msgstr ""
@@ -1817,7 +1836,7 @@ msgstr "Примірник видано"
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/checkout.inc:35
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-topissues.inc:93
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-authorities-home.tt:91
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:325
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:333
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:1114
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-password-recovery.tt:147
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-password-recovery.tt:177
@@ -1909,11 +1928,6 @@ msgstr "Мої згоди"
 #, c-format
 msgid "Powered by Koha"
 msgstr "Працює на АБІС Коха"
-
-#. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-bottom.inc:91
-msgid "Are you sure you want to delete your search history?"
-msgstr "Чи Ви справді хочете очистити Вашу історію пошуків?"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-detail-sidebar.inc:9
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/title-actions-menu.inc:6
@@ -4428,7 +4442,7 @@ msgstr "Шукати:"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:46
 #, c-format
 msgid "and"
-msgstr " і "
+msgstr "та"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:47
 #, c-format
@@ -4587,7 +4601,7 @@ msgid "See from (non-preferred form) headings are included "
 msgstr "Включено рубрики „див.“ (варіантні форми) "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:171
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:66
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:67
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1179
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:121
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recall.tt:95
@@ -4602,7 +4616,7 @@ msgstr "Тип одиниці зберігання"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:172
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:151
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:68
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:69
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1188
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recall.tt:101
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-reserve.tt:395
@@ -4728,7 +4742,7 @@ msgstr "підлітковий"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:345
 #, c-format
 msgid "Adult"
-msgstr "дорослий"
+msgstr "Дорослий"
 
 # 008.22=f - http://marc21.rsl.ru/index.php?doc=1050
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:346
@@ -5027,7 +5041,7 @@ msgstr "Чи Ви хочете отримувати електронну пош�
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-privacy.tt:126
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-privacy.tt:129
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:818
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Yes"
 msgstr "так"
@@ -5044,7 +5058,7 @@ msgstr "так"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-privacy.tt:128
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:519
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:820
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "No"
 msgstr "ні"
@@ -5074,7 +5088,7 @@ msgid "Alert subscriptions"
 msgstr "Передплати"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:49
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:67
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:68
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:129
 #, c-format
 msgid "Location"
@@ -5729,7 +5743,7 @@ msgstr "Жодної пропозиції не було відібрано"
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:373
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-shelves.tt:827
 msgid "No tag was specified."
 msgstr "Мітка не була вказана."
@@ -5847,7 +5861,7 @@ msgstr "Викладач(і): "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:55
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-curbside-pickups.tt:249
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:233
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-request-article.tt:154
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:275
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:279
@@ -5855,13 +5869,13 @@ msgstr "Викладач(і): "
 msgid "Notes:"
 msgstr "Примітки: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:61
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:62
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-reserves.tt:35
 #, c-format
 msgid "Courses"
 msgstr "Курси"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:70
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:71
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1206
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recall.tt:103
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-reserve.tt:385
@@ -5870,36 +5884,36 @@ msgid "Copy number"
 msgstr "Порядковий номер комплекту/примірника"
 
 # --Дата повернення (конфлікт з Return date)
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:72
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:73
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1213
 #, c-format
 msgid "Date due"
 msgstr "Очікується на дату"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:74
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:75
 #, c-format
 msgid "Link"
 msgstr "Посилання"
 
 # варіант змінних id_type, return_type функції GetAvailability з ILS-DI
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:102
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:103
 #, c-format
 msgid "Item URI"
 msgstr "URI примірника"
 
 # назва функції ILS-DI
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:104
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:105
 #, c-format
 msgid "Record URL"
 msgstr "URL запису"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:115
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:117
 #, c-format
 msgid "No reserves have been selected for this course."
 msgstr "Жодного примірника не вибрано для резервування в цьому курсі."
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:127
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:129
 #, fuzzy
 msgid "Search course reserves"
 msgstr "Інші резервування курсів"
@@ -6857,28 +6871,28 @@ msgstr "%s %s%s%s Посилання на ресурс %s "
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Amazon cover image (<a href='%s'>see the original image</a>)"
 msgstr "Зображення обкладинки Amazon (<a href='%s'>див. оригінальне зображення</a>)"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Coce image from Amazon.com"
 msgstr "Зображення Coce з Amazon.com"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Coce image from Google Books"
 msgstr "Зображення з Coce від Google Books"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Coce image from Open Library"
 msgstr "Зображення з Coce від Open Library"
@@ -6888,14 +6902,14 @@ msgstr "Зображення з Coce від Open Library"
 # Дата публікації 2 містить чотири пробіли.
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Cover image source unknown"
 msgstr "Джерело зображення обкладинки невідоме"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy
 msgid "Image from Google Books (<a href='%s'>see the original image</a>)"
@@ -6903,7 +6917,7 @@ msgstr "Зображення обкладинки Amazon (<a href='%s'>див. �
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy
 msgid "Image from OpenLibrary (<a href='%s'>see the original image</a>)"
@@ -7222,31 +7236,31 @@ msgstr "Дата скасування"
 msgid "Requested item type"
 msgstr "Запитуваний примірник: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:142
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:147
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-reserve.tt:324
 #, c-format
 msgid "Any item type"
 msgstr "Усі типи примірників"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:148
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:153
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recalls.tt:86
 #, c-format
 msgid "Fulfilled"
 msgstr ""
 
 # назва функції ILS-DI
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:150
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:158
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:155
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:163
 #, c-format
 msgid "Cancelled"
 msgstr "Скасовано"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:156
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:161
 #, fuzzy, c-format
 msgid "Waiting"
 msgstr "Дата очікування"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:161
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:166
 #, fuzzy, c-format
 msgid "In transit"
 msgstr " Примірник на переміщенні до підрозділу "
@@ -7336,7 +7350,7 @@ msgid "New interlibrary loan request"
 msgstr "Новий запит міжбібліотечного абонементу"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:42
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:181
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:186
 #, c-format
 msgid "View interlibrary loan request"
 msgstr "Переглянути запит міжбібліотечного абонементу"
@@ -7395,68 +7409,68 @@ msgstr "Востаннє оновлено"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:161
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:164
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:168
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:214
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:222
 #, c-format
 msgid "N/A"
 msgstr "не доступно"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:174
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:179
 #, c-format
 msgid "View"
 msgstr "Перегляд"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:187
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:192
 #, c-format
 msgid "Details from library"
 msgstr "Подробиці з бібліотеки"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:191
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:196
 #, c-format
 msgid "Request ID:"
 msgstr "Ідентифікатор запиту: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:195
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:200
 #, c-format
 msgid "Requested from:"
 msgstr "Запитано від: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:200
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:205
 #, c-format
 msgid "Requested item:"
 msgstr "Запитуваний примірник: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:201
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:206
 #, fuzzy, c-format
 msgid "View the requested item"
 msgstr "Запитуваний примірник: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:205
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:210
 #, c-format
 msgid "Collection library:"
 msgstr "Бібліотека зібрання: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:209
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:214
 #, c-format
 msgid "Status:"
 msgstr "Стан: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:221
 #, c-format
 msgid "Request type:"
 msgstr "Тип запиту: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:217
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:225
 #, c-format
 msgid "Request placed:"
 msgstr "Запит розміщено: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:221
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:229
 #, c-format
 msgid "Last updated:"
 msgstr "Останнє оновлення: "
 
 #. %1$s:  request.backend | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:235
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:243
 #, c-format
 msgid "Details from %s"
 msgstr "Подробиці від %s"
@@ -7465,53 +7479,53 @@ msgstr "Подробиці від %s"
 #. %2$s:  meta.value | html 
 #. %3$s:  ELSE 
 #. %4$s:  END 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:239
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:247
 #, fuzzy, c-format
 msgid "%s%s%sN/A%s"
 msgstr "%s%s%s Не доступно %s "
 
 # змінна функції HoldTitle з ILS-DI
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:249
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:257
 #, c-format
 msgid "Request cancellation"
 msgstr "Скасування запиту"
 
 #. INPUT type=submit
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:251
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:259
 msgid "Submit modifications"
 msgstr "Прийняти зміни"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:258
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:266
 #, fuzzy, c-format
 msgid "Interlibrary loan item availability"
 msgstr "Таблиці міжбібліотечного абонементу"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:263
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:271
 #, c-format
 msgid "Displaying availability results"
 msgstr "Відображення результатів доступності"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:279
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:287
 #, fuzzy, c-format
 msgid "If you can't find what you are looking for, you can "
 msgstr "Не знайшли того за чим шукали? "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:281
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:289
 #, c-format
 msgid "continue creating your request"
 msgstr "продовжуйте створювати Ваш запит"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:281
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:289
 #, c-format
 msgid "or "
 msgstr " або "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:282
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:290
 #, fuzzy, c-format
 msgid "cancel your request"
 msgstr "Скасувати замовлення "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:291
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:299
 #, c-format
 msgid "ILL request disclaimer"
 msgstr ""
@@ -7583,7 +7597,7 @@ msgstr "Примітка: "
 #. INPUT type=submit
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-issue-note.tt:56
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:594
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Submit note"
 msgstr "Подати примітку"
@@ -7758,7 +7772,7 @@ msgstr "Ваші оновлення прийняті. Бібліотекар р�
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:27
 #, c-format
 msgid "Street number:"
-msgstr "Номер будинку, квартири: "
+msgstr "Номер будинку, квартири:"
 
 #. %1$s:  IF op == 'edit' 
 #. %2$s:  ELSE 
@@ -7989,6 +8003,7 @@ msgid "Username:"
 msgstr "Логін: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:272
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-virtual-card.tt:53
 #, c-format
 msgid "Expiration date:"
 msgstr "Термін дії: "
@@ -8007,7 +8022,7 @@ msgstr "Особисті дані"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:343
 #, c-format
 msgid "Salutation:"
-msgstr "Вітання: "
+msgstr "Вітання:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:361
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:862
@@ -8034,7 +8049,7 @@ msgstr "Бажане імʼя:"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:397
 #, c-format
 msgid "Date of birth:"
-msgstr "Дата народження: "
+msgstr "Дата народження:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:407
 #, c-format
@@ -8049,7 +8064,7 @@ msgstr "Займенники:"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:425
 #, c-format
 msgid "Other names:"
-msgstr "Інші використовувані імена: "
+msgstr "Інші використовувані імена:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:435
 #, c-format
@@ -8075,7 +8090,7 @@ msgstr "Основна адреса"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:747
 #, c-format
 msgid "Street type:"
-msgstr "Тип вулиці: "
+msgstr "Тип вулиці:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:510
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:765
@@ -8142,12 +8157,12 @@ msgstr "Інший телефон: "
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:607
 #, c-format
 msgid "Primary email:"
-msgstr "Основна електронна пошта: "
+msgstr "Основна електронна пошта:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:615
 #, c-format
 msgid "Confirm primary email:"
-msgstr "Підтвердьте основну електронну адресу: "
+msgstr "Підтвердьте основну електронну адресу:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:625
 #, c-format
@@ -8434,7 +8449,7 @@ msgid "Interlibrary loan updated"
 msgstr "Запит міжбібліотечного абонементу"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-messaging.tt:79
-#, fuzzy, c-format
+#, c-format
 msgid "Auto renewal"
 msgstr "Автоматичне продовження"
 
@@ -8556,7 +8571,7 @@ msgstr "Будь ласка, зверніться до співробітник�
 
 #. INPUT type=submit
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-messaging.tt:248
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Submit changes"
 msgstr "Прийняти зміни"
 
@@ -8753,7 +8768,7 @@ msgstr "Доступні примірники: "
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-overdrive-search.tt:77
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Loading..."
 msgstr "Завантаження…"
 
@@ -9670,7 +9685,7 @@ msgstr "Не було зроблено жодних змін."
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recalls.tt:133
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to remove this recall?"
 msgstr "Чи Ви справді хочете вилучити це спільне використання списку?"
@@ -9708,6 +9723,7 @@ msgstr "Щоб увійти, використовуйте наступні об�
 
 # Можливе значення змінної id_typeфункції LookupPatron з ILS-DI
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-registration-confirmation.tt:80
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-virtual-card.tt:50
 #, c-format
 msgid "Card number:"
 msgstr "Номер читацького квитка: "
@@ -11525,9 +11541,9 @@ msgid "You do not have permission to add a record to this list."
 msgstr "У Вас немає привілеїв на додавання запису у цей список."
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-shelves.tt:201
-#, fuzzy, c-format
-msgid "You do not have permission to transfer ownership of this list."
-msgstr "У Вас немає дозволу на відправку цього списку."
+#, c-format
+msgid "Transfer not allowed: You or the selected user do not have the required permissions."
+msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-shelves.tt:203
 #, c-format
@@ -12919,7 +12935,7 @@ msgstr "Обліковий запис OverDrive"
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:329
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:550
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Renew selected"
 msgstr "Продовжити вибрані"
@@ -13103,7 +13119,7 @@ msgstr "Плата за оренду "
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:536
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Edit note"
 msgstr "Редагувати примітку"
@@ -13111,7 +13127,7 @@ msgstr "Редагувати примітку"
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:538
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Add note"
 msgstr "Додати нотатку"
@@ -13120,7 +13136,7 @@ msgstr "Додати нотатку"
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:552
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:568
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Renew all"
 msgstr "Продовжити усі"
@@ -13315,106 +13331,106 @@ msgid "Do not suspend"
 msgstr "Не використовувати профіль"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "All holds will be suspended."
 msgstr "Усі замовлення будуть призупинені."
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "All holds will resume."
 msgstr "Усі замовлення будуть відновлені."
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Are you sure you want to cancel this article request?"
 msgstr "Ви впевнені, що хочете скасувати замовлення цієї статті?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Are you sure you want to cancel this hold?"
 msgstr "Чи Ви справді хочете скасувати це замовлення?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to dismiss this message?"
 msgstr "Чи Ви справді хочете вилучити це спільне використання списку?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to request cancelling this hold?"
 msgstr "Чи Ви справді хочете скасувати це замовлення?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Are you sure you want to resume all suspended holds?"
 msgstr "Чи Ви справді хочете відновити призупинені замовлення?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Are you sure you want to suspend all holds?"
 msgstr "Чи Ви справді хочете призупинити усі замовлення?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "No, do not cancel article request"
 msgstr "Ні, не скасовувати замовлення на статтю"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "No, do not cancel hold"
 msgstr "Ні, не скасовувати замовлення"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "No, do not resume holds"
 msgstr "Ні, не відновлювати замовлення"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Nothing has been selected. Check the box for each item you want to renew"
 msgstr "Нічого не вибрано. Встановіть прапорець для кожного примірника, який Ви хочете продовжити"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Something went wrong. The note has not been saved"
 msgstr "Щось пішло не так. Примітку не було збережено"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Yes, cancel article request"
 msgstr "Так, скасувати замовлення на статтю"
 
 # назва функції ILS-DI
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Yes, cancel hold"
 msgstr "Так, скасувати замовлення"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Yes, resume all holds"
 msgstr "Так, відновити усі замовлення"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Yes, suspend all holds"
 msgstr "Так, призупинити усі замовлення"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Your note about %s could not be saved."
 msgstr "Ваша примітка про „%s“ не може бути збережена."
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Your note about %s has been saved and sent to the library."
 msgstr "Ваша примітка про „%s“ була збережена та відправлена у бібліотеку."
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Your note about %s was removed."
 msgstr "Ваша примітка про „%s“ була вилучена."
 
@@ -13422,7 +13438,7 @@ msgstr "Ваша примітка про „%s“ була вилучена."
 #. %2$s:  LibraryNameTitle | html 
 #. %3$s:  ELSE 
 #. %4$s:  END 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-virtual-card.tt:9
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-virtual-card.tt:10
 #, fuzzy, c-format
 msgid "My virtual card &rsaquo; %s%s%sKoha online%s catalog"
 msgstr "Ваш кошик &rsaquo; %s%s%s Коха %s &rsaquo; Електронний каталог"
@@ -14201,6 +14217,9 @@ msgstr "000 "
 #~ msgid "Are you sure you want to delete the selected tag(s)?"
 #~ msgstr "Чи Ви справді хочете вилучити вибрану(і) мітку(и)?"
 
+#~ msgid "Are you sure you want to delete your search history?"
+#~ msgstr "Чи Ви справді хочете очистити Вашу історію пошуків?"
+
 #~ msgid "Are you sure you want to remove this share?"
 #~ msgstr "Чи Ви справді хочете вилучити це спільне використання списку?"
 
@@ -14666,6 +14685,10 @@ msgstr "000 "
 #, fuzzy
 #~ msgid "Yes, delete from list"
 #~ msgstr "Так, вилучити"
+
+#, fuzzy, c-format
+#~ msgid "You do not have permission to transfer ownership of this list."
+#~ msgstr "У Вас немає дозволу на відправку цього списку."
 
 #~ msgid "You have checked out too many items and can't check out any more."
 #~ msgstr "Вам видано забагато примірників і більше не можете отримати."

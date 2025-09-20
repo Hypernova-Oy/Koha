@@ -186,7 +186,7 @@
  [% CASE 'unauthorized_on_add_biblio' %]
  <span>Sinulla ei ole oikeutta lisätä nimekettä tähän listaan.</span>
  [% CASE 'unauthorized_transfer' %]
- <span>Sinulla ei ole oikeutta siirtää tämän listan omistajuutta.</span>
+ <span>Siirto ei ole sallittu: Sinulla tai valitulla käyttäjällä ei ole riittäviä käyttäjäoikeuksia.</span>
  [% CASE 'new_owner_not_found' %]
  <span>Uutta omistajaa ei löytynyt.</span>
  [% CASE 'no_biblio_removed' %]
@@ -229,7 +229,7 @@
 
  <br/>
  <fieldset class="action">
- <input class="btn btn-primary" type="submit" value="Siirto" />
+ <input class="btn btn-primary" type="submit" value="Siirrä" />
  <a href="/cgi-bin/koha/virtualshelves/shelves.pl?op=list&amp;public=1" class="cancel">Peruuta</a>
  </fieldset>
 
@@ -606,7 +606,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% INCLUDE 'datatables.inc' %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% IF print %]
  <script>
             $( document ).ready(function() {

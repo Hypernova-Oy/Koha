@@ -106,24 +106,24 @@
 <!-- -->
 [% IF ( branch ) %]
  <tr>
- <td>homebranch INTE mappad</td>
+ <td>hembibliotek är INTE mappad</td>
  <td>fältet items.homebranch MÅSTE :<br />
  <ul><li>vara mappat till ett MARC-delfält,</li>
- <li>motsvarande delfält MÅSTE ha "Auktoriserat värde" inställt på "filialer"</li></ul></td>
+ <li>motsvarande delfält MÅSTE ha "Auktoriserat värde" inställt på "bibliotek"</li></ul></td>
  </tr>
 [% ELSE %]
  <tr>
  <td>OK</td>
- <td>homebranch definierad</td>
+ <td>hembibliotek definierad</td>
  </tr>
 [% END %]
 <!-- -->
 [% IF ( holdingbranch ) %]
  <tr>
- <td>holdingbranch INTE mappad</td>
+ <td>reservationsbibliotek är INTE mappad</td>
  <td>fältet items.holdingbranch MÅSTE :<br />
  <ul><li>vara mappat till ett MARC-delfält, </li>
- <li>motsvarande delfält MÅSTE ha "Auktoriserat värde" inställt på "filialer"</li></ul></td>
+ <li>motsvarande delfält MÅSTE ha "Auktoriserat värde" inställt på "bibliotek"</li></ul></td>
  </tr>
 [% ELSE %]
  <tr>

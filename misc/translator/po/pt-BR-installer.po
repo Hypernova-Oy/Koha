@@ -1,18 +1,18 @@
 # Compendium of pt_BR.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:29-0300\n"
-"PO-Revision-Date: 2024-08-29 03:00+0000\n"
-"Last-Translator: Tiago Murakami <trmurakami@gmail.com>\n"
+"PO-Revision-Date: 2025-08-15 03:09+0000\n"
+"Last-Translator: Rebeca Moura <rebecamoura@ibict.br>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: pt-BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /pt_BR/22.11/pt-BR-installer.po\n"
 "X-POOTLE-MTIME: 1695423603.188904\n"
@@ -258,7 +258,7 @@ msgid "Complete"
 msgstr "Completo"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+msgid "Aggregated full text"
 msgstr "Agrupamento completo"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -295,7 +295,7 @@ msgstr "Desconhecido"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:37
 msgid "Journal"
-msgstr "Jornal"
+msgstr "Periódico"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:38
 msgid "Newsletter"
@@ -4024,33 +4024,31 @@ msgstr "Fontes de classificação e regras de arquivamento padrão para o Koha."
 
 #: installer/data/mysql/en/mandatory/illbatch_statuses.yml:description:1
 msgid "ILL batch statuses used in Koha"
-msgstr "Status de lote EEB usados no Koha"
+msgstr "Status de lote de Empréstimo entre Bibliotecas (EEB) usados no Koha"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:description:1
 msgid "Default Koha system patron restriction types"
 msgstr "Tipos de restrição de usuários padrão do Koha"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:1
-#, fuzzy
 msgid "Manual restriction"
-msgstr "Descrição padrão"
+msgstr "Restrição manual"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:2
-#, fuzzy
 msgid "Overdues"
-msgstr "%sAtrasados%s"
+msgstr "Atrasados"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:3
 msgid "Suspension"
-msgstr ""
+msgstr "Suspensão"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:4
 msgid "Discharge"
-msgstr ""
+msgstr "Dar baixa"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:5
 msgid "Notice failure suspension"
-msgstr ""
+msgstr "Suspensão devido à falha no envio da notificação"
 
 #: installer/data/mysql/en/mandatory/sample_frequencies.yml:description:1
 msgid "Sample frequencies for subscriptions"
@@ -4129,24 +4127,20 @@ msgid "Booking cancellation notice"
 msgstr "Aviso de cancelamento de reserva"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3
-#, fuzzy
 msgid "A library booking was modified"
-msgstr "Uma reserva de biblioteca foi cancelada"
+msgstr "Uma reserva de biblioteca foi modificada"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3
-#, fuzzy
 msgid "Booking modification notice"
-msgstr "Aviso de cancelamento de reserva"
+msgstr "Aviso de modificação de reserva"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4
-#, fuzzy
 msgid "A library booking was confirmed"
-msgstr "Uma reserva de biblioteca foi cancelada"
+msgstr "Uma reserva de biblioteca foi confirmada"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4
-#, fuzzy
 msgid "Booking confirmation notice"
-msgstr "Aviso de cancelamento de reserva"
+msgstr "Aviso de confirmação de reserva"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:5
 msgid "Catalog concern acknowledgment"
@@ -4338,23 +4332,23 @@ msgstr "Exemplar não recebido"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42
 msgid "File SFTP failed"
-msgstr ""
+msgstr "Falha no envio do arquivo via SFTP"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42
 msgid "The SFTP by sftp_file.pl failed"
-msgstr ""
+msgstr "A operação de SFTP realizada pelo script sftp_file.pl falhou"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43
 msgid "File SFTP success"
-msgstr ""
+msgstr "Arquivo SFTP transferido com sucesso"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43
 msgid "The SFTP by sftp_file.pl was successful"
-msgstr ""
+msgstr "O SFTP por sftp_file.pl foi bem-sucedido"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:44
 msgid "ILL request ready for pickup"
-msgstr "Solicitação EEB pronta para retirada"
+msgstr "Solicitação de Empréstimo entre Bibliotecas (EEB) pronta para retirada"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:44
 msgid "Interlibrary loan request ready for pickup"
@@ -4362,7 +4356,7 @@ msgstr "Pedido de empréstimo entre bibliotecas pronto para retirada"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:45
 msgid "ILL request unavailable"
-msgstr "Pedido EEB indisponível"
+msgstr "Pedido de Empréstimo entre Bibliotecas (EEB) indisponível"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:45
 msgid "Interlibrary loan request unavailable"
@@ -4370,7 +4364,7 @@ msgstr "Pedido de empréstimo interbibliotecas indisponível"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:46
 msgid "ILL request cancelled"
-msgstr "Solicitação EEB cancelada"
+msgstr "Solicitação de Empréstimo entre Bibliotecas (EEB) cancelada"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:46
 msgid "Interlibrary loan request cancelled"
@@ -4378,7 +4372,7 @@ msgstr "Pedido de empréstimo entre bibliotecas cancelado"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:47
 msgid "ILL request modified"
-msgstr "Solicitação EEB modificada"
+msgstr "Solicitação de Empréstimo entre Bibliotecas (EEB) modificada"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:47
 msgid "Interlibrary loan request modified"
@@ -4386,7 +4380,7 @@ msgstr "Solicitação de empréstimo entre bibliotecas modificada"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:48
 msgid "ILL request to partners"
-msgstr "Solicitação EEB para parceiros"
+msgstr "Solicitação de Empréstimo entre Bibliotecas (EEB) para parceiros"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:48
 msgid "Interlibrary loan request to partners"
@@ -4394,7 +4388,7 @@ msgstr "Solicitação de empréstimo entre bibliotecas"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:49
 msgid "ILL request update"
-msgstr "Atualização de solicitação EEB"
+msgstr "Atualização de solicitação de Empréstimo entre Bibliotecas (EEB)"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:49
 msgid "Interlibrary loan request update"
@@ -4417,14 +4411,12 @@ msgid "Share list <<listname>>"
 msgstr "Compartilhar lista <<listname>>"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58
-#, fuzzy
 msgid "A list has been transferred to you"
-msgstr "Uma sugestão foi atribuída a você"
+msgstr "Uma lista foi atribuída a você"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58
-#, fuzzy
 msgid "Transfer ownership"
-msgstr "Etiquetas de transferência"
+msgstr "Transferir propriedade"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:59
 msgid "Discharge confirmation"
@@ -4500,7 +4492,7 @@ msgstr "Ordem de aquisição"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:69
 msgid "Order"
-msgstr "Ordem"
+msgstr "Pedido"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:70
 msgid "Point of sale receipt"
@@ -4707,13 +4699,12 @@ msgid "Your hold on [% hold.biblio.title %] is confirmed"
 msgstr "Sua reserva do [% hold.biblio.title %] está confirmada"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107
-#, fuzzy
 msgid "OAI harvest report"
-msgstr "Relatório de problema do OPAC"
+msgstr "Relatório de sincronização OAI"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107
 msgid "OAI harvest report for [% servername %]"
-msgstr ""
+msgstr "Relatório de sincronização OAI para [% servername %]"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:100:mul:1
 msgid "%sDear %s %s,%s"
@@ -4876,55 +4867,48 @@ msgid "You will be notified by the library when your item is available for picku
 msgstr "Você será notificado pela biblioteca quando seu exemplar estiver disponível para retirada."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:1
-#, fuzzy
 msgid "OAI harvest report for %s:"
-msgstr "Relatório de rotação de estoque para %s:"
+msgstr "Relatório de coleta OAI para %s:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:3
-#, fuzzy
 msgid "Endpoint: %s"
-msgstr "Enviado em: %s"
+msgstr "Endpoint: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:4
-#, fuzzy
 msgid "Set: %s"
-msgstr "Enviado em: %s"
+msgstr "Conjunto: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:5
-#, fuzzy
 msgid "Data format: %s"
-msgstr "Aguardando em: %s"
+msgstr "Formato de dados: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:6
-#, fuzzy
 msgid "Record type: %s"
-msgstr "Códigos de barra: %s"
+msgstr "Tipo de registro: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:8
 msgid "%s records added"
-msgstr ""
+msgstr "%s registros adicionados"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:9
-#, fuzzy
 msgid "%s records updated"
-msgstr "foi atualizado."
+msgstr "%s registros atualizados"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:10
 msgid "%s records deleted"
-msgstr ""
+msgstr "%s registros excluídos"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:11
 msgid "%s records skipped"
-msgstr ""
+msgstr "%s registros ignorados"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:12
-#, fuzzy
 msgid "%s records in error"
-msgstr "Gravação de som, rolo"
+msgstr "%s registros com erro"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:13
 msgid "%s total"
-msgstr ""
+msgstr "%s total"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:10:mul:26
 msgid "      %sTransaction ID: %s"
@@ -5215,9 +5199,8 @@ msgid "Dates: %s to %s%s"
 msgstr "Datas: %s a %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:11
-#, fuzzy
 msgid "Reason: %s%s"
-msgstr "Código de Barra: %s%s"
+msgstr "Motivo: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:13
 msgid "Kind regards%s"
@@ -5344,18 +5327,16 @@ msgid "Current library: %s %s"
 msgstr "Biblioteca atual: %s %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:5
-#, fuzzy
 msgid "Your booking of %s has been modified.%s"
-msgstr "Sua reserva de %s (%s) foi confirmada."
+msgstr "Sua reserva de %s foi modificada.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:7
 msgid "The new details are:%s"
-msgstr ""
+msgstr "Os novos detalhes são:%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:11
-#, fuzzy
 msgid "Pickup at: %s%s"
-msgstr "Local de coleta: %s"
+msgstr "Retirada em: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:40:mul:3
 msgid "%sTransfer to %s%s"
@@ -5371,11 +5352,11 @@ msgstr "%sNúmero do pedido %s (%s) (%s pedido) (R$%s cada) não foi recebido.%s
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42:mul:1
 msgid "SFTP upload failed:"
-msgstr ""
+msgstr "Falha no upload do SFTP:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43:mul:1
 msgid "SFTP upload succeeded"
-msgstr ""
+msgstr "Upload SFTP bem-sucedido"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:44:mul:3
 msgid "The Interlibrary loans request number %s you placed for:"
@@ -5399,11 +5380,11 @@ msgstr "infelizmente não está disponível."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:46:mul:1
 msgid "The patron for interlibrary loans request %s, with the following details, has requested cancellation of this ILL request:"
-msgstr "O usuário da solicitação de empréstimos entre bibliotecas %s, com os seguintes detalhes, solicitou o cancelamento desta solicitação de EEB:"
+msgstr "O usuário da solicitação de Empréstimos entre Bibliotecas (EEB) %s, com os seguintes detalhes, solicitou o cancelamento desta solicitação de EEB:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:47:mul:1
 msgid "The patron for interlibrary loans request %s, with the following details, has modified this ILL request:"
-msgstr "O usuário da solicitação de empréstimos entre bibliotecas %s, com os seguintes detalhes, modificou esta solicitação de EEB:"
+msgstr "O usuário da solicitação de Empréstimos entre Bibliotecas (EEB) %s, com os seguintes detalhes, modificou esta solicitação de EEB:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:48:mul:1
 msgid "Dear Sir/Madam,"
@@ -5426,13 +5407,12 @@ msgid "Details of the update are below:"
 msgstr "Os detalhes da atualização estão abaixo:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4:mul:5
-#, fuzzy
 msgid "Your booking of %s has been confirmed.%s"
-msgstr "Sua reserva de %s (%s) foi confirmada."
+msgstr "Sua reserva de %s foi confirmada %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4:mul:7
 msgid "The details are:%s"
-msgstr ""
+msgstr "Os detalhes são:%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:56:mul:1
 msgid "Dear patron,"
@@ -5456,16 +5436,15 @@ msgstr "Caso você não seja um usuário da nossa biblioteca ou não queira acei
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:3
 msgid "A public list, titled %s%s%s, has been transferred to you%s by %s%s.%s"
-msgstr ""
+msgstr "Uma lista pública, intitulada %s%s%s, foi transferida para você%s por %s%s.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:5
 msgid "%sThe list was previously owned by %s.%s%s%s"
-msgstr ""
+msgstr "%A lista pertencia anteriormente a %s.%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:6
-#, fuzzy
 msgid "Thank you%s"
-msgstr "Obrigado"
+msgstr "Obrigado%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:59:mul:3
 msgid "%sDischarge confirmation%s"
@@ -6141,7 +6120,7 @@ msgstr "Cópia da biblioteca perdida"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:1:row:4
 msgid "Available via ILL"
-msgstr "Disponível via EEB"
+msgstr "Disponível via Empréstimo entre Bibliotecas (EEB)"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:1:row:5
 msgid "Insufficient budget"
@@ -7677,7 +7656,7 @@ msgstr "Limite em casa"
 
 #: installer/data/mysql/en/optional/patron_categories.yml:categories:1:row:4
 msgid "Kid"
-msgstr "Criança"
+msgstr "Infantil"
 
 #: installer/data/mysql/en/optional/patron_categories.yml:categories:1:row:5
 msgid "Juvenile"

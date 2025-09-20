@@ -157,16 +157,21 @@
  <tr>
  <td>[% request.id | html %]</td>
  <td>
- [% IF request.metadata.Author %][% request.metadata.Author | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ [% IF request.metadata.Author %][% request.metadata.Author | html %][% ELSE %]<span>Ei saatavilla</span>[% END %]
  </td>
  <td>
- [% IF request.metadata.Title %][% request.metadata.Title | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ [% IF request.metadata.Title %][% request.metadata.Title | html %][% ELSE %]<span>Ei saatavilla</span>[% END %]
  </td>
  <td>[% request.backend | html %]</td>
  <td>
- [% IF type %][% type | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ [% IF type %][% type | html %][% ELSE %]<span>Ei saatavilla</span>[% END %]
  </td>
- <td>[% request.status_alias ? request.statusalias.lib_opac : request.capabilities.$status.name | html %]</td>
+ <td>
+ [% request.capabilities.$status.name | html %]
+ [% IF request.status_alias && request.statusalias.lib_opac %]
+ <i><strong>([% request.statusalias.lib_opac | html %])</strong></i>
+ [% END %]
+ </td>
  <td data-order="[% request.placed | html %]">[% request.placed | $KohaDates %]</td>
  <td data-order="[% request.updated | html %]">[% request.updated | $KohaDates %]</td>
  <td>
@@ -206,11 +211,14 @@
  </li>
  <li>
  <label for="status">Tila:</label>
- [% request.status_alias ? request.statusalias.lib_opac : request.capabilities.$status.name | html %]
+ [% request.capabilities.$status.name | html %]
+ [% IF request.status_alias && request.statusalias.lib_opac %]
+ <i><strong>([% request.statusalias.lib_opac | html %])</strong></i>
+ [% END %]
  </li>
  <li>
  <label for="medium">Pyynnön tyyppi:</label>
- [% IF type %][% type | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ [% IF type %][% type | html %][% ELSE %]<span>Ei saatavilla</span>[% END %]
  </li>
  <li>
  <label for="placed">Pyyntö tehty:</label>

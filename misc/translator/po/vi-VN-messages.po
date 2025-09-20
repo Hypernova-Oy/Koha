@@ -1,18 +1,18 @@
 # Compendium of vi.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2022-05-01 12:47-0300\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2025-08-09 03:11+0000\n"
+"PO-Revision-Date: 2025-08-20 03:09+0000\n"
+"Last-Translator: Heidi Ruan <heidi@sris.com.tw>\n"
 "Language-Team: Koha Translation Team\n"
-"Language: \n"
+"Language: vi-VN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /vi/22.11/vi-VN-messages.po\n"
 
@@ -39,19 +39,16 @@ msgid "Checked out"
 msgstr "Được ghi mượn"
 
 #: C4/ILSDI/Services.pm:979
-#, fuzzy
 msgid "Item lost"
 msgstr "Tài liệu bị mất"
 
 #: C4/ILSDI/Services.pm:981
-#, fuzzy
 msgid "Item withdrawn"
-msgstr "Tài liệu bị loại khỏi lưu thông."
+msgstr "Tài liệu đã bị thu hồi"
 
 #: C4/ILSDI/Services.pm:983
-#, fuzzy
 msgid "Item damaged"
-msgstr "Bị hư hỏng"
+msgstr "Tài liệu bị hư hỏng"
 
 #: C4/ILSDI/Services.pm:985
 msgid "In transit"
@@ -59,7 +56,7 @@ msgstr ""
 
 #: C4/ILSDI/Services.pm:987
 msgid "On hold"
-msgstr ""
+msgstr "Đặt mượn"
 
 #: C4/ILSDI/Services.pm:989
 #, fuzzy
@@ -1644,7 +1641,7 @@ msgstr "Ngày bổ sung"
 #: Koha/Database/Columns.pm:82
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
 msgid "Discount"
-msgstr ""
+msgstr "Giảm phí"
 
 #: Koha/Database/Columns.pm:83
 msgid "Budgeted cost, tax excl."
@@ -2187,7 +2184,7 @@ msgstr "Mã bưu chính:"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
 msgid "Barcode"
-msgstr "Đăng ký cá biệt"
+msgstr "Mã vạch"
 
 #: Koha/Database/Columns.pm:211 Koha/Database/Columns.pm:279
 #, fuzzy
@@ -2275,7 +2272,7 @@ msgstr "Tổng số ghi mượn"
 #: Koha/Database/Columns.pm:231 Koha/Database/Columns.pm:327
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
 msgid "Call number"
-msgstr "Ký hiệu phân loại"
+msgstr "Số phân loại"
 
 #: Koha/Database/Columns.pm:232
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
@@ -2328,7 +2325,7 @@ msgstr "Không có trạng thái cụ thể"
 #: Koha/Database/Columns.pm:244
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
 msgid "Due date"
-msgstr "Ngày hết hạn"
+msgstr "Hạn trả"
 
 #: Koha/Database/Columns.pm:245
 #, fuzzy
@@ -3924,9 +3921,8 @@ msgid "Serial enumeration"
 msgstr "Serial enumeraton/chronology"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Amount"
-msgstr "Quốc gia"
+msgstr "Số lượng"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
 #, fuzzy
@@ -3955,7 +3951,7 @@ msgstr "Thư viện thường trực"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
 msgid "Updated"
-msgstr ""
+msgstr "Đã cập nhật"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
 #, fuzzy
@@ -4959,8 +4955,8 @@ msgctxt "noun"
 msgid "Order"
 msgstr "Đơn hàng"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1248
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:803
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1251
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:804
 msgid "Add user"
 msgstr ""
 
@@ -5507,7 +5503,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:63
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:59
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:119
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:121
 #, perl-brace-format
 msgid "Modify tag {searchfield}"
 msgstr ""
@@ -5594,7 +5590,7 @@ msgstr ""
 msgid "Jobs"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:329
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:334
 msgid "Are you sure you want to cancel this job?"
 msgstr ""
 
@@ -5658,7 +5654,6 @@ msgid "Confirm deletion of library '{library}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:22
-#, fuzzy
 msgid "Libraries"
 msgstr "Thư viện"
 
@@ -6066,9 +6061,8 @@ msgid "Data deleted"
 msgstr "Ngày sinh"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:29
-#, fuzzy
 msgid "Item types"
-msgstr "Kiểu tài liệu"
+msgstr "Loại tài liệu"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:368
 #, perl-brace-format
@@ -6140,12 +6134,12 @@ msgstr ""
 msgid "Confirm deletion of tag {searchfield}"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:103
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:105
 #, perl-brace-format
 msgid "MARC bibliographic framework '{framework}' ({frameworkcode})"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:183
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:185
 #, perl-brace-format
 msgid "Confirm deletion of tag {searchfield}?"
 msgstr ""
@@ -6582,7 +6576,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/advsearch.tt:9
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:9
 msgid "Advanced search"
-msgstr ""
+msgstr "Tìm kiếm nâng cao"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/detail.tt:32
 #, perl-brace-format
@@ -6724,7 +6718,7 @@ msgstr ""
 msgid "Add MARC record"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:823
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:810
 #, fuzzy
 msgctxt "Editing MARC record titled:"
 msgid "Editing"
@@ -6749,24 +6743,24 @@ msgstr ""
 msgid "(Record #{biblionumber})"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
 #, perl-brace-format
 msgid "Edit {title} by {author}"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 #, fuzzy
 msgctxt "Bibliographic record number"
 msgid "Record #"
 msgstr "Bản ghi"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 #, perl-brace-format
 msgid "Edit {title}"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:73
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:72
 #, fuzzy
 msgctxt "Items attached to a bibliographic record"
 msgid "Items"
@@ -7212,7 +7206,7 @@ msgstr "Ghi chú lưu thông"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:26
 #, fuzzy, perl-brace-format
-msgid "Overdues at {library}"
+msgid "Overdues with fines at {library}"
 msgstr "Thư viện thường trực"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchtransfers.tt:11
@@ -7229,7 +7223,7 @@ msgstr "Ghi mượn"
 msgid "Checking out to {patron}"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:887
+#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:891
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:346
 #, fuzzy, perl-brace-format
 msgid "Bundle of {count} item"
@@ -7243,7 +7237,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/curbside_pickups.tt:13
 msgid "Curbside pickups"
-msgstr ""
+msgstr "Nhận sách ngoài thư viện"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/on-site_checkouts.tt:11
 #, fuzzy
@@ -7329,7 +7323,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/request-article.tt:20
 msgid "Request article"
-msgstr ""
+msgstr "Yêu cầu bài báo"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/reserveratios.tt:13
 #, fuzzy
@@ -7408,7 +7402,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/invalid-course.tt:7
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-reserves.tt:11
 msgid "Course reserves"
-msgstr ""
+msgstr "Tài liệu học phần"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/add_items-step2.tt:10
 msgid "Edit reserve"
@@ -7709,7 +7703,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/search.tt:5
 msgid "Search"
-msgstr ""
+msgstr "Tìm kiếm"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/spinelabel-home.tt:8
 msgid "Quick spine label creator"
@@ -7801,23 +7795,23 @@ msgstr ""
 msgid "Modify patron"
 msgstr "Ngày thông báo"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:488
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:490
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:500
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:491
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:493
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:503
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember-brief.tt:44
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:195
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:199
 #, fuzzy
 msgctxt "gender"
 msgid "Other"
 msgstr "Tên khác"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1521
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1524
 #, fuzzy
 msgctxt "patron restriction created on"
 msgid "Created"
 msgstr "related"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2093
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2096
 msgid "Add guarantor"
 msgstr ""
 
@@ -8007,6 +8001,11 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:7
 msgid "Image manager"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:124
+#, perl-brace-format
+msgid "Are you sure you want to delete image {image_id}?"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:9
@@ -8569,7 +8568,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/list.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:16
 msgid "Tags"
-msgstr ""
+msgstr "Thẻ"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:65
@@ -8578,9 +8577,8 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:69
-#, fuzzy
 msgid "Pending"
-msgstr "Chờ duyệt"
+msgstr "Đang xử lý"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:73
@@ -9058,7 +9056,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/sendshelfform.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/shelves.tt:21
 msgid "Lists"
-msgstr ""
+msgstr "Danh sách"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/downloadshelf.tt:5
 msgid "Download list"
@@ -9088,9 +9086,8 @@ msgid "Edit"
 msgstr "Đặt mượn:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/tables/shelves_results.tt:57
-#, fuzzy
 msgid "Delete"
-msgstr "Hư hỏng ("
+msgstr "Xóa"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/tables/shelves_results.tt:67
 #, fuzzy
@@ -9122,53 +9119,56 @@ msgstr ""
 msgid "Card number or username"
 msgstr "Ký hiệu phân loại"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:201
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:203
-msgid "Search the catalog by keyword"
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:147
+msgid "Are you sure you want to delete your search history?"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:206
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:208
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:210
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:212
+msgid "Search the catalog by keyword"
+msgstr "Tìm kiếm mục lục theo từ khóa"
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:215
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:217
 msgid "Search the catalog by title"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:211
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:220
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:222
 msgid "Search the catalog by author"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:216
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:218
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:227
 msgid "Search the catalog by subject"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:221
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:223
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:230
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:232
 msgid "Search the catalog by ISBN"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:226
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:228
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:235
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
 msgid "Search the catalog by ISSN"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:231
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:233
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:240
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:242
 msgid "Search the catalog by series"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:239
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:243
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:245
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:246
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:248
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:252
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
 msgid "Search the catalog by call number"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:105
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:134
-#, fuzzy
 msgid "Show more"
-msgstr "Kho tài liệu"
+msgstr "Hiển thị thêm"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:108
 msgid "Show more authors"
@@ -9268,70 +9268,62 @@ msgstr "Kho tài liệu"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/errors/errorpage.tt:9
 msgid "An error has occurred"
-msgstr ""
+msgstr "Đã xảy ra lỗi"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:10
 msgid "GetAvailability"
-msgstr ""
+msgstr "Lấy tình trạng sẵn có"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:12
-#, fuzzy
 msgid "GetRecords"
-msgstr "Bản ghi"
+msgstr "Lấy bản ghi"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:14
-#, fuzzy
 msgid "GetAuthorityRecords"
-msgstr "Tác giả"
+msgstr "Lấy bản ghi kiểm soát từ khóa"
 
 # Patrons
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:16
-#, fuzzy
 msgid "LookupPatron"
-msgstr "bạn đọc"
+msgstr "Tra cứu bạn đọc"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:18
 msgid "AuthenticatePatron"
-msgstr ""
+msgstr "Xác thực bạn đọc"
 
 # Patrons
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:20
-#, fuzzy
 msgid "GetPatronInfo"
-msgstr "bạn đọc"
+msgstr "Lấy thông tin bạn đọc"
 
 # Patrons
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:22
-#, fuzzy
 msgid "GetPatronStatus"
-msgstr "bạn đọc"
+msgstr "Lấy trạng thái bạn đọc"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:24
 msgid "GetServices"
-msgstr ""
+msgstr "Tra cứu dịch vụ"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:26
 msgid "RenewLoan"
-msgstr ""
+msgstr "Gia hạn khoản mượn"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:28
-#, fuzzy
 msgid "HoldTitle"
-msgstr "Nhan đề"
+msgstr "Đặt trước tài liệu"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:30
-#, fuzzy
 msgid "HoldItem"
-msgstr "Đặt mượn"
+msgstr "Đặt trước bản sao"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:32
-#, fuzzy
 msgid "CancelHold"
-msgstr "Hủy bỏ"
+msgstr "Hủy đặt trước"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:34
 msgid "ILS-DI"
-msgstr ""
+msgstr "ILS-DI"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/maintenance.tt:12
 #, fuzzy
@@ -9355,7 +9347,7 @@ msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-account.tt:16
 msgid "Your charges"
-msgstr ""
+msgstr "Các khoản phí của bạn"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-addbybiblionumber.tt:6
 msgid "Add to your list"
@@ -9383,7 +9375,7 @@ msgstr "Số nhà"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:12
 msgid "Log in to your account"
-msgstr ""
+msgstr "Đăng nhập vào tài khoản của bạn"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:14
 msgid "Catalog login disabled"
@@ -9495,6 +9487,10 @@ msgstr ""
 #, fuzzy
 #~ msgid "Koha itemtype"
 #~ msgstr "Kiểu tài liệu Koha"
+
+#, fuzzy, perl-brace-format
+#~ msgid "Overdues at with fines {library}"
+#~ msgstr "Thư viện thường trực"
 
 #, fuzzy
 #~ msgctxt "citations"

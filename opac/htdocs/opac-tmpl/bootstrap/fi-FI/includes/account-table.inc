@@ -4,7 +4,7 @@
  <input type="hidden" name="op" value="cud-pay"/>
  [% IF ( ACCOUNT_LINES ) %]
  <table class="table table-bordered table-striped finestable" id="finestable">
- <caption class="sr-only">Maksut</caption>
+ <caption class="sr-only">Maksusi</caption>
  <thead>
  <tr>
  [% IF ENABLE_OPAC_PAYMENTS %]<th>&nbsp;</th>[% END %]
@@ -13,7 +13,7 @@
  <th class="all">Tyyppi</th>
  <th>Kuvaus</th>
  <th>Summa</th>
- <th>Maksettava</th>
+ <th>Maksettavaa</th>
  <th></th>
  </tr>
  </thead>
@@ -102,7 +102,7 @@
  <th>Päivitetty</th>
  <th>Kuvaus</th>
  <th>Myöhästymismaksun määrä</th>
- <th>Maksettava</th>
+ <th>Maksettavaa</th>
  <th></th>
  </tr>
  </thead>

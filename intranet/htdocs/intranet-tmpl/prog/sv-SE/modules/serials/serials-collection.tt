@@ -259,7 +259,7 @@
  [% IF serial.publisheddate %]
  [% serial.publisheddate | $KohaDates %]
  [% ELSE %]
- <span>Okänt</span>
+ <span>Okänd</span>
  [% END %]
  </td>
  <td data-order="[% serial.publisheddatetext | html %]">
@@ -271,7 +271,7 @@
  [% IF serial.planneddate %]
  [% serial.planneddate | $KohaDates %]
  [% ELSE %]
- <span>Okänt</span>
+ <span>Okänd</span>
  [% END %]
  </td>
  <td>
@@ -342,7 +342,7 @@
                 "columnDefs": [
                     { "targets": [ 0,-1 ], "orderable": false, "searchable":  false }
                 ],
-                "order": [[0, 'desc']],
+                "order": [[1, 'desc']],
                 "dom": 't',
                 "autoWidth": false,
                 "paginate": false,

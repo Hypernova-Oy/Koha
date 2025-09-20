@@ -225,7 +225,7 @@
  <xsl:if test="$display880">
  <xsl:call-template name="m880Select">
  <xsl:with-param name="basetags">440,490</xsl:with-param>
- <xsl:with-param name="codes">/</xsl:with-param>
+ <xsl:with-param name="codes">av</xsl:with-param>
  <xsl:with-param name="class">results_summary series</xsl:with-param>
  <xsl:with-param name="label">Sarja: </xsl:with-param>
  <xsl:with-param name="index">se</xsl:with-param>
@@ -1080,7 +1080,7 @@
  <xsl:value-of select="$URLLinkText"/>
  </xsl:when>
  <xsl:otherwise>
- <xsl:text>Click here to access online</xsl:text>
+ <xsl:text>Klikkaa tästä verkkosisältöön</xsl:text>
  </xsl:otherwise>
  </xsl:choose>
  </a>
@@ -1148,7 +1148,7 @@
  <!-- 530 -->
  <xsl:if test="marc:datafield[@tag=530]">
  <span class="results_summary additionalforms">
- <span class="label">Available additional physical forms: </span>
+ <span class="label">Muut ilmiasut: </span>
  <ul class="resource_list">
  <xsl:for-each select="marc:datafield[@tag=530]">
  <li>
@@ -1568,7 +1568,7 @@
  <span class="label">Korvaa osittain julkaisun:</span>
  </xsl:when>
  <xsl:when test="@ind2=4">
- <span class="label">Yhdistynyt julkaisuista:</span>
+ <span class="label">Yhdistynyt julkaisuista: ... ja ...</span>
  </xsl:when>
  <xsl:when test="@ind2=5">
  <span class="label">Julkaisuun on sulautunut:</span>
@@ -1579,6 +1579,9 @@
  <xsl:when test="@ind2=7">
  <span class="label">Eronnut julkaisusta:</span>
  </xsl:when>
+ <xsl:otherwise>
+ <span class="label">Edeltäjä:</span>
+ </xsl:otherwise>
  </xsl:choose>
  <xsl:text> </xsl:text>
 
@@ -1667,6 +1670,9 @@
  <xsl:when test="@ind2=8">
  <span class="label">Jatkaa aikaisemmalla nimellä:</span>
  </xsl:when>
+ <xsl:otherwise>
+ <span class="label">Seuraaja:</span>
+ </xsl:otherwise>
  </xsl:choose>
  <xsl:text> </xsl:text>
 

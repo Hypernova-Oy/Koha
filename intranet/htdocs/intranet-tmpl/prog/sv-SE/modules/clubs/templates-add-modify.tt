@@ -105,7 +105,7 @@
  <option value=""></option>
  [% PROCESS options_for_libraries libraries => Branches.all( selected => club_template.branchcode ) %]
  </select>
- <div class="hint">Om uppsatt kommer bara bibliotekarier inloggade i denna filial kunna modifiera denna klubb-mallen.</div>
+ <div class="hint">Om uppsatt kommer bara bibliotekarier inloggade med detta bibliotek kunna modifiera denna klubb-mallen.</div>
  </li>
 
  </ol>
@@ -147,7 +147,7 @@
  </div>
  <fieldset class="action">
  <a href="#" class="add_club_field">
- <i class="fa fa-plus"></i> Lägg till ett nytt fält </a>
+ <i class="fa fa-plus"></i> Lägg till nytt fält </a>
  </fieldset>
  </fieldset>
 
@@ -191,7 +191,7 @@
  </div>
  <fieldset class="action">
  <a href="#" class="add_enrollment_field">
- <i class="fa fa-plus"></i> Lägg till ett nytt fält </a>
+ <i class="fa fa-plus"></i> Lägg till nytt fält </a>
  </fieldset>
  </fieldset>
 

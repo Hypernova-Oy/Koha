@@ -22,7 +22,7 @@
  [% END #/ opaccredits %]
  </div> <!-- / #wrapper in masthead.inc -->
 
- [% IF ( Koha.Preference('OPACReportProblem') && Koha.Preference('KohaAdminEmailAddress') ) || Koha.Preference( 'CookieConsent' ) || OpacKohaUrl || ( ( OpacLangSelectorMode == 'both' || OpacLangSelectorMode == 'footer') ) %]
+ [% IF ( Koha.Preference('OPACReportProblem') && Koha.Preference('KohaAdminEmailAddress') ) || Koha.Preference( 'CookieConsent' ) || OpacKohaUrl || ( ( opaclanguagesdisplay ) && ( ! one_language_enabled ) && ( languages_loop ) && ( OpacLangSelectorMode == 'both' || OpacLangSelectorMode == 'footer') ) %]
  <footer id="changelanguage" class="navbar navbar-expand navbar-light bg-light noprint">
  <div class="container-fluid">
  <div class="collapse navbar-collapse">
@@ -84,6 +84,7 @@
     let logged_in_user_id = "[% logged_in_user.borrowernumber | html %]";
 </script>
 [% Asset.js("js/global.js") | $raw %]
+[% Asset.js("js/form-submit.js",{'type' => 'module'}) | $raw %]
 [% IF ( OPACAmazonCoverImages || SyndeticsCoverImages ) %]
  [% Asset.js("js/amazonimages.js") | $raw %]
 [% END %]
@@ -118,10 +119,6 @@
         var biblionumber = $(this).data("biblionumber");
         delSingleRecord( biblionumber );
     });
-    $(".clearsh").on("click", function(){
-        return confirmDelete( _("Haluatko varmasti poistaa hakuhistoriasi?") );
-    });
-
 </script>
 
 [% IF Koha.Preference( 'opacbookbag' ) == 1 %]

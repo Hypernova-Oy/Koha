@@ -111,7 +111,7 @@ MARC order accounts
  [% END %]
  [% END %]
  </select>
- <div class="hint">This fund will be used as the fallback value if the MARC records do not contain a mapped value for a fund code.</div>
+ <div class="hint">Detta budgetställe kommer att användas som reservvärde om MARC-posterna inte innehåller ett mappat värde för en kod för budgetstället.</div>
  </li>
  <li>
  <label for="description">Beskrivning: </label>
@@ -120,7 +120,7 @@ MARC order accounts
  <li>
  <label for="download_directory">Hämtningskatalog: </label>
  <input type="text" name="download_directory" id="download_directory" size="20" value="[% account.download_directory | html %]" />
- <div class="hint">The download directory specifies the directory in your Koha installation that should be searched for new files.</div>
+ <div class="hint">Nedladdningskatalogen anger den katalog i din Koha-installation som ska genomsökas efter nya filer.</div>
  </li>
  <li>
  <label for="match_field">Sökfält: </label>
@@ -129,14 +129,14 @@ MARC order accounts
  <div class="hint">Formatet för detta fält är detsamma som MARCFieldsToOrder - fältet och delfältet separerade av ett dollartecken t.ex. 245 $a</div>
  </li>
  <li>
- <label for="match_value">Match value: </label>
+ <label for="match_value">Matcha värde: </label>
  <input type="text" name="match_value" id="match_value" size="20" value="[% account.match_value | html %]" />
- <div class="hint">(Optional): This is the value that will be checked against the match field to see if the file matches this account. If it does it will be processed by this account, if not it will be skipped.</div>
+ <div class="hint">(Valfritt): Detta är värdet som kommer att kontrolleras mot matchningsfältet för att se om filen matchar det här kontot. Om den gör det kommer den att bearbetas av det här kontot, annars hoppas den över.</div>
  </li>
  </ol>
  </fieldset>
  <fieldset class="rows">
- <legend>File import settings</legend>
+ <legend>Inställningar för filimport</legend>
  <ol>
  <li>
  <label for='record_type'>Posttyp:</label>
@@ -197,7 +197,7 @@ MARC order accounts
  </ol>
  </fieldset>
  <fieldset class="rows">
- <legend>Record matching settings</legend>
+ <legend>Inställningar för postmatchning</legend>
  <ol>
  <li>
  <label for="matcher">Regel för postmatchning:</label>

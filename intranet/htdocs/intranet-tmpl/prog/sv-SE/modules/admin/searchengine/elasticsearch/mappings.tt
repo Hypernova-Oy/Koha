@@ -204,9 +204,9 @@ a.add, a.delete {
  <option value="isbn">ISBN</option>
  [% END %]
  [% IF search_field.type == "stdno" %]
- <option value="stdno" selected="selected">Identifier</option>
+ <option value="stdno" selected="selected">Identifierare</option>
  [% ELSE %]
- <option value="stdno">Identifier</option>
+ <option value="stdno">Identifierare</option>
  [% END %]
  [% IF search_field.type == "callnumber" %]
  <option value="callnumber" selected="selected">Hyllsignatur</option>
@@ -278,7 +278,7 @@ a.add, a.delete {
  <option value="boolean">Boolesk</option>
  <option value="sum">Summa</option>
  <option value="isbn">ISBN</option>
- <option value="stdno">Identifierr</option>
+ <option value="stdno">Identifierare</option>
  <option value="callnumber">Hyllsignatur</option>
  <option value="geo_point">Geo point</option>
  </select>

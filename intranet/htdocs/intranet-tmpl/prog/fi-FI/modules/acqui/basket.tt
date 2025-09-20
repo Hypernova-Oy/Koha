@@ -120,10 +120,10 @@
  <a class="btn btn-default btn-xs submit-form-link" href="#" data-ean="[% eans.0 | html %]" data-basketno="[% basketno | html %]" data-action="basket.pl" data-method="post" data-op="cud-ediorder"><i class="fa fa-download"></i> Luo EDIFACT-tilaus</a>
  [% ELSE %]
  <button class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="ediorderbutton"><i class="fa fa-download"></i> Luo EDIFACT-tilaus</button>
- <ul class="dropdown-menu">
+ <ul class="dropdown-menu overflow-y-auto overflow-x-hidden" style="max-height: 75vh;">
  [% FOREACH eanacct IN eans %]
  <li>
- <a class="btn btn-default btn-xs submit-form-link" href="#" data-ean="[% eanacct.ean | html %]" data-basketno="[% basketno | html %]" data-action="basket.pl" data-method="post" data-op="cud-ediorder">[% eanacct.branch.branchname | html %] ([% eanacct.ean | html %]) [% IF eanacct     .description %][[% eanacct.description | html %]][% END %]</a>
+ <a class="btn btn-default btn-xs submit-form-link" href="#" data-ean="[% eanacct.ean | html %]" data-ean_description="[% eanacct.description | html %]" data-ean_branch="[% eanacct.branch.branchname | html %]" data-basketno="[% basketno | html %]" data-action="basket.pl" data-method="post" data-op="cud-ediorder">[% eanacct.branch.branchname | html %] ([% eanacct.ean | html %]) [% IF eanacct     .description %][[% eanacct.description | html %]][% END %]</a>
  </li>
  [% END %]
  </ul>
@@ -499,10 +499,10 @@
  <th>Nro.</th>
  <th>[% tp('noun', 'Order') | html %]</th>
  <th>Veroton hinta</th>
- <th>Hinta-arvio (veroton)</th>
+ <th>Todellinen hinta (veroton)</th>
  <th>Budjetoitu hinta (veroton)</th>
- <th>Verollinen hinta</th>
- <th>Hinta-arvio (verollinen)</th>
+ <th>Suositushinta (verollinen)</th>
+ <th>Todellinen hinta (verollinen)</th>
  <th>Budjetoitu hinta (verollinen)</th>
  <th>Korvaushinta</th>
  <th>Määrä</th>
@@ -718,7 +718,7 @@
  [% UNLESS (books_loo.order_received) %]
  <a href="neworderempty.pl?ordernumber=[% books_loo.ordernumber | uri %]&amp;booksellerid=[% booksellerid | uri %]&amp;basketno=[% basketno | uri %]">Muokkaa</a>
  <br />
- <a href="#" class="transfer_order" data-ordernumber="[% books_loo.ordernumber | html %]">Siirto</a>
+ <a href="#" class="transfer_order" data-ordernumber="[% books_loo.ordernumber | html %]">Siirrä</a>
  [% END %]
  </td>
  [% END %]
@@ -736,13 +736,13 @@
  <span class="button" title="Tietueen poisto ei onnistu, alla olevian rajoituksien takia">Ei voida poistaa tilausta ja nimeketietuetta</span><br>
  [% END %]
  [% IF ( books_loo.left_item ) %]
- <strong title="Tietueen poisto ei onnistu, koska siinä on [% books_loo.items | html %] varaus(ta).">[% books_loo.items | html %] kohde(tta) jäljellä</strong><br>
+ <strong title="Tietueen poisto ei onnistu, koska siinä on [% books_loo.items | html %] varaus(ta)">[% books_loo.items | html %] kohde(tta) jäljellä</strong><br>
  [% END %]
  [% IF ( books_loo.left_biblio ) %]
  <strong title="Tietueen poisto ei onnistu, poista muut siihen linkitetyt tilaukset ensin">[% books_loo.biblios | html %] tilaus(ta) jäljellä</strong><br>
  [% END %]
  [% IF ( books_loo.left_subscription ) %]
- <strong title="Tietueen poisto ei onnistu, poista siihen liittyvät kausijulkaisutilaukset ensin.">[% books_loo.subscriptions | html %] kausijulkaisutilaus(ta) jäljellä</strong><br>
+ <strong title="Tietueen poisto ei onnistu, poista siihen liittyvät kausijulkaisutilaukset ensin">[% books_loo.subscriptions | html %] kausijulkaisutilaus(ta) jäljellä</strong><br>
  [% END %]
  [% IF ( books_loo.left_holds ) %]
  <strong title="Luettelotietuetta tai tilausta ei voi perua, peruuta siihen kohdistuvat varaukset ensin">[% books_loo.holds | html %] varaus(ta) jäljellä</strong>
@@ -768,7 +768,7 @@
  <th>[% tp('noun', 'Order') | html %]</th>
  <th class="tax_excluded">Veroton hinta</th>
  <th class="tax_excluded">Hinta-arvio (veroton)</th>
- <th class="tax_included">Verollinen hinta</th>
+ <th class="tax_included">Suositushinta (verollinen)</th>
  <th class="tax_included">Hinta-arvio (verollinen)</th>
  <th class="replacementprice">Korvaushinta</th>
  <th>Määrä</th>
@@ -906,7 +906,11 @@
  <div id="closebasket_needsconfirmation" class="alert alert-warning">
  <form action="/cgi-bin/koha/acqui/basket.pl" method="post">
  [% INCLUDE 'csrf-token.inc' %]
- <h1>Haluatko varmasti luoda EDIFACT-tilauksen ja sulkea tilauskorin [% basketname | html %]?</h1>
+ <h1>Haluatko varmasti luoda tämän EDIFACT-tilauksen?</h1>
+ <ul>
+ <li> EDIFACT-tilaus luodaan kirjastolle <b> [% ean_branch | html %] ([% ean | html %]) [% IF ean_description %][% ean_description | html %][% END %]</b></li>
+ <li> Tilauskori <b>[% basketname | html %]</b> suljetaan </li>
+ </ul>
  [% IF CAN_user_acquisition_group_manage %]
  <p>
  <label for="createbasketgroup">Lisää tämä tilauskori uuteen, samannimiseen tilausryhmään</label>
@@ -919,11 +923,11 @@
  <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
  <input type="hidden" name="confirm" value="1" />
  <input type="hidden" name="basketgroupname" value="[% basketgroupname | html %]" />
- <button type="submit" class="btn btn-default approve" accesskey="Y"><i class="fa fa-fw fa-check"></i> Kyllä, sulje (Y)</button>
+ <button type="submit" class="btn btn-default approve" accesskey="Y"><i class="fa fa-fw fa-check"></i> Kyllä, luo tilaus ja sulje tilauskori (Y)</button>
  </form>
  <form action="/cgi-bin/koha/acqui/basket.pl" method="get">
  <input type="hidden" name="basketno" value="[% basketno | html %]" />
- <button type="submit" class="btn btn-default deny" accesskey="N"><i class="fa fa-fw fa-times"></i> Ei, älä sulje (N)</button>
+ <button type="submit" class="btn btn-default deny" accesskey="N"><i class="fa fa-fw fa-times"></i> Peruuta (C)</button>
  </form>
  </div> <!-- /#closebasket_needsconfirmation -->
  [% END # /IF edi_confirm %]
@@ -992,7 +996,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% Asset.js("js/acquisitions-menu.js") | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% INCLUDE 'datatables.inc' %]
  [% INCLUDE 'columns_settings.inc' %]
  [% Asset.js("js/acq.js") | $raw %]

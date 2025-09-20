@@ -88,7 +88,7 @@
  [% IF ( invalidShibLogin ) %]
  <!-- This is what is displayed if shibboleth login has failed to match a koha user -->
  <div class="alert alert-info">
- <p class="shib_invalid">Shibboleth-tunnuksen tiedot eivät täsmää kirjastokortin tietojen kanssa.</p>
+ <p class="shib_invalid">Shibboleth-tunnuksen tiedot eivät täsmää asiakastilisi tunnuksen kanssa.</p>
  [% UNLESS ( Koha.Preference('OPACShibOnly') ) %]
  [% IF ( casAuthentication ) %]
  [% IF ( invalidCasLogin ) %]
@@ -98,7 +98,7 @@
  <p>Jos sinulla on CAS-tili, voit kirjautua alla.</p>
  [% END %]
  [% ELSE %]
- <p>Jos sinulla on kirjastokortti, voit kirjautua alta.</p>
+ <p>Jos sinulla on asiakastili kirjastossa, voit kirjautua alta.</p>
  [% END %]
  [% END %]
  </div>
@@ -112,7 +112,7 @@
  <p>Jos sinulla ei ole Shibboleth-tiliä, mutta sinulla on CAS-tili, voit käyttää CASia.</p>
  [% ELSE %]
  <h2 class="shib_local_title">Paikallinen kirjautuminen</h2>
- <p class="shib_local_text">Jos sinulla ei ole Shibboleth-tiliä, kirjaudu paikallisella käyttäjätunnuksellasi (kirjastokortilla).</p>
+ <p class="shib_local_text">Jos sinulla ei ole Shibboleth-tiliä, voit kirjautua asiakastilillesi alta.</p>
  [% END %]
  [% END %]
  [% END # /IF shibbolethAuthentication %]
@@ -189,7 +189,7 @@
  <p>Jos haluat, voit yrittää <a href="/cgi-bin/koha/svc/auth/googleopenidconnect?reauthenticate=select_account">kirjaudu sisään toisena käyttäjänä</a>
  [% END %]
  <a href="/cgi-bin/koha/svc/auth/googleopenidconnect" class="btn btn-light" id="openid_connect"><i class="fa-brands fa-google" aria-hidden="true"></i> Kirjaudu Google-tunnuksella</a>
- <p>Jos sinulla ei ole Google-tiliä, voit kirjautua kirjastokortillasi: </p>
+ <p>Jos sinulla ei ole Google-tiliä, voit kirjautua omalla kirjaston tunnuksellasi: </p>
  [% END # /IF GoogleOpenIDConnect %]
  [% END # /UNLESS OPACShibOnly %]
 
@@ -259,8 +259,8 @@
  [% ELSE %]
  <h2>Haluatko salasanan?</h2>
  <p>Jos sinulla ei ole salasanaa, pyydä se kirjaston asiakaspalvelupisteestä.</p>
- <h2>Haluatko kirjastokortin?</h2>
- <p>Jos sinulla ei ole kirjastokorttia, käväise kirjastossa.</p>
+ <h2>Haluatko asiakastilin kirjastoon?</h2>
+ <p>Jos sinulla ei ole asiakastiliä, ota yhteyttä kirjastoon.</p>
  [% END # / IF OpacLoginInstructions %]
  </div>
  [% IF Koha.Preference('OpacPasswordChange') && Categories.can_any_reset_password %]

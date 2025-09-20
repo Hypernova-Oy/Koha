@@ -39,7 +39,7 @@
  <a class="circ-button" href="/cgi-bin/koha/circ/circulation.pl"><i class="fa fa-upload"></i> Lainaus</a>
  </li>
  <li>
- <a class="circ-button" href="/cgi-bin/koha/circ/returns.pl"><i class="fa fa-download"></i> Palauta</a>
+ <a class="circ-button" href="/cgi-bin/koha/circ/returns.pl"><i class="fa fa-download"></i> Palautus</a>
  </li>
  <li>
  <a class="circ-button" href="/cgi-bin/koha/circ/renew.pl"><i class="fa fa-retweet"></i> Uusinta</a>
@@ -131,7 +131,7 @@
  <ul class="buttons-list">
  [% IF !Koha.Preference('IndependentBranchesTransfers') || CAN_user_superlibrarian %]
  <li>
- <a class="circ-button" href="/cgi-bin/koha/circ/branchtransfers.pl"><i class="fa-solid fa-right-left"></i> Siirto</a>
+ <a class="circ-button" href="/cgi-bin/koha/circ/branchtransfers.pl"><i class="fa-solid fa-right-left"></i> Siirrä</a>
  </li>
  [% END %]
  [% IF Koha.Preference('StockRotation') %]
@@ -145,11 +145,11 @@
  </ul>
 
  [% IF ( CAN_user_circulate_overdues_report ) %]
- <h3>Myöhässä</h3>
+ <h3>Myöhässä olevat</h3>
 
  <ul class="buttons-list">
  <li>
- <a class="circ-button" href="/cgi-bin/koha/circ/overdue.pl" title="Varoitus: Tämä raportti vaatii paljon järjestelmäresursseja, jos tietokannassa on paljon myöhässä olevia lainoja."><i class="fa-solid fa-clock"></i> Myöhässä</a>
+ <a class="circ-button" href="/cgi-bin/koha/circ/overdue.pl" title="Varoitus: Tämä raportti vaatii paljon järjestelmäresursseja, jos tietokannassa on paljon myöhässä olevia lainoja."><i class="fa-solid fa-clock"></i> Myöhässä olevat</a>
  </li>
  <li>
  <a class="circ-button" href="/cgi-bin/koha/circ/branchoverdues.pl" title="Rajattu omaan kirjastoosi. Katso raportin ohjeista lisätietoja."><i class="fa-solid fa-clock"></i> Myöhässä ja maksuja</a>

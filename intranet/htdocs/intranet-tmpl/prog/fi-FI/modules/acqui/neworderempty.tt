@@ -154,7 +154,7 @@
                     $('#quantity').blur(function(){
                         // if user decreases the quantity
                         if($(this).val() < [% quantityrec | html %]){
-                            alert(_("Olet poistanut yhden tai useampia niteitä tilauksesta, muista myös poistaa ne luettelosta."));
+                            alert(_("Olet poistanut yhden tai useampia niteitä tilauksesta, muista myös poistaa ne kokoelmista"));
                             return true;
                         } else {
                             // if user increases the quantity
@@ -497,7 +497,7 @@
  <th>Rajoitettu</th>
  <th>Paikka</th>
  <th>Luokka</th>
- <th>Nidenumero</th>
+ <th>Kappaleen numero</th>
  <th>Inventaarionumero</th>
  <th>Kokoelma</th>
  <th>Nidetyyppi</th>
@@ -532,11 +532,11 @@
  <fieldset class="rows" id="itemfieldset">
  <legend>Nide</legend>
  [% IF ( NoACQframework ) %]
- <div class="alert alert-info">Ei tietuehankinnan pohjaa, käytetään oletuspohjaa. Luo pohja, jonka tunnuskoodi on ACQ.</div>
+ <div class="alert alert-info">Ei ACQ-kuvailupohjaa, käytetään oletuspohjaa. Luo kuvailupohja, jonka tunnus on ACQ</div>
  [% END %]
 
  [% UNLESS Koha.Preference('autoBarcode') == 'OFF' %]
- <div class="alert alert-info">autoBarcode-järjestelmäasetuksesi on asetettu [% Koha.Preference('autoBarcode') | html %] ja viivakoodittomille niteille generoidaan viivakoodi tallennuksen yhteydessä.</div>
+ <div class="alert alert-info">autoBarcode-järjestelmäasetukseesi on asetettu [% Koha.Preference('autoBarcode') | html %] ja viivakoodittomille niteille generoidaan viivakoodi tallennuksen yhteydessä</div>
  [% END %]
 
  <div id="outeritemblock"></div>
@@ -775,8 +775,8 @@
 </div> <!-- /.col-md-2.order-md-1 -->
 </div> <!-- /.row -->
 
-[% PROCESS patron_search_modal columns => columns, modal_title => t("Add user") %]
 [% SET columns = ['cardnumber','name','category','branch','action'] %]
+[% PROCESS patron_search_modal columns => columns, modal_title => t("Add user") %]
 [% PROCESS patron_search_js columns => columns, actions => ["add"], preview_on_name_click => 1 %]
 
 [% MACRO jsinclude BLOCK %]

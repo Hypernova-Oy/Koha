@@ -166,7 +166,7 @@
  <li><i class="fa fa-li fa-warning"></i>Exemplaret är redan utlånat till denna låntagare. Låna om?</li>
  [% END %]
  [% IF checkout_info.ADDITIONAL_MATERIALS %]
- <li><i class="fa fa-li fa-warning"></i>Please confirm that the accompanying materials are present: [%  checkout_info.ADDITIONAL_MATERIALS | html %]</li>
+ <li><i class="fa fa-li fa-warning"></i>Bekräfta att tillhörande material finns med: [%  checkout_info.ADDITIONAL_MATERIALS | html %]</li>
  [% END %]
  [% IF checkout_info.RESERVE_WAITING %]
  <li><i class="fa fa-li fa-warning"></i>Exemplaret väntar på en annan låntagare.</li>

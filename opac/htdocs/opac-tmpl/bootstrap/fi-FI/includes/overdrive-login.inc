@@ -2,7 +2,7 @@
  <div class="modal-dialog">
  <div class="modal-content">
  <div class="modal-header">
- <h1 class="modal-title" id="overdrive-login-label">Kirjastokortin numero</h1>
+ <h1 class="modal-title" id="overdrive-login-label">Kirjautumistunnus</h1>
  <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
  </div>
  <form action="#" id="overdrive-login-form">
@@ -14,7 +14,7 @@
  </fieldset>
  </div>
  <div class="modal-footer">
- <input class="btn btn-primary overdrive-checkout-submit" type="submit" value="Kirjastokortin numero" />
+ <input class="btn btn-primary overdrive-checkout-submit" type="submit" value="Kirjautumistunnus" />
  <button type="button" data-bs-dismiss="modal" class="btn btn-default">Peruuta</button>
  </div>
  </form> <!-- /#overdrive-login-form -->

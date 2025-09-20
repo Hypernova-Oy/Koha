@@ -20,7 +20,7 @@
  [% END %]
  </li>
  [% ELSE %]
- <li class="notification_method none">Asiakasta ei ole huomautettu.</li>
+ <li class="notification_method none">Asiakkaalle ei lähde viestiä.</li>
  [% END %]
 [% END %]
 
@@ -50,7 +50,7 @@
  <a href="/cgi-bin/koha/circ/circulation-home.pl">Lainaus ja palautus</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Palauta</span>
+ <span>Palautus</span>
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
  [% END #/ WRAPPER sub-header.inc %]
@@ -102,11 +102,11 @@
  [% END %]
 
  [% IF ( patron.is_debarred ) %]
- <li class="error">Asiakkaalla on LAINARAJOITUS</li>
+ <li class="error">Asiakkaalla on rajoite</li>
  [% END %]
 
  [% IF ( patron.gonenoaddress ) %]
- <li class="error">Tarkista osoite</li>
+ <li class="error">Tarkista asiakkaan osoite</li>
  [% END %]
  </ul>
 
@@ -622,11 +622,11 @@
  [% END %]
 
  [% IF ( patron.is_debarred ) %]
- <li class="error">Asiakkaalla on LAINARAJOITUS</li>
+ <li class="error">Asiakkaalla on rajoite</li>
  [% END %]
 
  [% IF ( patron.gonenoaddress ) %]
- <li class="error">Tarkista osoite</li>
+ <li class="error">Tarkista asiakkaan osoite</li>
  [% END %]
  </ul>
 
@@ -826,11 +826,11 @@
  [% END %]
 
  [% IF ( patron.is_debarred ) %]
- <li class="error">Asiakkaalla on LAINARAJOITUS</li>
+ <li class="error">Asiakkaalla on rajoite</li>
  [% END %]
 
  [% IF ( patron.gonenoaddress ) %]
- <li class="error">Tarkista osoite</li>
+ <li class="error">Tarkista asiakkaan osoite</li>
  [% END %]
  </ul>
  [% IF ( transfertodo ) %]
@@ -936,11 +936,11 @@
  [% END %]
 
  [% IF ( recall.patron.is_debarred ) %]
- <li class="error">Asiakkaalla on LAINARAJOITUS</li>
+ <li class="error">Asiakkaalla on rajoite</li>
  [% END %]
 
  [% IF ( recall.patron.gonenoaddress ) %]
- <li class="error">Tarkista osoite</li>
+ <li class="error">Tarkista asiakkaan osoite</li>
  [% END %]
  </ul>
  [% IF ( transfertodo ) %]
@@ -1033,11 +1033,11 @@
  [% END %]
 
  [% IF ( recall.patron.is_debarred ) %]
- <li class="error">Asiakkaalla on LAINARAJOITUS</li>
+ <li class="error">Asiakkaalla on rajoite</li>
  [% END %]
 
  [% IF ( recall.patron.gonenoaddress ) %]
- <li class="error">Tarkista osoite</li>
+ <li class="error">Tarkista asiakkaan osoite</li>
  [% END %]
  </ul>
  [% IF ( transfertodo ) %]
@@ -1078,7 +1078,7 @@
  [% INCLUDE 'csrf-token.inc' %]
  <fieldset id="circ_returns_checkin">
  <div class="show_checkin_dialog" style="float:right;display:none"><button class="btn btn-default btn-sm" data-bs-toggle="tooltip" title="Näytä viimeisin palautusviesti" type="button"><i class="fa fa-info"></i></button></div>
- <h1>Palauta</h1>
+ <h1>Palautus</h1>
  <div class="row">
  <div class="col-sm-6">
  <div class="form-control-group">
@@ -1093,7 +1093,7 @@
  <a href="#" title="Palautusasetukset"><i class="fa-solid fa-sliders"></i></a>
  </div>
 
- <button type="submit" class="btn btn-primary">Palauta</button>
+ <button type="submit" class="btn btn-primary">Palautus</button>
  [% FOREACH inputloo IN inputloop %]
  <input type="hidden" name="ri-[% inputloo.counter | html %]" value="[% inputloo.barcode | html %]" />
  <input type="hidden" name="dd-[% inputloo.counter | html %]" value="[% inputloo.duedate | html %]" />

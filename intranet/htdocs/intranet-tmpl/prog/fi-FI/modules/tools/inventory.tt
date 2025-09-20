@@ -277,19 +277,19 @@
  <thead>
  <tr>
  [% UNLESS uploadedbarcodesflag %]
- <th>Havaittu</th>
+ <th id="seen" data-colname="seen">Havaittu</th>
  [% END %]
- <th>Viivakoodi</th>
- <th>Luokka</th>
- <th>Kirjasto</th>
- <th>Kokoelma</th>
- <th class="anti-the">Nimeke</th>
- <th>Ei lainattavissa</th>
- <th>Kadonnut</th>
- <th>Vahingoittunut</th>
- <th>Pois kierrosta</th>
- <th>Viimeisin havainto</th>
- <th>Ongelmia</th>
+ <th id="barcode" data-colname="barcode">Viivakoodi</th>
+ <th id="call_number" data-colname="call_number">Luokka</th>
+ <th id="library" data-colname="library">Kirjasto</th>
+ <th id="collection" data-colname="collection">Kokoelma</th>
+ <th id="title" data-colname="title" class="anti-the">Nimeke</th>
+ <th id="notforloan" data-colname="notforloan">Ei lainattavissa</th>
+ <th id="lost" data-colname="lost">Kadonnut</th>
+ <th id="damaged" data-colname="damaged">Vahingoittunut</th>
+ <th id="withdrawn" data-colname="withdrawn">Pois kierrosta</th>
+ <th id="last_seen" data-colname="last_seen">Viimeisin havainto</th>
+ <th id="problems" data-colname="problems">Ongelmia</th>
  </tr>
  </thead>
  <tbody>
@@ -451,9 +451,10 @@
             var table_settings = [% TablesSettings.GetTableSettings( 'tools', 'inventory', 'inventoryt', 'json' ) | $raw %];
             inventorydt = KohaTable("inventoryt", {
                 "pagingType": 'full_numbers',
-                [% IF compareinv2barcd %]
+                "bKohaColumnsUseNames": true,
+                [% IF uploadedbarcodesflag %]
                     // sort on callnumber
-                    "order": [[ 1, "asc" ]],
+                    "order": [[ 2, "asc" ]],
                 [% ELSE %]
                     // first column contains checkboxes
                     "columnDefs": [

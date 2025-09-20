@@ -43,7 +43,7 @@
  [% INCLUDE 'messages.inc' %]
  [% INCLUDE 'cat-toolbar.inc' %]
 
- <h1>Tiedot niteelle [% INCLUDE 'biblio-title-head.inc' %]</h1>
+ <h1>Tiedot nimekkeelle [% INCLUDE 'biblio-title-head.inc' %]</h1>
 
  <div id="catalogue_detail_biblio">
  <div class="page-section clearfix">
@@ -52,7 +52,7 @@
  <h4>[% FOREACH subtitl IN subtitle %] [% subtitl | html %][% END %]</h4>
  [% END %]
  [% IF ( author ) %]
- <h4>[% author | html %]</h4>
+ <h4>/ [% author | html %]</h4>
  [% END %]
  <div class="listgroup">
  <div class="rows">
@@ -332,7 +332,7 @@
  </li>
  <li class="bookable">
  <span class="label">
- Ennakkovarattavissa: </span>
+ Käyttövarattavissa: </span>
  [% IF ( CAN_user_circulate ) %]
  <form action="updateitem.pl" method="post">
  [% INCLUDE 'csrf-token.inc' %]
@@ -357,7 +357,7 @@
  <input type="hidden" name="op" value="cud-set_bookable" />
  <input class="btn btn-primary btn-xs" name="submit" type="submit" value="Päivitä" />
  </form>
- [% ELSE %] [% IF ITEM_DAT.bookable == 1 %] Kyllä [% ELSIF ITEM_DAT.bookable == 0 %] Ei [% ELSE %] Noudata nidetyyppiä [% END %] [% END %] <span class="hint"> Nidetyyppi ennakkovarattavissa: [% IF ITEM_DAT.effective_itemtype.bookable == 1 %]Kyllä [% ELSE %]Ei [% END %]</span>
+ [% ELSE %] [% IF ITEM_DAT.bookable == 1 %] Kyllä [% ELSIF ITEM_DAT.bookable == 0 %] Ei [% ELSE %] Noudata nidetyyppiä [% END %] [% END %] <span class="hint"> Nidetyyppi käyttövarattavissa: [% IF ITEM_DAT.effective_itemtype.bookable == 1 %]Kyllä [% ELSE %]Ei [% END %]</span>
  </li>
 
  </ol> <!-- /.bibliodetails -->
@@ -418,9 +418,10 @@
  [% IF (ITEM_DAT.datelastborrowed ) %][% ITEM_DAT.datelastborrowed | $KohaDates %][% END %]
  </li>
  [% IF Koha.Preference('StoreLastBorrower') && ITEM_DAT.object.last_returned_by %]
+ [% SET last_returned_by = ITEM_DAT.object.last_returned_by.cardnumber || ITEM_DAT.object.last_returned_by.borrowernumber %]
  <li>
  <span class="label">Viimeksi palauttanut:</span>
- <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% ITEM_DAT.object.last_returned_by.borrowernumber | uri %]">[% ITEM_DAT.object.last_returned_by.cardnumber | html %]</a>
+ <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% ITEM_DAT.object.last_returned_by.borrowernumber | uri %]">[% last_returned_by | html %]</a>
  </li>
  [% END %]
  [% FOR i IN ITEM_DAT.old_issues %]
@@ -431,7 +432,8 @@
  [% ELSE %]
  <span class="label">Edellinen lainaaja:</span>
  [% END %]
- <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% b.borrowernumber | uri %]">[% b.cardnumber | html %]</a>&nbsp;
+ [% SET last_or_previous_borrower = b.cardnumber || b.borrowernumber %]
+ <a href="/cgi-bin/koha/circ/circulation.pl?borrowernumber=[% b.borrowernumber | uri %]">[% last_or_previous_borrower | html %]</a>&nbsp;
  </li>
  [% END %]
  [% IF ( ITEM_DAT.paidfor ) %]

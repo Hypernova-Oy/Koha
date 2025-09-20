@@ -2,7 +2,7 @@
  <div class="modal-dialog">
  <div class="modal-content">
  <div class="modal-header">
- <h1 class="modal-title" id="overdrive-login-label">Logga in</h1>
+ <h1 class="modal-title" id="overdrive-login-label">Inloggning</h1>
  <button aria-label="Stäng" class="btn-close" data-bs-dismiss="modal" type="button"></button>
  </div>
  <form action="#" id="overdrive-login-form">
@@ -14,7 +14,7 @@
  </fieldset>
  </div>
  <div class="modal-footer">
- <input class="btn btn-primary overdrive-checkout-submit" type="submit" value="Logga in" />
+ <input class="btn btn-primary overdrive-checkout-submit" type="submit" value="Inloggning" />
  <button type="button" data-bs-dismiss="modal" class="btn btn-default">Avbryt</button>
  </div>
  </form> <!-- /#overdrive-login-form -->

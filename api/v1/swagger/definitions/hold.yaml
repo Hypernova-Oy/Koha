@@ -14,7 +14,9 @@ properties:
     format: date
     description: The date the hold was placed
   biblio_id:
-    type: integer
+    type:
+      - integer
+      - "null"
     description: Internal biblio identifier
   deleted_biblio_id:
     type:
@@ -118,6 +120,11 @@ properties:
       - object
       - "null"
     description: Bibliographic record
+  deleted_biblio:
+    type:
+      - object
+      - "null"
+    description: Deleted bibliographic record
   item:
     type:
       - object

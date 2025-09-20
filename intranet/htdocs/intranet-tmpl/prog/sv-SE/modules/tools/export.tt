@@ -174,10 +174,7 @@
  [% UNLESS csv_profiles %]
  <div class="hint">
  Du måste skapa en CSV-profil för MARC-export för att använda detta alternativ. [% IF ( CAN_user_tools_manage_csv_profiles ) %] <a href="/cgi-bin/koha/tools/csv-profiles.pl">Skapa en ny CSV-profil för att exportera en CSV-fil.</a>
- [% ELSE %]
- CSV export unavailable.
- [% END %]
- </div>
+ [% ELSE %] CSV-export otillgänglig. [% END %] </div>
  [% END %]
  </li>
  <li class="csv_profiles">

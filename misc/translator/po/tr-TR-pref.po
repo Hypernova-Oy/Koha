@@ -1,7 +1,7 @@
 # Compendium of tr.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:35-0300\n"
 "PO-Revision-Date: 2023-03-03 11:28+0000\n"
@@ -2237,18 +2237,51 @@ msgstr "Kullan "
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "Kullanın"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 msgstr "Örneğin <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "Boş bırakılırsa, http://loc.gov (MARC21) veya http://archive.ifla.org (UNIMARC) üzerindeki biçim dokümantasyonu kullanılır."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "Kullanın"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "Olası ikameler <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (kullanıcının dili, örn. \"en\" veya \"fi-FI\")."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "Kullanın"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -6249,7 +6282,7 @@ msgstr "PROC: FIC - İşlem Merkezi konumundaki bir materyalin iade esnasında F
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
 #, fuzzy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - İşlem Merkezindeki bir materyalin kalıcı konumuna güncellenmesine neden olur.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6323,7 +6356,7 @@ msgstr "PROC: FIC - İşlem Merkezi konumundaki bir materyalin iade esnasında F
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
 #, fuzzy
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - İşlem Merkezindeki bir materyalin kalıcı konumuna güncellenmesine neden olur.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -9341,7 +9374,7 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "OPAC ayrıntılar sayfalarında sağlama ayrıntıları."
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
 msgstr ""
 
 # OPAC > Features > OPACAuthorIdentifiers
@@ -9441,6 +9474,22 @@ msgstr "Etkinleştir"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "OPAC bibliyografik detay sayfasında bir QR Kodu gösterme seçeneği."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "İzin ver"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "İzin verme"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr ""
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Appearance
@@ -11855,28 +11904,32 @@ msgstr "Geçerli materyal şu tarihten daha uzun süre kontrol edilmediyse bir u
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "gün önce."
 
-# Patrons > Patron relationships > PrefillGuaranteeField
-# Patrons > Patron relationships
-#, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "İletişim - Faks"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr ""
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "Garantör bilgileri"
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
 msgstr "Garantör bilgileri"
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
 msgstr "Gönderme"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron relationships
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
 msgstr "İletişim - Faks"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
@@ -15078,12 +15131,14 @@ msgstr "OPAC kullanıcıları için ILS-DI hizmetleri (burada mevcut: /cgi-bin/k
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
 msgstr "IP adreslerine izin ver"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
 msgstr "ILS-DI servisleri kullanmak için (etkinleştirildiğinde). IP adreslerini boşluk bırakmadan virgül ile ayırın. Herhangi bir IP adresine izin verebilmesi için  alanı boş bırakın."
 
 # Web services > IdRef > IdRef
@@ -15342,7 +15397,7 @@ msgstr "Etkinleştir"
 # Web services > REST API > RESTOAuth2ClientCredentials
 # Web services > REST API
 #, fuzzy
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
 msgstr "REST API'si için OAuth2 istemci kimlik bilgileri verilir. Net :: OAuth2 :: AuthorizationServer'ın yüklü olmasını gerektirir. [DENEYSEL]"
 
 # Web services > REST API > RESTPublicAPI
@@ -16395,6 +16450,16 @@ msgstr "raporlar web hizmeti yoluyla talep edilen bir raporun satırları"
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "gerekirse bunları otomatik olarak yerine mevcut yapılar referans yerine, yeni otorite kayıtları oluşturmak için."
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "Boş bırakılırsa, http://loc.gov (MARC21) veya http://archive.ifla.org (UNIMARC) üzerindeki biçim dokümantasyonu kullanılır."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "Olası ikameler <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (kullanıcının dili, örn. \"en\" veya \"fi-FI\")."
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #~ msgid "cataloguing.pref#OpacSuppression# <br />Display the following message on the redirect page for suppressed bibliographic records:"
@@ -16636,6 +16701,12 @@ msgstr "raporlar web hizmeti yoluyla talep edilen bir raporun satırları"
 # Patrons > Notices and notifications
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "iş"
+
+# Patrons > Patron relationships > PrefillGuaranteeField
+# Patrons > Patron relationships
+#, fuzzy
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "İletişim - Faks"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

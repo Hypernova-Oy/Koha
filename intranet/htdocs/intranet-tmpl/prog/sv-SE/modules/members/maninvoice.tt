@@ -67,8 +67,7 @@
  <div role="tabpanel" class="tab-pane active">
  [% IF error == 'itemnumber' %]
  <div id="error_message" class="alert alert-warning">
- Error: Invalid item barcode entered, please try again
- </div>
+ Fel: Ogiltig streckkod angiven, försök igen </div>
  [% ELSIF error %]
  <div id="error_message" class="alert alert-warning">
  Ett fel inträffade, försök igen: [% error | html %] </div>

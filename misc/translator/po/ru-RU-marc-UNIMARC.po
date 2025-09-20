@@ -1,10 +1,10 @@
 # Compendium of ru.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-20 03:02+0000\n"
-"PO-Revision-Date: 2025-04-02 03:07+0000\n"
+"PO-Revision-Date: 2025-08-20 03:09+0000\n"
 "Last-Translator: bibliochip <t.goverdovski@bibliotheca.ru>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: ru-RU\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /ru/22.11/ru-RU-marc-UNIMARC.po\n"
 "X-POOTLE-MTIME: 1699344436.714353\n"
@@ -62,7 +62,7 @@ msgstr "Аудитория: "
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/subtypes_unimarc.inc:191
 #, c-format
 msgid "Any"
-msgstr "произвольно"
+msgstr "Все"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:13
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/subtypes_unimarc.inc:7
@@ -8105,13 +8105,13 @@ msgstr "Идентификатор эры"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_122.tt:25
 #, c-format
 msgid "date falls before the year 1 in the Gregorian calendar, i.e. B.C."
-msgstr "дата до нашей эры"
+msgstr "дата до Н.Э."
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_122.tt:28
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_122.tt:30
 #, c-format
 msgid "date falls after the year 1 in the Gregorian calendar, i.e. A.D."
-msgstr "дата нашей эры"
+msgstr "дата Н.Э."
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_122.tt:43
 #, c-format
@@ -14541,7 +14541,7 @@ msgstr "Начать поиск"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_4XX.tt:48
 #, c-format
 msgid "Search results"
-msgstr "Поиск результатов"
+msgstr "Результат поиска"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_4XX.tt:50
 #, c-format
@@ -14596,7 +14596,7 @@ msgstr "Пожалуйста, выберите значение из класс�
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_686a.tt:26
 #, c-format
 msgid "Authority type"
-msgstr "Тип авторитетного источника"
+msgstr "Тип авторитетной записи"
 
 # Основное вхождение
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_686a.tt:31

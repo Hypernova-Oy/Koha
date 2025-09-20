@@ -1,7 +1,7 @@
 # Compendium of nb.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:25-0300\n"
 "PO-Revision-Date: 2023-11-01 07:42+0000\n"
@@ -2253,18 +2253,51 @@ msgstr "Bruk"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "UNIMARC"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 msgstr "For eksempel <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "Hvis feltet er tomt brukes dokumentasjonen fra http://loc.gov (MARC21) eller http://archive.ifla.org (UNIMARC)."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "UNIMARC"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "Felter som kan erstattes er <tt>{MARC}</tt> (MARC-variant, feks. \"MARC21\" eller \"UNIMARC\"), <tt>{FIELD}</tt> (felt, feks. \"000\" eller \"048\"), <tt>{LANG}</tt> (språk, feks. \"en\" eller \"fi-FI\")."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "UNIMARC"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -6446,7 +6479,7 @@ msgstr ""
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
 #, fuzzy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "Dette er en liste med verdipar. Den første verdien etterfølges av et kolon, et mellrom og så den andre verdien.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6503,9 +6536,11 @@ msgstr ""
 msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: FIC - causes an item in the Processing Center location to be updated into the Fiction location on check out.<br/>"
 msgstr ""
 
-# Circulation > Checkin policy > UpdateItemLocationOnCheckout
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
-msgstr ""
+# Circulation > Checkin policy > UpdateItemLocationOnCheckin
+# Circulation > Checkin policy
+#, fuzzy
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
+msgstr "Dette er en liste med verdipar. Den første verdien etterfølges av et kolon, et mellrom og så den andre verdien.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckout
 msgid "circulation.pref#UpdateItemLocationOnCheckout# The special term _ALL_ is used on the left side of the colon (:) to affect all items, <strong>and overrides all other rules.</strong>"
@@ -9642,7 +9677,7 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "innkjøpsdetaljene på detaljsider i publikumskatalogen."
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
 msgstr ""
 
 # OPAC > Features > OPACAuthorIdentifiers
@@ -9748,6 +9783,22 @@ msgstr "Gjør"
 #, fuzzy
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "innkjøpsdetaljene på detaljsider i publikumskatalogen."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "Tillat"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "Ikke tillat"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr ""
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Appearance
@@ -12266,26 +12317,32 @@ msgstr "kontroller lånerens lånehistorikk for å se om det aktuelle eksemplare
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "Gjør"
 
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr ""
+
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > General
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
 msgstr "(skill kolonner med |)"
 
-# Patrons > Patron relationships > ChildNeedsGuarantor
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
-msgstr ""
+# Patrons > Patron relationships > PrefillGuaranteeField
+# Patrons > General
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
+msgstr "(skill kolonner med |)"
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
 msgstr "Ikke send"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > General
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
 msgstr "(skill kolonner med |)"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
@@ -15604,12 +15661,14 @@ msgstr "ILS-DI-tjenester for brukere av publikumskatalog (tilgjengelig på: /cgi
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
 msgstr "Tillat IP-adressene"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
 msgstr "å bruke ILS-DI-tjenestene (når dette er aktivert). Skill IP-adressene med komma og uten mellomrom. La feltet stå tomt for å tillate alle IP-adresser."
 
 # Web services > IdRef > IdRef
@@ -15870,7 +15929,7 @@ msgstr "Aktiver"
 # Web services > REST API > RESTOAuth2ClientCredentials
 # Web services > REST API
 #, fuzzy
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
 msgstr "OAuth2 client credentials grant for REST API'et. Net::OAuth2::AuthorizationServer må være installert. [EKSPERIMENTELT]"
 
 # Web services > REST API > RESTPublicAPI
@@ -16924,6 +16983,16 @@ msgstr "rader med data for en rapport som det er bedt om via nettjenesten for ra
 # Authorities > General
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "automatisk opprettelse av nye autoritetsposter, i stedet for at det må henvises til eksterne autoritetsposter."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "Hvis feltet er tomt brukes dokumentasjonen fra http://loc.gov (MARC21) eller http://archive.ifla.org (UNIMARC)."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "Felter som kan erstattes er <tt>{MARC}</tt> (MARC-variant, feks. \"MARC21\" eller \"UNIMARC\"), <tt>{FIELD}</tt> (felt, feks. \"000\" eller \"048\"), <tt>{LANG}</tt> (språk, feks. \"en\" eller \"fi-FI\")."
 
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display

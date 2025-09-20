@@ -402,7 +402,7 @@
  </tbody>
  </table>
  [% ELSE %]
- <div class="alert alert-info">There have not been any deliveries today.</div>
+ <div class="alert alert-info">Tänään ei ole ollut noutoja.</div>
  [% END # /IF delivered_today.count %]
  [% END # /tab_panel %]
  [% WRAPPER tab_panel tabname="schedule-pickup" bt_active = schedule_pickup_active %]

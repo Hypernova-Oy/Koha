@@ -379,7 +379,7 @@ sub store {
 
                 if (    C4::Context->preference('ChildNeedsGuarantor')
                     and ( $self->is_child or $self->category->can_be_guarantee )
-                    and $self->contactname eq ""
+                    and ( !defined $self->contactname || $self->contactname eq "" )
                     and !@$guarantors )
                 {
                     Koha::Exceptions::Patron::Relationship::NoGuarantor->throw();
@@ -623,7 +623,11 @@ sub relationships_debt {
     my $non_issues_charges = 0;
     my $seen = $include_this_patron ? {} : { $self->id => 1 }; # For tracking members already added to the total
     foreach my $guarantor (@guarantors) {
-        $non_issues_charges += $guarantor->account->non_issues_charges if $include_guarantors && !$seen->{ $guarantor->id };
+        if ( !$only_this_guarantor && $seen->{ $guarantor->id } ) {
+            next;
+        }
+        $non_issues_charges += $guarantor->account->non_issues_charges
+            if $include_guarantors && !$seen->{ $guarantor->id };
 
         # We've added what the guarantor owes, not added in that guarantor's guarantees as well
         my @guarantees = map { $_->guarantee } $guarantor->guarantee_relationships->as_list;
@@ -846,7 +850,7 @@ sub do_check_for_previous_checkout {
     # Create (old)issues search criteria
     my $criteria = {
         borrowernumber => $self->borrowernumber,
-        itemnumber => \@item_nos,
+        itemnumber     => { -in => \@item_nos },
     };
 
     my $delay = C4::Context->preference('CheckPrevCheckoutDelay') || 0;

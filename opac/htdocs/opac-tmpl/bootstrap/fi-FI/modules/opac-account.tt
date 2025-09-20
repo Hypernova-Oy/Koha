@@ -29,7 +29,7 @@
  <a href="/cgi-bin/koha/opac-user.pl">[% INCLUDE 'patron-title.inc' patron = logged_in_user %]</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Maksut</span>
+ <span>Maksusi</span>
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
 
@@ -43,7 +43,7 @@
  <div class="col-md-12 col-lg-10 order-1">
  <div id="useraccount" class="maincontent">
 
- <h1>Maksut</h1>
+ <h1>Maksusi</h1>
  [% IF message %]
  <div class="alert alert-info">
  [% IF message == 'valid_payment' %]

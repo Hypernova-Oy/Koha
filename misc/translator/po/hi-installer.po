@@ -1,10 +1,10 @@
 # Compendium of hi.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:15-0300\n"
-"PO-Revision-Date: 2025-02-03 13:06+0000\n"
+"PO-Revision-Date: 2025-07-19 03:09+0000\n"
 "Last-Translator: Nikunj Tyagi <nikunj1@gmail.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: hi\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /hi/22.11/hi-installer.po\n"
 "X-POOTLE-MTIME: 1694416752.327585\n"
@@ -258,7 +258,8 @@ msgid "Complete"
 msgstr "पूर्ण"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+#, fuzzy
+msgid "Aggregated full text"
 msgstr "एकत्रित पूर्ण"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -4043,7 +4044,7 @@ msgstr "निलंबन"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:4
 msgid "Discharge"
-msgstr "डिस्चार्ज"
+msgstr "डिसचार्ज"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:5
 msgid "Notice failure suspension"
@@ -6055,7 +6056,7 @@ msgstr "सरल संख्या पद्धति"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Issue"
-msgstr "अंक"
+msgstr "इश्यू"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Vol. {X}, Number {Y}, Issue {Z}"
@@ -6099,7 +6100,7 @@ msgstr "मौसमी"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:4
 msgid "Year"
-msgstr "साल"
+msgstr "वर्ष"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:4
 msgid "{X} {Y}"

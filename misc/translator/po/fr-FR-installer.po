@@ -1,18 +1,18 @@
 # Compendium of fr.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:13-0300\n"
-"PO-Revision-Date: 2025-04-24 04:07+0000\n"
-"Last-Translator: Victor Grousset/tuxayo <victor@tuxayo.net>\n"
+"PO-Revision-Date: 2025-08-21 03:10+0000\n"
+"Last-Translator: grenier <aurelie.grenier@orleans-metropole.fr>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: fr-FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /fr/22.11/fr-FR-installer.po\n"
 "X-POOTLE-MTIME: 1694761966.060822\n"
@@ -258,8 +258,8 @@ msgid "Complete"
 msgstr "Complet"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
-msgstr "Complètement agrégé"
+msgid "Aggregated full text"
+msgstr "Texte complet agrégé"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
 msgid "Abstract and index"
@@ -295,7 +295,7 @@ msgstr "Inconnu"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:37
 msgid "Journal"
-msgstr "Revue"
+msgstr "Journal"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:38
 msgid "Newsletter"
@@ -311,7 +311,7 @@ msgstr "Procédures"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:41
 msgid "Website"
-msgstr "Site Web"
+msgstr "Site web"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:42
 msgid "Newspaper"
@@ -3791,7 +3791,7 @@ msgstr "Initiateur"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:94
 msgid "Other"
-msgstr "Autres"
+msgstr "Autre"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:95
 msgid "Papermaker"
@@ -4031,7 +4031,7 @@ msgstr "Types de suspension d'adhérent par défaut de Koha"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:1
 msgid "Manual restriction"
-msgstr "Suspension manuelle"
+msgstr "Restriction manuelle"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:2
 msgid "Overdues"
@@ -4043,7 +4043,7 @@ msgstr "Suspension"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:4
 msgid "Discharge"
-msgstr "Quitus"
+msgstr "Décharge"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:5
 msgid "Notice failure suspension"
@@ -6055,7 +6055,7 @@ msgstr "Méthode de numérotation simple"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Issue"
-msgstr "Fascicule"
+msgstr "Problème"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Vol. {X}, Number {Y}, Issue {Z}"

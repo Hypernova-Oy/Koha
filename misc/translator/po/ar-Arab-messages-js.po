@@ -1,9 +1,9 @@
 # Compendium of ar.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
+"POT-Creation-Date: 2025-08-28 03:09+0000\n"
 "PO-Revision-Date: 2024-05-13 03:00+0000\n"
 "Last-Translator: \"KnowledgeWare Technologies Est.\" <massoudalshareef@kwareict.com>\n"
 "Language-Team: Koha Translation Team\n"
@@ -33,16 +33,18 @@ msgid "New budget-parent is beneath budget"
 msgstr "أصل ميزانية جديدة أدنى الميزانية"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:10
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:55
 msgid "Form not submitted because of the following problem(s)"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:14
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:61
 #, javascript-format
 msgid "%s item mandatory fields empty"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:31
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:64
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:81
 msgid "Update item"
 msgstr "تحديث المادة"
 
@@ -50,13 +52,13 @@ msgstr "تحديث المادة"
 msgid "You can't receive any more items"
 msgstr "لا يمكنك استلام المزيد من المواد"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:122
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:187
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:653
 msgid "Edit"
 msgstr "تحرير"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:108
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:125
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1125
 #: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:9
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:592
@@ -72,39 +74,39 @@ msgstr "تحرير"
 msgid "Delete"
 msgstr "حذف"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:195
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:212
 msgid "Add item"
 msgstr "إضافة مادة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:196
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:213
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:106
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:338
 msgid "Clear"
 msgstr "مسح"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:197
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:214
 msgid "Add multiple items"
 msgstr "إضافة عدة مواد"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:199
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:216
 msgid "Number of items to add"
 msgstr "عدد المواد للإضافة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:200
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:217
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:84
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:78
 msgid "Add"
 msgstr "إضافة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:201
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:218
 msgid "NOTE: Fields listed in the 'UniqueItemFields' system preference will not be copied"
 msgstr "ملاحظة: لن يتم نسخ الحقول المدرجة في تفضيل النظام 'UniqueItemsFields'"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:288
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:305
 msgid "is duplicated"
 msgstr "مكرر"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:313
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:330
 msgid "already exists in database"
 msgstr "موجودة بالفعل في قاعدة البيانات"
 
@@ -498,8 +500,8 @@ msgid "September"
 msgstr "سبتمبر"
 
 #: koha-tmpl/intranet-tmpl/prog/js/cancel_booking_modal.js:47
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1188
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1256
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1210
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1278
 msgid "Failure"
 msgstr "فشل"
 
@@ -847,7 +849,7 @@ msgid "Update"
 msgstr "تحديث"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1225
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:415
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:443
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:48
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:167
@@ -880,7 +882,7 @@ msgid "Last"
 msgstr "آخر"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:15
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1072
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1146
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:16
 msgid "No data available in table"
 msgstr "لا تتوافر أي بيانات في الجدول"
@@ -964,8 +966,8 @@ msgstr "إكسل"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:41
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:43
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:688
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:690
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:746
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:748
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:62
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:64
 msgid "Clear filter"
@@ -1004,40 +1006,40 @@ msgstr ""
 msgid "Something went wrong when loading the table."
 msgstr "حدث خطأ ما أثناء تحميل الجدول."
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:723
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:781
 msgid "Columns settings"
 msgstr "إعدادات الأعمدة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:724
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:782
 msgid "Columns"
 msgstr "الأعمدة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:738
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:796
 msgid "Export or print"
 msgstr "تصدير أو طباعة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:739
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:797
 msgid "Export"
 msgstr "تصدير"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:747
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:805
 msgid "Copied!"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:754
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:755
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:812
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:813
 msgid "Copy shareable link"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:775
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:833
 msgid "Configure table"
 msgstr "تهيئة الجدول"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:776
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:834
 msgid "Configure"
 msgstr "تهيئة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:866
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:936
 #, javascript-format
 msgid "%s search"
 msgstr "%s بحث"
@@ -1082,81 +1084,81 @@ msgstr "لا"
 msgid "Yes"
 msgstr "نعم"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:263
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:267
 msgid "Resume"
 msgstr "متابعة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:266
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:414
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:276
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:442
 msgid "Suspend"
 msgstr "تعليق"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:275
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
 msgid "Hold is <strong>suspended</strong>"
 msgstr "الحجز <strong>معلق</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:277
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:305
 #, javascript-format
 msgid "until %s"
 msgstr "حتى %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:283
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
 #, javascript-format
 msgid "Next available %s item"
 msgstr "المتاح التالي %s مادة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:315
 #, javascript-format
 msgid "Next available item group <strong>%s</strong> item"
 msgstr "مجموعة المواد المتاحة التالية <strong>%s</strong> مادة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:295
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:323
 msgid "Item is <strong>waiting here</strong>"
 msgstr "المادة <strong>في الانتظار هنا</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:297
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:301
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:325
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:329
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:331
 #, javascript-format
 msgid "at %s"
 msgstr "في %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:300
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:328
 msgid "Item is <strong>waiting</strong>"
 msgstr "المادة في <strong>الانتظار</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:309
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:337
 #, javascript-format
 msgid "Item is <strong>in transit</strong> from %s since %s"
 msgstr "المادة <strong>في النقل</strong> من %s منذ %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:339
 #, javascript-format
 msgid "Item hasn't been transferred yet from %s"
 msgstr "لم يتم نقل المادة بعد من %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:350
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:378
 msgid "Unable to resume, hold not found"
 msgstr "لا يمكن المتابعة، لم يتم العثور على الحجز"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:353
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:439
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:381
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:467
 msgid "Your request could not be processed. Check the logs for details."
 msgstr "تعذر معالجة طلبك. يرجى التحقق من السجلات للتفاصيل."
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:399
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:427
 msgid "Suspend hold on"
 msgstr "تعليق الحجز في"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:406
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:434
 msgid "Suspend until:"
 msgstr "تعليق حتى:"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:409
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:437
 msgid "Clear date to suspend indefinitely"
 msgstr "قم بمسح التاريخ للتعليق إلى أجل غير مسمى"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:436
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:464
 msgid "Unable to suspend, hold not found."
 msgstr "غير قادر على التعليق، لم يتم العثور على الحجز"
 
@@ -1364,13 +1366,13 @@ msgid "Private"
 msgstr "خاص"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:194
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:110
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:718
 msgid "years"
 msgstr "عاماً"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:217
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:129
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:130
 msgid "Search for a patron"
 msgstr "بحث عن مستفيد"
 
@@ -1386,29 +1388,29 @@ msgstr "تم تحديث الشكوى #%s بنجاح."
 msgid "Error resolving concern #%s. Check the logs for details."
 msgstr "خطأ في حل الشكوى رقم %s. يرجى التحقق من السجلات للتفاصيل."
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:44
 msgid "Edit booking"
 msgstr "تحرير الحجز"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:46
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:47
 msgid "Place booking"
 msgstr "وضع حجز"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:198
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:199
 #, fuzzy
 msgid "Pickup location"
 msgstr "الموقع المادي"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:249
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:258
 #, fuzzy
 msgid "Item type"
 msgstr "لا يوجد نوع مادة"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1177
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1199
 msgid "Booking successfully placed"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1245
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1267
 #, fuzzy
 msgid "Booking successfully updated"
 msgstr "تم إرسال شكواك بنجاح."
@@ -1703,7 +1705,7 @@ msgstr "مرفوض"
 msgid "Testing..."
 msgstr "جاري الاختبار..."
 
-#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:163
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:169
 #, javascript-format
 msgid "AJAX error (%s alert)"
 msgstr "خطأ أجاكس (%s تنبيه)"
@@ -4414,6 +4416,11 @@ msgstr "إضافة مزود بيانات"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:330
 msgid "Edit data provider"
 msgstr "تحرير مزود البيانات"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:344
+#, fuzzy
+msgid "Reports"
+msgstr "أنواع التقارير"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:359
 msgid "View report"

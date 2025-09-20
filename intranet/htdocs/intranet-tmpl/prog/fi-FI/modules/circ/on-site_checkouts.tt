@@ -50,7 +50,7 @@
  <table id="pending_onsite_checkout">
  <thead>
  <tr>
- <th>Pvm</th><th>Asiakas</th><th>Nimeke</th><th>Luokka</th><th>Viivakoodi</th><th>Kirjasto</th><th>Paikka</th>
+ <th>Päivämäärä</th><th>Asiakas</th><th>Nimeke</th><th>Luokka</th><th>Viivakoodi</th><th>Kirjasto</th><th>Paikka</th>
  </tr>
  </thead>
  <tbody>
@@ -79,7 +79,7 @@
  </table>
  </div> <!-- /.page-section -->
  [% ELSE %]
- <h3>Ei odottavia on-site -lainoja</h3>
+ <h3>Ei odottavia on-site -lainoja.</h3>
  [% END %]
 
  [% IF Koha.Preference('CircSidebar') %]

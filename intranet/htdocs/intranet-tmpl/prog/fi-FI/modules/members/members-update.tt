@@ -23,7 +23,7 @@
 
 [% BLOCK display_names %]
 [% SWITCH field %]
-[% CASE 'branchcode'          %]<span>Kotikirjasto (lyhenne).</span>
+[% CASE 'branchcode'          %]<span>Kotikirjasto (kirjaston tunniste)</span>
 [% CASE 'surname'             %]<span>Sukunimi</span>
 [% CASE 'firstname'           %]<span>Etunimi</span>
 [% CASE 'preferred_name'      %]<span>Kutsumanimi</span>

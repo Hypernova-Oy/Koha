@@ -61,7 +61,7 @@ has 'today_iso' => ( is => 'ro', lazy => 1,
     default => sub { output_pref( { dt => dt_from_string(), dateonly => 1, dateformat => 'iso' } ); }, );
 
 has 'text_csv' => ( is => 'rw', lazy => 1,
-    default => sub { Text::CSV->new( { binary => 1, } ); },  );
+    default => sub { Text::CSV->new( { binary => 1, formula => 'empty' } ); },  );
 
 sub import_patrons {
     my ($self, $params) = @_;
@@ -254,7 +254,7 @@ sub import_patrons {
         # Remove warning for int datatype that cannot be null
         # Argument "" isn't numeric in numeric eq (==) at /usr/share/perl5/DBIx/Class/Row.pm line 1018
         for my $field (
-            qw( privacy privacy_guarantor_fines privacy_guarantor_checkouts anonymized login_attempts ))
+            qw( privacy privacy_guarantor_fines privacy_guarantor_checkouts anonymized login_attempts autorenew_checkouts ))
         {
             delete $borrower{$field}
               if exists $borrower{$field} and $borrower{$field} eq "";
@@ -292,7 +292,8 @@ sub import_patrons {
                 next if $col eq 'password'   && !$overwrite_passwords;
                 next if $col eq 'dateexpiry' && $update_dateexpiry;
 
-                $borrower{$col} = $member->{$col} if $col eq 'dateexpiry' && !$columns[ $csvkeycol{$col} ];
+                $borrower{$col} = $member->{$col}
+                    if $col eq 'dateexpiry' && ( !$csvkeycol{$col} || !$columns[ $csvkeycol{$col} ] );
 
                 unless ( exists( $csvkeycol{$col} ) || $defaults->{$col} ) {
                     $borrower{$col} = $member->{$col} if ( $member->{$col} );

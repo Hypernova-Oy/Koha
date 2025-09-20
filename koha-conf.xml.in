@@ -4,8 +4,8 @@
 <!-- scheme: tcp, ssl, unix, http, sru -->
 <!-- can run all servers on tcp, but the unix socket is faster -->
 
-<listen id="biblioserver" >unix:/build/koha-24.11.04/debian/tmp/var/run/koha/zebradb/bibliosocket</listen>
-<listen id="authorityserver" >unix:/build/koha-24.11.04/debian/tmp/var/run/koha/zebradb/authoritysocket</listen>
+<listen id="biblioserver" >unix:/build/koha-24.11.08/debian/tmp/var/run/koha/zebradb/bibliosocket</listen>
+<listen id="authorityserver" >unix:/build/koha-24.11.08/debian/tmp/var/run/koha/zebradb/authoritysocket</listen>
 
 <!-- Uncomment the following entry if you want to run the public Z39.50 server.
     Also uncomment the <server> and <serverinfo> sections for id 'publicserver' 
@@ -16,28 +16,28 @@
 
 <!-- BIBLIOGRAPHIC RECORDS -->
 <server id="biblioserver"  listenref="biblioserver"> 
-    <directory>/build/koha-24.11.04/debian/tmp/var/lib/koha/zebradb/biblios</directory>
-    <config>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/zebra-biblios-dom.cfg</config>
-    <cql2rpn>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/pqf.properties</cql2rpn>
-    <xi:include href="/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/retrieval-info-bib-dom.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/explain-biblios.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <directory>/build/koha-24.11.08/debian/tmp/var/lib/koha/zebradb/biblios</directory>
+    <config>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/zebra-biblios-dom.cfg</config>
+    <cql2rpn>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/pqf.properties</cql2rpn>
+    <xi:include href="/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/retrieval-info-bib-dom.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/explain-biblios.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </server>
 <serverinfo id="biblioserver">
-        <ccl2rpn>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/ccl.properties</ccl2rpn>
+        <ccl2rpn>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/ccl.properties</ccl2rpn>
         <user>kohauser</user>    
         <password>zebrastripes</password>
 </serverinfo>
 
 <!-- AUTHORITY RECORDS -->
 <server id="authorityserver"  listenref="authorityserver" >
-    <directory>/build/koha-24.11.04/debian/tmp/var/lib/koha/zebradb/authorities</directory>
-    <config>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/zebra-authorities-dom.cfg</config>
-    <cql2rpn>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/pqf.properties</cql2rpn>
-    <xi:include href="/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/retrieval-info-auth-dom.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/explain-authorities.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <directory>/build/koha-24.11.08/debian/tmp/var/lib/koha/zebradb/authorities</directory>
+    <config>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/zebra-authorities-dom.cfg</config>
+    <cql2rpn>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/pqf.properties</cql2rpn>
+    <xi:include href="/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/retrieval-info-auth-dom.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/explain-authorities.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </server>
 <serverinfo id="authorityserver">
-    <ccl2rpn>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/ccl.properties</ccl2rpn>
+    <ccl2rpn>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/ccl.properties</ccl2rpn>
     <user>kohauser</user>
     <password>zebrastripes</password>
 </serverinfo>
@@ -45,14 +45,14 @@
 <!-- PUBLICSERVER'S BIBLIOGRAPHIC RECORDS -->
 <!--
 <server id="publicserver"  listenref="publicserver"> 
-    <directory>/build/koha-24.11.04/debian/tmp/var/lib/koha/zebradb/biblios</directory>
-    <config>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/zebra-biblios-dom.cfg</config>
-    <cql2rpn>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/pqf.properties</cql2rpn>
-    <xi:include href="/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/retrieval-info-bib-dom.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
-    <xi:include href="/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/explain-biblios.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <directory>/build/koha-24.11.08/debian/tmp/var/lib/koha/zebradb/biblios</directory>
+    <config>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/zebra-biblios-dom.cfg</config>
+    <cql2rpn>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/pqf.properties</cql2rpn>
+    <xi:include href="/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/retrieval-info-bib-dom.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    <xi:include href="/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/explain-biblios.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
 </server>
 <serverinfo id="publicserver">
-        <ccl2rpn>/build/koha-24.11.04/debian/tmp/etc/koha/zebradb/ccl.properties</ccl2rpn>
+        <ccl2rpn>/build/koha-24.11.08/debian/tmp/etc/koha/zebradb/ccl.properties</ccl2rpn>
         <user>kohauser</user>    
         <password>zebrastripes</password>
 </serverinfo>
@@ -77,18 +77,18 @@
  <biblioservershadow>1</biblioservershadow>
  <authorityserver>authorities</authorityserver>
  <authorityservershadow>1</authorityservershadow>
- <pluginsdir>/build/koha-24.11.04/debian/tmp/var/lib/koha/plugins</pluginsdir> <!-- This entry can be repeated to use multiple directories -->
+ <pluginsdir>/build/koha-24.11.08/debian/tmp/var/lib/koha/plugins</pluginsdir> <!-- This entry can be repeated to use multiple directories -->
  <enable_plugins>0</enable_plugins>
  <upload_path></upload_path>
  <tmp_path></tmp_path>
- <intranetdir>/build/koha-24.11.04/debian/tmp/usr/share/koha/intranet/cgi-bin</intranetdir>
- <opacdir>/build/koha-24.11.04/debian/tmp/usr/share/koha/opac/cgi-bin/opac</opacdir>
- <opachtdocs>/build/koha-24.11.04/debian/tmp/usr/share/koha/opac/htdocs/opac-tmpl</opachtdocs>
- <intrahtdocs>/build/koha-24.11.04/debian/tmp/usr/share/koha/intranet/htdocs/intranet-tmpl</intrahtdocs>
- <includes>/build/koha-24.11.04/debian/tmp/usr/share/koha/intranet/htdocs/intranet-tmpl/prog/en/includes/</includes>
- <logdir>/build/koha-24.11.04/debian/tmp/var/log/koha</logdir>
- <docdir>/build/koha-24.11.04/debian/tmp/usr/share/koha/doc</docdir>
- <backupdir>/build/koha-24.11.04/debian/tmp/var/spool/koha</backupdir>
+ <intranetdir>/build/koha-24.11.08/debian/tmp/usr/share/koha/intranet/cgi-bin</intranetdir>
+ <opacdir>/build/koha-24.11.08/debian/tmp/usr/share/koha/opac/cgi-bin/opac</opacdir>
+ <opachtdocs>/build/koha-24.11.08/debian/tmp/usr/share/koha/opac/htdocs/opac-tmpl</opachtdocs>
+ <intrahtdocs>/build/koha-24.11.08/debian/tmp/usr/share/koha/intranet/htdocs/intranet-tmpl</intrahtdocs>
+ <includes>/build/koha-24.11.08/debian/tmp/usr/share/koha/intranet/htdocs/intranet-tmpl/prog/en/includes/</includes>
+ <logdir>/build/koha-24.11.08/debian/tmp/var/log/koha</logdir>
+ <docdir>/build/koha-24.11.08/debian/tmp/usr/share/koha/doc</docdir>
+ <backupdir>/build/koha-24.11.08/debian/tmp/var/spool/koha</backupdir>
  <!-- URL of the mana KB server -->
  <!-- alternative value http://mana-test.koha-community.org to query the test server -->
  <mana_config>https://mana-kb.koha-community.org</mana_config>
@@ -99,17 +99,17 @@
  <backup_conf_via_tools>0</backup_conf_via_tools>
  <!-- Uncomment the following line if you are not using packages and need to schedule reports through the web interface. supportdir should contain cronjobs/runreport.pl -->
  <!--
- <supportdir>/build/koha-24.11.04/debian/tmp/usr/share/koha/bin</supportdir>
+ <supportdir>/build/koha-24.11.08/debian/tmp/usr/share/koha/bin</supportdir>
  -->
- <install_log>/build/koha-24.11.04/debian/tmp/usr/share/koha/misc/koha-install-log</install_log>
+ <install_log>/build/koha-24.11.08/debian/tmp/usr/share/koha/misc/koha-install-log</install_log>
  <useldapserver>0</useldapserver><!-- see C4::Auth_with_ldap for extra configs you must add if you want to turn this on -->
  <useshibboleth>0</useshibboleth><!-- see C4::Auth_with_shibboleth for extra configs you must do to turn this on -->
- <zebra_lockdir>/build/koha-24.11.04/debian/tmp/var/lock/koha/zebradb</zebra_lockdir>
+ <zebra_lockdir>/build/koha-24.11.08/debian/tmp/var/lock/koha/zebradb</zebra_lockdir>
  <lockdir>__LOCK_DIR__</lockdir>
  <use_zebra_facets>1</use_zebra_facets>
  <zebra_max_record_size>1024</zebra_max_record_size>
  <zebra_connection_timeout>30</zebra_connection_timeout>
- <log4perl_conf>/build/koha-24.11.04/debian/tmp/etc/koha/log4perl.conf</log4perl_conf>
+ <log4perl_conf>/build/koha-24.11.08/debian/tmp/etc/koha/log4perl.conf</log4perl_conf>
  <!-- Uncomment/edit next setting if you want to adjust zebra log levels.
       Default is: none,fatal,warn.
       You can also include: debug,log,malloc,all,request.
@@ -151,7 +151,7 @@
  </ttf>
 
  <!-- Path to the config file for SMS::Send -->
- <sms_send_config>/build/koha-24.11.04/debian/tmp/etc/koha/sms_send/</sms_send_config>
+ <sms_send_config>/build/koha-24.11.08/debian/tmp/etc/koha/sms_send/</sms_send_config>
 
  <!-- Configuration for Plack -->
  <plack_max_requests>50</plack_max_requests>
@@ -182,20 +182,20 @@
      <!-- <chunk_size>5000</chunk_size> -->
  </elasticsearch>
  <!-- Uncomment the following line if you want to override the Elasticsearch default index settings -->
- <!-- <elasticsearch_index_config>/build/koha-24.11.04/debian/tmp/etc/koha/searchengine/elasticsearch/index_config.yaml</elasticsearch_index_config> -->
+ <!-- <elasticsearch_index_config>/build/koha-24.11.08/debian/tmp/etc/koha/searchengine/elasticsearch/index_config.yaml</elasticsearch_index_config> -->
  <!-- Uncomment the following line if you want to override the Elasticsearch default field settings -->
- <!-- <elasticsearch_field_config>/build/koha-24.11.04/debian/tmp/etc/koha/searchengine/elasticsearch/field_config.yaml</elasticsearch_field_config> -->
+ <!-- <elasticsearch_field_config>/build/koha-24.11.08/debian/tmp/etc/koha/searchengine/elasticsearch/field_config.yaml</elasticsearch_field_config> -->
  <!-- Uncomment the following line if you want to override the Elasticsearch index default settings.
       Note that any changes made to the mappings file only take effect if you reset the mappings in
       by visiting /cgi-bin/koha/admin/searchengine/elasticsearch/mappings.pl?op=reset&i_know_what_i_am_doing=1&reset_fields=1.
       Resetting mappings will override any changes made in the Search engine configuration UI.
  -->
- <!-- <elasticsearch_index_mappings>/build/koha-24.11.04/debian/tmp/etc/koha/searchengine/elasticsearch/mappings.yaml</elasticsearch_index_mappings> -->
+ <!-- <elasticsearch_index_mappings>/build/koha-24.11.08/debian/tmp/etc/koha/searchengine/elasticsearch/mappings.yaml</elasticsearch_index_mappings> -->
 
  <interlibrary_loans>
      <!-- Path to where Illbackends are located on the system
           - This setting should normally not be touched -->
-     <backend_directory>/build/koha-24.11.04/debian/tmp/usr/share/koha/lib/Koha/Illbackends</backend_directory>
+     <backend_directory>/build/koha-24.11.08/debian/tmp/usr/share/koha/lib/Koha/Illbackends</backend_directory>
      <!-- At least one <branch> block is required. -->
      <branch>
          <!-- The code of this branch -->

@@ -123,9 +123,9 @@
  <div class="btn-toolbar">
  <div class="btn-group">
  [% IF club_templates.count %]
- <button class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-plus"></i> New club</button>
+ <button class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-plus"></i> Ny klubb</button>
  [% ELSE %]
- <button disabled="disabled" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-plus"></i> New club</button>
+ <button disabled="disabled" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-plus"></i> Ny klubb</button>
  [% END %]
  <ul class="dropdown-menu">
  [% FOREACH t IN club_templates %]

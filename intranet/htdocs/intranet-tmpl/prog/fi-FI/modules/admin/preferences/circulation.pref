@@ -7,8 +7,8 @@ Lainaus ja palautus:
       pref: ArticleRequests
     - asiakkaiden tehdä artikkelipyyntöjä.
   - - choices:
-        '0': Älä salli
-        '1': Salli
+        '0': Älä ohjaa
+        '1': Ohjaa
       pref: ArticleRequestsOpacHostRedirection
     - ohjaa osakohteelta emolle perustuen MARC21 773$w -osakenttään, kun osakohteella
       ei ole niteitä artikkelipyyntöä tehdessä verkkokirjastossa.
@@ -55,10 +55,10 @@ Lainaus ja palautus:
     - ''
   - - 'Seuraavat artikkelipyyntöjen muodot on tuettu:'
     - multiple_sortable:
-        PHOTOCOPY: Photocopy
-        SCAN: Scan
+        PHOTOCOPY: Valokopio
+        SCAN: Skannaus
       pref: ArticleRequestsSupportedFormats
-    - The first listed format is selected by default when you request via the OPAC.
+    - Ensimmäinen listattu muoto on oletus verkkokirjastossa, kun tehdään artikkelipyyntöjä.
   Asiakkaiden rajoitukset:
   - - choices:
         '0': Älä salli
@@ -213,27 +213,28 @@ Lainaus ja palautus:
     - <br>(Käytetään kun longoverdue.pl-skriptiä kutsutaan ilman --charge-parametria)
     - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/longoverdue.pl</code>
       cronjobin. Pyydä kehittäjiä ajastamaan se.
-  - - The long overdue process affects patrons in the
+  - - Myöhässä olevien niteiden käsittely tehdään seuraaville
     - choices: patron-categories
       class: multiple
       pref: DefaultLongOverduePatronCategories
-    - categories.
-    - <br>Leave this field empty if you want to process long overdues for all patron
-      categories.
+    - asiakastyypeille.
+    - <br>Jätä tämä kenttä tyhjäksi, jos haluat käsitellä kaikkien asiakastyyppien
+      myöhässä olevat niteet.
     - <br>(Käytetään kun longoverdue.pl-skriptiä kutsutaan ilman --category-parametria)
-    - <br><strong>WARNING:</strong> This preference will be active only if DefaultLongOverdueSkipPatronCategories
-      is empty.
+    - <br><strong>Varoitus:</strong> Tätä asetusta käytetään vain, jos DefaultLongOverdueSkipPatronCategories-järjestelmäasetus
+      on tyhjä.
     - <br>
-    - The long overdue process <i>does not</i> affect patrons in the
+    - Myöhässä olevien niteiden käsittelyä <i>ei tehdä</i> valituille
     - choices: patron-categories
       class: multiple
       pref: DefaultLongOverdueSkipPatronCategories
-    - categories.
-    - <br>Leave this field empty if you want to process long overdues for all patron
-      categories.
+    - asiakastyypeille.
+    - <br>Jätä tämä kenttä tyhjäksi, jos haluat käsitellä kaikkien asiakastyyppien
+      myöhässä olevat niteet.
     - <br>(Käytetään kun longoverdue.pl-skriptiä kutsutaan ilman --skip-category-parametria)
-    - <br><strong>WARNING:</strong> This preference overrides the DefaultLongOverduePatronCategories
-      preference, so the DefaultLongOverduePatronCategories filter will not take effect.
+    - <br> <strong>Varoitus:</strong> Tämä järjestelmäsetus ohittaa DefaultLongOverduePatronCategories
+      -järjestelmäasetuksen, eikä DefaultLongOverduePatronCategories-suodatusta oteta
+      tällöin huomioon.
     - <br><strong>HUOM:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/longoverdue.pl</code>
       ajastetun ajon. Pyydä kehittäjiä ajastamaan se.
   - - Jos käytetään automaattista niteen kadonneeksi merkintää, ohita niteet, joissa
@@ -275,7 +276,7 @@ Lainaus ja palautus:
         '0': Älä salli
         '1': Salli
       pref: StockRotation
-    - kiertokokoelma-moduulin käyttö
+    - kiertokokoelma-moduuli.
   Kotipalvelu-moduuli:
   - - choices:
         '0': Älä ota käyttöön
@@ -287,7 +288,7 @@ Lainaus ja palautus:
         '0': Älä käytä
         '1': Käytä
       pref: UseCourseReserves
-    - kurssivarantoja
+    - kurssivarantoja.
   Käyttöliittymä:
   - - choices:
         '0': Älä näytä
@@ -357,11 +358,11 @@ Lainaus ja palautus:
       pref: HoldsToPullStartDate
     - päivää sitten. Huomaa, että oletusloppumispäivämäärän määrittää järjestelmäasetus
       <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ConfirmFutureHolds">ConfirmFutureHolds</a>.
-  - - When building the holds queue, calculate hold matches using
+  - - Kun luodaan varausjonoa, laske varausten tärppäytykset käyttäen
     - class: integer
       pref: HoldsQueueParallelLoopsCount
-    - parallel loop(s). The more loops used, the faster it will calculate and the
-      more computing resources it will use.
+    - rinnakkaista silmukkaa. Mitä enemmän silmukoita käytetään, sitä nopeammin lasketaan
+      ja sitä enemmän käytetään laskentaresursseja.
   - - choices:
         '0': Älä salli
         '1': Salli
@@ -411,7 +412,7 @@ Lainaus ja palautus:
         slip: avaa 'tulosta kuitti' tulostusikkuna
       pref: CircAutoPrintQuickSlip
     - .
-  - - 'CSS-tyylitiedoston sijainti:'
+  - - CSS-tyylitiedoston sijainti
     - class: url
       pref: NoticeCSS
     - huomautuksissa. (Anna täydellinen URL-osoite, joka alkaa merkkijonolla<code>http://</code>)
@@ -449,16 +450,15 @@ Lainaus ja palautus:
     - lainaustiskejä lainauksessa.
   Lainausasetukset:
   - - choices:
-        '0': Don't
-        '1': Do
+        '0': Älä näytä
+        '1': Näytä
       pref: AlwaysLoadCheckoutsTable
-    - always load the checkouts table immediately on opening the patron account in
-      the staff interface.
+    - lainat automaattisesti, kun avataan asiakkaan tiedot virkailijaliittymässä.
   - - Viivytä lainat-taulun automaattista lataamista lainaussivulla
     - class: integer
       pref: LoadCheckoutsTableDelay
-    - seconds when "Always show checkouts automatically" or <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AlwaysLoadCheckoutsTable">AlwaysLoadCheckoutsTable</a>
-      are enabled.
+    - sekuntia, kun "Näytä lainat reaaliaikaisesti" -toiminto tai <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AlwaysLoadCheckoutsTable">AlwaysLoadCheckoutsTable</a>-järjestelmäasetus
+      on päällä.
   - - choices:
         '0': Älä käytä
         '1': Käytä
@@ -555,7 +555,7 @@ Lainaus ja palautus:
       pref: UseTransportCostMatrix
     - kuljetusten painomatriisia optimoimaan varausten kiinnijääminen kirjastojen
       välillä.
-  - - 'Käytä kalenteria ja laina- ja maksusääntöjä:'
+  - - Käytä kalenteria ja laina- ja maksusääntöjä
     - choices:
         ItemHomeLibrary: niteen kotikirjaston säännöt.
         PatronLibrary: Asiakkaan kotikirjaston säännöt.
@@ -571,7 +571,7 @@ Lainaus ja palautus:
         ItemHomeLibrary: niteen omistavan kirjaston laina- ja maksusääntöjä.
       pref: CircControlReturnsBranch
       type: choice
-  - - 'Käytä seuraavia laina- ja maksusääntöjä:'
+  - - Käytä seuraavia laina- ja maksusääntöjä
     - choices:
         holdingbranch: niteen sijaintikirjasto.
         homebranch: niteen kotikirjasto.
@@ -587,8 +587,8 @@ Lainaus ja palautus:
       type: choice
   - - Virkailijaliittymän hakutuloksissa, näytä
     - choices:
-        holdingbranch: niteen sijaintikirjasto
-        homebranch: niteen kotikirjasto
+        holdingbranch: niteen sijaintikirjasto.
+        homebranch: niteen kotikirjasto.
       pref: StaffSearchResultsDisplayBranch
       type: choice
   - - choices:
@@ -713,7 +713,7 @@ Lainaus ja palautus:
         '1': Salli
       pref: AllowMultipleIssuesOnABiblio
     - asiakkaan lainata useita niteitä samasta tietueesta. (<strong>HUOM:</strong>
-      Tämä ei vaikuta tietueisiin, joissa on kausijulkaisutilaus).
+      Tämä ei vaikuta tietueisiin, joissa on kausijulkaisutilaus)
   - - choices:
         '0': Estä
         '1': Salli
@@ -877,11 +877,11 @@ Lainaus ja palautus:
     - class: integer
       pref: NoRefundOnLostReturnedItemsAge
     - päivää kadonneeksi merkitsemisen jälkeen.
-  - - Don't refund lost fees if the fee was paid in full or if the balance of the
-      fee was paid more than
+  - - Älä palauta kadonneen aineiston maksua, jos maksu on maksettu kokonaan tai maksu
+      on maksettu enemmän kuin
     - class: integer
       pref: NoRefundOnLostFinesPaidAge
-    - days ago.
+    - päivää sitten.
   - - choices:
         '0': Älä veloita
         '1': Veloita
@@ -922,7 +922,7 @@ Lainaus ja palautus:
         '0': Älä ota käyttöön
         '1': Ota käyttöön
       pref: CurbsidePickup
-    - noutopalvelu
+    - noutopalvelu.
   Palautusasetukset:
   - - choices:
         '0': Älä ota kiinni
@@ -1081,8 +1081,8 @@ Lainaus ja palautus:
       pref: ClaimReturnedLostValue
       source: LOST
     - ilmaisemaan 'ilmoittaa palauttaneensa'.
-    - <span class="hint">This will not update the lost status of the item if there
-      is already an existing lost status set.</span>
+    - <span class="hint">Tämä määritys ei päivitä niteen kadonnut-tilaa, jos niteellä
+      on jo jokin toinen kadonnut-tila.</span>
   - - Varoita virkailijaa, että asiakkaalla on liikaa 'ilmoittaa palauttaneensa' -huomautuksia,
       jos asiakkaalla on niitä enemmän kuin
     - class: integer
@@ -1214,7 +1214,7 @@ Lainaus ja palautus:
     - asiakkaiden tehdä verkkokirjastossa varauksia, jotka astuvat voimaan tulevaisuudessa.
       (Jos käytössä, täytyy myös <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=AllowHoldDateInFuture">AllowHoldDateInFuture</a>-asetuksen
       olla sallittu).
-  - - 'Määritä verkkokirjaston varauslomakkeelle pakolliseksi:'
+  - - Määritä verkkokirjaston varauslomakkeelle pakolliseksi
     - choices:
         '': ei varauspvm:ää
         both: kummatkin varauspvm:t
@@ -1423,7 +1423,7 @@ Lainaus ja palautus:
         '0': Älä salli
         '1': Salli
       pref: OPACHoldsIfAvailableAtPickup
-    - asiakkaiden tehdä varauksia noutopaikoihin (kirjastoihin), joissa nide on saatavana.
+    - varausten noutamista sellaisista kirjastoista, joissa nide on saatavana.
   - - 'Asiakastyypit, joihin ei vaikuta järjestelmäasetus <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACHoldsIfAvailableAtPickup">OPACHoldsIfAvailableAtPickup</a>:'
     - choices: patron-categories
       class: multiple

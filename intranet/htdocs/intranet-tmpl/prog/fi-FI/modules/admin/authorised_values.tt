@@ -240,11 +240,11 @@
  [% CASE 'error_on_update' %]
  <span>Auktoriteetin arvon päivityksessä tapahtui virhe. Ehkä arvo on jo olemassa.</span>
  [% CASE 'error_on_insert' %]
- <span>Auktorisoidun arvon lisäyksessä tapahtui virhe. Ehkä arvo tai kategoria on jo olemassa?</span>
+ <span>Auktorisoidun arvon lisäyksessä tapahtui virhe. Ehkä arvo tai kategoria on jo olemassa.</span>
  [% CASE 'error_on_edit_cat' %]
  <span>Auktorisoidun arvon luokan päivityksessä tapahtui virhe.</span>
  [% CASE 'error_on_insert_cat' %]
- <span>Auktorisoidun arvon kategorian lisäyksessä tapahtui virhe. Ehkä kategorian nimi on jo olemassa?</span>
+ <span>Auktorisoidun arvon kategorian lisäyksessä tapahtui virhe. Ehkä kategorian nimi on jo olemassa.</span>
  [% CASE 'error_on_delete' %]
  <span>Auktorisoidun arvon poistossa tapahtui virhe. Tarkista lokit.</span>
  [% CASE 'error_on_delete_category' %]
@@ -450,7 +450,7 @@
  [% CASE 'Asort2' %]
  <p>Käytetään hankinnan tilastoinnissa</p>
  [% CASE 'BOR_NOTES' %]
- <p>Arvot asiakasviesteille, jotka näkyvät lainausnäytöllä sekä verkkokirjastossa. Arvon kuvaus on viestin teksti ja se voi olla korkeintaan 200 merkkiä.</p>
+ <p>Arvot asiakasviesteille, jotka näkyvät lainausnäytöllä sekä verkkokirjastossa. Arvon kuvaus on viestin teksti ja se voi olla korkeintaan 200 merkkiä</p>
  [% CASE 'branches' %]
  <p></p>
  [% CASE 'Bsort1' %]
@@ -508,7 +508,7 @@
  [% CASE 'HOLD_CANCELLATION' %]
  <p>Varauksen perumissyyt</p>
  [% CASE 'ILL_STATUS_ALIAS' %]
- <p>Kaukolainapyyntöjen tilojen aliakset, joita käytetään kaukolainamoduulissa.</p>
+ <p>Kaukolainapyyntöjen tilojen aliakset, joita käytetään kaukolainamoduulissa</p>
  [% CASE 'AR_CANCELLATION' %]
  <p>Artikkelitilausten perumissyyt</p>
  [% CASE 'HSBND_FREQ' %]

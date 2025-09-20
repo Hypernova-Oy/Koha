@@ -1,10 +1,10 @@
 # Compendium of hi.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2025-03-07 03:45+0000\n"
+"POT-Creation-Date: 2025-08-28 03:09+0000\n"
+"PO-Revision-Date: 2025-07-19 03:09+0000\n"
 "Last-Translator: Nikunj Tyagi <nikunj1@gmail.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: hi\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /hi/22.11/hi-messages-js.po\n"
 "X-POOTLE-MTIME: 1697630809.332628\n"
@@ -34,16 +34,18 @@ msgid "New budget-parent is beneath budget"
 msgstr "नए बजट-पेरेंट बजट के नीचे है"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:10
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:55
 msgid "Form not submitted because of the following problem(s)"
 msgstr "निम्नलिखित समस्या(ओं) के कारण फॉर्म सबमिट नहीं किया गया"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:14
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:61
 #, javascript-format
 msgid "%s item mandatory fields empty"
 msgstr "%s आइटम अनिवार्य फ़ील्ड रिक्त"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:31
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:64
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:81
 msgid "Update item"
 msgstr "अद्यतन आइटम"
 
@@ -51,13 +53,13 @@ msgstr "अद्यतन आइटम"
 msgid "You can't receive any more items"
 msgstr "आप कोई और आइटम प्राप्त नहीं कर सकते"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:122
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:187
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:653
 msgid "Edit"
 msgstr "संपादित करें"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:108
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:125
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1125
 #: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:9
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:592
@@ -73,39 +75,39 @@ msgstr "संपादित करें"
 msgid "Delete"
 msgstr "मिटाना"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:195
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:212
 msgid "Add item"
 msgstr "आइटम जोड़ें"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:196
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:213
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:106
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:338
 msgid "Clear"
 msgstr "स्पष्ट"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:197
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:214
 msgid "Add multiple items"
 msgstr "एकाधिक आइटम जोड़ें"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:199
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:216
 msgid "Number of items to add"
 msgstr "आइटम्स की संख्या जोड़ने के लिए"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:200
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:217
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:84
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:78
 msgid "Add"
 msgstr "जोड़ना"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:201
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:218
 msgid "NOTE: Fields listed in the 'UniqueItemFields' system preference will not be copied"
-msgstr "नोट: 'UniverItemfields' सिस्टम वरीयता में सूचीबद्ध फ़ील्ड को कॉपी नहीं किया जाएगा"
+msgstr "नोट: 'UniqueItemFields' सिस्टम वरीयता में सूचीबद्ध फ़ील्ड कॉपी नहीं की जाएंगी"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:288
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:305
 msgid "is duplicated"
 msgstr "डुप्लिकेट हैं"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:313
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:330
 msgid "already exists in database"
 msgstr "पहले से ही डेटाबेस में मौजूद"
 
@@ -493,8 +495,8 @@ msgid "September"
 msgstr "सितम्बर"
 
 #: koha-tmpl/intranet-tmpl/prog/js/cancel_booking_modal.js:47
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1188
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1256
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1210
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1278
 msgid "Failure"
 msgstr "विफल"
 
@@ -713,14 +715,12 @@ msgid "Renewal denied by syspref"
 msgstr "नवीनीकरण से इनकार किया syspref द्वारा"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:366
-#, fuzzy
 msgid "{renewals_left} of {renewals_allowed} renewals remaining"
-msgstr "%s के %s नवीकरण शेष"
+msgstr "{renewals_left} of {renewals_allowed} शेष नवीकरण"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:368
-#, fuzzy
 msgid " and {renewals_left} of {renewals_allowed} unseen renewals remaining"
-msgstr " और %s के %s अनदेखे नवीनीकरण शेष"
+msgstr " and {renewals_left} of {renewals_allowed} शेष अनदेखे नवीनीकरण"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:374
 msgid "Scheduled for automatic renewal"
@@ -830,7 +830,7 @@ msgid "Update"
 msgstr "अद्यतन"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1225
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:415
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:443
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:48
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:167
@@ -863,7 +863,7 @@ msgid "Last"
 msgstr "अंतिम"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:15
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1072
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1146
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:16
 msgid "No data available in table"
 msgstr "सारणी मे डेटा उपलब्ध नही"
@@ -947,8 +947,8 @@ msgstr "एक्सेल"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:41
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:43
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:688
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:690
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:746
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:748
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:62
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:64
 msgid "Clear filter"
@@ -987,40 +987,40 @@ msgstr ""
 msgid "Something went wrong when loading the table."
 msgstr "टेबल लोड करते समय कोई गड़बड़ी हुई."
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:723
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:781
 msgid "Columns settings"
 msgstr "स्तंभ सेटिंग्स"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:724
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:782
 msgid "Columns"
 msgstr "कॉलम"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:738
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:796
 msgid "Export or print"
 msgstr "निर्यात या प्रिंट"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:739
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:797
 msgid "Export"
 msgstr "निर्यात"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:747
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:805
 msgid "Copied!"
 msgstr "कॉपी!"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:754
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:755
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:812
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:813
 msgid "Copy shareable link"
 msgstr "कॉपी शार्पेबल लिंक"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:775
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:833
 msgid "Configure table"
 msgstr "तालिका कॉन्फ़िगर करें"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:776
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:834
 msgid "Configure"
 msgstr "विन्यास "
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:866
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:936
 #, javascript-format
 msgid "%s search"
 msgstr "%s खोज"
@@ -1065,81 +1065,81 @@ msgstr "नहीं"
 msgid "Yes"
 msgstr "हाँ"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:263
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:267
 msgid "Resume"
 msgstr "पुनरारंभ"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:266
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:414
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:276
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:442
 msgid "Suspend"
 msgstr "निलंबित"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:275
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
 msgid "Hold is <strong>suspended</strong>"
 msgstr "होल्ड है <strong>निलंबित</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:277
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:305
 #, javascript-format
 msgid "until %s"
 msgstr "जब तक %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:283
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
 #, javascript-format
 msgid "Next available %s item"
 msgstr "उपलब्ध अगला %s आइटम"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:315
 #, javascript-format
 msgid "Next available item group <strong>%s</strong> item"
 msgstr "अगला उपलब्ध आइटम समूह <strong>%s</strong> item"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:295
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:323
 msgid "Item is <strong>waiting here</strong>"
 msgstr "आइटम हैं <strong>यहा इंतजार</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:297
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:301
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:325
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:329
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:331
 #, javascript-format
 msgid "at %s"
 msgstr "पर %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:300
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:328
 msgid "Item is <strong>waiting</strong>"
 msgstr "आइटम है <strong>इंतजार कर</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:309
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:337
 #, javascript-format
 msgid "Item is <strong>in transit</strong> from %s since %s"
 msgstr "आइटम हैं <strong>परिवहन में</strong>से %s since %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:339
 #, javascript-format
 msgid "Item hasn't been transferred yet from %s"
 msgstr "आइटम से अभी तक हस्तांतरित नहीं किया गया है %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:350
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:378
 msgid "Unable to resume, hold not found"
 msgstr "फिर से शुरू करने में असमर्थ है, होल्ड नहीं मिला "
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:353
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:439
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:381
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:467
 msgid "Your request could not be processed. Check the logs for details."
 msgstr "आपका अनुरोध संसाधित नहीं किया जा सका. विवरण के लिए लॉग की जाँच करें।"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:399
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:427
 msgid "Suspend hold on"
 msgstr "निलंबित होल्ड पर"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:406
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:434
 msgid "Suspend until:"
 msgstr "जब तक निलंबित:"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:409
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:437
 msgid "Clear date to suspend indefinitely"
 msgstr "स्पष्ट तारीख अनिश्चित काल के लिए स्थगित करने के लिए"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:436
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:464
 msgid "Unable to suspend, hold not found."
 msgstr "निलंबित करने में असमर्थ, होल्ड नहीं मिला।"
 
@@ -1347,13 +1347,13 @@ msgid "Private"
 msgstr "निजी"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:194
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:110
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:718
 msgid "years"
 msgstr "साल"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:217
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:129
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:130
 msgid "Search for a patron"
 msgstr "एक संरक्षक की खोज करें"
 
@@ -1369,27 +1369,27 @@ msgstr "संबंधित #%s को सफलतापूर्वक अ�
 msgid "Error resolving concern #%s. Check the logs for details."
 msgstr "संंबंधित का समाधान करने में त्रुटि #%s. विवरण के लिए लॉग की जाँच करें।"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:44
 msgid "Edit booking"
 msgstr "बुकिंग संपादित करें"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:46
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:47
 msgid "Place booking"
 msgstr "बुकिंग रखें"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:198
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:199
 msgid "Pickup location"
 msgstr "पिकअप स्थान"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:249
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:258
 msgid "Item type"
 msgstr "आइटम प्रकार"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1177
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1199
 msgid "Booking successfully placed"
 msgstr "बुकिंग सफलतापूर्वक रखी गई"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1245
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1267
 msgid "Booking successfully updated"
 msgstr "बुकिंग सफलतापूर्वक अपडेट की गई"
 
@@ -1683,7 +1683,7 @@ msgstr "अस्वीकृत"
 msgid "Testing..."
 msgstr "परिक्षण..."
 
-#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:163
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:169
 #, javascript-format
 msgid "AJAX error (%s alert)"
 msgstr "AJAX त्रुटि (%sचेतावनी)"
@@ -2536,12 +2536,10 @@ msgid "Packages"
 msgstr "पैकेज"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:264
-#, fuzzy
 msgid "(EBSCO)"
-msgstr "इब्सकों"
+msgstr "(इब्सकों)"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:280
-#, fuzzy
 msgid "local"
 msgstr "स्थानीय"
 
@@ -3051,14 +3049,12 @@ msgid "Create linked bibliographic record"
 msgstr "लिंक्ड ग्रंथ सूची बनाएं"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:385
-#, fuzzy
 msgid "Update bibliographic record"
-msgstr "लिंक किए गए ग्रंथसूची रिकॉर्ड को अपडेट करें"
+msgstr "ग्रंथसूची रिकॉर्ड को अपडेट करें"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:386
-#, fuzzy
 msgid "Create bibliographic record"
-msgstr "लिंक्ड ग्रंथ सूची बनाएं"
+msgstr "ग्रंथ सूची रिकार्ड बनाएं"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:497
 msgid "A package is used several times"
@@ -3122,37 +3118,32 @@ msgstr "आयात"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:2
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:210
-#, fuzzy
 msgid "Import from a KBART file"
-msgstr "सूची से आयात करें"
+msgstr "KBART फ़ाइल से आयात करें"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:5
-#, fuzzy
 msgid "Requirements:"
-msgstr "आवश्यक"
+msgstr "आवश्यकताएं:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:7
 msgid "The file must be in TSV or CSV format"
-msgstr ""
+msgstr "फ़ाइल TSV या CSV प्रारूप में होनी चाहिए"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:11
 msgid "The file should not contain any additional information / header rows, e.g. a file with a single title would be structured as follows:"
-msgstr ""
+msgstr "फ़ाइल में कोई अतिरिक्त जानकारी / हेडर पंक्तियाँ नहीं होनी चाहिए, उदाहरण के लिए एकल शीर्षक वाली फ़ाइल की संरचना इस प्रकार होगी:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:15
-#, fuzzy
 msgid "Column headings row"
-msgstr "स्तंभ सेटिंग्स"
+msgstr "स्तंभ शीर्षक पंक्ति"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:16
-#, fuzzy
 msgid "Title data row"
-msgstr "शीर्षक अपडेट किया गया"
+msgstr "शीर्षक डेटा पंक्ति"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:21
-#, fuzzy
 msgid "Select file for upload"
-msgstr "एक फाइल चुनें"
+msgstr "अपलोड के लिए फाइल चुनें"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:75
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:30
@@ -3163,34 +3154,32 @@ msgstr "फार्म साफ करें"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:146
 #, javascript-format
 msgid "Your file was too large to process in one job, the file has been split into %s jobs to meet the maximum size limits."
-msgstr ""
+msgstr "आपकी फ़ाइल एक कार्य में संसाधित करने के लिए बहुत बड़ी थी, फ़ाइल को अधिकतम आकार सीमा को पूरा करने के लिए %s कार्यों में विभाजित किया गया है।"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:151
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Job %s for uploaded file has been queued"
-msgstr "अपलोड की गई फ़ाइल के लिए जॉब कतारबद्ध की गई है"
+msgstr "अपलोड की गई फ़ाइल कतारबद्ध की गई है के लिए  %s जॉब"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:155
-#, fuzzy
 msgid "see progress"
-msgstr "नौकरी प्रगति की जाँच करें"
+msgstr "प्रगति देखें"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:162
-#, fuzzy
 msgid "Information:"
-msgstr "प्रतिबंध की जानकारी"
+msgstr "सूचना:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:165
 msgid "Additional columns were detected in your report, please see the list below:"
-msgstr ""
+msgstr "आपकी रिपोर्ट में अतिरिक्त कॉलम पाए गए हैं, कृपया नीचे दी गई सूची देखें:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:171
 msgid "The data in these columns will not be imported."
-msgstr ""
+msgstr "इन स्तंभों का डेटा आयात नहीं किया जाएगा।"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesKBARTImport.vue:177
 msgid "The file must be in .tsv or .csv format, please convert your file and try again."
-msgstr ""
+msgstr "फ़ाइल .tsv या .csv प्रारूप में होनी चाहिए, कृपया अपनी फ़ाइल परिवर्तित करें और पुनः प्रयास करें।"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:36
 msgid "There are no titles defined"
@@ -3212,9 +3201,9 @@ msgid "Contributors"
 msgstr "योगदानकर्ता"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:243
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Packages (%s)"
-msgstr "पैकेज %s"
+msgstr "पैकेज (%s)"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:5
 #, javascript-format
@@ -3275,9 +3264,8 @@ msgid "License #%s"
 msgstr "लाइसेंस #%s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Main.vue:138
-#, fuzzy
 msgid "The e-resource management module is disabled, turn on <a href='/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule'>ERMModule</a> to use it"
-msgstr "ई-संसाधन प्रबंधन मॉड्यूल अक्षम है, इसका उपयोग करने के लिए '<a href=\"/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule\">ERMModule</a>चालू करें"
+msgstr "ई-संसाधन प्रबंधन मॉड्यूल अक्षम है, इसका उपयोग करने के लिए <a href='/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule'>ERMModule</a> चालू करें"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:2
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:14
@@ -3293,9 +3281,8 @@ msgstr "डाटा प्रदाता नाम"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:23
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:425
-#, fuzzy
 msgid "Inactive"
-msgstr "सक्रिय"
+msgstr "निक्रिय"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:28
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:113
@@ -3309,9 +3296,8 @@ msgstr "रिपोर्ट प्रकार"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:40
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:123
-#, fuzzy
 msgid "Service platform"
-msgstr "सेवा प्रकार"
+msgstr "सेवा प्लेटफार्म"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:47
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:180
@@ -3384,7 +3370,7 @@ msgstr "द्वारा आयातित"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:149
 msgid "Cronjob"
-msgstr ""
+msgstr "क्रोनजॉब"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:4
 msgid "Manual upload:"
@@ -3392,12 +3378,12 @@ msgstr "मैनुअल अपलोड:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:95
 msgid "Job for uploaded file has been queued"
-msgstr "अपलोड की गई फ़ाइल के लिए जॉब कतारबद्ध की गई है"
+msgstr "अपलोड की गई फ़ाइल के लिए कार्य पंक्तिबद्ध कर दिया गया है"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFileImport.vue:100
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:256
 msgid "Check job progress"
-msgstr "नौकरी प्रगति की जाँच करें"
+msgstr "कार्य प्रगति की जाँच करें"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:6
 #, javascript-format
@@ -3444,9 +3430,8 @@ msgstr "ग्राहक आईडी जानकारी"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:332
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:342
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:352
-#, fuzzy
 msgid "No information provided"
-msgstr "प्रतिबंध की जानकारी"
+msgstr "कोई जानकारी उपलब्ध नहीं कराई गई"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:337
 msgid "Requestor ID info"
@@ -3543,7 +3528,7 @@ msgstr "प्रारम्भ दिनाँक"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:251
 #, javascript-format
 msgid "Job for report type <strong>%s</strong> has been queued"
-msgstr "रिपोर्ट प्रकार के लिए नौकरी <strong>%s </strong> को कतारबद्ध किया गया है"
+msgstr "रिपोर्ट प्रकार <strong>%s</strong> के लिए कार्य पंक्तिबद्ध कर दिया गया है"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:277
 #, javascript-format
@@ -3587,7 +3572,6 @@ msgid "Titles"
 msgstr "शीर्षक"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:172
-#, fuzzy
 msgid "Platforms"
 msgstr "प्लेटफार्म"
 
@@ -3597,9 +3581,8 @@ msgid "Items"
 msgstr "आइटमें"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:178
-#, fuzzy
 msgid "Databases"
-msgstr "डेटाबेस स्तंभ"
+msgstr "डेटाबेस"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:223
 #, javascript-format
@@ -3621,31 +3604,27 @@ msgstr "प्रारंभ"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:103
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:115
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:108
 msgid "End"
 msgstr "समाप्त"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:135
-#, fuzzy
 msgid "Title reports"
-msgstr "रिपोर्ट देखें"
+msgstr "शीर्षक रिपोर्ट"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:137
-#, fuzzy
 msgid "Platform reports"
-msgstr "प्लेटफार्म"
+msgstr "प्लेटफार्म रिपोर्ट"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:139
-#, fuzzy
 msgid "Database reports"
-msgstr "सहेजें गए रिपोर्ट"
+msgstr "डाटाबेस रिपोर्ट"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:141
-#, fuzzy
 msgid "Item reports"
-msgstr "सहेजें गए रिपोर्ट"
+msgstr "आइटम रिपोर्ट"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersToolbar.vue:7
 msgid "New data provider"
@@ -3699,28 +3678,24 @@ msgid "Data display"
 msgstr "आंकड़ा प्रदर्शन"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:21
-#, fuzzy
 msgid "By month"
-msgstr "%s महीने"
+msgstr "महीने द्वारा"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:26
 msgid "By month with period total"
-msgstr ""
+msgstr "कुल अवधि सहित माहवार"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:31
-#, fuzzy
 msgid "By year"
-msgstr "%s वर्ष"
+msgstr "वर्ष द्वारा"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:35
-#, fuzzy
 msgid "By metric type"
-msgstr "मीट्रिक प्रकार चुनें"
+msgstr "मीट्रिक प्रकार द्वारा"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:40
-#, fuzzy
 msgid "By data provider totals"
-msgstr "आंकड़ा प्रदाता सूची"
+msgstr "डेटा प्रदाता के कुल योग के अनुसार"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:59
 msgid "Choose data provider"
@@ -3864,7 +3839,7 @@ msgstr "नई उपयोगकर्ता को जोड़ना"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Help.vue:9
 msgid "Help"
-msgstr ""
+msgstr "सहायता"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/InfiniteScrollSelect.vue:27
 msgid "Loading more options..."
@@ -4196,7 +4171,7 @@ msgstr "प्रिंट स्लिप्स"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:217
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:617
 msgid "Cannot print slip, this item does not have a processing with a letter template defined."
-msgstr "स्लिप को प्रिंट नहीं कर सकता, इस आइटम में एक लेटर टेम्पलेट के साथ प्रसंस्करण नहीं है।"
+msgstr "पर्ची मुद्रित नहीं की जा सकती, इस आइटम में पत्र टेम्पलेट के साथ प्रसंस्करण परिभाषित नहीं है।"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:493
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:323
@@ -4377,6 +4352,11 @@ msgstr "डेटा प्रदाता जोड़े"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:330
 msgid "Edit data provider"
 msgstr "डेटा प्रदाता संपादित करें"
+
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:344
+#, fuzzy
+msgid "Reports"
+msgstr "रिपोर्ट प्रकार"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:359
 msgid "View report"
@@ -4583,7 +4563,7 @@ msgstr "आइटम प्राप्त करें"
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:302
 msgid "Check in"
-msgstr "चैक इन"
+msgstr "चेक इन"
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:303
 msgid "Are you sure you want to return this item?"

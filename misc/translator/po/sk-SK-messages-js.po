@@ -1,10 +1,10 @@
 # Compendium of sk.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2025-02-27 03:48+0000\n"
+"POT-Creation-Date: 2025-08-28 03:09+0000\n"
+"PO-Revision-Date: 2025-07-08 03:10+0000\n"
 "Last-Translator: Viliam <viliam.polonec@gmail.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: sk-SK\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /sk/22.11/sk-SK-messages-js.po\n"
 "X-POOTLE-MTIME: 1698487816.672352\n"
@@ -34,16 +34,18 @@ msgid "New budget-parent is beneath budget"
 msgstr "Nový nadradený rozpočet je pod rozpočtom"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:10
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:55
 msgid "Form not submitted because of the following problem(s)"
-msgstr ""
+msgstr "Formulár nebol odoslaný kvôli nasledujúcim problémom"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:14
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:61
 #, javascript-format
 msgid "%s item mandatory fields empty"
-msgstr ""
+msgstr "%s povinné pole pre exemplár sú nevyplnené"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:31
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:64
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:81
 msgid "Update item"
 msgstr "Aktualizovať exemplár"
 
@@ -51,13 +53,13 @@ msgstr "Aktualizovať exemplár"
 msgid "You can't receive any more items"
 msgstr "Nemôžete už prijať viac exemplárov"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:122
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:187
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:653
 msgid "Edit"
 msgstr "Upraviť"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:108
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:125
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1125
 #: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:9
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:592
@@ -73,40 +75,40 @@ msgstr "Upraviť"
 msgid "Delete"
 msgstr "Odstrániť"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:195
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:212
 msgid "Add item"
 msgstr "Pridať exemplár"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:196
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:213
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:106
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:338
 msgid "Clear"
 msgstr "Vymazať"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:197
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:214
 msgid "Add multiple items"
 msgstr "Pridať viacero exemplárov"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:199
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:216
 msgid "Number of items to add"
 msgstr "Počet exemplárov na pridanie"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:200
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:217
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:84
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:78
 msgid "Add"
 msgstr "Pridať"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:201
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:218
 #, fuzzy
 msgid "NOTE: Fields listed in the 'UniqueItemFields' system preference will not be copied"
 msgstr "POZNÁMKA: Polia vymenované v systémovom nastavení 'UniqueItemsFields' nebudú skopírované"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:288
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:305
 msgid "is duplicated"
 msgstr "je duplicitný"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:313
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:330
 msgid "already exists in database"
 msgstr "už sa nachádza v databáze"
 
@@ -502,8 +504,8 @@ msgid "September"
 msgstr "September"
 
 #: koha-tmpl/intranet-tmpl/prog/js/cancel_booking_modal.js:47
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1188
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1256
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1210
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1278
 #, fuzzy
 msgid "Failure"
 msgstr "Zlyhalo"
@@ -585,9 +587,8 @@ msgid "(select to create)"
 msgstr "vytvoriť"
 
 #: koha-tmpl/intranet-tmpl/prog/js/cataloging.js:649
-#, fuzzy
 msgid "Something went wrong. Maybe the value already exists?"
-msgstr "Niečo sa nepodarilo. Poznámka nebola uložená"
+msgstr "Niečo sa nepodarilo. Pravdepodobne hodnota už existuje."
 
 #: koha-tmpl/intranet-tmpl/prog/js/cataloging_additem.js:158
 msgid "Template name is required."
@@ -626,11 +627,11 @@ msgstr "Nenašli sa nijaké zhodné záznamy"
 #: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:13
 #, javascript-format
 msgid "Note: %s out of %s renewals have been logged"
-msgstr ""
+msgstr "Poznámka: %s z %s predĺžení boli zaevidované"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:24
 msgid "Renewed by"
-msgstr "Predĺžené kým :"
+msgstr "Predĺžené kým:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:24
 msgid "manually"
@@ -744,9 +745,9 @@ msgid "Scheduled for automatic renewal"
 msgstr "Naplánované pre automatické predĺženie"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:389
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Confirm (%s)"
-msgstr "Potvrdiť"
+msgstr "Potvrdiť (%s)"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:403
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:405
@@ -809,9 +810,8 @@ msgid "reason unknown"
 msgstr "neznámy dôvod"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:796
-#, fuzzy
 msgid "There are no items to be renewed."
-msgstr "Nie sú nadefinované žiadne licencie"
+msgstr "Žiadne exempláre na predĺženie."
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1080
 msgid "Double click to edit"
@@ -852,7 +852,7 @@ msgid "Update"
 msgstr "Aktualizovať"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1225
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:415
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:443
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:48
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:167
@@ -885,7 +885,7 @@ msgid "Last"
 msgstr "Posledné"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:15
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1072
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1146
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:16
 msgid "No data available in table"
 msgstr "V tabuľke nie sú žiadne údaje"
@@ -969,8 +969,8 @@ msgstr "Excel"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:41
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:43
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:688
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:690
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:746
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:748
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:62
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:64
 msgid "Clear filter"
@@ -1009,57 +1009,57 @@ msgstr ""
 msgid "Something went wrong when loading the table."
 msgstr "Počas načítavania tabuľky sa vyskytla chyba."
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:723
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:781
 msgid "Columns settings"
 msgstr "Nastavenia stĺpcov"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:724
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:782
 msgid "Columns"
 msgstr "Stĺpce"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:738
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:796
 msgid "Export or print"
 msgstr "Exportovať alebo tlačiť"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:739
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:797
 msgid "Export"
 msgstr "Exportovať"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:747
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:805
 msgid "Copied!"
-msgstr ""
+msgstr "Skopírované!"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:754
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:755
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:812
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:813
 msgid "Copy shareable link"
 msgstr "Skopírovať zdielateľný link"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:775
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:833
 msgid "Configure table"
 msgstr "Konfigurovať tabuľku"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:776
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:834
 msgid "Configure"
 msgstr "Konfigurovať"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:866
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:936
 #, javascript-format
 msgid "%s search"
 msgstr "%s hľadať"
 
 #: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:71
 msgid "This field is mandatory and must have at least one mapping"
-msgstr ""
+msgstr "Toto pole je povinné a musí mať aspoň jedno mapovanie"
 
 #: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:152
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Search field '%s' already exists"
-msgstr "Súbor už jestvuje"
+msgstr "Vyhľadávacie pole '%s' už existuje"
 
 #: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:174
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Facet '%s' already exists"
-msgstr "Súbor už jestvuje"
+msgstr "Fazeta '%s' už existuje"
 
 #: koha-tmpl/intranet-tmpl/prog/js/holds.js:6
 msgid "This pickup location is not allowed according to circulation rules"
@@ -1067,7 +1067,7 @@ msgstr "Miesto vyzdvihnutia nie je povolené v nastaveniach výpožičiek"
 
 #: koha-tmpl/intranet-tmpl/prog/js/holds.js:211
 msgid " (current) "
-msgstr " (Aktuálny)"
+msgstr " (aktuálne) "
 
 #: koha-tmpl/intranet-tmpl/prog/js/holds.js:245
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:57
@@ -1087,85 +1087,84 @@ msgstr "Nie"
 msgid "Yes"
 msgstr "Áno"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:263
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:267
 msgid "Resume"
 msgstr "Pokračovať"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:266
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:414
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:276
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:442
 msgid "Suspend"
 msgstr "Prerušiť"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:275
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
 msgid "Hold is <strong>suspended</strong>"
 msgstr "Rezervácia je <strong>prerušená</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:277
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:305
 #, javascript-format
 msgid "until %s"
 msgstr "do %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:283
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
 #, javascript-format
 msgid "Next available %s item"
 msgstr "Ďalší dostupný %s exemplár"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:315
 #, fuzzy, javascript-format
 msgid "Next available item group <strong>%s</strong> item"
 msgstr "Ďalší dostupný %s exemplár"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:295
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:323
 msgid "Item is <strong>waiting here</strong>"
 msgstr "Exemplár je <strong>pripravený</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:297
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:301
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:325
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:329
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:331
 #, javascript-format
 msgid "at %s"
 msgstr "v %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:300
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:328
 msgid "Item is <strong>waiting</strong>"
 msgstr "Exemplár sa <strong>očakáva</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:309
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:337
 #, javascript-format
 msgid "Item is <strong>in transit</strong> from %s since %s"
 msgstr "Exemplár je <strong>na ceste</strong> z %s od %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:339
 #, javascript-format
 msgid "Item hasn't been transferred yet from %s"
 msgstr "Exemplár ešte nebol presunutý z %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:350
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:378
 msgid "Unable to resume, hold not found"
 msgstr "Nedarí sa pokračovať, rezervácia sa nenašla"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:353
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:439
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:381
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:467
 #, fuzzy
 msgid "Your request could not be processed. Check the logs for details."
 msgstr "Súbor nebolo možné odstrániť. Skontrolujte chybový denník."
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:399
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:427
 msgid "Suspend hold on"
 msgstr "Zrušiť žiadanku na"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:406
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:434
 msgid "Suspend until:"
 msgstr "Prerušiť do:"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:409
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:437
 msgid "Clear date to suspend indefinitely"
 msgstr "Vymazať dátum pre prerušenie na neurčito"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:436
-#, fuzzy
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:464
 msgid "Unable to suspend, hold not found."
-msgstr "Nedarí sa prerušiť rezerváciu, rezervácia sa nenašla"
+msgstr "Nemožno prerušiť rezerváciu, rezervácia sa nenašla."
 
 #: koha-tmpl/intranet-tmpl/prog/js/item_search_fields.js:5
 msgid "Please enter letters or numbers"
@@ -1186,9 +1185,9 @@ msgid "A letter with the code '%s' already exists for '%s'."
 msgstr "List s kódom '%s' už existuje pre '%s'."
 
 #: koha-tmpl/intranet-tmpl/prog/js/letter.js:47
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "A letter with the code '%s' already exists for '%s'. Overwrite this letter?"
-msgstr "List s kódom '%s' už existuje pre '%s'."
+msgstr "Oznámenie s kódom '%s' už existuje pre '%s'. Prepísať oznámenie?"
 
 #: koha-tmpl/intranet-tmpl/prog/js/letter.js:52
 msgid "Existing format settings for all notices of the same language will be overwritten by these format settings."
@@ -1371,15 +1370,15 @@ msgid "Private"
 msgstr "Súkromný"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:194
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:110
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:718
 msgid "years"
 msgstr "rokov"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:217
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:129
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:130
 msgid "Search for a patron"
-msgstr ""
+msgstr "Vyhľadanie čitateľa"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:250
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:296
@@ -1393,30 +1392,30 @@ msgstr ""
 msgid "Error resolving concern #%s. Check the logs for details."
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:44
 #, fuzzy
 msgid "Edit booking"
 msgstr "Upraviť poskytovateľa %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:46
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:47
 #, fuzzy
 msgid "Place booking"
 msgstr "Zarezervovať"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:198
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:199
 msgid "Pickup location"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:249
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:258
 #, fuzzy
 msgid "Item type"
 msgstr "Bez typu exemplára"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1177
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1199
 msgid "Booking successfully placed"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1245
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1267
 msgid "Booking successfully updated"
 msgstr ""
 
@@ -1714,7 +1713,7 @@ msgstr "Zamietnuté"
 msgid "Testing..."
 msgstr "Testujem..."
 
-#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:163
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:169
 #, javascript-format
 msgid "AJAX error (%s alert)"
 msgstr "chyba AJAX (%s upozornenie)"
@@ -2214,9 +2213,9 @@ msgid "Additional fields"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:6
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Edit record source #%s"
-msgstr "Názov súboru:"
+msgstr "Upraviť zdroj záznamov #%s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:11
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:27
@@ -2229,14 +2228,12 @@ msgid "Can be edited"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:110
-#, fuzzy
 msgid "Record source updated!"
-msgstr "je duplicitný"
+msgstr "Zdroj záznamov upravený!"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:120
-#, fuzzy
 msgid "Record source created!"
-msgstr "je duplicitný"
+msgstr "Zdroj záznamov vytvorený!"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:21
 #, fuzzy
@@ -2297,9 +2294,9 @@ msgid "No, do not delete"
 msgstr "Nie, neodstraňovať"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/List.vue:132
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Record source '%s' deleted"
-msgstr "je duplicitný"
+msgstr "Zdroj záznamov '%s' vymazaný"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ButtonSubmit.vue:11
 msgid "Submit"
@@ -2422,9 +2419,8 @@ msgid "Related agreement %s"
 msgstr "Súvisiaca zmluva %s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:14
-#, fuzzy
 msgid "Remove this relationship"
-msgstr "Zrušiť obmedzenie?"
+msgstr "Odstrániť tento vzťah"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementRelationships.vue:22
 msgid "Related agreement"
@@ -3076,9 +3072,8 @@ msgid "New package"
 msgstr "Nový balík"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:45
-#, fuzzy
 msgid "Content type: "
-msgstr "Bez typu exemplára"
+msgstr "Typ obsahu: "
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:159
 msgid "An agreement is used several times"
@@ -3308,9 +3303,8 @@ msgstr "Nová licencia"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:14
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:27
-#, fuzzy
 msgid "License name"
-msgstr "Názov súboru:"
+msgstr "Názov licencie"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:221
 #, javascript-format
@@ -3339,9 +3333,9 @@ msgstr "Naozaj chcete odstrániť toto zdieľanie?"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:177
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:232
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "License %s deleted"
-msgstr "je duplicitný"
+msgstr "Licencia %s vymazaná"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesList.vue:253
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:65
@@ -3354,9 +3348,9 @@ msgid "Ended on"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:21
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "License #%s"
-msgstr "Názov súboru:"
+msgstr "Licencia #%s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Main.vue:138
 msgid "The e-resource management module is disabled, turn on <a href='/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule'>ERMModule</a> to use it"
@@ -3453,14 +3447,13 @@ msgid "Are you sure you want to remove this file?"
 msgstr "Naozaj chcete odstrániť toto zdieľanie?"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:108
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "File %s deleted"
-msgstr "je duplicitný"
+msgstr "Súbor %s vymazaný"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:123
-#, fuzzy
 msgid "Filename"
-msgstr "Názov súboru:"
+msgstr "Názov súboru"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersCounterLogs.vue:130
 #, fuzzy
@@ -4026,9 +4019,8 @@ msgid "Settings updated"
 msgstr "je duplicitný"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:3
-#, fuzzy
 msgid "Processings"
-msgstr "Spracúvam..."
+msgstr "Spracovávam"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:23
 #, fuzzy
@@ -4051,9 +4043,9 @@ msgstr "Naozaj chcete odstrániť toto zdieľanie?"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:88
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:159
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Processing %s deleted"
-msgstr "je duplicitný"
+msgstr "Spracovanie %s vymazané"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessings.vue:105
 msgid "This processing cannot be deleted, it is already in used."
@@ -4065,15 +4057,13 @@ msgid "Edit processing #%s"
 msgstr "Upraviť poskytovateľa %s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:7
-#, fuzzy
 msgid "New processing"
-msgstr "Spracúvam..."
+msgstr "Nové spracovanie"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:14
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:25
-#, fuzzy
 msgid "Processing name"
-msgstr "Spracúvam..."
+msgstr "Názov spracovania"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:27
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:33
@@ -4139,9 +4129,9 @@ msgid "Processing created"
 msgstr "je duplicitný"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:19
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Processing #%s"
-msgstr "Spracúvam..."
+msgstr "Spracovávanie #%s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsShow.vue:41
 #, fuzzy
@@ -4187,9 +4177,9 @@ msgid "Edit item #%s"
 msgstr "Upraviť akciu %s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:7
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Add new item to %s"
-msgstr "Pridať exemplár"
+msgstr "Pridať exemplár do %s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:14
 #, fuzzy
@@ -4325,9 +4315,8 @@ msgid "Train #%s"
 msgstr "Názov súboru:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:189
-#, fuzzy
 msgid "Actions: "
-msgstr "Akcie"
+msgstr "Akcie: "
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:194
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:197
@@ -4540,6 +4529,11 @@ msgstr "Pridať operátora SMS"
 msgid "Edit data provider"
 msgstr "Upraviť poskytovateľa %s"
 
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:344
+#, fuzzy
+msgid "Reports"
+msgstr "Uložené nastavenie %s"
+
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:359
 msgid "View report"
 msgstr ""
@@ -4590,14 +4584,12 @@ msgid "Waiting list"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:113
-#, fuzzy
 msgid "Settings"
-msgstr "Nastavenia stĺpcov"
+msgstr "Nastavenia"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:129
-#, fuzzy
 msgid "Show processing"
-msgstr "Spracúvam..."
+msgstr "Zobraziť spracovanie"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:135
 #, fuzzy
@@ -4672,9 +4664,8 @@ msgid "Sorry, nothing found."
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/barcode-generator.js:24
-#, fuzzy
 msgid "Error: "
-msgstr "Chyba:"
+msgstr "Chyba: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/barcode-generator.js:26
 msgid "Unable to generate barcode"
@@ -4802,9 +4793,8 @@ msgid "With selected titles: "
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:35
-#, fuzzy
 msgid "Select titles to: "
-msgstr "Vybrať všetko"
+msgstr "Vybrať tituly k: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:55
 #: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:64
@@ -4828,9 +4818,8 @@ msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:46
 #: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:110
-#, fuzzy
 msgid "Errors: "
-msgstr "Chyba:"
+msgstr "Chyby: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/tags.js:62
 msgid "Sorry, tags are not enabled on this system."

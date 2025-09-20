@@ -50,7 +50,7 @@
  [% INCLUDE 'messages.inc' %]
  [% INCLUDE 'cat-toolbar.inc' %]
  <h1>
- [% IF ( unknownbiblionumber ) %] Tuntematon tietue [% ELSE %] ISBD-tiedot kohteelle [% INCLUDE 'biblio-title-head.inc' %] [% END %] </h1>
+ [% IF ( unknownbiblionumber ) %] Tuntematon tietue [% ELSE %] ISBD-tiedot nimekkeelle [% INCLUDE 'biblio-title-head.inc' %] [% END %] </h1>
 
  [% IF ( unknownbiblionumber ) %]
  <div class="alert alert-info">Tietuetta [% biblionumber | html %] ei ole tietokannassa.</div>

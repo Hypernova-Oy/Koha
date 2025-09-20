@@ -110,7 +110,7 @@
  [% IF status_description %]
  [% status_description | html %]
  [% ELSE %]
- <span>Okänt</span>
+ <span>Okänd</span>
  [% END %]
  [% END %]
  [% IF s.reason %]([% s.reason | html %])[% END %]

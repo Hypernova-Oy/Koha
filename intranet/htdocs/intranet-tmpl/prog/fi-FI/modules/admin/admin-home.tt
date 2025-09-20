@@ -105,7 +105,7 @@
  [% END %]
  [% IF ( CAN_user_parameters_manage_transfers ) %]
  <dt><a href="/cgi-bin/koha/admin/branch_transfer_limits.pl">Aineistokuljetusten rajoitukset</a> (<a href="/cgi-bin/koha/admin/transfer_limits.pl">Kehittynyt editori</a>)</dt>
- <dd>Rajoita aineiston liikkumista kirjastojen välillä lähettävään kirjastoon, vastaanottavaan kirjastoon ja nidetyyppiin perustuen. Nämä rajoitukset ovat voimassa vain, jos UseBranchTransferLimits-järjestelmäasetus on päällä.</dd>
+ <dd>Rajoita aineiston liikkumista kirjastojen välillä lähettävään kirjastoon, vastaanottavaan kirjastoon ja nidetyyppiin perustuen. Nämä rajoitukset ovat voimassa vain, jos UseBranchTransferLimits-järjestelmäasetus on päällä</dd>
  <dt><a href="/cgi-bin/koha/admin/transport-cost-matrix.pl">Kuljetusten painomatriisi</a></dt>
  <dd>Määrittele aineiston kuljetuksen kustannukset kirjastojen välillä</dd>
  [% END %]
@@ -180,15 +180,15 @@
  <dl>
  [% IF ( CAN_user_parameters_manage_marc_frameworks ) %]
  <dt><a href="/cgi-bin/koha/admin/biblio_framework.pl">MARC-kuvailupohjat</a></dt>
- <dd>Luo ja hallinnoi MARC-kuvailupohjia, jotka määrittelevät kuvailueditorissa käytettävissä olevat MARC-kentät ja -osakentät.</dd>
+ <dd>Luo ja hallinnoi MARC-kuvailupohjia, jotka määrittelevät MARC-tietueiden ominaisuudet ja kuvailueditorissa käytettävissä olevat MARC-kentät ja -osakentät</dd>
  <dt><a href="/cgi-bin/koha/admin/koha2marclinks.pl">Kohan MARC-määritykset</a></dt>
  <dd>Määrittele vastaavuus Kohan tietokannan (SQL) ja MARC-nimeketietueiden välillä</dd>
  [% END %]
  [% IF ( CAN_user_parameters_manage_marc_frameworks ) %]
  <dt><a href="/cgi-bin/koha/admin/checkmarc.pl">MARC-kuvailupohjan testaus</a></dt>
- <dd>Tarkistaa MARC-rakenteen. Jos muutat kuvailupohjaa, tarkista se tällä työkalulla.</dd>
+ <dd>Tarkistaa MARC-rakenteen. Jos muutat kuvailupohjaa, tarkista se tällä työkalulla</dd>
  <dt><a href="/cgi-bin/koha/admin/authtypes.pl">Auktoriteettityypit</a></dt>
- <dd>Luo ja muokkaa auktoriteettipohjia. Näillä määritellään MARC-tietueiden kenttien ja osakenttien määritelmiä.</dd>
+ <dd>Luo ja muokkaa auktoriteettipohjia. Näillä määritellään MARC-tietueiden kenttien ja osakenttien ominaisuudet</dd>
  [% END %]
  [% IF ( CAN_user_parameters_manage_classifications ) %]
  <dt><a href="/cgi-bin/koha/admin/classsources.pl">Luokitusjärjestelmät</a></dt>
@@ -248,7 +248,7 @@
  [% END %]
  [% IF ( Koha.Preference('MarcOrderingAutomation') && CAN_user_acquisition_marc_order_manage ) %]
  <dt><a href="/cgi-bin/koha/admin/marc_order_accounts.pl">MARC-tilausten tilit</a></dt>
- <dd>Manage vendor accounts for automated order line creation from MARC records</dd>
+ <dd>Hallinnoi toimittajatilejä, joita käytetään, kun luodaan automaattisesti tilauksia MARC-tiedostoista</dd>
  [% END %]
  </dl>
  [% END %]
@@ -274,7 +274,7 @@
  [% END %]
  [% IF ( CAN_user_parameters_manage_didyoumean ) %]
  <dt><a href="/cgi-bin/koha/admin/didyoumean.pl">Tarkoititko?</a></dt>
- <dd>Valitse, mitä liitännäisiä käytetään hakuehdotusten luontiin.</dd>
+ <dd>Valitse, mitä liitännäisiä käytetään hakuehdotusten luontiin verkkokirjastossa ja virkailijaliittymässä</dd>
  [% END %]
  [% IF ( CAN_user_parameters_manage_column_config ) %]
  <dt><a href="/cgi-bin/koha/admin/columns_settings.pl">Taulujen asetukset</a></dt>

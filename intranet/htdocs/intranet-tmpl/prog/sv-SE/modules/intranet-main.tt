@@ -155,7 +155,7 @@
 
  [% IF Koha.Preference('PreservationModule') && CAN_user_preservation%]
  <li>
- <a class="icon_general icon_preservation" href="/cgi-bin/koha/preservation/home.pl"><i class="fa fa-fw fa-book"></i>p- Arkivkvalitet för långtidslagring</a>
+ <a class="icon_general icon_preservation" href="/cgi-bin/koha/preservation/home.pl"><i class="fa fa-fw fa-book"></i>Bokvård</a>
  </li>
  [% END %]
 

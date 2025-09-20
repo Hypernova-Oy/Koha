@@ -288,7 +288,8 @@ foreach my $guarantor (@guarantors) {
     if (   ( $op eq 'cud-save' || $op eq 'cud-insert' )
         && ( $guarantor->is_child || $guarantor->is_guarantee || ( $patron && $patron->is_guarantor ) ) )
     {
-        push @errors, 'ERROR_guarantor_is_guarantee';
+        push @errors, 'ERROR_child_is_guarantor'     if ( $guarantor->is_child );
+        push @errors, 'ERROR_guarantor_is_guarantee' if ( !$guarantor->is_child );
     }
 }
 
@@ -535,6 +536,9 @@ if ((!$nok) and $nodouble and ($op eq 'cud-insert' or $op eq 'cud-save')){
         }
 
         delete $newdata{password2};
+
+        delete $newdata{guarantor_id};
+        delete $newdata{guarantor_relationship};
 
         try {
             $patron->set( \%newdata )->store( { guarantors => \@guarantors } ) if scalar( keys %newdata ) > 1;
@@ -840,10 +844,14 @@ if ( C4::Context->preference('ExtendedPatronAttributes') ) {
 }
 
 if (C4::Context->preference('EnhancedMessagingPreferences')) {
-    if ($op eq 'add_form') {
-        C4::Form::MessagingPreferences::set_form_values({ categorycode => $categorycode }, $template);
+    unless ( $nok && $input->param('setting_messaging_prefs') ) {
+        if ( $op eq 'add_form' ) {
+            C4::Form::MessagingPreferences::set_form_values( { categorycode => $categorycode }, $template );
+        } else {
+            C4::Form::MessagingPreferences::set_form_values( { borrowernumber => $borrowernumber }, $template );
+        }
     } else {
-        C4::Form::MessagingPreferences::set_form_values({ borrowernumber => $borrowernumber }, $template);
+        C4::Form::MessagingPreferences::restore_form_values( $input, $template );
     }
     $template->param(SMSSendDriver => C4::Context->preference("SMSSendDriver"));
     $template->param(SMSnumber     => $data{'smsalertnumber'} );
@@ -995,6 +1003,10 @@ sub patron_attributes_form {
 
 sub add_guarantors {
     my ( $patron, $input ) = @_;
+
+    unless ( $patron->category->can_be_guarantee ) {
+        return;
+    }
 
     my @new_guarantor_id           = $input->multi_param('new_guarantor_id');
     my @new_guarantor_relationship = $input->multi_param('new_guarantor_relationship');

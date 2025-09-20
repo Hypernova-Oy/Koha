@@ -444,8 +444,8 @@ function AutomaticLinker() {
 
 function PopupMARCFieldDoc() {
     let field = this.dataset.tag;
-    [% IF Koha.Preference('marcfielddocurl') %]
-        var docurl = "[% Koha.Preference('marcfielddocurl').replace('"','&quot;') | html %]";
+    [% IF Koha.Preference('MarcFieldDocURL') %]
+        var docurl = "[% Koha.Preference('MarcFieldDocURL').replace('"','&quot;') | html %]";
         docurl = docurl.replace("{MARC}", "[% marcflavour | html %]");
         docurl = docurl.replace("{FIELD}", ""+field);
         docurl = docurl.replace("{LANG}", "[% lang | html %]");
@@ -485,38 +485,25 @@ $(document).ready(function(){
 
     function _MARC21FieldDoc(field) {
         if(field == 0) {
-            window.open("http://www.loc.gov/marc/bibliographic/bdleader.html");
+            window.open("https://www.loc.gov/marc/bibliographic/bdleader.html");
         } else if (field >= 90 && field <= 99 ){
-            window.open("http://www.loc.gov/marc/bibliographic/bd09x.html");
+            window.open("https://www.loc.gov/marc/bibliographic/bd09x.html");
         } else if (field >= 590 && field <= 599 ){
-            window.open("http://www.loc.gov/marc/bibliographic/bd59x.html");
+            window.open("https://www.loc.gov/marc/bibliographic/bd59x.html");
         } else if (field >= 690 && field <= 699 ){
-            window.open("http://www.loc.gov/marc/bibliographic/bd69x.html");
+            window.open("https://www.loc.gov/marc/bibliographic/bd69x.html");
         } else if (field < 900) {
-            window.open("http://www.loc.gov/marc/bibliographic/bd" + ("000"+field).slice(-3) + ".html");
+            window.open("https://www.loc.gov/marc/bibliographic/bd" + ("000"+field).slice(-3) + ".html");
         } else {
-            window.open("http://www.loc.gov/marc/bibliographic/bd9xx.html");
+            window.open("https://www.loc.gov/marc/bibliographic/bd9xx.html");
         }
     }
 
     function _UNIMARCFieldDoc(field) {
-        /* http://archive.ifla.org/VI/3/p1996-1/ is an outdated version of UNIMARC, but
-           seems to be the only version available that can be linked to per tag.  More recent
-           versions of the UNIMARC standard are available on the IFLA website only as
-           PDFs!
+        /* IFLA no longer provides field-level pages for the UNIMARC format
+           (as at December 2024).
         */
-        var url;
-        if (field == 0) {
-            url = "http://archive.ifla.org/VI/3/p1996-1/uni.htm";
-        } else {
-            var first = field.substring(0,1);
-            url = "http://archive.ifla.org/VI/3/p1996-1/uni" + first + ".htm#";
-            if (first == 0) url = url + "b";
-            url = first == 9
-                  ? "http://archive.ifla.org/VI/3/p1996-1/uni9.htm"
-                  : url + field;
-        }
-        window.open(url);
+        window.open("https://www.ifla.org/g/unimarc-rg/unimarc-updates/");
     }
 
     /*
@@ -611,7 +598,7 @@ $(document).ready(function(){
                 if ( elt.nodeName == 'SELECT' ) {
                     $(elt).siblings('.select2').find("span[role='combobox']").addClass(notFilledClass);
                 } else {
-                    elt.setAttribute('class','input_marceditor noEnterSubmit ' + notFilledClass);
+                        elt.setAttribute('class','input_marceditor noEnterSubmit framework_plugin ' + notFilledClass);
                 }
                 $('#' + subfields[i]).focus();
                 tabflag[tag+subfield+tagnumber][1]=label[i];
@@ -868,7 +855,7 @@ $(document).ready(function(){
  <!-- show duplicate warning on tab 0 only -->
  [% IF ( duplicatebiblionumber ) %]
  <div class="alert alert-warning">
- <h3>Tuplatietue?</h3>
+ <h3>Onko tämä tuplatietue?</h3>
  <p>Onko tämä kopio tästä: <a href="/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=[% duplicatebiblionumber | uri %]" onclick="openWindow('/cgi-bin/koha/catalogue/MARCdetail.pl?biblionumber=[% duplicatebiblionumber | uri %]&amp;popup=1', 'DuplicateBiblio','800','600'); return false;">[% duplicatetitle | html %] <i class="fa-solid fa-window-restore"></i></a> ?</p>
  [% IF ( CAN_user_editcatalogue_edit_items ) %]
  <form action="/cgi-bin/koha/cataloguing/additem.pl" method="get">
@@ -1076,7 +1063,7 @@ $(document).ready(function(){
  <a class="tagnum" data-field_id="tag_[% innerloo.tag | html %]_[% innerloo.index | html %][% innerloo.random | html %]" href="#" tabindex="1" title="[% innerloo.tag_lib | html %] - Klikkaa laajentaaksesi tätä tagia">[% innerloo.tag | html %]</a>
  [% ELSE %]
  <span class="tagnum" title="[% innerloo.tag_lib | html %]">[% innerloo.tag | html %]</span>
- <a href="#" class="marcdocs" data-tag="[% innerloo.tag | html %]">&nbsp;?</a>
+ &nbsp;<a class="marcdocs" data-tag="[% innerloo.tag | html %]" href="#" title="Näytä ohje tälle kentälle">[?]</a> &nbsp;
  [% END %]
 
  [% IF ( innerloo.fixedfield ) %]
@@ -1111,10 +1098,10 @@ $(document).ready(function(){
                                                         size="1"
                                                         maxlength="1"
                                                         value="[% innerloo.indicator2 | html %]" />
- [% END # /IF innerloo.fixedfield %] -
+ [% END # /IF innerloo.fixedfield %]
 
  [% UNLESS advancedMARCEditor %]
- <a class="expandfield" data-field_id="tag_[% innerloo.tag | html %]_[% innerloo.index | html %][% innerloo.random | html %]" href="#" tabindex="1" title="Valitse aukaistaksesi tämä kenttä">[% innerloo.tag_lib | html %]</a>
+ &nbsp; <a class="expandfield" data-field_id="tag_[% innerloo.tag | html %]_[% innerloo.index | html %][% innerloo.random | html %]" href="#" tabindex="1" title="Valitse aukaistaksesi tämä kenttä">[% innerloo.tag_lib | html %]</a>
  [% END %]
 
  <span class="field_controls">
@@ -1137,7 +1124,7 @@ $(document).ready(function(){
  <span class="handle">&#xf58e;</span>
  <input type="text"
                                                                 title="[% subfield_loo.marc_lib | $raw %]"
-                                                                style=" [% IF ( subfield_loo.fixedfield ) %]display:none; [% END %]"
+                                                                style=" [% IF ( subfield_loo.fixedfield ) %]display:none; [% END %]border:0;"
                                                                 name="tag_[% subfield_loo.tag | html %]_code_[% subfield_loo.subfield | html %]_[% subfield_loo.index | html %]_[% subfield_loo.index_subfield | html %]"
                                                                 value="[% subfield_loo.subfield | html %]"
                                                                 size="1"

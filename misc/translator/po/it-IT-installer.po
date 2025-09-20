@@ -1,10 +1,10 @@
 # Compendium of it.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:18-0300\n"
-"PO-Revision-Date: 2024-06-16 03:01+0000\n"
+"PO-Revision-Date: 2025-08-04 03:08+0000\n"
 "Last-Translator: Zeno Tajoli <ztajoli@gmail.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: it-IT\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5.5\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /it/22.11/it-IT-installer.po\n"
 "X-POOTLE-MTIME: 1698908831.809912\n"
@@ -258,7 +258,8 @@ msgid "Complete"
 msgstr "Completo"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+#, fuzzy
+msgid "Aggregated full text"
 msgstr "Totalmente aggregato"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -351,122 +352,115 @@ msgstr "Audiolibro"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:52
 msgid "PR - Platform master report"
-msgstr ""
+msgstr "PR - Rapporto principale della piattaforma"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:53
 msgid "PR_P1 - Platform usage"
-msgstr ""
+msgstr "PR_P1 - Uso piattaforma"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:54
 msgid "DR - Database master report"
-msgstr ""
+msgstr "DR - Report principale del DB"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:55
 msgid "DR_D1 - Database search and item usage"
-msgstr ""
+msgstr "DR_D1 - Ricerca sul DB e uso copia"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:56
 msgid "DR_D2 - Database access denied"
-msgstr ""
+msgstr "DR_D2 - Accesso non data al DB"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:57
 msgid "TR - Title master report"
-msgstr ""
+msgstr "TR - Report principale per titolo"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:58
 msgid "TR_B1 - Book requests (excluding OA_Gold)"
-msgstr ""
+msgstr "TR_B1 - Richieste di libri (escluse OA_Gold)"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:59
 msgid "TR_B2 - Book access denied"
-msgstr ""
+msgstr "TR_B2 - Accesso a libri rifiutato"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:60
 msgid "TR_B3 - Book usage by access type"
-msgstr ""
+msgstr "TR_B3 - Uso libri per tipo di accesso"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:61
 msgid "TR_J1 - Journal requests (excluding OA_Gold)"
-msgstr ""
+msgstr "TR_J1 - Richieste di riviste (escluse OA_Gold)"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:62
 msgid "TR_J2 - Journal access denied"
-msgstr ""
+msgstr "TR_J2 - Accesso al periodico negato"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:63
 msgid "TR_J3 - Journal usage by access type"
-msgstr ""
+msgstr "TR_J3 - Utilizzo del periodico per tipo di accesso"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:64
 msgid "TR_J4 - Journal requests by YOP(excluding OA_Gold)"
-msgstr ""
+msgstr "TR_J4 - Richieste di riviste per YOP (escluse OA_Gold)"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:65
 msgid "IR - Item master report"
-msgstr ""
+msgstr "IR - Report principale per la copia"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:66
-#, fuzzy
 msgid "IR_A1 - Journal article requests"
-msgstr "Richiesta di articolo"
+msgstr "IR_A1 - Richieste di articoli"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:67
 msgid "IR_M1 - Multimedia item requests"
-msgstr ""
+msgstr "IR_M1 - Richieste di copie multimediali"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:68
 msgid "Searches platform"
-msgstr ""
+msgstr "Ricerche piattaforma"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:69
 msgid "Total item investigations"
-msgstr ""
+msgstr "Totale indagini sulle copie"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:70
-#, fuzzy
 msgid "Total item requests"
-msgstr "Richiesta di articolo"
+msgstr "Totale richieste di copie"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:71
-#, fuzzy
 msgid "Unique item investigations"
-msgstr "Descrizione predefinita"
+msgstr "Indagini su copie uniche"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:72
-#, fuzzy
 msgid "Unique item requests"
-msgstr "Richiesta di articolo in attesa"
+msgstr "Richieste di copia uniche"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:73
 msgid "Unique title investigations"
-msgstr ""
+msgstr "Indagini sul titolo univoche"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:74
-#, fuzzy
 msgid "Unique title requests"
-msgstr "Richiesta di articolo in attesa"
+msgstr "Richieste di titoli unici"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:75
 msgid "Searches automated"
-msgstr ""
+msgstr "Ricerche automatizzate"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:76
 msgid "Searches federated"
-msgstr ""
+msgstr "Ricerche federate"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:77
-#, fuzzy
 msgid "Searches regular"
-msgstr "Irregolare"
+msgstr "Ricerche regolari"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:84
-#, fuzzy
 msgid "No license"
-msgstr "Titolare della licenza"
+msgstr "Senza licenza"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:85
 msgid "Limit exceeded"
-msgstr ""
+msgstr "Limite superato"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:100
 msgid "Admin"
@@ -482,11 +476,11 @@ msgstr "Reports"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:103
 msgid "Maintenance"
-msgstr ""
+msgstr "Manutenzione"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:104
 msgid "Outage"
-msgstr ""
+msgstr "Interruzione"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:1
 msgid "Andorra"
@@ -3798,7 +3792,7 @@ msgstr "Originatore"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:94
 msgid "Other"
-msgstr "Altro"
+msgstr "Altre forme:"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:95
 msgid "Papermaker"
@@ -4030,33 +4024,31 @@ msgstr "Sorgenti di classificazione di default e regole di ordinamento in Koha."
 
 #: installer/data/mysql/en/mandatory/illbatch_statuses.yml:description:1
 msgid "ILL batch statuses used in Koha"
-msgstr ""
+msgstr "Stati delle richieste ILL batch fatte in Koha"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:description:1
 msgid "Default Koha system patron restriction types"
 msgstr "Tipologie restrizioni utenti di default in Koha"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:1
-#, fuzzy
 msgid "Manual restriction"
-msgstr "Descrizione predefinita"
+msgstr "Restrizione manuale"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:2
-#, fuzzy
 msgid "Overdues"
-msgstr "%sScadutii%s"
+msgstr "Scaduti"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:3
 msgid "Suspension"
-msgstr ""
+msgstr "Sospensione"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:4
 msgid "Discharge"
-msgstr ""
+msgstr "Scarico"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:5
 msgid "Notice failure suspension"
-msgstr ""
+msgstr "Avviso di mancata sospensione"
 
 #: installer/data/mysql/en/mandatory/sample_frequencies.yml:description:1
 msgid "Sample frequencies for subscriptions"
@@ -4127,32 +4119,28 @@ msgid "Order received"
 msgstr "Ordine ricevuto"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2
-#, fuzzy
 msgid "A library booking was cancelled"
-msgstr "Richiesta ILL cancellata"
+msgstr "Una prenotazione da parte di una biblioteca è stata cancellata"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2
 msgid "Booking cancellation notice"
-msgstr ""
+msgstr "Avviso di cancellazione della prenotazione"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3
-#, fuzzy
 msgid "A library booking was modified"
-msgstr "Richiesta ILL cancellata"
+msgstr "Una prenotazione da parte di una biblioteca è stata modificata"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3
 msgid "Booking modification notice"
-msgstr ""
+msgstr "Avviso di modifica della prenotazione"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4
-#, fuzzy
 msgid "A library booking was confirmed"
-msgstr "Richiesta ILL cancellata"
+msgstr "Una prenotazione da parte di una biblioteca è stata confermata"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4
-#, fuzzy
 msgid "Booking confirmation notice"
-msgstr "Conferma di dimissione"
+msgstr "Avviso di conferma prenotazione"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:5
 msgid "Catalog concern acknowledgment"
@@ -4163,14 +4151,12 @@ msgid "Concern acknowledgement"
 msgstr "Dichiarazione di un problema"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:6
-#, fuzzy
 msgid "Catalog concern assigned"
-msgstr "Aggiornamento del problema sul catalogo"
+msgstr "Problema sul catalogo assegnato"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:6
-#, fuzzy
 msgid "Concern assigned notification"
-msgstr "Avvisato del problema"
+msgstr "L'assegnatario del problema è stato avvisato"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:7
 msgid "Catalog concern resolved"
@@ -4346,19 +4332,19 @@ msgstr "Copia non ricevuta"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42
 msgid "File SFTP failed"
-msgstr ""
+msgstr "File SFTP non caricato"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42
 msgid "The SFTP by sftp_file.pl failed"
-msgstr ""
+msgstr "L'uso di SFTP fatto usando sftp_file.pl non è riuscito"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43
 msgid "File SFTP success"
-msgstr ""
+msgstr "Successo del carico del file usando SFTP"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43
 msgid "The SFTP by sftp_file.pl was successful"
-msgstr ""
+msgstr "il carico via SFTP fatto tramite sftp_file.pl è stato eseguito con successo"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:44
 msgid "ILL request ready for pickup"
@@ -4425,14 +4411,12 @@ msgid "Share list <<listname>>"
 msgstr "Condividi la lista <<listname>>"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58
-#, fuzzy
 msgid "A list has been transferred to you"
-msgstr "Ti è stato assegnato un nuovo suggerimento"
+msgstr "Una lista è stata trasferita a te"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58
-#, fuzzy
 msgid "Transfer ownership"
-msgstr "Ricevuta di trasferimento"
+msgstr "Trasferimento di proprietà"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:59
 msgid "Discharge confirmation"
@@ -4447,9 +4431,8 @@ msgid "Account expiration"
 msgstr "Scadenza dell'account"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:61
-#, fuzzy
 msgid "Account renewal"
-msgstr "Tariffa per l'account"
+msgstr "Rinnovo dell'account"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:62
 msgid "OPAC self-registration verification email"
@@ -4532,14 +4515,12 @@ msgid "Hold available for pickup at <<branches.branchname>>"
 msgstr "Copia disponibile per il prelievo presso <<branches.branchname>>"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:74
-#, fuzzy
 msgid "Hold(s) available for pickup"
 msgstr "Copia disponibile per il prelievo"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:76
-#, fuzzy
 msgid "Hold available for pickup at [% branch.branchname %]"
-msgstr "Copia disponibile per il prelievo presso <<branches.branchname>>"
+msgstr "Copia disponibile per il prelievo presso [% branch.branchname %]"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:77
 msgid "Hold available for pickup (print notice)"
@@ -4666,7 +4647,6 @@ msgid "Recalled item awaiting pickup"
 msgstr "Copia richiamata in attesa di ritiro"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:97
-#, fuzzy
 msgid "Return recalled item"
 msgstr "Notifica per restituire una copia richiamata"
 
@@ -4707,26 +4687,24 @@ msgid "Your cart"
 msgstr "Il tuo carrello"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:105
-#, fuzzy
 msgid "Train item slip"
 msgstr "Ricevuta di trasferimento"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:106
 msgid "Hold is confirmed"
-msgstr ""
+msgstr "La prenotazione è confermata"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:106
 msgid "Your hold on [% hold.biblio.title %] is confirmed"
-msgstr ""
+msgstr "La tua prenotazione su [% hold.biblio.title %] è confermata"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107
-#, fuzzy
 msgid "OAI harvest report"
-msgstr "Report problemi OPAC"
+msgstr "Rapporto su raccolta records via OAI-PMH"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107
 msgid "OAI harvest report for [% servername %]"
-msgstr ""
+msgstr "Rapporto di raccolta OAI per [% nome del server %]"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:100:mul:1
 msgid "%sDear %s %s,%s"
@@ -4865,32 +4843,26 @@ msgid "%sView in online catalog%s"
 msgstr "%sGuarda sul catalogo online%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:105:mul:4
-#, fuzzy
 msgid "Train name: %s"
-msgstr "Username: %s"
+msgstr "Nome del treno: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:105:mul:5
-#, fuzzy
 msgid "Sent on: %s"
-msgstr "In prestito?: %s"
+msgstr "Inviato su: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:105:mul:9
-#, fuzzy
 msgid "Item number #%s"
-msgstr "Collocazione: %s"
+msgstr "Numero di copia # %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:106:mul:1
-#, fuzzy
 msgid "Hello %s %s (%s),"
-msgstr "Salve %s %s %s."
+msgstr "Salve %s %s (%s),"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:106:mul:2
-#, fuzzy
 msgid "Your hold on %s (%s) has been confirmed."
-msgstr " L'ordine %s (%s) è stato ricevuto."
+msgstr "L'ordine %s (%s) è stato ricevuto."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:106:mul:3
-#, fuzzy
 msgid "You will be notified by the library when your item is available for pickup."
 msgstr "Verrai nuovamente avvisato quando il libro diverrà disponibile."
 
@@ -4921,7 +4893,7 @@ msgstr "Barcode: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:8
 msgid "%s records added"
-msgstr ""
+msgstr "%s record aggiunti"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:9
 #, fuzzy
@@ -4930,11 +4902,11 @@ msgstr "è stata aggiornata."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:10
 msgid "%s records deleted"
-msgstr ""
+msgstr "%s record cancellati"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:11
 msgid "%s records skipped"
-msgstr ""
+msgstr "%s record saltati"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:12
 #, fuzzy
@@ -4943,7 +4915,7 @@ msgstr "Registrazione sonora, bobina"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:13
 msgid "%s total"
-msgstr ""
+msgstr "%s totale"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:10:mul:26
 msgid "      %sTransaction ID: %s"
@@ -5373,7 +5345,7 @@ msgstr " L'ordine %s (%s) è stato ricevuto."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:7
 msgid "The new details are:%s"
-msgstr ""
+msgstr "I nuovi dettagli sono:%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:11
 #, fuzzy
@@ -5394,11 +5366,11 @@ msgstr "%sL'ordine numero %s (%s) (%s ordinati) ($%s ognuno) non è stato ricevu
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42:mul:1
 msgid "SFTP upload failed:"
-msgstr ""
+msgstr "Caricamento SFTP non riuscito:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43:mul:1
 msgid "SFTP upload succeeded"
-msgstr ""
+msgstr "Caricamento SFTP riuscito"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:44:mul:3
 msgid "The Interlibrary loans request number %s you placed for:"
@@ -5455,7 +5427,7 @@ msgstr " L'ordine %s (%s) è stato ricevuto."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4:mul:7
 msgid "The details are:%s"
-msgstr ""
+msgstr "I dettagli sono:%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:56:mul:1
 msgid "Dear patron,"
@@ -5479,11 +5451,11 @@ msgstr "In caso tu non sia un utente della biblioteca o tu non voglia accettare 
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:3
 msgid "A public list, titled %s%s%s, has been transferred to you%s by %s%s.%s"
-msgstr ""
+msgstr "Una lista pubblica, intitolata %s%s%s, è stato trasferita a te%s da %s%s.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:5
 msgid "%sThe list was previously owned by %s.%s%s%s"
-msgstr ""
+msgstr "%sLa lista era precedentemente di proprietà di %s.%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:6
 #, fuzzy
@@ -5516,7 +5488,7 @@ msgstr "Hai rilevato: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:5:mul:9
 msgid "Thank you"
-msgstr "Grazie!"
+msgstr "Grazie"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:60:mul:1
 msgid "Dear %s %s %s,"
@@ -5536,15 +5508,17 @@ msgstr "Bibliotecario"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:61:mul:4
 msgid "Your library account has been renewed. The new expiry date is: %s."
-msgstr ""
+msgstr "Il tuo account della biblioteca è stato rinnovato. La nuova data di scadenza è: %s."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:61:mul:5
-#, fuzzy
 msgid ""
 "%s\n"
 "An enrollment fee of %s has been applied.\n"
 "%s"
-msgstr "Un pagamento di %s è stato registrato sul tuo account"
+msgstr ""
+"%s\n"
+"Una tariffa di iscrizione di %s è stata applicata.\n"
+"%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:61:mul:8
 #, fuzzy
@@ -5984,7 +5958,7 @@ msgstr "Hai raggiunto il massimo numero di rinnovi possibili."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:91:mul:7
 msgid "This item has reached the maximum number of unseen renewals and will need to be renewed at the library."
-msgstr ""
+msgstr "Questa copia ha raggiunto il numero massimo di rinnovi non visti e dovrà essere rinnovato in biblioteca."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:91:mul:9
 msgid "The following item, %s, has not been renewed because:"
@@ -6056,7 +6030,7 @@ msgstr "Un richiamo che hai richiesto su questa copia: %s / %s (%s) è ora dispo
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:97:mul:1
 msgid "Your item has been recalled: %s (%s). Please return it by %s."
-msgstr ""
+msgstr "La rua copia è stata ritirata: %s (%s). Si prega di restituirla entro il %s."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:98:mul:1
 #, fuzzy
@@ -6879,7 +6853,7 @@ msgstr "Si veda https://www.niso.org/publications/standards per dettagli."
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:1
 msgid "Abridger"
-msgstr ""
+msgstr "Riduttore"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:2
 msgid "Art copyist"
@@ -6896,7 +6870,7 @@ msgstr "Autore della postfazione, colofon, etc."
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:7
 msgid "Announcer"
-msgstr ""
+msgstr "Annunciatore"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:8
 msgid "Analyst"
@@ -6953,7 +6927,7 @@ msgstr "Coordinatore della stampa"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:29
 msgid "Screenwriter"
-msgstr ""
+msgstr "Sceneggiatore"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:33
 #, fuzzy
@@ -6974,11 +6948,11 @@ msgstr "Rilegatore"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:39
 msgid "Broadcaster"
-msgstr ""
+msgstr "Trasmettitore"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:40
 msgid "Braille embosser"
-msgstr ""
+msgstr "Goffratore Braille"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:42
 #, fuzzy
@@ -6987,7 +6961,7 @@ msgstr "Direttore editoriale"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:43
 msgid "Caster"
-msgstr ""
+msgstr "Caster"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:46
 msgid "Client"
@@ -7039,7 +7013,7 @@ msgstr "Contestante - appellante"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:64
 msgid "Court governed"
-msgstr ""
+msgstr "Governata dalla corte"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:65
 msgid "Cover designer"
@@ -7129,7 +7103,7 @@ msgstr "Convenuto-ricorrente"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:91
 msgid "Degree committee member"
-msgstr ""
+msgstr "Membro della commissione di laurea"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:92
 #, fuzzy
@@ -7142,8 +7116,9 @@ msgid "Degree supervisor"
 msgstr "Istituzione garante del diploma"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:95
+#, fuzzy
 msgid "DJ"
-msgstr ""
+msgstr "DJ"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:96
 msgid "Delineator"
@@ -7175,7 +7150,7 @@ msgstr "Gestore dati"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:110
 msgid "Editor of compilation"
-msgstr ""
+msgstr "Curatore della compilazione"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:111
 #, fuzzy
@@ -7201,7 +7176,7 @@ msgstr "Ingegnere"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:118
 msgid "Enacting jurisdiction"
-msgstr ""
+msgstr "Emanazione della giurisdizione"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:120
 msgid "Event place"
@@ -7250,7 +7225,7 @@ msgstr "Specialista in informazione geografica"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:136
 msgid "Host institution"
-msgstr ""
+msgstr "Istituzione ospitante"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:138
 msgid "Host"
@@ -7266,7 +7241,7 @@ msgstr "Strumentista"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:147
 msgid "Judge"
-msgstr ""
+msgstr "Giudice"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:148
 #, fuzzy
@@ -7327,7 +7302,7 @@ msgstr "Copista di musica"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:167
 msgid "Medium"
-msgstr ""
+msgstr "Mezzo"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:168
 msgid "Manufacture place"
@@ -7379,11 +7354,11 @@ msgstr "Supervisore del suono"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:182
 msgid "News anchor"
-msgstr ""
+msgstr "Conduttore del telegiornale"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:184
 msgid "Onscreen participant"
-msgstr ""
+msgstr "Partecipante sullo schermo"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:187
 #, fuzzy
@@ -7392,7 +7367,7 @@ msgstr "Organizzatore"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:188
 msgid "Onscreen presenter"
-msgstr ""
+msgstr "Presentatore sullo schermo"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:190
 msgid "Owner"
@@ -7400,7 +7375,7 @@ msgstr "Proprietario"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:191
 msgid "Place of address"
-msgstr ""
+msgstr "Luogo di residenza"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:192
 #, fuzzy
@@ -7433,7 +7408,7 @@ msgstr "Responsabile del progetto"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:205
 msgid "Praeses"
-msgstr ""
+msgstr "Preside"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:206
 msgid "Process contact"
@@ -7466,8 +7441,9 @@ msgid "Production designer"
 msgstr "Personale di produzione"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:217
+#, fuzzy
 msgid "Provider"
-msgstr ""
+msgstr "Provider"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:219
 #, fuzzy
@@ -7497,7 +7473,7 @@ msgstr "Reporter"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:226
 msgid "Recordist"
-msgstr ""
+msgstr "Registrante"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:228
 #, fuzzy
@@ -7576,7 +7552,7 @@ msgstr "Progettista del suono"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:254
 msgid "Special effects provider"
-msgstr ""
+msgstr "Fornitore di effetti speciali"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:256
 msgid "Supporting host"
@@ -7605,7 +7581,7 @@ msgstr "Scenografo"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:264
 msgid "Setting"
-msgstr ""
+msgstr "Setting"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:265
 msgid "Storyteller"
@@ -7621,11 +7597,11 @@ msgstr "Stereotipista"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:269
 msgid "Software developer"
-msgstr ""
+msgstr "Sviluppatore di software"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:270
 msgid "Television writer"
-msgstr ""
+msgstr "Scrittore televisivo"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:271
 msgid "Technical director"
@@ -7642,11 +7618,11 @@ msgstr "Direttore editoriale"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:275
 msgid "Television guest"
-msgstr ""
+msgstr "Ospite televisivo"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:276
 msgid "Television host"
-msgstr ""
+msgstr "Conduttore televisivo"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:277
 #, fuzzy
@@ -7672,11 +7648,11 @@ msgstr "Videografo"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:285
 msgid "Visual effects provider"
-msgstr ""
+msgstr "Fornitore di effetti visivi"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:286
 msgid "Writer of added commentary"
-msgstr ""
+msgstr "Scrittore dei commenti aggiunti"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:287
 #, fuzzy
@@ -7723,11 +7699,11 @@ msgstr "Stampatore delle lastre"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:297
 msgid "Writer of supplementary textual content"
-msgstr ""
+msgstr "Scrittura dei contenuti supplementari"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:298
 msgid "Writer of television story"
-msgstr ""
+msgstr "Scrittore di storie televisive"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:description:1
 msgid "MARC code list for relators, as of http://www.loc.gov/marc/relators/relaterm.html"
@@ -7983,7 +7959,7 @@ msgstr "Template per le segnalazioni sul catalogo"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:5
 msgid "Cookie policy bar"
-msgstr ""
+msgstr "Barra dell'informativa sui cookie"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6
 #, fuzzy
@@ -8068,31 +8044,31 @@ msgstr "Una chiara e stringata descrizione di cosa ti aspetti succeda."
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:5:mul:1
 msgid "%sThe online catalog uses functional cookies: these are essential to make the site work.%s"
-msgstr ""
+msgstr "%sIl catalogo online utilizza cookie funzionali: sono essenziali per il funzionamento del sito.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:1
 msgid "%sWhat are cookies?%s"
-msgstr ""
+msgstr "%sCosa sono i cookie? %s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:2
 msgid "%sCookies are small text files placed on your browser by websites. They help make websites work, or work more efficiently. They also \"remember\" some of your preferences, so you don't have to set a preference again every time you switch to a different page on the same website.%s"
-msgstr ""
+msgstr "%sI cookie sono piccoli file di testo che i siti Web inseriscono nel browser. Servono a far funzionare i siti web, o a farli funzionare in modo più efficiente. Inoltre, \"ricordano\" alcune preferenze dell'utente, in modo da non doverle impostare nuovamente ogni volta che si passa a una pagina diversa dello stesso sito web.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:3
 msgid "%sIf cookies are a concern for you, you may like to regularly clear your cookies on your browser or use a private browser mode. Check your browser settings for these options.%s"
-msgstr ""
+msgstr "%se i cookie sono un problema per te, puoi cancellare regolarmente i cookie dal vostro browser o utilizzare una modalità privata del browser. Controlla le impostazioni del browser per queste opzioni.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:4
 msgid "%sEssential cookies%s"
-msgstr ""
+msgstr "%sCookie essenziali%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:5
 msgid "%sHere is the list of essential cookies used on the Koha online catalog.%s"
-msgstr ""
+msgstr "%sEcco l'elenco dei cookie essenziali utilizzati nel catalogo online di Koha%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:6
 msgid "%sSome of these depend on settings chosen by the library team; therefore all the cookies listed may not apply to this site.%s"
-msgstr ""
+msgstr "%sAlcuni di questi dipendono dalle impostazioni scelte dal team della biblioteca; pertanto tutti i cookie elencati potrebbero non essere applicabili a questo sito.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:10
 #, fuzzy
@@ -8136,7 +8112,7 @@ msgstr "      %sID transazione: %s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:22
 msgid "      %sUntil logout or end of session%s"
-msgstr ""
+msgstr "      %sFino al logout o alla fine della sessione%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:23
 #, fuzzy
@@ -8160,7 +8136,7 @@ msgstr "      %sCreata%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:30
 msgid "      %sStores the language the user selected, so the online catalog will appear in that same language the next time it is visited.%s"
-msgstr ""
+msgstr "      %sMemorizza la lingua selezionata dall'utente, in modo che il catalogo online appaia nella stessa lingua la volta successiva che viene visitato.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:35
 #, fuzzy
@@ -8179,11 +8155,11 @@ msgstr "      %sCreata%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:39
 msgid "      %sEnd of session or when the advanced search page is accessed again.%s"
-msgstr ""
+msgstr "      %sFine sessione o quando si accede nuovamente alla pagina di ricerca avanzata.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:40
 msgid "      %sjQuery cookie. Stores search terms and limits of the last advanced search. Set when an advanced search is submitted.%s"
-msgstr ""
+msgstr "      %sjQuery cookie. Memorizza i termini di ricerca e i limiti dell'ultima ricerca avanzata. Impostato quando viene inviata una ricerca avanzata.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:44
 #, fuzzy
@@ -8192,11 +8168,11 @@ msgstr "      %sNota%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:45
 msgid "      %sads (fewer) or exs (more)%s"
-msgstr ""
+msgstr "      %sads (meno) o exs (più)%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:47
 msgid "      %sjQuery cookie. Related to serialized_form* cookies. Stores if the advanced search form was used with 'More options' or 'Fewer options'.%s"
-msgstr ""
+msgstr "      %sjQuery cookie. Correlato al cookie serialized_form*. Memorizza se il modulo di ricerca avanzata è stato usato con 'Più opzioni' o 'Meno opzioni'.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:51
 #, fuzzy
@@ -8210,7 +8186,7 @@ msgstr "      %sBilancio account in data: %s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:54
 msgid "      %sjQuery cookie. Used to store the number of created options when user selects 'More options' in advanced search to increase search boxes.%s"
-msgstr ""
+msgstr "      %sjQuery cookie. Utilizzato per memorizzare il numero di opzioni create quando l'utente seleziona \"Più opzioni\" nella ricerca avanzata per aumentare le caselle di ricerca.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:58
 #, fuzzy
@@ -8219,27 +8195,27 @@ msgstr "      %sCreata%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:59
 msgid "      %sList of record IDs (biblionumbers) separated by /%s"
-msgstr ""
+msgstr "      %sElenco di ID di record (numeri di biblioteche) separati da /%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:60
 msgid "      %sEnd of session or until the cart is emptied.%s"
-msgstr ""
+msgstr "      %sFine sessione o finché il carrello non viene svuotato.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:61
 msgid "      %sStores cart contents in the online catalog. Set when records are added to the cart for the first time.%s"
-msgstr ""
+msgstr "      %sRiporta il contenuto del carrello nel catalogo online. Impostato quando i record vengono aggiunti al carrello per la prima volta.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:65
 msgid "%sNon-essential cookies%s"
-msgstr ""
+msgstr "%sCookie non essenziali%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:66
 msgid "%sThe library team may create additional cookies. These are optional and will require your agreement before they are used.%s"
-msgstr ""
+msgstr "%sIl team della biblioteca può creare altri cookie. Questi sono facoltativi e richiedono il vostro consenso prima di essere utilizzati.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:67
 msgid "%sIf any non-essential cookies are created, they will appear below.%s"
-msgstr ""
+msgstr "%sse vengono creati cookie non essenziali, questi appariranno in basso.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:description:1
 msgid "Sample news items"

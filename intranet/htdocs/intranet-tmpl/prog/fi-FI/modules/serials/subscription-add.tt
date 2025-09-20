@@ -76,7 +76,7 @@ fieldset.rows table { clear: none; margin: 0; }
  <input type="hidden" name="user" value="[% logged_in_user.userid | html %]" />
  <input type="hidden" name="irreg_check" value="0" />
  <fieldset id="subscription_add_information" class="rows">
- <legend>Kausijulkaisu­tilauksen tiedot</legend>
+ <legend>Kausijulkaisutilausten tiedot</legend>
  <ol>
  [% IF ( subscriptionid ) %]
  <li><span class="label">Kausijulkaisutilausnro: </span> [% subscriptionid | html %]</li>

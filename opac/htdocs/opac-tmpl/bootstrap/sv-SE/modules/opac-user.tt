@@ -113,13 +113,13 @@
 
  [% IF ( borrower.blockedonfines && Koha.Preference('OPACHoldRequests') ) %]
  <div class="alert alert-warning" id="blockedonfines">
- <strong>Obs:</strong><span> Ditt konto har utstående avgifter på [% amountoutstanding | $Price %]. Reservationer är begränsade eftersom ditt konto överskrider maxgränsen.</span>
+ <strong>Notera:</strong><span> Ditt konto har utstående avgifter på [% amountoutstanding | $Price %]. Reservationer är begränsade eftersom ditt konto överskrider maxgränsen.</span>
  </div>
  [% END %]
 
  [% IF ( borrower.warndeparture ) %]
  <div class="alert alert-warning" id="warndeparture">
- <strong>Obs:</strong><span> Ditt lånekort går ut den <span id="warndeparture_date">[% borrower.warndeparture | $KohaDates %]</span>. Kontakta biblioteket för mer information.</span>
+ <strong>Notera:</strong><span> Ditt lånekort går ut den <span id="warndeparture_date">[% borrower.warndeparture | $KohaDates %]</span>. Kontakta biblioteket för mer information.</span>
  [% IF ( borrower.returnbeforeexpiry ) %]<span id="warndeparture_returnbeforeexpiry"> Observera att du måste återlämna alla dina lån innan ditt kort går ut.</span>[% END %]
  </div>
  [% END %]
@@ -132,7 +132,7 @@
 
  [% IF ( RENEW_ERROR ) %]
  <div class="alert alert-warning">
- <strong>Obs:</strong>
+ <strong>Notera:</strong>
  Omlån misslyckades på grund av följande problem: <ul>
  [% FOREACH error IN RENEW_ERROR.split('\|') %]
  [% IF error == 'card_expired' %]
@@ -163,11 +163,11 @@
  [% IF ( userdebarred ) %]
  [% IF ( discharge_available ) %]
  <li id="discharged">
- <strong>Obs:</strong> Ditt konto har blivit avslutat. <a href="/cgi-bin/koha/opac-discharge.pl?op=get">Begär att bli borttagen</a>
+ <strong>Notera:</strong> Ditt konto har blivit avslutat. <a href="/cgi-bin/koha/opac-discharge.pl?op=get">Begär att bli borttagen</a>
  </li>
  [% ELSE %]
  <li id="userdebarred">
- <strong>Obs:</strong> Ditt konto är fryst. [% IF ( borrower.debarredcomment ) %] Kommentar:<br />
+ <strong>Notera:</strong> Ditt konto är fryst. [% IF ( borrower.debarredcomment ) %] Kommentar:<br />
  <ul id="userdebarred_comment">
  [% FOREACH restriction IN logged_in_user.restrictions %]
  <li class="patron_restriction">
@@ -186,7 +186,7 @@
  [% END %]
  [% END %]
  [% IF ( borrower.gonenoaddress ) %]
- <li id="gonenoaddress"><strong>Obs:</strong> Enligt våra anteckningar har vi inte uppdaterad kontaktinformation. Vänligen kontakta biblioteket. <a href="/cgi-bin/koha/opac-memberentry.pl">[% IF ( Koha.Preference('OPACPatronDetails') ) %]<span>Uppdatera din kontaktinformation</span>[% ELSE %]<span>Till kontaktinformation</span>[% END %]</a>
+ <li id="gonenoaddress"><strong>Notera:</strong> Enligt våra anteckningar har vi inte uppdaterad kontaktinformation. Vänligen kontakta biblioteket. <a href="/cgi-bin/koha/opac-memberentry.pl">[% IF ( Koha.Preference('OPACPatronDetails') ) %]<span>Uppdatera din kontaktinformation</span>[% ELSE %]<span>Till kontaktinformation</span>[% END %]</a>
  [% IF ( Koha.Preference('OPACPatronDetails') ) %]<em>(Obs: det kan ta ett tag innan ditt konto återställs om du skickar online.)</em>[% END %]
  </li>
  [% END %]
@@ -903,7 +903,7 @@
 
  <tbody>
  [% FOREACH ar IN current_article_requests %]
- <tr>
+ <tr id="article_[% ar.id | html %]">
  <td class="article-request-record-title">
  [% INCLUDE 'biblio-title.inc' biblio=ar.biblio link=> 1 %]
  [% ar.item.enumchron | html %]
@@ -966,7 +966,7 @@
  [% ELSIF ar.status == 'REQUESTED' %]
  <span>Ny</span>
  [% ELSIF ar.status == 'COMPLETED' %]
- <span>Klar</span>
+ <span>Avslutad</span>
  [% ELSIF ar.status == 'CANCELED' %]
  <span>Borttagen</span>
  [% END %]
@@ -1042,7 +1042,6 @@
 
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% INCLUDE 'calendar.inc' %]
  [% INCLUDE 'datatables.inc' %]
  <script>
@@ -1064,7 +1063,7 @@
             [% IF ( opac_user_article_requests ) %]
                 $("#opac-user-views a[href='#opac-user-article-requests_panel']").tab("show");
             [% END %]
-            $('#opac-user-article-requests caption .count').html(AR_CAPTION_COUNT.format('[% current_article_requests.size | html %]'));
+            $('#article-requests-table caption .count').html(AR_CAPTION_COUNT.format('[% current_article_requests.size | html %]'));
 
             $(".modal-nojs").addClass("modal").addClass("hide").removeClass("modal-nojs");
 
@@ -1092,7 +1091,7 @@
                 );
             });
 
-            $(".btn-delete-article-request").on("click", function(e){
+            $("#article-requests-table").on("click", ".btn-delete-article-request", function(e){
                 e.preventDefault();
                 var article_request = $(this).data("title");
                 var article_request_id = $(this).data("article-request_id");
@@ -1103,16 +1102,18 @@
                                 type: "DELETE",
                                 url: '/api/v1/public/patrons/'+borrowernumber+'/article_requests/'+article_request_id+'?cancellation_reason=OPAC',
                                 success: function( data ) {
-                                    row.parents('tr').hide({
+                                    $("#article_" + article_request_id ).hide({
                                         duration: 'slow',
                                         complete: function() {
-                                            var ar_tab = $('a[href="#opac-user-article-requests"');
+                                            $(this).siblings(".child").hide();
+                                            var ar_tab = $('a[href="#opac-user-article-requests_panel"');
                                             var ar_table = $('#article-requests-table');
                                             var ar_length = $('tbody tr:visible', ar_table).length;
                                             var ar_count = $('caption .count', ar_table);
 
                                             ar_tab.html(ar_tab.html().replace(/\(\d+\)/, '('+ar_length+')'));
                                             ar_count.html(AR_CAPTION_COUNT.format(ar_length));
+
                                         }
                                     });
                                 }

@@ -9,7 +9,7 @@
     var ill_batch_api_request_fail = _("Paikallista pyyntöä ei voitu luoda");
     var ill_batch_requests_api_fail = _("Eräpyyntöjä ei voitu hakea");
     var ill_batch_unknown = _("Tuntematon");
-    var ill_batch_doi = _("DOI-tunnus");
+    var ill_batch_doi = _("DOI");
     var ill_batch_pmid = _("PubMed ID");
     var ill_populate_waiting = _("Haetaan...");
     var ill_populate_failed = _("Haku epäonnistui");
@@ -22,7 +22,7 @@
     var ill_batch_metadata_less = _("Vähemmän");
     var ill_batch_available_via = _("Saatavana");
     var ill_batch_metadata = {
-        'doi': _("DOI-tunnus"),
+        'doi': _("DOI"),
         'pmid': _("PubMed ID"),
         'issn': _("ISSN"),
         'title': _("Nimeke"),
@@ -32,7 +32,7 @@
         'publisher': _("Julkaisija"),
         'article_title': _("Artikkelin nimeke"),
         'article_author': _("Artikkelin tekijä"),
-        'volume': _("Vuosikerta")
+        'volume': _("Osa")
     };
 </script>
 <!-- / ill-batch-table-strings.inc -->

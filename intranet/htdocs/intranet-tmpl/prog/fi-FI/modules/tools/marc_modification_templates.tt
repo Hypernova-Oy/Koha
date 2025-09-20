@@ -185,7 +185,7 @@
  [% END %]
 
  [% IF ( ActionsLoo.to_field ) %]
- <span>kirjastoon</span> [% ActionsLoo.to_field | html %][% IF ( ActionsLoo.to_subfield.length ) %]$[% ActionsLoo.to_subfield | html %][% END %]
+ <span>kenttään</span> [% ActionsLoo.to_field | html %][% IF ( ActionsLoo.to_subfield.length ) %]$[% ActionsLoo.to_subfield | html %][% END %]
 
  [% IF ( ActionsLoo.to_regex_search ) %]
  <span>käyttäen RegEx:iä</span> s<strong>/[% ActionsLoo.to_regex_search | html %]/[% ActionsLoo.to_regex_replace | html %]/[% ActionsLoo.to_regex_modifiers | html %]</strong>

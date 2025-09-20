@@ -1,10 +1,10 @@
 # Compendium of hi.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:15-0300\n"
-"PO-Revision-Date: 2025-02-03 13:06+0000\n"
+"PO-Revision-Date: 2025-07-19 03:10+0000\n"
 "Last-Translator: Nikunj Tyagi <nikunj1@gmail.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: hi\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /hi/22.11/hi-pref.po\n"
 "X-POOTLE-MTIME: 1697630909.268926\n"
@@ -1882,19 +1882,17 @@ msgstr "cataloguing.pref#AlternateHoldingsField# रिकॉर्ड आइट
 
 # Cataloging > Record structure > AlternateHoldingsField
 # Cataloging > Record structure
-#, fuzzy
 msgid "cataloguing.pref#AlwaysShowHoldingsTableFilters# Do"
-msgstr "cataloguing.pref # AlternateHoldingsField #।"
+msgstr "करें"
 
 # Cataloging > Record structure > AlternateHoldingsField
 # Cataloging > Record structure
-#, fuzzy
 msgid "cataloguing.pref#AlwaysShowHoldingsTableFilters# Don't"
-msgstr "cataloguing.pref # AlternateHoldingsField #।"
+msgstr "नही करें"
 
 # Cataloging > Display > AlwaysShowHoldingsTableFilters
 msgid "cataloguing.pref#AlwaysShowHoldingsTableFilters# always show filters by default on the holdings table in the record details page in the staff interface."
-msgstr ""
+msgstr "स्टाफ इंटरफ़ेस में रिकॉर्ड विवरण पृष्ठ में होल्डिंग्स तालिका पर डिफ़ॉल्ट रूप से हमेशा फ़िल्टर दिखाएं।"
 
 # Cataloging > Record structure > ApplyFrameworkDefaults
 msgid "cataloguing.pref#ApplyFrameworkDefaults# Apply framework default values"
@@ -2181,18 +2179,51 @@ msgstr "cataloguing.pref#MARCOverlayRules# उपयोग करें"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "cataloguing.pref#MarcFieldDocURL# उपयोग करे"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 msgstr "cataloguing.pref#MarcFieldDocURL# उदाहरण के लिए <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "cataloguing.pref#MarcFieldDocURL# यदि खाली छोड़ दिया जाए, तो http://loc.gov (MARC21) या http://archive.ifla.org (UNIMARC) पर प्रारूप प्रलेखन का उपयोग किया जाता है."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "cataloguing.pref#MarcFieldDocURL# उपयोग करे"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "cataloguing.pref#MarcFieldDocURL# संभव प्रतिस्थापन हैं <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "cataloguing.pref#MarcFieldDocURL# उपयोग करे"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -2884,7 +2915,6 @@ msgstr "circulation.pref कर्बसाइड पिकअप मॉड्�
 
 # Circulation
 # Circulation > Fines Policy
-#, fuzzy
 msgid "circulation.pref Fines policy"
 msgstr "circulation.pref जुर्माना पॉलिसी"
 
@@ -2910,9 +2940,8 @@ msgstr "circulation.pref आइटम बंडल"
 
 # Circulation
 # Circulation > Holds policy
-#, fuzzy
 msgid "circulation.pref Lost item policy"
-msgstr "circulation.pref होल्ड पॉलिसी"
+msgstr "circulation.pref खोई आइटम पॉलिसी"
 
 # Circulation
 # Circulation > Return claims
@@ -3150,33 +3179,28 @@ msgstr "circulation.pref#AllowItemsOnHoldCheckoutSIP# SIP चेकआउट स
 
 # Circulation > Checkout policy > AllowItemsOnHoldCheckoutSIP
 # Circulation > Checkout policy
-#, fuzzy
 msgid "circulation.pref#AllowItemsOnLoanCheckoutSIP# Allow"
-msgstr "circulation.pref#AllowItemsOnHoldCheckoutSIP# अनुमति दें"
+msgstr "अनुमति दें"
 
 # Circulation > Checkout policy > AllowItemsOnHoldCheckoutSIP
 # Circulation > Checkout policy
-#, fuzzy
 msgid "circulation.pref#AllowItemsOnLoanCheckoutSIP# Don't allow"
-msgstr "circulation.pref#AllowItemsOnHoldCheckoutSIP# अनुमति नही दें"
+msgstr "अनुमति नही दें"
 
 # Circulation > Checkout policy > AllowItemsOnHoldCheckoutSIP
 # Circulation > Checkout policy
-#, fuzzy
 msgid "circulation.pref#AllowItemsOnLoanCheckoutSIP# If allowed do not generate ISSUED_TO_ANOTHER warning."
-msgstr "circulation.pref#AllowItemsOnHoldCheckoutSIP# यदि अनुमति दी जाती है तो संरक्षित चेतावनी उत्पन्न न करें."
+msgstr "यदि अनुमति हो तो ISSUED_TO_ANOTHER चेतावनी उत्पन्न न करें।"
 
 # Circulation > Checkout policy > AllowItemsOnHoldCheckoutSIP
 # Circulation > Checkout policy
-#, fuzzy
 msgid "circulation.pref#AllowItemsOnLoanCheckoutSIP# This allows self checkouts for those items."
-msgstr "circulation.pref#AllowItemsOnHoldCheckoutSIP# अनुमति दें"
+msgstr "इससे उन आइटमों के लिए स्वयं चेकआउट की सुविधा मिलती है।"
 
 # Circulation > Checkout policy > AllowItemsOnHoldCheckoutSIP
 # Circulation > Checkout policy
-#, fuzzy
 msgid "circulation.pref#AllowItemsOnLoanCheckoutSIP# checkouts of items already checked out to someone else via SIP checkout messages."
-msgstr "circulation.pref#AllowItemsOnHoldCheckoutSIP# SIP चेकआउट संदेशों के माध्यम से किसी और के लिए आरक्षित वस्तुओं के चेकआउट."
+msgstr "एसआईपी चेकआउट संदेशों के माध्यम से पहले से ही किसी अन्य व्यक्ति को चेकआउट की गई आइटमों को चेकआउट करना।"
 
 # Circulation > Checkout policy > AllowMultipleIssuesOnABiblio
 # Circulation > Checkout policy
@@ -3310,20 +3334,17 @@ msgstr "circulation.pref # AllowTooManyOverride # कर्मचारियो
 
 # Circulation > Batch checkout > BatchCheckouts
 # Circulation > Batch checkout
-#, fuzzy
 msgid "circulation.pref#AlwaysLoadCheckoutsTable# Do"
-msgstr "दिखाएँ"
+msgstr "करें"
 
 # Circulation > Interface > ShowAllCheckins
 # Circulation > Interface
-#, fuzzy
 msgid "circulation.pref#AlwaysLoadCheckoutsTable# Don't"
-msgstr "दिखाएँ नही"
+msgstr "नही करें"
 
 # Circulation > Checkout policy > LoadCheckoutsTableDelay
-#, fuzzy
 msgid "circulation.pref#AlwaysLoadCheckoutsTable# always load the checkouts table immediately on opening the patron account in the staff interface."
-msgstr "चेकआउट पृष्ठ पर चेकआउट तालिका के स्वचालित लोडिंग में देरी"
+msgstr "स्टाफ इंटरफ़ेस में संरक्षक खाता खोलते ही चेकआउट तालिका को तुरंत लोड करें।"
 
 # Circulation > Article requests > ArticleRequests
 # Circulation > Article requests
@@ -3491,20 +3512,17 @@ msgstr "सक्षम"
 
 # Circulation > Article requests > ArticleRequestsMandatoryFields
 # Circulation > Article requests
-#, fuzzy
 msgid "circulation.pref#ArticleRequestsSupportedFormats# Photocopy"
-msgstr "circulation.pref#ArticleRequestsMandatoryFields# लेखक"
+msgstr "फोटोकापी"
 
 # Circulation > Article requests > ArticleRequestsMandatoryFields
 # Circulation > Article requests
-#, fuzzy
 msgid "circulation.pref#ArticleRequestsSupportedFormats# Scan"
-msgstr "circulation.pref#ArticleRequestsMandatoryFields# दिनांक"
+msgstr "स्कैन"
 
 # Circulation > Article requests > ArticleRequestsSupportedFormats
-#, fuzzy
 msgid "circulation.pref#ArticleRequestsSupportedFormats# The first listed format is selected by default when you request via the OPAC."
-msgstr "(वर्तमान में मान्य विकल्प हैं: फोटोकॉपी और स्कैन। समर्थित प्रारूपों को एक लंबवत बार से अलग करें। पहला सूचीबद्ध प्रारूप डिफ़ॉल्ट रूप से चुना जाता है जब आप ओपेक के माध्यम से अनुरोध करते हैं।)"
+msgstr "जब आप ओपेक के माध्यम से अनुरोध करते हैं तो पहला सूचीबद्ध प्रारूप डिफ़ॉल्ट रूप से चयनित होता है।"
 
 # Circulation > Article requests > ArticleRequestsSupportedFormats
 # Circulation > Article requests
@@ -3513,27 +3531,23 @@ msgstr "circulation.pref#ArticleRequestsSupportedFormats# निम्नलि�
 
 # Circulation > Return claims > ClaimReturnedLostValue
 # Circulation > Return claims
-#, fuzzy
 msgid "circulation.pref#AutoClaimReturnStatusOnCheckin# Automatically resolve the claim and change the resolution to the <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION\">RETURN_CLAIM_RESOLUTION</a> authorized value"
-msgstr "उपयोग करें <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST\">LOST</a> अधिकृत मूल्य"
+msgstr "दावे का स्वचालित रूप से समाधान करें और समाधान को <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION\">RETURN_CLAIM_RESOLUTION</a> अधिकृत मान में बदलें"
 
 # Circulation > Return claims > ClaimReturnedChargeFee
 # Circulation > Return claims
-#, fuzzy
 msgid "circulation.pref#AutoClaimReturnStatusOnCheckin# upon check in."
-msgstr "circulation.pref#ClaimReturnedChargeFee# ."
+msgstr "चेक इन करने पर।"
 
 # Circulation > Return claims > ClaimReturnedLostValue
 # Circulation > Return claims
-#, fuzzy
 msgid "circulation.pref#AutoClaimReturnStatusOnCheckout# Automatically resolve the claim and change the resolution to the <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION\">RETURN_CLAIM_RESOLUTION</a> authorized value"
-msgstr "उपयोग करें <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=LOST\">LOST</a> अधिकृत मूल्य"
+msgstr "दावे का स्वचालित रूप से समाधान करें और समाधान को <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION\">RETURN_CLAIM_RESOLUTION</a> अधिकृत मान में बदलें"
 
 # Circulation > Checkout policy > RecordStaffUserOnCheckout
 # Circulation > Interface
-#, fuzzy
 msgid "circulation.pref#AutoClaimReturnStatusOnCheckout# upon check out."
-msgstr "circulation.pref#RecordStaffUserOnCheckout# रिकॉर्ड नहीं करें"
+msgstr "चेक आउट पर।"
 
 # Circulation > Patron restrictions > AutoRemoveOverduesRestrictions
 # Circulation > Checkout policy
@@ -3839,9 +3853,8 @@ msgstr "circulation.pref # CircAutoPrintQuickSlip # स्क्रीन स्
 
 # Circulation > Interface > CircAutoPrintQuickSlip
 # Circulation > Interface
-#, fuzzy
 msgid "circulation.pref#CircAutoPrintQuickSlip# do nothing"
-msgstr "circulation.pref # CircAutoPrintQuickSlip #।"
+msgstr "कुछ भी नहीं है"
 
 # Circulation > Interface > CircAutoPrintQuickSlip
 # Circulation > Interface
@@ -6053,7 +6066,8 @@ msgstr "PROC: FIC -प्रसंस्करण केंद्र स्थ�
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+#, fuzzy
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - एक आइटम का कारण बनता है जो प्रसंस्करण केंद्र में है, इसे स्थायी स्थान पर अपडेट किया जाना है.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6117,7 +6131,8 @@ msgstr "PROC: FIC - प्रसंस्करण केंद्र स्थ�
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
+#, fuzzy
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - एक आइटम का कारण बनता है जो प्रसंस्करण केंद्र में है, इसे स्थायी स्थान पर अपडेट किया जाना है.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -9065,7 +9080,7 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "opac.pref # OPACAcquisitionDetails # ओपेक विस्तार पृष्ठों पर अधिग्रहण विवरण।"
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
 msgstr ""
 
 # OPAC > Features > OPACAuthorIdentifiers
@@ -9165,6 +9180,22 @@ msgstr "opac.pref#OPACDetailQRCode# सक्षम करें"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "opac.pref#OPACDetailQRCode# ओपेक ग्रंथ सूची विवरण पृष्ठ पर एक QR कोड दिखाने का विकल्प."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "opac.pref # OPACFinesTab # अनुमति दें"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "opac.pref # OPACFinesTab # अनुमति न दें"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr ""
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Appearance
@@ -11548,23 +11579,32 @@ msgstr "patrons.pref#CheckPrevCheckoutDelay# यदि वर्तमान आ
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "patrons.pref#CheckPrevCheckoutDelay# दिन पहले।"
 
-# Patrons > Notices and notifications > EmailFieldPrimary
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "एक बाल संरक्षक"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr ""
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "संरक्षक को जोड़ते समय एक गारंटर।"
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
 msgstr "संरक्षक को जोड़ते समय एक गारंटर।"
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
 msgstr "जरूरत नहीं है"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron relationships
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
 msgstr "होना आवश्यक है"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
@@ -13001,7 +13041,7 @@ msgstr "searching.pref # DisplayLibraryFacets # घर पुस्तकाल�
 
 # Searching > Features > ESPreventAutoTruncate
 msgid "searching.pref#ESPreventAutoTruncate# List of search fields (separated by | or ,) that should not be autotruncated by Elasticsearch even if <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=QueryAutoTruncate'>QueryAutoTruncate</a> is set to 'Yes':"
-msgstr "खोज फ़ील्ड्स की सूची (द्वारा अलग की गई या,), जो कि elasticsearch द्वारा ऑटोट्रुनेट नहीं किया जाना चाहिए, भले ही <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=queryautotroncate'> QueryAutoTruncate </a> 'हाँ' पर सेट है:"
+msgstr "खोज फ़ील्ड की सूची (| या , से अलग) जिन्हें Elasticsearch द्वारा स्वचालित रूप से छोटा नहीं किया जाना चाहिए, भले ही<a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=QueryAutoTruncate'>QueryAutoTruncate</a>'हाँ' पर सेट है:"
 
 # Searching > Features > ElasticsearchCrossFields
 # Searching > Features
@@ -13325,7 +13365,7 @@ msgstr "searching.pref#QueryAutoTruncate# <br /> (* चरित्र की �
 
 # Searching > Features > QueryAutoTruncate
 msgid "searching.pref#QueryAutoTruncate# <strong>NOTE:</strong> Record identifiers (biblionumber, authid) will never be autotruncated."
-msgstr "<strong>नोट: </strong> रिकॉर्ड पहचानकर्ता (biblionumber, authid) कभी भी स्वचालित नहीं किया जाएगा।"
+msgstr "<strong>नोट:</strong> रिकॉर्ड पहचानकर्ता (biblionumber, authid) कभी भी स्वतः काटे नहीं जाएंगे।"
 
 # Searching > Features > QueryAutoTruncate
 # Searching > Features
@@ -14656,13 +14696,14 @@ msgstr "web_services.pref # आईएलएस-डि (उपलब्ध है
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
-msgstr "web_services.pref # आईएलएस-डि: AuthorizedIPs # अनुमति दें आईपी पतों"
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
+msgstr "केवल IP पते की अनुमति दें"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
-msgstr "web_services.pref # आईएलएस-डि: AuthorizedIPs # आईएलएस-डि सेवाओं का उपयोग करने के लिए (जब सक्षम)। अल्पविराम के साथ और रिक्त स्थान के बिना आईपी पतों को अलग। क्षेत्र को खाली छोड़ दो किसी भी आईपी पते की अनुमति है।"
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
+msgstr "ILS-DI सेवाओं का उपयोग करने के लिए (सक्षम होने पर)। IP पतों को अल्पविराम से और बिना रिक्त स्थान के अलग करें। किसी भी IP को अनुमति देने के लिए '0:0:0:0/0' या '::/0' दर्ज करें।"
 
 # Web services > IdRef > IdRef
 # Web services > IdRef
@@ -14911,7 +14952,8 @@ msgstr "web_services.pref#RESTOAuth2ClientCredentials# सक्षम"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
 # Web services > REST API
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
+#, fuzzy
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
 msgstr "web_services.pref#RESTOAuth2ClientCredentials# OAuth2 क्लाइंट प्रमाण-पत्र REST API के लिए अनुदान देता है। Net::OAuth2::AuthorizationServer स्थापित करने की आवश्यकता है।"
 
 # Web services > REST API > RESTPublicAPI
@@ -15964,6 +16006,16 @@ msgstr "web_services.pref # SvcMaxReportRows # एक रिपोर्ट र�
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "authorities.pref # BiblioAddsAuthorities # उन्हें स्वचालित रूप से नया प्राधिकरण रिकॉर्ड बनाने के लिए, अगर जरूरत है न कि मौजूदा अधिकारियों को संदर्भित करने के लिए होने से।"
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "cataloguing.pref#MarcFieldDocURL# यदि खाली छोड़ दिया जाए, तो http://loc.gov (MARC21) या http://archive.ifla.org (UNIMARC) पर प्रारूप प्रलेखन का उपयोग किया जाता है."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "cataloguing.pref#MarcFieldDocURL# संभव प्रतिस्थापन हैं <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #~ msgid "cataloguing.pref#OpacSuppression# <br />Display the following message on the redirect page for suppressed bibliographic records:"
@@ -16222,6 +16274,10 @@ msgstr "web_services.pref # SvcMaxReportRows # एक रिपोर्ट र�
 # Patrons > Notices and notifications
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "patrons.pref # AutoEmailPrimaryAddress # काम"
+
+# Patrons > Notices and notifications > EmailFieldPrimary
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "एक बाल संरक्षक"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

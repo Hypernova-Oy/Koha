@@ -125,7 +125,7 @@
 
 [% IF item.has_pending_hold %]
  [% SET itemavailable = 0 %]
- <span class="item-status pendinghold">Reservation i kö</span>
+ <span class="item-status pendinghold">Köad reservation</span>
 [% END %]
 
 [% IF Koha.Preference('UseRecalls') && item.has_pending_recall %]

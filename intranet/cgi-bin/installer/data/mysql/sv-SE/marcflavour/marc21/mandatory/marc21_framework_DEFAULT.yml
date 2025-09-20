@@ -25971,6 +25971,40 @@ tables:
       defaultvalue: ~
       frameworkcode: ''
       hidden: -6
+      isurl: 0
+      kohafield: ''
+      liblibrarian: Kontrollnummer eller standardnummer för auktoritetspost
+      libopac: Kontrollnummer eller standardnummer för auktoritetspost
+      link: ''
+      mandatory: 0
+      repeatable: 1
+      seealso: ''
+      tab: 5
+      tagfield: '506'
+      tagsubfield: '0'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
+      isurl: 0
+      kohafield: ''
+      liblibrarian: Real World Object URI
+      libopac: Real World Object URI
+      link: ''
+      mandatory: 0
+      repeatable: 1
+      seealso: ''
+      tab: 5
+      tagfield: '506'
+      tagsubfield: '1'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
       isurl: ~
       kohafield: ''
       liblibrarian: Source of term
@@ -26279,6 +26313,23 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
+      liblibrarian: Del av materialet som avses
+      libopac: Del av materialet som avses
+      link: ''
+      mandatory: 0
+      repeatable: 0
+      seealso: ''
+      tab: 5
+      tagfield: '508'
+      tagsubfield: '3'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
+      isurl: ~
+      kohafield: ''
       liblibrarian: Länkning
       libopac: Länkning
       link: ''
@@ -26509,6 +26560,23 @@ tables:
       tab: 5
       tagfield: '510'
       tagsubfield: x
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
+      isurl: ~
+      kohafield: ''
+      liblibrarian: Del av materialet som avses
+      libopac: Del av materialet som avses
+      link: ''
+      mandatory: 0
+      repeatable: 0
+      seealso: ''
+      tab: 5
+      tagfield: '511'
+      tagsubfield: '3'
       value_builder: ''
     - authorised_value: ''
       authtypecode: ''
@@ -29235,6 +29303,40 @@ tables:
       defaultvalue: ~
       frameworkcode: ''
       hidden: -6
+      isurl: 0
+      kohafield: ''
+      liblibrarian: Kontrollnummer eller standardnummer för auktoritetspost
+      libopac: Kontrollnummer eller standardnummer för auktoritetspost
+      link: ''
+      mandatory: 0
+      repeatable: 1
+      seealso: ''
+      tab: 5
+      tagfield: '540'
+      tagsubfield: '0'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
+      isurl: 0
+      kohafield: ''
+      liblibrarian: Real World Object URI
+      libopac: Real World Object URI
+      link: ''
+      mandatory: 0
+      repeatable: 1
+      seealso: ''
+      tab: 5
+      tagfield: '540'
+      tagsubfield: '1'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
       isurl: ~
       kohafield: ''
       liblibrarian: Source of term
@@ -29390,8 +29492,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Use and reproduction rights
-      libopac: Use and reproduction rights
+      liblibrarian: Standardized terminology for use and reproduction rights
+      libopac: Standardized terminology for use and reproduction rights
       link: ''
       mandatory: 0
       repeatable: 1

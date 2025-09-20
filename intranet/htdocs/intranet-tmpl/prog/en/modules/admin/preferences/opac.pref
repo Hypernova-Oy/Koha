@@ -562,7 +562,7 @@ OPAC:
                 place_of_birth: Place of birth (370$a)
                 place_of_death: Place of death (370$b)
                 uri: URI (371$u)
-            - "<strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+            - "<strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
         -
             - "Calculate the amount a patron has 'saved' by using the library based on replacement prices, and display:"
             - pref: OPACShowSavings
@@ -571,6 +571,36 @@ OPAC:
                   summary: "in user summary box on OPAC homepage (the system preference 'OPACUserSummary' must be enabled)"
                   user: "on patron's 'your summary' page"
             - ". Note that displayed savings may be inaccurate if checkout history is anonymized."
+        -
+            - pref: OPACVirtualCard
+              choices:
+                  1: Allow
+                  0: "Don't allow"
+            - patrons to access the 'My virtual card' tab on their account page on the OPAC.
+            - "If set to allow, show a "
+            - pref: OPACVirtualCardBarcode
+              default: code39
+              choices:
+                  code39: "CODE39"
+                  code128: "CODE128"
+                  ean13: "EAN-13"
+                  upca: "UPC-A"
+                  upce: "UPC-E"
+                  ean8: "EAN-8"
+                  itf14: "ITF-14"
+                  qrcode: "QR Code"
+                  matrix2of5: "Matrix 2 of 5"
+                  industrial2of5: "Industrial 2 of 5"
+                  iata2of5: "IATA 2 of 5"
+                  coop2of5: "COOP 2 of 5"
+            - " barcode in the patron's virtual card."
+        -
+            - pref: OPACDisableSendList
+              default: 0
+              choices:
+                  1: "Don't allow"
+                  0: Allow
+            - "OPAC users to email lists via a 'Send list' button."
     OpenURL:
         -
             - 'Complete URL of OpenURL resolver (starting with <code>http://</code> or <code>https://</code>):'
@@ -919,29 +949,6 @@ OPAC:
                   1: Show
                   0: "Don't show"
             - purchase suggestions from other patrons on the OPAC.
-        -
-            - pref: OPACVirtualCard
-              choices:
-                  1: Allow
-                  0: "Don't allow"
-            - patrons to access the 'My virtual card' tab on their account page on the OPAC.
-            - "If set to allow, show a "
-            - pref: OPACVirtualCardBarcode
-              default: code39
-              choices:
-                  code39: "CODE39"
-                  code128: "CODE128"
-                  ean13: "EAN-13"
-                  upca: "UPC-A"
-                  upce: "UPC-E"
-                  ean8: "EAN-8"
-                  itf14: "ITF-14"
-                  qrcode: "QR Code"
-                  matrix2of5: "Matrix 2 of 5"
-                  industrial2of5: "Industrial 2 of 5"
-                  iata2of5: "IATA 2 of 5"
-                  coop2of5: "COOP 2 of 5"
-            - " barcode in the patron's virtual card."
         -
             - "Fields that should be mandatory for patron purchase suggestions:"
             - pref: OPACSuggestionMandatoryFields

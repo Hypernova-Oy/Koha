@@ -1,18 +1,18 @@
 # Compendium of fr_CA.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:13-0300\n"
-"PO-Revision-Date: 2025-04-17 03:06+0000\n"
-"Last-Translator: Caroline Cyr-La-Rose <caroline.cyr-la-rose@inlibro.com>\n"
+"PO-Revision-Date: 2025-06-14 03:09+0000\n"
+"Last-Translator: marieluce <marie-luce.laflamme@inLibro.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: fr-CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /fr_CA/22.11/fr-CA-pref.po\n"
 "X-POOTLE-MTIME: 1697486928.162822\n"
@@ -507,15 +507,13 @@ msgstr "Vous pouvez utiliser les champs suivants: homebranch, holdingbranch, ity
 
 # Acquisitions > Printing > OrderPdfFormat
 # Acquisitions > Printing
-#, fuzzy
 msgid "acquisitions.pref#MarcOrderingAutomation# Disable"
-msgstr "Utiliser la mise en page"
+msgstr "Désactiver"
 
 # Acquisitions > Printing > OrderPdfFormat
 # Acquisitions > Printing
-#, fuzzy
 msgid "acquisitions.pref#MarcOrderingAutomation# Enable"
-msgstr "1 page en anglais"
+msgstr "Activer"
 
 # Acquisitions > Policy > MarcFieldsToOrder
 # Acquisitions > Policy
@@ -1893,7 +1891,7 @@ msgstr "."
 
 # Cataloging > Display > AlwaysShowHoldingsTableFilters
 msgid "cataloguing.pref#AlwaysShowHoldingsTableFilters# always show filters by default on the holdings table in the record details page in the staff interface."
-msgstr ""
+msgstr "toujours afficher les filtres par défaut dans le tableau des exemplaires dans la page de notice détaillée de l'interface professionnelle."
 
 # Cataloging > Record structure > ApplyFrameworkDefaults
 msgid "cataloguing.pref#ApplyFrameworkDefaults# Apply framework default values"
@@ -2180,18 +2178,51 @@ msgstr "Utiliser"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "Utiliser"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 msgstr "Par exemple <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "Si cette préférence système est vide, la documentation de format sur http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) sera utilisée."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "Utiliser"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "Les substitutions possibles sont <tt>{MARC}</tt> (format MARC, par exemple \"MARC21\" ou \"UNIMARC\"), <tt>{FIELD}</tt> (numéro de zone, par exemple \"000\" or \"048\"), <tt>{LANG}</tt> langue de l'utilisateur, par exemple \"en\" or \"fi-FI\")."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "Utiliser"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -6039,7 +6070,8 @@ msgstr "PROC: FIC - mettra à jour un exemplaire de la localisation Centre de tr
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+#, fuzzy
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - mettra à jour un exemplaire de la localisation Centre de traitement (PROC) vers la localisation permanente de l'exemplaire lors du retour.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6103,7 +6135,8 @@ msgstr "PROC: FIC - mettra à jour un exemplaire de la localisation Centre de tr
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
+#, fuzzy
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - mettra à jour un exemplaire de la localisation Centre de traitement (PROC) vers la localisation permanente de l'exemplaire lors du prêt.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -9045,7 +9078,8 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "les détails de l'acquisition dans la vue détaillée d'une notice à l'OPAC."
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+#, fuzzy
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
 msgstr "<strong>NOTE :</strong> Les codes de sources valides pour les identifiants des auteurs et contributeurs (consignés dans 024$2) sont actuellement : orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), et viaf (VIAF ID)."
 
 # OPAC > Features > OPACAuthorIdentifiers
@@ -9136,6 +9170,22 @@ msgstr "Afficher"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr " un code QR sur la page de la notice détaillée à l'OPAC."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "Autoriser"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "Ne pas autoriser"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr ""
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Appearance
@@ -11511,23 +11561,32 @@ msgstr "Afficher un message si l'exemplaire a été emprunté depuis moins de"
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "jours."
 
-# Patrons > Notices and notifications > EmailFieldPrimary
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "Un utilisateur enfant"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr ""
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "d'un garant lors de la création du dossier."
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
 msgstr "d'un garant lors de la création du dossier."
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
 msgstr "n'a pas besoin"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron relationships
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
 msgstr "a besoin"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
@@ -12484,7 +12543,7 @@ msgstr "Interdire"
 
 # Patrons > Patron relationships > RestrictPatronsWithFailedNotices
 msgid "patrons.pref#RestrictPatronsWithFailedNotices# a restriction to a patron when their email and SMS messages fail to send at the Koha level."
-msgstr ""
+msgstr "une restriction à l'utilisateur lorsque ses courriels et SMS ne peuvent être envoyés par Koha."
 
 # Patrons > Notices and notifications > SMSSendDriver
 msgid "patrons.pref#SMSSendDriver# <br><strong>NOTE:</strong> Many mobile providers have deprecated support for this feature and it is not recommended for use unless you have a dedicated SMS to Email gateway."
@@ -14611,12 +14670,14 @@ msgstr "Services ILS-DI pour les usagers de l'OPAC (disponible à : /cgi-bin/koh
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
 msgstr "Autoriser les adresses IP"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
 msgstr "pour utiliser les services ILS-DI (si activés). Séparez les adresses IP par des virgules et sans espaces. Laissez cette zone vide pour permettre l'accès à toutes les adresses IP."
 
 # Web services > IdRef > IdRef
@@ -14865,7 +14926,8 @@ msgstr "Activer"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
 # Web services > REST API
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
+#, fuzzy
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
 msgstr "l'attribution des informations d'identification du client OAuth2 pour l'API REST. Nécéssite que Net:: OAuth2::AuthorizationServer soit installé."
 
 # Web services > REST API > RESTPublicAPI
@@ -15918,6 +15980,16 @@ msgstr " lignes d'un rapport demandé par le service Web de rapports."
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "automatiquement de nouvelles notices d'autorité, si nécessaire, plutôt que d'avoir à faire référence à des autorités existantes."
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "Si cette préférence système est vide, la documentation de format sur http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) sera utilisée."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "Les substitutions possibles sont <tt>{MARC}</tt> (format MARC, par exemple \"MARC21\" ou \"UNIMARC\"), <tt>{FIELD}</tt> (numéro de zone, par exemple \"000\" or \"048\"), <tt>{LANG}</tt> langue de l'utilisateur, par exemple \"en\" or \"fi-FI\")."
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #~ msgid "cataloguing.pref#OpacSuppression# <br />Display the following message on the redirect page for suppressed bibliographic records:"
@@ -16178,6 +16250,10 @@ msgstr " lignes d'un rapport demandé par le service Web de rapports."
 # Patrons > Notices and notifications
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "du travail (courriel secondaire)"
+
+# Patrons > Notices and notifications > EmailFieldPrimary
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "Un utilisateur enfant"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

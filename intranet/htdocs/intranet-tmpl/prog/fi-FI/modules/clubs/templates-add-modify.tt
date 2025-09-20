@@ -113,7 +113,7 @@
 
  <fieldset class="rows">
  <legend>Kerhokentät:</legend>
- <p><span class="hint">Tähän pohjaan perustuvien kerhojen luontiin käytetään näitä kenttiä.</span></p>
+ <p><span class="hint">Tähän pohjaan perustuvien kerhojen luontiin käytetään näitä kenttiä</span></p>
  <div id="club-template-fields">
  [% FOREACH f IN club_template.club_template_fields %]
  <div class="club-field">
@@ -147,13 +147,13 @@
  </div>
  <fieldset class="action">
  <a href="#" class="add_club_field">
- <i class="fa fa-plus"></i> Lisää uusi kenttä </a>
+ <i class="fa fa-plus"></i> Lisää kenttä </a>
  </fieldset>
  </fieldset>
 
  <fieldset class="rows">
  <legend>Ilmoittautumiskentät</legend>
- <p><span class="hint">Näitä kenttiä käytetään, kun asiakkaita ilmoitetaan tähän pohjaan perustuviin kerhoihin.</span></p>
+ <p><span class="hint">Näitä kenttiä käytetään, kun asiakkaita ilmoitetaan tähän pohjaan perustuviin kerhoihin</span></p>
  <div id="club-template-enrollment-fields">
  [% FOREACH f IN club_template.club_template_enrollment_fields %]
  <div class="enrollment-field">
@@ -191,7 +191,7 @@
  </div>
  <fieldset class="action">
  <a href="#" class="add_enrollment_field">
- <i class="fa fa-plus"></i> Lisää uusi kenttä </a>
+ <i class="fa fa-plus"></i> Lisää kenttä </a>
  </fieldset>
  </fieldset>
 

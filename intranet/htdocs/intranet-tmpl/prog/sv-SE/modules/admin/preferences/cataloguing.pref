@@ -287,12 +287,16 @@ cataloguing.pref:
     - class: url
       pref: MarcFieldDocURL
     - som URL för MARC-fältdokumentation.
-    - Möjliga ersättningar är <tt>{MARC}</tt> (marc-smak, t.ex. "MARC21" eller "UNIMARC"),
-      <tt>{FIELD}</tt> (fältnummer, t.ex. "000" eller "048 "), <tt>{LANG}</tt> (användarspråk,
-      t.ex. "en" eller "fi-FI").
-    - Om den lämnas tom används formatdokumentationen på http://loc.gov (MARC21) eller
-      http://archive.ifla.org (UNIMARC).
-    - Till exempel <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>
+    - <br><br>
+    - 'If left empty, the default URLs are:'
+    - '<ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>'
+    - '<li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>'
+    - 'Placeholders available for use in the URL:'
+    - '<ul><li><code>{MARC}</code>: MARC flavor, "MARC21" or "UNIMARC"</li>'
+    - '<li><code>{FIELD}</code>: field number, for example, "000" or "048"</li>'
+    - '<li><code>{LANG}</code>: language, for example, "en" or "fi-FI"</li></ul>'
+    - Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>
+    - <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>
   - - choices:
         '0': Visa
         '1': Visa inte
@@ -344,11 +348,10 @@ cataloguing.pref:
     - är den inloggade användarens bibliotek. Den andra fliken innehåller alla andra
       exemplar.
   - - choices:
-        '0': Don't
-        '1': Do
+        '0': Visa inte
+        '1': Visa
       pref: AlwaysShowHoldingsTableFilters
-    - always show filters by default on the holdings table in the record details page
-      in the staff interface.
+    - alltid filter som standard i beståndstabellen på postinformationssidan i personalgränssnittet.
   - - Visa inte
     - class: multi
       pref: NotesToHide

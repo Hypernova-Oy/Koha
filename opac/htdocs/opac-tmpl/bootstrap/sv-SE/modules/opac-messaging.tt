@@ -79,7 +79,7 @@
  [% ELSIF ( messaging_preference.Auto_Renewals ) %]<span>Automatiskt omlån</span>
  [% ELSIF ( messaging_preference.Recall_Waiting ) %]<span>Återkrav väntar på hämtning</span>
  [% ELSIF ( messaging_preference.Recall_Requested ) %]<span>Återlämna återkrävt exemplar</span>
- [% ELSE %]<span>Okänt</span> [% END %]</td>
+ [% ELSE %]<span>Okänd</span> [% END %]</td>
  [% IF ( messaging_preference.takes_days ) %]
  <td><select aria-label="Välj hur många dagar i förväg som du vill bli meddelad" class="input-mini" name="[% messaging_preference.message_attribute_id | html %]-DAYS">
  [% FOREACH select_day IN messaging_preference.select_days %]
@@ -180,7 +180,7 @@
  <li>
  <label for="sms_provider_id">SMS-leverantör:</label>
  <select id="sms_provider_id" name="sms_provider_id">
- <option value="">Okänt</option>
+ <option value="">Okänd</option>
  [% FOREACH s IN sms_providers %]
  [% IF s.id == sms_provider_id %]
  <option value="[% s.id | html %]" selected="selected">[% s.name | html %]</option>

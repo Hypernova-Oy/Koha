@@ -27,11 +27,11 @@
  [% CASE 'error_on_insert_circ_rule' %]
  <div class="alert alert-danger">Lainaussääntöä ei luotu</div>
  [% CASE 'ERROR_password_too_short' %]
- <div class="alert alert-danger">Asiakasta ei lisätty. Salasana on liian lyhyt.</div>
+ <div class="alert alert-danger">Asiakasta ei lisätty, koska salasana on liian lyhyt</div>
  [% CASE 'ERROR_password_too_weak' %]
- <div class="alert alert-danger">Asiakastietoa ei ole luotu liian heikon salasanan takia. Salasanassa on oltava vähintään yksi iso ja yksi pieni kirjain sekä yksi numero.</div>
+ <div class="alert alert-danger">Asiakastietoa ei ole luotu liian heikon salasanan takia. Salasanassa on oltava vähintään yksi iso ja yksi pieni kirjain sekä yksi numero</div>
  [% CASE 'ERROR_password_has_whitespaces' %]
- <div class="alert alert-danger">Asiakasta ei lisätty, salasana sisältää tyhjiä merkkejä.</div>
+ <div class="alert alert-danger">Asiakasta ei lisätty, koska salasana sisältää tyhjiä merkkejä</div>
  [% CASE %][% message | html %]
  [% END %]
 [% END %]

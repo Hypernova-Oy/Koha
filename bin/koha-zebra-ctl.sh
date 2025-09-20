@@ -28,13 +28,13 @@ USER=koha
 GROUP=koha
 DBNAME=koha
 NAME=koha-zebra-ctl.$DBNAME
-LOGDIR=/build/koha-24.11.04/debian/tmp/var/log/koha
+LOGDIR=/build/koha-24.11.08/debian/tmp/var/log/koha
 ERRLOG=$LOGDIR/koha-zebradaemon.err
 STDOUT=$LOGDIR/koha-zebradaemon.log
 OUTPUT=$LOGDIR/koha-zebradaemon-output.log
-KOHA_CONF=/build/koha-24.11.04/debian/tmp/etc/koha/koha-conf.xml
-RUNDIR=/build/koha-24.11.04/debian/tmp/var/run/koha/zebradb
-LOCKDIR=/build/koha-24.11.04/debian/tmp/var/lock/koha/zebradb
+KOHA_CONF=/build/koha-24.11.08/debian/tmp/etc/koha/koha-conf.xml
+RUNDIR=/build/koha-24.11.08/debian/tmp/var/run/koha/zebradb
+LOCKDIR=/build/koha-24.11.08/debian/tmp/var/lock/koha/zebradb
 # you may need to change this depending on where zebrasrv is installed
 ZEBRASRV=/zebrasrv
 ZEBRAOPTIONS="-v none,fatal,warn"

@@ -151,7 +151,7 @@
  <span>Ett fel inträffade när denna lista togs bort.</span>
  [% CASE 'error_on_add_biblio' %]
  [% IF m.item_barcode %]
- <span>The record for this item ([% m.item_barcode | html %]) has not been added to the list. Please verify it is not already in the list.</span>
+ <span>Posten för det här exemplaret ([% m.item_barcode | html %]) har inte lagts till i listan. Kontrollera att det inte redan finns i denna lista.</span>
  [% ELSE %]
  <span>Post ([% m.bibnum | html %]) har inte lagts till listan. Kontrollera att det inte redan finns i denna lista.</span>
  [% END %]
@@ -163,7 +163,7 @@
  <span>Listan har tagits bort.</span>
  [% CASE 'success_on_add_biblio' %]
  [% IF m.item_barcode %]
- <span>The record for this item ([% m.item_barcode | html %]) has been added to the list.</span>
+ <span>Posten för det här exemplaret ([% m.item_barcode | html %]) har lagts till i listan.</span>
  [% ELSE %]
  <span>Post ([% m.bibnum | html %]) har lagts till i listan.</span>
  [% END %]
@@ -186,7 +186,7 @@
  [% CASE 'unauthorized_on_add_biblio' %]
  <span>Du saknar behörighet att lägga till en post till denna lista.</span>
  [% CASE 'unauthorized_transfer' %]
- <span>Du saknar behörighet att överföra ägarskap av den här listan.</span>
+ <span>Transfer not allowed: You or the selected user do not have the required permissions.</span>
  [% CASE 'new_owner_not_found' %]
  <span>Den nya ägaren kunde inte hittas längre.</span>
  [% CASE 'no_biblio_removed' %]
@@ -571,7 +571,7 @@
  [% INCLUDE 'csrf-token.inc' %]
  <div class="modal-content">
  <div class="modal-header">
- <h1 class="modal-title" id="addToListLabel">Add records</h1>
+ <h1 class="modal-title" id="addToListLabel">Lägg till poster</h1>
  <button aria-label="Stäng" class="btn-close" data-bs-dismiss="modal" type="button"></button>
  </div>
  <div class="modal-body">
@@ -606,7 +606,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% INCLUDE 'datatables.inc' %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% IF print %]
  <script>
             $( document ).ready(function() {

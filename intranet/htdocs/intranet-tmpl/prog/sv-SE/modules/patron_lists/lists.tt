@@ -151,7 +151,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% Asset.js("js/tools-menu.js") | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% INCLUDE 'datatables.inc' %]
 
  <script>
@@ -173,10 +172,10 @@
             $("#patrons_lists_form").submit(function(){
                 var checkedItems = $("input[name=patron_lists_ids]:checked");
                 if ( checkedItems.size() == 0) {
-                    alert(_("You must select one or more lists to delete"));
+                    alert(_("Du måste välja en eller flera listor att ta bort"));
                     return false;
                 }
-                if( confirm(_("Are you sure you want to delete the selected lists?")) ) {
+                if( confirm(_("Är du säker på att du vill ta bort de valda listorna?")) ) {
                     return true;
                 } else {
                     return false;

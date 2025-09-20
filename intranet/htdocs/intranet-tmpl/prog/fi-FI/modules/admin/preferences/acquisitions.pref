@@ -140,11 +140,11 @@ Hankinnat:
       listasta: kirjaston vastausosoite, kirjaston sähköpostiosoite, <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault">ReplytoDefault</a>
       ja <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress">KohaAdminEmailAddress</a>.'
   - - choices:
-        '0': Disable
-        '1': Enable
+        '0': Älä käytä
+        '1': Käytä
       default: no
       pref: MarcOrderingAutomation
-    - automatic order line creation from MARC records.
+    - automaattista tilausten luontia MARC-tietueista.
   EDIFACT:
   - - choices:
         '0': Älä käytä

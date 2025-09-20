@@ -278,7 +278,7 @@
                         },
                         error: function(data){
                             let error = data.responseJSON && data.responseJSON.error == "email_not_sent"
-                                ? _("Sähköpostia ei lähetetty, ota yhteys ylläpitoon.")
+                                ? _("Sähköpostia ei lähetetty, ota yhteys ylläpitoon")
                                 : _("Odottamaton ongelman, ota yhteys ylläpitoon");
                             $("#email_error").show().html(error);
                         }

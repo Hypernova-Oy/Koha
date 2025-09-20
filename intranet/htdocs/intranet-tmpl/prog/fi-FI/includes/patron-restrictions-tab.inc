@@ -25,7 +25,7 @@
  </td>
  <td>
  [% IF restriction.comment.search('OVERDUES_PROCESS') %]
- <span>Myöhästymisestä aiheutunut rajoitus [% restriction.comment.remove('OVERDUES_PROCESS ') | $raw %]</span>
+ <span>Rajoitus myöhästyneestä lainasta [% restriction.comment.remove('OVERDUES_PROCESS ') | $raw %]</span>
  [% ELSE %]
  [% restriction.comment | $raw %]
  [% END %]

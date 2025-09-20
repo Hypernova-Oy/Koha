@@ -1101,7 +1101,15 @@
  <xsl:attribute name="href">/cgi-bin/koha/tracklinks.pl?uri=<xsl:value-of select="str:encode-uri(marc:subfield[@code='u'], true())"/>&amp;biblionumber=<xsl:value-of select="$biblionumber"/></xsl:attribute>
  </xsl:when>
  <xsl:otherwise>
- <xsl:attribute name="href"><xsl:value-of select="marc:subfield[@code='u']"/></xsl:attribute>
+ <xsl:attribute name="href">
+ <xsl:call-template name="AddMissingProtocol">
+ <xsl:with-param name="resourceLocation" select="marc:subfield[@code='u']"/>
+ <xsl:with-param name="indicator1" select="@ind1"/>
+ <xsl:with-param name="accessMethod" select="marc:subfield[@code='2']"/>
+ </xsl:call-template>
+ <xsl:value-of select="marc:subfield[@code='u']"/>
+ </xsl:attribute>
+
  </xsl:otherwise>
  </xsl:choose>
  <xsl:choose>
@@ -1140,7 +1148,7 @@
  <status english="Withdrawn">Återkallad</status>
  <status english="Lost">Förlorad</status>
  <status english="Damaged">Skadad</status>
- <status english="Pending hold">Reservation i kö</status>
+ <status english="Pending hold">Köad reservation</status>
  <status english="In transit">Under transport</status>
  <status english="Hold waiting">Reserverad</status>
  <status english="Recall waiting">Väntande återkrav</status>

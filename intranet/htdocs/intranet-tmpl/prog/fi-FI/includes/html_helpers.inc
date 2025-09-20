@@ -335,7 +335,7 @@
  [% IF item.holds %]
  <a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% item.biblionumber | uri %]" title="Tämän tietueen varaukset: [% item.holds | html -%]">
  [% ELSE %]
- <a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% item.biblionumber | uri %]" title="Tietueelle ei ole varauksia">
+ <a href="/cgi-bin/koha/reserve/request.pl?biblionumber=[% item.biblionumber | uri %]" title="Ei varauksia tähän tietueeseen">
  [% END %]
  [% END # /IF item.holds %]
  [% IF item.holds %]

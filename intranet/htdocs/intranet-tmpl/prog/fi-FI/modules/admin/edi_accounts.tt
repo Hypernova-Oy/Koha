@@ -160,12 +160,12 @@
  <li>
  <label for="upload_port">Lähetysportti: </label>
  <input type="text" name="upload_port" id="upload_port" size="20" maxlength="40" value="[% account.upload_port | html %]" />
- <div class="hint">Latausportin (upload) oletusarvo on 22 ellei muuta ole asetettu.</div>
+ <div class="hint">Latausportin (upload) oletusarvo on 22 (SFTP:lle) tai 21 (FTP:lle) ellei muuta ole asetettu.</div>
  </li>
  <li>
  <label for="download_port">Latausportti: </label>
  <input type="text" name="download_port" id="download_port" size="20" maxlength="40" value="[% account.download_port | html %]" />
- <div class="hint">Latausportin (download) oletusarvo on 22 ellei muuta ole asetettu.</div>
+ <div class="hint">Latausportin (download) oletusarvo on 22 (SFTP:lle) tai 21 (FTP:lle) ellei muuta ole asetettu.</div>
  </li>
  <li>
  <label for="download_directory">Lataushakemisto: </label>
@@ -272,7 +272,7 @@
 [% END %]
 [% IF delete_confirm %]
 <div class="alert alert-warning">
-<h1>Vahvista EDI-tilin poisto</h1>
+<h1>Vahvista EDI-tilin poisto?</h1>
 <table>
  <tr>
  <th>Toimittaja</th>

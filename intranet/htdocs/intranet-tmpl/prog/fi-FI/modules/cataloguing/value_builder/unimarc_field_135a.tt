@@ -44,34 +44,34 @@
  <option value="d">teksti</option>
  [% END %]
  [% IF ( f1e ) %]
- <option value="e" selected="selected">données bibliographiques</option>
+ <option value="e" selected="selected">bibliografiset tiedot</option>
  [% ELSE %]
- <option value="e">données bibliographiques</option>
+ <option value="e">bibliografiset tiedot</option>
  [% END %]
  [% IF ( f1f ) %]
- <option value="f" selected="selected">polices de caractères</option>
+ <option value="f" selected="selected">fontit</option>
  [% ELSE %]
- <option value="f">polices de caractères</option>
+ <option value="f">fontit</option>
  [% END %]
  [% IF ( f1g ) %]
- <option value="g" selected="selected">jeu</option>
+ <option value="g" selected="selected">peli</option>
  [% ELSE %]
- <option value="g">jeu</option>
+ <option value="g">peli</option>
  [% END %]
  [% IF ( f1h ) %]
- <option value="h" selected="selected">son</option>
+ <option value="h" selected="selected">hänen</option>
  [% ELSE %]
- <option value="h">son</option>
+ <option value="h">hänen</option>
  [% END %]
  [% IF ( f1i ) %]
- <option value="i" selected="selected">multimédia interactif</option>
+ <option value="i" selected="selected">interaktiivinen multimedia</option>
  [% ELSE %]
- <option value="i">multimédia interactif</option>
+ <option value="i">interaktiivinen multimedia</option>
  [% END %]
  [% IF ( f1j ) %]
- <option value="j" selected="selected">système ou service en ligne</option>
+ <option value="j" selected="selected">verkkojärjestelmä tai -palvelu</option>
  [% ELSE %]
- <option value="j">système ou service en ligne</option>
+ <option value="j">verkkojärjestelmä tai -palvelu</option>
  [% END %]
  [% IF ( f1u ) %]
  <option value="u" selected="selected">tuntematon</option>
@@ -91,68 +91,68 @@
  </select>
  </td></tr>
  <tr>
- <td><label for="f2">Determinant of material specificity:</label></td>
+ <td><label for="f2">Materiaalispesifisyyden määräävä tekijä:</label></td>
  <td>
  <select name="f2" id="f2">
  [% IF ( f2a ) %]
- <option value="a" selected="selected">a- magnetic tape</option>
+ <option value="a" selected="selected">a- magneettinauha</option>
  [% ELSE %]
- <option value="a">a- magnetic tape</option>
+ <option value="a">a- magneettinauha</option>
  [% END %]
  [% IF ( f2b ) %]
- <option value="b" selected="selected">b- computer chip in the cartidge</option>
+ <option value="b" selected="selected">b - tietokoneen siru kotelossa</option>
  [% ELSE %]
- <option value="b">b- computer chip in the cartidge</option>
+ <option value="b">b - tietokoneen siru kotelossa</option>
  [% END %]
  [% IF ( f2c ) %]
- <option value="c" selected="selected">c- computer optical disc in a cassete</option>
+ <option value="c" selected="selected">c - tietokoneen optinen levy kotelossa</option>
  [% ELSE %]
- <option value="c">c- computer optical disc in a cassete</option>
+ <option value="c">c - tietokoneen optinen levy kotelossa</option>
  [% END %]
  [% IF ( f2d ) %]
- <option value="d" selected="selected">d- computer disk, type not defined</option>
+ <option value="d" selected="selected">d- tietokonelevy, tyyppiä ei määritelty</option>
  [% ELSE %]
- <option value="d">d- computer disk, type not defined</option>
+ <option value="d">d- tietokonelevy, tyyppiä ei määritelty</option>
  [% END %]
  [% IF ( f2e ) %]
- <option value="e" selected="selected">e- cassette with computer disk, type not defined</option>
+ <option value="e" selected="selected">e- kotelo tietokonelevyllä, tyyppiä ei määritetty</option>
  [% ELSE %]
- <option value="e">e- cassete with computer disk, type not defined</option>
+ <option value="e">e- kasetti tietokonelevyllä, tyyppiä ei määritelty</option>
  [% END %]
  [% IF ( f2f ) %]
- <option value="f" selected="selected">f- computer magnetic tape in a cassette</option>
+ <option value="f" selected="selected">f- tietokoneen magneettinauha kotelossa</option>
  [% ELSE %]
- <option value="f">f- computer magnetic tape in a cassette</option>
+ <option value="f">f- tietokoneen magneettinauha kotelossa</option>
  [% END %]
  [% IF ( f2j ) %]
- <option value="j" selected="selected">j- computer floppy disk</option>
+ <option value="j" selected="selected">j- tietokoneen levyke</option>
  [% ELSE %]
- <option value="j">j- computer floppy disk</option>
+ <option value="j">j- tietokoneen levyke</option>
  [% END %]
  [% IF ( f2k ) %]
- <option value="k" selected="selected">k- computer card</option>
+ <option value="k" selected="selected">k- tietokoneen kortti</option>
  [% ELSE %]
- <option value="k">k- computer card</option>
+ <option value="k">k- tietokoneen kortti</option>
  [% END %]
  [% IF ( f2m ) %]
- <option value="m" selected="selected">m- computer magneto-optical disk</option>
+ <option value="m" selected="selected">m- tietokoneen magneto-optinen levy</option>
  [% ELSE %]
- <option value="m">m- computer magneto-optical disk</option>
+ <option value="m">m- tietokoneen magneto-optinen levy</option>
  [% END %]
  [% IF ( f2o ) %]
- <option value="o" selected="selected">o- computer optical disk</option>
+ <option value="o" selected="selected">o- tietokoneen optinen levy</option>
  [% ELSE %]
- <option value="o">o- computer optical disk</option>
+ <option value="o">o- tietokoneen optinen levy</option>
  [% END %]
  [% IF ( f2r ) %]
- <option value="r" selected="selected">r- online</option>
+ <option value="r" selected="selected">r- verkko</option>
  [% ELSE %]
- <option value="r">r- online</option>
+ <option value="r">r- verkko</option>
  [% END %]
  [% IF ( f2s ) %]
- <option value="s" selected="selected">s- standalone device</option>
+ <option value="s" selected="selected">s- erillinen laite</option>
  [% ELSE %]
- <option value="s">s- standalone device</option>
+ <option value="s">s- erillinen laite</option>
  [% END %]
  [% IF ( f2u ) %]
  <option value="u" selected="selected">u- unknown</option>
@@ -160,9 +160,9 @@
  <option value="u">u- unknown</option>
  [% END %]
  [% IF ( f2z ) %]
- <option value="z" selected="selected">z- others</option>
+ <option value="z" selected="selected">z- muut</option>
  [% ELSE %]
- <option value="z">z- others</option>
+ <option value="z">z- muut</option>
  [% END %]
  </select>
  </td></tr>
@@ -171,34 +171,34 @@
  <td>
  <select name="f3" id="f3">
  [% IF ( f3a ) %]
- <option value="a" selected="selected">a- monochrome</option>
+ <option value="a" selected="selected">a- yksivärinen</option>
  [% ELSE %]
- <option value="a">a- monochrome</option>
+ <option value="a">a- yksivärinen</option>
  [% END %]
  [% IF ( f3b ) %]
- <option value="b" selected="selected">b- black and white</option>
+ <option value="b" selected="selected">b- mustavalkoinen</option>
  [% ELSE %]
- <option value="b">b- black and white</option>
+ <option value="b">b- mustavalkoinen</option>
  [% END %]
  [% IF ( f3c ) %]
- <option value="c" selected="selected">c- multicolored</option>
+ <option value="c" selected="selected">c- monivärinen</option>
  [% ELSE %]
- <option value="c">c- multicolored</option>
+ <option value="c">c- monivärinen</option>
  [% END %]
  [% IF ( f3g ) %]
- <option value="g" selected="selected">g- gray scale</option>
+ <option value="g" selected="selected">g- harmaasävy</option>
  [% ELSE %]
- <option value="g">g- gray scaled</option>
+ <option value="g">g- harmaasävyinen</option>
  [% END %]
  [% IF ( f3m ) %]
- <option value="m" selected="selected">m- mixed</option>
+ <option value="m" selected="selected">m- sekoitettu</option>
  [% ELSE %]
- <option value="m">m- mixed</option>
+ <option value="m">m- sekoitettu</option>
  [% END %]
  [% IF ( f3n ) %]
- <option value="n" selected="selected">n- not applicable</option>
+ <option value="n" selected="selected">n- soveltumaton</option>
  [% ELSE %]
- <option value="n">n- not applicable</option>
+ <option value="n">n- soveltumaton</option>
  [% END %]
  [% IF ( f3u ) %]
  <option value="u" selected="selected">u- unknown</option>
@@ -206,50 +206,50 @@
  <option value="u">u- unknown</option>
  [% END %]
  [% IF ( f3z ) %]
- <option value="z" selected="selected">z- others</option>
+ <option value="z" selected="selected">z- muut</option>
  [% ELSE %]
- <option value="z">z- others</option>
+ <option value="z">z- muut</option>
  [% END %]
  </select>
  </td></tr>
  <tr>
- <td><label for="f4">Geometric dimensions:</label></td>
+ <td><label for="f4">Geometriset mitat:</label></td>
  <td>
  <select name="f4" id="f4">
  [% IF ( f4a ) %]
- <option value="a" selected="selected">a- 3.5 inches</option>
+ <option value="a" selected="selected">a- 3.5 tuumaa</option>
  [% ELSE %]
- <option value="a">a- 3.5 inches</option>
+ <option value="a">a- 3.5 tuumaa</option>
  [% END %]
  [% IF ( f4e ) %]
- <option value="e" selected="selected">e- 12 inches</option>
+ <option value="e" selected="selected">e- 12 tuumaa</option>
  [% ELSE %]
- <option value="e">e- 12 inches</option>
+ <option value="e">e- 12 tuumaa</option>
  [% END %]
  [% IF ( f4g ) %]
- <option value="g" selected="selected">g- 4.7 inches or 12 cm</option>
+ <option value="g" selected="selected">g- 4.7 tuumaa tai 12 cm</option>
  [% ELSE %]
- <option value="g">g- 4.7 inches or 12 cm</option>
+ <option value="g">g- 4.7 tuumaa tai 12 cm</option>
  [% END %]
  [% IF ( f4i ) %]
- <option value="i" selected="selected">i- 1 1/8 x 2 3/8 inches</option>
+ <option value="i" selected="selected">i- 1 1/8 x 2 3/8 tuumaa</option>
  [% ELSE %]
- <option value="i">i- 1 1/8 x 2 3/8 inches</option>
+ <option value="i">i- 1 1/8 x 2 3/8 tuumaa</option>
  [% END %]
  [% IF ( f4j ) %]
- <option value="j" selected="selected">j- 3 7/8 x 2 1/2 inches</option>
+ <option value="j" selected="selected">j- 3 7/8 x 2 1/2 tuumaa</option>
  [% ELSE %]
- <option value="j">j- 3 7/8 x 2 1/2 inches</option>
+ <option value="j">j- 3 7/8 x 2 1/2 tuumaa</option>
  [% END %]
  [% IF ( f4n ) %]
- <option value="n" selected="selected">n- not applicable</option>
+ <option value="n" selected="selected">n- soveltumaton</option>
  [% ELSE %]
- <option value="n">n- not applicable</option>
+ <option value="n">n- soveltumaton</option>
  [% END %]
  [% IF ( f4o ) %]
- <option value="o" selected="selected">o- 5.25 inches</option>
+ <option value="o" selected="selected">o- 5.25 tuumaa</option>
  [% ELSE %]
- <option value="o">o- 5.25 inches</option>
+ <option value="o">o- 5.25 tuumaa</option>
  [% END %]
  [% IF ( f4u ) %]
  <option value="u" selected="selected">u- unknown</option>
@@ -257,19 +257,19 @@
  <option value="u">u- unknown</option>
  [% END %]
  [% IF ( f4v ) %]
- <option value="v" selected="selected">v- 8 inches</option>
+ <option value="v" selected="selected">v- 8 tuumaa</option>
  [% ELSE %]
- <option value="v">v- 8 inches</option>
+ <option value="v">v- 8 tuumaa</option>
  [% END %]
  [% IF ( f4z ) %]
- <option value="z" selected="selected">z- others</option>
+ <option value="z" selected="selected">z- muut</option>
  [% ELSE %]
- <option value="z">z- others</option>
+ <option value="z">z- muut</option>
  [% END %]
  </select>
  </td></tr>
  <tr>
- <td><label for="f5">Sound:</label></td>
+ <td><label for="f5">Ääni:</label></td>
  <td>
  <select name="f5" id="f5">
  [% IF ( f5space ) %]
@@ -278,9 +278,9 @@
  <option value=" ">no sound</option>
  [% END %]
  [% IF ( f5a ) %]
- <option value="a" selected="selected">a- with sound</option>
+ <option value="a" selected="selected">a- äänellä</option>
  [% ELSE %]
- <option value="a">a- with sound</option>
+ <option value="a">a- äänellä</option>
  [% END %]
  [% IF ( f5u ) %]
  <option value="u" selected="selected">u- unknown</option>
@@ -290,23 +290,23 @@
  </select>
  </td></tr>
  <tr>
- <td><label for="f6">Image depth (in bits):</label></td>
+ <td><label for="f6">Kuvasyvyys (bitteinä):</label></td>
  <td>
  <input type="text" value="[% f6 | html %]" name="f6" id="f6" maxlength="3" size="4">
  </td></tr>
  <tr>
- <td><label for="f7">The number of file formats in the electronic resource:</label></td>
+ <td><label for="f7">Elektronisen resurssin tiedostomuotojen lukumäärä:</label></td>
  <td>
  <select name="f7" id="f7">
  [% IF ( f7a ) %]
- <option value="a" selected="selected">a- one file format</option>
+ <option value="a" selected="selected">a- yksi tiedostomuoto</option>
  [% ELSE %]
- <option value="a">a- one file format</option>
+ <option value="a">a- yksi tiedostomuoto</option>
  [% END %]
  [% IF ( f7m ) %]
- <option value="m" selected="selected">m- many file formats</option>
+ <option value="m" selected="selected">m- monia tiedostomuotoja</option>
  [% ELSE %]
- <option value="m">m- many file formats</option>
+ <option value="m">m- monia tiedostomuotoja</option>
  [% END %]
  [% IF ( f7u ) %]
  <option value="u" selected="selected">u- unknown</option>
@@ -316,23 +316,23 @@
  </select>
  </td></tr>
  <tr>
- <td><label for="f8">Quality Assurance Indicators:</label></td>
+ <td><label for="f8">Laadunvarmistuksen indikaattorit:</label></td>
  <td>
  <select name="f8" id="f8">
  [% IF ( f8a ) %]
- <option value="a" selected="selected">a- missing</option>
+ <option value="a" selected="selected">a- puuttuva</option>
  [% ELSE %]
- <option value="a">a- missing</option>
+ <option value="a">a- puuttuva</option>
  [% END %]
  [% IF ( f8n ) %]
- <option value="n" selected="selected">n- not applicable</option>
+ <option value="n" selected="selected">n- soveltumaton</option>
  [% ELSE %]
- <option value="n">n- not applicable</option>
+ <option value="n">n- soveltumaton</option>
  [% END %]
  [% IF ( f8p ) %]
- <option value="p" selected="selected">p- available</option>
+ <option value="p" selected="selected">p- saatavana</option>
  [% ELSE %]
- <option value="p">p- available</option>
+ <option value="p">p- saatavana</option>
  [% END %]
  [% IF ( f8u ) %]
  <option value="u" selected="selected">u- unknown</option>
@@ -342,38 +342,38 @@
  </select>
  </td></tr>
  <tr>
- <td><label for="f9">Antecedent / Source:</label></td>
+ <td><label for="f9">Edeltäjä / Lähde:</label></td>
  <td>
  <select name="f9" id="f9">
  [% IF ( f9a ) %]
- <option value="a" selected="selected">a- the file is played from the original</option>
+ <option value="a" selected="selected">a- tiedosto toistetaan alkuperäisestä</option>
  [% ELSE %]
- <option value="a">a- the file is played from the original</option>
+ <option value="a">a- tiedosto toistetaan alkuperäisestä</option>
  [% END %]
  [% IF ( f9b ) %]
- <option value="b" selected="selected">b- the file is played from a microform</option>
+ <option value="b" selected="selected">b- tiedosto toistetaan mikrotallenteelta</option>
  [% ELSE %]
- <option value="b">b- the file is played from a microform</option>
+ <option value="b">b- tiedosto toistetaan mikrotallenteelta</option>
  [% END %]
  [% IF ( f9c ) %]
- <option value="c" selected="selected">c- the file is played from an electronic resource</option>
+ <option value="c" selected="selected">c- tiedosto toistetaan sähköisestä lähteestä</option>
  [% ELSE %]
- <option value="c">c- the file is played from an electronic resource</option>
+ <option value="c">c- tiedosto toistetaan sähköisestä lähteestä</option>
  [% END %]
  [% IF ( f9d ) %]
- <option value="d" selected="selected">d- the file is played from an intermediate source other than the microform</option>
+ <option value="d" selected="selected">d- tiedosto toistetaan jostakin muusta välilähteestä kuin mikrotallenteelta</option>
  [% ELSE %]
- <option value="d">d- the file is played from an intermediate source other than the microform</option>
+ <option value="d">d- tiedosto toistetaan jostakin muusta välilähteestä kuin mikrotallenteelta</option>
  [% END %]
  [% IF ( f9m ) %]
- <option value="m" selected="selected">m- mixed</option>
+ <option value="m" selected="selected">m- sekoitettu</option>
  [% ELSE %]
- <option value="m">m- mixed</option>
+ <option value="m">m- sekoitettu</option>
  [% END %]
  [% IF ( f9n ) %]
- <option value="n" selected="selected">n- not applicable</option>
+ <option value="n" selected="selected">n- soveltumaton</option>
  [% ELSE %]
- <option value="n">n- not applicable</option>
+ <option value="n">n- soveltumaton</option>
  [% END %]
  [% IF ( f9u ) %]
  <option value="u" selected="selected">u- unknown</option>
@@ -383,28 +383,28 @@
  </select>
  </td></tr>
  <tr>
- <td><label for="f10">Compression level:</label></td>
+ <td><label for="f10">Pakkaustaso:</label></td>
  <td>
  <select name="f10" id="f10">
  [% IF ( f10a ) %]
- <option value="a" selected="selected">a- not compressed</option>
+ <option value="a" selected="selected">a- ei pakattu</option>
  [% ELSE %]
- <option value="a">a- not compressed</option>
+ <option value="a">a- ei pakattu</option>
  [% END %]
  [% IF ( f10b ) %]
- <option value="b" selected="selected">b- compressed without losses</option>
+ <option value="b" selected="selected">b- pakattu ilman häviöitä</option>
  [% ELSE %]
- <option value="b">b- compressed without losses</option>
+ <option value="b">b- pakattu ilman häviöitä</option>
  [% END %]
  [% IF ( f10d ) %]
- <option value="d" selected="selected">d- compressed with losses</option>
+ <option value="d" selected="selected">d- pakattu häviön kanssa</option>
  [% ELSE %]
- <option value="d">d- compressed with losses</option>
+ <option value="d">d- pakattu häviön kanssa</option>
  [% END %]
  [% IF ( f10m ) %]
- <option value="m" selected="selected">m- mixed</option>
+ <option value="m" selected="selected">m- sekoitettu</option>
  [% ELSE %]
- <option value="m">m- mixed</option>
+ <option value="m">m- sekoitettu</option>
  [% END %]
  [% IF ( f10u ) %]
  <option value="u" selected="selected">u- unknown</option>
@@ -414,28 +414,28 @@
  </select>
  </td></tr>
  <tr>
- <td><label for="f11">Quality and purpose of the electronic resource:</label></td>
+ <td><label for="f11">Elektronisen resurssin laatu ja tarkoitus:</label></td>
  <td>
  <select name="f11" id="f11">
  [% IF ( f11a ) %]
- <option value="a" selected="selected">a- access</option>
+ <option value="a" selected="selected">a- pääsy</option>
  [% ELSE %]
- <option value="a">a- access</option>
+ <option value="a">a- pääsy</option>
  [% END %]
  [% IF ( f11n ) %]
- <option value="n" selected="selected">n- not applicable</option>
+ <option value="n" selected="selected">n- soveltumaton</option>
  [% ELSE %]
- <option value="n">n- not applicable</option>
+ <option value="n">n- soveltumaton</option>
  [% END %]
  [% IF ( f11p ) %]
- <option value="p" selected="selected">p- preservation</option>
+ <option value="p" selected="selected">p- säilytys</option>
  [% ELSE %]
- <option value="p">p- preservation</option>
+ <option value="p">p- säilytys</option>
  [% END %]
  [% IF ( f11r ) %]
- <option value="r" selected="selected">r- substitute</option>
+ <option value="r" selected="selected">r- korvike</option>
  [% ELSE %]
- <option value="r">r- substitute</option>
+ <option value="r">r- korvike</option>
  [% END %]
  [% IF ( f11u ) %]
  <option value="u" selected="selected">u- unknown</option>

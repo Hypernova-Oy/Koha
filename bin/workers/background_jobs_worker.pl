@@ -90,12 +90,14 @@ unless (@queues) {
     push @queues, 'default';
 }
 
-my $conn;
+my ( $conn, $error );
 try {
     $conn = Koha::BackgroundJob->connect;
 } catch {
-    warn sprintf "Cannot connect to the message broker, the jobs will be processed anyway (%s)", $_;
+    $error = sprintf "Cannot connect to the message broker, the jobs will be processed anyway (%s)", $_;
 };
+$error ||= "Cannot connect to the message broker, the jobs will be processed anyway" unless $conn;
+warn $error if $error;
 
 my $pm = Parallel::ForkManager->new($max_processes);
 
@@ -122,8 +124,27 @@ while (1) {
         }
 
         my $args = try {
+            my $command      = $frame->command;
             my $body = $frame->body;
+            my $content_type = $frame->content_type;
+            if ( $command && $command eq 'MESSAGE' ) {
+                if ( $content_type && $content_type eq 'application/json' ) {
             decode_json($body); # TODO Should this be from_json? Check utf8 flag.
+                } else {
+
+                    #TODO: This is a fallback for older enqueued messages which are missing the content-type header
+                    #TODO: Please replace this decode with a die in the future once content-type is well established
+                    decode_json($body);    # TODO Should this be from_json? Check utf8 flag.
+                }
+            } elsif ( $command && $command eq 'ERROR' ) {
+
+                #Known errors:
+                #You must log in using CONNECT first
+                #"NACK" must include a valid "message-id" header
+                Koha::Logger->get( { interface => 'worker' } )
+                    ->warn( sprintf "Shutting down after receiving ERROR frame:\n%s\n", $frame->as_string );
+                exit 1;
+            }
         } catch {
             Koha::Logger->get({ interface => 'worker' })->warn(sprintf "Frame not processed - %s", $_);
             return;

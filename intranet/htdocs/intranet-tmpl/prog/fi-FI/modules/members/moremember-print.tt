@@ -123,7 +123,7 @@
  <th>Tilattu</th>
  <th>Vanhenee</th>
  <th>Noutopaikka</th>
- <th>Varausjärjestys</th>
+ <th>Sija jonossa</th>
  </tr>
  </thead>
  <tbody>
@@ -141,11 +141,11 @@
  </table>
  [% END %]
  [% IF accounts && totaldue != 0 %]
- <h2>Tilitystiedot</h2>
+ <h2>Maksutapahtumat</h2>
  <table id="print-summary-fines">
  <thead>
  <tr>
- <th>Pvm</th>
+ <th>Päivämäärä</th>
  <th>Maksujen kuvaus</th>
  <th>Huomautus</th>
  <th>Summa</th>

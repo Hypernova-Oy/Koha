@@ -153,7 +153,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% Asset.js("js/admin-menu.js") | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% INCLUDE 'js-date-format.inc' %]
  [% INCLUDE 'datatables.inc' %]
  <script>
@@ -176,68 +175,74 @@
         const job_types = [
             {
                 '_id': 'batch_biblio_record_modification',
-                '_str': _("Satsvis redigering av bibliografiska poster")
+                '_str': _("Satsvis redigering av bibliografiska poster").escapeHtml()
             },
             {
                 '_id': 'batch_biblio_record_deletion',
-                '_str': _("Satsvis borttagning av bibliografiska poster")
+                '_str': _("Satsvis borttagning av bibliografiska poster").escapeHtml()
             },
             {
                 '_id': 'batch_authority_record_modification',
-                '_str': _("Satsvis redigering av auktoritetsposter")
+                '_str': _("Satsvis redigering av auktoritetsposter").escapeHtml()
             },
             {
                 '_id': 'batch_authority_record_deletion',
-                '_str': _("Satsvis borttagning av auktoritetsposter")
+                '_str': _("Satsvis borttagning av auktoritetsposter").escapeHtml()
             },
             {
                 '_id': 'batch_item_record_modification',
-                '_str': _("Satsvis redigering av exemplar")
+                '_str': _("Satsvis redigering av exemplar").escapeHtml()
             },
             {
                 '_id': 'batch_item_record_deletion',
-                '_str': _("Satsvis borttagning av exemplar")
+                '_str': _("Satsvis borttagning av exemplar").escapeHtml()
             },
             {
                 '_id': 'erm_sushi_harvester',
-                '_str': _("ERM Usage Statistics SUSHI Harvester")
+                '_str': _("ERM Usage Statistics SUSHI Harvester").escapeHtml()
             },
             {
                 '_id': 'batch_hold_cancel',
-                '_str': _("Satsvis borttagning av reservationer")
+                '_str': _("Satsvis borttagning av reservationer").escapeHtml()
             },
             {
                 '_id': 'pseudonymize_statistic',
-                '_str': _("Pseudonymisera statistik")
+                '_str': _("Pseudonymisera statistik").escapeHtml()
             },
             {
                 '_id': 'create_eholdings_from_biblios',
-                '_str': _("Skapa eHolding-titlar")
+                '_str': _("Skapa eHolding-titlar").escapeHtml()
             },
             {
                 '_id': 'update_elastic_index',
-                '_str': _("Uppdatera Elasticsearchindex")
+                '_str': _("Uppdatera Elasticsearchindex").escapeHtml()
             },
             {
                 '_id': 'update_holds_queue_for_biblios',
-                '_str': _("Uppdatering av reservationskö")
+                '_str': _("Uppdatering av reservationskö").escapeHtml()
             },
             {
                 '_id': 'stage_marc_for_import',
-                '_str': _("Förberedda MARC-poster för import")
+                '_str': _("Förberedda MARC-poster för import").escapeHtml()
             },
             {
                 '_id': 'marc_import_commit_batch',
-                '_str': _("Importera MARC-poster")
+                '_str': _("Importera MARC-poster").escapeHtml()
             },
             {
                 '_id': 'marc_import_revert_batch',
-                '_str': _("Ångra import av poster")
+                '_str': _("Ångra import av poster").escapeHtml()
             },
             {
                 '_id': 'import_from_kbart_file',
-                '_str': _("Importera titlar från en KBART-fil")
+                '_str': _("Importera titlar från en KBART-fil").escapeHtml()
             },
+            [% FOR job_type IN plugin_job_types %]
+            {
+                '_id': '[% job_type.id | html %]',
+                '_str': '[% job_type.str | html_entity %]'
+            },
+            [% END %]
         ];
 
         function get_job_type (job_type) {
@@ -295,7 +300,7 @@
                         "searchable": true,
                         "orderable": true,
                         "render": function(data, type, row, meta) {
-                            return get_job_type(row.type).escapeHtml();
+                            return get_job_type(row.type);
                         }
                     },
                     {

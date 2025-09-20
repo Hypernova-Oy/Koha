@@ -92,7 +92,7 @@
  <select id="content" name="limit" class="subtype">
  <option value="" >Alla</option>
  <option value="ctype:a" >bibliografi </option>
- <option value="ctype:b" >katalog </option>
+ <option value="ctype:b" >katalog</option>
  <option value="ctype:c" >register</option>
  <option value="ctype:d" >sammanfattning</option>
  <option value="ctype:e" >ordbok</option>
@@ -162,7 +162,7 @@
  <option value="ff8-18:n">Tre gånger i veckan </option>
  <option value="ff8-18:o">Tre gånger i månaden </option>
  <option value="ff8-18:y">Utan periodicitet </option>
- <option value="ff8-18:u">Okänt</option>
+ <option value="ff8-18:u">Okänd</option>
  <option value="ff8-18:z">Annat</option>
  </select>
  </p>

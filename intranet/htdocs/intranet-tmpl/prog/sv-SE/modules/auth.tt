@@ -65,7 +65,7 @@
 [% END %]
 
 [% IF ( wrongip ) %]
-<div id="login_error"><strong>Fel: </strong>StaffLoginRestrictLibraryByIP is switched on and you are logging in with an IP address that doesn't match your library. </div>
+<div id="login_error"><strong>Fel: </strong>StaffLoginRestrictLibraryByIP är påslaget och du loggar in med en IP-adress som inte matchar ditt bibliotek. </div>
 [% END %]
 
 [% IF too_many_login_attempts %]
@@ -160,7 +160,7 @@
  <span class="required">Obligatoriskt</span>
  [% END %]
  [% IF Koha.Preference('StaffLoginLibraryBasedOnIP')%]
- <span class="warning">Note: Your selection may be overridden if your current IP matches a specified IP for a branch in Koha</span>
+ <span class="warning">Notera: Ditt val kan åsidosättas om din nuvarande IP-adress matchar en angiven IP-adress för en filial i Koha</span>
  [% END %]
  </p>
 

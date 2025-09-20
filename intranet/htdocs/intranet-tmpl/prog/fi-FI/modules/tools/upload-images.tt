@@ -146,7 +146,7 @@
  [% IF ( error == 'UZIPFAIL' ) %]
  <p><strong>Arkiston purkaminen epäonnistui.<br />Tarkista, että olet lataamassa ZIP-tiedostoa, ja yritä uudelleen.</strong></p>
  [% ELSIF ( error == 'OPNLINK' ) %]
- <p><strong>Kansioindeksin avaaminen epäonnistui. (idlink.txt tai datalink.txt -tiedosto)<br />Vahvista, että se on olemassa.</strong></p>
+ <p><strong>Kansioindeksin avaaminen epäonnistui (idlink.txt tai datalink.txt -tiedosto).<br />Vahvista, että se on olemassa.</strong></p>
  [% ELSIF ( error == 'OPNIMG' ) %]
  <p><strong>Tiedostoa ei voitu käsitellä kuvana.<br />Varmista, että lataat vain GIF, JPEG, PNG tai XPM-muotoisen kuvan.</strong></p>
  [% ELSIF ( error == 'DELERR' ) %]

@@ -25,7 +25,7 @@
  </td>
  <td>
  [% IF restriction.comment.search('OVERDUES_PROCESS') %]
- <span>Spärr lagd pga försenat material [% restriction.comment.remove('OVERDUES_PROCESS ') | $raw %]</span>
+ <span>Begränsning tillagd på grund av försenat material [% restriction.comment.remove('OVERDUES_PROCESS ') | $raw %]</span>
  [% ELSE %]
  [% restriction.comment | $raw %]
  [% END %]

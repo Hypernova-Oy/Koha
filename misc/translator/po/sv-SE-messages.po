@@ -1,18 +1,18 @@
 # Compendium of sv.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2025-04-17 03:06+0000\n"
-"Last-Translator: plumflower <jeff_lindqvist@hotmail.com>\n"
+"POT-Creation-Date: 2025-08-09 03:11+0000\n"
+"PO-Revision-Date: 2025-06-11 03:09+0000\n"
+"Last-Translator: \"marie.hedbom\" <marie.hedbom@musikochteaterbiblioteket.se>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: sv-SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /sv/22.11/sv-SE-messages.po\n"
 "X-POOTLE-MTIME: 1692879232.228045\n"
@@ -2066,7 +2066,7 @@ msgstr "Pronomen"
 
 #: Koha/Database/Columns.pm:192
 msgid "Protected"
-msgstr ""
+msgstr "Skyddad"
 
 #: Koha/Database/Columns.pm:193
 msgid "Relationship"
@@ -2602,40 +2602,35 @@ msgstr "Begär att avbryta"
 
 #: Koha/ILL/Request.pm:635
 msgid "Place request with partners"
-msgstr ""
+msgstr "Skicka beställning till partnerbibliotek"
 
 #: Koha/ILL/Request.pm:643
-#, fuzzy
 msgid "Request reverted"
-msgstr "Beställ artikel"
+msgstr "Beställning återställd"
 
 #: Koha/ILL/Request.pm:644
-#, fuzzy
 msgid "Revert request"
-msgstr "Artikelbeställningar"
+msgstr "Återställ beställning"
 
 #: Koha/ILL/Request.pm:652
-#, fuzzy
 msgid "Queued request"
-msgstr "Fjärrlånebeställningar"
+msgstr "Köade beställningar"
 
 #: Koha/ILL/Request.pm:661
-#, fuzzy
 msgid "Cancellation requested"
-msgstr "Orsak till annullering"
+msgstr "Avbokning önskad"
 
 #: Koha/ILL/Request.pm:670
 msgid "Completed"
-msgstr ""
+msgstr "Avslutad"
 
 #: Koha/ILL/Request.pm:671
 msgid "Mark completed"
-msgstr ""
+msgstr "Markera som avslutad"
 
 #: Koha/ILL/Request.pm:680
-#, fuzzy
 msgid "Delete request"
-msgstr "Artikelbeställningar"
+msgstr "Ta bort beställning"
 
 #: Koha/ILL/Request.pm:689
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patron-search.inc:497
@@ -2643,14 +2638,12 @@ msgid "Check out"
 msgstr "Låna ut"
 
 #: Koha/ILL/Request.pm:701
-#, fuzzy
 msgid "Returned to library"
-msgstr "Permanent bibliotek"
+msgstr "Återlämnad till biblioteket"
 
 #: Koha/ILL/Request.pm:702
-#, fuzzy
 msgid "Check in"
-msgstr "Låna ut"
+msgstr "Återlämna"
 
 #: Koha/SuggestionEngine/Plugin/ExplodedTerms.pm:77
 msgid "Search also for narrower subjects"
@@ -2905,15 +2898,15 @@ msgstr "Planering för '{fund}' per {type}"
 #, perl-brace-format
 msgid "There is an item attached to this record. You must delete all items before deleting this record"
 msgid_plural "There are {count} items attached to this record. You must delete all items before deleting this record"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Det finns ett exemplar kopplat till den här posten. Du måste ta bort det innan du kan ta bort den här posten"
+msgstr[1] "Det finns {count} exemplar kopplade till den här posten. Du måste ta bort dem innan du kan ta bort den här posten"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/cat-toolbar.inc:138
 #, perl-brace-format
 msgid "There is a subscription attached to this record. You must delete all subscriptions before deleting this record"
 msgid_plural "There are {subscriptions_count} subscriptions attached to this record. You must delete all subscriptions before deleting this record"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Det finns en prenumeration kopplad till den här posten. Du måste ta bort alla prenumerationer innan du kan ta bort den här posten"
+msgstr[1] "Det finns {subscriptions_count} prenumerationer kopplade till den här posten. Du måste ta bort alla prenumerationer innan du kan ta bort den här posten"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:2
 msgid "Afghanistan"
@@ -4819,8 +4812,8 @@ msgctxt "noun"
 msgid "Order"
 msgstr "Beställning"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1248
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:803
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1251
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:804
 msgid "Add user"
 msgstr "Lägg till användare"
 
@@ -5347,7 +5340,7 @@ msgstr "Bekräfta borttagning av tagg '{searchfield}'"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:63
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:59
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:119
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:121
 #, perl-brace-format
 msgid "Modify tag {searchfield}"
 msgstr "Modifiera tagg {searchfield}"
@@ -5433,7 +5426,7 @@ msgstr "Detaljer för jobb #{job_id}"
 msgid "Jobs"
 msgstr "Jobb"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:329
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:334
 #, fuzzy
 msgid "Are you sure you want to cancel this job?"
 msgstr "Är du säker på att du vill ta bort det här?"
@@ -5958,12 +5951,12 @@ msgstr "Ny tagg {searchfield}"
 msgid "Confirm deletion of tag {searchfield}"
 msgstr "Bekräfta borttagning av tagg {searchfield}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:103
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:105
 #, perl-brace-format
 msgid "MARC bibliographic framework '{framework}' ({frameworkcode})"
 msgstr "MARC-bibliografiskt ramverk '{framework}' ({frameworkcode})"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:183
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:185
 #, perl-brace-format
 msgid "Confirm deletion of tag {searchfield}?"
 msgstr "Bekräfta borttagning av tagg {searchfield}?"
@@ -6535,7 +6528,7 @@ msgstr "Redigerar {title} (Katalogpostnummer) {biblionumber})"
 msgid "Add MARC record"
 msgstr "Lägg till MARC-post"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:823
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:810
 msgctxt "Editing MARC record titled:"
 msgid "Editing"
 msgstr "Redigerar"
@@ -6558,23 +6551,23 @@ msgstr "{title} av {author}"
 msgid "(Record #{biblionumber})"
 msgstr "(Post #{biblionumber})"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
 #, perl-brace-format
 msgid "Edit {title} by {author}"
 msgstr "Redigera {title} av {author}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 msgctxt "Bibliographic record number"
 msgid "Record #"
 msgstr "Post #"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 #, perl-brace-format
 msgid "Edit {title}"
 msgstr "Redigera {title}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:73
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:72
 msgctxt "Items attached to a bibliographic record"
 msgid "Items"
 msgstr "Exemplar"
@@ -7014,8 +7007,8 @@ msgstr "Cirkulationsstatistik för {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:26
-#, perl-brace-format
-msgid "Overdues at {library}"
+#, fuzzy, perl-brace-format
+msgid "Overdues with fines at {library}"
 msgstr "Förfallna hos {library}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchtransfers.tt:11
@@ -7031,7 +7024,7 @@ msgstr "Utlåningsmeddelanden"
 msgid "Checking out to {patron}"
 msgstr "Lånar ut till {patron}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:887
+#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:891
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:346
 #, perl-brace-format
 msgid "Bundle of {count} item"
@@ -7579,21 +7572,21 @@ msgstr "Lägg till låntagare"
 msgid "Modify patron"
 msgstr "Redigera låntagare"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:488
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:490
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:500
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:491
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:493
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:503
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember-brief.tt:44
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:195
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:199
 msgctxt "gender"
 msgid "Other"
 msgstr "Annat"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1521
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1524
 msgctxt "patron restriction created on"
 msgid "Created"
 msgstr "Skapad"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2093
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2096
 msgid "Add guarantor"
 msgstr "Lägg till vårdnadshavare"
 
@@ -7694,7 +7687,7 @@ msgstr "Skapa en ny exemplartyp"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/onboarding/onboardingstep5.tt:6
 msgid "Onboarding complete"
-msgstr ""
+msgstr "Starthjälp klar"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/onboarding/onboardingstep5.tt:8
 msgid "Create circulation rule"
@@ -7718,9 +7711,9 @@ msgid "Patron lists"
 msgstr "Låntagarlistor"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/list.tt:48
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Add patrons to '{patron_list_name}'"
-msgstr "Modifiera låntagarlista '{list_name}'"
+msgstr "Lägg till låntagare till '{patron_list_name}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-batch.tt:9
 msgid "Edit patron card batch"
@@ -7771,6 +7764,11 @@ msgstr "Ny lånekortsmall"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:7
 msgid "Image manager"
 msgstr "Bildhanterare"
+
+#: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:124
+#, fuzzy, perl-brace-format
+msgid "Are you sure you want to delete image {image_id}?"
+msgstr "Är du säker på att du vill ta bort det här?"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:9
 msgid "Patron card layouts"
@@ -7931,9 +7929,9 @@ msgid "Create from SQL"
 msgstr "Skapa från SQL"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/guided_reports_start.tt:31
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Show report {reportname} ({id})"
-msgstr "Rapport {reportname} {id}"
+msgstr "Visa rapport {reportname} {id}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/guided_reports_start.tt:32
 msgid "SQL view"
@@ -8136,8 +8134,8 @@ msgstr "Kontrollera utgångsdatum"
 #, perl-brace-format
 msgid "Your search returned 1 subscription expiring before {date}"
 msgid_plural "Your search returned {count} subscriptions expiring before {date}"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Din sökning gav 1 prenumeration som går ut före {date}"
+msgstr[1] "Din sökning gav {count} prenumerations som går ut före {date}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/claims.tt:12
 #, perl-brace-format
@@ -8218,7 +8216,7 @@ msgstr "Redigera frekvens '{description}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-frequencies.tt:14
 msgid "Frequencies"
-msgstr ""
+msgstr "Frekvenser"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-history.tt:8
 msgid "Subscription history"
@@ -8233,7 +8231,7 @@ msgstr "Nytt numreringsmönster"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-numberpatterns.tt:66
 #, perl-brace-format
 msgid "Modify numbering pattern '{pattern}'"
-msgstr ""
+msgstr "Redigera numreringsmönster '{pattern}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-numberpatterns.tt:13
 msgid "Numbering patterns"
@@ -8249,7 +8247,7 @@ msgstr "Förnya prenumerationer"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/viewalerts.tt:6
 msgid "Alert subscribers"
-msgstr ""
+msgstr "Avisera prenumeranter"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:15
 #, perl-brace-format
@@ -8277,7 +8275,7 @@ msgstr "Skapad av:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:1540
 msgid "Select suggester"
-msgstr ""
+msgstr "Välj förslagsställare"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:1543
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:1548
@@ -8821,52 +8819,56 @@ msgstr "{library} katalog"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/html_helpers.inc:177
 msgid "Koha online catalog"
-msgstr ""
+msgstr "Kohas onlinekatalog"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/html_helpers.inc:187
-#, fuzzy
 msgid "Card number or username"
-msgstr "Navigeringsverktyg för hyllsignaturer"
+msgstr "Kortnummer eller användarnamn"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:201
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:203
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:147
+#, fuzzy
+msgid "Are you sure you want to delete your search history?"
+msgstr "Är du säker på att du vill ta bort det här?"
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:210
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:212
 msgid "Search the catalog by keyword"
 msgstr "Sök på nyckelord i katalogen"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:206
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:208
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:215
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:217
 msgid "Search the catalog by title"
 msgstr "Sök på titel i katalogen"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:211
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:220
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:222
 msgid "Search the catalog by author"
 msgstr "Sök på författare i katalogen"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:216
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:218
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:227
 msgid "Search the catalog by subject"
 msgstr "Gör en sökning på ämne i katalogen"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:221
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:223
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:230
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:232
 msgid "Search the catalog by ISBN"
 msgstr "Sök på ISBN i katalogen"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:226
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:228
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:235
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
 msgid "Search the catalog by ISSN"
 msgstr "Sök på ISSN i katalogen"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:231
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:233
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:240
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:242
 msgid "Search the catalog by series"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:239
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:243
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:245
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:246
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:248
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:252
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
 msgid "Search the catalog by call number"
 msgstr "Sök på klassifikation i katalogen"
 
@@ -8965,7 +8967,7 @@ msgstr "Visa färre språk"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/errors/errorpage.tt:9
 msgid "An error has occurred"
-msgstr ""
+msgstr "Ett fel har inträffat"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:10
 msgid "GetAvailability"
@@ -9150,7 +9152,7 @@ msgstr "Annat:"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:801
 #, perl-brace-format
 msgid "{renewals_left} of {renewals_allowed} renewals remaining"
-msgstr ""
+msgstr "{renewals_left} av {renewals_allowed} kvarstående omlån"
 
 #~ msgid "Biblioitem number"
 #~ msgstr "Nummer för biblio-exemplar"
@@ -9191,6 +9193,10 @@ msgstr ""
 #, perl-brace-format
 #~ msgid "Modify system preference '{searchfield}'"
 #~ msgstr "Modifiera systeminställning '{searchfield}'"
+
+#, fuzzy, perl-brace-format
+#~ msgid "Overdues at with fines {library}"
+#~ msgstr "Förfallna hos {library}"
 
 #, fuzzy
 #~ msgctxt "citations"

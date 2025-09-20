@@ -143,10 +143,9 @@
  [% IF ( passworderr ) %]
  <div class="alert alert-warning">
  <strong>Följande fel påträffades:</strong><br />
- The previous column selection included a password field.<br />
- The column cannot be used due to security risks.<br />
- Please make a new selection and ensure no password columns have been selected.
- </div>
+ Det föregående kolumnvalet inkluderade ett lösenordsfält.<br />
+ Kolumnen kan inte användas pga säkerhetsrisker.<br />
+ Redigera den här rapporten och kontrollera att inga lösenordskolumner har valts. </div>
  [% END %]
 
 <fieldset class="rows"><legend>Steg 1 av 5: namnge den nya definitionen</legend><ol>

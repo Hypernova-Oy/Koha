@@ -587,7 +587,7 @@
  <span class="permissioncode">([% name | html %])</span>
  [%- CASE 'superserials' -%]
  <span class="sub_permission superserials_subpermission">
- Hantera prenumerationer oavsett filial (gäller endast när IndependentBranches används) </span>
+ Hantera prenumerationer oavsett bibliotek (gäller endast när IndependentBranches används) </span>
  <span class="permissioncode">([% name | html %])</span>
  [%- CASE 'delete_reports' -%]
  <span class="sub_permission delete_reports_subpermission">

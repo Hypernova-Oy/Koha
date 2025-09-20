@@ -53,7 +53,7 @@
  <div class="page-section">
  <fieldset class="action filters d-flex gap-2" style="cursor: pointer;">
  <a id="expired_filter" data-filter="expired"><i class="fa fa-bars"></i> Visa utgången</a>
- <a id="cancelled_filter" data-filter="cancelled"><i class="fa fa-bars"></i> Show cancelled</a>
+ <a id="cancelled_filter" data-filter="cancelled"><i class="fa fa-bars"></i> Visa avbruten</a>
  </fieldset>
 
  <table id="bookings_table"></table>
@@ -110,7 +110,7 @@
             function(items, bookings){
                 var itemsSet = new vis.DataSet([{
                     id: 0,
-                    content: _("Record level")
+                    content: _("Postnivå")
                 }]);
                 for (item of items[0]) {
                     itemsSet.add({
@@ -300,19 +300,19 @@
                             [_("Avbruten"), row.cancellation_reason]
                                 .filter(Boolean)
                                 .join(": "),
-                        completed: () => _("Klar"),
+                        completed: () => _("Avslutad"),
                     };
 
                     const statusText = statusMap[row.status]
                         ? statusMap[row.status]()
-                        : _("Okänt");
+                        : _("Okänd");
 
                     const classMap = [
                         { status: _("Utgången"), class: "bg-secondary" },
                         { status: _("Avbruten"), class: "bg-secondary" },
                         { status: _("Väntande"), class: "bg-warning" },
                         { status: _("Aktiv"), class: "bg-primary" },
-                        { status: _("Klar"), class: "bg-info" },
+                        { status: _("Avslutad"), class: "bg-info" },
                         { status: _("Ny"), class: "bg-success" },
                     ];
 
@@ -387,7 +387,7 @@
                     let is_cancelled = row.status === "cancelled";
                     [% IF CAN_user_circulate_manage_bookings %]
                     if (!is_cancelled) {
-                        result += '<button type="button" class="btn btn-default btn-xs edit-action" data-bs-toggle="modal" data-bs-target="#placeBookingModal" data-booking="%s" data-biblionumber="%s" data-itemnumber="%s" data-patron="%s" data-pickup_library="%s" data-start_date="%s" data-end_date="%s"><i class="fa fa-pencil" aria-hidden="true"></i> %s</button>'.format(row.booking_id, biblionumber, row.item_id,  row.patron_id, row.pickup_library_id, row.start_date, row.end_date, _("Redigera"));
+                        result += '<button type="button" class="btn btn-default btn-xs edit-action" data-bs-toggle="modal" data-bs-target="#placeBookingModal" data-booking="%s" data-biblionumber="%s" data-itemnumber="%s" data-patron="%s" data-pickup_library="%s" data-start_date="%s" data-end_date="%s" data-item_type_id="%s"><i class="fa fa-pencil" aria-hidden="true"></i> %s</button>'.format(row.booking_id, biblionumber, row.item_id,  row.patron_id, row.pickup_library_id, row.start_date, row.end_date, row.item.item_type_id, _("Redigera"));
                         result += '<button type="button" class="btn btn-default btn-xs cancel-action" data-bs-toggle="modal" data-bs-target="#cancelBookingModal" data-booking="%s"><i class="fa fa-trash" aria-hidden="true"></i> %s</button>'.format(row.booking_id, _("Avbryt"));
                     }
                     [% END %]
@@ -411,14 +411,14 @@
             .addEventListener("click", (e) =>
                 handleFilter(
                     e,
-                    { active: _("Hide cancelled"), inactive: _("Show cancelled") },
+                    { active: _("Dölj avbruten"), inactive: _("Visa avbruten") },
                     filterStates,
                 ),
             );
 
         $("#cancellation-reason").comboBox({
             displayProperty: 'name',
-            placeholder: _("Select or type a reason"),
+            placeholder: _("Välj eller ange ett skäl"),
         });
 
         function handleFilter(e, text, filterStates) {

@@ -71,7 +71,7 @@
  <input type="hidden" name="op" value="cud-show" />
  <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
  <input type="hidden" name="src" value="CATALOGUING" />
- <button id="batchedit" type="submit" class="dropdown-item" id="modifybiblio">Muokkaa niteitä eräajossa</button>
+ <button id="batchedit" type="submit" class="dropdown-item">Muokkaa niteitä eräajossa</button>
  </form>
  </li>
  [% ELSE %]
@@ -90,7 +90,7 @@
  <input type="hidden" name="del" value="1" />
  <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
  <input type="hidden" name="src" value="CATALOGUING" />
- <button id="batchdelete" type="submit" class="dropdown-item" id="modifybiblio">Poista niteet eräajossa</button>
+ <button id="batchdelete" type="submit" class="dropdown-item">Poista niteet eräajossa</button>
  </form>
  </li>
  [% ELSE %]

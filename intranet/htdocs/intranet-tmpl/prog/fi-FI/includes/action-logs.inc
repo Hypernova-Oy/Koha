@@ -1,6 +1,6 @@
 [% BLOCK translate_log_module %]
 [%    SWITCH module %]
-[%        CASE 'AUTH'         %]<span>Todennus</span>[% UNLESS Koha.Preference('AuthFailureLog') && Koha.Preference('AuthSuccessLog') %] <i class="log-disabled fa-solid fa-triangle-exclamation" data-log="AuthFailureLog|AuthSuccessLog" title="Lokitus ei käytössä"></i>[% END %]
+[%        CASE 'AUTH'         %]<span>Tunnistautuminen</span>[% UNLESS Koha.Preference('AuthFailureLog') && Koha.Preference('AuthSuccessLog') %] <i class="log-disabled fa-solid fa-triangle-exclamation" data-log="AuthFailureLog|AuthSuccessLog" title="Lokitus ei käytössä"></i>[% END %]
 [%        CASE 'CATALOGUING'  %]<span>Kuvailu</span>[% UNLESS Koha.Preference('CataloguingLog') %] <i class="log-disabled fa-solid fa-triangle-exclamation" data-log="CataloguingLog" title="Lokitus ei käytössä"></i>[% END %]
 
 [%        CASE 'AUTHORITIES'  %]<span>Auktoriteetit</span>[% UNLESS Koha.Preference('AuthoritiesLog') %] <i class="log-disabled fa-solid fa-triangle-exclamation" data-log="AuthoritiesLog" title="Lokitus ei käytössä"></i>[% END %]
@@ -85,7 +85,7 @@
 [%        CASE 'EDIT_MAPPINGS' %]<span>Muokkaa määrityksiä</span>
 [%        CASE 'RESET_MAPPINGS' %]<span>Nollaa määritykset</span>
 [%        CASE 'SERIAL CLAIM' %]<span>Kausijulkaisureklamaatio</span>
-[%        CASE 'ACQUISITION CLAIM' %]<span>Hankintavaatimus</span>
+[%        CASE 'ACQUISITION CLAIM' %]<span>Hankinnan reklamaatio</span>
 [%        CASE 'ACQUISITION ORDER' %]<span>Hankintatilaus</span>
 [%        CASE 'OVERDUE' %]<span>Myöhässä</span>
 [%        CASE 'EXPIRE'  %]<span>Umpeutuu</span>

@@ -849,8 +849,8 @@ tables:
       hidden: 0
       isurl: ~
       kohafield: items.copynumber
-      liblibrarian: Nidenumero
-      libopac: Nidenumero
+      liblibrarian: Kappaleen numero
+      libopac: Kappaleen numero
       link: ''
       mandatory: 0
       repeatable: 0
@@ -3784,8 +3784,8 @@ tables:
       hidden: -6
       isurl: 0
       kohafield: ''
-      liblibrarian: Pvm
-      libopac: Pvm
+      liblibrarian: Päivämäärä
+      libopac: Päivämäärä
       link: ''
       mandatory: 0
       repeatable: 1
@@ -4090,8 +4090,8 @@ tables:
       hidden: -6
       isurl: 0
       kohafield: ''
-      liblibrarian: Pvm
-      libopac: Pvm
+      liblibrarian: Päivämäärä
+      libopac: Päivämäärä
       link: ''
       mandatory: 0
       repeatable: 0
@@ -4889,8 +4889,8 @@ tables:
       hidden: -6
       isurl: 0
       kohafield: ''
-      liblibrarian: Pvm
-      libopac: Pvm
+      liblibrarian: Päivämäärä
+      libopac: Päivämäärä
       link: ''
       mandatory: 0
       repeatable: 0
@@ -15066,8 +15066,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Producing company
-      libopac: Producing company
+      liblibrarian: Tuotantoyritys
+      libopac: Tuotantoyritys
       link: ''
       mandatory: 0
       repeatable: 1
@@ -15253,8 +15253,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Serial identification
-      libopac: Serial identification
+      liblibrarian: Sarjan tunniste
+      libopac: Sarjan tunniste
       link: ''
       mandatory: 0
       repeatable: 0
@@ -16362,8 +16362,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Serial identification
-      libopac: Serial identification
+      liblibrarian: Sarjan tunniste
+      libopac: Sarjan tunniste
       link: ''
       mandatory: 0
       repeatable: 0
@@ -20783,8 +20783,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: Pvm
-      libopac: Pvm
+      liblibrarian: Päivämäärä
+      libopac: Päivämäärä
       link: ''
       mandatory: 0
       repeatable: 0
@@ -20868,8 +20868,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ~
-      liblibrarian: Kuvailtavan kopion tunniste
-      libopac: Kuvailtavan kopion tunniste
+      liblibrarian: Kuvaillun kappaleen tunniste
+      libopac: Kuvaillun kappaleen tunniste
       link: ''
       mandatory: 0
       repeatable: 0
@@ -25949,6 +25949,40 @@ tables:
       defaultvalue: ~
       frameworkcode: ''
       hidden: -6
+      isurl: 0
+      kohafield: ''
+      liblibrarian: Auktoriteettitietueen kontrollinumero tai standardinumero
+      libopac: Auktoriteettitietueen kontrollinumero tai standardinumero
+      link: ''
+      mandatory: 0
+      repeatable: 1
+      seealso: ''
+      tab: 5
+      tagfield: '506'
+      tagsubfield: '0'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
+      isurl: 0
+      kohafield: ''
+      liblibrarian: Reaalimaailman kohteen tunniste
+      libopac: Reaalimaailman kohteen tunniste
+      link: ''
+      mandatory: 0
+      repeatable: 1
+      seealso: ''
+      tab: 5
+      tagfield: '506'
+      tagsubfield: '1'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
       isurl: ~
       kohafield: ''
       liblibrarian: Asiasanan tai termin lähde
@@ -26257,6 +26291,23 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
+      liblibrarian: Eritellyt materiaalit
+      libopac: Eritellyt materiaalit
+      link: ''
+      mandatory: 0
+      repeatable: 0
+      seealso: ''
+      tab: 5
+      tagfield: '508'
+      tagsubfield: '3'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
+      isurl: ~
+      kohafield: ''
       liblibrarian: Linkitys
       libopac: Linkitys
       link: ''
@@ -26487,6 +26538,23 @@ tables:
       tab: 5
       tagfield: '510'
       tagsubfield: x
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
+      isurl: ~
+      kohafield: ''
+      liblibrarian: Eritellyt materiaalit
+      libopac: Eritellyt materiaalit
+      link: ''
+      mandatory: 0
+      repeatable: 0
+      seealso: ''
+      tab: 5
+      tagfield: '511'
+      tagsubfield: '3'
       value_builder: ''
     - authorised_value: ''
       authtypecode: ''
@@ -29213,6 +29281,40 @@ tables:
       defaultvalue: ~
       frameworkcode: ''
       hidden: -6
+      isurl: 0
+      kohafield: ''
+      liblibrarian: Auktoriteettitietueen kontrollinumero tai standardinumero
+      libopac: Auktoriteettitietueen kontrollinumero tai standardinumero
+      link: ''
+      mandatory: 0
+      repeatable: 1
+      seealso: ''
+      tab: 5
+      tagfield: '540'
+      tagsubfield: '0'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
+      isurl: 0
+      kohafield: ''
+      liblibrarian: Reaalimaailman kohteen tunniste
+      libopac: Reaalimaailman kohteen tunniste
+      link: ''
+      mandatory: 0
+      repeatable: 1
+      seealso: ''
+      tab: 5
+      tagfield: '540'
+      tagsubfield: '1'
+      value_builder: ''
+    - authorised_value: ''
+      authtypecode: ''
+      defaultvalue: ~
+      frameworkcode: ''
+      hidden: -6
       isurl: ~
       kohafield: ''
       liblibrarian: Asiasanan tai termin lähde
@@ -29368,8 +29470,8 @@ tables:
       hidden: -6
       isurl: ~
       kohafield: ''
-      liblibrarian: Käyttö- ja kopiointioikeudet
-      libopac: Käyttö- ja kopiointioikeudet
+      liblibrarian: Käyttö- ja kopiointioikeudet standarditerminologialla
+      libopac: Käyttö- ja kopiointioikeudet standarditerminologialla
       link: ''
       mandatory: 0
       repeatable: 1
@@ -56143,8 +56245,8 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ''
-      liblibrarian: Nidenumero
-      libopac: Nidenumero
+      liblibrarian: Kappaleen numero
+      libopac: Kappaleen numero
       link: ''
       mandatory: 0
       repeatable: 0
@@ -58903,8 +59005,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Nidenumero
-      libopac: Nidenumero
+      liblibrarian: Kappaleen numero
+      libopac: Kappaleen numero
       link: ''
       mandatory: 0
       repeatable: 0
@@ -59328,8 +59430,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Nidenumero
-      libopac: Nidenumero
+      liblibrarian: Kappaleen numero
+      libopac: Kappaleen numero
       link: ''
       mandatory: 0
       repeatable: 0
@@ -59753,8 +59855,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Nidenumero
-      libopac: Nidenumero
+      liblibrarian: Kappaleen numero
+      libopac: Kappaleen numero
       link: ''
       mandatory: 0
       repeatable: 0
@@ -61436,8 +61538,8 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ''
-      liblibrarian: Nidenumero
-      libopac: Nidenumero
+      liblibrarian: Kappaleen numero
+      libopac: Kappaleen numero
       link: ''
       mandatory: 0
       repeatable: 0
@@ -61708,8 +61810,8 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ''
-      liblibrarian: Nidenumero
-      libopac: Nidenumero
+      liblibrarian: Kappaleen numero
+      libopac: Kappaleen numero
       link: ''
       mandatory: 0
       repeatable: 0
@@ -61980,8 +62082,8 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ''
-      liblibrarian: Nidenumero
-      libopac: Nidenumero
+      liblibrarian: Kappaleen numero
+      libopac: Kappaleen numero
       link: ''
       mandatory: 0
       repeatable: 0
@@ -77370,8 +77472,8 @@ tables:
       hidden: 5
       isurl: ~
       kohafield: ''
-      liblibrarian: Nidenumero [LOCAL, KOHA]
-      libopac: Nidenumero [LOCAL, KOHA]
+      liblibrarian: Kappaleen numero [LOCAL, KOHA]
+      libopac: Kappaleen numero [LOCAL, KOHA]
       link: ''
       mandatory: 0
       repeatable: 0
@@ -77761,8 +77863,8 @@ tables:
       hidden: 5
       isurl: 0
       kohafield: ''
-      liblibrarian: Genre
-      libopac: Genre
+      liblibrarian: Lajityyppi
+      libopac: Lajityyppi
       link: ''
       mandatory: 0
       repeatable: 0

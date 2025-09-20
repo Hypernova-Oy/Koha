@@ -41,7 +41,7 @@
  <li><a href="/cgi-bin/koha/reports/cat_issues_top.pl">Eniten lainattu aineisto</a></li>
  </ul>
 
- <h5>Ei käytössä</h5>
+ <h5>Epäaktiivinen</h5>
  <ul>
  <li><a href="/cgi-bin/koha/reports/borrowers_out.pl">Asiakkaat, jotka eivät ole lainanneet</a></li>
  <li><a href="/cgi-bin/koha/reports/catalogue_out.pl">Niteet, joita ei ole lainattu</a></li>
@@ -51,7 +51,7 @@
  <h5>Muu</h5>
  <ul>
  <li><a href="/cgi-bin/koha/reports/itemslost.pl">Kadonnut aineisto</a></li>
- <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Tilauksia tilin mukaan</a></li>
+ <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Tilaukset tilin mukaan</a></li>
  <li><a href="/cgi-bin/koha/reports/catalog_by_itemtype.pl">Luettelo aineistoittain</a></li>
  <li><a href="/cgi-bin/koha/reports/issues_avg_stats.pl">Keskimääräinen laina-aika</a></li>
  </ul>

@@ -6,11 +6,12 @@ Verkkopalvelut:
         '1': Ota käyttöön
       pref: ILS-DI
     - 'ILS-DI-palvelut verkkokirjaston käyttäjille (sijainti: /cgi-bin/koha/ilsdi.pl)'
-  - - Allow only IP addresses
+  - - Salli vain IP-osoitteiden
     - class: Text
       pref: ILS-DI:AuthorizedIPs
-    - to use the ILS-DI services (when enabled). Separate the IP addresses with commas
-      and without spaces. Enter '0:0:0:0/0' or '::/0' to allow any IP.
+    - käyttää ILS-DI -palveluita (kun käytössä). Erota IP-osoitteet pilkulla ilman
+      välilyöntiä. Laita kenttään '0.0.0.0/0' tai '::/0' salliaksesi minkä tahansa
+      IP-osoitteen.
   IdRef:
   - - choices:
         '0': Poista käytöstä
@@ -85,7 +86,7 @@ Verkkopalvelut:
         transient: voidaan tyhjentää tai katkaista jossain pisteessä (tilapäinen)
       pref: OAI-PMH:DeletedRecord
     - .
-  - - After an OAI-PMH harvest, send a report email to the email address
+  - - Lähetä OAI-PMH-haravoinnin jälkeen raportti osoitteeseen
     - class: Text
       pref: OAI-PMH:HarvestEmailReport
     - .
@@ -104,8 +105,7 @@ Verkkopalvelut:
         '0': Estä
         '1': Salli
       pref: RESTOAuth2ClientCredentials
-    - Oauth2-asiakkaan valtuutus REST API:ssa. Vaatii, että Net::OAuth2::AuthorizationServer
-      on asennettu.
+    - Oauth2-asiakkaan valtuutus REST API:ssa.
   - - choices:
         '0': Estä
         '1': Salli

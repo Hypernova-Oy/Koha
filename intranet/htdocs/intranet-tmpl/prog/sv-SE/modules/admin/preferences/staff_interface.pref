@@ -56,11 +56,12 @@ Personalklient:
         '1': Visa
       pref: IntranetCatalogSearchPulldown
     - en rullgardinsmeny för sökfält för "Sök i katalogen"-rutor.
-  - - Download a maximum of
+  - - Ladda ner max
     - class: integer
       pref: ReportsExportLimit
-    - 'records when downloading from the reports module.<br>NOTE: Only a positive
-      value will enforce a limit. A specific limit in the report overrides this setting.'
+    - 'poster vid nedladdning från rapportmodulen.<br>OBS: Endast ett positivt värde
+      kommer att tvinga fram en gräns. En specifik gräns i rapporten åsidosätter denna
+      inställning.'
   Autentisering:
   - - choices:
         '0': Tillåt
@@ -225,7 +226,7 @@ Personalklient:
       type: boolean
     - ord i sökningar på resultatsidorna i personaklienten.
   - - choices:
-        '0': Do not allow
-        '1': Allow
+        '0': Tillåt inte
+        '1': Tillåt
       pref: ReportsExportFormatODS
-    - Open Document Spreadsheet (ODS) as download format in reports.
+    - Open Document Spreadsheet (ODS) som nedladdningsformat i rapporter.

@@ -141,11 +141,11 @@
 
  [% IF ( preservation ) %]
  <li class="active">
- <a href="/cgi-bin/koha/admin/preferences.pl?tab=preservation" title="p- Arkivkvalitet för långtidslagring">p- Arkivkvalitet för långtidslagring</a>
+ <a href="/cgi-bin/koha/admin/preferences.pl?tab=preservation" title="Bokvård">Bokvård</a>
  [% PROCESS subtabs  %]
  [% ELSE %]
  <li>
- <a href="/cgi-bin/koha/admin/preferences.pl?tab=preservation" title="p- Arkivkvalitet för långtidslagring">p- Arkivkvalitet för långtidslagring</a>
+ <a href="/cgi-bin/koha/admin/preferences.pl?tab=preservation" title="Bokvård">Bokvård</a>
  [% END %]
  </li>
 

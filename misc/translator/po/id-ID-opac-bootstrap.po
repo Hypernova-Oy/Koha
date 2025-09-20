@@ -1,9 +1,9 @@
 # Compendium of id.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
+"POT-Creation-Date: 2025-08-07 03:10+0000\n"
 "PO-Revision-Date: 2022-05-01 10:12-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: Koha Translation Team\n"
@@ -371,7 +371,7 @@ msgstr "%st - badan induk pemerintah"
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:25
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth-detail.tt:172
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:175
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:73
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:74
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-reserves.tt:44
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-curbside-pickups.tt:172
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1210
@@ -396,7 +396,7 @@ msgstr "Lihat juga:"
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/authorities-search-results.inc:136
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/authorities-search-results.inc:146
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:99
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:397
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:406
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/catalog_cite.inc:8
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/catalog_cite.inc:17
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/catalog_concern.inc:11
@@ -443,6 +443,16 @@ msgstr "Terbitan:"
 msgid "VIAF ID: "
 msgstr ""
 
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:22
+#, c-format
+msgid "ISNI ID: "
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:25
+#, c-format
+msgid "WIKIDATA ID: "
+msgstr ""
+
 #. %1$s:  info.field_of_activity | html 
 #. %2$s:  IF info.start_period || info.end_period 
 #. %3$s: ~ IF info.start_period 
@@ -452,7 +462,7 @@ msgstr ""
 #. %7$s:  info.end_period | html 
 #. %8$s:  END ~
 #. %9$s:  END 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:26
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:32
 #, fuzzy, c-format
 msgid "Field of activity: %s %s ( %sfrom: %s%s %suntil: %s%s ) %s "
 msgstr "%s %s %s %s %s Tidak ada judul %s %s , %s %s"
@@ -461,7 +471,7 @@ msgstr "%s %s %s %s %s Tidak ada judul %s %s , %s %s"
 #. %2$s:  info.postal_code | html 
 #. %3$s:  info.city | html 
 #. %4$s:  info.country | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:40
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:46
 #, fuzzy, c-format
 msgid "Address: %s %s %s %s"
 msgstr "%s oleh %s %s %s %s "
@@ -476,37 +486,37 @@ msgstr "%s oleh %s %s %s %s "
 #. %8$s:  END ~
 #. %9$s:  END 
 #. %10$s:  IF info.uri 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:46
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:52
 #, fuzzy, c-format
 msgid "Associated group: %s %s ( %sfrom: %s%s %suntil: %s%s ) %s %s"
 msgstr "%s %s %s %s %s Tidak ada judul %s %s , %s %s"
 
 #. For the first occurrence,
 #. %1$s:  info.uri | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:54
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:79
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:60
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:85
 #, fuzzy, c-format
 msgid "URI: %s"
 msgstr "# %s"
 
 #. For the first occurrence,
 #. %1$s:  info.source_of_information | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:55
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:80
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:61
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:86
 #, fuzzy, c-format
 msgid "Source of information: %s"
 msgstr "Informasi serial:"
 
 #. For the first occurrence,
 #. %1$s:  info.authority_record_number | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:56
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:81
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:62
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:87
 #, c-format
 msgid "Authority record control number or standard number: %s"
 msgstr ""
 
 #. %1$s:  info.email_address | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:63
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:69
 #, fuzzy, c-format
 msgid "Email address: %s "
 msgstr "Alamat surel:"
@@ -521,25 +531,25 @@ msgstr "Alamat surel:"
 #. %8$s:  END ~
 #. %9$s:  END 
 #. %10$s:  IF info.uri 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:71
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:77
 #, fuzzy, c-format
 msgid "Occupation: %s %s ( %sfrom: %s%s %suntil: %s%s ) %s %s"
 msgstr "%s %s %s %s %s Tidak ada judul %s %s , %s %s"
 
 #. %1$s:  info.place_of_birth | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:88
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:94
 #, fuzzy, c-format
 msgid "Place of birth: %s "
 msgstr "%s Tanggal lahir: "
 
 #. %1$s:  info.place_of_death | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:96
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:102
 #, fuzzy, c-format
 msgid "Place of death: %s "
 msgstr "Pesan pinjam"
 
 #. %1$s:  info.uri | $raw | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:104
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/authority-information.inc:110
 #, fuzzy, c-format
 msgid "URI: %s "
 msgstr "# %s"
@@ -576,12 +586,18 @@ msgstr "Tidak ada"
 msgid "%s %s %s No title %s %s%s,%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s "
 msgstr "%s %s %s Tidak ada judul %s %s%s,%s %s %s %s %s %s %s %s %s %s %s %s %s %s %s "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:7
+#. %1$s: - PROCESS 'show-biblio-title' -
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:5
+#, fuzzy, c-format
+msgid "(Deleted bibliographic record) %s"
+msgstr "HarvestBibliographicRecords "
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:11
 #, fuzzy, c-format
 msgid "No bibliographic record"
 msgstr "HarvestBibliographicRecords "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:9
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/biblio-title.inc:13
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/js-biblio-format.inc:1
 #, fuzzy, c-format
 msgid "No title"
@@ -639,6 +655,8 @@ msgstr "Hak Cipta"
 msgid "Print"
 msgstr "Cetak"
 
+#. IMG
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/cover-images.inc:7
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/cover-images.inc:9
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:66
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:67
@@ -647,7 +665,7 @@ msgstr "Cetak"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:942
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1239
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1240
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy, c-format
 msgid "Local cover image"
@@ -677,7 +695,7 @@ msgstr "Gambar Jilid"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/cover-images.inc:28
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:90
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, c-format
 msgid "Image from Syndetics"
@@ -720,7 +738,7 @@ msgstr "Lihat Tukang Roti dan Penjahit"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/cover-images.inc:69
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:131
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy, c-format
 msgid "Image from Baker &amp; Taylor"
@@ -732,7 +750,7 @@ msgstr "Lihat Tukang Roti dan Penjahit"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:139
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:140
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:142
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy, c-format
 msgid "Custom cover image"
@@ -762,7 +780,7 @@ msgstr "unAPI"
 #. %1$s:  HOLDS.count | html 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:7
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:714
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:356
 #, c-format
 msgid "(%s total)"
@@ -775,15 +793,15 @@ msgstr "Pesan pinjam "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:11
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/ill-availability-table.inc:7
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:206
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:208
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:215
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:217
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/checkout.inc:20
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/resort_form.inc:60
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:74
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:47
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:292
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:59
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:64
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:65
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:100
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:145
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:119
@@ -832,7 +850,7 @@ msgid "Priority"
 msgstr "Prioritas"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:27
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:71
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:72
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:759
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1208
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:133
@@ -909,7 +927,7 @@ msgid "Save"
 msgstr "Simpan"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:112
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:524
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:533
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/catalog_concern.inc:43
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-detail-sidebar.inc:146
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/overdrive-checkout.inc:16
@@ -922,8 +940,8 @@ msgstr "Simpan"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1139
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-downloadcart.tt:27
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-downloadshelf.tt:79
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:253
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:326
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:261
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:334
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-issue-note.tt:56
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-messaging.tt:249
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-passwd.tt:96
@@ -1002,7 +1020,7 @@ msgid "Pending for next available item of item type '%s'"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:159
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:163
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:168
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:995
 #, fuzzy, c-format
 msgid "Pending"
@@ -1059,13 +1077,13 @@ msgid "Source"
 msgstr "Sumber "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/ill-availability-table.inc:8
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:211
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:220
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:222
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/resort_form.inc:14
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:85
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:293
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:57
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:65
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:66
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:101
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:144
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:120
@@ -1079,8 +1097,8 @@ msgid "Author"
 msgstr "Penulis"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/ill-availability-table.inc:9
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:221
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:223
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:230
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:232
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:111
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:109
 #, c-format
@@ -1088,8 +1106,8 @@ msgid "ISBN"
 msgstr "ISBN"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/ill-availability-table.inc:10
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:226
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:228
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:235
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:46
 #, c-format
 msgid "ISSN"
@@ -1361,7 +1379,7 @@ msgid "Welcome, %s"
 msgstr "Selamat datang, "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:118
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:144
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:153
 #, fuzzy, c-format
 msgid "Log out"
 msgstr "Log masuk"
@@ -1370,7 +1388,7 @@ msgstr "Log masuk"
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:122
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:124
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:126
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:396
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:405
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:28
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:56
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:870
@@ -1386,7 +1404,7 @@ msgid "Your account"
 msgstr "Log masuk ke akun anda"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:139
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:165
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:174
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/usermenu.inc:58
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:28
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:47
@@ -1396,68 +1414,68 @@ msgstr "Riwayat pencarian"
 
 #. A
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:139
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:163
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:172
 msgid "View your search history"
 msgstr "Lihat riwayat pencarian anda"
-
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:141
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:87
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:1031
-#, c-format
-msgid "Clear"
-msgstr "Hapus"
 
 #. A
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:141
 msgid "Delete your search history"
 msgstr "Hapus riwayat pencarian anda"
 
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:149
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:87
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:1031
+#, c-format
+msgid "Clear"
+msgstr "Hapus"
+
 #. A name=Your cookies
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:153
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:162
 msgid "View and amend cookies you have consented to"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:155
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:164
 #, fuzzy, c-format
 msgid "Your cookies"
 msgstr "Lis anda"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:198
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:207
 #, fuzzy, c-format
 msgid "Search the catalog by:"
 msgstr "Riwayat pencarian"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:201
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:203
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:210
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:212
 #, c-format
 msgid "Library catalog"
 msgstr "Katalog perpustakaan"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:216
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:218
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:227
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:67
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:58
 #, c-format
 msgid "Subject"
 msgstr "Subyek"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:231
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:233
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:240
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:242
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:55
 #, c-format
 msgid "Series"
 msgstr "Serial"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:239
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:243
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:245
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:246
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:248
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:252
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/checkout.inc:21
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/resort_form.inc:26
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:79
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:81
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:50
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:69
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:70
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1194
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:122
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recall.tt:102
@@ -1475,26 +1493,26 @@ msgid "Call number"
 msgstr "Nomor panggil"
 
 #. %1$s:  Branches.GetName( mylibraryfirst ) | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:253
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:262
 #, c-format
 msgid "Search the catalog by keyword in %s"
 msgstr ""
 
 #. INPUT type=text name=q
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:256
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:257
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:263
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:265
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:266
 #, c-format
 msgid "Search the catalog by keyword"
 msgstr ""
 
 #. INPUT type=text name=q
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:263
 #, fuzzy
 msgid "Searching in %s only"
 msgstr "%s Pencarian: %s %s %s "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:264
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:273
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-topissues.inc:25
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:245
 #, c-format
@@ -1502,8 +1520,8 @@ msgid "All libraries"
 msgstr "Semua perpustakaan"
 
 #. OPTGROUP
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:266
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:379
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:275
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:388
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-library.tt:67
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-library.tt:74
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-library.tt:110
@@ -1512,29 +1530,29 @@ msgid "Libraries"
 msgstr "Perpustakaan"
 
 #. OPTGROUP
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:278
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:287
 msgid "Groups"
 msgstr ""
 
 #. BUTTON
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:307
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:316
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:451
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:86
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1138
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:183
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:188
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:227
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:96
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:144
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:199
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:241
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-search-history.tt:293
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:533
 #, c-format
 msgid "Search"
 msgstr "Cari"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:324
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:333
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:24
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:33
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:61
@@ -1543,7 +1561,7 @@ msgstr "Cari"
 msgid "Advanced search"
 msgstr "Pencarian tingkat lanjut"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:328
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:337
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:27
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-reserves.tt:24
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1224
@@ -1551,12 +1569,12 @@ msgstr "Pencarian tingkat lanjut"
 msgid "Course reserves"
 msgstr "SearchCourseReserves "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:333
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:342
 #, c-format
 msgid "Browse by hierarchy"
 msgstr "Telusuri berdasarkan hirarki"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:338
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:347
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth-MARCdetail.tt:32
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth-detail.tt:35
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-authorities-home.tt:23
@@ -1566,31 +1584,31 @@ msgstr "Telusuri berdasarkan hirarki"
 msgid "Authority search"
 msgstr "Otoritas hasil pencarian"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:343
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:352
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-showreviews.tt:19
 #, c-format
 msgid "Recent comments"
 msgstr "Komentar saat ini"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:348
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:357
 #, c-format
 msgid "Tag cloud"
 msgstr "Awan tag"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:353
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:362
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-tags_subject.tt:17
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-tags_subject.tt:35
 #, c-format
 msgid "Subject cloud"
 msgstr "Subject awan"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:358
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:367
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-topissues.tt:64
 #, c-format
 msgid "Most popular"
 msgstr "Paling populer"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:363
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:372
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:23
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:45
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:48
@@ -1599,7 +1617,7 @@ msgstr "Paling populer"
 msgid "Browse search"
 msgstr "Telusuri berdasarkan hirarki"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:369
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:378
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/usermenu.inc:102
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:31
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:38
@@ -1609,7 +1627,7 @@ msgstr "Telusuri berdasarkan hirarki"
 msgid "Purchase suggestions"
 msgstr "Saran Pembelian"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:377
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:386
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:48
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:515
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:128
@@ -1619,37 +1637,37 @@ msgstr "Saran Pembelian"
 msgid "Library"
 msgstr "Perpustakaan"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:404
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:413
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:193
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:182
 #, c-format
 msgid "Log in with Google"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:405
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:414
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:194
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:183
 #, fuzzy, c-format
 msgid "If you do not have a Google account, but do have a local account, you can still log in: "
 msgstr "Jika anda tidak memiliki sebuah akun CAS, tapi memiliki akun lokal, maka anda tetap dapat melakukan log masuk : "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:411
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:420
 #, c-format
 msgid "Sorry, your Shibboleth identity does not match a valid library identity. If you have a local login, you may use that below."
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:414
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:423
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:106
 #, fuzzy, c-format
 msgid "Shibboleth login"
 msgstr "Log masuk lokal"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:415
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:424
 #, fuzzy, c-format
 msgid "Log in using a Shibboleth account"
 msgstr "Log masuk ke akun anda"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:417
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:426
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:114
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:162
 #, c-format
@@ -1659,21 +1677,21 @@ msgstr "Log masuk lokal"
 #. For the first occurrence,
 #. %1$s:  END 
 #. %2$s:  provider.description | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:430
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:439
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:176
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:193
 #, c-format
 msgid "%s Log in with %s "
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:437
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:446
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:183
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:200
 #, fuzzy, c-format
 msgid "If you do not have an external account, but do have a local account, you can still log in: "
 msgstr "Jika anda tidak memiliki sebuah akun CAS, tapi memiliki akun lokal, maka anda tetap dapat melakukan log masuk : "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:443
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:452
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/overdrive-login.inc:12
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:249
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:205
@@ -1686,7 +1704,7 @@ msgid "Password:"
 msgstr "Kata sandi:"
 
 #. INPUT type=submit
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:446
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:455
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:253
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:209
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-registration-confirmation.tt:126
@@ -1695,7 +1713,7 @@ msgstr "Kata sandi:"
 msgid "Log in"
 msgstr "Log masuk"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:456
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:465
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:270
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:219
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-reset-password.tt:100
@@ -1704,7 +1722,7 @@ msgstr "Log masuk"
 msgid "Forgot your password?"
 msgstr "Anda tidak dapat mengganti kata sandi anda."
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:461
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:470
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:275
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-main.tt:224
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-registration-confirmation.tt:130
@@ -1712,39 +1730,39 @@ msgstr "Anda tidak dapat mengganti kata sandi anda."
 msgid "Create an account"
 msgstr "Belum memiliki sebuah kata sandi?"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:483
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:521
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:492
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:530
 #, c-format
 msgid "Accept all cookies"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:485
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:519
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:494
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:528
 #, c-format
 msgid "Accept essential cookies"
 msgstr ""
 
 #. BUTTON
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:486
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:495
 msgid "Click to view more information about your cookie consents"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:486
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:495
 #, fuzzy, c-format
 msgid "More information"
 msgstr "Informasi serial:"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:494
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:503
 #, c-format
 msgid "Cookies policy"
 msgstr ""
 
 #. INPUT type=checkbox name=consentCheckbox
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:507
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:516
 msgid "Consent to cookie"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:522
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:531
 #, c-format
 msgid "Accept selected non-essential cookies"
 msgstr ""
@@ -1807,7 +1825,7 @@ msgstr "Barang sedang dipinjam"
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/modals/checkout.inc:35
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-topissues.inc:93
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-authorities-home.tt:91
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:325
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:333
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:1114
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-password-recovery.tt:147
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-password-recovery.tt:177
@@ -1899,11 +1917,6 @@ msgstr "Lis anda"
 #, fuzzy, c-format
 msgid "Powered by Koha"
 msgstr "Komentar oleh %s %s"
-
-#. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-bottom.inc:91
-msgid "Are you sure you want to delete your search history?"
-msgstr "Apakah anda yakin ingin menghapus jejak hasil pencarian anda?"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-detail-sidebar.inc:9
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/title-actions-menu.inc:6
@@ -4544,7 +4557,7 @@ msgid "See from (non-preferred form) headings are included "
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:171
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:66
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:67
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1179
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-readingrecord.tt:121
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recall.tt:95
@@ -4559,7 +4572,7 @@ msgstr "Jenis barang"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:172
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:151
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:68
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:69
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1188
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recall.tt:101
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-reserve.tt:395
@@ -4972,7 +4985,7 @@ msgstr "Apakah anda ingin menerima sebuah surel ketika ada kabar mengenai adanya
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-privacy.tt:126
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-privacy.tt:129
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:818
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Yes"
 msgstr "Ya"
@@ -4988,7 +5001,7 @@ msgstr "Ya"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-privacy.tt:128
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:519
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:820
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "No"
 msgstr "Tidak"
@@ -5018,7 +5031,7 @@ msgid "Alert subscriptions"
 msgstr "Abonemen"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscriptions.tt:49
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:67
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:68
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-full-serial-issues.tt:129
 #, c-format
 msgid "Location"
@@ -5671,7 +5684,7 @@ msgstr "Tidak ada barang yang dipilih"
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-basket.tt:373
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-shelves.tt:827
 msgid "No tag was specified."
 msgstr "Tidak ada tag yang ditentukan"
@@ -5786,7 +5799,7 @@ msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:55
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-curbside-pickups.tt:249
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:233
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-request-article.tt:154
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:275
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-suggestions.tt:279
@@ -5794,13 +5807,13 @@ msgstr ""
 msgid "Notes:"
 msgstr "Catatan:"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:61
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:62
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-reserves.tt:35
 #, c-format
 msgid "Courses"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:70
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:71
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1206
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recall.tt:103
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-reserve.tt:385
@@ -5808,34 +5821,34 @@ msgstr ""
 msgid "Copy number"
 msgstr "Nomor panggil"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:72
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:73
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1213
 #, c-format
 msgid "Date due"
 msgstr "Tanggal jatuh tempo"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:74
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:75
 #, fuzzy, c-format
 msgid "Link"
 msgstr "Tautan"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:102
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:103
 #, fuzzy, c-format
 msgid "Item URI"
 msgstr "Barang: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:104
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:105
 #, fuzzy, c-format
 msgid "Record URL"
 msgstr "# Rekaman"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:115
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:117
 #, c-format
 msgid "No reserves have been selected for this course."
 msgstr ""
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:127
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:129
 #, fuzzy
 msgid "Search course reserves"
 msgstr "SearchCourseReserves "
@@ -6789,14 +6802,14 @@ msgstr "%s%s%sSumberdaya Daring%s"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Amazon cover image (<a href='%s'>see the original image</a>)"
 msgstr ""
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy
 msgid "Coce image from Amazon.com"
@@ -6804,7 +6817,7 @@ msgstr "Lihat di Amazon.com"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy
 msgid "Coce image from Google Books"
@@ -6812,7 +6825,7 @@ msgstr "Klik untuk menampilkannya di Buku Google"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 #, fuzzy
 msgid "Coce image from Open Library"
@@ -6820,21 +6833,21 @@ msgstr "Perpustakaan : "
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Cover image source unknown"
 msgstr ""
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Image from Google Books (<a href='%s'>see the original image</a>)"
 msgstr ""
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1473
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-detail.tt:1475
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-results.tt:438
 msgid "Image from OpenLibrary (<a href='%s'>see the original image</a>)"
 msgstr ""
@@ -7152,30 +7165,30 @@ msgstr "Batalkan notifikasi surel "
 msgid "Requested item type"
 msgstr "Semua jenis barang"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:142
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:147
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-reserve.tt:324
 #, fuzzy, c-format
 msgid "Any item type"
 msgstr "Semua jenis barang"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:148
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:153
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recalls.tt:86
 #, c-format
 msgid "Fulfilled"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:150
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:158
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:155
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:163
 #, fuzzy, c-format
 msgid "Cancelled"
 msgstr "CancelHold"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:156
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:161
 #, fuzzy, c-format
 msgid "Waiting"
 msgstr "Menunggu"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:161
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-holdshistory.tt:166
 #, fuzzy, c-format
 msgid "In transit"
 msgstr "%s  Barang dalam perjalanan ke "
@@ -7266,7 +7279,7 @@ msgid "New interlibrary loan request"
 msgstr "%s%s%sKoha daring%s katalog &rsaquo; Permintaan pinjaman anda dari perpustakaan lain"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:42
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:181
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:186
 #, fuzzy, c-format
 msgid "View interlibrary loan request"
 msgstr "%s%s%sKoha daring%s katalog &rsaquo; Permintaan pinjaman anda dari perpustakaan lain"
@@ -7325,68 +7338,68 @@ msgstr "Kata sandi sudah diperbarui"
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:161
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:164
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:168
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:214
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:222
 #, c-format
 msgid "N/A"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:174
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:179
 #, c-format
 msgid "View"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:187
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:192
 #, fuzzy, c-format
 msgid "Details from library"
 msgstr "Tag-tag dari perpustakaan ini:"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:191
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:196
 #, fuzzy, c-format
 msgid "Request ID:"
 msgstr "Artikel legal"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:195
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:200
 #, fuzzy, c-format
 msgid "Requested from:"
 msgstr "Terpisah dari:"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:200
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:205
 #, fuzzy, c-format
 msgid "Requested item:"
 msgstr "Hapus barang yang dipilih"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:201
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:206
 #, fuzzy, c-format
 msgid "View the requested item"
 msgstr "Pilih sebuah salinan tertentu:"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:205
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:210
 #, fuzzy, c-format
 msgid "Collection library:"
 msgstr "Judul koleksi:"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:209
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:214
 #, fuzzy, c-format
 msgid "Status:"
 msgstr "Status"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:221
 #, fuzzy, c-format
 msgid "Request type:"
 msgstr "%s Jenis jalan: "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:217
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:225
 #, fuzzy, c-format
 msgid "Request placed:"
 msgstr "Artikel legal"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:221
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:229
 #, fuzzy, c-format
 msgid "Last updated:"
 msgstr "Kata sandi sudah diperbarui"
 
 #. %1$s:  request.backend | html 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:235
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:243
 #, fuzzy, c-format
 msgid "Details from %s"
 msgstr "Perincian"
@@ -7395,53 +7408,53 @@ msgstr "Perincian"
 #. %2$s:  meta.value | html 
 #. %3$s:  ELSE 
 #. %4$s:  END 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:239
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:247
 #, fuzzy, c-format
 msgid "%s%s%sN/A%s"
 msgstr "%s%s%sT/A%s "
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:249
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:257
 #, fuzzy, c-format
 msgid "Request cancellation"
 msgstr "request_location"
 
 #. INPUT type=submit
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:251
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:259
 #, fuzzy
 msgid "Submit modifications"
 msgstr "Kirim perubahan"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:258
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:266
 #, c-format
 msgid "Interlibrary loan item availability"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:263
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:271
 #, c-format
 msgid "Displaying availability results"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:279
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:287
 #, fuzzy, c-format
 msgid "If you can't find what you are looking for, you can "
 msgstr "Tidak menemukan apa yang anda cari?"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:281
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:289
 #, c-format
 msgid "continue creating your request"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:281
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:289
 #, fuzzy, c-format
 msgid "or "
 msgstr "atau"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:282
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:290
 #, fuzzy, c-format
 msgid "cancel your request"
 msgstr "Apakah anda yakin ingin membatalkan pemesanan pinjam ini?"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:291
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-illrequests.tt:299
 #, c-format
 msgid "ILL request disclaimer"
 msgstr ""
@@ -7513,7 +7526,7 @@ msgstr "Catatan:"
 #. INPUT type=submit
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-issue-note.tt:56
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:594
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy, c-format
 msgid "Submit note"
 msgstr "Kirim perubahan"
@@ -7919,6 +7932,7 @@ msgid "Username:"
 msgstr "nama pengguna"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:272
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-virtual-card.tt:53
 #, fuzzy, c-format
 msgid "Expiration date:"
 msgstr "%s Tanggal pendaftaran: "
@@ -8491,7 +8505,7 @@ msgstr ""
 
 #. INPUT type=submit
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-messaging.tt:248
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Submit changes"
 msgstr "Kirim perubahan"
 
@@ -8691,7 +8705,7 @@ msgstr "Barang yang tidak tersedia:"
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-overdrive-search.tt:77
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Loading..."
 msgstr "Memuat..."
 
@@ -9611,7 +9625,7 @@ msgstr "Riwayat membaca anda sudah dihapus."
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-recalls.tt:133
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to remove this recall?"
 msgstr "Apakah anda yakin ingin menghapus daftar ini?"
@@ -9648,6 +9662,7 @@ msgid "To log in, use the following credentials:"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-registration-confirmation.tt:80
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-virtual-card.tt:50
 #, fuzzy, c-format
 msgid "Card number:"
 msgstr "%s Numor kartu: "
@@ -11471,9 +11486,9 @@ msgid "You do not have permission to add a record to this list."
 msgstr "Anda tidak mempunyai izin untuk mengirim lis ini."
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-shelves.tt:201
-#, fuzzy, c-format
-msgid "You do not have permission to transfer ownership of this list."
-msgstr "Anda tidak mempunyai izin untuk mengirim lis ini."
+#, c-format
+msgid "Transfer not allowed: You or the selected user do not have the required permissions."
+msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-shelves.tt:203
 #, fuzzy, c-format
@@ -12879,7 +12894,7 @@ msgstr "Koleksi serial"
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:329
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:550
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Renew selected"
 msgstr "Memperbarui yang dipilih"
@@ -13063,7 +13078,7 @@ msgstr ""
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:536
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy, c-format
 msgid "Edit note"
 msgstr "Catatan judul"
@@ -13071,7 +13086,7 @@ msgstr "Catatan judul"
 #. For the first occurrence,
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:538
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy, c-format
 msgid "Add note"
 msgstr "Tambah bidang lain"
@@ -13080,7 +13095,7 @@ msgstr "Tambah bidang lain"
 #. SCRIPT
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:552
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:568
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, c-format
 msgid "Renew all"
 msgstr "Memperbarui semuanya"
@@ -13273,116 +13288,116 @@ msgid "Do not suspend"
 msgstr "Catatan tidak ditemukan"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "All holds will be suspended."
 msgstr ""
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "All holds will resume."
 msgstr ""
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to cancel this article request?"
 msgstr "Apakah anda yakin ingin membatalkan pemesanan pinjam ini?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Are you sure you want to cancel this hold?"
 msgstr "Apakah anda yakin ingin membatalkan pemesanan pinjam ini?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to dismiss this message?"
 msgstr "Apakah anda yakin ingin menghapus daftar ini?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to request cancelling this hold?"
 msgstr "Apakah anda yakin ingin membatalkan pemesanan pinjam ini?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to resume all suspended holds?"
 msgstr "Apakah anda yakin ingin membatalkan pemesanan pinjam ini?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Are you sure you want to suspend all holds?"
 msgstr "Apakah anda yakin ingin membatalkan pemesanan pinjam ini?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "No, do not cancel article request"
 msgstr "Apakah anda yakin ingin membatalkan pemesanan pinjam ini?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "No, do not cancel hold"
 msgstr "Tidak dalam pemesanan"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "No, do not resume holds"
 msgstr "Mohon maaf, anda tidak dapat memesan lebih dari %s pinjaman. "
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Nothing has been selected. Check the box for each item you want to renew"
 msgstr "Tidak ada satupun yang telah dipilih. Periksa kotaknya untuk setiap barang yang ingin anda tinjau"
 
 #. For the first occurrence,
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Something went wrong. The note has not been saved"
 msgstr ""
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Yes, cancel article request"
 msgstr "Apakah anda yakin ingin membatalkan pemesanan pinjam ini?"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Yes, cancel hold"
 msgstr "CancelHold"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Yes, resume all holds"
 msgstr "Lanjutkan kembali semua pemesanan yang ditahan"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Yes, suspend all holds"
 msgstr "Tahan semua pesanan"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 msgid "Your note about %s could not be saved."
 msgstr ""
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Your note about %s has been saved and sent to the library."
 msgstr "%s Fitur ini belum digunakan, mohon hubungi seorang pustakawan. %s"
 
 #. SCRIPT
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1080
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:1079
 #, fuzzy
 msgid "Your note about %s was removed."
 msgstr "KESALAHAN: Tidak ada biblionumber yang diterima."
@@ -13391,7 +13406,7 @@ msgstr "KESALAHAN: Tidak ada biblionumber yang diterima."
 #. %2$s:  LibraryNameTitle | html 
 #. %3$s:  ELSE 
 #. %4$s:  END 
-#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-virtual-card.tt:9
+#: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-virtual-card.tt:10
 #, fuzzy, c-format
 msgid "My virtual card &rsaquo; %s%s%sKoha online%s catalog"
 msgstr "%s%s%sKoha daring%s katalog"
@@ -14156,6 +14171,9 @@ msgstr "000 "
 #~ msgid "Are you sure you want to delete the selected tag(s)?"
 #~ msgstr "Apakah anda yakin ingin menghapus barang yang dipilih?"
 
+#~ msgid "Are you sure you want to delete your search history?"
+#~ msgstr "Apakah anda yakin ingin menghapus jejak hasil pencarian anda?"
+
 #, fuzzy
 #~ msgid "Are you sure you want to remove this share?"
 #~ msgstr "Apakah anda yakin ingin menghapus daftar ini?"
@@ -14596,6 +14614,10 @@ msgstr "000 "
 #, fuzzy
 #~ msgid "Yes, delete from list"
 #~ msgstr "%s barang yang dihapus."
+
+#, fuzzy, c-format
+#~ msgid "You do not have permission to transfer ownership of this list."
+#~ msgstr "Anda tidak mempunyai izin untuk mengirim lis ini."
 
 #, fuzzy, c-format
 #~ msgid "You may register here."

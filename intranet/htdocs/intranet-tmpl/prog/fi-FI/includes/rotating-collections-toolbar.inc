@@ -5,7 +5,7 @@
 
  [% IF ( colId ) %]
  <div class="btn-group">
- <a class="btn btn-default" href="/cgi-bin/koha/rotating_collections/transferCollection.pl?colId=[% colId | html %]"><i class="fa-solid fa-right-left"></i> Siirto</a>
+ <a class="btn btn-default" href="/cgi-bin/koha/rotating_collections/transferCollection.pl?colId=[% colId | html %]"><i class="fa-solid fa-right-left"></i> Siirrä</a>
  </div>
  <div class="btn-group">
  <a class="btn btn-default" href="/cgi-bin/koha/rotating_collections/editCollections.pl?op=edit&amp;colId=[% colId | html %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa</a>

@@ -1,10 +1,10 @@
 # Compendium of bg.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:06-0300\n"
-"PO-Revision-Date: 2025-04-24 04:07+0000\n"
+"PO-Revision-Date: 2025-08-10 03:08+0000\n"
 "Last-Translator: Илиян Дамянов <aioiliyan@gmail.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: bg-Cyrl\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /bg/22.11/bg-Cyrl-pref.po\n"
 "X-POOTLE-MTIME: 1699281636.090656\n"
@@ -2167,18 +2167,47 @@ msgstr "Използвайте"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
-msgstr "Например: <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "<br><br>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr "<li><code>{FIELD}</code>:номер на полето, например, \"000\" или \"048\"</li>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr "<li><code>{LANG}</code>: език, например, \"en\" или \"fi-FI\"</li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr "<li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr "<li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr "<ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr "MARC21: страници на ниво поле на https://www.loc.gov/marc/bibliographic/</li>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "Ако се остави празно, се използва документацията на http://loc.gov (MARC21) или http://archive.ifla.org (UNIMARC)."
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
+msgstr "Например::<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "Възможните замествания са <tt>{MARC}</tt> (видове marc, напр. 'MARC21' или 'UNIMARC'), <tt>{FIELD}</tt> (номер на полето, например '000' или '048'), <tt>{LANG}</tt> (потребителски език, напр. 'En' или 'fi-FI')."
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "Ако се остави празно, URL адресите по подразбиране са:"
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "Заместители, налични за използване в URL адреса:"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -5978,7 +6007,7 @@ msgstr "PROC: FIC - кара библиотечен документ, който
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - кара даден библиотечен документ, който е в Центъра за обработка, да бъде актуализиран до неговото постоянно място.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6042,7 +6071,7 @@ msgstr "PROC: FIC - кара библиотечен документ, който
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - кара даден библиотечен документ, който е в Центъра за обработка, да бъде актуализиран до неговото постоянно място.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -8254,7 +8283,7 @@ msgstr "Активирани пакети МБЗ за заявки, иниции
 # Interlibrary loans > Features > ILLModule
 # Circulation > Interlibrary loans
 msgid "interlibrary_loans.pref#ILLPartnerCode# Use patrons from category"
-msgstr "Използвайте покровители от категория"
+msgstr "Използвайте потребители от категория"
 
 # Interlibrary loans > Features > CirculateILL
 # Circulation > Interlibrary loans
@@ -8962,8 +8991,8 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "данните за придобиване на страниците с подробности за библиотечни документи в OPAC."
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
-msgstr "<strong>ЗАБЕЛЕЖКА:</strong> Идентификатори за автори и сътрудници - валидните кодове за използване в подполето източник (024$2) в момента са: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID) и viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
+msgstr "<strong>ЗАБЕЛЕЖКА:</strong> Идентификатори за автори и сътрудници - валидни кодове за използване в подполето за източник (024$2) в момента са: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID) и wikidata (WIKIDATA ID)."
 
 # OPAC > Features > OPACAuthorIdentifiers
 # OPAC > Features
@@ -9053,6 +9082,20 @@ msgstr "Активирайте"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "опция за показване на QR код на страницата с библиографски подробности в OPAC."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "Разрешете"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "Не разрешавайте"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr "Потребителите на OPAC могат да изпращат имейли със списъци чрез бутон „Изпращане на списък“."
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 msgid "opac.pref#OPACDisplay856uAsImage# . Note: The corresponding <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACXSLT\">OPACXSLT</a> option must be turned on."
@@ -11384,24 +11427,29 @@ msgstr "Задействайте предупреждение, ако текущ
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "дни."
 
-# Patrons > Notices and notifications > EmailFieldPrimary
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "Дете читател"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr "<p><strong>ПРЕДУПРЕЖДЕНИЕ:</strong> Задаването на това предпочитание на <em>изисква</em> ще доведе до грешки за всички съществуващи клиенти, които сега биха изисквали гарант, а нямат такъв."
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
-msgstr "поръчител при регистрация."
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "Всеки читател от друг вид читател може да има гарант"
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
+msgstr "да се зададе гарант при добавяне на читател."
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
-msgstr "не трябва да има"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
+msgstr "не се изисква"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron relationships
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
-msgstr "трябва да има"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
+msgstr "изисква"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
@@ -14450,13 +14498,13 @@ msgstr "на услугите за потребители на OPAC (достъ�
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
-msgstr "Разрешете IP адреси"
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
+msgstr "Разрешаване само на IP адреси"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
-msgstr "да използват ILS-DI услугите (когато са активирани). Разделете IP адресите със запетаи и без интервали. Оставете полето празно, за да разрешите всеки IP адрес."
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
+msgstr "за да използвате услугите на ILS-DI (когато са активирани). Разделете IP адресите със запетаи и без интервали. Въведете '0.0.0.0/0' или '::/0', за да разрешите произволен IP адрес."
 
 # Web services > IdRef > IdRef
 # Web services > IdRef
@@ -14702,8 +14750,8 @@ msgstr "Активирайте"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
 # Web services > REST API
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
-msgstr "предоставените от OAuth2 идентификационни данни за клиенти за REST API. Изисква Net :: OAuth2 :: InstallationServer е инсталиран."
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
+msgstr "клиентските идентификационни данни за OAuth2 предоставят за REST API."
 
 # Web services > REST API > RESTPublicAPI
 # Web services > REST API
@@ -15755,6 +15803,16 @@ msgstr "реда от доклад, поискан чрез уеб услуга�
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "те автоматично да създават нови Класификатори, ако е необходимо, вместо да се налага препратка към съществуващите класификатори."
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "Ако се остави празно, се използва документацията на http://loc.gov (MARC21) или http://archive.ifla.org (UNIMARC)."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "Възможните замествания са <tt>{MARC}</tt> (видове marc, напр. 'MARC21' или 'UNIMARC'), <tt>{FIELD}</tt> (номер на полето, например '000' или '048'), <tt>{LANG}</tt> (потребителски език, напр. 'En' или 'fi-FI')."
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #~ msgid "cataloguing.pref#OpacSuppression# <br />Display the following message on the redirect page for suppressed bibliographic records:"
@@ -16004,6 +16062,10 @@ msgstr "реда от доклад, поискан чрез уеб услуга�
 # Patrons > Notices and notifications
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "служебен"
+
+# Patrons > Notices and notifications > EmailFieldPrimary
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "Дете читател"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

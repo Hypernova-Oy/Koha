@@ -1,18 +1,18 @@
 # Compendium of fr_CA.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:13-0300\n"
-"PO-Revision-Date: 2025-04-26 04:06+0000\n"
-"Last-Translator: marieluce <marie-luce.laflamme@inLibro.com>\n"
+"PO-Revision-Date: 2025-07-01 03:09+0000\n"
+"Last-Translator: Caroline Cyr-La-Rose <caroline.cyr-la-rose@inlibro.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: fr-CA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /fr_CA/22.11/fr-CA-installer.po\n"
 "X-POOTLE-MTIME: 1693594251.914172\n"
@@ -59,19 +59,19 @@ msgstr "Annulation"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:11
 msgid "Lost item processing fee refund"
-msgstr "Remboursement de frais d'administration pour exemplaire perdu"
+msgstr "Remboursement des frais de traitement d'exemplaire perdu"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:description:1
 msgid "Credit types used in Koha"
-msgstr "Types de crédits utilisés dans Koha"
+msgstr "Types de crédit utilisés dans Koha"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:1
 msgid "Account creation fee"
-msgstr "Frais d'abonnement"
+msgstr "Frais de création de compte"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:2
 msgid "Account renewal fee"
-msgstr "Frais de renouvellement d'abonnement"
+msgstr "Frais de renouvellement de compte"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:3
 msgid "Article request fee"
@@ -83,7 +83,7 @@ msgstr "Exemplaire perdu"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:5
 msgid "Manual fee"
-msgstr "Frais manuel"
+msgstr "Frais manuels"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:6
 msgid "New card fee"
@@ -95,11 +95,11 @@ msgstr "Frais de retard"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:8
 msgid "Lost item processing fee"
-msgstr "Frais d'administration pour exemplaire perdu"
+msgstr "Frais de traitement d'exemplaire perdu"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:9
 msgid "Payment from library to patron"
-msgstr "Paiement de la bibliothèque à l'utilisateur"
+msgstr "Remboursement de la bibliothèque à l'utilisateur"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:10
 msgid "Rental fee"
@@ -111,15 +111,15 @@ msgstr "Frais quotidien de location"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:12
 msgid "Renewal of daily rental item"
-msgstr "Renouvellement d'une location quotidienne"
+msgstr "Renouvellement d'exemplaire en location avec frais quotidien"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:13
 msgid "Renewal of rental item"
-msgstr "Renouvellement d'une location"
+msgstr "Renouvellement d'exemplaire en location"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:14
 msgid "Hold fee"
-msgstr "Coût de réservation"
+msgstr "Frais de réservation"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:15
 msgid "Hold waiting too long"
@@ -258,7 +258,8 @@ msgid "Complete"
 msgstr "Complet"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+#, fuzzy
+msgid "Aggregated full text"
 msgstr "Text intégral agrégé"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -3991,7 +3992,7 @@ msgstr "Interviewer"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:79
 msgid "Issuing body"
-msgstr "Organisme émetteur"
+msgstr "Organisme de publication"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:80
 msgid "Librettist"
@@ -4051,7 +4052,7 @@ msgstr "Initiateur"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:94
 msgid "Other"
-msgstr "Autres"
+msgstr "Autre"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:95
 msgid "Papermaker"
@@ -4143,7 +4144,7 @@ msgstr "Réviseur"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:117
 msgid "Restorationist"
-msgstr "restaurationniste"
+msgstr "Restaurateur"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:118
 msgid "Rubricator"
@@ -7095,7 +7096,7 @@ msgstr "Copiste d'art"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:4
 msgid "Art director"
-msgstr "Directeur artistique"
+msgstr "Directeur artistique d'images"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:6
 msgid "Author of afterword, colophon, etc."
@@ -7168,7 +7169,7 @@ msgstr "Producteur de livres"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:36
 msgid "Blurb writer"
-msgstr "Auteur de la notice publicitaire"
+msgstr "Auteur de la note publicitaire"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:37
 msgid "Binder"
@@ -7180,7 +7181,7 @@ msgstr "Diffuseur"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:40
 msgid "Braille embosser"
-msgstr "Embosseur braille"
+msgstr "Producteur braille"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:42
 msgid "Casting director"
@@ -7188,7 +7189,7 @@ msgstr "Directeur de casting"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:43
 msgid "Caster"
-msgstr "Mouleur"
+msgstr "Fondeur"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:46
 msgid "Client"
@@ -7224,7 +7225,7 @@ msgstr "Opérateur de caméra"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:61
 msgid "Collection registrar"
-msgstr "Conservateur de collections"
+msgstr "Conservateur de collection"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:62
 msgid "Contestant"
@@ -7236,7 +7237,7 @@ msgstr "Contestant-appelant"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:64
 msgid "Court governed"
-msgstr "Régi par tribunal"
+msgstr "Tribunal régi"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:65
 msgid "Cover designer"
@@ -7308,7 +7309,7 @@ msgstr "Directeur de doublage"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:87
 msgid "Distribution place"
-msgstr "Lieu de distribution"
+msgstr "Lieu de diffusion ou de distribution"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:88
 msgid "Defendant"
@@ -7332,7 +7333,7 @@ msgstr "Institution émettrice d'un diplôme"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:93
 msgid "Degree supervisor"
-msgstr "Directeur de thèse"
+msgstr "Superviseur académique"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:95
 msgid "DJ"
@@ -7400,7 +7401,7 @@ msgstr "Lieu de l'événement"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:122
 msgid "Facsimilist"
-msgstr "Copiste"
+msgstr "Créateur de fac-similé"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:123
 msgid "Film distributor"
@@ -7420,7 +7421,7 @@ msgstr "Cinéaste"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:129
 msgid "Film producer"
-msgstr "Producteur de films"
+msgstr "Producteur de cinéma"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:131
 msgid "First party"
@@ -7536,7 +7537,7 @@ msgstr "Animateur de débat"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:174
 msgid "Marbler"
-msgstr "Marbrier"
+msgstr "Marbreur"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:175
 msgid "Markup editor"
@@ -7696,7 +7697,7 @@ msgstr "Chercheur"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:234
 msgid "Radio producer"
-msgstr "Producteur d’émissions de radio"
+msgstr "Producteur de radio"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:235
 msgid "Repository"
@@ -7772,7 +7773,7 @@ msgstr "Décorateur de scène"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:264
 msgid "Setting"
-msgstr "Décor"
+msgstr "Cadre"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:265
 msgid "Storyteller"
@@ -7860,7 +7861,7 @@ msgstr "Graveur sur bois de bout"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:292
 msgid "Writer of film story"
-msgstr "Auteur d'histoire de film"
+msgstr "Auteur de récit cinématographique"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:293
 msgid "Writer of intertitles"
@@ -7884,7 +7885,7 @@ msgstr "Auteur de contenu textuel supplémentaire"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:298
 msgid "Writer of television story"
-msgstr "Auteur d'histoire d'émissions de télévision"
+msgstr "Auteur de récit télévisuel"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:description:1
 msgid "MARC code list for relators, as of http://www.loc.gov/marc/relators/relaterm.html"

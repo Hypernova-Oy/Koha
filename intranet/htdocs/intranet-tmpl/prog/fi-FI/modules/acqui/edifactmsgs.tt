@@ -24,7 +24,7 @@
  <a href="/cgi-bin/koha/acqui/acqui-home.pl">Hankinnat</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>EDIFACT-sanomat</span>
+ <span>EDIFACT-viestit</span>
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
 [% END #/ WRAPPER sub-header.inc %]
@@ -36,7 +36,7 @@
  [% INCLUDE 'messages.inc' %]
 
 
-<h1>EDIFACT-sanomat</h1>
+<h1>EDIFACT-viestit</h1>
 <div id="acqui_edifactmsgs" class="page-section">
 
 <table id="edi_msgs"></table>

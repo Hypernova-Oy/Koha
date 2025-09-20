@@ -43,7 +43,7 @@
  <div class="col-md-12">
  [% INCLUDE 'messages.inc' %]
 
- <div class="container">
+ <div class="container-fluid">
 
  <h1>Korisi</h1>
 
@@ -56,7 +56,7 @@
 
  <a class="btn btn-default" href="basket.pl" id="send_cart"><i class="fa-solid fa-envelope"></i> Lähetä</a>
  <div class="btn-group">
- <a aria-haspopup="menu" aria-label="Valitse tallennusmuoto ja lataa kori." class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" href="#" id="downloadcart"><i class="fa fa-download"></i> Lataa </a>
+ <a aria-haspopup="menu" aria-label="Valitse tallennusmuoto ja lataa kori" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" href="#" id="downloadcart"><i class="fa fa-download"></i> Lataa </a>
  <ul class="dropdown-menu">
  <li><a class="dropdown-item" href="/cgi-bin/koha/basket/downloadcart.pl?format=iso2709&amp;bib_list=[% bib_list | uri %]">iso2709</a></li>
  <li><a class="dropdown-item" href="/cgi-bin/koha/basket/downloadcart.pl?format=ris&amp;bib_list=[% bib_list | uri %]">RIS</a></li>

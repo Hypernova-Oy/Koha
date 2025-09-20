@@ -256,7 +256,7 @@
 
  [% IF servers_count > 0 %]
  <div class="page-section">
- <h3>All SMTP servers</h3>
+ <h3>Kaikki SMTP-palvelimet</h3>
  <table id="smtp_servers">
  <thead>
  <tr>
@@ -485,14 +485,14 @@
 [% BLOCK default_server_info %]
  <div class="page-section">
  <div class="rows" id="default_server_message">
- <h2>Current default configuration</h2>
+ <h2>Nykyiset oletusasetukset</h2>
  <ul>
  <li><span class="label">Palvelin: </span> [%- default_config.host | html -%]</li>
  <li><span class="label">Portti: </span> [%- default_config.port | html -%]</li>
- <li><span class="label">Timeout (secs): </span> [%- default_config.timeout | html -%]</li>
+ <li><span class="label">Aikakatkaisu (s): </span> [%- default_config.timeout | html -%]</li>
  <li><span class="label">SSL: </span> [%- IF default_config.ssl_mode == 'disabled' -%]<span>Poistettu käytöstä</span>[%- ELSIF default_config.ssl_mode == 'ssl' -%]<span>SSL</span>[%- ELSE -%]<span>STARTTLS</span>[%- END -%]</li>
  <li><span class="label">Vianjäljitystila: </span> [%- IF default_config.debug -%]Kyllä[%- ELSE -%]Ei[%- END -%]</li>
- [% IF op == 'list' %]
+ [% IF op == 'list' && default_config.id %]
  <li><a href="/cgi-bin/koha/admin/smtp_servers.pl?op=edit_form&smtp_server_id=[% default_config.id | uri %]"><i class="fa fa-pencil"></i> Muokkaa</a></li>
  [% END %]
  </ul>

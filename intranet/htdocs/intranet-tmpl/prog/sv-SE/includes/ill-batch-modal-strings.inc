@@ -8,7 +8,7 @@
     var ill_batch_statuses_api_fail = _("Kunde inte hämta de satsvisa statusarna");
     var ill_batch_api_request_fail = _("Det gick inte att skapa lokal beställning");
     var ill_batch_requests_api_fail = _("Kunde inte hämta beställningar satsvis");
-    var ill_batch_unknown = _("Okänt");
+    var ill_batch_unknown = _("Okänd");
     var ill_batch_doi = _("DOI");
     var ill_batch_pmid = _("PubMed-ID");
     var ill_populate_waiting = _("Hämtar...");

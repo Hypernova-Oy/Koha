@@ -56,7 +56,7 @@
  <li><a class="dropdown-item" href="/cgi-bin/koha/course_reserves/course-reserves.pl">Kurslistor</a></li>
  [% END %]
  [% IF Koha.Preference('PreservationModule') && CAN_user_preservation %]
- <li><a class="dropdown-item" href="/cgi-bin/koha/preservation/home.pl">p- Arkivkvalitet för långtidslagring</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/preservation/home.pl">Bokvård</a></li>
  [% END %]
  [% IF ( CAN_user_reports ) %]
  <li><a class="dropdown-item" href="/cgi-bin/koha/reports/reports-home.pl">Rapporter</a></li>

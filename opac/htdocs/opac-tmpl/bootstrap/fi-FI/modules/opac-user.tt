@@ -85,7 +85,7 @@
  [% CASE 'branchNotInHoldGroup' %]
  <span>Kirjastostasi ei voi varata</span>
  [% CASE 'itemAlreadyOnHold' %]
- <span>Sinulla on jo varaus tähän niteeseen</span>
+ <span>Sinulla on jo varaus tähän teokseen</span>
  [% CASE 'cannotBeTransferred' %]
  <span>Ei voi kuljettaa noutokirjastoon</span>
  [% CASE 'pickupNotInHoldGroup' %]
@@ -95,11 +95,11 @@
  [% CASE 'libraryNotPickupLocation' %]
  <span>Tämä kirjasto ei ole sallittu noutopaikka</span>
  [% CASE 'no_valid_pickup_location' %]
- <span>Ei sallittua noutopaikkaa</span>
+ <span>Ei kelvollista noutokirjastoa</span>
  [% CASE 'notforloan' %]
  <span>Ei lainata</span>
  [% CASE 'items_available' %]
- <span>Kirjastossasi on saatavana olevia niteitä, käy lainaamassa kirjastostasi</span>
+ <span>Kirjastossasi on saatavana olevia niteitä, käy lainaamassa ne kirjastostasi</span>
  [% CASE 'not_placed' %]
  <span>Varaamisessa tapahtui virhe, otathan yhteyttä kirjastoon</span>
  [% CASE %]
@@ -113,30 +113,30 @@
 
  [% IF ( borrower.blockedonfines && Koha.Preference('OPACHoldRequests') ) %]
  <div class="alert alert-warning" id="blockedonfines">
- <strong>Huomaa:</strong><span> Tilillänne on maksamattomia maksuja [% amountoutstanding | $Price %]. Varaukset ovat estetty, koska summa ylittää sallitun rajan.</span>
+ <strong>Huomioi:</strong><span> Tilillänne on maksamattomia maksuja [% amountoutstanding | $Price %]. Varaukset ovat estetty, koska summa ylittää sallitun rajan.</span>
  </div>
  [% END %]
 
  [% IF ( borrower.warndeparture ) %]
  <div class="alert alert-warning" id="warndeparture">
- <strong>Huomaa:</strong><span> Kirjastokorttisi vanhenee <span id="warndeparture_date">[% borrower.warndeparture | $KohaDates %]</span>. Ole hyvä ja ota yhteyttä kirjastoon kortin uusimiseksi.</span>
+ <strong>Huomioi:</strong><span> Asiakastilisi vanhenee <span id="warndeparture_date">[% borrower.warndeparture | $KohaDates %]</span>. Ole hyvä ja ota yhteyttä kirjastoon kortin uusimiseksi.</span>
  [% IF ( borrower.returnbeforeexpiry ) %]<span id="warndeparture_returnbeforeexpiry"> Kaikki lainat on palautettava ennen lainausoikeuden päättymistä.</span>[% END %]
  </div>
  [% END %]
 
  [% IF ( borrower.warnexpired ) %]
  <div class="alert alert-warning" id="warnexpired">
- <strong>Huomaa: </strong><span>Kirjastokorttisi on vanhentunut [% borrower.warnexpired | $KohaDates %]. Ota yhteyttä kirjastoon kortin uusimiseksi.</span>
+ <strong>Huomaa: </strong><span>Asiakastilisi on vanhentunut [% borrower.warnexpired | $KohaDates %]. Ota yhteyttä kirjastoon asiakastilisi uusimiseksi.</span>
  </div>
  [% END %]
 
  [% IF ( RENEW_ERROR ) %]
  <div class="alert alert-warning">
- <strong>Huomaa:</strong>
+ <strong>Huomioi:</strong>
  Lainan uusinta epäonnistui seuraavista syistä: <ul>
  [% FOREACH error IN RENEW_ERROR.split('\|') %]
  [% IF error == 'card_expired' %]
- <li>Kirjastokorttisi ei ole voimassa. Ota yhteys kirjastoon.</li>
+ <li>Asiakastilisi ei ole voimassa. Ota yhteys kirjastoon.</li>
  [% ELSIF error == 'too_many' %]
  <li>Lainan uusimiskerrat ovat tulleet täyteen.</li>
  [% ELSIF error == 'too_unseen' %]
@@ -163,16 +163,16 @@
  [% IF ( userdebarred ) %]
  [% IF ( discharge_available ) %]
  <li id="discharged">
- <strong>Huomaa:</strong> Kirjastokorttisi on lukittu, koska se on irtisanottu. <a href="/cgi-bin/koha/opac-discharge.pl?op=get">Hae velattomuusilmoituksesi</a>
+ <strong>Huomioi:</strong> Asiakastilisi on lukittu, koska et ole vielä hakenut velattomuusilmoitusta. <a href="/cgi-bin/koha/opac-discharge.pl?op=get">Hae velattomuusilmoituksesi</a>
  </li>
  [% ELSE %]
  <li id="userdebarred">
- <strong>Huomaa:</strong> Kirjastokorttisi on lukittu. [% IF ( borrower.debarredcomment ) %] Kommentti:<br />
+ <strong>Huomioi:</strong> Asiakastilisi on lukittu. [% IF ( borrower.debarredcomment ) %] Kommentti:<br />
  <ul id="userdebarred_comment">
  [% FOREACH restriction IN logged_in_user.restrictions %]
  <li class="patron_restriction">
  <strong>[%- restriction.type.display_text | html -%]: </strong>
- [% IF restriction.comment.search('OVERDUES_PROCESS') %] Rajoite tullut palautuskehoituksesta [% restriction.comment.remove('OVERDUES_PROCESS ') | html_line_break %] [% ELSE %] [%- IF restriction.comment -%] <span class="restriction_comment">[% restriction.comment | html_line_break %]</span>. [%- END -%] [% END %] [%- IF restriction.expiration -%] Kirjastokortti lukittu <span class="restriction_expiration">[%- restriction.expiration | $KohaDates -%]</span>
+ [% IF restriction.comment.search('OVERDUES_PROCESS') %] Rajoite tullut palautuskehoituksesta [% restriction.comment.remove('OVERDUES_PROCESS ') | html_line_break %] [% ELSE %] [%- IF restriction.comment -%] <span class="restriction_comment">[% restriction.comment | html_line_break %]</span>. [%- END -%] [% END %] [%- IF restriction.expiration -%] Asiakastilisi lukittu seuraavaan päivämäärään asti: <span class="restriction_expiration">[%- restriction.expiration | $KohaDates -%]</span>
  [%- ELSE -%]
  <strong>Tili lukittu toistaiseksi</strong>
  [%- END -%]
@@ -181,12 +181,12 @@
  </ul>
  [% END %]
 
- <p><em>Tavallisin syy kirjastokortin lukitsemiselle on maksamattomat maksut tai kadonneet lainat. Jos tiedoissasi ei ole mielestäsi epäselvyyksiä, ota yhteys kirjastoon asian selvittämiseksi.</em> <a href="/cgi-bin/koha/opac-account.pl">Siirry Maksut-sivulle</a></p>
+ <p><em>Tavallisin syy asiakastilin lukitsemiselle on maksamattomat maksut tai kadonneet lainat. Jos tiedoissasi ei ole mielestäsi epäselvyyksiä, ota yhteys kirjastoon asian selvittämiseksi.</em> <a href="/cgi-bin/koha/opac-account.pl">Siirry Maksut-sivulle</a></p>
  </li>
  [% END %]
  [% END %]
  [% IF ( borrower.gonenoaddress ) %]
- <li id="gonenoaddress"><strong>Huomaa:</strong> Yhteystietosi eivät ole ajantasalla. Ole hyvä ja ota yhteys kirjastoon. <a href="/cgi-bin/koha/opac-memberentry.pl">[% IF ( Koha.Preference('OPACPatronDetails') ) %]<span>Päivitä yhteystietosi</span>[% ELSE %]<span>Siirry yhteystietoihin</span>[% END %]</a>
+ <li id="gonenoaddress"><strong>Huomioi:</strong> Yhteystietosi eivät ole ajantasalla. Ole hyvä ja ota yhteys kirjastoon. <a href="/cgi-bin/koha/opac-memberentry.pl">[% IF ( Koha.Preference('OPACPatronDetails') ) %]<span>Päivitä yhteystietosi</span>[% ELSE %]<span>Siirry yhteystietoihin</span>[% END %]</a>
  [% IF ( Koha.Preference('OPACPatronDetails') ) %]<em>(Huomioi: tilisi tietojen palautuksessa voi olla viive, jos tallennat verkossa.)</em>[% END %]
  </li>
  [% END %]
@@ -440,12 +440,7 @@
  [% IF ISSUE.itemtype_object.rentalcharge_hourly > 0 %]
  <span class="renewalfee badge text-bg-warning">[% ISSUE.itemtype_object.rentalcharge_hourly | $Price %] / tunti</span>
  [% END %]
- <span class="renewals">(
- [% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = ISSUE.renewsleft, renewals_allowed = ISSUE.renewsallowed }) %]
- [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %]
- / [% ISSUE.unseenleft | html %] of [% ISSUE.unseenallowed | html %] renewals left before the item must be seen by the library
- [% END %]
- )</span>
+ <span class="renewals">([% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = ISSUE.renewsleft, renewals_allowed = ISSUE.renewsallowed }) %] [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %] / [% ISSUE.unseenleft | html %] / [% ISSUE.unseenallowed | html %] uusintaa jäljellä ennen kuin nide on vietävä kirjastoon uusittavaksi [% END %] )</span>
  [% ELSIF ( ISSUE.on_reserve ) %]
  <span class="usr-msg no-renew-hold">Ei uusittavissa <span class="renewals">(varattu)</span></span>
  [% ELSIF ( ISSUE.too_many ) %]
@@ -458,28 +453,13 @@
  <span class="usr-msg no-renew-too-late">Ei enää uusittavissa</span>
  [% ELSIF ISSUE.auto_too_much_oweing %]
  <span class="usr-msg auto-renew-fines">Automaattinen uusinta epäonnistui, sinulla on maksamattomia maksuja.</span>
- <span class="renewals">(
- [% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = ISSUE.renewsleft, renewals_allowed = ISSUE.renewsallowed }) %]
- [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %]
- / [% ISSUE.unseenleft | html %] of [% ISSUE.unseenallowed | html %] renewals left before the item must be seen by the library
- [% END %]
- )</span>
+ <span class="renewals">([% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = ISSUE.renewsleft, renewals_allowed = ISSUE.renewsallowed }) %] [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %] / [% ISSUE.unseenleft | html %] / [% ISSUE.unseenallowed | html %] uusintaa jäljellä ennen kuin nide on vietävä kirjastoon uusittavaksi [% END %] )</span>
  [% ELSIF ISSUE.auto_account_expired %]
- <span class="usr-msg auto-renew-expired">Automaattinen uusinta epäonnistui, kirjastokortti on vanhentunut.</span>
- <span class="renewals">(
- [% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = ISSUE.renewsleft, renewals_allowed = ISSUE.renewsallowed }) %]
- [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %]
- / [% ISSUE.unseenleft | html %] of [% ISSUE.unseenallowed | html %] renewals left before the item must be seen by the library
- [% END %]
- )</span>
+ <span class="usr-msg auto-renew-expired">Automaattinen uusinta epäonnistui, koska asiakastilisi on vanhentunut.</span>
+ <span class="renewals">([% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = ISSUE.renewsleft, renewals_allowed = ISSUE.renewsallowed }) %] [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %] / [% ISSUE.unseenleft | html %] / [% ISSUE.unseenallowed | html %] uusintaa jäljellä ennen kuin nide on vietävä kirjastoon uusittavaksi [% END %] )</span>
  [% ELSIF ( ISSUE.too_soon ) %]
  <span class="usr-msg no-renewal-before">Ei uusintaa ennen [% ISSUE.soonestrenewdate | $KohaDates  as_due_date => 1 %]</span>
- <span class="renewals">(
- [% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = ISSUE.renewsleft, renewals_allowed = ISSUE.renewsallowed }) %]
- [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %]
- / [% ISSUE.unseenleft | html %] of [% ISSUE.unseenallowed | html %] renewals left before the item must be seen by the library
- [% END %]
- )</span>
+ <span class="renewals">([% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = ISSUE.renewsleft, renewals_allowed = ISSUE.renewsallowed }) %] [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %] / [% ISSUE.unseenleft | html %] / [% ISSUE.unseenallowed | html %] uusintaa jäljellä ennen kuin nide on vietävä kirjastoon uusittavaksi [% END %] )</span>
  [% ELSIF ( ISSUE.item_denied_renewal ) %] Uusinta ei ole sallittu [% END %] [% IF ( ISSUE.auto_renew || ISSUE.auto_too_soon ) %] <br><span class="usr-msg automatic-renewal">Tämä nide on määritetty uusiutumaan automaattisesti.</span>
  [% END %]
  </td>
@@ -508,7 +488,7 @@
  </div>
  <a id="save_[% ISSUE.issue_id | html %]" href="/cgi-bin/koha/opac-issue-note.pl?issue_id=[% ISSUE.issue_id | html %]" class="btn btn-primary btn-sm btn-add-note noprint" data-title="[% ISSUE.title | html %] [% FOREACH subtitle IN ISSUE.subtitle.split(' \| ') %][% IF Koha.Preference('marcflavour')=='UNIMARC' %],[% END %][% subtitle | html %][% END %]" data-issueid="[% ISSUE.issue_id | html %]" id="save_[% ISSUE.issue_id | html %]">
  [% IF ( ISSUE.note ) -%]
- <span>Muokkaa huomautuksia</span>
+ <span>Muokkaa huomautusta</span>
  [% ELSE -%]
  <span>Lisää huomautus</span>
  [% END %]
@@ -766,14 +746,9 @@
  </td>
  [% IF ( OpacRenewalAllowed ) %]
  <td>
- [% IF ( OVERDUE.debarred ) %] Kirjastokortti lukittu [% ELSIF ( OVERDUE.status ) %] [% IF ( canrenew ) %] <a href="/cgi-bin/koha/opac-renew.pl?from=opac_user&amp;item=[% OVERDUE.itemnumber | uri %]&amp;bornum=[% OVERDUE.borrowernumber | uri %]">Uusinta</a>
+ [% IF ( OVERDUE.debarred ) %] Asiakastilisi lukittu [% ELSIF ( OVERDUE.status ) %] [% IF ( canrenew ) %] <a href="/cgi-bin/koha/opac-renew.pl?from=opac_user&amp;item=[% OVERDUE.itemnumber | uri %]&amp;bornum=[% OVERDUE.borrowernumber | uri %]">Uusinta</a>
  [% END %]
- <span class="renewals">(
- [% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = OVERDUE.renewsleft, renewals_allowed = OVERDUE.renewsallowed }) %]
- [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %]
- / [% OVERDUE.unseenleft | html %] of [% OVERDUE.unseenallowed | html %] renewals left before the item must be seen by the library
- [% END %]
- )</span>
+ <span class="renewals">([% I18N.tx("{renewals_left} of {renewals_allowed} renewals remaining", { renewals_left = OVERDUE.renewsleft, renewals_allowed = OVERDUE.renewsallowed }) %] [% IF Koha.Preference('UnseenRenewals') && ISSUE.unseenallowed %] / [% OVERDUE.unseenleft | html %] / [% OVERDUE.unseenallowed | html %] uusintaa jäljellä ennen kuin nide on vietävä kirjastoon uusittavaksi [% END %] )</span>
  [% ELSIF ( OVERDUE.norenew_overdue ) %] Ei sallittu <span class="renewals">(myöhässä)</span>
  [% ELSIF ( OVERDUE.onreserve ) %]
  <span>Varattu</span>
@@ -886,14 +861,14 @@
  <th class="psort article-request-created-on">Varauspvm</th>
  <th class="anti-the article-request-title">Nimeke</th>
  <th class="article-request-author">Tekijä</th>
- <th class="article-request-volume">Vuosikerta</th>
+ <th class="article-request-volume">Osa</th>
  <th class="article-request-issue">Numero</th>
- <th class="article-request-date">Pvm</th>
+ <th class="article-request-date">Päivämäärä</th>
  <th class="article-request-toc" title="Sisällysluettelo">Sisällysluettelo</th>
  <th class="article-request-pages">Sivut</th>
  <th class="article-request-chapters">Luvut</th>
  <th class="article-request-patron-notes">Huomautukset</th>
- <th class="article-request-format">Materiaali</th>
+ <th class="article-request-format">Aineistotyyppi</th>
  <th class="article-request-status">Tila</th>
  <th class="article-request-branchcode">Noutokirjasto</th>
  <th class="article-request-cancel">Toiminnot</th>
@@ -903,7 +878,7 @@
 
  <tbody>
  [% FOREACH ar IN current_article_requests %]
- <tr>
+ <tr id="article_[% ar.id | html %]">
  <td class="article-request-record-title">
  [% INCLUDE 'biblio-title.inc' biblio=ar.biblio link=> 1 %]
  [% ar.item.enumchron | html %]
@@ -1042,7 +1017,6 @@
 
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% INCLUDE 'calendar.inc' %]
  [% INCLUDE 'datatables.inc' %]
  <script>
@@ -1064,7 +1038,7 @@
             [% IF ( opac_user_article_requests ) %]
                 $("#opac-user-views a[href='#opac-user-article-requests_panel']").tab("show");
             [% END %]
-            $('#opac-user-article-requests caption .count').html(AR_CAPTION_COUNT.format('[% current_article_requests.size | html %]'));
+            $('#article-requests-table caption .count').html(AR_CAPTION_COUNT.format('[% current_article_requests.size | html %]'));
 
             $(".modal-nojs").addClass("modal").addClass("hide").removeClass("modal-nojs");
 
@@ -1092,7 +1066,7 @@
                 );
             });
 
-            $(".btn-delete-article-request").on("click", function(e){
+            $("#article-requests-table").on("click", ".btn-delete-article-request", function(e){
                 e.preventDefault();
                 var article_request = $(this).data("title");
                 var article_request_id = $(this).data("article-request_id");
@@ -1103,16 +1077,18 @@
                                 type: "DELETE",
                                 url: '/api/v1/public/patrons/'+borrowernumber+'/article_requests/'+article_request_id+'?cancellation_reason=OPAC',
                                 success: function( data ) {
-                                    row.parents('tr').hide({
+                                    $("#article_" + article_request_id ).hide({
                                         duration: 'slow',
                                         complete: function() {
-                                            var ar_tab = $('a[href="#opac-user-article-requests"');
+                                            $(this).siblings(".child").hide();
+                                            var ar_tab = $('a[href="#opac-user-article-requests_panel"');
                                             var ar_table = $('#article-requests-table');
                                             var ar_length = $('tbody tr:visible', ar_table).length;
                                             var ar_count = $('caption .count', ar_table);
 
                                             ar_tab.html(ar_tab.html().replace(/\(\d+\)/, '('+ar_length+')'));
                                             ar_count.html(AR_CAPTION_COUNT.format(ar_length));
+
                                         }
                                     });
                                 }
@@ -1371,11 +1347,11 @@
                     $("#notesaved").addClass("alert-info");
                     noteinput.data('origvalue', data.note)
                         .val(data.note);
-                    notebutton.text( _("Muokkaa huomautuksia" ) );
+                    notebutton.text( _("Muokkaa huomautusta" ) );
                     $("#viewnote_" + issue_id ).text( data.note );
                     message = "<p>" + _("Huomautuksesi %s tallennettiin ja lähetettiin kirjastolle.").format( em(title) ) + "</p>";
                     message += "<p class=\"checkout_note\">" + data.note;
-                    message += "<a href=\"/cgi-bin/koha/opac-issue-note.pl?issue_id=" + issue_id + "\" class=\"btn btn-link btn-sm btn-add-note\" data-title=\"" + title + "\" data-issueid=\"" + issue_id + "\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> " + _("Muokkaa huomautuksia") + "</a>";
+                    message += "<a href=\"/cgi-bin/koha/opac-issue-note.pl?issue_id=" + issue_id + "\" class=\"btn btn-link btn-sm btn-add-note\" data-title=\"" + title + "\" data-issueid=\"" + issue_id + "\"><i class=\"fa fa-pencil\" aria-hidden=\"true\"></i> " + _("Muokkaa huomautusta") + "</a>";
                     message += "</p>";
                 } else if(data.status == 'removed') {
                     $("#notesaved").removeClass("alert-error");

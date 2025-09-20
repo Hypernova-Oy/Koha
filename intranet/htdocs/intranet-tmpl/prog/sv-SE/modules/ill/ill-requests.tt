@@ -184,8 +184,7 @@
  Lokal användning registrerad </div>
  [% ELSIF whole.value.check_out_errors.error.UNKNOWN_BARCODE %]
  <div class="alert alert-warning">
- The bibliographic record's item contains an unknown (or empty) barcode.
- </div>
+ Den bibliografiska postens exemplar innehåller en okänd (eller tom) streckkod. </div>
  [% ELSE %]
  <div class="alert alert-warning">
  Problem med att låna ut exemplaret. Kontrollera om det är problem med <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% whole.value.patron.borrowernumber | uri %]">låntagarkontot</a>
@@ -199,7 +198,7 @@
  <legend>Utlåningsinställningar</legend>
  [% items = whole.value.biblio.items.unblessed %]
  [% IF items.size == 1 %]
- <p><a target="_blank" href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% whole.value.biblio.biblionumber | uri %]">The bibliographic record</a> for this request already has an item attached to it, you are about to check it out</p>
+ <p><a target="_blank" href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% whole.value.biblio.biblionumber | uri %]">Den bibliografiska posten</a> för den här beställningen har redan ett exemplar kopplat till sig, du är på väg att låna ut det</p>
  [% ELSE %]
  <p>En bibliografisk post för den här beställningen finns, men inget exemplar. Du kommer att skapa ett exemplar och låna ut det</p>
  [% END %]
@@ -618,6 +617,7 @@
  </a>
  [% END %]
  [% END %]
+ [% IF request.borrowernumber %]
  <div class="dropdown btn-group">
  <button class="btn btn-default dropdown-toggle" type="button" id="ill-notice-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
  <i class="fa-solid fa-envelope"></i> Skicka meddelande till låntagare </button>
@@ -627,6 +627,7 @@
  [% END %]
  </ul>
  </div>
+ [% END %]
  <a class="btn btn-default" href="#" id="ill-request-display-metadata" title="Visa metadata från leverantör">
  <span class="fa-solid fa-eye"></span>
  Visa metadata från leverantör </a>
@@ -645,6 +646,7 @@
  [% request.orderid | html %]
  </li>
  [% END %]
+ [% IF request.borrowernumber %]
  <li class="borrowernumber">
  <span class="label borrowernumber">Låntagare:</span>
  [% borrowerlink = "/cgi-bin/koha/members/moremember.pl" _ "?borrowernumber=" _ request.patron.borrowernumber %]
@@ -652,6 +654,7 @@
  [% request.patron.firstname _ " " _ request.patron.surname _ " [" _ request.patron.cardnumber _ "]" | html %]
  </a>
  </li>
+ [% END %]
  [% IF request.biblio_id %]
  <li class="biblio_id">
  <span class="label biblio_id">Bibliografisk post-id:</span>

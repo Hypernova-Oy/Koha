@@ -93,8 +93,8 @@ Sisältölaajennukset:
     - choices:
         both: verkkokirjastossa ja virkailijaliittymässä.
         not: ei ollenkaan.
-        opac: verkkokirjastossa
-        staff: virkailijaliittymässä
+        opac: verkkokirjastossa.
+        staff: virkailijaliittymässä.
       pref: HTML5MediaEnabled
   - - Mediatiedostojen laajennokset
     - class: multi
@@ -185,10 +185,10 @@ Sisältölaajennukset:
   - - Käyttäjätunnus Novelist Select -palveluun
     - pref: NovelistSelectProfile
     - (verkkokirjastossa)
-  - - 'Käyttäjätunnus Novelist Select -palveluun:'
+  - - Käyttäjätunnus Novelist Select -palveluun
     - pref: NovelistSelectStaffProfile
-    - (virkailijaliittymässä)
-  - - 'Salasana Novelist Select -palveluun:'
+    - virkailijaliittymässä.
+  - - Salasana Novelist Select -palveluun
     - class: password
       pref: NovelistSelectPassword
     - .
@@ -218,10 +218,10 @@ Sisältölaajennukset:
     - Open Libraryn hakutuloksia verkkokirjastossa.
   OverDrive:
   - - choices:
-        '0': Don't enable
-        '1': Enable
+        '0': Älä salli
+        '1': Salli
       pref: OPACOverDrive
-    - OverDrive integration in the OPAC.
+    - OverDriven integraatio Kohan verkkokirjastossa.
   - - Sisällytä OverDrive-saatavuustieto asiakasavaimeen
     - pref: OverDriveClientKey
     - ja asiakkaan salasanaan
@@ -244,7 +244,7 @@ Sisältölaajennukset:
       pref: OverDriveCirculation
     - asiakkaiden nähdä OverDrive-lainahistoriansa sekä lainata ja palauttaa aineistoja.<br
       />
-    - OverDrive uses the patron's
+    - OverDrive käyttää asiakkaan
     - choices:
         cardnumber: kirjastokortin numeron
         userid: käyttäjätunnusta

@@ -74,8 +74,8 @@ searching.pref:
       Please note: you will need to reindex your bibliographic database when changing
       this system preference.'
   - - choices:
-        '0': Don't include
-        '1': Include
+        '0': Inkludera inte
+        '1': Inkludera
       default: 0
       pref: IncludeSeeAlsoFromInSearches
     - '<em>see also from</em> headings in bibliographic searches. Please note: you
@@ -112,25 +112,26 @@ searching.pref:
     - class: long
       pref: ESPreventAutoTruncate
   - - choices:
-        '0': Don't
-        '1': Do
+        '0': Gör inte
+        '1': Gör
       default: 0
       pref: SearchCancelledAndInvalidISBNandISSN
-    - search for cancelled or invalid forms of ISBN/ISSN when performing ISBN/ISSN
-      search (when using Elasticsearch).
+    - sök efter avbrutna eller ogiltiga former av ISBN/ISSN när du utför ISBN/ISSN-sökning
+      (när du använder Elasticsearch).
   - - class: code
       pref: z3950Status
       syntax: text/x-yaml
       type: textarea
-    - Define custom rules to show specific items as not available in Z3950. Rules
-      are defined with item database fields as keys and an array of values.<br/>
-    - Examples:<br/><br/>
-    - '<pre>ccode: [REF,ARC]</pre><br/>  - would mark all REF and ARC collections
-      (Reference and Archives) items as unavailable in Z3950 results.<br/><br/>'
-    - You can define multiple keys and values, items meeting ANY of the criteria will
-      be marked unavailable:<br/><br/>
-    - '<pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  - would mark all
-      reference items AND items at the REPAIR branch as unavailable.'
+    - Definiera anpassade regler för att visa specifika objekt som inte tillgängliga
+      i Z3950. Regler definieras med exemplarets databasfält som nycklar och en matris
+      med värden.<br/>
+    - Exempel:<br/><br/>
+    - '<pre>ccode: [REF,ARC]</pre><br/> - skulle markera alla REF- och ARC-samlingar
+      (referens och arkiv) som otillgängliga i Z3950-resultat.<br/><br/>'
+    - Du kan definiera flera nycklar och värden, exemplar som uppfyller NÅGON av kriterierna
+      kommer att markeras som otillgängliga:<br/><br/>
+    - '<pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/> - skulle markera alla
+      referensobjekt OCH objekt på REPAIR-grenen som otillgängliga.'
   Menade du/stavningskontroll:
   - - Svensk tjänst för stavningskontroll.<br/>
     - LIBRIS stavningskontroll API-nyckel

@@ -239,7 +239,7 @@
  <input type="text" name="marcorgcode" id="marcorgcode" size="16" maxlength="16" value="[% library.marcorgcode | html %]" />
  <div class="hint">
  [% IF ( CAN_user_parameters_manage_sysprefs ) %]
- [% pref_MARCOrgCode_link = BLOCK %]<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=MARCOrgCode">MARCOrgCode</a>[% END %] Standard: [% pref_MARCOrgCode_link | $raw | $KohaSpan %] systeminställning [% ELSE %] Standard: MARCOrgCode-systeminställningen. [% END %]  Erhåll bibliotekskod från <a href="https://www.loc.gov/marc/organizations/orgshome.html" target="_blank">Library of Congress</a>.
+ [% pref_MARCOrgCode_link = BLOCK %]<a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=MARCOrgCode">MARCOrgCode</a>[% END %] Standard: [% pref_MARCOrgCode_link | $raw | $KohaSpan %] systeminställning. [% ELSE %] Standard: MARCOrgCode-systeminställningen. [% END %] Erhåll bibliotekskod från <a href="https://www.loc.gov/marc/organizations/orgshome.html" target="_blank">Library of Congress</a>.
  </div>
  </li>
  <li><label for="branchnotes">Kommentarer: </label><input type="text" name="branchnotes" id="branchnotes" size="80" value="[% library.branchnotes | html %]" /></li>
@@ -492,10 +492,16 @@
  <span class="label">Return-Path: </span>
  [% library.branchreturnpath | html %]
  </li>
+ [% IF ( library.smtp_server.id ) %]
  <li>
  <span class="label">SMTP-server: </span>
- [% smtp_server.name | html %]
+ [% IF ( CAN_user_parameters_manage_smtp_servers ) %]
+ <a href="/cgi-bin/koha/admin/smtp_servers.pl?op=edit_form&smtp_server_id=[% library.smtp_server.id | uri %]">[% library.smtp_server.name | html %]</a>
+ [% ELSE %]
+ [% library.smtp_server.name | html %]
+ [% END %]
  </li>
+ [% END %]
  <li>
  <span class="label">URL: </span>
  [% IF ( library.branchurl ) %]

@@ -1,10 +1,10 @@
 # Compendium of zh_TW.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2025-04-17 03:06+0000\n"
+"POT-Creation-Date: 2025-08-28 03:09+0000\n"
+"PO-Revision-Date: 2025-07-08 03:10+0000\n"
 "Last-Translator: Frank Chou <frank@sris.com.tw>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: zh-Hant-TW\n"
@@ -12,14 +12,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /zh_TW/22.11/zh-Hant-TW-messages-js.po\n"
 "X-POOTLE-MTIME: 1698923539.991452\n"
 
 #: koha-tmpl/intranet-tmpl/prog/js/acq.js:10
 msgid "ERROR: Price is not a valid number, please check the price and try again!"
-msgstr "錯誤：價格不是有效的數字，請檢查價格並再試！"
+msgstr "錯誤:價格不是有效的數字，請檢查價格並再試！"
 
 #: koha-tmpl/intranet-tmpl/prog/js/acq.js:314
 msgid "Fund amount exceeds parent allocation"
@@ -34,16 +34,18 @@ msgid "New budget-parent is beneath budget"
 msgstr "新預算-上層預算低於預算"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:10
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:55
 msgid "Form not submitted because of the following problem(s)"
 msgstr "因下列問題而未提交表格"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:14
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:61
 #, javascript-format
 msgid "%s item mandatory fields empty"
 msgstr "%s 館藏必填段為空"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:31
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:64
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:81
 msgid "Update item"
 msgstr "更新館藏"
 
@@ -51,13 +53,13 @@ msgstr "更新館藏"
 msgid "You can't receive any more items"
 msgstr "您不能再簽收任何館藏"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:122
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:187
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:653
 msgid "Edit"
 msgstr "編輯"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:108
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:125
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1125
 #: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:9
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:592
@@ -73,39 +75,39 @@ msgstr "編輯"
 msgid "Delete"
 msgstr "刪除"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:195
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:212
 msgid "Add item"
 msgstr "新增館藏"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:196
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:213
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:106
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:338
 msgid "Clear"
 msgstr "清除"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:197
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:214
 msgid "Add multiple items"
 msgstr "新增多個館藏"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:199
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:216
 msgid "Number of items to add"
 msgstr "新增的館藏數"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:200
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:217
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:84
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:78
 msgid "Add"
 msgstr "新增"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:201
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:218
 msgid "NOTE: Fields listed in the 'UniqueItemFields' system preference will not be copied"
 msgstr "注意: 系統偏好設定中 'UniqueItemsFields' 列出的段將不會被複製"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:288
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:305
 msgid "is duplicated"
 msgstr "被重複"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:313
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:330
 msgid "already exists in database"
 msgstr "已經在資料庫裡"
 
@@ -314,7 +316,7 @@ msgstr "您確定要取代 %s 書目框架的段及分欄? 現有框架將會被
 #: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:59
 #, javascript-format
 msgid "Importing to framework: %s. Importing from file: %s."
-msgstr "匯入至框架：%s。匯入自檔案：%s。"
+msgstr "匯入至框架:%s。匯入自檔案:%s。"
 
 #: koha-tmpl/intranet-tmpl/prog/js/browser.js:88
 #: koha-tmpl/intranet-tmpl/prog/js/browser.js:90
@@ -493,8 +495,8 @@ msgid "September"
 msgstr "九月"
 
 #: koha-tmpl/intranet-tmpl/prog/js/cancel_booking_modal.js:47
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1188
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1256
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1210
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1278
 msgid "Failure"
 msgstr "失敗"
 
@@ -583,13 +585,13 @@ msgstr "模板名稱為必填的."
 
 #: koha-tmpl/intranet-tmpl/prog/js/categories.js:14
 msgid "Category code can only contain the following characters: letters, numbers, - and _."
-msgstr "類別代碼祗能用下列字元：字母、數字、- 與 _。"
+msgstr "類別代碼祗能用下列字元:字母、數字、- 與 _。"
 
 #: koha-tmpl/intranet-tmpl/prog/js/categories.js:32
 #: koha-tmpl/intranet-tmpl/prog/js/categories.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/categories.js:116
 msgid "Please choose an enrollment period in months OR by date."
-msgstr "請祗選擇以月計或日計的註冊期間。"
+msgstr "請祗選擇以月計或日計的註冊期間."
 
 #: koha-tmpl/intranet-tmpl/prog/js/categories.js:124
 msgid "Please select ..."
@@ -611,7 +613,7 @@ msgstr "未找到匹配項"
 #: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:13
 #, javascript-format
 msgid "Note: %s out of %s renewals have been logged"
-msgstr "注意：%s 在外的 %s 續借已經被記錄"
+msgstr "注意:%s 在外的 %s 續借已經被記錄"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkout_renewals_modal.js:24
 msgid "Renewed by"
@@ -684,12 +686,12 @@ msgstr "必須在圖書館續借"
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:287
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:740
 msgid "Not allowed: patron restricted"
-msgstr "不允許：讀者停權"
+msgstr "不允許:讀者停權"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:294
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:742
 msgid "Not allowed: overdue"
-msgstr "不允許：逾期"
+msgstr "不允許:逾期"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:301
 #, javascript-format
@@ -713,14 +715,12 @@ msgid "Renewal denied by syspref"
 msgstr "續借被系統偏好設定阻止"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:366
-#, fuzzy
 msgid "{renewals_left} of {renewals_allowed} renewals remaining"
-msgstr "續借剩 %s 次(共 %s 次)"
+msgstr "剩餘 {renewals_left} 次續借（共允許 {renewals_allowed} 次）"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:368
-#, fuzzy
 msgid " and {renewals_left} of {renewals_allowed} unseen renewals remaining"
-msgstr " and %s of %s 未見續借剩餘"
+msgstr " 且剩餘 {renewals_left} 次未見續借（共允許 {renewals_allowed} 次）"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:374
 msgid "Scheduled for automatic renewal"
@@ -759,11 +759,11 @@ msgstr "無法還入"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:727
 msgid "Renewed, due:"
-msgstr "續借到期日："
+msgstr "續借到期日:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:730
 msgid "Renew failed:"
-msgstr "續借失敗："
+msgstr "續借失敗:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:732
 msgid "not checked out"
@@ -828,7 +828,7 @@ msgid "Update"
 msgstr "更新"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1225
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:415
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:443
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:48
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:167
@@ -861,7 +861,7 @@ msgid "Last"
 msgstr "最後項"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:15
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1072
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1146
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:16
 msgid "No data available in table"
 msgstr "表單內無可用的資料"
@@ -945,8 +945,8 @@ msgstr "Excel"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:41
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:43
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:688
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:690
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:746
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:748
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:62
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:64
 msgid "Clear filter"
@@ -985,40 +985,40 @@ msgstr ""
 msgid "Something went wrong when loading the table."
 msgstr "上傳此表單時出錯了。"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:723
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:781
 msgid "Columns settings"
 msgstr "設定欄"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:724
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:782
 msgid "Columns"
 msgstr "欄"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:738
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:796
 msgid "Export or print"
 msgstr "匯出或印出"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:739
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:797
 msgid "Export"
 msgstr "匯出"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:747
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:805
 msgid "Copied!"
 msgstr "複本!"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:754
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:755
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:812
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:813
 msgid "Copy shareable link"
 msgstr "複製可分享連結"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:775
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:833
 msgid "Configure table"
 msgstr "組態表"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:776
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:834
 msgid "Configure"
 msgstr "組態"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:866
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:936
 #, javascript-format
 msgid "%s search"
 msgstr "%s 搜尋"
@@ -1063,81 +1063,81 @@ msgstr "否"
 msgid "Yes"
 msgstr "是"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:263
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:267
 msgid "Resume"
 msgstr "恢復"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:266
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:414
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:276
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:442
 msgid "Suspend"
 msgstr "暫停"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:275
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
 msgid "Hold is <strong>suspended</strong>"
 msgstr "預約被 <strong>中止</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:277
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:305
 #, javascript-format
 msgid "until %s"
 msgstr "直到 %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:283
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
 #, javascript-format
 msgid "Next available %s item"
 msgstr "下個可取得 %s 館藏"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:315
 #, javascript-format
 msgid "Next available item group <strong>%s</strong> item"
 msgstr "下個可用的館藏群組 <strong>%s</strong> 館藏"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:295
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:323
 msgid "Item is <strong>waiting here</strong>"
 msgstr "館藏 <strong>等待中</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:297
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:301
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:325
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:329
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:331
 #, javascript-format
 msgid "at %s"
 msgstr "在 %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:300
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:328
 msgid "Item is <strong>waiting</strong>"
 msgstr "館藏 <strong>等待中</strong>"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:309
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:337
 #, javascript-format
 msgid "Item is <strong>in transit</strong> from %s since %s"
 msgstr "館藏 <strong>轉移</strong> 自 %s 自從 %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:339
 #, javascript-format
 msgid "Item hasn't been transferred yet from %s"
 msgstr "館藏還沒有從 %s 轉送"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:350
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:378
 msgid "Unable to resume, hold not found"
 msgstr "無法復原，未找到預約"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:353
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:439
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:381
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:467
 msgid "Your request could not be processed. Check the logs for details."
 msgstr "無法處理您的請求. 檢查日誌以了解詳細資訊."
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:399
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:427
 msgid "Suspend hold on"
 msgstr "暫停預約"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:406
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:434
 msgid "Suspend until:"
-msgstr "暫停至："
+msgstr "暫停至:"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:409
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:437
 msgid "Clear date to suspend indefinitely"
 msgstr "無限延擱清除曰期"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:436
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:464
 msgid "Unable to suspend, hold not found."
 msgstr "無法暫停, 未找到預約."
 
@@ -1278,7 +1278,7 @@ msgstr "請確認是否為重複的讀者"
 #: koha-tmpl/intranet-tmpl/prog/js/members.js:82
 #, javascript-format
 msgid "Minimum password length: %s"
-msgstr "密碼最短長度：%s"
+msgstr "密碼最短長度:%s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/members.js:178
 msgid "Age"
@@ -1345,13 +1345,13 @@ msgid "Private"
 msgstr "私人的"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:194
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:110
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:718
 msgid "years"
 msgstr "年"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:217
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:129
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:130
 msgid "Search for a patron"
 msgstr "搜尋讀者"
 
@@ -1367,27 +1367,27 @@ msgstr "關係 #%s 更新成功."
 msgid "Error resolving concern #%s. Check the logs for details."
 msgstr "解決問題 #%s 時出錯. 檢查記錄以了解詳細資訊."
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:44
 msgid "Edit booking"
 msgstr "編輯預約"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:46
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:47
 msgid "Place booking"
 msgstr "預約"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:198
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:199
 msgid "Pickup location"
 msgstr "取件地點"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:249
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:258
 msgid "Item type"
 msgstr "館藏類型"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1177
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1199
 msgid "Booking successfully placed"
 msgstr "已成功預約"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1245
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1267
 msgid "Booking successfully updated"
 msgstr "預約已成功更新"
 
@@ -1401,7 +1401,7 @@ msgstr "您必須選擇借出以匯出"
 
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:10
 msgid "Error: presence of invalid data prevent saving. Please make the corrections and try again."
-msgstr "錯誤：不能儲存錯誤的資料。請更正並再試。"
+msgstr "錯誤:不能儲存錯誤的資料。請更正並再試。"
 
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:48
 msgid "Nothing to save"
@@ -1440,11 +1440,11 @@ msgstr "展開此部分"
 
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:329
 msgid "Note: _ALL_ value will override all other values"
-msgstr "說明：_ALL_ 的值將取代其他的值"
+msgstr "說明:_ALL_ 的值將取代其他的值"
 
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:343
 msgid "The following values are not formatted correctly:"
-msgstr "以下值非正確的格式："
+msgstr "以下值非正確的格式:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:483
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:17
@@ -1559,7 +1559,7 @@ msgstr "擴展"
 
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:585
 msgid "Collapse"
-msgstr "坍塌"
+msgstr "收摺"
 
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:609
 msgid "You must complete all fields"
@@ -1681,7 +1681,7 @@ msgstr "已拒絕"
 msgid "Testing..."
 msgstr "測試中..."
 
-#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:163
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:169
 #, javascript-format
 msgid "AJAX error (%s alert)"
 msgstr "AJAX 錯誤 (%s 警示)"
@@ -1704,7 +1704,7 @@ msgstr "此主題唯在安全環境 (HTTPS)可取得。"
 
 #: koha-tmpl/intranet-tmpl/prog/js/patron-webcam.js:126
 msgid "An unknown error occurred: "
-msgstr "發生未知的錯誤： "
+msgstr "發生未知的錯誤: "
 
 #: koha-tmpl/intranet-tmpl/prog/js/recalls.js:6
 msgid "Are you sure you want to remove this recall?"
@@ -1904,7 +1904,7 @@ msgstr "要向館員顯示的期刊數量必須是數字"
 
 #: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:81
 msgid "Number of issues to display to the public must be a number"
-msgstr "顯示在線上公用目錄的期數必須是數字："
+msgstr "顯示在線上公用目錄的期數必須是數字:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:91
 msgid "You must choose a first publication date"
@@ -1941,7 +1941,7 @@ msgstr "下期出版日期不確定"
 #: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:305
 #, javascript-format
 msgid "Cannot test prediction pattern for the following reason(s): %s"
-msgstr "因為下列的原因無法檢視預測模式：%s"
+msgstr "因為下列的原因無法檢視預測模式:%s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:354
 msgid "Please enter a name for this pattern"
@@ -1953,7 +1953,7 @@ msgstr "此模式已存在。您仍要修改它嗎？"
 
 #: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:370
 msgid "Warning: This will modify the pattern for all subscriptions that are using it."
-msgstr "警示：將修改所有訂閱的模式。"
+msgstr "警示:將修改所有訂閱的模式。"
 
 # pattern是指？樣式或其它意思？
 #: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:400
@@ -1974,7 +1974,7 @@ msgstr "顯示 Mana 結果"
 
 #: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:446
 msgid "Subscription found on Mana Knowledge Base:"
-msgstr "在 Mana 知識庫發現的訂閱："
+msgstr "在 Mana 知識庫發現的訂閱:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/subscription-add.js:449
 msgid "No subscription found on Mana Knowledge Base"
@@ -2099,7 +2099,7 @@ msgstr "未定義上傳用的暫存目錄"
 
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:113
 msgid "Upload status: "
-msgstr "上傳狀態："
+msgstr "上傳狀態: "
 
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:114
 msgid "Failed"
@@ -2115,7 +2115,7 @@ msgstr "當上傳時發生錯誤。"
 
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:173
 msgid "Error:"
-msgstr "錯誤："
+msgstr "錯誤:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:173
 msgid "This tool only accepts ZIP files or GIF, JPEG, PNG, or XPM images."
@@ -2127,11 +2127,11 @@ msgstr "檔案名稱:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:181
 msgid "File type:"
-msgstr "檔案類型："
+msgstr "檔案類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:182
 msgid "File size:"
-msgstr "檔案大小："
+msgstr "檔案大小:"
 
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:214
 #: koha-tmpl/intranet-tmpl/prog/js/upload-images.js:219
@@ -2452,7 +2452,7 @@ msgstr "只有一個控制授權被允許"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:213
 #, javascript-format
 msgid "File size exceeds maximum allowed: %s MB"
-msgstr "檔案大小超過允許的最大值：%s MB"
+msgstr "檔案大小超過允許的最大值:%s MB"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:317
 #, javascript-format
@@ -2535,12 +2535,10 @@ msgid "Packages"
 msgstr "套裝"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:264
-#, fuzzy
 msgid "(EBSCO)"
-msgstr "EBSCO"
+msgstr "(EBSCO)"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:280
-#, fuzzy
 msgid "local"
 msgstr "本地的"
 
@@ -3002,7 +3000,7 @@ msgstr "新包裝"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:45
 msgid "Content type: "
-msgstr "內容類型： "
+msgstr "內容類型: "
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesFormAdd.vue:159
 msgid "An agreement is used several times"
@@ -3050,14 +3048,12 @@ msgid "Create linked bibliographic record"
 msgstr "建立連結的書目記錄"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:385
-#, fuzzy
 msgid "Update bibliographic record"
-msgstr "更新連結的書目記錄"
+msgstr "更新書目紀錄"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:386
-#, fuzzy
 msgid "Create bibliographic record"
-msgstr "建立連結的書目記錄"
+msgstr "建立書目紀錄"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesFormAdd.vue:497
 msgid "A package is used several times"
@@ -3204,9 +3200,9 @@ msgid "Contributors"
 msgstr "其他作者"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesShow.vue:243
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Packages (%s)"
-msgstr "套裝 %s"
+msgstr "套件 (%s)"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesFormAdd.vue:5
 #, javascript-format
@@ -3267,9 +3263,8 @@ msgid "License #%s"
 msgstr "許可證 #%s"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/Main.vue:138
-#, fuzzy
 msgid "The e-resource management module is disabled, turn on <a href='/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule'>ERMModule</a> to use it"
-msgstr "電子資源管理模塊已禁用,開啟 <a href=\"/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule\">ERMModule</a>使用它"
+msgstr "電子資源管理模組已被停用，請啟用 <a href='/cgi-bin/koha/admin/preferences.pl?tab=&op=search&searchfield=ERMModule'>ERMModule</a> 以使用該功能"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:2
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:14
@@ -3285,9 +3280,8 @@ msgstr "資料提供者名字"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:23
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:425
-#, fuzzy
 msgid "Inactive"
-msgstr "現行的"
+msgstr "未啟用"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:28
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:113
@@ -3435,9 +3429,8 @@ msgstr "客戶 ID 資訊"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:332
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:342
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:352
-#, fuzzy
 msgid "No information provided"
-msgstr "電子全文取用限制期資訊"
+msgstr "未提供任何資訊"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersFormAdd.vue:337
 msgid "Requestor ID info"
@@ -3578,7 +3571,6 @@ msgid "Titles"
 msgstr "標題"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:172
-#, fuzzy
 msgid "Platforms"
 msgstr "平台"
 
@@ -3588,9 +3580,8 @@ msgid "Items"
 msgstr "館藏"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:178
-#, fuzzy
 msgid "Databases"
-msgstr "資料庫列"
+msgstr "資料庫"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:223
 #, javascript-format
@@ -3612,40 +3603,36 @@ msgstr "開始"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:103
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:115
 msgid "N/A"
-msgstr ""
+msgstr "N/A"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:108
 msgid "End"
 msgstr "結束"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:135
-#, fuzzy
 msgid "Title reports"
-msgstr "查看報告"
+msgstr "書名報告"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:137
-#, fuzzy
 msgid "Platform reports"
-msgstr "平台"
+msgstr "平台報告"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:139
-#, fuzzy
 msgid "Database reports"
-msgstr "已儲存的報告"
+msgstr "資料庫報告"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersSummary.vue:141
-#, fuzzy
 msgid "Item reports"
-msgstr "已儲存的報告"
+msgstr "館藏報告"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersToolbar.vue:7
 msgid "New data provider"
 msgstr "新的資料提供者"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:9
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "No %s data has been harvested for this provider"
-msgstr "您確定要為此資料提供者執行擷取器？"
+msgstr "此提供者尚未收集到任何 %s 資料"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsProviderDataList.vue:84
 #: koha-tmpl/intranet-tmpl/prog/js/vue/stores/usage-reports.js:51
@@ -3690,28 +3677,24 @@ msgid "Data display"
 msgstr "資料顯示"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:21
-#, fuzzy
 msgid "By month"
-msgstr "%s 月份"
+msgstr "按月份"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:26
 msgid "By month with period total"
-msgstr ""
+msgstr "按月份及期間總計"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:31
-#, fuzzy
 msgid "By year"
-msgstr "%s 年"
+msgstr "按年"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:35
-#, fuzzy
 msgid "By metric type"
-msgstr "選擇指標類型"
+msgstr "選擇矩陣類型"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:40
-#, fuzzy
 msgid "By data provider totals"
-msgstr "資料提供者列表"
+msgstr "按資料提供者總計"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:59
 msgid "Choose data provider"
@@ -4369,6 +4352,11 @@ msgstr "新增資料提供者"
 msgid "Edit data provider"
 msgstr "編輯資料提供者"
 
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:344
+#, fuzzy
+msgid "Reports"
+msgstr "報告類型"
+
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:359
 msgid "View report"
 msgstr "查看報告"
@@ -4468,7 +4456,7 @@ msgstr "相關"
 #: koha-tmpl/intranet-tmpl/prog/js/xmlControlfield.js:215
 #, javascript-format
 msgid "AJAX error: receiving data from %s"
-msgstr "AJAX 錯誤：從 %s 接收資料"
+msgstr "AJAX 錯誤:從 %s 接收資料"
 
 #: koha-tmpl/intranet-tmpl/prog/js/z3950_search.js:9
 msgid "The page entered is not a number."
@@ -4565,7 +4553,7 @@ msgstr "預約"
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:291
 msgid "Checked out until: "
-msgstr "借出至："
+msgstr "借出至: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/overdrive.js:296
 msgid "Get item"
@@ -4606,12 +4594,12 @@ msgstr "警告: 無法撤銷. 請再次確認"
 #: koha-tmpl/opac-tmpl/bootstrap/js/ratings.js:35
 #, javascript-format
 msgid "Your rating: %s."
-msgstr "您的評分: %s."
+msgstr "您的評分:%s."
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/ratings.js:42
 #, javascript-format
 msgid "Average rating: %s (%s votes)"
-msgstr "平均評分：%s (%s 票數)"
+msgstr "平均評分:%s (%s 票數)"
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:32
 msgid "With selected titles: "

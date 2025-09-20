@@ -136,7 +136,7 @@ if ( $op eq 'cud-create' ) {
     $borrower{categorycode} ||= $PatronSelfRegistrationDefaultCategory;
 
     my @empty_mandatory_fields = (CheckMandatoryFields( \%borrower, $op ), CheckMandatoryAttributes( \%borrower, $attributes ) );
-    my $invalidformfields = CheckForInvalidFields(\%borrower);
+    my $invalidformfields = CheckForInvalidFields( { borrower => \%borrower, context => 'create' } );
     delete $borrower{'password2'};
     my $is_cardnumber_valid;
     if ( !grep { $_ eq 'cardnumber' } @empty_mandatory_fields ) {
@@ -201,6 +201,7 @@ if ( $op eq 'cud-create' ) {
             $borrower{verification_token} = $verification_token;
 
             $borrower{extended_attributes} = to_json($attributes);
+            $borrower{borrowernumber}      = 0;                      # prevent warn Missing value for PK column
             Koha::Patron::Modification->new( \%borrower )->store();
 
             #Send verification email
@@ -311,10 +312,11 @@ elsif ( $op eq 'cud-update' ) {
 
     my %borrower = ParseCgiForBorrower($cgi);
     $borrower{borrowernumber} = $borrowernumber;
+    $borrower{categorycode}   = $borrower->{categorycode};
 
     my @empty_mandatory_fields = grep { $_ ne 'password' } # password is not required when editing personal details
       ( CheckMandatoryFields( \%borrower, $op ), CheckMandatoryAttributes( \%borrower, $attributes ) );
-    my $invalidformfields = CheckForInvalidFields(\%borrower);
+    my $invalidformfields = CheckForInvalidFields( { borrower => \%borrower, context => 'update' } );
 
     # Send back the data to the template
     %borrower = ( %$borrower, %borrower );
@@ -352,6 +354,7 @@ elsif ( $op eq 'cud-update' ) {
 
             Koha::Patron::Modifications->search({ borrowernumber => $borrowernumber })->delete;
 
+            $borrower_changes{verification_token} = q{};    # prevent warn Missing value for PK column
             my $m = Koha::Patron::Modification->new( \%borrower_changes )->store();
             #Automatically approve patron profile changes if set in syspref
 
@@ -484,12 +487,14 @@ sub CheckMandatoryAttributes{
 }
 
 sub CheckForInvalidFields {
-    my $borrower = shift;
+    my $params   = shift;
+    my $borrower = $params->{borrower};
+    my $context  = $params->{context};
     my @invalidFields;
     if ($borrower->{'email'}) {
         unless ( Koha::Email->is_valid($borrower->{email}) ) {
             push(@invalidFields, "email");
-        } elsif ( C4::Context->preference("PatronSelfRegistrationEmailMustBeUnique") ) {
+        } elsif ( C4::Context->preference("PatronSelfRegistrationEmailMustBeUnique") && $context eq 'create' ) {
             my $patrons_with_same_email = Koha::Patrons->search( # FIXME Should be search_limited?
                 {
                     email => $borrower->{email},

@@ -86,7 +86,7 @@
  <select name="limit" class="subtype">
  <option value="" >Alla</option>
  <option value="ctype:a" >bibliografi </option>
- <option value="ctype:b" >katalog </option>
+ <option value="ctype:b" >katalog</option>
  <option value="ctype:c" >register</option>
  <option value="ctype:d" >sammanfattning</option>
  <option value="ctype:e" >ordbok</option>
@@ -156,7 +156,7 @@
  <option value="Frequency-code:n">Tre gånger i veckan </option>
  <option value="Frequency-code:o">Tre gånger i månaden </option>
  <option value="Frequency-code:y">Utan periodicitet </option>
- <option value="Frequency-code:u">Okänt</option>
+ <option value="Frequency-code:u">Okänd</option>
  <option value="Frequency-code:z">Annat</option>
  </select>
  </p>

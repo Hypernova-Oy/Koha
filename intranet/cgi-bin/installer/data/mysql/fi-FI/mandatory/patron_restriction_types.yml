@@ -6,23 +6,23 @@ tables:
     multiline: []
     rows:
     - code: MANUAL
-      display_text: Manual restriction
+      display_text: Käsin lisätty rajoitus
       is_default: 1
       is_system: 0
     - code: OVERDUES
-      display_text: Overdues
+      display_text: Myöhässä olevat
       is_default: 0
       is_system: 1
     - code: SUSPENSION
-      display_text: Suspension
+      display_text: Keskeytys
       is_default: 0
       is_system: 1
     - code: DISCHARGE
-      display_text: Discharge
+      display_text: Velattomuusilmoitus
       is_default: 0
       is_system: 1
     - code: NOTICE_FAILURE_SUSPENSION
-      display_text: Notice failure suspension
+      display_text: Keskeytys epäonnistuneesta viestinlähetyksestä
       is_default: 0
       is_system: 1
     translatable:

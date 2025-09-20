@@ -111,11 +111,11 @@
  [% END %]
 
  [% IF ( patron.is_debarred ) %]
- <li class="error">Asiakkaalla on LAINARAJOITUS</li>
+ <li class="error">Asiakkaalla on rajoite</li>
  [% END %]
 
  [% IF ( patron.gonenoaddress ) %]
- <li class="error">Tarkista osoite</li>
+ <li class="error">Tarkista asiakkaan osoite</li>
  [% END %]
  </ul>
  <h4>Siirrä pisteeseen: [% Branches.GetName( hold.branchcode ) | html %]</h4>
@@ -164,7 +164,7 @@
  <input type="hidden" name="tobranchcd" value="[% tobranchcd | html %]" />
  <input type="hidden" name="barcode" />
  [% PROCESS transfer_hidden_fields %]
- <button type="submit" class="btn btn-default deny"><i class="fa fa-times"></i> Älä huomioi ja palaa Siirto-sivulle</button>
+ <button type="submit" class="btn btn-default deny"><i class="fa fa-times"></i> Älä siirrä ja palaa Siirto-sivulle</button>
  </form>
  </div>
  </div> <!-- /.modal-footer -->
@@ -231,7 +231,7 @@
  <div class="form-control-group">
  <label class="hint" for="barcode">Syötä niteen viivakoodi: </label>
  <input class="barcode focus" id="barcode" name="barcode" placeholder="Syötä niteen viivakoodi" size="15" type="text" />
- <input class="btn btn-default" type="submit" value="Siirto" />
+ <input class="btn btn-default" type="submit" value="Siirrä" />
  </div>
  </fieldset>
  [% FOREACH trsfitemloo IN trsfitemloop %]
@@ -302,9 +302,11 @@
             var to_branch = $(this).attr('data-tobranch');
             window.open("/cgi-bin/koha/circ/transfer-slip.pl?transferitem=" + itemnumber + "&branchcode=" + to_branch);
         });
+        $(document).ready( function() {
         [% IF ( found ) %]
-            $("#transfer_confirm").modal("show");
+                $("#transfer_confirm").modal('show');
         [% END %]
+        });
     </script>
 [% END %]
 

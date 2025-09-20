@@ -24,7 +24,7 @@
  <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscriptionid | uri %]"><em>[% bibliotitle | html %]</em></a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Notifiera prenumeranter</span>
+ <span>Avisera prenumeranter</span>
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
 [% END #/ WRAPPER sub-header.inc %]

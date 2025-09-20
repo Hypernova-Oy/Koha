@@ -27,7 +27,7 @@ tables:
       - '[%- USE KohaDates -%]'
       - Kära [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
       - <br>
-      - We regret to inform you, that the following booking has been cancelled.<br>
+      - Vi beklagar att meddelade dig att följande bokning har avbrutits.<br>
       - <br>
       - 'Title: [%- INCLUDE ''biblio-title.inc'' biblio=booking.biblio link = 0 -%]<br>'
       - <br>
@@ -43,8 +43,8 @@ tables:
       lang: default
       message_transport_type: email
       module: bookings
-      name: Booking cancellation notice
-      title: A library booking was cancelled
+      name: Meddelande om avbruten bokning
+      title: En bokning har avbrutits
     - branchcode: ''
       code: BOOKING_MODIFICATION
       content:
@@ -52,10 +52,10 @@ tables:
       - '[%- USE KohaDates -%]'
       - Kära [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
       - <br>
-      - Your booking of [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
-        = 0 -%] has been modified.<br>
+      - Din bokning av [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link =
+        0 -%] har ändrats eller uppdaterats.<br>
       - <br>
-      - The new details are:<br>
+      - De nya detaljerna är:<br>
       - <br>
       - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
         %]<br>'
@@ -68,8 +68,8 @@ tables:
       lang: default
       message_transport_type: email
       module: bookings
-      name: Booking modification notice
-      title: A library booking was modified
+      name: Meddelande om ändrad eller uppdaterad bokning
+      title: En bokning ändrades eller uppdaterades
     - branchcode: ''
       code: BOOKING_CONFIRMATION
       content:
@@ -77,10 +77,10 @@ tables:
       - '[%- USE KohaDates -%]'
       - Kära [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
       - <br>
-      - Your booking of [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
-        = 0 -%] has been confirmed.<br>
+      - Din bokning av [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link =
+        0 -%] har bekräftats.<br>
       - <br>
-      - The details are:<br>
+      - Detaljerna är:<br>
       - <br>
       - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
         %]<br>'
@@ -93,8 +93,8 @@ tables:
       lang: default
       message_transport_type: email
       module: bookings
-      name: Booking confirmation notice
-      title: A library booking was confirmed
+      name: Meddelande om bekräftad bokning
+      title: En bokning bekräftades
     - branchcode: ''
       code: TICKET_ACKNOWLEDGE
       content:
@@ -741,7 +741,7 @@ tables:
       content:
       - Kära <<borrowers.firstname>> <<borrowers.surname>>,
       - ''
-      - You have <<count>> item(s) that are now due
+      - Du har <<count>> exemplar som ska återlämnas idag
       - ''
       - Tack.
       is_html: 0
@@ -842,7 +842,7 @@ tables:
       - <hr>
       - <br>
       - '[% IF additional_contents.count %]'
-      - '<h4 style="text-align: center; font-style:italic;">News</h4>'
+      - '<h4 style="text-align: center; font-style:italic;">Nyheter</h4>'
       - '[% FOREACH content IN additional_contents %]'
       - <div class="newsitem">
       - '<h5 style="margin-bottom: 1px; margin-top: 1px"><b>[% content.title %]</b></h5>'
@@ -957,7 +957,7 @@ tables:
       content:
       - Kära <<borrowers.firstname>> <<borrowers.surname>>,
       - ''
-      - You have <<count>> item(s) that will be due soon.
+      - Du har <<count>> exemplar som snart ska återlämnas.
       - ''
       - Tack.
       is_html: 0
@@ -1406,11 +1406,11 @@ tables:
       content:
       - Kära [%- INCLUDE 'patron-title.inc' patron => owner -%],<br>
       - <br>
-      - A public list, titled <em>[% shelf.shelfname | html %]</em>, has been transferred
-        to you[% IF ( librarian ) %] by [%- INCLUDE 'patron-title.inc' patron => librarian
-        %][% END %].<br>
+      - En offentlig lista, döpt <em>[% shelf.shelfname | html %]</em>, har flyttats
+        över till dig[% IF ( librarian ) %] av [%- INCLUDE 'patron-title.inc' patron
+        => librarian %][% END %].<br>
       - <br>
-      - '[% IF old_owner %]The list was previously owned by [%- INCLUDE ''patron-title.inc''
+      - '[% IF old_owner %]Listan ägdes tidigare av [%- INCLUDE ''patron-title.inc''
         patron => old_owner -%].<br><br>[% END %]'
       - Thank you<br>
       - <br>
@@ -2424,8 +2424,8 @@ tables:
     - branchcode: ''
       code: RETURN_RECALLED_ITEM
       content:
-      - 'Your item has been recalled: <<biblio.title>> (<<items.barcode>>). Please
-        return it by <<issues.date_due>.'
+      - 'Ditt exemplar har blivit återkrävt: <<biblio.title>> (<<items.barcode>>).
+        Vänligen återlämna det senast <<issues.date_due>.'
       is_html: 0
       lang: default
       message_transport_type: sms

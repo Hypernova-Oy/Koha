@@ -24,7 +24,7 @@
  <tr>
  <th>Tilauskori (#)</th>
  <th>[% tp('basket created by', 'Created by') | html %]</th>
- <th>Pvm</th>
+ <th>Päivämäärä</th>
  <th>&nbsp;</th>
  </tr>
  </thead>
@@ -65,7 +65,7 @@
  [% END %]
  [% END %]
  </td>
- <td><a class="btn btn-default btn-xs" href="transferorder.pl?bookselleridfrom=[% ordersloo.bookselleridfrom | html %]&ordernumber=[% ordersloo.ordernumber | html %]">Siirto</a></td>
+ <td><a class="btn btn-default btn-xs" href="transferorder.pl?bookselleridfrom=[% ordersloo.bookselleridfrom | html %]&ordernumber=[% ordersloo.ordernumber | html %]">Siirrä</a></td>
  </tr>
  [% END %]
  </tbody>

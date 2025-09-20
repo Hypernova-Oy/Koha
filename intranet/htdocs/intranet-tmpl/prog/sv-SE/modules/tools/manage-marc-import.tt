@@ -628,7 +628,7 @@
 [% END %]
 [% INCLUDE 'intranet-bottom.inc' %]
 [% BLOCK pagination %]
- <nav aria-label="Page navigation">
+ <nav aria-label="Sidnavigering">
  <ul class="pagination">
  [% FOREACH page IN pages %]
  [% IF ( page.current_page && page.page_number > 1 ) %]

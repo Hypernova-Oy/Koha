@@ -39,7 +39,7 @@ Hakutoiminnot:
         '1': käytä
       pref: IntranetNumbersPreferPhrase
       type: boolean
-    - operaattoria "phr" luokka- ja standardinumeroissa virkailijaliittymän hauissa
+    - operaattoria "phr" luokka- ja standardinumeroissa virkailijaliittymän hauissa.
   Hakutulokset:
   - - choices:
         '0': Älä näytä
@@ -138,7 +138,7 @@ Hakutoiminnot:
   - - Näytä korkeintaan
     - class: integer
       pref: maxItemsInSearchResults
-    - nidettä nimeketietuetta kohti hakutuloksissa.
+    - nidettä nimeketietuetta kohti hakutuloksissa
   - - Kokoa hakutulosnäytön vasemman sivupalkin fasetit
     - class: integer
       default: 20
@@ -325,8 +325,8 @@ Hakutoiminnot:
         '1': Yritä soveltaa
       default: 0
       pref: ElasticsearchCrossFields
-    - cross_fields optio Elasticsearchin haussa, (tuetaan versiosta Elasticsearch
-      6.X eteenpäin)
+    - cross_fields -optio Elasticsearchin haussa, tuetaan versiosta Elasticsearch
+      6.X eteenpäin.
     - Katso dokumentaatio osoitteesta https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html#type-cross-fields
   - - choices:
         '0': Älä salli
@@ -341,27 +341,25 @@ Hakutoiminnot:
     - class: long
       pref: ESPreventAutoTruncate
   - - choices:
-        '0': Don't
-        '1': Do
+        '0': Älä hae
+        '1': Hae
       default: 0
       pref: SearchCancelledAndInvalidISBNandISSN
-    - search for cancelled or invalid forms of ISBN/ISSN when performing ISBN/ISSN
-      search (when using Elasticsearch).
+    - peruutettuja ja virheellisiä muotoja ISBN/ISSN:stä kun tehdään ISBN/ISSN-haku
+      (käytettäessä Elasticsearchiä).
   - - class: code
       pref: z3950Status
       syntax: text/x-yaml
       type: textarea
-    - searching.pref#z3950Status# Define custom rules to show specific items as not
-      available in Z3950. Rules are defined with item database fields as keys and
-      an array of values.<br/>
+    - Määrittele sääntöjä, joilla tietyt niteet voidaan määrittää ei-saatavaksi Z39.50-hauissa.
+      Säännöt määritellään nidetaulun kenttien ja niiden arvojen pareina.<br/>
     - searching.pref#z3950Status# Esimerkit:<br/><br/>
-    - 'searching.pref#z3950Status# <pre>ccode: [REF,ARC]</pre><br/>  - would mark
-      all REF and ARC collections (Reference and Archives) items as unavailable in
-      Z3950 results.<br/><br/>'
-    - searching.pref#z3950Status# You can define multiple keys and values, items meeting
-      ANY of the criteria will be marked unavailable:<br/><br/>
-    - 'searching.pref#z3950Status# <pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  -
-      would mark all reference items AND items at the REPAIR branch as unavailable.'
+    - '<pre>ccode: [REF,ARC]</pre><br/>  - merkitsisi kaikki REF ja ARC -kokoelmissa
+      olevat(Reference and Archives) niteet ei-saataville Z39.50-haun tuloksissa.<br/><br/>'
+    - Voit määritellä useita avain-arvo-pareja. Niteet, jotka täsmäävät minkä tahansa
+      määritetyn kriteerin kanssa, merkitään ei-saatavaksi:<br/><br/>
+    - '<pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  - merkitsisi kaikki
+      REF-nidetyyppiset niteet JA niteet, joiden kotikirjaston on REPAIR ei saatavaksi.'
   Tarkoititko/oikoluku:
   - - ruotsalainen oikolukupalvelu.<br/>
     - LIBRIS-oikolukijan API-avain

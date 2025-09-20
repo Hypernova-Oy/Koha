@@ -201,7 +201,7 @@
  <li><i class="fa fa-li fa-warning"></i>Asiakkaalla on [% checkout_info.USERBLOCKEDOVERDUE | html %] nidettä myöhässä.</li>
  [% END %]
  [% IF checkout_info.ITEM_LOST %]
- <li><i class="fa fa-li fa-warning"></i>Tämä nide on merkitty kadonneeksi tilaan "[% checkout_info.ITEM_LOST | html %]".</li>
+ <li><i class="fa fa-li fa-warning"></i>Tällä niteellä on kadonnut-tila "[% checkout_info.ITEM_LOST | html %]."</li>
  [% END %]
  [% IF checkout_info.HIGHHOLDS %]
  <li><i class="fa fa-li fa-warning"></i>Paljon kysytty aineisto. Laina-aika lyhennetty [% checkout_info.HIGHHOLDS.duration | html %] päivään (eräpäivä [% checkout_info.HIGHHOLDS.returndate | html %]).</li>
@@ -230,7 +230,7 @@
  [% IF checkout_info.alert.ITEM_LOST || checkout_info.alert.OTHER_CHARGES %]
  <ul class="info">
  [% IF checkout_info.alert.ITEM_LOST %]
- <li>Tämä nide on merkitty kadonneeksi tilaan "[% checkout_info.alert.ITEM_LOST | html %]".</li>
+ <li>Tällä niteellä on kadonnut-tila "[% checkout_info.alert.ITEM_LOST | html %]."</li>
  [% END %]
  [% IF checkout_info.alert.OTHER_CHARGES %]
  <li>Asiakkaalla on maksamattomia maksuja varauksista, lainoista, tms [% checkout_info.alert.OTHER_CHARGES | $Price %].</li>
@@ -269,7 +269,7 @@
  <li><i class="fa fa-li fa-exclamation"></i>Asiakkaan kortti on kadonnut</li>
  [% END %]
  [% IF checkout_info.DEBARRED %]
- <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on lainarajoitus</li>
+ <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on rajoitus</li>
  [% END %]
  [% IF checkout_info.NO_MORE_RENEWALS %]
  <li><i class="fa fa-li fa-exclamation"></i>Ei enää uusintakertoja jäljellä.</li>
@@ -281,7 +281,7 @@
  <li><i class="fa fa-li fa-exclamation"></i>Tämä nide kuuluu kirjastoon [% Branches.GetName( checkout_info.itemhomebranch ) | html %], eikä sitä voida lainata tästä kirjastosta.</li>
  [% END %]
  [% IF checkout_info.USERBLOCKEDREMAINING %]
- <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on myöhässä olevia lainoja, ja on lainauskiellossa [% checkout_info.USERBLOCKEDREMAINING | html %] päivää.</li>
+ <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on ollut myöhässä olevia lainoja, ja on lainauskiellossa [% checkout_info.USERBLOCKEDREMAINING | html %] päivää.</li>
  [% END %]
  [% IF checkout_info.USERBLOCKEDOVERDUE %]
  <li><i class="fa fa-li fa-exclamation"></i>Lainaus estetty, koska asiakkaalla on erääntyneitä lainoja.</li>
@@ -293,7 +293,7 @@
  <li><i class="fa fa-li fa-exclamation"></i>Viivakoodia [% checkout_info.barcode | html %] ei löytynyt.</li>
  [% END %]
  [% IF checkout_info.DEBT %]
- <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on velkoja [% checkout_info.DEBT | $Price %].</li> <!-- Need debt_confirmed -->
+ <li><i class="fa fa-li fa-exclamation"></i>Asiakkaalla on maksuja [% checkout_info.DEBT | $Price %].</li> <!-- Need debt_confirmed -->
  [% END %]
  </p>
  [% END %]

@@ -53,7 +53,7 @@
  [% SET number_of_public_shelves = number_of_public_shelves + 1 %]
  [% IF number_of_public_shelves >= 10 %][% LAST %][% END %]
  [% END %]
- [% IF some_public_shelves > 10 %]
+ [% IF some_public_shelves.count > 10 %]
  <a class="dropdown-item listmenulink" href="/cgi-bin/koha/opac-shelves.pl?op=list&amp;public=1" tabindex="-1" role="menuitem">Näytä kaikki</a>
  [% END %]
  [% END %]
@@ -70,7 +70,7 @@
  [% SET number_of_private_shelves = number_of_private_shelves + 1 %]
  [% IF number_of_private_shelves >= 10 %][% LAST %][% END %]
  [% END %]
- [% IF some_private_shelves > 10 %]
+ [% IF some_private_shelves.count > 10 %]
  <a class="dropdown-item listmenulink" href="/cgi-bin/koha/opac-shelves.pl?op=list&amp;public=0" tabindex="-1" role="menuitem">Näytä kaikki</a>
  [% END %]
  [% ELSE %]
@@ -132,7 +132,8 @@
  <p>
  <a class="login-link" href="/cgi-bin/koha/opac-search-history.pl" role="menuitem" tabindex="-1" title="Hakuhistoria">Hakuhistoria</a>
  <span class="divider-vertical"></span>
- <a class="clearsh" href="/cgi-bin/koha/opac-search-history.pl?action=delete" title="Poista hakuhistoria"><i class="fa fa-trash-can" aria-hidden="true"></i> Tyhjennä</a>
+ <a class="clearsh submit-form-link" data-action="/cgi-bin/koha/opac-search-history.pl" data-confirmation-msg="[% t('Are you sure you want to delete your search history?') | html %]" data-method="post" data-op="cud-delete" href="#" title="Poista hakuhistoria"><i class="fa fa-trash-can" aria-hidden="true"></i> Tyhjennä</a
+                                            >
  </p>
  [% END %]
  <a tabindex="-1" role="menuitem" class="logout" id="logout" href="/cgi-bin/koha/opac-main.pl?logout.x=1">Kirjaudu ulos</a>
@@ -244,7 +245,7 @@
 
  <div class="col order-4 order-sm-3">
  [% IF ( !Koha.Preference( 'OpacAddMastheadLibraryPulldown' ) == 1 && mylibraryfirst ) %]
- <label for="translControl1" class="visually-hidden">Hae hakusanalla kirjastosta</label>
+ <label for="translControl1" class="visually-hidden">Hae hakusanalla kirjastosta [% Branches.GetName( mylibraryfirst ) | html %]</label>
  <input class="transl1 form-control form-control-filtered" data-bs-placement="top" data-bs-toggle="tooltip" id="translControl1" name="q" placeholder="Hae hakusanalla" title="Etsimässä [% Branches.GetName( mylibraryfirst ) | html %] vain" type="text" value="[% ms_value | html %]" /><span id="translControl"></span>
  [% ELSE %]
  <label for="translControl1" class="visually-hidden">Hae hakusanalla</label>
@@ -396,7 +397,7 @@
  <div class="modal-body">
  [% IF ( Koha.Preference('GoogleOpenIDConnect') == 1 ) %]
  <a href="/cgi-bin/koha/svc/auth/googleopenidconnect" class="btn btn-light" id="openid_connect"><i class="fa-brands fa-google" aria-hidden="true"></i> Kirjaudu Google-tunnuksella</a>
- <p>Jos sinulla ei ole Google-tiliä, voit kirjautua kirjastokortillasi: </p>
+ <p>Jos sinulla ei ole Google-tiliä, voit kirjautua omalla kirjaston tunnuksellasi: </p>
  [% END # /IF GoogleOpenIDConnect %]
  [% IF ( shibbolethAuthentication ) %]
  [% IF ( invalidShibLogin ) %]

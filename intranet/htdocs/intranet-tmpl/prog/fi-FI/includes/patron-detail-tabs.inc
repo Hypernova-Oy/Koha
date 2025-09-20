@@ -102,7 +102,7 @@
  <thead>
  <tr>
  <th>Taattavat</th>
- <th>Maksettava</th>
+ <th>Maksettavaa</th>
  </tr>
  </thead>
  [% FOREACH guarantee IN guarantees %]
@@ -143,7 +143,7 @@
  </table>
 
  <fieldset class="action">
- <input class="cancel" name="submit" type="submit" value="Peruuta valitut varaukset" />
+ <input class="btn btn-primary cancel" name="submit" type="submit" value="Peruuta valitut varaukset" />
 
  [% SET hold_cancellation = AuthorisedValues.GetAuthValueDropbox('HOLD_CANCELLATION') %]
  [% IF hold_cancellation.count %]
@@ -205,7 +205,7 @@
  </fieldset>
  <table id="bookings_table" style="width: 100% !Important;"></table>
  [% ELSE %]
- <p>Asiakkaalla ei ole ennakkovarauksia.</p>
+ <p>Asiakkaalla ei ole käyttövarauksia.</p>
  [% END %]
  [% END %]
  [% END %]

@@ -866,6 +866,9 @@
  </fieldset> <!-- /.rows -->
  <fieldset class="action">
  <input type="hidden" name="op" value="run" />
+ [% IF ( template_id ) %]
+ <input type="hidden" name="template" value="[% template_id | html %]" />
+ [% END %]
  <button type="submit" class="btn btn-primary">Aja raportti</button>
  </fieldset>
  </form>
@@ -1520,7 +1523,6 @@
  [% Asset.js( "lib/codemirror/highlight.js" ) | $raw %]
  [% Asset.css("lib/codemirror/highlight.css") | $raw %]
  [% Asset.js( "js/mana.js" ) | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
  <script>
 
         //  if the report param form has multiselects override default form submission
@@ -1716,7 +1718,7 @@
                     break;
                 case "insertDate":
                     modalTitle.text( _("Lisää päivämäärä") );
-                    $("#paramLabel").val( _("Pvm") );
+                    $("#paramLabel").val( _("Päivämäärä") );
                     $("#param_category").val("date");
                     break;
                 case "insertItemtypes":
@@ -1794,6 +1796,9 @@
         $(document).ready(function(){
 
             var activeTab = localStorage.getItem("sql_reports_activetab");
+            if( activeTab == 0 ){
+                $("#subgroup_filter_block").hide();
+            }
 
             $("body").on('click',".fetch_chart_data",function(){
                 if( [% unlimited_total || 0 | $raw %] > 1000 ){
@@ -2283,7 +2288,7 @@
             let table_dt = rtable.DataTable();
             let col4 = table_dt.columns(4);
             col4.search("").visible(true);
-            let col5 = table_dt.columns(4);
+            let col5 = table_dt.columns(5);
             col5.search("").visible(true);
 
             var g_id = tab.find("a").data("tabname");
@@ -2293,13 +2298,17 @@
 
             if (g_id && g_id.length > 0) {
                 col4.search(g_id, {exact:true}).visible(false);
-                for(var i in group_subgroups[g_id]) {
-                    $("#subgroup_filter").append(
-                        '<option value="' + group_subgroups[g_id][i][0] + '">'
-                        + group_subgroups[g_id][i][1] + '</option>'
-                    );
+                if( group_subgroups[g_id] && group_subgroups[g_id].length > 0 ){
+                    for(var i in group_subgroups[g_id]) {
+                        $("#subgroup_filter").append(
+                            '<option value="' + group_subgroups[g_id][i][0] + '">'
+                            + group_subgroups[g_id][i][1] + '</option>'
+                        );
+                    }
+                    $("#subgroup_filter_block").show();
+                } else {
+                    $("#subgroup_filter_block").hide();
                 }
-                $("#subgroup_filter_block").show();
             } else {
                 $("#subgroup_filter_block").hide();
             }
@@ -2416,8 +2425,7 @@
                             <a id="preview-modal-editreport" class="btn btn-default" href="/cgi-bin/koha/reports/guided_reports.pl?id=' + reportid + '&amp;op=edit_form"><i class="fa-solid fa-pencil" aria-hidden="true"></i> ' + _("Muokkaa") + '</a>\
                             <a id="preview-modal-duplicate" class="btn btn-default" href="/cgi-bin/koha/reports/guided_reports.pl?op=duplicate&amp;id=' + reportid + '"><i class="fa fa-copy" aria-hidden="true"></i> ' + _("Kopioi") + '</a>\
                             <a id="preview-modal-duplicate" class="btn btn-default" href="/cgi-bin/koha/tools/scheduler.pl?id=' + reportid + '"><i class="fa-solid fa-clock" aria-hidden="true"></i> ' + _("Ajastus") + '</a>\
-                            <a class="btn btn-default submit-form-link" href="#" data-id="' + reportid + '" data-action="guided_reports.pl" data-method="post" data-op="cud-delete" data-confirmation-msg="' + _("Haluatko varmasti poistaa tämän raportin?") + '"><i class="fa fa-trash-can" aria-hidden="true"></i> Delete</a>\
-                            <a id="preview-modal-delete"href="#" class="btn btn-default" title="Delete this saved report"><i class="fa fa-trash-can aria-hidden="true""></i> ' + _("Poista") + '</a>\
+                            <a class="btn btn-default submit-form-link" href="#" data-id="' + reportid + '" data-action="guided_reports.pl" data-method="post" data-op="cud-delete" data-confirmation-msg="' + _("Haluatko varmasti poistaa tämän raportin?") + '"><i class="fa fa-trash-can" aria-hidden="true"></i>' + _("Poista") + '</a>\
                             <a id="preview-modal-runreport" class="btn btn-default" href="/cgi-bin/koha/reports/guided_reports.pl?id=' + reportid + '&amp;op=run"><i class="fa fa-play" aria-hidden="true"></i> ' + _("Aja raportti") + '</a>\
                             <a href="#" id="preview-sql-modal-cancel" data-bs-dismiss="modal" class="btn btn-default"><i class="fa fa-times" aria-hidden="true"></i> ' + _("Sulje") + '</a>\
                         </div>\
@@ -2500,7 +2508,7 @@
  <li><a class="dropdown-item insertParam" href="#" id="insertAuthVal">Auktorisoidut arvot</a></li>
  <li><a class="dropdown-item insertParam" href="#" id="insertFramework">Kuvailupohja</a></li>
  <li><a class="dropdown-item insertParam" href="#" id="insertCnSource">Luokitusjärjestelmät</a></li>
- <li><a class="dropdown-item insertParam" href="#" id="insertDate">Pvm</a></li>
+ <li><a class="dropdown-item insertParam" href="#" id="insertDate">Päivämäärä</a></li>
  <li><a class="dropdown-item insertParam" href="#" id="insertItemtypes">Nidetyypit</a></li>
  <li><a class="dropdown-item insertParam" href="#" id="insertBranches">Kirjastot</a></li>
  <li><a class="dropdown-item insertParam" href="#" id="insertList">Lista</a></li>

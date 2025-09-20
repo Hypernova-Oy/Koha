@@ -82,7 +82,7 @@
  <div class="alert alert-info">Aiemmin palautetuksi ilmoitettu nide palautettiin, merkitään automaattisesti palautusilmoitus ratkaistuksi.</div>
  [% END %]
  [% IF ( alert.ITEM_LOST ) %]
- <div class="alert alert-info">Tämä nide on kadonnut, tila: "[% alert.ITEM_LOST | html %]"</div>
+ <div class="alert alert-info">Tällä niteellä on kadonnut-tila "[% alert.ITEM_LOST | html %]".</div>
  [% END %]
 
  [% IF ( alert.OTHER_CHARGES ) %]
@@ -98,11 +98,15 @@
  [% END %]
 
  [% IF alert.BOOKED %]
- <div class="alert alert-warning">Niteeseen on ennakkovaraus tälle asiakkaalle</div>
+ <div class="alert alert-warning">Niteeseen on käyttövaraus tälle asiakkaalle</div>
  [% END %]
 
  [% IF ( nopermission ) %]
  <div class="alert alert-warning">Kirjaston henkilökunnalla ei ole oikeutta antaa velattomuusilmoitusta asiakkaille eikä asiakkailla oikeutta pyytää velattomuusilmoitusta.</div>
+ [% END %]
+
+ [% IF ( noguarantor ) %]
+ <div class="alert alert-warning">Asiakkaan tiliä ei voitu uusia: hän tarvitsee takaajan.</div>
  [% END %]
 
  [% IF is_anonymous %]
@@ -125,7 +129,7 @@
 
 
  [% IF ( DEBT ) %]
- <li class="needsconfirm debt">Asiakkaalla on velkoja [% DEBT | $Price %].</li>
+ <li class="needsconfirm debt">Asiakkaalla on maksuja [% DEBT | $Price %].</li>
  [% END %]
 
  [% IF ( DEBT_GUARANTEES ) %]
@@ -149,7 +153,7 @@
  [% END %]
 
  [% IF ( TRANSFERRED ) %]
- <li class="needsconfirm transferred">Nide <em>[% getTitleMessageIteminfo | html %]</em> ([% getBarcodeMessageIteminfo | html %]) on varattuna <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% resborrowernumber | uri %]">[% resfirstname | html %] [% ressurname | html %]</a> ([% rescardnumber | html %]) ja kuljetaan kirjastoon [% Branches.GetName( resbranchcode ) | html %]</li>
+ <li class="needsconfirm transferred">Nide <em>[% getTitleMessageIteminfo | html %]</em> ([% getBarcodeMessageIteminfo | html %]) on varattuna <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% resborrowernumber | uri %]">[% resfirstname | html %] [% ressurname | html %]</a> ([% rescardnumber | html %]) ja kuljetetaan kirjastoon [% Branches.GetName( resbranchcode ) | html %]</li>
  [% END %]
 
  [% IF ( PROCESSING ) %]
@@ -245,7 +249,7 @@
 
  [% IF ( BOOKED_EARLY ) %]
  <li class="needsconfirm booked_early">
- Asiakkaalla on tähän niteeseen ennakkovaraus, joka tulee lainattavaksi [% BOOKED_EARLY.start_date | $KohaDates %] </li>
+ Asiakkaalla on tähän niteeseen käyttövaraus, joka tulee lainattavaksi [% BOOKED_EARLY.start_date | $KohaDates %] </li>
  [% END %]
  </ul>
 
@@ -264,7 +268,7 @@
  [% IF HIGHHOLDS %]
  <p class="circ-override-high-holds">
  <input type="checkbox" name="override_high_holds_tmp" id="override_high_holds_tmp" value="1" />
- <label for="override_high_holds_tmp">Älä pidennä laina-aikaa varausten pohjalta</label>
+ <label for="override_high_holds_tmp">Älä lyhennä laina-aikaa varausten perusteella</label>
  </p>
  [% END %]
 
@@ -527,7 +531,7 @@
  [% END %]
 
  [% IF ( GNA ) %]
- <li>Tarkista osoite</li>
+ <li>Tarkista asiakkaan osoite</li>
  [% END %]
 
  [% IF ( CARD_LOST ) %]
@@ -593,7 +597,7 @@
  [% END %]
 
  [% IF ( BOOKED_TO_ANOTHER ) %]
- <li>Tämä aineisto ennakkovarattu toiselle asiakkaalle</li>
+ <li>Tähän niteeseen on käyttövaraus toiselle asiakkaalle</li>
  [% END %]
  </ul>
  </div> <!-- /#circ_impossible -->
@@ -614,7 +618,7 @@
  <th>Nimeke</th>
  <th>Viivakoodi</th>
  <th>Luokka</th>
- <th>Nidenumero</th>
+ <th>Kappaleen numero</th>
  <th>Inventaarionumero</th>
  <th>Kausijulkaisun numerointi</th>
  <th>Kokoelma</th>
@@ -1100,11 +1104,14 @@
 
             // Handle checkout for fast cataloging
             // Check the referrer to prevent csrf, fill and submit form
-            if(document.referrer.split(window.location.origin + '/cgi-bin/koha/cataloguing/additem.pl?')[1].match(/frameworkcode=FA&circborrowernumber=/) ) {
-                let urlParams = new URLSearchParams(window.location.search);
-                let barcode = urlParams.get('barcode');
-                $('#barcode').val(barcode);
-                $('#mainform').submit();
+            if (document.referrer.length) {
+                const referrerSplit = document.referrer.split(window.location.origin + '/cgi-bin/koha/cataloguing/additem.pl?')
+                if(referrerSplit[1] && referrerSplit[1].match(/frameworkcode=FA&circborrowernumber=/) ) {
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let barcode = urlParams.get('barcode');
+                    $('#barcode').val(barcode);
+                    $('#mainform').submit();
+                }
             }
 
             $("#cancellation-reason").comboBox({
@@ -1118,7 +1125,6 @@
  [% Asset.js("js/checkouts.js") | $raw %]
  [% Asset.js("js/tables/bookings.js") | $raw %]
  [% Asset.js("js/recalls.js") | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
 [% END %]
 
 [% INCLUDE 'intranet-bottom.inc' %]

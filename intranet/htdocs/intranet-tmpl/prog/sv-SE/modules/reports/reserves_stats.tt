@@ -80,7 +80,7 @@
  [% END %]
  
  [% FOREACH mainloo IN mainloop %]
- 
+ <div class="page-section">
  <table> 
  <tr>
  <th>[% mainloo.line | html %] / [% mainloo.column | html %]</th>
@@ -108,6 +108,8 @@
  <th>[% mainloo.total | html %]</th>
  </tr>
  </table>
+ </div>
+ <!-- /.page-section -->
  [% END %]
  [% END %]
 [% ELSE %]
@@ -129,7 +131,7 @@
  <td><input type="radio" name="Line" value="reservestatus" /></td>
  <td><input type="radio" name="Column" value="reservestatus" checked="checked" /></td>
  <td>
- <input type="checkbox" name="filter_reservestatus_or_C" value="C" /> Annullerad <input type="checkbox" name="filter_reservestatus_or_F" value="F" /> Genomförd <input type="checkbox" name="filter_reservestatus_or_P" value="P" /> Lades den <input type="checkbox" name="filter_reservestatus_or_W" value="W" /> Väntar </td>
+ <input type="checkbox" name="filter_reservestatus_or_C" value="C" /> Annullerad <input type="checkbox" name="filter_reservestatus_or_F" value="F" /> Genomförd <input type="checkbox" name="filter_reservestatus_or_P" value="P" /> Lades den <input type="checkbox" name="filter_reservestatus_or_W" value="W" /> Väntande </td>
  </tr>
  <tr>
  <td>Reservationsdatum</td>

@@ -1,18 +1,18 @@
 # Compendium of fi.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:12-0300\n"
-"PO-Revision-Date: 2024-07-30 17:48+0000\n"
-"Last-Translator: pknuuti <paivi.knuutinen@joensuu.fi>\n"
+"PO-Revision-Date: 2025-08-15 03:09+0000\n"
+"Last-Translator: Anneli Österman <anneli.osterman@koha-suomi.fi>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: fi-FI\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /fi/22.11/fi-FI-installer.po\n"
 "X-POOTLE-MTIME: 1695118958.904701\n"
@@ -23,7 +23,7 @@ msgstr "Liikamaksun hyvitys"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:2
 msgid "Payment"
-msgstr "Maksu"
+msgstr "Maksusuoritus"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:3
 msgid "Writeoff"
@@ -239,7 +239,7 @@ msgstr "Määräävä"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:22
 msgid "Future"
-msgstr "Tulevaisuus"
+msgstr "Tuleva"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:23
 msgid "Historic"
@@ -258,7 +258,7 @@ msgid "Complete"
 msgstr "Täydellinen"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+msgid "Aggregated full text"
 msgstr "Kokotekstikooste"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -307,11 +307,11 @@ msgstr "Raportti"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:40
 msgid "Proceedings"
-msgstr "Proceedings"
+msgstr "Julkaisu"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:41
 msgid "Website"
-msgstr "Verkkosivu"
+msgstr "Verkkosivut"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:42
 msgid "Newspaper"
@@ -435,11 +435,11 @@ msgstr "Uniikkeja teoksen pyyntöjä"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:73
 msgid "Unique title investigations"
-msgstr "Unique title investigations"
+msgstr "Yksittäiset nimekkeiden katselut"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:74
 msgid "Unique title requests"
-msgstr "Unique title requests"
+msgstr "Yksittäiset nimekkeiden pyynnöt"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:75
 msgid "Searches automated"
@@ -3919,7 +3919,7 @@ msgstr "Laulaja"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:126
 msgid "Sponsor"
-msgstr "Tukija"
+msgstr "Sponsori"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:127
 msgid "Standards body"
@@ -4030,26 +4030,24 @@ msgid "Default Koha system patron restriction types"
 msgstr "Kohan oletusarvot asiakkaan rajoitustyypeille"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:1
-#, fuzzy
 msgid "Manual restriction"
-msgstr "Oletuskuvaus"
+msgstr "Käsin lisätty rajoitus"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:2
-#, fuzzy
 msgid "Overdues"
-msgstr "%sMyöhässä%s"
+msgstr "Myöhässä olevat"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:3
 msgid "Suspension"
-msgstr ""
+msgstr "Keskeytys"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:4
 msgid "Discharge"
-msgstr ""
+msgstr "Velattomuusilmoitus"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:5
 msgid "Notice failure suspension"
-msgstr ""
+msgstr "Keskeytys epäonnistuneesta viestinlähetyksestä"
 
 #: installer/data/mysql/en/mandatory/sample_frequencies.yml:description:1
 msgid "Sample frequencies for subscriptions"
@@ -4121,32 +4119,28 @@ msgid "Order received"
 msgstr "Tilaus vastaanotettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2
-#, fuzzy
 msgid "A library booking was cancelled"
-msgstr "Kaukolainapyyntö peruutettu"
+msgstr "Käyttövaraus peruutettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2
 msgid "Booking cancellation notice"
-msgstr ""
+msgstr "Käyttövarauksen peruutus"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3
-#, fuzzy
 msgid "A library booking was modified"
-msgstr "Kaukolainapyyntö peruutettu"
+msgstr "Käyttövarausta muutettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3
 msgid "Booking modification notice"
-msgstr ""
+msgstr "Käyttövarauksen muutos"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4
-#, fuzzy
 msgid "A library booking was confirmed"
-msgstr "Kaukolainapyyntö peruutettu"
+msgstr "Käyttövaraus vahvistettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4
-#, fuzzy
 msgid "Booking confirmation notice"
-msgstr "Evästetiedot"
+msgstr "Käyttövarauksen vahvistus"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:5
 msgid "Catalog concern acknowledgment"
@@ -4157,14 +4151,12 @@ msgid "Concern acknowledgement"
 msgstr "Virheilmoitus vastaanotettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:6
-#, fuzzy
 msgid "Catalog concern assigned"
-msgstr "Kuvailutietojen virheilmoitus päivitetty"
+msgstr "Kuvailutietojen virheilmoitus vastuutettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:6
-#, fuzzy
 msgid "Concern assigned notification"
-msgstr "Virheilmoitus saapunut"
+msgstr "Ilmoitus kuvailuvirheen vastuutuksesta"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:7
 msgid "Catalog concern resolved"
@@ -4200,7 +4192,7 @@ msgstr "Käyttäjätilimaksu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:13
 msgid "Account writeoff"
-msgstr "Käyttäjätilin poistaminen"
+msgstr "Maksu hyvitetty"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14
 msgid "Article request - canceled"
@@ -4256,7 +4248,7 @@ msgstr "Palautukset"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:20
 msgid "Item check-in (digest)"
-msgstr "Palautuskuitti (yhteenveto)"
+msgstr "Palautusilmoitus (yhteenveto)"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:22
 msgid "Checkouts"
@@ -4264,7 +4256,7 @@ msgstr "Lainat"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:22
 msgid "Item check-out (digest)"
-msgstr "Lainauskuitti (yhteenveto)"
+msgstr "Lainausilmoitus (yhteenveto)"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:24
 msgid "Checkout note"
@@ -4333,7 +4325,7 @@ msgstr "Kuljetuskuitti"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:41
 msgid "Acquisition claim"
-msgstr "Hankintavaatimus"
+msgstr "Hankinnan reklamaatio"
 
 # sumea arvaus
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:41
@@ -4342,19 +4334,19 @@ msgstr "Nidettä ei vastaanotettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42
 msgid "File SFTP failed"
-msgstr ""
+msgstr "Tiedosto SFTP epäonnistui"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42
 msgid "The SFTP by sftp_file.pl failed"
-msgstr ""
+msgstr "SFTP sftp_file.pl:llä epäonnistui"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43
 msgid "File SFTP success"
-msgstr ""
+msgstr "Onnistunut tiedoston SFTP-siirto"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43
 msgid "The SFTP by sftp_file.pl was successful"
-msgstr ""
+msgstr "sftp_file.pl:n suorittama SFTP-siirto onnistui"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:44
 msgid "ILL request ready for pickup"
@@ -4421,15 +4413,13 @@ msgid "Share list <<listname>>"
 msgstr "Jaetaan lista <<listname>>"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58
-#, fuzzy
 msgid "A list has been transferred to you"
-msgstr "Sinulle on hankintaehdotus"
+msgstr "Lista on siirretty sinulle"
 
 # Siirrot? Kuljetukset? Kuljetukset ja siirrot?
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58
-#, fuzzy
 msgid "Transfer ownership"
-msgstr "Kuljetuskuitti"
+msgstr "Listan omistajan muutos"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:59
 msgid "Discharge confirmation"
@@ -4489,7 +4479,7 @@ msgstr "Kaksivaiheinen tunnistus"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:67
 msgid "two-authentication step token"
-msgstr "Kaksivaiheisen tunnistuksen vaihe"
+msgstr "Kaksivaiheisen tunnistautumisen koodi"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:68
 msgid "Account balance slip"
@@ -4577,7 +4567,7 @@ msgstr "Hankintaehdotus hyväksytty"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:83
 msgid "Suggestion accepted"
-msgstr "Ehdotus hyväksytty"
+msgstr "Hankintaehdotus hyväksytty"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:84
 msgid "Suggested purchase available"
@@ -4669,11 +4659,11 @@ msgstr "Palautuspyynnön tehneen asiakkaan tiedot"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:100
 msgid "Confirmation of disabling two factor authentication"
-msgstr "Vahvistetaan kaksivaiheisen todennuksen käytöstäpoisto"
+msgstr "Kaksivaiheinen tunnistautuminen poistettu käytöstä"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:101
 msgid "Confirmation of enabling two factor authentication"
-msgstr "Vahvistetaan kaksivaiheisen todennuksen käyttöönotto"
+msgstr "Kaksivaiheinen tunnistautuminen otettu käyttöön"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:102
 msgid "New OPAC self-registration"
@@ -4713,13 +4703,12 @@ msgid "Your hold on [% hold.biblio.title %] is confirmed"
 msgstr "Varauksesi teokseen [% hold.biblio.title %] on vahvistettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107
-#, fuzzy
 msgid "OAI harvest report"
-msgstr "Verkkokirjaston vikailmoitukset"
+msgstr "OAI-haravoinnin raportti"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107
 msgid "OAI harvest report for [% servername %]"
-msgstr ""
+msgstr "OAI-haravoinnin raportti palvelimelle [% servername %]"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:100:mul:1
 msgid "%sDear %s %s,%s"
@@ -4882,55 +4871,48 @@ msgid "You will be notified by the library when your item is available for picku
 msgstr "Saat ilmoituksen kun nide on noudettavissa."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:1
-#, fuzzy
 msgid "OAI harvest report for %s:"
-msgstr "Kiertokokoelmaraportti kohteelle %s:"
+msgstr "OAI-haravoinnin raportti palvelimelle %s:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:3
-#, fuzzy
 msgid "Endpoint: %s"
-msgstr "Lähetetty: %s"
+msgstr "Päätepiste: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:4
-#, fuzzy
 msgid "Set: %s"
-msgstr "Lähetetty: %s"
+msgstr "Setti: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:5
-#, fuzzy
 msgid "Data format: %s"
-msgstr "Odottaa kirjastossa: %s"
+msgstr "Tiedon tallennusmuoto: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:6
-#, fuzzy
 msgid "Record type: %s"
-msgstr "Viivakoodi: %s"
+msgstr "Tietuetyyppi: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:8
 msgid "%s records added"
-msgstr ""
+msgstr "%s tietuetta lisätty"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:9
-#, fuzzy
 msgid "%s records updated"
-msgstr "on päivitetty."
+msgstr "%s tietuetta päivitetty"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:10
 msgid "%s records deleted"
-msgstr ""
+msgstr "%s tietuetta poistettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:11
 msgid "%s records skipped"
-msgstr ""
+msgstr "%s tietuetta ohitettu"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:12
-#, fuzzy
 msgid "%s records in error"
-msgstr "Äänite, rulla"
+msgstr "%s tietuetta virheellisiä"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:13
 msgid "%s total"
-msgstr ""
+msgstr "%s yhteensä"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:10:mul:26
 msgid "      %sTransaction ID: %s"
@@ -5046,11 +5028,11 @@ msgstr "Jäljelle jäänyt määrä: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:13:mul:2
 msgid "An account writeoff of %s has been applied to your account."
-msgstr "Maksuistasi on poistettu summa %s."
+msgstr "Maksuihisi on tehty %s hyvitys."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:13:mul:4
 msgid "This writeoff affected the following fees:"
-msgstr "Poisto vaikuttaa seuraaviin maksuihin:"
+msgstr "Hyvitys vaikuttaa seuraaviin maksuihin:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:1
 msgid "Dear %s %s (%s),"
@@ -5209,29 +5191,24 @@ msgid "Dear %s,%s"
 msgstr "Hyvä %s,%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:5
-#, fuzzy
 msgid "We regret to inform you, that the following booking has been cancelled.%s"
-msgstr "Valitettavasti varaamasi nide on kadonnut. Olemme peruuttaneet varauksesi."
+msgstr "Valitettavasti käyttövarauksesi on peruutettu.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:7
-#, fuzzy
 msgid "Title: %s%s"
-msgstr "Otsikko: %s"
+msgstr "Nimeke: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:9
-#, fuzzy
 msgid "Dates: %s to %s%s"
-msgstr "%sPvm: %s%s"
+msgstr "Aikaväli: %s - %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:11
-#, fuzzy
 msgid "Reason: %s%s"
-msgstr "Viivakoodi: %s%s"
+msgstr "Syy: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:13
-#, fuzzy
 msgid "Kind regards%s"
-msgstr "Ystävällisin terveisin"
+msgstr "Ystävällisin terveisin%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:30:mul:3
 msgid "Checked out to %s %s %s %s %s"
@@ -5323,7 +5300,7 @@ msgstr "Kiertokokoelmaraportti kohteelle %s:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:3
 msgid "%s%s items to be processed for this branch."
-msgstr "%s%s tälle kirjastolle käsiteltävät niteet."
+msgstr "%s%s kpl tälle kirjastolle käsiteltäviä niteitä."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:4
 msgid "%sNo items to be processed for this branch"
@@ -5339,7 +5316,7 @@ msgstr "Luokka: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:8
 msgid "Location: %s"
-msgstr "Hyllypaikka: %s"
+msgstr "Sijainti: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:10
 msgid "On loan?: %s"
@@ -5355,18 +5332,16 @@ msgid "Current library: %s %s"
 msgstr "Nykyinen kirjasto: %s %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:5
-#, fuzzy
 msgid "Your booking of %s has been modified.%s"
-msgstr "Varauksesi %s (%s) on vahvistettu."
+msgstr "Käyttövarauksesi %s on muutettu.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:7
 msgid "The new details are:%s"
-msgstr ""
+msgstr "Uudet tiedot ovat:%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:11
-#, fuzzy
 msgid "Pickup at: %s%s"
-msgstr "Noutopaikka: %s"
+msgstr "Noutopaikka: %s%s"
 
 # Siirrot? Kuljetukset? Kuljetukset ja siirrot?
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:40:mul:3
@@ -5383,11 +5358,11 @@ msgstr "%sTilausta numerolla %s (%s) (%s tilattu) ($%s €/kpl) ei ole vastaanot
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42:mul:1
 msgid "SFTP upload failed:"
-msgstr ""
+msgstr "SFTP-siirto epäonnistui:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43:mul:1
 msgid "SFTP upload succeeded"
-msgstr ""
+msgstr "SFTP-siirto onnistui"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:44:mul:3
 msgid "The Interlibrary loans request number %s you placed for:"
@@ -5438,13 +5413,12 @@ msgid "Details of the update are below:"
 msgstr "Päivityksen tarkemmat tiedot alla:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4:mul:5
-#, fuzzy
 msgid "Your booking of %s has been confirmed.%s"
-msgstr "Varauksesi %s (%s) on vahvistettu."
+msgstr "Käyttövarauksesi %s on vahvistettu.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4:mul:7
 msgid "The details are:%s"
-msgstr ""
+msgstr "Tiedot:%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:56:mul:1
 msgid "Dear patron,"
@@ -5468,16 +5442,15 @@ msgstr "Jos et ole kirjastomme asiakas tai et halua hyväksyä tätä kutsua, vo
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:3
 msgid "A public list, titled %s%s%s, has been transferred to you%s by %s%s.%s"
-msgstr ""
+msgstr "Julkinen lista %s%s%s on siirretty sinulle%s käyttäjältä %s%s.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:5
 msgid "%sThe list was previously owned by %s.%s%s%s"
-msgstr ""
+msgstr "%sListan omisti aiemmin %s.%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:6
-#, fuzzy
 msgid "Thank you%s"
-msgstr "Kiitos"
+msgstr "Kiitos%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:59:mul:3
 msgid "%sDischarge confirmation%s"
@@ -5559,7 +5532,7 @@ msgstr "Jos et luonut tiliä, voit jättää tämän viestin huomioimatta. Vahvi
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:63:mul:3
 msgid "We want to notify you that your password has been changed. If you did not change it yourself (or requested that change), please contact library staff."
-msgstr "Salasanasi on muuttunut, jos en muuttanut salasanaasi itse (tai pyytänyt kirjastosta sen muuttamista), ole yhteydessä kirjastoon."
+msgstr "Salasanasi on muuttunut. Jos et muuttanut salasanaasi itse (tai pyytänyt kirjastosta sen muuttamista), ole yhteydessä kirjastoon."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:64:mul:1
 msgid "%sThis email has been sent in response to your password recovery request for the account %s%s%s."
@@ -5587,7 +5560,7 @@ msgstr "Luo uusi salasana tämän linkin kautta:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:65:mul:7
 msgid "%sThis link will be valid for 5 days from this email's reception, then you must reapply if you do not change your password.%s"
-msgstr "%sTämä linkki on voimassa viisi päivää vistin saapumisesta. Ellet vaihda salasanaa sinä aikana, sinun pitää hakea sitä uudelleen.%s"
+msgstr "%sTämä linkki on voimassa viisi päivää viestin saapumisesta. Ellet vaihda salasanaa sinä aikana, sinun pitää hakea sitä uudelleen.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:66:mul:2
 msgid "Hello %s %s %s.%s"
@@ -5678,14 +5651,12 @@ msgid "Dear cataloger,%s"
 msgstr "Hyvä kuvailija,%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:6:mul:4
-#, fuzzy
 msgid "%s has assigned the following concern with %s%s%s to you%s"
-msgstr "%s raportoi seuraavan kuvailutietojen virheen %s%s%s%s"
+msgstr "%s antoi seuraavan kuvailutietojen virheen %s%s%s sinun ratkaistavaksi%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:6:mul:8
-#, fuzzy
 msgid "You can action this concern from the %sconcern management page%s."
-msgstr "Voit merkitä tämän virheilmoituksen käsitellyksi %svirheilmoitusten käsittelysivulla%s."
+msgstr "Voit käsitellä virheilmoitusta %svirheilmoitusten käsittelysivulla%s."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:70:mul:23
 msgid "  %sTransaction ID: %s"
@@ -6007,7 +5978,7 @@ msgstr "Tämä nide täytyy uusia kirjastossa."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:91:mul:25
 msgid "Your account has expired."
-msgstr "Kirjastokortti on vanhentunut."
+msgstr "Asiakastilisi on vanhentunut."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:92:mul:2
 msgid "Checked in items for %s %s %s %s %s"
@@ -6091,7 +6062,7 @@ msgstr "Yksinkertainen numerointikaava"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Issue"
-msgstr "Volyymi/numero"
+msgstr "Numero"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Vol. {X}, Number {Y}, Issue {Z}"
@@ -6099,7 +6070,7 @@ msgstr "Vsk. {X}, nro {Y} : {Z}"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Volume"
-msgstr "Vuosikerta"
+msgstr "Osa"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Volume Number Issue 1"
@@ -6367,11 +6338,11 @@ msgstr "Nide ei löydy hyllystä"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:5:row:24
 msgid "Item was found to be too damaged to fill hold"
-msgstr "Varattu nide vahingoittunut. Varausta ei voida täyttää."
+msgstr "Varattu nide on vahingoittunut. Varausta ei voida täyttää."
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:5:row:26
 msgid "Item was found to be too damaged to fill article request"
-msgstr "Teos on vahingoittunut. Artikkelipyyntöä ei voida täyttää."
+msgstr "Teos on vahingoittunut. Artikkelipyyntöä ei voida täyttää"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:5:row:27
 msgid "Cancelled from the OPAC user page"
@@ -8239,7 +8210,7 @@ msgstr "Tosiasioiden tunnustaminen on viisauden alku."
 
 #: installer/data/mysql/en/optional/sample_quotes.yml:quotes:1:row:19
 msgid "My fellow Americans, ask not what your country can do for you; ask what you can do for your country."
-msgstr "Älkää kysykö mitä maa voi tehdä teille – kysykää, mitä te voitte tehdä maallenne"
+msgstr "Älkää kysykö mitä maa voi tehdä teille – kysykää, mitä te voitte tehdä maallenne."
 
 #: installer/data/mysql/en/optional/sample_quotes.yml:quotes:1:row:20
 msgid "I do not think it altogether inappropriate to introduce myself to this audience. I am the man who accompanied Jacqueline Kennedy to Paris, and I have enjoyed it."

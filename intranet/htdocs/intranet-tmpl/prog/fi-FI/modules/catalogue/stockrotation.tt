@@ -73,7 +73,7 @@
  [% IF item.rota.active %]
  <span>Aktiivinen</span>
  [% ELSE %]
- <span>Ei käytössä</span>
+ <span>Epäaktiivinen</span>
  [% END %]
  [% IF !item.rota.active %]
  </span>

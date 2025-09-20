@@ -222,10 +222,10 @@
  <a class="btn btn-default btn-xs dropdown-toggle" id="reservoirsearchactions[% breeding_loo.id | html %]" role="button" data-bs-toggle="dropdown" href="#">
  Toiminnot </a>
  <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-labelledby="reservoirsearchactions[% breeding_loo.id | html %]">
- <li><a href="/cgi-bin/koha/catalogue/showmarc.pl?importid=[% breeding_loo.id | uri %]" class="previewData"><i class="fa-solid fa-eye"></i> MARC-esikatselu</a></li>
- <li><a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;importid=[% breeding_loo.id | uri %]" class="previewData"><i class="fa-solid fa-eye"></i> Kortti-esikatselu</a></li>
+ <li><a href="/cgi-bin/koha/catalogue/showmarc.pl?importid=[% breeding_loo.id | uri %]" class="dropdown-item previewData"><i class="fa-solid fa-eye"></i> MARC-esikatselu</a></li>
+ <li><a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;importid=[% breeding_loo.id | uri %]" class="dropdown-item previewData"><i class="fa-solid fa-eye"></i> Kortti-esikatselu</a></li>
  [% IF ( CAN_user_editcatalogue_edit_catalogue ) %]
- <li><a href="/cgi-bin/koha/cataloguing/addbiblio.pl?breedingid=[% breeding_loo.id | uri %]"><i class="fa fa-plus"></i> Lisää nimeketietue</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/cataloguing/addbiblio.pl?breedingid=[% breeding_loo.id | uri %]"><i class="fa fa-plus"></i> Lisää nimeketietue</a></li>
  [% END %]
  </ul>
  </div>

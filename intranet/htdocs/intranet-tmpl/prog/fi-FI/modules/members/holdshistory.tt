@@ -45,17 +45,44 @@
 [% INCLUDE 'members-toolbar.inc' %]
 <h1>Varaushistoria</h1>
 
-[% UNLESS Koha.Preference('IntranetReadingHistoryHolds') %]
+ [% UNLESS Koha.Preference('IntranetReadingHistoryHolds') %]
  <div class="alert alert-warning">Virkailijat eivät pääse asiakkaan varaushistoriaan</div>
-[% ELSIF is_anonymous %]
+ [% ELSIF is_anonymous %]
  <div class="alert alert-warning">Tämä on anonymisoitu asiakas, joten varaushistoriaa ei voi näyttää.</div>
-[% ELSIF ( !holds ) %]
- <div class="alert alert-info">Asiakkaalla ei ole varaushistoriaa.</div>
-[% ELSE %]
+ [% ELSE %]
 
 [% SET show_itemtype_column = Koha.Preference('AllowHoldItemTypeSelection') %]
 
-<div id="holdshistory" class="page-section">
+ <div id="holdshistory" class="page-section">
+ <h2 id="current_holds_heading">Voimassa olevat varaukset</h2>
+ <p
+                ><a href="#past_holds_heading"><i class="fa fa-arrow-down" aria-hidden="true"></i> Näytä vanhat varaukset</a></p
+            >
+ [% IF patron.holds.count %]
+ <div id="current_holds_filters" data-table-id="table_holdshistory">
+ <p>
+ <span class="select_hold_status" id="status_show_all">
+ <input id="current_show_all" type="checkbox" checked="checked" class="show_all" />
+ <label for="current_show_all">Näytä kaikki</label>
+ </span>
+ <span class="select_hold_status" id="status_show_pending">
+ <input id="current_pending_filter" type="checkbox" checked="checked" />
+ <label for="current_pending_filter">Odottava</label>
+ </span>
+ <span class="select_hold_status" id="status_show_waiting">
+ <input id="current_waiting_filter" type="checkbox" checked="checked" />
+ <label for="current_waiting_filter">Odottaa</label>
+ </span>
+ <span class="select_hold_status" id="status_show_processing">
+ <input id="current_processing_filter" type="checkbox" checked="checked" />
+ <label for="current_processing_filter">Käsittelypohja</label>
+ </span>
+ <span class="select_hold_status" id="status_show_intransit">
+ <input id="current_transit_filter" type="checkbox" checked="checked" />
+ <label for="current_transit_filter">Kuljetettavana</label>
+ </span>
+ </p>
+ </div>
  <table id="table_holdshistory">
  <thead>
  <tr>
@@ -72,60 +99,60 @@
  <th>Varauksen nidetyyppi</th>
  [% END %]
  <th>Tila</th>
+ <th>Huomautukset</th>
  </tr>
  </thead>
- <tbody>
- [% FOREACH hold IN holds %]
- <tr>
- <td>[% INCLUDE 'biblio-title.inc' biblio=hold.biblio link = 1 %]</td>
- <td>[% hold.biblio.author | html %]</td>
- <td>[% hold.item.barcode | html %]</td>
- <td>[% hold.item.itemcallnumber | html %]</td>
- <td>[% Branches.GetName( hold.branchcode ) | html %]</td>
- <td data-order="[% hold.reservedate | html %]">[% hold.reservedate | $KohaDates %]</td>
- <td data-order="[% hold.expirationdate | html %]">
- [% hold.expirationdate | $KohaDates %]
- </td>
- <td data-order="[% hold.waitingdate | html %]">
- [% hold.waitingdate | $KohaDates %]
- </td>
- <td data-order="[% hold.cancellationdate | html %]">
- [% hold.cancellationdate | $KohaDates %]
- </td>
- [% IF show_itemtype_column %]
- <td>
- [% IF hold.itemtype %]
- [% ItemTypes.GetDescription( hold.itemtype ) | html %]
- [% ELSE %]
- <span>Mikä tahansa nidetyyppi</span>
- [% END %]
- </td>
- [% END %]
- <td>
- [% IF hold.found == 'F' %]
- <span>Täytetty</span>
- [% ELSIF hold.cancellationdate %]
- <span>Peruutettu</span>
- [% IF hold.cancellation_reason %]
- ([% AuthorisedValues.GetByCode('HOLD_CANCELLATION', hold.cancellation_reason) | html %])
- [% END %]
- [% ELSIF hold.found == 'W' %]
- <span>Odottaa</span>
- [% ELSIF hold.found == 'P' %]
- <span>Käsittelypohja</span>
- [% ELSIF hold.found == 'T' %]
- <span>Kuljetettavana</span>
- [% ELSE %]
- <span>Odottava</span>
- [% END %]
- </td>
- </tr>
- [% END %]
- </tbody>
  </table>
-</div>
+ [% ELSE %]
+ <div class="alert alert-info">Asiakkaalla ei ole voimassa olevia varauksia.</div>
+ [% END %]
 
-[% END %]
+ <h2 id="past_holds_heading">Vanhat varaukset</h2>
+ <p
+                ><a href="#current_holds_heading"><i class="fa fa-arrow-up" aria-hidden="true"></i> Näytä voimassa olevat varaukset</a></p
+            >
+ [% IF patron.old_holds.count %]
+ <div id="old_holds_filters" data-table-id="table_oldholdshistory">
+ <p>
+ <span class="select_hold_status" id="status_show_all_old">
+ <input id="old_show_all" type="checkbox" checked="checked" class="show_all" />
+ <label for="old_show_all">Näytä kaikki</label>
+ </span>
+ <span class="select_hold_status" id="status_show_fulfilled">
+ <input id="old_fulfilled_filter" type="checkbox" checked="checked" />
+ <label for="old_fulfilled_filter">Täytetty</label>
+ </span>
+ <span class="select_hold_status" id="status_show_cancelled">
+ <input id="old_cancelled_filter" type="checkbox" checked="checked" />
+ <label for="old_cancelled_filter">Peruutettu</label>
+ </span>
+ </p>
+ </div>
+ <table id="table_oldholdshistory">
+ <thead>
+ <tr>
+ <th class="anti-the">Nimeke</th>
+ <th>Tekijä</th>
+ <th>Viivakoodi</th>
+ <th>Luokka</th>
+ <th>Kirjasto</th>
+ <th>Varauspvm</th>
+ <th>Vanhentumispvm</th>
+ <th>Odotuspvm</th>
+ <th>Peruutuspvm</th>
+ [% IF show_itemtype_column %]
+ <th>Varauksen nidetyyppi</th>
+ [% END %]
+ <th>Tila</th>
+ <th>Huomautukset</th>
+ </tr>
+ </thead>
+ </table>
+ [% ELSE %]
+ <div class="alert alert-info">Asiakkaalla ei ole vanhoja varauksia.</div>
+ [% END %]
+ </div>
+ [% END %]
 
  </main>
  </div> <!-- /.col-md-10.order-md-2 -->
@@ -142,6 +169,7 @@
  [% INCLUDE 'columns_settings.inc' %]
  [% INCLUDE 'str/members-menu.inc' %]
  [% Asset.js("js/members-menu.js") | $raw %]
+ [% INCLUDE 'js-biblio-format.inc' %]
  <script>
         $(document).ready(function() {
             var table_settings = [% TablesSettings.GetTableSettings('members', 'holdshistory', 'holdshistory-table', 'json') | $raw %];
@@ -149,10 +177,199 @@
               //Remove item type column settings
               table_settings['columns'] = table_settings['columns'].filter(function(c){return c['columnname'] != 'itemtype';});
             [% END %]
-            var table = KohaTable("table_holdshistory", {
-                "pagingType": "full",
-                "order": [[4, 'desc']]
-            }, table_settings);
+            let current_holds_table = build_holds_table("#table_holdshistory");
+            let old_holds_table = build_holds_table("#table_oldholdshistory", 1);
+            function build_holds_table(table_id, old){
+                let additional_filters = {
+                    "-or": function(){
+                        let statuses = [];
+                        let include_cancelled = false;
+                        if ( table_id == '#table_holdshistory' ) {
+                            if ( $("#current_pending_filter").is(":checked") ) {
+                                statuses.push(null);
+                            }
+                            if ( $("#current_waiting_filter").is(":checked") ) {
+                                statuses.push("W");
+                            }
+                            if ( $("#current_processing_filter").is(":checked") ) {
+                                statuses.push("P");
+                            }
+                            if ( $("#current_transit_filter").is(":checked") ) {
+                                statuses.push("T");
+                            }
+                        } else {
+                            if ( $("#old_fulfilled_filter").is(":checked") ) {
+                                statuses.push("F");
+                            }
+                            if ( $("#old_cancelled_filter").is(":checked") ) {
+                                include_cancelled = true;
+                            }
+                        }
+                        if ( include_cancelled ) {
+                            return [{status: statuses}, { cancellation_date: {"<": new Date().toISOString() } } ]; // cancellation_date cannot be in the future. Would be better a 'not null' here however.
+                        } else {
+                            return [{status: statuses}];
+                        }
+                    },
+
+                };
+
+                let table_url = '/api/v1/patrons/[% patron.borrowernumber | uri %]/holds';
+                let table_embeds = ['biblio', 'item', 'pickup_library', 'pickup_library.branchname'];
+                if (old){
+                    table_url += '?old=1';
+                    table_embeds.push('deleted_biblio');
+                }
+                return $(table_id).kohaTable({
+                    ajax: {
+                        url: table_url,
+                    },
+                    order: [],
+                    embed: table_embeds,
+                    columns: [
+                        {
+                            data: "biblio.title:biblio.subtitle:biblio.medium",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                if( row.biblio ){
+                                    return $biblio_to_html(row.biblio, { link: 1 });
+                                } else {
+                                    return $biblio_to_html(row.deleted_biblio, { link: 0, deleted: 1 });
+                                }
+                            }
+                        },
+                        {
+                            data: "biblio.author",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                let biblio = row.biblio ? row.biblio : row.deleted_biblio;
+                                return biblio ? biblio.author : "";
+                            }
+                        },
+                        {
+                            data: "item.external_id",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                return row.item ? row.item.external_id : "";
+                            }
+                        },
+                        {
+                            data: "item.callnumber",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                return row.item ? row.item.callnumber: "";
+                            }
+                        },
+                        {
+                            data: "pickup_library_id:pickup_library.branchname",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                return row.pickup_library.name;
+                            }
+                        },
+                        {
+                            data: "hold_date",
+                            type: "date",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                return $date(row.hold_date);
+                            }
+                        },
+                        {
+                            data: "expiration_date",
+                            type: "date",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                return $date(row.expiration_date)
+                            }
+                        },
+                        {
+                            data: "waiting_date",
+                            type: "date",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                return $date(row.waiting_date)
+                            }
+                        },
+                        {
+                            data: "cancellation_date",
+                            type: "date",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                return $date(row.cancellation_date)
+                            }
+                        },
+                        [% IF show_itemtype_column %]
+                        {
+                            data: "item_type.item_type",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                if ( row.item_type ) {
+                                    return row.item_type.item_type;
+                                } else {
+                                    return _("Mikä tahansa nidetyyppi");
+                                }
+                            }
+                        },
+                        [% END %]
+                        {
+                            data: "status",
+                            searchable: false,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                if ( row.status == 'F' ) {
+                                    return _("Täytetty");
+                                } else if (row.cancellation_date) {
+                                    let r = _("Peruutettu");
+                                    if (row.cancellation_reason){
+                                        r += "(%s)".format("FIXME"); //FIXME Add HOLD_CANCELLATION description
+                                    }
+                                    return r;
+                                } else if (row.status == 'W') {
+                                    return _("Odottaa");
+                                } else if (row.status == 'P') {
+                                    return _("Käsittelypohja");
+                                } else if (row.status == 'T') {
+                                    return _("Kuljetettavana");
+                                }
+
+                                return _("Odottava");
+                            }
+                        },
+                        {
+                            data: "notes",
+                            searchable: true,
+                            orderable: true,
+                            render: function (data, type, row, meta) {
+                                return row.notes;
+                            }
+                        },
+                    ],
+                }, table_settings, true, additional_filters);
+            }
+            $("#current_holds_filters :checkbox, #old_holds_filters :checkbox").on("change", function(e){
+                e.preventDefault();
+                let container = $(this).closest("div");
+                if ( $(this).hasClass("show_all") ) {
+                    if ( $(this).is(":checked") ) {
+                        container.find(":checkbox").prop("checked", true);
+                    }
+                } else if ( $(this).not(":checked") ) {
+                    container.find(".show_all").prop("checked", false);
+                }
+                let table_dt = $("#"+container.data("table-id")).DataTable();
+                table_dt.draw();
+            });
         });
     </script>
 [% END %]

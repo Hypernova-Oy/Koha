@@ -210,6 +210,9 @@ legend.collapsed i.fa.fa-caret-down::before {
  [% IF ( ERROR_child_no_guarantor ) %]
  <li id="ERROR_child_no_guarantor">Lapsiasiakas tarvitsee takaajan.</li>
  [% END %]
+ [% IF ( ERROR_child_is_guarantor ) %]
+ <li id="ERROR_child_is_guarantor">Lapsiasiakas ei voi olla takaaja.</li>
+ [% END %]
  [% IF ( ERROR_guarantor_is_guarantee ) %]
  <li id="ERROR_guarantor_is_guarantee">Takaaja ei voi olla taattava.</li>
  [% END %]
@@ -223,11 +226,11 @@ legend.collapsed i.fa.fa-caret-down::before {
  </div>
  [% END %]
 
- [% SET fieldstohide = Koha.Preference('CollapseFieldsPatronAddForm') %]
+ [% SET fieldstohide = Koha.Preference('CollapseFieldsPatronAddForm').split(',') %]
  [% IF Koha.Preference('CollapseFieldsPatronAddForm') %][% UNLESS step %]
  <p id="selections">
  <label><input id="toggle_hidden_fields" title="Nämä kentät on oletusarvoisesti piilotettu CollapseFieldsPatronAddForm-järjestelmäasetuksella" type="checkbox"><strong>Näytä supistetut kentät:</strong></label>
- [% FOREACH field IN fieldstohide.split(',') %]
+ [% FOREACH field IN fieldstohide %]
  [% SWITCH field %]
  [% CASE 'identity' %] <span>Asiakkaan tiedot</span> |
  [% CASE 'guarantor' %] <span>Takaajan tiedot</span> |
@@ -513,12 +516,12 @@ legend.collapsed i.fa.fa-caret-down::before {
  <li class="guarantor-details" data-borrowernumber="[% r.guarantor_id | $raw %]">
  <span class="label">Takaaja:</span>
  [% INCLUDE 'patron-title.inc' patron=r.guarantor hide_patron_infos_if_needed=1 %]
- <input type="hidden" class="new_guarantor_id relation-[% r.id | html %]" name="new_guarantor_id" value="[% r.guarantor_id | html %]"/>
+ <input type="hidden" class="guarantor_id relation-[% r.id | html %]" name="guarantor_id" value="[% r.guarantor_id | html %]" />
  </li>
  <li>
  <span class="label">Suhde:</span>
  <span>[% r.relationship | html %]</span>
- <input type=hidden class="new_guarantor_relationship relation-[% r.id | html %]" name="new_guarantor_relationship" value="[% r.relationship | html %]" />
+ <input type=hidden class="guarantor_relationship relation-[% r.id | html %]" name="guarantor_relationship" value="[% r.relationship | html %]" />
  </li>
 
  <li>
@@ -959,9 +962,9 @@ legend.collapsed i.fa.fa-caret-down::before {
  [% FOREACH category_type IN patron_categories.keys.sort %]
  [% SWITCH category_type %]
  [% CASE 'C' %]
- <optgroup label="Huollettava">
+ <optgroup label="Lapsi">
  [% CASE 'A' %]
- <optgroup label="Aikuiset">
+ <optgroup label="Aikuinen">
  [% CASE 'S' %]
  <optgroup label="Henkilökunta">
  [% CASE 'I' %]
@@ -969,7 +972,7 @@ legend.collapsed i.fa.fa-caret-down::before {
  [% CASE 'P' %]
  <optgroup label="Ammattilainen">
  [% CASE 'X' %]
- <optgroup label="Tilastoyksikkö">
+ <optgroup label="Tilasto">
  [% CASE %]
  <optgroup label="Tuntematon">
  [% END %]
@@ -1347,7 +1350,7 @@ legend.collapsed i.fa.fa-caret-down::before {
  <legend class="expanded" id="account_flags_lgd">
  <i class="fa fa-caret-down" aria-hidden="true"></i>
  Käyttäjätilin huomautukset </legend>
- <p>Mikäli näihin valittuna "kyllä", estyy asiakkaalta lainaaminen ja varausten tekeminen verkkokirjastossa.</p>
+ <p>Mikäli näihin valittuna "kyllä", estyy asiakkaalta lainaaminen ja varausten tekeminen verkkokirjastossa</p>
  <ol class="radio">
  [% UNLESS nogonenoaddress %]
  <li>
@@ -1688,74 +1691,74 @@ legend.collapsed i.fa.fa-caret-down::before {
         function showHideFields(){
             $("#messaging_prefs_loading, #guarantor_template").hide();
             [% UNLESS step == 1 %]
-                [% IF fieldstohide.match('identity') %]
+                [% IF fieldstohide.grep('^identity$').size %]
                     togglePanel( $("#identity_lgd") );
                 [% END %]
                 [% IF show_guarantor || guarantor %]
-                    [% IF fieldstohide.match('guarantor') %]
+                    [% IF fieldstohide.grep('^guarantor$').size %]
                         togglePanel( $("#patron_guarantor_lgd") );
                     [% END %]
-                    [% IF fieldstohide.match('nonpatron_guarantor') %]
+                    [% IF fieldstohide.grep('^nonpatron_guarantor$').size %]
                         togglePanel( $("#non_patron_guarantor_lgd") );
                     [% END %]
                 [% END %]
-                [% IF fieldstohide.match('primary_address') %]
+                [% IF fieldstohide.grep('^primary_address$').size %]
                     togglePanel( $("#main_address_lgd") );
                 [% END %]
-                [% IF fieldstohide.match('primary_contact') %]
+                [% IF fieldstohide.grep('^primary_contact$').size %]
                     togglePanel( $("#contact_lgd") );
                 [% END %]
             [% END %]
             [% UNLESS step == 6 %]
-                [% IF fieldstohide.match('alt_address') %]
+                [% IF fieldstohide.grep('^alt_address$').size %]
                     togglePanel( $("#alt_address_lgd") );
                 [% END %]
             [% END %]
             [% UNLESS step == 2 %]
-                [% IF fieldstohide.match('alt_contact') %]
+                [% IF fieldstohide.grep('^alt_contact$').size %]
                     togglePanel( $("#alt_contact_lgd") );
                 [% END %]
             [% END %]
             [% UNLESS step == 3 %]
-                [% IF fieldstohide.match('lib_mgmt') %]
+                [% IF fieldstohide.grep('^lib_mgmt$').size %]
                     togglePanel( $("#library_management_lgd") );
                 [% END %]
                 [% UNLESS nodateenrolled && noopacnote && noborrowernotes %]
-                    [% IF fieldstohide.match('lib_setup') %]
+                    [% IF fieldstohide.grep('^lib_setup$').size %]
                         togglePanel( $("#library_setup_lgd") );
                     [% END %]
                 [% END %]
                 [% UNLESS nouserid && nopassword %]
-                    [% IF fieldstohide.match('login') %]
+                    [% IF fieldstohide.grep('^login$').size %]
                         togglePanel( $("#opac_staff_login_lgd") );
                     [% END %]
                 [% END %]
                 [% UNLESS ( op == 'add_form' || op == 'duplicate' ) %]
-                    [% IF fieldstohide.match('flags') %]
+                    [% IF fieldstohide.grep('^flags$').size %]
                         togglePanel( $("#account_flags_lgd") );
                     [% END %]
                 [% END %]
-                [% IF fieldstohide.match('debarments') %]
+                [% IF fieldstohide.grep('^debarments$').size %]
                     togglePanel( $("#restrictions_lgd") );
                 [% END %]
             [% END %]
             [% UNLESS step == 7 %]
                 [% IF Koha.Preference('HouseboundModule') %]
-                    [% IF fieldstohide.match('housebound') %]
+                    [% IF fieldstohide.grep('^housebound$').size %]
                         togglePanel( $("#housebound_roles") );
                     [% END %]
                 [% END %]
             [% END %]
             [% UNLESS step == 4 %]
                 [% IF Koha.Preference('ExtendedPatronAttributes') %]
-                    [% IF fieldstohide.match('additional') %]
+                    [% IF fieldstohide.grep('^additional$').size %]
                         togglePanel( $("#patron_attributes_lgd") );
                     [% END %]
                 [% END %]
             [% END %]
             [% UNLESS step == 5 %]
                 [% IF Koha.Preference('EnhancedMessagingPreferences') %]
-                    [% IF fieldstohide.match('messaging') %]
+                    [% IF fieldstohide.grep('^messaging$').size %]
                         togglePanel( $("#patron_messaging_prefs_lgd") );
                         $("#messaging_prefs_loading").toggle();
                     [% END %]
@@ -1766,7 +1769,7 @@ legend.collapsed i.fa.fa-caret-down::before {
         function togglePanel( node ){
             var panel = node.nextAll();
             if(panel.is(":visible")){
-                node.addClass("collapsed").removeClass("expanded").attr("title", _("Valitse aukaistaksesi tämä kenttä") );
+                node.addClass("collapsed").removeClass("expanded").attr("title", _("Valitse aukaistaksesi tämä osio") );
                 panel.hide();
             } else {
                 node.addClass("expanded").removeClass("collapsed").attr("title", _("Valitse sulkeaksesi tämä osio") );

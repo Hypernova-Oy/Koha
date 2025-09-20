@@ -201,7 +201,7 @@
  [% CASE 'libraryNotPickupLocation' %]
  <span>Tämä kirjasto ei ole sallittu noutopaikka</span>
  [% CASE 'no_valid_pickup_location' %]
- <span>Ei sallittua noutopaikkaa</span>
+ <span>Ei kelvollista noutokirjastoa</span>
  [% CASE 'notforloan' %]
  <span>Ei lainattavissa</span>
  [% CASE 'items_available' %]
@@ -237,14 +237,14 @@
  [% IF ( messageborrower ) %]
  <div class="alert alert-warning">
  <h3>Asiakasta ei löytynyt</h3>
- <p>Ei asiakasta tällä nimellä. Yritä uudelleen.</p>
+ <p>Ei asiakasta tällä nimellä. Yritä uudelleen</p>
  </div>
  [% END %]
 
  [% IF ( messageclub ) %]
  <div class="alert alert-warning">
  <h3>Kerhoa ei löydy</h3>
- <p>Ei kerhoa tällä nimellä. Yritä uudelleen.</p>
+ <p>Ei kerhoa tällä nimellä. Yritä uudelleen</p>
  </div>
  [% END %]
  <fieldset>
@@ -819,7 +819,7 @@
  <th>Kokoelma</th>
  [% END %]
  <th>Luokka</th>
- <th>Nidenumero</th>
+ <th>Kappaleen numero</th>
  [% IF itemdata_enumchron %]
  <th>Nro.</th>
  [% END %]
@@ -876,7 +876,7 @@
  [% ELSIF itemloo.not_holdable == 'libraryNotPickupLocation' %]
  <span>Tämä kirjasto ei ole sallittu noutopaikka</span>
  [% ELSIF itemloo.not_holdable == 'no_valid_pickup_location' %]
- <span>Ei sallittua noutopaikkaa</span>
+ <span>Ei kelvollista noutokirjastoa</span>
  [% ELSIF itemloo.not_holdable == 'notforloan' %]
  <span>Ei lainattavissa</span>
  [% ELSE %]
@@ -942,7 +942,7 @@
  [% ELSE %]
  <td>
  [% IF ( itemloo.transfertwhen ) %]
- <span>Kuljetettavana kirjastosta [% Branches.GetName( itemloo.transfertfrom ) | html %] kirjastoon [% Branches.GetName( itemloo.transfertto ) | html %] lähtien [% itemloo.transfertwhen | $KohaDates %].</span>
+ <span>Kuljetettavana toimipisteestä [% Branches.GetName( itemloo.transfertfrom ) | html %] toimipisteeseen [% Branches.GetName( itemloo.transfertto ) | html %] [% itemloo.transfertwhen | $KohaDates %] lähtien</span>
  [% END %]
  [% END %]
 
@@ -1433,7 +1433,6 @@
  [% INCLUDE 'columns_settings.inc' %]
  [% INCLUDE 'select2.inc' %]
  [% Asset.js("js/holds.js") | $raw%]
- [% Asset.js("js/form-submit.js") | $raw%]
 
  [% SET url_biblio_params = "biblionumber=" _ biblionumbers.join("&amp;biblionumber=") %]
  [% IF multi_hold %]

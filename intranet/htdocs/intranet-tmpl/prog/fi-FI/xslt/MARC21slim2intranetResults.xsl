@@ -863,7 +863,7 @@
  <xsl:value-of select="$URLLinkText"/>
  </xsl:when>
  <xsl:otherwise>
- <xsl:text>Click here to access online</xsl:text>
+ <xsl:text>Klikkaa tästä verkkosisältöön</xsl:text>
  </xsl:otherwise>
  </xsl:choose>
  </xsl:when>

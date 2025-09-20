@@ -266,14 +266,14 @@
  [% IF serialslis.planneddate %]
  [% serialslis.planneddate | $KohaDates %]
  [% ELSE %]
- <span>Okänt</span>
+ <span>Okänd</span>
  [% END %]
  </td>
  <td>
  [% IF serialslis.publisheddate %]
  [% serialslis.publisheddate | $KohaDates %]
  [% ELSE %]
- <span>Okänt</span>
+ <span>Okänd</span>
  [% END %]
  </td>
  <td>

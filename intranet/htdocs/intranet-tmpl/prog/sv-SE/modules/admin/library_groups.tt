@@ -427,10 +427,10 @@
  [% UNLESS group.branchcode %]
  <ul>
  [% IF group.ft_hide_patron_info %]
- <li>Limit patron visibility to libraries within this group for members.</li>
+ <li>Begränsa låntagares synlighet till bibliotek inom den här gruppen av medlemmar.</li>
  [% END %]
  [% IF group.ft_limit_item_editing %]
- <li>Limit item editing to items owned inside of this group.</li>
+ <li>Begränsa redigering av exemplar till exemplar som ägs inom den här gruppen.</li>
  [% END %]
  [% IF group.ft_search_groups_opac %]
  <li>Använd för sökgrupper i OPAC</li>

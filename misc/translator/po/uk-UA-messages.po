@@ -1,10 +1,10 @@
 # Compendium of uk.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2025-04-09 09:45+0000\n"
+"POT-Creation-Date: 2025-08-09 03:11+0000\n"
+"PO-Revision-Date: 2025-06-16 21:30+0000\n"
 "Last-Translator: Serhij Dubyk <dubyk@ukr.net>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: uk-UA\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /uk/22.11/uk-UA-messages.po\n"
 "X-POOTLE-MTIME: 1699213835.325856\n"
@@ -1566,11 +1566,11 @@ msgstr ""
 
 #: Koha/Database/Auditor.pm:88
 msgid "The installed database schema is correct."
-msgstr ""
+msgstr "Встановлена схема бази даних правильна."
 
 #: Koha/Database/Auditor.pm:89
 msgid "All is well"
-msgstr ""
+msgstr "Все добре"
 
 #: Koha/Database/Auditor.pm:111
 #, perl-format
@@ -2107,12 +2107,12 @@ msgstr "Номер мобільного телефону"
 #: Koha/Database/Columns.pm:198
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:61
 msgid "Sort 1"
-msgstr "Сортувальне поле 1 "
+msgstr "Сортувальне поле 1"
 
 #: Koha/Database/Columns.pm:199
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:62
 msgid "Sort 2"
-msgstr "Сортувальне поле 2 "
+msgstr "Сортувальне поле 2"
 
 #: Koha/Database/Columns.pm:200
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:22
@@ -4489,19 +4489,16 @@ msgid "Mobile phone"
 msgstr "Номер мобільного телефону"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:31
-#, fuzzy
 msgid "Alternate street number"
 msgstr "Запасна адреса: номер будинку, квартири"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:32
-#, fuzzy
 msgid "Alternate street type"
 msgstr "Запасна адреса: тип вулиці"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:33
-#, fuzzy
 msgid "Alternate address"
-msgstr "Запасна адреса: місто"
+msgstr "Запасна адреса"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:34
 #, fuzzy
@@ -4570,11 +4567,11 @@ msgstr "Причина від користувача"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:50
 msgid "Guarantor surname"
-msgstr ""
+msgstr "Прізвище поручителя"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:51
 msgid "Guarantor firstname"
-msgstr ""
+msgstr "Імʼя поручителя"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:52
 msgid "Guarantor title"
@@ -4920,8 +4917,8 @@ msgctxt "noun"
 msgid "Order"
 msgstr "Замовлення"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1248
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:803
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1251
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:804
 msgid "Add user"
 msgstr ""
 
@@ -5478,7 +5475,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:63
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:59
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:119
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:121
 #, perl-brace-format
 msgid "Modify tag {searchfield}"
 msgstr ""
@@ -5565,7 +5562,7 @@ msgstr "Подробиці завдання № {job_id}"
 msgid "Jobs"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:329
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:334
 msgid "Are you sure you want to cancel this job?"
 msgstr ""
 
@@ -6106,12 +6103,12 @@ msgstr ""
 msgid "Confirm deletion of tag {searchfield}"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:103
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:105
 #, perl-brace-format
 msgid "MARC bibliographic framework '{framework}' ({frameworkcode})"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:183
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:185
 #, perl-brace-format
 msgid "Confirm deletion of tag {searchfield}?"
 msgstr ""
@@ -6692,7 +6689,7 @@ msgstr "Редагування: {title} (бібзапис № {biblionumber})"
 msgid "Add MARC record"
 msgstr "Новий МАРК-запис"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:823
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:810
 msgctxt "Editing MARC record titled:"
 msgid "Editing"
 msgstr "Редагування"
@@ -6715,24 +6712,24 @@ msgstr ""
 msgid "(Record #{biblionumber})"
 msgstr "(бібзапис № {biblionumber})"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
 #, perl-brace-format
 msgid "Edit {title} by {author}"
 msgstr "Редагування: {title} / {author}"
 
 # можливо й не потрібно перекладати
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 msgctxt "Bibliographic record number"
 msgid "Record #"
 msgstr "бібзапис №"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 #, perl-brace-format
 msgid "Edit {title}"
 msgstr "Редагування: „{title}“"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:73
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:72
 msgctxt "Items attached to a bibliographic record"
 msgid "Items"
 msgstr "Примірники"
@@ -7177,7 +7174,7 @@ msgstr "Статистика з обігу: „{title}“"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:26
 #, fuzzy, perl-brace-format
-msgid "Overdues at {library}"
+msgid "Overdues with fines at {library}"
 msgstr "Постійна бібліотека"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchtransfers.tt:11
@@ -7193,7 +7190,7 @@ msgstr "Примітки щодо книговидачі"
 msgid "Checking out to {patron}"
 msgstr "Видача користувачу: {patron}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:887
+#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:891
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:346
 #, perl-brace-format
 msgid "Bundle of {count} item"
@@ -7474,7 +7471,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step1.tt:15
 msgid "Check Perl dependencies"
-msgstr ""
+msgstr "Перевірка Perl-залежностей"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step1.tt:17
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step2.tt:7
@@ -7488,13 +7485,12 @@ msgid "Web installer"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step2.tt:6
-#, fuzzy
 msgid "Database settings"
-msgstr "Параметри конфіденційності"
+msgstr "Параметри налаштування бази даних"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:7
 msgid "Set up database"
-msgstr ""
+msgstr "Налаштовування бази даних"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:11
 msgid "Error creating database tables"
@@ -7520,11 +7516,11 @@ msgstr "Дата останнього оновлення"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:27
 msgid "Select your MARC flavor"
-msgstr ""
+msgstr "Вибираємо наш стандарт МАРК-записів"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:30
 msgid "Selecting default settings"
-msgstr ""
+msgstr "Вибір налаштувань за умовчанням"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:33
 msgid "Default data loaded"
@@ -7532,7 +7528,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:36
 msgid "Installation complete"
-msgstr ""
+msgstr "Встановлення завершене"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/intranet-main.tt:11
 msgid "Koha staff interface"
@@ -7759,27 +7755,27 @@ msgstr "Змінюємо логін/пароль для користувача:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:18
 msgid "Add patron"
-msgstr ""
+msgstr "Новий користувач"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:20
 msgid "Modify patron"
 msgstr "Редагування користувача —"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:488
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:490
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:500
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:491
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:493
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:503
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember-brief.tt:44
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:195
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:199
 msgctxt "gender"
 msgid "Other"
 msgstr "Інше"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1521
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1524
 msgctxt "patron restriction created on"
 msgid "Created"
 msgstr "Створено"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2093
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2096
 msgid "Add guarantor"
 msgstr "Додаємо поручителя"
 
@@ -7965,6 +7961,11 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:7
 msgid "Image manager"
+msgstr ""
+
+#: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:124
+#, perl-brace-format
+msgid "Are you sure you want to delete image {image_id}?"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:9
@@ -8591,7 +8592,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/additional-contents.tt:20
 msgid "New news item"
-msgstr ""
+msgstr "Новий запис в новинах"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/additional-contents.tt:22
 #, fuzzy
@@ -9074,46 +9075,50 @@ msgstr "Електронний каталог"
 msgid "Card number or username"
 msgstr "Логін або № читацького квитка"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:201
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:203
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:147
+msgid "Are you sure you want to delete your search history?"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:210
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:212
 msgid "Search the catalog by keyword"
 msgstr "Пошук за ключовими словами"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:206
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:208
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:215
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:217
 msgid "Search the catalog by title"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:211
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:220
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:222
 msgid "Search the catalog by author"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:216
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:218
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:227
 #, fuzzy
 msgid "Search the catalog by subject"
 msgstr "шукати також ширші теми"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:221
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:223
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:230
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:232
 msgid "Search the catalog by ISBN"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:226
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:228
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:235
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
 msgid "Search the catalog by ISSN"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:231
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:233
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:240
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:242
 msgid "Search the catalog by series"
 msgstr ""
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:239
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:243
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:245
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:246
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:248
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:252
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
 msgid "Search the catalog by call number"
 msgstr ""
 
@@ -9445,6 +9450,10 @@ msgstr ""
 #, fuzzy
 #~ msgid "Koha itemtype"
 #~ msgstr "Тип одиниці в Коха"
+
+#, fuzzy, perl-brace-format
+#~ msgid "Overdues at with fines {library}"
+#~ msgstr "Постійна бібліотека"
 
 #, fuzzy
 #~ msgctxt "citations"

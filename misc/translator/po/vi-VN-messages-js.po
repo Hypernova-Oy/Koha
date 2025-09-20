@@ -1,18 +1,18 @@
 # Compendium of vi.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2022-05-01 12:47-0300\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2025-08-28 03:09+0000\n"
+"PO-Revision-Date: 2025-08-12 02:05+0000\n"
+"Last-Translator: Heidi Ruan <heidi@sris.com.tw>\n"
 "Language-Team: Koha Translation Team\n"
-"Language: \n"
+"Language: vi-VN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /vi/22.11/vi-VN-messages-js.po\n"
 
@@ -34,16 +34,18 @@ msgid "New budget-parent is beneath budget"
 msgstr "Tạo quỹ lớn trong một nguồn quỹ"
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:10
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:55
 msgid "Form not submitted because of the following problem(s)"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:14
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:61
 #, javascript-format
 msgid "%s item mandatory fields empty"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/additem.js:31
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:64
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:81
 msgid "Update item"
 msgstr "Cập nhật tài liệu"
 
@@ -51,13 +53,13 @@ msgstr "Cập nhật tài liệu"
 msgid "You can't receive any more items"
 msgstr "Bạn không thể nhận thêm tài liệu"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:105
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:122
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/KohaTable.vue:187
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:653
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:108
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:125
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1125
 #: koha-tmpl/intranet-tmpl/prog/js/elasticsearch-mappings.js:9
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:592
@@ -73,41 +75,41 @@ msgstr "Chỉnh sửa"
 msgid "Delete"
 msgstr "Xóa"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:195
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:212
 msgid "Add item"
 msgstr "Tạo bản tài liệu"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:196
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:213
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/AdditionalFieldsEntry.vue:106
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsReportBuilder.vue:338
 msgid "Clear"
 msgstr "Xóa"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:197
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:214
 #, fuzzy
 msgid "Add multiple items"
 msgstr "multiple forms"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:199
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:216
 #, fuzzy
 msgid "Number of items to add"
 msgstr "Số lượng ĐKCB đã thêm"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:200
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:217
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:84
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItems.vue:78
 msgid "Add"
 msgstr "Tạo"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:201
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:218
 msgid "NOTE: Fields listed in the 'UniqueItemFields' system preference will not be copied"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:288
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:305
 msgid "is duplicated"
 msgstr "Tài liệu đã có"
 
-#: koha-tmpl/intranet-tmpl/prog/js/additem.js:313
+#: koha-tmpl/intranet-tmpl/prog/js/additem.js:330
 msgid "already exists in database"
 msgstr "Đã có trong CSDL"
 
@@ -313,7 +315,7 @@ msgstr "Thêm vào giỏ tài liệu"
 #: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:418
 #: koha-tmpl/opac-tmpl/bootstrap/js/basket.js:426
 msgid "In your cart"
-msgstr "Trong giỏ tài liệu"
+msgstr "Trong thư mục của bạn"
 
 #: koha-tmpl/intranet-tmpl/prog/js/biblio_framework.js:36
 #, fuzzy
@@ -335,7 +337,7 @@ msgstr "Kiểu dữ liệu kiểm soát không phù hợp"
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:13
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:14
 msgid "Previous"
-msgstr "Sau"
+msgstr "Trước"
 
 #: koha-tmpl/intranet-tmpl/prog/js/browser.js:93
 #: koha-tmpl/intranet-tmpl/prog/js/browser.js:95
@@ -354,9 +356,9 @@ msgid "Go back to the results"
 msgstr "Kết quả tìm kiếm"
 
 #: koha-tmpl/intranet-tmpl/prog/js/calendar.js:3
-#, fuzzy, javascript-format
+#, javascript-format
 msgid "Please enter a valid date (should match %s)."
-msgstr "Hãy nhập đúng giá trị ngày (ISO)."
+msgstr "Vui lòng nhập ngày hợp lệ (phù hợp với định dạng %s)."
 
 #: koha-tmpl/intranet-tmpl/prog/js/calendar.js:138
 msgid "Fri"
@@ -508,8 +510,8 @@ msgid "September"
 msgstr "Tháng 9"
 
 #: koha-tmpl/intranet-tmpl/prog/js/cancel_booking_modal.js:47
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1188
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1256
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1210
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1278
 msgid "Failure"
 msgstr ""
 
@@ -877,7 +879,7 @@ msgid "Update"
 msgstr "Cập nhật"
 
 #: koha-tmpl/intranet-tmpl/prog/js/checkouts.js:1225
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:415
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:443
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Admin/RecordSources/FormAdd.vue:48
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsFormAdd.vue:167
@@ -903,7 +905,7 @@ msgstr "Bạn có chắc chắn xóa biểu ghi này không?"
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:10
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:11
 msgid "First"
-msgstr "Lần 1"
+msgstr "Đầu tiên"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:11
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:12
@@ -911,7 +913,7 @@ msgid "Last"
 msgstr "Trước"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:15
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1072
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:1146
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:16
 msgid "No data available in table"
 msgstr "Không có dữ liệu hiển thị trong bảng"
@@ -977,7 +979,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:31
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:32
 msgid "Print"
-msgstr "Bản in"
+msgstr "In"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:32
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:695
@@ -998,13 +1000,12 @@ msgstr "Trích dẫn"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:41
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:43
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:688
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:690
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:746
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:748
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:62
 #: koha-tmpl/opac-tmpl/bootstrap/js/datatables.js:64
-#, fuzzy
 msgid "Clear filter"
-msgstr "Xóa trường"
+msgstr "Xóa bộ lọc"
 
 #: koha-tmpl/intranet-tmpl/prog/js/datatables.js:55
 #: koha-tmpl/intranet-tmpl/prog/js/marc_modification_templates.js:124
@@ -1037,44 +1038,43 @@ msgstr "Phát hiện lỗi! Bạn không thể tạo mẫu đánh số ÂPĐK."
 msgid "Something went wrong when loading the table."
 msgstr "Phát hiện lỗi! Bạn không thể tạo mẫu đánh số ÂPĐK."
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:723
-#, fuzzy
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:781
 msgid "Columns settings"
-msgstr "Thiết lập mẫu in"
+msgstr "Cài đặt cột"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:724
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:782
 msgid "Columns"
 msgstr "Cột"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:738
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:796
 #, fuzzy
 msgid "Export or print"
 msgstr "Tranh in"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:739
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:797
 msgid "Export"
 msgstr "Xuất dữ liệu"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:747
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:805
 msgid "Copied!"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:754
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:755
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:812
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:813
 msgid "Copy shareable link"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:775
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:833
 #, fuzzy
 msgid "Configure table"
 msgstr "Xác nhận"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:776
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:834
 #, fuzzy
 msgid "Configure"
 msgstr "Xác nhận"
 
-#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:866
+#: koha-tmpl/intranet-tmpl/prog/js/datatables.js:936
 #, fuzzy, javascript-format
 msgid "%s search"
 msgstr "Tìm kiếm:"
@@ -1120,83 +1120,82 @@ msgstr "Không xóa"
 msgid "Yes"
 msgstr "Có"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:263
-#, fuzzy
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:267
 msgid "Resume"
-msgstr "Kết quả"
+msgstr "Khôi phục"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:266
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:414
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:276
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:442
 msgid "Suspend"
-msgstr "Tạm dừng"
+msgstr "Tạm ngưng"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:275
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
 msgid "Hold is <strong>suspended</strong>"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:277
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:305
 #, fuzzy, javascript-format
 msgid "until %s"
 msgstr "đến ngày "
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:283
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
 #, fuzzy, javascript-format
 msgid "Next available %s item"
 msgstr "Nhan đề này không có bản tài liệu đính kèm."
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:287
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:315
 #, fuzzy, javascript-format
 msgid "Next available item group <strong>%s</strong> item"
 msgstr "Nhan đề này không có bản tài liệu đính kèm."
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:295
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:323
 msgid "Item is <strong>waiting here</strong>"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:297
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:301
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:303
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:325
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:329
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:331
 #, fuzzy, javascript-format
 msgid "at %s"
 msgstr "Giỏ đặt hàng số %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:300
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:328
 msgid "Item is <strong>waiting</strong>"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:309
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:337
 #, fuzzy, javascript-format
 msgid "Item is <strong>in transit</strong> from %s since %s"
 msgstr "Đang chuyển từ thư viện %s tới thư viện %s từ ngày %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:311
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:339
 #, javascript-format
 msgid "Item hasn't been transferred yet from %s"
 msgstr "Tài liệu đã không được bạn đọc nhận từ %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:350
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:378
 msgid "Unable to resume, hold not found"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:353
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:439
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:381
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:467
 msgid "Your request could not be processed. Check the logs for details."
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:399
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:427
 #, fuzzy
 msgid "Suspend hold on"
 msgstr "Tạm dừng tất cả"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:406
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:434
 msgid "Suspend until:"
 msgstr "Tạm dừng đến ngày:"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:409
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:437
 msgid "Clear date to suspend indefinitely"
-msgstr "Xóa ngày"
+msgstr "Xóa ngày để tạm ngưng vô thời hạn"
 
-#: koha-tmpl/intranet-tmpl/prog/js/holds.js:436
+#: koha-tmpl/intranet-tmpl/prog/js/holds.js:464
 #, fuzzy
 msgid "Unable to suspend, hold not found."
 msgstr "Không thể xóa tài khoản bạn đọc"
@@ -1415,14 +1414,14 @@ msgid "Private"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:194
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:110
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:111
 #: koha-tmpl/intranet-tmpl/prog/js/staff-global.js:718
 #, fuzzy
 msgid "years"
 msgstr "%s tuổi"
 
 #: koha-tmpl/intranet-tmpl/prog/js/modals/display_ticket.js:217
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:129
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:130
 msgid "Search for a patron"
 msgstr ""
 
@@ -1438,30 +1437,30 @@ msgstr ""
 msgid "Error resolving concern #%s. Check the logs for details."
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:43
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:44
 #, fuzzy
 msgid "Edit booking"
 msgstr "Chỉnh sửa %s"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:46
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:47
 #, fuzzy
 msgid "Place booking"
 msgstr "Đặt mượn"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:198
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:199
 msgid "Pickup location"
-msgstr ""
+msgstr "Địa điểm nhận sách"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:249
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:258
 #, fuzzy
 msgid "Item type"
 msgstr "Kiểu tài liệu Koha"
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1177
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1199
 msgid "Booking successfully placed"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1245
+#: koha-tmpl/intranet-tmpl/prog/js/modals/place_booking.js:1267
 msgid "Booking successfully updated"
 msgstr ""
 
@@ -1609,7 +1608,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAdd.vue:26
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:136
 msgid "Description"
-msgstr ""
+msgstr "Thông tin mô tả"
 
 #: koha-tmpl/intranet-tmpl/prog/js/pages/preferences.js:511
 msgid "Requires consent in OPAC"
@@ -1763,7 +1762,7 @@ msgstr "Bị từ chối"
 msgid "Testing..."
 msgstr "Đang kiểm tra..."
 
-#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:163
+#: koha-tmpl/intranet-tmpl/prog/js/pages/tags-review.js:169
 #, javascript-format
 msgid "AJAX error (%s alert)"
 msgstr "AJAX lỗi (%s cảnh báo)"
@@ -2120,7 +2119,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProviderDetails.vue:18
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersList.vue:327
 msgid "Status"
-msgstr ""
+msgstr "Trạng thái"
 
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:52
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackageTitlesList.vue:13
@@ -2128,7 +2127,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalTitlesList.vue:173
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:346
 msgid "Title"
-msgstr ""
+msgstr "Nhan đề"
 
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:63
 msgid "Item"
@@ -2164,9 +2163,8 @@ msgstr "Thao tác"
 
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:147
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:166
-#, fuzzy
 msgid "Pending"
-msgstr "Đặt mượn"
+msgstr "Đang xử lý"
 
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:150
 #: koha-tmpl/intranet-tmpl/prog/js/tables/bookings.js:169
@@ -2382,7 +2380,7 @@ msgstr "Tài liệu đã có"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ButtonSubmit.vue:11
 msgid "Submit"
-msgstr ""
+msgstr "Gửi"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Dialog.vue:19
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/AgreementsShow.vue:336
@@ -2397,7 +2395,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:108
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsShow.vue:276
 msgid "Close"
-msgstr ""
+msgstr "Thoát"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Dialog.vue:110
 #, fuzzy
@@ -2852,7 +2850,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/LicensesShow.vue:49
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/SettingsProcessingsFormAdd.vue:90
 msgid "Type"
-msgstr ""
+msgstr "Loại"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsEBSCOPackagesShow.vue:5
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/EHoldingsLocalPackagesShow.vue:23
@@ -3776,7 +3774,7 @@ msgstr "Xuất dữ liệu"
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:161
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:255
 msgid "Titles"
-msgstr ""
+msgstr "Nhan đề"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/ERM/UsageStatisticsDataProvidersShow.vue:172
 #, fuzzy
@@ -4073,7 +4071,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Help.vue:9
 msgid "Help"
-msgstr ""
+msgstr "Trợ giúp"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/InfiniteScrollSelect.vue:27
 #, fuzzy
@@ -4298,7 +4296,7 @@ msgstr "Đang xử lý..."
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:117
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:367
 msgid "Barcode"
-msgstr ""
+msgstr "Mã vạch"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/TrainsFormAddItem.vue:241
 msgid "Cannot find item with this barcode. It must be in the waiting list."
@@ -4517,13 +4515,12 @@ msgid "Item removed from the waiting list"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:355
-#, fuzzy
 msgid "Author"
-msgstr "Biểu ghi nhất quán"
+msgstr "Tác giả"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/components/Preservation/WaitingList.vue:361
 msgid "Call number"
-msgstr ""
+msgstr "Số phân loại"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/admin/record_sources.js:7
 msgid "Administration"
@@ -4635,6 +4632,11 @@ msgstr "Chỉnh sửa %s"
 msgid "Edit data provider"
 msgstr "Chỉnh sửa %s"
 
+#: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:344
+#, fuzzy
+msgid "Reports"
+msgstr "Lưu toàn bộ %s thông số "
+
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/erm.js:359
 msgid "View report"
 msgstr ""
@@ -4645,7 +4647,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:34
 msgid "Home"
-msgstr ""
+msgstr "Trang chủ"
 
 #: koha-tmpl/intranet-tmpl/prog/js/vue/routes/preservation.js:39
 msgid "Trains"
@@ -4896,12 +4898,12 @@ msgstr ""
 #: koha-tmpl/opac-tmpl/bootstrap/js/ratings.js:35
 #, javascript-format
 msgid "Your rating: %s."
-msgstr ""
+msgstr "Đánh giá của bạn: %s."
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/ratings.js:42
 #, javascript-format
 msgid "Average rating: %s (%s votes)"
-msgstr ""
+msgstr "Đánh giá trung bình: %s (%s lượt bình chọn)"
 
 #: koha-tmpl/opac-tmpl/bootstrap/js/results-list.js:32
 msgid "With selected titles: "

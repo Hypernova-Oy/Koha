@@ -84,7 +84,7 @@ my $bib_heading_fields = {
     },
     '151' => {
         auth_type => 'GEOGR_NAME',
-        subfields => 'avxyz68',
+        subfields => 'agvxyz68',
         main_entry => 1
     },
     '155' => {
@@ -136,7 +136,7 @@ my $bib_heading_fields = {
     },
     '648' => { auth_type => 'CHRON_TERM', subfields => 'avxyz',  subject => 1 },
     '650' => { auth_type => 'TOPIC_TERM', subfields => 'abvxyz', subject => 1 },
-    '651' => { auth_type => 'GEOGR_NAME', subfields => 'avxyz',  subject => 1 },
+    '651' => { auth_type => 'GEOGR_NAME', subfields => 'agvxyz', subject => 1 },
     '655' => { auth_type => 'GENRE/FORM', subfields => 'avxyz',  subject => 1 },
     '690' => { auth_type => 'TOPIC_TERM', subfields => 'abvxyz', subject => 1 },
     '691' => { auth_type => 'GEOGR_NAME', subfields => 'avxyz',  subject => 1 },
@@ -202,7 +202,7 @@ my $auth_heading_fields = {
     },
     '151' => {
         auth_type  => 'GEOGR_NAME',
-        subfields  => 'avxyz68',
+        subfields  => 'agvxyz68',
         main_entry => 1
     },
     '155' => {

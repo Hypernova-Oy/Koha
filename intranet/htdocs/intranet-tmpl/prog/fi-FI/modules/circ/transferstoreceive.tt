@@ -81,6 +81,9 @@
  [% BLOCK subject %]Varaus:[% END %] <a href="mailto:[% reser.patron.notice_email_address | uri %]?subject=[% INCLUDE subject %] [% reser.title | uri %]">
  [% reser.patron.notice_email_address | html %]
  </a>
+ [% END %]
+ [% IF reser.patron.cardnumber %]
+ <div class="cardnumber">Korttinumero: [% reser.patron.cardnumber | html %]</div>
  [% END %] [% ELSIF ( reser.recall ) %] Palautuspyyntö asiakkaalle <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% reser.recall.patron_id | uri %]">[% reser.recall.patron.surname | html %][% IF reser.recall.patron.firstname %], [% reser.recall.patron.firstname | html %][% END %] ([% reser.recall.patron.cardnumber | html %])</a>
  [% ELSE %]
  <p>Ei mitään</p>

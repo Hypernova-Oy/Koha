@@ -26,9 +26,9 @@
  <option value="aud:d">Lukioikäiset ja vastaavat</option>
  [% END %]
  [% IF (limits.aud.0 == 'e' ) %]
- <option value="aud:e" selected="selected">Aikuiset</option>
+ <option value="aud:e" selected="selected">Aikuinen</option>
  [% ELSE %]
- <option value="aud:e">Aikuiset</option>
+ <option value="aud:e">Aikuinen</option>
  [% END %]
  [% IF (limits.aud.0 == 'f' ) %]
  <option value="aud:f" selected="selected">Erityisryhmä</option>
@@ -133,9 +133,9 @@
  <option value="l-format:co" >CD-ROM</option>
  [% END %]
  [% IF (limits.$lformat.0 == 'cr' ) %]
- <option value="l-format:cr" selected="selected" >Verkkosivu</option>
+ <option value="l-format:cr" selected="selected" >Verkkosivut</option>
  [% ELSE %]
- <option value="l-format:cr" >Verkkosivu</option>
+ <option value="l-format:cr" >Verkkosivut</option>
  [% END %]
  [% limits.delete( 'l-format' ) %]
  </select>

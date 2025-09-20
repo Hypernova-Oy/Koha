@@ -168,8 +168,8 @@
 
  [% IF ( Koha.Preference('SearchEngine') == 'Elasticsearch' ) %]
  <span id="catalogue_detail_elastic_record" class="results_summary">
- <span class="label">Elasticsearch tietue:</span>
- <a class="previewElastic" href="/cgi-bin/koha/catalogue/showelastic.pl?id=[% biblionumber | uri %]" title="Elasticsearch tietue">Näytä</a>
+ <span class="label">Elasticsearch-tietue:</span>
+ <a class="previewElastic" href="/cgi-bin/koha/catalogue/showelastic.pl?id=[% biblionumber | uri %]" title="Elasticsearch-tietue">Näytä</a>
  </span>
  [% END %]
 
@@ -507,7 +507,7 @@
  <p>Tämä kausijulkaisutilaus on loppunut.</p>
  [% END %]
  [% IF ( subscription.location ) %]
- <p class="subscription_location">Hyllypaikka: [% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => subscription.location ) | html %]</p>
+ <p class="subscription_location">Sijainti: [% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => subscription.location ) | html %]</p>
  [% END %]
  [% IF ( subscription.callnumber ) %]
  <p>Luokka: [% subscription.callnumber | html %] </p>
@@ -548,7 +548,7 @@
  [% END # /IF subscription.latestserials %]
  [% IF ( CAN_user_serials ) %]
  <p>
- <a class="btn btn-link" href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscription.subscriptionid | uri %]"><i class="fa fa-list" aria-hidden="true"></i> Kausijulkaisu­tilauksen tiedot</a>
+ <a class="btn btn-link" href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscription.subscriptionid | uri %]"><i class="fa fa-list" aria-hidden="true"></i> Kausijulkaisutilausten tiedot</a>
  </p>
  [% END %]
  [% END # /FOREACH subscription %]
@@ -839,10 +839,12 @@
  <thead>
  <tr>
  <th>Kommentoija</th>
- <th>Pvm</th>
+ <th>Päivämäärä</th>
  <th>Tila</th>
  <th>Selitys</th>
+ [% IF ( CAN_user_tools_moderate_comments ) %]
  <th class="NoSort">Toiminnot</th>
+ [% END %]
  </tr>
  </thead>
  <tbody>
@@ -970,7 +972,7 @@
  <div class="modal-dialog modal-lg">
  <div class="modal-content">
  <div class="modal-header">
- <h1 class="modal-title" id="elasticPreviewLabel">Elasticsearch tietue</h1>
+ <h1 class="modal-title" id="elasticPreviewLabel">Elasticsearch-tietue</h1>
  <button aria-label="Sulje" class="btn-close" data-bs-dismiss="modal" type="button"></button>
  </div>
  <div class="modal-body">
@@ -1202,6 +1204,11 @@
  [% Asset.js("js/recalls.js") | $raw %]
  [% Asset.js("js/coce.js") | $raw %]
  [% Asset.js("lib/Chocolat/js/chocolat.js") | $raw %]
+
+ [%# The following PROCESS needs: %]
+ [%# can_edit_items_from item_type_image_locations %]
+ [% PROCESS build_items_table_js biblio => biblio %]
+
  [% IF ( Koha.Preference('CatalogConcerns') ) %]
  <script>
             /* Set a variable needed by add_catalog_concern.js */
@@ -1661,6 +1668,44 @@
             var bundle_lost_value = [% Koha.Preference('BundleLostValue') | html %];
         [% END %]
 
+        let items_tab_ids = [ 'holdings', 'otherholdings' ];
+        items_tab_ids.forEach( function( tab_id, index ) {
+
+            // Early return if the tab is not shown (ie. no table)
+            if (!$("#%s_table".format(tab_id)).length) return;
+            [% IF Koha.Preference('AlwaysShowHoldingsTableFilters') %]
+                build_items_table(tab_id, true, {}, build_items_table_drawncallback);
+            [% ELSE %]
+                build_items_table(tab_id, false, {}, build_items_table_drawncallback);
+            [% END %]
+
+            [% IF bundlesEnabled %]
+                // Add event listener for opening and closing bundle details
+                $('#' + tab_id + '_table tbody').on('click', 'button.details-control', function () {
+                    var button = $(this);
+                    var tr = button.closest('tr');
+                    var dTable = button.closest('table').DataTable({ 'retrieve': true });
+
+                    let row = dTable.row( tr );
+                    let data = row.data();
+                    let itemnumber = data.item_id;
+                    let duedate = (data.checkout&&data.checkout.due_date) || null;
+
+                    if ( row.child.isShown() ) {
+                        // This row is already open - close it
+                        row.child.hide();
+                        tr.removeClass('shown');
+                        button.removeClass('active');
+                    } else {
+                        // Open this row
+                        createChild(row, itemnumber, duedate);
+                        tr.addClass('shown');
+                        button.addClass('active');
+                    }
+                });
+            [% END # /IF bundlesEnabled %]
+        });
+
         $(document).ready(function() {
             [% IF bundlesEnabled %] // Bundle handling
                 function createChild ( row, itemnumber, duedate ) {
@@ -1966,44 +2011,6 @@
                 // End bundle handling
             [% END # /IF bundlesEnabled %]
 
-            let items_tab_ids = [ 'holdings', 'otherholdings' ];
-            items_tab_ids.forEach( function( tab_id, index ) {
-
-                // Early return if the tab is not shown (ie. no table)
-                if (!$("#%s-tab".format(tab_id)).length) return;
-                [% IF Koha.Preference('AlwaysShowHoldingsTableFilters') %]
-                    build_items_table(tab_id, true, {}, build_items_table_drawncallback);
-                [% ELSE %]
-                    build_items_table(tab_id, false, {}, build_items_table_drawncallback);
-                [% END %]
-
-                [% IF bundlesEnabled %]
-                    // Add event listener for opening and closing bundle details
-                    $('#' + tab_id + '_table tbody').on('click', 'button.details-control', function () {
-                        var button = $(this);
-                        var tr = button.closest('tr');
-                        var dTable = button.closest('table').DataTable({ 'retrieve': true });
-
-                        let row = dTable.row( tr );
-                        let data = row.data();
-                        let itemnumber = data.item_id;
-                        let duedate = (data.checkout&&data.checkout.due_date) || null;
-
-                        if ( row.child.isShown() ) {
-                            // This row is already open - close it
-                            row.child.hide();
-                            tr.removeClass('shown');
-                            button.removeClass('active');
-                        } else {
-                            // Open this row
-                            createChild(row, itemnumber, duedate);
-                            tr.addClass('shown');
-                            button.addClass('active');
-                        }
-                    });
-                [% END # /IF bundlesEnabled %]
-            });
-
             [% IF Koha.Preference('AcquisitionDetails') %]
                 var table_settings = [% TablesSettings.GetTableSettings('catalogue', 'detail', 'acquisitiondetails-table', 'json') | $raw %];
                 var acquisitiondetails_table = KohaTable("orders", {
@@ -2289,10 +2296,6 @@
         });
 
     </script>
-
- [%# The following PROCESS needs: %]
- [%# can_edit_items_from item_type_image_locations %]
- [% PROCESS build_items_table_js biblio => biblio %]
 
  [% CoverImagePlugins | $raw %]
 [% END # /jsinclude %]

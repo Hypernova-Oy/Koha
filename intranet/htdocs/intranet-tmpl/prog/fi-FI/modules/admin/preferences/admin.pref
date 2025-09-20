@@ -141,15 +141,6 @@ Ylläpitoasetukset:
       järjestelmäasetus on asetettu "Ei" (älä jaa).
     - <br><strong>HUOM:</strong> Käytä <a href="/cgi-bin/koha/admin/usage_statistics.pl">käyttötilastot-asetussivua</a>
       määritelläksesi ja muokataksesi järjestelmäasetusta.
-  Jobs:
-  - - 'Use '
-    - choices:
-        STOMP: STOMP
-        polling: polling
-      default: STOMP
-      pref: JobsNotificationMethod
-    - as the preferred job worker notification method. STOMP (default) requires RabbitMQ
-      running. Polling will be used as a fallback if RabbitMQ is not accessible.
   Kirjautumisasetukset:
   - - 'Kirjaa passiiviset käyttäjät automaattisesti ulos näin monen sekunnin päästä: '
     - class: integer
@@ -305,3 +296,12 @@ Ylläpitoasetukset:
         emailAddress: Sähköpostiosoite (emailAddress)
       default: None
       pref: AllowPKIAuth
+  Taustatyöt:
+  - - 'Käytä '
+    - choices:
+        STOMP: STOMP
+        polling: kyselyä
+      default: STOMP
+      pref: JobsNotificationMethod
+    - taustatöiden ilmoitustapana. STOMP (oletus) vaatii toimiakseen RabbitMQ:n. Kyselyä
+      käytetään varmistuksen, jos RabbitMQ ei ole käytettävissä.

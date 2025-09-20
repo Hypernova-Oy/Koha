@@ -20,6 +20,9 @@
             }
             else {
                 title = '<span class="biblio-title">';
+                if (config && config.deleted) {
+                    title += _("(Bibliografinen tietue poistettu) ");
+                }
                 if (biblio.title != null && biblio.title != '') {
                     title += escape_str(biblio.title);
                 } else {

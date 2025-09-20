@@ -1,10 +1,10 @@
 # Compendium of tr.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:35-0300\n"
-"PO-Revision-Date: 2025-04-25 03:49+0000\n"
+"PO-Revision-Date: 2025-07-24 03:08+0000\n"
 "Last-Translator: Onur Erdem <onurerdem@sdu.edu.tr>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: tr-TR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /tr/22.11/tr-TR-installer.po\n"
 "X-POOTLE-MTIME: 1677759472.907363\n"
@@ -258,7 +258,8 @@ msgid "Complete"
 msgstr "Tamamlanmış"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+#, fuzzy
+msgid "Aggregated full text"
 msgstr "Toplu"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -4870,50 +4871,44 @@ msgid "OAI harvest report for %s:"
 msgstr "%s için OAI hasat raporu:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:3
-#, fuzzy
 msgid "Endpoint: %s"
-msgstr "Ödünçte mi?: %s"
+msgstr "Erişim noktası: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:4
-#, fuzzy
 msgid "Set: %s"
-msgstr "Ödünçte mi?: %s"
+msgstr "Grup: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:5
-#, fuzzy
 msgid "Data format: %s"
-msgstr "Şu konumda bekliyor: %s"
+msgstr "Veri biçimi: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:6
-#, fuzzy
 msgid "Record type: %s"
-msgstr "Barkod: %s"
+msgstr "Kayıt türü: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:8
 msgid "%s records added"
-msgstr ""
+msgstr "%s kayıt eklendi"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:9
-#, fuzzy
 msgid "%s records updated"
-msgstr "Ayırtma iptal edildi"
+msgstr "%s kayıt güncellendi"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:10
 msgid "%s records deleted"
-msgstr ""
+msgstr "%s kayıt silindi"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:11
 msgid "%s records skipped"
-msgstr ""
+msgstr "%s kayıt atlandı"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:12
-#, fuzzy
 msgid "%s records in error"
-msgstr "Ses kaydı, makara"
+msgstr "%s kayıt hatalı"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:13
 msgid "%s total"
-msgstr ""
+msgstr "%s toplam"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:10:mul:26
 msgid "      %sTransaction ID: %s"
@@ -5192,29 +5187,24 @@ msgid "Dear %s,%s"
 msgstr "Sayın %s, %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:5
-#, fuzzy
 msgid "We regret to inform you, that the following booking has been cancelled.%s"
-msgstr "Aşağıdaki materyalin kayıp olması nedeniyle sağlanamayacağını üzülerek bildiririz. Ayırtmanız iptal edildi."
+msgstr "Üzgünüz, aşağıdaki rezervasyon iptal edilmiştir.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:7
-#, fuzzy
 msgid "Title: %s%s"
-msgstr "Başlık: %s"
+msgstr "Başlık: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:9
-#, fuzzy
 msgid "Dates: %s to %s%s"
-msgstr "%sTarih: %s%s"
+msgstr "Tarihler: %s - %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:11
-#, fuzzy
 msgid "Reason: %s%s"
-msgstr "Barkod: %s%s"
+msgstr "Gerekçe: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:13
-#, fuzzy
 msgid "Kind regards%s"
-msgstr "Saygılarımla "
+msgstr "Saygılarımla %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:30:mul:3
 msgid "Checked out to %s %s %s %s %s"
@@ -5449,16 +5439,15 @@ msgstr "Kütüphanemizin kullanıcısı değilseniz veya bu daveti kabul etmek i
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:3
 msgid "A public list, titled %s%s%s, has been transferred to you%s by %s%s.%s"
-msgstr ""
+msgstr "Başlığı %s%s%s olan bir genel liste, %s tarafından size %s%s aktarıldı.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:5
 msgid "%sThe list was previously owned by %s.%s%s%s"
-msgstr ""
+msgstr "%sListe daha önce %s tarafından sahiplenilmişti.%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:6
-#, fuzzy
 msgid "Thank you%s"
-msgstr "Teşekkür ederiz!"
+msgstr "Teşekkür ederiz%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:59:mul:3
 msgid "%sDischarge confirmation%s"
@@ -5657,12 +5646,11 @@ msgstr "Sayın kataloglayıcı,%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:6:mul:4
 msgid "%s has assigned the following concern with %s%s%s to you%s"
-msgstr ""
+msgstr "%s, aşağıdaki konuyu %s%s%s ile size atadı%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:6:mul:8
-#, fuzzy
 msgid "You can action this concern from the %sconcern management page%s."
-msgstr "Bu şikayeti %sşikayet yönetim sayfasından%s çözülmüş olarak işaretleyebilirsiniz."
+msgstr "Bu konuyu %skonu yönetim sayfası%s üzerinden işlem yapabilirsiniz."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:70:mul:23
 msgid "  %sTransaction ID: %s"
@@ -6020,12 +6008,11 @@ msgstr "İsteğiniz üzerine \"%s / %s (%s)\" başlıklı eserin geri çağırma
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:97:mul:1
 msgid "Your item has been recalled: %s (%s). Please return it by %s."
-msgstr ""
+msgstr "Materyaliniz geri çağrıldı: %s (%s). Lütfen bunu %s tarihine kadar iade edin."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:98:mul:1
-#, fuzzy
 msgid "A recalled item: %s (%s) is ready for you to pick up at %s. Please collect by %s."
-msgstr "İsteğiniz üzerine \"%s / %s (%s)\" başlıklı eserin geri çağırma işlemi tamamlanmıştır. Eser şu anda \"%s\" konumunda teslime hazırdır. Lütfen eseri belirtilen tarihe kadar, \"%s\" tarihine kadar teslim alın."
+msgstr "Geri çağrılan bir materyal: %s (%s), %s adresinden alınmaya hazır. Lütfen %s tarihine kadar teslim alınız."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:99:mul:3
 msgid "Recall for pickup at %s"
@@ -7612,14 +7599,12 @@ msgid "Wood engraver"
 msgstr "Ahşap oymacı"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:292
-#, fuzzy
 msgid "Writer of film story"
-msgstr "Giriş yazarı"
+msgstr "Film senaryo yazarı"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:293
-#, fuzzy
 msgid "Writer of intertitles"
-msgstr "Giriş yazarı"
+msgstr "Ara başlık yazarı"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:294
 msgid "Writer of introduction"

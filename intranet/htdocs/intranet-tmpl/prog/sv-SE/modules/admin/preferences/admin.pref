@@ -274,8 +274,8 @@ admin.pref:
         polling: polling
       default: STOMP
       pref: JobsNotificationMethod
-    - as the preferred job worker notification method. STOMP (default) requires RabbitMQ
-      running. Polling will be used as a fallback if RabbitMQ is not accessible.
+    - som den föredragna metoden för meddelande. STOMP (standard) kräver att RabbitMQ
+      körs. Polling kommer att användas som en reserv om RabbitMQ inte är tillgängligt.
   SSL-klientcertifikat:
   - - 'Field to use for SSL client certificate authentication: '
     - choices:

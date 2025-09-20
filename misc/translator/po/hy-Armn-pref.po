@@ -1,10 +1,10 @@
 # Compendium of hy.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:16-0300\n"
-"PO-Revision-Date: 2025-04-24 04:07+0000\n"
+"PO-Revision-Date: 2025-08-10 03:08+0000\n"
 "Last-Translator: tigran <tigran@flib.sci.am>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: hy-Armn\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /hy/22.11/hy-Armn-pref.po\n"
 "X-POOTLE-MTIME: 1697606788.763976\n"
@@ -2179,18 +2179,47 @@ msgstr "cataloguing.pref#MARCOverlayRules# Օգտագործիր"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
-msgstr "cataloguing.pref#MarcFieldDocURL# Օրինակի համար, <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "cataloguing.pref#MarcFieldDocURL# <br><br>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: դաշտի թիվը՝ օրինակի համար, \"000\" կամ \"048\"</li>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: լեզու, օրինակի համար, \"en\" կամ \"fi-FI\"</li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: ՄեԸՔ բույր, \"MARC21\" կամ \"UNIMARC\"</li>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: դաշտի մակարդակի էջեր https://www.loc.gov/marc/bibliographic/</li>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "cataloguing.pref#MarcFieldDocURL# Եթե թողնված է դատարկ, ձևաչափի փաստաթղթերը օգտագործվում են այստեղից http://loc.gov (MARC21) կամ այստեղից http://archive.ifla.org (UNIMARC)."
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
+msgstr "cataloguing.pref#MarcFieldDocURL# Օրինակներ:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "cataloguing.pref#MarcFieldDocURL# Հնարավոր բաժանորդագրություններն են <tt>{MARC}</tt> (marc flavour, օր. \"MARC21\" կամ \"UNIMARC\"), <tt>{FIELD}</tt> (դաշտի համար, օր. \"000\" կամ \"048\"), <tt>{LANG}</tt> (օգտվողի լեզու, օր. \"en\" կամ \"fi-FI\")։"
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "cataloguing.pref#MarcFieldDocURL# Եթե դատարկ թողնվի, լռելյայն URL-ներն են:"
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "cataloguing.pref#MarcFieldDocURL# URL-ում օգտագործելու համար հասանելի տեղապահներ:"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -6014,8 +6043,8 @@ msgstr "circulation.pref#UpdateItemLocationOnCheckin# PROC: FIC - պատճառ �
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
-msgstr "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - հանգեցնում է նրան, որ գործառույթների կենտրոնում գտնվող նյութը թարմացվում է իր մշտական գտնվելու վայրին.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
+msgstr "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - ստիպում է Մշակման կենտրոնում գտնվող նյութը թարմացվել իր մշտական գտնվելու վայրին.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
@@ -6078,8 +6107,8 @@ msgstr "circulation.pref#UpdateItemLocationOnCheckout# PROC: FIC-ը հանգեց
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
-msgstr "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - հանգեցնում է նրան, որ գործառույթների կենտրոնի նյութը թարմացվում է իր մշտական գտնվելու վայրին։<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
+msgstr "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - Մշակման կենտրոնում գտնվող տարրը թարմացվում է իր մշտական տեղակայման վայրում.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
@@ -9007,8 +9036,8 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "opac.pref#OPACAcquisitionDetails# համալրման մանրամասներ ՀՕԱՔ մանրամասների էջում։"
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
-msgstr "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>ՆՇՈՒՄ:</strong> Հեղինակների և աջակիցների նույնացուցիչները՝ սկզբնաղբյուրի (024$2) ենթադաշտում օգտագործելու վավեր կոդերն են՝ orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID) և viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
+msgstr "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>ՆՇՈՒՄ:</strong> Հեղինակների և աջակիցների նույնացուցիչները՝ սկզբնաղբյուրի (024$2) ենթադաշտում օգտագործելու վավեր կոդերն են՝ isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID) և wikidata (WIKIDATA ID)."
 
 # OPAC > Features > OPACAuthorIdentifiers
 # OPAC > Features
@@ -9098,6 +9127,20 @@ msgstr "opac.pref#OPACDetailQRCode# Թույլատրել"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "opac.pref#OPACDetailQRCode# ՀՕԱՔ մատենագիտական մանրամասների էջից QR կոդը ցույց տվող ընտրանք։"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "opac.pref#OPACDisableSendList# Թույլ տուր"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "opac.pref#OPACDisableSendList# Թույլ մի տուր"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr "opac.pref#OPACDisableSendList# ՀՕԱՔ օգտատերերը կարող են էլ․ փոստով ուղարկել ցուցակներ «Ուղարկել ցուցակը» կոճակի միջոցով."
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Appearance
@@ -11447,24 +11490,29 @@ msgstr "patrons.pref#CheckPrevCheckoutDelay# Միացրեք նախազգուշա
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "patrons.pref#CheckPrevCheckoutDelay# օրեր առաջ։"
 
-# Patrons > Notices and notifications > EmailFieldPrimary
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "patrons.pref#ChildNeedsGuarantor# Երեխա այցելու"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr "patrons.pref#ChildNeedsGuarantor# <p><strong>ԶԳՈՒՇԱՑՈՒՄ:</strong> Այս նախընտրության կարգաբերումը <em>պահանջում է</em> կհանգեցնի սխալների այն նախապես գոյություն ունեցող հաճախորդների մոտ, որոնք այժմ կպահանջեն երաշխավոր և չունեն երաշխավոր."
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
-msgstr "patrons.pref#ChildNeedsGuarantor# հովանավոր, երբ ավելացվում է այցելու."
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "patrons.pref#ChildNeedsGuarantor# Ցանկացած հաճախորդի տեսակ կարող է ունենալ երաշխավոր"
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
+msgstr "patrons.pref#ChildNeedsGuarantor# երաշխավորը պետք է սահմանվի այցելուին ավելացնելիս."
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
-msgstr "patrons.pref#ChildNeedsGuarantor# կարիք չունի"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
+msgstr "patrons.pref#ChildNeedsGuarantor# չի պահանջում"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron relationships
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
-msgstr "patrons.pref#ChildNeedsGuarantor# պետք է ունենա"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
+msgstr "patrons.pref#ChildNeedsGuarantor# պահանջում է"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
@@ -14534,13 +14582,13 @@ msgstr "web_services.pref#ILS-DI# ILS-DI ծառայություններ ՀՕԱՔ
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
-msgstr "web_services.pref#ILS-DI:AuthorizedIPs# Թույլ տուր IP հասցեները"
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
+msgstr "web_services.pref#ILS-DI:AuthorizedIPs# Թույլ տուր միայն IP հասցեները"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
-msgstr "web_services.pref#ILS-DI:AuthorizedIPs# ILS-DI ծառայությունները օգտագործելու համար (երբ թույլատրված է)։ Բաժանիր IP հասցեները ստորակետներով առանդ բացատների։ Թող դաշտը դատարկ կամայական IP հասցե թույլատրելու համար։"
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
+msgstr "web_services.pref#ILS-DI:AuthorizedIPs# ILS-DI ծառայություններն օգտագործելու համար (երբ միացված է): IP հասցեները բաժանեք ստորակետերով և առանց բացատների: Մուտքագրեք '0.0.0.0/0' կամ '::/0' ցանկացած IP հասցե թույլատրելու համար."
 
 # Web services > IdRef > IdRef
 # Web services > IdRef
@@ -14788,8 +14836,8 @@ msgstr "web_services.pref#RESTOAuth2ClientCredentials# Թույլատրի"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
 # Web services > REST API
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
-msgstr "web_services.pref#RESTOAuth2ClientCredentials# OAuth2 հաճախորդի հավատարմագրերի տրամադրում REST API -ի համար։ Պահանջում է Net::OAuth2::AuthorizationServer տեղադրում։"
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
+msgstr "web_services.pref#RESTOAuth2ClientCredentials# OAuth2 հաճախորդի հավատարմագրերի տրամադրում REST API -ի համար։"
 
 # Web services > REST API > RESTPublicAPI
 # Web services > REST API
@@ -15841,6 +15889,16 @@ msgstr "web_services.pref#SvcMaxReportRows# հաշվետվության տողե�
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "authorities.pref#BiblioAddsAuthorities# նրանց եթե պահանջվում է ինքնաշխատ ստեղծել նոր հեղինակավոր գրառումներ, քանց թե հղում կատարել եղածների վրա։"
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "cataloguing.pref#MarcFieldDocURL# Եթե թողնված է դատարկ, ձևաչափի փաստաթղթերը օգտագործվում են այստեղից http://loc.gov (MARC21) կամ այստեղից http://archive.ifla.org (UNIMARC)."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "cataloguing.pref#MarcFieldDocURL# Հնարավոր բաժանորդագրություններն են <tt>{MARC}</tt> (marc flavour, օր. \"MARC21\" կամ \"UNIMARC\"), <tt>{FIELD}</tt> (դաշտի համար, օր. \"000\" կամ \"048\"), <tt>{LANG}</tt> (օգտվողի լեզու, օր. \"en\" կամ \"fi-FI\")։"
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #~ msgid "cataloguing.pref#OpacSuppression# <br />Display the following message on the redirect page for suppressed bibliographic records:"
@@ -16097,6 +16155,10 @@ msgstr "web_services.pref#SvcMaxReportRows# հաշվետվության տողե�
 # Patrons > Notices and notifications
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "patrons.pref#AutoEmailPrimaryAddress# աշխատանք"
+
+# Patrons > Notices and notifications > EmailFieldPrimary
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "patrons.pref#ChildNeedsGuarantor# Երեխա այցելու"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

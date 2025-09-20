@@ -37,7 +37,7 @@
  [%- CASE 'FORGIVEN'     -%]<span>Maksun mitätöinti</span>
  [%- CASE 'LOST_FOUND'   -%]<span>Kadonneen niteen korvaushinnan hyvitys</span>
  [%- CASE 'OVERPAYMENT'  -%]<span>Liikamaksun hyvitys</span>
- [%- CASE 'PAYMENT'      -%]<span>Maksu</span>
+ [%- CASE 'PAYMENT'      -%]<span>Maksusuoritus</span>
  [%- CASE 'PROCESSING_FOUND' -%]<span>Kadonneen niteen käsittelykulut</span>
  [%- CASE 'PURCHASE'     -%]<span>Osto</span>
  [%- CASE 'REFUND'       -%]<span>Hyvitys</span>

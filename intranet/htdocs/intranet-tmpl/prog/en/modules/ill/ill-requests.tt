@@ -627,6 +627,7 @@
                                 </a>
                             [% END %]
                         [% END %]
+                    [% IF request.borrowernumber %]
                         <div class="dropdown btn-group">
                             <button class="btn btn-default dropdown-toggle" type="button" id="ill-notice-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <i class="fa-solid fa-envelope"></i> Send notice to patron
@@ -637,6 +638,7 @@
                                 [% END %]
                             </ul>
                         </div>
+                    [% END %]
                         <a title="Display supplier metadata" id="ill-request-display-metadata" class="btn btn-default" href="#">
                             <span class="fa-solid fa-eye"></span>
                             Display supplier metadata
@@ -657,6 +659,7 @@
                                         [% request.orderid | html %]
                                     </li>
                                 [% END %]
+                            [% IF request.borrowernumber %]
                                 <li class="borrowernumber">
                                     <span class="label borrowernumber">Patron:</span>
                                     [% borrowerlink = "/cgi-bin/koha/members/moremember.pl" _ "?borrowernumber=" _ request.patron.borrowernumber %]
@@ -664,6 +667,7 @@
                                     [% request.patron.firstname _ " " _ request.patron.surname _ " [" _ request.patron.cardnumber _ "]" | html %]
                                     </a>
                                 </li>
+                            [% END %]
                                 [% IF request.biblio_id %]
                                     <li class="biblio_id">
                                         <span class="label biblio_id">Bibliographic record ID:</span>

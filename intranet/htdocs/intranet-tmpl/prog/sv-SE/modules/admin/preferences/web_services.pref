@@ -15,7 +15,7 @@ web_services.pref:
     - class: Text
       pref: ILS-DI:AuthorizedIPs
     - to use the ILS-DI services (when enabled). Separate the IP addresses with commas
-      and without spaces. Enter '0:0:0:0/0' or '::/0' to allow any IP.
+      and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP.
   IdRef:
   - - choices:
         '0': Avaktivera
@@ -110,8 +110,7 @@ web_services.pref:
         '0': Avaktivera
         '1': Aktivera
       pref: RESTOAuth2ClientCredentials
-    - OAuth2-kundreferenser för REST API. Kräver att Net::OAuth2::AuthorizationServer
-      är installerad.
+    - the OAuth2 client credentials grant for the REST API.
   - - choices:
         '0': Avaktivera
         '1': Aktivera

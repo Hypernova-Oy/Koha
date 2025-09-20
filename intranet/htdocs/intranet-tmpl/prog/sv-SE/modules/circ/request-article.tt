@@ -311,7 +311,7 @@
  [% ELSIF ar.status == 'REQUESTED' %]
  <span>Ny</span>
  [% ELSIF ar.status == 'COMPLETED' %]
- <span>Klar</span>
+ <span>Avslutad</span>
  [% ELSIF ar.status == 'CANCELED' %]
  <span>Borttagen</span>
  [% END %]

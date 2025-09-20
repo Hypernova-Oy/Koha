@@ -21,7 +21,7 @@ function showMergingInProgress() {
     var alreadySelected = Cookies.get('auth_to_merge');
     if (alreadySelected) {
         alreadySelected = JSON.parse(alreadySelected);
-        $('#merge_in_progress').show().html(_("Slå samman med auktoritet: ") + "<a href='detail.pl?authid=" + alreadySelected.authid + "'><span class='authorizedheading'>" + alreadySelected.summary + "</span> (" + alreadySelected.authid + ")</a> <a href='#' id='cancel_merge'>" + _("Avbryt sammanslagning") + "</a>");
+        $('#merge_in_progress').show().html(_("Slår samman med auktoritet: ") + "<a href='detail.pl?authid=" + alreadySelected.authid + "'><span class='authorizedheading'>" + alreadySelected.summary + "</span> (" + alreadySelected.authid + ")</a> <a href='#' id='cancel_merge'>" + _("Avbryt sammanslagning") + "</a>");
         $('#cancel_merge').click(function(event) {
             event.preventDefault();
             Cookies.remove('auth_to_merge');

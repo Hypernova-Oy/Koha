@@ -123,29 +123,29 @@
  <label for="config" class="required json">Määritykset: </label>
  <textarea name="config" id="config" class="required" cols="75" rows="10"></textarea>
  <span class="required">Pakollinen tieto</span>
- <div class="hint">Tarjoaja pääasetukset. <button class="more btn btn-ligth" data-bs-target="config"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
+ <div class="hint">Tarjoaja pääasetukset. <button class="more btn btn-light" data-target="config"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
  <div class="hint more-config" style="display: none">
  <div>Tämä asetus on erilainen jokaiselle protokollalle.</div>
- <div>Suositeltavaa on lisätä oletusasetus, jonka jälkeen korvata se soveltuvilla arvoilla.</div>
+ <div>Suositeltavaa on lisätä oletusasetus, jonka jälkeen korvata se soveltuvilla arvoilla</div>
  </div>
  <div class="hint">
- <button class="btn btn-ligth defaults" data-default-target="config" id="default-config">Lisää OAuth oletusasetukset</button>
+ <button class="btn btn-light defaults" data-default-target="config" id="default-config">Lisää OAuth oletusasetukset</button>
  </div>
  </li>
  <li>
  <label for="mapping" class="required json">Määrittely: </label>
  <textarea name="mapping" id="mapping" class="required" cols="75" rows="10"></textarea>
  <span class="required">Pakollinen tieto</span>
- <div class="hint">Määritä tarjoajan tulokset Kohan asiakaskenttään. <button class="more btn btn-ligth" data-bs-target="mapping"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
+ <div class="hint">Määritä tarjoajan tulokset Kohan asiakaskenttään. <button class="more btn btn-light" data-target="mapping"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
  <div class="hint more-mapping" style="display: none">
  <div>Suositeltavaa on lisätä oletusmääritys, jonka jälkeen muokata se sopivaksi tarjoajan vastaukseen</div>
  <div>Avaimet edustavat Kohan kenttiä ja arvot edustavat avaimia tarjoajan tuloksissa</div>
  <div>Sisäkkäisille arvoille tarjoajien tuloksissa, voit käyttää pistettä erottimena.</div>
  <div>Esimerkiksi, <i>etunimi: "users.0.name"</i> täsmää 'nimi' määreen ensimmäisen objektin 'käyttäjät' taulukossa ja asettaa sen 'etunimi' kenttään</div>
- <div>Jos aiot käyttää automaattista rekisteröintiä joko <i>userid</i> tai <i>kirjastokortin numeron</i> täytyy olla määritettynä tässä</div>
+ <div>Jos aiot käyttää automaattista rekisteröintiä joko <i>userid</i> tai <i>cardnumber</i> täytyy olla määritettynä tässä</div>
  </div>
  <div class="hint">
- <button class="btn btn-ligth defaults" data-default-target="mapping" id="default-mapping">Lisää OAuth oletusmääritykset</button>
+ <button class="btn btn-light defaults" data-default-target="mapping" id="default-mapping">Lisää OAuth oletusmääritykset</button>
  </div>
  </li>
  <li>
@@ -288,29 +288,29 @@
  <label for="config" class="required json">Määritykset: </label>
  <textarea name="config" id="config" class="required" cols="75" rows="10">[%- identity_provider.config | html -%]</textarea>
  <span class="required">Pakollinen tieto</span>
- <div class="hint">Tarjoaja pääasetukset. <button class="more btn btn-ligth" data-bs-target="config"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
+ <div class="hint">Tarjoaja pääasetukset. <button class="more btn btn-light" data-target="config"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
  <div class="hint more-config" style="display: none">
  <div>Tämä asetus on erilainen jokaiselle protokollalle.</div>
- <div>Suositeltavaa on lisätä oletusasetus, jonka jälkeen korvata se soveltuvilla arvoilla.</div>
+ <div>Suositeltavaa on lisätä oletusasetus, jonka jälkeen korvata se soveltuvilla arvoilla</div>
  </div>
  <div class="hint">
- <button class="btn btn-ligth defaults" data-default-target="config" id="default-config">Lisää oletusasetukset protokollalle: [%- identity_provider.protocol | html -%]</button>
+ <button class="btn btn-light defaults" data-default-target="config" id="default-config">Lisää oletusasetukset protokollalle: [%- identity_provider.protocol | html -%]</button>
  </div>
  </li>
  <li>
  <label for="mapping" class="required json">Määrittely: </label>
  <textarea name="mapping" id="mapping" class="required" cols="75" rows="10">[%- identity_provider.mapping | html -%]</textarea>
  <span class="required">Pakollinen tieto</span>
- <div class="hint">Määritä tarjoajan tulokset Kohan asiakaskenttään. <button class="more btn btn-ligth" data-bs-target="mapping"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
+ <div class="hint">Määritä tarjoajan tulokset Kohan asiakaskenttään. <button class="more btn btn-light" data-target="mapping"><i class="fa fa-caret-down"></i> Lisätietoja</button></div>
  <div class="hint more-mapping" style="display: none">
  <div>Suositeltavaa on lisätä oletusmääritys, jonka jälkeen muokata se sopivaksi tarjoajan vastaukseen</div>
  <div>Avaimet edustavat Kohan kenttiä ja arvot edustavat avaimia tarjoajan tuloksissa</div>
  <div>Sisäkkäisille arvoille tarjoajien tuloksissa, voit käyttää pistettä erottimena.</div>
  <div>Esimerkiksi, <i>etunimi: "users.0.name"</i> täsmää 'nimi' määreen ensimmäisen objektin 'käyttäjät' taulukossa ja asettaa sen 'etunimi' kenttään</div>
- <div>Jos aiot käyttää automaattista rekisteröintiä joko <i>userid</i> tai <i>kirjastokortin numeron</i> täytyy olla määritettynä tässä</div>
+ <div>Jos aiot käyttää automaattista rekisteröintiä joko <i>userid</i> tai <i>cardnumber</i> täytyy olla määritettynä tässä</div>
  </div>
  <div class="hint">
- <button class="btn btn-ligth defaults" data-default-target="mapping" id="default-mapping">Lisää oletusmääritykset protokollalle: [%- identity_provider.protocol | html -%]</button>
+ <button class="btn btn-light defaults" data-default-target="mapping" id="default-mapping">Lisää oletusmääritykset protokollalle: [%- identity_provider.protocol | html -%]</button>
  </div>
  </li>
  <li>

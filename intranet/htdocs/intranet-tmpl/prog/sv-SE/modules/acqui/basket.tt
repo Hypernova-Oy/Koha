@@ -111,7 +111,7 @@
 
  [% IF Koha.Preference('EDIFACT') && ediaccount %]
  [% UNLESS eans.size %]
- <div class="btn-group" title="You must define an EAN in Administration -> Library EANs">
+ <div class="btn-group" title="Du måste definiera ett EAN i Administration -> Biblioteks-EAN">
  <button class="btn btn-default btn-xs disabled" disabled="disabled" href="#"><i class="fa fa-download"></i> Skapa EDIFACT-beställning</button>
  </div>
  [% ELSE %]
@@ -120,10 +120,10 @@
  <a class="btn btn-default btn-xs submit-form-link" href="#" data-ean="[% eans.0 | html %]" data-basketno="[% basketno | html %]" data-action="basket.pl" data-method="post" data-op="cud-ediorder"><i class="fa fa-download"></i> Skapa EDIFACT-beställning</a>
  [% ELSE %]
  <button class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="ediorderbutton"><i class="fa fa-download"></i> Skapa EDIFACT-beställning</button>
- <ul class="dropdown-menu">
+ <ul class="dropdown-menu overflow-y-auto overflow-x-hidden" style="max-height: 75vh;">
  [% FOREACH eanacct IN eans %]
  <li>
- <a class="btn btn-default btn-xs submit-form-link" href="#" data-ean="[% eanacct.ean | html %]" data-basketno="[% basketno | html %]" data-action="basket.pl" data-method="post" data-op="cud-ediorder">[% eanacct.branch.branchname | html %] ([% eanacct.ean | html %]) [% IF eanacct     .description %][[% eanacct.description | html %]][% END %]</a>
+ <a class="btn btn-default btn-xs submit-form-link" href="#" data-ean="[% eanacct.ean | html %]" data-ean_description="[% eanacct.description | html %]" data-ean_branch="[% eanacct.branch.branchname | html %]" data-basketno="[% basketno | html %]" data-action="basket.pl" data-method="post" data-op="cud-ediorder">[% eanacct.branch.branchname | html %] ([% eanacct.ean | html %]) [% IF eanacct     .description %][[% eanacct.description | html %]][% END %]</a>
  </li>
  [% END %]
  </ul>
@@ -906,7 +906,11 @@
  <div id="closebasket_needsconfirmation" class="alert alert-warning">
  <form action="/cgi-bin/koha/acqui/basket.pl" method="post">
  [% INCLUDE 'csrf-token.inc' %]
- <h1>Är du säker på att du vill generera en EDIFACT-beställning och stänga korgen [% basketname | html %]?</h1>
+ <h1>Are you sure you want to generate this EDIFACT order?</h1>
+ <ul>
+ <li> An EDIFACT order will be generated for <b> [% ean_branch | html %] ([% ean | html %]) [% IF ean_description %][% ean_description | html %][% END %]</b></li>
+ <li> The basket <b>[% basketname | html %]</b> will be closed </li>
+ </ul>
  [% IF CAN_user_acquisition_group_manage %]
  <p>
  <label for="createbasketgroup">Koppla denna korg till en ny korggrupp med samma namn</label>
@@ -919,11 +923,11 @@
  <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
  <input type="hidden" name="confirm" value="1" />
  <input type="hidden" name="basketgroupname" value="[% basketgroupname | html %]" />
- <button type="submit" class="btn btn-default approve" accesskey="Y"><i class="fa fa-fw fa-check"></i> Ja, stäng (Y)</button>
+ <button type="submit" class="btn btn-default approve" accesskey="Y"><i class="fa fa-fw fa-check"></i> Yes, generate order and close basket (Y)</button>
  </form>
  <form action="/cgi-bin/koha/acqui/basket.pl" method="get">
  <input type="hidden" name="basketno" value="[% basketno | html %]" />
- <button type="submit" class="btn btn-default deny" accesskey="N"><i class="fa fa-fw fa-times"></i> Nej, stäng inte (N)</button>
+ <button type="submit" class="btn btn-default deny" accesskey="N"><i class="fa fa-fw fa-times"></i> Cancel (C)</button>
  </form>
  </div> <!-- /#closebasket_needsconfirmation -->
  [% END # /IF edi_confirm %]
@@ -992,7 +996,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% Asset.js("js/acquisitions-menu.js") | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% INCLUDE 'datatables.inc' %]
  [% INCLUDE 'columns_settings.inc' %]
  [% Asset.js("js/acq.js") | $raw %]

@@ -31,7 +31,7 @@
 
  [% IF op == 'edit' || op == 'add' %]
  [% WRAPPER breadcrumb_item %]
- <a href="/cgi-bin/koha/admin/oai_servers.pl">OAI repositories</a>
+ <a href="/cgi-bin/koha/admin/oai_servers.pl">OAI-uppsättning</a>
  [% END %]
  [% END %]
 
@@ -47,7 +47,7 @@
 
  [% ELSE %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>OAI repositories</span>
+ <span>OAI-uppsättning</span>
  [% END %]
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
@@ -59,11 +59,11 @@
  <main>
 
 [% IF msg_deleted %]
- <div class="alert alert-warning">OAI repository deleted ([% msg_add | html %])</div>
+ <div class="alert alert-warning">OAI-uppsättning borttagen ([% msg_add | html %])</div>
 [% ELSIF msg_updated %]
  <div class="alert alert-info">OAI repository updated ([% msg_add | html %])</div>
 [% ELSIF msg_added %]
- <div class="alert alert-info">OAI repository added ([% msg_add | html %])</div>
+ <div class="alert alert-info">OAI-uppsättning tillagd ([% msg_add | html %])</div>
 [% ELSIF msg_notfound %]
  <div class="alert alert-warning">Fel: Server med id [% msg_add | html %] hittas inte</div>
 [% END %]
@@ -90,18 +90,18 @@
  <span class="required">Obligatoriskt</span>
  </li>
 
- <li><label for="endpoint" class="required">Endpoint: </label> <input type="text" name="endpoint" id="endpoint" size="30" value="[% server.endpoint | html %]" required="required" /> <span class="required">Obligatoriskt</span>
+ <li><label for="endpoint" class="required">Slutenhet: </label> <input type="text" name="endpoint" id="endpoint" size="30" value="[% server.endpoint | html %]" required="required" /> <span class="required">Obligatoriskt</span>
  </li>
  <li><label for="oai_set">[% I18N.tp('OAI', 'Set:') | html %] </label> <input type="text" name="oai_set" id="oai_set" value="[% server.oai_set | html %]" />
  </li>
  <li>
- <label for="dataformat">Data format: </label>
+ <label for="dataformat">Dataformat: </label>
  <select name="dataformat" id="dataformat">
  <option value="oai_dc">Dublin Core (oai_dc)</option>
  <option value="marc-xml">Marcxml (marc-xml)</option>
- <option value="marcxml">Marcxml (marcxml)</option>
+ <option value="marcxml">Marcxml (marc-xml)</option>
  </select>
- <div class="hint">OAI can send records in various formats. Choose one.</div>
+ <div class="hint">OAI kan skicka poster i olika format. Välj ett.</div>
  </li>
 
  <li><label for="recordtype">Posttyp: </label>
@@ -111,7 +111,7 @@
  </select>
  </li>
  <li>
- <label for="add_xslt">XSLT file for transforming results: </label>
+ <label for="add_xslt">XSLT-fil för transformering av resultat: </label>
  <input type="text" name="add_xslt" id="add_xslt" size="100" placeholder="[% xslt_path | html %]" value="[% server.add_xslt | html %]"/>
  </li>
 
@@ -126,17 +126,17 @@
  <div id="toolbar" class="btn-toolbar">
  <a id="newserver" class="btn btn-default" href="/cgi-bin/koha/admin/oai_servers.pl?op=add"><i class="fa fa-plus"></i> New OAI repository</a>
  </div>
- <h1>OAI repositories</h1>
+ <h1>OAI-uppsättning</h1>
  [% IF id %]
- <span>You searched for record [% id | html %]</span>
+ <span>Du sökte efter post [% id | html %]</span>
  [% ELSIF searchfield %]
- </span>You searched for [% searchfield | html %]<span>
+ </span>Du sökte efter [% searchfield | html %]<span>
  [% END %]
 
  <div class="page-section">
  <table id="serverst">
 
- <thead><tr><th>ID</th><th>Repository name</th><th>Endpoint</th><th>[% tp('OAI', 'Set') | html %]</th><th>Data format</th><th>Posttyp</th><th class="noExport NoSort">Åtgärder</th>
+ <thead><tr><th>ID</th><th>Repository name</th><th>Slutenhet</th><th>[% tp('OAI', 'Set') | html %]</th><th>Dataformat</th><th>Posttyp</th><th class="noExport NoSort">Åtgärder</th>
  </tr></thead>
  <tbody>
  [% FOREACH loo IN loop %]

@@ -16,9 +16,10 @@ Asiakkaat:
       pref: BorrowerUnwantedField
       source: borrowers
       type: modalselect
-    - '<br /> NOTE: preferred_name will be set to firstname if not included in the
-      form. It should also be selected in <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfModificationBorrowerUnwantedField">PatronSelfModificationBorrowerUnwantedField</a>
-      if selected here.'
+    - '<br/>Huomioi: preferred_name-kentän tieto asetetaan firstaname-kenttään, jos
+      se on piilotettu lomakkeelta. Se pitää valita myös järjestelmäasetuksessa <a
+      href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfModificationBorrowerUnwantedField">PatronSelfModificationBorrowerUnwantedField</a>,
+      jos kenttä piilotetaan tässä asetuksessa.'
   - - 'Lainaajien puhuttelumuodot:'
     - class: multi
       pref: BorrowersTitles
@@ -142,20 +143,23 @@ Asiakkaat:
       pref: AllowStaffToSetFinesVisibilityForGuarantor
     - henkilökunnan asettaa asiakkaan maksut näkyväksi linkitetyille asiakkaille (takaaja/taattava)
       verkkokirjastossa.
-  - - Lapsiasiakas
+  - - Kuka tahansa taattavan asiakastyypin asiakas
     - choices:
         '0': ei tarvitse
         '1': tarvitsee
       pref: ChildNeedsGuarantor
     - takaajan asiakasta lisätessä.
+    - <p><strong>Varoitus:</strong> Asettamalla tähän asetukseen vaihtoehdon <em>tarvitsee</em>,
+      aiheuttaa ongelmia aiemmin lisätyillä taattavilla asiakkailla, joille ei ole
+      määritetty takaajaa.
   - - choices:
-        '0': Don't apply
-        '1': Apply
+        '0': Älä aseta
+        '1': Aseta
       pref: RestrictPatronsWithFailedNotices
-    - a restriction to a patron when their email and SMS messages fail to send at
-      the Koha level.
-    - <br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/restrict_patrons_with_failed_notices.pl</code>
-      cronjob. Ask your system administrator to schedule it.
+    - asiakkaalle rajoitus(ta), kun viestin lähetys sähköpostiin tai tekstiviestinä
+      heille epäonnistuu Kohassa.
+    - <br><strong>Huomioi:</strong> Tämä järjestelmäasetus vaatii <code>misc/cronjobs/restrict_patrons_with_failed_notices.pl</code>
+      -ajastetun ajon. Pyydä kehittäjiä ajastamaan se.
   Asiakkuuden voimassaoloaika:
   - - Kirjastokortin voimassaoloaikaa uusittaessa uusi voimassaolon päättymispäivämäärä
       lasketaan
@@ -219,7 +223,7 @@ Asiakkaat:
         emailpro: toissijaista sähköpostia
       default: ''
       pref: EmailFieldPrimary
-    - sähköposti-ilmoitusten lähettämiseen
+    - sähköposti-ilmoitusten lähettämiseen.
     - <br><strong>HUOM:</strong> Jos asetettu "ensimmäistä toimivaa sähköpostia",
       sähköpostit tarkistetaan järjestelmäasetuksessa <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailFieldPrecedence">EmailFieldPrecedence</a>
       määritetyssä järjestyksessä.
@@ -280,7 +284,7 @@ Asiakkaat:
     - pref: SMSSendUsername
     - ja salasana
     - pref: SMSSendPassword
-    - '. Korvaa lähettäjän osoite tällä:'
+    - . Korvaa lähettäjän osoite tällä
     - class: email
       pref: EmailSMSSendDriverFromAddress
     - sähköpostiviesteille, jotka on lähetetty "Email"-ajurilla.
@@ -302,7 +306,7 @@ Asiakkaat:
         preferences: asiakkaan viestiasetusten mukaisesti
       pref: AutoRenewalNotices
   Tietoturva-asetukset:
-  - - 'Salasanan vähimmäispituus:'
+  - - Salasanan vähimmäispituus henkilökunnalle ja asiakkaille pitää olla vähintään
     - class: integer
       pref: minPasswordLength
     - merkkiä (koskee sekä käyttäjiä että henkilökuntaa).
@@ -326,10 +330,11 @@ Asiakkaat:
       pref: FailedLoginAttempts
     - kertaa.
   - - choices:
-        '0': Don't force
-        '1': Force
+        '0': Älä pakota
+        '1': Pakota
       pref: ForcePasswordResetWhenSetByStaff
-    - a staff created patron account to reset its password after its first OPAC login.
+    - virkailijan lisäämät asiakkaat vaihtamaan salasanansa, kun he kirjautuvat ensimmäisen
+      kerran verkkokirjastoon.
   - - choices:
         '0': Älä käytä
         '1': Käytä
@@ -476,9 +481,9 @@ Asiakkaat:
       pref: DefaultPatronSearchFields
       source: borrowers
       type: modalselect
-    - If empty Koha will default to "firstname|preferred_name|middle_name|surname|othernames|cardnumber|userid".
-      Additional fields added to this preference will be added as search options in
-      the dropdown menu on the patron search page.
+    - Jos tyhjä, Koha asettaa oletukseksi "firstname|preferred_name|middle_name|surname|othernames|cardnumber|userid".
+      Muut tähän asetukseen lisätyt kentät lisätään hakuvaihtoehtoina pudotusvalikkoon
+      asiakkaiden hakusivulla.
   - - choices:
         contains: Sisältää
         starts_with: Alkaa
@@ -514,7 +519,7 @@ Asiakkaat:
         check_in: Niteen palautuksessa
         check_out: Niteen lainauksessa
         connection: Kun ollaan yhteydessä Kohaan SIP:n tai ILSDI:n kautta
-        creation: Creating a patron
+        creation: Asiakasta luodessa
         hold: Varausta tehdessä
         login: Kirjauduttaessa
         renewal: Uusittaessa lainaa

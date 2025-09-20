@@ -42,8 +42,8 @@
  <main>
  [% INCLUDE 'messages.inc' %]
 
-<h1>Lainahistoria kohteelle [% INCLUDE 'biblio-title.inc' %]</h1>
-[% IF biblio.author %]<h3>[% biblio.author | html %]</h3>[% END %]
+<h1>Lainahistoria nimekkeelle [% INCLUDE 'biblio-title.inc' %]</h1>
+[% IF biblio.author %]<h3>/ [% biblio.author | html %]</h3>[% END %]
 
 [% SET show_patron_column = Koha.Preference('intranetreadinghistory') AND CAN_user_circulate_circulate_remaining_permissions %]
 

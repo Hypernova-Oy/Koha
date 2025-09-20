@@ -5,7 +5,7 @@
 [% SET return_claims = patron.return_claims %]
 [% SET logged_in_branchcode = Branches.GetLoggedInBranchcode() %]
 
-[% IF ( has_modifications || warndeparture || returnbeforeexpiry || expired || patron.gonenoaddress || patron.lost || userdebarred || odues || ( return_claims.count > ClaimReturnedWarningThreshold ) || age_limitations || limited_category || charges || charges_guarantors_guarantees || charges_guarantees || credits ) %]
+[% IF ( has_modifications || warndeparture || returnbeforeexpiry || expired || patron.gonenoaddress || patron.lost || userdebarred || odues || ( return_claims.count > ClaimReturnedWarningThreshold ) || age_limitations || limited_category || charges || charges_guarantors_guarantees || charges_guarantees || credits || patron.account_locked ) %]
     <h3>Attention</h3>
     <ul>
         [% IF ( has_modifications ) %]
@@ -52,6 +52,22 @@
             </li>
         [% END %]
 
+        [% IF patron.account_locked %]
+            <li class="blocker [% patron.login_attempts < 0 ? 'account_admin_locked' : 'account_locked' | html %]">
+            [% IF patron.login_attempts < 0 %]
+                <span class="circ-hlt">Locked: </span><span> Patron's account has been administratively locked</span>
+            [% ELSE %]
+                <span class="circ-hlt">Locked: </span><span> Patron's account has been locked (due to [% patron.login_attempts | html %] failed login attempts)</span>
+            [% END %]
+            [% IF CAN_user_borrowers_edit_borrowers %]
+                <span>
+                    <a href="/cgi-bin/koha/members/member-password.pl?member=[% patron.borrowernumber | uri %]">Change password</a>
+                    <span data-bs-toggle="tooltip" title="Resetting password will remove lock on account" data-bs-placement="right" class="fa fa-info-circle"> </span>
+                </span>
+            [% END %]
+            </li>
+        [% END %]
+
         [% IF ( patron.gonenoaddress ) %]
             <li class="gonenoaddress blocker">
                 <span title="gonenoaddress flag is set in patron record"><span class="circ-hlt">Address:</span> Patron's address flagged as in doubt</span> <a class="btn btn-default btn-xs" href="/cgi-bin/koha/members/memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | uri %]&amp;step=3#memberentry_account_flags"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Edit</a>
@@ -95,7 +111,7 @@
                         [% END %]
                     </em><br/>
                 [% END %]
-                <a class="btn btn-xs btn-default" href="#reldebarments-tab" onclick="$('#reldebarments-tab').click()"><i class="fa fa-ban"></i> View restrictions</a>
+                <a class="btn btn-xs btn-default" href="#reldebarments-tab" onclick="(new bootstrap.Tab($('#reldebarments-tab'))).show()"><i class="fa fa-ban"></i> View restrictions</a>
             </li> <!-- /.blocker -->
         [% END # /IF userdebarred %]
 

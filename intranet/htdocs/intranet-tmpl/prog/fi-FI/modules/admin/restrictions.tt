@@ -116,7 +116,7 @@
  <span class="required">Pakollinen tieto</span>
  </li>
  <li>
- <label for="lift_after_payment" class="required">Poista maksun jälkeen: </label>
+ <label for="lift_after_payment" class="required">Poista maksusuorituksen jälkeen: </label>
  <select type="text" name="lift_after_payment" id="lift_after_payment"/>
  [% IF restriction.lift_after_payment %]
  <option value="0">Ei</option>
@@ -143,7 +143,7 @@
  <span class="required">Pakollinen tieto</span>
  </li>
  <li>
- <label for="lift_after_payment">Poista maksun jälkeen: </label>
+ <label for="lift_after_payment">Poista maksusuorituksen jälkeen: </label>
  <select type="text" name="lift_after_payment" id="lift_after_payment" />
  <option value="0" selected="selected">Ei</option>
  <option value="1">Kyllä</option>
@@ -196,7 +196,7 @@
  <th scope="col">Tunnus</th>
  <th scope="col">Otsikko</th>
  <th scope="col">Oletus</th>
- <th scope="col">Poistetaanko maksun jälkeen?</th>
+ <th scope="col">Poistetaanko maksusuorituksen jälkeen?</th>
  <th scope="col">Maksuraja</th>
  <th scope="col">Toiminnot</th>
  </tr>

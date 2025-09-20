@@ -115,10 +115,10 @@
  <li><span class="label"></span> <i class="fa fa-check"></i> Ensisijainen hankinnan yhteystieto</li>
  [% END %]
  [% IF ( contact.orderacquisition ) %]
- <li><span class="label"></span> <i class="fa fa-check"></i> Vastaanottaa tilauksia</li>
+ <li><span class="label"></span> <i class="fa fa-check"></i> Ottaa vastaan tilauksia</li>
  [% END %]
  [% IF ( contact.claimacquisition ) %]
- <li><span class="label"></span> <i class="fa fa-check"></i> Vastaanotto reklamoi myöhässä olevia tilauksia</li>
+ <li><span class="label"></span> <i class="fa fa-check"></i> Ottaa vastaan reklamaatioita myöhässä olevista tilauksista</li>
  [% END %]
  </ol>
  </li>
@@ -128,10 +128,10 @@
  <span class="label">Kausijulkaisutilausten asetukset:</span>
  <ol>
  [% IF ( contact.serialsprimary ) %]
- <li><span class="label"></span> <i class="fa fa-check"></i> Ensisijainen kausijulkaisun yhteystieto</li>
+ <li><span class="label"></span> <i class="fa fa-check"></i> Ensisijainen kausijulkaisutilausten yhteystieto</li>
  [% END %]
  [% IF ( contact.claimissues ) %]
- <li><span class="label"></span> <i class="fa fa-check"></i> Vastaanottaa reklamaatioita myöhässä olevista numeroista</li>
+ <li><span class="label"></span> <i class="fa fa-check"></i> Ottaa vastaan reklamaatioita myöhässä olevista kausijulkaisunumeroista</li>
  [% END %]
  </ol>
  </li>
@@ -220,7 +220,7 @@
 
  <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
  <fieldset class="rows">
- <legend>Yrityksen tiedot</legend>
+ <legend>Toimittajan tiedot</legend>
  <ol><li><label for="company" class="required">Nimi:</label>
  <input type="text" size="40" id="company" name="company" value="[% name | html %]" required="required" class="required focus" /><span class="required">Pakollinen tieto</span></li>
  <li><label for="company_postal">Postiosoite: </label>
@@ -261,7 +261,7 @@
  </fieldset>
 
  <fieldset class="rows">
- <legend>Verkkopalvelu</legend>
+ <legend>Käyttöliittymät</legend>
  <div id="interfaces"></div>
  </fieldset>
 
@@ -272,12 +272,12 @@
  <input type="radio" id="activestatus" name="status" value="1" checked="checked" />
  <label class="radio" for="activestatus">Aktiivinen</label>
  <input type="radio" id="inactivestatus" name="status" value="0" />
- <label class="radio" for="inactivestatus">Ei käytössä</label>
+ <label class="radio" for="inactivestatus">Epäaktiivinen</label>
  [% ELSE %]
  <input type="radio" id="activestatus" name="status" value="1" />
  <label class="radio" for="activestatus">Aktiivinen</label>
  <input type="radio" id="inactivestatus" name="status" value="0" checked="checked" />
- <label class="radio" for="inactivestatus">Ei käytössä</label>
+ <label class="radio" for="inactivestatus">Epäaktiivinen</label>
  [% END %]</li>
  <li><label for="list_currency">Listahinnat ovat: </label>
  <select name="list_currency" id="list_currency">
@@ -424,7 +424,7 @@
 
  [% IF vendor.interfaces.count %]
  <div id="supplier-interfaces" class="page-section rows">
- <h2>Verkkopalvelu</h2>
+ <h2>Käyttöliittymät</h2>
 
  [% FOR i IN vendor.interfaces %]
  <h3>[% i.name | html %]</h3>
@@ -456,14 +456,14 @@
 
  <div class="col">
  <div id="supplier-contact-details" class="page-section rows">
- <h2>Yhteystiedot</h2>
+ <h2>Yhteystieto</h2>
  [% FOREACH contact IN contacts %]
  [% INCLUDE show_contact %]
  [% END %]
  </div> <!-- /#supplier-contact-details -->
 
  <div id="subscription-details" class="page-section">
- <h2>Kausijulkaisu­tilauksen tiedot</h2>
+ <h2>Kausijulkaisutilausten tiedot</h2>
  <p><strong>Kausijulkaisutilausten määrä: </strong>
  [% IF (  CAN_user_serials ) %]
  <a href="/cgi-bin/koha/serials/serials-search.pl?bookseller_filter=[% name | uri %]&searched=1">[% subscriptioncount | html %]</a>
@@ -642,7 +642,7 @@
             let nodes = $("<div id='interfaces'></div>");
             interfaces.forEach((interface, i) => {
                 let n = $("<fieldset class='supplier-interface'></fieldset>");
-                n.append("<legend>" + _("Verkkopalvelu") + "</legend>");
+                n.append("<legend>" + _("Käyttöliittymän tiedot") + "</legend>");
                 n.append(`<input type="hidden" name="interface_counter" value="${i}" />`);
                 let ol = $('<ol class="interface-form"></ol>');
                 let attributes = [
@@ -669,7 +669,7 @@
                     }
                     ol.append(li);
                 });
-                ol.append(`<li><button class="btn btn-default" onclick="remove_interface(${i});"><i class="fa fa-trash"></i> ` + _("Poista verkkopalvelu") + '</li>');
+                ol.append(`<li><button class="btn btn-default" onclick="remove_interface(${i});"><i class="fa fa-trash"></i> ` + _("Poista käyttöliittymä") + '</li>');
                 n.append(ol);
                 nodes.append(n);
             });

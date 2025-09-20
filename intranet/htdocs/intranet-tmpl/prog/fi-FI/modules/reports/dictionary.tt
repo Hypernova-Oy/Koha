@@ -143,10 +143,9 @@
  [% IF ( passworderr ) %]
  <div class="alert alert-warning">
  <strong>Virheitä:</strong><br />
- The previous column selection included a password field.<br />
- The column cannot be used due to security risks.<br />
- Please make a new selection and ensure no password columns have been selected.
- </div>
+ Aiempi sarakevalinta sisälsi salasana-kentän.<br />
+ Saraketta ei voi käyttää turvallisuusriskin vuoksi.<br />
+ Muokkaa raporttia ja varmista, ettei salasana-kenttiä ole valittuna. </div>
  [% END %]
 
 <fieldset class="rows"><legend>Kohta 1/5: Nimeä uusi määritelmä</legend><ol>

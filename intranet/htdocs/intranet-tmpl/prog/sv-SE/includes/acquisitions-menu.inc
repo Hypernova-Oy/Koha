@@ -16,7 +16,7 @@
  <h5>Rapporter</h5>
  <ul>
  [% IF ( CAN_user_reports ) %]
- <li><a href="/cgi-bin/koha/reports/acquisitions_stats.pl">Guide för inköpsstatistik</a></li>
+ <li><a href="/cgi-bin/koha/reports/acquisitions_stats.pl">Statistikguide för inköp</a></li>
  <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Sortera efter kostnadsställe</a></li>
  [% END %]
  [% IF ( CAN_user_circulate_circulate_remaining_permissions ) %]

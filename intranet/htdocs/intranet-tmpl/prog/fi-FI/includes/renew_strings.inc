@@ -8,7 +8,7 @@
 [% CASE 'too_many' %]
  <span>Lainan uusimiskerrat ovat tulleet täyteen</span>
 [% CASE 'auto_too_soon' %]
- <span>Ajastettu automaattista uusintaa varten. Ei voida vielä uusia.</span>
+ <span>Ajastettu automaattista uusintaa varten, eikä voida vielä uusia</span>
 [% CASE 'auto_too_late' %]
  <span>Ajastettu automaattista uusintaa varten. Ei voitu enää uusia</span>
 [% CASE 'auto_account_expired' %]

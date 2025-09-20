@@ -26,14 +26,14 @@
  [% END %]
  [% IF ( get_orders ) %]
  [% WRAPPER breadcrumb_item %]
- <a href="/cgi-bin/koha/reports/orders_by_fund.pl">Tilauksia tilin mukaan</a>
+ <a href="/cgi-bin/koha/reports/orders_by_fund.pl">Tilaukset tilin mukaan</a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
  <span>Tulokset</span>
  [% END %]
  [% ELSE %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Tilauksia tilin mukaan</span>
+ <span>Tilaukset tilin mukaan</span>
  [% END %]
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
@@ -47,7 +47,7 @@
 
 
 [% IF ( current_budget_name ) %]<h1>Tilaukset tilille '[% current_budget_name | html %]'</h1>
-[% ELSE %]<h1>Tilauksia tilin mukaan</h1>
+[% ELSE %]<h1>Tilaukset tilin mukaan</h1>
 [% END %]
 
 [% IF ( get_orders ) %]
@@ -60,7 +60,7 @@
  <th>Tilauskori</th>
  <th>Tilauskorin nimi</th>
  <th>Tilauskori</th>
- <th>Nimeke</th>
+ <th class="anti-the">Nimeke</th>
  <th>Rahayksikkö</th>
  <th>Listahinta</th>
  <th>OVH</th>

@@ -169,7 +169,7 @@
  <li><a class="dropdown-item" href="/cgi-bin/koha/cataloguing/addbiblio.pl?biblionumber=[% resultsloo.biblionumber | uri %]"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Redigera post</a></li>
  [% END %]
  [% IF ( CAN_user_editcatalogue_edit_items ) %]
- <li><a class="dropdown-item" href="/cgi-bin/koha/cataloguing/additem.pl?biblionumber=[% resultsloo.biblionumber | uri %]"><i class="fa fa-plus"></i> Add or edit items</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/cataloguing/additem.pl?biblionumber=[% resultsloo.biblionumber | uri %]"><i class="fa fa-plus"></i> Lägg till eller redigera exemplar</a></li>
  [% END %]
  </ul>
  </div> <!-- /.dropup -->
@@ -222,10 +222,10 @@
  <a class="btn btn-default btn-xs dropdown-toggle" id="reservoirsearchactions[% breeding_loo.id | html %]" role="button" data-bs-toggle="dropdown" href="#">
  Åtgärder </a>
  <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-labelledby="reservoirsearchactions[% breeding_loo.id | html %]">
- <li><a href="/cgi-bin/koha/catalogue/showmarc.pl?importid=[% breeding_loo.id | uri %]" class="previewData"><i class="fa-solid fa-eye"></i> MARC-förhandsvisning</a></li>
- <li><a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;importid=[% breeding_loo.id | uri %]" class="previewData"><i class="fa-solid fa-eye"></i> Förhandsvisning av kort</a></li>
+ <li><a href="/cgi-bin/koha/catalogue/showmarc.pl?importid=[% breeding_loo.id | uri %]" class="dropdown-item previewData"><i class="fa-solid fa-eye"></i> MARC-förhandsvisning</a></li>
+ <li><a href="/cgi-bin/koha/catalogue/showmarc.pl?viewas=card&amp;importid=[% breeding_loo.id | uri %]" class="dropdown-item previewData"><i class="fa-solid fa-eye"></i> Förhandsvisning av kort</a></li>
  [% IF ( CAN_user_editcatalogue_edit_catalogue ) %]
- <li><a href="/cgi-bin/koha/cataloguing/addbiblio.pl?breedingid=[% breeding_loo.id | uri %]"><i class="fa fa-plus"></i> Lägg till biblio</a></li>
+ <li><a class="dropdown-item" href="/cgi-bin/koha/cataloguing/addbiblio.pl?breedingid=[% breeding_loo.id | uri %]"><i class="fa fa-plus"></i> Lägg till biblio</a></li>
  [% END %]
  </ul>
  </div>

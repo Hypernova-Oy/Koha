@@ -11,6 +11,11 @@
  [% t("Koha") | html %]
 [% END %]</title>
 [% INCLUDE 'doc-head-close.inc' %]
+<style>
+.version-ellipsis {
+    text-decoration: underline;
+}
+</style>
 </head>
 <body id="about_about" class="about">
 [% INCLUDE 'header.inc' %]
@@ -36,7 +41,7 @@
  [% WRAPPER tab_item linktab = 1 tabname = "about" bt_active = tab == "about" %] <span>Palvelimen tiedot</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "perl" bt_active = tab == "perl" %] <span>Perl-moduulit</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "sysinfo" bt_active = tab == "sysinfo" %] <span>Järjestelmätiedot</span> [% END %]
- [% WRAPPER tab_item linktab = 1 tabname = "database" bt_active = tab == "database" %] <span>Database audit</span> [% END %]
+ [% WRAPPER tab_item linktab = 1 tabname = "database" bt_active = tab == "database" %] <span>Tietokannan tarkastus</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "team" bt_active = tab == "team" %] <span>Koha-tiimi</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "licenses" bt_active = tab == "licenses" %] <span>Lisenssit</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "translations" bt_active = tab == "translations" %] <span>Käännökset</span> [% END %]
@@ -77,7 +82,7 @@
  <td>[% osVersion | html %]</td>
  </tr>
  <tr>
- <th scope="row">Perl interpreter: </th>
+ <th scope="row">Perl-tulkki: </th>
  <td>[% perlPath | html %]</td>
  </tr>
  <tr>
@@ -100,12 +105,14 @@
  <th scope="row">Apache-versio: </th>
  <td>[% apacheVersion | html %]</td>
  </tr>
- [% IF (is_psgi) %]
  <tr>
  <th scope="row">PSGI: </th>
+ [% IF is_psgi %]
  <td>[% psgi_server | html %]</td>
- </tr>
+ [% ELSE %]
+ <td class="error">Kohaa ajetaan CGI-tilassa. Tämä on tietoturvaongelma. Aja Kohaa käyttäen Plackia, joka turvaa CSRF:ltä (cross-site request forgery). Lisätietoja: <code>koha-plack --help</code></td>
  [% END %]
+ </tr>
  [% IF Koha.Preference('SearchEngine') == 'Elasticsearch' %]
  <tr>
  <th scope="row">Elasticsearch: </th>
@@ -204,12 +211,14 @@
  </tr>
  <tr>
  <th scope="row">Viestin välittäjä: </th>
- [% IF warnConnectBroker == 'Error connecting' %]
+ [% IF warnConnectBroker %]
  <td class="text-bg-warning"><strong>Käytetään SQL-kyselyä (Varasuunnitelma, Virhe yhdistettäessä RabbitMQ-palveluun)</strong></td>
- [% ELSIF warnConnectBroker %]
- <td class="text-bg-warning"><strong>Käytetään SQL-kyselyä</strong></td>
+ [% ELSE %]
+ [% IF Koha.Preference('JobsNotificationMethod') == 'polling' %]
+ <td class="text-bg-info">Käytetään SQL-kyselyä</td>
  [% ELSE %]
  <td class="text-bg-info">Käytetään RabbitMQ:ta</td>
+ [% END %]
  [% END %]
  </tr>
  <tr>
@@ -253,23 +262,23 @@
  [% FOREACH ro IN tabl.row %]
  [% IF ( ro.current ) %]
  [% IF ( ro.require ) %]
- <th scope="row" style="font-weight:bold;" title="Tämänhetkinen osio">
+ <th scope="row" style="font-weight:bold;" title="Moduuli ajantasalla">
  [% ELSE %]
- <th scope="row" style="font-weight:normal" title="Tämänhetkinen osio">
+ <th scope="row" style="font-weight:normal" title="Moduuli ajantasalla">
  [% END %]
  [% ELSIF ( ro.upgrade ) %]
  [% IF ( ro.require ) %]
- <th scope="row" style="background-color:#FFCB2F;font-weight:bold;" title="Osion päivitys vaaditaan">
+ <th scope="row" style="background-color:#FFCB2F;font-weight:bold;" title="Moduuli pitää päivittää">
  [% ELSE %]
- <th scope="row" style="background-color:#FFCB2F;font-weight:normal" title="Osion päivitys vaaditaan">
+ <th scope="row" style="background-color:#FFCB2F;font-weight:normal" title="Moduuli pitää päivittää">
  [% END %]
  [% ELSE %]
  [% IF ( ro.name == '' ) %]
  <th>
  [% ELSIF ( ro.require ) %]
- <th scope="row" style="background-color:#FF8A8A;font-weight:bold;" title="Vaadittu osio puuttuu">
+ <th scope="row" style="background-color:#FF8A8A;font-weight:bold;" title="Vaadittu moduuli puuttuu">
  [% ELSE %]
- <th scope="row" style="background-color:#FF8A8A;font-weight:normal" title="Valinnainen osio puuttuu">
+ <th scope="row" style="background-color:#FF8A8A;font-weight:normal" title="Vapaaehtoinen moduuli puuttuu">
  [% END %]
  [% END # /IF ro.current %]
  [% IF ( ro.name ) %]
@@ -436,7 +445,7 @@
  [% IF (warnPrefRequireChoosingExistingAuthority) %]
  <tr>
  <th scope="row"><strong>Varoitus</strong> </th>
- <td>Järjestelmäasetus 'RequireChoosingExistingAuthority' ei ole käytössä, mutta asetuksen 'AutoCreateAuthorities' pitää olla sallittu. Muutoin kuvailijat voivat lisätä termejä, joita ei linkitetä auktoriteetteihin.</td>
+ <td>Järjestelmäasetus 'RequireChoosingExistingAuthority' ei ole käytössä, mutta asetus 'AutoCreateAuthorites' pitää olla sallittu. Muutoin kuvailijat voivat lisätä termejä, joita ei voida linkittää auktoriteetteihin.</td>
  </tr>
  [% END %]
  [% IF (warnPrefEasyAnalyticalRecords) %]
@@ -745,7 +754,7 @@
 
 [% BLOCK database_panel %]
  [% WRAPPER tab_panel tabname= "database" bt_active = 1 %]
- <h2>Database audit</h2>
+ <h2>Tietokannan tarkastus</h2>
  [% IF db_audit.diff_found %]
  <div class="alert alert-warning">
  [% ELSE %]
@@ -756,9 +765,8 @@
  </div>
  [% IF db_audit.diff_found %]
  <div>
- <p>Run the following SQL to fix the database:</p>
  <pre>
- <code>[% db_audit.diff | $raw %]</code>
+ <code>[% db_audit.diff | html %]</code>
  </pre>
  </div>
  [% END %]
@@ -961,10 +969,10 @@
  <ul>
  <li>Irma Birchall</li>
  <li>Rachel Hamilton-Williams (Kaitiaki from 2004 to present)</li>
- <li>Stephen Hedges (early Documentation Manager)</li>
+ <li>Stephen Hedges (varhainen Dokumentaation ylläpitäjä)</li>
  <li>Brooke Johnson</li>
  <li>Jo Ransom</li>
- <li>Nicholas Rosasco (Documentation Compiler)</li>
+ <li>Nicholas Rosasco (Dokumentaation koostaja)</li>
  <li>Regula Sebastiao</li>
  </ul>
  [% END # tab=team %]
@@ -1231,15 +1239,15 @@
  <li>suomi, suomen kieli (Finnish) Pasi Korkalo</li>
  <li>Fran&ccedil;ais (ranska) <a href="http://www.koha-fr.org/content/lassociation-kohala">Kohala</a>, Pascale Nalon (ENSMP) ja monet muut </li>
  <li>Galego (Galician) Ignacio Javier</li>
- <li>Deutsch (German) Friedrich zur Hellen, Robert Hillig, Katrin Fischer, Beda Szukics, Mirko Tietgen and Marc Véron</li>
+ <li>Deutsch (German) Friedrich zur Hellen, Robert Hillig, Katrin Fischer, Beda Szukics, Mirko Tietgen ja Marc Véron</li>
  <li>&#949;&#955;&#955;&#951;&#957;&#953;&#954;&#940; (kreikka, nykykreikka [1453- ]) Koha Hellenic Users' Group (Georgia Katsarou, Dimitris Antonakis, Eugenios Papadopoulos), Theodoros Theodoropoulos, Panoraia Gaitanou ja Kiriaki Roditi</li>
  <li>&#1506;&#1489;&#1512;&#1497;&#1514; (heprea)</li>
  <li>&#2361;&#2367;&#2344;&#2381;&#2342;&#2368; (hindi)</li>
  <li>Magyar (Hungarian)Agnes Imecs</li>
- <li>Norsk Bokmål (Norwegian) Axel Bojer and Thomas Gramstad</li>
- <li>Norsk Nynorsk (Norwegian) Unni Knutsen and Marit Kristine Ådland</li>
+ <li>Norsk Bokmål (Norwegian) Axel Bojer ja Thomas Gramstad</li>
+ <li>Norsk Nynorsk (Norwegian) Unni Knutsen ja Marit Kristine Ådland</li>
  <li>(indonesia)</li>
- <li>Italiano (Italian) for 3.2: Zeno Tajoli, Pietro Gozzetti and Paolo Pozzan; for 3.4 and more: Zeno Tajoli, Stefano Bargioni, Paolo Bizzarri</li>
+ <li>Italiano (Italian) versio 3.2: Zeno Tajoli, Pietro Gozzetti ja Paolo Pozzan; versiosta 3.4: Zeno Tajoli, Stefano Bargioni, Paolo Bizzarri</li>
  <li>&#26085;&#26412;&#35486; (japani)</li>
  <li>&#54620;&#44397;&#50612; (korea)</li>
  <li>&#3221;&#3240;&#3277;&#3240;&#3233; (kanna&#7693;a)</li>
@@ -1253,11 +1261,11 @@
  <li>Portugu&ecirc;s (portugali)</li>
  <li>Rom&acirc;n&#259; (romania)</li>
  <li>&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081; (venäjä) Victor Titarchuk and Serhij Dubyk</li>
- <li>Espa&ntilde;ol (Spanish) Bernardo González Kriegel, Héctor Castro and Tomás Cohen Arazi, with the help of the koha-es community.</li>
+ <li>Espa&ntilde;ol (Spanish) Bernardo González Kriegel, Héctor Castro ja Tomás Cohen Arazi, koha-es -yhteisön avulla.</li>
  <li>Svenska (ruotsi)</li>
  <li>Tetun (Tetum) Karen Myers</li>
  <li>&#3616;&#3634;&#3625;&#3634;&#3652;&#3607;&#3618; (thai)</li>
- <li>T&uuml;rk&ccedil;e (Turkish) pre-3.8: Selma Aslan; for 3.8+, Suleyman Demirel University (Ugur Bulgan, Onur Erdem, Kemal Caner Bayrakci, and Alper Tutunsatar)</li>
+ <li>T&uuml;rk&ccedil;e (Turkish) versiota 3.8 vanhemmat: Selma Aslan; versiosta 3.8+, Suleyman Demirel University (Ugur Bulgan, Onur Erdem, Kemal Caner Bayrakci, and Alper Tutunsatar)</li>
  <li>&#1575;&#1585;&#1583;&#1608;(urdu) Ata ur Rehman</li>
  <li>&#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1089;&#1100;&#1082;&#1072; (ukraina) Victor Titarchuk and Serhij Dubyk</li>
  </ul>
@@ -1271,7 +1279,7 @@
  <table style="cursor:pointer">
  <thead>
  <tr>
- <td  style="font-weight:bold;" >Pvm</td>
+ <td  style="font-weight:bold;" >Päivämäärä</td>
  <td  style="font-weight:bold;" >Kuvaus</td>
  </tr>
  </thead>

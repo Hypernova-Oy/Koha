@@ -13,7 +13,7 @@
  <th scope="col" data-datatype="related-object" data-related="extended_attributes" data-related-key="type" data-related-value="title"         data-related-search-on="value">Nimeke</th>
  <th scope="col" data-datatype="related-object" data-related="extended_attributes" data-related-key="type" data-related-value="article_title" data-related-search-on="value">Artikkelin nimeke</th>
  <th scope="col" data-datatype="related-object" data-related="extended_attributes" data-related-key="type" data-related-value="issue"         data-related-search-on="value">Numero</th>
- <th scope="col" data-datatype="related-object" data-related="extended_attributes" data-related-key="type" data-related-value="volume"        data-related-search-on="value">Vuosikerta</th>
+ <th scope="col" data-datatype="related-object" data-related="extended_attributes" data-related-key="type" data-related-value="volume"        data-related-search-on="value">Osa</th>
  <th scope="col" data-datatype="related-object" data-related="extended_attributes" data-related-key="type" data-related-value="year"          data-related-search-on="value">Vuosi</th>
  <th scope="col" data-datatype="related-object" data-related="extended_attributes" data-related-key="type" data-related-value="pages"         data-related-search-on="value">Sivut</th>
  <th scope="col" data-datatype="related-object" data-related="extended_attributes" data-related-key="type" data-related-value="type"          data-related-search-on="value">Pyynnön tyyppi</th>
@@ -32,7 +32,7 @@
  <th scope="col">Kommentit</th>
  <th scope="col">Huomautus verkkokirjastossa</th>
  <th scope="col">Virkailijahuomautus</th>
- <th scope="col">Kaukolainayhteys</th>
+ <th scope="col">Taustajärjestelmä</th>
  <th scope="col" class="actions"></th>
  </tr>
  </thead>

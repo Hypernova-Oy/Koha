@@ -27,7 +27,7 @@
  <i class="fa fa-fw fa-upload" aria-hidden="true"></i> <span class="tab-title"><span class="tab-title">Lainaus</span></span>
  [% END %]
  [% WRAPPER tab_item tabname= "checkin_search" %]
- <i class="fa fa-fw fa-download" aria-hidden="true"></i> <span class="tab-title"><span class="tab-title">Palauta</span></span>
+ <i class="fa fa-fw fa-download" aria-hidden="true"></i> <span class="tab-title"><span class="tab-title">Palautus</span></span>
  [% END %]
  [% WRAPPER tab_item tabname= "renew_search" %]
  <i class="fa fa-fw fa-retweet" aria-hidden="true"></i> <span class="tab-title"><span class="tab-title">Uusinta</span></span>

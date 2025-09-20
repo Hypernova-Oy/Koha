@@ -510,7 +510,7 @@
  <span class="permissioncode">([% name | html %])</span>
  [%- CASE 'manage_staged_marc' -%]
  <span class="sub_permission manage_staged_marc_subpermission">
- Hallinnoida välivarastoituja MARC-tietueita, myös tuontien täydentäminen ja peruutus </span>
+ Hallinnoida välivarastoituja MARC-tietueita, myös tuontien hyväksyminen ja peruutus </span>
  <span class="permissioncode">([% name | html %])</span>
  [%- CASE 'marc_modification_templates' -%]
  <span class="sub_permission marc_modification_templates_subpermission">

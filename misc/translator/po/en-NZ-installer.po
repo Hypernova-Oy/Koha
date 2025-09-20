@@ -1,10 +1,10 @@
 # Compendium of en_NZ.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:10-0300\n"
-"PO-Revision-Date: 2023-11-13 13:36+0000\n"
+"PO-Revision-Date: 2025-05-23 03:32+0000\n"
 "Last-Translator: chrisc <chris@bigballofwax.co.nz>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: en-NZ\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1.1\n"
+"X-Generator: Weblate 5.6.2\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /en_NZ/22.11/en-NZ-installer.po\n"
 "X-POOTLE-MTIME: 1675735399.980687\n"
@@ -276,7 +276,7 @@ msgid "Complete"
 msgstr "Compiler"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+msgid "Aggregated full text"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -314,7 +314,7 @@ msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:36
 msgid "Unknown"
-msgstr ""
+msgstr "Unknown"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:37
 #, fuzzy
@@ -826,9 +826,8 @@ msgid "Falkland Islands"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:73
-#, fuzzy
 msgid "Micronesia"
-msgstr "Microfilm"
+msgstr "Micronesia"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:74
 #, fuzzy
@@ -836,9 +835,8 @@ msgid "Faroe Islands"
 msgstr "Ferro, Canary Islands"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:75
-#, fuzzy
 msgid "France"
-msgstr "romance"
+msgstr "France"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:76
 msgid "Gabon"
@@ -932,7 +930,7 @@ msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:97
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:98
 #, fuzzy
@@ -1243,9 +1241,8 @@ msgid "Nicaragua"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:166
-#, fuzzy
 msgid "Netherlands"
-msgstr "Amsterdam, Netherlands"
+msgstr "Netherlands"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:167
 #, fuzzy
@@ -1420,7 +1417,7 @@ msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:205
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:206
 #, fuzzy
@@ -1428,9 +1425,8 @@ msgid "Somalia"
 msgstr "Somali"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:207
-#, fuzzy
 msgid "Suriname"
-msgstr "Surname"
+msgstr "Suriname"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:208
 #, fuzzy
@@ -1505,9 +1501,8 @@ msgid "Tunisia"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:224
-#, fuzzy
 msgid "Tonga"
-msgstr "Tongan"
+msgstr "Tonga"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:225
 #, fuzzy
@@ -1608,9 +1603,8 @@ msgid "Mayotte"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:247
-#, fuzzy
 msgid "South Africa"
-msgstr "Capetown, South Africa"
+msgstr "South Africa"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:3:row:248
 msgid "Zambia"
@@ -4310,13 +4304,12 @@ msgid "Manual restriction"
 msgstr "Default description"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:2
-#, fuzzy
 msgid "Overdues"
-msgstr "%sOverdues%s"
+msgstr "Overdues"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:3
 msgid "Suspension"
-msgstr ""
+msgstr "Suspension"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:4
 msgid "Discharge"
@@ -6616,7 +6609,7 @@ msgstr "Catalogue"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:5:row:3
 msgid "Patrons"
-msgstr "Members"
+msgstr "Users"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:5:row:4
 msgid "Acquisitions"
@@ -7637,7 +7630,7 @@ msgstr "Music copyist"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:167
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:168
 msgid "Manufacture place"

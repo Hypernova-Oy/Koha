@@ -3,13 +3,13 @@
 [% USE Asset %]
 [% USE Koha %]
 [% USE Branches %]
+[% USE KohaDates %]
 [% SET OpacNav = AdditionalContents.get( location => "OpacNav", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
 [% SET OpacNavBottom = AdditionalContents.get( location => "OpacNavBottom", lang => lang, library => logged_in_user.branchcode || default_branch, blocktitle => 0 ) %]
 [% INCLUDE 'doc-head-open.inc' %]
 <title>Sähköinen kirjastokortti &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Kohan verkkokirjasto[% END %]</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %]
- [% Asset.css("css/opac.css") | $raw %]
 [% END %]
 </head>
 [% INCLUDE 'bodytag.inc' bodyid='opac-virtual-card' %]
@@ -45,6 +45,12 @@
  </div>
  <div id="lib-container">
  <p id="patron-lib"><strong>Kirjasto:</strong> [% Branches.GetName( patron.branchcode ) | html %]</p>
+ </div>
+ <div id="cardnumber-container">
+ <p id="patron-cardnumber"><strong>Kirjastokortin numero:</strong> [% patron.cardnumber | html %]</p>
+ </div>
+ <div id="dateexpiry-container">
+ <p id="patron-dateexpiry"><strong>Vanhenee:</strong> [% patron.dateexpiry | $KohaDates %]</p>
  </div>
  </div>
  </div> <!-- / .col-10 -->

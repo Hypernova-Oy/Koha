@@ -1443,6 +1443,93 @@ sub columns_to_str {
     return $values;
 }
 
+=head3 _status
+
+    my @statuses = $item->_status();
+
+Returns a list of statuses for the current item. Possible values are:
+
+=over 4
+
+=item B<checked_out> (mutually exclussive with B<local_use>)
+
+=item B<local_use> (mutually exclussive with B<checked_out>)
+
+=item B<in_transit>
+
+=item B<lost>
+
+=item B<lost>
+
+=item B<withdrawn>
+
+=item B<damaged>
+
+=item B<not_for_loan>
+
+=item B<on_hold>
+
+=item B<recalled>
+
+=item B<available>
+
+=item B<restricted>
+
+=item B<in_bundle>
+
+=back
+
+=cut
+
+sub _status {
+    my ($self) = @_;
+
+    my @statuses;
+    if ( my $checkout = $self->checkout ) {
+        unless ( $checkout->onsite_checkout ) {
+            push @statuses, "checked_out";
+        } else {
+            push @statuses, "local_use";
+        }
+    } elsif ( my $transfer = $self->transfer ) {
+        push @statuses, "in_transit";
+    }
+    if ( $self->itemlost ) {
+        push @statuses, 'lost';
+    }
+    if ( $self->withdrawn ) {
+        push @statuses, 'withdrawn';
+    }
+    if ( $self->damaged ) {
+        push @statuses, 'damaged';
+    }
+    if ( $self->notforloan || $self->item_type->notforloan ) {
+
+        # TODO on a big Koha::Items loop we are going to join with item_type too often, use a cache
+        push @statuses, 'not_for_loan';
+    }
+    if ( $self->first_hold ) {
+        push @statuses, 'on_hold';
+    }
+    if ( C4::Context->preference('UseRecalls') && $self->recall ) {
+        push @statuses, 'recalled';
+    }
+
+    unless (@statuses) {
+        push @statuses, 'available';
+    }
+
+    if ( $self->restricted ) {
+        push @statuses, 'restricted';
+    }
+
+    if ( $self->in_bundle ) {
+        push @statuses, 'in_bundle';
+    }
+
+    return \@statuses;
+}
+
 =head3 additional_attributes
 
     my $attributes = $item->additional_attributes;
@@ -1666,10 +1753,12 @@ sub _set_found_trigger {
             }
 
         } elsif ( $lostreturn_policy eq 'charge' && ( $lost_overdue || $lost_charge ) ) {
+            my $patron_id = $lost_overdue ? $lost_overdue->borrowernumber : $lost_charge->borrowernumber;
             $self->add_message(
                 {
                     type    => 'info',
                     message => 'lost_charge',
+                    payload => { patron_id => $patron_id }
                 }
             );
         }

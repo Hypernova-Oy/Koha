@@ -1,18 +1,18 @@
 # Compendium of en_GB.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:09-0300\n"
-"PO-Revision-Date: 2025-01-29 03:05+0000\n"
-"Last-Translator: lvharvey <lucy.vaux-harvey@ptfs-europe.com>\n"
+"PO-Revision-Date: 2025-06-10 03:09+0000\n"
+"Last-Translator: Aude Charillon <aude.charillon@openfifth.co.uk>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: en-GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /en_GB/22.11/en-GB-installer.po\n"
 "X-POOTLE-MTIME: 1684488367.559174\n"
@@ -271,7 +271,8 @@ msgid "Complete"
 msgstr ", compiler"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+#, fuzzy
+msgid "Aggregated full text"
 msgstr "Aggregated full"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -4279,11 +4280,11 @@ msgstr "Article request - print slip"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:20
 msgid "Check-ins"
-msgstr "Check-ins"
+msgstr "Returns"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:20
 msgid "Item check-in (digest)"
-msgstr "Item check-in (digest)"
+msgstr "Items returned (digest)"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:22
 msgid "Checkouts"

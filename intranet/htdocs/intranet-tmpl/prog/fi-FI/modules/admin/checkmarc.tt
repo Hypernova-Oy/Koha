@@ -172,8 +172,8 @@
  <tr>
  <td>pohjan arvot</td>
  <td>tyhjä (null) arvo pohjassa. Tarkista seuraavat taulut<br />
- <li>select * from marc_subfield_structure where frameworkcode is NULL</li>
- <li>select * from marc_tag_structure where frameworkcode is NULL</li>
+ <li>SELECT * FROM marc_subfield_structure WHERE frameworkcode IS NULL</li>
+ <li>SELECT * FROM marc_tag_structure WHERE frameworkcode IS NULL</li>
  </td>
  </tr>
  [% ELSE %]
@@ -285,7 +285,7 @@
 [% IF ( total ) %]
  <tr>
  <td>YHT</td>
- <td>MARC-asetuksissa on [% total | html %] virhettä. Korjaa ne ennen Kohan käyttämistä.</td>
+ <td>MARC-asetuksissa on [% total | html %] virhettä. Korjaa ne ennen Kohan käyttämistä</td>
  </tr>
 </table>
 [% ELSE %]

@@ -225,7 +225,7 @@ opac.pref:
     - multiple_sortable:
         activity: Activity (372$a$s$t)
         address: Address (371$a$b$d$e)
-        associated_group: Associated group (373$a$s$t$u$v$0)
+        associated_group: Associerad grupp (373$a$s$t$u$v$0)
         email_address: Electronic mail address (371$m)
         identifiers: Identifiers (024$2$a)
         occupation: Occupation (374$a$s$t$u$v$0)
@@ -234,8 +234,9 @@ opac.pref:
         uri: URI (371$u)
       pref: OPACAuthorIdentifiersAndInformation
     - '<strong>NOTE:</strong> Identifiers for authors and contributors - valid codes
-      to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID),
-      loop (Loop ID), rid (Publons ID), and viaf (VIAF ID).'
+      to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID),
+      scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata
+      (WIKIDATA ID).'
   - - 'Beräkna hur mycket en låntagare har "sparat" genom att använda biblioteket,
       baserat på ersättningskostnad, och visa:'
     - multiple:
@@ -246,6 +247,34 @@ opac.pref:
         user: på låntagarens sida 'din sammanfattning'
       pref: OPACShowSavings
     - . Observera att visad summa kan vara felaktig om utlåningshistorik är anonymiserad.
+  - - choices:
+        '0': Don't allow
+        '1': Tillåt
+      pref: OPACVirtualCard
+    - låntagare åtkomst till fliken 'Digitalt lånekort' på sidan Din översikt i OPAC.
+    - 'Om inställt på tillåt, visa en '
+    - choices:
+        code128: CODE128
+        code39: CODE39
+        coop2of5: COOP 2 of 5
+        ean13: EAN-13
+        ean8: EAN-8
+        iata2of5: IATA 2 of 5
+        industrial2of5: Industrial 2 of 5
+        itf14: ITF-14
+        matrix2of5: Matrix 2 of 5
+        qrcode: QR-kod
+        upca: UPC-A
+        upce: UPC-E
+      default: code39
+      pref: OPACVirtualCardBarcode
+    - streckkoden i låntagarens virtuella kort.
+  - - choices:
+        '0': Allow
+        '1': Don't allow
+      default: 0
+      pref: OPACDisableSendList
+    - OPAC users to email lists via a 'Send list' button.
   Förslag:
   - - choices:
         '0': Visa inte
@@ -275,28 +304,6 @@ opac.pref:
         '1': Visa
       pref: OPACViewOthersSuggestions
     - inköpsförslag från andra låntagare i OPAC.
-  - - choices:
-        '0': Don't allow
-        '1': Tillåt
-      pref: OPACVirtualCard
-    - patrons to access the 'My virtual card' tab on their account page on the OPAC.
-    - 'If set to allow, show a '
-    - choices:
-        code128: CODE128
-        code39: CODE39
-        coop2of5: COOP 2 of 5
-        ean13: EAN-13
-        ean8: EAN-8
-        iata2of5: IATA 2 of 5
-        industrial2of5: Industrial 2 of 5
-        itf14: ITF-14
-        matrix2of5: Matrix 2 of 5
-        qrcode: QR Code
-        upca: UPC-A
-        upce: UPC-E
-      default: code39
-      pref: OPACVirtualCardBarcode
-    - ' barcode in the patron''s virtual card.'
   - - 'Fält som ska vara obligatoriska för inköpsförslag från låntagare:'
     - pref: OPACSuggestionMandatoryFields
       required: title
@@ -490,14 +497,15 @@ opac.pref:
       default: 0
       pref: OpacAllowSharingPrivateLists
     - OPAC-användare att dela privata listor med andra låntagare.
-  - - 'Expired patrons are blocked from performing the following actions in the OPAC:'
+  - - 'Utgångna låntagare blockeras från att göra följande saker i OPAC:'
     - multiple:
-        hold: Placing a hold on an item
-        ill_request: Placing an ILL request
-        renew: Renewing an item
+        hold: Göra reservationer
+        ill_request: Göra en fjärrlånebeställning
+        renew: Låna om
       pref: BlockExpiredPatronOpacActions
-    - <p><strong>NOTE:</strong> OPAC actions blocked using the patron category setting
-      take priority over this system preference.</p>
+    - <p><strong>OBS:</strong> utgångna låntagare från OPAC-åtgärder som att reservera
+      eller låna om. Observera att låntagarkategorins inställning har högre prioritet
+      än denna systeminställning.</p>
   - - Cronjobbet cleanup_database.pl tar automatiskt bort inbjudningar till oaccepterade
       privata listdelninger efter
     - class: integer
@@ -579,8 +587,8 @@ opac.pref:
       pref: PatronSelfRegistrationBorrowerUnwantedField
       source: borrowers
       type: modalselect
-    - '<br /> NOTE: preferred_name will be set to firstname if not included in the
-      form.'
+    - '<br /> OBS: preferred_name kommer att ställas in på förnamn om det inte ingår
+      i formuläret.'
   - - 'Följande <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
       target=''blank''>databaskolumner</a> kommer inte visas i formuläret där låntagaren
       kan ändra uppgifter:'
@@ -588,9 +596,9 @@ opac.pref:
       pref: PatronSelfModificationBorrowerUnwantedField
       source: borrowers
       type: modalselect
-    - '<br /> NOTE: preferred_name will be set to firstname if not included in the
-      form. It should also be selected in <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerUnwantedField">BorrowerUnwantedField</a>
-      if selected here.'
+    - '<br /> OBS: preferred_name kommer att ställas in på förnamn om det inte ingår
+      i formuläret. Det bör också väljas i <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerUnwantedField">BorrowerUnwantedField</a>
+      om det är valt här.'
   - - choices:
         '0': Betrakta inte
         '1': Betrakta
@@ -625,8 +633,8 @@ opac.pref:
         KohaAdminEmailAddress: KohaAdminEmailAddress
       default: 0
       pref: EmailPatronRegistrations
-    - '<br>If you choose <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForPatronRegistrations">EmailAddressForPatronRegistrations</a>
-      you have to enter a valid email address: '
+    - '<br>Om du väljer <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForPatronRegistrations">EmailAddressForPatronRegistrations</a>
+      så måste du ange en giltig e-postadress: '
     - class: email
       pref: EmailAddressForPatronRegistrations
   Utseende:
@@ -694,20 +702,21 @@ opac.pref:
   - - Den här beskrivningen kommer att synas i sökmotorernas söklistor (160 tecken).
     - pref: OpacMetaDescription
       type: textarea
-  - - Control how search engines index the OPAC by adding a robots meta tag with
+  - - Styr hur sökmotorer indexerar OPAC genom att lägga till en robots-metatagg med
     - multiple:
         nofollow: nofollow
         noindex: noindex
       pref: OpacMetaRobots
     - options.<br>
-    - <br><strong>nofollow:</strong> This option tells search engines not to follow
-      any links on the OPAC. If you don't specify this rule, search engines may use
-      links on the page to discover those linked pages.
-    - <br/><strong>noindex:</strong> This option instructs search engines not to index
-      the OPAC at all. This means the OPAC won't appear in search results. This might
-      be useful for internal library catalogs that are not intended for public search.
-    - <br><strong>both:</strong> Search engines won't follow any links on the OPAC
-      and won't index the OPAC itself.
+    - <br><strong>nofollow:</strong> Det här alternativet talar om för sökmotorer
+      att inte följa några länkar på OPAC. Om du inte anger denna regel kan sökmotorer
+      använda länkar på sidan för att upptäcka de länkade sidorna.
+    - <br/><strong>noindex:</strong> Det här alternativet instruerar sökmotorer att
+      inte indexera OPAC alls. Det betyder att OPAC inte visas i sökresultaten. Detta
+      kan vara användbart för interna bibliotekskataloger som inte är avsedda för
+      offentlig sökning.
+    - <br><strong>båda:</strong> Sökmotorer följer inte några länkar på OPAC och kommer
+      inte att indexera själva OPAC.
   - - Visa som standard katalogposter
     - choices:
         isbd: som angivet i ISBD-mallen.
@@ -831,10 +840,10 @@ opac.pref:
     - '<br />Obs: Om ''separat kolumn'' är markerad, behöver du fortfarande aktivera
       visning av item_shelving_location på sidan <a href=''/cgi-bin/koha/admin/columns_settings.pl''>konfigurera
       kolumner</a>.'
-  - - Use
+  - - Använd
     - choices:
-        cardnumber: card number
-        cardnumberorusername: card number or username
+        cardnumber: kortnummer
+        cardnumberorusername: kortnummer eller användarnamn
         username: användarnamn
       default: card number
       pref: OPACLoginLabelTextContent

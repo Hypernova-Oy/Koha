@@ -160,12 +160,12 @@
  <li>
  <label for="upload_port">Ladda upp port: </label>
  <input type="text" name="upload_port" id="upload_port" size="20" maxlength="40" value="[% account.upload_port | html %]" />
- <div class="hint">Porten för uppladdning är 22 om inget annat anges.</div>
+ <div class="hint">The upload port will default to 22 (for SFTP) or 21 (for FTP) if not set.</div>
  </li>
  <li>
  <label for="download_port">Ladda ned port: </label>
  <input type="text" name="download_port" id="download_port" size="20" maxlength="40" value="[% account.download_port | html %]" />
- <div class="hint">Porten för nedladdning är 22 om inget annat anges.</div>
+ <div class="hint">The download port will default to 22 (for SFTP) or 21 (for FTP) if not set.</div>
  </li>
  <li>
  <label for="download_directory">Hämtningskatalog: </label>

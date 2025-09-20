@@ -81,6 +81,10 @@
                                 <h3>Unable to delete patron</h3>
                                 <p>Insufficient privileges.</p>
                             [% END %]
+            [% IF ( error == 'CANT_RENEW_CHILD_WITHOUT_GUARANTOR' ) %]
+                <h3>Unable to renew patron</h3>
+                <p>They must have a guarantor</p>
+            [% END %]
                         </div>
                     [% END %]
 
@@ -776,7 +780,6 @@
     [% INCLUDE 'str/members-menu.inc' %]
     [% Asset.js("js/members-menu.js") | $raw %]
     [% Asset.js("js/recalls.js") | $raw %]
-    [% Asset.js("js/form-submit.js") | $raw %]
     <script>
         const LoadCheckoutsTableDelay = 0;
         const AlwaysLoadCheckoutsTable = [% Koha.Preference('AlwaysLoadCheckoutsTable') | html %];

@@ -126,28 +126,6 @@ Verkkokirjasto:
         '1': Näytä
       pref: OPACViewOthersSuggestions
     - toisten asiakkaiden tekemiä hankintaehdotuksia verkkokirjastossa.
-  - - choices:
-        '0': Don't allow
-        '1': Allow
-      pref: OPACVirtualCard
-    - patrons to access the 'My virtual card' tab on their account page on the OPAC.
-    - 'If set to allow, show a '
-    - choices:
-        code128: CODE128
-        code39: CODE39
-        coop2of5: COOP 2 of 5
-        ean13: EAN-13
-        ean8: EAN-8
-        iata2of5: IATA 2 of 5
-        industrial2of5: Industrial 2 of 5
-        itf14: ITF-14
-        matrix2of5: Matrix 2 of 5
-        qrcode: QR Code
-        upca: UPC-A
-        upce: UPC-E
-      default: code39
-      pref: OPACVirtualCardBarcode
-    - ' barcode in the patron''s virtual card.'
   - - 'Pakolliset kentät hankintaehdotuksissa:'
     - pref: OPACSuggestionMandatoryFields
       required: title
@@ -231,17 +209,17 @@ Verkkokirjasto:
       pref: PatronSelfRegistrationBorrowerUnwantedField
       source: borrowers
       type: modalselect
-    - '<br /> NOTE: preferred_name will be set to firstname if not included in the
-      form.'
+    - '<br/>Huomioi: preferred_name-kenttään asetetaan firstname-kentän tieto, mikäli
+      se piilotetaan lomakkeelta.'
   - - 'Seuraavat <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
       target=''blank''>tietokannan sarakkeet</a> eivät näy asiakkaan itserekisteröitymissivulla:'
     - exclusions: sort1|sort2|gonenoaddress|lost|flags
       pref: PatronSelfModificationBorrowerUnwantedField
       source: borrowers
       type: modalselect
-    - '<br /> NOTE: preferred_name will be set to firstname if not included in the
-      form. It should also be selected in <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerUnwantedField">BorrowerUnwantedField</a>
-      if selected here.'
+    - '<br/>Huomioi: preferred_name-kentän tieto asetetaan firstname-kenttään, jos
+      se on piilotettu lomakkeelta. Se pitäisi piilottaa myös <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerUnwantedField">BorrowerUnwantedField</a>-järjestelmäasetuksesta,
+      jos se piilotetaan tässä asetuksessa.'
   - - choices:
         '0': Älä vaadi
         '1': Vaadi
@@ -276,8 +254,8 @@ Verkkokirjasto:
         KohaAdminEmailAddress: KohaAdminEmailAddress
       default: 0
       pref: EmailPatronRegistrations
-    - '<br>If you choose <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForPatronRegistrations">EmailAddressForPatronRegistrations</a>
-      you have to enter a valid email address: '
+    - '<br>Jos valitset <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForPatronRegistrations">EmailAddressForPatronRegistrations</a>,
+      syötä toimiva sähköpostiosoite: '
     - class: email
       pref: EmailAddressForPatronRegistrations
   Ominaisuudet:
@@ -302,14 +280,14 @@ Verkkokirjasto:
         '1': Salli
       pref: opacuserlogin
     - asiakkaiden kirjautua verkkokirjastoon.
-  - - Show
+  - - Näytä
     - choices:
-        callnum: library and call number
-        ccode: library, collection code, and call number
-        library: only library
-        location: library, location, and call number
+        callnum: kirjasto ja luokka
+        ccode: kirjasto, kokoelma ja luokka
+        library: vain kirjasto
+        location: kirjasto, hyllypaikka ja luokka
       pref: OPACItemLocation
-    - for items on the OPAC search results.
+    - verkkokirjastossa hakutuloksen niteille.
   - - choices:
         '0': Älä salli
         '1': Salli
@@ -468,8 +446,9 @@ Verkkokirjasto:
         uri: URI (371$u)
       pref: OPACAuthorIdentifiersAndInformation
     - '<strong>Huomioi:</strong> Tekijöiden ja muiden tekijöiden tunnisteet - osakentässä
-      (024$2) käytettävät koodit ovat tällä hetkellä: orcid (ORCID), scopus (ScopusID),
-      loop (Loop ID), rid (Publons ID), and viaf (VIAF ID).'
+      (024$2) käytettävät koodit ovat tällä hetkellä: isni (ISNI), orcid (ORCID),
+      scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), ja wikidata
+      (WIKIDATA ID).'
   - - 'Laske kuinka paljon asiakas on ''säästänyt'' käyttäessään kirjastoa pohjaten
       summat korvaushintoihin näytä ne:'
     - multiple:
@@ -481,6 +460,34 @@ Verkkokirjasto:
       pref: OPACShowSavings
     - Huomaa, että näytettävät säästöt voivat olla epätarkkoja, jos lainahistoria
       on anonymisoitu.
+  - - choices:
+        '0': Älä salli
+        '1': Salli
+      pref: OPACVirtualCard
+    - asiakkaiden päästä virtuaalikirjastokorttiinsa verkkokirjaston Omat tiedot -sivulla.
+    - 'Jos sallittu, näytä '
+    - choices:
+        code128: CODE128
+        code39: CODE39
+        coop2of5: COOP 2 of 5
+        ean13: EAN-13
+        ean8: EAN-8
+        iata2of5: IATA 2 of 5
+        industrial2of5: Industrial 2 of 5
+        itf14: ITF-14
+        matrix2of5: Matrix 2 of 5
+        qrcode: QR-koodi
+        upca: UPC-A
+        upce: UPC-E
+      default: code39
+      pref: OPACVirtualCardBarcode
+    - -muotoinen viivakoodi asiakkaan virtuaalikortissa.
+  - - choices:
+        '0': Salli
+        '1': Älä salli
+      default: 0
+      pref: OPACDisableSendList
+    - verkkokirjaston käyttäjien lähettää listoja sähköpostilla "Lähetä lista" -napilla.
   OpenURL:
   - - 'Täydellinen URL-osoite OpenURL nimipalvelimelle (joka alkaa merkkijonolla <code>http://</code>
       tai <code>https://</code>):'
@@ -489,7 +496,7 @@ Verkkokirjasto:
   - - 'OpenURL-linkkien teksti (tai kuvan nimi, jos <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpenURLImageLocation">OpenURLImageLocation</a>
       on määritelty):'
     - pref: OpenURLText
-  - - Kuvan sijainti OpenURL-linkeille
+  - - 'Kuvan sijainti OpenURL-linkeille:'
     - class: url
       pref: OpenURLImageLocation
     - <br />Voi olla absoluuttinen URL, joka alkaa merkkijonolla <code>http://</code>,
@@ -599,7 +606,7 @@ Verkkokirjasto:
         '1': Näytä
       pref: OPACShowLibraries
     - linkki verkkokirjastoon kunkin kirjaston tietoihin.
-  - - 'Näytä arvostelut (tähdet):'
+  - - Näytä arvostelut (tähdet)
     - choices:
         all: hakutuloksissa, perustiedot-näytöllä ja asiakkaan sivulla
         details: vain perustiedot-näytöllä
@@ -633,7 +640,7 @@ Verkkokirjasto:
       jota ei ole tarkoitettu asiakkaiden haettavaksi.
     - <br><strong>both:</strong> Hakukoneet eivät seuraa mitään linkkejä verkkokirjastossa
       eivätkä indeksoi verkkokirjaston sisältöä.
-  - - 'Nimeketietueiden oletusnäyttötapa:'
+  - - Nimeketietueiden oletusnäyttötapa
     - choices:
         isbd: ISBD-mallin mukaisesti.
         marc: MARC-formaatin mukaisesti.
@@ -754,14 +761,14 @@ Verkkokirjasto:
     - '<br />Huomaa: Jos valittuna on ''erillisessä sarakkeessa'', täytyy item_shelving_location
       valinnan olla päällä <a href=''/cgi-bin/koha/admin/columns_settings.pl''>taulujen
       asetuksissa</a> (verkkokirjaston taulut) -ylläpiton sivulla.'
-  - - Use
+  - - Käytä
     - choices:
-        cardnumber: card number
-        cardnumberorusername: card number or username
-        username: username
+        cardnumber: kirjastokorttia
+        cardnumberorusername: kirjastokorttia tai käyttäjätunnusta
+        username: käyttäjätunnusta
       default: card number
       pref: OPACLoginLabelTextContent
-    - as the label of the userid input field on the OPAC login form.
+    - kirjautumistunnuksen otsikkona verkkokirjaston kirjautumisessa.
   - - choices:
         '0': Älä näytä
         '1': Näytä
@@ -1009,4 +1016,4 @@ Verkkokirjasto:
         track: Jäljitä
       default: 0
       pref: TrackClicks
-    - asiakkaiden klikkaamia linkkejä
+    - asiakkaiden klikkaamia linkkejä.

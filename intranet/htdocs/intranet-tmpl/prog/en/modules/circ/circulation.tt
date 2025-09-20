@@ -105,6 +105,10 @@
                         <div class="alert alert-warning">Staff members are not allowed to discharge borrowers, nor borrowers to request a discharge.</div>
                     [% END %]
 
+    [% IF ( noguarantor ) %]
+        <div class="alert alert-warning">This patron could not be renewed: they need a guarantor.</div>
+    [% END %]
+
                     [% IF is_anonymous %]
                         <div class="alert alert-warning">This is the anonymous patron, so circulation is disabled.</div>
                     [% END %]
@@ -1149,11 +1153,14 @@
 
             // Handle checkout for fast cataloging
             // Check the referrer to prevent csrf, fill and submit form
-            if(document.referrer.split(window.location.origin + '/cgi-bin/koha/cataloguing/additem.pl?')[1].match(/frameworkcode=FA&circborrowernumber=/) ) {
-                let urlParams = new URLSearchParams(window.location.search);
-                let barcode = urlParams.get('barcode');
-                $('#barcode').val(barcode);
-                $('#mainform').submit();
+            if (document.referrer.length) {
+                const referrerSplit = document.referrer.split(window.location.origin + '/cgi-bin/koha/cataloguing/additem.pl?')
+                if(referrerSplit[1] && referrerSplit[1].match(/frameworkcode=FA&circborrowernumber=/) ) {
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let barcode = urlParams.get('barcode');
+                    $('#barcode').val(barcode);
+                    $('#mainform').submit();
+                }
             }
 
             $("#cancellation-reason").comboBox({
@@ -1167,7 +1174,6 @@
     [% Asset.js("js/checkouts.js") | $raw %]
     [% Asset.js("js/tables/bookings.js") | $raw %]
     [% Asset.js("js/recalls.js") | $raw %]
-    [% Asset.js("js/form-submit.js") | $raw %]
 [% END %]
 
 [% INCLUDE 'intranet-bottom.inc' %]

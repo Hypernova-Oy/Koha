@@ -25,7 +25,7 @@
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
 
- <div class="container">
+ <div class="container-fluid">
  <div id="holds" class="maincontent">
  <h1>Varaaminen</h1>
  [% IF ( message ) %]
@@ -48,7 +48,7 @@
 
  [% IF ( debarred ) %]
  <li id="debarred">
- Kirjastokorttisi on lukittu. [% IF debarred_comment %] Kommentti:<br />
+ Asiakastilisi on lukittu. [% IF debarred_comment %] Kommentti:<br />
  <span id="userdebarred_comment">
  <strong>
  [% IF debarred_comment.search('OVERDUES_PROCESS') %] Rajoite tullut palautuskehoituksesta [% debarred_comment.remove('OVERDUES_PROCESS ') | html_line_break %] [% ELSE %] [% FOR restriction IN logged_in_user.restrictions %] <div class="patron_restriction">
@@ -67,7 +67,7 @@
  </span>
  [% END %] [% IF debarred_date && debarred_date != '9999-12-31' %] Loppupvm: <span id="userdebarred_date">[% debarred_date | $KohaDates %]</span>
  [% END %]
- <br /><em>Tavallisin syy kirjastokortin lukitsemiselle on maksamattomat maksut tai kadonneet lainat. Jos tiedoissasi ei ole mielestäsi epäselvyyksiä, ota yhteys kirjastoon asian selvittämiseksi.</em> <a href="/cgi-bin/koha/opac-account.pl">Siirry Maksut-sivulle</a>
+ <br /><em>Tavallisin syy asiakastilisi lukitsemiselle on maksamattomat maksut tai kadonneet lainat. Jos tiedoissasi ei ole mielestäsi epäselvyyksiä, ota yhteys kirjastoon asian selvittämiseksi.</em> <a href="/cgi-bin/koha/opac-account.pl">Siirry Maksut-sivulle</a>
  </li>
  [% END %]
 
@@ -83,7 +83,7 @@
 
  [% IF ( bad_biblionumber ) %]
  <li id="bad_biblionumber">
- VIRHE: Ei tietuetta tällä ID-numerolla [% bad_biblionumber | html %]. </li>
+ VIRHE: Ei teostietoja tällä ID-numerolla [% bad_biblionumber | html %]. </li>
  [% END %]
 
  [% IF ( no_items_selected ) %]
@@ -258,7 +258,7 @@
  [% END %]
  </select>
  [% IF at_least_one_library_not_available_for_pickup %]
- <div class="at_least_one_library_not_available_note">Huomaa: Kirjaston käyttösäännöt eivät salli hyllyvarausten tekemistä.</div>
+ <div class="at_least_one_library_not_available_note">Huomaa: Kirjaston käyttösäännöt eivät salli hyllyvarausten tekemistä. Tule kirjastoon noutamaan haluamasi teos</div>
  [% END %]
  [% END # / UNLESS bibitemloo.holdable %]
  </li>
@@ -352,7 +352,7 @@
  <caption>Valitse nide:</caption>
  <thead>
  <tr>
- <th>Nidenumero</th>
+ <th>Kappaleen numero</th>
  [% IF ( item_level_itypes ) %]
  <th>Nidetyyppi</th>
  [% END %]

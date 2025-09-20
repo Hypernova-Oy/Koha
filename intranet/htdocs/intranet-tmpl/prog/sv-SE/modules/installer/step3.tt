@@ -422,8 +422,7 @@
  [% END %]
  [% END %]
  <li class="update_error">
- ERROR: [% e.error | $raw %]
- </li>
+ FEL: [% e.error | $raw %] </li>
  [% END %]
  </ul>
  [% END %]
@@ -441,8 +440,7 @@
  [% END %]
  [% END %]
  <li class="update_error">
- ERROR: [% e.error | $raw %]
- </li>
+ FEL: [% e.error | $raw %] </li>
  [% END %]
  </ul>
  [% END %]

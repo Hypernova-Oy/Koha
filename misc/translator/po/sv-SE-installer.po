@@ -1,11 +1,11 @@
 # Compendium of sv.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:32-0300\n"
-"PO-Revision-Date: 2024-11-19 03:00+0000\n"
-"Last-Translator: \"jessica.andersson\" <jessica.andersson@alingsas.se>\n"
+"PO-Revision-Date: 2025-05-22 03:07+0000\n"
+"Last-Translator: \"marie.hedbom\" <marie.hedbom@musikochteaterbiblioteket.se>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: sv-SE\n"
 "MIME-Version: 1.0\n"
@@ -258,7 +258,7 @@ msgid "Complete"
 msgstr "Komplett"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+msgid "Aggregated full text"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -291,7 +291,7 @@ msgstr "Strömmande media"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:36
 msgid "Unknown"
-msgstr "Okänt"
+msgstr "Okänd"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:37
 msgid "Journal"
@@ -4131,32 +4131,28 @@ msgid "Order received"
 msgstr "Beställning mottagen"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2
-#, fuzzy
 msgid "A library booking was cancelled"
-msgstr "Fjärrlånebeställning avbruten"
+msgstr "En bokning har avbrutits"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2
 msgid "Booking cancellation notice"
-msgstr ""
+msgstr "Meddelande om avbruten bokning"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3
-#, fuzzy
 msgid "A library booking was modified"
-msgstr "Fjärrlånebeställning avbruten"
+msgstr "En bokning ändrades eller uppdaterades"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3
 msgid "Booking modification notice"
-msgstr ""
+msgstr "Meddelande om ändrad eller uppdaterad bokning"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4
-#, fuzzy
 msgid "A library booking was confirmed"
-msgstr "Fjärrlånebeställning avbruten"
+msgstr "En bokning bekräftades"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4
-#, fuzzy
 msgid "Booking confirmation notice"
-msgstr "Bekräfta godkännande av begäran om att bli borttagen"
+msgstr "Meddelande om bekräftad bokning"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:5
 msgid "Catalog concern acknowledgment"
@@ -5219,7 +5215,7 @@ msgstr "Följande exemplar är för tillfället försenade:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:28:mul:3
 msgid "You have %s item(s) that are now due"
-msgstr ""
+msgstr "Du har %s exemplar som ska återlämnas idag"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:29:mul:1
 msgid "%sDate: %s%s"
@@ -5242,9 +5238,8 @@ msgid "Dear %s,%s"
 msgstr "Kära %s,%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:5
-#, fuzzy
 msgid "We regret to inform you, that the following booking has been cancelled.%s"
-msgstr "Vi beklagar att meddela dig att följande exemplar inte kan tillhandahållas på grund av att den saknas. Din reservation har tagits bort."
+msgstr "Vi beklagar att meddelade dig att följande bokning har avbrutits.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:7
 #, fuzzy
@@ -5292,7 +5287,7 @@ msgstr "%sFörseningar%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:31:mul:28
 msgid "%sNews%s"
-msgstr ""
+msgstr "%sNyheter%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:31:mul:33
 msgid "%sPosted on %s%s"
@@ -5347,7 +5342,7 @@ msgstr "Följande exemplar modifierades:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:37:mul:3
 msgid "You have %s item(s) that will be due soon."
-msgstr ""
+msgstr "Du har %s exemplar som snart ska återlämnas."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:38:mul:1
 msgid "The following items have been renewed:"
@@ -5390,13 +5385,12 @@ msgid "Current library: %s %s"
 msgstr "Aktuellt bibliotek: %s %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:5
-#, fuzzy
 msgid "Your booking of %s has been modified.%s"
-msgstr "Din reservation på %s (%s) har bekräftats."
+msgstr "Din bokning av %s har ändrats eller uppdaterats.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:7
 msgid "The new details are:%s"
-msgstr ""
+msgstr "De nya detaljerna är:%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:11
 #, fuzzy
@@ -5472,13 +5466,12 @@ msgid "Details of the update are below:"
 msgstr "Information om uppdateringen nedan:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4:mul:5
-#, fuzzy
 msgid "Your booking of %s has been confirmed.%s"
-msgstr "Din reservation på %s (%s) har bekräftats."
+msgstr "Din bokning av %s har bekräftats.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4:mul:7
 msgid "The details are:%s"
-msgstr ""
+msgstr "Detaljerna är:%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:56:mul:1
 msgid "Dear patron,"
@@ -5502,11 +5495,11 @@ msgstr "Om du inte är beskyddare i vårt bibliotek eller inte vill acceptera de
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:3
 msgid "A public list, titled %s%s%s, has been transferred to you%s by %s%s.%s"
-msgstr ""
+msgstr "En offentlig lista, döpt %s%s%s, har flyttats över till dig%s av %s%s.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:5
 msgid "%sThe list was previously owned by %s.%s%s%s"
-msgstr ""
+msgstr "%sListan ägdes tidigare av %s.%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:6
 #, fuzzy
@@ -6081,7 +6074,7 @@ msgstr "Ett krav som du har registrerat på följande exemplar: %s / %s (%s) fin
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:97:mul:1
 msgid "Your item has been recalled: %s (%s). Please return it by %s."
-msgstr ""
+msgstr "Ditt exemplar har blivit återkrävt: %s (%s). Vänligen återlämna det senast %s."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:98:mul:1
 #, fuzzy
@@ -8229,31 +8222,31 @@ msgstr "En klar och tydlig beskrivning av vad du förväntade skulle hända."
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:5:mul:1
 msgid "%sThe online catalog uses functional cookies: these are essential to make the site work.%s"
-msgstr ""
+msgstr "%sDen här katalogen använder funktionella cookies: de är nödvändiga för att den här sajten ska fungera.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:1
 msgid "%sWhat are cookies?%s"
-msgstr ""
+msgstr "%sVad är kakor?%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:2
 msgid "%sCookies are small text files placed on your browser by websites. They help make websites work, or work more efficiently. They also \"remember\" some of your preferences, so you don't have to set a preference again every time you switch to a different page on the same website.%s"
-msgstr ""
+msgstr "%sKakor är små textfiler som webbplatser placerar i din webbläsare. De hjälper webbplatser att fungera, eller fungera mer effektivt. De \"kommer också ihåg\" några av dina inställningar, så att du inte behöver ställa in en inställning igen varje gång du byter till en annan sida på samma webbplats.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:3
 msgid "%sIf cookies are a concern for you, you may like to regularly clear your cookies on your browser or use a private browser mode. Check your browser settings for these options.%s"
-msgstr ""
+msgstr "%sOm kakor är ett problem för dig kanske du vill rensa dina kakor regelbundet i din webbläsare eller använda ett privat webbläsarläge. Kontrollera dina webbläsarinställningar för dessa alternativ.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:4
 msgid "%sEssential cookies%s"
-msgstr ""
+msgstr "%sNödvändiga kakor%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:5
 msgid "%sHere is the list of essential cookies used on the Koha online catalog.%s"
-msgstr ""
+msgstr "%sHär är listan med nödvändiga kakor som används i Kohas onlinekatalog.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:6
 msgid "%sSome of these depend on settings chosen by the library team; therefore all the cookies listed may not apply to this site.%s"
-msgstr ""
+msgstr "%Några av dessa beror på inställningar som valts av bibliotekspersonalen; därför kanske alla listade kakor inte gäller för den här webbplatsen.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:10
 #, fuzzy
@@ -8392,15 +8385,15 @@ msgstr ""
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:65
 msgid "%sNon-essential cookies%s"
-msgstr ""
+msgstr "%sIcke-nödvändiga kakor%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:66
 msgid "%sThe library team may create additional cookies. These are optional and will require your agreement before they are used.%s"
-msgstr ""
+msgstr "%sBibliotekspersonalen kan skapa ytterligare kakor. Dessa är valfria och kräver ditt samtycke innan de används.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:67
 msgid "%sIf any non-essential cookies are created, they will appear below.%s"
-msgstr ""
+msgstr "%sOm icke-nödvändiga kakor skapas kommer de att visas nedan.%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:description:1
 #, fuzzy
@@ -8609,7 +8602,7 @@ msgstr ""
 
 #: installer/data/mysql/en/optional/sample_z3950_servers.yml:description:1
 msgid "Allow access to the following servers to search and download record information:"
-msgstr ""
+msgstr "Tillåt åtkomst till följande servrar för att söka efter och ladda ner postinformation:"
 
 #: installer/data/mysql/en/optional/sample_z3950_servers.yml:description:3
 msgid "LIBRARY OF CONGRESS NAMES (authority records)"

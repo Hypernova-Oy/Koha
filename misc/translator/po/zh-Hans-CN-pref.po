@@ -1,7 +1,7 @@
 # Compendium of zh_CN.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:37-0300\n"
 "PO-Revision-Date: 2025-04-14 03:56+0000\n"
@@ -2112,16 +2112,51 @@ msgid "cataloguing.pref#MARCOverlayRules# Use"
 msgstr "使用"
 
 # Cataloging > Display > MarcFieldDocURL
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+# Cataloging > Record structure
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "使用"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 msgstr "例如 <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
 
 # Cataloging > Display > MarcFieldDocURL
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "若空白，则文件格式文件在 http://loc.gov (MARC21) 或 http://archive.ifla.org (UNIMARC)。"
+# Cataloging > Record structure
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "使用"
 
 # Cataloging > Display > MarcFieldDocURL
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "可能的替代为 <tt>{MARC}</tt> (选用 marc，如 \"MARC21\" 或 \"UNIMARC\")、<tt>{FIELD}</tt> (栏号，如 \"000\" 或 \"048\")、<tt>{LANG}</tt> (使用者语文，如 \"en\" or \"fi-FI\")。"
+# Cataloging > Record structure
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "使用"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Record structure
@@ -5941,7 +5976,7 @@ msgstr ""
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
 #, fuzzy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "此为配对值清单。还入馆藏时，若左方的不外借值匹配馆藏的不外借值"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -5998,9 +6033,11 @@ msgstr ""
 msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: FIC - causes an item in the Processing Center location to be updated into the Fiction location on check out.<br/>"
 msgstr ""
 
-# Circulation > Checkin policy > UpdateItemLocationOnCheckout
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
-msgstr ""
+# Circulation > Checkin policy > UpdateItemLocationOnCheckin
+# Circulation > Checkin policy
+#, fuzzy
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
+msgstr "此为配对值清单。还入馆藏时，若左方的不外借值匹配馆藏的不外借值"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckout
 msgid "circulation.pref#UpdateItemLocationOnCheckout# The special term _ALL_ is used on the left side of the colon (:) to affect all items, <strong>and overrides all other rules.</strong>"
@@ -8927,7 +8964,7 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "OPAC 详情页面的采访详情。"
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
 msgstr ""
 
 # OPAC > Features > OPACAuthorIdentifiers
@@ -9027,6 +9064,22 @@ msgstr "启用"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "在 OPAC 书目详情页面显示 QR 码的选项。"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "允许"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "不允许"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr ""
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Appearance
@@ -11347,26 +11400,32 @@ msgstr "触发警告, 若目前馆藏被借出不超过"
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "日前。"
 
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr ""
+
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > General
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
 msgstr "(以直线 | 区隔各栏)"
 
-# Patrons > Patron relationships > ChildNeedsGuarantor
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
-msgstr ""
+# Patrons > Patron relationships > PrefillGuaranteeField
+# Patrons > General
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
+msgstr "(以直线 | 区隔各栏)"
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
 msgstr "不送出"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > General
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
 msgstr "(以直线 | 区隔各栏)"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
@@ -14393,12 +14452,14 @@ msgstr "ILS-DI给 OPAC 使用者的 ILS-DI 服务 (可在：/cgi-bin/koha/ilsdi.
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
 msgstr "允许IP寻址"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
 msgstr "使用ILS-DI服务(启用时)。以无空格的逗点区隔多个IP。空白则允许任意IP使用。"
 
 # Web services > IdRef > IdRef
@@ -14645,7 +14706,8 @@ msgid "web_services.pref#RESTOAuth2ClientCredentials# Enable"
 msgstr "启用"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
+#, fuzzy
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
 msgstr "OAuth2 客户认证供 REST API 使用。需要安装 Net::OAuth2::AuthorizationServer。"
 
 # Web services > REST API > RESTPublicAPI
@@ -15885,6 +15947,14 @@ msgstr "经由报表页面服务指定报表的列数。"
 # Authorities > General
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "需要自动新增权威记录时，仍需参照既有的权威记录。"
+
+# Cataloging > Display > MarcFieldDocURL
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "若空白，则文件格式文件在 http://loc.gov (MARC21) 或 http://archive.ifla.org (UNIMARC)。"
+
+# Cataloging > Display > MarcFieldDocURL
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "可能的替代为 <tt>{MARC}</tt> (选用 marc，如 \"MARC21\" 或 \"UNIMARC\")、<tt>{FIELD}</tt> (栏号，如 \"000\" 或 \"048\")、<tt>{LANG}</tt> (使用者语文，如 \"en\" or \"fi-FI\")。"
 
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display

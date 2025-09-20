@@ -1,10 +1,10 @@
 # Compendium of es.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:11-0300\n"
-"PO-Revision-Date: 2025-03-26 03:06+0000\n"
+"PO-Revision-Date: 2025-08-09 03:09+0000\n"
 "Last-Translator: Tomás Cohen Arazi <tomascohen@gmail.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: es-ES\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /es/22.11/es-ES-installer.po\n"
 "X-POOTLE-MTIME: 1693861905.945989\n"
@@ -258,8 +258,8 @@ msgid "Complete"
 msgstr "Completo"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
-msgstr "Total agregado"
+msgid "Aggregated full text"
+msgstr "Texto completo agregado"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
 msgid "Abstract and index"
@@ -323,7 +323,7 @@ msgstr "No especificado"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:44
 msgid "Book"
-msgstr "Libro"
+msgstr "Reservar anticipadamente"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:46
 msgid "Bookseries"
@@ -3792,7 +3792,7 @@ msgstr "Originador"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:94
 msgid "Other"
-msgstr "Otro"
+msgstr "Otros"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:95
 msgid "Papermaker"
@@ -3920,7 +3920,7 @@ msgstr "Cantante"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:126
 msgid "Sponsor"
-msgstr "Patrocinador"
+msgstr "Espónsor"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:127
 msgid "Standards body"
@@ -6061,7 +6061,7 @@ msgstr "Método de numeración simple"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Issue"
-msgstr "Ítem"
+msgstr "Número"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Vol. {X}, Number {Y}, Issue {Z}"
@@ -7694,7 +7694,7 @@ msgstr "Biblioteca"
 
 #: installer/data/mysql/en/optional/patron_categories.yml:categories:1:row:12
 msgid "Staff"
-msgstr "Administrativo"
+msgstr "Personal"
 
 #: installer/data/mysql/en/optional/patron_categories.yml:description:1
 msgid "Sample patron types and categories. Types are currently hardcoded but you can manage categories after installation from the administration module."

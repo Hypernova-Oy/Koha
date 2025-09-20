@@ -1,10 +1,10 @@
 # Compendium of pl.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:28-0300\n"
-"PO-Revision-Date: 2025-03-07 03:45+0000\n"
+"PO-Revision-Date: 2025-08-09 03:09+0000\n"
 "Last-Translator: Urszula <matoga@biblos.pk.edu.pl>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: pl-PL\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /pl/22.11/pl-PL-installer.po\n"
 "X-POOTLE-MTIME: 1698043824.607378\n"
@@ -171,7 +171,7 @@ msgstr "Każdego tygodnia"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:2
 msgid "Active"
-msgstr "Aktywna"
+msgstr "Aktywny"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:3
 msgid "In negotiation"
@@ -258,8 +258,8 @@ msgid "Complete"
 msgstr "Skończony"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
-msgstr "Agregowana pełnotekstowa"
+msgid "Aggregated full text"
+msgstr "Zagregowany pełny tekst"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
 msgid "Abstract and index"
@@ -283,7 +283,7 @@ msgstr "Zasób informacyjny online"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:34
 msgid "Print"
-msgstr "Druk"
+msgstr "Drukuj"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:35
 msgid "Streaming media"
@@ -311,7 +311,7 @@ msgstr "Sprawozdanie"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:41
 msgid "Website"
-msgstr "Strona WWW"
+msgstr "Strona internetowa"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:42
 msgid "Newspaper"
@@ -3970,7 +3970,7 @@ msgstr "Writer of accompanying material"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:description:1
 msgid "Default Koha system authorised values"
-msgstr "Domyślne dopuszczone wartości Koha"
+msgstr "Domyślne wartości kontrolowane Koha"
 
 #: installer/data/mysql/en/mandatory/class_sources.yml:class_sort_rules:1:row:1
 msgid "Default filing rules for DDC"
@@ -4682,11 +4682,11 @@ msgstr "Twoja lista: [% listname | html %]"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:104
 msgid "Send cart"
-msgstr "Wyślij schowek"
+msgstr "Wyślij koszyk"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:104
 msgid "Your cart"
-msgstr "Twój schowek"
+msgstr "Twój koszyk"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:105
 msgid "Train item slip"
@@ -4838,7 +4838,7 @@ msgstr "%s%sEgzemplarze: %s%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:104:mul:6
 msgid "%s %s sent you a cart from our online catalog.%s"
-msgstr "%s %s wysłał Ci zawartość schowka z katalogu.%s"
+msgstr "%s %s wysłał Ci zawartość koszyka z katalogu.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:104:mul:23
 msgid "%sView in online catalog%s"
@@ -6346,7 +6346,7 @@ msgstr "Cancelled from the OPAC user page"
 
 #: installer/data/mysql/en/optional/auth_val.yml:description:1
 msgid "Some basic default authorised values for library locations, item lost status, etc."
-msgstr "Podstawowe dopuszczone wartości dla lokalizacji biblioteki, statusów zagubienia egzemplarza, itd."
+msgstr "Podstawowe wartości kontrolowane dla lokalizacji biblioteki, statusów zagubienia egzemplarza, itd."
 
 #: installer/data/mysql/en/optional/auth_val.yml:description:2
 msgid "You can change these at any time after installation."

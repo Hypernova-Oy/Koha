@@ -552,7 +552,7 @@
                                     + encodeURIComponent(row.order_id) + '&amp;invoiceid=[% invoiceid | uri %]' + '">'
                                     + _("Vastaanota") + '</a><br/>'
                                     + '<a href="#" onclick="transfer_order_popup(' + escape_str(row.order_id) + '); return false;">'
-                                    + _("Siirto") + '</a>';
+                                    + _("Siirrä") + '</a>';
                         },
                         "orderable": false,
                         "searchable": false
@@ -593,7 +593,7 @@
 
                                 if ( row.biblio.items_count - row.items.length > 0 ) {
                                     result += '<strong title="'
-                                            + _("Tietueen poisto ei onnistu, sillä siinä on %s nide(ttä).").format(row.items.length)
+                                            + _("Tietueen poisto ei onnistu, sillä siinä on %s nide(ttä)").format(row.items.length)
                                             +'">' + (row.biblio.items_count - row.items.length) + _(" kohde(tta) jäljellä") + '</strong><br/>';
                                 }
 
@@ -604,7 +604,7 @@
                                 }
 
                                 if ( row.biblio.subscriptions_count > 0 ) {
-                                    result += '<strong title="' + _("Tietueen poisto ei onnistu, poista siihen liittyvät kausijulkaisutilaukset ensin.") + '">'
+                                    result += '<strong title="' + _("Tietueen poisto ei onnistu, poista siihen liittyvät kausijulkaisutilaukset ensin") + '">'
                                             + _("%s kausijulkaisutilaus(ta) jäljellä").format(row.biblio.subscriptions_count)
                                             + '</strong><br>';
                                 }

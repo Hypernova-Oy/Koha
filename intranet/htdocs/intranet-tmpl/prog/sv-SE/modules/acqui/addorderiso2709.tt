@@ -303,7 +303,7 @@
  </li>
 
  <li>
- <label for="ccode_item_[% item.item_id | html %]">ccode</label>
+ <label for="ccode_item_[% item.item_id | html %]">avdelning</label>
  <select id="ccode_item_[% item.item_id | html %]" name="ccode_[% biblio.import_record_id | html %]">
  <option value=""> </option>
  [% FOREACH ccodeloo IN ccodeloop %]

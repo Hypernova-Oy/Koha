@@ -34,7 +34,7 @@
  [% END %]
  [% IF ( show || op == "enqueued") %]
  [% WRAPPER breadcrumb_item %]
- <a href="/cgi-bin/koha/tools/batchMod.pl">Niteiden poisto eräajona</a>
+ <a href="/cgi-bin/koha/tools/batchMod.pl?del=1">Niteiden poisto eräajona</a>
  [% END %]
  [% ELSE %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
@@ -170,7 +170,10 @@
  <input type="hidden" name="op" value="[% op | html %]" />
  <p>Tämä poistaa [% IF ( too_many_items_display ) %]kaikki[% ELSE %]valitut[% END %] niteet.</p>
  <input type="hidden" name="del" value="1" />
- <input type="checkbox" name="del_records" id="del_records" /> <label for="del_records">Poista tietueet, jos kaikki niteet poistettu.</label>
+ [% IF ( CAN_user_editcatalogue_edit_catalogue ) %]
+ <input type="checkbox" name="del_records" id="del_records" />
+ <label for="del_records">Poista tietueet, jos kaikki niteet poistettu.</label>
+ [% END %]
 
  <fieldset class="action">
  [% IF too_many_items_display %]

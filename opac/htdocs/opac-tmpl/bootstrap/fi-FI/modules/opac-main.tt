@@ -177,7 +177,7 @@
  <legend>Kirjaudu sisään:</legend>
  [% IF ( Koha.Preference('GoogleOpenIDConnect') == 1 ) %]
  <a href="/cgi-bin/koha/svc/auth/googleopenidconnect" class="btn btn-light" id="openid_connect"><i class="fa-brands fa-google" aria-hidden="true"></i> Kirjaudu Google-tunnuksella</a>
- <p>Jos sinulla ei ole Google-tiliä, voit kirjautua kirjastokortillasi: </p>
+ <p>Jos sinulla ei ole Google-tiliä, voit kirjautua omalla kirjaston tunnuksellasi: </p>
  [% END # /IF GoogleOpenIDConnect %]
  [% SET identity_providers = AuthClient.get_providers('opac') %]
  [% IF ( ! identity_providers.empty ) %]

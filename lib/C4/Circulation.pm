@@ -780,8 +780,10 @@ sub CanBookBeIssued {
     my $onsite_checkout     = $params->{onsite_checkout}     || 0;
     my $override_high_holds = $params->{override_high_holds} || 0;
 
-    my $item_object = !$barcode ? undef : $params->{item}
-      // Koha::Items->find( { barcode => $barcode } );
+    my $item_object = $params->{item};
+    if ( !$item_object and $barcode ) {
+        $item_object = Koha::Items->find( { barcode => $barcode } );
+    }
 
     # MANDATORY CHECKS - unless item exists, nothing else matters
     unless ( $item_object ) {
@@ -2329,6 +2331,10 @@ sub AddReturn {
                         my $patron = $issue->patron;
                         $patron_unblessed = $patron->unblessed;
                     }
+
+                    # Confirm the lost charge came from the most recent patron to return the item
+                    # and only charge the fine if so
+                    if ( $message->payload->{patron_id} == $patron_unblessed->{borrowernumber} ) {
                     _CalculateAndUpdateFine(
                         {
                             issue       => $issue,
@@ -2343,6 +2349,7 @@ sub AddReturn {
                 }
             }
         }
+    }
     }
 
     # check if we have a transfer for this document
@@ -4239,7 +4246,7 @@ sub ProcessOfflineOperation {
     if ( $operation->{action} eq 'return' ) {
         $report = ProcessOfflineReturn( $operation );
     } elsif ( $operation->{action} eq 'issue' ) {
-        $report = ProcessOfflineIssue( $operation );
+        ($report) = ProcessOfflineIssue($operation);
     } elsif ( $operation->{action} eq 'payment' ) {
         $report = ProcessOfflinePayment( $operation );
     }
@@ -4297,15 +4304,15 @@ sub ProcessOfflineIssue {
                 $operation->{timestamp},
             );
         }
-        AddIssue(
+        my $checkout = AddIssue(
             $patron,
-            $operation->{'barcode'},
-            undef,
+            $operation->{barcode},
+            $operation->{due_date},
             undef,
             $operation->{timestamp},
             undef,
         );
-        return "Success.";
+        return ( "Success.", $checkout );
     } else {
         return "Borrower not found.";
     }

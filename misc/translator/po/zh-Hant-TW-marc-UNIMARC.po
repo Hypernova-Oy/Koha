@@ -1,10 +1,10 @@
 # Compendium of zh_TW.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-11-20 03:02+0000\n"
-"PO-Revision-Date: 2025-04-21 03:05+0000\n"
+"PO-Revision-Date: 2025-05-13 03:56+0000\n"
 "Last-Translator: Frank Chou <frank@sris.com.tw>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: zh-Hant-TW\n"
@@ -38,7 +38,7 @@ msgstr "代碼欄位"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:343
 #, c-format
 msgid "Audience: "
-msgstr "預期讀者："
+msgstr "預期讀者: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:12
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:26
@@ -231,7 +231,7 @@ msgstr "不詳"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:24
 #, c-format
 msgid "Physical presentation: "
-msgstr "尺寸："
+msgstr "尺寸: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:27
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_106.tt:24
@@ -315,7 +315,7 @@ msgstr "其他文字資料格式"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:41
 #, c-format
 msgid "Literary genre: "
-msgstr "文體："
+msgstr "文體: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:44
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125b.tt:38
@@ -408,7 +408,7 @@ msgstr "多重/其他圖書館表單"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:58
 #, c-format
 msgid "Biography: "
-msgstr "傳記："
+msgstr "傳記: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:61
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/subtypes_unimarc.inc:55
@@ -451,7 +451,7 @@ msgstr "包括傳記資料"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:69
 #, c-format
 msgid "Illustration: "
-msgstr "插圖："
+msgstr "插圖: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:72
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:28
@@ -688,7 +688,7 @@ msgstr "無插圖"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:91
 #, c-format
 msgid "Content: "
-msgstr "內容："
+msgstr "內容: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:94
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_110.tt:267
@@ -1037,7 +1037,7 @@ msgstr "其他"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:120
 #, c-format
 msgid "Video types: "
-msgstr "視聽資料類型："
+msgstr "視聽資料類型: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:123
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115a.tt:28
@@ -1072,7 +1072,7 @@ msgstr "期刊"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:133
 #, c-format
 msgid "Serial type: "
-msgstr "期刊類型："
+msgstr "期刊類型: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:135
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/subtypes_unimarc.inc:129
@@ -1127,7 +1127,7 @@ msgstr "其他"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:146
 #, c-format
 msgid "Periodicity: "
-msgstr "週期："
+msgstr "週期: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:149
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/subtypes_unimarc.inc:143
@@ -1234,7 +1234,7 @@ msgstr "未知的"
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:170
 #, c-format
 msgid "Regularity: "
-msgstr "規則性："
+msgstr "規則性: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/subtypes_unimarc.inc:172
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/subtypes_unimarc.inc:166
@@ -1550,7 +1550,7 @@ msgstr "輸入日期"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_100.tt:21
 #, c-format
 msgid "Type of publication date: Publication dates 1 and 2"
-msgstr "出版年類型：出版年1與2"
+msgstr "出版年類型: 出版年1與2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_100.tt:25
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_100.tt:27
@@ -2008,7 +2008,7 @@ msgstr "b- 其他"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_100_authorities.tt:67
 #, c-format
 msgid "c- multiple transliterations: ISO or other schemes"
-msgstr "c- 多層翻譯：ISO或其他方案"
+msgstr "c- 多層翻譯: ISO或其他方案"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_100.tt:420
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_100.tt:422
@@ -2791,7 +2791,7 @@ msgstr "UNIMARC 105 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:17
 #, c-format
 msgid "Illustration codes 1:"
-msgstr "插圖代碼1："
+msgstr "插圖代碼1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:32
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:34
@@ -2982,7 +2982,7 @@ msgstr "y - 無插圖"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:115
 #, c-format
 msgid "Illustration codes 2:"
-msgstr "插圖代碼2："
+msgstr "插圖代碼2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:170
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:172
@@ -2993,7 +2993,7 @@ msgstr "i - 紋章"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:212
 #, c-format
 msgid "Illustration codes 3:"
-msgstr "插圖代碼3："
+msgstr "插圖代碼3:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:302
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:304
@@ -3006,12 +3006,12 @@ msgstr "y - 無插圖"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:308
 #, c-format
 msgid "Illustration codes 4:"
-msgstr "插圖代碼4："
+msgstr "插圖代碼4:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:405
 #, c-format
 msgid "Form of contents codes 1:"
-msgstr "內容格式代碼1："
+msgstr "內容格式代碼1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:420
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:422
@@ -3292,22 +3292,22 @@ msgstr "z - 其他"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:543
 #, c-format
 msgid "Form of contents codes 2:"
-msgstr "內容格式代碼2："
+msgstr "內容格式代碼2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:681
 #, c-format
 msgid "Form of contents codes 3:"
-msgstr "內容格式代碼3："
+msgstr "內容格式代碼3:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:818
 #, c-format
 msgid "Form of contents codes 4:"
-msgstr "內容格式代碼4："
+msgstr "內容格式代碼4:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:956
 #, c-format
 msgid "Conference or meeting code:"
-msgstr "會議代碼："
+msgstr "會議代碼:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:966
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:968
@@ -3324,7 +3324,7 @@ msgstr "1- 會議出版品"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:982
 #, c-format
 msgid "Festschrift indicator:"
-msgstr "紀念文集指標："
+msgstr "紀念文集指標:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:992
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_105.tt:994
@@ -3470,7 +3470,7 @@ msgstr "UNIMARC 106 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_106.tt:19
 #, c-format
 msgid "Form of item: Coded data: Medium designator (not repeatable)"
-msgstr "載體形式：代碼資料：媒體代號(不可重複)"
+msgstr "載體形式: 代碼資料: 媒體代號(不可重複)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_106.tt:52
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_106.tt:54
@@ -3482,7 +3482,7 @@ msgstr "手寫"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_106.tt:61
 #, c-format
 msgid "multimedia (e.g. an item in regular print with a microfiche supplement)"
-msgstr "多媒體(如：常態印刷的館藏附件為縮影片)"
+msgstr "多媒體(如: 常態印刷的館藏附件為縮影片)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_106.tt:72
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_106.tt:74
@@ -4712,7 +4712,7 @@ msgstr "根據不安全影片的電片"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_116.tt:174
 #, c-format
 msgid "synthetics (plastic, vinyl, etc.)"
-msgstr "合成材料(如：塑膠、尼龍等)"
+msgstr "合成材料(如: 塑膠、尼龍等)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115a.tt:1054
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115a.tt:1056
@@ -4768,7 +4768,7 @@ msgstr "金屬與玻璃"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115a.tt:1122
 #, c-format
 msgid "synthetics (plastic, vinyl, etc.) and glass"
-msgstr "合成材料 (如：塑膠、尼龍等) 與玻璃"
+msgstr "合成材料 (如: 塑膠、尼龍等) 與玻璃"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115a.tt:1140
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115a.tt:1142
@@ -5210,7 +5210,7 @@ msgstr "硝酸鹽基底 - 粉化"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115b.tt:575
 #, c-format
 msgid "nonnitrate - detectable deterioration (e.g. diacetate odour)"
-msgstr "非硝酸鹽基底 - 偵測到惡化(如：二醋酸氣味)"
+msgstr "非硝酸鹽基底 - 偵測到惡化(如: 二醋酸氣味)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115b.tt:579
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_115b.tt:581
@@ -6514,7 +6514,7 @@ msgstr "無狹義詞"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:80
 #, c-format
 msgid "Relief codes 1:"
-msgstr "地勢代碼1："
+msgstr "地勢代碼1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:89
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:91
@@ -6663,17 +6663,17 @@ msgstr "其他地貌表示法"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:156
 #, c-format
 msgid "Relief codes 2:"
-msgstr "地勢代碼2："
+msgstr "地勢代碼2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:232
 #, c-format
 msgid "Relief codes 3:"
-msgstr "地勢代碼3："
+msgstr "地勢代碼3:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:310
 #, c-format
 msgid "Relief codes 4:"
-msgstr "地勢代碼4："
+msgstr "地勢代碼4:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:387
 #, c-format
@@ -6963,7 +6963,7 @@ msgstr "其他已知類型"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:661
 #, c-format
 msgid "Prime meridian 1:"
-msgstr "本初子午線1："
+msgstr "本初子午線1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:671
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:673
@@ -7272,7 +7272,7 @@ msgstr "華盛頓特區，美國"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_120.tt:896
 #, c-format
 msgid "Prime meridian 2:"
-msgstr "本初子午線2："
+msgstr "本初子午線2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:14
 #, c-format
@@ -7299,7 +7299,7 @@ msgstr "3-空間的"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:35
 #, c-format
 msgid "Primary cartographic image 1:"
-msgstr "主要圖像1："
+msgstr "主要圖像1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:45
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:47
@@ -7342,7 +7342,7 @@ msgstr "被動遙控感測技術"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:73
 #, c-format
 msgid "Primary cartographic image 2:"
-msgstr "主要圖像2："
+msgstr "主要圖像2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:98
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:100
@@ -7359,7 +7359,7 @@ msgstr "實際媒體"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:135
 #, c-format
 msgid "synthetics (e.g. plastics, vinyl)"
-msgstr "合成材料(如：塑膠、尼龍)"
+msgstr "合成材料(如: 塑膠、尼龍)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:138
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:140
@@ -7371,7 +7371,7 @@ msgstr "皮製品 (如，羊皮、牛皮)"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:145
 #, c-format
 msgid "textile including manmade fibre textiles (e.g. silk, cloth, nylon)"
-msgstr "紡織品，包括人造纖維(如：絲、布、尼龍)"
+msgstr "紡織品，包括人造纖維(如: 絲、布、尼龍)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:148
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121a.tt:150
@@ -7615,7 +7615,7 @@ msgstr "垂直"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121b.tt:60
 #, c-format
 msgid "Spectral bands : 01 to 99 = number of bands, xx = not applicable"
-msgstr "光譜帶：01 至 99 = 帶數，xx = 不適用"
+msgstr "光譜帶: 01 至 99 = 帶數，xx = 不適用"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_121b.tt:64
 #, c-format
@@ -7798,7 +7798,7 @@ msgstr "UNIMARC 123a 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123a.tt:18
 #, c-format
 msgid "Type of scale:"
-msgstr "尺寸類型："
+msgstr "尺寸類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123a.tt:22
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123a.tt:24
@@ -7816,7 +7816,7 @@ msgstr "角尺度"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123a.tt:34
 #, c-format
 msgid "other type of scale (e.g., time scale, quantitative statistical scale)"
-msgstr "其他尺規類型(如：時間尺規、質化統計尺規)"
+msgstr "其他尺規類型(如: 時間尺規、質化統計尺規)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123defg.tt:13
 #, c-format
@@ -7827,7 +7827,7 @@ msgstr "UNIMARC 123d/e/f/g 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123i_j.tt:18
 #, c-format
 msgid "Hemisphere:"
-msgstr "半球："
+msgstr "半球:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123defg.tt:23
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123defg.tt:25
@@ -7867,13 +7867,13 @@ msgstr "程度(補 0)"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123i_j.tt:38
 #, c-format
 msgid "Minute (complete with 0):"
-msgstr "分(補 0)："
+msgstr "分(補 0):"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123defg.tt:51
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123i_j.tt:41
 #, c-format
 msgid "Second (complete with 0):"
-msgstr "第二(補 0)："
+msgstr "第二(補 0):"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_123i_j.tt:13
 #, c-format
@@ -7918,7 +7918,7 @@ msgstr "UNIMARC 124b 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124b.tt:19
 #, c-format
 msgid "Form of cartographic item:"
-msgstr "地圖館藏格式："
+msgstr "地圖館藏格式:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124b.tt:24
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124b.tt:26
@@ -7982,7 +7982,7 @@ msgstr "UNIMARC 124c 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124c.tt:19
 #, c-format
 msgid "Presentation technique for photographic or non-photographic image:"
-msgstr "照片或非照片呈現技術："
+msgstr "照片或非照片呈現技術:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124c.tt:24
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124c.tt:26
@@ -8124,7 +8124,7 @@ msgstr "UNIMARC 124d 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124d.tt:19
 #, c-format
 msgid "Position of platform for photographic or remote sensing image:"
-msgstr "照片或遙測感應影像平台位置："
+msgstr "照片或遙測感應影像平台位置:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124e.tt:14
 #, c-format
@@ -8134,7 +8134,7 @@ msgstr "UNIMARC 124e 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124e.tt:19
 #, c-format
 msgid "Category of satellite for remote sensing image:"
-msgstr "遙測影像衛星的範圍："
+msgstr "遙測影像衛星的範圍:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124e.tt:24
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124e.tt:26
@@ -8162,7 +8162,7 @@ msgstr "UNIMARC 124f 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124f.tt:19
 #, c-format
 msgid "Name of satellite for remote sensing image:"
-msgstr "遙測影像衛星名稱："
+msgstr "遙測影像衛星名稱:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124f.tt:23
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124f.tt:25
@@ -8274,7 +8274,7 @@ msgstr "UNIMARC 124g 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124g.tt:19
 #, c-format
 msgid "Recording technique for remote sensing image:"
-msgstr "遙測感應影像紀錄技術："
+msgstr "遙測感應影像紀錄技術:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124g.tt:29
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_124g.tt:31
@@ -8338,7 +8338,7 @@ msgstr "UNIMARC 125a 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:19
 #, c-format
 msgid "Type of score:"
-msgstr "樂譜類型："
+msgstr "樂譜類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:23
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:25
@@ -8380,7 +8380,7 @@ msgstr "圖像記譜"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:55
 #, c-format
 msgid "close score (e.g. hymnals)"
-msgstr "close score (如：贊美詩)"
+msgstr "close score (如: 贊美詩)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:58
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:60
@@ -8427,7 +8427,7 @@ msgstr "不適用，不是樂譜"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:105
 #, c-format
 msgid "Parts indicator:"
-msgstr "部件指標："
+msgstr "部件指標:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:110
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125a.tt:112
@@ -8461,7 +8461,7 @@ msgstr "UNIMARC 125b 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125b.tt:19
 #, c-format
 msgid "Literary text indicator:"
-msgstr "文體指示器："
+msgstr "文體指示器:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125b.tt:43
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_125b.tt:45
@@ -8561,7 +8561,7 @@ msgstr "UNIMARC 126a 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:19
 #, c-format
 msgid "Form of release:"
-msgstr "釋出格式："
+msgstr "釋出格式:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:24
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:26
@@ -8616,7 +8616,7 @@ msgstr "影片(有聲電影)"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:71
 #, c-format
 msgid "Speed:"
-msgstr "速度："
+msgstr "速度:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:90
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:92
@@ -8717,7 +8717,7 @@ msgstr "每秒4/10 英吋"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:172
 #, c-format
 msgid "Kind of sound:"
-msgstr "音效類型："
+msgstr "音效類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:176
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:178
@@ -8734,7 +8734,7 @@ msgstr "四聲道"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:203
 #, c-format
 msgid "Groove width:"
-msgstr "溝紋寬度："
+msgstr "溝紋寬度:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:207
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:209
@@ -8751,7 +8751,7 @@ msgstr "縮影細紋"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:234
 #, c-format
 msgid "Dimensions (sound recordings):"
-msgstr "尺寸(錄音)："
+msgstr "尺寸(錄音):"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:238
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:240
@@ -8822,7 +8822,7 @@ msgstr "5.7 公分 x 10 公分或 2 1/4 英吋 x 4英吋，磁柱"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:310
 #, c-format
 msgid "Tape width:"
-msgstr "磁帶寬度："
+msgstr "磁帶寬度:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:315
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:317
@@ -8852,7 +8852,7 @@ msgstr "1/8 英吋。"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:337
 #, c-format
 msgid "2 in."
-msgstr "2 英吋"
+msgstr "2 英吋."
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:340
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:342
@@ -8871,7 +8871,7 @@ msgstr "未記錄成帶子"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:362
 #, c-format
 msgid "Tape configuration:"
-msgstr "磁帶組態："
+msgstr "磁帶組態:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:367
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:369
@@ -8924,7 +8924,7 @@ msgstr "六聲道"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:424
 #, c-format
 msgid "Accompanying textual material 1:"
-msgstr "隨附文件資料 1："
+msgstr "隨附文件資料 1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:433
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:435
@@ -9153,32 +9153,32 @@ msgstr "其他文字附件"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:510
 #, c-format
 msgid "Accompanying textual material 2:"
-msgstr "隨附文件資料 2："
+msgstr "隨附文件資料 2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:597
 #, c-format
 msgid "Accompanying textual material 3:"
-msgstr "隨附文件資料 3："
+msgstr "隨附文件資料 3:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:684
 #, c-format
 msgid "Accompanying textual material 4:"
-msgstr "隨附文件資料 4："
+msgstr "隨附文件資料 4:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:771
 #, c-format
 msgid "Accompanying textual material 5:"
-msgstr "隨附文件資料 5："
+msgstr "隨附文件資料 5:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:857
 #, c-format
 msgid "Accompanying textual material 6:"
-msgstr "隨附文件資料 6："
+msgstr "隨附文件資料 6:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:944
 #, c-format
 msgid "Recording technique:"
-msgstr "紀錄技術："
+msgstr "紀錄技術:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:948
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:950
@@ -9201,7 +9201,7 @@ msgstr "數位化"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:975
 #, c-format
 msgid "Special reproduction characteristics:"
-msgstr "特別重製特色："
+msgstr "特別重製特色:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:979
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126a.tt:981
@@ -9259,7 +9259,7 @@ msgstr "UNIMARC 126b 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:19
 #, c-format
 msgid "Kind of disc, cylinder or tape:"
-msgstr "磁碟、磁柱或磁帶類型："
+msgstr "磁碟、磁柱或磁帶類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:24
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:26
@@ -9312,7 +9312,7 @@ msgstr "測試壓模"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:76
 #, c-format
 msgid "Kind of material:"
-msgstr "資料類型："
+msgstr "資料類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:96
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:98
@@ -9330,13 +9330,13 @@ msgstr "塑膠 (大量生產)"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:108
 #, c-format
 msgid "lacquered (e.g. acetate)"
-msgstr "漆(如：醋酸鹽)"
+msgstr "漆(如: 醋酸鹽)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:111
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:113
 #, c-format
 msgid "metal (e.g. aluminium)"
-msgstr "金屬(如：鋁)"
+msgstr "金屬(如: 鋁)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:116
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:118
@@ -9383,7 +9383,7 @@ msgstr "聚酯纖維"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:153
 #, c-format
 msgid "Kind of cutting:"
-msgstr "切割類型："
+msgstr "切割類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:157
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_126b.tt:159
@@ -9410,17 +9410,17 @@ msgstr "(左邊補上 0)"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_127.tt:19
 #, c-format
 msgid "Hours:"
-msgstr "時間："
+msgstr "時間:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_127.tt:23
 #, c-format
 msgid "Minutes:"
-msgstr "分："
+msgstr "分:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_127.tt:27
 #, c-format
 msgid "Seconds:"
-msgstr "分："
+msgstr "分:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_128a.tt:14
 #, c-format
@@ -9430,7 +9430,7 @@ msgstr "UNIMARC 128a 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_128a.tt:19
 #, c-format
 msgid "Form of musical work:"
-msgstr "音樂作品格式："
+msgstr "音樂作品格式:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_128a.tt:23
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_128a.tt:25
@@ -9860,7 +9860,7 @@ msgstr "UNIMARC 128b 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_128b.tt:19
 #, c-format
 msgid "Instruments or voices for ensemble:"
-msgstr "合奏的器樂或聲音："
+msgstr "合奏的器樂或聲音:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_128b.tt:29
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_128b.tt:31
@@ -10584,7 +10584,7 @@ msgstr "UNIMARC 130 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:19
 #, c-format
 msgid "Specific material designation:"
-msgstr "資料特殊類型標示："
+msgstr "資料特殊類型標示:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:23
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:25
@@ -10649,7 +10649,7 @@ msgstr "縮影條"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:70
 #, c-format
 msgid "Polarity:"
-msgstr "極性："
+msgstr "極性:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:90
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:92
@@ -10660,7 +10660,7 @@ msgstr "混合極性"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:97
 #, c-format
 msgid "Dimensions:"
-msgstr "尺寸："
+msgstr "尺寸:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:107
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:109
@@ -10719,7 +10719,7 @@ msgstr "9 x 19 公分"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:164
 #, c-format
 msgid "Reduction ratio:"
-msgstr "縮小倍率："
+msgstr "縮小倍率:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:168
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:170
@@ -10768,7 +10768,7 @@ msgstr "特別微縮倍率"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_135a.tt:170
 #, c-format
 msgid "Color:"
-msgstr "顏色："
+msgstr "顏色:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:215
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:217
@@ -10785,7 +10785,7 @@ msgstr "彩色"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:237
 #, c-format
 msgid "Emulsion on film:"
-msgstr "影片的乳化劑："
+msgstr "影片的乳化劑:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:241
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:243
@@ -10814,7 +10814,7 @@ msgstr "混合乳化"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:278
 #, c-format
 msgid "Generation:"
-msgstr "世代："
+msgstr "世代:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:282
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:284
@@ -10843,7 +10843,7 @@ msgstr "混合發電"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:309
 #, c-format
 msgid "Base of film:"
-msgstr "影片基底："
+msgstr "影片基底:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:313
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_130.tt:315
@@ -10865,7 +10865,7 @@ msgstr "UNIMARC 135a 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_135a.tt:17
 #, c-format
 msgid "Type of electronic resource:"
-msgstr "電子資源類型："
+msgstr "電子資源類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_135a.tt:27
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_135a.tt:29
@@ -11256,7 +11256,7 @@ msgstr "UNIMARC 140 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:19
 #, c-format
 msgid "Illustration - Book 1:"
-msgstr "插圖 - 圖書1："
+msgstr "插圖 - 圖書1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:38
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:40
@@ -11367,17 +11367,17 @@ msgstr "意見"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:114
 #, c-format
 msgid "Illustration - Book 2:"
-msgstr "插圖 - 圖書2："
+msgstr "插圖 - 圖書2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:210
 #, c-format
 msgid "Illustration - Book 3:"
-msgstr "插圖 - 圖書3："
+msgstr "插圖 - 圖書3:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:305
 #, c-format
 msgid "Illustration - Book 4:"
-msgstr "插圖 - 圖書4："
+msgstr "插圖 - 圖書4:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:350
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:352
@@ -11388,32 +11388,32 @@ msgstr "圖像"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:402
 #, c-format
 msgid "Illustration - Full page plates 1:"
-msgstr "插圖 - 全頁圖版1："
+msgstr "插圖 - 全頁圖版1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:473
 #, c-format
 msgid "Illustration - Full page plates 2:"
-msgstr "插圖 - 全頁圖版2："
+msgstr "插圖 - 全頁圖版2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:545
 #, c-format
 msgid "Illustration - Full page plates 3:"
-msgstr "插圖 - 全頁圖版3："
+msgstr "插圖 - 全頁圖版3:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:616
 #, c-format
 msgid "Illustration - Full page plates 4:"
-msgstr "插圖 - 全頁圖版4："
+msgstr "插圖 - 全頁圖版4:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:687
 #, c-format
 msgid "Illustration - Technique:"
-msgstr "插圖 - 技術："
+msgstr "插圖 - 技術:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:740
 #, c-format
 msgid "Form of contents 1:"
-msgstr "內容格式1："
+msgstr "內容格式1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:750
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:752
@@ -11718,22 +11718,22 @@ msgstr "作品版本"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:896
 #, c-format
 msgid "Form of contents 2:"
-msgstr "內容格式2："
+msgstr "內容格式2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1054
 #, c-format
 msgid "Form of contents 3:"
-msgstr "內容格式3："
+msgstr "內容格式3:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1210
 #, c-format
 msgid "Form of contents 4:"
-msgstr "內容格式4："
+msgstr "內容格式4:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1366
 #, c-format
 msgid "Literature:"
-msgstr "文學："
+msgstr "文學:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1381
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1383
@@ -11870,7 +11870,7 @@ msgstr "多重或其他"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1535
 #, c-format
 msgid "Biography:"
-msgstr "傳記："
+msgstr "傳記:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1560
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1562
@@ -11893,7 +11893,7 @@ msgstr "多重或其他表單"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1578
 #, c-format
 msgid "Support material - Book:"
-msgstr "支援材料 - 圖書："
+msgstr "支援材料 - 圖書:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1588
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1590
@@ -11944,7 +11944,7 @@ msgstr "羊皮紙"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1619
 #, c-format
 msgid "Support material - Plates:"
-msgstr "支援材料 - 圖片："
+msgstr "支援材料 - 圖片:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1663
 #, c-format
@@ -11966,7 +11966,7 @@ msgstr "浮水印紙張"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1679
 #, c-format
 msgid "Printer's device:"
-msgstr "印表機設備："
+msgstr "印表機設備:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1684
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1686
@@ -11983,7 +11983,7 @@ msgstr "印表機設定出現"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1697
 #, c-format
 msgid "Publisher's device:"
-msgstr "出版者設備："
+msgstr "出版者設備:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1702
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1704
@@ -12000,7 +12000,7 @@ msgstr "呈現出版社設備"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1713
 #, c-format
 msgid "Ornamental device:"
-msgstr "裝飾樂器："
+msgstr "裝飾樂器:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1718
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_140.tt:1720
@@ -12022,7 +12022,7 @@ msgstr "UNIMARC 141 段建立器"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:19
 #, c-format
 msgid "Binding material 1:"
-msgstr "裝訂資料1："
+msgstr "裝訂資料1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:34
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:36
@@ -12059,17 +12059,17 @@ msgstr "未裝訂"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:75
 #, c-format
 msgid "Binding material 2:"
-msgstr "裝訂資料2："
+msgstr "裝訂資料2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:132
 #, c-format
 msgid "Binding material 3:"
-msgstr "裝訂資料3："
+msgstr "裝訂資料3:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:188
 #, c-format
 msgid "Types of binding:"
-msgstr "裝訂類型："
+msgstr "裝訂類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:193
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:195
@@ -12110,7 +12110,7 @@ msgstr "與其他作品裝訂在一起"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:234
 #, c-format
 msgid "Bound with:"
-msgstr "共同裝訂："
+msgstr "共同裝訂:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:239
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:241
@@ -12127,7 +12127,7 @@ msgstr "與其他裝訂在一起"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:250
 #, c-format
 msgid "State of preservation - Binding:"
-msgstr "保存狀態 - 裝訂："
+msgstr "保存狀態 - 裝訂:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:255
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:257
@@ -12174,7 +12174,7 @@ msgstr "遺失"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:291
 #, c-format
 msgid "State of preservation - Body of the book 1 :"
-msgstr "保存狀態 - 圖書本體1："
+msgstr "保存狀態 - 圖書本體1:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:321
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:323
@@ -12187,7 +12187,7 @@ msgstr "復原"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_141.tt:332
 #, c-format
 msgid "State of preservation - Body of the book 2 :"
-msgstr "保存狀態 - 圖書本體2："
+msgstr "保存狀態 - 圖書本體2:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_146a.tt:14
 #, c-format
@@ -13516,7 +13516,7 @@ msgstr "選定館藏"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_225a.tt:26
 #, c-format
 msgid "OR new collection: "
-msgstr "或新增館藏："
+msgstr "或新增館藏: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_283-2.tt:14
 #, c-format
@@ -13904,7 +13904,7 @@ msgstr "5 - 訂閱後免費閱讀 (需要註冊)"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_325j.tt:56
 #, c-format
 msgid "Qualifier type :"
-msgstr "參賽類型 ："
+msgstr "參賽類型 :"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_325j.tt:60
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_325j.tt:62
@@ -13929,7 +13929,7 @@ msgstr "# - 未打算編碼"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_325j.tt:86
 #, c-format
 msgid "Unit under embargo :"
-msgstr "禁運單位 ："
+msgstr "禁運單位 :"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_325j.tt:90
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_325j.tt:92
@@ -13958,7 +13958,7 @@ msgstr "i - 問題部分"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_325j.tt:128
 #, c-format
 msgid "Number of units under embargo :"
-msgstr "禁運的單位數量 ："
+msgstr "禁運的單位數量 :"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_4XX.tt:16
 #, c-format
@@ -13978,7 +13978,7 @@ msgstr "任何字詞"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_4XX.tt:31
 #, c-format
 msgid "Item type:"
-msgstr "館藏類型："
+msgstr "館藏類型:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_4XX.tt:33
 #, c-format
@@ -14028,7 +14028,7 @@ msgstr "&lt;&lt; 上一頁 "
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_4XX.tt:130
 #, c-format
 msgid "Next&gt;&gt; "
-msgstr "下一頁 &gt;&gt;"
+msgstr "下一頁 &gt;&gt; "
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_686a.tt:15
 #, c-format
@@ -14802,7 +14802,7 @@ msgstr "URN:ISSN:"
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2SRWDC.xsl:163
 #, c-format
 msgid "LOC:"
-msgstr "LOC："
+msgstr "LOC:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2SRWDC.xsl:33
 #, c-format
@@ -14885,7 +14885,7 @@ msgstr "corporate_secondary_author"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:138
 #, c-format
 msgid "Language: "
-msgstr "語言："
+msgstr "語言: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:100
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:142
@@ -14945,12 +14945,12 @@ msgstr "副書名， "
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:168
 #, c-format
 msgid "Country: "
-msgstr "國家："
+msgstr "國家: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:148
 #, c-format
 msgid "Tag 009: "
-msgstr "欄號 009："
+msgstr "欄號 009: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:156
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:197
@@ -14986,13 +14986,13 @@ msgstr "杜威: "
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:262
 #, c-format
 msgid "Classification: "
-msgstr "分類法："
+msgstr "分類法: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:239
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:280
 #, c-format
 msgid "Contents note: "
-msgstr "聯絡說明："
+msgstr "聯絡說明: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:244
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:285
@@ -15012,31 +15012,31 @@ msgstr "jpxyz"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:297
 #, c-format
 msgid "Abstract: "
-msgstr "摘要："
+msgstr "摘要: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:273
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:314
 #, c-format
 msgid "Provenance note: "
-msgstr "來源附註："
+msgstr "來源附註: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:282
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:323
 #, c-format
 msgid "Bibliography: "
-msgstr "書目："
+msgstr "書目: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:292
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:333
 #, c-format
 msgid "Thesis: "
-msgstr "論文："
+msgstr "論文: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:317
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:358
 #, c-format
 msgid "SUDOC serial history: "
-msgstr "SUDOC 集叢紀錄："
+msgstr "SUDOC 集叢紀錄: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:328
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:369
@@ -15102,7 +15102,7 @@ msgstr "商標"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:419
 #, c-format
 msgid "Online Resources:"
-msgstr "線上資源："
+msgstr "線上資源:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslim2intranetDetail.xsl:391
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACDetail.xsl:431
@@ -15161,7 +15161,7 @@ msgstr "title"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslimUtils.xsl:268
 #, c-format
 msgid "Publication: "
-msgstr "出版："
+msgstr "出版: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:70
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:128
@@ -15181,37 +15181,37 @@ msgstr "搜尋出版者"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslimUtils.xsl:258
 #, c-format
 msgid "Production: "
-msgstr "產量： "
+msgstr "產量: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:98
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslimUtils.xsl:259
 #, c-format
 msgid "Distribution: "
-msgstr "分佈： "
+msgstr "分佈: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:99
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslimUtils.xsl:260
 #, c-format
 msgid "Manufacture: "
-msgstr "製造者： "
+msgstr "製造者: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:102
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslimUtils.xsl:263
 #, c-format
 msgid "Copyright date: "
-msgstr "版權日期： "
+msgstr "版權日期: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:103
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslimUtils.xsl:264
 #, c-format
 msgid "Protection date: "
-msgstr "保護日期： "
+msgstr "保護日期: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:104
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslimUtils.xsl:265
 #, c-format
 msgid "Copyright date / protection date: "
-msgstr "版權日期/保護日期： "
+msgstr "版權日期/保護日期: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:161
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslimUtils.xsl:322
@@ -15234,7 +15234,7 @@ msgstr "說明: "
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:219
 #, c-format
 msgid "Linked with: "
-msgstr "連結者："
+msgstr "連結者: "
 
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:281
 #: koha-tmpl/intranet-tmpl/prog/en/xslt/UNIMARCslimUtils.xsl:293
@@ -15453,7 +15453,7 @@ msgstr "播放此樣本"
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:165
 #, c-format
 msgid "Availability: "
-msgstr "可取得："
+msgstr "可取得: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:197
 #, c-format
@@ -15463,7 +15463,7 @@ msgstr "無可借的館藏 "
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:202
 #, c-format
 msgid "Items available for loan: "
-msgstr "可以借出的館藏："
+msgstr "可以借出的館藏: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:210
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:236
@@ -15472,12 +15472,12 @@ msgstr "可以借出的館藏："
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:343
 #, c-format
 msgid "Call number: "
-msgstr "索書號："
+msgstr "索書號: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:287
 #, c-format
 msgid "Items available for reference: "
-msgstr "可供參考的館藏："
+msgstr "可供參考的館藏: "
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:292
 #: koha-tmpl/opac-tmpl/bootstrap/en/xslt/UNIMARCslim2OPACResults.xsl:333

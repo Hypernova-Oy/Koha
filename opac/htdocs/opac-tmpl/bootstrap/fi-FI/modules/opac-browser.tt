@@ -19,7 +19,7 @@
  <div class="main">
  [% WRAPPER breadcrumbs %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Selaa luetteloa</span>
+ <span>Selaa kokoelmia</span>
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
 
@@ -37,7 +37,7 @@
  [% END %]
 
  <div id="userbrowser" class="maincontent">
- <h1>Selaa luetteloa</h1>
+ <h1>Selaa kokoelmia</h1>
 
  [% IF ( have_hierarchy ) %]
  <ul>

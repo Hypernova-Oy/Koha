@@ -60,7 +60,7 @@
  [% IF failureMessage == "NO_ITEM" %]
  <span>Ei nidettä viivakoodilla</span>
  [% ELSIF failureMessage == "IN_COLLECTION_OTHER" %]
- <span>Tämä aineisto on osa toista siirtokokoelmaa.</span>
+ <span>Tämä nide on jo toisessa siirtokokoelmassa</span>
  [% ELSIF failureMessage == "IN_COLLECTION" %]
  <span>Nide on jo tässä kokoelmassa</span>
  [% ELSE %]

@@ -259,7 +259,7 @@
  <span class="hint">Jos valittuna, niteet palautetaan automaattisesti eräpäivänä. Ominaisuus vaatii <code>misc/cronjobs/automatic_checkin.pl</code> cronjobin. Pyydä kehittäjiä ajastamaan se.</span>
  </li>
  <li>
- <label for="bookable">Ennakkovarattavissa: </label>
+ <label for="bookable">Käyttövarattavissa: </label>
  [% IF itemtype.bookable %]
  <input type="checkbox" id="bookable" name="bookable" checked="checked" value="1" />
  [% ELSE %]

@@ -147,7 +147,7 @@
  [% IF modulename != 'opac' && pagename != 'itemsearch' && tablename != 'holdings_table' && tablename != 'otherholdings_table' %]
  <p>
  [% SET option_name = pagename _ "|" _ tablename _ "_default_save_state" %]
- <label for="[% option_name | html %]" title="Save the column visibility, length of the table and order in session">Save configuration state on page change:</label>
+ <label for="[% option_name | html %]" title="Spara kolumnens synlighet, tabellens längd och ordning i denna session">Spara konfigurationsstatus vid byte av sida:</label>
  [%- IF table_settings.default_save_state -%]
  <input type="checkbox" id="[% option_name | html %]" name="[% option_name | html %]" value="1" checked="checked" />
  [%- ELSE -%]
@@ -157,7 +157,7 @@
 
  <p>
  [% SET option_name = pagename _ "|" _ tablename _ "_default_save_state_search" %]
- <label for="[% option_name | html %]" title="Save the search and filtering in session">Save search state on page change:</label>
+ <label for="[% option_name | html %]" title="Spara sökning och filtrering i denna session">Spara sökning vid byte av sida:</label>
  [%- IF table_settings.default_save_state_search -%]
  <input type="checkbox" id="[% option_name | html %]" name="[% option_name | html %]" value="1" checked="checked" />
  [%- ELSE -%]

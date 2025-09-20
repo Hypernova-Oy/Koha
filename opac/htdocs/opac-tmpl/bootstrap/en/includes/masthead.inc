@@ -59,7 +59,7 @@
                                             [% SET number_of_public_shelves = number_of_public_shelves + 1 %]
                                             [% IF number_of_public_shelves >= 10 %][% LAST %][% END %]
                                         [% END %]
-                                        [% IF some_public_shelves > 10 %]
+                                    [% IF some_public_shelves.count > 10 %]
                                             <a class="dropdown-item listmenulink" href="/cgi-bin/koha/opac-shelves.pl?op=list&amp;public=1" tabindex="-1" role="menuitem">View all</a>
                                         [% END %]
                                     [% END %]
@@ -76,7 +76,7 @@
                                                     [% SET number_of_private_shelves = number_of_private_shelves + 1 %]
                                                     [% IF number_of_private_shelves >= 10 %][% LAST %][% END %]
                                                 [% END %]
-                                                [% IF some_private_shelves > 10 %]
+                                            [% IF some_private_shelves.count > 10 %]
                                                     <a class="dropdown-item listmenulink" href="/cgi-bin/koha/opac-shelves.pl?op=list&amp;public=0" tabindex="-1" role="menuitem">View all</a>
                                                 [% END %]
                                             [% ELSE %]
@@ -138,7 +138,16 @@
                                         <p>
                                             <a tabindex="-1" role="menuitem" class="login-link" href="/cgi-bin/koha/opac-search-history.pl" title="View your search history">Search history</a>
                                             <span class="divider-vertical"></span>
-                                            <a class="clearsh" href="/cgi-bin/koha/opac-search-history.pl?action=delete" title="Delete your search history"><i class="fa fa-trash-can" aria-hidden="true"></i> Clear</a>
+                                            <a
+                                                class="clearsh submit-form-link"
+                                                href="#"
+                                                data-method="post"
+                                                data-action="/cgi-bin/koha/opac-search-history.pl"
+                                                data-op="cud-delete"
+                                                data-confirmation-msg="[% t('Are you sure you want to delete your search history?') | html %]"
+                                                title="Delete your search history"
+                                                ><i class="fa fa-trash-can" aria-hidden="true"></i> Clear</a
+                                            >
                                         </p>
                                     [% END %]
                                     <a tabindex="-1" role="menuitem" class="logout" id="logout" href="/cgi-bin/koha/opac-main.pl?logout.x=1">Log out</a>

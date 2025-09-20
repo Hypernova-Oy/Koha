@@ -835,10 +835,11 @@ sub CheckReserves {
 
     my $dont_trap = C4::Context->preference('TrapHoldsOnOrder') ? $item->notforloan > 0 : $item->notforloan;
     if ( !$dont_trap ) {
-        my $item_type = $item->effective_itemtype;
-        if ( $item_type ) {
-            return if Koha::ItemTypes->find( $item_type )->notforloan;
-        }
+        my $effective_item_type = $item->effective_itemtype;
+
+        my $item_type = Koha::ItemTypes->find($effective_item_type);
+        return
+            if $item_type && $item_type->notforloan;
     }
     else {
         return;
@@ -1960,22 +1961,26 @@ sub MoveReserve {
     my $lookahead = C4::Context->preference('ConfirmFutureHolds'); #number of days to look for future holds
     my $item = Koha::Items->find($itemnumber);
     my ( $restype, $res, undef ) = CheckReserves( $item, $lookahead );
-    return unless $res;
 
-    my $biblionumber = $res->{biblionumber};
-
-    if ($res->{borrowernumber} == $borrowernumber) {
+    if ( $res &&$res->{borrowernumber} == $borrowernumber) {
         my $hold = Koha::Holds->find( $res->{reserve_id} );
         $hold->fill({ item_id => $itemnumber });
     }
     else {
-        # warn "Reserved";
         # The item is reserved by someone else.
         # Find this item in the reserves
 
+        my $lookahead_date = output_pref(
+            {
+                dt         => dt_from_string->add_duration( DateTime::Duration->new( days => $lookahead ) ),
+                dateformat => 'iso', dateonly => 1
+            }
+        );
         my $borr_res  = Koha::Holds->search({
             borrowernumber => $borrowernumber,
-            biblionumber   => $biblionumber,
+            biblionumber   => $item->biblionumber,
+                reservedate    => { '<=' => $lookahead_date },
+                -or            => [ item_level_hold => 0, itemnumber => $itemnumber ],
         },{
             order_by       => 'priority'
         })->next();

@@ -27,8 +27,8 @@ patrons.pref:
         '0': Tillåt inte
         '1': Tillåt
       pref: intranetreadinghistory
-    - staff to access a patron's checkout history (checkout history is still stored,
-      regardless of staff being allowed access or not).
+    - personal att komma åt en kunds lånehistorik (lånehistoriken lagras fortfarande,
+      oavsett om personalen har åtkomst eller inte).
   - - choices:
         '0': Tillåt inte
         '1': Tillåt
@@ -182,9 +182,9 @@ patrons.pref:
       pref: CookieConsentedJS
       processor: prepareCookieConsentedJS
       type: modaljs
-    - <br><strong>NOTE:</strong> The cookie consent modal can be customised using
-      the <a href="/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations"
-      target="_blank">CookieConsentPopup</a> html customisation.
+    - <br><strong>OBS:</strong> Samtycke för cookies kan anpassas med hjälp av <a
+      href="/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations"
+      target="_blank">CookieConsentPopup</a> html-anpassningen.
   Låntagarformulär:
   - - 'Följande <a href=''http://schema.koha-community.org/__VERSION__/tables/borrowers.html''
       target=''blank''>databaskolumner</a> måste anges i låntagarposten:'
@@ -201,9 +201,9 @@ patrons.pref:
       pref: BorrowerUnwantedField
       source: borrowers
       type: modalselect
-    - '<br /> NOTE: preferred_name will be set to firstname if not included in the
-      form. It should also be selected in <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfModificationBorrowerUnwantedField">PatronSelfModificationBorrowerUnwantedField</a>
-      if selected here.'
+    - '<br /> OBS: preferred_name kommer att ställas in på förnamn om det inte ingår
+      i formuläret. Det bör också väljas i <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfModificationBorrowerUnwantedField">PatronSelfModificationBorrowerUnwantedField</a>
+      om det är valt här.'
   - - 'Låntagare kan ha följande titlar:'
     - class: multi
       pref: BorrowersTitles
@@ -270,8 +270,8 @@ patrons.pref:
   - - 'Förmyndare kan vara det följande för dem de är förmyndare för:'
     - class: multi
       pref: borrowerRelationship
-    - (input multiple choices separated by |, leave a | at the end to allow for librarians
-      to leave it blank).
+    - (ange flera alternativ separerade med |, lämna ett | i slutet så att bibliotekarier
+      kan lämna det tomt).
   - - 'När vårdnadstagare läggs till ett konto för vårdnadshavare, komplettera följande
       fält i vårdnadstagares formulär baserat på vårdnadshavarens konto:'
     - multiple:
@@ -329,20 +329,22 @@ patrons.pref:
       pref: AllowStaffToSetFinesVisibilityForGuarantor
     - personalen att ställa in möjligheten för en låntagares avgifter att vara synliga
       för länkade låntagare i OPAC:en.
-  - - Ett barn
+  - - Any patron of a patron type than can have a guarantor
     - choices:
-        '0': behöver inte
-        '1': måste ha
+        '0': does not require
+        '1': requires
       pref: ChildNeedsGuarantor
-    - en vårdnadshavare när kontot skapas.
+    - a guarantor be set when adding the patron.
+    - <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will
+      cause errors for any pre-existing patrons that would now require a guarantor
+      and do not have one.
   - - choices:
-        '0': Don't apply
-        '1': Apply
+        '0': Lägg inte
+        '1': Lägg
       pref: RestrictPatronsWithFailedNotices
-    - a restriction to a patron when their email and SMS messages fail to send at
-      the Koha level.
-    - <br><strong>NOTE:</strong> This system preference requires the <code>misc/cronjobs/restrict_patrons_with_failed_notices.pl</code>
-      cronjob. Ask your system administrator to schedule it.
+    - en begränsning för en låntagare  när deras e-post och SMS-utskick misslyckas.
+    - <br><strong>OBS:</strong> Denna systeminställning kräver cronjobbet <code>misc/cronjobs/restrict_patrons_with_failed_notices.pl</code>.
+      Be din systemadministratör att schemalägga det.
   Meddelanden och utskick:
   - - choices:
         '0': Tillåt inte
@@ -438,10 +440,10 @@ patrons.pref:
     - <br><strong>OBS:</strong> Många mobilleverantörer har fasat ut supporten för
       denna tjänst och den rekommenderas inte såvida ni inte har en dedikerad gateway
       för SMS till Email.
-    - <br>Limit messages to
+    - <br>Begränsa utskick till
     - class: integer
       pref: SMSSendMaxChar
-    - characters (no limitation if empty).
+    - tecken (ingen begränsning om fältet lämnas tomt).
   - - Ange användarnamn/inloggning
     - pref: SMSSendUsername
     - och lösenord
@@ -450,8 +452,8 @@ patrons.pref:
     - class: email
       pref: EmailSMSSendDriverFromAddress
     - för e-postmeddelanden som skickas med "Email"-funktionen.
-    - 'If the SMS::Send driver requires more options than just username/login and
-      password, enter them here as YAML key/value pairs:'
+    - 'Om drivrutinen SMS::Send kräver fler alternativ än endast användarnamn/login
+      och lösenord, ange dem här som YAML-värdepar:'
     - pref: SMSSendAdditionalOptions
       syntax: text/x-yaml
       type: textarea
@@ -492,10 +494,11 @@ patrons.pref:
       pref: FailedLoginAttempts
     - misslyckade inloggningsförsök.
   - - choices:
-        '0': Don't force
-        '1': Force
+        '0': Tvinga inte
+        '1': Tvinga
       pref: ForcePasswordResetWhenSetByStaff
-    - a staff created patron account to reset its password after its first OPAC login.
+    - ett låntagarkonto (som skapats av personalen) att återställa lösenordet efter
+      första inloggningen.
   - - choices:
         '0': Inaktivera
         '1': Aktivera

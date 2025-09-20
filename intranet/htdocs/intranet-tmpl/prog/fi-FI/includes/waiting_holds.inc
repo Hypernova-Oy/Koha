@@ -17,7 +17,7 @@
  <th>Nykyinen kirjasto</th>
  <th>Hyllypaikka</th>
  <th>Luokka</th>
- <th>Nidenumero</th>
+ <th>Kappaleen numero</th>
  <th>Numerointi</th>
  <th class="NoSort noExport">Toiminnot</th>
  </tr>

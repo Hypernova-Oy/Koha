@@ -29,8 +29,7 @@
  [% IF ( displayprev ) %]
  <li class="page-item">
  <a class="page-link" href="auth_finder.pl?startfrom=[% startfromprev | uri %]&amp;authtypecode=[% authtypecode | uri %][% FOREACH searchdat IN searchdata %]&amp;[% searchdat.term | uri %]=[% searchdat.val | uri %][% END %]&amp;op=do_search&amp;type=intranetamp;&amp;index=[% index | uri %]&amp;tagid=[% tagid | uri %]&amp;orderby=[% orderby | uri %]&amp;source=[% source | uri %]">
- <i class="fa fa-fw fa-angle-left"></i> Previous
- </a>
+ <i class="fa fa-fw fa-angle-left"></i> Edellinen </a>
  </li>
  [% END %]
  [% FOREACH number IN numbers %]
@@ -139,8 +138,8 @@
 
         function doauth(authid, index, repet){
             [% IF source == 'auth' %]
-                var e = document.getElementById("relationship");
-                var relationship = e.options[e.selectedIndex].value;
+                var elem = document.getElementById("special_relationship");
+                var relationship = elem.options[elem.selectedIndex].value;
 
                 jumpfull('blinddetail-biblio-search.pl?authid=' + authid + '&index=' + index + '&repet=' + repet + '&relationship=' + relationship);
             [% ELSE %]

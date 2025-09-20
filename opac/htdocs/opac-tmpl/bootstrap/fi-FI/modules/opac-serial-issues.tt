@@ -128,7 +128,7 @@
 
  <h3>[% subscription_LOO.branchname | html %]</h3>
  [% IF ( subscription_LOO.location ) %]
- <p class="subscription_location">Hyllypaikka: [% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => subscription_LOO.location, opac => 1 ) | html %]</p>
+ <p class="subscription_location">Sijainti: [% AuthorisedValues.GetDescriptionByKohaField( kohafield => 'items.location', authorised_value => subscription_LOO.location, opac => 1 ) | html %]</p>
  [% END %]
 
  [% IF ( subscription_LOO.notes ) %]

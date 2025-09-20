@@ -317,8 +317,8 @@
  [% IF has_invoice_unitprice %]
  <th>Hinta laskulla</th>
  [% END %]
- <th class="tax_excluded">Hinta-arvio (veroton)</th>
- <th class="tax_included">Hinta-arvio (verollinen)</th>
+ <th class="tax_excluded">Todellinen hinta (veroton)</th>
+ <th class="tax_included">Todellinen hinta (verollinen)</th>
  <th class="replacementprice">Korvaushinta</th>
  <th>Määrä</th>
  <th class="tax_excluded">Yhteensä (veroton) ([% currency.symbol | html %])</th>
@@ -539,7 +539,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% Asset.js("js/acquisitions-menu.js") | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% Asset.js("lib/jquery/plugins/humanmsg.js") | $raw %]
  [% Asset.js("js/acq.js") | $raw %]
  [% Asset.js("js/additional-fields-entry.js") | $raw %]

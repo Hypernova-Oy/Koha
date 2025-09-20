@@ -36,7 +36,7 @@
  <a href="/cgi-bin/koha/serials/subscription-detail.pl?subscriptionid=[% subscriptionid | uri %]"><em>[% bibliotitle | html %]</em></a>
  [% END %]
  [% WRAPPER breadcrumb_item bc_active= 1 %]
- <span>Kausijulkaisu­tilauksen tiedot</span>
+ <span>Kausijulkaisutilausten tiedot</span>
  [% END %]
  [% END %]
  [% END #/ WRAPPER breadcrumbs %]
@@ -332,7 +332,7 @@
  <th>Huomautus toimittajalle</th>
  <th>Tili</th>
  <th>Määrä</th>
- <th title="veroton budjetoitu hinta / verollinen budjetoitu hinta">Tilattu</th>
+ <th title="veroton arvioitu hinta / verollinen arvioitu hinta">Tilattu</th>
  <th title="Todellinen veroton hinta / Todellinen verollinen hinta.">Käytetty</th>
  </tr>
  </thead>
@@ -437,7 +437,7 @@
  [% INCLUDE 'columns_settings.inc' %]
  <script>
         // the english words used in display purposes
-        var text = new Array(_("Numero"),_("Vuosikerta"),_("Numero"),_("Kuukausi"),_("Viikko"),_("Alkaa:"),_("Jakso vaihtuu:"),_("Valitse pallonpuolisko:"),_("Pohjoinen"),_("Southern",
+        var text = new Array(_("Numero"),_("Osa"),_("Numero"),_("Kuukausi"),_("Viikko"),_("Alkaa:"),_("Jakso vaihtuu:"),_("Valitse pallonpuolisko:"),_("Pohjoinen"),_("Southern",
         "Autumn"),_("Talvi"),_("Kevät"),_("Kesä"),_("Syksy"),_("Vuodenaika"),_("Vuosi"));
         $(document).ready(function() {
 

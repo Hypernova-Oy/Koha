@@ -3220,9 +3220,9 @@ CREATE TABLE `erm_usage_data_providers` (
   `service_type` varchar(80) DEFAULT NULL COMMENT 'service_type of the harvester',
   `service_url` varchar(80) DEFAULT NULL COMMENT 'service_url of the harvester',
   `report_release` varchar(80) DEFAULT NULL COMMENT 'report_release of the harvester',
-  `customer_id` varchar(50) DEFAULT NULL COMMENT 'sushi customer id',
-  `requestor_id` varchar(50) DEFAULT NULL COMMENT 'sushi requestor id',
-  `api_key` varchar(80) DEFAULT NULL COMMENT 'sushi api key',
+  `customer_id` text DEFAULT NULL COMMENT 'SUSHI customer ID',
+  `requestor_id` text DEFAULT NULL COMMENT 'SUSHI requestor ID',
+  `api_key` text DEFAULT NULL COMMENT 'SUSHI API key',
   `requestor_name` varchar(80) DEFAULT NULL COMMENT 'requestor name',
   `requestor_email` varchar(80) DEFAULT NULL COMMENT 'requestor email',
   `report_types` varchar(255) DEFAULT NULL COMMENT 'report types provided by the harvester',
@@ -3701,7 +3701,7 @@ CREATE TABLE `illrequests` (
   KEY `illrequests_ibfk` (`batch_id`),
   CONSTRAINT `illrequests_bcfk_2` FOREIGN KEY (`branchcode`) REFERENCES `branches` (`branchcode`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `illrequests_bibfk` FOREIGN KEY (`biblio_id`) REFERENCES `biblio` (`biblionumber`) ON DELETE SET NULL ON UPDATE CASCADE,
-  CONSTRAINT `illrequests_bnfk` FOREIGN KEY (`borrowernumber`) REFERENCES `borrowers` (`borrowernumber`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `illrequests_bnfk` FOREIGN KEY (`borrowernumber`) REFERENCES `borrowers` (`borrowernumber`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `illrequests_ibfk` FOREIGN KEY (`batch_id`) REFERENCES `illbatches` (`ill_batch_id`) ON DELETE SET NULL ON UPDATE CASCADE,
   CONSTRAINT `illrequests_safk` FOREIGN KEY (`status_alias`) REFERENCES `authorised_values` (`authorised_value`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

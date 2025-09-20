@@ -71,7 +71,7 @@ if($op eq 'cud-gennext' && @subscriptionid){
             my $planneddate = $date_received_today ? dt_from_string : $issue->{planneddate};
             ModSerialStatus( $issue->{serialid}, $issue->{serialseq},
                     $planneddate, $issue->{publisheddate},
-                    $issue->{publisheddatetext}, $status, "", $count_forward );
+                    $issue->{publisheddatetext}, $status, $issue->{notes}, $count_forward );
         } else {
             require C4::Serials::Numberpattern;
             my $subscription = GetSubscription($subscriptionid);
@@ -189,8 +189,11 @@ foreach my $subscription (@$subscriptiondescs){
   $subscription->{'hasRouting'} = check_routing($subscription->{'subscriptionid'});
 }
 
+my $subscription = $subscriptionid ? Koha::Subscriptions->find($subscriptionid) : "";
+
 chop $subscriptionidlist;
 $template->param(
+    subscription                                 => $subscription,
           subscriptionidlist => $subscriptionidlist,
           biblionumber => $biblionumber,
           subscriptions => $subscriptiondescs,
@@ -203,6 +206,7 @@ $template->param(
           routing => C4::Context->preference("RoutingSerials"),
           subscr=>scalar $query->param('subscriptionid'),
           subscriptioncount => $subscriptioncount,
+    cannotedit                                   => ( not C4::Serials::can_edit_subscription($subscriptionid) ),
           location => $location,
           callnumber	       => $callnumber,
           uc(C4::Context->preference("marcflavour")) => 1,

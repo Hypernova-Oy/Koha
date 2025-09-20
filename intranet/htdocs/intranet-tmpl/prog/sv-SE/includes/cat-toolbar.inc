@@ -71,7 +71,7 @@
  <input type="hidden" name="op" value="cud-show" />
  <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
  <input type="hidden" name="src" value="CATALOGUING" />
- <button id="batchedit" type="submit" class="dropdown-item" id="modifybiblio">Satsredigera exemplar</button>
+ <button id="batchedit" type="submit" class="dropdown-item">Satsredigera exemplar</button>
  </form>
  </li>
  [% ELSE %]
@@ -90,7 +90,7 @@
  <input type="hidden" name="del" value="1" />
  <input type="hidden" name="biblionumber" value="[% biblionumber | html %]" />
  <input type="hidden" name="src" value="CATALOGUING" />
- <button id="batchdelete" type="submit" class="dropdown-item" id="modifybiblio">Ta bort exemplar i en sats</button>
+ <button id="batchdelete" type="submit" class="dropdown-item">Ta bort exemplar i en sats</button>
  </form>
  </li>
  [% ELSE %]

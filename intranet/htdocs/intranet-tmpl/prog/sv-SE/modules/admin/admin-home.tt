@@ -107,7 +107,7 @@
  <dt><a href="/cgi-bin/koha/admin/branch_transfer_limits.pl">Överföringsbegränsningar för bibliotek</a> (<a href="/cgi-bin/koha/admin/transfer_limits.pl">Avancerad redigerare</a>)</dt>
  <dd>Begränsa möjligheten att överföra exemplar mellan bibliotek baserat på biblioteket som skickar, biblioteket som tar emot och den exemplartyp det gäller. Dessa regler tillämpas bara om inställningen UseBranchTransferLimits är aktiverad</dd>
  <dt><a href="/cgi-bin/koha/admin/transport-cost-matrix.pl">Fraktkostnadstabell</a></dt>
- <dd>Definiera fraktkostnader mellan filialer</dd>
+ <dd>Definiera fraktkostnader mellan bibliotek</dd>
  [% END %]
  [% IF ( CAN_user_parameters_manage_item_circ_alerts ) %]
  <dt><a href="/cgi-bin/koha/admin/item_circulation_alerts.pl">Lånenotifikationer för exemplar</a></dt>
@@ -265,7 +265,7 @@
  [% IF ( CAN_user_parameters_manage_search_targets ) %]
  <dt><a href="/cgi-bin/koha/admin/z3950servers.pl">Z39.50/SRU-servrar</a></dt>
  <dd>Definiera vilka externa servrar som ska tillfrågas om MARC-data</dd>
- <dt><a href="/cgi-bin/koha/admin/oai_servers.pl">OAI repositories</a></dt>
+ <dt><a href="/cgi-bin/koha/admin/oai_servers.pl">OAI-uppsättning</a></dt>
  <dd>Define which OAI repositories to harvest data from</dd>
  [% END %]
  [% IF ( CAN_user_parameters_manage_smtp_servers ) %]

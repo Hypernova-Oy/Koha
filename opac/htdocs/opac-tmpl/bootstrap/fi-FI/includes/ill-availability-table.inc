@@ -8,7 +8,7 @@
  <th>Tekijä</th>
  <th>ISBN</th>
  <th>ISSN</th>
- <th>Pvm</th>
+ <th>Päivämäärä</th>
  </tr>
  </thead>
  <tbody id="[% service.id | html %]-body">

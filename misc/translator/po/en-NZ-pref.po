@@ -1,18 +1,18 @@
 # Compendium of en_NZ.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:10-0300\n"
-"PO-Revision-Date: 2023-11-01 01:43+0000\n"
-"Last-Translator: wainui <wainuiwitikapark@catalyst.net.nz>\n"
+"PO-Revision-Date: 2025-05-23 03:33+0000\n"
+"Last-Translator: chrisc <chris@bigballofwax.co.nz>\n"
 "Language-Team: Koha Translation Team\n"
-"Language: en_NZ\n"
+"Language: en-NZ\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Pootle 2.8\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /en_NZ/22.11/en-NZ-pref.po\n"
 "X-POOTLE-MTIME: 1698803004.885228\n"
@@ -192,11 +192,11 @@ msgstr "Printing"
 
 # Acquisitions > Printing > 1PageOrderPDFText
 msgid "acquisitions.pref#1PageOrderPDFText# <br><strong>NOTE:</strong> To prevent the bottom of your text from being cut off by the order table please do not save more than 3 lines of text in this system preference.</span>"
-msgstr ""
+msgstr "acquisitions.pref#1PageOrderPDFText# <br><strong>NOTE:</strong> To prevent the bottom of your text from being cut off by the order table please do not save more than 3 lines of text in this system preference.</span>"
 
 # Acquisitions > Printing > 1PageOrderPDFText
 msgid "acquisitions.pref#1PageOrderPDFText# Text to be used above the order table in the English 1-page order PDF file. Note: Press enter to add line breaks to your sentence."
-msgstr ""
+msgstr "acquisitions.pref#1PageOrderPDFText# Text to be used above the order table in the English 1-page order PDF file. Note: Press enter to add line breaks to your sentence."
 
 # Acquisitions > Policy > AcqCreateItem
 # Acquisitions > Policy
@@ -284,36 +284,31 @@ msgid "acquisitions.pref#AcqWarnOnDuplicateInvoice# when the librarian tries to 
 msgstr "when the librarian tries to create an invoice with a duplicate number."
 
 # Administration > Interface options > AddressForFailedOverdueNotices
-#, fuzzy
 msgid "acquisitions.pref#AcquisitionsDefaultEmailAddress# <br>If left empty, it will fall back to the first defined address in the following list: library email, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress\">KohaAdminEmailAddress</a>."
-msgstr "If left empty then it will fallback to the first defined address in the following list: Library ReplyTo, Library Email, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault\">ReplytoDefault</a> and <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress\">KohaAdminEmailAddress</a>"
+msgstr "If left empty then it will fallback to the first defined address in the following list: Library ReplyTo, Library Email, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault\">ReplytoDefault</a> and <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress\">KohaAdminEmailAddress</a>."
 
 # Administration > Interface options > ReplytoDefault
 # Administration > Interface options
-#, fuzzy
 msgid "acquisitions.pref#AcquisitionsDefaultEmailAddress# Use the from email address"
-msgstr " Email address to be set as the replyto in emails: "
+msgstr "Use the from email address"
 
 # Acquisitions > Policy > ClaimsBccCopy
 # Acquisitions > Policy
-#, fuzzy
 msgid "acquisitions.pref#AcquisitionsDefaultEmailAddress# when sending acquisitions order and claim notices."
-msgstr "blind copy (BCC) to logged in user when sending serial or acquisitions claims notices."
+msgstr "when sending acquisitions order and claim notices."
 
 # Administration > Interface options > AddressForFailedOverdueNotices
-#, fuzzy
 msgid "acquisitions.pref#AcquisitionsDefaultReplyTo# <br>If left empty, it will fall back to the first defined address in the following list: library reply-to, library email, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault\">ReplytoDefault</a>, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress\">KohaAdminEmailAddress</a>."
-msgstr "If left empty then it will fallback to the first defined address in the following list: Library ReplyTo, Library Email, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault\">ReplytoDefault</a> and <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress\">KohaAdminEmailAddress</a>"
+msgstr "If left empty then it will fallback to the first defined address in the following list: Library ReplyTo, Library Email, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ReplytoDefault\">ReplytoDefault</a> and <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=KohaAdminEmailAddress\">KohaAdminEmailAddress</a>."
 
 # Acquisitions > Policy > AcquisitionsDefaultReplyTo
 msgid "acquisitions.pref#AcquisitionsDefaultReplyTo# Use the reply-to email address"
-msgstr ""
+msgstr "acquisitions.pref#AcquisitionsDefaultReplyTo# Use the reply-to email address"
 
 # Acquisitions > Policy > ClaimsBccCopy
 # Acquisitions > Policy
-#, fuzzy
 msgid "acquisitions.pref#AcquisitionsDefaultReplyTo# when sending acquisitions order and claim notices."
-msgstr "blind copy (BCC) to logged in user when sending serial or acquisitions claims notices."
+msgstr "when sending acquisitions order and claim notices."
 
 # Acquisitions > Policy > BasketConfirmations
 # Acquisitions > Policy
@@ -360,7 +355,7 @@ msgstr "Don't"
 
 # Acquisitions > Policy > CancelOrdersInClosedBaskets
 msgid "acquisitions.pref#CancelOrdersInClosedBaskets# cancelling order lines in closed baskets."
-msgstr ""
+msgstr "acquisitions.pref#CancelOrdersInClosedBaskets# cancelling order lines in closed baskets."
 
 # Acquisitions > Policy > ClaimsBccCopy
 # Acquisitions > Policy
@@ -500,7 +495,7 @@ msgstr " <br/>For example:<br/>holdingbranch: 975$b<br/>itype: 975$9|975$z"
 
 # Acquisitions > Policy > MarcItemFieldsToOrder
 msgid "acquisitions.pref#MarcItemFieldsToOrder# <p>If a field is missing or not mapped, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=MarcFieldsToOrder\">MarcFieldsToOrder</a> will be checked and used for that field (except quantity).</p>"
-msgstr ""
+msgstr "acquisitions.pref#MarcItemFieldsToOrder# <p>If a field is missing or not mapped, <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=MarcFieldsToOrder\">MarcFieldsToOrder</a> will be checked and used for that field (except quantity).</p>"
 
 # Acquisitions > Policy > MarcItemFieldsToOrder
 # Acquisitions > Policy
@@ -1021,7 +1016,7 @@ msgstr " Yes"
 
 # Administration > Jobs > JobsNotificationMethod
 msgid "admin.pref#JobsNotificationMethod# as the preferred job worker notification method. STOMP (default) requires RabbitMQ running. Polling will be used as a fallback if RabbitMQ is not accessible."
-msgstr ""
+msgstr "admin.pref#JobsNotificationMethod# as the preferred job worker notification method. STOMP (default) requires RabbitMQ running. Polling will be used as a fallback if RabbitMQ is not accessible."
 
 # Administration > Login options > AutoLocation
 # Administration > Login options
@@ -1132,11 +1127,11 @@ msgstr " No"
 
 # Administration > Login options > StaffLoginLibraryBasedOnIP
 msgid "admin.pref#StaffLoginLibraryBasedOnIP# Note: If IPs overlap, the first found match will be used."
-msgstr ""
+msgstr "admin.pref#StaffLoginLibraryBasedOnIP# Note: If IPs overlap, the first found match will be used."
 
 # Administration > Login options > StaffLoginLibraryBasedOnIP
 msgid "admin.pref#StaffLoginLibraryBasedOnIP# Set logged in library for staff by matching their current IP to the library configuration: "
-msgstr ""
+msgstr "admin.pref#StaffLoginLibraryBasedOnIP# Set logged in library for staff by matching their current IP to the library configuration: "
 
 # OPAC > Suggestions > AnonSuggestions
 # OPAC > Privacy
@@ -1158,7 +1153,7 @@ msgstr " <a href=\"/cgi-bin/koha/admin/branches.pl\">Link to library administrat
 
 # Administration > Login options > StaffLoginRestrictLibraryByIP
 msgid "admin.pref#StaffLoginRestrictLibraryByIP# Limit the libraries staff can select at login to those where their computer's IP address is within the library's specified range or to libraries without an IP restriction: "
-msgstr ""
+msgstr "admin.pref#StaffLoginRestrictLibraryByIP# Limit the libraries staff can select at login to those where their computer's IP address is within the library's specified range or to libraries without an IP restriction: "
 
 # Administration > Login options > SessionRestrictionByIP
 # Administration > Login options
@@ -1661,7 +1656,7 @@ msgstr "When editing records,"
 
 # Authorities > General > DefaultAuthorityTab
 msgid "authorities.pref#DefaultAuthorityTab# tab. If the selected tab does not exist, the view will default to the first tab."
-msgstr ""
+msgstr "authorities.pref#DefaultAuthorityTab# tab. If the selected tab does not exist, the view will default to the first tab."
 
 # Authorities > General > GenerateAuthorityField667
 # Enhanced content > Library Thing
@@ -1687,7 +1682,7 @@ msgstr " Don't"
 
 # Authorities > Linker > LinkerConsiderThesaurus
 msgid "authorities.pref#LinkerConsiderThesaurus# compare the source for 6XX headings to the thesaurus source for authority records when linking. Enabling this preference may require a reindex, and may generate new authority records if AutoCreateAuthorities is enabled."
-msgstr ""
+msgstr "authorities.pref#LinkerConsiderThesaurus# compare the source for 6XX headings to the thesaurus source for authority records when linking. Enabling this preference may require a reindex, and may generate new authority records if AutoCreateAuthorities is enabled."
 
 # Authorities > Linker > LinkerKeepStale
 # Authorities > Linker
@@ -1926,7 +1921,7 @@ msgstr " ."
 
 # Cataloging > Display > AlwaysShowHoldingsTableFilters
 msgid "cataloguing.pref#AlwaysShowHoldingsTableFilters# always show filters by default on the holdings table in the record details page in the staff interface."
-msgstr ""
+msgstr "cataloguing.pref#AlwaysShowHoldingsTableFilters# always show filters by default on the holdings table in the record details page in the staff interface."
 
 # Cataloging > Record structure > ApplyFrameworkDefaults
 msgid "cataloguing.pref#ApplyFrameworkDefaults# Apply framework default values"
@@ -1991,15 +1986,15 @@ msgstr " Use one line per tag in the format BT_TAG: TAG$SUBFIELD ( e.g. lccn: 01
 
 # Cataloging > Interface > CatalogConcerns
 msgid "cataloguing.pref#CatalogConcerns# <p><strong>NOTE:</strong> You can also enable `<a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacCatalogConcerns\">OpacCatalogConcerns</a>` to allow OPAC users the same option.</p>"
-msgstr ""
+msgstr "cataloguing.pref#CatalogConcerns# <p><strong>NOTE:</strong> You can also enable `<a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OpacCatalogConcerns\">OpacCatalogConcerns</a>` to allow OPAC users the same option.</p>"
 
 # Cataloging > Interface > CatalogConcerns
 msgid "cataloguing.pref#CatalogConcerns# Allow"
-msgstr ""
+msgstr "cataloguing.pref#CatalogConcerns# Allow"
 
 # Cataloging > Interface > CatalogConcerns
 msgid "cataloguing.pref#CatalogConcerns# Don't allow"
-msgstr ""
+msgstr "cataloguing.pref#CatalogConcerns# Don't allow"
 
 # Logging > Logging > CataloguingLog
 # Logging > Logging
@@ -2009,23 +2004,23 @@ msgstr "any changes to bibliographic or item records."
 
 # Cataloging > Interface > CatalogerEmails
 msgid "cataloguing.pref#CatalogerEmails#  as the notification address for catalog concerns."
-msgstr ""
+msgstr "cataloguing.pref#CatalogerEmails#  as the notification address for catalog concerns."
 
 # Cataloging > Interface > CatalogerEmails
 msgid "cataloguing.pref#CatalogerEmails# Use "
-msgstr ""
+msgstr "cataloguing.pref#CatalogerEmails# Use "
 
 # Cataloging > Record structure > ContentWarningField
 msgid "cataloguing.pref#ContentWarningField# <br/><strong>NOTE:</strong> The field needs to appear in the MARC frameworks to be accessible."
-msgstr ""
+msgstr "cataloguing.pref#ContentWarningField# <br/><strong>NOTE:</strong> The field needs to appear in the MARC frameworks to be accessible."
 
 # Cataloging > Record structure > ContentWarningField
 msgid "cataloguing.pref#ContentWarningField# Use MARC field"
-msgstr ""
+msgstr "cataloguing.pref#ContentWarningField# Use MARC field"
 
 # Cataloging > Record structure > ContentWarningField
 msgid "cataloguing.pref#ContentWarningField# for storing content warnings."
-msgstr ""
+msgstr "cataloguing.pref#ContentWarningField# for storing content warnings."
 
 # Cataloging > Interface > CreateAVFromCataloguing
 # Cataloging > Spine labels
@@ -2216,19 +2211,52 @@ msgid "cataloguing.pref#MARCOverlayRules# Use"
 msgstr "Use"
 
 # Cataloging > Display > MarcFieldDocURL
+# Cataloging > Record structure
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "Use"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 msgstr "For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
 
 # Cataloging > Display > MarcFieldDocURL
-# Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+# Cataloging > Record structure
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "Use"
 
 # Cataloging > Display > MarcFieldDocURL
-# Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+# Cataloging > Record structure
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "Use"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Record structure
@@ -2343,7 +2371,7 @@ msgstr " (Leave blank if not used. Define a range like <code>192.168.</code>.)"
 
 # Cataloging > Display > OpacSuppression
 msgid "cataloguing.pref#OpacSuppression# <br /> A custom message can be shown on the redirect page for suppressed bibliographic records by creating an <a href='/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations'>HTML customization</a> in the OpacSuppressionMessage region."
-msgstr ""
+msgstr "cataloguing.pref#OpacSuppression# <br /> A custom message can be shown on the redirect page for suppressed bibliographic records by creating an <a href='/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations'>HTML customization</a> in the OpacSuppressionMessage region."
 
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
@@ -2615,7 +2643,7 @@ msgstr "Show"
 
 # Cataloging > Record structure > StripWhitespaceChars
 msgid "cataloguing.pref#StripWhitespaceChars# leading and trailing whitespace characters (including spaces, tabs, line breaks and carriage returns) and inner newlines from data fields when cataloguing bibliographic and authority records. The leader and control fields will not be affected."
-msgstr ""
+msgstr "cataloguing.pref#StripWhitespaceChars# leading and trailing whitespace characters (including spaces, tabs, line breaks and carriage returns) and inner newlines from data fields when cataloguing bibliographic and authority records. The leader and control fields will not be affected."
 
 # Cataloging > Record structure > SubfieldsToAllowForRestrictedBatchmod
 # Cataloging > Record structure
@@ -3359,7 +3387,7 @@ msgstr "Don't show"
 
 # Circulation > Checkout policy > AlwaysLoadCheckoutsTable
 msgid "circulation.pref#AlwaysLoadCheckoutsTable# always load the checkouts table immediately on opening the patron account in the staff interface."
-msgstr ""
+msgstr "circulation.pref#AlwaysLoadCheckoutsTable# always load the checkouts table immediately on opening the user account in the staff interface."
 
 # Circulation > Article requests > ArticleRequests
 # Circulation > Article requests
@@ -3597,7 +3625,7 @@ msgstr "Don't"
 
 # Circulation > Patron restrictions > AutoRemoveOverduesRestrictions
 msgid "circulation.pref#AutoRemoveOverduesRestrictions# remove OVERDUES restriction triggered by sent notices. The difference between removing restriction when no remaining overdue items exists and doing so only when any of the items would result in debarment is that the latter option will respect possible grace periods of overdue rules also on returns and not only when generating overdue notices."
-msgstr ""
+msgstr "circulation.pref#AutoRemoveOverduesRestrictions# remove OVERDUES restriction triggered by sent notices. The difference between removing restriction when no remaining overdue items exists and doing so only when any of the items would result in debarment is that the latter option will respect possible grace periods of overdue rules also on returns and not only when generating overdue notices."
 
 # Circulation > Holds policy > AutoResumeSuspendedHolds
 # Circulation > Holds policy
@@ -3996,7 +4024,7 @@ msgstr "don't charge a lost fee"
 
 # Circulation > Return claims > ClaimReturnedLostValue
 msgid "circulation.pref#ClaimReturnedLostValue# <span class=\"hint\">This will not update the lost status of the item if there is already an existing lost status set.</span>"
-msgstr ""
+msgstr "circulation.pref#ClaimReturnedLostValue# <span class=\"hint\">This will not update the lost status of the item if there is already an existing lost status set.</span>"
 
 # Circulation > Return claims > ClaimReturnedLostValue
 # Circulation > Checkout policy
@@ -4049,15 +4077,15 @@ msgstr " When checking out an item with rental fees, "
 
 # Circulation > Checkout policy > ConsiderLibraryHoursInCirculation
 msgid "circulation.pref#ConsiderLibraryHoursInCirculation# do not consider the library's opening hours."
-msgstr ""
+msgstr "circulation.pref#ConsiderLibraryHoursInCirculation# do not consider the library's opening hours."
 
 # Circulation > Checkout policy > ConsiderLibraryHoursInCirculation
 msgid "circulation.pref#ConsiderLibraryHoursInCirculation# extend the loan period and set the checkout to be due at the library's open time."
-msgstr ""
+msgstr "circulation.pref#ConsiderLibraryHoursInCirculation# extend the loan period and set the checkout to be due at the library's open time."
 
 # Circulation > Checkout policy > ConsiderLibraryHoursInCirculation
 msgid "circulation.pref#ConsiderLibraryHoursInCirculation# shorten the loan period and set the checkout to be due at the library's close time."
-msgstr ""
+msgstr "circulation.pref#ConsiderLibraryHoursInCirculation# shorten the loan period and set the checkout to be due at the library's close time."
 
 # Circulation > Checkout policy > ConsiderOnSiteCheckoutsAsNormalCheckouts
 # Circulation > Checkout policy
@@ -4663,11 +4691,11 @@ msgstr "updating the reserves queue in real time."
 
 # Circulation > Interface > HoldsQueueParallelLoopsCount
 msgid "circulation.pref#HoldsQueueParallelLoopsCount# parallel loop(s). The more loops used, the faster it will calculate and the more computing resources it will use."
-msgstr ""
+msgstr "circulation.pref#HoldsQueueParallelLoopsCount# parallel loop(s). The more loops used, the faster it will calculate and the more computing resources it will use."
 
 # Circulation > Holds policy > HoldsQueuePrioritizeBranch
 msgid "circulation.pref#HoldsQueuePrioritizeBranch# The holds queue should prioritize filling a hold by matching the patron's home library with an item having a matching"
-msgstr ""
+msgstr "circulation.pref#HoldsQueuePrioritizeBranch# The holds queue should prioritize filling a hold by matching the user's home library with an item having a matching"
 
 # Circulation > Checkout policy > HomeOrHoldingBranch
 # Circulation > Checkout policy
@@ -4814,7 +4842,7 @@ msgstr "users from issuing an item whose rental charge would take them over the 
 
 # Circulation > Checkout policy > ItemsDeniedRenewal
 msgid "circulation.pref#ItemsDeniedRenewal# <br /><strong>Configuration:</strong> <a href='/cgi-bin/koha/admin/authorised_values.pl?searchfield=CCODE'>Collections (CCODE)</a> | <a href='/cgi-bin/koha/admin/itemtypes.pl'>Item types</a>"
-msgstr ""
+msgstr "circulation.pref#ItemsDeniedRenewal# <br /><strong>Configuration:</strong> <a href='/cgi-bin/koha/admin/authorised_values.pl?searchfield=CCODE'>Collections (CCODE)</a> | <a href='/cgi-bin/koha/admin/itemtypes.pl'>Item types</a>"
 
 # Circulation > Checkout policy > ItemsDeniedRenewal
 # Circulation > Checkout policy
@@ -4855,7 +4883,7 @@ msgstr "a bracketed list of values separated by commas."
 
 # Circulation > Checkout policy > LoadCheckoutsTableDelay
 msgid "circulation.pref#LoadCheckoutsTableDelay# Delay the automatic loading of the checkouts table on the checkouts page by"
-msgstr ""
+msgstr "circulation.pref#LoadCheckoutsTableDelay# Delay the automatic loading of the checkouts table on the checkouts page by"
 
 # Circulation > Holds policy > OPACAllowHoldDateInFuture
 # Circulation > Holds policy
@@ -6136,7 +6164,7 @@ msgstr "PROC: FIC - causes an item in the Processing Center location to be updat
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
 #, fuzzy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6209,7 +6237,7 @@ msgstr "PROC: FIC - causes an item in the Processing Center location to be updat
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
 #, fuzzy
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6256,11 +6284,11 @@ msgstr "when cataloguing an item"
 
 # Circulation > Checkout policy > UpdateItemLostStatusWhenWriteoff
 msgid "circulation.pref#UpdateItemLostStatusWhenWriteoff# Update item status to"
-msgstr ""
+msgstr "circulation.pref#UpdateItemLostStatusWhenWriteoff# Update item status to"
 
 # Circulation > Checkout policy > UpdateItemLostStatusWhenWriteoff
 msgid "circulation.pref#UpdateItemLostStatusWhenWriteoff# when the outstanding balance is written off."
-msgstr ""
+msgstr "circulation.pref#UpdateItemLostStatusWhenWriteoff# when the outstanding balance is written off."
 
 # Circulation > Holds policy > UpdateItemWhenLostFromHoldList
 # Circulation > Holds policy
@@ -6311,7 +6339,7 @@ msgstr "Examples:<br/>"
 
 # Circulation > Checkin policy > UpdateNotForLoanStatusOnCheckin
 msgid "circulation.pref#UpdateNotForLoanStatusOnCheckin# Each item type needs to be defined on a separate line on the left side of the colon (:).<br/>Each pair of not for loan values, for that item type, should be listed on separate lines below the item type, each indented by a leading space<br/><br/>"
-msgstr ""
+msgstr "circulation.pref#UpdateNotForLoanStatusOnCheckin# Each item type needs to be defined on a separate line on the left side of the colon (:).<br/>Each pair of not for loan values, for that item type, should be listed on separate lines below the item type, each indented by a leading space<br/><br/>"
 
 # Circulation > Checkin policy > UpdateNotForLoanStatusOnCheckin
 # Circulation > Checkin policy
@@ -6332,7 +6360,7 @@ msgstr "Use the <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=N
 
 # Circulation > Checkin policy > UpdateNotForLoanStatusOnCheckin
 msgid "circulation.pref#UpdateNotForLoanStatusOnCheckin# When an item is checked in, if it's item type matches CR then when the value on the left (1) matches the items' not for loan value it will be updated to the value on the right.<br/><br/>The special term _ALL_ is used on the left side of the colon (:) to affect all item types, <strong>this does not override all other rules</strong><br/><br/>"
-msgstr ""
+msgstr "circulation.pref#UpdateNotForLoanStatusOnCheckin# When an item is checked in, if it's item type matches CR then when the value on the left (1) matches the items' not for loan value it will be updated to the value on the right.<br/><br/>The special term _ALL_ is used on the left side of the colon (:) to affect all item types, <strong>this does not override all other rules</strong><br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Self check-out module
@@ -8380,15 +8408,15 @@ msgstr "the interlibrary loans module (master switch)."
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# &nbsp;&nbsp;&lt;h2&gt;HTML title&lt;/h2&gt;<br>"
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# &nbsp;&nbsp;&lt;h2&gt;HTML title&lt;/h2&gt;<br>"
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# &nbsp;&nbsp;&lt;p&gt;This is an HTML paragraph&lt;/p&gt;<br>"
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# &nbsp;&nbsp;&lt;p&gt;This is an HTML paragraph&lt;/p&gt;<br>"
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# &nbsp;&nbsp;&lt;p&gt;This is another HTML paragraph&lt;/p&gt;<br>"
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# &nbsp;&nbsp;&lt;p&gt;This is another HTML paragraph&lt;/p&gt;<br>"
 
 # Interlibrary loans > Features > ILLModuleUnmediated
 # Circulation > Interlibrary loans
@@ -8404,7 +8432,7 @@ msgstr " Enable"
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# &nbsp;text: copyright text for all article type requests<br>"
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# &nbsp;text: copyright text for all article type requests<br>"
 
 # Interlibrary loans > Features > ILLModule
 # Circulation > Interlibrary loans
@@ -8426,15 +8454,15 @@ msgstr " Disable"
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# <li><code>av_category_code</code> is the authorised values category that will be used for the options being presented at the disclaimer stage.</li>"
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# <li><code>av_category_code</code> is the authorised values category that will be used for the options being presented at the disclaimer stage.</li>"
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# <li><code>bypass</code> allows for a specific request type to skip the disclaimer stage.</li></ul>"
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# <li><code>bypass</code> allows for a specific request type to skip the disclaimer stage.</li></ul>"
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# <li><code>text</code> is the HTML that will be visible for the specified request type.</li>"
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# <li><code>text</code> is the HTML that will be visible for the specified request type.</li>"
 
 # Interlibrary loans > Features > ILLModule
 # Circulation > Interlibrary loans
@@ -8444,11 +8472,11 @@ msgstr "the interlibrary loans module (master switch)."
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# For each request type, you can have 3 configuration options: <code>text</code>, <code>av_category_code</code> and <code>bypass</code><ul>"
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# For each request type, you can have 3 configuration options: <code>text</code>, <code>av_category_code</code> and <code>bypass</code><ul>"
 
 # Interlibrary loans > Workflow > ILLModuleDisclaimerByType
 msgid "interlibrary_loans.pref#ILLModuleDisclaimerByType# If the ILL backend supports it, adding YAML will enable the request type disclaimer stage in request creation, prompting the user with a request type specific disclaimer as defined (staff interface and OPAC)."
-msgstr ""
+msgstr "interlibrary_loans.pref#ILLModuleDisclaimerByType# If the ILL backend supports it, adding YAML will enable the request type disclaimer stage in request creation, prompting the user with a request type specific disclaimer as defined (staff interface and OPAC)."
 
 # Interlibrary loans > Features > ILLModule
 # Circulation > Interlibrary loans
@@ -8555,11 +8583,11 @@ msgstr "when acquisition actions take place."
 
 # Logging > Debugging > ActionLogsTraceDepth
 msgid "logs.pref#ActionLogsTraceDepth# When logging actions, store a stack trace that goes at most"
-msgstr ""
+msgstr "logs.pref#ActionLogsTraceDepth# When logging actions, store a stack trace that goes at most"
 
 # Logging > Debugging > ActionLogsTraceDepth
 msgid "logs.pref#ActionLogsTraceDepth# levels deep."
-msgstr ""
+msgstr "logs.pref#ActionLogsTraceDepth# levels deep."
 
 # Logging > Logging > AuthFailureLog
 # Logging > Logging
@@ -9060,7 +9088,7 @@ msgstr "expired members from OPAC actions such as placing a reserve or renewing.
 
 # OPAC > Policy > BlockExpiredPatronOpacActions
 msgid "opac.pref#BlockExpiredPatronOpacActions# Expired patrons are blocked from performing the following actions in the OPAC:"
-msgstr ""
+msgstr "opac.pref#BlockExpiredPatronOpacActions# Expired users are blocked from performing the following actions in the OPAC:"
 
 # OPAC > Policy > BlockExpiredPatronOpacActions
 # OPAC > Policy
@@ -9216,7 +9244,7 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "the acquisition details on OPAC detail pages."
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
 msgstr ""
 
 # OPAC > Features > OPACAuthorIdentifiers
@@ -9233,7 +9261,7 @@ msgstr "Don't display"
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
 msgid "opac.pref#OPACAuthorIdentifiersAndInformation# Associated group (373$a$s$t$u$v$0)"
-msgstr ""
+msgstr "opac.pref#OPACAuthorIdentifiersAndInformation# Associated group (373$a$s$t$u$v$0)"
 
 # OPAC > Features > OPACAuthorIdentifiers
 # OPAC > Appearance
@@ -9316,6 +9344,22 @@ msgstr "Enable"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "the option to show a QR Code on the OPAC bibliographic detail page."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "Allow"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "Don't allow"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr ""
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Appearance
@@ -9508,7 +9552,7 @@ msgstr "Disable"
 
 # OPAC > Appearance > OPACLoginLabelTextContent
 msgid "opac.pref#OPACLoginLabelTextContent# as the label of the userid input field on the OPAC login form."
-msgstr ""
+msgstr "opac.pref#OPACLoginLabelTextContent# as the label of the userid input field on the OPAC login form."
 
 # OPAC > Features > OpacItemLocation
 # OPAC > Features
@@ -9518,7 +9562,7 @@ msgstr "library and call number"
 
 # OPAC > Appearance > OPACLoginLabelTextContent
 msgid "opac.pref#OPACLoginLabelTextContent# card number or username"
-msgstr ""
+msgstr "opac.pref#OPACLoginLabelTextContent# card number or username"
 
 # OPAC > Features > ShowReviewer
 # OPAC > Features
@@ -9674,7 +9718,7 @@ msgstr "Group unavailable items by"
 
 # OPAC > Appearance > OPACResultsMaxItems
 msgid "opac.pref#OPACResultsMaxItems# If <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACResultsUnavailableGroupingBy\">OPACResultsUnavailableGroupingBy</a> is set to \"library and substatus\", show no more than"
-msgstr ""
+msgstr "opac.pref#OPACResultsMaxItems# If <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=OPACResultsUnavailableGroupingBy\">OPACResultsUnavailableGroupingBy</a> is set to \"library and substatus\", show no more than"
 
 # OPAC > Appearance > OPACResultsMaxItems
 # OPAC > Appearance
@@ -9837,23 +9881,23 @@ msgstr "display of OpenURL link in OPAC search results and detail page."
 
 # OPAC > Features > OPACShowSavings
 msgid "opac.pref#OPACShowSavings# . Note that displayed savings may be inaccurate if checkout history is anonymized."
-msgstr ""
+msgstr "opac.pref#OPACShowSavings# . Note that displayed savings may be inaccurate if checkout history is anonymized."
 
 # OPAC > Features > OPACShowSavings
 msgid "opac.pref#OPACShowSavings# Calculate the amount a patron has 'saved' by using the library based on replacement prices, and display:"
-msgstr ""
+msgstr "opac.pref#OPACShowSavings# Calculate the amount a user has 'saved' by using the library based on replacement prices, and display:"
 
 # OPAC > Features > OPACShowSavings
 msgid "opac.pref#OPACShowSavings# in user summary box on OPAC homepage (the system preference 'OPACUserSummary' must be enabled)"
-msgstr ""
+msgstr "opac.pref#OPACShowSavings# in user summary box on OPAC homepage (the system preference 'OPACUserSummary' must be enabled)"
 
 # OPAC > Features > OPACShowSavings
 msgid "opac.pref#OPACShowSavings# on patron's 'your summary' page"
-msgstr ""
+msgstr "opac.pref#OPACShowSavings# on user's 'your summary' page"
 
 # OPAC > Features > OPACShowSavings
 msgid "opac.pref#OPACShowSavings# on patron's checkout history page (the system preference 'opacreadinghistory' must be enabled)"
-msgstr ""
+msgstr "opac.pref#OPACShowSavings# on user's checkout history page (the system preference 'opacreadinghistory' must be enabled)"
 
 # OPAC > Appearance > OPACShowUnusedAuthorities
 # OPAC > Appearance
@@ -9979,7 +10023,7 @@ msgstr "purchase suggestions from other members on the OPAC."
 
 # OPAC > Suggestions > OPACVirtualCard
 msgid "opac.pref#OPACVirtualCard#  barcode in the patron's virtual card."
-msgstr ""
+msgstr "opac.pref#OPACVirtualCard#  barcode in the user's virtual card."
 
 # OPAC > Privacy > OPACPrivacy
 # OPAC > Privacy
@@ -10037,7 +10081,7 @@ msgstr "Enable"
 
 # OPAC > Suggestions > OPACVirtualCard
 msgid "opac.pref#OPACVirtualCard# If set to allow, show a "
-msgstr ""
+msgstr "opac.pref#OPACVirtualCard# If set to allow, show a "
 
 # OPAC > Features > OPACDetailQRCode
 # OPAC > Appearance
@@ -10327,19 +10371,19 @@ msgstr "members to browse subject authorities on the OPAC."
 
 # OPAC > Features > OpacCatalogConcerns
 msgid "opac.pref#OpacCatalogConcerns# <p><strong>NOTE:</strong> Enabling `<a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CatalogConcerns\">CatalogConcerns</a>` will allow concern submissions from the staff interface.</p>"
-msgstr ""
+msgstr "opac.pref#OpacCatalogConcerns# <p><strong>NOTE:</strong> Enabling `<a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=CatalogConcerns\">CatalogConcerns</a>` will allow concern submissions from the staff interface.</p>"
 
 # OPAC > Features > OpacCatalogConcerns
 msgid "opac.pref#OpacCatalogConcerns# Allow"
-msgstr ""
+msgstr "opac.pref#OpacCatalogConcerns# Allow"
 
 # OPAC > Features > OpacCatalogConcerns
 msgid "opac.pref#OpacCatalogConcerns# Don't allow"
-msgstr ""
+msgstr "opac.pref#OpacCatalogConcerns# Don't allow"
 
 # OPAC > Features > OpacCatalogConcerns
 msgid "opac.pref#OpacCatalogConcerns# OPAC users to report concerns about bibliographic records."
-msgstr ""
+msgstr "opac.pref#OpacCatalogConcerns# OPAC users to report concerns about bibliographic records."
 
 # OPAC > Features > OpacCloud
 # OPAC > Features
@@ -10614,19 +10658,19 @@ msgstr "This description will show in search engine results (160 characters)."
 
 # OPAC > Appearance > OpacMetaRobots
 msgid "opac.pref#OpacMetaRobots# <br/><strong>noindex:</strong> This option instructs search engines not to index the OPAC at all. This means the OPAC won't appear in search results. This might be useful for internal library catalogs that are not intended for public search."
-msgstr ""
+msgstr "opac.pref#OpacMetaRobots# <br/><strong>noindex:</strong> This option instructs search engines not to index the OPAC at all. This means the OPAC won't appear in search results. This might be useful for internal library catalogs that are not intended for public search."
 
 # OPAC > Appearance > OpacMetaRobots
 msgid "opac.pref#OpacMetaRobots# <br><strong>both:</strong> Search engines won't follow any links on the OPAC and won't index the OPAC itself."
-msgstr ""
+msgstr "opac.pref#OpacMetaRobots# <br><strong>both:</strong> Search engines won't follow any links on the OPAC and won't index the OPAC itself."
 
 # OPAC > Appearance > OpacMetaRobots
 msgid "opac.pref#OpacMetaRobots# <br><strong>nofollow:</strong> This option tells search engines not to follow any links on the OPAC. If you don't specify this rule, search engines may use links on the page to discover those linked pages."
-msgstr ""
+msgstr "opac.pref#OpacMetaRobots# <br><strong>nofollow:</strong> This option tells search engines not to follow any links on the OPAC. If you don't specify this rule, search engines may use links on the page to discover those linked pages."
 
 # OPAC > Appearance > OpacMetaRobots
 msgid "opac.pref#OpacMetaRobots# Control how search engines index the OPAC by adding a robots meta tag with"
-msgstr ""
+msgstr "opac.pref#OpacMetaRobots# Control how search engines index the OPAC by adding a robots meta tag with"
 
 # OPAC > Features > OpacHoldNotes
 # OPAC > Features
@@ -10942,7 +10986,7 @@ msgstr "Text of OpenURL links (or image title if <a href=\"/cgi-bin/koha/admin/p
 
 # OPAC > Self registration and modification > PatronSelfModificationBorrowerUnwantedField
 msgid "opac.pref#PatronSelfModificationBorrowerUnwantedField# <br /> NOTE: preferred_name will be set to firstname if not included in the form. It should also be selected in <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerUnwantedField\">BorrowerUnwantedField</a> if selected here."
-msgstr ""
+msgstr "opac.pref#PatronSelfModificationBorrowerUnwantedField# <br /> NOTE: preferred_name will be set to firstname if not included in the form. It should also be selected in <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=BorrowerUnwantedField\">BorrowerUnwantedField</a> if selected here."
 
 # OPAC > Self registration and modification > PatronSelfModificationBorrowerUnwantedField
 # OPAC > Self registration and modification
@@ -10980,7 +11024,7 @@ msgstr "The following <a href='http://schema.koha-community.org/__VERSION__/tabl
 
 # OPAC > Self registration and modification > PatronSelfRegistrationBorrowerUnwantedField
 msgid "opac.pref#PatronSelfRegistrationBorrowerUnwantedField# <br /> NOTE: preferred_name will be set to firstname if not included in the form."
-msgstr ""
+msgstr "opac.pref#PatronSelfRegistrationBorrowerUnwantedField# <br /> NOTE: preferred_name will be set to firstname if not included in the form."
 
 # OPAC > Self registration and modification > PatronSelfRegistrationBorrowerUnwantedField
 # OPAC > Self registration and modification
@@ -11101,27 +11145,27 @@ msgstr "that a self-registering member verify themselves via email."
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# </ul>"
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# </ul>"
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# <li>First priority: Use the --list-invites parameter when the cleanup_database.pl cronjob is run with a --list-invites parameter defining a number of days.</li>"
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# <li>First priority: Use the --list-invites parameter when the cleanup_database.pl cronjob is run with a --list-invites parameter defining a number of days.</li>"
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# <li>Second priority: Use the PurgeListShareInvitesOlderThan system preference when it contains a value.</li>"
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# <li>Second priority: Use the PurgeListShareInvitesOlderThan system preference when it contains a value.</li>"
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# <li>Third priority: Use a default of 14 days when the cleanup_database.pl cronjob is run with a --list-invites parameter, but no value AND the PurgeListShareInvitesOlderThan system preference is empty.</li>"
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# <li>Third priority: Use a default of 14 days when the cleanup_database.pl cronjob is run with a --list-invites parameter, but no value AND the PurgeListShareInvitesOlderThan system preference is empty.</li>"
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# <p><strong>WARNING</strong>: Unaccepted private list shares are deleted using these priorities:"
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# <p><strong>WARNING</strong>: Unaccepted private list shares are deleted using these priorities:"
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# <p>Example: [14] Deletes unaccepted private list share invites older than 14 days.</p>"
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# <p>Example: [14] Deletes unaccepted private list share invites older than 14 days.</p>"
 
 # OPAC > Self registration and modification > PatronSelfRegistrationVerifyByEmail
 # OPAC > Self registration and modification
@@ -11131,15 +11175,15 @@ msgstr "<br><strong>NOTE:</strong> This system preference requires the <code>mis
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# <ul>"
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# <ul>"
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# The cleanup_database.pl cronjob automatically deletes unaccepted private list share invites after"
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# The cleanup_database.pl cronjob automatically deletes unaccepted private list share invites after"
 
 # OPAC > Policy > PurgeListShareInvitesOlderThan
 msgid "opac.pref#PurgeListShareInvitesOlderThan# days."
-msgstr ""
+msgstr "opac.pref#PurgeListShareInvitesOlderThan# days."
 
 # OPAC > Features > QuoteOfTheDay
 # OPAC > Features
@@ -11638,7 +11682,7 @@ msgstr " the latter of the current and expiry date."
 
 # Patrons > Patron forms > BorrowerUnwantedField
 msgid "patrons.pref#BorrowerUnwantedField# <br /> NOTE: preferred_name will be set to firstname if not included in the form. It should also be selected in <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfModificationBorrowerUnwantedField\">PatronSelfModificationBorrowerUnwantedField</a> if selected here."
-msgstr ""
+msgstr "users.pref#BorrowerUnwantedField# <br /> NOTE: preferred_name will be set to firstname if not included in the form. It should also be selected in <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=PatronSelfModificationBorrowerUnwantedField\">PatronSelfModificationBorrowerUnwantedField</a> if selected here."
 
 # Patrons > Patron forms > BorrowerUnwantedField
 # Patrons > Patron forms
@@ -11709,28 +11753,32 @@ msgstr "Trigger a warning if the current item has been checked out no longer tha
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "days ago."
 
-# Patrons > Patron relationships > PrefillGuaranteeField
-# Patrons > Patron relationships
-#, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "Contact - Fax"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr ""
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "Guarantor information"
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
 msgstr "Guarantor information"
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
 msgstr "Don't send"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron relationships
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
 msgstr "Contact - Fax"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
@@ -11816,7 +11864,7 @@ msgstr "When adding new members or editing existing members, collapse the follow
 
 # Patrons > Privacy > CookieConsent
 msgid "patrons.pref#CookieConsent# <br><strong>NOTE:</strong> The cookie banner can be customised using the <a href=\"/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations\" target=\"_blank\">CookieConsentBar</a> html customisation."
-msgstr ""
+msgstr "users.pref#CookieConsent# <br><strong>NOTE:</strong> The cookie banner can be customised using the <a href=\"/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations\" target=\"_blank\">CookieConsentBar</a> html customisation."
 
 # Patrons > Security > RequireStrongPassword
 # Patrons > Security
@@ -11838,11 +11886,11 @@ msgstr "results per page in the staff interface."
 
 # Patrons > Privacy > CookieConsentedJS
 msgid "patrons.pref#CookieConsentedJS# <br><strong>NOTE:</strong> The cookie consent modal can be customised using the <a href=\"/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations\" target=\"_blank\">CookieConsentPopup</a> html customisation."
-msgstr ""
+msgstr "users.pref#CookieConsentedJS# <br><strong>NOTE:</strong> The cookie consent modal can be customised using the <a href=\"/cgi-bin/koha/tools/additional-contents.pl?category=html_customizations\" target=\"_blank\">CookieConsentPopup</a> html customisation."
 
 # Patrons > Privacy > CookieConsentedJS
 msgid "patrons.pref#CookieConsentedJS# Run the following JavaScript if cookie consent is provided (e.g. tracking code)."
-msgstr ""
+msgstr "users.pref#CookieConsentedJS# Run the following JavaScript if cookie consent is provided (e.g. tracking code)."
 
 # Patrons > General > DefaultPatronSearchFields
 #, fuzzy
@@ -11863,19 +11911,19 @@ msgstr "Don't retain"
 
 # Patrons > General > DefaultPatronSearchMethod
 msgid "patrons.pref#DefaultPatronSearchMethod# Enable this search method to determine whether to use 'starts with' or 'contains' for all patron searches, including auto-complete."
-msgstr ""
+msgstr "users.pref#DefaultPatronSearchMethod# Enable this search method to determine whether to use 'starts with' or 'contains' for all user searches, including auto-complete."
 
 # Patrons > General > DefaultPatronSearchMethod
 msgid "patrons.pref#DefaultPatronSearchMethod# Starts with"
-msgstr ""
+msgstr "users.pref#DefaultPatronSearchMethod# Starts with"
 
 # Patrons > Notices and notifications > EmailFieldPrecedence
 msgid "patrons.pref#EmailFieldPrecedence# <br><strong>NOTE:</strong> All patron fields can be used, but to work correctly they must contain a valid email address or an empty string."
-msgstr ""
+msgstr "users.pref#EmailFieldPrecedence# <br><strong>NOTE:</strong> All user fields can be used, but to work correctly they must contain a valid email address or an empty string."
 
 # Patrons > Notices and notifications > EmailFieldPrecedence
 msgid "patrons.pref#EmailFieldPrecedence# Example: email|emailpro|B_email"
-msgstr ""
+msgstr "users.pref#EmailFieldPrecedence# Example: email|emailpro|B_email"
 
 # Patrons > Patron forms > PatronQuickAddFields
 # Patrons > Patron forms
@@ -11899,11 +11947,11 @@ msgstr "<br><strong>NOTE:</strong> If set to \"first valid\", the order in which
 
 # Patrons > Notices and notifications > EmailFieldPrimary
 msgid "patrons.pref#EmailFieldPrimary# Use the patron's"
-msgstr ""
+msgstr "users.pref#EmailFieldPrimary# Use the user's"
 
 # Patrons > Notices and notifications > EmailFieldPrimary
 msgid "patrons.pref#EmailFieldPrimary# alternate email"
-msgstr ""
+msgstr "users.pref#EmailFieldPrimary# alternate email"
 
 # Patrons > Notices and notifications
 #, fuzzy
@@ -11912,19 +11960,19 @@ msgstr "cardnumber as"
 
 # Patrons > Notices and notifications > EmailFieldPrimary
 msgid "patrons.pref#EmailFieldPrimary# first valid email address"
-msgstr ""
+msgstr "users.pref#EmailFieldPrimary# first valid email address"
 
 # Patrons > Notices and notifications > EmailFieldPrimary
 msgid "patrons.pref#EmailFieldPrimary# for sending out email notices."
-msgstr ""
+msgstr "users.pref#EmailFieldPrimary# for sending out email notices."
 
 # Patrons > Notices and notifications > EmailFieldPrimary
 msgid "patrons.pref#EmailFieldPrimary# primary email"
-msgstr ""
+msgstr "users.pref#EmailFieldPrimary# primary email"
 
 # Patrons > Notices and notifications > EmailFieldPrimary
 msgid "patrons.pref#EmailFieldPrimary# secondary email"
-msgstr ""
+msgstr "users.pref#EmailFieldPrimary# secondary email"
 
 # Patrons > Notices and notifications
 #, fuzzy
@@ -12665,7 +12713,7 @@ msgstr "Contact - Fax"
 
 # Patrons > Patron relationships > RedirectGuaranteeEmail
 msgid "patrons.pref#RedirectGuaranteeEmail# sending emails to both guarantees and their guarantor. This does not affect patrons without guarantors."
-msgstr ""
+msgstr "users.pref#RedirectGuaranteeEmail# sending emails to both guarantees and their guarantor. This does not affect users without guarantors."
 
 # Patrons > Security > RequireStrongPassword
 # Patrons > General
@@ -12707,7 +12755,7 @@ msgstr "Don't allow"
 
 # Patrons > Patron relationships > RestrictPatronsWithFailedNotices
 msgid "patrons.pref#RestrictPatronsWithFailedNotices# a restriction to a patron when their email and SMS messages fail to send at the Koha level."
-msgstr ""
+msgstr "users.pref#RestrictPatronsWithFailedNotices# a restriction to a user when their email and SMS messages fail to send at the Koha level."
 
 # Patrons > Notices and notifications > SMSSendDriver
 msgid "patrons.pref#SMSSendDriver# <br><strong>NOTE:</strong> Many mobile providers have deprecated support for this feature and it is not recommended for use unless you have a dedicated SMS to Email gateway."
@@ -12752,7 +12800,7 @@ msgstr "Define a username/login"
 
 # Patrons > Notices and notifications > SMSSendUsername
 msgid "patrons.pref#SMSSendUsername# If the SMS::Send driver requires more options than just username/login and password, enter them here as YAML key/value pairs:"
-msgstr ""
+msgstr "users.pref#SMSSendUsername# If the SMS::Send driver requires more options than just username/login and password, enter them here as YAML key/value pairs:"
 
 # Patrons > Notices and notifications > SMSSendUsername
 # Enhanced content > Baker and Taylor
@@ -13018,7 +13066,7 @@ msgstr "Use the <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=N
 
 # Preservation > Interface > PreservationNotForLoanDefaultTrainIn
 msgid "preservation.pref#PreservationNotForLoanDefaultTrainIn# to apply to items added to a train."
-msgstr ""
+msgstr "preservation.pref#PreservationNotForLoanDefaultTrainIn# to apply to items added to a train."
 
 # Circulation > Item bundles > BundleNotLoanValue
 #, fuzzy
@@ -13027,7 +13075,7 @@ msgstr "Use the <a href=\"/cgi-bin/koha/admin/authorised_values.pl?searchfield=N
 
 # Preservation > Interface > PreservationNotForLoanWaitingListIn
 msgid "preservation.pref#PreservationNotForLoanWaitingListIn# to apply to items added to the waiting list."
-msgstr ""
+msgstr "preservation.pref#PreservationNotForLoanWaitingListIn# to apply to items added to the waiting list."
 
 # Searching
 msgid "searching.pref"
@@ -13127,7 +13175,7 @@ msgstr "date of publication"
 
 # Searching > Results display > AuthorLinkSortBy
 msgid "searching.pref#AuthorLinkSortBy# default sort field and order specified in defaultSortField or OPACdefaultSortField"
-msgstr ""
+msgstr "searching.pref#AuthorLinkSortBy# default sort field and order specified in defaultSortField or OPACdefaultSortField"
 
 # Searching > Results display > defaultSortField
 # Searching > Results display
@@ -13210,7 +13258,7 @@ msgstr "home library"
 
 # Searching > Features > ESPreventAutoTruncate
 msgid "searching.pref#ESPreventAutoTruncate# List of search fields (separated by | or ,) that should not be autotruncated by Elasticsearch even if <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=QueryAutoTruncate'>QueryAutoTruncate</a> is set to 'Yes':"
-msgstr ""
+msgstr "searching.pref#ESPreventAutoTruncate# List of search fields (separated by | or ,) that should not be autotruncated by Elasticsearch even if <a href='/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=QueryAutoTruncate'>QueryAutoTruncate</a> is set to 'Yes':"
 
 # Searching > Features > ElasticsearchCrossFields
 # Searching > Features
@@ -13534,7 +13582,7 @@ msgstr "<br />(The * character would be used like so: <cite>Har*</cite> or <cite
 
 # Searching > Features > QueryAutoTruncate
 msgid "searching.pref#QueryAutoTruncate# <strong>NOTE:</strong> Record identifiers (biblionumber, authid) will never be autotruncated."
-msgstr ""
+msgstr "searching.pref#QueryAutoTruncate# <strong>NOTE:</strong> Record identifiers (biblionumber, authid) will never be autotruncated."
 
 # Searching > Features > QueryAutoTruncate
 # Searching > Features
@@ -13678,7 +13726,7 @@ msgstr "the option for staff with permission to create/edit custom saved search 
 
 # Searching > Features > SearchCancelledAndInvalidISBNandISSN
 msgid "searching.pref#SearchCancelledAndInvalidISBNandISSN# Do"
-msgstr ""
+msgstr "searching.pref#SearchCancelledAndInvalidISBNandISSN# Do"
 
 # Searching > Results display > SearchWithISBNVariations
 # Searching > Results display
@@ -13688,7 +13736,7 @@ msgstr "don't show"
 
 # Searching > Features > SearchCancelledAndInvalidISBNandISSN
 msgid "searching.pref#SearchCancelledAndInvalidISBNandISSN# search for cancelled or invalid forms of ISBN/ISSN when performing ISBN/ISSN search (when using Elasticsearch)."
-msgstr ""
+msgstr "searching.pref#SearchCancelledAndInvalidISBNandISSN# search for cancelled or invalid forms of ISBN/ISSN when performing ISBN/ISSN search (when using Elasticsearch)."
 
 # Searching > Results display > SearchLimitLibrary
 msgid "searching.pref#SearchLimitLibrary# When limiting search results with a library or library group, limit by the item's"
@@ -13959,23 +14007,23 @@ msgstr "results per page dropdown on staff interface search results."
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# <pre>ccode: [REF,ARC]</pre><br/>  - would mark all REF and ARC collections (Reference and Archives) items as unavailable in Z3950 results.<br/><br/>"
-msgstr ""
+msgstr "searching.pref#z3950Status# <pre>ccode: [REF,ARC]</pre><br/>  - would mark all REF and ARC collections (Reference and Archives) items as unavailable in Z3950 results.<br/><br/>"
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# <pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  - would mark all reference items AND items at the REPAIR branch as unavailable."
-msgstr ""
+msgstr "searching.pref#z3950Status# <pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  - would mark all reference items AND items at the REPAIR branch as unavailable."
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# Define custom rules to show specific items as not available in Z3950. Rules are defined with item database fields as keys and an array of values.<br/>"
-msgstr ""
+msgstr "searching.pref#z3950Status# Define custom rules to show specific items as not available in Z3950. Rules are defined with item database fields as keys and an array of values.<br/>"
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# Examples:<br/><br/>"
-msgstr ""
+msgstr "searching.pref#z3950Status# Examples:<br/><br/>"
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# You can define multiple keys and values, items meeting ANY of the criteria will be marked unavailable:<br/><br/>"
-msgstr ""
+msgstr "searching.pref#z3950Status# You can define multiple keys and values, items meeting ANY of the criteria will be marked unavailable:<br/><br/>"
 
 # Serials
 msgid "serials.pref"
@@ -14108,7 +14156,7 @@ msgstr "Show the"
 
 # Serials > Features > SerialsSearchResultsLimit
 msgid "serials.pref#SerialsSearchResultsLimit# first serials when performing an advanced serials search."
-msgstr ""
+msgstr "serials.pref#SerialsSearchResultsLimit# first serials when performing an advanced serials search."
 
 # Serials > Features > StaffSerialIssueDisplayCount
 # Serials
@@ -14390,15 +14438,15 @@ msgstr " Don't allow"
 
 # Staff interface > Appearance > ReportsExportFormatODS
 msgid "staff_interface.pref#ReportsExportFormatODS# Open Document Spreadsheet (ODS) as download format in reports."
-msgstr ""
+msgstr "staff_interface.pref#ReportsExportFormatODS# Open Document Spreadsheet (ODS) as download format in reports."
 
 # Staff interface > Options > ReportsExportLimit
 msgid "staff_interface.pref#ReportsExportLimit# Download a maximum of"
-msgstr ""
+msgstr "staff_interface.pref#ReportsExportLimit# Download a maximum of"
 
 # Staff interface > Options > ReportsExportLimit
 msgid "staff_interface.pref#ReportsExportLimit# records when downloading from the reports module.<br>NOTE: Only a positive value will enforce a limit. A specific limit in the report overrides this setting."
-msgstr ""
+msgstr "staff_interface.pref#ReportsExportLimit# records when downloading from the reports module.<br>NOTE: Only a positive value will enforce a limit. A specific limit in the report overrides this setting."
 
 # Staff interface > Appearance > SlipCSS
 # Staff Client > Appearance
@@ -14869,12 +14917,14 @@ msgstr " ILS-DI services for OPAC users (available at: /cgi-bin/koha/ilsdi.pl)"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
 msgstr "Allow IP addresses"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
 msgstr " to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
 
 # Web services > IdRef > IdRef
@@ -15024,7 +15074,7 @@ msgstr "."
 
 # Web services > OAI-PMH > OAI-PMH:HarvestEmailReport
 msgid "web_services.pref#OAI-PMH:HarvestEmailReport# After an OAI-PMH harvest, send a report email to the email address"
-msgstr ""
+msgstr "web_services.pref#OAI-PMH:HarvestEmailReport# After an OAI-PMH harvest, send a report email to the email address"
 
 # Web services > OAI-PMH > OAI-PMH:MaxCount
 # Web services > OAI-PMH
@@ -15130,7 +15180,8 @@ msgid "web_services.pref#RESTOAuth2ClientCredentials# Enable"
 msgstr "Enable"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
+#, fuzzy
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
 msgstr "the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
 
 # Web services > REST API > RESTPublicAPI
@@ -16183,6 +16234,16 @@ msgstr "rows of a report requested via the reports web service."
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr " them to automatically create new authority records if needed, rather than having to reference existing authorities."
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #~ msgid "cataloguing.pref#OpacSuppression# <br />Display the following message on the redirect page for suppressed bibliographic records:"
@@ -16427,6 +16488,12 @@ msgstr "rows of a report requested via the reports web service."
 # Patrons > Notices and notifications
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "work"
+
+# Patrons > Patron relationships > PrefillGuaranteeField
+# Patrons > Patron relationships
+#, fuzzy
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "Contact - Fax"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

@@ -48,9 +48,9 @@
  [% INCLUDE 'messages.inc' %]
 
 [% IF ( op ) %]
- <h1>New routing list for <em>[% title | html %]</em></h1>
+ <h1>Ny mottagarlista för <em>[% title | html %]</em></h1>
 [% ELSE %]
- <h1>Modify routing list for <em>[% title | html %]</em></h1>
+ <h1>Redigera mottagarlista för <em>[% title | html %]</em></h1>
 [% END %]
 
 <fieldset class="rows">

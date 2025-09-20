@@ -56,11 +56,11 @@ Virkailijaliittymä:
         '1': Näytä
       pref: IntranetCatalogSearchPulldown
     - pudotusvalikko haku-kentissä.
-  - - Download a maximum of
+  - - Lataa korkeintaan
     - class: integer
       pref: ReportsExportLimit
-    - 'records when downloading from the reports module.<br>NOTE: Only a positive
-      value will enforce a limit. A specific limit in the report overrides this setting.'
+    - 'riviä, kun ladataan raporteista. <br>Huomioi: Vain positiivinen luku toimii
+      raja-arvona. Raporttiin asetettu raja-arvo ohittaa tämän asetuksen.'
   Tunnistautuminen:
   - - choices:
         '0': Salli
@@ -78,17 +78,16 @@ Virkailijaliittymä:
       osoitteesta: '
     - class: file
       pref: AuthorityXSLTResultsDisplay
-    - <br />Options:<ul><li>Put a path to define a XSLT file</li><li>Put an URL for
-      an external specific stylesheet.</li></ul>{langcode} will be replaced with current
-      interface language and {authtypecode} will be replaced by the authority type
-      code
-  - - 'Display authority details in the staff interface using XSLT stylesheet at: '
+    - <br />Vaihtoehdot:<ul><li>Lisää XSLT-tiedoston hakemistopolku</li><li>Lisää
+      ulkoisen tyylitiedoston URL.</li></ul>{langcode} korvautuu käytössä olevalla
+      kielellä ja {authtypecode} korvautuu auktoriteettityypin koodilla
+  - - 'Näytä auktoriteettitiedot virkailijaliittymässä käyttäen XSLT-tyylitiedostoa
+      osoitteesta: '
     - class: file
       pref: AuthorityXSLTDetailsDisplay
-    - <br />Options:<ul><li>Put a path to define a XSLT file</li><li>Put an URL for
-      an external specific stylesheet.</li></ul>{langcode} will be replaced with current
-      interface language and {authtypecode} will be replaced by the authority type
-      code
+    - <br />Vaihtoehdot:<ul><li>Lisää XSLT-tiedoston hakemistopolku</li><li>Lisää
+      ulkoisen tyylitiedoston URL.</li></ul>{langcode} korvautuu käytössä olevalla
+      kielellä ja {authtypecode} korvautuu auktoriteettityypin koodilla
   - - 'Näytä kielivalinta '
     - choices:
         both: sekä ylä- että alareunassa
@@ -226,7 +225,7 @@ Virkailijaliittymä:
       type: boolean
     - virkailijaliittymän hakutuloksissa haettuja sanoja.
   - - choices:
-        '0': Do not allow
-        '1': Allow
+        '0': Älä salli
+        '1': Salli
       pref: ReportsExportFormatODS
-    - Open Document Spreadsheet (ODS) as download format in reports.
+    - Open Document Spreadseet (ODS) latausmuotona raporteissa.

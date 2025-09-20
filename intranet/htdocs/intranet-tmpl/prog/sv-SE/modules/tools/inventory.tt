@@ -277,19 +277,19 @@
  <thead>
  <tr>
  [% UNLESS uploadedbarcodesflag %]
- <th>Sedd</th>
+ <th id="seen" data-colname="seen">Sedd</th>
  [% END %]
- <th>Streckkod</th>
- <th>Hyllsignatur</th>
- <th>Bibliotek</th>
- <th>Avdelning</th>
- <th class="anti-the">Titel</th>
- <th>Ej för utlån</th>
- <th>Förlorad</th>
- <th>Skadad</th>
- <th>Återkallad</th>
- <th>Senast sedd</th>
- <th>Problem</th>
+ <th id="barcode" data-colname="barcode">Streckkod</th>
+ <th id="call_number" data-colname="call_number">Hyllsignatur</th>
+ <th id="library" data-colname="library">Bibliotek</th>
+ <th id="collection" data-colname="collection">Avdelning</th>
+ <th id="title" data-colname="title" class="anti-the">Titel</th>
+ <th id="notforloan" data-colname="notforloan">Ej för utlån</th>
+ <th id="lost" data-colname="lost">Förlorad</th>
+ <th id="damaged" data-colname="damaged">Skadad</th>
+ <th id="withdrawn" data-colname="withdrawn">Återkallad</th>
+ <th id="last_seen" data-colname="last_seen">Senast sedd</th>
+ <th id="problems" data-colname="problems">Problem</th>
  </tr>
  </thead>
  <tbody>
@@ -352,7 +352,7 @@
  [% IF result.notforloan %]
  <span>Exemplaret har en avmarkerad 'ej för utlån'-status "[% result.notforloan | html %]"</span><br/>
  [% ELSE %]
- <span>Item has no "not for loan" status</span><br/>
+ <span>Exemplaret saknar "Ej för utlån"-status</span><br/>
  [% END %]
  [% ELSIF problem.key == 'not_scanned' %]
  <span>Saknas (inte skannad)</span><br/>
@@ -451,9 +451,10 @@
             var table_settings = [% TablesSettings.GetTableSettings( 'tools', 'inventory', 'inventoryt', 'json' ) | $raw %];
             inventorydt = KohaTable("inventoryt", {
                 "pagingType": 'full_numbers',
-                [% IF compareinv2barcd %]
+                "bKohaColumnsUseNames": true,
+                [% IF uploadedbarcodesflag %]
                     // sort on callnumber
-                    "order": [[ 1, "asc" ]],
+                    "order": [[ 2, "asc" ]],
                 [% ELSE %]
                     // first column contains checkboxes
                     "columnDefs": [

@@ -65,16 +65,20 @@ Kuvailu:
       pref: UseControlNumber
     - tietueen kontrollinumeroa ($w osakentissä) ja kontrollinumeroa (001) nimeketietueiden
       linkittämiseen.
-  - - 'Käytä URLia:'
+  - - Käytä URLia
     - class: url
       pref: MarcFieldDocURL
     - MARC-kenttien dokumentaatiossa.
-    - Mahdolliset sijoitukset ovat <tt>{MARC}</tt>(marc-formaatti, esim. "MARC21"
-      or "UNIMARC"), <tt>{FIELD}</tt> (kentät, esim. "000" or "048"), <tt>{LANG}</tt>
-      (käyttäjän kieli, esim. "en" or "fi-FI").
-    - 'Jos jätetään tyhjäksi, käytetään formaattidokumentaatiota osoitteista: http://loc.gov
-      (MARC21) tai http://archive.ifla.org (UNIMARC).'
-    - Esimerkiksi <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>
+    - <br><br>
+    - 'Jos tyhjä, oletus-URLit ovat:'
+    - '<ul><li>MARC21: kenttäkohtaiset sivut osoitteessa https://www.loc.gov/marc/bibliographic/</li>'
+    - '<li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>'
+    - 'Käytettävissä olevat paikkamerkit URLissa käytettäväksi:'
+    - '<ul><li><code>{MARC}</code>: MARC-muoto, "MARC21" tai "UNIMARC"</li>'
+    - '<li><code>{FIELD}</code>: kentän numero, esimerkiksi, "000" tai "048"</li>'
+    - '<li><code>{LANG}</code>: kieli, esimerkiksi, "en" tai "fi-FI"</li></ul>'
+    - Esimerkit:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>
+    - <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>
   - - choices:
         '0': Näytä
         '1': Älä näytä
@@ -85,12 +89,12 @@ Kuvailu:
         standard: Älä kokoa
       pref: LabelMARCView
     - toistettuja samantyyppisiä avainsanoja yhdeksi tagiksi näytöllä.
-  - - 'Nimeketietueiden oletusnäyttötapa:'
+  - - Nimeketietueiden oletusnäyttötapa
     - choices:
         isbd: ISBD-lomake (katso alla).
         labeled_marc: otsikoitu MARC-näyttö.
-        marc: MARC-tietue
-        normal: perusnäyttö
+        marc: MARC-tietue.
+        normal: perusnäyttö.
       pref: IntranetBiblioDefaultView
   - - 'Käytä seuraavaa virkailijaliittymän ISBD-pohjana:'
     - class: code
@@ -108,7 +112,7 @@ Kuvailu:
     - (Jätä tyhjäksi, jos tätä ei käytetä. Määrittele alue muodossa <code>192.168.</code>.)
     - <br />Uudelleenohjaa verkkokirjastossa piilotettujen tietueiden perustiedot-näytöltä
     - choices:
-        '0': virhe 404 ('Ei löytynyt')
+        '0': virhe 404 ('Ei löytynyt').
         '1': selityssivu ('Tämä tietue on estetty').
       pref: OpacSuppressionRedirect
     - <br /> Lisäohje voidaan näyttää kaikilla piilotettujen tietueiden uudelleenohjaussivuilla
@@ -125,11 +129,11 @@ Kuvailu:
       pref: SeparateHoldingsBranch
     - on kirjautuneen käyttäjän kirjasto. Toinen välilehti sisältää kaikki muut niteet.
   - - choices:
-        '0': Don't
-        '1': Do
+        '0': Älä näytä
+        '1': Näytä
       pref: AlwaysShowHoldingsTableFilters
-    - always show filters by default on the holdings table in the record details page
-      in the staff interface.
+    - aina oletuksena virkailijaliittymässä perustiedot-näytön kokoelmat-taulukon
+      suodatuksia.
   - - Älä näytä
     - class: multi
       pref: NotesToHide

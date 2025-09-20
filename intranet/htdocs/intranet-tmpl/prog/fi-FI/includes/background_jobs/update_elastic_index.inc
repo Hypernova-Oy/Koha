@@ -27,7 +27,7 @@
  [% END %] [% SWITCH m.code %] [% CASE 'index_error' %] Jotain meni pieleen indeksoinnin aikana: [% m.error | html %] [% END %] </div>
  [% END %]
  [% IF report %]
- <h3> Tietueen IDt:</h3>
+ <h3> Tietue IDt:</h3>
  <ul>
  [% FOREACH record_id IN report.record_ids %]
  <li><a href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% record_id | uri %]">[% record_id | html %]</a></li>

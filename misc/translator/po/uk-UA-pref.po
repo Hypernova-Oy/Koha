@@ -1,10 +1,10 @@
 # Compendium of uk.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:36-0300\n"
-"PO-Revision-Date: 2025-03-27 12:28+0000\n"
+"PO-Revision-Date: 2025-08-04 17:25+0000\n"
 "Last-Translator: Serhij Dubyk <dubyk@ukr.net>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: uk-UA\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /uk/22.11/uk-UA-pref.po\n"
 "X-POOTLE-MTIME: 1699212380.333914\n"
@@ -74,7 +74,7 @@ msgstr "Не генерувати автоматично номери креди
 # Accounting > Features > EnablePointOfSale
 # Accounting > Features
 msgid "accounting.pref#EnablePointOfSale#  the point of sale feature to allow anonymous transactions with the accounting system. (Requires <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters\">UseCashRegisters</a>)"
-msgstr " функцію торгового пункту, що дозволяє проводити анонімні операції зі системою бухгалтерського обліку. (Вимагає „<a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters\">UseCashRegisters</a>“)"
+msgstr "функцію торгового пункту, що дозволяє проводити анонімні операції зі системою бухгалтерського обліку. (Вимагає „<a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=UseCashRegisters\">UseCashRegisters</a>“)"
 
 # Accounting > Features > EnablePointOfSale
 # Accounting > Features
@@ -488,9 +488,8 @@ msgstr "<br/>Для прикладу:<br/>price: 947$a|947$c<br/>quantity: 969$h
 
 # Acquisitions > Policy > MarcFieldsToOrder
 # Acquisitions > Policy
-#, fuzzy
 msgid "acquisitions.pref#MarcFieldsToOrder# <p>You can use the following fields: price, replacementprice, quantity, budget_code, discount, sort1, sort2</p>"
-msgstr "Ви можете використовувати наступні поля: price, quantity, budget_code, discount, sort1 та sort2."
+msgstr "<p>Ви можете використовувати наступні поля: price, replacementprice, quantity, budget_code, discount, sort1 та sort2.</p>"
 
 # Acquisitions > Policy > MarcFieldsToOrder
 # Acquisitions > Policy
@@ -2224,18 +2223,51 @@ msgstr "Використовувати"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "Використовувати"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 msgstr "Наприклад, „<tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>“, „<tt>https://unimarc.org.ua/wiki/{FIELD}</tt>“."
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "Якщо залишити порожнім, використовуватиметься документація по формату на „<tt>http://loc.gov</tt>“ (MARC21)<tt> або „<tt>http://archive.ifla.org</tt>“ (UNIMARC)."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "Використовувати"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "Можливі наступні заміни: <tt>{MARC}</tt> (marc-різновид, напр. „MARC21“ чи „UNIMARC“), <tt>{FIELD}</tt> (номер поля, напр. „000“ чи „100“), <tt>{LANG}</tt> (користувацька мова, напр. „en“ чи „uk-UA“)."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "Використовувати"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -6137,7 +6169,7 @@ msgstr "PROC: FIC – оновить примірник з розташуван�
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
 #, fuzzy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ — оновить примірник, який знаходиться в центрі обробки, до його „постійного розташування“.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6210,7 +6242,7 @@ msgstr "PROC: FIC – оновить примірник з розташуван�
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
 #, fuzzy
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ — оновить примірник, який знаходиться в центрі обробки, до його „постійного розташування“.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -8586,18 +8618,17 @@ msgstr " зміни в авторитетних записах."
 # Logging > Logging > BorrowersLog
 # Logging > Logging
 msgid "logs.pref#BorrowersLog# Don't log"
-msgstr "Не записувати у журнал "
+msgstr "Не записувати у журнал"
 
 # Logging > Logging > BorrowersLog
 # Logging > Logging
 msgid "logs.pref#BorrowersLog# Log"
-msgstr "Записувати у журнал "
+msgstr "Записувати у журнал"
 
 # Logging > Logging > BorrowersLog
 # Logging > Logging
-#, fuzzy
 msgid "logs.pref#BorrowersLog# changes to patron records and patron restrictions."
-msgstr " зміни у записах користувачів."
+msgstr "про зміни в облікових записах та обмеженнях користувачів."
 
 # Logging > Logging > CataloguingLog
 # Logging > Logging
@@ -9187,7 +9218,7 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr " інформацію про надходження на сторінці подробиць бібліографічного запису в електронному каталозі."
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
 msgstr ""
 
 # OPAC > Features > OPACAuthorIdentifiers
@@ -9287,6 +9318,22 @@ msgstr "Увімкнути"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "можливість показувати QR-код на сторінці подробиць бібліографічного запису в електронному каталозі."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "Дозволити"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "Не дозволяти"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr ""
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Policy > OPACFineNoRenewalsIncludeCredits
@@ -11672,28 +11719,32 @@ msgstr "Викликати попередження, якщо поточний �
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "днів тому."
 
-# Patrons > Patron relationships > PrefillGuaranteeField
-# Patrons > Patron forms
-#, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "Прізвище"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr ""
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "Дані про поручителя"
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
 msgstr "Дані про поручителя"
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Patron forms
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
 msgstr "Не надсилати"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron forms
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
 msgstr "Прізвище"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
@@ -11807,9 +11858,8 @@ msgid "patrons.pref#CookieConsentedJS# Run the following JavaScript if cookie co
 msgstr ""
 
 # Patrons > General > DefaultPatronSearchFields
-#, fuzzy
 msgid "patrons.pref#DefaultPatronSearchFields# If empty Koha will default to \"firstname|preferred_name|middle_name|surname|othernames|cardnumber|userid\". Additional fields added to this preference will be added as search options in the dropdown menu on the patron search page."
-msgstr "Якщо поле не заповнене, то за замовчуванням буде використано „firstname,middle_name,surname,othernames,cardnumber,userid“. Додаткові поля, додані до цього параметра, будуть додані як варіанти пошуку у випадаючому меню на сторінці пошуку користувачів."
+msgstr "Якщо поле не заповнене, то за замовчуванням буде використано „firstname|preferred_name|middle_name|surname|othernames|cardnumber|userid“. Додаткові поля, додані до цього параметра, будуть додані як варіанти пошуку у випадаючому меню на сторінці пошуку користувачів."
 
 # Patrons > General > DefaultPatronSearchFields
 # Patrons > General
@@ -11886,7 +11936,7 @@ msgstr ""
 
 # Patrons > Notices and notifications > EmailFieldPrimary
 msgid "patrons.pref#EmailFieldPrimary# primary email"
-msgstr ""
+msgstr "основна електронна пошта"
 
 # Patrons > Notices and notifications > EmailFieldPrimary
 msgid "patrons.pref#EmailFieldPrimary# secondary email"
@@ -11909,9 +11959,8 @@ msgid "patrons.pref#EmailFieldSelection# alternate email"
 msgstr "запасну"
 
 # Patrons > Notices and notifications
-#, fuzzy
 msgid "patrons.pref#EmailFieldSelection# primary email"
-msgstr "номер квитка користувача як"
+msgstr "основна електронна пошта"
 
 # Patrons > Notices and notifications
 #, fuzzy
@@ -14834,12 +14883,14 @@ msgstr "служби ILS-DI для користувачів електронно
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
 msgstr "Дозволити лише IP-адреси"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
 msgstr "для використання послуг ILS-DI (якщо вони включені). Відокремте IP-адреси комами та без пробілів. Залиште поле порожнім, щоб дозволити будь-які IP-адреси."
 
 # Web services > IdRef > IdRef
@@ -15095,7 +15146,8 @@ msgid "web_services.pref#RESTOAuth2ClientCredentials# Enable"
 msgstr "Увімкнути"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
+#, fuzzy
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
 msgstr "надання облікових даних клієнта OAuth2 для REST API. Потрібно встановити Perl-модуль „Net::OAuth2::AuthorizationServer“."
 
 # Web services > REST API > RESTPublicAPI
@@ -16148,6 +16200,16 @@ msgstr " рядків у повідомленні, яке було запита�
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr " також автоматичне створення нових (за необхідності) авторитетних записів, замість того, щоб посилатися на вже існуючі авторитетні джерела."
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "Якщо залишити порожнім, використовуватиметься документація по формату на „<tt>http://loc.gov</tt>“ (MARC21)<tt> або „<tt>http://archive.ifla.org</tt>“ (UNIMARC)."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "Можливі наступні заміни: <tt>{MARC}</tt> (marc-різновид, напр. „MARC21“ чи „UNIMARC“), <tt>{FIELD}</tt> (номер поля, напр. „000“ чи „100“), <tt>{LANG}</tt> (користувацька мова, напр. „en“ чи „uk-UA“)."
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #~ msgid "cataloguing.pref#OpacSuppression# <br />Display the following message on the redirect page for suppressed bibliographic records:"
@@ -16394,6 +16456,12 @@ msgstr " рядків у повідомленні, яке було запита�
 # Patrons > General
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "робочу"
+
+# Patrons > Patron relationships > PrefillGuaranteeField
+# Patrons > Patron forms
+#, fuzzy
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "Прізвище"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

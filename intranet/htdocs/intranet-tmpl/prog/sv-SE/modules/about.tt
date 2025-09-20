@@ -11,6 +11,11 @@
  [% t("Koha") | html %]
 [% END %]</title>
 [% INCLUDE 'doc-head-close.inc' %]
+<style>
+.version-ellipsis {
+    text-decoration: underline;
+}
+</style>
 </head>
 <body id="about_about" class="about">
 [% INCLUDE 'header.inc' %]
@@ -36,7 +41,7 @@
  [% WRAPPER tab_item linktab = 1 tabname = "about" bt_active = tab == "about" %] <span>Serverinformation</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "perl" bt_active = tab == "perl" %] <span>Perl-moduler</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "sysinfo" bt_active = tab == "sysinfo" %] <span>Systeminformation</span> [% END %]
- [% WRAPPER tab_item linktab = 1 tabname = "database" bt_active = tab == "database" %] <span>Database audit</span> [% END %]
+ [% WRAPPER tab_item linktab = 1 tabname = "database" bt_active = tab == "database" %] <span>Databasgranskning</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "team" bt_active = tab == "team" %] <span>Koha-gruppen</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "licenses" bt_active = tab == "licenses" %] <span>Licenser</span> [% END %]
  [% WRAPPER tab_item linktab = 1 tabname = "translations" bt_active = tab == "translations" %] <span>Översättningar</span> [% END %]
@@ -100,12 +105,14 @@
  <th scope="row">Apache-version: </th>
  <td>[% apacheVersion | html %]</td>
  </tr>
- [% IF (is_psgi) %]
  <tr>
  <th scope="row">PSGI: </th>
+ [% IF is_psgi %]
  <td>[% psgi_server | html %]</td>
- </tr>
+ [% ELSE %]
+ <td class="error">Koha is running in CGI mode. This is a security issue! Run Koha using Plack for CSRF (cross-site request forgery) protection. More information: <code>koha-plack --help</code></td>
  [% END %]
+ </tr>
  [% IF Koha.Preference('SearchEngine') == 'Elasticsearch' %]
  <tr>
  <th scope="row">Elasticsearch: </th>
@@ -204,12 +211,14 @@
  </tr>
  <tr>
  <th scope="row">Meddelandehanterare: </th>
- [% IF warnConnectBroker == 'Error connecting' %]
- <td class="text-bg-warning"><strong>Using SQL polling (Fallback, Error connecting to RabbitMQ)</strong></td>
- [% ELSIF warnConnectBroker %]
- <td class="text-bg-warning"><strong>Använder SQL-pollning</strong></td>
+ [% IF warnConnectBroker %]
+ <td class="text-bg-warning"><strong>Använder SQL polling (Fallback, Fel vid anslutning till RabbitMQ)</strong></td>
+ [% ELSE %]
+ [% IF Koha.Preference('JobsNotificationMethod') == 'polling' %]
+ <td class="text-bg-info">Använder SQL-pollning</td>
  [% ELSE %]
  <td class="text-bg-info">Använder RabbitMQ</td>
+ [% END %]
  [% END %]
  </tr>
  <tr>
@@ -745,7 +754,7 @@
 
 [% BLOCK database_panel %]
  [% WRAPPER tab_panel tabname= "database" bt_active = 1 %]
- <h2>Database audit</h2>
+ <h2>Databasgranskning</h2>
  [% IF db_audit.diff_found %]
  <div class="alert alert-warning">
  [% ELSE %]
@@ -756,9 +765,8 @@
  </div>
  [% IF db_audit.diff_found %]
  <div>
- <p>Run the following SQL to fix the database:</p>
  <pre>
- <code>[% db_audit.diff | $raw %]</code>
+ <code>[% db_audit.diff | html %]</code>
  </pre>
  </div>
  [% END %]
@@ -1080,9 +1088,9 @@
  <a href="https://htmlhint.com/">HTMLHint v0.9.12</a>: <a href="https://github.com/htmlhint/HTMLHint/blob/v0.9.12/LICENSE.md">MIT-licens</a>
  </p>
 
- <h2>Humanized Messages</h2>
+ <h2>Genomskinliga meddelanden</h2>
  <p>
- <a href="https://code.google.com/archive/p/humanmsg/">Humanized Messages v1.0</a>: <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, version 2.0</a>
+ <a href="https://code.google.com/archive/p/humanmsg/">Genomskinliga meddelanden v1.0</a>: <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License, version 2.0</a>
  </p>
 
  <h2>JavaScript-kaka</h2>

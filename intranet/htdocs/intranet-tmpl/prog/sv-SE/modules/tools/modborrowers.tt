@@ -256,7 +256,7 @@
  <th>Utgångsdatum för lösenord</th>
  [% END %]
  [% IF CanUpdateProtectPatron %]
- <th>Protected</th>
+ <th>Skyddad</th>
  [% END %]
  <th>Kommentar</th>
  <th>OPAC-kommentar</th>
@@ -315,12 +315,7 @@
  [% FOREACH patron_message IN borrower.patron_messages %]
  [% patron_message.message | html %] <br>
  <strong>
- [% IF (patron_message.message_type == 'B') %]
- ( OPAC )
- [% ELSE %]
- ( Staff )
- [% END %]
- </strong><br><br>
+ [% IF (patron_message.message_type == 'B') %] ( OPAC ) [% ELSE %] ( Personal) [% END %] </strong><br><br>
  [% END %]
  </td>
  <td data-order="[% borrower.debarred | html %]">[% borrower.debarred | $KohaDates %]</td>
@@ -414,7 +409,7 @@
  [% ELSE %]
  <input name="disable_input" title="Markera om du vill ta bort fältet" type="checkbox" value="[% field.name | html %]" />
  [% IF ( field.type == 'message_type' ) %]
- <span class="hint">NOTE: Checking this box will remove ALL messages</span>
+ <span class="hint">Notera: att markera den här rutan kommer ta bort ALLA meddelanden</span>
  [% END %]
  [% END %]
  </li>

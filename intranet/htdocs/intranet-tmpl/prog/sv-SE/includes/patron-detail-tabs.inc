@@ -143,7 +143,7 @@
  </table>
 
  <fieldset class="action">
- <input class="cancel" name="submit" type="submit" value="Annullera markerade reservationer" />
+ <input class="btn btn-primary cancel" name="submit" type="submit" value="Annullera markerade reservationer" />
 
  [% SET hold_cancellation = AuthorisedValues.GetAuthValueDropbox('HOLD_CANCELLATION') %]
  [% IF hold_cancellation.count %]

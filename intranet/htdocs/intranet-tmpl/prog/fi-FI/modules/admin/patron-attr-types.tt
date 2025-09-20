@@ -289,7 +289,7 @@
 <div class="alert alert-info">Poistettiin asiakasmääre &quot;[% deleted_attribute_type | html %]&quot;</div>
 [% END %]
 [% IF ( ERROR_delete_in_use ) %]
-<div class="alert alert-info">Asiakasmääreen &quot;[% ERROR_delete_in_use | html %]&quot; &mdash; poisto epäonnistui, sitä käyttää [% ERROR_num_patrons | html %] asiakastietuetta.</div>
+<div class="alert alert-info">Asiakasmääreen &quot;[% ERROR_delete_in_use | html %]&quot; &mdash; poisto epäonnistui, koska sitä käyttää [% ERROR_num_patrons | html %] asiakastietuetta</div>
 [% END %]
 [% IF ( ERROR_delete_not_found ) %]
 <div class="alert alert-info">Asiakasmääreen &quot;[% ERROR_delete_not_found | html %]&quot; &mdash; poisto epäonnistui, sitä ei löytynyt tietokannasta.</div>

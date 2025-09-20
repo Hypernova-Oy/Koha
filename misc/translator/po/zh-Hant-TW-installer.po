@@ -1,11 +1,11 @@
 # Compendium of zh_TW.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:37-0300\n"
-"PO-Revision-Date: 2025-02-17 03:05+0000\n"
-"Last-Translator: Saralin <c108126114@nkust.edu.tw>\n"
+"PO-Revision-Date: 2025-05-22 03:07+0000\n"
+"Last-Translator: Frank Chou <frank@sris.com.tw>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: zh-Hant-TW\n"
 "MIME-Version: 1.0\n"
@@ -258,7 +258,8 @@ msgid "Complete"
 msgstr "完全"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+#, fuzzy
+msgid "Aggregated full text"
 msgstr "全部聚合"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -323,7 +324,7 @@ msgstr "未載明"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:44
 msgid "Book"
-msgstr "圖書"
+msgstr "書"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:46
 msgid "Bookseries"
@@ -5011,11 +5012,11 @@ msgstr "%s的付款已用到你的帳戶."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:12:mul:4
 msgid "This payment affected the following fees:"
-msgstr "這筆付款影響了以下費用："
+msgstr "這筆付款影響了以下費用:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:12:mul:6
 msgid "Description: %s"
-msgstr "說明：%s"
+msgstr "說明: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:12:mul:7
 msgid "Amount paid: %s"
@@ -5031,7 +5032,7 @@ msgstr "已將%s的帳戶註銷納入你的帳戶。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:13:mul:4
 msgid "This writeoff affected the following fees:"
-msgstr "此註銷影響了以下費用："
+msgstr "此註銷影響了以下費用:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:1
 msgid "Dear %s %s (%s),"
@@ -5039,31 +5040,31 @@ msgstr "親愛的 %s %s (%s)，"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:3
 msgid "Your request for an article from %s (%s) has been canceled for the following reason:"
-msgstr "您從 %s (%s) 的論文需求因為下列的原因己被取消："
+msgstr "您從 %s (%s) 的論文需求因為下列的原因己被取消:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:7
 msgid "Article requested:"
-msgstr "被要求文章："
+msgstr "被要求文章:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:8
 msgid "Title: %s"
-msgstr "題名：%s"
+msgstr "題名: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:9
 msgid "Author: %s"
-msgstr "著者：%s"
+msgstr "著者: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:10
 msgid "Volume: %s"
-msgstr "卷： %s"
+msgstr "卷: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:11
 msgid "Issue: %s"
-msgstr "期： %s"
+msgstr "期: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:12
 msgid "Date: %s"
-msgstr "日期：%s"
+msgstr "日期: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:13
 msgid "TOC: %sYes%sNo%s"
@@ -5075,15 +5076,15 @@ msgstr "頁: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:15
 msgid "Chapters: %s"
-msgstr "章節： %s"
+msgstr "章節: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:16
 msgid "Notes: %s"
-msgstr "說明：%s"
+msgstr "說明: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:17
 msgid "Format: %sCopy%sScan%s"
-msgstr "格式：%s複製%s掃描%s"
+msgstr "格式: %s複製%s掃描%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:14:mul:19
 msgid "Your library"
@@ -5119,7 +5120,7 @@ msgstr "我們正在處理您來自 %s (%s) 論文的需求。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:19:mul:1
 msgid "Article request:"
-msgstr "文章要求："
+msgstr "文章要求:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:19:mul:6
 msgid "Barcode: %s"
@@ -5139,7 +5140,7 @@ msgstr "你的圖書館。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:20:mul:1
 msgid "The following items have been checked in:"
-msgstr "已還入以下館藏："
+msgstr "已還入以下館藏:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:20:mul:5
 msgid "Thank you."
@@ -5147,7 +5148,7 @@ msgstr "謝謝您。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:22:mul:1
 msgid "The following items have been checked out:"
-msgstr "已借出以下館藏："
+msgstr "已借出以下館藏:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:22:mul:5
 msgid "Thank you for visiting %s."
@@ -5159,11 +5160,11 @@ msgstr "%s %s 已在項目 %s - %s (%s) 中添加了註釋."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:25:mul:3
 msgid "The following item is now due:"
-msgstr "以下館藏現在到期："
+msgstr "以下館藏現在到期:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:27:mul:3
 msgid "The following item(s) are now due:"
-msgstr "以下館藏已逾期："
+msgstr "以下館藏已逾期:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:28:mul:3
 msgid "You have %s item(s) that are now due"
@@ -5223,7 +5224,7 @@ msgstr "條碼: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:30:mul:13
 msgid "Date due: %s%s"
-msgstr "到期日：%s%s"
+msgstr "到期日: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:31:mul:7
 msgid "%sChecked out%s"
@@ -5247,15 +5248,15 @@ msgstr "根據我們目前記錄，你有過期的項目.你的圖書館不會�
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:32:mul:8
 msgid "Phone: %s"
-msgstr "電話： %s"
+msgstr "電話: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:32:mul:9
 msgid "Fax: %s"
-msgstr "傳真：%s"
+msgstr "傳真: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:32:mul:10
 msgid "Email: %s"
-msgstr "電子郵件：%s"
+msgstr "電子郵件: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:32:mul:12
 msgid "If you have registered a password with the library, and you have a renewal available, you may renew online. If an item becomes more than 30 days overdue, you will be unable to use your library card until the item is returned."
@@ -5263,7 +5264,7 @@ msgstr "如果您在圖書館註冊了密碼，而且您可以續借，可以在
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:32:mul:14
 msgid "The following item(s) is/are currently overdue:"
-msgstr "以下館藏已逾期："
+msgstr "以下館藏已逾期:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:32:mul:16
 msgid "%s\"%s\" by %s, %s, Barcode: %s Fine: %s%s"
@@ -5279,11 +5280,11 @@ msgstr "%s 員工"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:34:mul:3
 msgid "The following item will be due soon:"
-msgstr "以下館藏將即將到期："
+msgstr "以下館藏將即將到期:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:36:mul:3
 msgid "The following item(s) will be due soon:"
-msgstr "以下館藏將即將到期："
+msgstr "以下館藏將即將到期:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:37:mul:3
 msgid "You have %s item(s) that will be due soon."
@@ -5291,7 +5292,7 @@ msgstr "您有 %s 件館藏即將到期。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:38:mul:1
 msgid "The following items have been renewed:"
-msgstr "以下館藏已被續借："
+msgstr "以下館藏已被續借:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:1
 msgid "Stock rotation report for %s:"
@@ -5311,11 +5312,11 @@ msgstr "%s%s%s題名: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:7
 msgid "Call number: %s"
-msgstr "索書號：%s"
+msgstr "索書號: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:8
 msgid "Location: %s"
-msgstr "位置：%s"
+msgstr "位置: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:10
 msgid "On loan?: %s"
@@ -5327,7 +5328,7 @@ msgstr "狀態: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:39:mul:12
 msgid "Current library: %s %s"
-msgstr "目前圖書館：%s %s"
+msgstr "目前圖書館: %s %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:5
 msgid "Your booking of %s has been modified.%s"
@@ -5395,7 +5396,7 @@ msgstr "親愛的先生/女士,"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:48:mul:3
 msgid "We would like to request an interlibrary loan for a title matching the following description:"
-msgstr "我們想為符合以下描述的題名申請館際互借："
+msgstr "我們想為符合以下描述的題名申請館際互借:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:48:mul:7
 msgid "Please let us know if you are able to supply this to us."
@@ -5407,7 +5408,7 @@ msgstr "已被更新。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:49:mul:9
 msgid "Details of the update are below:"
-msgstr "更新細節如下："
+msgstr "更新細節如下:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:4:mul:5
 msgid "Your booking of %s has been confirmed.%s"
@@ -5471,7 +5472,7 @@ msgstr "謝謝您的報告關於 %s.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:5:mul:6
 msgid "You reported: %s"
-msgstr "您回報：%s"
+msgstr "您回報: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:5:mul:9
 msgid "Thank you"
@@ -5483,7 +5484,7 @@ msgstr "親愛的 %s %s %s,"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:60:mul:3
 msgid "Your library card will expire soon, on:"
-msgstr "您的借書證即將到期，到期日為："
+msgstr "您的借書證即將到期，到期日為:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:60:mul:7
 msgid "Thank you,"
@@ -5553,7 +5554,7 @@ msgstr "%s 館員已重置帳戶 %s%s%s 的密碼。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:65:mul:4
 msgid "Please create your new password using the following link:"
-msgstr "請使用以下連結來建立你的新密碼："
+msgstr "請使用以下連結來建立你的新密碼:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:65:mul:7
 msgid "%sThis link will be valid for 5 days from this email's reception, then you must reapply if you do not change your password.%s"
@@ -5637,7 +5638,7 @@ msgstr "        截至%s應付總額:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:69:mul:8
 msgid "Please order for the library:"
-msgstr "請為圖書館採購："
+msgstr "請為圖書館採購:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:69:mul:10
 msgid "%sOrdernumber %s (%s) (quantity: %s) ($%s each).%s"
@@ -5705,7 +5706,7 @@ msgstr "我們很抱歉要通知您, 以下的館藏不能被提供, 因為它�
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:72:mul:7
 msgid "Copy: %s"
-msgstr "複製： %s"
+msgstr "複製: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:73:mul:3
 msgid "You have a hold available for pickup as of %s:"
@@ -5745,7 +5746,7 @@ msgstr "請更新此館藏的預約資訊。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:79:mul:5
 msgid "Item: %s"
-msgstr "館藏：%s"
+msgstr "館藏: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:79:mul:6
 msgid "Pickup location: %s"
@@ -5771,10 +5772,10 @@ msgid ""
 msgstr ""
 "親愛的 %s %s，\n"
 "\n"
-"下列預約館藏在 %s 等待：\n"
+"下列預約館藏在 %s 等待: \n"
 "\n"
 "%s\n"
-"    %s ：從 %s 開始等待\n"
+"    %s : 從 %s 開始等待\n"
 "%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:81:mul:4
@@ -5803,7 +5804,7 @@ msgstr "您到達後，請致電您的圖書館或登錄您的帳號，然後點
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:82:mul:3
 msgid "The following issue is now available:"
-msgstr "現在有以下問題："
+msgstr "現在有以下問題:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:82:mul:7
 msgid "Please pick it up at your convenience."
@@ -5847,7 +5848,7 @@ msgstr "    %s%s標題:%s %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:85:mul:18
 msgid "    %s%sAuthor:%s %s%s"
-msgstr "    %s%s著者：%s %s%s"
+msgstr "    %s%s著者: %s %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:85:mul:19
 msgid "    %s%sCopyright date:%s %s%s"
@@ -5867,7 +5868,7 @@ msgstr "    %s%s館藏名稱:%s %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:85:mul:23
 msgid "    %s%sPublication place:%s %s%s"
-msgstr "    %s%s出版地：%s %s%s"
+msgstr "    %s%s出版地: %s %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:85:mul:24
 msgid "    %s%sQuantity:%s %s%s"
@@ -5919,7 +5920,7 @@ msgstr "圖書館已添加您針對 %s 報告的問題的更新。%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:90:mul:1
 msgid "Username: %s"
-msgstr "使用者名稱： %s"
+msgstr "使用者名稱: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:90:mul:3
 msgid "Problem page: %s"
@@ -5943,7 +5944,7 @@ msgstr "此館藏已達未讀續借的最大次數，需要在圖書館進行續
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:91:mul:9
 msgid "The following item, %s, has not been renewed because:"
-msgstr "下列館藏, %s, 已審核因為："
+msgstr "下列館藏, %s, 已審核因為:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:91:mul:11
 msgid "You have reached the maximum number of renewals possible."
@@ -5987,7 +5988,7 @@ msgstr "%s今日還入%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:92:mul:12
 msgid "Barcode: %s %s"
-msgstr "條碼： %s %s"
+msgstr "條碼: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:94:mul:3
 msgid "There were %s items that were not renewed."
@@ -6007,7 +6008,7 @@ msgstr "已催還以下館藏: %s / %s (%s). 截止日期現已更新為 %s. 請
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:96:mul:5
 msgid "A recall that you requested on the following item: %s / %s (%s) is now ready for you to pick up at %s. Please pick up your item by %s."
-msgstr "您對以下館藏請求催還：%s / %s (%s) 現在可以在 %s 取件。請在 %s 之前取走您的館藏。"
+msgstr "您對以下館藏請求催還: %s / %s (%s) 現在可以在 %s 取件。請在 %s 之前取走您的館藏。"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:97:mul:1
 msgid "Your item has been recalled: %s (%s). Please return it by %s."
@@ -6031,7 +6032,7 @@ msgstr "%s 由 %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:99:mul:12
 msgid "Callnumber: %s"
-msgstr "索書號：%s"
+msgstr "索書號: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:9:mul:4
 msgid "%s reported the following concern with %s%s%s%s"
@@ -6387,7 +6388,7 @@ msgstr "基本書目單位"
 
 #: installer/data/mysql/en/optional/marc21_holdings_coded_values.yml:authorised_values:1:row:3
 msgid "Secondary bibliographic unit: supplements, special issues, accompanying material, other secondary bibliographic units"
-msgstr "二級書目單元：增刊、特刊、附件或其他二級書目單元"
+msgstr "二級書目單元: 增刊、特刊、附件或其他二級書目單元"
 
 #: installer/data/mysql/en/optional/marc21_holdings_coded_values.yml:authorised_values:1:row:4
 msgid "Indexes"
@@ -7643,7 +7644,7 @@ msgstr "在摘要螢幕的館藏清單上顯示條碼"
 
 #: installer/data/mysql/en/optional/patron_atributes.yml:description:1
 msgid "Useful patron attribute types:"
-msgstr "有用的讀者屬性類型："
+msgstr "有用的讀者屬性類型:"
 
 #: installer/data/mysql/en/optional/patron_atributes.yml:description:2
 msgid "* SHOW_BCODE - Show barcode on the patron summary screen items listings"
@@ -7939,7 +7940,7 @@ msgstr "**重製**"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:4:mul:5
 msgid "Steps to reproduce the behavior:"
-msgstr "重現以下行為之步驟："
+msgstr "重現以下行為之步驟:"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:4:mul:6
 msgid "1. Go to '...'"

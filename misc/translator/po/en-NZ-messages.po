@@ -1,11 +1,11 @@
 # Compendium of en_NZ.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-23 04:07+0000\n"
-"PO-Revision-Date: 2024-08-28 03:00+0000\n"
-"Last-Translator: danyonsewell <danyonsewell@catalyst.net.nz>\n"
+"POT-Creation-Date: 2025-08-09 03:11+0000\n"
+"PO-Revision-Date: 2025-05-23 03:33+0000\n"
+"Last-Translator: chrisc <chris@bigballofwax.co.nz>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: en-NZ\n"
 "MIME-Version: 1.0\n"
@@ -57,7 +57,7 @@ msgstr ""
 
 #: C4/ILSDI/Services.pm:987
 msgid "On hold"
-msgstr ""
+msgstr "On reserve"
 
 #: C4/ILSDI/Services.pm:989
 msgid "available"
@@ -1576,9 +1576,8 @@ msgid "Parsing schema for file %s\n"
 msgstr ""
 
 #: Koha/Database/Columns.pm:73
-#, fuzzy
 msgid "Basket ID (internal)"
-msgstr "Item number (internal)"
+msgstr "Basket ID (internal)"
 
 #: Koha/Database/Columns.pm:74 Koha/Database/Columns.pm:212
 #: Koha/Database/Columns.pm:262 Koha/Database/Columns.pm:280
@@ -1586,40 +1585,34 @@ msgid "Biblio number (internal)"
 msgstr "Biblio number (internal)"
 
 #: Koha/Database/Columns.pm:75
-#, fuzzy
 msgid "Fund ID (internal)"
-msgstr "Item number (internal)"
+msgstr "Fund ID (internal)"
 
 #: Koha/Database/Columns.pm:76 Koha/Database/Columns.pm:88
 msgid "Not used (deprecated)"
 msgstr ""
 
 #: Koha/Database/Columns.pm:77
-#, fuzzy
 msgid "Cancellation reason"
-msgstr "patronreason"
+msgstr "Cancellation reason"
 
 #: Koha/Database/Columns.pm:78
-#, fuzzy
 msgid "Borrower number of creator"
-msgstr "Borrower number"
+msgstr "Borrower number of creator"
 
 #: Koha/Database/Columns.pm:79
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Currency"
-msgstr "Current library"
+msgstr "Currency"
 
 #: Koha/Database/Columns.pm:80
-#, fuzzy
 msgid "Cancellation date"
-msgstr "Creation date"
+msgstr "Cancellation date"
 
 #: Koha/Database/Columns.pm:81
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Date received"
-msgstr "Date acquired"
+msgstr "Date received"
 
 #: Koha/Database/Columns.pm:82
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
@@ -1648,9 +1641,8 @@ msgid "Estimated delivery date"
 msgstr ""
 
 #: Koha/Database/Columns.pm:89
-#, fuzzy
 msgid "Invoice ID (internal)"
-msgstr "Item number (internal)"
+msgstr "Invoice ID (internal)"
 
 #: Koha/Database/Columns.pm:90
 msgid "Line item ID (EDIFACT)"
@@ -1674,27 +1666,23 @@ msgstr ""
 #: Koha/Database/Columns.pm:94
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Order number"
-msgstr "Card number"
+msgstr "Order number"
 
 #: Koha/Database/Columns.pm:95
-#, fuzzy
 msgid "Order status"
-msgstr "New status"
+msgstr "Order status"
 
 #: Koha/Database/Columns.pm:96
-#, fuzzy
 msgid "Parent order number (internal)"
-msgstr "Item number (internal)"
+msgstr "Parent order number (internal)"
 
 #: Koha/Database/Columns.pm:97 Koha/Database/Columns.pm:344
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Quantity"
-msgstr "quantity"
+msgstr "Quantity"
 
 #: Koha/Database/Columns.pm:98
 msgid "Quantity received"
@@ -1713,9 +1701,8 @@ msgid "Retail price, tax incl."
 msgstr ""
 
 #: Koha/Database/Columns.pm:102
-#, fuzzy
 msgid "Retail price"
-msgstr "Replacement price"
+msgstr "Retail price"
 
 #: Koha/Database/Columns.pm:103 Koha/Database/Columns.pm:105
 msgid "Not used"
@@ -1730,9 +1717,8 @@ msgid "Statistic 2"
 msgstr ""
 
 #: Koha/Database/Columns.pm:107
-#, fuzzy
 msgid "Subscription ID (internal)"
-msgstr "Biblio number (internal)"
+msgstr "Subscription ID (internal)"
 
 #: Koha/Database/Columns.pm:108
 msgid "Vendor reference number (EDIFACT)"
@@ -1910,11 +1896,11 @@ msgstr "Card number"
 
 #: Koha/Database/Columns.pm:152 Koha/Database/Columns.pm:314
 msgid "Patron category"
-msgstr "Member category"
+msgstr "User category"
 
 #: Koha/Database/Columns.pm:153
 msgid "Check for previous checkouts"
-msgstr ""
+msgstr "Check for previous issues"
 
 #: Koha/Database/Columns.pm:154
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:21
@@ -2003,9 +1989,8 @@ msgid "Last activity date"
 msgstr ""
 
 #: Koha/Database/Columns.pm:175
-#, fuzzy
 msgid "Number of failed login attempts"
-msgstr "Number of pages"
+msgstr "Number of failed login attempts"
 
 #: Koha/Database/Columns.pm:176
 msgid "Lost card flag"
@@ -2035,9 +2020,8 @@ msgid "Overdrive auth token"
 msgstr ""
 
 #: Koha/Database/Columns.pm:182
-#, fuzzy
 msgid "Password expiration date"
-msgstr "Creation date"
+msgstr "Password expiration date"
 
 #: Koha/Database/Columns.pm:183
 msgid "Password"
@@ -2059,13 +2043,12 @@ msgid "Preferred name"
 msgstr ""
 
 #: Koha/Database/Columns.pm:187
-#, fuzzy
 msgid "Primary contact method"
-msgstr "Primary phone"
+msgstr "Primary contact method"
 
 #: Koha/Database/Columns.pm:188
 msgid "Show checkouts to guarantor"
-msgstr ""
+msgstr "Show issues to guarantor"
 
 #: Koha/Database/Columns.pm:189
 msgid "Show fines to guarantor"
@@ -2098,9 +2081,8 @@ msgid "Gender"
 msgstr "Gender"
 
 #: Koha/Database/Columns.pm:196
-#, fuzzy
 msgid "SMS provider ID (internal)"
-msgstr "Item number (internal)"
+msgstr "SMS provider ID (internal)"
 
 #: Koha/Database/Columns.pm:197
 msgid "Mobile phone number"
@@ -2142,9 +2124,8 @@ msgid "Salutation"
 msgstr "Salutation"
 
 #: Koha/Database/Columns.pm:205
-#, fuzzy
 msgid "Last update date"
-msgstr "Start date"
+msgstr "Last update date"
 
 #: Koha/Database/Columns.pm:206
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:58
@@ -2164,9 +2145,8 @@ msgid "Barcode"
 msgstr "Barcode"
 
 #: Koha/Database/Columns.pm:211 Koha/Database/Columns.pm:279
-#, fuzzy
 msgid "Biblio item number (internal)"
-msgstr "Biblioitem number (internal)"
+msgstr "Biblio item number (internal)"
 
 #: Koha/Database/Columns.pm:213
 msgid "Bookable"
@@ -2186,9 +2166,8 @@ msgid "Koha normalized classification for sorting"
 msgstr "Koha normalized classification for sorting"
 
 #: Koha/Database/Columns.pm:217 Koha/Database/Columns.pm:284
-#, fuzzy
 msgid "Source of classification or shelving scheme"
-msgstr "Source of classification / shelving scheme"
+msgstr "Source of classification or shelving scheme"
 
 #: Koha/Database/Columns.pm:218
 msgid "Coded location qualifier"
@@ -2213,16 +2192,15 @@ msgstr "Date acquired"
 
 #: Koha/Database/Columns.pm:223
 msgid "Date last checked out"
-msgstr "Date last checked out"
+msgstr "Date last issued"
 
 #: Koha/Database/Columns.pm:224
 msgid "Date last seen"
 msgstr "Date last seen"
 
 #: Koha/Database/Columns.pm:225
-#, fuzzy
 msgid "Deleted on"
-msgstr "Damaged on"
+msgstr "Deleted on"
 
 #: Koha/Database/Columns.pm:226
 msgid "Serial enumeraton/chronology"
@@ -2230,7 +2208,7 @@ msgstr "Serial enumeraton/chronology"
 
 #: Koha/Database/Columns.pm:227
 msgid "Exclude from local holds priority"
-msgstr ""
+msgstr "Exclude from local reserves priority"
 
 #: Koha/Database/Columns.pm:228
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
@@ -2264,20 +2242,17 @@ msgid "Public note"
 msgstr "Public note"
 
 #: Koha/Database/Columns.pm:236
-#, fuzzy
 msgid "Koha item number (autogenerated)"
-msgstr "Biblioitem number (internal)"
+msgstr "Koha item number (autogenerated)"
 
 #: Koha/Database/Columns.pm:237 Koha/Database/Columns.pm:319
 #: Koha/Database/Columns.pm:339
-#, fuzzy
 msgid "Koha item type"
-msgstr "Koha itemtype"
+msgstr "Koha item type"
 
 #: Koha/Database/Columns.pm:238
-#, fuzzy
 msgid "Total local uses"
-msgstr "Total reserves"
+msgstr "Total local uses"
 
 #: Koha/Database/Columns.pm:239 Koha/Database/Columns.pm:320
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
@@ -2340,7 +2315,6 @@ msgid "Modification date"
 msgstr "Modification date"
 
 #: Koha/Database/Columns.pm:255
-#, fuzzy
 msgid "Uniform Resource Identifier"
 msgstr "Uniform Resource Identifier"
 
@@ -2364,18 +2338,16 @@ msgid "Author"
 msgstr "Author"
 
 #: Koha/Database/Columns.pm:263 Koha/Database/Columns.pm:337
-#, fuzzy
 msgid "Copyright date"
-msgstr "copyrightdate"
+msgstr "Copyright date"
 
 #: Koha/Database/Columns.pm:265
 msgid "Framework code"
 msgstr "Framework code"
 
 #: Koha/Database/Columns.pm:266
-#, fuzzy
 msgid "Medium"
-msgstr "medium"
+msgstr "Medium"
 
 #: Koha/Database/Columns.pm:267 Koha/Database/Columns.pm:297
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
@@ -2420,19 +2392,16 @@ msgid "Age restriction"
 msgstr "Age restriction"
 
 #: Koha/Database/Columns.pm:281
-#, fuzzy
 msgid "Classification part"
-msgstr "Classification"
+msgstr "Classification part"
 
 #: Koha/Database/Columns.pm:282
-#, fuzzy
 msgid "Item part"
-msgstr "Item number"
+msgstr "Item part"
 
 #: Koha/Database/Columns.pm:285
-#, fuzzy
 msgid "Call number suffix"
-msgstr "Call number"
+msgstr "Call number suffix"
 
 #: Koha/Database/Columns.pm:286
 msgid "Series statement"
@@ -2459,9 +2428,8 @@ msgid "Edition statement"
 msgstr ""
 
 #: Koha/Database/Columns.pm:292
-#, fuzzy
 msgid "Other physical details"
-msgstr "New status"
+msgstr "Other physical details"
 
 #: Koha/Database/Columns.pm:293 Koha/Database/Columns.pm:338
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
@@ -2511,9 +2479,8 @@ msgid "Size"
 msgstr "Size"
 
 #: Koha/Database/Columns.pm:305
-#, fuzzy
 msgid "Total checkouts, all items"
-msgstr "Total issues"
+msgstr "Total issues, all items"
 
 #: Koha/Database/Columns.pm:306
 msgid "URL"
@@ -2541,9 +2508,8 @@ msgid "Statistics date and time"
 msgstr "Statistics date and time"
 
 #: Koha/Database/Columns.pm:317
-#, fuzzy
 msgid "Interface"
-msgstr "Internal note"
+msgstr "Interface"
 
 #: Koha/Database/Columns.pm:318
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
@@ -2556,9 +2522,8 @@ msgstr ""
 
 #: Koha/Database/Columns.pm:322
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Transaction type"
-msgstr "Creation date"
+msgstr "Transaction type"
 
 #: Koha/Database/Columns.pm:323
 msgid "Value"
@@ -2583,29 +2548,24 @@ msgstr "Start date"
 #: Koha/Database/Columns.pm:336
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Collection title"
-msgstr "collectiontitle"
+msgstr "Collection title"
 
 #: Koha/Database/Columns.pm:340
-#, fuzzy
 msgid "Note"
-msgstr "Notes"
+msgstr "Note"
 
 #: Koha/Database/Columns.pm:341
-#, fuzzy
 msgid "Patron reason"
-msgstr "patronreason"
+msgstr "User reason"
 
 #: Koha/ILL/Backend/Standard.pm:172
-#, fuzzy
 msgid "Switched provider"
-msgstr "Item number (internal)"
+msgstr "Switched provider"
 
 #: Koha/ILL/Backend/Standard.pm:173
-#, fuzzy
 msgid "Switch provider"
-msgstr "Item number (internal)"
+msgstr "Switch provider"
 
 #: Koha/ILL/Backend/Standard.pm:181
 msgid "Edited item metadata"
@@ -2616,18 +2576,16 @@ msgid "Edit item metadata"
 msgstr ""
 
 #: Koha/ILL/Request.pm:614 Koha/ILL/Request.pm:615
-#, fuzzy
 msgid "New request"
-msgstr "Current library"
+msgstr "New request"
 
 #: Koha/ILL/Request.pm:625
 msgid "Requested"
 msgstr ""
 
 #: Koha/ILL/Request.pm:626
-#, fuzzy
 msgid "Confirm request"
-msgstr "Date of birth"
+msgstr "Confirm request"
 
 #: Koha/ILL/Request.pm:634
 msgid "Requested from partners"
@@ -2650,9 +2608,8 @@ msgid "Queued request"
 msgstr ""
 
 #: Koha/ILL/Request.pm:661
-#, fuzzy
 msgid "Cancellation requested"
-msgstr "patronreason"
+msgstr "Cancellation requested"
 
 #: Koha/ILL/Request.pm:670
 msgid "Completed"
@@ -2663,9 +2620,8 @@ msgid "Mark completed"
 msgstr ""
 
 #: Koha/ILL/Request.pm:680
-#, fuzzy
 msgid "Delete request"
-msgstr "Damaged on"
+msgstr "Delete request"
 
 #: Koha/ILL/Request.pm:689
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patron-search.inc:497
@@ -2673,14 +2629,12 @@ msgid "Check out"
 msgstr "Issue"
 
 #: Koha/ILL/Request.pm:701
-#, fuzzy
 msgid "Returned to library"
-msgstr "Permanent library"
+msgstr "Returned to library"
 
 #: Koha/ILL/Request.pm:702
-#, fuzzy
 msgid "Check in"
-msgstr "Issue"
+msgstr "Return"
 
 #: Koha/SuggestionEngine/Plugin/ExplodedTerms.pm:77
 msgid "Search also for narrower subjects"
@@ -3098,9 +3052,8 @@ msgid "Comoros"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:40
-#, fuzzy
 msgid "Congo"
-msgstr "bongos"
+msgstr "Congo"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:41
 msgid "Costa Rica"
@@ -3179,9 +3132,8 @@ msgid "Finland"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:60
-#, fuzzy
 msgid "France"
-msgstr "dancer"
+msgstr "France"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:61
 msgid "Gabon"
@@ -3232,9 +3184,8 @@ msgid "Haiti"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:73
-#, fuzzy
 msgid "Honduras"
-msgstr "Conductors"
+msgstr "Honduras"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:74
 msgid "Hungary"
@@ -3401,9 +3352,8 @@ msgid "Mexico"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:115
-#, fuzzy
 msgid "Micronesia"
-msgstr "lirone"
+msgstr "Micronesia"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:116
 msgid "Moldova"
@@ -3446,9 +3396,8 @@ msgid "Nepal"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:126
-#, fuzzy
 msgid "Netherlands"
-msgstr "eight hands"
+msgstr "Netherlands"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:127
 msgid "New Zealand"
@@ -3555,9 +3504,8 @@ msgid "Saudi Arabia"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:153
-#, fuzzy
 msgid "Senegal"
-msgstr "regals"
+msgstr "Senegal"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:154
 msgid "Serbia"
@@ -3592,9 +3540,8 @@ msgid "Somalia"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:162
-#, fuzzy
 msgid "South Africa"
-msgstr "mouth organ"
+msgstr "South Africa"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:163
 msgid "Spain"
@@ -3609,9 +3556,8 @@ msgid "Sudan"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:166
-#, fuzzy
 msgid "Suriname"
-msgstr "Surname"
+msgstr "Suriname"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:167
 msgid "Swaziland"
@@ -3650,9 +3596,8 @@ msgid "Togo"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:176
-#, fuzzy
 msgid "Tonga"
-msgstr "conga"
+msgstr "Tonga"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/country-list.inc:177
 msgid "Trinidad & Tob."
@@ -3736,9 +3681,8 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Contract name"
-msgstr "First name"
+msgstr "Contract name"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 msgid "Delivery place"
@@ -3747,21 +3691,18 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Entry date"
-msgstr "End date"
+msgstr "Entry date"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Note for vendor"
-msgstr "Not for loan"
+msgstr "Note for vendor"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Publication year"
-msgstr "Publication date"
+msgstr "Publication year"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basket.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
@@ -3769,9 +3710,8 @@ msgid "RRP"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Account number"
-msgstr "Volume number"
+msgstr "Account number"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
 msgid "Basket billing place"
@@ -3791,14 +3731,12 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Basket name"
-msgstr "First name"
+msgstr "Basket name"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Contract number"
-msgstr "Street number"
+msgstr "Contract number"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
 msgid "Estimated cost tax excluded"
@@ -3817,18 +3755,16 @@ msgid "RRP tax included"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Vendor name"
-msgstr "Other name"
+msgstr "Vendor name"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
 msgid "Vendor physical address"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/basketgroup.tt:6
-#, fuzzy
 msgid "Vendor postal address"
-msgstr "Gone no address flag"
+msgstr "Vendor postal address"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/acqui/lateorders.tt:6
 msgid "BASKET"
@@ -3876,68 +3812,56 @@ msgstr "Issues"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Item type"
-msgstr "Itemtype"
+msgstr "Item type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
-#, fuzzy
 msgid "Last checkout date"
-msgstr "Start date"
+msgstr "Last issue date"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
-#, fuzzy
 msgid "Not for loan status"
-msgstr "Not for loan"
+msgstr "Not for loan status"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/catalogue/itemsearch.tt:6
-#, fuzzy
 msgid "Serial enumeration"
-msgstr "Serial enumeraton/chronology"
+msgstr "Serial enumeration"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Amount"
-msgstr "Country"
+msgstr "Amount"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Manager name"
-msgstr "Other name"
+msgstr "Manager name"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Patron card number"
-msgstr "Member category"
+msgstr "User card number"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Patron name"
-msgstr "Member category"
+msgstr "User name"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Transaction date"
-msgstr "Creation date"
+msgstr "Transaction date"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
-#, fuzzy
 msgid "Transaction library"
-msgstr "Permanent library"
+msgstr "Transaction library"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/cash_register_stats.tt:4
 msgid "Updated"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Authorised by"
-msgstr "Author"
+msgstr "Authorised by"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Basket num"
-msgstr "basket"
+msgstr "Basket num"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
 msgid "Biblio number"
@@ -3948,14 +3872,12 @@ msgid "Fund"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Total RRP"
-msgstr "Total reserves"
+msgstr "Total RRP"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/csv_headers/reports/orders_by_budget.tt:4
-#, fuzzy
 msgid "Total cost"
-msgstr "Total reserves"
+msgstr "Total cost"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/header.inc:175
 msgid "Set library, desk, and register"
@@ -3972,9 +3894,8 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/header.inc:181
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/set-library.tt:14
-#, fuzzy
 msgid "Set library"
-msgstr "Home library"
+msgstr "Set library"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/header.inc:184
 msgid "Set desk and cash register"
@@ -4468,108 +4389,88 @@ msgid "Standard"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:4
-#, fuzzy
 msgid "Full address"
-msgstr "Address"
+msgstr "Full address"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:5
 msgid "All emails"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:6
-#, fuzzy
 msgid "All phones"
-msgstr "metallophone"
+msgstr "All phones"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:7
-#, fuzzy
 msgid "Borrowernumber"
-msgstr "Borrower number"
+msgstr "Borrowernumber"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:27
-#, fuzzy
 msgid "Mobile phone"
-msgstr "Mobile phone number"
+msgstr "Mobile phone"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:31
-#, fuzzy
 msgid "Alternate street number"
-msgstr "Alternate address: Street number"
+msgstr "Alternate street number"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:32
-#, fuzzy
 msgid "Alternate street type"
-msgstr "Alternate address: Street type"
+msgstr "Alternate street type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:33
-#, fuzzy
 msgid "Alternate address"
-msgstr "Alternate address: City"
+msgstr "Alternate address"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:34
-#, fuzzy
 msgid "Alternate address line 2"
-msgstr "Alternate address: Phone"
+msgstr "Alternate address line 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:35
-#, fuzzy
 msgid "Alternate city"
-msgstr "Alternate contact: City"
+msgstr "Alternate city"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:36
-#, fuzzy
 msgid "Alternate state"
-msgstr "Alternate address: State"
+msgstr "Alternate state"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:37
-#, fuzzy
 msgid "Alternate zip code"
-msgstr "Alternate contact: Address"
+msgstr "Alternate zip code"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:38
-#, fuzzy
 msgid "Alternate country"
-msgstr "Alternate contact: Country"
+msgstr "Alternate country"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:39
-#, fuzzy
 msgid "Alternate email"
-msgstr "Alternate address: Email"
+msgstr "Alternate email"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:40
-#, fuzzy
 msgid "Alternate phone"
-msgstr "Alternate contact: Phone"
+msgstr "Alternate phone"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:42
-#, fuzzy
 msgid "Library (code)"
-msgstr "Library"
+msgstr "Library (code)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:43
-#, fuzzy
 msgid "Category (code)"
-msgstr "Framework code"
+msgstr "Category (code)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:46
-#, fuzzy
 msgid "Gone no address"
-msgstr "Gone no address flag"
+msgstr "Gone no address"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:47
-#, fuzzy
 msgid "Lost card"
-msgstr "Lost card flag"
+msgstr "Lost card"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:48
-#, fuzzy
 msgid "Restricted"
-msgstr "Restricted [until] flag"
+msgstr "Restricted"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:49
-#, fuzzy
 msgid "Restriction reason"
-msgstr "patronreason"
+msgstr "Restriction reason"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:50
 msgid "Guarantor surname"
@@ -4588,99 +4489,80 @@ msgid "Guarantor ID"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:55
-#, fuzzy
 msgid "Guarantor relationship"
-msgstr "Relationship"
+msgstr "Guarantor relationship"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:57
-#, fuzzy
 msgid "Permissions (code)"
-msgstr "System permissions"
+msgstr "Permissions (code)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:60
-#, fuzzy
 msgid "Contact note"
-msgstr "First name"
+msgstr "Contact note"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:63
-#, fuzzy
 msgid "Alternate contact first name"
-msgstr "Alternate contact: First name"
+msgstr "Alternate contact first name"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:64
-#, fuzzy
 msgid "Alternate contact surname"
-msgstr "Alternate contact: Surname"
+msgstr "Alternate contact surname"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:65
-#, fuzzy
 msgid "Alternate contact address"
-msgstr "Alternate contact: Address"
+msgstr "Alternate contact address"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:66
-#, fuzzy
 msgid "Alternate contact address 2"
-msgstr "Alternate contact: Address 2"
+msgstr "Alternate contact address 2"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:67
-#, fuzzy
 msgid "Alternate contact city"
-msgstr "Alternate contact: City"
+msgstr "Alternate contact city"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:68
-#, fuzzy
 msgid "Alternate contact state"
-msgstr "Alternate contact: State"
+msgstr "Alternate contact state"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:69
-#, fuzzy
 msgid "Alternate contact ZIP/postal code"
-msgstr "Alternate contact: ZIP/Postal code"
+msgstr "Alternate contact ZIP/postal code"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:70
-#, fuzzy
 msgid "Alternate contact country"
-msgstr "Alternate contact: Country"
+msgstr "Alternate contact country"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:71
-#, fuzzy
 msgid "Alternate contact phone"
-msgstr "Alternate contact: Phone"
+msgstr "Alternate contact phone"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:72
-#, fuzzy
 msgid "SMS alert number"
-msgstr "Street number"
+msgstr "SMS alert number"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:73
-#, fuzzy
 msgid "SMS provider"
-msgstr "Item number (internal)"
+msgstr "SMS provider"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:74
-#, fuzzy
 msgid "Privacy (code)"
-msgstr "Privacy settings"
+msgstr "Privacy (code)"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:75
-#, fuzzy
 msgid "Guarantor can view checkouts"
-msgstr "Total issues"
+msgstr "Guarantor can view issues"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:76
-#, fuzzy
 msgid "Last updated"
-msgstr "Start date"
+msgstr "Last updated"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:77
-#, fuzzy
 msgid "Last seen"
-msgstr "Date last seen"
+msgstr "Last seen"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/patronfields.inc:78
-#, fuzzy
 msgid "Check previous checkout"
-msgstr "Item is on loan"
+msgstr "Check previous issue"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/reports-toolbar.inc:154
 msgid "Hide SQL code"
@@ -4691,14 +4573,12 @@ msgid "Manual"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/restriction-types.inc:6
-#, fuzzy
 msgid "Overdues"
-msgstr "overdue"
+msgstr "Overdues"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/restriction-types.inc:7
-#, fuzzy
 msgid "Suspension"
-msgstr "Percussion"
+msgstr "Suspension"
 
 #: koha-tmpl/intranet-tmpl/prog/en/includes/restriction-types.inc:8
 msgid "Discharge"
@@ -4863,9 +4743,8 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/z3950_search.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqcontract.tt:24
 #: koha-tmpl/intranet-tmpl/prog/en/modules/suggestion/suggestion.tt:23
-#, fuzzy
 msgid "Acquisitions"
-msgstr "Actions"
+msgstr "Acquisitions"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/addorder.tt:5
 msgid "Add order"
@@ -4875,9 +4754,8 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/cancelorder.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/modordernotes.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:23
-#, fuzzy
 msgid "Acquisition"
-msgstr "Actions"
+msgstr "Acquisition"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/addorderiso2709.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/showdiffmarc.tt:9
@@ -4887,9 +4765,8 @@ msgid "Batch {batch_id}"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/addorderiso2709.tt:13
-#, fuzzy
 msgid "Batch list"
-msgstr "Batches"
+msgstr "Batch list"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/addorderiso2709.tt:15
 msgid "Order staged MARC records"
@@ -4907,10 +4784,9 @@ msgstr "Created by:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:352
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:289
-#, fuzzy
 msgctxt "Acquisitions basket managed by user"
 msgid "Managed by:"
-msgstr "Created by:"
+msgstr "Managed by:"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:505
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:785
@@ -4926,8 +4802,8 @@ msgctxt "noun"
 msgid "Order"
 msgstr "Order"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1248
-#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:803
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/basket.tt:1251
+#: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:804
 msgid "Add user"
 msgstr ""
 
@@ -4972,9 +4848,8 @@ msgid "Created by"
 msgstr "Created by"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/cancelorder.tt:6
-#, fuzzy
 msgid "Cancel order"
-msgstr "dance orchestra"
+msgstr "Cancel order"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/duplicate_orders.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:18
@@ -4988,18 +4863,16 @@ msgid "Duplicate existing orders"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/edifactmsgs.tt:9
-#, fuzzy
 msgid "EDIFACT messages"
-msgstr "message"
+msgstr "EDIFACT messages"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/edimsg.tt:6
 msgid "EDIFACT message display"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/histsearch.tt:12
-#, fuzzy
 msgid "Orders search"
-msgstr "Card number"
+msgstr "Orders search"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/histsearch.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/z3950_search.tt:10
@@ -5012,20 +4885,17 @@ msgid "Search results"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/histsearch.tt:15
-#, fuzzy
 msgid "Order search"
-msgstr "New status"
+msgstr "Order search"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/invoice-files.tt:9
-#, fuzzy
 msgid "Files"
-msgstr "Profiles"
+msgstr "Files"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/invoice-files.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/invoice.tt:19
-#, fuzzy
 msgid "Invoice"
-msgstr "man's voice"
+msgstr "Invoice"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/invoice.tt:145
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/invoices.tt:116
@@ -5037,14 +4907,12 @@ msgid "Are you sure you want to delete this adjustment?"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/invoices.tt:12
-#, fuzzy
 msgid "Invoices"
-msgstr "Voices"
+msgstr "Invoices"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/lateorders.tt:12
-#, fuzzy
 msgid "Late orders"
-msgstr "recorder"
+msgstr "Late orders"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/moddeliverydate.tt:8
 msgid "Change estimated delivery date"
@@ -5055,9 +4923,8 @@ msgid "Change order vendor note"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/modordernotes.tt:9
-#, fuzzy
 msgid "Change order internal note"
-msgstr "Internal note"
+msgstr "Change order internal note"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:14
 #, perl-brace-format
@@ -5065,9 +4932,8 @@ msgid "Modify order details (line #{ordernumber})"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty.tt:16
-#, fuzzy
 msgid "New order"
-msgstr "recorder"
+msgstr "New order"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/neworderempty_duplicate.tt:6
 msgid "Duplicate warning"
@@ -5090,9 +4956,8 @@ msgid "Add order from a suggestion"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/ordered.tt:11
-#, fuzzy
 msgid "Ordered"
-msgstr "Order"
+msgstr "Ordered"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/orderreceive.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/parcel.tt:13
@@ -5124,20 +4989,17 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/parcels.tt:93
-#, fuzzy
 msgctxt "Bibliographic record"
 msgid "Record count"
-msgstr "record"
+msgstr "Record count"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/showorder.tt:5
-#, fuzzy
 msgid "Order details"
-msgstr "New status"
+msgstr "Order details"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/spent.tt:11
-#, fuzzy
 msgid "Spent"
-msgstr "serpent"
+msgstr "Spent"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/supplier.tt:152
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/supplier.tt:181
@@ -5155,9 +5017,8 @@ msgid "Vendor '{vendor}'"
 msgstr "Not for loan"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/transferorder.tt:6
-#, fuzzy
 msgid "Transfer order"
-msgstr "recorder"
+msgstr "Transfer order"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/uncertainprice.tt:10
 #, perl-brace-format
@@ -5171,26 +5032,23 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:53
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:91
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify vendor issue {issue_number}"
-msgstr "Periodicity"
+msgstr "Modify vendor issue {issue_number}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:55
-#, fuzzy
 msgid "New vendor issue"
-msgstr "New status"
+msgstr "New vendor issue"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:18
-#, fuzzy
 msgid "Confirm deletion of vendor issue"
-msgstr "Date of birth"
+msgstr "Confirm deletion of vendor issue"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:21
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/vendor_issues.tt:44
-#, fuzzy
 msgid "Vendor issues"
-msgstr "Other name"
+msgstr "Vendor issues"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/z3950_search.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/acqui/z3950_search.tt:11
@@ -5218,9 +5076,8 @@ msgid "Table '{table_name}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/additional-fields.tt:20
-#, fuzzy
 msgid "Additional fields"
-msgstr "Additional subfields (XML)"
+msgstr "Additional fields"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/additional-fields.tt:205
 msgid "Are you sure you want to delete this field?"
@@ -5354,9 +5211,8 @@ msgid "Add users"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqbudgets.tt:685
-#, fuzzy
 msgid "Select owner"
-msgstr "electronic"
+msgstr "Select owner"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqcontract.tt:11
 #, perl-brace-format
@@ -5364,9 +5220,8 @@ msgid "Modify contract {contractname}"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqcontract.tt:13
-#, fuzzy
 msgid "New contract"
-msgstr "New status"
+msgstr "New contract"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqcontract.tt:17
 #, perl-brace-format
@@ -5379,33 +5234,29 @@ msgid "Confirm deletion of contract '{contractnumber}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqcontract.tt:23
-#, fuzzy
 msgid "Contracts"
-msgstr "contrabass"
+msgstr "Contracts"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqplan.tt:216
-#, fuzzy
 msgctxt "Budget planning"
 msgid "by months"
 msgstr "by months"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqplan.tt:217
-#, fuzzy
 msgctxt "Budget planning"
 msgid "by item types"
 msgstr "by item types"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqplan.tt:218
-#, fuzzy
 msgctxt "Budget planning"
 msgid "by libraries"
 msgstr "by libraries"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/aqplan.tt:219
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgctxt "Budget planning"
 msgid "by {type}"
-msgstr "by item types"
+msgstr "by {type}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/audio_alerts.tt:8
 msgid "Audio alerts"
@@ -5449,9 +5300,8 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_subfields_structure.tt:25
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:25
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/authtypes.tt:25
-#, fuzzy
 msgid "Authority types"
-msgstr "Street type"
+msgstr "Authority types"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_subfields_structure.tt:69
 #, perl-brace-format
@@ -5460,14 +5310,13 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:126
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify tag '{searchfield}'"
-msgstr "Periodicity"
+msgstr "Modify tag '{searchfield}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:14
-#, fuzzy
 msgid "New tag"
-msgstr "New status"
+msgstr "New tag"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:18
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:82
@@ -5479,7 +5328,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/auth_tag_structure.tt:63
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:59
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:119
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:121
 #, perl-brace-format
 msgid "Modify tag {searchfield}"
 msgstr ""
@@ -5514,9 +5363,8 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/authorised_values.tt:19
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/categories.tt:16
-#, fuzzy
 msgid "New category"
-msgstr "Member category"
+msgstr "New category"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/authorised_values.tt:26
 msgid "Authorized values"
@@ -5566,7 +5414,7 @@ msgstr ""
 msgid "Jobs"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:329
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/background_jobs.tt:334
 msgid "Are you sure you want to cancel this job?"
 msgstr ""
 
@@ -5583,9 +5431,9 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/biblio_framework.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/biblio_framework.tt:59
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Framework cannot be deleted"
-msgstr "Framework code"
+msgstr "Framework cannot be deleted"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/biblio_framework.tt:18
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/biblio_framework.tt:61
@@ -5614,14 +5462,13 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:15
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:55
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:125
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify library '{library}'"
-msgstr "Periodicity"
+msgstr "Modify library '{library}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:17
-#, fuzzy
 msgid "New library"
-msgstr "Home library"
+msgstr "New library"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:20
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:65
@@ -5630,16 +5477,15 @@ msgid "Confirm deletion of library '{library}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/branches.tt:22
-#, fuzzy
 msgid "Libraries"
-msgstr "by libraries"
+msgstr "Libraries"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cash_registers.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cash_registers.tt:50
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cash_registers.tt:101
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify cash register '{cash_register}'"
-msgstr "Periodicity"
+msgstr "Modify cash register '{cash_register}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cash_registers.tt:14
 msgid "New cash register"
@@ -5658,9 +5504,9 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/categories.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/categories.tt:59
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/categories.tt:123
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify category '{categorycode}'"
-msgstr "Periodicity"
+msgstr "Modify category '{categorycode}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/categories.tt:21
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/categories.tt:71
@@ -5677,9 +5523,8 @@ msgid "Confirm deletion of category '{categorycode}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/categories.tt:26
-#, fuzzy
 msgid "Patron categories"
-msgstr "Member category"
+msgstr "User categories"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/checkmarc.tt:8
 msgid "MARC bibliographic framework test"
@@ -5688,9 +5533,9 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:44
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:99
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify city '{city}'"
-msgstr "Periodicity"
+msgstr "Modify city '{city}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/cities.tt:13
 msgid "New city"
@@ -5710,14 +5555,13 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:66
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:148
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify classification source '{description}'"
-msgstr "Koha normalized classification for sorting"
+msgstr "Modify classification source '{description}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:12
-#, fuzzy
 msgid "New classification source"
-msgstr "Dewey/classification"
+msgstr "New classification source"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:75
@@ -5742,9 +5586,8 @@ msgid "New splitting rule"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/classsources.tt:27
-#, fuzzy
 msgid "Classification configuration"
-msgstr "Classification"
+msgstr "Classification configuration"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/clone-rules.tt:9
 msgid "Clone circulation and fine rules"
@@ -5752,32 +5595,28 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/clone-rules.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/smart-rules.tt:20
-#, fuzzy
 msgid "Circulation and fine rules"
-msgstr "Circulation note"
+msgstr "Circulation and fine rules"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/columns_settings.tt:194
-#, fuzzy
 msgid "Table settings"
-msgstr "Privacy settings"
+msgstr "Table settings"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:43
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:82
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify credit type '{credit_type}'"
-msgstr "Periodicity"
+msgstr "Modify credit type '{credit_type}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:14
-#, fuzzy
 msgid "New credit type"
-msgstr "Street type"
+msgstr "New credit type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:18
-#, fuzzy
 msgid "Credit types"
-msgstr "Street type"
+msgstr "Credit types"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/credit_types.tt:196
 #, perl-brace-format
@@ -5821,14 +5660,13 @@ msgstr "Wednesday"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/currency.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/currency.tt:51
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/currency.tt:107
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify currency '{currency_name}'"
-msgstr "Periodicity"
+msgstr "Modify currency '{currency_name}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/currency.tt:15
-#, fuzzy
 msgid "New currency"
-msgstr "Current library"
+msgstr "New currency"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/currency.tt:19
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/currency.tt:60
@@ -5844,19 +5682,17 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/debit_types.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/debit_types.tt:42
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/debit_types.tt:81
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify debit type '{debit_type}'"
-msgstr "Periodicity"
+msgstr "Modify debit type '{debit_type}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/debit_types.tt:15
-#, fuzzy
 msgid "New debit type"
-msgstr "Street type"
+msgstr "New debit type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/debit_types.tt:18
-#, fuzzy
 msgid "Debit types"
-msgstr "by item types"
+msgstr "Debit types"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/desks.tt:11
 msgid "Modify desk"
@@ -5886,9 +5722,8 @@ msgid "Modify account '{edi_account}' for vendor '{vendor}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_accounts.tt:12
-#, fuzzy
 msgid "New account"
-msgstr "record"
+msgstr "New account"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_accounts.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_accounts.tt:58
@@ -5901,22 +5736,20 @@ msgid "EDI accounts"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_accounts.tt:327
-#, fuzzy
 msgctxt "EDIFACT message QUOTE"
 msgid "Quotes"
-msgstr "Notes"
+msgstr "Quotes"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_ean_accounts.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_ean_accounts.tt:45
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_ean_accounts.tt:97
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify library EAN '{ean}'"
-msgstr "Periodicity"
+msgstr "Modify library EAN '{ean}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_ean_accounts.tt:12
-#, fuzzy
 msgid "New library EAN"
-msgstr "Home library"
+msgstr "New library EAN"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_ean_accounts.tt:17
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_ean_accounts.tt:57
@@ -5933,9 +5766,8 @@ msgid "Confirm deletion of EAN '{ean}'?"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/edi_ean_accounts.tt:22
-#, fuzzy
 msgid "Library EANs"
-msgstr "Library"
+msgstr "Library EANs"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/identity_provider_domains.tt:11
 msgid "New identity provider domain"
@@ -5983,14 +5815,13 @@ msgid "Modify identity provider '{id_provider}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/item_circulation_alerts.tt:9
-#, fuzzy
 msgid "Item circulation alerts"
-msgstr "Circulation note"
+msgstr "Item circulation alerts"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/items_search_field.tt:10
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify search field '{field}'"
-msgstr "Periodicity"
+msgstr "Modify search field '{field}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/items_search_field.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/items_search_field.tt:58
@@ -6004,21 +5835,20 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/items_search_field.tt:37
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/items_search_field.tt:56
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify search field  '{field}'"
-msgstr "Periodicity"
+msgstr "Modify search field  '{field}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:75
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:148
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify item type '{item_type}'"
-msgstr "Periodicity"
+msgstr "Modify item type '{item_type}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:16
-#, fuzzy
 msgid "New item type"
-msgstr "by item types"
+msgstr "New item type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:21
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:87
@@ -6033,14 +5863,12 @@ msgid "Confirm deletion of item type '{item_type}'?"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:27
-#, fuzzy
 msgid "Data deleted"
-msgstr "Date of birth"
+msgstr "Data deleted"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:29
-#, fuzzy
 msgid "Item types"
-msgstr "Itemtype"
+msgstr "Item types"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/itemtypes.tt:368
 #, perl-brace-format
@@ -6052,14 +5880,12 @@ msgid "Koha to MARC mapping"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/library_groups.tt:9
-#, fuzzy
 msgid "Library groups"
-msgstr "Library"
+msgstr "Library groups"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/localization.tt:7
-#, fuzzy
 msgid "Localization"
-msgstr "Location"
+msgstr "Localization"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marc-overlay-rules.tt:11
 msgid "Record overlay rules"
@@ -6112,12 +5938,12 @@ msgstr ""
 msgid "Confirm deletion of tag {searchfield}"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:103
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:105
 #, perl-brace-format
 msgid "MARC bibliographic framework '{framework}' ({frameworkcode})"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:183
+#: koha-tmpl/intranet-tmpl/prog/en/modules/admin/marctagstructure.tt:185
 #, perl-brace-format
 msgid "Confirm deletion of tag {searchfield}?"
 msgstr ""
@@ -6125,9 +5951,9 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/matching-rules.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/matching-rules.tt:83
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/matching-rules.tt:113
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify record matching rule '{code}'"
-msgstr "Periodicity"
+msgstr "Modify record matching rule '{code}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/matching-rules.tt:12
 msgid "New record matching rule"
@@ -6149,10 +5975,9 @@ msgid "Set:"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/oai_servers.tt:139
-#, fuzzy
 msgctxt "OAI"
 msgid "Set"
-msgstr "serpent"
+msgstr "Set"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/oai_set_mappings.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/oai_set_mappings.tt:30
@@ -6173,9 +5998,9 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/oai_sets.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/oai_sets.tt:44
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/oai_sets.tt:68
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify OAI set '{oai_set}'"
-msgstr "Periodicity"
+msgstr "Modify OAI set '{oai_set}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/overdrive.tt:10
 msgid "OverDrive library authnames"
@@ -6186,60 +6011,54 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/patron-attr-types.tt:79
 #, perl-brace-format
 msgid "Modify patron attribute type '{code}'"
-msgstr ""
+msgstr "Modify user attribute type '{code}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/patron-attr-types.tt:15
 msgid "New patron attribute type"
-msgstr ""
+msgstr "New user attribute type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/patron-attr-types.tt:19
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/patron-attr-types.tt:56
 #, perl-brace-format
 msgid "Confirm deletion of patron attribute type '{code}'"
-msgstr ""
+msgstr "Confirm deletion of user attribute type '{code}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/patron-attr-types.tt:21
 msgid "Patron attribute types"
-msgstr ""
+msgstr "User attribute types"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/patron-attr-types.tt:274
 #, perl-brace-format
 msgid "Confirm deletion of patron attribute type '{code}' ({description})?"
-msgstr ""
+msgstr "Confirm deletion of user attribute type '{code}' ({description})?"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/preferences.tt:10
-#, fuzzy
 msgid "System preferences"
-msgstr "System permissions"
+msgstr "System preferences"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/record_sources.tt:11
-#, fuzzy
 msgid "Record sources"
-msgstr "record"
+msgstr "Record sources"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/restrictions.tt:10
-#, fuzzy
 msgid "Modify restriction type"
-msgstr "Modification date"
+msgstr "Modify restriction type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/restrictions.tt:12
-#, fuzzy
 msgid "New restriction type"
-msgstr "Age restriction"
+msgstr "New restriction type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/restrictions.tt:16
 msgid "Confirm deletion of restriction type"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/restrictions.tt:18
-#, fuzzy
 msgid "Patron restriction types"
-msgstr "Use restrictions"
+msgstr "User restriction types"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/search_filters.tt:9
-#, fuzzy
 msgid "Search filters"
-msgstr "archlute"
+msgstr "Search filters"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/admin/searchengine/elasticsearch/mappings.tt:9
 msgid "Search engine configuration (Elasticsearch)"
@@ -6448,7 +6267,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/authorities/auth_finder.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/authorities/searchresultlist-auth.tt:9
 msgid "Cataloging authority plugin"
-msgstr ""
+msgstr "Cataloguing authority plugin"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/authorities/authorities-home.tt:9
 #: koha-tmpl/intranet-tmpl/prog/en/modules/authorities/authorities.tt:13
@@ -6457,9 +6276,8 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/authorities/searchresultlist.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_field_008_authorities.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_leader_authorities.tt:7
-#, fuzzy
 msgid "Authorities"
-msgstr "Author"
+msgstr "Authorities"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/authorities/authorities.tt:9
 #, perl-brace-format
@@ -6515,7 +6333,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/stockrotation.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/bookcount.tt:10
 msgid "Catalog"
-msgstr ""
+msgstr "Catalogue"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/basket/downloadcart.tt:5
 msgid "Download cart"
@@ -6538,9 +6356,8 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/MARCdetail.tt:9
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/detail.tt:29
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/labeledMARCdetail.tt:10
-#, fuzzy
 msgid "Unknown record"
-msgstr "Unknown reason"
+msgstr "Unknown record"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/ISBDdetail.tt:12
 #, perl-brace-format
@@ -6554,9 +6371,8 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/advsearch.tt:9
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-advsearch.tt:9
-#, fuzzy
 msgid "Advanced search"
-msgstr "dance orchestra"
+msgstr "Advanced search"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/detail.tt:32
 #, perl-brace-format
@@ -6578,12 +6394,11 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/issuehistory.tt:12
 #, perl-brace-format
 msgid "Checkout history for {title}"
-msgstr ""
+msgstr "Issue history for {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/itemsearch.tt:173
-#, fuzzy
 msgid "Item search"
-msgstr "Item number"
+msgstr "Item search"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/itemsearch.tt:326
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/itemsearch.tt:328
@@ -6594,7 +6409,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/labeledMARCdetail.tt:12
 #, perl-brace-format
 msgid "Labeled MARC details for {title}"
-msgstr ""
+msgstr "Labelled MARC details for {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/moredetail.tt:12
 #, perl-brace-format
@@ -6683,7 +6498,7 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:29
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/upload-images.tt:12
 msgid "Cataloging"
-msgstr ""
+msgstr "Cataloguing"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/catalogue/stockrotation.tt:10
 #, perl-brace-format
@@ -6699,20 +6514,18 @@ msgstr ""
 msgid "Add MARC record"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:823
-#, fuzzy
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbiblio.tt:810
 msgctxt "Editing MARC record titled:"
 msgid "Editing"
-msgstr "reserve waiting"
+msgstr "Editing"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/addbooks.tt:12
 msgid "No results found"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:11
-#, fuzzy
 msgid "Items"
-msgstr "Item lost"
+msgstr "Items"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:13
 #, perl-brace-format
@@ -6724,37 +6537,34 @@ msgstr ""
 msgid "(Record #{biblionumber})"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
 #, perl-brace-format
 msgid "Edit {title} by {author}"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:66
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
-#, fuzzy
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:65
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 msgctxt "Bibliographic record number"
 msgid "Record #"
-msgstr "record"
+msgstr "Record #"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:68
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:67
 #, perl-brace-format
 msgid "Edit {title}"
 msgstr ""
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:73
-#, fuzzy
+#: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/additem.tt:72
 msgctxt "Items attached to a bibliographic record"
 msgid "Items"
-msgstr "Item lost"
+msgstr "Items"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/concerns.tt:11
 msgid "Catalog concerns"
-msgstr ""
+msgstr "Catalogue concerns"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/editor.tt:7
-#, fuzzy
 msgid "Editor"
-msgstr "reserve waiting"
+msgstr "Editor"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/linkitem.tt:7
 msgid "Link to host record"
@@ -6829,9 +6639,8 @@ msgid "Cataloguing"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/cn_browser.tt:10
-#, fuzzy
 msgid "Call number browser"
-msgstr "Call number"
+msgstr "Call number browser"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_field_006.tt:7
 msgid "006 builder"
@@ -6848,9 +6657,8 @@ msgid "008 builder"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_field_008_classifications.tt:7
-#, fuzzy
 msgid "Classifications"
-msgstr "Classification"
+msgstr "Classifications"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/marc21_leader.tt:7
 msgid "000 - Leader builder"
@@ -6895,10 +6703,9 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_116.tt:70
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_116.tt:72
-#, fuzzy
 msgctxt "UNIMARC 116 painting techniques"
 msgid "print"
-msgstr "Print"
+msgstr "print"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/cataloguing/value_builder/unimarc_field_116.tt:899
 msgctxt "UNIMARC 116 painting techniques"
@@ -7176,36 +6983,34 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/recalls/recalls_to_pull.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/recalls/recalls_waiting.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:33
-#, fuzzy
 msgid "Circulation"
-msgstr "Circulation note"
+msgstr "Circulation"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/bookcount.tt:9
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Circulation statistics for {title}"
-msgstr "Circulation note"
+msgstr "Circulation statistics for {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchoverdues.tt:26
 #, fuzzy, perl-brace-format
-msgid "Overdues at {library}"
-msgstr "Permanent library"
+msgid "Overdues with fines at {library}"
+msgstr "Overdues at {library}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/branchtransfers.tt:11
 msgid "Transfers"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/checkout-notes.tt:10
-#, fuzzy
 msgid "Checkout notes"
-msgstr "Issue"
+msgstr "Issue notes"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:19
 #, perl-brace-format
 msgid "Checking out to {patron}"
-msgstr ""
+msgstr "Issuing to {user}"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:887
+#: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation.tt:891
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/sco/sco-main.tt:346
 #, perl-brace-format
 msgid "Bundle of {count} item"
@@ -7216,16 +7021,15 @@ msgstr[1] "Bundle of {count} items"
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/circulation_batch_checkouts.tt:15
 #, perl-brace-format
 msgid "Batch check out to {patron}"
-msgstr ""
+msgstr "Batch issue to {user}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/curbside_pickups.tt:13
 msgid "Curbside pickups"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/on-site_checkouts.tt:11
-#, fuzzy
 msgid "Pending on-site checkouts"
-msgstr "Total issues"
+msgstr "Pending on-site issues"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/overdue.tt:17
 #, perl-brace-format
@@ -7233,17 +7037,16 @@ msgid "Items overdue as of {date}"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/pendingbookings.tt:12
-#, fuzzy
 msgid "Bookings to collect"
-msgstr "Collection"
+msgstr "Bookings to collect"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/pendingreserves.tt:13
 msgid "Holds to pull"
-msgstr ""
+msgstr "Reserves to pull"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/printslip.tt:11
 msgid "Hold transfer print receipt"
-msgstr ""
+msgstr "Reserve transfer print receipt"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/printslip.tt:14
 msgid "Transfers print receipt"
@@ -7289,14 +7092,12 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/statistics.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/two_factor_auth.tt:9
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/update-child.tt:8
-#, fuzzy
 msgid "Patrons"
-msgstr "patronreason"
+msgstr "Users"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/printslip.tt:20
-#, fuzzy
 msgid "Recall print receipt"
-msgstr "Replacement price"
+msgstr "Recall print receipt"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/renew.tt:10
 #, perl-brace-format
@@ -7308,32 +7109,29 @@ msgid "Request article"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/reserveratios.tt:13
-#, fuzzy
 msgid "Hold ratios"
-msgstr "reserve waiting"
+msgstr "Reserve ratios"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/returns.tt:33
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Check in {title}"
-msgstr "collectiontitle"
+msgstr "Return {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/transfers_to_send.tt:12
 msgid "Transfers to send"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/transferstoreceive.tt:10
-#, fuzzy
 msgid "Transfers to receive"
-msgstr "Date acquired"
+msgstr "Transfers to receive"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/view_holdsqueue.tt:13
 msgid "Holds queue"
-msgstr ""
+msgstr "Reserves queue"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/circ/waitingreserves.tt:12
-#, fuzzy
 msgid "Holds awaiting pickup"
-msgstr "reserve waiting"
+msgstr "Reserves awaiting pickup"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/clubs/club-enrollments.tt:11
 #, perl-brace-format
@@ -7344,9 +7142,8 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/clubs/clubs-add-modify.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/clubs/clubs.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/clubs/templates-add-modify.tt:15
-#, fuzzy
 msgid "Patron clubs"
-msgstr "patronreason"
+msgstr "User clubs"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/clubs/clubs-add-modify.tt:12
 #, perl-brace-format
@@ -7364,9 +7161,8 @@ msgid "Modify club template {club_template}"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/clubs/templates-add-modify.tt:13
-#, fuzzy
 msgid "New club template"
-msgstr "template"
+msgstr "New club template"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/add_items-step1.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/add_items-step2.tt:12
@@ -7429,9 +7225,8 @@ msgid "Edit {course_name}"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/course.tt:11
-#, fuzzy
 msgid "New course"
-msgstr "New status"
+msgstr "New course"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/course.tt:108
 #: koha-tmpl/intranet-tmpl/prog/en/modules/course_reserves/course.tt:121
@@ -7449,25 +7244,23 @@ msgid "E-resource management"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/erm/erm.tt:55
-#, fuzzy
 msgid "Select user"
-msgstr "electric"
+msgstr "Select user"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/errors/errorpage.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/modules/errors/errorpage.tt:21
 #: koha-tmpl/intranet-tmpl/prog/en/modules/errors/errorpage.tt:33
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Error {error_number}"
-msgstr "Borrower number"
+msgstr "Error {error_number}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/ill/ill-requests.tt:13
 msgid "ILL requests"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/ill/log/patron_notice.tt:4
-#, fuzzy
 msgid "Patron notice sent"
-msgstr "patronreason"
+msgstr "User notice sent"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/ill/log/status_change.tt:4
 msgid "Status changed"
@@ -7501,9 +7294,8 @@ msgid "Web installer"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step2.tt:6
-#, fuzzy
 msgid "Database settings"
-msgstr "Privacy settings"
+msgstr "Database settings"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:7
 msgid "Set up database"
@@ -7518,18 +7310,16 @@ msgid "Database tables created"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:18
-#, fuzzy
 msgid "Update database"
-msgstr "Start date"
+msgstr "Update database"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:20
 msgid "Install basic configuration settings"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:24
-#, fuzzy
 msgid "Updating database structure"
-msgstr "Start date"
+msgstr "Updating database structure"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/installer/step3.tt:27
 msgid "Select your MARC flavor"
@@ -7623,9 +7413,8 @@ msgid "Edit label template {template_id}"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-edit-template.tt:10
-#, fuzzy
 msgid "New label template"
-msgstr "metal bells plate"
+msgstr "New label template"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-edit-template.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-template.tt:13
@@ -7638,9 +7427,8 @@ msgid "layout"
 msgstr "layout"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:9
-#, fuzzy
 msgid "Label layouts"
-msgstr "Layouts"
+msgstr "Label layouts"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:10
@@ -7648,9 +7436,8 @@ msgid "template"
 msgstr "template"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:11
-#, fuzzy
 msgid "Label templates"
-msgstr "template"
+msgstr "Label templates"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:12
@@ -7658,9 +7445,8 @@ msgid "profile"
 msgstr "profile"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:13
-#, fuzzy
 msgid "Printer profiles"
-msgstr "Profiles"
+msgstr "Printer profiles"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:14
@@ -7668,9 +7454,8 @@ msgid "batch"
 msgstr "batch"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:15
-#, fuzzy
 msgid "Label batches"
-msgstr "Batches"
+msgstr "Label batches"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/labels/label-manage.tt:100
 msgid "Are you sure you want to delete this?"
@@ -7702,23 +7487,20 @@ msgid "Details of credit"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/accountline-details.tt:16
-#, fuzzy
 msgid "Details of debit"
-msgstr "Date of birth"
+msgstr "Details of debit"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/apikeys.tt:8
 msgid "API Keys"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/boraccount.tt:18
-#, fuzzy
 msgid "Account for"
-msgstr "countertenor"
+msgstr "Account for"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/deletemem.tt:10
-#, fuzzy
 msgid "Delete patron"
-msgstr "electronic"
+msgstr "Delete user"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/discharge.tt:12
 msgid "Discharge for"
@@ -7734,12 +7516,11 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/holdshistory.tt:13
 msgid "Holds history for"
-msgstr ""
+msgstr "Reserves history for"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/housebound.tt:11
-#, fuzzy
 msgid "Details for"
-msgstr "Replacement price"
+msgstr "Details for"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/housebound.tt:12
 msgid "Housebound"
@@ -7754,19 +7535,16 @@ msgid "Create manual credit"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/maninvoice.tt:11
-#, fuzzy
 msgid "Create manual invoice"
-msgstr "reciting man's voice"
+msgstr "Create manual invoice"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/member-flags.tt:10
-#, fuzzy
 msgid "Set permissions for"
-msgstr "System permissions"
+msgstr "Set permissions for"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/member-password.tt:10
-#, fuzzy
 msgid "Password updated"
-msgstr "Creation date"
+msgstr "Password updated"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/member-password.tt:12
 msgid "Update password for"
@@ -7774,52 +7552,49 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:18
 msgid "Add patron"
-msgstr ""
+msgstr "Add user"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:20
-#, fuzzy
 msgid "Modify patron"
-msgstr "Modification date"
+msgstr "Modify user"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:488
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:490
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:500
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:491
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:493
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:503
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember-brief.tt:44
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:195
-#, fuzzy
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:199
 msgctxt "gender"
 msgid "Other"
-msgstr "other"
+msgstr "Other"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1521
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:1524
 msgctxt "patron restriction created on"
 msgid "Created"
 msgstr "Created"
 
-#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2093
+#: koha-tmpl/intranet-tmpl/prog/en/modules/members/memberentrygen.tt:2096
 msgid "Add guarantor"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/members-update.tt:12
 msgid "Update patron records"
-msgstr ""
+msgstr "Update user records"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/merge-patrons.tt:11
 msgid "Merge patron records"
-msgstr ""
+msgstr "Merge user records"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember-brief.tt:9
 msgid "Check duplicate patron"
-msgstr ""
+msgstr "Check duplicate user"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember-print.tt:14
 msgid "Summary for"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/moremember.tt:18
-#, fuzzy
 msgid "Patron details for"
-msgstr "patronreason"
+msgstr "User details for"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/notices.tt:11
 msgid "Sent notices for"
@@ -7832,12 +7607,12 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/paycollect.tt:27
 #, perl-brace-format
 msgid "Write off an amount for {patron}"
-msgstr ""
+msgstr "Write off an amount for {user}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/paycollect.tt:29
 #, perl-brace-format
 msgid "Collect payment for {patron}"
-msgstr ""
+msgstr "Collect payment for {user}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/printfeercpt.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/printinvoice.tt:8
@@ -7849,27 +7624,24 @@ msgid "Purchase suggestions for"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/readingrec.tt:12
-#, fuzzy
 msgid "Circulation history for"
-msgstr "Circulation note"
+msgstr "Circulation history for"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/recallshistory.tt:9
 msgid "Recalls history for"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/routing-lists.tt:10
-#, fuzzy
 msgid "Subscription routing lists for"
-msgstr "Biblio number (internal)"
+msgstr "Subscription routing lists for"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/statistics.tt:11
 msgid "Statistics for"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/members/update-child.tt:7
-#, fuzzy
 msgid "Choose adult category"
-msgstr "Member category"
+msgstr "Choose adult category"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/offline_circ/enqueue_koc.tt:6
 msgid "Add offline circulations to queue"
@@ -7884,63 +7656,58 @@ msgid "Offline circulation file upload"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/onboarding/onboardingstep1.tt:6
-#, fuzzy
 msgid "Create a library"
-msgstr "Current library"
+msgstr "Create a library"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/onboarding/onboardingstep2.tt:7
-#, fuzzy
 msgid "Add a patron category"
-msgstr "Member category"
+msgstr "Add a user category"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/onboarding/onboardingstep3.tt:7
 msgid "Create Koha administrator patron"
-msgstr ""
+msgstr "Create Koha administrator user"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/onboarding/onboardingstep4.tt:5
-#, fuzzy
 msgid "Create a new item type"
-msgstr "Koha itemtype"
+msgstr "Create a new item type"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/onboarding/onboardingstep5.tt:6
 msgid "Onboarding complete"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/onboarding/onboardingstep5.tt:8
-#, fuzzy
 msgid "Create circulation rule"
-msgstr "Circulation note"
+msgstr "Create circulation rule"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/add-modify.tt:9
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/add-modify.tt:35
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/add-modify.tt:49
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify patron list '{list_name}'"
-msgstr "Periodicity"
+msgstr "Modify user list '{list_name}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/add-modify.tt:11
 msgid "New patron list"
-msgstr ""
+msgstr "New user list"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/add-modify.tt:13
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/list.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/lists.tt:8
-#, fuzzy
 msgid "Patron lists"
-msgstr "patronreason"
+msgstr "User lists"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patron_lists/list.tt:48
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Add patrons to '{patron_list_name}'"
-msgstr "Periodicity"
+msgstr "Add users to '{patron_list_name}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-batch.tt:9
 msgid "Edit patron card batch"
-msgstr ""
+msgstr "Edit user card batch"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-batch.tt:11
 msgid "New patron card batch"
-msgstr ""
+msgstr "New user card batch"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-batch.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-layout.tt:13
@@ -7949,27 +7716,24 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/home.tt:6
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:31
-#, fuzzy
 msgid "Patron card creator"
-msgstr "Member category"
+msgstr "User card creator"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-batch.tt:394
-#, fuzzy
 msgid "Add patrons"
-msgstr "Modification date"
+msgstr "Add users"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-layout.tt:8
 msgid "Edit patron card layout"
-msgstr ""
+msgstr "Edit user card layout"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-layout.tt:10
 msgid "New patron card layout"
-msgstr ""
+msgstr "New user card layout"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-layout.tt:12
-#, fuzzy
 msgid "Layout"
-msgstr "Layouts"
+msgstr "Layout"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-profile.tt:8
 msgid "Edit printer profile"
@@ -7977,34 +7741,36 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-template.tt:9
 msgid "Edit patron card template"
-msgstr ""
+msgstr "Edit user card template"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/edit-template.tt:11
 msgid "New patron card template"
-msgstr ""
+msgstr "New user card template"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:7
 msgid "Image manager"
 msgstr ""
 
+#: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/image-manage.tt:124
+#, perl-brace-format
+msgid "Are you sure you want to delete image {image_id}?"
+msgstr ""
+
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:9
-#, fuzzy
 msgid "Patron card layouts"
-msgstr "Member category"
+msgstr "User card layouts"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:11
-#, fuzzy
 msgid "Patron card templates"
-msgstr "patronreason"
+msgstr "User card templates"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:13
 msgid "Patron card printer profiles"
-msgstr ""
+msgstr "User card printer profiles"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:15
-#, fuzzy
 msgid "Patron card batches"
-msgstr "Member category"
+msgstr "User card batches"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/manage.tt:16
 msgid "Actions"
@@ -8012,12 +7778,11 @@ msgstr "Actions"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/print.tt:7
 msgid "Patron card printing/exporting"
-msgstr ""
+msgstr "User card printing/exporting"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/patroncards/print.tt:8
-#, fuzzy
 msgid "Patron cards"
-msgstr "Member category"
+msgstr "User cards"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/plugins/plugins-disabled.tt:6
 msgid "Plugins disabled"
@@ -8050,9 +7815,8 @@ msgid "Old recalls"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/recalls/recalls_overdue.tt:9
-#, fuzzy
 msgid "Overdue recalls"
-msgstr "overdue"
+msgstr "Overdue recalls"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/recalls/recalls_queue.tt:9
 msgid "Recalls queue"
@@ -8100,16 +7864,15 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/bor_issues_top.tt:10
 msgid "Patrons with the most checkouts"
-msgstr ""
+msgstr "Users with the most issues"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/borrowers_out.tt:7
-#, fuzzy
 msgid "Patrons with no checkouts"
-msgstr "Total issues"
+msgstr "Users with no issues"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/borrowers_stats.tt:12
 msgid "Patrons statistics"
-msgstr ""
+msgstr "Users statistics"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/cash_register_stats.tt:17
 msgid "Cash register statistics"
@@ -8120,22 +7883,20 @@ msgid "Most-circulated items"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/catalogue_out.tt:8
-#, fuzzy
 msgid "Items with no checkouts"
-msgstr "Item is on loan"
+msgstr "Items with no issues"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/catalogue_stats.tt:11
 msgid "Catalog statistics"
-msgstr ""
+msgstr "Catalogue statistics"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/convert_report.tt:5
 msgid "Convert report"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/dictionary.tt:7
-#, fuzzy
 msgid "Dictionary"
-msgstr "friction drum"
+msgstr "Dictionary"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/dictionary.tt:8
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/guided_reports_start.tt:55
@@ -8205,19 +7966,16 @@ msgid "Average loan time"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/issues_stats.tt:11
-#, fuzzy
 msgid "Circulation statistics"
-msgstr "Circulation note"
+msgstr "Circulation statistics"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/itemslost.tt:14
-#, fuzzy
 msgid "Lost items"
-msgstr "Lost status"
+msgstr "Lost items"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/itemtypes.tt:10
-#, fuzzy
 msgid "Catalog by item types"
-msgstr "by item types"
+msgstr "Catalogue by item types"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/orders_by_budget.tt:11
 msgid "Orders by fund"
@@ -8225,26 +7983,24 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/reserves_stats.tt:11
 msgid "Holds statistics"
-msgstr ""
+msgstr "Reserves statistics"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reports/serials_stats.tt:10
-#, fuzzy
 msgid "Serials subscriptions stats"
-msgstr "subscription"
+msgstr "Serials subscriptions stats"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:28
 #, perl-brace-format
 msgid "Place a hold on {title}"
-msgstr ""
+msgstr "Place a reserve on {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:30
 msgid "Confirm holds"
-msgstr ""
+msgstr "Confirm reserves"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:32
-#, fuzzy
 msgid "Holds"
-msgstr "Reserve"
+msgstr "Reserves"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reserve/request.tt:1280
 msgid "Hold"
@@ -8261,9 +8017,8 @@ msgid "Comments awaiting moderation"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/reviews/reviewswaiting.tt:13
-#, fuzzy
 msgid "Comments"
-msgstr "Comment"
+msgstr "Comments"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/addItems.tt:8
 msgid "Manage items"
@@ -8275,17 +8030,16 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/editCollections.tt:64
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/transferCollection.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/transferCollection.tt:31
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Collection '{collection_title}'"
-msgstr "collectiontitle"
+msgstr "Collection '{collection_title}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/addItems.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/editCollections.tt:24
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/rotatingCollections.tt:9
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/transferCollection.tt:11
-#, fuzzy
 msgid "Rotating collections"
-msgstr "Collection"
+msgstr "Rotating collections"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/addItems.tt:51
 #, perl-brace-format
@@ -8294,38 +8048,32 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/editCollections.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/editCollections.tt:67
-#, fuzzy
 msgid "Edit collection"
-msgstr "Collection"
+msgstr "Edit collection"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/editCollections.tt:13
-#, fuzzy
 msgid "Add a new collection"
-msgstr "Collection"
+msgstr "Add a new collection"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/editCollections.tt:16
-#, fuzzy
 msgid "Collection deleted"
-msgstr "collectiontitle"
+msgstr "Collection deleted"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/editCollections.tt:19
-#, fuzzy
 msgid "Collection created successfully"
-msgstr "Mappings updated successfully."
+msgstr "Collection created successfully"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/editCollections.tt:21
-#, fuzzy
 msgid "Collection creation failed"
-msgstr "collectiontitle"
+msgstr "Collection creation failed"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/rotatingCollections.tt:66
 msgid "Are you sure you want to delete this rotating collection?"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/transferCollection.tt:9
-#, fuzzy
 msgid "Transfer collection"
-msgstr "Collection"
+msgstr "Transfer collection"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/rotating_collections/transferCollection.tt:45
 #, perl-brace-format
@@ -8333,9 +8081,8 @@ msgid "Transfer collection '{collection_title}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/acqui-search-result.tt:6
-#, fuzzy
 msgid "Vendor search results"
-msgstr "Gone no address flag"
+msgstr "Vendor search results"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/acqui-search-result.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/acqui-search.tt:6
@@ -8361,14 +8108,12 @@ msgid "Serials"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/acqui-search.tt:5
-#, fuzzy
 msgid "Search for vendor"
-msgstr "Not for loan"
+msgstr "Search for vendor"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/checkexpiration.tt:9
-#, fuzzy
 msgid "Check expiration"
-msgstr "Location"
+msgstr "Check expiration"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/checkexpiration.tt:82
 #, perl-brace-format
@@ -8378,9 +8123,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/claims.tt:12
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Claims for {vendor}"
-msgstr "Not for loan"
+msgstr "Claims for {vendor}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/claims.tt:14
 msgid "Claims"
@@ -8388,93 +8133,81 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/routing-preview-slip.tt:7
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/routing-preview-slip.tt:19
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Routing slip for {title}"
-msgstr "Circulation note"
+msgstr "Routing slip for {title}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/routing-preview.tt:7
-#, fuzzy
 msgid "Preview routing list"
-msgstr "Biblio number (internal)"
+msgstr "Preview routing list"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/routing.tt:9
 msgid "New routing list"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/routing.tt:11
-#, fuzzy
 msgid "Modify routing list"
-msgstr "Modification date"
+msgstr "Modify routing list"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/routing.tt:175
 msgid "Add recipients"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/serials-collection.tt:12
-#, fuzzy
 msgid "Serial collection information"
-msgstr "Volume information"
+msgstr "Serial collection information"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/serials-edit.tt:8
-#, fuzzy
 msgid "Serial edition"
-msgstr "Serial enumeraton/chronology"
+msgstr "Serial edition"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/serials-home.tt:11
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Serials {biblionumber}"
-msgstr "Biblio number"
+msgstr "Serials {biblionumber}"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-add.tt:12
-#, fuzzy
 msgid "Modify subscription"
-msgstr "subscription"
+msgstr "Modify subscription"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-add.tt:15
-#, fuzzy
 msgid "New subscription"
-msgstr "subscription"
+msgstr "New subscription"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-batchedit.tt:11
-#, fuzzy
 msgid "Batch edit"
-msgstr "Batches"
+msgstr "Batch edit"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-bib-search.tt:5
-#, fuzzy
 msgid "Catalog search"
-msgstr "patronreason"
+msgstr "Catalogue search"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-detail.tt:15
-#, fuzzy
 msgid "Subscription details"
-msgstr "Biblio number (internal)"
+msgstr "Subscription details"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-frequencies.tt:9
-#, fuzzy
 msgid "New frequency"
-msgstr "Current library"
+msgstr "New frequency"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-frequencies.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-frequencies.tt:50
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-frequencies.tt:71
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify frequency '{description}'"
-msgstr "Koha normalized classification for sorting"
+msgstr "Modify frequency '{description}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-frequencies.tt:14
 msgid "Frequencies"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-history.tt:8
-#, fuzzy
 msgid "Subscription history"
-msgstr "Biblio number (internal)"
+msgstr "Subscription history"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-numberpatterns.tt:9
-#, fuzzy
 msgid "New numbering pattern"
-msgstr "Item number (internal)"
+msgstr "New numbering pattern"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-numberpatterns.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-numberpatterns.tt:41
@@ -8484,19 +8217,16 @@ msgid "Modify numbering pattern '{pattern}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-numberpatterns.tt:13
-#, fuzzy
 msgid "Numbering patterns"
-msgstr "Number of pages"
+msgstr "Numbering patterns"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-renew.tt:9
-#, fuzzy
 msgid "Renew subscription"
-msgstr "subscription"
+msgstr "Renew subscription"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/subscription-renew.tt:12
-#, fuzzy
 msgid "Renew subscriptions"
-msgstr "subscription"
+msgstr "Renew subscriptions"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/serials/viewalerts.tt:6
 msgid "Alert subscribers"
@@ -8554,9 +8284,8 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:69
-#, fuzzy
 msgid "Pending"
-msgstr "reserve pending"
+msgstr "Pending"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:73
@@ -8576,10 +8305,9 @@ msgid "Approved"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:166
-#, fuzzy
 msgctxt "Tags (single)"
 msgid "Pending"
-msgstr "reserve pending"
+msgstr "Pending"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:228
 msgctxt "Tags (multiple)"
@@ -8592,10 +8320,9 @@ msgid "Rejected"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tags/review.tt:236
-#, fuzzy
 msgctxt "Tags (multiple)"
 msgid "Pending"
-msgstr "reserve pending"
+msgstr "Pending"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/access_files.tt:9
 msgid "Access files"
@@ -8618,9 +8345,8 @@ msgid "New news item"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/additional-contents.tt:22
-#, fuzzy
 msgid "New page"
-msgstr "Number of pages"
+msgstr "New page"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/additional-contents.tt:24
 msgid "New HTML customization"
@@ -8661,9 +8387,8 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batch_extend_due_dates.tt:47
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batch_record_modification.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batch_record_modification.tt:42
-#, fuzzy
 msgid "Confirm selection"
-msgstr "Collection"
+msgstr "Confirm selection"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod-del.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod-del.tt:46
@@ -8682,28 +8407,24 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod-del.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod.tt:9
-#, fuzzy
 msgid "Batch item deletion"
-msgstr "Date of birth"
+msgstr "Batch item deletion"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod-edit.tt:11
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod-edit.tt:52
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:14
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:42
-#, fuzzy
 msgid "Modifications"
-msgstr "Modification date"
+msgstr "Modifications"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod-edit.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batchMod.tt:11
-#, fuzzy
 msgid "Batch item modification"
-msgstr "Place of publication"
+msgstr "Batch item modification"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batch_delete_records.tt:15
-#, fuzzy
 msgid "Batch record deletion"
-msgstr "Date of birth"
+msgstr "Batch record deletion"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/batch_extend_due_dates.tt:18
 msgid "Batch extend due dates"
@@ -8723,7 +8444,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/cleanborrowers.tt:16
 msgid "Batch patron deletion and anonymization"
-msgstr ""
+msgstr "Batch user deletion and anonymization"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/csv-profiles.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/csv-profiles.tt:42
@@ -8733,9 +8454,8 @@ msgid "Modify CSV profile '{csv_profile_name}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/csv-profiles.tt:12
-#, fuzzy
 msgid "New CSV profile"
-msgstr "profile"
+msgstr "New CSV profile"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/csv-profiles.tt:15
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/csv-profiles.tt:51
@@ -8744,9 +8464,8 @@ msgid "Confirm deletion of CSV profile '{csv_profile_name}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/csv-profiles.tt:17
-#, fuzzy
 msgid "CSV profiles"
-msgstr "profile"
+msgstr "CSV profiles"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/csv-profiles.tt:282
 #, perl-brace-format
@@ -8754,9 +8473,8 @@ msgid "Delete CSV profile '{csv_profile_name}'?"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/export.tt:9
-#, fuzzy
 msgid "Export data"
-msgstr "Expiry date"
+msgstr "Export data"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/holidays.tt:10
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/holidays.tt:28
@@ -8767,7 +8485,7 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/import_borrowers.tt:12
 msgid "Import patrons"
-msgstr ""
+msgstr "Import users"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/import_borrowers.tt:62
 #, perl-brace-format
@@ -8829,9 +8547,8 @@ msgid "Values are comma-separated."
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/inventory.tt:15
-#, fuzzy
 msgid "Inventory"
-msgstr "Inventory number"
+msgstr "Inventory"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/letter.tt:13
 msgid "Modify notice"
@@ -8846,9 +8563,8 @@ msgid "Notice added"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/letter.tt:22
-#, fuzzy
 msgid "Confirm deletion"
-msgstr "Date of birth"
+msgstr "Confirm deletion"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/letter.tt:27
 msgid "Notices and slips"
@@ -8884,13 +8600,12 @@ msgid "Actions for template '{template_name}'"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/marc_modification_templates.tt:20
-#, fuzzy
 msgid "MARC modification templates"
-msgstr "Modification date"
+msgstr "MARC modification templates"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/modborrowers.tt:19
 msgid "Batch patron modification"
-msgstr ""
+msgstr "Batch user modification"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/overduerules.tt:9
 msgid "Overdue notice/status triggers"
@@ -8902,16 +8617,15 @@ msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/picture-upload.tt:11
 msgid "Upload patron images"
-msgstr ""
+msgstr "Upload user images"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/preview_letter.tt:5
 msgid "Preview notice template"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/preview_letter.tt:6
-#, fuzzy
 msgid "Notices"
-msgstr "Voices"
+msgstr "Notices"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/problem-reports.tt:9
 msgid "OPAC problem reports"
@@ -8951,14 +8665,13 @@ msgstr ""
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:12
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:59
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:176
-#, fuzzy, perl-brace-format
+#, perl-brace-format
 msgid "Modify rota '{rota_title}'"
-msgstr "Periodicity"
+msgstr "Modify rota '{rota_title}'"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:14
-#, fuzzy
 msgid "New rota"
-msgstr "New status"
+msgstr "New rota"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:16
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:19
@@ -8978,9 +8691,8 @@ msgid "Modify {library} stage"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:21
-#, fuzzy
 msgid "New stage"
-msgstr "New status"
+msgstr "New stage"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:23
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:26
@@ -8997,9 +8709,8 @@ msgid "Add items"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:28
-#, fuzzy
 msgid "Stock rotation"
-msgstr "Location"
+msgstr "Stock rotation"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:448
 #: koha-tmpl/intranet-tmpl/prog/en/modules/tools/stockrotation.tt:576
@@ -9062,19 +8773,16 @@ msgid "Edit list {list_name}"
 msgstr ""
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/tables/shelves_results.tt:46
-#, fuzzy
 msgid "Edit"
-msgstr "reserve waiting"
+msgstr "Edit"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/tables/shelves_results.tt:57
-#, fuzzy
 msgid "Delete"
-msgstr "Damaged on"
+msgstr "Delete"
 
 #: koha-tmpl/intranet-tmpl/prog/en/modules/virtualshelves/tables/shelves_results.tt:67
-#, fuzzy
 msgid "Transfer"
-msgstr "recorder"
+msgstr "Transfer"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/holds-table.inc:197
 msgctxt "Cancel hold button"
@@ -9089,65 +8797,66 @@ msgstr ""
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/html_helpers.inc:175
 #, perl-brace-format
 msgid "{library} catalog"
-msgstr ""
+msgstr "{library} catalogue"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/html_helpers.inc:177
 msgid "Koha online catalog"
-msgstr ""
+msgstr "Koha online catalogue"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/html_helpers.inc:187
-#, fuzzy
 msgid "Card number or username"
-msgstr "Call number"
+msgstr "Card number or username"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:201
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:203
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:147
+msgid "Are you sure you want to delete your search history?"
+msgstr ""
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:210
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:212
 msgid "Search the catalog by keyword"
-msgstr ""
+msgstr "Search the catalogue by keyword"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:206
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:208
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:215
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:217
 msgid "Search the catalog by title"
-msgstr ""
+msgstr "Search the catalogue by title"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:211
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:213
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:220
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:222
 msgid "Search the catalog by author"
-msgstr ""
+msgstr "Search the catalogue by author"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:216
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:218
-#, fuzzy
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:225
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:227
 msgid "Search the catalog by subject"
-msgstr "Search also for broader subjects"
+msgstr "Search the catalogue by subject"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:221
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:223
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:230
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:232
 msgid "Search the catalog by ISBN"
-msgstr ""
+msgstr "Search the catalogue by ISBN"
 
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:226
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:228
-msgid "Search the catalog by ISSN"
-msgstr ""
-
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:231
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:233
-msgid "Search the catalog by series"
-msgstr ""
-
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:235
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:237
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:239
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:243
-#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:245
+msgid "Search the catalog by ISSN"
+msgstr "Search the catalogue by ISSN"
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:240
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:242
+msgid "Search the catalog by series"
+msgstr "Search the catalogue by series"
+
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:246
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:248
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:252
+#: koha-tmpl/opac-tmpl/bootstrap/en/includes/masthead.inc:254
 msgid "Search the catalog by call number"
-msgstr ""
+msgstr "Search the catalogue by call number"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:105
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:134
-#, fuzzy
 msgid "Show more"
-msgstr "Shelving location"
+msgstr "Show more"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:108
 msgid "Show more authors"
@@ -9170,9 +8879,8 @@ msgid "Show more series"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:118
-#, fuzzy
 msgid "Show more item types"
-msgstr "Street type"
+msgstr "Show more item types"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:120
 msgid "Show more home libraries"
@@ -9183,19 +8891,16 @@ msgid "Show more holding libraries"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:124
-#, fuzzy
 msgid "Show more locations"
-msgstr "Shelving location"
+msgstr "Show more locations"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:126
-#, fuzzy
 msgid "Show more collections"
-msgstr "Shelving location"
+msgstr "Show more collections"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:128
-#, fuzzy
 msgid "Show more languages"
-msgstr "Shelving location"
+msgstr "Show more languages"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:137
 msgid "Show fewer authors"
@@ -9218,9 +8923,8 @@ msgid "Show fewer series"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:147
-#, fuzzy
 msgid "Show fewer item types"
-msgstr "Street type"
+msgstr "Show fewer item types"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:149
 msgid "Show fewer home libraries"
@@ -9231,19 +8935,16 @@ msgid "Show fewer holding libraries"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:153
-#, fuzzy
 msgid "Show fewer locations"
-msgstr "Shelving location"
+msgstr "Show fewer locations"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:155
-#, fuzzy
 msgid "Show fewer collections"
-msgstr "Shelving location"
+msgstr "Show fewer collections"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/includes/opac-facets.inc:157
-#, fuzzy
 msgid "Show fewer languages"
-msgstr "Shelving location"
+msgstr "Show fewer languages"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/errors/errorpage.tt:9
 msgid "An error has occurred"
@@ -9254,33 +8955,28 @@ msgid "GetAvailability"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:12
-#, fuzzy
 msgid "GetRecords"
-msgstr "record"
+msgstr "GetRecords"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:14
-#, fuzzy
 msgid "GetAuthorityRecords"
-msgstr "Author"
+msgstr "GetAuthorityRecords"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:16
-#, fuzzy
 msgid "LookupPatron"
-msgstr "patronreason"
+msgstr "LookupPatron"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:18
 msgid "AuthenticatePatron"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:20
-#, fuzzy
 msgid "GetPatronInfo"
-msgstr "patronreason"
+msgstr "GetPatronInfo"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:22
-#, fuzzy
 msgid "GetPatronStatus"
-msgstr "patronreason"
+msgstr "GetPatronStatus"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:24
 msgid "GetServices"
@@ -9291,28 +8987,24 @@ msgid "RenewLoan"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:28
-#, fuzzy
 msgid "HoldTitle"
-msgstr "Title"
+msgstr "HoldTitle"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:30
-#, fuzzy
 msgid "HoldItem"
-msgstr "Reserve"
+msgstr "HoldItem"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:32
-#, fuzzy
 msgid "CancelHold"
-msgstr "Cancel"
+msgstr "CancelHold"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/ilsdi.tt:34
 msgid "ILS-DI"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/maintenance.tt:12
-#, fuzzy
 msgid "System maintenance"
-msgstr "System permissions"
+msgstr "System maintenance"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-ISBDdetail.tt:7
 #, perl-brace-format
@@ -9330,18 +9022,16 @@ msgid "MARC view for: {title}"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-account.tt:16
-#, fuzzy
 msgid "Your charges"
-msgstr "four hands"
+msgstr "Your charges"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-addbybiblionumber.tt:6
 msgid "Add to your list"
 msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscribe.tt:8
-#, fuzzy
 msgid "Subscribe to a subscription alert"
-msgstr "subscription"
+msgstr "Subscribe to a subscription alert"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-alert-subscribe.tt:10
 msgid "Unsubscribe from a subscription alert"
@@ -9355,9 +9045,8 @@ msgstr ""
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth-detail.tt:16
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-authorities-home.tt:10
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-authoritiessearchresultlist.tt:14
-#, fuzzy
 msgid "Authority search"
-msgstr "Street type"
+msgstr "Authority search"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:12
 msgid "Log in to your account"
@@ -9365,7 +9054,7 @@ msgstr ""
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-auth.tt:14
 msgid "Catalog login disabled"
-msgstr ""
+msgstr "Catalogue login disabled"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-authoritiessearchresultlist.tt:93
 msgid "record"
@@ -9374,18 +9063,16 @@ msgstr[0] "record"
 msgstr[1] "records"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-blocked.tt:8
-#, fuzzy
 msgid "Record blocked"
-msgstr "record"
+msgstr "Record blocked"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browse.tt:11
-#, fuzzy
 msgid "Browse search"
-msgstr "New status"
+msgstr "Browse search"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-browser.tt:10
 msgid "Browse our catalog"
-msgstr ""
+msgstr "Browse our catalogue"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:14
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-course-details.tt:30
@@ -9426,10 +9113,9 @@ msgstr[0] "message"
 msgstr[1] "messages"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-memberentry.tt:449
-#, fuzzy
 msgctxt "gender"
 msgid "Other:"
-msgstr "other"
+msgstr "Other:"
 
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:465
 #: koha-tmpl/opac-tmpl/bootstrap/en/modules/opac-user.tt:483
@@ -9471,6 +9157,10 @@ msgstr ""
 #, fuzzy
 #~ msgid "Koha itemtype"
 #~ msgstr "Koha itemtype"
+
+#, fuzzy, perl-brace-format
+#~ msgid "Overdues at with fines {library}"
+#~ msgstr "Overdues at {library}"
 
 #, fuzzy
 #~ msgctxt "citations"

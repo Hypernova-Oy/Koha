@@ -9,7 +9,7 @@
 [%#- not use an API to fetch items that populates item.datedue. -%]
 
 [% UNLESS item.isa('Koha::Item') %]
- <div>Ohjelmointivirhe, ole hyvä ja ota yhteys kirjastoon ja anna henkilökunnalle seuraava virheilmoitus, "Programming error, item-status.inc must be called with a Koha::Item object."<div>
+ <div>Ohjelmointivirhe, ole hyvä ja ota yhteys kirjastoon ja anna henkilökunnalle seuraava virheilmoitus, "Programming error, item-status.inc must be called with a Koha::Item object".<div>
  [% STOP %]
 [% END %]
 

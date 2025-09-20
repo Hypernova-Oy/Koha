@@ -39,7 +39,7 @@
  <i class="fa fa-fw fa-upload" aria-hidden="true"></i> <span class="tab-title">Lainaus</span>
  [% END %]
  [% WRAPPER tab_item tabname= "checkin_search" %]
- <i class="fa fa-fw fa-download" aria-hidden="true"></i> <span class="tab-title">Palauta</span>
+ <i class="fa fa-fw fa-download" aria-hidden="true"></i> <span class="tab-title">Palautus</span>
  [% END %]
  [% WRAPPER tab_item tabname= "renew_search" %]
  <i class="fa fa-fw fa-retweet" aria-hidden="true"></i> <span class="tab-title">Uusinta</span>

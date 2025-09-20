@@ -1,10 +1,10 @@
 # Compendium of de.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:08-0300\n"
-"PO-Revision-Date: 2025-04-13 03:04+0000\n"
+"PO-Revision-Date: 2025-08-09 03:09+0000\n"
 "Last-Translator: Katrin Fischer <katrin.fischer@bsz-bw.de>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: de-DE\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /de/22.11/de-DE-installer.po\n"
 "X-POOTLE-MTIME: 1693905226.914981\n"
@@ -207,7 +207,7 @@ msgstr "ERM-Bibliothekar*in"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:11
 msgid "Subject specialist"
-msgstr "Themenexperte"
+msgstr "Fachexpert*in"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:12
 msgid "Local"
@@ -258,8 +258,8 @@ msgid "Complete"
 msgstr "Vollständig"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
-msgstr "Vollständig aggregiert"
+msgid "Aggregated full text"
+msgstr "Aggregierter Volltext"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
 msgid "Abstract and index"
@@ -283,7 +283,7 @@ msgstr "Online-Referenz"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:34
 msgid "Print"
-msgstr "Druck"
+msgstr "Drucken"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:35
 msgid "Streaming media"
@@ -339,11 +339,11 @@ msgstr "Abschlussarbeit/Dissertation"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:49
 msgid "Streaming audio"
-msgstr "Streaming-Audio"
+msgstr "Audiostreaming"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:50
 msgid "Streaming video"
-msgstr "Streaming-Video"
+msgstr "Videostreaming"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:51
 msgid "Audiobook"
@@ -367,7 +367,7 @@ msgstr "DR_D1 - Datenbanksuche und Exemplarnutzung"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:56
 msgid "DR_D2 - Database access denied"
-msgstr "DR_D2 - Datenbankzugriff verweigert"
+msgstr "DR_D2 - verweigerte Datenbankzugriffe"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:57
 msgid "TR - Title master report"
@@ -375,11 +375,11 @@ msgstr "TR - Titelmasterbericht"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:58
 msgid "TR_B1 - Book requests (excluding OA_Gold)"
-msgstr "TR_B1 - Buchanfragen (ohne OA_Gold)"
+msgstr "TR_B1 - Buchzugriffe (ohne OA_Gold)"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:59
 msgid "TR_B2 - Book access denied"
-msgstr "TR_B2 - Buchzugang verweigert"
+msgstr "TR_B2 - verweigerte Buchzugriffe"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:60
 msgid "TR_B3 - Book usage by access type"
@@ -391,7 +391,7 @@ msgstr "TR_J1 - Zeitschriftenanfragen (ohne OA_Gold)"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:62
 msgid "TR_J2 - Journal access denied"
-msgstr "TR_J2 - Zeitschriftenzugriff verweigert"
+msgstr "TR_J2 - verweigerte Zeitschriftenzugriffe"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:63
 msgid "TR_J3 - Journal usage by access type"
@@ -411,11 +411,11 @@ msgstr "IR_A1 - Zeitschriftenartikelanfragen"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:67
 msgid "IR_M1 - Multimedia item requests"
-msgstr "IR_M1 - Multimediaanfragen"
+msgstr "IR_M1 - Multimediazugriffe"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:68
 msgid "Searches platform"
-msgstr "Plattform durchsuchen"
+msgstr "Plattformsuchen"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:69
 msgid "Total item investigations"
@@ -455,7 +455,7 @@ msgstr "Reguläre Suchen"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:84
 msgid "No license"
-msgstr "Keine Lizenz"
+msgstr "Ohne Lizenz"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:85
 msgid "Limit exceeded"
@@ -3739,7 +3739,7 @@ msgstr "LibrettistIn"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:81
 msgid "Licensee"
-msgstr "LizenznehmerIn"
+msgstr "Lizenznehmer*in"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:82
 msgid "Licensor"
@@ -3791,7 +3791,7 @@ msgstr "UrheberIn"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:94
 msgid "Other"
-msgstr "Andere"
+msgstr "Sonstiges"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:95
 msgid "Papermaker"
@@ -3827,11 +3827,11 @@ msgstr "VortragendeR"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:103
 msgid "Printer"
-msgstr "DruckerIn"
+msgstr "Drucker*in"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:104
 msgid "Printer of plates"
-msgstr "DruckerIn der Druckformen"
+msgstr "Drucker*in der Druckformen"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:105
 msgid "Producer"
@@ -3919,7 +3919,7 @@ msgstr "SängerIn"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:126
 msgid "Sponsor"
-msgstr "SponsorIn"
+msgstr "Sponsor"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:5:row:127
 msgid "Standards body"
@@ -6055,7 +6055,7 @@ msgstr "Einfache Nummerierungsmethode"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Issue"
-msgstr "Heft"
+msgstr "Ausgabe"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Vol. {X}, Number {Y}, Issue {Z}"
@@ -6063,7 +6063,7 @@ msgstr "Bd. {X}, Nummer {Y}, Heft {Z}"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Volume"
-msgstr "Jahrgang"
+msgstr "Band"
 
 #: installer/data/mysql/en/mandatory/sample_numberpatterns.yml:subscription_numberpatterns:1:row:2
 msgid "Volume Number Issue 1"
@@ -6271,7 +6271,7 @@ msgstr "Zeitschriften"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:5:row:9
 msgid "Magazine"
-msgstr "Zeitschrift"
+msgstr "Publikumszeitschrift"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:5:row:10
 msgid "Bound journal"
@@ -7367,7 +7367,7 @@ msgstr "ProgrammiererIn"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:211
 msgid "Printmaker"
-msgstr "DruckgrafikerIn"
+msgstr "Druckgrafiker*in"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:212
 msgid "Production company"

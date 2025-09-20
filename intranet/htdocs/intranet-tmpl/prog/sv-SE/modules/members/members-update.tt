@@ -23,7 +23,7 @@
 
 [% BLOCK display_names %]
 [% SWITCH field %]
-[% CASE 'branchcode'          %]<span>Hembibliotek (filialkod)</span>
+[% CASE 'branchcode'          %]<span>Hembibliotek (bibliotekskod)</span>
 [% CASE 'surname'             %]<span>Efternamn</span>
 [% CASE 'firstname'           %]<span>Förnamn</span>
 [% CASE 'preferred_name'      %]<span>Föredraget namn</span>

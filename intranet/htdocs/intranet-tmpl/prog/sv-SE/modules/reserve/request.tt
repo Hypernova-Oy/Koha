@@ -1433,7 +1433,6 @@
  [% INCLUDE 'columns_settings.inc' %]
  [% INCLUDE 'select2.inc' %]
  [% Asset.js("js/holds.js") | $raw%]
- [% Asset.js("js/form-submit.js") | $raw%]
 
  [% SET url_biblio_params = "biblionumber=" _ biblionumbers.join("&amp;biblionumber=") %]
  [% IF multi_hold %]
@@ -1691,7 +1690,7 @@
             } else {
                 // Requesting next available
                 if( $("#pickup-next-avail").length < 1 || $("#pickup-next-avail").val() == "" || $('#pickup-next-avail').val() === null ){
-                    msg = _("- Please select a pickup location for this hold") + "\n";
+                    msg = _("- Välj ett avhämtningsbibliotek för den här reservationen") + "\n";
                 }
             }
 
@@ -1723,7 +1722,7 @@
                     }
                 });
                 if ( pickup_not_set > 0 ) {
-                    alert( _("Please make sure all selected titles have a pickup location set") + "\n" );
+                    alert( _("Kontrollera att alla valda titlar har ett avhämtningsbibliotek angivet") + "\n" );
                     return false;
                 }
             }

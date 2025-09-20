@@ -538,7 +538,7 @@
                                     </select>
                                 </td>
                                 [% END %]
-                                <td><input type="text" name="rentaldiscount" id="rentaldiscount" size="2" /></td>
+                                <td><input type="text" name="rentaldiscount" id="rentaldiscount" size="3" inputmode="decimal" pattern="^\d+(\.\d{2})?$" /></td>
                                 [% IF Koha.Preference('UseRecalls') %]
                                     <td><input type="text" name="recalls_allowed" id="recalls_allowed" size="3"></td>
                                     <td><input type="text" name="recalls_per_record" id="recalls_per_record" size="3"></td>
@@ -1543,7 +1543,7 @@
                         // specific processing for the Note column
                         var note = $(this).find("a[id='viewnote']").data("content");
                         $(current_column).find("input[type='text']").val(note);
-                    } else if ( current_input_id === "hardduedatecompare" ) {
+                        } else if (current_input_id === "hardduedate") {
                         // specific processing for Hard due date
                         $(current_column).find("select").val(itm_code);
                         var hardduedate = $(this).data('duedate');

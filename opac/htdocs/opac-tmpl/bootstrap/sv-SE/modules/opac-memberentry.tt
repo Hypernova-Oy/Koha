@@ -234,15 +234,15 @@
  [% IF minlength_cardnumber == maxlength_cardnumber %]
  <input type="text" id="borrower_cardnumber" name="borrower_cardnumber" size="20" value="[% borrower.cardnumber | html %]" minlength="[% minlength_cardnumber | html %]" maxlength="[% maxlength_cardnumber | html %]" class="[% required.cardnumber | html %]" />
  <div class="required_label [% required.cardnumber | html %]">Obligatoriskt</div>
- <div class="hint">Kortnumret måste vara exakt [% minlength_cardnumber | html %] tecken långt.</div>
+ <div class="hint">Kortnummer måste vara exakt [% minlength_cardnumber | html %] tecken.</div>
  [% ELSIF minlength_cardnumber && maxlength_cardnumber %]
  <input type="text" id="borrower_cardnumber" name="borrower_cardnumber" size="20" value="[% borrower.cardnumber | html %]" minlength="[% minlength_cardnumber | html %]" maxlength="[% maxlength_cardnumber | html %]" class="[% required.cardnumber | html %]" />
  <div class="required_label [% required.cardnumber | html %]">Obligatoriskt</div>
- <div class="hint">Kortnumret måste vara mellan [% minlength_cardnumber | html %] och [% maxlength_cardnumber | html %] tecken långt.</div>
+ <div class="hint">Kortnummer måste vara mellan [% minlength_cardnumber | html %] och [% maxlength_cardnumber | html %] tecken.</div>
  [% ELSIF maxlength_cardnumber %]
  <input type="text" id="borrower_cardnumber" name="borrower_cardnumber" size="20" value="[% borrower.cardnumber | html %]" maxlength="[% maxlength_cardnumber | html %]" class="[% required.cardnumber | html %]" />
  <div class="required_label [% required.cardnumber | html %]">Obligatoriskt</div>
- <div class="hint">Max antal tecken för lånekortsnummer är [% maxlength_cardnumber | html %].</div>
+ <div class="hint">Kortnummer kan vara upp till [% maxlength_cardnumber | html %] tecken.</div>
  [% ELSE %]
  <input type="text" id="borrower_cardnumber" name="borrower_cardnumber" size="20" value="[% borrower.cardnumber | html %]" class="[% required.cardnumber | html %]" />
  <div class="required_label [% required.cardnumber | html %]">Obligatoriskt</div>

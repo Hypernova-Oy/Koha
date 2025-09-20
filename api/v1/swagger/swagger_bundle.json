@@ -436,7 +436,7 @@
         "x-mojo-to": "Acquisitions::Baskets#list_managers",
         "operationId": "listBasketsManagers",
         "description": "This resource returns a list of patron allowed to be a manager for baskets",
-        "summary": "List possibe managers for baskets",
+        "summary": "List possible managers for baskets",
         "tags": [
           "baskets"
         ],
@@ -5694,6 +5694,7 @@
               "type": "string",
               "enum": [
                 "+strings",
+                "_status",
                 "home_library",
                 "holding_library",
                 "biblio.title",
@@ -14683,6 +14684,7 @@
               "enum": [
                 "cancellation_requested",
                 "biblio",
+                "deleted_biblio",
                 "pickup_library"
               ]
             },
@@ -20917,6 +20919,7 @@
               "enum": [
                 "cancellation_requested",
                 "biblio",
+                "deleted_biblio",
                 "item",
                 "pickup_library",
                 "pickup_library.branchname"
@@ -30881,7 +30884,10 @@
           "description": "The date the hold was placed"
         },
         "biblio_id": {
-          "type": "integer",
+          "type": [
+            "integer",
+            "null"
+          ],
           "description": "Internal biblio identifier"
         },
         "deleted_biblio_id": {
@@ -31020,6 +31026,13 @@
             "null"
           ],
           "description": "Bibliographic record"
+        },
+        "deleted_biblio": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Deleted bibliographic record"
         },
         "item": {
           "type": [
@@ -32061,6 +32074,13 @@
             "null"
           ],
           "description": "A return claims object if one exists that's unresolved"
+        },
+        "_status": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "The status of the item"
         }
       },
       "additionalProperties": false

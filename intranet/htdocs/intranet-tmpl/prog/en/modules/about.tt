@@ -11,6 +11,11 @@
     [% t("Koha") | html %]
 [% END %]</title>
 [% INCLUDE 'doc-head-close.inc' %]
+<style>
+.version-ellipsis {
+    text-decoration: underline;
+}
+</style>
 </head>
 <body id="about_about" class="about">
 [% INCLUDE 'header.inc' %]
@@ -100,12 +105,14 @@
                 <th scope="row">Apache version: </th>
                 <td>[% apacheVersion | html %]</td>
             </tr>
-            [% IF (is_psgi) %]
                 <tr>
                     <th scope="row">PSGI: </th>
+                [% IF is_psgi %]
                     <td>[% psgi_server | html %]</td>
-                </tr>
+                [% ELSE %]
+                    <td class="error">Koha is running in CGI mode. This is a security issue! Run Koha using Plack for CSRF (cross-site request forgery) protection. More information: <code>koha-plack --help</code></td>
             [% END %]
+            </tr>
             [% IF Koha.Preference('SearchEngine') == 'Elasticsearch' %]
                 <tr>
                     <th scope="row">Elasticsearch: </th>
@@ -204,12 +211,14 @@
             </tr>
             <tr>
                 <th scope="row">Message broker: </th>
-                [% IF warnConnectBroker == 'Error connecting' %]
+                [% IF warnConnectBroker %]
                     <td class="text-bg-warning"><strong>Using SQL polling (Fallback, Error connecting to RabbitMQ)</strong></td>
-                [% ELSIF warnConnectBroker %]
-                    <td class="text-bg-warning"><strong>Using SQL polling</strong></td>
+                [% ELSE %]
+                    [% IF Koha.Preference('JobsNotificationMethod') == 'polling' %]
+                        <td class="text-bg-info">Using SQL polling</td>
                 [% ELSE %]
                     <td class="text-bg-info">Using RabbitMQ</td>
+                [% END %]
                 [% END %]
             </tr>
             <tr>
@@ -808,9 +817,8 @@
         </div>
         [% IF db_audit.diff_found %]
             <div>
-                <p>Run the following SQL to fix the database:</p>
                 <pre>
-                    <code>[% db_audit.diff | $raw %]</code>
+                    <code>[% db_audit.diff | html %]</code>
                 </pre>
             </div>
         [% END %]

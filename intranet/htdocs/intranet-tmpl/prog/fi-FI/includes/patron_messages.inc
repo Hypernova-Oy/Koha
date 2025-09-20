@@ -5,7 +5,7 @@
 [% SET return_claims = patron.return_claims %]
 [% SET logged_in_branchcode = Branches.GetLoggedInBranchcode() %]
 
-[% IF ( has_modifications || warndeparture || returnbeforeexpiry || expired || patron.gonenoaddress || patron.lost || userdebarred || odues || ( return_claims.count > ClaimReturnedWarningThreshold ) || age_limitations || limited_category || charges || charges_guarantors_guarantees || charges_guarantees || credits ) %]
+[% IF ( has_modifications || warndeparture || returnbeforeexpiry || expired || patron.gonenoaddress || patron.lost || userdebarred || odues || ( return_claims.count > ClaimReturnedWarningThreshold ) || age_limitations || limited_category || charges || charges_guarantors_guarantees || charges_guarantees || credits || patron.account_locked ) %]
  <h3>Huomio</h3>
  <ul>
  [% IF ( has_modifications ) %]
@@ -51,6 +51,22 @@
  </li>
  [% END %]
 
+ [% IF patron.account_locked %]
+ <li class="blocker [% patron.login_attempts < 0 ? 'account_admin_locked' : 'account_locked' | html %]">
+ [% IF patron.login_attempts < 0 %]
+ <span class="circ-hlt">Lukittu: </span><span> Tili on lukittu hallinnollisesti</span>
+ [% ELSE %]
+ <span class="circ-hlt">Lukittu: </span><span> Tili on lukittu (johtuen [% patron.login_attempts | html %] epäonnistuneesta kirjautumisyrityksestä)</span>
+ [% END %]
+ [% IF CAN_user_borrowers_edit_borrowers %]
+ <span>
+ <a href="/cgi-bin/koha/members/member-password.pl?member=[% patron.borrowernumber | uri %]">Vaihda salasana</a>
+ <span class="fa fa-info-circle" data-bs-placement="right" data-bs-toggle="tooltip" title="Salasanan vaihtaminen vapauttaa tilin"> </span>
+ </span>
+ [% END %]
+ </li>
+ [% END %]
+
  [% IF ( patron.gonenoaddress ) %]
  <li class="gonenoaddress blocker">
  <span title="Asiakastietoihin on asetettu 'tarkista osoite' -merkintä"><span class="circ-hlt">Osoite:</span> Tarkista osoite</span> <a class="btn btn-default btn-xs" href="/cgi-bin/koha/members/memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | uri %]&amp;step=3#memberentry_account_flags"><i class="fa-solid fa-pencil" aria-hidden="true"></i> Muokkaa</a>
@@ -83,7 +99,7 @@
  [% END %]
  </em><br/>
  [% END %]
- <a class="btn btn-xs btn-default" href="#reldebarments-tab" onclick="$('#reldebarments-tab').click()"><i class="fa fa-ban"></i> Näytä rajoitukset</a>
+ <a class="btn btn-xs btn-default" href="#reldebarments-tab" onclick="(new bootstrap.Tab($('#reldebarments-tab'))).show()"><i class="fa fa-ban"></i> Näytä rajoitukset</a>
  </li> <!-- /.blocker -->
  [% END # /IF userdebarred %]
 
@@ -100,7 +116,7 @@
 
  [% IF age_limitations %]
  <li class="invalid_age">
- <span class="circ-hlt">Asiakkaan ikä on asiakaslajin ikärajan ulkopuolella.</span>
+ <span class="circ-hlt">Asiakkaan ikä ei ole asiakastyypin sallituissa rajoissa.</span>
  Sallittu ikäväli on [% age_low | html %]-[% age_high | html %]. <a href="/cgi-bin/koha/members/memberentry.pl?op=edit_form&amp;borrowernumber=[% patron.borrowernumber | uri %]&amp;step=3" class="btn btn-default btn-xs">Vaihda luokka</a>
  </li>
  [% END %]

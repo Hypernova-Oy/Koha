@@ -39,10 +39,9 @@
  <div class="col-md-10 order-md-2 order-sm1">
  <main>
  [% INCLUDE 'messages.inc' %]
- <h1>Items required for bookings between <span id="from_date">[% from | $KohaDates %]</span> och <span id="to_date">[% to | $KohaDates %]</span></h1>
+ <h1>Exemplar behövs för bokningar mellan <span id="from_date">[% from | $KohaDates %]</span> och <span id="to_date">[% to | $KohaDates %]</span></h1>
  <h2>Rapporterad den [% todaysdate | $KohaDates %]</h2>
- <p>The following items have not been collected for bookings. Please retrieve them
- and check them in.</p>
+ <p>Följande exemplar har inte plockats till bokningar. Var snäll och hämta och återlämna dem.</p>
  <div id="searchresults">
  <table id="bookingst"></table>
  </div>
@@ -89,7 +88,7 @@
  </select>
  </li>
  <li>
- <label for="from">Starts after: </label>
+ <label for="from">Startar efter: </label>
  <input type="text" size="10" id="from" name="from" value="[% from | html %]" class="flatpickr" data-date_to="to"/>
  </li>
  <li>
@@ -234,7 +233,7 @@
                         "render": function(data,type,row,meta) {
                             if ( row.item ) {
                                 if ( row.item.checked_out_date ) {
-                                    return _("On loan, due: ") . $date(row.item.checked_out_date);
+                                    return _("Utlånad, återlämnas: ") + $date(row.item.checked_out_date);
                                 } else {
                                     return row.item._strings.location.str;
                                 }

@@ -27,24 +27,24 @@ tables:
       - '[%- USE KohaDates -%]'
       - Hyvä [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
       - <br>
-      - We regret to inform you, that the following booking has been cancelled.<br>
+      - Valitettavasti käyttövarauksesi on peruutettu.<br>
       - <br>
-      - 'Title: [%- INCLUDE ''biblio-title.inc'' biblio=booking.biblio link = 0 -%]<br>'
+      - 'Nimeke: [%- INCLUDE ''biblio-title.inc'' biblio=booking.biblio link = 0 -%]<br>'
       - <br>
-      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+      - 'Aikaväli: [% booking.start_date | $KohaDates %] - [% booking.end_date | $KohaDates
         %]<br>'
       - <br>
-      - 'Reason: [% booking.cancellation_reason | html %]<br>'
+      - 'Syy: [% booking.cancellation_reason | html %]<br>'
       - <br>
-      - Kind regards<br>
+      - Ystävällisin terveisin<br>
       - <br>
       - '[% booking.pickup_library.branchname %]'
       is_html: 1
       lang: default
       message_transport_type: email
       module: bookings
-      name: Booking cancellation notice
-      title: A library booking was cancelled
+      name: Käyttövarauksen peruutus
+      title: Käyttövaraus peruutettu
     - branchcode: ''
       code: BOOKING_MODIFICATION
       content:
@@ -52,24 +52,24 @@ tables:
       - '[%- USE KohaDates -%]'
       - Hyvä [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
       - <br>
-      - Your booking of [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
-        = 0 -%] has been modified.<br>
+      - Käyttövarauksesi [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
+        = 0 -%] on muutettu.<br>
       - <br>
-      - The new details are:<br>
+      - Uudet tiedot ovat:<br>
       - <br>
-      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+      - 'Aikaväli: [% booking.start_date | $KohaDates %] - [% booking.end_date | $KohaDates
         %]<br>'
       - <br>
-      - 'Pickup at: [% booking.pickup_library.branchname %]<br>'
-      - Kind regards<br>
+      - 'Noutopaikka: [% booking.pickup_library.branchname %]<br>'
+      - Ystävällisin terveisin<br>
       - <br>
       - '[% booking.pickup_library.branchname %]'
       is_html: 1
       lang: default
       message_transport_type: email
       module: bookings
-      name: Booking modification notice
-      title: A library booking was modified
+      name: Käyttövarauksen muutos
+      title: Käyttövarausta muutettu
     - branchcode: ''
       code: BOOKING_CONFIRMATION
       content:
@@ -77,24 +77,24 @@ tables:
       - '[%- USE KohaDates -%]'
       - Hyvä [%- INCLUDE 'patron-title.inc' patron => booking.patron -%],<br>
       - <br>
-      - Your booking of [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
-        = 0 -%] has been confirmed.<br>
+      - Käyttövarauksesi [%- INCLUDE 'biblio-title.inc' biblio=booking.biblio link
+        = 0 -%] on vahvistettu.<br>
       - <br>
-      - The details are:<br>
+      - Tiedot:<br>
       - <br>
-      - 'Dates: [% booking.start_date | $KohaDates %] to [% booking.end_date | $KohaDates
+      - 'Aikaväli: [% booking.start_date | $KohaDates %] - [% booking.end_date | $KohaDates
         %]<br>'
       - <br>
-      - 'Pickup at: [% booking.pickup_library.branchname %]<br>'
-      - Kind regards<br>
+      - 'Noutopaikka: [% booking.pickup_library.branchname %]<br>'
+      - Ystävällisin terveisin<br>
       - <br>
       - '[% booking.pickup_library.branchname %]'
       is_html: 1
       lang: default
       message_transport_type: email
       module: bookings
-      name: Booking confirmation notice
-      title: A library booking was confirmed
+      name: Käyttövarauksen vahvistus
+      title: Käyttövaraus vahvistettu
     - branchcode: ''
       code: TICKET_ACKNOWLEDGE
       content:
@@ -120,22 +120,22 @@ tables:
       - '[%- PROCESS ''html_helpers.inc'' -%]'
       - '[%- USE Koha -%]'
       - Hyvä kuvailija,<br>
-      - '[%- INCLUDE ''patron-title.inc'' patron => librarian -%] has assigned the
-        following concern with <a href=''[%- Koha.Preference(''staffClientBaseURL'')
+      - '[%- INCLUDE ''patron-title.inc'' patron => librarian -%] antoi seuraavan
+        kuvailutietojen virheen <a href=''[%- Koha.Preference(''staffClientBaseURL'')
         -%]/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% ticket.biblio.biblionumber
         %]'' >[%- INCLUDE ''biblio-title.inc'' biblio=ticket.biblio link = 0 -%]</a>
-        to you<br>'
+        sinun ratkaistavaksi<br>'
       - <br>
       - '[%- ticket.body -%]<br>'
       - <br>
-      - You can action this concern from the <a href='[%- Koha.Preference('staffClientBaseURL')
-        -%]/cgi-bin/koha/cataloguing/concerns.pl'>concern management page</a>.
+      - Voit käsitellä virheilmoitusta <a href='[%- Koha.Preference('staffClientBaseURL')
+        -%]/cgi-bin/koha/cataloguing/concerns.pl'>virheilmoitusten käsittelysivulla</a>.
       is_html: 1
       lang: default
       message_transport_type: email
       module: catalogue
-      name: Concern assigned notification
-      title: Catalog concern assigned
+      name: Ilmoitus kuvailuvirheen vastuutuksesta
+      title: Kuvailutietojen virheilmoitus vastuutettu
     - branchcode: ''
       code: TICKET_RESOLVE
       content:
@@ -440,9 +440,9 @@ tables:
       code: ACCOUNT_WRITEOFF
       content:
       - '[%- USE Price -%]'
-      - Maksuistasi on poistettu summa [% credit.amount * -1 | $Price %].
+      - Maksuihisi on tehty [% credit.amount * -1 | $Price %] hyvitys.
       - ''
-      - 'Poisto vaikuttaa seuraaviin maksuihin:'
+      - 'Hyvitys vaikuttaa seuraaviin maksuihin:'
       - '[%- FOREACH o IN offsets %]'
       - 'Kuvaus: [% o.debit.description %]'
       - 'Maksettu määrä: [% o.amount * -1 | $Price %]'
@@ -452,8 +452,8 @@ tables:
       lang: default
       message_transport_type: email
       module: circulation
-      name: Käyttäjätilin poistaminen
-      title: Käyttäjätilin poistaminen
+      name: Maksu hyvitetty
+      title: Maksu hyvitetty
     - branchcode: ''
       code: AR_CANCELED
       content:
@@ -642,7 +642,7 @@ tables:
       lang: default
       message_transport_type: email
       module: circulation
-      name: Palautuskuitti (yhteenveto)
+      name: Palautusilmoitus (yhteenveto)
       title: Palautukset
     - branchcode: ''
       code: CHECKIN
@@ -656,7 +656,7 @@ tables:
       lang: default
       message_transport_type: sms
       module: circulation
-      name: Palautuskuitti (yhteenveto)
+      name: Palautusilmoitus (yhteenveto)
       title: Palautukset
     - branchcode: ''
       code: CHECKOUT
@@ -670,7 +670,7 @@ tables:
       lang: default
       message_transport_type: email
       module: circulation
-      name: Lainauskuitti (yhteenveto)
+      name: Lainausilmoitus (yhteenveto)
       title: Lainat
     - branchcode: ''
       code: CHECKOUT
@@ -684,7 +684,7 @@ tables:
       lang: default
       message_transport_type: sms
       module: circulation
-      name: Lainauskuitti (yhteenveto)
+      name: Lainausilmoitus (yhteenveto)
       title: Lainat
     - branchcode: ''
       code: CHECKOUT_NOTE
@@ -988,14 +988,14 @@ tables:
       content:
       - 'Kiertokokoelmaraportti kohteelle [% branch.name %]:'
       - ''
-      - '[% IF branch.items.size %][% branch.items.size %] tälle kirjastolle käsiteltävät
-        niteet.'
+      - '[% IF branch.items.size %][% branch.items.size %] kpl tälle kirjastolle käsiteltäviä
+        niteitä.'
       - '[% ELSE %]Tälle kirjastolle ei ole käsiteltäviä niteitä'
       - '[% END %][% FOREACH item IN branch.items %][% IF item.reason != ''in-demand''
         %]Nimeke: [% item.title %]'
       - 'Tekijä: [% item.author %]'
       - 'Luokka: [% item.callnumber %]'
-      - 'Hyllypaikka: [% item.location %]'
+      - 'Sijainti: [% item.location %]'
       - 'Viivakoodi: [% item.barcode %]'
       - 'Lainassa?: [% item.onloan %]'
       - 'Tila: [% item.reason %]'
@@ -1045,30 +1045,30 @@ tables:
       lang: default
       message_transport_type: email
       module: claimacquisition
-      name: Hankintavaatimus
+      name: Hankinnan reklamaatio
       title: Nidettä ei vastaanotettu
     - branchcode: ''
       code: SFTP_FAILURE
       content:
-      - 'SFTP upload failed:'
+      - 'SFTP-siirto epäonnistui:'
       - ''
       - <<sftp_status>>
       is_html: 0
       lang: default
       message_transport_type: email
       module: commandline
-      name: File SFTP failed
-      title: The SFTP by sftp_file.pl failed
+      name: Tiedosto SFTP epäonnistui
+      title: SFTP sftp_file.pl:llä epäonnistui
     - branchcode: ''
       code: SFTP_SUCCESS
       content:
-      - SFTP upload succeeded
+      - SFTP-siirto onnistui
       is_html: 0
       lang: default
       message_transport_type: email
       module: commandline
-      name: File SFTP success
-      title: The SFTP by sftp_file.pl was successful
+      name: Onnistunut tiedoston SFTP-siirto
+      title: sftp_file.pl:n suorittama SFTP-siirto onnistui
     - branchcode: ''
       code: ILL_PICKUP_READY
       content:
@@ -1408,20 +1408,20 @@ tables:
       content:
       - Hyvä [%- INCLUDE 'patron-title.inc' patron => owner -%],<br>
       - <br>
-      - A public list, titled <em>[% shelf.shelfname | html %]</em>, has been transferred
-        to you[% IF ( librarian ) %] by [%- INCLUDE 'patron-title.inc' patron => librarian
+      - Julkinen lista <em>[% shelf.shelfname | html %]</em> on siirretty sinulle[%
+        IF ( librarian ) %] käyttäjältä [%- INCLUDE 'patron-title.inc' patron => librarian
         %][% END %].<br>
       - <br>
-      - '[% IF old_owner %]The list was previously owned by [%- INCLUDE ''patron-title.inc''
+      - '[% IF old_owner %]Listan omisti aiemmin [%- INCLUDE ''patron-title.inc''
         patron => old_owner -%].<br><br>[% END %]'
-      - Thank you<br>
+      - Kiitos<br>
       - <br>
       is_html: 1
       lang: default
       message_transport_type: email
       module: lists
-      name: Transfer ownership
-      title: A list has been transferred to you
+      name: Listan omistajan muutos
+      title: Lista on siirretty sinulle
     - branchcode: ''
       code: DISCHARGE
       content:
@@ -1503,7 +1503,7 @@ tables:
       content:
       - Hyvä [% borrower.firstname %] [% borrower.surname %],
       - ''
-      - Salasanasi on muuttunut, jos en muuttanut salasanaasi itse (tai pyytänyt kirjastosta
+      - Salasanasi on muuttunut. Jos et muuttanut salasanaasi itse (tai pyytänyt kirjastosta
         sen muuttamista), ole yhteydessä kirjastoon.
       - ''
       - Kirjastosi.
@@ -1542,7 +1542,7 @@ tables:
       - 'Luo uusi salasana tämän linkin kautta:'
       - <br><a href="<<passwordreseturl>>"><<passwordreseturl>></a>
       - </p>
-      - <p>Tämä linkki on voimassa viisi päivää vistin saapumisesta. Ellet vaihda
+      - <p>Tämä linkki on voimassa viisi päivää viestin saapumisesta. Ellet vaihda
         salasanaa sinä aikana, sinun pitää hakea sitä uudelleen.</p>
       - <p>Kiitos.</p>
       is_html: 1
@@ -1586,7 +1586,7 @@ tables:
       lang: default
       message_transport_type: email
       module: members
-      name: Kaksivaiheisen tunnistuksen vaihe
+      name: Kaksivaiheisen tunnistautumisen koodi
       title: Kaksivaiheinen tunnistus
     - branchcode: ''
       code: ACCOUNTS_SUMMARY
@@ -1882,7 +1882,7 @@ tables:
       - 'Otsikko: [% biblio.title %]'
       - 'Tekijä: [% biblio.author %]'
       - 'Kopion numero: [% item.copynumber %]'
-      - 'Hyllypaikka: [% branch.branchname %]'
+      - 'Sijainti: [% branch.branchname %]'
       is_html: 0
       lang: default
       message_transport_type: email
@@ -1899,7 +1899,7 @@ tables:
       - 'Otsikko: [% biblio.title %]'
       - 'Tekijä: [% biblio.author %]'
       - 'Kopion numero: [% item.copynumber %]'
-      - 'Hyllypaikka: [% branch.branchname %]'
+      - 'Sijainti: [% branch.branchname %]'
       - '[% branch.branchaddress1 %]'
       - '[% branch.branchaddress2 %]'
       - '[% branch.branchaddress3 %]'
@@ -2106,7 +2106,7 @@ tables:
       lang: default
       message_transport_type: email
       module: suggestions
-      name: Ehdotus hyväksytty
+      name: Hankintaehdotus hyväksytty
       title: Hankintaehdotus hyväksytty
     - branchcode: ''
       code: AVAILABLE
@@ -2295,7 +2295,7 @@ tables:
       - '[% ELSIF checkout.auto_renew_error == ''too_unseen'' %]'
       - Tämä nide täytyy uusia kirjastossa.
       - '[% ELSIF checkout.auto_renew_error == ''auto_account_expired'' %]'
-      - Kirjastokortti on vanhentunut.
+      - Asiakastilisi on vanhentunut.
       - '[% END %]'
       - '[% ELSE %]'
       - Seuraava nide, [% biblio.title %], on uusittu oikein ja erääntyy nyt [% checkout.date_due
@@ -2480,8 +2480,8 @@ tables:
       lang: default
       message_transport_type: email
       module: members
-      name: Vahvistetaan kaksivaiheisen todennuksen käytöstäpoisto
-      title: Vahvistetaan kaksivaiheisen todennuksen käytöstäpoisto
+      name: Kaksivaiheinen tunnistautuminen poistettu käytöstä
+      title: Kaksivaiheinen tunnistautuminen poistettu käytöstä
     - branchcode: ''
       code: 2FA_ENABLE
       content:
@@ -2494,8 +2494,8 @@ tables:
       lang: default
       message_transport_type: email
       module: members
-      name: Vahvistetaan kaksivaiheisen todennuksen käyttöönotto
-      title: Vahvistetaan kaksivaiheisen todennuksen käyttöönotto
+      name: Kaksivaiheinen tunnistautuminen otettu käyttöön
+      title: Kaksivaiheinen tunnistautuminen otettu käyttöön
     - branchcode: ''
       code: OPAC_REG
       content:
@@ -2699,25 +2699,25 @@ tables:
     - branchcode: ''
       code: OAI_HARVEST_REPORT
       content:
-      - 'OAI harvest report for [% servername %]:'
+      - 'OAI-haravoinnin raportti palvelimelle [% servername %]:'
       - ''
-      - 'Endpoint: [% endpoint %]'
-      - 'Set: [% set %]'
-      - 'Data format: [% dataformat %]'
-      - 'Record type: [% recordtype %]'
+      - 'Päätepiste: [% endpoint %]'
+      - 'Setti: [% set %]'
+      - 'Tiedon tallennusmuoto: [% dataformat %]'
+      - 'Tietuetyyppi: [% recordtype %]'
       - ''
-      - '[% added %] records added'
-      - '[% updated %] records updated'
-      - '[% deleted %] records deleted'
-      - '[% skipped %] records skipped'
-      - '[% in_error %] records in error'
-      - '[% total %] total'
+      - '[% added %] tietuetta lisätty'
+      - '[% updated %] tietuetta päivitetty'
+      - '[% deleted %] tietuetta poistettu'
+      - '[% skipped %] tietuetta ohitettu'
+      - '[% in_error %] tietuetta virheellisiä'
+      - '[% total %] yhteensä'
       is_html: 0
       lang: default
       message_transport_type: email
       module: catalogue
-      name: OAI harvest report
-      title: OAI harvest report for [% servername %]
+      name: OAI-haravoinnin raportti
+      title: OAI-haravoinnin raportti palvelimelle [% servername %]
     translatable:
     - name
     - title

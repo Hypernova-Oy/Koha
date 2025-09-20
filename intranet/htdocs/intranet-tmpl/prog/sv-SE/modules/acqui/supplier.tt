@@ -63,7 +63,7 @@
  </div>
  <div>
  <fieldset class="rows">
- <legend>Periodikaalternativ</legend>
+ <legend>Alternativ för prenumerationer</legend>
  <ol class="radio">
  <li>
  <label>
@@ -115,7 +115,7 @@
  <li><span class="label"></span> <i class="fa fa-check"></i> Primär inköpskontakt</li>
  [% END %]
  [% IF ( contact.orderacquisition ) %]
- <li><span class="label"></span> <i class="fa fa-check"></i> Markera beställningar som mottagna</li>
+ <li><span class="label"></span> <i class="fa fa-check"></i> Tar emot beställningar</li>
  [% END %]
  [% IF ( contact.claimacquisition ) %]
  <li><span class="label"></span> <i class="fa fa-check"></i> Tar emot reklamationer för sena beställningar</li>
@@ -220,7 +220,7 @@
 
  <input type="hidden" name="booksellerid" value="[% booksellerid | html %]" />
  <fieldset class="rows">
- <legend>Företagsinformation</legend>
+ <legend>Information om leverantör</legend>
  <ol><li><label for="company" class="required">Namn:</label>
  <input type="text" size="40" id="company" name="company" value="[% name | html %]" required="required" class="required focus" /><span class="required">Obligatoriskt</span></li>
  <li><label for="company_postal">Postadress: </label>
@@ -266,7 +266,7 @@
  </fieldset>
 
  <fieldset class="rows">
- <legend>Beställningsinformation</legend>
+ <legend>Orderinformation</legend>
  <ol><li><label for="activestatus">Leverantör är:</label>
  [% IF ( active ) %]
  <input type="radio" id="activestatus" name="status" value="1" checked="checked" />
@@ -316,27 +316,27 @@
 
  <li><label for="list_gstyes">Listpriser:</label>
  [% IF ( listincgst ) %]
- <label class="radio" for="list_gstyes">Inkludera skatt</label>
+ <label class="radio" for="list_gstyes">Inklusive moms</label>
  <input type="radio" id="list_gstyes" name="list_gst" value="1" checked="checked" />
- <label class="radio" for="list_gstno">Inkludera inte skatt</label>
+ <label class="radio" for="list_gstno">Exklusive moms</label>
  <input type="radio" id="list_gstno" name="list_gst" value="0" />
  [% ELSE %]
- <label class="radio" for="list_gstyes">Inkludera skatt</label>
+ <label class="radio" for="list_gstyes">Inklusive moms</label>
  <input type="radio" id="list_gstyes" name="list_gst" value="1" />
- <label class="radio" for="list_gstno">Inkludera inte skatt</label>
+ <label class="radio" for="list_gstno">Exklusive moms</label>
  <input type="radio" id="list_gstno" name="list_gst" value="0" checked="checked" />
  [% END %]</li>
 
  <li><label for="invoice_gstyes">Fakturapriser:</label>
  [% IF ( invoiceincgst ) %]
- <label class="radio" for="invoice_gstyes">Inkludera skatt</label>
+ <label class="radio" for="invoice_gstyes">Inklusive moms</label>
  <input type="radio" id="invoice_gstyes" name="invoice_gst" value="1" checked="checked" />
- <label class="radio" for="invoice_gstno">Inkludera inte skatt</label>
+ <label class="radio" for="invoice_gstno">Exklusive moms</label>
  <input type="radio" id="invoice_gstno" name="invoice_gst" value="0" />
  [% ELSE %]
- <label class="radio" for="invoice_gstyes">Inkludera skatt</label>
+ <label class="radio" for="invoice_gstyes">Inklusive moms</label>
  <input type="radio" id="invoice_gstyes" name="invoice_gst" value="1" />
- <label class="radio" for="invoice_gstno">Inkludera inte skatt</label>
+ <label class="radio" for="invoice_gstno">Exklusive moms</label>
  <input type="radio" id="invoice_gstno" name="invoice_gst" value="0" checked="checked" />
  [% END %]</li>
 
@@ -372,7 +372,7 @@
  <div class="row">
  <div class="col">
  <div id="supplier-company-details" class="page-section rows">
- <h2>Leverantörsinformation</h2>
+ <h2>Leverantörsuppgifter</h2>
  <ol>
  <li>
  <span class="label">Typ: </span>
@@ -403,7 +403,7 @@
  </div> <!-- /#supplier-company-details -->
 
  <div id="supplier-ordering-information" class="page-section rows">
- <h2>Beställningsinformation</h2>
+ <h2>Orderinformation</h2>
  <li><span class="label">Leverantör är: </span>[% IF ( active ) %]Aktiv[% ELSE %]Inaktiv[% END %]</li>
  <li><span class="label">Listpriser är: </span>[% listprice | html %]</li>
  <li><span class="label">Fakturapriser är: </span>[% invoiceprice | html %]</li>

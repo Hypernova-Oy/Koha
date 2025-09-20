@@ -22,7 +22,7 @@ Web services:
               choices:
                   1: Enable
                   0: "Disable"
-            - "the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
+            - "the OAuth2 client credentials grant for the REST API."
         -
             - pref: RESTPublicAnonymousRequests
               choices:
@@ -108,7 +108,7 @@ Web services:
             - Allow only IP addresses
             - pref: ILS-DI:AuthorizedIPs
               class: Text
-            - to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0:0:0:0/0' or '::/0' to allow any IP.
+            - to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP.
     Mana KB:
         -
             - pref: Mana

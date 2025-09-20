@@ -93,7 +93,7 @@
  </div>
 
  <div class="rep_inactive">
- <h2>Ei käytössä</h2>
+ <h2>Epäaktiivinen</h2>
  <ul>
  <li><a href="/cgi-bin/koha/reports/borrowers_out.pl">Asiakkaat, jotka eivät ole lainanneet</a></li>
  <li><a href="/cgi-bin/koha/reports/catalogue_out.pl">Niteet, joita ei ole lainattu</a></li>
@@ -104,7 +104,7 @@
  <h2>Muu</h2>
  <ul>
  <li><a href="/cgi-bin/koha/reports/itemslost.pl">Kadonneet niteet</a></li>
- <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Tilauksia tilin mukaan</a></li>
+ <li><a href="/cgi-bin/koha/reports/orders_by_fund.pl">Tilaukset tilin mukaan</a></li>
  <li><a href="/cgi-bin/koha/reports/catalog_by_itemtype.pl">Luettelo aineistoittain</a></li>
  <li><a href="/cgi-bin/koha/reports/issues_avg_stats.pl">Keskimääräinen laina-aika</a></li>
  [% SET koha_version = Koha.Version %]

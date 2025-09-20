@@ -69,7 +69,7 @@
  <iframe class="notice" id="notice[% QUEUED_MESSAGE.message_id | html %]" srcdoc="[% QUEUED_MESSAGE.html_content | html %]"></iframe>
  </td>
  <td>
- [% IF ( QUEUED_MESSAGE.message_transport_type == 'email' ) %]<span>sähköposti</span>
+ [% IF ( QUEUED_MESSAGE.message_transport_type == 'email' ) %]<span>email</span>
  [% ELSIF ( QUEUED_MESSAGE.message_transport_type == 'print' ) %]<span>tuloste</span>
  [% ELSIF ( QUEUED_MESSAGE.message_transport_type == 'feed' ) %]<span>syöte</span>
  [% ELSIF ( QUEUED_MESSAGE.message_transport_type == 'sms' ) %]<span>tekstiviesti</span>
@@ -107,17 +107,17 @@
  [% ELSIF ( QUEUED_MESSAGE.failure_code == 'SENDMAIL' ) %]<span class="clearfix">Käsittelemätön sähköpostivirhe, tarkista lisätiedot lokeista</span>
  [% ELSIF ( QUEUED_MESSAGE.failure_code == "UNKNOWN_ERROR" ) %]<span class="clearfix">Tuntematon virhe</span>
  [% ELSE %]
- <span class="clearfix">Viestin lähetys epäonnistui seuraavan virheen vuoksi: [% QUEUED_MESSAGE.failure_code | html %].</span>
+ <span class="clearfix">Viestin lähetys epäonnistui seuraavan virheen vuoksi: [% QUEUED_MESSAGE.failure_code | html %]</span>
  [% END %]
  [% END %]
  [% IF ( QUEUED_MESSAGE.status == 'sent' ) %]
- [% IF ( QUEUED_MESSAGE.from_address ) %]
+ [% IF ( QUEUED_MESSAGE.from_address && QUEUED_MESSAGE.message_transport_type != 'print') %]
  <span class="clearfix"><span class="label">Alkaen:</span> [% QUEUED_MESSAGE.from_address | html %]</span>
  [% END %]
- [% IF ( QUEUED_MESSAGE.to_address ) %]
+ [% IF ( QUEUED_MESSAGE.to_address && QUEUED_MESSAGE.message_transport_type != 'print') %]
  <span class="clearfix"><span class="label">Saakka:</span> [% QUEUED_MESSAGE.to_address | html %]</span>
  [% END %]
- [% IF ( QUEUED_MESSAGE.cc_address ) %]
+ [% IF ( QUEUED_MESSAGE.cc_address && QUEUED_MESSAGE.message_transport_type != 'print') %]
  <span class="clearfix"><span class="label">CC:</span> [% QUEUED_MESSAGE.cc_address | html %]</span>
  [% END %]
  [% END %]

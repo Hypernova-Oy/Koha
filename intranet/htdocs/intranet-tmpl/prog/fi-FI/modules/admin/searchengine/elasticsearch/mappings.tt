@@ -174,9 +174,9 @@ a.add, a.delete {
  <option value="string">Merkkijono</option>
  [% END %]
  [% IF search_field.type == "date" %]
- <option value="date" selected="selected">Pvm</option>
+ <option value="date" selected="selected">Päivämäärä</option>
  [% ELSE %]
- <option value="date">Pvm</option>
+ <option value="date">Päivämäärä</option>
  [% END %]
  [% IF search_field.type == "year" %]
  <option value="year" selected="selected">Vuosi</option>
@@ -204,9 +204,9 @@ a.add, a.delete {
  <option value="isbn">ISBN</option>
  [% END %]
  [% IF search_field.type == "stdno" %]
- <option value="stdno" selected="selected">Identifier</option>
+ <option value="stdno" selected="selected">Tunniste</option>
  [% ELSE %]
- <option value="stdno">Identifier</option>
+ <option value="stdno">Tunniste</option>
  [% END %]
  [% IF search_field.type == "callnumber" %]
  <option value="callnumber" selected="selected">Luokka</option>
@@ -272,13 +272,13 @@ a.add, a.delete {
  <select data-id="search_field_type">
  <option value="">Oletus</option>
  <option value="string">Merkkijono</option>
- <option value="date">Pvm</option>
+ <option value="date">Päivämäärä</option>
  <option value="year">Vuosi</option>
  <option value="number">Numero</option>
  <option value="boolean">Boolean</option>
  <option value="sum">Summa</option>
  <option value="isbn">ISBN</option>
- <option value="stdno">Identifierr</option>
+ <option value="stdno">Tunniste</option>
  <option value="callnumber">Luokka</option>
  <option value="geo_point">Maantieteellinen piste</option>
  </select>
@@ -470,7 +470,7 @@ a.add, a.delete {
 
  [% IF index.index_name == 'biblios' %]
  <h3>Fasettien järjestys</h3>
- <div class="hint">Raahaa ja pudota muuttaaksesi rivien järjestystä.</div>
+ <div class="hint">Raahaa ja pudota muuttaaksesi rivien järjestystä</div>
  <div id="facet_[% index.index_name | html %]">
  <table id="facet_[% index.index_name | html %]_table" style="max-width: 50%; margin: 0;">
  <thead>

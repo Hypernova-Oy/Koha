@@ -1,10 +1,10 @@
 # Compendium of el.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:09-0300\n"
-"PO-Revision-Date: 2025-04-16 03:05+0000\n"
+"PO-Revision-Date: 2025-06-26 03:09+0000\n"
 "Last-Translator: Eugenios Papadopoulos <eugenios.papadopoulos@gmail.com>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: el-GR\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8-bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /el/22.11/el-GR-pref.po\n"
 "X-POOTLE-MTIME: 1687174624.203494\n"
@@ -2156,18 +2156,51 @@ msgstr "Χρήση"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "Χρήση του"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr ""
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 msgstr "για παράδειγμα <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "εάν μείνει κενό, χρησιμοποιείται η τεκμηρίωση στο http://loc.gov (MARC21) ή στο http://archive.ifla.org (UNIMARC)."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "Χρήση του"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "πιθανές αντικαταστάσεις είναι <tt>{MARC}</tt> ( είδος marc , π.χ. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (αριθμός πεδίου, π.χ. \"000\" ή \"048\"), <tt>{LANG}</tt> (γλώσσα χρήστη, π.χ. \"en\" ή \"fi-FI\")."
+#, fuzzy
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "Χρήση του"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -3492,9 +3525,8 @@ msgstr "circulation.pref#ArticleRequestsMandatoryFields# Ημερομηνία"
 
 # Circulation > Article requests > ArticleRequestsSupportedFormats
 # Circulation > Article Requests
-#, fuzzy
 msgid "circulation.pref#ArticleRequestsSupportedFormats# The first listed format is selected by default when you request via the OPAC."
-msgstr "Η ακόλουθη μορφή αιτήματος άρθρου είναι υποστηριζόμενη:"
+msgstr "Η πρώτη καταχωρημένη μορφή επιλέγεται αυτόματα όταν κάνετε αίτηση μέσω του OPAC."
 
 # Circulation > Article requests > ArticleRequestsSupportedFormats
 # Circulation > Article Requests
@@ -6116,7 +6148,8 @@ msgstr ""
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+#, fuzzy
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - προκαλεί σε αντίτυπο που βρίσκεται στο κέντρο επεξεργασίας την ενημέρωση της μόνιμης τοποθεσίας του.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6171,9 +6204,11 @@ msgstr ""
 msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: FIC - causes an item in the Processing Center location to be updated into the Fiction location on check out.<br/>"
 msgstr ""
 
-# Circulation > Checkin policy > UpdateItemLocationOnCheckout
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
-msgstr ""
+# Circulation > Checkin policy > UpdateItemLocationOnCheckin
+# Circulation > Checkin policy
+#, fuzzy
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
+msgstr "PROC: _PERM_ - προκαλεί σε αντίτυπο που βρίσκεται στο κέντρο επεξεργασίας την ενημέρωση της μόνιμης τοποθεσίας του.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckout
 msgid "circulation.pref#UpdateItemLocationOnCheckout# The special term _ALL_ is used on the left side of the colon (:) to affect all items, <strong>and overrides all other rules.</strong>"
@@ -9271,7 +9306,7 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "στις πληροφορίες πρόσκτησης στη σελίδα της εγγραφής στον OPAC."
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
 msgstr ""
 
 # OPAC > Features > OPACAuthorIdentifiers
@@ -9375,6 +9410,22 @@ msgstr "ενεργοποίηστε"
 #, fuzzy
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "στις πληροφορίες πρόσκτησης στη σελίδα της εγγραφής στον OPAC."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "Να επιτρέπεται"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+#, fuzzy
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "Να μην επιτρέπεται"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr ""
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # Patrons > General > AutoApprovePatronProfileSettings
@@ -11842,27 +11893,32 @@ msgstr "Ενεργοποιήστε μια προειδοποίηση εάν το
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "ημέρες πριν."
 
-# Patrons > Patron relationships > PrefillGuaranteeField
-# Patrons > Patron relationships
-#, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "επαφή - Fax"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr ""
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "ένα κηδεμόνα κατά τη προσθήκη μέλους."
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+#, fuzzy
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
 msgstr "ένα κηδεμόνα κατά τη προσθήκη μέλους."
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
 msgstr "Να μην αποστέλλεται"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron relationships
 #, fuzzy
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
 msgstr "επαφή - Fax"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
@@ -15093,12 +15149,14 @@ msgstr "των υπηρεσιών ILS-DI για τους χρήστες του O
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
 msgstr "Να επιτρέπεται στις IP διευθύνσεις"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
+#, fuzzy
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
 msgstr "να χρησιμοποιούν τις υπηρεσίες ILS-DI (όταν είναι ενεργοποιημένες). Διαχωρίστε τις διευθύνσεις IP με κόμμα και χωρίς διάστημα. Αφήστε το πεδίο κενό για να επιτρέπεται οποιαδήποτε διεύθυνση IP."
 
 # Web services > IdRef > IdRef
@@ -15357,8 +15415,10 @@ msgid "web_services.pref#RESTOAuth2ClientCredentials# Enable"
 msgstr "Απενεργοποίηση"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
-msgstr ""
+# Web services > REST API
+#, fuzzy
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
+msgstr "Απενεργοποίηση"
 
 # Web services > REST API > RESTPublicAPI
 # Web services > ILS-DI
@@ -16411,6 +16471,16 @@ msgstr "σειρές από μια αιτούμενη αναφορά μέσω τ
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "να δημιουργούνται αυτόματα νέες εγγραφές καθιερωμένων όρων αν χρειάζεται, αντί να πρέπει να αναφέρονται υπάρχουσες εγγραφές."
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "εάν μείνει κενό, χρησιμοποιείται η τεκμηρίωση στο http://loc.gov (MARC21) ή στο http://archive.ifla.org (UNIMARC)."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "πιθανές αντικαταστάσεις είναι <tt>{MARC}</tt> ( είδος marc , π.χ. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (αριθμός πεδίου, π.χ. \"000\" ή \"048\"), <tt>{LANG}</tt> (γλώσσα χρήστη, π.χ. \"en\" ή \"fi-FI\")."
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #, fuzzy
@@ -16647,6 +16717,12 @@ msgstr "σειρές από μια αιτούμενη αναφορά μέσω τ
 # Patrons > Notices and notifications
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "της δουλειάς το"
+
+# Patrons > Patron relationships > PrefillGuaranteeField
+# Patrons > Patron relationships
+#, fuzzy
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "επαφή - Fax"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

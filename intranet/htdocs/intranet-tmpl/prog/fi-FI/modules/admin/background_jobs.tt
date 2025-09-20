@@ -153,7 +153,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% Asset.js("js/admin-menu.js") | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
  [% INCLUDE 'js-date-format.inc' %]
  [% INCLUDE 'datatables.inc' %]
  <script>
@@ -176,68 +175,74 @@
         const job_types = [
             {
                 '_id': 'batch_biblio_record_modification',
-                '_str': _("Tietueiden muokkaus eräajona")
+                '_str': _("Tietueiden muokkaus eräajona").escapeHtml()
             },
             {
                 '_id': 'batch_biblio_record_deletion',
-                '_str': _("Tietueiden poisto eräajona")
+                '_str': _("Tietueiden poisto eräajona").escapeHtml()
             },
             {
                 '_id': 'batch_authority_record_modification',
-                '_str': _("Auktoriteettitietueen muokkaus eräajona")
+                '_str': _("Auktoriteettitietueen muokkaus eräajona").escapeHtml()
             },
             {
                 '_id': 'batch_authority_record_deletion',
-                '_str': _("Auktoriteettitietueen poisto eräajona")
+                '_str': _("Auktoriteettitietueen poisto eräajona").escapeHtml()
             },
             {
                 '_id': 'batch_item_record_modification',
-                '_str': _("Niteiden muokkaus eräajona")
+                '_str': _("Niteiden muokkaus eräajona").escapeHtml()
             },
             {
                 '_id': 'batch_item_record_deletion',
-                '_str': _("Niteiden poisto eräajona")
+                '_str': _("Niteiden poisto eräajona").escapeHtml()
             },
             {
                 '_id': 'erm_sushi_harvester',
-                '_str': _("ERM-käyttäjätilastojen SUSHI-haravoija")
+                '_str': _("ERM-käyttäjätilastojen SUSHI-haravoija").escapeHtml()
             },
             {
                 '_id': 'batch_hold_cancel',
-                '_str': _("Varausten peruutus eräajona")
+                '_str': _("Varausten peruutus eräajona").escapeHtml()
             },
             {
                 '_id': 'pseudonymize_statistic',
-                '_str': _("Pseudonymisoi tilastot")
+                '_str': _("Pseudonymisoi tilastot").escapeHtml()
             },
             {
                 '_id': 'create_eholdings_from_biblios',
-                '_str': _("Luo eKokoelma nimekkeet")
+                '_str': _("Luo eKokoelma nimekkeet").escapeHtml()
             },
             {
                 '_id': 'update_elastic_index',
-                '_str': _("Päivitä Elasticsearch indeksi")
+                '_str': _("Päivitä Elasticsearch indeksi").escapeHtml()
             },
             {
                 '_id': 'update_holds_queue_for_biblios',
-                '_str': _("Varausjono päivitetty")
+                '_str': _("Varausjono päivitetty").escapeHtml()
             },
             {
                 '_id': 'stage_marc_for_import',
-                '_str': _("Välivarastoitujen MARC-tietueiden hallinta")
+                '_str': _("Välivarastoitujen MARC-tietueiden hallinta").escapeHtml()
             },
             {
                 '_id': 'marc_import_commit_batch',
-                '_str': _("Tuo MARC-tietueita")
+                '_str': _("Tuo MARC-tietueita").escapeHtml()
             },
             {
                 '_id': 'marc_import_revert_batch',
-                '_str': _("Peruuta tietueiden tuonti")
+                '_str': _("Peruuta tietueiden tuonti").escapeHtml()
             },
             {
                 '_id': 'import_from_kbart_file',
-                '_str': _("Tuo nimekkeitä KBART-tiedostosta")
+                '_str': _("Tuo nimekkeitä KBART-tiedostosta").escapeHtml()
             },
+            [% FOR job_type IN plugin_job_types %]
+            {
+                '_id': '[% job_type.id | html %]',
+                '_str': '[% job_type.str | html_entity %]'
+            },
+            [% END %]
         ];
 
         function get_job_type (job_type) {
@@ -295,7 +300,7 @@
                         "searchable": true,
                         "orderable": true,
                         "render": function(data, type, row, meta) {
-                            return get_job_type(row.type).escapeHtml();
+                            return get_job_type(row.type);
                         }
                     },
                     {

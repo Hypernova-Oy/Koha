@@ -85,7 +85,7 @@
  [% ELSIF ar.status == 'PROCESSING' %]
  <span>Bearbetar</span>
  [% ELSIF ar.status == 'COMPLETED' %]
- <span>Klar</span>
+ <span>Avslutad</span>
  [% ELSIF ar.status == 'CANCELED' %]
  <span>Borttagen</span>
  [% END %]

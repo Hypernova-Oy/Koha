@@ -34,7 +34,7 @@
  <th scope="col">Lainattu</th>
  <th scope="col">Lainauspiste</th>
  <th scope="col">Luokka</th>
- <th scope="col">Nidenumero</th>
+ <th scope="col">Kappaleen numero</th>
  <th scope="col">Maksu</th>
  <th scope="col">Myöhästymismaksu</th>
  <th scope="col">Hinta</th>

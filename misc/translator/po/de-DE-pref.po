@@ -1,10 +1,10 @@
 # Compendium of de.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:08-0300\n"
-"PO-Revision-Date: 2025-04-13 03:04+0000\n"
+"PO-Revision-Date: 2025-08-14 03:10+0000\n"
 "Last-Translator: Katrin Fischer <katrin.fischer@bsz-bw.de>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: de-DE\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /de/22.11/de-DE-pref.po\n"
 "X-POOTLE-MTIME: 1697491543.026636\n"
@@ -660,7 +660,7 @@ msgstr "Jobs"
 # Administration
 # Administration > Login options
 msgid "admin.pref Login options"
-msgstr "Login"
+msgstr "Loginoptionen"
 
 # Administration
 # Administration > SSL client certificate authentication
@@ -2179,18 +2179,47 @@ msgstr "Verwende"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# For example <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
-msgstr "Zum Beispiel: <tt>http://fielddoc.example.com/?marc={MARC}&field={FIELD}&language={LANG}</tt>"
+msgid "cataloguing.pref#MarcFieldDocURL# <br><br>"
+msgstr "<br><br>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{FIELD}</code>: field number, for example, \"000\" or \"048\"</li>"
+msgstr "<li><code>{FIELD}</code>: Feldnummer, zum Beispiel: \"000\" oder \"048\"</li>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li><code>{LANG}</code>: language, for example, \"en\" or \"fi-FI\"</li></ul>"
+msgstr "<li><code>{LANG}</code>: Sprache, zum Beispiel: \"en\" oder \"fi-FI\"</li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+msgstr "<li>UNIMARC: https://www.ifla.org/g/unimarc-rg/unimarc-updates/</a></li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+msgstr "<li>https://www.marc21.ca/MaJ/BIB/B{FIELD}.pdf</li></ul>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li><code>{MARC}</code>: MARC flavor, \"MARC21\" or \"UNIMARC\"</li>"
+msgstr "<ul><li><code>{MARC}</code>: MARC-Format: \"MARC21\" oder \"UNIMARC\"</li>"
+
+# Cataloging > Display > MarcFieldDocURL
+msgid "cataloguing.pref#MarcFieldDocURL# <ul><li>MARC21: field-level pages at https://www.loc.gov/marc/bibliographic/</li>"
+msgstr "<ul><li>MARC21: Seiten auf Feldebene unter https://www.loc.gov/marc/bibliographic/</li>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
-msgstr "Wenn frei gelassen, dann wird die Dokumentation unter http://loc.gov (MARC21) oder http://archive.ifla.org (UNIMARC) verwendet."
+msgid "cataloguing.pref#MarcFieldDocURL# Examples:<ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
+msgstr "Beispiele: <ul><li>https://www.example.com/marcdocs?marc={MARC}&field={FIELD}&language={LANG}</li>"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
-msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
-msgstr "Mögliche Platzhalter sind <tt>{MARC}</tt> (MARC-Format, z.B. \"MARC21\" oder \"UNIMARC\"), <tt>{FIELD}</tt> (Feldnummer, z.B. \"000\" oder \"048\"), <tt>{LANG}</tt> (Sprache, z.B. \"en\" oder \"de-DE\")."
+msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the default URLs are:"
+msgstr "Wenn frei gelassen, werden die Standard-URLs verwendet:"
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+msgid "cataloguing.pref#MarcFieldDocURL# Placeholders available for use in the URL:"
+msgstr "Verfügbare Platzhalter in der URL:"
 
 # Cataloging > Display > MarcFieldDocURL
 # Cataloging > Display
@@ -4766,7 +4795,7 @@ msgstr "Sekunden wenn \"Ausleihen immer sofort anzeigen\" oder <a href=\"/cgi-bi
 # Circulation > Holds policy > LocalHoldsPriority
 # Circulation > Holds policy
 msgid "circulation.pref#LocalHoldsPriority# Don't give"
-msgstr "Bevorzuge nicht"
+msgstr "Keine"
 
 # Circulation > Holds policy > LocalHoldsPriority
 # Circulation > Holds policy
@@ -4776,7 +4805,7 @@ msgstr "Bevorzuge"
 # Circulation > Holds policy > LocalHoldsPriority
 # Circulation > Holds policy
 msgid "circulation.pref#LocalHoldsPriority# holding library"
-msgstr "aktuellen Aufenthaltsbibliothek des Exemplars entspricht"
+msgstr "aktuelle Bibliothek"
 
 # Circulation > Holds policy > LocalHoldsPriority
 # Circulation > Holds policy
@@ -4796,7 +4825,7 @@ msgstr "Abholbibliothek"
 # Circulation > Holds policy > LocalHoldsPriority
 # Circulation > Holds policy
 msgid "circulation.pref#LocalHoldsPriority# priority for filling holds to patrons whose"
-msgstr "Vormerkungen von Benutzern, deren"
+msgstr "erhält die Priorität bei der Erfüllung von Vormerkungen für Benutzende, deren"
 
 # Circulation > Checkout policy > MarkLostItemsAsReturned
 # Circulation > Checkout policy
@@ -6015,7 +6044,7 @@ msgstr "PROC: FIC - sorgt dafür, dass ein Exemplar am Standort \"In Bearbeitung
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckin# PROC: _PERM_ - causes an item that is in the Processing center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - sorgt dafür, dass ein Exemplar am Standort \"In Bearbeitung\" (PROC) auf seinen permanenten Standort (permanent_location) aktualisiert wird.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -6079,7 +6108,7 @@ msgstr "PROC: FIC - sorgt dafür, dass ein Exemplar am Standort \"In Bearbeitung
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
 # Circulation > Checkin policy
-msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to it's permanent location.<br/><br/>"
+msgid "circulation.pref#UpdateItemLocationOnCheckout# PROC: _PERM_ - causes an item that is in the Processing Center to be updated to its permanent location.<br/><br/>"
 msgstr "PROC: _PERM_ - sorgt dafür, dass ein Exemplar am Standort \"In Bearbeitung\" (PROC) auf seinen permanenten Standort (permanent_location) aktualisiert wird.<br/><br/>"
 
 # Circulation > Checkin policy > UpdateItemLocationOnCheckin
@@ -8915,7 +8944,6 @@ msgstr "das Format, die Zielgruppe und die Materialtypicons mit den zugehörigen
 
 # OPAC > Self registration and modification > EmailPatronRegistrations
 # Acquisitions > Policy
-#, fuzzy
 msgid "opac.pref#EmailPatronRegistrations# <br>If you choose <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForPatronRegistrations\">EmailAddressForPatronRegistrations</a> you have to enter a valid email address: "
 msgstr "<br>Wenn Sie <a href=\"/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=EmailAddressForPatronRegistrations\">EmailAddressForPatronRegistrations</a> aktiviert haben, müssen Sie eine gültige E-Mail-Adresse angeben: "
 
@@ -9010,8 +9038,8 @@ msgid "opac.pref#OPACAcquisitionDetails# the acquisition details on OPAC detail 
 msgstr "Erwerbungsinformationen in der Detailansicht im OPAC."
 
 # OPAC > Features > OPACAuthorIdentifiersAndInformation
-msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
-msgstr "<strong>HINWEIS:</strong> Identifikatoren für Verfasser und Beitragende - gültige Codes für die Quelle (024$2) sind aktuell: orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), and viaf (VIAF ID)."
+msgid "opac.pref#OPACAuthorIdentifiersAndInformation# <strong>NOTE:</strong> Identifiers for authors and contributors - valid codes to use in the source subfield (024$2) are currently: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID), and wikidata (WIKIDATA ID)."
+msgstr "<strong>HINWEIS:</strong> Identifikatoren für Verfasser und Beitragende - gültige Codes für die Quelle (024$2) sind aktuell: isni (ISNI), orcid (ORCID), scopus (ScopusID), loop (Loop ID), rid (Publons ID), viaf (VIAF ID) und wikidata (WIKIDATA ID)."
 
 # OPAC > Features > OPACAuthorIdentifiers
 # OPAC > Features
@@ -9101,6 +9129,20 @@ msgstr "Aktiviere"
 # OPAC > Features
 msgid "opac.pref#OPACDetailQRCode# the option to show a QR Code on the OPAC bibliographic detail page."
 msgstr "die Option einen QR-Code in der Detailansicht im OPAC anzuzeigen."
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+msgid "opac.pref#OPACDisableSendList# Allow"
+msgstr "Erlaube,"
+
+# OPAC > Features > OPACFinesTab
+# OPAC > Features
+msgid "opac.pref#OPACDisableSendList# Don't allow"
+msgstr "Erlaube nicht,"
+
+# OPAC > Features > OPACDisableSendList
+msgid "opac.pref#OPACDisableSendList# OPAC users to email lists via a 'Send list' button."
+msgstr "dass OPAC-Nutzer Listen per E-Mail über die Schaltfläche 'Liste versenden' verschicken."
 
 # OPAC > Appearance > OPACDisplay856uAsImage
 # OPAC > Appearance
@@ -11450,24 +11492,29 @@ msgstr "Löse einen Warnhinweis aus, wenn das aktuelle Exemplar vor nicht mehr a
 msgid "patrons.pref#CheckPrevCheckoutDelay# days ago."
 msgstr "Tagen ausgeliehen war."
 
-# Patrons > Notices and notifications > EmailFieldPrimary
-msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
-msgstr "Ein Kind-Konto"
+# Patrons > Patron relationships > ChildNeedsGuarantor
+msgid "patrons.pref#ChildNeedsGuarantor# <p><strong>WARNING:</strong> Setting this preference to <em>requires</em> will cause errors for any pre-existing patrons that would now require a guarantor and do not have one."
+msgstr "<p><strong>Warnung:</strong> Wenn Sie diesen Sytemparameter auf <em>erfordert</em> setzen, wird dies Fehler bei bereits existierenden Konten verursachen, die jetzt einen Bürgenden benötigen und für die keiner erfasst wurde."
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
-msgid "patrons.pref#ChildNeedsGuarantor# a guarantor when adding the patron."
-msgstr "einen Bürgenden, wenn der Datensatz angelegt wird."
+msgid "patrons.pref#ChildNeedsGuarantor# Any patron of a patron type than can have a guarantor"
+msgstr "Jede*r Benutzer*in eines Benutzertyps, die einen Bürgenden haben kann"
+
+# Patrons > Patron forms > CollapseFieldsPatronAddForm
+# Patrons > Patron forms
+msgid "patrons.pref#ChildNeedsGuarantor# a guarantor be set when adding the patron."
+msgstr "Bürgenden, wenn das Konto angelegt wird."
 
 # Patrons > Notices and notifications > AutoEmailNewUser
 # Patrons > Notices and notifications
-msgid "patrons.pref#ChildNeedsGuarantor# doesn't need"
-msgstr "benötigt keinen"
+msgid "patrons.pref#ChildNeedsGuarantor# does not require"
+msgstr "erfordert keinen"
 
 # Patrons > Patron relationships > PrefillGuaranteeField
 # Patrons > Patron relationships
-msgid "patrons.pref#ChildNeedsGuarantor# must have"
-msgstr "benötigt einen"
+msgid "patrons.pref#ChildNeedsGuarantor# requires"
+msgstr "erfordert einen"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms
@@ -12513,7 +12560,7 @@ msgstr "Bei Ausleihe eines Exemplars"
 # Patrons > General > TrackLastPatronActivity
 # Patrons > General
 msgid "patrons.pref#TrackLastPatronActivityTriggers# Connecting to Koha via SIP or ILSDI"
-msgstr "Bei Login über SIP oder ILSDI"
+msgstr "Bei Login über SIP oder ILS-DI"
 
 # Patrons > General > TrackLastPatronActivity
 # Patrons > General
@@ -13424,12 +13471,12 @@ msgstr "suche"
 # Searching > Results display > ShowHeadingUse
 # Searching > Results display
 msgid "searching.pref#ShowHeadingUse# Don't show"
-msgstr "Zeige keine"
+msgstr "Zeige nicht,"
 
 # Searching > Results display > ShowHeadingUse
 # Searching > Results display
 msgid "searching.pref#ShowHeadingUse# Show"
-msgstr "Zeige"
+msgstr "Zeige,"
 
 # Searching > Results display > ShowHeadingUse
 msgid "searching.pref#ShowHeadingUse# whether an authority record contains an established heading that conforms to descriptive cataloguing rules, and can therefore be used as a main/added entry, or subject, or series title."
@@ -13438,7 +13485,7 @@ msgstr "ob ein Normsatz eine den Katalogisierungsregeln konforme Ansetzung enth�
 # Searching > Features > TraceCompleteSubfields
 # Searching > Features
 msgid "searching.pref#TraceCompleteSubfields# Don't force"
-msgstr "Erzwinge nicht"
+msgstr "Erzwinge nicht,"
 
 # Searching > Features > TraceCompleteSubfields
 # Searching > Features
@@ -13631,7 +13678,7 @@ msgstr "Auswahlmenü für die Anzahl der Ergebnisse je Seite in der Dienstoberfl
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# <pre>ccode: [REF,ARC]</pre><br/>  - would mark all REF and ARC collections (Reference and Archives) items as unavailable in Z3950 results.<br/><br/>"
-msgstr "<pre>ccode: [REF,ARC]</pre><br/>  - würde alle Elemente von REF- und ARC-Sammlungen (Reference and Archives) in den Z3950-Ergebnissen als nicht verfügbar markieren.<br/><br/>"
+msgstr "<pre>ccode: [REF,ARC]</pre><br/>  - würde alle Elemente von REF- und ARC-Sammlungen (Reference and Archives) in den Z39.50-Ergebnissen als nicht verfügbar markieren.<br/><br/>"
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# <pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  - would mark all reference items AND items at the REPAIR branch as unavailable."
@@ -13639,7 +13686,7 @@ msgstr "<pre>itype: [REF]<br/>holdingbranch: [REPAIR]</pre><br/>  - würde alle 
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# Define custom rules to show specific items as not available in Z3950. Rules are defined with item database fields as keys and an array of values.<br/>"
-msgstr "Legen Sie benutzerdefinierte Regeln fest, um bestimmte Artikel in der Z3950 als nicht verfügbar anzuzeigen. Die Regeln werden mit Artikeldatenbankfeldern als Schlüssel und einem Array von Werten definiert.<br/>"
+msgstr "Legen Sie benutzerdefinierte Regeln fest, um bestimmte Artikel in der Z39.50 als nicht verfügbar anzuzeigen. Die Regeln werden mit Artikeldatenbankfeldern als Schlüssel und einem Array von Werten definiert.<br/>"
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# Examples:<br/><br/>"
@@ -13647,7 +13694,7 @@ msgstr "Beispiele:<br/><br/>"
 
 # Searching > Features > z3950Status
 msgid "searching.pref#z3950Status# You can define multiple keys and values, items meeting ANY of the criteria will be marked unavailable:<br/><br/>"
-msgstr "Sie können mehrere Schlüssel und Werte definieren; Elemente, die EINE der Kriterien erfüllen, werden als nicht verfügbar markiert:<br/><br/>"
+msgstr "Sie können mehrere Schlüssel und Werte definieren; Elemente, die EINES der Kriterien erfüllen, werden als nicht verfügbar markiert:<br/><br/>"
 
 # Serials
 msgid "serials.pref"
@@ -14052,7 +14099,7 @@ msgstr "Erlaube nicht"
 
 # Staff interface > Appearance > ReportsExportFormatODS
 msgid "staff_interface.pref#ReportsExportFormatODS# Open Document Spreadsheet (ODS) as download format in reports."
-msgstr "Open Document Spreadsheet (ODS) als Download-Format in Berichten."
+msgstr "Open Document Spreadsheet (ODS) als Download-Format in Reports."
 
 # Staff interface > Options > ReportsExportLimit
 msgid "staff_interface.pref#ReportsExportLimit# Download a maximum of"
@@ -14537,13 +14584,13 @@ msgstr "ILS-DI Services für OPAC-Benutzer (erreichbar unter: /cgi-bin/koha/ilsd
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow IP addresses"
-msgstr "Erlaube den IP-Adressen"
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# Allow only IP addresses"
+msgstr "Erlaube nur den IP-Adressen"
 
 # Web services > ILS-DI > ILS-DI:AuthorizedIPs
 # Web services > ILS-DI
-msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Leave the field blank to allow any IP address."
-msgstr "die ILS-DI-Services zu verwenden (falls eingeschaltet). IP-Adressen mit Komma (ohne Leerzeichen) trennen. Feld leer lassen, um die ILS-DI-Services für alle IP-Adresse zu erlauben."
+msgid "web_services.pref#ILS-DI:AuthorizedIPs# to use the ILS-DI services (when enabled). Separate the IP addresses with commas and without spaces. Enter '0.0.0.0/0' or '::/0' to allow any IP."
+msgstr "um die ILS-DI-Services zu verwenden (falls aktiviert). Trennen Sie IP-Adressen mit Komma und ohne Leerzeichen. Geben Sie '0:0:0:0/0' oder '::/0' ein, um alle IP-Adressen zu erlauben."
 
 # Web services > IdRef > IdRef
 # Web services > IdRef
@@ -14791,8 +14838,8 @@ msgstr "Aktiviere"
 
 # Web services > REST API > RESTOAuth2ClientCredentials
 # Web services > REST API
-msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API. Requires Net::OAuth2::AuthorizationServer installed."
-msgstr "die Vergabe von Anmeldedaten für den OAuth2-Client für das REST API. Es muss Net::OAuth2::AuthorizationServer installiert sein."
+msgid "web_services.pref#RESTOAuth2ClientCredentials# the OAuth2 client credentials grant for the REST API."
+msgstr "die Vergabe von Anmeldedaten für den OAuth2-Client für das REST API."
 
 # Web services > REST API > RESTPublicAPI
 # Web services > REST API
@@ -15844,6 +15891,16 @@ msgstr "Zeilen für einen Report, der über den Reports Web Service ausgeführt 
 #~ msgid "authorities.pref#BiblioAddsAuthorities# them to automatically create new authority records if needed, rather than having to reference existing authorities."
 #~ msgstr "automatisch neue Normdatensätze angelegt werden, statt mit existierenden Normdatensätzen verlinken zu müssen."
 
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# If left empty, the format documentation on http://loc.gov (MARC21) or http://archive.ifla.org (UNIMARC) is used."
+#~ msgstr "Wenn frei gelassen, dann wird die Dokumentation unter http://loc.gov (MARC21) oder http://archive.ifla.org (UNIMARC) verwendet."
+
+# Cataloging > Display > MarcFieldDocURL
+# Cataloging > Display
+#~ msgid "cataloguing.pref#MarcFieldDocURL# Possible substitutions are <tt>{MARC}</tt> (marc flavour, eg. \"MARC21\" or \"UNIMARC\"), <tt>{FIELD}</tt> (field number, eg. \"000\" or \"048\"), <tt>{LANG}</tt> (user language, eg. \"en\" or \"fi-FI\")."
+#~ msgstr "Mögliche Platzhalter sind <tt>{MARC}</tt> (MARC-Format, z.B. \"MARC21\" oder \"UNIMARC\"), <tt>{FIELD}</tt> (Feldnummer, z.B. \"000\" oder \"048\"), <tt>{LANG}</tt> (Sprache, z.B. \"en\" oder \"de-DE\")."
+
 # Cataloging > Display > OpacSuppression
 # Cataloging > Display
 #~ msgid "cataloguing.pref#OpacSuppression# <br />Display the following message on the redirect page for suppressed bibliographic records:"
@@ -16100,6 +16157,10 @@ msgstr "Zeilen für einen Report, der über den Reports Web Service ausgeführt 
 # Patrons > Notices and notifications
 #~ msgid "patrons.pref#AutoEmailPrimaryAddress# work"
 #~ msgstr "die 2. E-Mail-Adresse"
+
+# Patrons > Notices and notifications > EmailFieldPrimary
+#~ msgid "patrons.pref#ChildNeedsGuarantor# A child patron"
+#~ msgstr "Ein Kind-Konto"
 
 # Patrons > Patron forms > CollapseFieldsPatronAddForm
 # Patrons > Patron forms

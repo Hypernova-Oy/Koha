@@ -69,8 +69,8 @@ sub connect {
     return
         unless $notification_method eq 'STOMP';
 
-    my $hostname = $ENV{KOHA_STOMP_HOSTNAME} // 'localhost';
-    my $port     = $ENV{KOHA_STOMP_PORT}     // '61613';
+    my $hostname = 'localhost';
+    my $port     = '61613';
 
     my $config = C4::Context->config('message_broker');
     my $credentials = {
@@ -89,10 +89,16 @@ sub connect {
 
     try {
         $stomp = Net::Stomp->new( { hostname => $hostname, port => $port } );
-        $stomp->connect( $credentials );
+        my $connected_frame = $stomp->connect($credentials);
+        if ( $connected_frame->command ne 'CONNECTED' ) {
+            my $message = $connected_frame->body;
+            chomp $message;
+            warn sprintf "Cannot connect to broker (%s)", $message;
+            undef $stomp;
+        }
     } catch {
-        warn "Cannot connect to broker " . $_;
-        $stomp = undef;
+        warn sprintf "Cannot connect to broker (%s)", $_;
+        undef $stomp;
     };
 
     return $stomp;
@@ -151,8 +157,12 @@ sub enqueue {
         my $namespace = C4::Context->config('memcached_namespace');
         my $encoded_args = Encode::encode_utf8( $json_args ); # FIXME We should better leave this to Net::Stomp?
         my $destination = sprintf( "/queue/%s-%s", $namespace, $job_queue );
-        $conn->send_with_receipt( { destination => $destination, body => $encoded_args, persistent => 'true' } )
-          or Koha::Exceptions::BackgroundJob->throw('Job has not been enqueued');
+        $conn->send_with_receipt(
+            {
+                destination    => $destination, body => $encoded_args, persistent => 'true',
+                'content-type' => 'application/json'
+            }
+        ) or Koha::Exceptions::BackgroundJob->throw('Job has not been enqueued');
     } catch {
         $self->status('failed')->store;
         if ( ref($_) eq 'Koha::Exceptions::BackgroundJob' ) {
@@ -481,14 +491,17 @@ sub plugin_types_to_classes {
             my $namespace = $metadata->{namespace};
 
             foreach my $type ( keys %{$tasks} ) {
-                my $class = $tasks->{$type};
+                my $class =
+                    ( ref $tasks->{$type} eq 'HASH' )
+                    ? $tasks->{$type}{class}
+                    : $tasks->{$type};
 
                 # skip if conditions not met
                 next unless $type and $class;
 
                 my $key = "plugin_$namespace" . "_$type";
 
-                $self->{_plugin_mapping}->{$key} = $tasks->{$type};
+                $self->{_plugin_mapping}->{$key} = $class;
             }
         }
     }

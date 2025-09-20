@@ -193,7 +193,7 @@
  [% CASE 'unauthorized_on_add_biblio' %]
  <span>Du saknar behörighet att lägga till en post till denna lista.</span>
  [% CASE 'unauthorized_transfer' %]
- <span>Du saknar behörighet att överföra ägarskap av den här listan.</span>
+ <span>Transfer not allowed: You or the selected user do not have the required permissions.</span>
  [% CASE 'no_biblio_removed' %]
  <span>Inga poster togs bort.</span>
  [% CASE 'new_owner_not_found' %]
@@ -243,7 +243,7 @@
  </div>
  </div>
 
- [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ [% IF ( Koha.Preference( 'opacuserlogin' ) == 1 ) && ( ! Koha.Preference('OPACDisableSendList') ) %]
  <span class="sendlist"><a href="/cgi-bin/koha/opac-sendshelf.pl?shelfid=[% shelf.shelfnumber | uri %]" class="btn btn-link send"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i> Skicka lista</a></span>
  [% END %]
 
@@ -730,7 +730,7 @@
  [% SET contents = s.get_contents %]
  <tr>
  <td><a href="/cgi-bin/koha/opac-shelves.pl?op=view&amp;shelfnumber=[% s.shelfnumber | uri %]">[% s.shelfname | html %]</a></td>
- <td>[% IF contents.count %][% contents.count | html %] [% IF contents.count == 1 %]<span>artikel</span>[% ELSE %]<span>exemplar</span>[% END %][% ELSE %]<span>Tom</span>[% END %]</td>
+ <td>[% IF contents.count %][% contents.count | html %] [% IF contents.count == 1 %]<span>exemplar</span>[% ELSE %]<span>exemplar</span>[% END %][% ELSE %]<span>Tom</span>[% END %]</td>
  <td>
  [% IF s.is_private %]
  [% IF s.is_shared %]<span>Delad</span>[% ELSE %]<span>Privat</span>[% END %]

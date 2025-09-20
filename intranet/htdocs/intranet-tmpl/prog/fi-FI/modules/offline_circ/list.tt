@@ -49,10 +49,10 @@
  <thead>
  <tr>
  <th>&nbsp;</th>
- <th>Pvm</th>
+ <th>Päivämäärä</th>
  <th>Toiminto</th>
  <th>Viivakoodi</th>
- <th>Kortin numero tai käyttäjätunnus</th>
+ <th>Kirjastokortti tai käyttäjätunnus</th>
  <th>Summa</th>
  </tr>
  </thead>
@@ -68,9 +68,9 @@
  [%   CASE "issue" -%]
  <span>Lainaus</span>
  [%   CASE "return" -%]
- <span>Palauta</span>
+ <span>Palautus</span>
  [%   CASE "payment" -%]
- <span>Maksu</span>
+ <span>Maksusuoritus</span>
  [%   CASE # default case -%]
  <span>[% operation.action | html %]</span>
  [% END -%]

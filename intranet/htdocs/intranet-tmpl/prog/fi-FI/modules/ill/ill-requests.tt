@@ -184,8 +184,7 @@
  Sisäinen käyttö tilastoitu </div>
  [% ELSIF whole.value.check_out_errors.error.UNKNOWN_BARCODE %]
  <div class="alert alert-warning">
- The bibliographic record's item contains an unknown (or empty) barcode.
- </div>
+ Kuvailutietueen niteellä on tuntematon (tai tyhjä) viivakoodi. </div>
  [% ELSE %]
  <div class="alert alert-warning">
  Tämän niteen lainaamisessa ilmeni ongelma, ole hyvä ja tarkista mahdolliset ongelmat: <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% whole.value.patron.borrowernumber | uri %]">asiakkaan tili</a>
@@ -199,9 +198,9 @@
  <legend>Lainan tiedot</legend>
  [% items = whole.value.biblio.items.unblessed %]
  [% IF items.size == 1 %]
- <p><a target="_blank" href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% whole.value.biblio.biblionumber | uri %]">The bibliographic record</a> for this request already has an item attached to it, you are about to check it out</p>
+ <p><a target="_blank" href="/cgi-bin/koha/catalogue/detail.pl?biblionumber=[% whole.value.biblio.biblionumber | uri %]">Kuvailutietue</a> tämän pyynnön nimeketietueessa on jo nide kiinnitettynä, olet lainaamassa sitä</p>
  [% ELSE %]
- <p>Tälle pyynnölle on nimeketietue, mutta ei niteitä. Olet luomassa niteen ja lainaamassa sen.</p>
+ <p>Tälle pyynnölle on nimeketietue, mutta ei niteitä. Olet luomassa niteen ja lainaamassa sen</p>
  [% END %]
  <ol>
  <li class="ill_checkout_inhouse">
@@ -412,7 +411,7 @@
  <form method="POST" id="ill_edit_action_form" action="/cgi-bin/koha/ill/ill-requests.pl">
  [% INCLUDE 'csrf-token.inc' %]
  <fieldset class="rows">
- <legend>Pyynnön tiedot</legend>
+ <legend>Kaukolainapyynnön tiedot</legend>
  <ol>
  [% type = request.get_type %]
  <li class="borrowernumber">
@@ -475,11 +474,11 @@
  </li>
  <li class="medium">
  <label class="medium">Pyynnön tyyppi:</label>
- [% IF type %][% type | html %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ [% IF type %][% type | html %][% ELSE %]<span>Ei saatavilla</span>[% END %]
  </li>
  <li class="cost">
  <label class="cost">Hinta:</label>
- [% IF request.cost %][% request.cost | $Price %][% ELSE %]<span>Ei käytettävissä</span>[% END %]
+ [% IF request.cost %][% request.cost | $Price %][% ELSE %]<span>Ei saatavilla</span>[% END %]
  </li>
  <li class="price_paid">
  <label class="price_paid">Maksettu hinta:</label>
@@ -618,6 +617,7 @@
  </a>
  [% END %]
  [% END %]
+ [% IF request.borrowernumber %]
  <div class="dropdown btn-group">
  <button class="btn btn-default dropdown-toggle" type="button" id="ill-notice-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
  <i class="fa-solid fa-envelope"></i> Lähetä ilmoitus asiakkaalle </button>
@@ -627,6 +627,7 @@
  [% END %]
  </ul>
  </div>
+ [% END %]
  <a class="btn btn-default" href="#" id="ill-request-display-metadata" title="Näytä toimittajan metadata">
  <span class="fa-solid fa-eye"></span>
  Näytä toimittajan metadata </a>
@@ -635,7 +636,7 @@
  Kaukolainapyyntöjen loki </a>
  </div>
  <div class="page-section">
- <h3>Pyynnön tiedot</h3>
+ <h3>Kaukolainapyynnön tiedot</h3>
  <h4>Tiedot kirjastolta</h4>
  <div class="rows">
  <ol>
@@ -645,6 +646,7 @@
  [% request.orderid | html %]
  </li>
  [% END %]
+ [% IF request.borrowernumber %]
  <li class="borrowernumber">
  <span class="label borrowernumber">Asiakas:</span>
  [% borrowerlink = "/cgi-bin/koha/members/moremember.pl" _ "?borrowernumber=" _ request.patron.borrowernumber %]
@@ -652,6 +654,7 @@
  [% request.patron.firstname _ " " _ request.patron.surname _ " [" _ request.patron.cardnumber _ "]" | html %]
  </a>
  </li>
+ [% END %]
  [% IF request.biblio_id %]
  <li class="biblio_id">
  <span class="label biblio_id">Nimeketietueen ID:</span>

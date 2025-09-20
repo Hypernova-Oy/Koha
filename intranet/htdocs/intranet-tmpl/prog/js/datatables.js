@@ -444,6 +444,9 @@ function _dt_default_ajax (params){
             var length = data.length;
             var start  = data.start;
 
+            let api = new $.fn.dataTable.Api(settings);
+            const global_search = api.search();
+
             var dataSet = {
                 _page: Math.floor(start/length) + 1,
                 _per_page: length
@@ -456,6 +459,7 @@ function _dt_default_ajax (params){
                 for (var i=0;i<attributes.length;i++){
                     var part = {};
                     var attr = attributes[i];
+                    let default_build = true;
                     let criteria = options.criteria;
                     if ( value.match(/^\^(.*)\$$/) ) {
                         value = value.replace(/^\^/, '').replace(/\$$/, '');
@@ -474,6 +478,9 @@ function _dt_default_ajax (params){
                     }
 
                     if ( col.datatype !== undefined ) {
+                        default_build = false;
+                        let coded_datatype =
+                            col.datatype.match(/^coded_value:(.*)/);
                         if (col.datatype == 'related-object') {
                             let query_term = value;
 
@@ -485,12 +492,57 @@ function _dt_default_ajax (params){
                                 [col.related + '.' + col.relatedKey]: col.relatedValue,
                                 [col.related + '.' + col.relatedSearchOn]: query_term
                             };
+                        } else if (
+                            coded_datatype &&
+                            coded_datatype.length > 1
+                        ) {
+                            if (global_search.length || value.length) {
+                                coded_datatype = coded_datatype[1];
+                                const search_value = value.length
+                                    ? value
+                                    : global_search;
+                                const regex = new RegExp(
+                                    `^${search_value}`,
+                                    "i"
+                                );
+                                if (
+                                    coded_values &&
+                                    coded_values.hasOwnProperty(coded_datatype)
+                                ) {
+                                    let codes = [
+                                        ...coded_values[
+                                            coded_datatype
+                                        ].entries(),
+                                    ]
+                                        .filter(([label]) => regex.test(label))
+                                        .map(([, code]) => code);
+
+                                    if (codes.length) {
+                                        part[
+                                            !attr.includes(".")
+                                                ? "me." + attr
+                                                : attr
+                                        ] = codes;
+                                    } else {
+                                        // Coded value not found using the description, fallback to code
+                                        default_build = true;
+                                    }
+                                } else {
+                                    console.log(
+                                        "coded datatype %s not supported yet".format(
+                                            coded_datatype
+                                        )
+                                    );
+                                }
+                            } else {
+                                default_build = true;
+                            }
                         } else {
                             console.log("datatype %s not supported yet".format(col.datatype));
                         }
                     }
 
-                    if (col.datatype != 'related-object') {
+                    if (default_build) {
                         let value_part;
                         if ( criteria === 'exact' ) {
                             value_part = built_value ? [value, built_value] : value
@@ -502,7 +554,7 @@ function _dt_default_ajax (params){
                         part[!attr.includes('.')?'me.'+attr:attr] = value_part;
                     }
 
-                    parts.push(part);
+                    if (Object.keys(part).length) parts.push(part);
                 }
                 return parts;
             }
@@ -554,7 +606,13 @@ function _dt_default_ajax (params){
                     } else if ( f == '-and' ) {
                         if (v) and_query_parameters.push(v)
                     } else if ( v ) {
-                        additional_filters[k] = v;
+                        if (typeof v === "string") {
+                            additional_filters[k] = v
+                                .replace(/^\^/, "")
+                                .replace(/\$$/, "");
+                        } else {
+                            additional_filters[k] = v;
+                        }
                     }
                 }
                 if ( Object.keys(additional_filters).length ) {
@@ -831,9 +889,10 @@ function _dt_add_filters(table_node, table_dt, filters_options = {}) {
         let i = column.index();
         var visible_i = table_dt.column.index('fromData', i);
         let th = $(table_node).find('thead tr:eq(1) th:eq(%s)'.format(visible_i));
-        var is_searchable = columns[i].bSearchable;
+        var is_searchable = table_dt.settings()[0].aoColumns[i].bSearchable;
         $(th).removeClass('sorting').removeClass("sorting_asc").removeClass("sorting_desc");
-        if ( is_searchable ) {
+        $(this).data("th-id", i);
+        if (is_searchable || $(this).data("filter") || filters_options[i]) {
             let input_type = 'input';
             let existing_search = column.search();
             if ( $(th).data('filter') || filters_options.hasOwnProperty(i)) {
@@ -847,16 +906,27 @@ function _dt_add_filters(table_node, table_dt, filters_options = {}) {
                 } else if ( typeof filters_options[i] === "function" ) {
                     filters_options[i] = filters_options[i](table_dt)
                 }
-                $(filters_options[i]).each(function(){
-                    let o = $('<option value="%s">%s</option>'.format(this._id, this._str));
-                    // Compare with lc, or selfreg won't match ^SELFREG$ for instance, see bug 32517
-                    // This is only for category, we might want to apply it only in this case.
-                    existing_search = existing_search.toLowerCase()
-                    if ( existing_search === this._id || (existing_search && this._id.toLowerCase().match(existing_search)) ) {
-                        o.prop("selected", "selected");
-                    }
-                    o.appendTo(select);
-                });
+                $(filters_options[i])
+                    .filter(function () {
+                        return this._id && this._str;
+                    })
+                    .each(function () {
+                        let optionValue =
+                            table_dt.settings()[0].ajax !== null
+                                ? `^${this._id}$`
+                                : this._id;
+                        let o = $(
+                            `<option value="${optionValue}">${this._str}</option>`
+                        );
+
+                        // Compare with lc, or selfreg won't match ^SELFREG$ for instance, see bug 32517
+                        // This is only for category, we might want to apply it only in this case.
+                        existing_search = existing_search.toLowerCase()
+                        if ( existing_search === this._id || (existing_search && this._id.toLowerCase().match(existing_search)) ) {
+                            o.prop("selected", "selected");
+                        }
+                        o.appendTo(select);
+                    });
                 $(th).html( select );
             } else {
                 var title = $(th).text();
@@ -895,8 +965,8 @@ function _dt_add_delay_filters(table_dt, table_node) {
     let col_input_search = DataTable.util.debounce(function (i, val) {
         table_dt.column(i).search(val).draw();
     }, delay_ms);
-    let col_select_search = DataTable.util.debounce(function (i, val) {
-        table_dt.column(i).search(val, true, false).draw();
+    let col_select_search = DataTable.util.debounce(function (i, val, regex_search = true) {
+        table_dt.column(i).search(val, regex_search, false).draw();
     }, delay_ms);
 
     $(table_node).find('thead tr:eq(1) th').each( function (visible_i) {
@@ -911,8 +981,7 @@ function _dt_add_delay_filters(table_dt, table_node) {
         $(this).find("select")
             .unbind()
             .bind("keyup change", function(){
-                let value = this.value.length ? '^'+this.value+'$' : '';
-                col_select_search(i, this.value)
+                col_select_search(i, this.value, false)
             });
     });
 }
@@ -1043,6 +1112,11 @@ function _dt_save_restore_state(table_settings, external_filter_nodes={}){
     *                                                Supports `contains`, `starts_with`, `ends_with` and `exact` match
     * @param  {string}  [options.columns.*.type      Data type the field is stored in so we may impose some additional
     *                                                manipulation to search strings. Supported types are currenlty 'date'
+    * @param  {string}  [options.columns.*.datatype  Data type the field is stored in so we may impose some additional
+    *                                                manipulation logic to search. Supported types are currently 'related-object',
+    *                                                for implimenting joins in api search queries, and 'coded_value:TABLE' to allow
+    *                                                for clientside translations of description to code to reduce join requirements.
+    *                                                See bug 39011 for an example implimentation.
     * @param  {Object}  table_settings               The arrayref as returned by TableSettings.GetTableSettings function
     *                                                available from the columns_settings template toolkit include
     * @param  {Boolean} add_filters                  Add a filters row as the top row of the table

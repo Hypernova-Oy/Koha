@@ -37,7 +37,7 @@
  [% ELSIF ( messaging_preference.Auto_Renewals ) %]<span>Automatiskt omlån</span>
  [% ELSIF ( messaging_preference.Recall_Waiting ) %]<span>Återkrav väntar på hämtning</span>
  [% ELSIF ( messaging_preference.Recall_Requested ) %]<span>Återlämna återkrävt exemplar</span>
- [% ELSE %]<span>Okänt</span>
+ [% ELSE %]<span>Okänd</span>
  [% END %]
  </td>
  [% IF ( messaging_preference.takes_days ) %]

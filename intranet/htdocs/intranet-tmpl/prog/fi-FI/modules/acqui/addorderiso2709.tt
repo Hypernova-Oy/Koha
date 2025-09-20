@@ -421,7 +421,7 @@
  <fieldset class="rows" style="float:none;">
  <legend>Nide</legend>
  [% IF ( NoACQframework ) %]
- <div class="alert alert-info">Ei tietuehankinnan pohjaa, käytetään oletuspohjaa. Luo pohja, jonka tunnuskoodi on ACQ.</div>
+ <div class="alert alert-info">Ei ACQ-kuvailupohjaa, käytetään oletuspohjaa. Luo kuvailupohja, jonka tunnus on ACQ</div>
  [% END %]
  <div class="item_edit_form">
  [% FOREACH item IN items %]

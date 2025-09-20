@@ -54,10 +54,10 @@ circulation.pref:
     - ''
   - - 'Följande format för artikelbeställningar stöds:'
     - multiple_sortable:
-        PHOTOCOPY: Photocopy
-        SCAN: Scan
+        PHOTOCOPY: Fotokopia
+        SCAN: Skanning
       pref: ArticleRequestsSupportedFormats
-    - The first listed format is selected by default when you request via the OPAC.
+    - Det första listade formatet väljs som standard när du beställer via OPAC.
   Avgiftspolicy:
   - - choices:
         ignoreCalendar: Ta inte hänsyn till kalendern
@@ -213,11 +213,11 @@ circulation.pref:
       pref: HoldsToPullStartDate
     - dagar sedan. Notera att det automatiska slutdatumet styrs av systeminställningen
       <a href="/cgi-bin/koha/admin/preferences.pl?op=search&searchfield=ConfirmFutureHolds">ConfirmFutureHolds</a>.
-  - - When building the holds queue, calculate hold matches using
+  - - När du bygger reservationskön, beräkna med hjälp av
     - class: integer
       pref: HoldsQueueParallelLoopsCount
-    - parallel loop(s). The more loops used, the faster it will calculate and the
-      more computing resources it will use.
+    - parallell(a) loop(ar). Ju fler loopar som används, desto snabbare kommer den
+      att beräkna och desto mer datorresurser kommer den att använda.
   - - choices:
         '0': Tillåt inte
         '1': Tillåt
@@ -375,8 +375,8 @@ circulation.pref:
         '1': Tillåt
       pref: AllowItemsOnLoanCheckoutSIP
     - utlån av exemplar som är reserverade av någon annan via SIP utlåningsmeddelanden.
-    - If allowed do not generate ISSUED_TO_ANOTHER warning.
-    - This allows self checkouts for those items.
+    - Om tillåtet, generera inte varningen ISSUED_TO_ANOTHER.
+    - Detta tillåter självutlån av dessa exemplar.
   - - choices:
         '0': Tillåt inte
         '1': Tillåt
@@ -665,8 +665,8 @@ circulation.pref:
     - 'FIC: _BLANK_ - gör att ett exemplar med placering FIC blir flyttat till en
       tom placering vid återlämning.<br/>'
     - '_ALL_: FIC - gör att alla exemplar flyttas till placeringen Fiction vid utlån.<br/>'
-    - 'PROC: _PERM_ - gör att ett exemplar som är i Processing Center kommer att flyttas
-      till dess permanenta placering.<br/><br/>'
+    - 'PROC: _PERM_ - causes an item that is in the Processing Center to be updated
+      to its permanent location.<br/><br/>'
     - 'Allmän regel: om placeringen till vänster om kolonet (:) matchar exemplarets
       nuvarande placering, så kommer det flyttas till placeringen som står till höger
       om kolonet (:).<br/>'
@@ -779,7 +779,7 @@ circulation.pref:
     - <br><strong>VARNING:</strong> Denna inställning kommer endast att vara aktiv
       om DefaultLongOverdueSkipPatronCategories är tom.
     - <br>
-    - The long overdue process <i>does not</i> affect patrons in the
+    - I hanteringen av mycket försenade lån ska följande låntagare <i>inte</i> påverkas
     - choices: patron-categories
       class: multiple
       pref: DefaultLongOverdueSkipPatronCategories
@@ -834,14 +834,14 @@ circulation.pref:
       default: ask
       pref: ClaimReturnedChargeFee
     - .
-  - - Automatically resolve the claim and change the resolution to the <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION">RETURN_CLAIM_RESOLUTION</a>
-      authorized value
+  - - Lös automatiskt kravet och ändra lösningen till det auktoriserade värdet <a
+      href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION">RETURN_CLAIM_RESOLUTION</a>
     - choices: authval
       pref: AutoClaimReturnStatusOnCheckin
       source: RETURN_CLAIM_RESOLUTION
     - vid återlämning.
-  - - Automatically resolve the claim and change the resolution to the <a href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION">RETURN_CLAIM_RESOLUTION</a>
-      authorized value
+  - - Lös automatiskt kravet och ändra lösningen till det auktoriserade värdet <a
+      href="/cgi-bin/koha/admin/authorised_values.pl?searchfield=RETURN_CLAIM_RESOLUTION">RETURN_CLAIM_RESOLUTION</a>
     - choices: authval
       pref: AutoClaimReturnStatusOnCheckout
       source: RETURN_CLAIM_RESOLUTION
@@ -1119,14 +1119,14 @@ circulation.pref:
         '0': Prioritera inte
         '1': Prioritera
       pref: LocalHoldsPriority
-    - att fylla reservationer för låntagare vars
+    - för reservationer åt låntagare vars
     - choices:
         HomeLibrary: hembibliotek
         PickupLibrary: avhämtningsbibliotek
       pref: LocalHoldsPriorityPatronControl
     - matchar exemplarets
     - choices:
-        holdingbranch: nuvarande plats
+        holdingbranch: aktuellt bibliotek
         homebranch: hembibliotek
       pref: LocalHoldsPriorityItemControl
   - - choices:
@@ -1416,8 +1416,8 @@ circulation.pref:
     - 'FIC: _BLANK_ - gör att ett exemplar med placering FIC blir flyttat till en
       tom placering vid återlämning.<br/>'
     - '_ALL_: FIC - gör att alla exemplar flyttas till placeringen Fiction vid återlämning.<br/>'
-    - 'PROC: _PERM_ - gör att ett exemplar som är i Processing Center kommer att flyttas
-      till dess permanenta placering.<br/><br/>'
+    - 'PROC: _PERM_ - causes an item that is in the Processing center to be updated
+      to its permanent location.<br/><br/>'
     - 'Allmän regel: om placeringen till vänster om kolonet (:) matchar exemplarets
       nuvarande placering, så kommer det flyttas till placeringen som står till höger
       om kolonet (:).<br/>'

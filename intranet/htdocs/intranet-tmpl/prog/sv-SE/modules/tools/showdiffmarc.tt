@@ -50,6 +50,7 @@
 
  <div class="page-section col-sm-12">
  <h2>[% RECORDTITLE | html %]</h2>
+ <div class="row">
  <div id="col1" class="col-sm-6">
  <h3>Ursprunglig</h3>
  [% IF ( ERROR_FORMATTED1 ) %]
@@ -70,6 +71,7 @@
  <h3>[% IMPORTTITLE | html %]</h3>
  <pre>[% MARC_FORMATTED2 | html %] </pre>
  [% END %]
+ </div>
  </div>
  </div>
  <fieldset class="action">

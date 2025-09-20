@@ -100,7 +100,7 @@ tables:
       lib: Määräävä
     - authorised_value: future
       category: ERM_AGREEMENT_LICENSE_STATUS
-      lib: Tulevaisuus
+      lib: Tuleva
     - authorised_value: history
       category: ERM_AGREEMENT_LICENSE_STATUS
       lib: Historiallinen
@@ -154,10 +154,10 @@ tables:
       lib: Raportti
     - authorised_value: proceedings
       category: ERM_TITLE_PUBLICATION_TYPE
-      lib: Proceedings
+      lib: Julkaisu
     - authorised_value: website
       category: ERM_TITLE_PUBLICATION_TYPE
-      lib: Verkkosivu
+      lib: Verkkosivut
     - authorised_value: newspaper
       category: ERM_TITLE_PUBLICATION_TYPE
       lib: Sanomalehti
@@ -253,10 +253,10 @@ tables:
       lib: Uniikkeja teoksen pyyntöjä
     - authorised_value: Unique_Title_Investigations
       category: ERM_PLATFORM_REPORTS_METRICS
-      lib: Unique title investigations
+      lib: Yksittäiset nimekkeiden katselut
     - authorised_value: Unique_Title_Requests
       category: ERM_PLATFORM_REPORTS_METRICS
-      lib: Unique title requests
+      lib: Yksittäiset nimekkeiden pyynnöt
     - authorised_value: Searches_Automated
       category: ERM_DATABASE_REPORTS_METRICS
       lib: Automatisoituja hakuja
@@ -280,10 +280,10 @@ tables:
       lib: Uniikkeja teoksen pyyntöjä
     - authorised_value: Unique_Title_Investigations
       category: ERM_DATABASE_REPORTS_METRICS
-      lib: Unique title investigations
+      lib: Yksittäiset nimekkeiden katselut
     - authorised_value: Unique_Title_Requests
       category: ERM_DATABASE_REPORTS_METRICS
-      lib: Unique title requests
+      lib: Yksittäiset nimekkeiden pyynnöt
     - authorised_value: No_License
       category: ERM_DATABASE_REPORTS_METRICS
       lib: Ei lisenssiä
@@ -304,10 +304,10 @@ tables:
       lib: Uniikkeja teoksen pyyntöjä
     - authorised_value: Unique_Title_Investigations
       category: ERM_TITLE_REPORTS_METRICS
-      lib: Unique title investigations
+      lib: Yksittäiset nimekkeiden katselut
     - authorised_value: Unique_Title_Requests
       category: ERM_TITLE_REPORTS_METRICS
-      lib: Unique title requests
+      lib: Yksittäiset nimekkeiden pyynnöt
     - authorised_value: Limit_Exceeded
       category: ERM_TITLE_REPORTS_METRICS
       lib: Raja ylittyi
@@ -3810,8 +3810,8 @@ tables:
       lib_opac: Laulaja
     - authorised_value: '723'
       category: qualif
-      lib: Tukija
-      lib_opac: Tukija
+      lib: Sponsori
+      lib_opac: Sponsori
     - authorised_value: '725'
       category: qualif
       lib: Standardisoimiselin

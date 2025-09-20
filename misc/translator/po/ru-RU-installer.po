@@ -1,10 +1,10 @@
 # Compendium of ru.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:30-0300\n"
-"PO-Revision-Date: 2025-04-24 04:07+0000\n"
+"PO-Revision-Date: 2025-08-22 03:09+0000\n"
 "Last-Translator: bibliochip <t.goverdovski@bibliotheca.ru>\n"
 "Language-Team: Koha Translation Team\n"
 "Language: ru-RU\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /ru/22.11/ru-RU-installer.po\n"
 "X-POOTLE-MTIME: 1697746895.721143\n"
@@ -36,7 +36,7 @@ msgstr "Прощено"
 # Зачет
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:5
 msgid "Credit"
-msgstr "Кредит"
+msgstr "Баланс"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:6
 msgid "A discount applied to a patrons fine"
@@ -84,7 +84,7 @@ msgstr "Утерянный экземпляр"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:5
 msgid "Manual fee"
-msgstr "Начислить вручную"
+msgstr "Платёж"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:6
 msgid "New card fee"
@@ -128,7 +128,7 @@ msgstr "Заказ находится в ожидании слишком дол�
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:16
 msgid "Credit has been voided"
-msgstr "Долг был аннулирован"
+msgstr "Зачисление аннулировано"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:description:1
 msgid "Debit types used in Koha"
@@ -174,7 +174,7 @@ msgstr "Каждую неделю"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:2
 msgid "Active"
-msgstr "Активно"
+msgstr "Активировано"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:3
 msgid "In negotiation"
@@ -262,7 +262,8 @@ msgid "Complete"
 msgstr "Завершено"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+#, fuzzy
+msgid "Aggregated full text"
 msgstr "Полностью агрегированный"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -4060,7 +4061,7 @@ msgstr "Типы ограничений читателей Koha по умолч�
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:1
 msgid "Manual restriction"
-msgstr "Ограничения по умолчанию"
+msgstr "Ручная блокировка"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:2
 msgid "Overdues"
@@ -4068,7 +4069,7 @@ msgstr "Задолжности"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:3
 msgid "Suspension"
-msgstr "Блокировка"
+msgstr "Приостановка"
 
 #: installer/data/mysql/en/mandatory/patron_restriction_types.yml:restriction_types:1:row:4
 msgid "Discharge"
@@ -4147,7 +4148,6 @@ msgid "Order received"
 msgstr "Заказ получен"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2
-#, fuzzy
 msgid "A library booking was cancelled"
 msgstr "Запрос по МБА отменен"
 
@@ -4684,9 +4684,8 @@ msgid "Recalled item awaiting pickup"
 msgstr "Экземпляры, ожидающие получения"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:97
-#, fuzzy
 msgid "Return recalled item"
-msgstr "Оповещение о возврате запрошенного экземпляра"
+msgstr "Верните возвращенную копию"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:99
 msgid "Details of patron who recalled item"
@@ -4737,9 +4736,8 @@ msgid "Your hold on [% hold.biblio.title %] is confirmed"
 msgstr "Ваш заказ [% hold.biblio.title %] подтвержден"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107
-#, fuzzy
 msgid "OAI harvest report"
-msgstr "Отчет о проблемах ЭК"
+msgstr "Отчет OAI harvest"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107
 msgid "OAI harvest report for [% servername %]"
@@ -4827,7 +4825,7 @@ msgstr "%sАвтор(ы): %s%s%s%s%s; %s%s%s%s%s%s%s;%s%s%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:103:mul:13
 msgid "%s%sISBN: %s%s%s; %s%s%s%s"
-msgstr ""
+msgstr "%s%sISBN: %s%s%s; %s%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:103:mul:14
 msgid "%sPublished by: %s%s in %s%s%s, %s%s%s%s"
@@ -4859,11 +4857,11 @@ msgstr ""
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:103:mul:21
 msgid "%sIn: %s%s %s%s%s%s%s%s"
-msgstr ""
+msgstr "%sВ: %s%s %s%s%s%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:103:mul:22
 msgid "%sURL: %s%s%s"
-msgstr ""
+msgstr "%sURL: %s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:103:mul:23
 msgid "[%sView in online catalog%s"
@@ -4910,19 +4908,16 @@ msgid "OAI harvest report for %s:"
 msgstr "Отчет о OAI harvest для %s:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:3
-#, fuzzy
 msgid "Endpoint: %s"
-msgstr "Отправлено: %s"
+msgstr "Получатель: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:4
-#, fuzzy
 msgid "Set: %s"
-msgstr "Отправлено: %s"
+msgstr "Установлено: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:5
-#, fuzzy
 msgid "Data format: %s"
-msgstr "Ожидание на: %s"
+msgstr "Формат даты: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:107:mul:6
 msgid "Record type: %s"
@@ -5233,24 +5228,20 @@ msgid "We regret to inform you, that the following booking has been cancelled.%s
 msgstr "С сожалением сообщаем вам, что следующий экземпляр не может быть предоставлен из-за его отсутствия. Ваш заказ было отменен.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:7
-#, fuzzy
 msgid "Title: %s%s"
-msgstr "Заглавие: %s"
+msgstr "Заглавие: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:9
-#, fuzzy
 msgid "Dates: %s to %s%s"
-msgstr "%sДата: %s%s"
+msgstr "Дата: %s до %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:11
-#, fuzzy
 msgid "Reason: %s%s"
-msgstr "Штрих-код: %s%s"
+msgstr "Обоснование: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:2:mul:13
-#, fuzzy
 msgid "Kind regards%s"
-msgstr "С уважением"
+msgstr "С уважением%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:30:mul:3
 msgid "Checked out to %s %s %s %s %s"
@@ -5381,9 +5372,8 @@ msgid "The new details are:%s"
 msgstr "Новые данные: %s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:3:mul:11
-#, fuzzy
 msgid "Pickup at: %s%s"
-msgstr "Место получения: %s"
+msgstr "Место получения: %s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:40:mul:3
 msgid "%sTransfer to %s%s"
@@ -5399,11 +5389,11 @@ msgstr "%sНомер заказа %s (%s) (%s заказано) ($%s кажды�
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:42:mul:1
 msgid "SFTP upload failed:"
-msgstr ""
+msgstr "Ошибка загрузки SFTP:"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:43:mul:1
 msgid "SFTP upload succeeded"
-msgstr ""
+msgstr "Загрузка SFTP выполнена успешно"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:44:mul:3
 msgid "The Interlibrary loans request number %s you placed for:"
@@ -5483,11 +5473,11 @@ msgstr "Если вы не являетесь читателем нашей би
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:3
 msgid "A public list, titled %s%s%s, has been transferred to you%s by %s%s.%s"
-msgstr ""
+msgstr "Общедоступная подборка с названием: %s%s%s, была передана Вам %s. Кем: %s%s.%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:5
 msgid "%sThe list was previously owned by %s.%s%s%s"
-msgstr ""
+msgstr "%sПредыдущий владелец подборки: %s.%s%s%s"
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:58:mul:6
 msgid "Thank you%s"
@@ -5997,7 +5987,7 @@ msgstr "Вы достигли максимально возможного кол
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:91:mul:13
 msgid "This item is on hold for another patron."
-msgstr "Этот экземпляр на заказан для другого пользователя."
+msgstr "Этот экземпляр заказан для другого пользователя."
 
 #: installer/data/mysql/en/mandatory/sample_notices.yml:letter:1:row:91:mul:15
 msgid "You are currently restricted."
@@ -6990,17 +6980,16 @@ msgstr "Телеведущий"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:40
 msgid "Braille embosser"
-msgstr ""
+msgstr "Машина для тиснения шрифта Брайля"
 
 # http://marc21.rsl.ru/index.php?doc=2771
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:42
-#, fuzzy
 msgid "Casting director"
-msgstr "Ответственный, главный, литературный, титульный редактор"
+msgstr "Директор кастинга"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:43
 msgid "Caster"
-msgstr ""
+msgstr "Литейщик"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:46
 msgid "Client"
@@ -7118,9 +7107,8 @@ msgstr "Куратор"
 
 # http://marc21.rsl.ru/index.php?doc=2771
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:86
-#, fuzzy
 msgid "Dubbing director"
-msgstr "Ответственный, главный, литературный, титульный редактор"
+msgstr "Режиссер дубляжа"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:87
 msgid "Distribution place"
@@ -7143,18 +7131,16 @@ msgid "Degree committee member"
 msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:92
-#, fuzzy
 msgid "Degree granting institution"
 msgstr "Организация, утвердившая ученую степень"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:93
-#, fuzzy
 msgid "Degree supervisor"
-msgstr "Организация, утвердившая ученую степень"
+msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:95
 msgid "DJ"
-msgstr ""
+msgstr "DJ"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:96
 msgid "Delineator"
@@ -7193,9 +7179,8 @@ msgid "Editorial director"
 msgstr "Главный редактор"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:112
-#, fuzzy
 msgid "Editor of moving image work"
-msgstr "Композитор основного музыкального произведения"
+msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:115
 msgid "Electrician"
@@ -7230,9 +7215,8 @@ msgid "Field director"
 msgstr "Руководитель полевых работ"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:126
-#, fuzzy
 msgid "Film director"
-msgstr "Руководитель полевых работ"
+msgstr "Директор фильма"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:127
 msgid "Filmmaker"
@@ -7256,7 +7240,7 @@ msgstr "Специалист по географической информац�
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:136
 msgid "Host institution"
-msgstr ""
+msgstr "Принимающее учреждение"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:138
 msgid "Host"
@@ -7275,9 +7259,8 @@ msgid "Judge"
 msgstr "Судья"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:148
-#, fuzzy
 msgid "Jurisdiction governed"
-msgstr "Порядок комплектования"
+msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:149
 msgid "Laboratory"
@@ -7348,9 +7331,8 @@ msgid "Metadata contact"
 msgstr "Ответственный за метаданные"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:171
-#, fuzzy
 msgid "Makeup artist"
-msgstr "Мим (Mime artist) см. Артист пантомимы"
+msgstr "Визажист"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:172
 msgid "Moderator"
@@ -7407,9 +7389,8 @@ msgid "Place of address"
 msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:192
-#, fuzzy
 msgid "Panelist"
-msgstr "Вокалист"
+msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:193
 msgid "Patron"
@@ -7456,18 +7437,16 @@ msgid "Printmaker"
 msgstr "Гравировщик"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:212
-#, fuzzy
 msgid "Production company"
-msgstr "Руководитель производства"
+msgstr "Производственная компания"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:214
 msgid "Production place"
 msgstr "Место производства"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:215
-#, fuzzy
 msgid "Production designer"
-msgstr "Производственный персонал"
+msgstr "Художник-постановщик"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:217
 msgid "Provider"
@@ -7504,17 +7483,14 @@ msgid "Recordist"
 msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:228
-#, fuzzy
 msgid "Addressee"
-msgstr "Примечания к адресу"
+msgstr "Адресат"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:229
-#, fuzzy
 msgid "Radio director"
-msgstr "Руководитель полевых работ"
+msgstr "Директор радио"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:230
-#, fuzzy
 msgid "Redaktor"
 msgstr "Редактор-составитель"
 
@@ -7527,9 +7503,8 @@ msgid "Researcher"
 msgstr "Исследователь"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:234
-#, fuzzy
 msgid "Radio producer"
-msgstr "Продюсер записи"
+msgstr "Радиопродюсер"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:235
 msgid "Repository"
@@ -7560,19 +7535,16 @@ msgid "Respondent-appellant"
 msgstr "Ответчик по делу, рассмотренному на основе права «справедливости», подавший апелляционную жалобу"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:245
-#, fuzzy
 msgid "Remix artist"
-msgstr "Мим (Mime artist) см. Артист пантомимы"
+msgstr "Ремикс-исполнитель"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:250
-#, fuzzy
 msgid "Sound engineer"
-msgstr "Художник по звуку, дизайнер по звуку, звукодизайнер"
+msgstr "Звукорежиссер"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:251
-#, fuzzy
 msgid "Stage director"
-msgstr "Руководитель полевых работ"
+msgstr "Режиссер-постановщик"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:252
 msgid "Sound designer"
@@ -7580,16 +7552,15 @@ msgstr "Художник по звуку, дизайнер по звуку, зв
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:254
 msgid "Special effects provider"
-msgstr ""
+msgstr "Постановщик спецэффектов"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:256
 msgid "Supporting host"
 msgstr "Хост поддержки"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:257
-#, fuzzy
 msgid "Seller"
-msgstr "Рассказчик, сказитель, сказочник"
+msgstr "Продавец"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:259
 msgid "Speaker"
@@ -7609,7 +7580,7 @@ msgstr "Художник-декоратор"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:264
 msgid "Setting"
-msgstr ""
+msgstr "Декорация"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:265
 msgid "Storyteller"
@@ -7641,9 +7612,8 @@ msgstr "Преподаватель"
 
 # http://marc21.rsl.ru/index.php?doc=2771
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:274
-#, fuzzy
 msgid "Television director"
-msgstr "Ответственный, главный, литературный, титульный редактор"
+msgstr "Телевизионный режиссёр"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:275
 msgid "Television guest"
@@ -7651,12 +7621,11 @@ msgstr "Гость студии"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:276
 msgid "Television host"
-msgstr ""
+msgstr "Телеведущий"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:277
-#, fuzzy
 msgid "Television producer"
-msgstr "Продюсер записи"
+msgstr "Телевизионный продюсер"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:278
 msgid "Transcriber"
@@ -7667,9 +7636,8 @@ msgid "University place"
 msgstr "Расположение университета"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:283
-#, fuzzy
 msgid "Voice actor"
-msgstr "Редактор-составитель"
+msgstr "Актер озвучивания"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:284
 msgid "Videographer"
@@ -7684,14 +7652,12 @@ msgid "Writer of added commentary"
 msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:287
-#, fuzzy
 msgid "Writer of added lyrics"
-msgstr "Печатник иллюстраций"
+msgstr "Автор добавленных текстов песен"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:289
-#, fuzzy
 msgid "Writer of added text"
-msgstr "Печатник иллюстраций"
+msgstr "Автор добавленного текста"
 
 #: installer/data/mysql/en/optional/marc21_relatorterms.yml:authorised_values:1:row:290
 msgid "Woodcutter"
@@ -7791,7 +7757,7 @@ msgstr "Библиотека"
 
 #: installer/data/mysql/en/optional/patron_categories.yml:categories:1:row:12
 msgid "Staff"
-msgstr "Работник библиотеки"
+msgstr "Сотрудник"
 
 #: installer/data/mysql/en/optional/patron_categories.yml:description:1
 msgid "Sample patron types and categories. Types are currently hardcoded but you can manage categories after installation from the administration module."
@@ -7971,7 +7937,7 @@ msgstr "Рождество"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:1
 msgid "Welcome to Koha"
-msgstr "Добро пожаловать"
+msgstr "Добро пожаловать в Koha"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:2
 msgid "What's Next?"
@@ -8131,7 +8097,7 @@ msgstr "      %sНомер сессии: %s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:22
 msgid "      %sUntil logout or end of session%s"
-msgstr ""
+msgstr "      %sДо выхода из системы или окончания сессии%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:23
 msgid "      %sSession cookie%s"
@@ -8215,7 +8181,7 @@ msgstr ""
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:65
 msgid "%sNon-essential cookies%s"
-msgstr ""
+msgstr "%sНе обязательные cookies%s"
 
 #: installer/data/mysql/en/optional/sample_news.yml:additional_contents_localizations:2:row:6:mul:66
 msgid "%sThe library team may create additional cookies. These are optional and will require your agreement before they are used.%s"

@@ -343,11 +343,11 @@
  [%  CASE 'manager_not_enough_permissions' %]
  <span>Den ansvariga du valde har inte tillräckliga rättigheter.</span>
  [% CASE 'no_manage_permission' %]
- <span>You do not have permissions to manage suggestions</span>
+ <span>Du har inte behörighet att hantera förslag</span>
  [% CASE 'no_create_permission' %]
- <span>You do not have permissions to create suggestions</span>
+ <span>Du har inte behörighet att skapa förslag</span>
  [% CASE 'no_delete_permission' %]
- <span>You do not have permissions to delete suggestions</span>
+ <span>Du har inte behörighet att ta bort förslag</span>
  [% CASE %]
  <span>[% m.code | html %]</span>
  [% END %]
@@ -570,10 +570,7 @@
  <span id="managedby_name" name="managedby_name">
  [% IF CAN_user_suggestions_suggestions_manage %]
  <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% logged_in_user.borrowernumber | uri %]">dig</a>
- [% ELSE %]
- Nobody
- [% END %]
- </span>
+ [% ELSE %] Ingen [% END %] </span>
  [% IF managedby_patron.borrowernumber && logged_in_user.borrowernumber != managedby_patron.borrowernumber %] | Var tidigare [% INCLUDE 'patron-title.inc' patron=managedby_patron hide_patron_infos_if_needed=1 %] [% Branches.GetName( managedby_patron.branchcode ) | html %] ([% managedby_patron.category.description | html %]) [% END %] <br />
  <a href="#patron_search_modal_manager" id="edit_manager" data-bs-toggle="modal"><i class="fa fa-search"></i> Välj ansvarig</a>
  [% IF managedby_patron.borrowernumber && logged_in_user.borrowernumber != managedby_patron.borrowernumber %]

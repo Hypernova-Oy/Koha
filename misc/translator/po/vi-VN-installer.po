@@ -1,42 +1,40 @@
 # Compendium of vi.
 msgid ""
 msgstr ""
-"Project-Id-Version: Koha 24.11.03.000\n"
+"Project-Id-Version: Koha 24.11.08.000\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-02 07:37-0300\n"
-"PO-Revision-Date: 2022-05-01 12:47-0300\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2025-08-12 02:05+0000\n"
+"Last-Translator: Heidi Ruan <heidi@sris.com.tw>\n"
 "Language-Team: Koha Translation Team\n"
-"Language: vi\n"
+"Language: vi-VN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Translate Toolkit 2.2.5\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.11.4\n"
 "X-Pootle-Revision: 1\n"
 "X-Pootle-Path: /vi/22.11/vi-VN-installer.po\n"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:1
 msgid "Overpayment refund"
-msgstr ""
+msgstr "Hoàn trả khoản thanh toán thừa"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:2
-#, fuzzy
 msgid "Payment"
-msgstr "payment"
+msgstr "Thanh toán"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:3
 msgid "Writeoff"
-msgstr ""
+msgstr "Xóa khoản phải thu"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:4
-#, fuzzy
 msgid "Forgiven"
-msgstr "Miễn giảm tiền phạt"
+msgstr "Miễn"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:5
-#, fuzzy
 msgid "Credit"
-msgstr "Nộp tiền vào tài khoản"
+msgstr "Hạn mức sử dụng"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:6
 msgid "A discount applied to a patrons fine"
@@ -44,15 +42,15 @@ msgstr ""
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:7
 msgid "Refund"
-msgstr ""
+msgstr "Hoàn tiền"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:8
 msgid "Lost item fee refund"
-msgstr ""
+msgstr "Hoàn phí tài liệu mất"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:9
 msgid "Purchase"
-msgstr ""
+msgstr "Mua"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:10
 #, fuzzy
@@ -61,26 +59,23 @@ msgstr "Phân hệ lưu thông"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:account_credit_types:1:row:11
 msgid "Lost item processing fee refund"
-msgstr ""
+msgstr "Hoàn phí xử lý tài liệu bị mất"
 
 #: installer/data/mysql/en/mandatory/account_credit_types.yml:description:1
 msgid "Credit types used in Koha"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:1
-#, fuzzy
 msgid "Account creation fee"
-msgstr "Kiểm tra ÂPĐK quá hạn"
+msgstr "Phí tạo tài khoản"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:2
-#, fuzzy
 msgid "Account renewal fee"
-msgstr "Kiểu tiền phạt"
+msgstr "Phí gia hạn tài khoản"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:3
-#, fuzzy
 msgid "Article request fee"
-msgstr "Bài báo"
+msgstr "Phí yêu cầu đặt bài báo"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:4
 #, fuzzy
@@ -89,7 +84,7 @@ msgstr "Bị mất thẻ"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:5
 msgid "Manual fee"
-msgstr ""
+msgstr "Phí thủ công"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:6
 msgid "New card fee"
@@ -102,27 +97,27 @@ msgstr "Overdue Notice Markup"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:8
 msgid "Lost item processing fee"
-msgstr ""
+msgstr "Phí xử lý vật phẩm bị mất"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:9
 msgid "Payment from library to patron"
-msgstr ""
+msgstr "Khoản thanh toán từ thư viện cho người dùng"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:10
 msgid "Rental fee"
-msgstr ""
+msgstr "Phí mượn tài liệu"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:11
 msgid "Daily rental fee"
-msgstr ""
+msgstr "Phí thuê theo ngày"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:12
 msgid "Renewal of daily rental item"
-msgstr ""
+msgstr "Gia hạn tài liệu thuê theo ngày"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:13
 msgid "Renewal of rental item"
-msgstr ""
+msgstr "Gia hạn mục thuê"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:14
 msgid "Hold fee"
@@ -130,12 +125,11 @@ msgstr ""
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:15
 msgid "Hold waiting too long"
-msgstr ""
+msgstr "Yêu cầu đặt đã chờ quá hạn"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:account_debit_types:1:row:16
-#, fuzzy
 msgid "Credit has been voided"
-msgstr "Đặt mượn bị hủy bỏ"
+msgstr "Khoản tín dụng đã bị hủy"
 
 #: installer/data/mysql/en/mandatory/account_debit_types.yml:description:1
 msgid "Debit types used in Koha"
@@ -208,9 +202,8 @@ msgid "Renew"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:9
-#, fuzzy
 msgid "Cancel"
-msgstr "Dance forms"
+msgstr "Hủy bỏ"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:10
 #, fuzzy
@@ -276,7 +269,7 @@ msgid "Complete"
 msgstr ", compiler"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:28
-msgid "Aggregated full"
+msgid "Aggregated full text"
 msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:29
@@ -304,9 +297,8 @@ msgid "Online reference"
 msgstr "Thông số"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:34
-#, fuzzy
 msgid "Print"
-msgstr "Máy in"
+msgstr "In"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:2:row:35
 msgid "Streaming media"
@@ -2120,7 +2112,7 @@ msgstr ""
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:124
 msgid "English"
-msgstr "English"
+msgstr "Tiếng Anh"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:125
 msgid "English, Middle (1100-1500)"
@@ -2182,9 +2174,8 @@ msgid "Fon"
 msgstr "Phông chữ"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:138
-#, fuzzy
 msgid "French"
-msgstr "f- French only"
+msgstr "Tiếng Pháp"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:139
 msgid "French, Middle (ca.1400-1600)"
@@ -2241,9 +2232,8 @@ msgid "Georgian"
 msgstr "ma- Georgian"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:151
-#, fuzzy
 msgid "German"
-msgstr "Munich, Germany"
+msgstr "Tiếng Đức"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:152
 msgid "Geez"
@@ -2466,9 +2456,8 @@ msgid "Iroquoian languages"
 msgstr "Sign languages"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:203
-#, fuzzy
 msgid "Italian"
-msgstr "realia"
+msgstr "Tiếng Ý"
 
 #: installer/data/mysql/en/mandatory/auth_values.yml:authorised_values:4:row:204
 #, fuzzy
@@ -6809,7 +6798,7 @@ msgstr ""
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:3:row:4
 msgid "Missing"
-msgstr "Thiếu"
+msgstr "Thất lạc"
 
 #: installer/data/mysql/en/optional/auth_val.yml:authorised_values:3:row:5
 msgid "Missing from bundle"
@@ -7532,9 +7521,8 @@ msgid "Received and complete or Ceased"
 msgstr ""
 
 #: installer/data/mysql/en/optional/marc21_holdings_coded_values.yml:authorised_values:1:row:103
-#, fuzzy
 msgid "On order"
-msgstr "Đang đặt hàng ("
+msgstr "Đang đặt hàng"
 
 #: installer/data/mysql/en/optional/marc21_holdings_coded_values.yml:authorised_values:1:row:104
 #, fuzzy

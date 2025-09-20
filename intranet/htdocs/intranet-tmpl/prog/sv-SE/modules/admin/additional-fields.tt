@@ -136,17 +136,12 @@
  [% IF CAN_user_erm %]
  <h2>E-resurshantering</h2>
  <ul>
- [% WRAPPER table_option value="erm_agreements" %]Agreements[% END %]
- [% WRAPPER table_option value="erm_licenses" %]Licenses[% END %]
- [% WRAPPER table_option value="erm_packages" %]Packages[% END %]
- </ul>
+ [% WRAPPER table_option value="erm_agreements" %]Avtal[% END %] [% WRAPPER table_option value="erm_licenses" %]Licenser[% END %] [% WRAPPER table_option value="erm_packages" %]Paket[% END %] </ul>
  [% END %]
  [% IF CAN_user_updatecharges_remaining_permissions %]
  <h3>Låntagare</h3>
  <ul>
- [% WRAPPER table_option value="accountlines:credit" %]Account lines (credit)[% END %]
- [% WRAPPER table_option value="accountlines:debit" %]Account lines (debit)[% END %]
- </ul>
+ [% WRAPPER table_option value="accountlines:credit" %]Kontorader (kredit)[% END %] [% WRAPPER table_option value="accountlines:debit" %]Kontorader (debit)[% END %] </ul>
  [% END %]
  [% IF CAN_user_serials_edit_subscription %]
  <h2>Periodika</h2>
@@ -296,7 +291,6 @@
 
 [% MACRO jsinclude BLOCK %]
  [% INCLUDE "datatables.inc" %]
- [% Asset.js("js/form-submit.js") | $raw %]
  <script>
         $(document).ready(function(){
             $('#selecttable').find(":submit").hide();

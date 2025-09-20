@@ -41,7 +41,7 @@
  [% INCLUDE 'messages.inc' %]
  <h1>Lisää varantoja <em>[% course.course_name | html %]</em></h1>
  [% IF action == 'invalid_course' %]
- <div id="invalid-course-error" class="alert alert-warning">Virheellinen kurssi.</div>
+ <div id="invalid-course-error" class="alert alert-warning">Virheellinen kurssi</div>
  [% END %]
 
  [% IF action == 'display_form' %]

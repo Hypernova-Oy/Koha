@@ -508,7 +508,7 @@
  </select>
  </td>
  [% END %]
- <td><input type="text" name="rentaldiscount" id="rentaldiscount" size="2" /></td>
+ <td><input type="text" name="rentaldiscount" id="rentaldiscount" size="3" inputmode="decimal" pattern="^\d+(\.\d{2})?$" /></td>
  [% IF Koha.Preference('UseRecalls') %]
  <td><input type="text" name="recalls_allowed" id="recalls_allowed" size="3"></td>
  <td><input type="text" name="recalls_per_record" id="recalls_per_record" size="3"></td>
@@ -1058,37 +1058,37 @@
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( defaultRefundRule == 'refund_unpaid' ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid" selected="selected">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( defaultRefundRule == 'charge' ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge" selected="selected">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( defaultRefundRule == 'restore' ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore" selected="selected">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( defaultRefundRule == 0 ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0" selected="selected">Lämna avgift för borttappat exemplar</option>
+ <option value="0" selected="selected">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSE %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% END %]
  [% ELSE %]
  [%# Branch-specific %]
@@ -1103,7 +1103,7 @@
  [% ELSIF defaultRefundRule == 'restore' %]
  <span>(Återbetala avgift för borttappat exemplar och återställ förseningsavgift)</span>
  [% ELSE %]
- <span>(Lämna avgift för borttappat exemplar)</span>
+ <span>Använd standard (Låt avgift för borttappat exemplar stå kvar på låntagaren)</span>
  [% END %]
  </option>
  [% IF ( not refundLostItemFeeRule ) %]
@@ -1111,38 +1111,38 @@
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSE %]
  [% IF ( refundLostItemFeeRule.rule_value == 'refund' ) %]
  <option value="refund" selected="selected">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( refundLostItemFeeRule.rule_value == 'refund_unpaid' ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid" selected="selected">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( refundLostItemFeeRule.rule_value == 'charge' ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge" selected="selected">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( refundLostItemFeeRule.rule_value == 'restore' ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore" selected="selected">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0">Lämna avgift för borttappat exemplar</option>
+ <option value="0">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( refundLostItemFeeRule.rule_value == 0 ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för förkommet exemplar (enbart om obetald)</option>
  <option value="charge">Återbetala avgift för borttappat exemplar och lägg på ny förseningsavgift</option>
  <option value="restore">Återbetala avgift för borttappat exemplar och återställ förseningsavgift</option>
- <option value="0" selected="selected">Lämna avgift för borttappat exemplar</option>
+ <option value="0" selected="selected">Låt avgift för borttappat exemplar stå kvar på låntagaren</option>
  [% END %]
  [% END %]
  [% END %]
@@ -1155,19 +1155,19 @@
  [% IF ( defaultProcessingRefundRule == 'refund' ) %]
  <option value="refund" selected="selected">Återbetala avgift för hantering av förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för hantering av förkommet exemplar (enbart om obetald)</option>
- <option value="0">Lämna avgift för hantering av borttappat exemplar</option>
+ <option value="0">Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( defaultProcessingRefundRule == 'refund_unpaid' ) %]
  <option value="refund">Återbetala avgift för förkommet exemplar</option>
  <option value="refund_unpaid" selected="selected">Återbetala avgift för hantering av förkommet exemplar (enbart om obetald)</option>
- <option value="0">Lämna avgift för hantering av borttappat exemplar</option>
+ <option value="0">Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( defaultProcessingRefundRule == 0 ) %]
  <option value="refund">Återbetala avgift för hantering av förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för hantering av förkommet exemplar (enbart om obetald)</option>
- <option value="0" selected="selected">Lämna avgift för hantering av borttappat exemplar</option>
+ <option value="0" selected="selected">Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren</option>
  [% ELSE %]
  <option value="refund">Återbetala avgift för hantering av förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för hantering av förkommet exemplar (enbart om obetald)</option>
- <option value="0">Lämna avgift för hantering av borttappat exemplar</option>
+ <option value="0">Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren</option>
  [% END %]
  [% ELSE %]
  [%# Branch-specific %]
@@ -1178,26 +1178,26 @@
  [% END %]
  [% IF defaultProcessingRefundRule == 'refund' %]
  <span>Återbetala avgift för förkommet exemplar</span>
- [% ELSIF defaultProcessingRefundRule == 'refund_unpaid' %] Använd standard (Återbetala avgift för hantering av förkommet exemplar (enbart om inte betalt)) [% ELSE %] <span>Lämna avgift för hantering av borttappat exemplar</span>
+ [% ELSIF defaultProcessingRefundRule == 'refund_unpaid' %] Använd standard (Återbetala avgift för hantering av förkommet exemplar (enbart om inte betalt)) [% ELSE %] <span>Använd standard (Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren)</span>
  [% END %]
  </option>
  [% IF ( not refundProcessingFeeRule ) %]
  <option value="refund">Återbetala avgift för hantering av förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för hantering av förkommet exemplar (enbart om obetald)</option>
- <option value="0">Lämna avgift för hantering av borttappat exemplar</option>
+ <option value="0">Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren</option>
  [% ELSE %]
  [% IF ( refundProcessingFeeRule.rule_value == 'refund' ) %]
  <option value="refund" selected="selected">Återbetala avgift för hantering av förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för hantering av förkommet exemplar (enbart om obetald)</option>
- <option value="0">Lämna avgift för hantering av borttappat exemplar</option>
+ <option value="0">Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( refundProcessingFeeRule.rule_value == 'refund_unpaid' ) %]
  <option value="refund">Återbetala avgift för hantering av förkommet exemplar</option>
  <option value="refund_unpaid" selected="selected">Återbetala avgift för hantering av förkommet exemplar (enbart om obetald)</option>
- <option value="0">Lämna avgift för hantering av borttappat exemplar</option>
+ <option value="0">Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren</option>
  [% ELSIF ( refundProcessingFeeRule.rule_value == 0 ) %]
  <option value="refund">Återbetala avgift för hantering av förkommet exemplar</option>
  <option value="refund_unpaid">Återbetala avgift för hantering av förkommet exemplar (enbart om obetald)</option>
- <option value="0" selected="selected">Lämna avgift för hantering av borttappat exemplar</option>
+ <option value="0" selected="selected">Låt avgift för hantering av borttappat exemplar stå kvar på låntagaren</option>
  [% END %]
  [% END %]
  [% END %]
@@ -1463,7 +1463,7 @@
                         // specific processing for the Note column
                         var note = $(this).find("a[id='viewnote']").data("content");
                         $(current_column).find("input[type='text']").val(note);
-                    } else if ( current_input_id === "hardduedatecompare" ) {
+                        } else if (current_input_id === "hardduedate") {
                         // specific processing for Hard due date
                         $(current_column).find("select").val(itm_code);
                         var hardduedate = $(this).data('duedate');

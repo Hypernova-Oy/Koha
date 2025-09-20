@@ -1706,7 +1706,12 @@ sub to_api {
     $args = defined $args ? {%$args} : {};
     delete $args->{embed};
 
-    my $json_biblioitem = $self->biblioitem->to_api( $args );
+    my $biblioitem = $self->biblioitem;
+
+    Koha::Exceptions::RelatedObjectNotFound->throw( accessor => 'biblioitem', class => 'Koha::Biblioitem' )
+        unless $biblioitem;
+
+    my $json_biblioitem = $biblioitem->to_api($args);
     return unless $json_biblioitem;
 
     return { %$json_biblioitem, %$json_biblio };
@@ -1890,7 +1895,7 @@ sub generate_marc_host_field {
 
     my $marcflavour = C4::Context->preference('marcflavour');
     my $marc_host   = $self->metadata->record;
-    my %sfd;
+    my @sfd;
     my $host_field;
     my $link_field;
 
@@ -1900,7 +1905,48 @@ sub generate_marc_host_field {
         if ( $host_field = $marc_host->field('100') || $marc_host->field('110') || $marc_host->field('111') ) {
             my $s = $host_field->as_string('ab');
             if ($s) {
-                $sfd{a} = $s;
+                push @sfd, ( a => $s );
+            }
+        }
+
+        # Title
+        if ( $host_field = $marc_host->field('245') ) {
+            my $s = $host_field->as_string('abnp');
+            if ($s) {
+                push @sfd, ( t => $s );
+            }
+        }
+
+        # Publication
+        my $p;
+        my @publication_fields = $marc_host->field('264');
+        @publication_fields = $marc_host->field('260') unless (@publication_fields);
+        my $index = 0;
+        for my $host_field (@publication_fields) {
+
+            # Use first entry unless we find a preferred indicator1 = 3
+            if ( $index == 0 ) {
+            my $s = $host_field->as_string('abc');
+            if ($s) {
+                $p = $s;
+            }
+                $index++;
+            }
+            if ( $host_field->indicator(1) && ( $host_field->indicator(1) eq '3' ) ) {
+                my $s = $host_field->as_string('abc');
+                if ($s) {
+                    $p = $s;
+                }
+                last;
+            }
+        }
+        push @sfd, ( d => $p ) if $p;
+
+        # Uniform title
+        if ( $host_field = $marc_host->field('240') ) {
+            my $s = $host_field->as_string('a');
+            if ($s) {
+                push @sfd, ( s => $s );
             }
         }
 
@@ -1908,31 +1954,7 @@ sub generate_marc_host_field {
         if ( $host_field = $marc_host->field('250') ) {
             my $s = $host_field->as_string('ab');
             if ($s) {
-                $sfd{b} = $s;
-            }
-        }
-
-        # Publication
-        if ( $host_field = $marc_host->field('260') ) {
-            my $s = $host_field->as_string('abc');
-            if ($s) {
-                $sfd{d} = $s;
-            }
-        }
-
-        # Uniform title
-        if ( $host_field = $marc_host->field('240') ) {
-            my $s = $host_field->as_string('a');
-            if ($s) {
-                $sfd{s} = $s;
-            }
-        }
-
-        # Title
-        if ( $host_field = $marc_host->field('245') ) {
-            my $s = $host_field->as_string('ab');
-            if ($s) {
-                $sfd{t} = $s;
+                push @sfd, ( b => $s );
             }
         }
 
@@ -1940,7 +1962,7 @@ sub generate_marc_host_field {
         if ( $host_field = $marc_host->field('022') ) {
             my $s = $host_field->as_string('a');
             if ($s) {
-                $sfd{x} = $s;
+                push @sfd, ( x => $s );
             }
         }
 
@@ -1948,53 +1970,33 @@ sub generate_marc_host_field {
         if ( $host_field = $marc_host->field('020') ) {
             my $s = $host_field->as_string('a');
             if ($s) {
-                $sfd{z} = $s;
+                push @sfd, ( z => $s );
             }
         }
         if ( C4::Context->preference('UseControlNumber') ) {
 
+            my $w;
+
             # Control number
             if ( $host_field = $marc_host->field('001') ) {
-                $sfd{w} = $host_field->data();
+                $w = $host_field->data();
             }
 
             # Control number identifier
             if ( $host_field = $marc_host->field('003') ) {
-                $sfd{w} = '(' . $host_field->data() . ')' . $sfd{w};
+                $w = '(' . $host_field->data() . ')' . $w;
             }
+
+            push @sfd, ( w => $w ) if $w;
         }
-        $link_field = MARC::Field->new( 773, '0', ' ', %sfd );
+        $link_field = MARC::Field->new( 773, '0', ' ', @sfd );
     } elsif ( $marcflavour eq 'UNIMARC' ) {
 
         # Author
         if ( $host_field = $marc_host->field('700') || $marc_host->field('710') || $marc_host->field('720') ) {
             my $s = $host_field->as_string('ab');
             if ($s) {
-                $sfd{a} = $s;
-            }
-        }
-
-        # Place of publication
-        if ( $host_field = $marc_host->field('210') ) {
-            my $s = $host_field->as_string('a');
-            if ($s) {
-                $sfd{c} = $s;
-            }
-        }
-
-        # Date of publication
-        if ( $host_field = $marc_host->field('210') ) {
-            my $s = $host_field->as_string('d');
-            if ($s) {
-                $sfd{d} = $s;
-            }
-        }
-
-        # Edition statement
-        if ( $host_field = $marc_host->field('205') ) {
-            my $s = $host_field->as_string();
-            if ($s) {
-                $sfd{e} = $s;
+                push @sfd, ( a => $s );
             }
         }
 
@@ -2002,7 +2004,31 @@ sub generate_marc_host_field {
         if ( $host_field = $marc_host->field('200') ) {
             my $s = $host_field->as_string('a');
             if ($s) {
-                $sfd{t} = $s;
+                push @sfd, ( t => $s );
+            }
+        }
+
+        # Place of publication
+        if ( $host_field = $marc_host->field('210') ) {
+            my $s = $host_field->as_string('a');
+            if ($s) {
+                push @sfd, ( c => $s );
+            }
+        }
+
+        # Date of publication
+        if ( $host_field = $marc_host->field('210') ) {
+            my $s = $host_field->as_string('d');
+            if ($s) {
+                push @sfd, ( d => $s );
+            }
+        }
+
+        # Edition statement
+        if ( $host_field = $marc_host->field('205') ) {
+            my $s = $host_field->as_string();
+            if ($s) {
+                push @sfd, ( e => $s );
             }
         }
 
@@ -2010,7 +2036,7 @@ sub generate_marc_host_field {
         if ( $host_field = $marc_host->field('856') ) {
             my $s = $host_field->as_string('u');
             if ($s) {
-                $sfd{u} = $s;
+                push @sfd, ( u => $s );
             }
         }
 
@@ -2018,7 +2044,7 @@ sub generate_marc_host_field {
         if ( $host_field = $marc_host->field('011') ) {
             my $s = $host_field->as_string('a');
             if ($s) {
-                $sfd{x} = $s;
+                push @sfd, ( x => $s );
             }
         }
 
@@ -2026,13 +2052,14 @@ sub generate_marc_host_field {
         if ( $host_field = $marc_host->field('010') ) {
             my $s = $host_field->as_string('a');
             if ($s) {
-                $sfd{y} = $s;
+                push @sfd, ( y => $s );
             }
         }
         if ( $host_field = $marc_host->field('001') ) {
-            $sfd{0} = $host_field->data();
+
+            push @sfd, ( 0 => $host_field->data() );
         }
-        $link_field = MARC::Field->new( 461, '0', ' ', %sfd );
+        $link_field = MARC::Field->new( 461, '0', ' ', @sfd );
     }
 
     return $link_field;

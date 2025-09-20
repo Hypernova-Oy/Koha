@@ -38,7 +38,7 @@
  <main>
  [% INCLUDE 'messages.inc' %]
 
- <h1>Subscription history for <em>[% title | html %]</em></h1>
+ <h1>Prenumerationshistorik för <em>[% title | html %]</em></h1>
 
  <div id="subscription_form_history">
  <form method="post" action="/cgi-bin/koha/serials/subscription-history.pl">

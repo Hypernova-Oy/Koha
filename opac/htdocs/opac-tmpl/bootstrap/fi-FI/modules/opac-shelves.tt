@@ -193,7 +193,7 @@
  [% CASE 'unauthorized_on_add_biblio' %]
  <span>Sinulla ei ole oikeutta lisätä nimekettä tähän listaan.</span>
  [% CASE 'unauthorized_transfer' %]
- <span>Sinulla ei ole oikeutta siirtää tämän listan omistajuutta.</span>
+ <span>Siirto ei ole sallittu: Sinulla tai valitulla käyttäjällä ei ole riittäviä käyttäjäoikeuksia.</span>
  [% CASE 'no_biblio_removed' %]
  <span>Yhtään tietuetta ei poistettu.</span>
  [% CASE 'new_owner_not_found' %]
@@ -243,7 +243,7 @@
  </div>
  </div>
 
- [% IF Koha.Preference( 'opacuserlogin' ) == 1 %]
+ [% IF ( Koha.Preference( 'opacuserlogin' ) == 1 ) && ( ! Koha.Preference('OPACDisableSendList') ) %]
  <span class="sendlist"><a href="/cgi-bin/koha/opac-sendshelf.pl?shelfid=[% shelf.shelfnumber | uri %]" class="btn btn-link send"><i class="fa fa-fw fa-envelope" aria-hidden="true"></i> Lähetä lista</a></span>
  [% END %]
 
@@ -660,7 +660,7 @@
  </div>
  <br/>
  <fieldset class="action">
- <input class="submit" type="submit" value="Siirto" />
+ <input class="submit" type="submit" value="Siirrä" />
  <a href="/cgi-bin/koha/opac-shelves.pl?op=list&amp;public=0" class="cancel">Peruuta</a>
  </fieldset>
  </fieldset>
@@ -761,7 +761,7 @@
  <input type="hidden" name="public" value="0" />
  <input type="hidden" name="op" value="cud-transfer" />
  <input type="hidden" name="referer" value="list" />
- <button type="submit" class="btn btn-link transfershelf"> Siirto</button>
+ <button type="submit" class="btn btn-link transfershelf"> Siirrä</button>
  </form>
  [% END %]
  [% IF s.is_shared_with( loggedinusernumber ) %]

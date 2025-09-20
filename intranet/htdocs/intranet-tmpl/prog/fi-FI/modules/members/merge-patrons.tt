@@ -164,7 +164,7 @@
  </fieldset>
 
  [% ELSE %]
- <div class="alert alert-warning">Virhe: Valitse vähintään kaksi asiakastietuetta yhdistettäväksi.</div>
+ <div class="alert alert-warning">Virhe: Valitse vähintään kaksi asiakastietuetta yhdistettäväksi</div>
  [% END %]
  </form>
  [% ELSIF op == 'cud-merge' %]

@@ -56,7 +56,7 @@
  <Value code="[aa#]"><description>Kaksimerkkinen koodi</description></Value>
  <Value code="[aaa]"><description>Kolmimerkkinen koodi</description></Value>
  </Position>
- <Position pos="18"><name>Kuvitus, koodi 1</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat minkä tyyppistä kuvitusta kuvailun kohteeseen sisältyy. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="18"><name>Kuvitus, koodi 1</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri yksimerkkistä koodia, jotka ilmaisevat minkä tyyppistä kuvitusta kuvailun kohteeseen sisältyy. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä-merkki (#)</description>
  <Value code="#"><description>Ei kuvitusta</description></Value>
  <Value code="a"><description>Kuvitus</description></Value>
  <Value code="b"><description>Kartat</description></Value>
@@ -75,7 +75,7 @@
  <Value code="p"><description>Piirroskuva</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="19"><name>Kuvitus, koodi 2</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat minkä tyyppistä kuvitusta kuvailun kohteeseen sisältyy. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="19"><name>Kuvitus, koodi 2</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri yksimerkkistä koodia, jotka ilmaisevat minkä tyyppistä kuvitusta kuvailun kohteeseen sisältyy. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä-merkki (#)</description>
  <Value code="#"><description>Ei kuvitusta</description></Value>
  <Value code="a"><description>Kuvitus</description></Value>
  <Value code="b"><description>Kartat</description></Value>
@@ -94,7 +94,7 @@
  <Value code="p"><description>Piirroskuva</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="20"><name>Kuvitus, koodi 3</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat minkä tyyppistä kuvitusta kuvailun kohteeseen sisältyy. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="20"><name>Kuvitus, koodi 3</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri yksimerkkistä koodia, jotka ilmaisevat minkä tyyppistä kuvitusta kuvailun kohteeseen sisältyy. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä-merkki (#)</description>
  <Value code="#"><description>Ei kuvitusta</description></Value>
  <Value code="a"><description>Kuvitus</description></Value>
  <Value code="b"><description>Kartat</description></Value>
@@ -113,7 +113,7 @@
  <Value code="p"><description>Piirroskuva</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="21"><name>Kuvitus, koodi 4</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat minkä tyyppistä kuvitusta kuvailun kohteeseen sisältyy. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="21"><name>Kuvitus, koodi 4</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri yksimerkkistä koodia, jotka ilmaisevat minkä tyyppistä kuvitusta kuvailun kohteeseen sisältyy. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä-merkki (#)</description>
  <Value code="#"><description>Ei kuvitusta</description></Value>
  <Value code="a"><description>Kuvitus</description></Value>
  <Value code="b"><description>Kartat</description></Value>
@@ -127,24 +127,24 @@
  <Value code="j"><description>Sukutaulukko</description></Value>
  <Value code="k"><description>Lomake tai kaavake</description></Value>
  <Value code="l"><description>Mallikappale tai näyte</description></Value>
- <Value code="m"><description>Äänite (phonodisc, phonowire ym.)</description></Value>
+ <Value code="m"><description>Äänite, phonodisc, phonowire ym.</description></Value>
  <Value code="o"><description>Valokuvat</description></Value>
  <Value code="p"><description>Piirroskuva</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="22"><name>Kohderyhmä</name><description>Millaiselle kohderyhmälle kuvailun kohde on suunnattu.</description>
+ <Position pos="22"><name>Kohderyhmä</name><description>Yksimerkkinen aakkosellinen koodi, joka kuvaa, millaiselle kohderyhmälle kuvailun kohde on suunnattu</description>
  <Value code="#"><description>Tuntematon tai ei määritelty</description></Value>
  <Value code="a"><description>Esikouluikäiset</description></Value>
  <Value code="b"><description>Ala-asteikäiset</description></Value>
  <Value code="c"><description>Yläasteikäiset</description></Value>
  <Value code="d"><description>Lukioikäiset ja vastaavat</description></Value>
- <Value code="e"><description>Aikuiset</description></Value>
+ <Value code="e"><description>Aikuinen</description></Value>
  <Value code="f"><description>Erityisryhmä</description></Value>
  <Value code="g"><description>Yleinen</description></Value>
  <Value code="j"><description>Lapset ja nuoret</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="23"><name>Ilmiasu</name><description>Kohteen materiaalin muoto.</description>
+ <Position pos="23"><name>Ilmiasu</name><description>Kohteen materiaalin muoto</description>
  <Value code="#"><description>Ei mikään seuraavista</description></Value>
  <Value code="a"><description>Mikrofilmi</description></Value>
  <Value code="b"><description>Mikrokortti</description></Value>
@@ -157,7 +157,7 @@
  <Value code="s"><description>Elektroninen</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="24"><name>Sisällön tyyppi - koodi 1</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat aineiston sisältöä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="24"><name>Sisällön tyyppi - koodi 1</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat aineiston sisältöä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#)</description>
  <Value code="#"><description>Sisältöä ei määritelty</description></Value>
  <Value code="2"><description>Eripainokset</description></Value>
  <Value code="5"><description>Kalenterit</description></Value>
@@ -188,7 +188,7 @@
  <Value code="z"><description>Sopimukset</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="25"><name>Sisällön tyyppi - koodi 2</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat aineiston sisältöä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="25"><name>Sisällön tyyppi - koodi 2</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat aineiston sisältöä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#)</description>
  <Value code="#"><description>Sisältöä ei määritelty</description></Value>
  <Value code="2"><description>Eripainokset</description></Value>
  <Value code="5"><description>Kalenterit</description></Value>
@@ -219,7 +219,7 @@
  <Value code="z"><description>Sopimukset</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="26"><name>Sisällön tyyppi - koodi 3</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat aineiston sisältöä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="26"><name>Sisällön tyyppi - koodi 3</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat aineiston sisältöä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#)</description>
  <Value code="#"><description>Sisältöä ei määritelty</description></Value>
  <Value code="2"><description>Eripainokset</description></Value>
  <Value code="5"><description>Kalenterit</description></Value>
@@ -250,7 +250,7 @@
  <Value code="z"><description>Sopimukset</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="27"><name>Sisällön tyyppi - koodi 4</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat aineiston sisältöä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="27"><name>Sisällön tyyppi - koodi 4</name><description>Aakkosjärjestyksessä voidaan tallentaa neljä eri koodia, jotka ilmaisevat aineiston sisältöä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#)</description>
  <Value code="#"><description>Sisältöä ei määritelty</description></Value>
  <Value code="2"><description>Eripainokset</description></Value>
  <Value code="5"><description>Kalenterit</description></Value>
@@ -281,7 +281,7 @@
  <Value code="z"><description>Sopimukset</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="28"><name>Virallisjulkaisu</name><description>Onko kohde virallisen tai julkishallinnollisen tahon tuottama tai sen käyttöön tarkoitettu ja mikä on kyseisen tahon toimivalta.</description>
+ <Position pos="28"><name>Virallisjulkaisu</name><description>Onko kohde virallisen tai julkishallinnollisen tahon tuottama tai sen käyttöön tarkoitettu ja mikä on kyseisen tahon toimivalta</description>
  <Value code="#"><description>Ei virallisjulkaisu</description></Value>
  <Value code="a"><description>Itsehallinnollinen tai puoli-itsehallinnollinen</description></Value>
  <Value code="c"><description>Monta paikallista yksikköä</description></Value>
@@ -300,12 +300,12 @@
  <Value code="1"><description>Kokousjulkaisu</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="30"><name>Juhlajulkaisu</name><description>Onko kuvailun kohde juhlajulkaisu.</description>
+ <Position pos="30"><name>Juhlajulkaisu</name><description>Onko kuvailun kohde juhlajulkaisu</description>
  <Value code="0"><description>Ei juhlakirja</description></Value>
  <Value code="1"><description>Juhlajulkaisu</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="31"><name>Hakemisto</name><description>Sisältääkö kuvailun kohde itseään koskevan hakemiston.</description>
+ <Position pos="31"><name>Hakemisto</name><description>Sisältääkö kuvailun kohde itseään koskevan hakemiston</description>
  <Value code="0"><description>Ei sisällysluetteloa</description></Value>
  <Value code="1"><description>Hakemisto</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
@@ -335,7 +335,7 @@
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
  <Position pos="35-37" url="http://www.loc.gov/marc/languages/language_code.html"><urltext>Lista kielikoodeista</urltext><name>Kieli</name><description></description>
- <Value code="###"><description>Tietoa ei toimitettu</description></Value>
+ <Value code="###"><description>Ei tietoja tarjolla</description></Value>
  <Value code="mul"><description>Useita kieliä</description></Value>
  <Value code="sgn"><description>Viittomakielet</description></Value>
  <Value code="und"><description>Ei määritelty</description></Value>
@@ -413,19 +413,19 @@
  <Value code="[aaa]"><description>Kolmimerkkinen koodi</description></Value>
  </Position>
  <Position pos="18-21"><name>Määrittelemätön</name><description>Kukin sisältää tyhjämerkin (#) tai täyttömerkin (|)</description></Position>
- <Position pos="22"><name>Kohderyhmä</name><description>Millaiselle kohderyhmälle kuvailun kohde on suunnattu.</description>
+ <Position pos="22"><name>Kohderyhmä</name><description>Millaiselle kohderyhmälle kuvailun kohde on suunnattu</description>
  <Value code="#"><description>Tuntematon tai ei määritelty</description></Value>
  <Value code="a"><description>Esikouluikäiset</description></Value>
  <Value code="b"><description>Ala-asteikäiset</description></Value>
  <Value code="c"><description>Yläasteikäiset</description></Value>
  <Value code="d"><description>Lukioikäiset ja vastaavat</description></Value>
- <Value code="e"><description>Aikuiset</description></Value>
+ <Value code="e"><description>Aikuinen</description></Value>
  <Value code="f"><description>Erityisryhmä</description></Value>
  <Value code="g"><description>Yleinen</description></Value>
  <Value code="j"><description>Lapset ja nuoret</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="23"><name>Ilmiasu</name><description>Kohteen materiaalin muoto.</description>
+ <Position pos="23"><name>Ilmiasu</name><description>Kohteen materiaalin muoto</description>
  <Value code="#"><description>Tuntematon tai ei määritelty</description></Value>
  <Value code="o"><description>Verkkoaineisto</description></Value>
  <Value code="q"><description>Paikalliskäyttöinen elektroninen tallenne</description></Value>
@@ -465,7 +465,7 @@
  </Position>
  <Position pos="29-34"><name>Määrittelemätön</name><description>Kuusi määrittelemätöntä merkkipaikkaa; kukin sisältää tyhjämerkin (#) tai täyttömerkin (|).</description></Position>
  <Position pos="35-37" url="http://www.loc.gov/marc/languages/language_code.html"><urltext>Lista kielikoodeista</urltext><name>Kieli</name><description></description>
- <Value code="###"><description>Tietoa ei toimitettu</description></Value>
+ <Value code="###"><description>Ei tietoja tarjolla</description></Value>
  <Value code="mul"><description>Useita kieliä</description></Value>
  <Value code="sgn"><description>Viittomakielet</description></Value>
  <Value code="und"><description>Ei määritelty</description></Value>
@@ -542,7 +542,7 @@
  <Value code="[aa#]"><description>Kaksimerkkinen koodi</description></Value>
  <Value code="[aaa]"><description>Kolmimerkkinen koodi</description></Value>
  </Position>
- <Position pos="18-21"><name>Korkeustietojen esitystapa</name><description>Nelimerkkinen koodi ilmaisee miten korkeuserot on esitetty. Koodit luetteloidaan tärkeysjärjestyksessä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#).</description>
+ <Position pos="18-21"><name>Korkeustietojen esitystapa</name><description>Nelimerkkinen koodi ilmaisee miten korkeuserot on esitetty. Koodit luetteloidaan tärkeysjärjestyksessä. Jos tallennetaan vähemmän kuin neljä koodia, koodit tasataan vasemmalle ja käyttämättömissä merkkipaikoissa on tyhjä (#)</description>
  <Value code="#"><description>Korkeuseroja ei määritelty</description></Value>
  <Value code="a"><description>Korkeuskäyrät</description></Value>
  <Value code="b"><description>Varjostus</description></Value>
@@ -670,7 +670,7 @@
  <Value code="||"><description>Ei koodattu</description></Value>
  </Position>
  <Position pos="35-37" url="http://www.loc.gov/marc/languages/language_code.html"><urltext>Lista kielikoodeista</urltext><name>Kieli</name><description></description>
- <Value code="###"><description>Tietoa ei toimitettu</description></Value>
+ <Value code="###"><description>Ei tietoja tarjolla</description></Value>
  <Value code="mul"><description>Useita kieliä</description></Value>
  <Value code="sgn"><description>Viittomakielet</description></Value>
  <Value code="und"><description>Ei määritelty</description></Value>
@@ -850,13 +850,13 @@
  <Value code="u"><description>Tuntematon</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="22"><name>Kohderyhmä</name><description>Millaiselle kohderyhmälle kuvailun kohde on suunnattu.</description>
+ <Position pos="22"><name>Kohderyhmä</name><description>Yksimerkkinen aakkosellinen koodi, joka kuvaa, millaiselle kohderyhmälle kuvailun kohde on suunnattu</description>
  <Value code="#"><description>Tuntematon tai määrittelemätön</description></Value>
  <Value code="a"><description>Esikouluikäiset</description></Value>
  <Value code="b"><description>Ala-asteikäiset</description></Value>
  <Value code="c"><description>Yläasteikäiset</description></Value>
  <Value code="d"><description>Lukioikäiset ja vastaavat</description></Value>
- <Value code="e"><description>Aikuiset</description></Value>
+ <Value code="e"><description>Aikuinen</description></Value>
  <Value code="f"><description>Erityisryhmä</description></Value>
  <Value code="g"><description>Yleinen</description></Value>
  <Value code="j"><description>Lapset ja nuoret</description></Value>
@@ -928,7 +928,7 @@
  </Position>
  <Position pos="34"><name>Määrittelemätön</name><description>Määrittelemätön; sisältää tyhjämerkin (#) tai täyttömerkin (|).</description></Position>
  <Position pos="35-37" url="http://www.loc.gov/marc/languages/language_code.html"><urltext>Lista kielikoodeista</urltext><name>Kieli</name><description></description>
- <Value code="###"><description>Tietoa ei toimitettu</description></Value>
+ <Value code="###"><description>Ei tietoja tarjolla</description></Value>
  <Value code="mul"><description>Useita kieliä</description></Value>
  <Value code="sgn"><description>Viittomakielet</description></Value>
  <Value code="und"><description>Ei määritelty</description></Value>
@@ -1064,7 +1064,7 @@
  <Value code="s"><description>Elektroninen</description></Value>
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
- <Position pos="23"><name>Ilmiasu</name><description>Kohteen materiaalin muoto.</description>
+ <Position pos="23"><name>Ilmiasu</name><description>Kohteen materiaalin muoto</description>
  <Value code="#"><description>Ei mikään seuraavista</description></Value>
  <Value code="a"><description>Mikrofilmi</description></Value>
  <Value code="b"><description>Mikrokortti</description></Value>
@@ -1182,7 +1182,7 @@
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
  <Position pos="35-37" url="http://www.loc.gov/marc/languages/language_code.html"><urltext>Lista kielikoodeista</urltext><name>Kieli</name><description></description>
- <Value code="###"><description>Tietoa ei toimitettu</description></Value>
+ <Value code="###"><description>Ei tietoja tarjolla</description></Value>
  <Value code="mul"><description>Useita kieliä</description></Value>
  <Value code="sgn"><description>Viittomakielet</description></Value>
  <Value code="und"><description>Ei määritelty</description></Value>
@@ -1273,7 +1273,7 @@
  <Value code="b"><description>Ala-asteikäiset</description></Value>
  <Value code="c"><description>Yläasteikäiset</description></Value>
  <Value code="d"><description>Lukioikäiset ja vastaavat</description></Value>
- <Value code="e"><description>Aikuiset</description></Value>
+ <Value code="e"><description>Aikuinen</description></Value>
  <Value code="f"><description>Erityisryhmä</description></Value>
  <Value code="g"><description>Yleinen</description></Value>
  <Value code="j"><description>Lapset ja nuoret</description></Value>
@@ -1341,7 +1341,7 @@
  <Value code="|"><description>Ei koodattu</description></Value>
  </Position>
  <Position pos="35-37" url="http://www.loc.gov/marc/languages/language_code.html"><urltext>Lista kielikoodeista</urltext><name>Kieli</name><description></description>
- <Value code="###"><description>Tietoa ei toimitettu</description></Value>
+ <Value code="###"><description>Ei tietoja tarjolla</description></Value>
  <Value code="mul"><description>Useita kieliä</description></Value>
  <Value code="sgn"><description>Viittomakielet</description></Value>
  <Value code="und"><description>Ei määritelty</description></Value>
@@ -1419,7 +1419,7 @@
  <Value code="[aaa]"><description>Kolmimerkkinen koodi</description></Value>
  </Position>
  <Position pos="18-22"><name>Määrittelemätön</name><description>Määrittelemätön; kukin merkkipaikka sisältää tyhjämerkin (#) tai täyttömerkin (|).</description></Position>
- <Position pos="23"><name>Ilmiasu</name><description>Kohteen materiaalin muoto.</description>
+ <Position pos="23"><name>Ilmiasu</name><description>Kohteen materiaalin muoto</description>
  <Value code="#"><description>Ei mikään seuraavista</description></Value>
  <Value code="a"><description>Mikrofilmi</description></Value>
  <Value code="b"><description>Mikrokortti</description></Value>
@@ -1434,7 +1434,7 @@
  </Position>
  <Position pos="24-34"><name>Määrittelemätön</name><description>Määrittelemätön; kukin merkkipaikka sisältää tyhjämerkin (#) tai täyttömerkin (|).</description></Position>
  <Position pos="35-37" url="http://www.loc.gov/marc/languages/language_code.html"><urltext>Lista kielikoodeista</urltext><name>Kieli</name><description></description>
- <Value code="###"><description>Tietoa ei toimitettu</description></Value>
+ <Value code="###"><description>Ei tietoja tarjolla</description></Value>
  <Value code="mul"><description>Useita kieliä</description></Value>
  <Value code="sgn"><description>Viittomakielet</description></Value>
  <Value code="und"><description>Ei määritelty</description></Value>

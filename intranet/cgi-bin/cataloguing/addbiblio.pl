@@ -34,7 +34,6 @@ use C4::Biblio qw(
     GetMarcStructure
     GetUsedMarcStructure
     ModBiblio
-    prepare_host_field
     PrepHostMarcField
     TransformHtmlToMarc
     ApplyMarcOverlayRules
@@ -518,6 +517,7 @@ my $fa_duedatespec        = $input->param('duedatespec');
 $op            = $input->param('op') // q{};
 $frameworkcode = &GetFrameworkCode($biblionumber)
   if ( $biblionumber and not( defined $frameworkcode) and $op ne 'cud-addbiblio' );
+$frameworkcode //= '';
 
 my $userflags =
     $frameworkcode eq 'FA'
@@ -649,7 +649,8 @@ if ($parentbiblio) {
     my $marcflavour = C4::Context->preference('marcflavour');
     $record = MARC::Record->new();
     SetMarcUnicodeFlag($record, $marcflavour);
-    my $hostfield = prepare_host_field($parentbiblio,$marcflavour);
+    my $parent    = Koha::Biblios->find($parentbiblio);
+    my $hostfield = $parent->generate_marc_host_field;
     if ($hostfield) {
         $record->append_fields($hostfield);
     }

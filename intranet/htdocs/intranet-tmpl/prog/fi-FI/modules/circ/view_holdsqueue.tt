@@ -84,13 +84,13 @@
  <th class="hq-location">Hyllypaikka</th>
  <th class="hq-itemtype">Nidetyyppi</th>
  <th class="hq-callnumber">Luokka</th>
- <th class="hq-copynumber">Nidenumero</th>
+ <th class="hq-copynumber">Kappaleen numero</th>
  <th class="hq-enumchron">Numerointi</th>
  <th class="hq-barcode">Viivakoodi</th>
  <th class="hq-patron">Asiakas</th>
  <th class="hq-patroncategory">Asiakastyyppi</th>
  <th class="hq-sendto">Lähetä kohteelle</th>
- <th class="hq-date">Pvm</th>
+ <th class="hq-date">Päivämäärä</th>
  <th class="hq-notes">Huomautukset</th>
  </tr>
  <tr>
@@ -141,7 +141,7 @@
  </td>
  <td class="hq-copynumber">
  <span class="filter_column filter_text">
- <input placeholder="Nidenumero" type="text">
+ <input placeholder="Kappaleen numero" type="text">
  </span>
  </td>
  <td class="hq-enumchron">
@@ -171,7 +171,7 @@
  </td>
  <td class="hq-date">
  <span class="filter_column filter_text">
- <input placeholder="Pvm" type="text">
+ <input placeholder="Päivämäärä" type="text">
  </span>
  </td>
  <td class="hq-notes">

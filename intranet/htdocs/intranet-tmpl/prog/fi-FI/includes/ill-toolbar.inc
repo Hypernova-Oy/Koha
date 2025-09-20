@@ -25,7 +25,7 @@
  <i class="fa fa-list"></i> Päivitä </a>
  [% ELSE %]
  <a id="ill-list" class="btn btn-sm btn-default btn-group" href="/cgi-bin/koha/ill/ill-requests.pl">
- <i class="fa fa-list"></i> Listapyynnöt </a>
+ <i class="fa fa-list"></i> Pyyntölistalle </a>
  [% END %]
  [% IF have_batch.size > 0 && metadata_enrichment_services %]
  <div id="ill-batch">

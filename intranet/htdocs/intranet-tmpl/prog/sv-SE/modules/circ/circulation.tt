@@ -105,6 +105,10 @@
  <div class="alert alert-warning">Personal kan inte godkänna begäran om borttagning och låntagare kan inte heller begära att bli borttagna.</div>
  [% END %]
 
+ [% IF ( noguarantor ) %]
+ <div class="alert alert-warning">This patron could not be renewed: they need a guarantor.</div>
+ [% END %]
+
  [% IF is_anonymous %]
  <div class="alert alert-warning">Detta är en anonym låntagare, så utlån är inaktiverat.</div>
  [% END %]
@@ -459,7 +463,7 @@
  [% IF ( STATS ) %]
  <li>Lokal användning registrerad</li>
  [% IF ( CHECKEDIN ) %]
- <li>Item checked in from: <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% BORROWER.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' patron=BORROWER %]</a></li>
+ <li>Exemplaret mottaget från: <a href="/cgi-bin/koha/members/moremember.pl?borrowernumber=[% BORROWER.borrowernumber | uri %]">[% INCLUDE 'patron-title.inc' patron=BORROWER %]</a></li>
  [% END %]
  [% IF ( MESSAGES.ResFound ) %]
  <li>Exemplaret är reserverat, var god återlämna.</li>
@@ -1100,16 +1104,19 @@
 
             // Handle checkout for fast cataloging
             // Check the referrer to prevent csrf, fill and submit form
-            if(document.referrer.split(window.location.origin + '/cgi-bin/koha/cataloguing/additem.pl?')[1].match(/frameworkcode=FA&circborrowernumber=/) ) {
-                let urlParams = new URLSearchParams(window.location.search);
-                let barcode = urlParams.get('barcode');
-                $('#barcode').val(barcode);
-                $('#mainform').submit();
+            if (document.referrer.length) {
+                const referrerSplit = document.referrer.split(window.location.origin + '/cgi-bin/koha/cataloguing/additem.pl?')
+                if(referrerSplit[1] && referrerSplit[1].match(/frameworkcode=FA&circborrowernumber=/) ) {
+                    let urlParams = new URLSearchParams(window.location.search);
+                    let barcode = urlParams.get('barcode');
+                    $('#barcode').val(barcode);
+                    $('#mainform').submit();
+                }
             }
 
             $("#cancellation-reason").comboBox({
                 displayProperty: 'name',
-                placeholder: _("Select or type a reason"),
+                placeholder: _("Välj eller ange ett skäl"),
             });
         });
     </script>
@@ -1118,7 +1125,6 @@
  [% Asset.js("js/checkouts.js") | $raw %]
  [% Asset.js("js/tables/bookings.js") | $raw %]
  [% Asset.js("js/recalls.js") | $raw %]
- [% Asset.js("js/form-submit.js") | $raw %]
 [% END %]
 
 [% INCLUDE 'intranet-bottom.inc' %]

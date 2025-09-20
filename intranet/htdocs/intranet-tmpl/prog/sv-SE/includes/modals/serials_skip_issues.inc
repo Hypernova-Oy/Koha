@@ -11,7 +11,7 @@
  <legend>Hoppa över exemplarnummer och generera nästa</legend>
  <ol>
  <li>
- <label for="nbissues" class="required">Hur många nummer vill du hoppas över?</label>
+ <label for="nbissues" class="required">Hur många nummer vill du hoppa över?</label>
  <input type="text" pattern="^\d$" size="10" id="skip_issues" name="skip_issues" required="required" />
  </li>
  </ol>
