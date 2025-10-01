@@ -26,6 +26,8 @@ use Try::Tiny;
 use Koha::Token;
 use URI::Escape qw(uri_escape_utf8);
 
+use C4::Log;
+
 =head1 NAME
 
 Koha::REST::V1::OAuth::Client - Controller library for handling OAuth2-related login attempts
@@ -132,6 +134,12 @@ sub login {
                     $c->auth->session( { patron => $patron, interface => $interface, provider => $provider } );
 
                 $c->cookie( CGISESSID => $session_id, { path => "/" } );
+
+                if ( !$patron->email ) {
+                  $uri = "/cgi-bin/koha/opac-memberentry.pl";
+                }
+
+                C4::Log::logaction( 'AUTH', 'SUCCESS', $patron->id, "Valid MPASS-login for " . $patron->firstname . " " . $patron->surname . " (oppijanumero " . $patron->userid . ")", "opac" );
 
                 $c->redirect_to($uri);
             } catch {
