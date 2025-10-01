@@ -380,6 +380,21 @@ sub get_template_and_user {
             );
         }
 
+        # If we enforce MPASS users to fill in a patron modification request, redirect
+        # patron to modification form
+        if( $in->{type} eq 'opac' &&
+            $in->{'template_name'} !~ /^(opac-memberentry|opac-page|opac-patron-consent|sc[io]\/)/ &&
+            $patron->categorycode eq C4::Context->preference('PatronSelfRegistrationDefaultCategory') && !$patron->email )
+        {
+            my $modification = Koha::Patron::Modifications->search({
+                borrowernumber => $borrowernumber,
+            })->count;
+            if( !$modification ) {
+                print $in->{query}->redirect(-uri => '/cgi-bin/koha/opac-memberentry.pl', -cookie => $cookie);
+                safe_exit;
+            }
+        }
+
         # We are going to use the $flags returned by checkauth
         # to create the template's parameters that will indicate
         # which menus the user can access.
