@@ -1379,6 +1379,18 @@ if ( $type eq "opac" && $query->param('login_password') && $query->param('login_
         $session->flush;
     }    # END unless ($userid)
 
+    # MPASS is the only available login for OPISkelija
+    if ( $type eq 'opac' && $auth_state eq 'logged_in' && $userid ) {
+        my $patron = Koha::Patrons->find( { userid => $userid } );
+        if ( $patron && $patron->categorycode eq 'OPIS' && $query->param('login_password') ) {
+            $info{'invalid_username_or_password'} = 1;
+            $auth_state = "failed";
+            C4::Context::unset_userenv();
+            $session->delete;
+            $session->flush;
+        }
+    }
+
     if ( $auth_state eq 'logged_in' ) {
         $auth_state = 'completed';
 
