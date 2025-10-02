@@ -102,7 +102,7 @@ if ( $op eq 'show' ) {
                 keeper  => $keeper,
                 results => $results
             );
-            if ($copy) {
+            if ( $copy && $results ) {
                 $keeper->set( \%data )->store();
             }
         } catch {
