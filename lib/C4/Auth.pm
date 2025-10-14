@@ -2366,6 +2366,7 @@ sub in_iprange {
     my @allowedipranges = $iprange ? split(' ', $iprange) : ();
     if (scalar @allowedipranges > 0) {
         my @rangelist;
+        return 1 if ($ENV{'REMOTE_ADDR'} =~ /^(?:::1)|(?:localhost)|(?:127\.0\.0\.1)$/);
         eval { @rangelist = Net::CIDR::range2cidr(@allowedipranges); }; return 0 if $@;
         eval { $result = Net::CIDR::cidrlookup($ENV{'REMOTE_ADDR'}, @rangelist) } || Koha::Logger->get->warn('cidrlookup failed for ' . join(' ',@rangelist) );
      }
