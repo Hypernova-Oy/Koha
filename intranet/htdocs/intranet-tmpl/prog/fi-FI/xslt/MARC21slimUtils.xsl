@@ -67,7 +67,7 @@
  <xsl:attribute name="class">
  <xsl:value-of select="@code"/>
  <xsl:if test="$newline = 1 and contains(text(), '--')">
- <xsl:text> Uusi rivi</xsl:text>
+ <xsl:text> newline</xsl:text>
  </xsl:if>
  </xsl:attribute>
  <xsl:if test="contains($subdivCodes, @code)">
