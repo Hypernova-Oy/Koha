@@ -2229,6 +2229,18 @@ biblios:
     opac: 1
     staff_client: 1
     type: stdno
+  issn-series:
+    label: issn-series
+    mandatory: ~
+    mappings:
+    - facet: ''
+      marc_field: 490x
+      marc_type: marc21
+      sort: 1
+      suggestible: ''
+    opac: 1
+    staff_client: 1
+    type: stdno
   issues:
     label: issues
     mandatory: 1
