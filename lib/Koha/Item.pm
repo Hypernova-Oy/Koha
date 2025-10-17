@@ -2783,6 +2783,27 @@ FIXME: It should return I<$self>. See bug 35270.
 sub location_update_trigger {
     my ( $self, $action ) = @_;
 
+    if (my $new_location = $self->_check_location_update_rules($action)) {
+        my $messages = {
+            'ItemLocationUpdated' => {
+                from => $self->location,
+                to   => $new_location,
+            }
+        };
+        $self->location($new_location)->store(
+            {
+                log_action        => 0,
+                skip_record_index => 1,
+                skip_holds_queue  => 1
+            }
+        );
+        return $messages;
+    }
+    return undef;
+}
+
+sub _check_location_update_rules {
+    my ($self, $action) = @_;
     my ( $update_loc_rules, $messages );
     if ( $action eq 'checkin' ) {
         $update_loc_rules = C4::Context->yaml_preference('UpdateItemLocationOnCheckin');
@@ -2791,64 +2812,32 @@ sub location_update_trigger {
     }
 
     if ($update_loc_rules) {
-        if ( defined $update_loc_rules->{_ALL_} ) {
-            if ( $update_loc_rules->{_ALL_} eq '_PERM_' ) {
-                $update_loc_rules->{_ALL_} = $self->permanent_location;
-            }
-            if ( $update_loc_rules->{_ALL_} eq '_BLANK_' ) {
-                $update_loc_rules->{_ALL_} = '';
-            }
-            if (
-                ( defined $self->location && $self->location ne $update_loc_rules->{_ALL_} )
-                || ( !defined $self->location
-                    && $update_loc_rules->{_ALL_} ne "" )
-                )
-            {
-                $messages->{'ItemLocationUpdated'} =
-                    { from => $self->location, to => $update_loc_rules->{_ALL_} };
-                $self->location( $update_loc_rules->{_ALL_} )->store(
-                    {
-                        log_action        => 0,
-                        skip_record_index => 1,
-                        skip_holds_queue  => 1
-                    }
-                );
-            }
-        } else {
-            foreach my $key ( keys %$update_loc_rules ) {
-                if ( $update_loc_rules->{$key} eq '_PERM_' ) {
-                    $update_loc_rules->{$key} = $self->permanent_location;
-                } elsif ( $update_loc_rules->{$key} eq '_BLANK_' ) {
-                    $update_loc_rules->{$key} = '';
-                }
-                if (
-                    (
-                           defined $self->location
-                        && $self->location eq $key
-                        && $self->location ne $update_loc_rules->{$key}
-                    )
-                    || (   $key eq '_BLANK_'
-                        && ( !defined $self->location || $self->location eq '' )
-                        && $update_loc_rules->{$key} ne '' )
-                    )
-                {
-                    $messages->{'ItemLocationUpdated'} = {
-                        from => $self->location,
-                        to   => $update_loc_rules->{$key}
-                    };
-                    $self->location( $update_loc_rules->{$key} )->store(
-                        {
-                            log_action        => 0,
-                            skip_record_index => 1,
-                            skip_holds_queue  => 1
-                        }
-                    );
-                    last;
-                }
-            }
+        if (defined($update_loc_rules->{'_ALL_'})) {
+            return $self->_check_location_update_rule($update_loc_rules->{'_ALL_'});
+        }
+        elsif (defined($update_loc_rules->{$self->location//''})) {
+            return $self->_check_location_update_rule($update_loc_rules->{$self->location});
+        }
+        elsif (defined($update_loc_rules->{'_DEFAULT_'})) {
+            return $self->_check_location_update_rule($update_loc_rules->{'_DEFAULT_'});
         }
     }
-    return $messages;
+}
+
+sub _check_location_update_rule {
+    my ($self, $update_loc_rule) = @_;
+
+    if ($update_loc_rule eq '_PERM_') {
+        $update_loc_rule = $self->permanent_location;
+    }
+    if ($update_loc_rule eq '_BLANK_') {
+        $update_loc_rule = '';
+    }
+    if ((defined($self->location) && $self->location ne $update_loc_rule) ||
+        (not(defined($self->location)) && $update_loc_rule ne "" )) {
+        return $update_loc_rule;
+    }
+    return undef;
 }
 
 =head3 z3950_status
