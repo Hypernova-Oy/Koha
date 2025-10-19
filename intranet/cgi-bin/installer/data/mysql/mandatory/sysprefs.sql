@@ -132,6 +132,7 @@ INSERT INTO systempreferences ( `variable`, `value`, `options`, `explanation`, `
 ('BorrowerRenewalPeriodBase','now','dateexpiry|now|combination','Set whether the borrower renewal date should be counted from the dateexpiry, from the current date or by combination: if the dateexpiry is in future use dateexpiry, else use current date ','Choice'),
 ('BorrowersLog','1',NULL,'If ON, log edit/create/delete actions on patron data','YesNo'),
 ('BorrowersTitles','Mr|Mrs|Miss|Ms',NULL,'Define appropriate Titles for patrons','free'),
+('BorrowersViewLog','0',NULL,'If enabled, log when patron data is viewed','YesNo'),
 ('BorrowerUnwantedField','',NULL,'Name the fields you don\'t need to store for a patron\'s account','free'),
 ('BranchTransferLimitsType','ccode','itemtype|ccode','When using branch transfer limits, choose whether to limit by itemtype or collection code.','Choice'),
 ('BrowseResultSelection','0',NULL,'Enable/Disable browsing search results fromt the bibliographic record detail page in staff interface','YesNo'),
