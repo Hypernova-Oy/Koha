@@ -56,6 +56,8 @@ sub list {
         my $patrons_rs = Koha::Patrons->search($query);
         my $patrons    = $c->objects->search($patrons_rs);
 
+        $c->res->headers->header( 'Cache-Control' => 'private, no-cache, no-store, must-revalidate, max-age=0' );
+
         return $c->render(
             status  => 200,
             openapi => $patrons
