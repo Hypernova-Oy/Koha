@@ -437,8 +437,20 @@ sub get_template_and_user {
             }
             C4::Search::History::set_to_session( { cgi => $in->{'query'}, search_history => [] } );
 
-        } elsif ( $in->{type} eq 'intranet' and C4::Context->preference('EnableSearchHistory') ) {
-            $template->param( EnableSearchHistory => 1 );
+        } elsif ( $in->{type} eq 'intranet' ) {
+            if ( C4::Context->preference('EnableSearchHistory') ) {
+                $template->param( EnableSearchHistory => 1 );
+            }
+            if ( C4::Context->preference('BorrowersViewLog') ) {
+                if ( defined $in->{'query'}->param('borrowernumber') ) {
+                    my $log_info = $in->{'template_name'};
+                    $log_info =~ s/\.tt$//;
+                    logaction(
+                        'MEMBERS', 'VIEW', $in->{'query'}->param('borrowernumber'),
+                        $log_info, $in->{'type'}
+                    );
+                }
+            }
         }
     } else {    # if this is an anonymous session, setup to display public lists...
 
