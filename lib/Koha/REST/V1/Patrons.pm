@@ -56,6 +56,12 @@ sub list {
         my $patrons_rs = Koha::Patrons->search($query);
         my $patrons    = $c->objects->search($patrons_rs);
 
+        if ( C4::Context->preference('BorrowersViewLog') && $patrons ) {
+            foreach my $patron (@$patrons) {
+                C4::Log::logaction( 'MEMBERS', 'VIEW', $patron->{patron_id}, 'list' );
+            }
+        }
+
         $c->res->headers->header( 'Cache-Control' => 'private, no-cache, no-store, must-revalidate, max-age=0' );
 
         return $c->render(
@@ -82,6 +88,10 @@ sub get {
 
         return $c->render_resource_not_found("Patron")
             unless $patron;
+
+        if ( C4::Context->preference('BorrowersViewLog') ) {
+            C4::Log::logaction( 'MEMBERS', 'VIEW', $patron->{patron_id}, 'get' );
+        }
 
         return $c->render(
             status  => 200,
