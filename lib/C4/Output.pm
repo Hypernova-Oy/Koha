@@ -262,9 +262,12 @@ sub output_with_http_headers {
     my $cache_policy = 'no-cache';
     $cache_policy .= ', no-store, max-age=0' if $extra_options->{force_no_caching};
     my $csp_nonce = '';
+    my $session_id = $query->cookie('CGISESSID') // '';
     my $cache = Koha::Cache::Memory::Lite->get_instance();
-    if ( my $csp_nonce_value = $cache->get_from_cache('csp_nonce') ){
+    if ( my $csp_nonce_value = $cache->get_from_cache("csp_nonce_${session_id}")) ) {
         $csp_nonce = "'nonce-$csp_nonce_value'";
+    } else {
+        warn "C4::output_with_http_headers(): Could not fetch Content-Security-Policy (CSP) nonce from cache!";
     }
     #NOTE: unsafe-eval is needed in script-src for DataTables
     my @csp_options = (
@@ -283,8 +286,8 @@ sub output_with_http_headers {
         Pragma            => 'no-cache',
         'Cache-Control'   => $cache_policy,
         'X-Frame-Options' => 'SAMEORIGIN',
-        'Content-Security-Policy' => $csp_header,
     };
+    $options->{'Content-Security-Policy'} = $csp_header if C4::Context->interface eq 'opac' and $csp_nonce;
     $options->{expires} = 'now' if $extra_options->{force_no_caching};
     $options->{'Access-Control-Allow-Origin'} = C4::Context->preference('AccessControlAllowOrigin')
         if C4::Context->preference('AccessControlAllowOrigin');

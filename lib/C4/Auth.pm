@@ -637,7 +637,7 @@ sub get_template_and_user {
         );
         my $csp_nonce = Koha::Token->new()->generate({ pattern => '\w{10}' });
         my $cache = Koha::Cache::Memory::Lite->get_instance();
-        $cache->set_in_cache('csp_nonce',$csp_nonce);
+        $cache->set_in_cache( "csp_nonce_$sessionID", $csp_nonce, { expiry => 300 } );
         $template->param( csp_nonce => $csp_nonce );
 
         $template->param( OpacPublic => '1' ) if ( $user || C4::Context->preference("OpacPublic") );
