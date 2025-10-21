@@ -338,6 +338,7 @@ sub SearchAuthorities {
                 $newline{summary}      = $summary;
                 $newline{even}         = $counter % 2;
                 $newline{reported_tag} = $reported_tag;
+                $newline{origincode}   = CalculateOriginCode( $authrecord, $authtypecode );
             }
             $counter++;
             push @finalresult, \%newline;
