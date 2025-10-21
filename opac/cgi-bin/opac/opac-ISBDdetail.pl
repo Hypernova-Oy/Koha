@@ -42,7 +42,7 @@ use Modern::Perl;
 
 use C4::Auth qw( get_template_and_user );
 use C4::Context;
-use C4::Output qw( parametrized_url output_html_with_http_headers );
+use C4::Output qw( parametrized_url output_html_with_http_headers redirect_if_opac_hidden );
 use CGI        qw ( -utf8 );
 use C4::Biblio qw(
     CountItemsIssued
@@ -116,15 +116,7 @@ my $patron = Koha::Patrons->find($loggedinuser);
 
 my $opachiddenitems_rules = C4::Context->yaml_preference('OpacHiddenItems');
 
-unless ( $patron and $patron->category->override_hidden_items ) {
-
-    # only skip this check if there's a logged in user
-    # and its category overrides OpacHiddenItems
-    if ( $biblio->hidden_in_opac( { rules => $opachiddenitems_rules } ) ) {
-        print $query->redirect('/cgi-bin/koha/errors/404.pl');    # escape early
-        exit;
-    }
-}
+redirect_if_opac_hidden( $query, $biblio, $patron );
 
 my $record = $biblio->metadata->record;
 my @items  = $biblio->items->filter_by_visible_in_opac( { patron => $patron } )->as_list;
