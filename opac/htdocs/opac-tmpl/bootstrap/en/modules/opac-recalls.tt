@@ -130,7 +130,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% csp_nonce %]">
         $(document).ready(function(){
             $(".cancel_recall").click(function(){
                 return confirmDelete(_("Are you sure you want to remove this recall?"));

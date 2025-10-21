@@ -370,7 +370,7 @@
 
 [% BLOCK jsinclude %]
         [% INCLUDE 'datatables.inc' %]
-        <script>
+        <script nonce="[% csp_nonce %]">
             [% IF ( TagsInputEnabled && loggedinusername ) %]
                 function tagSelected() {
                     var bibs = document.getElementById('records').value;

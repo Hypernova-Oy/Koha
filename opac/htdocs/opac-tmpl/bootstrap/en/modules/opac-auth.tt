@@ -295,7 +295,7 @@
 
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
-<script>
+<script nonce="[% csp_nonce %]">
     // Hide circular 'Log in to Your Account' link in opac-auth.pl
     $(document).ready(function() {
         if ( $("#auth" ) ) { $("#members ul li a").hide(); }

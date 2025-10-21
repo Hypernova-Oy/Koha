@@ -21,7 +21,7 @@
     </style>
 [% END %]
 [% IF ( SCOUserCSS ) %]<style>[% SCOUserCSS | $raw %]</style>[% END %]
-<script>
+<script nonce="[% csp_nonce %]">
     var Koha = {};
     function _(s) { return s } // dummy function for gettext
 </script>
@@ -79,5 +79,5 @@
 
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
-    [% IF ( SCOUserJS ) %]<script>[% SCOUserJS | $raw %]</script>[% END %]
+    [% IF ( SCOUserJS ) %]<script nonce="[% csp_nonce %]">[% SCOUserJS | $raw %]</script>[% END %]
 [% END %]

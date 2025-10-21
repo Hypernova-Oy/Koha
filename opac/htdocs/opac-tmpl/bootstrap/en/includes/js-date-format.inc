@@ -5,13 +5,13 @@
 [% Asset.js("lib/dayjs/dayjs.min.js") | $raw %]
 [% Asset.js("lib/dayjs/plugin/timezone.js") | $raw %]
 [% Asset.js("lib/dayjs/plugin/utc.js") | $raw %]
-<script>
+<script nonce="[% csp_nonce %]">
     dayjs.extend(window.dayjs_plugin_utc);
     dayjs.extend(window.dayjs_plugin_timezone);
 </script>
 
 <!-- js-date-format.inc -->
-<script>
+<script nonce="[% csp_nonce %]">
     (function() {
         var def_date_format = '[% Koha.Preference('dateformat') | html %]';
         var def_time_format = '[% Koha.Preference('TimeFormat') | html %]';

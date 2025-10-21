@@ -211,7 +211,7 @@
 [% IF ( displayhierarchy ) %]
     [% Asset.js("lib/jquery/plugins/jstree/jstree-3.3.12.min.js") | $raw %]
 [% END %]
-<script>
+<script nonce="[% csp_nonce %]">
     $(document).ready(function() {
         [% IF ( displayhierarchy ) %]
             $('#hierarchies').jstree({

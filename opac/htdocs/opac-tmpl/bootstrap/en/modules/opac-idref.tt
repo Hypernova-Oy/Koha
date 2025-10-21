@@ -50,7 +50,7 @@
 </div>
 [% BLOCK jsinclude %]
 [% INCLUDE 'datatables.inc' %]
-<script>
+<script nonce="[% csp_nonce %]">
   $(document).ready(function (){
       $("table").dataTable($.extend(true, {}, dataTablesDefaults, {
           'filter': false,

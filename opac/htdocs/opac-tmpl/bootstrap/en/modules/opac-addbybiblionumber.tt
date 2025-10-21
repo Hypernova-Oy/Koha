@@ -124,7 +124,7 @@
 
 [% INCLUDE 'opac-bottom.inc' is_popup=1 %]
 [% BLOCK jsinclude %]
-<script>
+<script nonce="[% csp_nonce %]">
          $(document).ready(function() {
             [% IF WINDOW_PARENT_RELOAD %]
                 opener.location.reload();

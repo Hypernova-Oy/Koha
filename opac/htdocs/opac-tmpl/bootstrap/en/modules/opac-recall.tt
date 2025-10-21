@@ -180,7 +180,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
 [% INCLUDE 'calendar.inc' %]
-<script>
+<script nonce="[% csp_nonce %]">
     $(document).ready(function(){
         $(".level-option").show();
         $("#items").hide();

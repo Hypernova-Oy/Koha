@@ -347,7 +347,7 @@
 
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% csp_nonce %]">
         $("#illrequestlist").dataTable($.extend(true, {}, dataTablesDefaults, {
             "columnDefs": [
                 { "targets": [ -1 ], "sortable": false, "searchable": false }
@@ -366,7 +366,7 @@
     </script>
     [% IF op == 'availability' %]
         [% Asset.js("js/ill-availability.js") | $raw %]
-        <script>
+        <script nonce="[% csp_nonce %]">
             $(document).ready(function() {
                 window.doSearch();
             });

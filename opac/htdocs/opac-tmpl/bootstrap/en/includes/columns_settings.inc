@@ -1,7 +1,7 @@
 [% USE raw %]
 [% USE TablesSettings %]
 [% Asset.js("js/datatables_buttons_shim.js") | $raw %]
-<script>
+<script nonce="[% csp_nonce %]">
 
 function _dt_visibility(table_settings, table_dt){
     let hidden_ids = [];

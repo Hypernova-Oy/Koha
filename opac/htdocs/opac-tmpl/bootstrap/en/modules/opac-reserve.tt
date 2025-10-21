@@ -516,7 +516,7 @@
 [% BLOCK jsinclude %]
 [% INCLUDE 'calendar.inc' %]
 [% INCLUDE 'datatables.inc' %]
-<script>
+<script nonce="[% csp_nonce %]">
     $(document).ready(function() {
 
         $(".toggle_unholdable").click(function(e){

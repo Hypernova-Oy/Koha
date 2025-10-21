@@ -261,7 +261,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% csp_nonce %]">
         $(document).ready(function(){
             function toggle_digest(id){
                 let PhoneNotification = [% Koha.Preference('PhoneNotification') || 0 | html %];
