@@ -46,6 +46,7 @@ BEGIN {
         setlanguagecookie getlanguagecookie pagination_bar parametrized_url
         output_html_with_http_headers output_ajax_with_http_headers output_with_http_headers
         output_and_exit_if_error output_and_exit output_error
+        redirect_if_opac_hidden
     );
 }
 
@@ -427,6 +428,32 @@ sub parametrized_url {
     }
     $ret =~ s/\{[^\{]*\}//g;    # remove remaining vars
     return $ret;
+}
+
+=item redirect_if_opac_hidden
+
+    redirect_if_opac_hidden( $query, $biblio, $patron );
+
+For a given I<Koha::Biblio> and I<Koha::Patron> object, it handles redirection
+if it is hidden from the OPAC.
+
+=cut
+
+sub redirect_if_opac_hidden {
+    my ( $query, $biblio, $patron ) = @_;
+
+    if ( $patron and $patron->category->override_hidden_items ) {
+        return;
+    }
+
+    if ( $biblio->hidden_in_opac( { rules => C4::Context->yaml_preference('OpacHiddenItems') } ) ) {
+        if ( C4::Context->preference("OpacHiddenRecordRedirect") ) {
+            print $query->redirect("/cgi-bin/koha/opac-blocked.pl?hidden=1");
+        } else {
+            print $query->redirect('/cgi-bin/koha/errors/404.pl');
+        }
+        C4::Auth::safe_exit();
+    }
 }
 
 END { }                         # module clean-up code here (global destructor)
