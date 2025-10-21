@@ -1,4 +1,4 @@
-<script>
+<script nonce="[% csp_nonce %]">
     (function() {
         /**
          * Format the biblio response from a Koha RESTful API request.

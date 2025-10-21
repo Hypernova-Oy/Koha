@@ -176,7 +176,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% IF ( GoogleJackets ) %]
-        <script>
+        <script nonce="[% csp_nonce %]">
             $(document).ready(function(){
                 KOHA.Google.GetCoverFromIsbn();
             });

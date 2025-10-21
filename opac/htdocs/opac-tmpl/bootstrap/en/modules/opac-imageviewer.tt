@@ -105,7 +105,7 @@
 
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
-    <script>
+    <script nonce="[% csp_nonce %]">
         $(document).ready(function(){
             $("#largeCoverImg").attr("src","[% interface | html %]/[% theme | html %]/images/loading.gif");
             showCover([% imagenumber | html %]);

@@ -33,7 +33,7 @@
     </style>
 [% END %]
 [% IF ( Koha.Preference('SCOUserCSS') ) %]<style>[% Koha.Preference('SCOUserCSS') | $raw %]</style>[% END %]
-<script>
+<script nonce="[% csp_nonce %]">
     var Koha = {};
     function _(s) { return s } // dummy function for gettext
 </script>
@@ -530,7 +530,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% csp_nonce %]">
         function mungeHistory() {
             // prevent back button from allowing form resubmission
             if (history && history.pushState) {
@@ -652,5 +652,5 @@
 
     </script>
 
-    [% IF ( Koha.Preference('SCOUserJS') ) %]<script>[% Koha.Preference('SCOUserJS') | $raw %]</script>[% END %]
+    [% IF ( Koha.Preference('SCOUserJS') ) %]<script nonce="[% csp_nonce %]">[% Koha.Preference('SCOUserJS') | $raw %]</script>[% END %]
 [% END %]

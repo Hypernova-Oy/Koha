@@ -143,7 +143,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% csp_nonce %]">
         $(function() {
             $("#topissuest").dataTable($.extend(true, {}, dataTablesDefaults, {
                 "sorting": [[3, "desc"]],

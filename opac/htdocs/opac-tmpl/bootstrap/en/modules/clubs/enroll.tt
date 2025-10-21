@@ -35,7 +35,7 @@
     </form>
 </div>
 
-<script>
+<script nonce="[% csp_nonce %]">
 function addEnrollment() {
     $("body").css("cursor", "progress");
     let data = $( "#patron-enrollment-form" ).serialize();

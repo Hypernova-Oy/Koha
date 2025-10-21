@@ -50,7 +50,7 @@
     </style>
 [% END %]
 [% IF ( Koha.Preference('SelfCheckInUserCSS') ) %]<style>[% Koha.Preference('SelfCheckInUserCSS') | $raw %]</style>[% END %]
-<script>
+<script nonce="[% csp_nonce %]">
     var Koha = {};
     function _(s) { return s } // dummy function for gettext
 </script>
@@ -202,7 +202,7 @@
 
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
-    <script>
+    <script nonce="[% csp_nonce %]">
 
         function mungeHistory() {
             // prevent back button from allowing form resubmission
@@ -326,6 +326,6 @@ document.getElementById("sci_append_button").addEventListener("click", function(
     </script>
 
     [% IF ( Koha.Preference('SelfCheckInUserJS') ) %]
-        <script>[% Koha.Preference('SelfCheckInUserJS') | $raw %]</script>
+        <script nonce="[% csp_nonce %]">[% Koha.Preference('SelfCheckInUserJS') | $raw %]</script>
     [% END %]
 [% END %]

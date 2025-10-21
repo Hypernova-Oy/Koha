@@ -534,7 +534,7 @@
     [% Asset.js("js/autofill.js") | $raw %]
 [% END %]
 [% INCLUDE 'datatables.inc' %]
-<script>
+<script nonce="[% csp_nonce %]">
     [% IF ( loggedinusername ) %]
         function enableCheckboxActions(){
             // Enable/disable controls if checkboxes are checked

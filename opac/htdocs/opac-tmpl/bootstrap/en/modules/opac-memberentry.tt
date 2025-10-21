@@ -1131,7 +1131,7 @@
     [% Asset.js("lib/jquery/plugins/jquery.validate.min.js") | $raw %]
     [% INCLUDE 'calendar.inc' %]
 
-    <script>
+    <script nonce="[% csp_nonce %]">
 
         $(document).ready(function() {
             [% IF op == 'edit' && !OPACPatronDetails %]
