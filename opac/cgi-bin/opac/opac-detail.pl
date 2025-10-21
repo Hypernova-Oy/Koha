@@ -33,7 +33,7 @@ use C4::Koha        qw(
 );
 use C4::Search  qw( new_record_from_zebra searchResults getRecords );
 use C4::Serials qw( CountSubscriptionFromBiblionumber SearchSubscriptions GetLatestSerials );
-use C4::Output  qw( parametrized_url output_html_with_http_headers );
+use C4::Output  qw( parametrized_url output_html_with_http_headers redirect_if_opac_hidden );
 use C4::Biblio  qw(
     CountItemsIssued
     GetBiblioData
@@ -150,10 +150,7 @@ unless ( $patron and $patron->category->override_hidden_items ) {
 
     # only skip this check if there's a logged in user
     # and its category overrides OpacHiddenItems
-    if ( $biblio->hidden_in_opac( { rules => C4::Context->yaml_preference('OpacHiddenItems') } ) ) {
-        print $query->redirect('/cgi-bin/koha/errors/404.pl');    # escape early
-        exit;
-    }
+    redirect_if_opac_hidden( $query, $biblio, $patron );
     if ( $items->count >= 1 ) {
         $items = $items->filter_by_visible_in_opac( { patron => $patron } );
     }
