@@ -1,0 +1,257 @@
+#!/usr/bin/perl
+
+package Main;
+
+use strict;
+use warnings;
+
+use C4::Context("/etc/koha/koha-conf-site.xml.in");
+use Getopt::Long;
+use Pod::Usage;
+
+
+my $caches_available = eval {
+    use Koha::Caches;
+    1;
+};
+
+my $verbose     = 0;
+my $pref        = 0;
+my $all         = 0;
+my @files;
+GetOptions(
+    'v|verbose' => \$verbose,
+    'p'         => \$pref,
+    'f:s'       => \@files,
+    'i|installed-languages' => \$all,
+);
+
+
+my ($cmd, $lang) = @ARGV;
+$cmd //= "";
+$cmd = lc $cmd;
+
+my @langs;
+$all = 1 unless $lang;
+if ( $all ) {
+    @langs = split(/\n/, `koha-translate --list`);
+}
+else {
+    push @langs, $lang;
+}
+
+
+if ( $cmd =~ /^install$/ ) {
+    my $installer = HNLangInstaller->new( $lang, $pref, $verbose );
+    if ( $lang and not grep( {$_ eq $lang} @{ $installer->{langs} } ) ) {
+        print "Unsupported language: $lang\n";
+        exit;
+    }
+    if ( $all ) {
+        for my $lang ( @langs ) {
+            `koha-translate --install $lang; koha-translate --update $lang`;
+            $installer->set_lang( $lang );
+            $installer->$cmd();
+        }
+    }
+    else {
+        `koha-translate --install $lang; koha-translate --update $lang`;
+        $installer->install();
+    }
+
+    Koha::Caches->get_instance()->flush_all if $caches_available;
+}
+elsif ( $cmd =~ /^create$/ ) {
+    my $installer = HNLangInstaller->new( $lang, $pref, $verbose );
+
+    if ( $lang and not grep( {$_ eq $lang} @{ $installer->{langs} } ) ) {
+        print "Unsupported language: $lang\n";
+        exit;
+    }
+
+    my $po_template = <<"POTEMPLATE";
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\\n"
+
+POTEMPLATE
+
+    my $po_template_messages = <<"POTEMPLATEMESSAGES";
+msgid "Custom modifications start here. This file will be appended to lang-messages.po"
+msgstr "Custom modifications start here. This file will be appended to lang-messages.po"
+
+POTEMPLATEMESSAGES
+
+    my $hn_po_path = 'HN/misc/translator/po';
+    my @files = glob('misc/translator/po/fi-FI*.po');
+
+    foreach my $lang (@langs) {
+        foreach my $file (@files) {
+            $file =~ s/misc\/translator\/po\/fi-FI-//;
+            next if $file =~ /^installer/;
+            next if $file =~ /UNIMARC/;
+            my $abs_file = "$hn_po_path/$lang-$file";
+            unless(-e $abs_file) {
+                open my $fh, ">", $abs_file;
+                unless ($file =~ /^messages\.po$/) {
+                    print $fh $po_template;
+                } else {
+                    print $fh $po_template_messages;
+                }
+                close $fh;
+                print "Created $abs_file\n";
+            }
+        }
+    }
+}
+else {
+    print STDERR "Unsupported command $cmd\n" if $cmd;
+    print STDERR "Available commands: install, create\n" unless $cmd;
+    exit;
+}
+
+
+package HNLangInstaller;
+
+use lib ("/usr/share/koha/lib", "/usr/share/koha/misc/translator");
+use File::Basename;
+use File::Path;
+use File::Temp;
+use base 'LangInstaller';
+
+sub new {
+  my ( $class, $lang, $verbose ) = @_;
+  my $self = {};
+
+  $FindBin::Bin = "misc/translator";
+
+  $self = $class->SUPER::new( $lang, undef, $verbose );
+  $self->{path_po} = 'HN/misc/translator/po';
+  $self->{files} = $self->get_changed_files();
+  bless $self, $class;
+}
+
+sub install_installer {
+    my $self = shift;
+    return 1;
+}
+
+sub install_messages {
+    my ($self) = @_;
+
+    my $temp_dir = File::Temp::tempdir(CLEANUP => 1);
+    my $locale = $self->locale_name();
+    my $modir = "misc/translator/po/$locale/LC_MESSAGES";
+    my $pofile = "misc/translator/po/$self->{lang}-messages.po";
+    my $hn_pofile = "$self->{path_po}/$self->{lang}-messages.po";
+    my $temp_pofile = "$temp_dir/" . File::Basename::basename($pofile);
+    my $mofile = "$modir/$self->{domain}.mo";
+
+    unless ( -f $pofile ) {
+        die "PO file $pofile for language '$self->{lang}' do not exist";
+    }
+
+    system("cp $pofile $temp_pofile");
+    system("cat $hn_pofile >> $temp_pofile");
+
+    
+
+    print "Install HN messages ($locale)\n" if $self->{verbose};
+    system "$self->{msgfmt} -o $mofile $temp_pofile";
+
+    my $js_pofile = "misc/translator/po/$self->{lang}-messages-js.po";
+    my $hn_js_pofile = "$self->{path_po}/$self->{lang}-messages-js.po";
+    $temp_pofile = "$temp_dir/" . File::Basename::basename($js_pofile);
+
+    unless ( -f $pofile ) {
+        die "PO file $js_pofile for language '$self->{lang}' do not exist";
+    }
+
+    system("cp $js_pofile $temp_pofile");
+    system("cat $hn_js_pofile >> $temp_pofile");
+
+    my $js_locale_data = 'var json_locale_data = {"Koha":' . `$self->{po2json} $temp_pofile` . '};';
+    my $progdir = C4::Context->config('intrahtdocs') . '/prog';
+    mkdir "$progdir/$self->{lang}/js";
+    open my $fh, '>', "$progdir/$self->{lang}/js/locale_data.js";
+    print $fh $js_locale_data;
+    close $fh;
+
+    my $opachtdocs = C4::Context->config('opachtdocs');
+    opendir(my $dh, $opachtdocs);
+    for my $theme ( grep { not /^\.|lib|xslt/ } readdir($dh) ) {
+        mkdir "$opachtdocs/$theme/$self->{lang}/js";
+        open my $fh, '>', "$opachtdocs/$theme/$self->{lang}/js/locale_data.js";
+        print $fh $js_locale_data;
+        close $fh;
+    }
+}
+
+sub po_filename {
+    my $self   = shift;
+    my $suffix = shift;
+
+    $self->{path_pref_en} = C4::Context->config('intrahtdocs') .
+                            "/prog/$self->{lang}/modules/admin/preferences";
+    my $trans_file = $self->{path_po} . "/" . $self->{lang} . $suffix;
+    return $trans_file;
+}
+
+sub get_changed_files {
+    my ( $self ) = @_;
+
+    my $git_changed_files = `cd /usr/share/koha && git diff --name-only \`git rev-list HEAD | tail -n 2 | head -n 1\` HEAD`;
+
+    my @changed_files = split('\n', $git_changed_files);
+    my @translatable_files;
+    foreach my $file (@changed_files) {
+        next unless $file =~ /\.(tt|inc|xsl|xml|def|xsl|js|yml|yaml)$/;
+        next if $file =~ /^intranet\/cgi-bin\/installer\//;
+        push @translatable_files, $file;
+    }
+    return \@translatable_files;
+}
+
+sub path_to_po_file {
+    my ( $self, $filepath ) = @_;
+
+    my $paths_to_pos = [
+        { dir => 'opac/htdocs/opac-tmpl/bootstrap/en/xslt', po => '-marc-MARC21.po' },
+        { dir => 'intranet/htdocs/intranet-tmpl/prog/en/xslt', po => '-marc-MARC21.po' },
+        { dir => 'intranet/cgi-bin/installer/data/mysql/en/marcflavour/marc21/mandatory', po => '-installer-MARC21.po' },
+        { dir => 'intranet/cgi-bin/installer/data/mysql/en/mandatory', po => '-installer.po' },
+        { dir => 'intranet/cgi-bin/installer/data/mysql/en/optional', po => '-installer.po' },
+        { dir => 'intranet/htdocs/intranet-tmpl/prog', po => '-staff-prog.po' },
+        { dir => 'opac/htdocs/opac-tmpl/bootstrap', po => '-opac-bootstrap.po' }
+    ];
+
+    foreach my $pathobj (@$paths_to_pos) {
+        my $dir = $pathobj->{dir};
+        if (File::Basename::dirname($filepath) =~ /^$dir/) {
+            return $pathobj->{po};
+        }
+    }
+
+    warn $self . "->path_to_po_file(): Could not convert $filepath to po file.";
+    return "";
+}
+sub install_tmpl {
+    my ( $self ) = @_;
+    print "Install templates\n" if $self->{verbose};
+
+    for my $file (@{$self->{files}}) {
+        my $temp_dir = File::Temp::tempdir(CLEANUP => 1);
+        my $pofile = $self->path_to_po_file($file);
+        next unless $pofile;
+        my $en_dir = File::Basename::dirname($file);
+        my $justfile = File::Basename::basename($file);
+        my $destination_dir = $en_dir;
+        $destination_dir =~ s/\/en\//\/$self->{lang}\//;
+        system "$self->{process} install "
+                . "-i $destination_dir "
+                . "-o $temp_dir  "
+                . "-s $self->{path_po}/$self->{lang}$pofile "
+                . "-f $justfile";
+        system "cp $temp_dir/$justfile $destination_dir/$justfile";
+    }
+}
