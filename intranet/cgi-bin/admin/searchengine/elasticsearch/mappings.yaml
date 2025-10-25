@@ -3200,6 +3200,18 @@ biblios:
     opac: 1
     staff_client: 1
     type: boolean
+  other-classification:
+    label: other-classification
+    mandatory: ~
+    mappings:
+    - facet: ''
+      marc_field: '084a'
+      marc_type: marc21
+      sort: 1
+      suggestible: ''
+    opac: 1
+    staff_client: 1
+    type: ''
   other-control-number:
     label: other-control-number
     mandatory: ~
