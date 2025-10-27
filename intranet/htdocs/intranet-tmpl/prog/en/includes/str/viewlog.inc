@@ -2,7 +2,7 @@
 [% USE raw %]
 
 <!-- str/viewlog.inc -->
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var module_labels = {
         APIKEYS: _("API keys"),
         AUTH: _("Authentication"),

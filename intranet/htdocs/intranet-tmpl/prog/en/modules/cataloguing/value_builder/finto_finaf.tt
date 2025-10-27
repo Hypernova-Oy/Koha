@@ -81,7 +81,7 @@
     [% END %]
 [%END%]
 
-<script type="text/javascript">
+<script nonce="[% Koha.CSPNonce | $raw %]" type="text/javascript">
 //<![CDATA[
 function report() {
         var index_start = "[% index %]";

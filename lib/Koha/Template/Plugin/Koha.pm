@@ -25,6 +25,7 @@ use C4::Context;
 use Koha::Token;
 use Koha;
 use Koha::Cache::Memory::Lite;
+use Koha::ContentSecurityPolicy;
 
 =head1 NAME
 
@@ -140,6 +141,23 @@ sub GenerateCSRF {
     my $csrf_token = Koha::Token->new->generate_csrf( { session_id => scalar $session_id } );
     $memory_cache->set_in_cache( $cache_key, $csrf_token );
     return $csrf_token;
+}
+
+=head3 CSPNonce
+
+Retrieves the Content-Security-Policy nonce.
+
+It should be cached by Koha::Middleware::ContentSecurityPolicy.
+
+=cut
+
+sub CSPNonce {
+    my $csp = Koha::ContentSecurityPolicy->new();
+    my $nonce;
+    if ( $csp->is_enabled ) {
+        $nonce = $csp->get_nonce;
+    }
+    return $nonce;
 }
 
 1;

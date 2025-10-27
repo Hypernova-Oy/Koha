@@ -1,5 +1,6 @@
-
-<script>
+[% USE Koha %]
+[% USE raw %]
+<script nonce="[% Koha.CSPNonce | $raw %]">
     (function () {
         /**
          * Format the biblio response from a Koha RESTful API request.

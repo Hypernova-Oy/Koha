@@ -459,7 +459,7 @@
     [% Asset.js("js/admin-menu.js") | $raw %]
     [% Asset.js("js/transport_status.js") | $raw %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
 
             var file_transports_url = '/api/v1/config/file_transports';

@@ -249,7 +249,7 @@
     <!-- /.page-section -->
 [% END %]
 
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     #fileuploadstatus,
     #fileuploadfailed {
         display: none;
@@ -361,7 +361,7 @@
     [% Asset.js("js/tools-menu.js") | $raw %]
     [% INCLUDE 'datatables.inc' %]
     [% Asset.js("js/file-upload.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function StartUpload() {
             if( $('#fileToUpload').prop('files').length == 0 ) return;
             $('#fileToUpload').prop('disabled',true);

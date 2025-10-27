@@ -104,6 +104,7 @@ my $exceptions = {
         ],
         codespell => [],
         core      => [],
+        nonce     => [qw(t/lib/plugins/Koha/Plugin/TestValuebuilder/test_valuebuilder_popup.tt)],
     },
     yml => {
         core => [],

@@ -1,4 +1,5 @@
 [% USE Koha %]
+[% USE raw %]
 <!-- snippet for form to set borrower and patron category messaging preferences -->
 
 <input type="hidden" name="modify" value="yes" />
@@ -337,7 +338,7 @@
         [% END %]
     </tbody>
 </table>
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     document.addEventListener("DOMContentLoaded", function () {
         const selectElement = document.querySelector('select[name="2-DAYS"]');
 

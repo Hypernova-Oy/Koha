@@ -18,7 +18,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         .item-status,
         .dt-buttons {
             display: inline;
@@ -416,7 +416,7 @@
 
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         [% IF ( TagsInputEnabled && loggedinusername ) %]
             function tagSelected() {
                 var bibs = document.getElementById('records').value;

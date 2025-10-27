@@ -1,3 +1,5 @@
+[% USE Koha %]
+[% USE raw %]
 <fieldset class="rows">
     <legend>Custom fields</legend>
     <ol id="standard-fields">
@@ -25,7 +27,7 @@
     </button>
 </fieldset>
 
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     .custom-field-input {
         width: 25%;
         display: inline-block;

@@ -93,7 +93,7 @@
 [% END %][%# end of block items_table %]
 
 [% BLOCK build_items_table_js %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         let hide_patron_name = [% IF Koha.Preference('HidePatronName') %]true[% ELSE %]false[% END %];
 
         let items_selection = {};
