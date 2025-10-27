@@ -1,5 +1,6 @@
-
-<script>
+[% USE Koha %]
+[% USE raw %]
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var showLastPatronCount = "[% Koha.Preference('showLastPatronCount') | html %]";
 </script>
 <div id="lastborrower-window">

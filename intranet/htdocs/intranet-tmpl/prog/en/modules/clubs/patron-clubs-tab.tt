@@ -1,3 +1,5 @@
+[% USE Koha %]
+[% USE raw %]
 [% USE KohaDates %]
 
 [% IF enrollments %]
@@ -58,7 +60,7 @@
         </tbody>
     </table>
 [% END %]
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var clubs_dt_params = {
         paginate: true,
     };

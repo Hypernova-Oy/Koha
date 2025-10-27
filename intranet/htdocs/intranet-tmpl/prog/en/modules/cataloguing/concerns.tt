@@ -64,7 +64,7 @@
     [% INCLUDE 'js-date-format.inc' %]
     [% INCLUDE 'js-patron-format.inc' %]
     [% INCLUDE 'js-biblio-format.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
 
             logged_in_user_borrowernumber = [% logged_in_user.borrowernumber | html %];

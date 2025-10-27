@@ -1,5 +1,5 @@
 
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     (function () {
         /**
          * Format the patron response from a Koha RESTful API request.

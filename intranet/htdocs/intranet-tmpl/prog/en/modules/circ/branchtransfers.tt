@@ -15,7 +15,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         #tobranchcd-error {
             display: block;
         }
@@ -294,7 +294,7 @@
 [% END %]
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'select2.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(".printtransferslip").on("click", function(e){
             e.preventDefault();
             var itemnumber = $(this).attr('data-itemnumber');

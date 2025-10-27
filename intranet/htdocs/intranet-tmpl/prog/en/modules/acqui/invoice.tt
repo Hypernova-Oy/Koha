@@ -542,7 +542,7 @@
     [% Asset.js("js/additional-fields-entry.js") | $raw %]
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function updateColumnsVisibility(visible) {
             if ( visible ) {
                 $("table .tax_excluded, .tax_included").show();

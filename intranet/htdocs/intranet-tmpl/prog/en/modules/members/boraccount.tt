@@ -577,7 +577,7 @@
     [% INCLUDE 'format_price.inc' %]
     [% INCLUDE 'str/members-menu.inc' %]
     [% Asset.js("js/members-menu.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             [% IF payment_id && Koha.Preference('FinePaymentAutoPopup') %]
                 window.open('/cgi-bin/koha/members/printfeercpt.pl?action=print&change_given=[% change_given | html %]&accountlines_id=[% payment_id | html %]', '_blank');

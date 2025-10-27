@@ -292,7 +292,7 @@
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function get_options(column){
             let regex = /(<([^>]+)>)/ig; // Remove html tags
             let options = [... new Set(column

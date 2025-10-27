@@ -561,7 +561,7 @@
         [% Asset.js("lib/jquery/plugins/treetable/jquery.treetable.js") | $raw %]
     [% END %]
     [% Asset.js("js/acq.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             [% IF ( tab ) %]
                 $("#budgetsTabs li:eq([% tab | html %]) a").tab("show");

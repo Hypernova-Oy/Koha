@@ -1,6 +1,6 @@
 [% USE Context %]
 <!-- catalog-strings.inc -->
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     /* Some required variables from the template */
     var biblionumber = "[% biblionumber | html %]";
     var count = [% count || 0 | html %];

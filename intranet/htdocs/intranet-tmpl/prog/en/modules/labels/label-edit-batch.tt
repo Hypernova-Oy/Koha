@@ -232,7 +232,7 @@
     [% INCLUDE 'greybox.inc' %]
     [% INCLUDE 'datatables.inc' %]
     [% Asset.js("js/labels-menu.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function dofocus() {    // named function req'd for body onload event by some FF and IE7 security models
             $(".focus:last").select();
         }

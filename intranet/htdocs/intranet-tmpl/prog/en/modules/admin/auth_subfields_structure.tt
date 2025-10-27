@@ -435,7 +435,7 @@
     [% INCLUDE 'datatables.inc' %]
     [% Asset.js( "lib/sortable/Sortable.min.js" ) | $raw %]
     [% Asset.js("js/admin-menu.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             $("#table_authsubfieldstructure").kohaTable({
                 aaSorting: [],

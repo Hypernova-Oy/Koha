@@ -184,7 +184,7 @@
     [% IF op == 'list' %]
         [% INCLUDE 'datatables.inc' %]
     [% END %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         [% IF ( add_form ) %]
             $(document).ready(function(){
                 // Update selects for dataformat and recordtype

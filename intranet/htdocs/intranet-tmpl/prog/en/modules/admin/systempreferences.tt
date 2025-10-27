@@ -493,7 +493,7 @@
     [% INCLUDE 'wysiwyg-systempreferences.inc' %]
     [% IF ( else ) %]
         [% INCLUDE 'datatables.inc' %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             $(document).ready(function() {
                [% IF ( loop ) %]
                    $("#sysprefst").kohaTable({
@@ -504,7 +504,7 @@
             });
         </script>
     [% END %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         [% IF ( add_form ) %]
             $(document).ready(function() {
                 $('.variabletype').css({ color: "#0000CC", cursor: "pointer" });

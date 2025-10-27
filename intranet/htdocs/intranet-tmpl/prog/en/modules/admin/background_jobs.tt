@@ -144,7 +144,7 @@
     [% Asset.js("js/admin-menu.js") | $raw %]
     [% INCLUDE 'js-date-format.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         const job_statuses = [
             {'_id': 'new',       '_str': _("New")},
             {'_id': 'cancelled', '_str': _("Cancelled")},

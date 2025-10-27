@@ -8,7 +8,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' popup => 1 %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     table {
         border-collapse: separate;
         border-spacing: 0;
@@ -182,7 +182,7 @@
 [% MACRO jsinclude BLOCK %]
     [% Asset.js("js/tools-menu.js") | $raw %]
     [% INCLUDE 'greybox.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function Done() {
             window.location = "[% referer | html %]";
         };

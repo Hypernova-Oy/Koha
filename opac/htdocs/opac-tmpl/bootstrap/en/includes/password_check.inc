@@ -1,5 +1,6 @@
 [% USE Koha %]
-<script>
+[% USE raw %]
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var pwd_title = "";
     var pattern_title = "";
     var new_password_node_name = "[% new_password | html %]";

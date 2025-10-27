@@ -116,7 +116,7 @@
     [% INCLUDE 'js-biblio-format.inc' %]
     [% INCLUDE 'js-date-format.inc' %]
     [% INCLUDE 'js-patron-format.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         let table_settings = [% TablesSettings.GetTableSettings( 'circ', 'bookings', 'bookings-to-collect', 'json' ) | $raw %];
         $(document).ready(function() {
 

@@ -164,7 +164,7 @@
     [% INCLUDE 'js-date-format.inc' %]
     [% INCLUDE 'js-patron-format.inc' %]
     [% Asset.js("js/checkout_renewals_modal.js") | $raw %]
-    <script id="js">
+    <script nonce="[% Koha.CSPNonce | $raw %]" id="js">
         $(document).ready(function() {
             [% IF Koha.Preference('RecordStaffUserOnCheckout') %]
                 // FIXME This cannot work without bKohaColumnsUseNames

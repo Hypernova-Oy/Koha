@@ -120,7 +120,7 @@
         <a onclick="addToList()"><i class="fa fa-plus"></i></a>
     </div>
 [% END %]
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var patron_lists_dt_params = {
         sPaginationType: "full",
     };

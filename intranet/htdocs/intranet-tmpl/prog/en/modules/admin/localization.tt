@@ -10,7 +10,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' popup => 1 %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     #localization {
         margin-top: 1em;
     }
@@ -108,7 +108,7 @@
 
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function show_message( params ) {
             var type = params.type;
             var data = params.data;

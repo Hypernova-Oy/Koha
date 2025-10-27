@@ -148,7 +148,7 @@
 
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'greybox.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function Done() {
             window.location = "[% referer | html %]";
         };
