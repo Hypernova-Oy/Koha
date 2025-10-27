@@ -13,7 +13,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     .version-ellipsis {
         text-decoration: underline;
     }

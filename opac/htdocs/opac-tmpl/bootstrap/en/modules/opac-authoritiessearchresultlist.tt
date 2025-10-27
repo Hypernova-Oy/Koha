@@ -119,7 +119,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script type="text/JavaScript">
+    <script nonce="[% Koha.CSPNonce | $raw %]" type="text/JavaScript">
         $(document).ready(function () {
             $(".table").kohaTable({
                 searching: false,

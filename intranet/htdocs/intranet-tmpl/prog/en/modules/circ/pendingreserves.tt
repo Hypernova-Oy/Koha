@@ -298,7 +298,7 @@
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
     [% Asset.js("js/hold-group.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function get_options(column){
             let regex = /(<([^>]+)>)/ig; // Remove html tags
             let options = [... new Set(column

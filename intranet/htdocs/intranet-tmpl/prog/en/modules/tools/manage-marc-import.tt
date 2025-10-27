@@ -21,7 +21,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.css("css/humanmsg.css") | $raw %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     span.change-status {
         font-style: italic;
         color: #666;
@@ -457,7 +457,7 @@
 [% MACRO jsinclude BLOCK %]
     [% Asset.js("lib/jquery/plugins/humanmsg.js") | $raw %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             $("#staged-record-matching-rules select").change(function() {
                 var str = $(this).attr("id");

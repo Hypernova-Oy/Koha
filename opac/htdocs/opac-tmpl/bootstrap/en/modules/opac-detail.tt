@@ -48,7 +48,7 @@
 [% Asset.css("lib/Chocolat/css/chocolat.css") | $raw %]
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         .component_part {
             padding: 0.5rem 0.9rem;
             border-bottom: 1px solid #bcbcbc;
@@ -1642,7 +1642,7 @@
     [% Asset.js("lib/Chocolat/js/chocolat.js") | $raw %]
 
     [% IF ( Koha.Preference('OPACShowMusicalInscripts') ) %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             var interface = "[% interface | html %]";
             var PREF_OPACPlayMusicalInscripts = "[% Koha.Preference('OPACPlayMusicalInscripts') | html %]";
         </script>
@@ -1652,7 +1652,7 @@
     [% IF OpenLibraryCovers || OpenLibrarySearch %]
         [% Asset.js("js/openlibrary.js") | $raw %]
     [% END %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         window.emojiPicker = new EmojiPicker({
         emojiable_selector: '[data-emojiable=true]',
         assetsPath: '[% interface | html %]/lib/emoji-picker/img/',

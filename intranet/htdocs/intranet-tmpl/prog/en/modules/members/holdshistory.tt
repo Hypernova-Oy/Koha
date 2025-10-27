@@ -155,7 +155,7 @@
     [% INCLUDE 'str/members-menu.inc' %]
     [% Asset.js("js/members-menu.js") | $raw %]
     [% INCLUDE 'js-biblio-format.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         const all_libraries = [% To.json(Branches.all) | $raw %].map(e => {
                     e["_id"] = e["branchcode"];
                     e["_str"] = e["branchname"];
@@ -181,7 +181,7 @@
         const show_itemtype_column = [% Koha.Preference('AllowHoldItemTypeSelection') ? 1 : 0 | html %];
         const display_hold_group_id = [% Koha.Preference('DisplayAddHoldGroups') ? 1 : 0 | html %];
     </script>
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             var table_settings = [% TablesSettings.GetTableSettings('members', 'holdshistory', 'holdshistory-table', 'json') | $raw %];
 

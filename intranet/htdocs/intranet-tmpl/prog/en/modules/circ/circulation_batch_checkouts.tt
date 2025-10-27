@@ -244,7 +244,7 @@
                                     [% END %]
                                     [% IF checkout_info.HIGHHOLDS %]
                                         <!-- FIXME -->
-                                        <script>
+                                        <script nonce="[% Koha.CSPNonce | $raw %]">
                                             $(document).ready(function() {
                                                 $("input[name=duedatespec]:hidden").val('[% checkout_info.HIGHHOLDS.returndate | html %]');
                                             });
@@ -352,7 +352,7 @@
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             if($('#barcodelist').length) {
                 $('#barcodelist').focus();

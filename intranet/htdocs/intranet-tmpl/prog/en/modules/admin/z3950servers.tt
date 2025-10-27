@@ -272,7 +272,7 @@
     [% IF op == 'list' %]
         [% INCLUDE 'datatables.inc' %]
     [% END %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         [% IF op == 'edit_form' || op == 'add_form' %]
             $(document).ready(function(){
                 // Update selects for syntax, encoding and recordtype
