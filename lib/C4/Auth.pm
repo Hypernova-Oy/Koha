@@ -1152,10 +1152,15 @@ sub checkauth {
                     {
                         my $patron;
 
+# Disable OPAC password login, only IdP
+if ( $type eq "opac" && $query->param('login_password') && $query->param('login_userid') ) {
+    $info{'invalid_username_or_password'} = 1;
+} else {
                         ( $return, $cardnumber, $retuserid, $patron, $cas_ticket ) =
                             checkpw( $q_userid, $password, $query, $type );
                         $userid = $retuserid if ($retuserid);
                         $info{'invalid_username_or_password'} = 1 unless ($return);
+}
                     }
                 }
             }
