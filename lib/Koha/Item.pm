@@ -2812,19 +2812,36 @@ sub _check_location_update_rules {
     }
 
     if ($update_loc_rules) {
-        if (defined($update_loc_rules->{'_ALL_'})) {
-            return $self->_check_location_update_rule($update_loc_rules->{'_ALL_'});
-        }
-        elsif (defined($update_loc_rules->{$self->location//''})) {
-            return $self->_check_location_update_rule($update_loc_rules->{$self->location});
-        }
-        elsif (defined($update_loc_rules->{'_DEFAULT_'})) {
-            return $self->_check_location_update_rule($update_loc_rules->{'_DEFAULT_'});
-        }
+        $self->_check_location_update_interface($update_loc_rules);
     }
 }
 
+sub _check_location_update_interface {
+    my ($self, $update_loc_rules) = @_;
+    my $new_location;
+
+    if (my $update_loc_rules = $update_loc_rules->{C4::Context->interface()}) {
+        $new_location = $self->_check_location_update_rule($update_loc_rules);
+    }
+    $new_location = $self->_check_location_update_rule($update_loc_rules) unless (defined($new_location));
+    return $new_location;
+}
+
 sub _check_location_update_rule {
+    my ($self, $update_loc_rule) = @_;
+
+    if (defined($update_loc_rule->{'_ALL_'})) {
+        return $self->_check_location_update_rule2($update_loc_rule->{'_ALL_'});
+    }
+    elsif (defined($update_loc_rule->{$self->location//''})) {
+        return $self->_check_location_update_rule2($update_loc_rule->{$self->location});
+    }
+    elsif (defined($update_loc_rule->{'_DEFAULT_'})) {
+        return $self->_check_location_update_rule2($update_loc_rule->{'_DEFAULT_'});
+    }
+}
+
+sub _check_location_update_rule2 {
     my ($self, $update_loc_rule) = @_;
 
     if ($update_loc_rule eq '_PERM_') {
