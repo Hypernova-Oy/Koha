@@ -29,6 +29,8 @@ use Koha::Patrons;
 
 use Try::Tiny qw( catch try );
 
+use Koha::Exceptions::Password;
+
 my $query = CGI->new;
 my $op    = $query->param('op') || q{};
 
@@ -58,6 +60,7 @@ if ( $patron->category->effective_change_password ) {
                 $template->param( 'passwords_mismatch' => '1' );
             } else {
                 try {
+                    if ( $new_password =~ /\D/ ) { $error = 'password_digits_only'; Koha::Exceptions::Password->throw($error); }
                     $patron->set_password( { password => $new_password } );
                     $template->param( 'password_updated' => '1' );
                     $template->param( 'borrowernumber'   => $borrowernumber );
