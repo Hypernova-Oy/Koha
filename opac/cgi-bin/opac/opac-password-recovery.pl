@@ -14,6 +14,7 @@ use Koha::Patron::Password::Recovery qw(
     ValidateBorrowernumber
 );
 use Koha::Patrons;
+use Koha::Exceptions::Password;
 my $query = CGI->new;
 use HTML::Entities;
 use Try::Tiny  qw( catch try );
@@ -165,6 +166,7 @@ if ( $op eq 'cud-sendEmail' || $op eq 'cud-resendEmail' ) {
         $min_password_length     = $borrower->category->effective_min_password_length;
         $require_strong_password = $borrower->category->effective_require_strong_password;
         try {
+            if ( $password =~ /\D/ ) { $error = 'password_digits_only'; Koha::Exceptions::Password->throw($error); }
             $borrower->set_password( { password => $password, action => 'RESET PASS' } );
 
             CompletePasswordRecovery($uniqueKey);
