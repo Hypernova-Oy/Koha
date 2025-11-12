@@ -64,6 +64,9 @@
                                 [% IF password_has_whitespaces %]
                                     <span>Password must not contain leading or trailing whitespaces.</span>
                                 [% END %]
+                                [% IF password_digits_only %]
+                                    <span>Password must only contain numbers (0-9).</span>
+                                [% END %]
 
                                 [% IF ( WrongPass ) %]
                                     <span>Your current password was entered incorrectly. If this problem persists, please ask a librarian to reset your password for you.</span>
@@ -89,11 +92,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="Newkey">New password:</label>
-                                        <input class="form-control" type="password" id="Newkey" size="25" name="Newkey" autocomplete="new-password" />
+                                        <input class="form-control" type="password" id="Newkey" size="25" name="Newkey" autocomplete="new-password" pattern="[0-9]" />
                                     </div>
                                     <div class="form-group">
                                         <label for="Confirm">Re-type new password:</label>
-                                        <input class="form-control" type="password" id="Confirm" size="25" name="Confirm" autocomplete="new-password" />
+                                        <input class="form-control" type="password" id="Confirm" size="25" name="Confirm" autocomplete="new-password" pattern="[0-9]" />
                                     </div>
                                 </fieldset>
                                 <fieldset class="action">
@@ -136,6 +139,7 @@
                 rules: {
                     Newkey: {
                         required: true,
+                        password_digits_only: true,
                         password_strong: true,
                         password_no_spaces: true,
                     },
