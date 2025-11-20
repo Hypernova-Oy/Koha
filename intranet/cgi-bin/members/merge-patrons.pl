@@ -41,8 +41,9 @@ my $op  = $cgi->param('op') || 'show';
 my @ids = $cgi->multi_param('id');
 
 my $copy   = $cgi->param('copy');
-my $name   = $cgi->param('name');
 my @fields = qw(
+    surname
+    firstname
     preferred_name
     initials
     othernames
@@ -78,12 +79,6 @@ for my $field (@fields) {
     if ( defined $val ) {
         $data{$field} = $val;
     }
-}
-
-if ($name) {
-    my @names = split( ', ', $name );
-    $data{'firstname'} = $names[0];
-    $data{'surname'}   = $names[1];
 }
 
 if ( $op eq 'show' ) {
