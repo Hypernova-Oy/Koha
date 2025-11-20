@@ -249,7 +249,8 @@
             <div class="modal-body">
                 <div class="compare">
                     <div id="col-label">
-                        <div><strong data-field="name">Name:</strong></div>
+                        <div><strong data-field="surname">Surname:</strong></div>
+                        <div><strong data-field="firstname">First name:</strong></div>
                         <div><strong data-field="preferred_name">Preferred name:</strong></div>
                         <div><strong data-field="initials">Initials:</strong></div>
                         <div><strong data-field="othernames">Other name:</strong></div>
@@ -284,7 +285,8 @@
                             <!-- prettier-ignore-start -->
 <!-- <pre> block is unindented to avoid unwanted whitespace -->
 <pre>
-[% IF ( p.surname ) %][% p.surname | html %], [% p.firstname | html %][% ELSE %]-[% END %]
+[% IF ( p.surname ) %][% p.surname | html %][% ELSE %]-[% END %]
+[% IF ( p.firstname ) %][% p.firstname | html %][% ELSE %]-[% END %]
 [% IF ( p.preferred_name ) %][% p.preferred_name | html %][% ELSE %]-[% END %]
 [% IF ( p.initials ) %][% p.initials | html %][% ELSE %]-[% END %]
 [% IF ( p.othernames ) %][% p.othernames | html %][% ELSE %]-[% END %]
