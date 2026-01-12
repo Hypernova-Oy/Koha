@@ -210,12 +210,16 @@
     <xsl:if test="marc:datafield[@tag=028]">
         <span class="results_summary publisher_number ">
             <span class="label">Publisher number: </span>
+            <ul class="resource_list">
             <xsl:for-each select="marc:datafield[@tag=028]">
+                <li>
                 <xsl:call-template name="subfieldSelect">
                     <xsl:with-param name="codes">abq</xsl:with-param>
                     <xsl:with-param name="delimeter"><xsl:text> | </xsl:text></xsl:with-param>
                 </xsl:call-template>
+                </li>
             </xsl:for-each>
+            </ul>
         </span>
     </xsl:if>
 
