@@ -934,6 +934,7 @@
                     <xsl:with-param name="codes">abq</xsl:with-param>
                     <xsl:with-param name="delimeter"><xsl:text> | </xsl:text></xsl:with-param>
                 </xsl:call-template>
+                <xsl:if test="position()!=last()"><span class="separator"><xsl:text> | </xsl:text></span></xsl:if>
             </xsl:for-each>
         </span>
     </xsl:if>
