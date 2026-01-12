@@ -1046,6 +1046,7 @@
                         <xsl:call-template name="subfieldSelect">
                             <xsl:with-param name="codes">abq</xsl:with-param>
                         </xsl:call-template>
+                        <xsl:if test="position()!=last()"><span class="separator"><xsl:text> | </xsl:text></span></xsl:if>
                     </li>
                 </xsl:for-each>
             </ul>
