@@ -752,6 +752,7 @@ sub LinkBibHeadingsToAuthorities {
                         if defined $current_link;
                     my @auth_subfields;
                     foreach my $subfield ( $field->subfields() ) {
+                        next if ( $heading->auth_type() eq 'PERSO_NAME' && not( $subfield->[0] eq 'a' ) );
                         if ( $subfield->[0] =~ /[A-z]/
                             && C4::Heading::valid_heading_subfield( $field->tag, $subfield->[0] ) )
                         {
