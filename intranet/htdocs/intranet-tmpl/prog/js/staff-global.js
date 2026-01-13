@@ -188,6 +188,25 @@ $(document).ready(function () {
         decimal_rate: true,
     });
 
+    jQuery.validator.addMethod(
+        "email_with_display_name",
+        function (value, element) {
+            // https://html.spec.whatwg.org/multipage/input.html#valid-e-mail-address
+            let html5_email_regex =
+                "[a-zA-Z0-9.!#$%&'*+\\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*";
+            let display_name_regex = "[^<>\x0A\x0D]+";
+            let validation_regex = new RegExp(
+                `^${display_name_regex}<${html5_email_regex}>\$|^${html5_email_regex}\$`
+            );
+            return this.optional(element) || validation_regex.test(value);
+        },
+        __("Please enter a valid email address (display name allowed).")
+    );
+
+    jQuery.validator.addClassRules("email_with_display_name", {
+        email_with_display_name: true,
+    });
+
     $("#logout").on("click", function () {
         logOut();
     });
