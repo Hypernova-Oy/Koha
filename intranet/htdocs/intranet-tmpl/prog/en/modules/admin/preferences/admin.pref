@@ -4,7 +4,7 @@ Administration:
         -
             - "Email address for the administrator of Koha: "
             - pref: KohaAdminEmailAddress
-              class: email
+              class: email-with-display-name
             - "(This is the default From: address for emails unless there is one for the particular library, and is referred to when an internal error occurs.)"
         -
             - "Email address to be set as the replyto in emails: "

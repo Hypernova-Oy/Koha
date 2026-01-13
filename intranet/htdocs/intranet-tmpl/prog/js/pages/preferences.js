@@ -371,6 +371,12 @@ $(".preference-email").each(function () {
     });
 });
 
+$(".preference-email-with-display-name").each(function () {
+    $(this).rules("add", {
+        email_with_display_name: true,
+    });
+});
+
 $(".modalselect").on("click", function () {
     var datasource = $(this).data("source");
     var exclusions = $(this).data("exclusions").split("|");
