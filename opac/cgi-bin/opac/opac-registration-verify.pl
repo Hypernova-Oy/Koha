@@ -70,7 +70,7 @@ if ( $rego_found
             template_name   => "opac-registration-confirmation.tt",
             type            => "opac",
             query           => $cgi,
-            authnotrequired => C4::Context->preference("OpacPublic") ? 1 : 0,
+            authnotrequired => 1,
         }
     );
     $template->param( "token" => $token );
@@ -113,7 +113,7 @@ if ( $rego_found
                 template_name   => "opac-registration-confirmation.tt",
                 type            => "opac",
                 query           => $cgi,
-                authnotrequired => C4::Context->preference("OpacPublic") ? 1 : 0,
+                authnotrequired => 1,
             }
         );
         $template->param( "confirmed" => 1 );
