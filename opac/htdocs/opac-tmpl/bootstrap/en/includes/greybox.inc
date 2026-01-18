@@ -1,5 +1,6 @@
 [% USE raw %]
 [% USE Asset %]
+[% USE Koha %]
 <script nonce="[% Koha.CSPNonce | $raw %]">
     var GB_ROOT_DIR = "[% interface | html %]/lib/greybox/";
 </script>
