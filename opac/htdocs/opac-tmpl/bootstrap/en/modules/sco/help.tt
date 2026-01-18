@@ -32,7 +32,7 @@
     <style>[% SCOUserCSS | $raw %]</style>
     <!-- prettier-ignore-end -->
 [% END %]
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var Koha = {};
     function _(s) {
         return s;
@@ -93,7 +93,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% IF ( SCOUserJS ) %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             [% SCOUserJS | $raw %]
         </script>
     [% END %]

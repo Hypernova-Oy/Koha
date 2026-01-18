@@ -1050,7 +1050,7 @@
 [% BLOCK jsinclude %]
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var AR_CAPTION_COUNT = _("(%s total)");
 
 
@@ -1423,7 +1423,7 @@
     [% END %]
     [% IF OverDriveCirculation %]
         [% Asset.js("js/overdrive.js") | $raw %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             [%- IF Koha.Preference('OverDrivePasswordRequired') -%]
                 var OD_password_required = 1;
             [%- ELSE -%]

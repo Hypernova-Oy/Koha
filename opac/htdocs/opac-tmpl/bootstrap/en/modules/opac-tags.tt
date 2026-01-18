@@ -242,13 +242,13 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         const loggedinusername = [% ( loggedinusername ) ? 1 : 0 | html %];
         const opacbookbag = [% ( opacbookbag ) ? 1 : 0 | html %];
         const virtualshelves = [% ( virtualshelves ) ? 1 : 0 | html %];
     </script>
     [% Asset.js("js/results-list.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function () {
             $("body").on("click", ".remove", function (e) {
                 e.preventDefault();

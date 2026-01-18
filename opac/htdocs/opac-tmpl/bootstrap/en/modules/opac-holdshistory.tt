@@ -191,7 +191,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function () {
             $("#sort").change(function () {
                 $("#sortform").submit();

@@ -517,7 +517,7 @@
 [% BLOCK jsinclude %]
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
 
             $(".toggle_unholdable").click(function(e){
