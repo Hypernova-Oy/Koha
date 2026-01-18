@@ -1,4 +1,5 @@
 [% USE raw %]
+[% USE Koha %]
 <script nonce="[% Koha.CSPNonce | $raw %]">
     [% IF ( Koha.Preference('IntranetSlipPrinterJS') ) %]
         [% Koha.Preference('IntranetSlipPrinterJS') | $raw %]
