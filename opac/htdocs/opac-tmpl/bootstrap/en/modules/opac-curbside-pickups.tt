@@ -280,15 +280,15 @@
     [% Asset.js("lib/dayjs/dayjs.min.js") | $raw %]
     [% Asset.js("lib/dayjs/plugin/isSameOrAfter.js") | $raw %]
     [% Asset.js("lib/dayjs/plugin/customParseFormat.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         dayjs.extend(window.dayjs_plugin_isSameOrAfter);
     </script>
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         dayjs.extend(window.dayjs_plugin_customParseFormat);
     </script>
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         [% SET pickup_exists_in = [] %]
         [% FOR p IN patron_curbside_pickups %]
             [% UNLESS p.delivered_by  %]

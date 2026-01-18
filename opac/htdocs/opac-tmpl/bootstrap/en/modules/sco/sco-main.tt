@@ -44,7 +44,7 @@
     <style>[% Koha.Preference('SCOUserCSS') | $raw %]</style>
     <!-- prettier-ignore-end -->
 [% END %]
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var Koha = {};
     function _(s) {
         return s;
@@ -404,7 +404,7 @@
     [% INCLUDE 'opac-bottom.inc' %]
     [% BLOCK jsinclude %]
         [% INCLUDE 'datatables.inc' %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             function mungeHistory() {
                     // prevent back button from allowing form resubmission
                     if (history && history.pushState) {
@@ -523,7 +523,7 @@
             });
         </script>
         [% IF ( Koha.Preference('SCOUserJS') ) %]
-            <script>
+            <script nonce="[% Koha.CSPNonce | $raw %]">
                 [% Koha.Preference('SCOUserJS') | $raw %]
             </script>
         [% END %]

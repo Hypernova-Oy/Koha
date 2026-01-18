@@ -73,7 +73,7 @@
 [% FILTER collapse %]
     [% PROCESS cssinclude %]
 [% END %]
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var Koha = {};
     function _(s) { return s } // dummy function for gettext
     const is_logged_in = [% IF logged_in_user %]true[% ELSE %]false[% END %]

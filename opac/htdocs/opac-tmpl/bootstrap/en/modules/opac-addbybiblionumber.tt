@@ -140,7 +140,7 @@
 
 [% INCLUDE 'opac-bottom.inc' is_popup=1 %]
 [% BLOCK jsinclude %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             [% IF WINDOW_PARENT_RELOAD %]
                 opener.location.reload();

@@ -145,7 +145,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(function () {
             $("#topissuest").kohaTable({
                 sorting: [[3, "desc"]],
