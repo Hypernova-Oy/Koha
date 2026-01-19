@@ -48,12 +48,12 @@
 [% END %]
 [% IF ( Koha.Preference('OPACUserCSS') ) %]
     <!-- prettier-ignore-start -->
-    <style>[% Koha.Preference('OPACUserCSS') | $raw %]</style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">[% Koha.Preference('OPACUserCSS') | $raw %]</style>
     <!-- prettier-ignore-end -->
 [% END %]
 [% IF Branches.GetBranchSpecificCSS( Branches.GetLoggedInBranchcode() || default_branch) %]
     <!-- prettier-ignore-start -->
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         [% Branches.GetBranchSpecificCSS( Branches.GetLoggedInBranchcode() || default_branch) | $raw %]
     </style>
     <!-- prettier-ignore-end -->
@@ -62,7 +62,7 @@
     [% SET SCOUserCSS = Koha.Preference('SCOUserCSS') %]
     [% IF SCOUserCSS %]
         <!-- prettier-ignore-start -->
-        <style>[% SCOUserCSS | $raw %]</style>
+        <style nonce="[% Koha.CSPNonce | $raw %]">[% SCOUserCSS | $raw %]</style>
         <!-- prettier-ignore-end -->
     [% END %]
 [% END %]

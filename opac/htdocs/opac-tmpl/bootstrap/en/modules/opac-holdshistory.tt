@@ -20,7 +20,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         .controls .paginate_button {
             font-family: "FontAwesome";
             text-decoration: none;

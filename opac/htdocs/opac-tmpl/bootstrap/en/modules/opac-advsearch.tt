@@ -14,7 +14,7 @@
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %]
     [% FILTER collapse %]
-        <style>
+        <style nonce="[% Koha.CSPNonce | $raw %]">
             .adv-search-grid {
                 display: grid;
                 gap: 0.5rem;
