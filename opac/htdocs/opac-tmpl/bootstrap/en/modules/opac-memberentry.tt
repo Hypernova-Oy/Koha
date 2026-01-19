@@ -188,7 +188,7 @@
                                                 </select>
                                                 <span class="hint">
                                                     <a id="update_privacy_guarantor_checkouts" href="#" class="btn btn-primary">Update</a>
-                                                    <span id="update_privacy_guarantor_checkouts_message" class="alert" style="display:none"></span>
+                                                    <span id="update_privacy_guarantor_checkouts_message" class="alert" nonce="[% Koha.CSPNonce | $raw %]" style="display:none"></span>
                                                 </span>
                                             </li>
                                         [% END %]
@@ -206,7 +206,7 @@
                                                 </select>
                                                 <span class="hint">
                                                     <a id="update_privacy_guarantor_fines" href="#" class="btn btn-primary">Update</a>
-                                                    <span id="update_privacy_guarantor_fines_message" class="alert" style="display:none"></span>
+                                                    <span id="update_privacy_guarantor_fines_message" class="alert" nonce="[% Koha.CSPNonce | $raw %]" style="display:none"></span>
                                                 </span>
                                             </li>
                                         [% END %]
@@ -1315,7 +1315,7 @@
                                                     <input type="checkbox" name="borrower_gdpr_proc_consent" id="borrower_gdpr_proc_consent" class="required" value="agreed" />
                                                     <span>I agree with your processing of my personal data as outlined in the <a target="_blank" href="[% Koha.Preference('PrivacyPolicyURL') | url %]">privacy policy</a>.</span>
                                                 </label>
-                                                <label class="error" for="borrower_gdpr_proc_consent" style="display: none;"></label>
+                                                <label class="error" for="borrower_gdpr_proc_consent" nonce="[% Koha.CSPNonce | $raw %]" style="display: none;"></label>
                                                 <div class="required_label required">Required</div>
                                             </li>
                                         </ol>
@@ -1336,7 +1336,7 @@
                                             <li>
                                                 <label for="captcha" class="required">Verification:</label>
 
-                                                <input type="text" name="captcha" id="captcha" style="text-transform: uppercase;" />
+                                                <input type="text" name="captcha" id="captcha" nonce="[% Koha.CSPNonce | $raw %]" style="text-transform: uppercase;" />
                                                 <div class="required_label required">Required</div>
                                                 <input type="hidden" name="captcha_digest" value="[% captcha_digest | html %]" />
 

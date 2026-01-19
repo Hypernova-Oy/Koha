@@ -196,7 +196,7 @@
                         <div class="alert alert-info" id="savings"> Congratulations, you have saved a total of [% savings | $Price with_symbol => 1 %] by using the library. </div>
                     [% END %]
 
-                    <div class="alert alert-info" id="notesaved" style="display:none;"></div>
+                    <div class="alert alert-info" id="notesaved" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;"></div>
                     [% IF ( OpacMySummaryNote ) %]
                         [% PROCESS koha_news_block news => OpacMySummaryNote %]
                     [% END %]
@@ -353,7 +353,7 @@
 
                                                                 [% IF ( GoogleJackets ) %]
                                                                     [% IF ( ISSUE.normalized_isbn ) %]
-                                                                        <div style="display:block;" title="Click to view in Google Books" class="[% ISSUE.normalized_isbn | html %]" id="gbs-thumbnail[% loop.count | html %]"></div>
+                                                                        <div nonce="[% Koha.CSPNonce | $raw %]" style="display:block;" title="Click to view in Google Books" class="[% ISSUE.normalized_isbn | html %]" id="gbs-thumbnail[% loop.count | html %]"></div>
                                                                     [% ELSE %]
                                                                         <a href="http://books.google.com/books?q=[% ISSUE.title |url %]"><span class="no-image">No cover image available</span></a>
                                                                     [% END %]
@@ -724,7 +724,7 @@
 
                                                             [% IF ( GoogleJackets ) %]
                                                                 [% IF ( OVERDUE.normalized_isbn ) %]
-                                                                    <div style="display:block;" title="Click to view in Google Books" class="[% OVERDUE.normalized_isbn | html %]" id="gbs-thumbnail[% loop.count | html %]"></div>
+                                                                    <div nonce="[% Koha.CSPNonce | $raw %]" style="display:block;" title="Click to view in Google Books" class="[% OVERDUE.normalized_isbn | html %]" id="gbs-thumbnail[% loop.count | html %]"></div>
                                                                 [% ELSE %]
                                                                     <a href="http://books.google.com/books?q=[% OVERDUE.title |url %]"><span class="no-image">No cover image available</span></a>
                                                                 [% END %]

@@ -73,19 +73,19 @@
 
         [% IF ( TagsInputEnabled ) %]
             <span id="tagsel_span">
-                <button id="tagsel_tag" class="btn btn-link btn-sm disabled" type="submit" style="display:none"><i class="fa fa-fw fa-tag" aria-hidden="true"></i> Tag</button>
+                <button id="tagsel_tag" class="btn btn-link btn-sm disabled" type="submit" nonce="[% Koha.CSPNonce | $raw %]" style="display:none"><i class="fa fa-fw fa-tag" aria-hidden="true"></i> Tag</button>
             </span>
         [% END %]
     </div>
     <!-- / .links -->
     [% IF ( TagsInputEnabled ) %]
-        <div id="tagsel_form" style="display:none">
+        <div id="tagsel_form" nonce="[% Koha.CSPNonce | $raw %]" style="display:none">
             <label for="tagsel_new">New tag:</label>
             <input type="text" name="tagsel_new" id="tagsel_new" maxlength="100" />
             <input id="tagsel_button" name="tagsel_button" class="tagsel_button btn btn-sm btn-primary" title="Add" type="submit" value="Add" />
             <a href="#" id="tagsel_cancel">(done)</a>
         </div>
-        <div id="tagsel_status" class="tagsel_tatus" style="display:none;"> Tag status here. </div>
+        <div id="tagsel_status" class="tagsel_tatus" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;"> Tag status here. </div>
     [% END %]
 </div>
 <!-- / .selections-toolbar -->

@@ -92,7 +92,7 @@
                                 [% END # / IF opacuserlogin %]
                             </span>
                             [% IF ( TagsInputEnabled && loggedinusername ) %]
-                                <span id="tagsel_form" style="display:none">
+                                <span id="tagsel_form" nonce="[% Koha.CSPNonce | $raw %]" style="display:none">
                                     <label for="tagsel_new">New tag:</label>
                                     <input type="text" name="tagsel_new" id="tagsel_new" maxlength="100" />
                                     <input id="tagsel_button" name="tagsel_button" class="input tagsel_button" title="Add" type="submit" value="Add" />
@@ -343,7 +343,7 @@
                                                     title="ctx_ver=Z39.88-2004&amp;rft_val_fmt=info%3Aofi%2Ffmt%3Akev%3Amtx%3Abook&amp;rft.au=[% BIBLIO_RESULT.author | html %]&amp;rft.btitle=[% BIBLIO_RESULT.title |url %]&amp;rft.date=[% BIBLIO_RESULT.publicationyear | html %]&amp;rft.tpages=[% BIBLIO_RESULT.item('size') | html %]&amp;rft.isbn=[% BIBLIO_RESULT.isbn |url %]&amp;rft.aucorp=&amp;rft.place=[% BIBLIO_RESULT.place | html %]&amp;rft.pub=[% BIBLIO_RESULT.publisher |url %]&amp;rft.edition=[% BIBLIO_RESULT.edition | html %]&amp;rft.series=[% BIBLIO_RESULT.series | html %]&amp;rft.genre="
                                                 ></span>
                                                 [% IF ( TagsInputEnabled && loggedinusername ) %]
-                                                    <span id="newtag[% BIBLIO_RESULT.biblionumber | html %]_status" class="tagstatus results_summary" style="display:none">Tag status here.</span>
+                                                    <span id="newtag[% BIBLIO_RESULT.biblionumber | html %]_status" class="tagstatus results_summary" nonce="[% Koha.CSPNonce | $raw %]" style="display:none">Tag status here.</span>
                                                 [% END %]
 
                                                 [% IF BIBLIO_RESULT.HOSTITEMENTRIES || BIBLIO_RESULT.HOSTINFO %]

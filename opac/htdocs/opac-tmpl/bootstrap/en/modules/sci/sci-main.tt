@@ -151,7 +151,7 @@
                             <div class="row">
                                 <div class="col">
                                     <div class="sci_input_append">
-                                        <table id="sci_barcodes_table" class="table table-bordered table-striped dataTable no-footer" style="display: none;">
+                                        <table id="sci_barcodes_table" class="table table-bordered table-striped dataTable no-footer" nonce="[% Koha.CSPNonce | $raw %]" style="display: none;">
                                             <caption class="sr-only">Barcodes</caption>
                                             <thead>
                                                 <th class="barcodes_column">Barcode</th>
@@ -163,8 +163,8 @@
                                     <!-- .sci_input_append -->
                                     <input type="hidden" name="op" value="cud-check_in" />
                                     <div id="button_bar">
-                                        <button id="sci_checkin_button" type="submit" class="btn btn-primary" style="display: none;"> <i class="fa fa-check-square" aria-hidden="true"></i> <span>Check in</span> </button>
-                                        <a href="/cgi-bin/koha/sci/sci-main.pl" class="btn btn-danger" role="button" style="display: none;" id="sci_refresh_button"> <i class="fa fa-times" aria-hidden="true"></i> <span>Cancel</span> </a>
+                                        <button id="sci_checkin_button" type="submit" class="btn btn-primary" nonce="[% Koha.CSPNonce | $raw %]" style="display: none;"> <i class="fa fa-check-square" aria-hidden="true"></i> <span>Check in</span> </button>
+                                        <a href="/cgi-bin/koha/sci/sci-main.pl" class="btn btn-danger" role="button" nonce="[% Koha.CSPNonce | $raw %]" style="display: none;" id="sci_refresh_button"> <i class="fa fa-times" aria-hidden="true"></i> <span>Cancel</span> </a>
                                     </div>
                                     <!-- /#button_bar -->
                                 </div>
@@ -257,7 +257,7 @@
 
                 if (barcode !== "") {
                     // Properly escape the barcode value by using .text() for display
-                    var barcodeHtml = $('<tr style="font-size: initial;"><td></td></tr>');
+                    var barcodeHtml = $('<tr nonce="[% Koha.CSPNonce | $raw %]" style="font-size: initial;"><td></td></tr>');
                     barcodeHtml.find('td').text(barcode).append(
                         $('<input>').attr({
                             type: 'hidden',

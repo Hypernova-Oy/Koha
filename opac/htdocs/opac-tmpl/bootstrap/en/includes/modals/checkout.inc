@@ -13,7 +13,7 @@
                     <label for="checkout_barcode">Enter item barcode: </label>
                     <input type="text" name="checkout_barcode" id="checkout_barcode" required="required" />
                 </div>
-                <table id="checkoutsTable" class="table table-bordered table-striped" style="width:100%;">
+                <table id="checkoutsTable" class="table table-bordered table-striped" nonce="[% Koha.CSPNonce | $raw %]" style="width:100%;">
                     <thead>
                         <tr>
                             <th>Barcode</th>

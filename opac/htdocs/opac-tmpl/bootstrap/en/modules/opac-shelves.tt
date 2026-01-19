@@ -88,9 +88,9 @@
 
             [% IF shelf.allow_change_from_others %]<option value="2" selected="selected">Anyone seeing this list</option>[% ELSE %]<option value="2">Anyone seeing this list</option>[% END %]
         </select>
-        &emsp; <span id="permitted_staff_remark" style="display:none;color:red;">The "Permitted staff only" permission has no actual effect while this list is strictly private.</span> &emsp;
-        <span id="staff_remark" style="display:none;color:red;">The "Staff only" permission has no actual effect while this list is strictly private.</span> &emsp;
-        <span id="anyone_remark" style="display:none;color:red;">The "Anyone" permission has no actual effect while this list is strictly private.</span>
+        &emsp; <span id="permitted_staff_remark" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;color:red;">The "Permitted staff only" permission has no actual effect while this list is strictly private.</span> &emsp;
+        <span id="staff_remark" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;color:red;">The "Staff only" permission has no actual effect while this list is strictly private.</span> &emsp;
+        <span id="anyone_remark" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;color:red;">The "Anyone" permission has no actual effect while this list is strictly private.</span>
     </li>
 [% END %]
 

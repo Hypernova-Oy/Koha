@@ -133,7 +133,7 @@
 
 [% BLOCK notesmodal %]
     <!-- notes modal -->
-    <div style="font-style:normal;" class="modal notesModal" id="notesModal_[% authid | html %]" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel">
+    <div nonce="[% Koha.CSPNonce | $raw %]" style="font-style:normal;" class="modal notesModal" id="notesModal_[% authid | html %]" tabindex="-1" role="dialog" aria-labelledby="notesModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">

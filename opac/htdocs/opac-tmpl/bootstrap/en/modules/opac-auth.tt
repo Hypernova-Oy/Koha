@@ -178,7 +178,7 @@
                                         <p class="clearfix">
                                             <a href="[% provider.url | url %]" class="btn btn-light col-md-12" id="provider_[% provider.code | html %]">
                                                 [% IF provider.icon_url %]
-                                                    <img src="[% provider.icon_url | url %]" style="max-height: 20px; max-width: 20px;" />
+                                                    <img src="[% provider.icon_url | url %]" nonce="[% Koha.CSPNonce | $raw %]" style="max-height: 20px; max-width: 20px;" />
                                                 [% ELSE %]
                                                     <i class="fa fa-user" aria-hidden="true"></i>
                                                 [% END %]

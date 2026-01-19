@@ -94,7 +94,7 @@
                                         [% IF Koha.Preference( 'OPACSuggestionAutoFill' ) %]
                                             <li>
                                                 <label for="isbn">Standard number (ISBN, ISSN or other):</label>
-                                                <input type="text" id="isbn" name="isbn" maxlength="80" style="margin-right:10px;margin-top:10px;" size="15" />
+                                                <input type="text" id="isbn" name="isbn" maxlength="80" nonce="[% Koha.CSPNonce | $raw %]" style="margin-right:10px;margin-top:10px;" size="15" />
                                             </li>
                                         [% END %]
                                         <li>
@@ -291,7 +291,7 @@
                                         [% END %]
 
                                         <!--  Add a hidden 'negcap' field -->
-                                        <li id="negcap" style="position: absolute; left: -2000px;"> negcap <input type="text" name="negcap" /> </li>
+                                        <li id="negcap" nonce="[% Koha.CSPNonce | $raw %]" style="position: absolute; left: -2000px;"> negcap <input type="text" name="negcap" /> </li>
                                     </ol>
                                 </fieldset>
                                 <fieldset class="action">

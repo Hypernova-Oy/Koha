@@ -117,7 +117,7 @@
         <caption class="sr-only">Checkout history</caption>
         <thead>
             <tr>
-                <th style="display:none;" class="no-export">Type</th>
+                <th nonce="[% Koha.CSPNonce | $raw %]" style="display:none;" class="no-export">Type</th>
                 <th class="no-sort no-export"></th>
                 <th class="all anti-the">Title</th>
                 <th>Author</th>
@@ -136,7 +136,7 @@
                 [% SET item = checkout.item %]
                 [% SET biblio = item.biblio %]
                 <tr>
-                    <td style="display:none;">
+                    <td nonce="[% Koha.CSPNonce | $raw %]" style="display:none;">
                         [% IF checkout.onsite_checkout %]
                             [% issuetype = 'onsite_checkout' %]
                         [% ELSE %]

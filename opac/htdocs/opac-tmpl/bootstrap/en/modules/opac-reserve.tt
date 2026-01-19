@@ -147,7 +147,7 @@
                                     [% IF ( bibitemloo.holdable ) %]
                                         <input class="reserve_mode" name="reserve_mode" type="hidden" value="single" />
                                         <input class="single_bib" name="single_bib" type="hidden" value="[% bibitemloo.biblionumber | html %]" />
-                                        <span class="confirmjs_hold" title="[% bibitemloo.biblionumber | html %]" style="padding:.3em"></span>
+                                        <span class="confirmjs_hold" title="[% bibitemloo.biblionumber | html %]" nonce="[% Koha.CSPNonce | $raw %]" style="padding:.3em"></span>
                                         <span class="confirm_nonjs">
                                             <input
                                                 type="radio"
@@ -256,7 +256,7 @@
                                             [% END # / UNLESS singleBranchMode %]
                                         </ul>
 
-                                        <a class="toggle-hold-options" id="toggle-hold-options-[% bibitemloo.biblionumber | html %]" style="display:none;" href="#">Show more options</a>
+                                        <a class="toggle-hold-options" id="toggle-hold-options-[% bibitemloo.biblionumber | html %]" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;" href="#">Show more options</a>
 
                                         <div id="hold-options-[% bibitemloo.biblionumber | html %]" class="hold-options">
                                             <ul>
@@ -274,7 +274,7 @@
                                                             value="[% KohaDates.datetime_from_string | $KohaDates dateformat => 'iso' %]"
                                                         />
                                                         <span class="date-format from" data-biblionumber="[% bibitemloo.biblionumber | html %]">[% INCLUDE 'date-format.inc' %]</span>
-                                                        <div class="required_label" style="display:none;">Required</div>
+                                                        <div class="required_label" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;">Required</div>
                                                     </li>
                                                 [% END %]
 
@@ -289,7 +289,7 @@
                                                         class="flatpickr futuredate"
                                                     />
                                                     <span class="date-format to" data-biblionumber="[% bibitemloo.biblionumber | html %]">[% INCLUDE 'date-format.inc' %]</span>
-                                                    <div class="required_label" style="display:none;">Required</div>
+                                                    <div class="required_label" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;">Required</div>
                                                 </li>
 
                                                 [% IF Koha.Preference('AllowHoldItemTypeSelection') %]
@@ -331,7 +331,7 @@
 
                                                 [% IF bibitemloo.itemholdable %]
                                                     <!-- ITEM HOLDS -->
-                                                    <li class="lradio place_on_type" style="display:none;">
+                                                    <li class="lradio place_on_type" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;">
                                                         [% UNLESS bibitemloo.forced_hold_level == 'item' || bibitemloo.forced_hold_level == 'item_group' || bibitemloo.force_hold %]
                                                             <label class="radio inline" for="reqany_[% bibitemloo.biblionumber | html %]">Next available item</label>
                                                             <input type="radio" name="reqtype_[% bibitemloo.biblionumber | html %]" id="reqany_[% bibitemloo.biblionumber | html %]" class="selectany" value="Any" checked="checked" />
@@ -388,7 +388,7 @@
                                                                         [% row_class = "unholdable" %]
                                                                     [% END %]
                                                                 [% END %]
-                                                                <tr class="[% row_class | html %]" style="[% row_style | html %]">
+                                                                <tr class="[% row_class | html %]" nonce="[% Koha.CSPNonce | $raw %]" style="[% row_style | html %]">
                                                                     [% IF ( itemLoo.available ) %]
                                                                         <td class="copynumber" data-order="[% itemLoo.copynumber | html %]">
                                                                             <input
@@ -411,7 +411,7 @@
                                                                                 class="checkitem"
                                                                                 name="checkitem"
                                                                                 value="[% itemLoo.itemnumber | html %]"
-                                                                                style="display:none;"
+                                                                                nonce="[% Koha.CSPNonce | $raw %]" style="display:none;"
                                                                             />
                                                                             <i class="fa fa-times danger" aria-hidden="true" title="Cannot be put on hold"></i>
                                                                             [% IF ( itemLoo.copynumber ) %]
@@ -489,7 +489,7 @@
                                                     <!-- / #copiesrow_[% bibitemloo.biblionumber | html %] -->
                                                     [% IF unholdable_items %]
                                                         <button id="show_unholdable" class="btn btn-primary toggle_unholdable unholdable">Show unholdable items</button>
-                                                        <button id="hide_unholdable" class="btn btn-primary toggle_unholdable unholdable" style="display:none;">Hide unholdable items</button>
+                                                        <button id="hide_unholdable" class="btn btn-primary toggle_unholdable unholdable" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;">Hide unholdable items</button>
                                                     [% END %]
                                                 </div>
                                             [% END # / IF ( bibitemloo.itemholdable ) %]

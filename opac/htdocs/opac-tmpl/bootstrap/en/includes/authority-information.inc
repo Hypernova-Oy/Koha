@@ -67,9 +67,9 @@
                         [% IF info.end_period %]until: [% info.end_period | html %][% END ~%]
                         )
                     [% END %]
-                    [% IF info.uri %]<p style="margin-bottom: 0;">URI: [% info.uri | html %]</p>[% END %]
-                    [% IF info.source_of_information %]<p style="margin-bottom: 0;">Source of information: [% info.source_of_information | html %]</p>[% END %]
-                    [% IF info.authority_record_number %]<p style="margin-bottom: 0;">Authority record control number or standard number: [% info.authority_record_number | html %]</p>[% END %]
+                    [% IF info.uri %]<p nonce="[% Koha.CSPNonce | $raw %]" style="margin-bottom: 0;">URI: [% info.uri | html %]</p>[% END %]
+                    [% IF info.source_of_information %]<p nonce="[% Koha.CSPNonce | $raw %]" style="margin-bottom: 0;">Source of information: [% info.source_of_information | html %]</p>[% END %]
+                    [% IF info.authority_record_number %]<p nonce="[% Koha.CSPNonce | $raw %]" style="margin-bottom: 0;">Authority record control number or standard number: [% info.authority_record_number | html %]</p>[% END %]
                 </span>
             </li>
         [% END %]
@@ -89,9 +89,9 @@
                         [% IF info.end_period %]until: [% info.end_period | html %][% END ~%]
                         )
                     [% END %]
-                    [% IF info.uri %]<p style="margin-bottom: 0;">URI: [% info.uri | html %]</p>[% END %]
-                    [% IF info.source_of_information %]<p style="margin-bottom: 0;">Source of information: [% info.source_of_information | html %]</p>[% END %]
-                    [% IF info.authority_record_number %]<p style="margin-bottom: 0;">Authority record control number or standard number: [% info.authority_record_number | html %]</p>[% END %]
+                    [% IF info.uri %]<p nonce="[% Koha.CSPNonce | $raw %]" style="margin-bottom: 0;">URI: [% info.uri | html %]</p>[% END %]
+                    [% IF info.source_of_information %]<p nonce="[% Koha.CSPNonce | $raw %]" style="margin-bottom: 0;">Source of information: [% info.source_of_information | html %]</p>[% END %]
+                    [% IF info.authority_record_number %]<p nonce="[% Koha.CSPNonce | $raw %]" style="margin-bottom: 0;">Authority record control number or standard number: [% info.authority_record_number | html %]</p>[% END %]
                 </span>
             </li>
         [% END %]

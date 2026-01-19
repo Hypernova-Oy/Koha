@@ -28,7 +28,7 @@
             [% END %]
         [% END %]
     </select>
-    <img id="rating-loading" style="display:none" src="[% interface | html %]/[% theme | html %]/images/spinner-small.gif" alt="" />
+    <img id="rating-loading" nonce="[% Koha.CSPNonce | $raw %]" style="display:none" src="[% interface | html %]/[% theme | html %]/images/spinner-small.gif" alt="" />
 
     <!-- define some hidden vars for ratings -->
 
@@ -46,7 +46,7 @@
         </div>
     [% ELSE %]
         <span class="rating_value_text"></span>
-        <span class="cancel_rating_text" style="display:none;"
+        <span class="cancel_rating_text" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;"
             ><a href="#" data-context="star_rating-[% item.itemnumber | html %]"><i class="fa fa-times" aria-hidden="true"></i> Cancel rating</a>.</span
         >
     [% END %]

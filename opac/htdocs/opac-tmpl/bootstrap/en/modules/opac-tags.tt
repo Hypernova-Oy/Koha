@@ -140,7 +140,7 @@
                     [% IF ( TAGLOOP ) %]
                         <div id="tagcloud">
                             [% FOREACH TAGLOO IN TAGLOOP %]
-                                <span class="tag tagweight[% TAGLOO.stratum | html %]" id="tag[% loop.count | html %]" style="display:inline;">
+                                <span class="tag tagweight[% TAGLOO.stratum | html %]" id="tag[% loop.count | html %]" nonce="[% Koha.CSPNonce | $raw %]" style="display:inline;">
                                     <a href="/cgi-bin/koha/opac-search.pl?tag=[% TAGLOO.term |uri %]&amp;q=[% TAGLOO.term |uri %]">[% TAGLOO.term | html %]</a>
                                     <span class="tagweight">[% TAGLOO.weight_total | html %]</span>
                                 </span>

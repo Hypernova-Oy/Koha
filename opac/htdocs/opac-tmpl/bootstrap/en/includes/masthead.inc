@@ -189,8 +189,8 @@
                 </li>
                 <!-- Cookie consent button for non logged-in users -->
                 [% IF !loggedinusername %]
-                    <li style="display:none" id="cookieConsentDivider" class="divider-vertical" aria-hidden="true"></li>
-                    <li style="display:none" id="cookieConsentLi" class="nav-item" aria-hidden="true">
+                    <li nonce="[% Koha.CSPNonce | $raw %]" style="display:none" id="cookieConsentDivider" class="divider-vertical" aria-hidden="true"></li>
+                    <li nonce="[% Koha.CSPNonce | $raw %]" style="display:none" id="cookieConsentLi" class="nav-item" aria-hidden="true">
                         <a id="cookieConsentButton" href="#" name="Your cookies" class="nav-link" title="View and amend cookies you have consented to" role="button">
                             <i class="fa fa-cookie-bite fa-fw fa-icon-black" aria-hidden="true"></i>
                             <span class="cookieconsentlabel">Your cookies</span>
