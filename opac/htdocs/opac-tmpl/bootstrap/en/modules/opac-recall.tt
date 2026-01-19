@@ -91,8 +91,8 @@
                                                     <input type="text" name="expirationdate" id="expirationdate" size="20" class="flatpickr futuredate" />
                                                     <span id="expiration-hint">[% INCLUDE 'date-format.inc' %]</span>
                                                 </li>
-                                                <li class="level-option" style="display:none;"><label for="bibliolevel">Recall next available item</label> <input type="radio" name="type" id="bibliolevel" value="bibliolevel" checked /></li>
-                                                <li class="level-option" style="display:none;"><label for="itemlevel">Recall a specific item</label> <input type="radio" name="type" id="itemlevel" value="itemlevel" /></li>
+                                                <li class="level-option" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;"><label for="bibliolevel">Recall next available item</label> <input type="radio" name="type" id="bibliolevel" value="bibliolevel" checked /></li>
+                                                <li class="level-option" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;"><label for="itemlevel">Recall a specific item</label> <input type="radio" name="type" id="itemlevel" value="itemlevel" /></li>
                                             </ul>
 
                                             <table class="table table-bordered table-striped" id="items">
@@ -117,7 +117,7 @@
                                                             [% IF item.can_be_recalled( patron => logged_in_user ) %]
                                                                 <input type="radio" class="itemnumber" name="itemnumber" value="[% item.itemnumber | html %]" />
                                                             [% ELSE %]
-                                                                <input disabled="disabled" type="radio" class="itemnumber" name="itemnumber" value="[% item.itemnumber | html %]" style="display:none;" />
+                                                                <input disabled="disabled" type="radio" class="itemnumber" name="itemnumber" value="[% item.itemnumber | html %]" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;" />
                                                                 <img src="[% interface | html %]/lib/famfamfam/cross.png" alt="Cannot be recalled" title="Cannot be recalled" />
                                                             [% END %]
                                                         </td>

@@ -55,7 +55,7 @@
                 ><a data-biblionumber="[% biblio.biblionumber | html %]" class="addtocart cart[% biblio.biblionumber | html %] addrecord btn btn-link btn-lg" href="#"
                     ><i class="fa fa-fw fa-shopping-cart" aria-hidden="true"></i> Add to your cart</a
                 >
-                <a style="display:none;" data-biblionumber="[% biblio.biblionumber | html %]" class="cartRemove cartR[% biblio.biblionumber | html %]" href="#">(remove)</a></li
+                <a nonce="[% Koha.CSPNonce | $raw %]" style="display:none;" data-biblionumber="[% biblio.biblionumber | html %]" class="cartRemove cartR[% biblio.biblionumber | html %]" href="#">(remove)</a></li
             >
         [% END %]
     [% END %]

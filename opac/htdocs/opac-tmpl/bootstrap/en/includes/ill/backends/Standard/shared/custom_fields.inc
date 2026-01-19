@@ -18,7 +18,7 @@
             [% i = i + 1 %]
         [% END %]
     </ol>
-    <div id="custom-warning" style="display:none;margin:1em;" class="error required"></div>
+    <div id="custom-warning" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;margin:1em;" class="error required"></div>
     <button type="button" id="add-new-fields" class="btn btn-default">
         <span class="fa fa-plus"></span>
         Add new field

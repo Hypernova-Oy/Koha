@@ -236,7 +236,7 @@
                                                             <option value="[% p.branchcode | html %]">[% Branches.GetName(p.branchcode) | html %]</option>
                                                         [% END %]
                                                     </select>
-                                                    <span id="existing-pickup-warning" class="required" style="display: none;">You already have a pickup scheduled for this library.</span>
+                                                    <span id="existing-pickup-warning" class="required" nonce="[% Koha.CSPNonce | $raw %]" style="display: none;">You already have a pickup scheduled for this library.</span>
                                                     <div class="required_label required">Required</div>
                                                 </li>
                                                 <li id="pickup_date_item">

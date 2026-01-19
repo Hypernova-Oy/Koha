@@ -46,13 +46,13 @@
             <span class="actions"
                 ><a id="tag_add[% items.biblionumber | html %]" href="#" class="tag_add btn btn-link btn-sm"><i class="fa fa-fw fa-tag" aria-hidden="true"></i> Add tag</a></span
             >
-            <div id="tagform[% items.biblionumber | html %]" class="tag_results_input form-inline" style="display:none;">
+            <div id="tagform[% items.biblionumber | html %]" class="tag_results_input form-inline" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;">
                 <label for="newtag[% items.biblionumber | html %]">New tag(s), separated by a comma:</label>
                 <input type="text" name="newtag[% items.biblionumber | html %]" id="newtag[% items.biblionumber | html %]" class="form-control form-control-sm newtag" maxlength="100" />
                 <input name="tagbutton" class="btn btn-sm btn-primary tagbutton" title="[% items.biblionumber | html %]" type="submit" value="Add" />
                 <a class="cancel_tag_add" id="cancel[% items.biblionumber | html %]" href="#">(done)</a>
             </div>
-            <span id="newtag[% items.biblionumber | html %]_status" class="tagstatus" style="display:none;"> Tag status here. </span>
+            <span id="newtag[% items.biblionumber | html %]_status" class="tagstatus" nonce="[% Koha.CSPNonce | $raw %]" style="display:none;"> Tag status here. </span>
         [% ELSE %]
             <span class="actions">
                 <span class="login4tags">
@@ -90,7 +90,7 @@
                 ><a aria-label="Add [% items.title | html %] to cart" data-biblionumber="[% items.biblionumber | html %]" class="btn btn-link btn-sm addtocart cart cart[% items.biblionumber | html %]" href="#"
                     ><i class="fa fa-fw fa-shopping-cart" aria-hidden="true"></i> Add to cart</a
                 >
-                <a style="display:none;" data-biblionumber="[% items.biblionumber | html %]" class="btn btn-link btn-sm remove cartRemove cartR[% items.biblionumber | html %]" href="#">(remove)</a></span
+                <a nonce="[% Koha.CSPNonce | $raw %]" style="display:none;" data-biblionumber="[% items.biblionumber | html %]" class="btn btn-link btn-sm remove cartRemove cartR[% items.biblionumber | html %]" href="#">(remove)</a></span
             >
         [% END %]
     [% END # / IF opacbookbag %]

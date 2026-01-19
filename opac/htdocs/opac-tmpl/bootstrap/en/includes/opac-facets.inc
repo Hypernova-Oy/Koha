@@ -85,7 +85,7 @@
                                     [% li_class = "collapsible-facet" %]
                                     [% li_style = "display:none" %]
                                 [% END %]
-                                <li class="[% li_class | html %]" style="[% li_style | html %]">
+                                <li class="[% li_class | html %]" nonce="[% Koha.CSPNonce | $raw %]" style="[% li_style | html %]">
                                     [% IF facet.active %]
                                         [% local_url = BLOCK %][% url | $raw %][% "&nolimit=" _  facet.type_link_value _ ":" _ facet.facet_link_value | url %][% END %]
                                         <span class="facet-label">[% facet.facet_label_value | html %]</span>
@@ -132,7 +132,7 @@
 
                                     <a href="#" aria-label="[% aria_label | html | trim %]"><strong>Show more</strong></a>
                                 </li>
-                                <li class="moretoggle" style="display:none">
+                                <li class="moretoggle" nonce="[% Koha.CSPNonce | $raw %]" style="display:none">
                                     [% SET aria_label = t("Show more") %]
                                     [% SWITCH facets_loo.label %]
                                     [% CASE 'Authors' %]

@@ -129,7 +129,7 @@
                         [% IF loop.first %]
                             [% div_style = "display:block" %]
                         [% END %]
-                        <div class="yeardata tabsub" id="show[% year.year | html %]" style="[% div_style | html %]">
+                        <div class="yeardata tabsub" id="show[% year.year | html %]" nonce="[% Koha.CSPNonce | $raw %]" style="[% div_style | html %]">
                             <table class="subscriptionstclass table table-bordered table-striped">
                                 <caption class="sr-only">Subscriptions</caption>
                                 <thead>

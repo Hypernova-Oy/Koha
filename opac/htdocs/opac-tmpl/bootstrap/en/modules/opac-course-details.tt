@@ -120,7 +120,7 @@
                             </table>
                         </div>
                     [% ELSE %]
-                        <br style="clear:both;" />
+                        <br nonce="[% Koha.CSPNonce | $raw %]" style="clear:both;" />
                         <div class="alert alert-info">
                             <p>No reserves have been selected for this course.</p>
                         </div>
