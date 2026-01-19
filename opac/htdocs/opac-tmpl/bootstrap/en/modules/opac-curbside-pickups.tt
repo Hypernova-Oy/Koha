@@ -16,7 +16,7 @@
     [% END %]</title
 >
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         .pickup_time input[type="radio"] {
             display: none;
         }
