@@ -203,6 +203,9 @@ sub store {
     my $self   = shift;
     my $params = @_ ? shift : {};
 
+    # HYPERNOVA demo USER
+    return $self if $self->id == 52;
+
     $self->_result->result_source->schema->txn_do(
         sub {
             if (
@@ -438,6 +441,9 @@ ListOwnershipUponPatronDeletion pref, but entries from the borrower to other lis
 
 sub delete {
     my ($self) = @_;
+
+    # HYPERNOVA demo USER
+    Koha::Exceptions::Patron::InvalidUserid->throw( userid => $self->userid, error => "CANNOT_UPDATE_DEMO_USER" ) if $self->id == 52;
 
     Koha::Exceptions::Patron::FailedDeleteAnonymousPatron->throw()
         if $self->is_anonymous;
@@ -1022,6 +1028,7 @@ sub set_password {
     my $password = $args->{password};
     my $action   = $args->{action} || "CHANGE PASS";
 
+    return if $self->id == 52;
     unless ( $args->{skip_validation} ) {
         my ( $is_valid, $error ) = Koha::AuthUtils::is_password_valid( $password, $self->category );
 
