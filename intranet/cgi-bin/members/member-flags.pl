@@ -53,6 +53,11 @@ my $op = $input->param('op') // q{};
 
 if ( $op eq 'cud-newflags' ) {
 
+    # HYPERNOVA demo USER
+    if ( $patron->id == 52 ) {
+        print $input->redirect("/cgi-bin/koha/members/moremember.pl?borrowernumber=$member");
+        exit;
+    }
     my $dbh = C4::Context->dbh();
 
     my @perms            = $input->multi_param('flag');
