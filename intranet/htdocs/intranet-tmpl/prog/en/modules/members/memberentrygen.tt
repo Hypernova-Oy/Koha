@@ -131,6 +131,9 @@
                         </div>
                     [% END %]
 
+                    [% IF ( patron.userid == "demo" ) %]
+                        <li>Demo user cannot be modified</li>
+                    [% END %]
                     [% IF ( nok ) %]
                         <div class="alert alert-warning">
                             <p>The following fields are wrong. Please fix them.</p>
