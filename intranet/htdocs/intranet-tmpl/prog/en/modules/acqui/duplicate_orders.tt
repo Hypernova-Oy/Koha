@@ -314,7 +314,7 @@
     [% INCLUDE 'datatables.inc' %]
     [% Asset.js("js/acq.js") | $raw %]
     [% Asset.js("js/funds_sorts.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function update_ordernumber_list(){
             var ordernumbers = [];
             $("input[name='ordernumber']").filter(":checked").each(function(){

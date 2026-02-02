@@ -1025,7 +1025,7 @@
         </div>
     </div>
     <div id="patron_preview_modal" class="basicModal"></div>
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             let parent_block = $("#[% search_results_block_id | html %]");
             parent_block.find(".select_all").on("click",function(e){

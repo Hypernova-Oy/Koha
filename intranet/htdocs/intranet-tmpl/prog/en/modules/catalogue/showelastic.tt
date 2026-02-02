@@ -19,7 +19,7 @@
             resize: none;
         }
     </style>
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         display();
 
         function display() {

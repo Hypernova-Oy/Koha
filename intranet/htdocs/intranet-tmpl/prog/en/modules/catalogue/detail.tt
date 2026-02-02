@@ -1268,14 +1268,14 @@
     [% PROCESS build_items_table_js biblio => biblio %]
 
     [% IF ( Koha.Preference('CatalogConcerns') ) %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             /* Set a variable needed by add_catalog_concern.js */
             var logged_in_user_borrowernumber = "[% logged_in_user.borrowernumber | html %]";
         </script>
         [% Asset.js("js/modals/add_catalog_concern.js") | $raw %]
     [% END %]
     [% IF ( ( Koha.Preference('CatalogConcerns') || Koha.Preference('OpacCatalogConcerns') ) && CAN_user_editcatalogue_edit_catalogue ) %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             $(document).ready(function() {
                 $("#bibliodetails a:first").tab("show");
                 var table_settings = [% TablesSettings.GetTableSettings( 'catalogue', 'concerns', 'table_concerns', 'json' ) | $raw %];
@@ -1436,7 +1436,7 @@
         </script>
         [% Asset.js("js/modals/display_ticket.js") | $raw %]
     [% END # /IF CatalogConcerns %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var interface = "[% interface | html %]";
         var theme = "[% theme | html %]";
         // http://www.oreillynet.com/pub/a/javascript/2003/10/21/amazonhacks.html

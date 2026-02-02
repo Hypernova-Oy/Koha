@@ -108,7 +108,7 @@
 
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function show_message( params ) {
             var type = params.type;
             var data = params.data;

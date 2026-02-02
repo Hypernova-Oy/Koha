@@ -10,7 +10,7 @@
 [% ELSE %]
     [% Asset.css("css/installer.css") | $raw %]
 [% END %]
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var Koha = {};
 </script>
 [% IF lang && lang != 'en' %]

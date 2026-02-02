@@ -173,7 +173,7 @@
 
 [% MACRO jsinclude BLOCK %]
     [% Asset.js("js/admin-menu.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         let opening_slots = {};
         let slots;
         [% FOR l IN libraries %]

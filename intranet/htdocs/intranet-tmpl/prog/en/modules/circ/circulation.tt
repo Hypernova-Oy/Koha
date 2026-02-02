@@ -1079,7 +1079,7 @@
     [% PROCESS 'modal-claims.inc' %]
     [% PROCESS 'modal-claims-js' %]
     [% INCLUDE 'js-date-format.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         /* Set some variable needed in circulation.js */
         const LoadCheckoutsTableDelay = [% Koha.Preference('LoadCheckoutsTableDelay') || 0 | html %];
         const AlwaysLoadCheckoutsTable = [% Koha.Preference('AlwaysLoadCheckoutsTable') | html %];

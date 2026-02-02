@@ -341,7 +341,7 @@
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function changeRemovedDateTrStatus() {
             var Cellvalue = $("input[name='Cellvalue']:checked").val();
             if(Cellvalue == "deleteditems") {

@@ -762,7 +762,7 @@
     [% INCLUDE 'datatables.inc' %]
     [% INCLUDE 'select2.inc' %]
     [% PROCESS 'modal-claims-js' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         /* Set some variable needed in circulation.js */
         var logged_in_user_borrowernumber = "[% logged_in_user.borrowernumber | html %]";
         var ClaimReturnedLostValue = "[% Koha.Preference('ClaimReturnedLostValue') | html %]";

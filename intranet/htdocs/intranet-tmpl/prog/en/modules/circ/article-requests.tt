@@ -522,7 +522,7 @@
 
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var active_tab = "#article-requests-requested_panel";
         var last_cancel_reason, requested_datatable, pending_datatable, processing_datatable, active_datatable, requested_dt, pending_dt, processing_dt;
         $(document).ready(function() {

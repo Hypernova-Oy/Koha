@@ -323,7 +323,7 @@
 
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function() {
             //Set focus to cataloging search
             $("input[name=q]:eq(0)").focus();

@@ -72,7 +72,7 @@
 <!-- /.container-fluid -->
 
 [% MACRO jsinclude BLOCK %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function () {
             $("#print_slip").on("click", function (e) {
                 e.preventDefault();

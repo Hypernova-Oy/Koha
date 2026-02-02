@@ -677,7 +677,7 @@
     [% ELSIF op == 'list' %]
         [% INCLUDE 'datatables.inc' %]
         [% Asset.js("lib/jquery/plugins/treetable/jquery.treetable.js") | $raw %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             $(document).ready(function() {
                 [% IF budgets %]
                     var oTable = $("#budgeth").kohaTable({

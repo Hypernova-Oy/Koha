@@ -294,7 +294,7 @@
 [% END %]
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'select2.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(".printtransferslip").on("click", function(e){
             e.preventDefault();
             var itemnumber = $(this).attr('data-itemnumber');

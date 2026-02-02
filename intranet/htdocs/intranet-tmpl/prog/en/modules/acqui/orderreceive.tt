@@ -453,7 +453,7 @@
     [% INCLUDE 'datatables.inc' %]
     [% INCLUDE 'js-date-format.inc' %]
     [% INCLUDE 'format_price.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function display_string(key, strings, fallback) {
             if ( strings.hasOwnProperty(key) ) {
                 return strings[key].str && escape_str(strings[key].str) || '';

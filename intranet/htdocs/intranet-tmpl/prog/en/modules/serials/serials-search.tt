@@ -281,11 +281,11 @@
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var subscriptionid = "[% subscriptionid | html %]";
     </script>
     [% Asset.js("js/serials-toolbar.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function itemSelectionBuildEditLink( tab ) {
             var subscription_ids = new Array();
             $( "input:checkbox." + tab + ":checked" ).each(function() {

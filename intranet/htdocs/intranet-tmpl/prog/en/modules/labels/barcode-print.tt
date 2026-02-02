@@ -126,7 +126,7 @@
 
 [% MACRO jsinclude BLOCK %]
     [% Asset.js("lib/jquery/plugins/humanmsg.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var base_url = "[% Koha.Preference('staffClientBaseURL') | html %]";
 
         function showBarcodeText( path, dimensions ){

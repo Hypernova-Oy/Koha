@@ -30,11 +30,11 @@
 [% Asset.css("lib/datatables/datatables.min.css") | $raw %]
 [% Asset.css("css/print.css", { media = "print" }) | $raw %]
 [% INCLUDE intranetstylesheet.inc %]
-<script type="module">
+<script nonce="[% Koha.CSPNonce | $raw %]" type="module">
     import { APIClient } from "/intranet-tmpl/prog/js/fetch/api-client.js";
     window.APIClient = APIClient;
 </script>
-<script>
+<script nonce="[% Koha.CSPNonce | $raw %]">
     var Koha = {};
     [% IF CAN_user_parameters_manage_column_config %]
         var CAN_user_parameters_manage_column_config = 1;

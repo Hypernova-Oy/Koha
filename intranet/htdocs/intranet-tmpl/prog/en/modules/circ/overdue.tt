@@ -346,7 +346,7 @@
     [% INCLUDE 'select2.inc' %]
     [% INCLUDE 'js-date-format.inc' %]
     [% PROCESS 'modal-claims-js' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function clone_input( node, original_id ) {
             var original = node;
             var clone = original.clone();

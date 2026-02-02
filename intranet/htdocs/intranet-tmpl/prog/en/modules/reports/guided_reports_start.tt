@@ -1715,7 +1715,7 @@
     [% Asset.css("lib/codemirror/highlight.css") | $raw %]
     [% Asset.js( "js/mana.js" ) | $raw %]
     [% INCLUDE 'select2.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         //  if the report param form has multiselects override default form submission
         if( $('#report_param_form').find('select[multiple]').length ) {
             $('#report_param_form').on('submit', function(e) {

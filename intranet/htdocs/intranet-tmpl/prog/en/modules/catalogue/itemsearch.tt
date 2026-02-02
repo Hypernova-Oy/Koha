@@ -383,7 +383,7 @@
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
     [% INCLUDE 'select2.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var authorised_values = [% authorised_values_json | $raw %];
 
         function showItemSelections( number ){

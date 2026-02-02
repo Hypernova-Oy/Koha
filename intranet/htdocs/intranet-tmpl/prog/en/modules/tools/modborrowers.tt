@@ -481,7 +481,7 @@
     [% INCLUDE 'datatables.inc' %]
     [% Asset.js("js/tools-menu.js") | $raw %]
     [% Asset.js("js/members-patron-selections.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var patron_attributes_lib = new Array();
         var patron_attributes_values = new Array();
 

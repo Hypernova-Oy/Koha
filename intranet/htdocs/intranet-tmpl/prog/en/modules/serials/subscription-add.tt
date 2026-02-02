@@ -587,7 +587,7 @@
     [% INCLUDE 'calendar.inc' %]
     [% INCLUDE 'datatables.inc' %]
     [% Asset.js("js/mana.js") | $raw %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var subscriptionid = "[% subscriptionid | html %]";
         var irregularity = "[% irregularity | html %]";
         var more_than_one_serial = "[% more_than_one_serial | html %]";

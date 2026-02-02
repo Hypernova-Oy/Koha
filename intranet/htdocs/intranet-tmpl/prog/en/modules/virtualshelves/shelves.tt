@@ -627,7 +627,7 @@
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'datatables.inc' %]
     [% IF print %]
-        <script>
+        <script nonce="[% Koha.CSPNonce | $raw %]">
             $(document).ready(function () {
                 window.print();
                 window.onafterprint = function () {
@@ -639,7 +639,7 @@
             });
         </script>
     [% END #/print %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         var MSG_NO_ITEM_SELECTED = _("Nothing is selected.");
         var MSG_REMOVE_FROM_LIST = _("Are you sure you want to remove these records from the list?");
         var MSG_CONFIRM_DELETE_LIST = _("Are you sure you want to remove this list?");

@@ -248,7 +248,7 @@
 [% MACRO jsinclude BLOCK %]
     [% INCLUDE 'format_price.inc' %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         function moneyFormat(textObj) {
             var newValue = textObj.value;
             var decAmount = "";

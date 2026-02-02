@@ -190,7 +190,7 @@
 [% INCLUDE 'opac-bottom.inc' %]
 [% BLOCK jsinclude %]
     [% INCLUDE 'datatables.inc' %]
-    <script>
+    <script nonce="[% Koha.CSPNonce | $raw %]">
         $(document).ready(function(){
             showlayer([% yearmin | html %]);
             $("a.tabsubs:first").addClass("currentsubtab");
