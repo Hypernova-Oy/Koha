@@ -314,7 +314,7 @@ if ( $op eq 'cud-create' ) {
     my $invalidformfields = CheckForInvalidFields( { borrower => \%borrower, context => 'update' } );
 
     $borrower{'password'} = $patron->password; # inject old password for bypassing changed fields
-    if ( $password && $password =~ /\D/ ) { push @$invalidformfields, 'password_digits_only'; }
+    if ( !$password || $password && ( $password =~ /\D/ || length($password) != 4 ) ) { push @$invalidformfields, 'password_digits_only'; }
     delete $borrower{'password2'};
     # Send back the data to the template
     %borrower = ( %$borrower, %borrower );

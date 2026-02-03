@@ -117,7 +117,7 @@
                                         <li>Password must not contain leading or trailing whitespaces.</li>
                                     [% END %]
                                     [% IF field == "password_digits_only" %]
-                                        <li>Your pin code must contain only numbers. Pin code is entered to our checkout device at the library.</li>
+                                        <li>Your pin code must be 4 numbers. Pin code is entered to our checkout device at the library.</li>
                                     [% END %]
                                     [% IF field == "duplicate_email" %]
                                         <li>This email address already exists in our database.</li>
@@ -1199,9 +1199,9 @@
                                                 [% IF ( patron.category.effective_require_strong_password ) %]
                                                     <p>Your password must contain at least [% patron.category.effective_min_password_length | html %] characters, including UPPERCASE, lowercase and numbers.</p>
                                                 [% ELSE %]
-                                                    <p>Your pin code must be at least [% patron.category.effective_min_password_length | html %] characters long.</p>
+                                                    <p>Your pin code must be four digits long.</p>
                                                 [% END %]
-                                                <p>Your pin code must contain only numbers. Pin code is entered to our checkout device at the library.</p>
+                                                <p>Your pin code must be 4 numbers. Pin code is entered to our checkout device at the library.</p>
                                             [% ELSE %]
                                                 <p id="password_alert"></p>
                                             [% END %]
@@ -1209,14 +1209,14 @@
 
                                         <ol>
                                             <li
-                                                ><label for="password" class="[% required.password | html %]">Pin code:</label>
+                                                ><label for="password" class="required">Pin code:</label>
                                                 <input type="password" name="borrower_password" id="password" class="[% required.password | html %]" autocomplete="new-password" />
-                                                <div class="required_label [% required.password | html %]">Required</div>
+                                                <div class="required_label required">Required</div>
                                             </li>
                                             <li
-                                                ><label for="password2" class="[% required.password | html %]">Confirm pin code:</label>
+                                                ><label for="password2" class="required">Confirm pin code:</label>
                                                 <input type="password" name="borrower_password2" id="password2" autocomplete="new-password" />
-                                                <div class="required_label [% required.password | html %]">Required</div>
+                                                <div class="required_label required">Required</div>
                                             </li>
                                         </ol>
                                     </fieldset>
