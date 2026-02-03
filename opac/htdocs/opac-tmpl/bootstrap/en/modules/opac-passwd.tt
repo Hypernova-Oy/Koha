@@ -65,7 +65,7 @@
                                     <span>Password must not contain leading or trailing whitespaces.</span>
                                 [% END %]
                                 [% IF password_digits_only %]
-                                    <span>Password must only contain numbers (0-9).</span>
+                                    <span>Password must be four digits long.</span>
                                 [% END %]
 
                                 [% IF ( WrongPass ) %]
