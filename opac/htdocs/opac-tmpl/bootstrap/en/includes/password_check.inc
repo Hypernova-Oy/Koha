@@ -35,8 +35,8 @@
         return ( this.optional(element) || !value.match(/^\s/) && !value.match(/\s$/) );
     }, _("Password contains leading and/or trailing spaces"));
     jQuery.validator.addMethod("password_digits_only", function(value, element){
-        return ( this.optional(element) || value.match(/^[0-9]+$/) );
-    }, _("Password must only contain numbers (0-9)."));
+        return ( value.match(/^[0-9][0-9][0-9][0-9]$/) );
+    }, _("Password must be four digits long."));
     jQuery.validator.addMethod("password_match", function(value, element){
         var new_password_node = $("input[name='" + new_password_node_name + "']:first");
         return value == $(new_password_node).val();
