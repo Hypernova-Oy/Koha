@@ -41,7 +41,7 @@
                 <div id="update-submitted" class="maincontent">
                     <div class="alert alert-success">
                         <p><strong>Thank you</strong></p>
-                        [% IF ( Koha.Preference('AutoApprovePatronProfileSettings') ) %]
+                        [% IF ( Koha.Preference('AutoApprovePatronProfileSettings') || onlypassword ) %]
                             <p>Your updates have been submitted and your patron account has been modified.</p>
                         [% ELSE %]
                             <p>Your updates have been submitted. A librarian will review your updates before applying them.</p>
