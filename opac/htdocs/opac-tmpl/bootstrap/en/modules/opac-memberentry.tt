@@ -116,6 +116,9 @@
                                     [% IF field == "password_has_whitespaces" %]
                                         <li>Password must not contain leading or trailing whitespaces.</li>
                                     [% END %]
+                                    [% IF field == "password_digits_only" %]
+                                        <li>Your pin code must contain only numbers. Pin code is entered to our checkout device at the library.</li>
+                                    [% END %]
                                     [% IF field == "duplicate_email" %]
                                         <li>This email address already exists in our database.</li>
                                     [% END %]
@@ -1185,35 +1188,33 @@
                             <!-- /.row -->
                         [% END %]
 
-                        [% UNLESS op == 'edit' || hidden.defined('password') %]
+                        [% IF op == 'edit' && !hidden.defined('password') %]
                             <div class="row">
                                 <div class="col">
-                                    <h2 class="sr-only">Password</h2>
+                                    <h2 class="sr-only">Pin code</h2>
                                     <fieldset class="rows" id="memberentry_password">
-                                        <legend id="contact_legend">Password</legend>
+                                        <legend id="contact_legend">Pin code</legend>
                                         <div class="alert alert-info">
                                             [% IF patron %]
                                                 [% IF ( patron.category.effective_require_strong_password ) %]
                                                     <p>Your password must contain at least [% patron.category.effective_min_password_length | html %] characters, including UPPERCASE, lowercase and numbers.</p>
                                                 [% ELSE %]
-                                                    <p>Your password must be at least [% patron.category.effective_min_password_length | html %] characters long.</p>
+                                                    <p>Your pin code must be at least [% patron.category.effective_min_password_length | html %] characters long.</p>
                                                 [% END %]
+                                                <p>Your pin code must contain only numbers. Pin code is entered to our checkout device at the library.</p>
                                             [% ELSE %]
                                                 <p id="password_alert"></p>
-                                            [% END %]
-                                            [% UNLESS mandatory.defined('password') %]
-                                                <p>If you do not enter a password a system generated password will be created.</p>
                                             [% END %]
                                         </div>
 
                                         <ol>
                                             <li
-                                                ><label for="password" class="[% required.password | html %]">Password:</label>
+                                                ><label for="password" class="[% required.password | html %]">Pin code:</label>
                                                 <input type="password" name="borrower_password" id="password" class="[% required.password | html %]" autocomplete="new-password" />
                                                 <div class="required_label [% required.password | html %]">Required</div>
                                             </li>
                                             <li
-                                                ><label for="password2" class="[% required.password | html %]">Confirm password:</label>
+                                                ><label for="password2" class="[% required.password | html %]">Confirm pin code:</label>
                                                 <input type="password" name="borrower_password2" id="password2" autocomplete="new-password" />
                                                 <div class="required_label [% required.password | html %]">Required</div>
                                             </li>
@@ -1409,6 +1410,7 @@
                             email: true
                         },
                         borrower_password: {
+                            password_digits_only: true,
                             password_strong: true,
                             password_no_spaces: true
                         },

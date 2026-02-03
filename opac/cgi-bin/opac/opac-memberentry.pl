@@ -301,17 +301,21 @@ if ( $op eq 'cud-create' ) {
         }
     }
 } elsif ( $op eq 'cud-update' ) {
-
-    my $borrower = Koha::Patrons->find($borrowernumber)->unblessed;
+    my $patron = Koha::Patrons->find($borrowernumber);
+    my $borrower = $patron->unblessed;
 
     my %borrower = ParseCgiForBorrower($cgi);
     $borrower{borrowernumber} = $borrowernumber;
     $borrower{categorycode}   = $borrower->{categorycode};
 
+    my $password = $borrower{'password'};
     my @empty_mandatory_fields = grep { $_ ne 'password' }    # password is not required when editing personal details
         ( CheckMandatoryFields( \%borrower, $op ), CheckMandatoryAttributes( \%borrower, $attributes ) );
     my $invalidformfields = CheckForInvalidFields( { borrower => \%borrower, context => 'update' } );
 
+    $borrower{'password'} = $patron->password; # inject old password for bypassing changed fields
+    if ( $password && $password =~ /\D/ ) { push @$invalidformfields, 'password_digits_only'; }
+    delete $borrower{'password2'};
     # Send back the data to the template
     %borrower = ( %$borrower, %borrower );
 
@@ -361,8 +365,22 @@ if ( $op eq 'cud-create' ) {
                 $tmp_m->approve() if $tmp_m;
             }
 
+            $patron->set_password( { password => $password } ) if $password;
             my $patron = Koha::Patrons->find($borrowernumber);
             $template->param( borrower => $patron->unblessed );
+        } elsif ($password) {
+            $patron->set_password( { password => $password } );
+            ( $template, $borrowernumber, $cookie ) = get_template_and_user(
+                {
+                    template_name   => "opac-memberentry-update-submitted.tt",
+                    type            => "opac",
+                    query           => $cgi,
+                    authnotrequired => 1,
+                }
+            );
+            $template->param(
+                onlypassword => 1
+            );
         } else {
             my $patron = Koha::Patrons->find($borrowernumber);
             $template->param(
