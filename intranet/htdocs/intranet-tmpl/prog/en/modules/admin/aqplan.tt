@@ -13,7 +13,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     td.locked {
         background-image: url("[% interface | html %]/[% theme | html %]/img/locked.png");
         padding-left: 20px;

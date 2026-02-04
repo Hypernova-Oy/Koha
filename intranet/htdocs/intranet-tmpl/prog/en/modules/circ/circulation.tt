@@ -26,7 +26,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         #patron_checkout_search {
             display: flex;
             gap: 0.5rem;

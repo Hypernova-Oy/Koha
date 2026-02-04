@@ -11,7 +11,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' %]
-<style media="print">
+<style nonce="[% Koha.CSPNonce | $raw %]" media="print">
     #ser_routing-preview-slip {
         min-width: 0;
         width: auto;

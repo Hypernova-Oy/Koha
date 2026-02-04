@@ -25,7 +25,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         #add_action {
             display: none;
         }

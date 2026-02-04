@@ -13,7 +13,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         table.grid thead th {
             vertical-align: bottom;
         }

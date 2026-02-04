@@ -31,7 +31,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     .constraints::after {
         content: " ";
         clear: both;

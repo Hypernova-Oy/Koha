@@ -20,7 +20,7 @@
 [% INCLUDE 'doc-head-close.inc' %]
 [% USE Koha %]
 
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     tr.selected {
         background-color: #ffffcc;
     }

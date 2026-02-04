@@ -36,7 +36,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         fieldset.rows div.toptabs li {
             clear: none;
             margin-right: 0.4em;

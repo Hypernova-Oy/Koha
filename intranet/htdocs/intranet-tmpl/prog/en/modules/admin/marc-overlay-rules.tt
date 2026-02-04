@@ -15,7 +15,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     #tag-error {
         display: block;
         margin-top: 5px;

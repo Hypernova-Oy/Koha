@@ -10,7 +10,7 @@
 <title>Most popular titles &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         #search-facets fieldset {
             border: 0;
             margin: 0;

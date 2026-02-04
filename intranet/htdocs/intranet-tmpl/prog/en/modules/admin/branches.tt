@@ -770,7 +770,7 @@
     [% Asset.js( "lib/codemirror/css-lint.min.js" ) | $raw %]
     [% Asset.js( "lib/codemirror/yaml-lint.min.js" ) | $raw %]
     [% Asset.css("lib/codemirror/codemirror.css") | $raw %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         .CodeMirror {
             border: 1px solid #eee;
             margin: 1em, 1em, 1em, 0;

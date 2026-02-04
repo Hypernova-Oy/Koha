@@ -18,7 +18,7 @@
 [% END %]
 [% Asset.js('js/Gettext.js') | $raw %]
 [% Asset.js('js/i18n.js') | $raw %]
-<style id="antiClickjack">
+<style nonce="[% Koha.CSPNonce | $raw %]" id="antiClickjack">
     body {
         display: none !important;
     }

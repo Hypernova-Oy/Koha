@@ -66,7 +66,7 @@
     </select>
 [% END %]
 
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     fieldset.rows fieldset.rows {
         border-width: 0;
     }

@@ -51,7 +51,7 @@
     [% SET editmode = "text" %]
     [% Asset.css("lib/codemirror/codemirror.css") | $raw %]
     [% Asset.css("lib/codemirror/lint.min.css") | $raw %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         .CodeMirror {
             resize: vertical;
             z-index: 0;

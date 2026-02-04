@@ -19,7 +19,7 @@
 <title>Tags &rsaquo; [% IF ( LibraryNameTitle ) %][% LibraryNameTitle | html %][% ELSE %]Koha online[% END %] catalog</title>
 [% INCLUDE 'doc-head-close.inc' %]
 [% BLOCK cssinclude %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         fieldset {
             padding: 0.3em;
             margin: 0.3em 0;

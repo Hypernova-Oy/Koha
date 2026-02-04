@@ -13,7 +13,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     .pickup-slot {
         border: 2px solid #b9d8d9;
         padding: 0 0.1em;

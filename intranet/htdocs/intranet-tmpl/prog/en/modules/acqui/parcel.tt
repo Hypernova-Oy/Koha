@@ -350,7 +350,7 @@
 [% MACRO jsinclude BLOCK %]
     [% Asset.js("js/acquisitions-menu.js") | $raw %]
     [% INCLUDE 'datatables.inc' %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         fieldset.action {
             margin-bottom: 20px;
         }

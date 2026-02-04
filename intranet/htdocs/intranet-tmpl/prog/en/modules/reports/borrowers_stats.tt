@@ -17,7 +17,7 @@
 >
 
 [% INCLUDE 'doc-head-close.inc' %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     .sql {
         display: none;
     }

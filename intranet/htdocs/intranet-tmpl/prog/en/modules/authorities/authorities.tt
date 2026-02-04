@@ -384,7 +384,7 @@
     });
 </script>
 [% Asset.css("css/addbiblio.css") | $raw %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     #auloadpreview {
         font-family: monospace;
     }

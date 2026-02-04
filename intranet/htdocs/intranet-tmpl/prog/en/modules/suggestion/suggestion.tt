@@ -31,7 +31,7 @@
 [% INCLUDE 'doc-head-close.inc' %]
 [% IF op == 'else' %]
     [% FILTER collapse %]
-        <style>
+        <style nonce="[% Koha.CSPNonce | $raw %]">
             h4.local_collapse a {
                 font-size: 80%;
                 text-decoration: none;

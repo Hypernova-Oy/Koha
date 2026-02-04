@@ -16,7 +16,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         .tab-toolbar {
             padding: 0.5rem 0;
             margin-bottom: 0.5rem;

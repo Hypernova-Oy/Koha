@@ -18,7 +18,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     .pager div.dt-buttons {
         justify-content: flex-start;
     }

@@ -40,7 +40,7 @@
 <script nonce="[% Koha.CSPNonce | $raw %]">
     var has_item_groups = "[% item_groups.size | html %]";
 </script>
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     .flatpickr_wrapper input {
         width: 100%;
     }

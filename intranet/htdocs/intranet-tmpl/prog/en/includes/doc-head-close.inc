@@ -10,7 +10,7 @@
 [% IF logged_in_user %]<meta name="generator" content="Koha [% Koha.Version.maintenance | html %]" />[% END %]
 [%# Prevent XFS attacks -%]
 [% UNLESS popup %]
-    <style id="antiClickjack">
+    <style nonce="[% Koha.CSPNonce | $raw %]" id="antiClickjack">
         body {
             display: none !important;
         }
@@ -54,7 +54,7 @@
 
 [% IF ( IntranetUserCSS ) %]
     <!-- prettier-ignore-start -->
-    <style>[% IntranetUserCSS | $raw %]</style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">[% IntranetUserCSS | $raw %]</style>
     <!-- prettier-ignore-end -->
 [% END %]
 

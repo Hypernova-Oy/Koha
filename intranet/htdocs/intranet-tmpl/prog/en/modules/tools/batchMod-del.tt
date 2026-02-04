@@ -22,7 +22,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 <!--[if IE]>
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         #selections {
             display: none;
         }

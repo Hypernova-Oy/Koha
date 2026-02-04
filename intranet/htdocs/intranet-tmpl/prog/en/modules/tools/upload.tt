@@ -248,7 +248,7 @@
     <!-- /.page-section -->
 [% END %]
 
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     #fileuploadstatus,
     #fileuploadfailed {
         display: none;

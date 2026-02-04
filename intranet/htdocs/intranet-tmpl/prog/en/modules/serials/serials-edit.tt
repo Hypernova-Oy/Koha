@@ -89,7 +89,7 @@
     });
     //]]>
 </script>
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     #serials_edit fieldset.rows label,
     #serials_edit fieldset.rows span.label {
         font-size: 100%;

@@ -21,7 +21,7 @@
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.css("css/humanmsg.css") | $raw %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         fieldset.rows label.viewlog {
             float: none;
             font-weight: normal;

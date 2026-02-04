@@ -33,7 +33,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% Asset.css("lib/jquery/plugins/multiple-select/multiple-select.min.css") | $raw %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     #enrolmentmessage.hint {
         display: none;
     }

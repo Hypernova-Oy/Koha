@@ -36,7 +36,7 @@
 >
 [% INCLUDE 'doc-head-close.inc' %]
 [% FILTER collapse %]
-    <style>
+    <style nonce="[% Koha.CSPNonce | $raw %]">
         #preview_template .modal-dialog {
             width: 80%;
         }

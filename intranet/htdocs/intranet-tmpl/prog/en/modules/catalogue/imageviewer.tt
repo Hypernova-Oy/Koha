@@ -11,7 +11,7 @@
     [% END %]</title
 >
 [% INCLUDE 'doc-head-close.inc' %]
-<style>
+<style nonce="[% Koha.CSPNonce | $raw %]">
     #largeCover {
         background: transparent url("[% interface | html %]/[% theme | html %]/img/spinner-small.gif") center center no-repeat;
     }
