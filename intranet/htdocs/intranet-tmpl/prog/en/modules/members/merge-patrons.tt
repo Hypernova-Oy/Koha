@@ -278,6 +278,7 @@
                         <div><strong data-field="sex">Gender:</strong></div>
                         <div><strong data-field="updated_on">Updated on:</strong></div>
                         <div><strong data-field="userid">Username:</strong></div>
+                        <div><strong data-field="password">Password:</strong></div>
                     </div>
 
                     [% FOREACH p IN patrons %]
@@ -314,6 +315,7 @@
 [% IF ( p.sex ) %][% p.sex | html %][% ELSE %]-[% END %]
 [% IF ( p.updated_on ) %][% p.updated_on | html %][% ELSE %]-[% END %]
 [% IF ( p.userid ) %][% p.userid | html %][% ELSE %]-[% END %]
+[% IF ( loop.index == 0 ) %]* * *[% ELSE %]* * * [% END %]
 </pre>
 <!-- prettier-ignore-end -->
                         </div>
@@ -427,7 +429,7 @@
             );
 
             labels.forEach((label, i) => {
-                if (diff1[i] !== diff2[i]) {
+                if (diff1[i] !== diff2[i] || fields[i] == 'password') {
                     container.append(
                         `<div class="row">
                             <div class="col">
