@@ -69,6 +69,7 @@ my @fields = qw(
     sex
     updated_on
     userid
+    password
 );
 
 my %data;
@@ -90,8 +91,16 @@ if ( $op eq 'show' ) {
 
     my $keeper = Koha::Patrons->find($keeper_id);
 
+    my $password = $data{'password'};
+    delete $data{'password'};
     if ($keeper) {
         try {
+            my $source;
+            if ( $copy && scalar @ids == 2) {
+                my $source_borrowernumber = $keeper->borrowernumber == $ids[0] ? $ids[1] : $keeper->borrowernumber == $ids[1] ? $ids[0] : die "Keeper borrowernumber '$keeper_id' is neither of the given ids '$ids[0]' or '$ids[1]'";
+                $source = Koha::Patrons->find($source_borrowernumber);
+                $source = $source->unblessed if $source;
+            } 
             $results = $keeper->merge_with( \@ids );
             $template->param(
                 keeper  => $keeper,
@@ -99,6 +108,12 @@ if ( $op eq 'show' ) {
             );
             if ( $copy && $results ) {
                 $keeper->set( \%data )->store();
+                if ($password && $source) {
+                    C4::Context->dbh->do(
+                        "UPDATE borrowers SET password = ? WHERE borrowernumber = ?", undef,
+                    $source->{password}, $keeper->borrowernumber
+                    );
+                }
             }
         } catch {
             $template->param( error => $_ );
