@@ -5,7 +5,7 @@
     "version": "1",
     "license": {
       "name": "GPL v3,",
-      "url": "http://www.gnu.org/licenses/gpl.txt"
+      "url": "https://www.gnu.org/licenses/gpl.txt"
     },
     "contact": {
       "name": "Koha Development Team",
@@ -211,6 +211,11 @@
       "x-displayName": "Holds"
     },
     {
+      "description": "Manage hold groups\n",
+      "name": "hold_groups",
+      "x-displayName": "Hold groups"
+    },
+    {
       "description": "Manage identity providers\n",
       "name": "identity_providers",
       "x-displayName": "Identity providers"
@@ -336,9 +341,29 @@
       "x-displayName": "Search filters"
     },
     {
+      "description": "Manage SIP2 accounts",
+      "name": "sip2_accounts",
+      "x-displayName": "SIP2 Accounts"
+    },
+    {
+      "description": "Manage SIP2 institutions",
+      "name": "sip2_institutions",
+      "x-displayName": "SIP2 Institutions"
+    },
+    {
+      "description": "Manage SIP2 system preference overrides",
+      "name": "sip2_system_preference_overrides",
+      "x-displayName": "SIP2 System preference overrides"
+    },
+    {
       "description": "Manage SMTP servers configurations\n",
       "name": "smtp_servers",
       "x-displayName": "SMTP servers"
+    },
+    {
+      "description": "Manage file transport configurations\n",
+      "name": "file_transports",
+      "x-displayName": "File transports"
     },
     {
       "description": "Manage tickets\n",
@@ -394,6 +419,22 @@
           },
           {
             "$ref": "#/parameters/q_body"
+          },
+          {
+            "name": "x-koha-embed",
+            "in": "header",
+            "required": false,
+            "description": "Embed list sent as a request header",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "basket_group",
+                "creator",
+                "days_late"
+              ]
+            },
+            "collectionFormat": "csv"
           }
         ],
         "produces": [
@@ -437,6 +478,90 @@
         "x-koha-authorization": {
           "permissions": {
             "acquisition": "order_manage"
+          }
+        }
+      },
+      "post": {
+        "x-mojo-to": "Acquisitions::Baskets#add",
+        "operationId": "addBasket",
+        "tags": [
+          "baskets"
+        ],
+        "summary": "Add basket",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "A basket",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/basket"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A successfully created basket",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/basket"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in creating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "acquisition": [
+              "order_manage"
+            ]
           }
         }
       }
@@ -994,6 +1119,7 @@
                 "basket",
                 "basket.basket_group",
                 "basket.creator",
+                "basket.days_late",
                 "biblio",
                 "biblio.uncancelled_orders+count",
                 "biblio.holds+count",
@@ -1165,6 +1291,7 @@
                 "basket",
                 "basket.basket_group",
                 "basket.creator",
+                "basket.days_late",
                 "biblio",
                 "biblio.uncancelled_orders+count",
                 "biblio.holds+count",
@@ -1435,7 +1562,9 @@
                 "aliases",
                 "baskets+count",
                 "subscriptions+count",
-                "invoices+count"
+                "invoices+count",
+                "extended_attributes",
+                "+strings"
               ]
             },
             "collectionFormat": "csv"
@@ -1574,6 +1703,90 @@
         }
       }
     },
+    "/acquisitions/vendors/extended_attribute_types": {
+      "get": {
+        "x-mojo-to": "ExtendedAttributeTypes#list_acq_vendors",
+        "operationId": "listAcquisitionVendorsAdditionalFields",
+        "tags": [
+          "additional_fields"
+        ],
+        "summary": "List acquisition vendors extended attribute types",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "filter by resource type",
+            "in": "query",
+            "name": "resource_type",
+            "type": "string",
+            "enum": [
+              "vendor"
+            ]
+          },
+          {
+            "$ref": "#/parameters/match"
+          },
+          {
+            "$ref": "#/parameters/order_by"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/per_page"
+          },
+          {
+            "$ref": "#/parameters/q_param"
+          },
+          {
+            "$ref": "#/parameters/q_body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of extended attribute types for acquisition vendors",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/extended_attribute_type"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad request. Possible `error_code` attribute values:\n\n  * `invalid_query`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": [
+            {
+              "acquisition": "vendors_manage"
+            }
+          ]
+        }
+      }
+    },
     "/acquisitions/vendors/config": {
       "get": {
         "x-mojo-to": "Acquisitions::Vendors#config",
@@ -1657,7 +1870,9 @@
                 "invoices+count",
                 "interfaces",
                 "contacts",
-                "contracts"
+                "contracts",
+                "extended_attributes",
+                "+strings"
               ]
             },
             "collectionFormat": "csv"
@@ -7222,6 +7437,7 @@
             "items": {
               "type": "string",
               "enum": [
+                "booking",
                 "issuer",
                 "item",
                 "item.biblio",
@@ -7395,6 +7611,7 @@
             "items": {
               "type": "string",
               "enum": [
+                "booking",
                 "issuer",
                 "item",
                 "item.biblio",
@@ -8844,6 +9061,350 @@
         }
       }
     },
+    "/config/file_transports": {
+      "get": {
+        "x-mojo-to": "Config::File::Transports#list",
+        "operationId": "listFileTransportServers",
+        "tags": [
+          "file_transports"
+        ],
+        "summary": "List File transports",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/match"
+          },
+          {
+            "$ref": "#/parameters/order_by"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/per_page"
+          },
+          {
+            "$ref": "#/parameters/q_param"
+          },
+          {
+            "$ref": "#/parameters/q_body"
+          },
+          {
+            "$ref": "#/parameters/request_id_header"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of File transports",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/file_transport"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request. Possible `error_code` attribute values:\n\n  * `invalid_query`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "parameters": "manage_file_transports"
+          }
+        }
+      },
+      "post": {
+        "x-mojo-to": "Config::File::Transports#add",
+        "operationId": "addFileTransportServer",
+        "tags": [
+          "file_transports"
+        ],
+        "summary": "Add File transport",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "A JSON object representing a new File transport configuration",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/file_transport"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "An File transport object",
+            "schema": {
+              "$ref": "#/definitions/file_transport"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in creating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "parameters": "manage_file_transports"
+          }
+        }
+      }
+    },
+    "/config/file_transports/{file_transport_id}": {
+      "get": {
+        "x-mojo-to": "Config::File::Transports#get",
+        "operationId": "getFileTransportServer",
+        "tags": [
+          "file_transports"
+        ],
+        "summary": "Get File transport",
+        "parameters": [
+          {
+            "$ref": "#/parameters/file_transport_id_pp"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "An File transport object",
+            "schema": {
+              "$ref": "#/definitions/file_transport"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict updating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "parameters": "manage_file_transports"
+          }
+        }
+      },
+      "put": {
+        "x-mojo-to": "Config::File::Transports#update",
+        "operationId": "updateFileTransportServer",
+        "tags": [
+          "file_transports"
+        ],
+        "summary": "Update File transport",
+        "parameters": [
+          {
+            "$ref": "#/parameters/file_transport_id_pp"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "An File transport object",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/file_transport"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "An File transport object",
+            "schema": {
+              "$ref": "#/definitions/file_transport"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "parameters": "manage_file_transports"
+          }
+        }
+      },
+      "delete": {
+        "x-mojo-to": "Config::File::Transports#delete",
+        "operationId": "deleteFileTransportServer",
+        "tags": [
+          "file_transports"
+        ],
+        "summary": "Delete File transport",
+        "parameters": [
+          {
+            "$ref": "#/parameters/file_transport_id_pp"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "File transport deleted"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Object not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "parameters": "manage_file_transports"
+          }
+        }
+      }
+    },
     "/deleted/biblios": {
       "get": {
         "x-mojo-to": "DeletedBiblios#list",
@@ -9342,6 +9903,8 @@
               "type": "string",
               "enum": [
                 "periods",
+                "periods.extended_attributes",
+                "periods+strings",
                 "user_roles",
                 "user_roles.patron",
                 "agreement_licenses",
@@ -10555,7 +11118,9 @@
             "items": {
               "type": "string",
               "enum": [
-                "resources.package"
+                "resources.package",
+                "extended_attributes",
+                "+strings"
               ]
             },
             "collectionFormat": "csv"
@@ -10951,7 +11516,9 @@
               "type": "string",
               "enum": [
                 "resources",
-                "resources.package"
+                "resources.package",
+                "extended_attributes",
+                "+strings"
               ]
             },
             "collectionFormat": "csv"
@@ -11615,6 +12182,20 @@
             "name": "proxy",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "x-koha-embed",
+            "in": "header",
+            "required": false,
+            "description": "Embed list sent as a request header",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "package",
+                "title"
+              ]
+            }
           },
           {
             "$ref": "#/parameters/match"
@@ -12796,7 +13377,9 @@
             "enum": [
               "license",
               "agreement",
-              "package"
+              "agreement_period",
+              "package",
+              "title"
             ]
           },
           {
@@ -14811,7 +15394,10 @@
               "agreement",
               "package",
               "order",
-              "subscription"
+              "subscription",
+              "vendor",
+              "title",
+              "agreement_period"
             ]
           },
           {
@@ -15034,7 +15620,9 @@
                 "cancellation_requested",
                 "biblio",
                 "deleted_biblio",
-                "pickup_library"
+                "pickup_library",
+                "item",
+                "patron"
               ]
             },
             "collectionFormat": "csv"
@@ -15161,7 +15749,7 @@
                     "null"
                   ]
                 },
-                "item_type": {
+                "item_type_id": {
                   "description": "Limit hold on one itemtype (ignored for item-level holds)",
                   "type": [
                     "string",
@@ -15309,6 +15897,89 @@
         "responses": {
           "201": {
             "description": "Holds suspended"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Hold not allowed",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Hold not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "reserveforothers": "place_holds"
+          }
+        }
+      }
+    },
+    "/holds/cancellation_bulk": {
+      "delete": {
+        "x-mojo-to": "Holds#delete_bulk",
+        "operationId": "deleteHolds",
+        "tags": [
+          "holds"
+        ],
+        "summary": "Cancel holds",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Hold ids",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "cancellation_reason": {
+                  "description": "Cancellation reason",
+                  "type": "string"
+                },
+                "hold_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "additionalProperties": false
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Holds deleted"
           },
           "400": {
             "description": "Bad request",
@@ -20167,6 +20838,13 @@
             "type": "boolean"
           },
           {
+            "name": "primary_contact_method",
+            "in": "query",
+            "description": "Case insensitive search on primary_contact_method",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/match"
           },
           {
@@ -20263,6 +20941,9 @@
         ],
         "summary": "Add patron",
         "parameters": [
+          {
+            "$ref": "#/parameters/confirm_not_duplicate_header"
+          },
           {
             "name": "body",
             "in": "body",
@@ -20815,6 +21496,136 @@
         },
         "x-koha-authorization": {
           "permissions": {
+            "updatecharges": "remaining_permissions"
+          }
+        }
+      }
+    },
+    "/patrons/{patron_id}/account/credits/{credit_id}": {
+      "get": {
+        "x-mojo-to": "Patrons::Account#get_credit",
+        "operationId": "getPatronCredit",
+        "tags": [
+          "patrons"
+        ],
+        "summary": "Get a patron credit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/patron_id_pp"
+          },
+          {
+            "$ref": "#/parameters/credit_id_pp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A patron credit",
+            "schema": {
+              "$ref": "#/definitions/credit"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Patron not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "borrowers": "edit_borrowers",
+            "updatecharges": "remaining_permissions"
+          }
+        }
+      }
+    },
+    "/patrons/{patron_id}/account/debits/{debit_id}": {
+      "get": {
+        "x-mojo-to": "Patrons::Account#get_debit",
+        "operationId": "getPatronDebit",
+        "tags": [
+          "patrons"
+        ],
+        "summary": "Get a patron debit",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/patron_id_pp"
+          },
+          {
+            "$ref": "#/parameters/debit_id_pp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A patron debit",
+            "schema": {
+              "$ref": "#/definitions/debit"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Patron not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "borrowers": "edit_borrowers",
             "updatecharges": "remaining_permissions"
           }
         }
@@ -21510,7 +22321,306 @@
         },
         "x-koha-authorization": {
           "permissions": {
+            "borrowers": [
+              "edit_borrowers",
+              "view_holds_history"
+            ]
+          }
+        }
+      }
+    },
+    "/patrons/{patron_id}/hold_groups": {
+      "get": {
+        "x-mojo-to": "Patrons::HoldGroups#list",
+        "operationId": "getPatronHoldGroups",
+        "tags": [
+          "hold_groups"
+        ],
+        "summary": "List hold groups for a patron",
+        "parameters": [
+          {
+            "$ref": "#/parameters/patron_id_pp"
+          },
+          {
+            "$ref": "#/parameters/match"
+          },
+          {
+            "$ref": "#/parameters/order_by"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/per_page"
+          },
+          {
+            "$ref": "#/parameters/q_param"
+          },
+          {
+            "$ref": "#/parameters/q_body"
+          },
+          {
+            "$ref": "#/parameters/request_id_header"
+          },
+          {
+            "name": "x-koha-embed",
+            "in": "header",
+            "required": false,
+            "description": "Embed list sent as a request header",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "holds"
+              ]
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "The patron hold groups",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/hold_group"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request. Possible `error_code` attribute values:\n\n  * `invalid_query`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Patron not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
             "borrowers": "edit_borrowers"
+          }
+        }
+      },
+      "post": {
+        "x-mojo-to": "Patrons::HoldGroups#add",
+        "operationId": "addPatronHoldGroups",
+        "tags": [
+          "hold_groups"
+        ],
+        "summary": "Add hold group. May contain hold ids of existing holds",
+        "parameters": [
+          {
+            "$ref": "#/parameters/patron_id_pp"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "A JSON object containing informations about the new hold group",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hold_ids": {
+                  "description": "List of holds to add to hold group",
+                  "type": [
+                    "array",
+                    "null"
+                  ]
+                },
+                "force_grouped": {
+                  "description": "Whether to force creation of a new hold group",
+                  "type": [
+                    "boolean",
+                    "null"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          {
+            "name": "x-koha-embed",
+            "in": "header",
+            "required": false,
+            "description": "Embed list sent as a request header",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "holds"
+              ]
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Created hold group",
+            "schema": {
+              "$ref": "#/definitions/hold_group"
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Hold not allowed",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Borrower not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict. Possible `error_code` attribute values:\n\n  * `bad_address`\n  * `card_lost`\n  * `debt_limit`\n  * `expired`\n  * `hold_limit`\n  * `restricted`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "reserveforothers": "1"
+          }
+        }
+      }
+    },
+    "/patrons/{patron_id}/hold_groups/{hold_group_id}": {
+      "delete": {
+        "x-mojo-to": "Patrons::HoldGroups#delete",
+        "operationId": "deletePatronHoldGroups",
+        "tags": [
+          "hold_groups"
+        ],
+        "summary": "Delete hold group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/patron_id_pp"
+          },
+          {
+            "name": "hold_group_id",
+            "in": "path",
+            "description": "Internal hold group identifier",
+            "type": "integer",
+            "required": true
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "204": {
+            "description": "Hold group deleted"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Hold group not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict. Possible `error_code` attribute values:\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n\n* `internal_server_error`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "reserveforothers": "1"
           }
         }
       }
@@ -21557,6 +22667,7 @@
             "items": {
               "type": "string",
               "enum": [
+                "booking",
                 "issuer",
                 "item",
                 "item.biblio",
@@ -21625,6 +22736,9 @@
             },
             {
               "circulate": "manage_bookings"
+            },
+            {
+              "borrowers": "view_checkout_history"
             }
           ]
         }
@@ -24592,6 +25706,59 @@
         }
       }
     },
+    "/public/csp-reports": {
+      "post": {
+        "x-mojo-to": "CSPReports#add",
+        "operationId": "addCSPReport",
+        "tags": [
+          "csp"
+        ],
+        "summary": "Report a Content-Security-Policy violation",
+        "description": "This endpoint receives Content-Security-Policy violation reports from browsers.\nWhen a CSP violation occurs, browsers can be configured to POST a report to this\nendpoint using the `report-uri` or `report-to` CSP directive.\n\nReports are logged using Koha's logging system for administrator review.\n\nThis is a public endpoint that does not require authentication, as browsers\nsend these reports automatically without user credentials.\n",
+        "consumes": [
+          "application/csp-report",
+          "application/json",
+          "application/reports+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "CSP violation report",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/csp_report_uri_to"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Report received successfully"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        }
+      }
+    },
     "/public/oauth/login/{provider_code}/{interface}": {
       "get": {
         "x-mojo-to": "OAuth::Client#login",
@@ -26863,6 +28030,1250 @@
         }
       }
     },
+    "/sip2/accounts": {
+      "get": {
+        "x-mojo-to": "SIP2::Accounts#list",
+        "operationId": "listSip2Accounts",
+        "tags": [
+          "sip2_accounts"
+        ],
+        "summary": "List accounts",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Case insensitive search on account sip_account_id",
+            "in": "query",
+            "name": "sip_account_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-koha-embed",
+            "in": "header",
+            "required": false,
+            "description": "Embed list sent as a request header",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "institution",
+                "custom_item_fields",
+                "item_fields",
+                "custom_patron_fields",
+                "patron_attributes",
+                "screen_msg_regexs",
+                "sort_bin_mappings",
+                "system_preference_overrides"
+              ]
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "$ref": "#/parameters/match"
+          },
+          {
+            "$ref": "#/parameters/order_by"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/per_page"
+          },
+          {
+            "$ref": "#/parameters/q_param"
+          },
+          {
+            "$ref": "#/parameters/q_body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of SIP2 accounts",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_account"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad request. Possible `error_code` attribute values:\n\n  * `invalid_query`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "post": {
+        "x-mojo-to": "SIP2::Accounts#add",
+        "operationId": "addSip2Accounts",
+        "tags": [
+          "sip2_accounts"
+        ],
+        "summary": "Add accounts",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "A JSON object containing information about the new account",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sip2_account"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A successfully created account",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_account"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in creating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "413": {
+            "description": "Payload too large",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      }
+    },
+    "/sip2/accounts/{sip_account_id}": {
+      "get": {
+        "x-mojo-to": "SIP2::Accounts#get",
+        "operationId": "getSip2Accounts",
+        "tags": [
+          "sip2_accounts"
+        ],
+        "summary": "Get SIP2 account",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_account_id_pp"
+          },
+          {
+            "name": "x-koha-embed",
+            "in": "header",
+            "required": false,
+            "description": "Embed list sent as a request header",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "institution",
+                "custom_item_fields",
+                "item_fields",
+                "custom_patron_fields",
+                "patron_attributes",
+                "screen_msg_regexs",
+                "sort_bin_mappings",
+                "system_preference_overrides"
+              ]
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A SIP2 account",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_account"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "put": {
+        "x-mojo-to": "SIP2::Accounts#update",
+        "operationId": "updateSip2Accounts",
+        "tags": [
+          "sip2_accounts"
+        ],
+        "summary": "Update account",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_account_id_pp"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "A JSON object containing new information about existing account",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sip2_account"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successfully updated account",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_account"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in updating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "413": {
+            "description": "Payload too large",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "delete": {
+        "x-mojo-to": "SIP2::Accounts#delete",
+        "operationId": "deleteSip2Accounts",
+        "tags": [
+          "sip2_accounts"
+        ],
+        "summary": "Delete account",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_account_id_pp"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Account deleted"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in deleting resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      }
+    },
+    "/sip2/institutions": {
+      "get": {
+        "x-mojo-to": "SIP2::Institutions#list",
+        "operationId": "listSip2Institutions",
+        "tags": [
+          "sip2_institutions"
+        ],
+        "summary": "List institutions",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Case insensitive search on institution sip_institution_id",
+            "in": "query",
+            "name": "sip_institution_id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Case insensitive search on institution name",
+            "in": "query",
+            "name": "name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "Case insensitive search on institution implementation",
+            "in": "query",
+            "name": "implementation",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/match"
+          },
+          {
+            "$ref": "#/parameters/order_by"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/per_page"
+          },
+          {
+            "$ref": "#/parameters/q_param"
+          },
+          {
+            "$ref": "#/parameters/q_body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of SIP2 institutions",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_institution"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad request. Possible `error_code` attribute values:\n\n  * `invalid_query`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "post": {
+        "x-mojo-to": "SIP2::Institutions#add",
+        "operationId": "addSip2Institutions",
+        "tags": [
+          "sip2_institutions"
+        ],
+        "summary": "Add institutions",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "A JSON object containing information about the new institution",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sip2_institution"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A successfully created institution",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_institution"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in creating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "413": {
+            "description": "Payload too large",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      }
+    },
+    "/sip2/institutions/{sip_institution_id}": {
+      "get": {
+        "x-mojo-to": "SIP2::Institutions#get",
+        "operationId": "getSip2Institutions",
+        "tags": [
+          "sip2_institutions"
+        ],
+        "summary": "Get SIP2 institution",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_institution_id_pp"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A SIP2 institution",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_institution"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "put": {
+        "x-mojo-to": "SIP2::Institutions#update",
+        "operationId": "updateSip2Institutions",
+        "tags": [
+          "sip2_institutions"
+        ],
+        "summary": "Update institution",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_institution_id_pp"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "A JSON object containing new information about existing institution",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sip2_institution"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successfully updated institution",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_institution"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in updating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "413": {
+            "description": "Payload too large",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "delete": {
+        "x-mojo-to": "SIP2::Institutions#delete",
+        "operationId": "deleteSip2Institutions",
+        "tags": [
+          "sip2_institutions"
+        ],
+        "summary": "Delete institution",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_institution_id_pp"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Institution deleted"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in deleting resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      }
+    },
+    "/sip2/system_preference_overrides": {
+      "get": {
+        "x-mojo-to": "SIP2::SystemPreferenceOverrides#list",
+        "operationId": "listSip2SystemPreferenceOverrides",
+        "tags": [
+          "sip2_system_preference_overrides"
+        ],
+        "summary": "List system preference overrides",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "Case insensitive search on system preference override sip_system_preference_override_id",
+            "in": "query",
+            "name": "sip_system_preference_override_id",
+            "required": false,
+            "type": "string",
+            "collectionFormat": "csv"
+          },
+          {
+            "$ref": "#/parameters/match"
+          },
+          {
+            "$ref": "#/parameters/order_by"
+          },
+          {
+            "$ref": "#/parameters/page"
+          },
+          {
+            "$ref": "#/parameters/per_page"
+          },
+          {
+            "$ref": "#/parameters/q_param"
+          },
+          {
+            "$ref": "#/parameters/q_body"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of SIP2 system preference overrides",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_system_preference_override"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "Bad request. Possible `error_code` attribute values:\n\n  * `invalid_query`\n",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "post": {
+        "x-mojo-to": "SIP2::SystemPreferenceOverrides#add",
+        "operationId": "addSip2SystemPreferenceOverrides",
+        "tags": [
+          "sip2_system_preference_overrides"
+        ],
+        "summary": "Add system preference overrides",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "description": "A JSON object containing information about the new system preference override",
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sip2_system_preference_override"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "A successfully created system preference override",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_system_preference_override"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in creating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "413": {
+            "description": "Payload too large",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      }
+    },
+    "/sip2/system_preference_overrides/{sip_system_preference_override_id}": {
+      "get": {
+        "x-mojo-to": "SIP2::SystemPreferenceOverrides#get",
+        "operationId": "getSipSystemPreferenceOverrides",
+        "tags": [
+          "sip2_system_preference_overrides"
+        ],
+        "summary": "Get SIP2 system preference overrides",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_system_preference_override_id_pp"
+          },
+          {
+            "name": "x-koha-embed",
+            "in": "header",
+            "required": false,
+            "description": "Embed list sent as a request header",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "custom_item_fields",
+                "item_fields",
+                "custom_patron_fields",
+                "patron_attributes"
+              ]
+            },
+            "collectionFormat": "csv"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A SIP2 system preference override",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_system_preference_override"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "put": {
+        "x-mojo-to": "SIP2::SystemPreferenceOverrides#update",
+        "operationId": "updateSip2SystemPreferenceOverrides",
+        "tags": [
+          "sip2_system_preference_overrides"
+        ],
+        "summary": "Update system preference override",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_system_preference_override_id_pp"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "A JSON object containing new information about existing system preference override",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/sip2_system_preference_override"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A successfully updated system preference override",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sip2_system_preference_override"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Ressource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in updating resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "413": {
+            "description": "Payload too large",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      },
+      "delete": {
+        "x-mojo-to": "SIP2::SystemPreferenceOverrides#delete",
+        "operationId": "deleteSip2SystemPreferenceOverrides",
+        "tags": [
+          "sip2_system_preference_overrides"
+        ],
+        "summary": "Delete system preference override",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/sip_system_preference_override_id_pp"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "System preference override deleted"
+          },
+          "400": {
+            "description": "Bad request",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "401": {
+            "description": "Authentication required",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "403": {
+            "description": "Access forbidden",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "404": {
+            "description": "Resource not found",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "409": {
+            "description": "Conflict in deleting resource",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "500": {
+            "description": "Internal server error. Possible `error_code` attribute values:\n* `internal_server_error`",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "503": {
+            "description": "Under maintenance",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-koha-authorization": {
+          "permissions": {
+            "sip2": 1
+          }
+        }
+      }
+    },
     "/suggestions": {
       "get": {
         "x-mojo-to": "Suggestions#list",
@@ -28783,8 +31194,12 @@
             "null"
           ]
         },
-        "auto_register": {
-          "description": "If patrons will be generated on login if required",
+        "auto_register_opac": {
+          "description": "If patrons will be generated on login if required (OPAC)",
+          "type": "boolean"
+        },
+        "auto_register_staff": {
+          "description": "If patrons will be generated on login if required (Staff interface)",
           "type": "boolean"
         },
         "update_on_auth": {
@@ -28818,7 +31233,8 @@
       "required": [
         "identity_provider_domain_id",
         "domain",
-        "auto_register",
+        "auto_register_opac",
+        "auto_register_staff",
         "update_on_auth",
         "default_library_id",
         "default_category_id",
@@ -28834,7 +31250,10 @@
           "description": "Internal identifier for the basket"
         },
         "name": {
-          "type": "string",
+          "type": [
+            "string",
+            "null"
+          ],
           "description": "Basket name"
         },
         "internal_note": {
@@ -28921,13 +31340,6 @@
           "type": "boolean",
           "description": "Is the basket closed"
         },
-        "note": {
-          "type": [
-            "string",
-            "null"
-          ],
-          "description": "basket notes"
-        },
         "create_items": {
           "type": [
             "string",
@@ -28940,9 +31352,19 @@
             null
           ],
           "description": "When items should be created for orders in this basket (Options: 'ordering', 'receiving', 'cataloguing'. Null means system wide config)"
+        },
+        "days_late": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "The number of days the basket is late (x-koha-embed)"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "required": [
+        "vendor_id"
+      ]
     },
     "booking": {
       "additionalProperties": false,
@@ -29243,6 +31665,13 @@
             "null"
           ]
         },
+        "booking_id": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "description": "Internal booking identifier that this checkout fulfills"
+        },
         "external_id": {
           "type": [
             "string",
@@ -29342,7 +31771,7 @@
             "string",
             "null"
           ],
-          "format": "date",
+          "format": "date-time",
           "description": "Datetime of the issue note"
         },
         "note_seen": {
@@ -29379,6 +31808,13 @@
             "null"
           ],
           "description": "The object representing the checkout patron"
+        },
+        "booking": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The object representing the linked booking"
         }
       },
       "additionalProperties": false
@@ -29477,6 +31913,113 @@
         "postal_code",
         "country"
       ]
+    },
+    "csp_report": {
+      "type": "object",
+      "description": "A Content-Security-Policy violation report as sent by browsers.\nSee https://www.w3.org/TR/CSP3/#violation-reports for specification.\n",
+      "properties": {
+        "document-uri": {
+          "type": "string",
+          "description": "The URI of the document where the violation occurred",
+          "maxLength": 200
+        },
+        "referrer": {
+          "type": "string",
+          "description": "The referrer of the document where the violation occurred",
+          "maxLength": 200
+        },
+        "violated-directive": {
+          "type": "string",
+          "description": "The directive that was violated (e.g., \"script-src 'self'\")",
+          "maxLength": 100
+        },
+        "effective-directive": {
+          "type": "string",
+          "description": "The effective directive that was violated",
+          "maxLength": 100
+        },
+        "original-policy": {
+          "type": "string",
+          "description": "The original CSP policy as specified in the header",
+          "maxLength": 400
+        },
+        "disposition": {
+          "type": "string",
+          "description": "Either \"enforce\" or \"report\" depending on CSP mode",
+          "enum": [
+            "enforce",
+            "report"
+          ]
+        },
+        "blocked-uri": {
+          "type": "string",
+          "description": "The URI of the resource that was blocked",
+          "maxLength": 200
+        },
+        "line-number": {
+          "type": "integer",
+          "description": "Line number in the document where the violation occurred",
+          "minimum": 0,
+          "maximum": 999999
+        },
+        "column-number": {
+          "type": "integer",
+          "description": "Column number where the violation occurred",
+          "minimum": 0,
+          "maximum": 999999
+        },
+        "source-file": {
+          "type": "string",
+          "description": "The URI of the script where the violation occurred",
+          "maxLength": 200
+        },
+        "status-code": {
+          "type": "integer",
+          "description": "HTTP status code of the document",
+          "minimum": 0,
+          "maximum": 999
+        },
+        "script-sample": {
+          "type": "string",
+          "description": "First 40 characters of the inline script that caused the violation",
+          "maxLength": 41
+        }
+      },
+      "additionalProperties": true
+    },
+    "csp_report_uri_to": {
+      "type": "object",
+      "description": "A Content-Security-Policy violation report as sent by browsers.\nSee https://www.w3.org/TR/CSP3/#violation-reports for specification.\n",
+      "properties": {
+        "csp-report": {
+          "$ref": "#/definitions/csp_report"
+        },
+        "body": {
+          "$ref": "#/definitions/csp_report"
+        },
+        "user_agent": {
+          "type": "string",
+          "maxLength": 300
+        },
+        "destination": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "url": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "timestamp": {
+          "type": "string",
+          "maxLength": 50
+        },
+        "attempts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 99
+        }
+      },
+      "additionalProperties": true
     },
     "credit": {
       "type": "object",
@@ -29855,7 +32398,8 @@
         },
         "name": {
           "description": "name of the agreement",
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "description": {
           "description": "description of the agreement",
@@ -29866,14 +32410,16 @@
         },
         "status": {
           "description": "current status of the agreement",
-          "type": "string"
+          "type": "string",
+          "maxLength": 80
         },
         "closure_reason": {
           "description": "reason of the closure",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 80
         },
         "is_perpetual": {
           "description": "is the agreement perpetual",
@@ -29884,7 +32430,8 @@
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 80
         },
         "license_info": {
           "description": "info about the license",
@@ -30282,98 +32829,112 @@
         },
         "publication_title": {
           "description": "publication_title of the title",
-          "type": "string"
+          "type": "string",
+          "maxLength": 255
         },
         "external_id": {
           "description": "External id of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "print_identifier": {
           "description": "print_identifier of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "online_identifier": {
           "description": "online_identifier of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "date_first_issue_online": {
           "description": "date_first_issue_online of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "num_first_vol_online": {
           "description": "num_first_vol_online of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "num_first_issue_online": {
           "description": "num_first_issue_online of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "date_last_issue_online": {
           "description": "date_last_issue_online of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "num_last_vol_online": {
           "description": "num_last_vol_online of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "num_last_issue_online": {
           "description": "num_last_issue_online of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "title_url": {
           "description": "title_url of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "first_author": {
           "description": "first_author of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "embargo_info": {
           "description": "embargo_info of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "coverage_depth": {
           "description": "coverage_depth of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "notes": {
           "description": "notes of the title",
@@ -30387,70 +32948,80 @@
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "publication_type": {
           "description": "publication_type of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 80
         },
         "date_monograph_published_print": {
           "description": "date_monograph_published_print of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "date_monograph_published_online": {
           "description": "date_monograph_published_online of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "monograph_volume": {
           "description": "monograph_volume of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "monograph_edition": {
           "description": "monograph_edition of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "first_editor": {
           "description": "first_editor of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "parent_publication_title_id": {
           "description": "parent_publication_title_id of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "preceding_publication_title_id": {
           "description": "preceding_publication_title_id of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "access_type": {
           "description": "access_type of the title",
           "type": [
             "string",
             "null"
-          ]
+          ],
+          "maxLength": 255
         },
         "is_selected": {
           "description": "if the title is selected in the KB",
@@ -30470,6 +33041,21 @@
           "description": "should a linked biblio be created",
           "type": [
             "boolean",
+            "null"
+          ]
+        },
+        "extended_attributes": {
+          "description": "Related additional field values",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "$ref": "#/definitions/extended_attribute_value"
+          }
+        },
+        "_strings": {
+          "type": [
+            "object",
             "null"
           ]
         }
@@ -31971,12 +34557,18 @@
           "description": "Set this hold as non priority",
           "type": "boolean"
         },
-        "item_type": {
+        "item_type_id": {
           "type": [
             "string",
             "null"
           ],
           "description": "If record level hold, the optional itemtype of the item the patron is requesting"
+        },
+        "hold_group_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "item_level": {
           "type": "boolean",
@@ -32017,6 +34609,13 @@
           ],
           "description": "Pickup library"
         },
+        "patron": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Patron for hold"
+        },
         "_strings": {
           "type": [
             "object",
@@ -32031,6 +34630,35 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/hold"
+      },
+      "additionalProperties": false
+    },
+    "hold_group": {
+      "type": "object",
+      "properties": {
+        "hold_group_id": {
+          "type": "integer",
+          "description": "Internal hold group identifier"
+        },
+        "borrowernumber": {
+          "type": "integer",
+          "description": "Patron this hold group belongs to"
+        },
+        "visual_hold_group_id": {
+          "type": "integer",
+          "description": "Visual ID for this hold group, in the context of the related patron"
+        },
+        "target_hold_id": {
+          "type": "integer",
+          "description": "Target hold ID of this hold group"
+        },
+        "holds": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "description": "The holds in this hold group (x-koha-embed)"
+        }
       },
       "additionalProperties": false
     },
@@ -33251,6 +35879,15 @@
           "items": {
             "$ref": "#/definitions/item_type_translated_description"
           }
+        },
+        "checkprevcheckout": {
+          "type": "string",
+          "enum": [
+            "yes",
+            "no",
+            "inherit"
+          ],
+          "description": "Produce a warning for this item type if this item has previously been checked out to this patron if ''yes'', not if ''no'', defer to patron setting if ''inherit''"
         }
       },
       "additionalProperties": false,
@@ -33992,6 +36629,25 @@
       },
       "additionalProperties": false
     },
+    "order_claim": {
+      "type": "object",
+      "properties": {
+        "order_claim_id": {
+          "type": "integer",
+          "description": "Internally assigned order claim identifier"
+        },
+        "order_id": {
+          "type": "integer",
+          "description": "Internally assigned order identifier"
+        },
+        "date_claimed": {
+          "type": "string",
+          "format": "date",
+          "description": "Date the claim was recorded"
+        }
+      },
+      "additionalProperties": false
+    },
     "patron": {
       "type": "object",
       "properties": {
@@ -34539,6 +37195,14 @@
             "boolean"
           ],
           "description": "Protected status of the patron"
+        },
+        "primary_contact_method": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "patron's primary contact method",
+          "maxLength": 45
         },
         "_strings": {
           "type": [
@@ -35409,6 +38073,410 @@
         "name"
       ]
     },
+    "sip2_account": {
+      "type": "object",
+      "properties": {
+        "sip_account_id": {
+          "type": "integer",
+          "description": "unique account identifier",
+          "readOnly": true
+        },
+        "sip_institution_id": {
+          "type": "integer",
+          "description": "unique institution identifier"
+        },
+        "ae_field_template": {
+          "description": "ae field template",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "allow_additional_materials_checkout": {
+          "description": "allow additional materials checkout",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "allow_empty_passwords": {
+          "description": "allow empty passwords",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "allow_fields": {
+          "description": "allow fields",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "av_field_template": {
+          "description": "av field template",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "blocked_item_types": {
+          "description": "blocked item types",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "checked_in_ok": {
+          "description": "checked in ok",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "convert_nonprinting_characters": {
+          "description": "convert nonprinting characters",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "cr_item_field": {
+          "description": "cr item field",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ct_always_send": {
+          "description": "ct always send",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "cv_send_00_on_success": {
+          "description": "cv send 00 on success",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "cv_triggers_alert": {
+          "description": "cv triggers alert",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "da_field_template": {
+          "description": "da field template",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "delimiter": {
+          "description": "delimiter",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "disallow_overpayment": {
+          "description": "disallow overpayment",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "encoding": {
+          "description": "encoding",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "error_detect": {
+          "description": "error detect",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "format_due_date": {
+          "description": "format due date",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "hide_fields": {
+          "description": "hide fields",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "holds_block_checkin": {
+          "description": "holds block checkin",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "holds_get_captured": {
+          "description": "holds get captured",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "inhouse_item_types": {
+          "description": "inhouse item types",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "inhouse_patron_categories": {
+          "description": "inhouse patron categories",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "login_id": {
+          "description": "Staff userid for SIP2 authentication",
+          "type": "string"
+        },
+        "lost_block_checkout": {
+          "description": "lost status for missing",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "lost_block_checkout_value": {
+          "description": "lost status for missing",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "lost_status_for_missing": {
+          "description": "lost status for missing",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "overdues_block_checkout": {
+          "description": "overdues block checkout",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "payment_type_writeoff": {
+          "description": "payment type writeoff",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prevcheckout_block_checkout": {
+          "description": "prevcheckout block checkout",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "register_id": {
+          "description": "register id",
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "seen_on_item_information": {
+          "description": "seen on item information",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "send_patron_home_library_in_af": {
+          "description": "send patron home library in af",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "show_checkin_message": {
+          "description": "show checkin message",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "show_outstanding_amount": {
+          "description": "show outstanding amount",
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "institution": {
+          "description": "Related institution embed",
+          "type": [
+            "object",
+            "null"
+          ]
+        },
+        "custom_item_fields": {
+          "description": "Related custom_item_fields embed",
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "item_fields": {
+          "description": "Related item_fields embed",
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "custom_patron_fields": {
+          "description": "Related custom_patron_fields embed",
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "patron_attributes": {
+          "description": "Related patron_attributes embed",
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "screen_msg_regexs": {
+          "description": "Related screen_msg_regexs embed",
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "sort_bin_mappings": {
+          "description": "Related sort_bin_mappings embed",
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "system_preference_overrides": {
+          "description": "Related system_preference_overrides embed",
+          "type": [
+            "array",
+            "null"
+          ]
+        },
+        "terminator": {
+          "description": "terminator",
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "CR",
+            "CRLF",
+            null
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "sip_account_id",
+        "login_id"
+      ]
+    },
+    "sip2_institution": {
+      "type": "object",
+      "properties": {
+        "sip_institution_id": {
+          "type": "integer",
+          "description": "unique identifier",
+          "readOnly": true
+        },
+        "name": {
+          "description": "unique string institution's name",
+          "type": "string"
+        },
+        "implementation": {
+          "description": "institution's implementation, defaults to 'ILS'",
+          "type": "string"
+        },
+        "checkin": {
+          "description": "institution's policy for checkin",
+          "type": "boolean"
+        },
+        "checkout": {
+          "description": "institution's policy for checkout",
+          "type": "boolean"
+        },
+        "offline": {
+          "description": "institution's policy for offline",
+          "type": "boolean"
+        },
+        "renewal": {
+          "description": "institution's policy for renewal",
+          "type": "boolean"
+        },
+        "retries": {
+          "description": "institution's policy for retries",
+          "type": "integer"
+        },
+        "status_update": {
+          "description": "institution's policy for status_update",
+          "type": "boolean"
+        },
+        "timeout": {
+          "description": "institution's policy for timeout",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "sip_institution_id",
+        "name"
+      ]
+    },
+    "sip2_system_preference_override": {
+      "type": "object",
+      "properties": {
+        "sip_system_preference_override_id": {
+          "type": "integer",
+          "description": "unique identifier",
+          "readOnly": true
+        },
+        "variable": {
+          "description": "variable",
+          "type": "string"
+        },
+        "value": {
+          "description": "value",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "sip_system_preference_override_id",
+        "variable",
+        "value"
+      ]
+    },
     "smtp_server": {
       "type": "object",
       "properties": {
@@ -35463,6 +38531,100 @@
         "is_default": {
           "type": "boolean",
           "description": "Is this the default SMTP server"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "name"
+      ]
+    },
+    "file_transport": {
+      "type": "object",
+      "properties": {
+        "file_transport_id": {
+          "type": "integer",
+          "description": "Internal File transport identifier",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the File transport"
+        },
+        "host": {
+          "type": "string",
+          "description": "FTP/SFTP host name (optional)"
+        },
+        "port": {
+          "type": "integer",
+          "description": "TCP port number (optional)"
+        },
+        "transport": {
+          "type": "string",
+          "enum": [
+            "ftp",
+            "sftp",
+            "file"
+          ],
+          "description": "Transport of File transport (optional)"
+        },
+        "auth_mode": {
+          "type": "string",
+          "enum": [
+            "password",
+            "key_file",
+            "noauth"
+          ],
+          "description": "Authentication mode to use (optional)"
+        },
+        "passive": {
+          "type": "boolean",
+          "description": "Whether or not to use passive mode (optional)"
+        },
+        "user_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The user name to use for authentication (optional)"
+        },
+        "password": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The password to use for authentication (optional)"
+        },
+        "key_file": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The key file to use for authentication (optional)"
+        },
+        "download_directory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Path on the remote server we download from (optional)"
+        },
+        "upload_directory": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Path on the remote server we upload to (optional)"
+        },
+        "status": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "Most recent status of the File transport (optional)"
+        },
+        "debug": {
+          "type": "boolean",
+          "description": "If the SMTP connection is set to debug mode (optional)"
         }
       },
       "additionalProperties": false,
@@ -36031,14 +39193,16 @@
             "string",
             "null"
           ],
-          "description": "Vendor phone number"
+          "description": "Vendor phone number",
+          "maxLength": 30
         },
         "fax": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Vendor fax number"
+          "description": "Vendor fax number",
+          "maxLength": 50
         },
         "accountnumber": {
           "type": [
@@ -36052,7 +39216,8 @@
             "string",
             "null"
           ],
-          "description": "Type of vendor"
+          "description": "Type of vendor",
+          "maxLength": 255
         },
         "notes": {
           "type": [
@@ -36073,7 +39238,8 @@
             "string",
             "null"
           ],
-          "description": "Vendor web address"
+          "description": "Vendor web address",
+          "maxLength": 255
         },
         "active": {
           "type": [
@@ -36087,14 +39253,16 @@
             "string",
             "null"
           ],
-          "description": "List prices currency"
+          "description": "List prices currency",
+          "maxLength": 10
         },
         "invoice_currency": {
           "type": [
             "string",
             "null"
           ],
-          "description": "Invoice prices currency"
+          "description": "Invoice prices currency",
+          "maxLength": 10
         },
         "gst": {
           "type": [
@@ -36143,7 +39311,16 @@
             "string",
             "null"
           ],
-          "description": "External id"
+          "description": "External id",
+          "maxLength": 255
+        },
+        "payment_method": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Payment method",
+          "maxLength": 255
         },
         "aliases": {
           "type": "array",
@@ -36192,6 +39369,21 @@
             "null"
           ],
           "description": "Number of linked invoices"
+        },
+        "extended_attributes": {
+          "description": "Related additional field values",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "$ref": "#/definitions/extended_attribute_value"
+          }
+        },
+        "_strings": {
+          "type": [
+            "object",
+            "null"
+          ]
         }
       },
       "additionalProperties": false,
@@ -36336,6 +39528,10 @@
         "marc_orders": {
           "type": "boolean",
           "description": "MarcOrderingAutomation system preference value"
+        },
+        "erm_module": {
+          "type": "boolean",
+          "description": "ERMModule system preference value"
         }
       },
       "additionalProperties": false
@@ -36406,6 +39602,21 @@
         "notes": {
           "type": [
             "string",
+            "null"
+          ]
+        },
+        "extended_attributes": {
+          "description": "Related additional field values",
+          "type": [
+            "array"
+          ],
+          "items": {
+            "$ref": "#/definitions/extended_attribute_value"
+          }
+        },
+        "_strings": {
+          "type": [
+            "object",
             "null"
           ]
         }
@@ -36830,6 +40041,20 @@
       "required": true,
       "type": "integer"
     },
+    "credit_id_pp": {
+      "description": "Internal credit identifier",
+      "in": "path",
+      "name": "credit_id",
+      "required": true,
+      "type": "integer"
+    },
+    "debit_id_pp": {
+      "description": "Internal debit identifier",
+      "in": "path",
+      "name": "debit_id",
+      "required": true,
+      "type": "integer"
+    },
     "eholdings_title_id_pp": {
       "description": "Title internal identifier",
       "in": "path",
@@ -37110,10 +40335,45 @@
       "required": false,
       "type": "integer"
     },
+    "sip_account_id_pp": {
+      "description": "SIP2 account internal identifier",
+      "in": "path",
+      "name": "sip_account_id",
+      "required": true,
+      "type": "integer"
+    },
+    "sip_institution_id_pp": {
+      "description": "SIP2 institution internal identifier",
+      "in": "path",
+      "name": "sip_institution_id",
+      "required": true,
+      "type": "integer"
+    },
+    "sip_listener_id_pp": {
+      "description": "SIP2 listener internal identifier",
+      "in": "path",
+      "name": "sip_listener_id",
+      "required": true,
+      "type": "integer"
+    },
+    "sip_system_preference_override_id_pp": {
+      "description": "SIP2 system preference override internal identifier",
+      "in": "path",
+      "name": "sip_system_preference_override_id",
+      "required": true,
+      "type": "integer"
+    },
     "smtp_server_id_pp": {
       "description": "SMTP server internal identifier",
       "in": "path",
       "name": "smtp_server_id",
+      "required": true,
+      "type": "integer"
+    },
+    "file_transport_id_pp": {
+      "description": "File transport internal identifier",
+      "in": "path",
+      "name": "file_transport_id",
       "required": true,
       "type": "integer"
     },

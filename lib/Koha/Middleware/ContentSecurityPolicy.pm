@@ -76,7 +76,7 @@ sub _add_csp_to_reporting_endpoints {
     } else {
         $value = '';
     }
-    $value = $value . 'csp-violations="/api/v1/public/csp-reports"';
+    $value = $value . 'csp-violations="https://koha-productions.lxd/api/v1/public/csp-reports"';
 
     return $value;
 }
