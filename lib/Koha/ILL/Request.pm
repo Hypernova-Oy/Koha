@@ -1913,7 +1913,7 @@ sub send_staff_notice {
     # Try and get an address to which to send staff notices
     my $branch       = Koha::Libraries->find( $self->branchcode );
     my $to_address   = $branch->inbound_ill_address;
-    my $from_address = $branch->inbound_ill_address;
+    my $from_address = $branch->from_email_address;
 
     my $params = {
         letter                 => $letter,
