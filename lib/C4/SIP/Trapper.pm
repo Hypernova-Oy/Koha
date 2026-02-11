@@ -66,6 +66,10 @@ sub BINMODE {
 
 $SIG{__DIE__} = sub {
     my $msg    = shift;
+    # $SIG{__DIE__} is called even inside an eval()
+    # We don't need to log such cases because they should be handled by the
+    # responsible module
+    return if defined $^S;
     my $logger = Koha::Logger->get( { interface => 'sip', category => 'STDERR' } );
     $logger->error($msg) if $logger;
     die $msg;
