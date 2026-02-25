@@ -38,3 +38,31 @@ $("body").on("click", ".submit-form-link", function (e) {
     e.preventDefault();
     submit_form(this);
 });
+
+let forms_submitting = [];
+$("body").on("submit", "form.submit-form-prevent-resubmit", function (e) {
+    let should_we_send_it = true;
+    forms_submitting.forEach(el => {
+        if (el.is(this)) {
+            should_we_send_it = false;
+        }
+    });
+
+    if (!should_we_send_it) {
+        e.preventDefault();
+        return false;
+    }
+
+    forms_submitting.push($(this));
+});
+
+$("body").on("change", "form.submit-form-prevent-resubmit", function (e) {
+    let form_el = $(this);
+    // If user is able to change the form before the next page loads,
+    // allow them to resubmit the form with the new values
+    forms_submitting.forEach(function (item, index, object) {
+        if ($(item).attr("id") === form_el.attr("id")) {
+            object.splice(index, 1);
+        }
+    });
+});
