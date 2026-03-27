@@ -1458,6 +1458,18 @@ sub get_marc_notes {
             push @marcnotes, { marcnote => $field->as_string(), tag => $tag };
         }
     }
+
+    # HN#2101
+    if ( $marcflavour eq 'MARC21' && !$hiddenlist{'031'} && !($opac && $maybe_private{'031'}) ) {
+        my @mii = $record->field('031');
+        foreach my $miifield (@mii) {
+            my @miitext = $miifield->subfield('t');
+            foreach my $miitext (@miitext) {
+                push @marcnotes, { marcnote => $miitext, tag => '031' }
+            }
+        }
+    }
+
     return \@marcnotes;
 }
 
