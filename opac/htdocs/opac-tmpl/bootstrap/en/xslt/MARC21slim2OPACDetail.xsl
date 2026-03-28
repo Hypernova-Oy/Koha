@@ -159,7 +159,6 @@
                 </h1>
             </xsl:if>
 
-
         <!-- Author Statement: Alternate Graphic Representation (MARC 880) -->
         <xsl:if test="$display880">
             <span class="results_summary author h3">
@@ -191,6 +190,113 @@
             <xsl:with-param name="materialTypeLabel" select="$materialTypeLabel"/>
             <xsl:with-param name="theme" select="$theme"/>
         </xsl:call-template>
+
+        <!-- Other Title  Statement: Alternate Graphic Representation (MARC 880) -->
+        <xsl:if test="$display880">
+            <xsl:call-template name="m880Select">
+                <xsl:with-param name="basetags">246</xsl:with-param>
+                <xsl:with-param name="codes">abhfgnp</xsl:with-param>
+                <xsl:with-param name="class">results_summary other_title</xsl:with-param>
+                <xsl:with-param name="label">Other title: </xsl:with-param>
+            </xsl:call-template>
+        </xsl:if>
+
+        <xsl:if test="marc:datafield[@tag=246]">
+            <span class="results_summary other_title">
+                <span class="label">Other title: </span>
+                <ul class="resource_list">
+                    <xsl:for-each select="marc:datafield[@tag=246]">
+                        <li>
+                            <span property="alternateName">
+                                <xsl:call-template name="chopPunctuation">
+                                    <xsl:with-param name="chopString">
+                                        <xsl:if test="marc:subfield[@code='i']">
+                                            <xsl:call-template name="subfieldSelect">
+                                                <xsl:with-param name="codes">i</xsl:with-param>
+                                            </xsl:call-template>
+                                        </xsl:if>
+                                        <xsl:text> </xsl:text>
+                                        <xsl:call-template name="subfieldSelect">
+                                            <xsl:with-param name="codes">abhfgnp</xsl:with-param>
+                                        </xsl:call-template>
+                                    </xsl:with-param>
+                                </xsl:call-template>
+                                <xsl:if test="@ind1=1 and not(marc:subfield[@code='i'])">
+                                    <xsl:choose>
+                                        <xsl:when test="@ind2=0"> [Portion of title]</xsl:when>
+                                        <xsl:when test="@ind2=1"> [Parallel title]</xsl:when>
+                                        <xsl:when test="@ind2=2"> [Distinctive title]</xsl:when>
+                                        <xsl:when test="@ind2=3"> [Other title]</xsl:when>
+                                        <xsl:when test="@ind2=4"> [Cover title]</xsl:when>
+                                        <xsl:when test="@ind2=5"> [Added title page title]</xsl:when>
+                                        <xsl:when test="@ind2=6"> [Caption title]</xsl:when>
+                                        <xsl:when test="@ind2=7"> [Running title]</xsl:when>
+                                        <xsl:when test="@ind2=8"> [Spine title]</xsl:when>
+                                    </xsl:choose>
+                                </xsl:if>
+                            </span>
+                        </li>
+                    </xsl:for-each>
+                </ul>
+            </span>
+        </xsl:if>
+
+
+        <xsl:if test="marc:datafield[@tag=242]">
+        <span class="results_summary translated_title"><span class="label">Title translated: </span>
+            <xsl:for-each select="marc:datafield[@tag=242]">
+                <span property="alternateName">
+                <xsl:call-template name="chopPunctuation">
+                  <xsl:with-param name="chopString">
+                    <xsl:call-template name="subfieldSelect">
+                        <xsl:with-param name="codes">abchnp</xsl:with-param>
+                    </xsl:call-template>
+                   </xsl:with-param>
+               </xsl:call-template>
+                </span>
+                    <xsl:choose><xsl:when test="position()=last()"><xsl:text></xsl:text></xsl:when><xsl:otherwise><xsl:text>; </xsl:text></xsl:otherwise></xsl:choose>
+            </xsl:for-each>
+        </span>
+       </xsl:if>
+
+
+        <!-- Uniform Title  Statement: Alternate Graphic Representation (MARC 880) -->
+        <xsl:if test="$display880">
+            <span property="alternateName">
+            <xsl:call-template name="m880Select">
+                <xsl:with-param name="basetags">130,240</xsl:with-param>
+                <xsl:with-param name="codes">adfklmor</xsl:with-param>
+                <xsl:with-param name="class">results_summary uniform_title</xsl:with-param>
+                <xsl:with-param name="label">Uniform titles: </xsl:with-param>
+            </xsl:call-template>
+            </span>
+        </xsl:if>
+
+        <xsl:if test="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730][@ind2!=2]">
+            <span class="results_summary uniform_titles">
+                <span class="label">Uniform titles: </span>
+                <ul class="resource_list">
+                    <xsl:for-each select="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730][@ind2!=2]">
+                        <li>
+                            <span property="alternateName">
+                                <xsl:if test="marc:subfield[@code='i']">
+                                    <xsl:call-template name="subfieldSelect">
+                                        <xsl:with-param name="codes">i</xsl:with-param>
+                                    </xsl:call-template>
+                                </xsl:if>
+                                <xsl:text> </xsl:text>
+                                <xsl:for-each select="marc:subfield">
+                                    <xsl:if test="contains('adfghklmnoprst',@code)">
+                                        <xsl:value-of select="text()"/>
+                                        <xsl:text> </xsl:text>
+                                    </xsl:if>
+                                </xsl:for-each>
+                            </span>
+                        </li>
+                    </xsl:for-each>
+                </ul>
+            </span>
+        </xsl:if>
 
    <xsl:if test="$DisplayOPACiconsXSLT!='0'">
         <xsl:if test="$materialTypeCode!=''">
@@ -658,113 +764,6 @@
                 </xsl:for-each>
             </span>
         </xsl:if>
-
-        <!-- Other Title  Statement: Alternate Graphic Representation (MARC 880) -->
-        <xsl:if test="$display880">
-            <xsl:call-template name="m880Select">
-                <xsl:with-param name="basetags">246</xsl:with-param>
-                <xsl:with-param name="codes">abhfgnp</xsl:with-param>
-                <xsl:with-param name="class">results_summary other_title</xsl:with-param>
-                <xsl:with-param name="label">Other title: </xsl:with-param>
-            </xsl:call-template>
-        </xsl:if>
-
-        <xsl:if test="marc:datafield[@tag=246]">
-            <span class="results_summary other_title">
-                <span class="label">Other title: </span>
-                <ul class="resource_list">
-                    <xsl:for-each select="marc:datafield[@tag=246]">
-                        <li>
-                            <span property="alternateName">
-                                <xsl:call-template name="chopPunctuation">
-                                    <xsl:with-param name="chopString">
-                                        <xsl:if test="marc:subfield[@code='i']">
-                                            <xsl:call-template name="subfieldSelect">
-                                                <xsl:with-param name="codes">i</xsl:with-param>
-                                            </xsl:call-template>
-                                        </xsl:if>
-                                        <xsl:text> </xsl:text>
-                                        <xsl:call-template name="subfieldSelect">
-                                            <xsl:with-param name="codes">abhfgnp</xsl:with-param>
-                                        </xsl:call-template>
-                                    </xsl:with-param>
-                                </xsl:call-template>
-                                <xsl:if test="@ind1=1 and not(marc:subfield[@code='i'])">
-                                    <xsl:choose>
-                                        <xsl:when test="@ind2=0"> [Portion of title]</xsl:when>
-                                        <xsl:when test="@ind2=1"> [Parallel title]</xsl:when>
-                                        <xsl:when test="@ind2=2"> [Distinctive title]</xsl:when>
-                                        <xsl:when test="@ind2=3"> [Other title]</xsl:when>
-                                        <xsl:when test="@ind2=4"> [Cover title]</xsl:when>
-                                        <xsl:when test="@ind2=5"> [Added title page title]</xsl:when>
-                                        <xsl:when test="@ind2=6"> [Caption title]</xsl:when>
-                                        <xsl:when test="@ind2=7"> [Running title]</xsl:when>
-                                        <xsl:when test="@ind2=8"> [Spine title]</xsl:when>
-                                    </xsl:choose>
-                                </xsl:if>
-                            </span>
-                        </li>
-                    </xsl:for-each>
-                </ul>
-            </span>
-        </xsl:if>
-
-
-        <xsl:if test="marc:datafield[@tag=242]">
-        <span class="results_summary translated_title"><span class="label">Title translated: </span>
-            <xsl:for-each select="marc:datafield[@tag=242]">
-                <span property="alternateName">
-                <xsl:call-template name="chopPunctuation">
-                  <xsl:with-param name="chopString">
-                    <xsl:call-template name="subfieldSelect">
-                        <xsl:with-param name="codes">abchnp</xsl:with-param>
-                    </xsl:call-template>
-                   </xsl:with-param>
-               </xsl:call-template>
-                </span>
-                    <xsl:choose><xsl:when test="position()=last()"><xsl:text></xsl:text></xsl:when><xsl:otherwise><xsl:text>; </xsl:text></xsl:otherwise></xsl:choose>
-            </xsl:for-each>
-        </span>
-       </xsl:if>
-
-        <!-- Uniform Title  Statement: Alternate Graphic Representation (MARC 880) -->
-        <xsl:if test="$display880">
-            <span property="alternateName">
-            <xsl:call-template name="m880Select">
-                <xsl:with-param name="basetags">130,240</xsl:with-param>
-                <xsl:with-param name="codes">adfklmor</xsl:with-param>
-                <xsl:with-param name="class">results_summary uniform_title</xsl:with-param>
-                <xsl:with-param name="label">Uniform titles: </xsl:with-param>
-            </xsl:call-template>
-            </span>
-        </xsl:if>
-
-        <xsl:if test="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730][@ind2!=2]">
-            <span class="results_summary uniform_titles">
-                <span class="label">Uniform titles: </span>
-                <ul class="resource_list">
-                    <xsl:for-each select="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730][@ind2!=2]">
-                        <li>
-                            <span property="alternateName">
-                                <xsl:if test="marc:subfield[@code='i']">
-                                    <xsl:call-template name="subfieldSelect">
-                                        <xsl:with-param name="codes">i</xsl:with-param>
-                                    </xsl:call-template>
-                                </xsl:if>
-                                <xsl:text> </xsl:text>
-                                <xsl:for-each select="marc:subfield">
-                                    <xsl:if test="contains('adfghklmnoprst',@code)">
-                                        <xsl:value-of select="text()"/>
-                                        <xsl:text> </xsl:text>
-                                    </xsl:if>
-                                </xsl:for-each>
-                            </span>
-                        </li>
-                    </xsl:for-each>
-                </ul>
-            </span>
-        </xsl:if>
-
 
         <!-- #13382 Added Related works 700$i -->
         <xsl:if test="marc:datafield[@tag=700][marc:subfield[@code='i']] or marc:datafield[@tag=710][marc:subfield[@code='i']] or marc:datafield[@tag=711][marc:subfield[@code='i']]">
