@@ -272,11 +272,11 @@
             </span>
         </xsl:if>
 
-        <xsl:if test="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730][@ind2!=2]">
+        <xsl:if test="marc:datafield[@tag=130]|marc:datafield[@tag=240]">
             <span class="results_summary uniform_titles">
                 <span class="label">Uniform titles: </span>
                 <ul class="resource_list">
-                    <xsl:for-each select="marc:datafield[@tag=130]|marc:datafield[@tag=240]|marc:datafield[@tag=730][@ind2!=2]">
+                    <xsl:for-each select="marc:datafield[@tag=130]|marc:datafield[@tag=240]">
                         <li>
                             <span property="alternateName">
                                 <xsl:if test="marc:subfield[@code='i']">
@@ -852,6 +852,32 @@
                     </ul>
                 </span>
             </xsl:if>
+
+        <xsl:if test="marc:datafield[@tag=730][@ind2!=2]">
+            <span class="results_summary uniform_titles">
+                <span class="label">Contained works: </span>
+                <ul class="resource_list">
+                    <xsl:for-each select="marc:datafield[@tag=730][@ind2!=2]">
+                        <li>
+                            <span property="alternateName">
+                                <xsl:if test="marc:subfield[@code='i']">
+                                    <xsl:call-template name="subfieldSelect">
+                                        <xsl:with-param name="codes">i</xsl:with-param>
+                                    </xsl:call-template>
+                                </xsl:if>
+                                <xsl:text> </xsl:text>
+                                <xsl:for-each select="marc:subfield">
+                                    <xsl:if test="contains('adfghklmnoprst',@code)">
+                                        <xsl:value-of select="text()"/>
+                                        <xsl:text> </xsl:text>
+                                    </xsl:if>
+                                </xsl:for-each>
+                            </span>
+                        </li>
+                    </xsl:for-each>
+                </ul>
+            </span>
+        </xsl:if>
 
             <xsl:if test="marc:datafield[substring(@tag, 1, 1) = '6' and not(@tag=655)]">
                 <span class="results_summary subjects">
