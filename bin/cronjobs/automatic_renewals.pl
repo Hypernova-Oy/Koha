@@ -391,6 +391,7 @@ sub send_digests {
 
 PATRON: while ( my ( $borrowernumber, $digest ) = each %{ $params->{digests} } ) {
         next unless defined $digest->{updated} && $digest->{updated} == 1;
+        next unless defined $digest->{success} && $digest->{success} > 0;
         my $borrower_preferences = C4::Members::Messaging::GetMessagingPreferences(
             {
                 borrowernumber => $borrowernumber,
