@@ -3856,6 +3856,18 @@ biblios:
     opac: 1
     staff_client: 1
     type: ''
+  time-period-of-creation:
+    label: time-period-of-creation
+    mandatory: ~
+    mappings:
+    - facet: ''
+      marc_field: 388a
+      marc_type: marc21
+      sort: 1
+      suggestible: ''
+    opac: 1
+    staff_client: 1
+    type: ''
   title:
     label: title
     mandatory: 1
