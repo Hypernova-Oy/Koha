@@ -1057,6 +1057,18 @@ biblios:
     opac: 1
     staff_client: 1
     type: ''
+  associated-place:
+    label: associated-place
+    mandatory: ~
+    mappings:
+    - facet: ''
+      marc_field: 370g
+      marc_type: marc21
+      sort: 1
+      suggestible: ''
+    opac: 1
+    staff_client: 1
+    type: ''
   author:
     facet_order: 1
     label: Authors
