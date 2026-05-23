@@ -125,6 +125,11 @@ if ($authid) {
     if ( defined $controlled_ind->{sub2} ) {
         my $v = $controlled_ind->{sub2};
         push @subfield_loop, { marc_subfield => '2', marc_values => [$v] };
+        if ($v =~ /^yso\//) {
+            my $f024 = $record->field('024');
+            my $f024a = $f024->subfield('a') if $f024;
+            push @subfield_loop, { marc_subfield => '0', marc_values => $f024a } if $f024a;
+        }
     }
 } else {
 
