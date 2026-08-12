@@ -3082,6 +3082,18 @@ biblios:
     opac: 1
     staff_client: 1
     type: ''
+  name-relator:
+    label: name-relator
+    mandatory: ~
+    mappings:
+    - facet: ''
+      marc_field: 700(ae)
+      marc_type: marc21
+      sort: 1
+      suggestible: ''
+    opac: 1
+    staff_client: 1
+    type: stdno
   nlm-call-number:
     label: nlm-call-number
     mandatory: ~
