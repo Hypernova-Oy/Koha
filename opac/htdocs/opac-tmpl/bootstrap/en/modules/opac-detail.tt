@@ -135,9 +135,9 @@
                                 [% coce_id = normalized_ean || normalized_isbn %]
                                 <div class="cover-image coce-coverimg">
                                     [% IF ( coce_id ) %]
-                                        <a title="Image from Coce" class="[% coce_id | html %]" id="coce-thumbnail-preview"></a>
+                                        <a class="[% coce_id | html %]" id="coce-thumbnail-preview"></a>
                                     [% END %]
-                                    <div class="hint">Image from Coce</div>
+                                    <div class="hint"></div>
                                 </div>
                             [% END %]
 

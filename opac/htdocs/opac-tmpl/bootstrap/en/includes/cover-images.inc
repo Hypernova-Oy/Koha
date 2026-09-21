@@ -70,7 +70,7 @@
                 [% IF ( coce_id ) %]
                     <a class="[% coce_id | html %]" id="coce-thumbnail-[% SEARCH_RESULT.biblionumber | html %]"></a>
                 [% END %]
-                <div class="hint">Image from Coce</div>
+                <div class="hint"></div>
             </div>
         [% END %]
 
