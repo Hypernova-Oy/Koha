@@ -891,6 +891,7 @@
 
             <xsl:choose>
             <xsl:when test="position()=last()"></xsl:when>
+            <xsl:when test="starts-with(following-sibling::marc:datafield[substring(@tag, 1, 1) = '6'][not(@tag=655)][1]/marc:subfield[@code='a'], ':')"></xsl:when>
             <xsl:otherwise> | </xsl:otherwise>
             </xsl:choose>
 
