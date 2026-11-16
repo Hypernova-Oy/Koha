@@ -1,0 +1,1 @@
+/usr/share/koha/opac/cgi-bin/opac/oai.pl
